@@ -101563,9 +101563,13 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld de, Func_72156 ; $6156
 	push de
 	jp [hl]
+
+PalCode_00:	; $5dff
 	ld hl, Unknown_72448 ; $6448
 	ld de, Unknown_721b5 ; $61b5
 	ret
+
+PalCode_01:	; $5e06
 	ld hl, Unknown_72428 ; $6428
 	ld de, $cf2d
 	ld bc, $10
@@ -101578,7 +101582,6 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld a, [W_ENEMYBATTSTATUS3]
 	ld hl, W_ENEMYMONID                ; enemy Pokemon ID
 	call DeterminePaletteID
-
 	ld c, a
 	ld hl, $cf2e
 	ld a, [$cf1d]
@@ -101599,9 +101602,11 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld a, $1
 	ld [$cf1c], a
 	ret
+PalCode_02:	; $5e48
 	ld hl, Unknown_72458 ; $6458
 	ld de, Unknown_7219e ; $619e
 	ret
+PalCode_03:	; $5e4f
 	ld hl, Unknown_72428 ; $6428
 	ld de, $cf2d
 	ld bc, $10
@@ -101623,9 +101628,11 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld hl, $cf2d
 	ld de, Unknown_721fa ; $61fa
 	ret
+PalCode_0a:	; $5e7b
 	ld hl, Unknown_72438 ; $6438
 	ld de, $cf2e
 	ret
+PalCode_04:	; $5e82
 	ld hl, Unknown_72468 ; $6468
 	ld de, $cf2d
 	ld bc, $10
@@ -101638,21 +101645,28 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld de, Unknown_72222 ; $6222
 	ret
 
+PalCode_05:	; $5e9f
 INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
+
+PalCode_06:	; $5ea6
 	ld hl, Unknown_72488 ; $6488
 	ld de, Unknown_7228e ; $628e
 	ret
+PalCode_08:	; $5ead
 	ld hl, Unknown_724a8 ; $64a8
 	ld de, Unknown_7219e ; $619e
 	ret
+PalCode_07:	; $5eb4
 	ld hl, Unknown_724b8 ; $64b8
 	ld de, Unknown_722c1 ; $62c1
 	ret
+PalCode_0c: ; $5ebb
 	ld hl, Unknown_724c8 ; $64c8
 	ld de, Unknown_723dd ; $63dd
 	ld a, $8
 	ld [$cf1c], a
 	ret
+PalCode_09: ; $5ec7
 	ld hl, Unknown_72428 ; $6428
 	ld de, $cf2d
 	ld bc, $10
@@ -101696,6 +101710,7 @@ INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
 .asm_71f14
 	xor a
 	jr .asm_71efe
+PalCode_0b; $5f17
 	push bc
 	ld hl, Unknown_72428 ; $6428
 	ld de, $cf2d
@@ -101713,6 +101728,7 @@ INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
 	ld hl, $cf2d
 	ld de, Unknown_7219e ; $619e
 	ret
+PalCode_0d: ; $5f3b
 	ld hl, Unknown_72360 ; $6360
 	ld de, $cc5b
 	ld bc, $40
@@ -101751,7 +101767,20 @@ INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
 	ret
 
 Unknown_71f73: ; 71f73 (1c:5f73)
-INCBIN "baserom.gbc",$71f73,$71f8f - $71f73
+	dw PalCode_00
+	dw PalCode_01
+	dw PalCode_02
+	dw PalCode_03
+	dw PalCode_04
+	dw PalCode_05
+	dw PalCode_06
+	dw PalCode_07
+	dw PalCode_08
+	dw PalCode_09
+	dw PalCode_0a
+	dw PalCode_0b
+	dw PalCode_0c
+	dw PalCode_0d
 
 Unknown_71f8f: ; 71f8f (1c:5f8f)
 INCBIN "baserom.gbc",$71f8f,$71f97 - $71f8f
