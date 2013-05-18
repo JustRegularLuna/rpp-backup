@@ -1,0 +1,17 @@
+BATTLES:
+
+GoPAL_SET (3def)
+	In the grand scheme it looks like it simply invokes a PAL_SET sgb command.
+	Calls 1c:5ddf.
+
+DeterminePaletteID (1c:5f97)
+	Calls GoPAL_SET through Predef. Something's fishy?
+
+1c:5ddf:
+	Called from GoPAL_SET. calls DeterminePaletteID, then apparently sets the palettes.
+	
+f:6feb: called when battle is started; sets black palette
+
+f:6fb8: battle initialization function.
+
+1c:616d: UNUSED GBC CODE???

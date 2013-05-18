@@ -1,3 +1,4 @@
+#!/bin/python2
 #author: Bryan Bishop <kanzure@gmail.com>
 #date: 2012-01-09
 import extract_maps

@@ -1,10 +1,21 @@
 INCLUDE "constants.asm"
 
 ; the rst vectors are unused
-SECTION "rst00",HOME[0]
+
+SECTION "rst0",HOME[0]
 	db $FF
-SECTION "rst08",HOME[8]
-	db $FF
+RefreshMapColorsScrolling:
+	push af
+	ld a,$2f
+	jp $00f1
+
+SECTION "rst8",HOME[$8]
+	rst $38
+RefreshMapColors:
+	push af
+	ld a,$2c
+	jp $00f1
+
 SECTION "rst10",HOME[$10]
 	db $FF
 SECTION "rst18",HOME[$18]
@@ -19,14 +30,25 @@ SECTION "rst38",HOME[$38]
 	db $FF
 
 ; interrupts
-SECTION "vblank",HOME[$40]
-	jp VBlankHandler
-SECTION "lcdc",HOME[$48]
-	db $FF
-SECTION "timer",HOME[$50]
-	jp TimerHandler
-SECTION "serial",HOME[$58]
+SECTION "interrupts",HOME[$40]
+vblank:
+	push af
+	ld a,$2d
+	ld [$2000],a
+	jr .skip
+	db $FF	; lcd
+.skip
+	call $4800
+	ld a,[$ffb8]
+	jr .skip2
+	jp TimerHandler	; timer
+.skip2
+	ld [$2000],a
+	jr .skip3
 	jp SerialInterruptHandler
+.skip3
+	pop af
+	jp $2024
 SECTION "joypad",HOME[$60]
 	reti
 
@@ -102,13 +124,53 @@ CopyData: ; 00b5 (0:00b5)
 	jr nz,CopyData
 	ret
 
+SECTION "initpalettes",HOME[$c0]
+InitPalettes:
+	ld hl,$0102
+	push hl
+	ld a,$2d
+	ld [$2000],a
+	jp $4400
+	xor a
+	ld [$2000],a
+	ret
+loop2
+	cp $11
+	jr z,InitPalettes
+	ld a,$30
+	ld [$2000],a
+	jr .loop3
+	push af
+	ld a,$2e
+	jr callToBank
+	push af
+	ld a,$2d
+.loop3
+	ld [$2000],a
+	call $00f5
+	pop af
+	call $09e8
+	ret
+	nop
+	nop
+callToBank:	; $f1
+	ld [$2000],a
+	pop af
+	push af
+	call $6000
+	ld a,[$ff00+$b8]
+	ld [$2000],a
+	pop af
+	ret
+
 SECTION "romheader",HOME[$100]
-nop
-jp Start
+db $18, $cf
+db $18, $53
 
 Section "start",HOME[$150]
 Start: ; 0150 (0:0150)
 	cp $11 ; value that indicates Gameboy Color
+Start_2:
 	jr z,.gbcDetected
 	xor a
 	jr .storeValue
@@ -939,7 +1001,7 @@ WarpFound2: ; 073c (0:073c)
 	ld [W_CURMAP],a ; change current map to destination map
 	cp a,ROCK_TUNNEL_1
 	jr nz,.notRockTunnel
-	ld a,$06
+	ld a,$1a	; HAX (previously ld a,$06)
 	ld [$d35d],a
 	call GBFadeIn1
 .notRockTunnel
@@ -2792,7 +2854,8 @@ LoadMapData: ; 1241 (0:1241)
 	ld hl,InitMapSprites
 	call Bankswitch ; load tile pattern data for sprites
 	call LoadTileBlockMap
-	call LoadTilesetTilePatternData
+	;call LoadTilesetTilePatternData
+	call $00e1	; HAX
 	call LoadCurrentMapView
 ; copy current map view to VRAM
 	ld hl,W_SCREENTILESBUFFER
@@ -2801,9 +2864,7 @@ LoadMapData: ; 1241 (0:1241)
 .vramCopyLoop
 	ld c,$14
 .vramCopyInnerLoop
-	ld a,[hli]
-	ld [de],a
-	inc e
+	call 0009
 	dec c
 	jr nz,.vramCopyInnerLoop
 	ld a,$0c
@@ -4727,15 +4788,13 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 	ld d,a
 	ld c,18 ; screen height
 .loop1
-	ld a,[hli]
-	ld [de],a
-	inc de
-	ld a,[hli]
+	call $0001	; HAX
+	nop
 	ld [de],a
 	ld a,31
 	add e
 	ld e,a
-	jr nc,.noCarry
+jr nc,.noCarry
 	inc d
 .noCarry
 ; the following 4 lines wrap us from bottom to top if necessary
@@ -4764,10 +4823,8 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 .drawHalf
 	ld c,10
 .loop2
-	ld a,[hli]
-	ld [de],a
-	inc de
-	ld a,[hli]
+	call $0001	; HAX
+	nop
 	ld [de],a
 	ld a,e
 	inc a
@@ -4782,6 +4839,25 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 	jr nz,.loop2
 	ret
 
+HaxFunc1: ; 1d57
+	ld a,BANK(RefreshWindow)
+	ld [$2000],a
+	call RefreshWindow
+	ld a,[H_LOADEDROMBANK]
+	ld [$2000],a
+	ret
+
+HaxFunc2: ; 1d65
+	ld a,BANK(RefreshWindowInitial)
+	ld [$2000],a
+	jp RefreshWindowInitial
+
+HaxFunc3: ; 1d6d
+	ld a,[H_LOADEDROMBANK]
+	ld [$2000],a
+	ret
+
+; HAX: This function is not needed.
 ; This function automatically transfers tile number data from the tile map at
 ; C3A0 to VRAM during V-blank. Note that it only transfers one third of the
 ; background per V-blank. It cycles through which third it draws.
@@ -4789,122 +4865,16 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 ; on when talking to sprites, battling, using menus, etc. This is because
 ; the above function, RedrawExposedScreenEdge, is used when walking to
 ; improve efficiency.
-AutoBgMapTransfer: ; 1d57 (0:1d57)
-	ld a,[H_AUTOBGTRANSFERENABLED]
-	and a
-	ret z
-	ld hl,[sp + 0]
-	ld a,h
-	ld [H_SPTEMP],a
-	ld a,l
-	ld [H_SPTEMP + 1],a ; save stack pinter
-	ld a,[H_AUTOBGTRANSFERPORTION]
-	and a
-	jr z,.transferTopThird
-	dec a
-	jr z,.transferMiddleThird
-.transferBottomThird
-	FuncCoord 0,12
-	ld hl,Coord
-	ld sp,hl
-	ld a,[H_AUTOBGTRANSFERDEST + 1]
-	ld h,a
-	ld a,[H_AUTOBGTRANSFERDEST]
-	ld l,a
-	ld de,(12 * 32)
-	add hl,de
-	xor a ; TRANSFERTOP
-	jr .doTransfer
-.transferTopThird
-	FuncCoord 0,0
-	ld hl,Coord
-	ld sp,hl
-	ld a,[H_AUTOBGTRANSFERDEST + 1]
-	ld h,a
-	ld a,[H_AUTOBGTRANSFERDEST]
-	ld l,a
-	ld a,TRANSFERMIDDLE
-	jr .doTransfer
-.transferMiddleThird
-	FuncCoord 0,6
-	ld hl,Coord
-	ld sp,hl
-	ld a,[H_AUTOBGTRANSFERDEST + 1]
-	ld h,a
-	ld a,[H_AUTOBGTRANSFERDEST]
-	ld l,a
-	ld de,(6 * 32)
-	add hl,de
-	ld a,TRANSFERBOTTOM
-.doTransfer
-	ld [H_AUTOBGTRANSFERPORTION],a ; store next portion
-	ld b,6
+;AutoBgMapTransfer: ; 1d57 (0:1d57)
 
+; HAX: This function is not needed.
 ; unrolled loop and using pop for speed
-TransferBgRows: ; 1d9e (0:1d9e)
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	ld a,13
-	add l
-	ld l,a
-	jr nc,.noCarry
-	inc h
-.noCarry
-	dec b
-	jr nz,TransferBgRows
-	ld a,[H_SPTEMP]
-	ld h,a
-	ld a,[H_SPTEMP + 1]
-	ld l,a
-	ld sp,hl ; restore stack pointer
-	ret
+;TransferBgRows: ; 1d9e (0:1d9e)
+
+SECTION "\@",HOME[$1dde]
+
+JpPoint:
+	jp HaxFunc2	; HAX
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
 ; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
@@ -4930,7 +4900,7 @@ VBlankCopyBgMap: ; 1de1 (0:1de1)
 	ld b,a
 	xor a
 	ld [H_VBCOPYBGSRC],a ; disable transfer so it doesn't continue next V-blank
-	jr TransferBgRows
+	jr JpPoint	; HAX
 
 ; This function copies ([H_VBCOPYDOUBLESIZE] * 8) source bytes
 ; from H_VBCOPYDOUBLESRC to H_VBCOPYDOUBLEDEST.
@@ -5112,26 +5082,18 @@ UpdateMovingBgTiles: ; 1ebe (0:1ebe)
 	jr z,.updateFlowerTile
 	ld hl,$9140 ; water tile pattern VRAM location
 	ld c,16 ; number of bytes in a tile pattern
+	; HAX
+	ld a,$2c
+	ld [$2000],a
 	ld a,[$d085]
 	inc a
 	and a,$07
 	ld [$d085],a
 	and a,$04
-	jr nz,.rotateWaterLeftLoop
-.rotateWaterRightloop
-	ld a,[hl]
-	rrca
-	ld [hli],a
-	dec c
-	jr nz,.rotateWaterRightloop
-	jr .done
-.rotateWaterLeftLoop
-	ld a,[hl]
-	rlca
-	ld [hli],a
-	dec c
-	jr nz,.rotateWaterLeftLoop
-.done
+	jp nz,$7000
+	jp $7080
+	ld a,[H_LOADEDROMBANK]
+	ld [$2000],a
 	ld a,[$ffd7]
 	rrca
 	ret nc
@@ -5311,7 +5273,7 @@ VBlankHandler: ; 2024 (0:2024)
 	ld a,[$ffb0]
 	ld [rWY],a
 .doVramTransfers
-	call AutoBgMapTransfer
+	call $1d57	; HAX
 	call VBlankCopyBgMap
 	call RedrawExposedScreenEdge
 	call VBlankCopy
@@ -5378,8 +5340,7 @@ DelayFrame: ; 20af (0:20af)
 .halt
 	db $76 ; XXX this is a hack--rgbasm adds a nop after this instr even when ints are enabled
 	ld a,[H_VBLANKOCCURRED]
-	and a
-	jr nz,.halt
+	jp $3fa6	; HAX
 
 	ret
 
@@ -5461,12 +5422,14 @@ IncGradGBPalTable_01: ; 210d (0:210d)
 	db %11100100
 GBPalTable_00: ; 2116 (0:2116)
 	db %11100100
-	db %11010000
+	db %11100100 ; HAX
+	;db %11010000
 DecGradGBPalTable_01: ; 2118 (0:2118)
 	db %11100000
 	;19
 	db %11100100
-	db %11010000
+	db %11100100 ; HAX
+	;db %11010000
 	db %11100000
 IncGradGBPalTable_02: ; 211c (0:211c)
 	db %10010000
@@ -10453,7 +10416,8 @@ GoPAL_SET_CF1C: ; 3ded (0:3ded)
 GoPAL_SET: ; 3def (0:3def)
 	ld a,[$cf1b]
 	and a
-	ret z
+	;ret z
+	nop
 	ld a,$45
 	jp Predef
 
@@ -10722,6 +10686,33 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	dw $7be8
 	dw $7c0d
 	dw $7c45
+
+HaxFunc4:
+	push af
+	ld a,[W_CURMAPTILESET]
+	and a
+	jr nz,.label2
+	push bc
+	ld a,[$ff00+$49]
+	ld b,a
+	ld a,[$d35e]
+	cp b
+	jr nz,.label3
+.label1
+	pop bc
+.label2
+	pop af
+	and a
+	jp nz,$20af
+	ret
+.label3
+	ld [$ff00+$49],a
+	ld a,$2d
+	ld [$2000],a
+	jp $6200
+	ld a,[$ff00+$b8]
+	ld [$2000],a
+	jr .label1
 
 SECTION "bank1",DATA,BANK[$1]
 
@@ -11740,9 +11731,7 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	ld a, [$FF00+$94]        ; load bit 7 (set to $80 if sprite is in grass and should be drawn behind it)
 	or [hl]
 .alwaysInForeground
-	inc hl
-	ld [de], a               ; write OAM sprite flags
-	inc e
+	call $00dc	; HAX
 	bit 0, a                 ; test for OAMFLAG_ENDOFDATA
 	jr z, .spriteTilesLoop
 	ld a, e
@@ -63797,7 +63786,8 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 Func_3efeb: ; 3efeb (f:6feb)
 	ld b, $0
 	call GoPAL_SET
-	call Func_3c04c
+	call _BattleInitHook
+	;call Func_3c04c	; Comment this stuff to make room for the hook
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, Unknown_3f04a
@@ -65349,6 +65339,13 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	pop hl
 	ret
 ; 3fbc8 (f:7bc8)
+
+_BattleInitHook:
+	call Func_3c04c	; Should have been called from the hook
+	ld b,BANK(BattleInitHook)
+	ld hl,BattleInitHook
+	jp Bankswitch
+
 SECTION "bank10",DATA,BANK[$10]
 
 DisplayPokedexMenu_: ; 40000 (10:4000)
@@ -101578,7 +101575,8 @@ PalCode_01:	; $5e06
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, W_PLAYERMONID        ; player Pokemon ID
 	call DeterminePaletteID
-	ld b, a
+	ld d, a
+
 	ld a, [W_ENEMYBATTSTATUS3]
 	ld hl, W_ENEMYMONID                ; enemy Pokemon ID
 	call DeterminePaletteID
@@ -128416,3 +128414,338 @@ MoveNames: ; b0000 (2c:4000)
 	db "SLASH@"
 	db "SUBSTITUTE@"
 	db "STRUGGLE@"
+
+INCBIN "bank2c.bin",$060f,$b4000-$b060f
+
+SECTION "bank2D",DATA,BANK[$2D]
+INCBIN "bank2d.bin",$0000,$b8000-$b4000
+
+SECTION "bank2E",DATA,BANK[$2E]
+INCBIN "bank2e.bin",$0000,$bc000-$b8000
+
+SECTION "bank2F",DATA,BANK[$2F]
+
+RefreshWindow:
+	ld a,[H_AUTOBGTRANSFERENABLED]
+	and a
+	ret z
+
+	ld hl,[sp+$00]
+	ld a,h
+	ld [$ff00+$bf],a
+	ld a,l
+	ld [$ff00+$c0],a	; Store stack pointer
+	ld a,[$ff00+$bb]
+	and a
+	jr z,label_000
+	dec a
+	jr z,label_001
+	ld hl,W_SCREENTILESBUFFER+6*20*2
+	ld sp,hl
+	ld a,[$ff00+$bd]
+	ld h,a
+	ld a,[$ff00+$bc]
+	ld l,a
+	ld de,$0180
+	add hl,de
+	xor a
+	jr startCopy
+label_000:
+	ld hl,W_SCREENTILESBUFFER
+	ld sp,hl
+	ld a,[$ff00+$bd]
+	ld h,a
+	ld a,[$ff00+$bc]
+	ld l,a
+	ld a,$01
+	jr startCopy
+label_001:
+	ld hl,W_SCREENTILESBUFFER+6*20
+	ld sp,hl
+	ld a,[$ff00+$bd]
+	ld h,a
+	ld a,[$ff00+$bc]
+	ld l,a
+	ld de,$00c0
+	add hl,de
+	ld a,$02
+
+; sp now points to map data in wram, hl points to vram destination.
+startCopy:
+	ld [$ff00+$bb],a
+	ld b,$06
+
+drawRow:
+REPT 10
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+ENDR
+
+	ld a,[W_ISINBATTLE]
+	and a
+	;jr nz,skipPalettes
+
+; BEGIN loading palettes
+
+	ld a,$02
+	ld [rSVBK],a	; Wram bank 2
+
+	; l -= 20; reload row
+	ld a,l
+	sub 20
+	ld l,a
+
+	add sp,-20	; reload row for next bank
+	ld a,$01
+	ld [rVBK],a
+	ld c,10
+
+drawPalette:
+REPT 10
+	pop de
+	ld c,e
+
+	ld d,$d2	; E is the tile number; palette # located at $d2XX
+	ld a,[de]
+	ldi [hl],a	; Store byte 1
+	ld e,c
+	ld a,[de]
+	ldi [hl],a	; Store byte 2
+ENDR
+
+	xor a
+	ld [rVBK],a
+	ld [rSVBK],a	; Reset gbc-only banks
+
+skipPalettes:
+
+	ld a,$0c
+	add l
+	ld l,a
+	jr nc,.noCarry
+	inc h
+.noCarry
+	dec b
+	jp nz,drawRow
+
+	ld a,[$ff00+$bf]
+	ld h,a
+	ld a,[$ff00+$c0]
+	ld l,a
+	ld sp,hl
+
+	ld a,[W_ISINBATTLE]
+	and a
+	ret z
+	ld b,BANK(DrawLifebars)
+	ld hl,DrawLifebars
+	jp Bankswitch
+
+RefreshWindowInitial:
+label_011:
+	ld a,$02
+	ld [rSVBK],a
+	ld c,$0a
+label_012:
+	pop de
+label_013:
+	ld a,[rSTAT]
+	bit 1,a
+	jr nz,label_013
+	ld [hl],e
+	inc l
+	ld [hl],d
+	inc l
+	dec c
+	jr nz,label_012
+	ld c,$14
+label_014:
+	dec l
+	dec c
+	jr nz,label_014
+	add sp,-$14
+	ld a,$01
+	ld [$ff00+$4f],a
+	ld c,$0a
+label_015:
+	pop de
+	ld d,$d2
+label_016:
+	ld a,[$ff00+$41]
+	bit 1,a
+	jr nz,label_016
+	ld a,[de]
+	ldi [hl],a
+	add sp,-$02
+	pop de
+	ld e,d
+	ld d,$d2
+label_017:
+	ld a,[$ff00+$41]
+	bit 1,a
+	jr nz,label_017
+	ld a,[de]
+	ldi [hl],a
+	dec c
+	jr nz,label_015
+	xor a
+	ld [$ff00+$4f],a
+	ld [$ff00+$70],a
+	ld a,$0c
+	add l
+	ld l,a
+	jr nc,label_018
+	inc h
+label_018:
+	dec b
+	jr nz,label_011
+	ld a,[$ff00+$bf]
+	ld h,a
+	ld a,[$ff00+$c0]
+	ld l,a
+	ld sp,hl
+	ret
+
+; Refresh map colors
+	ORG $2f, $6000
+
+	ld a,$02
+	ld [$ff00+$70],a
+	ld a,$01
+	ld [$ff00+$4f],a
+	ld a,[hl]
+	push hl
+	ld h,$d2
+	ld l,a
+	ld a,[hl]
+	ld hl,$ff41
+label_019:
+	bit 1,[hl]
+	jr nz,label_019
+	ld [de],a
+	pop hl
+	xor a
+	ld [$ff00+$4f],a
+	ld a,[hli]
+	push hl
+	ld hl,$ff41
+label_020:
+	bit 1,[hl]
+	jr nz,label_020
+	ld [de],a
+	inc de
+	pop hl
+	ld a,$01
+	ld [$ff00+$4f],a
+	ld a,[hl]
+	push hl
+	ld h,$d2
+	ld l,a
+	ld a,[hl]
+	ld hl,$ff41
+label_021:
+	bit 1,[hl]
+	jr nz,label_021
+	ld [de],a
+	pop hl
+	xor a
+	ld [$ff00+$4f],a
+	ld [$ff00+$70],a
+	ld a,[hli]
+	add sp,$04
+	push af
+	add sp,-$02
+	push hl
+	ld hl,$ff41
+label_022:
+	bit 1,[hl]
+	jr nz,label_022
+	pop hl
+	ret
+
+SECTION "bank1C_extend",DATA,BANK[$1C]
+
+DrawLifebars:
+	ld a,1
+	ld [rVBK],a
+
+	ld a, [W_ENEMYBATTSTATUS3]
+	ld hl, W_ENEMYMONID                ; enemy Pokemon ID
+	call DeterminePaletteID
+	ld d,a
+	ld e,0
+	call LoadSGBPalette
+	ld e,0
+	ld hl,$9c44
+	ld b,6
+.loop
+	ld a,[rSTAT]
+	bit 1,a
+	jr nz,.loop
+	ld [hl],e
+	inc l
+	dec b
+	jr nz,.loop
+
+	xor a
+	ld [rVBK],a
+	ret
+
+BattleInitHook:
+	ld a,2
+	ld [rSVBK],a
+
+	ld a,2
+	ld hl,$d200
+.fillLoop
+	ld [hl],a
+	inc l
+	jr nz,.fillLoop
+
+	;call DrawLifebars
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+
+LoadSGBPalette:
+	ld a,e
+
+	ld l,d
+	ld h,0
+	add hl
+	add hl
+	add hl
+	ld de,SuperPalettes
+	add hl,de
+
+	add a,a
+	add a,a
+	add a,a
+	or a,$80
+	ld [rBGPI],a
+	ld c,rBGPD&$ff
+	ld b,8
+.paletteLoop
+	ld a,[rSTAT]
+	bit 1,a
+	jr nz,.paletteLoop
+	ld a,[hli]
+	ld [$ff00+c],a
+	dec b
+	jr nz,.paletteLoop
+	ret
+
+
+SECTION "bank30",DATA,BANK[$30]
+INCBIN "bank30.bin",$0000,$c4000-$c0000
+
+SECTION "bank31",DATA,BANK[$31]
+INCBIN "bank31.bin",$0000,$c8000-$c4000
+
+SECTION "bank32",DATA,BANK[$32]
+
