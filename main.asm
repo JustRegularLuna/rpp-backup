@@ -7,7 +7,7 @@ SECTION "rst0",HOME[0]
 RefreshMapColorsScrolling:
 	push af
 	ld a,$2f
-	jp $00f1
+	jp CallToBank
 
 SECTION "rst8",HOME[$8]
 	rst $38
@@ -33,13 +33,13 @@ SECTION "rst38",HOME[$38]
 SECTION "interrupts",HOME[$40]
 vblank:
 	push af
-	ld a,$2d
+	ld a,BANK(GbcVBlankHook)
 	ld [$2000],a
 	jr .skip
 	db $FF	; lcd
 .skip
-	call $4800
-	ld a,[$ffb8]
+	call GbcVBlankHook
+	ld a,[H_LOADEDROMBANK]
 	jr .skip2
 	jp TimerHandler	; timer
 .skip2
@@ -48,7 +48,7 @@ vblank:
 	jp SerialInterruptHandler
 .skip3
 	pop af
-	jp $2024
+	jp VBlankHandler
 SECTION "joypad",HOME[$60]
 	reti
 
@@ -124,25 +124,30 @@ CopyData: ; 00b5 (0:00b5)
 	jr nz,CopyData
 	ret
 
-SECTION "initpalettes",HOME[$c0]
-InitPalettes:
-	ld hl,$0102
+SECTION "Initialization",HOME[$c0]
+
+IsGBC:
+	ld hl,Start
 	push hl
-	ld a,$2d
+	ld a,BANK(InitGbcPalettes)
 	ld [$2000],a
-	jp $4400
+	jp InitGbcPalettes
+
+LoadBank1:
 	xor a
 	ld [$2000],a
 	ret
-loop2
+
+Initialize:
 	cp $11
-	jr z,InitPalettes
+	jr z,IsGBC
+.IsNotGBC
 	ld a,$30
 	ld [$2000],a
 	jr .loop3
 	push af
 	ld a,$2e
-	jr callToBank
+	jr CallToBank
 	push af
 	ld a,$2d
 .loop3
@@ -153,7 +158,7 @@ loop2
 	ret
 	nop
 	nop
-callToBank:	; $f1
+CallToBank:	; $f1
 	ld [$2000],a
 	pop af
 	push af
@@ -164,8 +169,7 @@ callToBank:	; $f1
 	ret
 
 SECTION "romheader",HOME[$100]
-db $18, $cf
-db $18, $53
+	jp Initialize
 
 Section "start",HOME[$150]
 Start: ; 0150 (0:0150)
@@ -4788,7 +4792,7 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 	ld d,a
 	ld c,18 ; screen height
 .loop1
-	call $0001	; HAX
+	call RefreshMapColorsScrolling	; HAX
 	nop
 	ld [de],a
 	ld a,31
@@ -4823,7 +4827,7 @@ jr nc,.noCarry
 .drawHalf
 	ld c,10
 .loop2
-	call $0001	; HAX
+	call RefreshMapColorsScrolling	; HAX
 	nop
 	ld [de],a
 	ld a,e
@@ -4839,7 +4843,14 @@ jr nc,.noCarry
 	jr nz,.loop2
 	ret
 
-HaxFunc1: ; 1d57
+; This function automatically transfers tile number data from the tile map at
+; C3A0 to VRAM during V-blank. Note that it only transfers one third of the
+; background per V-blank. It cycles through which third it draws.
+; This transfer is turned off when walking around the map, but is turned
+; on when talking to sprites, battling, using menus, etc. This is because
+; the above function, RedrawExposedScreenEdge, is used when walking to
+; improve efficiency.
+AutoBgMapTransfer: ; 1d57 (0:1d57)	; HAXED function
 	ld a,BANK(RefreshWindow)
 	ld [$2000],a
 	call RefreshWindow
@@ -4847,7 +4858,9 @@ HaxFunc1: ; 1d57
 	ld [$2000],a
 	ret
 
-HaxFunc2: ; 1d65
+; More HAX functions
+
+_RefreshWindowInitial: ; 1d65
 	ld a,BANK(RefreshWindowInitial)
 	ld [$2000],a
 	jp RefreshWindowInitial
@@ -4857,24 +4870,14 @@ HaxFunc3: ; 1d6d
 	ld [$2000],a
 	ret
 
-; HAX: This function is not needed.
-; This function automatically transfers tile number data from the tile map at
-; C3A0 to VRAM during V-blank. Note that it only transfers one third of the
-; background per V-blank. It cycles through which third it draws.
-; This transfer is turned off when walking around the map, but is turned
-; on when talking to sprites, battling, using menus, etc. This is because
-; the above function, RedrawExposedScreenEdge, is used when walking to
-; improve efficiency.
-;AutoBgMapTransfer: ; 1d57 (0:1d57)
-
-; HAX: This function is not needed.
+; HAX: This function is reimplemented.
 ; unrolled loop and using pop for speed
 ;TransferBgRows: ; 1d9e (0:1d9e)
 
-SECTION "\@",HOME[$1dde]
+	ORG $00, $1dde
 
 JpPoint:
-	jp HaxFunc2	; HAX
+	jp _RefreshWindowInitial	; HAX
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
 ; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
@@ -5273,7 +5276,7 @@ VBlankHandler: ; 2024 (0:2024)
 	ld a,[$ffb0]
 	ld [rWY],a
 .doVramTransfers
-	call $1d57	; HAX
+	call AutoBgMapTransfer	; HAX
 	call VBlankCopyBgMap
 	call RedrawExposedScreenEdge
 	call VBlankCopy
@@ -5408,13 +5411,14 @@ GBFadeInCommon: ; 20fb (0:20fb)
 	jr nz,GBFadeInCommon
 	ret
 
+; HAX: some of these palettes have been modified.
 IncGradGBPalTable_01: ; 210d (0:210d)
 	db %11111111 ;BG Pal
 	db %11111111 ;OBJ Pal 1
 	db %11111111 ;OBJ Pal 2
 	             ;and so on...
 	db %11111110
-	db %11111110
+	db %11111010
 	db %11111000
 
 	db %11111001
@@ -5422,18 +5426,16 @@ IncGradGBPalTable_01: ; 210d (0:210d)
 	db %11100100
 GBPalTable_00: ; 2116 (0:2116)
 	db %11100100
-	db %11100100 ; HAX
-	;db %11010000
+	db %11100100
 DecGradGBPalTable_01: ; 2118 (0:2118)
 	db %11100000
 	;19
 	db %11100100
-	db %11100100 ; HAX
-	;db %11010000
+	db %11100100
 	db %11100000
 IncGradGBPalTable_02: ; 211c (0:211c)
 	db %10010000
-	db %10000000
+	db %10010000
 	db %10010000
 
 	db %01000000
@@ -10399,7 +10401,8 @@ Delay3: ; 3dd7 (0:3dd7)
 GBPalNormal: ; 3ddc (0:3ddc)
 	ld a,%11100100
 	ld [rBGP],a
-	ld a,%11010000
+;	ld a,%11010000
+	ld a,%11100100	; HAX
 	ld [rOBP0],a
 	ret
 
@@ -10691,28 +10694,29 @@ HaxFunc4:
 	push af
 	ld a,[W_CURMAPTILESET]
 	and a
-	jr nz,.label2
+	jr nz,label2
 	push bc
 	ld a,[$ff00+$49]
 	ld b,a
 	ld a,[$d35e]
 	cp b
-	jr nz,.label3
-.label1
+	jr nz,label3
+label1
 	pop bc
-.label2
+label2
 	pop af
 	and a
 	jp nz,$20af
 	ret
-.label3
+label3
 	ld [$ff00+$49],a
 	ld a,$2d
 	ld [$2000],a
 	jp $6200
+HaxFunc5: ; 3fc8
 	ld a,[$ff00+$b8]
 	ld [$2000],a
-	jr .label1
+	jr label1
 
 SECTION "bank1",DATA,BANK[$1]
 
@@ -63786,8 +63790,7 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 Func_3efeb: ; 3efeb (f:6feb)
 	ld b, $0
 	call GoPAL_SET
-	call _BattleInitHook
-	;call Func_3c04c	; Comment this stuff to make room for the hook
+	call Func_3c04c	; Comment this stuff to make room for the hook
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, Unknown_3f04a
@@ -65338,13 +65341,6 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	pop de
 	pop hl
 	ret
-; 3fbc8 (f:7bc8)
-
-_BattleInitHook:
-	call Func_3c04c	; Should have been called from the hook
-	ld b,BANK(BattleInitHook)
-	ld hl,BattleInitHook
-	jp Bankswitch
 
 SECTION "bank10",DATA,BANK[$10]
 
@@ -101552,218 +101548,80 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld l, a
 	ld h, $0
 	add hl, hl
-	ld de, Unknown_71f73 ; $5f73
+	ld de, Unknown_71f73 ; $5f73 : Jump table
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, Func_72156 ; $6156
+
+	di
+	;call WaitForVBlank
+
+	;ld de, SetPalettesAndMaps ; $6156
+	ld de,PalCodeRet
 	push de
+
 	jp [hl]
 
-PalCode_00:	; $5dff
-	ld hl, Unknown_72448 ; $6448
-	ld de, Unknown_721b5 ; $61b5
+PalCodeRet:
+	ei
 	ret
 
-PalCode_01:	; $5e06
-	ld hl, Unknown_72428 ; $6428
-	ld de, $cf2d
-	ld bc, $10
-	call CopyData
-; 71e12 (1c:5e12)
-	ld a, [W_PLAYERBATTSTATUS3]
-	ld hl, W_PLAYERMONID        ; player Pokemon ID
-	call DeterminePaletteID
-	ld d, a
 
-	ld a, [W_ENEMYBATTSTATUS3]
-	ld hl, W_ENEMYMONID                ; enemy Pokemon ID
-	call DeterminePaletteID
-	ld c, a
-	ld hl, $cf2e
-	ld a, [$cf1d]
-	add $1f
-	ld [hli], a
-	inc hl
-	ld a, [$cf1e]
-	add $1f
-	ld [hli], a
-	inc hl
-	ld a, b
-	ld [hli], a
-	inc hl
-	ld a, c
-	ld [hl], a
-	ld hl, $cf2d
-	ld de, Unknown_721b5 ; $61b5
-	ld a, $1
-	ld [$cf1c], a
-	ret
-PalCode_02:	; $5e48
-	ld hl, Unknown_72458 ; $6458
-	ld de, Unknown_7219e ; $619e
-	ret
-PalCode_03:	; $5e4f
-	ld hl, Unknown_72428 ; $6428
-	ld de, $cf2d
-	ld bc, $10
-	call CopyData
-	ld a, [$cf91]
-	cp $bf
-	jr c, .asm_71e64
-	ld a, $1
-.asm_71e64
-	call Func_71f9d
-	push af
-	ld hl, $cf2e
-	ld a, [$cf25]
-	add $1f
-	ld [hli], a
-	inc hl
-	pop af
-	ld [hl], a
-	ld hl, $cf2d
-	ld de, Unknown_721fa ; $61fa
-	ret
-PalCode_0a:	; $5e7b
-	ld hl, Unknown_72438 ; $6438
-	ld de, $cf2e
-	ret
-PalCode_04:	; $5e82
-	ld hl, Unknown_72468 ; $6468
-	ld de, $cf2d
-	ld bc, $10
-	call CopyData
-	ld a, [$cf91]
-	call Func_71f9d
-	ld hl, $cf30
-	ld [hl], a
-	ld hl, $cf2d
-	ld de, Unknown_72222 ; $6222
-	ret
+; HAX: Custom functions squeezed in here
 
-PalCode_05:	; $5e9f
-INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
-
-PalCode_06:	; $5ea6
-	ld hl, Unknown_72488 ; $6488
-	ld de, Unknown_7228e ; $628e
-	ret
-PalCode_08:	; $5ead
-	ld hl, Unknown_724a8 ; $64a8
-	ld de, Unknown_7219e ; $619e
-	ret
-PalCode_07:	; $5eb4
-	ld hl, Unknown_724b8 ; $64b8
-	ld de, Unknown_722c1 ; $62c1
-	ret
-PalCode_0c: ; $5ebb
-	ld hl, Unknown_724c8 ; $64c8
-	ld de, Unknown_723dd ; $63dd
-	ld a, $8
-	ld [$cf1c], a
-	ret
-PalCode_09: ; $5ec7
-	ld hl, Unknown_72428 ; $6428
-	ld de, $cf2d
-	ld bc, $10
-	call CopyData
-	ld a, [W_CURMAPTILESET] ; $d367
-	cp $f
-	jr z, .asm_71f0c
-	cp $11
-	jr z, .asm_71f10
-	ld a, [W_CURMAP] ; $d35e
-	cp $25
-	jr c, .asm_71ef8
-	cp $e2
-	jr c, .asm_71ef5
-	cp $e5
-	jr c, .asm_71f10
-	cp $f5
-	jr z, .asm_71f14
-	cp $f6
-	jr z, .asm_71f10
-.asm_71ef5
-	ld a, [$d365]
-.asm_71ef8
-	cp $b
-	jr c, .asm_71efe
-	ld a, $ff
-.asm_71efe
-	inc a
-	ld hl, $cf2e
-	ld [hld], a
-	ld de, Unknown_7219e ; $619e
-	ld a, $9
-	ld [$cf1c], a
-	ret
-.asm_71f0c
-	ld a, $18
-	jr .asm_71efe
-.asm_71f10
-	ld a, $22
-	jr .asm_71efe
-.asm_71f14
-	xor a
-	jr .asm_71efe
-PalCode_0b; $5f17
-	push bc
-	ld hl, Unknown_72428 ; $6428
-	ld de, $cf2d
-	ld bc, $10
-	call CopyData
-	pop bc
-	ld a, c
-	and a
-	ld a, $1e
-	jr nz, .asm_71f31
-	ld a, [$cf1d]
-	call Func_71f9d
-.asm_71f31
-	ld [$cf2e], a
-	ld hl, $cf2d
-	ld de, Unknown_7219e ; $619e
-	ret
-PalCode_0d: ; $5f3b
-	ld hl, Unknown_72360 ; $6360
-	ld de, $cc5b
-	ld bc, $40
-	call CopyData
-	ld de, Unknown_71f8f ; $5f8f
-	ld hl, $cc5d
-	ld a, [W_OBTAINEDBADGES] ; $d356
-	ld c, $8
-.asm_71f52
-	srl a
-	push af
-	jr c, .asm_71f62
-	push bc
-	ld a, [de]
-	ld c, a
-	xor a
-.asm_71f5b
-	ld [hli], a
-	dec c
-	jr nz, .asm_71f5b
-	pop bc
-	jr .asm_71f67
-.asm_71f62
-	ld a, [de]
-.asm_71f63
-	inc hl
+WaitForVBlank:
+	ld a,[rSTAT]
+	and a,3
 	dec a
-	jr nz, .asm_71f63
-.asm_71f67
-	pop af
-	inc de
-	dec c
-	jr nz, .asm_71f52
-	ld hl, Unknown_72498 ; $6498
-	ld de, $cc5b
+	jr nz,WaitForVBlank
 	ret
 
+LoadSGBPalette:
+	ld a,e
+
+	ld l,d
+	ld h,0
+	add hl
+	add hl
+	add hl
+	ld de,SuperPalettes
+	add hl,de
+
+	ld de,$d000
+	jr startPaletteTransfer
+
+LoadSGBPalette_Sprite:
+	ld a,e
+
+	ld l,d
+	ld h,0
+	add hl
+	add hl
+	add hl
+	ld de,SuperPalettes
+	add hl,de
+
+	ld de,$d040
+
+startPaletteTransfer:
+	add a
+	add a
+	add a
+	add e
+	ld e,a
+	ld b,8
+	
+paletteLoop:
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec b
+	jr nz,paletteLoop
+	ret
+
+; Palette commands are moved to the end of the bank
+	ORG $1c, $5f73
 Unknown_71f73: ; 71f73 (1c:5f73)
 	dw PalCode_00
 	dw PalCode_01
@@ -101838,6 +101696,7 @@ Func_71fc2: ; 71fc2 (1c:5fc2)
 	pop de
 	ld [hl], e
 	ret
+
 ; 71feb (1c:5feb)
 SendSGBPacket: ; 71feb (1c:5feb)
 ;check number of packets
@@ -102074,7 +101933,9 @@ Wait7000: ; 7214a (1c:614a)
 	jr nz,.loop\@
 	ret
 
-Func_72156: ; 72156 (1c:6156)
+; de = ptr to ATTR_BLK packet
+; hl = ptr to PAL_SET packet
+SetPalettesAndMaps: ; 72156 (1c:6156)
 	ld a, [$cf1a]
 	and a
 	jr z, .asm_72165
@@ -102513,7 +102374,7 @@ IF _BLUE
 	RGB 16,19,29
 ENDC
 	RGB 3,2,2
-	RGB 31,29,31 ; PAL_BLACK
+	RGB 31,29,31 ; PAL_BLACK	(index $1e)
 	RGB 7,7,7
 	RGB 2,3,3
 	RGB 3,2,2
@@ -128417,329 +128278,303 @@ MoveNames: ; b0000 (2c:4000)
 
 INCBIN "bank2c.bin",$060f,$b4000-$b060f
 
-SECTION "bank2D",DATA,BANK[$2D]
-INCBIN "bank2d.bin",$0000,$b8000-$b4000
+INCLUDE "bank2d.asm"
 
 SECTION "bank2E",DATA,BANK[$2E]
 INCBIN "bank2e.bin",$0000,$bc000-$b8000
 
-SECTION "bank2F",DATA,BANK[$2F]
+INCLUDE "bank2f.asm"
 
-RefreshWindow:
-	ld a,[H_AUTOBGTRANSFERENABLED]
-	and a
+SECTION "bank1C_extension",DATA,BANK[$1C]
+
+
+; Set all palettes to black at beginning of battle
+PalCode_00:
+	; Code $ff sometimes calls this (by accident?)
+	inc b
 	ret z
 
-	ld hl,[sp+$00]
-	ld a,h
-	ld [$ff00+$bf],a
-	ld a,l
-	ld [$ff00+$c0],a	; Store stack pointer
-	ld a,[$ff00+$bb]
-	and a
-	jr z,label_000
-	dec a
-	jr z,label_001
-	ld hl,W_SCREENTILESBUFFER+6*20*2
-	ld sp,hl
-	ld a,[$ff00+$bd]
-	ld h,a
-	ld a,[$ff00+$bc]
-	ld l,a
-	ld de,$0180
-	add hl,de
-	xor a
-	jr startCopy
-label_000:
-	ld hl,W_SCREENTILESBUFFER
-	ld sp,hl
-	ld a,[$ff00+$bd]
-	ld h,a
-	ld a,[$ff00+$bc]
-	ld l,a
-	ld a,$01
-	jr startCopy
-label_001:
-	ld hl,W_SCREENTILESBUFFER+6*20
-	ld sp,hl
-	ld a,[$ff00+$bd]
-	ld h,a
-	ld a,[$ff00+$bc]
-	ld l,a
-	ld de,$00c0
-	add hl,de
-	ld a,$02
-
-; sp now points to map data in wram, hl points to vram destination.
-startCopy:
-	ld [$ff00+$bb],a
-	ld b,$06
-
-drawRow:
-REPT 10
-	pop de
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-ENDR
-
-	ld a,[W_ISINBATTLE]
-	and a
-	;jr nz,skipPalettes
-
-; BEGIN loading palettes
-
-	ld a,$02
-	ld [rSVBK],a	; Wram bank 2
-
-	; l -= 20; reload row
-	ld a,l
-	sub 20
-	ld l,a
-
-	add sp,-20	; reload row for next bank
-	ld a,$01
-	ld [rVBK],a
-	ld c,10
-
-drawPalette:
-REPT 10
-	pop de
-	ld c,e
-
-	ld d,$d2	; E is the tile number; palette # located at $d2XX
-	ld a,[de]
-	ldi [hl],a	; Store byte 1
-	ld e,c
-	ld a,[de]
-	ldi [hl],a	; Store byte 2
-ENDR
-
-	xor a
-	ld [rVBK],a
-	ld [rSVBK],a	; Reset gbc-only banks
-
-skipPalettes:
-
-	ld a,$0c
-	add l
-	ld l,a
-	jr nc,.noCarry
-	inc h
-.noCarry
-	dec b
-	jp nz,drawRow
-
-	ld a,[$ff00+$bf]
-	ld h,a
-	ld a,[$ff00+$c0]
-	ld l,a
-	ld sp,hl
-
-	ld a,[W_ISINBATTLE]
-	and a
-	ret z
-	ld b,BANK(DrawLifebars)
-	ld hl,DrawLifebars
-	jp Bankswitch
-
-RefreshWindowInitial:
-label_011:
 	ld a,$02
 	ld [rSVBK],a
-	ld c,$0a
-label_012:
+
+	ld d,$1e	; Black palette
+	ld e,7
+.palLoop	; Set all bg and sprite palettes to SGB Palette $1e
+	push de
+	call LoadSGBPalette
 	pop de
-label_013:
-	ld a,[rSTAT]
-	bit 1,a
-	jr nz,label_013
-	ld [hl],e
-	inc l
-	ld [hl],d
-	inc l
-	dec c
-	jr nz,label_012
-	ld c,$14
-label_014:
-	dec l
-	dec c
-	jr nz,label_014
-	add sp,-$14
-	ld a,$01
-	ld [$ff00+$4f],a
-	ld c,$0a
-label_015:
+	push de
+	call LoadSGBPalette_Sprite
 	pop de
-	ld d,$d2
-label_016:
-	ld a,[$ff00+$41]
-	bit 1,a
-	jr nz,label_016
-	ld a,[de]
-	ldi [hl],a
-	add sp,-$02
-	pop de
-	ld e,d
-	ld d,$d2
-label_017:
-	ld a,[$ff00+$41]
-	bit 1,a
-	jr nz,label_017
-	ld a,[de]
-	ldi [hl],a
-	dec c
-	jr nz,label_015
+	dec e
+	ld a,e
+	inc a
+	jr nz,.palLoop
+
 	xor a
-	ld [$ff00+$4f],a
-	ld [$ff00+$70],a
-	ld a,$0c
-	add l
-	ld l,a
-	jr nc,label_018
-	inc h
-label_018:
-	dec b
-	jr nz,label_011
-	ld a,[$ff00+$bf]
-	ld h,a
-	ld a,[$ff00+$c0]
-	ld l,a
-	ld sp,hl
+	ld [W2_LastBGP],a
+	ld [W2_LastOBP],a	; Palettes must be refreshed
+
+	;xor a
+	ld [rSVBK],a
 	ret
 
-; Refresh map colors
-	ORG $2f, $6000
-
-	ld a,$02
-	ld [$ff00+$70],a
-	ld a,$01
-	ld [$ff00+$4f],a
-	ld a,[hl]
-	push hl
-	ld h,$d2
-	ld l,a
-	ld a,[hl]
-	ld hl,$ff41
-label_019:
-	bit 1,[hl]
-	jr nz,label_019
-	ld [de],a
-	pop hl
-	xor a
-	ld [$ff00+$4f],a
-	ld a,[hli]
-	push hl
-	ld hl,$ff41
-label_020:
-	bit 1,[hl]
-	jr nz,label_020
-	ld [de],a
-	inc de
-	pop hl
-	ld a,$01
-	ld [$ff00+$4f],a
-	ld a,[hl]
-	push hl
-	ld h,$d2
-	ld l,a
-	ld a,[hl]
-	ld hl,$ff41
-label_021:
-	bit 1,[hl]
-	jr nz,label_021
-	ld [de],a
-	pop hl
-	xor a
-	ld [$ff00+$4f],a
-	ld [$ff00+$70],a
-	ld a,[hli]
-	add sp,$04
-	push af
-	add sp,-$02
-	push hl
-	ld hl,$ff41
-label_022:
-	bit 1,[hl]
-	jr nz,label_022
-	pop hl
-	ret
-
-SECTION "bank1C_extend",DATA,BANK[$1C]
-
-DrawLifebars:
-	ld a,1
-	ld [rVBK],a
+; Set proper palettes for pokemon/trainers
+PalCode_01:	; $5e06
+	ld a, [W_PLAYERBATTSTATUS3]
+	ld hl, W_PLAYERMONID        ; player Pokemon ID
+	call DeterminePaletteID
+	ld b, a
 
 	ld a, [W_ENEMYBATTSTATUS3]
 	ld hl, W_ENEMYMONID                ; enemy Pokemon ID
 	call DeterminePaletteID
-	ld d,a
+	ld c, a
+
+	ld a,$02
+	ld [rSVBK],a
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+
+	; Player palette
+	push bc
+	ld d,b
 	ld e,0
 	call LoadSGBPalette
-	ld e,0
-	ld hl,$9c44
-	ld b,6
-.loop
-	ld a,[rSTAT]
-	bit 1,a
-	jr nz,.loop
-	ld [hl],e
-	inc l
-	dec b
-	jr nz,.loop
 
-	xor a
-	ld [rVBK],a
-	ret
+	; Enemy palette
+	pop bc
+	ld d,c
+	ld e,1
+	call LoadSGBPalette
 
-BattleInitHook:
-	ld a,2
-	ld [rSVBK],a
+	; Set tile palette id's while we're at it
 
-	ld a,2
+	; Top half; enemy lifebar
 	ld hl,$d200
+	ld d,2
+	ld bc,10*18
 .fillLoop
-	ld [hl],a
-	inc l
+	ld [hl],d
+	inc hl
+	dec bc
+	ld a,b
+	or c
 	jr nz,.fillLoop
 
-	;call DrawLifebars
+	; Bottom half; player lifebar
+	ld hl,$d200+10*18
+	ld d,3
+	ld bc,10*18
+.fillLoop
+	ld [hl],d
+	inc hl
+	dec bc
+	ld a,b
+	or c
+	jr nz,.fillLoop
+
+	; Player pokemon
+	ld hl,$d200+4*20
+	ld de,20-8
+	ld b,11
+	ld a,0
+.pDrawLine
+	ld c,8
+.pPalLoop
+	ld [hli],a
+	dec c
+	jr nz,.pPalLoop
+	add hl,de
+	dec b
+	jr nz,.pDrawLine
+	
 
 	xor a
+	ld [W2_LastBGP],a
+	ld [W2_LastOBP],a	; Palettes must be refreshed
+
+	;xor a
 	ld [rSVBK],a
 	ret
 
-
-LoadSGBPalette:
-	ld a,e
-
-	ld l,d
-	ld h,0
-	add hl
-	add hl
-	add hl
-	ld de,SuperPalettes
-	add hl,de
-
-	add a,a
-	add a,a
-	add a,a
-	or a,$80
-	ld [rBGPI],a
-	ld c,rBGPD&$ff
-	ld b,8
-.paletteLoop
-	ld a,[rSTAT]
-	bit 1,a
-	jr nz,.paletteLoop
-	ld a,[hli]
-	ld [$ff00+c],a
-	dec b
-	jr nz,.paletteLoop
+PalCode_02:	; $5e48
+	ret
+	ld hl, Unknown_72458 ; $6458
+	ld de, Unknown_7219e ; $619e
+	ret
+PalCode_03:	; $5e4f
+	ret
+	ld hl, Unknown_72428 ; $6428
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+	ld a, [$cf91]
+	cp $bf
+	jr c, .asm_71e64
+	ld a, $1
+.asm_71e64
+	call Func_71f9d
+	push af
+	ld hl, $cf2e
+	ld a, [$cf25]
+	add $1f
+	ld [hli], a
+	inc hl
+	pop af
+	ld [hl], a
+	ld hl, $cf2d
+	ld de, Unknown_721fa ; $61fa
+	ret
+PalCode_0a:	; $5e7b
+	ret
+	ld hl, Unknown_72438 ; $6438
+	ld de, $cf2e
+	ret
+PalCode_04:	; $5e82
+	ret
+	ld hl, Unknown_72468 ; $6468
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+	ld a, [$cf91]
+	call Func_71f9d
+	ld hl, $cf30
+	ld [hl], a
+	ld hl, $cf2d
+	ld de, Unknown_72222 ; $6222
 	ret
 
+PalCode_05:	; $5e9f
+ret
+INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
+
+PalCode_06:	; $5ea6
+	ret
+	ld hl, Unknown_72488 ; $6488
+	ld de, Unknown_7228e ; $628e
+	ret
+PalCode_08:	; $5ead
+	ret
+	ld hl, Unknown_724a8 ; $64a8
+	ld de, Unknown_7219e ; $619e
+	ret
+PalCode_07:	; $5eb4
+	ret
+	ld hl, Unknown_724b8 ; $64b8
+	ld de, Unknown_722c1 ; $62c1
+	ret
+PalCode_0c: ; $5ebb
+	ret
+	ld hl, Unknown_724c8 ; $64c8
+	ld de, Unknown_723dd ; $63dd
+	ld a, $8
+	ld [$cf1c], a
+	ret
+PalCode_09: ; $5ec7
+	ret
+	ld hl, Unknown_72428 ; $6428
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+	ld a, [W_CURMAPTILESET] ; $d367
+	cp $f
+	jr z, .asm_71f0c
+	cp $11
+	jr z, .asm_71f10
+	ld a, [W_CURMAP] ; $d35e
+	cp $25
+	jr c, .asm_71ef8
+	cp $e2
+	jr c, .asm_71ef5
+	cp $e5
+	jr c, .asm_71f10
+	cp $f5
+	jr z, .asm_71f14
+	cp $f6
+	jr z, .asm_71f10
+.asm_71ef5
+	ld a, [$d365]
+.asm_71ef8
+	cp $b
+	jr c, .asm_71efe
+	ld a, $ff
+.asm_71efe
+	inc a
+	ld hl, $cf2e
+	ld [hld], a
+	ld de, Unknown_7219e ; $619e
+	ld a, $9
+	ld [$cf1c], a
+	ret
+.asm_71f0c
+	ld a, $18
+	jr .asm_71efe
+.asm_71f10
+	ld a, $22
+	jr .asm_71efe
+.asm_71f14
+	xor a
+	jr .asm_71efe
+
+PalCode_0b; $5f17
+	ret
+	push bc
+	ld hl, Unknown_72428 ; $6428
+	ld de, $cf2d
+	ld bc, $10
+	call CopyData
+	pop bc
+	ld a, c
+	and a
+	ld a, $1e
+	jr nz, .asm_71f31
+	ld a, [$cf1d]
+	call Func_71f9d
+.asm_71f31
+	ld [$cf2e], a
+	ld hl, $cf2d
+	ld de, Unknown_7219e ; $619e
+	ret
+PalCode_0d: ; $5f3b
+	ret
+	ld hl, Unknown_72360 ; $6360
+	ld de, $cc5b
+	ld bc, $40
+	call CopyData
+	ld de, Unknown_71f8f ; $5f8f
+	ld hl, $cc5d
+	ld a, [W_OBTAINEDBADGES] ; $d356
+	ld c, $8
+.asm_71f52
+	srl a
+	push af
+	jr c, .asm_71f62
+	push bc
+	ld a, [de]
+	ld c, a
+	xor a
+.asm_71f5b
+	ld [hli], a
+	dec c
+	jr nz, .asm_71f5b
+	pop bc
+	jr .asm_71f67
+.asm_71f62
+	ld a, [de]
+.asm_71f63
+	inc hl
+	dec a
+	jr nz, .asm_71f63
+.asm_71f67
+	pop af
+	inc de
+	dec c
+	jr nz, .asm_71f52
+	ld hl, Unknown_72498 ; $6498
+	ld de, $cc5b
+	ret
 
 SECTION "bank30",DATA,BANK[$30]
 INCBIN "bank30.bin",$0000,$c4000-$c0000

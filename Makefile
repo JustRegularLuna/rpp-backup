@@ -1,14 +1,15 @@
 .SUFFIXES: .asm .tx .o .gbc
 
+ASMFILES = constants.asm bank2d.asm bank2f.asm
 TEXTFILES =	text/oakspeech.tx text/pokedex.tx text/mapRedsHouse1F.tx \
 		text/mapBluesHouse.tx text/mapPalletTown.tx
 
 all: pokered.gbc
 
-pokered.o: pokered.asm main.tx constants.asm ${TEXTFILES}
+pokered.o: pokered.asm main.tx ${ASMFILES} ${TEXTFILES}
 	rgbasm -o pokered.o pokered.asm
 	
-pokeblue.o: pokeblue.asm main.tx constants.asm ${TEXTFILES}
+pokeblue.o: pokeblue.asm main.tx ${ASMFILES} ${TEXTFILES}
 	rgbasm -o pokeblue.o pokeblue.asm
 
 redrle: extras/redrle.c

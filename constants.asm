@@ -3519,5 +3519,25 @@ mus_jump: MACRO
 ENDM
 
 ORG: MACRO
-	SECTION "ORG\@",DATA[\2],BANK[\1]
+	IF \1 == 0
+		SECTION "ORG\@",HOME[\2]
+	ELSE
+		SECTION "ORG\@",DATA[\2],BANK[\1]
+	ENDC
 	ENDM
+
+
+; GB CStuff in wram bank 2
+
+SECTION "variables",BSS[$d000]
+
+W2_BgPaletteData:	ds $40
+W2_SprPaletteData:	ds $40
+
+W2_LastBGP EQU $d087
+W2_LastOBP EQU $d088
+
+W2_MapPaletteArrangement EQU $d200
+
+SECTION "moreVariables",BSS[$d500]
+W2_TileBasedPalettes:	db

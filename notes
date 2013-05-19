@@ -1,7 +1,6 @@
 BATTLES:
 
 GoPAL_SET (3def)
-	In the grand scheme it looks like it simply invokes a PAL_SET sgb command.
 	Calls 1c:5ddf.
 
 DeterminePaletteID (1c:5f97)
@@ -10,8 +9,20 @@ DeterminePaletteID (1c:5f97)
 1c:5ddf:
 	Called from GoPAL_SET. calls DeterminePaletteID, then apparently sets the palettes.
 	
-f:6feb: called when battle is started; sets black palette
-
 f:6fb8: battle initialization function.
 
-1c:616d: UNUSED GBC CODE???
+1c:5ddf: Essentially GoPAL_SET.
+	It accepts a "command" in b. It jumps to index b in a table at 5F73. Values:
+		00 = Set black palettes at beginning of battle
+		01 = Set proper palettes for pokemon/trainers in battle
+		03 = Pokemon status
+		06 = Set titlescreen palettes
+		07 = Called before intro
+		09 = Load maps
+		0A = Send static PAL_SET, variable ATTR_BLK (Called when loading pokemon menu after FC)
+		FC = Called 6 times when loading pokemon menu: status bars
+		FF = Use code [cf1c] instead. Useful for reloading after a menu clears something.
+
+1c:5fb6: For code FC. Determines lifebar color and displays it.
+
+1c:616d: Unused GBC Code?
