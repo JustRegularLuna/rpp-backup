@@ -23,6 +23,7 @@ f:6fb8: battle initialization function.
 		08 = Open pokedex (just clear it)
 		09 = Load maps
 		0A = Send static PAL_SET, variable ATTR_BLK (Called when loading pokemon menu after FC)
+		0D = Trainer card
 		FC = Called 6 times when loading pokemon menu: status bars
 		FF = Use code [cf1c] instead. Useful for reloading after a menu clears something.
 

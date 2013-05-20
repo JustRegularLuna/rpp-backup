@@ -11167,10 +11167,11 @@ Func_4496: ; 4496 (1:4496)
 	call Func_4524
 	ld a, $90
 	ld [$FF00+$b0], a
-	ld d, $1
-	ld b, BANK(LoadScreenTilesFromBuffer18)
-	ld hl, LoadScreenTilesFromBuffer18
-	call Bankswitch ; indirect jump to LoadScreenTilesFromBuffer18 (37258 (d:7258))
+	ld d,$1
+	; HAX; palette must be refreshed
+	ld b, BANK(LoadIntroMonTilesAndPalettes)
+	ld hl, LoadIntroMonTilesAndPalettes
+	call Bankswitch
 	ret
 
 ; known jump sources: 4442 (1:4442)
@@ -101551,11 +101552,17 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld h, [hl]
 	ld l, a
 
-	; Don't bother hijacking ret.
 	;ld de, SetPalettesAndMaps ; $6156
-	;push de
 
+	ld de,PalCodeRet
+	push de
+
+	di
 	jp [hl]
+
+PalCodeRet:
+	ei
+	ret
 
 
 ; HAX: Custom functions squeezed in here
@@ -101637,7 +101644,7 @@ DeterminePaletteID: ; 71f97 (1c:5f97)
 	ld a, PAL_GREYMON
 	ret nz
 	ld a, [hl]
-Func_71f9d: ; 71f9d (1c:5f9d) - DeterminePaletteID without status check
+DeterminePaletteID_NoStatusCheck: ; 71f9d (1c:5f9d) - DeterminePaletteID without status check
 	ld [$D11E], a
 	and a
 	jr z, .idZero
@@ -102220,10 +102227,11 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; MEW
 
 ; palettes for overworlds, title screen, monsters
+; Partially HAXed
 SuperPalettes: ; 72660 (1c:6660)
-	RGB 31,29,31 ; PAL_ROUTE
-	RGB 21,28,11
-	RGB 20,26,31
+	RGB 31,29,31 ; PAL_TOWN2
+	RGB 24,17,7
+	RGB 24,17,7
 	RGB 3,2,2
 	RGB 31,29,31 ; PAL_PALLET
 	RGB 25,28,27
@@ -102270,8 +102278,8 @@ SuperPalettes: ; 72660 (1c:6660)
 	RGB 20,26,31
 	RGB 3,2,2
 	RGB 31,29,31 ; PAL_TOWNMAP
-	RGB 20,26,31
-	RGB 17,23,10
+	RGB 15,15,31
+	RGB 5,15,5
 	RGB 3,2,2
 IF _RED
 	RGB 31,29,31 ; PAL_LOGO1
@@ -102293,7 +102301,7 @@ ENDC
 	RGB 24,20,30
 	RGB 11,20,30
 	RGB 3,2,2
-	RGB 31,29,31 ; PAL_MEWMON
+	RGB 31,29,31 ; PAL_MEWMON	(index $10)
 	RGB 30,22,17
 	RGB 16,14,19
 	RGB 3,2,2
@@ -128424,10 +128432,36 @@ PalCode_01:	; $5e06
 	ld [W_PALREFRESHCMD],a
 	ret
 
+; Load town map
 PalCode_02:	; $5e48
-	ret
-	ld hl, Unknown_72458 ; $6458
-	ld de, Unknown_7219e ; $619e
+	ld a,2
+	ld [rSVBK],a
+
+	ld d,$c ;PAL_TOWNMAP
+	ld e,0
+	call LoadSGBPalette
+
+	ld d,$0 ;PAL_BROWNMON
+	ld e,1
+	call LoadSGBPalette
+
+	ld a,1
+	ld [W2_TileBasedPalettes],a
+
+	ld hl,$d200
+	ld b,$80
+	xor a
+.loop:
+	ld [hli],a
+	dec b
+	jr nz,.loop
+
+	; Give tile $65 a brownish color
+	ld hl,$d265
+	ld [hl], 1
+
+	xor a
+	ld [rSVBK],a
 	ret
 
 ; Status screen
@@ -128437,7 +128471,7 @@ PalCode_03:	; $5e4f
 	jr c, .asm_71e64
 	ld a, $1
 .asm_71e64
-	call Func_71f9d ; DeterminePaletteID without status check
+	call DeterminePaletteID_NoStatusCheck
 	ld b,a
 
 	ld a,2
@@ -128495,7 +128529,6 @@ PalCode_03:	; $5e4f
 	ret
 
 PalCode_0a:	; $5e7b
-	di
 	ld a,2
 	ld [rSVBK],a
 
@@ -128538,13 +128571,12 @@ PalCode_0a:	; $5e7b
 
 	xor a
 	ld [rSVBK],a
-	ei
 	ret
 
 ; Show pokedex data
 PalCode_04:	; $5e82
 	ld a, [$cf91]
-	call Func_71f9d	; Call DeterminePaletteID without status check
+	call DeterminePaletteID_NoStatusCheck	; Call DeterminePaletteID without status check
 	ld d,a
 	ld e,0
 
@@ -128597,10 +128629,55 @@ PalCode_05:	; $5e9f
 ret
 INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
 
+; Set intro palettes
 PalCode_06:	; $5ea6
-	ret
-	ld hl, Unknown_72488 ; $6488
-	ld de, Unknown_7228e ; $628e
+	ld a,[W_WHICHTRADE]
+	call DeterminePaletteID_NoStatusCheck
+	ld d,a
+	ld e,0
+
+	ld a,2
+	ld [rSVBK],a
+
+	call LoadSGBPalette
+
+	ld d,$e	; PAL_YELLOWMON
+	ld e,1
+	call LoadSGBPalette
+
+	ld d,$d	; PAL_LOGO1
+	ld e,2
+	call LoadSGBPalette
+
+	ld hl,$d200
+	ld a,1
+	ld b,8
+.logo2Loop
+	ld c,20
+.logo2InnerLoop
+	ld [hli],a
+	dec c
+	jr nz,.logo2InnerLoop
+	dec b
+	jr nz,.logo2Loop
+
+	ld a,2
+	ld c,20
+.logoLoop
+	ldi [hl],a
+	dec c
+	jr nz,.logoLoop
+
+	xor a
+	ld [W2_LastBGP],a	; Palettes must be redrawn
+
+	;xor a
+	ld [rSVBK],a
+
+	; Execute code 08 after titlescreen. Though it uses the red lifebar palette,
+	; it will look like plain black & white.
+	ld a,8
+	ld [W_PALREFRESHCMD],a
 	ret
 ; Pokedex screen (just clears to a single color)
 PalCode_08:	; $5ead
@@ -128644,7 +128721,6 @@ PalCode_0c: ; $5ebb
 
 ; Loading a map
 PalCode_09: ; $5ec7
-	di
 	ld a,2
 	ld [rSVBK],a
 	ld a,1
@@ -128664,7 +128740,6 @@ PalCode_09: ; $5ec7
 	xor a
 	ld [rSVBK],a
 	ld [rVBK],a
-	ei
 	ret
 
 PalCode_0b; $5f17
@@ -128680,7 +128755,7 @@ PalCode_0b; $5f17
 	ld a, $1e
 	jr nz, .asm_71f31
 	ld a, [$cf1d]
-	call Func_71f9d
+	call DeterminePaletteID_NoStatusCheck
 .asm_71f31
 	ld [$cf2e], a
 	ld hl, $cf2d
@@ -128723,6 +128798,16 @@ PalCode_0d: ; $5f3b
 	jr nz, .asm_71f52
 	ld hl, Unknown_72498 ; $6498
 	ld de, $cc5b
+	ret
+
+LoadIntroMonTilesAndPalettes:
+	push de
+	ld b,6
+	call GoPAL_SET
+	pop de
+	ld b, BANK(LoadScreenTilesFromBuffer18)
+	ld hl, LoadScreenTilesFromBuffer18
+	call Bankswitch ; indirect jump to LoadScreenTilesFromBuffer18 (37258 (d:7258))
 	ret
 
 SECTION "bank30",DATA,BANK[$30]
