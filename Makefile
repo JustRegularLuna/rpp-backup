@@ -1,6 +1,6 @@
 .SUFFIXES: .asm .tx .o .gbc
 
-ASMFILES = constants.asm bank2c.asm bank2d.asm bank2f.asm
+ASMFILES = constants.asm bank2c.asm bank2d.asm bank2e.asm bank2f.asm
 TEXTFILES =	text/oakspeech.tx text/pokedex.tx text/mapRedsHouse1F.tx \
 		text/mapBluesHouse.tx text/mapPalletTown.tx
 

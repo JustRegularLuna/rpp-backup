@@ -21,6 +21,15 @@ InitGbcPalettes:
 	dec b
 	jr nz,.bgCopyLoop
 
+	call InitSpritePalettes
+
+	ld a,$01
+	ld [rSVBK],a
+	ld [$ff4d],a
+	stop	; Automatically adds a nop
+	jp LoadBank1
+
+InitSpritePalettes:
 	ld de,W2_SprPaletteData
 	ld hl,SprPalettes
 	ld b,$40
@@ -30,21 +39,26 @@ InitGbcPalettes:
 	inc de
 	dec b
 	jr nz,.sprCopyLoop
-
-	ld a,$01
-	ld [rSVBK],a
-	ld [$ff4d],a
-	stop	; Automatically adds a nop
-	jp LoadBank1
+	ret
 
 	ORG $2d, $4800
 
 ; Refreshes palettes based on BGP and OBP registers
 GbcVBlankHook:
+	; Skip palette updating if tiles need to be copied to vram.
+	; This must be done before vblank is over.
+	ld a,[H_VBCOPYDOUBLESIZE]
+	and a
+	ret nz
+	ld a,[H_VBCOPYSIZE]
+	and a
+	ret nz
+
 	push af
 	push bc
 	push de
 	push hl
+
 	ld a,$02
 	ld [rSVBK],a
 	ld a,[rBGP]
@@ -276,6 +290,7 @@ LoadTilesetPalette:
 	dec b
 	jr nz,.nextPalette
 
+	; Start copying palette assignments
 	pop af	; Retrieve W_CURMAPTILESET into A
 	ld hl,$0000
 	cp $00
@@ -291,7 +306,7 @@ LoadTilesetPalette:
 	add hl,bc
 	push hl
 	pop de
-	ld hl, W2_MapPaletteArrangement
+	ld hl, $d200
 	ld b,$60
 .copyLoop
 	ld a,[de]
@@ -299,6 +314,14 @@ LoadTilesetPalette:
 	ld [hli],a
 	dec b
 	jr nz,.copyLoop
+
+	; Set the remaining values to zero
+	ld b,$a0
+	xor a
+.fillLoop
+	ld [hli],a
+	dec b
+	jr nz,.fillLoop
 
 	xor a
 	ld [rSVBK],a

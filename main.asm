@@ -145,10 +145,11 @@ Initialize:
 	ld a,$30
 	ld [$2000],a
 	jr loop3
+_SetSpriteAttributes: ; $00dc
 	push af
-	ld a,$2e
+	ld a, BANK(SetSpriteAttributes)
 	jr CallToBank
-_LoadTilesetPatternsAndPalettes:	; 00e1
+_LoadTilesetPatternsAndPalettes: ; $00e1
 	push af
 	ld a, BANK(LoadTilesetPalette)
 loop3
@@ -159,7 +160,7 @@ loop3
 	ret
 	nop
 	nop
-CallToBank:	; $00f1
+CallToBank: ; $00f1
 	ld [$2000],a
 	pop af
 	push af
@@ -4785,64 +4786,13 @@ RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 	ld [H_SCREENEDGEREDRAW],a
 	dec b
 	jr nz,.redrawRow
-.redrawColumn
-	ld hl,W_SCREENEDGETILES
-	ld a,[H_SCREENEDGEREDRAWADDR]
-	ld e,a
-	ld a,[H_SCREENEDGEREDRAWADDR + 1]
-	ld d,a
-	ld c,18 ; screen height
-.loop1
-	call RefreshMapColorsScrolling	; HAX
-	nop
-	ld [de],a
-	ld a,31
-	add e
-	ld e,a
-jr nc,.noCarry
-	inc d
-.noCarry
-; the following 4 lines wrap us from bottom to top if necessary
-	ld a,d
-	and a,$03
-	or a,$98
-	ld d,a
-	dec c
-	jr nz,.loop1
-	xor a
-	ld [H_SCREENEDGEREDRAW],a
+	CALL_INDIRECT DrawMapColumn
 	ret
 .redrawRow
-	ld hl,W_SCREENEDGETILES
-	ld a,[H_SCREENEDGEREDRAWADDR]
-	ld e,a
-	ld a,[H_SCREENEDGEREDRAWADDR + 1]
-	ld d,a
-	push de
-	call .drawHalf ; draw upper half
-	pop de
-	ld a,32 ; width of VRAM background map
-	add e
-	ld e,a
-	                 ; draw lower half
-.drawHalf
-	ld c,10
-.loop2
-	call RefreshMapColorsScrolling	; HAX
-	nop
-	ld [de],a
-	ld a,e
-	inc a
-; the following 6 lines wrap us from the right edge to the left edge if necessary
-	and a,$1f
-	ld b,a
-	ld a,e
-	and a,$e0
-	or b
-	ld e,a
-	dec c
-	jr nz,.loop2
+	CALL_INDIRECT DrawMapRow
 	ret
+
+	ORG 0, $1d57
 
 ; This function automatically transfers tile number data from the tile map at
 ; C3A0 to VRAM during V-blank. Note that it only transfers one third of the
@@ -10712,6 +10662,30 @@ LoadTownPalette_Ret:
 	ld [$2000],a
 	ret
 
+_LoadIntroNidorinoPal:
+	ld b,$f
+	ld c,$14	; PAL_PURPLEMON
+	call GoPAL_SET
+	jp MovePicLeft
+
+_LoadIntroPlayerPal:
+	ld b,$f
+	ld c,$15	; PAL_BROWNMON
+	call GoPAL_SET
+	jp MovePicLeft
+	
+_LoadIntroPlayerPal2:
+	ld b,$f
+	ld c,$15	; PAL_BROWNMON
+	call GoPAL_SET
+	jp GBFadeIn2
+
+_LoadIntroRivalPal:
+	ld b,$f
+	ld c,$14	; PAL_PURPLEMON
+	call GoPAL_SET
+	jp FadeInIntroPic
+
 SECTION "bank1",DATA,BANK[$1]
 
 SpriteFacingAndAnimationTable: ; 4000 (1:4000)
@@ -11730,7 +11704,7 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	ld a, [$FF00+$94]        ; load bit 7 (set to $80 if sprite is in grass and should be drawn behind it)
 	or [hl]
 .alwaysInForeground
-	call $00dc	; HAX
+	call _SetSpriteAttributes	; HAX
 	bit 0, a                 ; test for OAMFLAG_ENDOFDATA
 	jr z, .spriteTilesLoop
 	ld a, e
@@ -14223,7 +14197,8 @@ OakSpeech: ; 6115 (1:6115)
 	FuncCoord 6, 4 ; $c3f6
 	ld hl,Coord     ; position on tilemap the pic is displayed
 	call LoadFlippedFrontSpriteByMonIndex      ; displays pic?
-	call MovePicLeft
+	call _LoadIntroNidorinoPal	; HAX
+;	call MovePicLeft
 	ld hl,OakSpeechText2
 	call PrintText      ; Prints text box
 	call GBFadeOut2
@@ -14231,7 +14206,8 @@ OakSpeech: ; 6115 (1:6115)
 	ld de,RedPicFront
 	ld bc,$0400     ; affects the position of the player pic
 	call IntroPredef3B      ; displays player pic?
-	call MovePicLeft
+	call _LoadIntroPlayerPal	; HAX
+;	call MovePicLeft
 	ld hl,IntroducePlayerText
 	call PrintText
 	call Func_695d ; brings up NewName/Red/etc menu
@@ -14240,7 +14216,8 @@ OakSpeech: ; 6115 (1:6115)
 	ld de,Rival1Pic
 	ld bc,$1300
 	call IntroPredef3B ; displays rival pic
-	call FadeInIntroPic
+	call _LoadIntroRivalPal	; HAX
+;	call FadeInIntroPic
 	ld hl,IntroduceRivalText
 	call PrintText
 	call Func_69a4
@@ -14250,7 +14227,8 @@ Function61BC: ; 61bc (1:61bc)
 	ld de,RedPicFront
 	ld bc,$0400
 	call IntroPredef3B
-	call GBFadeIn2
+	call _LoadIntroPlayerPal2	; HAX
+;	call GBFadeIn2
 	ld a,[$D72D]
 	and a
 	jr nz,.next
@@ -101619,7 +101597,6 @@ startPaletteTransfer:
 	ret
 
 ; Palette commands are moved to the end of the bank
-	ORG $1c, $5f73
 Unknown_71f73: ; 71f73 (1c:5f73)
 	dw PalCode_00
 	dw PalCode_01
@@ -101635,7 +101612,11 @@ Unknown_71f73: ; 71f73 (1c:5f73)
 	dw PalCode_0b
 	dw PalCode_0c
 	dw PalCode_0d
+	; Past here are codes which didn't previously exist.
+	dw PalCode_0e	; Set prof oak's color
+	dw PalCode_0f	; Set intro pokemon (nidorino)'s color
 
+	ORG $1c, $5f8f
 Unknown_71f8f: ; 71f8f (1c:5f8f)
 INCBIN "baserom.gbc",$71f8f,$71f97 - $71f8f
 
@@ -102279,7 +102260,7 @@ SuperPalettes: ; 72660 (1c:6660)
 	RGB 3,2,2
 	RGB 31,29,31 ; PAL_TOWNMAP
 	RGB 15,15,31
-	RGB 5,15,5
+	RGB 2,25,3
 	RGB 3,2,2
 IF _RED
 	RGB 31,29,31 ; PAL_LOGO1
@@ -102302,8 +102283,8 @@ ENDC
 	RGB 11,20,30
 	RGB 3,2,2
 	RGB 31,29,31 ; PAL_MEWMON	(index $10)
-	RGB 30,22,17
-	RGB 16,14,19
+	RGB 21,17,25
+	RGB 22,3,22
 	RGB 3,2,2
 	RGB 31,29,31 ; PAL_BLUEMON
 	RGB 18,20,27
@@ -128276,14 +128257,6 @@ MoveNames: ; b0000 (2c:4000)
 	db "STRUGGLE@"
 
 
-INCLUDE "bank2c.asm"
-INCLUDE "bank2d.asm"
-
-SECTION "bank2E",DATA,BANK[$2E]
-INCBIN "bank2e.bin",$0000,$bc000-$b8000
-
-INCLUDE "bank2f.asm"
-
 SECTION "bank1C_extension",DATA,BANK[$1C]
 
 
@@ -128320,8 +128293,6 @@ PalCode_00:
 
 ; Set proper palettes for pokemon/trainers
 PalCode_01:	; $5e06
-	CALL_INDIRECT InitGbcPalettes	; Restores sprites palettes which were set to black
-
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, W_PLAYERMONID        ; player Pokemon ID
 	call DeterminePaletteID
@@ -128360,6 +128331,9 @@ PalCode_01:	; $5e06
 	ld d,a
 	ld e,3
 	call LoadSGBPalette
+
+	; Restore sprite palettes which were set to black
+	CALL_INDIRECT InitSpritePalettes
 
 
 	; Now set the tilemap
@@ -128674,9 +128648,8 @@ PalCode_06:	; $5ea6
 	;xor a
 	ld [rSVBK],a
 
-	; Execute code 08 after titlescreen. Though it uses the red lifebar palette,
-	; it will look like plain black & white.
-	ld a,8
+	; Execute code 0e after titlescreen to set prof oak's color.
+	ld a,$e
 	ld [W_PALREFRESHCMD],a
 	ret
 ; Pokedex screen (just clears to a single color)
@@ -128761,12 +128734,39 @@ PalCode_0b; $5f17
 	ld hl, $cf2d
 	ld de, Unknown_7219e ; $619e
 	ret
+
+; Uses palettes $10, $22, $12, $18
 PalCode_0d: ; $5f3b
+	ld a,2
+	ld [rSVBK],a
+	
+	ld d,$10
+	ld e,0
+	call LoadSGBPalette
+	ld d,$22
+	ld e,1
+	call LoadSGBPalette
+	ld d,$12
+	ld e,2
+	call LoadSGBPalette
+	ld d,$18
+	ld e,3
+	call LoadSGBPalette
+
+	ld hl, BadgePalettes
+	ld de, $d200
+	ld b, $60
+.copyLoop
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec b
+	jr nz,.copyLoop
+
+	xor a
+	ld [W2_LastBGP],a
+	ld [rSVBK],a
 	ret
-	ld hl, Unknown_72360 ; $6360
-	ld de, $cc5b
-	ld bc, $40
-	call CopyData
 	ld de, Unknown_71f8f ; $5f8f
 	ld hl, $cc5d
 	ld a, [W_OBTAINEDBADGES] ; $d356
@@ -128800,6 +128800,68 @@ PalCode_0d: ; $5f3b
 	ld de, $cc5b
 	ret
 
+BadgePalettes:
+	REPT $20
+	db 0
+	ENDR
+	db 0,0,0,0	; Leader 1
+	db 0,0,0,0	; Badge 1
+	db 0,0,0,0	; Leader 2
+	db 1,1,1,1
+	db 0,0,0,0	; Leader 3
+	db 3,3,3,3
+	db 0,0,0,0	; Leader 4
+	db 0,2,1,3
+	db 0,0,0,0	; Leader 5
+	db 2,2,2,2
+	db 0,0,0,0	; Leader 6
+	db 3,3,3,3
+	db 0,0,0,0	; Leader 7
+	db 2,2,2,2
+	db 0,0,0,0	; Leader 8
+	db 1,1,1,1
+
+; First colors in intro
+PalCode_0e:
+	ld a,2
+	ld [rSVBK],a
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+
+	ld d,$15	; PAL_BROWNMON
+	ld e,0
+	call LoadSGBPalette
+
+	ld bc,20*18
+	ld hl,$d200
+	ld d,0
+.palLoop
+	ld [hl],d
+	inc hl
+	dec bc
+	ld a,b
+	or c
+	jr nz,.palLoop
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+; Loads palette c to slot 0.
+PalCode_0f:
+	ld a,2
+	ld [rSVBK],a
+
+	ld d,c
+	ld e,0
+	call LoadSGBPalette
+
+	xor a
+	ld [rSVBK],a
+	ld [W_PALREFRESHCMD],a
+	ret
+
 LoadIntroMonTilesAndPalettes:
 	push de
 	ld b,6
@@ -128809,6 +128871,12 @@ LoadIntroMonTilesAndPalettes:
 	ld hl, LoadScreenTilesFromBuffer18
 	call Bankswitch ; indirect jump to LoadScreenTilesFromBuffer18 (37258 (d:7258))
 	ret
+
+
+INCLUDE "bank2c.asm"
+INCLUDE "bank2d.asm"
+INCLUDE "bank2e.asm"
+INCLUDE "bank2f.asm"
 
 SECTION "bank30",DATA,BANK[$30]
 INCBIN "bank30.bin",$0000,$c4000-$c0000

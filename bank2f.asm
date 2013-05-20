@@ -1,3 +1,6 @@
+; Functions to refresh 1/3 of the window each frame, and to
+; redraw the map as its being walked towards.
+
 SECTION "bank2F",DATA,BANK[$2F]
 
 RefreshWindow:
@@ -63,11 +66,11 @@ ENDR
 	ld a,$0c
 	add l
 	ld l,a
-	adc h
-	sub l
-	ld h,a
+	jr nc,.noCarry
+	inc h
+.noCarry
 	dec b
-	jp nz,.drawRow
+	jr nz,.drawRow
 
 
 ; BEGIN loading palettes
@@ -129,9 +132,9 @@ staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
 	ld a,32-20
 	add l
 	ld l,a
-	adc h
-	sub l
-	ld h,a
+	jr nc,.noCarry
+	inc h
+.noCarry
 	dec b
 	jr nz,.drawRow_Pal
 
@@ -139,31 +142,24 @@ staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
 
 tileBasedPalettes:	; Palettes are loaded based on the tile at that location
 .drawRow_Pal
-	ld c,20
-.palLoop
+	push bc
+	ld b,$d2
+REPT 20
 	ld a,[de]
 	inc de
-	push de
-	ld e,a
-	ld d,$d2
+	ld c,a
 
-.waitLoop
-	ld a,[rSTAT]
-	and $02
-	jr nz,.waitLoop
-
-	ld a,[de]
+	ld a,[bc]
 	ld [hli],a
-	pop de
-	dec c
-	jr nz,.palLoop
+ENDR
 
 	ld a,32-20
 	add l
 	ld l,a
-	adc h
-	sub l
-	ld h,a
+	jr nc,.noCarry
+	inc h
+.noCarry
+	pop bc
 	dec b
 	jr nz,.drawRow_Pal
 
@@ -252,23 +248,15 @@ label_018:
 	ld h,$d2
 	ld l,a
 	ld a,[hl]
-	ld hl,$ff41
-label_019:
-	bit 1,[hl]
-	jr nz,label_019
+
 	ld [de],a
 	pop hl
 	xor a
 	ld [$ff00+$4f],a
 	ld a,[hli]
-	push hl
-	ld hl,$ff41
-label_020:
-	bit 1,[hl]
-	jr nz,label_020
+
 	ld [de],a
 	inc de
-	pop hl
 	ld a,$01
 	ld [$ff00+$4f],a
 	ld a,[hl]
@@ -297,3 +285,156 @@ label_022:
 	pop hl
 	ret
 
+DrawMapRow:
+	ld hl,W_SCREENEDGETILES
+	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld e,a
+	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld d,a
+	push de
+	call .drawHalf ; draw upper half
+	pop de
+	ld a,32 ; width of VRAM background map
+	add e
+	ld e,a
+	call .drawHalf ; draw lower half
+
+	; Start drawing palettes
+	ld a,2
+	ld [rSVBK],a
+	ld a,1
+	ld [rVBK],a
+	ld hl,W_SCREENEDGETILES
+	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld e,a
+	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld d,a
+
+	push de
+	call .drawHalfPalette ; draw upper half
+	pop de
+	ld a,32 ; width of VRAM background map
+	add e
+	ld e,a
+	call .drawHalfPalette ; draw lower half
+
+	xor a
+	ld [rSVBK],a
+	ld [rVBK],a
+	ret
+
+.drawHalf
+	ld c,10
+.loop2
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,[hli]
+	ld [de],a
+	ld a,e
+	inc a
+; the following 6 lines wrap us from the right edge to the left edge if necessary
+	and a,$1f
+	ld b,a
+	ld a,e
+	and a,$e0
+	or b
+	ld e,a
+	dec c
+	jr nz,.loop2
+	ret
+
+.drawHalfPalette
+	ld b, $d2
+REPT 10
+	ld a,[hli]
+	ld c,a
+	ld a,[bc]
+	ld [de],a
+	inc de
+	ld a,[hli]
+	ld c,a
+	ld a,[bc]
+	ld [de],a
+	ld a,e
+	inc a
+; the following 6 lines wrap us from the right edge to the left edge if necessary
+	and a,$1f
+	ld c,a
+	ld a,e
+	and a,$e0
+	or c
+	ld e,a
+ENDR
+	ret
+
+
+DrawMapColumn:
+	; Draw tiles
+	ld hl,W_SCREENEDGETILES
+	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld e,a
+	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld d,a
+	ld c,18 ; screen height
+.loop1
+	ld a,[hli]
+	ld [de],a
+	inc de
+	ld a,[hli]
+	ld [de],a
+	ld a,31
+	add e
+	ld e,a
+jr nc,.noCarry
+	inc d
+.noCarry
+; the following 4 lines wrap us from bottom to top if necessary
+	ld a,d
+	and a,$03
+	or a,$98
+	ld d,a
+	dec c
+	jr nz,.loop1
+
+; =======================
+	; Draw palettes
+	ld a,2
+	ld [rSVBK],a
+	ld a,1
+	ld [rVBK],a
+
+	ld hl,W_SCREENEDGETILES
+	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld e,a
+	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld d,a
+	ld b,$d2
+REPT 18
+	ld a,[hli]
+	ld c,a
+	ld a,[bc]
+	ld [de],a
+	inc de
+	ld a,[hli]
+	ld c,a
+	ld a,[bc]
+	ld [de],a
+	ld a,31
+	add e
+	ld e,a
+jr nc,.noCarry\@
+	inc d
+.noCarry\@
+; the following 4 lines wrap us from bottom to top if necessary
+	ld a,d
+	and a,$03
+	or a,$98
+	ld d,a
+ENDR
+
+	xor a
+	ld [H_SCREENEDGEREDRAW],a
+	ld [rVBK],a
+	ld [rSVBK],a
+	ret
