@@ -3526,6 +3526,7 @@ ORG: MACRO
 	ENDC
 	ENDM
 
+W_PALREFRESHCMD EQU $CF1C
 
 ; GB CStuff in wram bank 2
 
@@ -3541,3 +3542,9 @@ W2_MapPaletteArrangement EQU $d200
 
 SECTION "moreVariables",BSS[$d500]
 W2_TileBasedPalettes:	db
+
+CALL_INDIRECT: MACRO
+	ld b, BANK(\1)
+	ld hl, \1
+	call Bankswitch
+ENDM

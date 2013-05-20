@@ -15,9 +15,12 @@ f:6fb8: battle initialization function.
 	It accepts a "command" in b. It jumps to index b in a table at 5F73. Values:
 		00 = Set black palettes at beginning of battle
 		01 = Set proper palettes for pokemon/trainers in battle
+		02 = Map
 		03 = Pokemon status
+		04 = Show pokedex data
 		06 = Set titlescreen palettes
 		07 = Called before intro
+		08 = Open pokedex (just clear it)
 		09 = Load maps
 		0A = Send static PAL_SET, variable ATTR_BLK (Called when loading pokemon menu after FC)
 		FC = Called 6 times when loading pokemon menu: status bars

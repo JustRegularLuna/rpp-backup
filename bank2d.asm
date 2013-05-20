@@ -235,6 +235,7 @@ MapPaletteArrangements:
 
 	ORG $2d, $6000
 ; Load color for new map and tile placement
+LoadTilesetPalette:
 	push bc
 	push de
 	push hl
@@ -307,16 +308,20 @@ MapPaletteArrangements:
 	ret
 
 	ORG $2d, $6200
-; Load Town color
+; Towns have different roof colors while using the same tileset
 LoadTownPalette:
+	ld a, [W_CURMAP]
+	ld c,a
+
 	ld a,$02
 	ld [rSVBK],a
+
 	push de
 	push hl
 	ld hl, W2_BgPaletteData + $32
 	ld b,$04
 	ld d, TownData>>8
-	ld a,[rOBP1]
+	ld a, c
 	add a
 	add a
 	ld e,a
@@ -328,11 +333,12 @@ LoadTownPalette:
 	jr nz,.copyLoop
 	pop hl
 	pop de
+
 	xor a
 	ld [W2_LastBGP],a
 	ld [W2_LastOBP],a
 	ld [rSVBK],a
-	jp HaxFunc5
+	ret
 
 
 	ORG $2d, $7000

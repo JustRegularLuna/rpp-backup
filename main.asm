@@ -11,10 +11,10 @@ RefreshMapColorsScrolling:
 
 SECTION "rst8",HOME[$8]
 	rst $38
-RefreshMapColors:
+_RefreshMapColors:
 	push af
-	ld a,$2c
-	jp $00f1
+	ld a, BANK(RefreshMapColors)
+	jp CallToBank
 
 SECTION "rst10",HOME[$10]
 	db $FF
@@ -144,21 +144,22 @@ Initialize:
 .IsNotGBC
 	ld a,$30
 	ld [$2000],a
-	jr .loop3
+	jr loop3
 	push af
 	ld a,$2e
 	jr CallToBank
+_LoadTilesetPatternsAndPalettes:	; 00e1
 	push af
-	ld a,$2d
-.loop3
+	ld a, BANK(LoadTilesetPalette)
+loop3
 	ld [$2000],a
 	call $00f5
 	pop af
-	call $09e8
+	call LoadTilesetTilePatternData
 	ret
 	nop
 	nop
-CallToBank:	; $f1
+CallToBank:	; $00f1
 	ld [$2000],a
 	pop af
 	push af
@@ -1005,7 +1006,7 @@ WarpFound2: ; 073c (0:073c)
 	ld [W_CURMAP],a ; change current map to destination map
 	cp a,ROCK_TUNNEL_1
 	jr nz,.notRockTunnel
-	ld a,$1a	; HAX (previously ld a,$06)
+	ld a,$06	; Previously HAXed to 1a
 	ld [$d35d],a
 	call GBFadeIn1
 .notRockTunnel
@@ -2859,7 +2860,7 @@ LoadMapData: ; 1241 (0:1241)
 	call Bankswitch ; load tile pattern data for sprites
 	call LoadTileBlockMap
 	;call LoadTilesetTilePatternData
-	call $00e1	; HAX
+	call _LoadTilesetPatternsAndPalettes	; HAX
 	call LoadCurrentMapView
 ; copy current map view to VRAM
 	ld hl,W_SCREENTILESBUFFER
@@ -2868,7 +2869,7 @@ LoadMapData: ; 1241 (0:1241)
 .vramCopyLoop
 	ld c,$14
 .vramCopyInnerLoop
-	call 0009
+	call _RefreshMapColors
 	dec c
 	jr nz,.vramCopyInnerLoop
 	ld a,$0c
@@ -5085,6 +5086,7 @@ UpdateMovingBgTiles: ; 1ebe (0:1ebe)
 	jr z,.updateFlowerTile
 	ld hl,$9140 ; water tile pattern VRAM location
 	ld c,16 ; number of bytes in a tile pattern
+
 	; HAX
 	ld a,$2c
 	ld [$2000],a
@@ -5095,6 +5097,7 @@ UpdateMovingBgTiles: ; 1ebe (0:1ebe)
 	and a,$04
 	jp nz,$7000
 	jp $7080
+
 	ld a,[H_LOADEDROMBANK]
 	ld [$2000],a
 	ld a,[$ffd7]
@@ -5343,7 +5346,9 @@ DelayFrame: ; 20af (0:20af)
 .halt
 	db $76 ; XXX this is a hack--rgbasm adds a nop after this instr even when ints are enabled
 	ld a,[H_VBLANKOCCURRED]
-	jp $3fa6	; HAX
+	and a
+	jr nz,.halt
+	;jp HaxFunc4	; HAX
 
 	ret
 
@@ -10690,33 +10695,22 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	dw $7c0d
 	dw $7c45
 
-HaxFunc4:
-	push af
+_LoadTownPalette:
 	ld a,[W_CURMAPTILESET]
 	and a
-	jr nz,label2
+	ret nz
+	ld a,[W_CURMAP]
+	ld [rOBP1],a
+	ld bc, LoadTownPalette_Ret
 	push bc
-	ld a,[$ff00+$49]
-	ld b,a
-	ld a,[$d35e]
-	cp b
-	jr nz,label3
-label1
-	pop bc
-label2
-	pop af
-	and a
-	jp nz,$20af
+	ld a, BANK(LoadTownPalette)
+	ld [$2000],a
+	jp LoadTownPalette
+
+LoadTownPalette_Ret:
+	ld a,[H_LOADEDROMBANK]
+	ld [$2000],a
 	ret
-label3
-	ld [$ff00+$49],a
-	ld a,$2d
-	ld [$2000],a
-	jp $6200
-HaxFunc5: ; 3fc8
-	ld a,[$ff00+$b8]
-	ld [$2000],a
-	jr label1
 
 SECTION "bank1",DATA,BANK[$1]
 
@@ -101535,6 +101529,9 @@ UnnamedText_71dda: ; 71dda (1c:5dda)
 	db $50
 ; 0x71dda + 5 bytes
 
+; HAX: This is the super gameboy palette command handler.
+; I hijaxed a jump table so I can reimplement all SGB colorization functions.
+; Value of b is the "command". Jumps to function "PalCode_XX" where X is the command.
 ; known jump sources: 3df6 (0:3df6)
 Func_71ddf: ; 71ddf (1c:5ddf)
 	call Load16BitRegisters
@@ -101554,21 +101551,15 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld h, [hl]
 	ld l, a
 
-	di
-	;call WaitForVBlank
-
+	; Don't bother hijacking ret.
 	;ld de, SetPalettesAndMaps ; $6156
-	ld de,PalCodeRet
-	push de
+	;push de
 
 	jp [hl]
 
-PalCodeRet:
-	ei
-	ret
-
 
 ; HAX: Custom functions squeezed in here
+; Before, PalCode functions were here
 
 WaitForVBlank:
 	ld a,[rSTAT]
@@ -101612,12 +101603,12 @@ startPaletteTransfer:
 	ld e,a
 	ld b,8
 	
-paletteLoop:
+.palLoop
 	ld a,[hli]
 	ld [de],a
 	inc de
 	dec b
-	jr nz,paletteLoop
+	jr nz,.palLoop
 	ret
 
 ; Palette commands are moved to the end of the bank
@@ -101646,7 +101637,7 @@ DeterminePaletteID: ; 71f97 (1c:5f97)
 	ld a, PAL_GREYMON
 	ret nz
 	ld a, [hl]
-Func_71f9d: ; 71f9d (1c:5f9d)
+Func_71f9d: ; 71f9d (1c:5f9d) - DeterminePaletteID without status check
 	ld [$D11E], a
 	and a
 	jr z, .idZero
@@ -128276,8 +128267,8 @@ MoveNames: ; b0000 (2c:4000)
 	db "SUBSTITUTE@"
 	db "STRUGGLE@"
 
-INCBIN "bank2c.bin",$060f,$b4000-$b060f
 
+INCLUDE "bank2c.asm"
 INCLUDE "bank2d.asm"
 
 SECTION "bank2E",DATA,BANK[$2E]
@@ -128321,21 +128312,20 @@ PalCode_00:
 
 ; Set proper palettes for pokemon/trainers
 PalCode_01:	; $5e06
+	CALL_INDIRECT InitGbcPalettes	; Restores sprites palettes which were set to black
+
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, W_PLAYERMONID        ; player Pokemon ID
 	call DeterminePaletteID
 	ld b, a
 
 	ld a, [W_ENEMYBATTSTATUS3]
-	ld hl, W_ENEMYMONID                ; enemy Pokemon ID
+	ld hl, W_ENEMYMONID         ; enemy Pokemon ID
 	call DeterminePaletteID
 	ld c, a
 
 	ld a,$02
 	ld [rSVBK],a
-
-	xor a
-	ld [W2_TileBasedPalettes],a
 
 	; Player palette
 	push bc
@@ -128349,31 +128339,49 @@ PalCode_01:	; $5e06
 	ld e,1
 	call LoadSGBPalette
 
-	; Set tile palette id's while we're at it
+	; Player lifebar
+	ld a, [$cf1d]
+	add $1f
+	ld d,a
+	ld e,2
+	call LoadSGBPalette
+
+	; Enemy lifebar
+	ld a, [$cf1e]
+	add $1f
+	ld d,a
+	ld e,3
+	call LoadSGBPalette
+
+
+	; Now set the tilemap
+
+	xor a
+	ld [W2_TileBasedPalettes],a	; Use a direct color map instead of assigning colors to tiles
 
 	; Top half; enemy lifebar
 	ld hl,$d200
-	ld d,2
-	ld bc,10*18
-.fillLoop
-	ld [hl],d
-	inc hl
-	dec bc
-	ld a,b
-	or c
-	jr nz,.fillLoop
-
-	; Bottom half; player lifebar
-	ld hl,$d200+10*18
 	ld d,3
 	ld bc,10*18
-.fillLoop
+.eFillLoop
 	ld [hl],d
 	inc hl
 	dec bc
 	ld a,b
 	or c
-	jr nz,.fillLoop
+	jr nz,.eFillLoop
+
+	; Bottom half; player lifebar
+	ld hl,$d200+9*18
+	ld d,2
+	ld bc,10*18
+.pFillLoop
+	ld [hl],d
+	inc hl
+	dec bc
+	ld a,b
+	or c
+	jr nz,.pFillLoop
 
 	; Player pokemon
 	ld hl,$d200+4*20
@@ -128390,13 +128398,30 @@ PalCode_01:	; $5e06
 	dec b
 	jr nz,.pDrawLine
 	
+	; Enemy pokemon
+	ld hl,$d200 + 11
+	ld de,20-9
+	ld b,7
+	ld a,1
+.eDrawLine
+	ld c,9
+.ePalLoop
+	ld [hli],a
+	dec c
+	jr nz,.ePalLoop
+	add hl,de
+	dec b
+	jr nz,.eDrawLine
 
 	xor a
 	ld [W2_LastBGP],a
-	ld [W2_LastOBP],a	; Palettes must be refreshed
+	ld [W2_LastOBP],a	; Palettes must be redrawn
 
 	;xor a
 	ld [rSVBK],a
+
+	ld a,$01
+	ld [W_PALREFRESHCMD],a
 	ret
 
 PalCode_02:	; $5e48
@@ -128404,46 +128429,168 @@ PalCode_02:	; $5e48
 	ld hl, Unknown_72458 ; $6458
 	ld de, Unknown_7219e ; $619e
 	ret
+
+; Status screen
 PalCode_03:	; $5e4f
-	ret
-	ld hl, Unknown_72428 ; $6428
-	ld de, $cf2d
-	ld bc, $10
-	call CopyData
 	ld a, [$cf91]
 	cp $bf
 	jr c, .asm_71e64
 	ld a, $1
 .asm_71e64
-	call Func_71f9d
-	push af
-	ld hl, $cf2e
+	call Func_71f9d ; DeterminePaletteID without status check
+	ld b,a
+
+	ld a,2
+	ld [rSVBK],a
+
+	push bc
+
+	; Load Lifebar palette
 	ld a, [$cf25]
 	add $1f
-	ld [hli], a
-	inc hl
+	ld d,a
+	ld e,1
+	call LoadSGBPalette	
+
+	; Load pokemon palette
 	pop af
-	ld [hl], a
-	ld hl, $cf2d
-	ld de, Unknown_721fa ; $61fa
+	ld d,a
+	ld e,0
+	call LoadSGBPalette
+
+
+	; Set palette map
+	xor a
+	ld [W2_TileBasedPalettes],a
+
+	; Set everything to the lifebar palette
+	ld hl,$d200
+	ld bc,18*20
+	ld d,1
+.fillLoop
+	ld [hl],d
+	inc hl
+	dec bc
+	ld a,b
+	or c
+	jr nz,.fillLoop
+
+	; Set upper-left to pokemon's palette
+	ld hl,$d200
+	ld de,20-8
+	ld b,7
+	xor a
+.drawRow
+	ld c,8
+.palLoop
+	ld [hli],a
+	dec c
+	jr nz,.palLoop
+	add hl,de
+	dec b
+	jr nz,.drawRow
+
+	xor a
+	ld [rSVBK],a
 	ret
+
 PalCode_0a:	; $5e7b
+	di
+	ld a,2
+	ld [rSVBK],a
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+
+	ld d,$1f	; Filler for palette 0 (technically, green)
+	ld e,0
+	call LoadSGBPalette
+	ld d,$1f	; Green
+	ld e,1
+	call LoadSGBPalette
+	ld d,$20	; Yellow
+	ld e,2
+	call LoadSGBPalette
+	ld d,$21	; Red
+	ld e,3
+	call LoadSGBPalette
+
+	; Palettes were written to a SGB packet. Extract them.
+	ld b,9		; there are only 6 pokemon but iterate 9 times to fill the whole screen
+	ld hl,$cf37
+	ld de,$d200
+.loop
+	ld a,[hl]
+	and 3
+
+	ld c,40
+.loop2
+	ld [de],a
+	inc de
+	dec c
+	jr nz,.loop2
+
+	ld a,6
+	add l
+	ld l,a
+	dec b
+	jr nz,.loop
+
+	xor a
+	ld [rSVBK],a
+	ei
 	ret
-	ld hl, Unknown_72438 ; $6438
-	ld de, $cf2e
-	ret
+
+; Show pokedex data
 PalCode_04:	; $5e82
-	ret
-	ld hl, Unknown_72468 ; $6468
-	ld de, $cf2d
-	ld bc, $10
-	call CopyData
 	ld a, [$cf91]
-	call Func_71f9d
-	ld hl, $cf30
-	ld [hl], a
-	ld hl, $cf2d
-	ld de, Unknown_72222 ; $6222
+	call Func_71f9d	; Call DeterminePaletteID without status check
+	ld d,a
+	ld e,0
+
+	ld a,2
+	ld [rSVBK],a
+
+	call LoadSGBPalette
+
+IF _BLUE
+	ld d,$11	; PAL_BLUEMON
+ELSE
+	ld d,$12	; PAL_REDMON
+ENDC
+	ld e,1
+	call LoadSGBPalette
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+
+	ld bc,20*18
+	ld hl,$d200
+	ld d,1
+.palLoop
+	ld [hl],d
+	inc hl
+	dec bc
+	ld a,b
+	or c
+	jr nz,.palLoop
+
+	ld hl,$d201+20
+	ld de,20-8
+	ld b,7
+	xor a
+.pokeLoop
+	ld c,8
+.pokeInnerLoop
+	ld [hli],a
+	dec c
+	jr nz,.pokeInnerLoop
+	add hl,de
+	dec b
+	jr nz,.pokeLoop
+
+	xor a
+	ld [rSVBK],a
 	ret
 
 PalCode_05:	; $5e9f
@@ -128455,11 +128602,33 @@ PalCode_06:	; $5ea6
 	ld hl, Unknown_72488 ; $6488
 	ld de, Unknown_7228e ; $628e
 	ret
+; Pokedex screen (just clears to a single color)
 PalCode_08:	; $5ead
+	ld a,2
+	ld [rSVBK],a
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+
+	ld d,$21	; Red lifebar color (for pokeballs)
+	ld e,0
+	call LoadSGBPalette
+
+	ld bc,20*18
+	ld hl,$d200
+	ld d,0
+.palLoop
+	ld [hl],d
+	inc hl
+	dec bc
+	ld a,b
+	or c
+	jr nz,.palLoop
+
+	xor a
+	ld [rSVBK],a
 	ret
-	ld hl, Unknown_724a8 ; $64a8
-	ld de, Unknown_7219e ; $619e
-	ret
+
 PalCode_07:	; $5eb4
 	ret
 	ld hl, Unknown_724b8 ; $64b8
@@ -128472,51 +128641,31 @@ PalCode_0c: ; $5ebb
 	ld a, $8
 	ld [$cf1c], a
 	ret
+
+; Loading a map
 PalCode_09: ; $5ec7
-	ret
-	ld hl, Unknown_72428 ; $6428
-	ld de, $cf2d
-	ld bc, $10
-	call CopyData
-	ld a, [W_CURMAPTILESET] ; $d367
-	cp $f
-	jr z, .asm_71f0c
-	cp $11
-	jr z, .asm_71f10
-	ld a, [W_CURMAP] ; $d35e
-	cp $25
-	jr c, .asm_71ef8
-	cp $e2
-	jr c, .asm_71ef5
-	cp $e5
-	jr c, .asm_71f10
-	cp $f5
-	jr z, .asm_71f14
-	cp $f6
-	jr z, .asm_71f10
-.asm_71ef5
-	ld a, [$d365]
-.asm_71ef8
-	cp $b
-	jr c, .asm_71efe
-	ld a, $ff
-.asm_71efe
-	inc a
-	ld hl, $cf2e
-	ld [hld], a
-	ld de, Unknown_7219e ; $619e
-	ld a, $9
-	ld [$cf1c], a
-	ret
-.asm_71f0c
-	ld a, $18
-	jr .asm_71efe
-.asm_71f10
-	ld a, $22
-	jr .asm_71efe
-.asm_71f14
+	di
+	ld a,2
+	ld [rSVBK],a
+	ld a,1
+	ld [W2_TileBasedPalettes],a
 	xor a
-	jr .asm_71efe
+	ld [rSVBK],a
+
+	ld a,9
+	ld [W_PALREFRESHCMD],a
+
+	ld b, BANK(LoadTilesetPalette)
+	ld hl, LoadTilesetPalette
+	call Bankswitch
+
+	call _LoadTownPalette
+
+	xor a
+	ld [rSVBK],a
+	ld [rVBK],a
+	ei
+	ret
 
 PalCode_0b; $5f17
 	ret

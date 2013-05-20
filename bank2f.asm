@@ -101,7 +101,7 @@ ENDR
 
 	ld a,[W2_TileBasedPalettes]
 	and a
-	jp nz,tileBasedPalettes
+	jr nz,tileBasedPalettes
 
 staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
 	push hl
@@ -117,6 +117,9 @@ staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
 .drawRow_Pal
 	ld c,20
 .palLoop
+	ld a,[rSTAT]
+	and 2
+	jr nz,.palLoop
 	ld a,[de]
 	inc de
 	ld [hli],a
@@ -237,13 +240,13 @@ label_018:
 	ld sp,hl
 	ret
 
-; Refresh map colors
+; Refresh map colors, scrolling
 	ORG $2f, $6000
 
 	ld a,$02
-	ld [$ff00+$70],a
+	ld [rSVBK],a
 	ld a,$01
-	ld [$ff00+$4f],a
+	ld [rVBK],a
 	ld a,[hl]
 	push hl
 	ld h,$d2
