@@ -1,6 +1,13 @@
 INCLUDE "constants.asm"
 
-; the rst vectors are unused
+; Put rstFuncs at the top so its defines are visible everywhere
+SECTION "RstFuncs", HOME
+
+RstFuncTable:
+
+RSTFUNC_GbcVBlankHook EQU NumRstFuncs
+	DEFINE_RSTFUNC GbcVBlankHook
+
 
 SECTION "rst0",HOME[0]
 	db $FF
@@ -16,8 +23,10 @@ _RefreshMapColors:
 	ld a, BANK(RefreshMapColors)
 	jp CallToBank
 
+; HAX: rst10 is used as a convenient way to hook into custom code
 SECTION "rst10",HOME[$10]
-	db $FF
+	jp HandleRstFunc
+
 SECTION "rst18",HOME[$18]
 	db $FF
 SECTION "rst20",HOME[$20]
@@ -32,24 +41,18 @@ SECTION "rst38",HOME[$38]
 ; interrupts
 SECTION "interrupts",HOME[$40]
 vblank:
-	push af
-	ld a,BANK(GbcVBlankHook)
-	ld [$2000],a
-	jr .skip
-	db $FF	; lcd
-.skip
-	call GbcVBlankHook
-	ld a,[H_LOADEDROMBANK]
-	jr .skip2
-	jp TimerHandler	; timer
-.skip2
-	ld [$2000],a
-	jr .skip3
-	jp SerialInterruptHandler
-.skip3
-	pop af
 	jp VBlankHandler
-SECTION "joypad",HOME[$60]
+
+	ORG 0, $48
+	db $FF	; lcd
+
+	ORG 0, $50
+	jp TimerHandler	; timer
+
+	ORG 0, $58
+	jp SerialInterruptHandler
+
+	ORG 0, $60
 	reti
 
 SECTION "bank0",HOME[$61]
@@ -4777,6 +4780,7 @@ ClearBgMap: ; 1cf0 (0:1cf0)
 ; When the player takes a step, a row or column of 2x2 tile blocks at the edge
 ; of the screen toward which they moved is exposed and has to be redrawn.
 ; This function does the redrawing.
+; This function has beex HAXed to call other functions, which will also refresh palettes.
 RedrawExposedScreenEdge: ; 1d01 (0:1d01)
 	ld a,[H_SCREENEDGEREDRAW]
 	and a
@@ -5229,12 +5233,14 @@ VBlankHandler: ; 2024 (0:2024)
 	ld a,[$ffb0]
 	ld [rWY],a
 .doVramTransfers
-	call AutoBgMapTransfer	; HAX
+	call AutoBgMapTransfer
 	call VBlankCopyBgMap
 	call RedrawExposedScreenEdge
 	call VBlankCopy
 	call VBlankCopyDouble
-	call UpdateMovingBgTiles
+	;call UpdateMovingBgTiles
+	ld b, RSTFUNC_GbcVBlankHook
+	rst $10
 	call $ff80 ; OAM DMA
 	ld a,$01
 	ld [H_LOADEDROMBANK],a
@@ -10662,29 +10668,30 @@ LoadTownPalette_Ret:
 	ld [$2000],a
 	ret
 
-_LoadIntroNidorinoPal:
-	ld b,$f
-	ld c,$14	; PAL_PURPLEMON
-	call GoPAL_SET
-	jp MovePicLeft
+HandleRstFunc:
+	ld a,[H_LOADEDROMBANK]
+	push af
+	ld a,b
+	add a
+	add a
+	ld hl,RstFuncTable
+	add l
+	ld l,a
+	ld a,[hli]
+	ld [$2000],a
+	ld [H_LOADEDROMBANK],a
+	ld a,[hli]
+	ld h,[hl]
+	ld l,a
+	ld de,RstFuncRet
+	push de
+	jp [hl]
 
-_LoadIntroPlayerPal:
-	ld b,$f
-	ld c,$15	; PAL_BROWNMON
-	call GoPAL_SET
-	jp MovePicLeft
-	
-_LoadIntroPlayerPal2:
-	ld b,$f
-	ld c,$15	; PAL_BROWNMON
-	call GoPAL_SET
-	jp GBFadeIn2
+RstFuncRet:
+	pop af
+	ld [$2000],a
+	ret
 
-_LoadIntroRivalPal:
-	ld b,$f
-	ld c,$14	; PAL_PURPLEMON
-	call GoPAL_SET
-	jp FadeInIntroPic
 
 SECTION "bank1",DATA,BANK[$1]
 
@@ -14197,8 +14204,8 @@ OakSpeech: ; 6115 (1:6115)
 	FuncCoord 6, 4 ; $c3f6
 	ld hl,Coord     ; position on tilemap the pic is displayed
 	call LoadFlippedFrontSpriteByMonIndex      ; displays pic?
-	call _LoadIntroNidorinoPal	; HAX
-;	call MovePicLeft
+	;call _LoadIntroNidorinoPal	; HAX
+	call MovePicLeft
 	ld hl,OakSpeechText2
 	call PrintText      ; Prints text box
 	call GBFadeOut2
@@ -14206,8 +14213,8 @@ OakSpeech: ; 6115 (1:6115)
 	ld de,RedPicFront
 	ld bc,$0400     ; affects the position of the player pic
 	call IntroPredef3B      ; displays player pic?
-	call _LoadIntroPlayerPal	; HAX
-;	call MovePicLeft
+;	call _LoadIntroPlayerPal	; HAX
+	call MovePicLeft
 	ld hl,IntroducePlayerText
 	call PrintText
 	call Func_695d ; brings up NewName/Red/etc menu
@@ -14216,8 +14223,8 @@ OakSpeech: ; 6115 (1:6115)
 	ld de,Rival1Pic
 	ld bc,$1300
 	call IntroPredef3B ; displays rival pic
-	call _LoadIntroRivalPal	; HAX
-;	call FadeInIntroPic
+;	call _LoadIntroRivalPal	; HAX
+	call FadeInIntroPic
 	ld hl,IntroduceRivalText
 	call PrintText
 	call Func_69a4
@@ -14227,8 +14234,8 @@ Function61BC: ; 61bc (1:61bc)
 	ld de,RedPicFront
 	ld bc,$0400
 	call IntroPredef3B
-	call _LoadIntroPlayerPal2	; HAX
-;	call GBFadeIn2
+;	call _LoadIntroPlayerPal2	; HAX
+	call GBFadeIn2
 	ld a,[$D72D]
 	and a
 	jr nz,.next

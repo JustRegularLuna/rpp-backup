@@ -45,19 +45,7 @@ InitSpritePalettes:
 
 ; Refreshes palettes based on BGP and OBP registers
 GbcVBlankHook:
-	; Skip palette updating if tiles need to be copied to vram.
-	; This must be done before vblank is over.
-	ld a,[H_VBCOPYDOUBLESIZE]
-	and a
-	ret nz
-	ld a,[H_VBCOPYSIZE]
-	and a
-	ret nz
-
-	push af
-	push bc
-	push de
-	push hl
+	call UpdateMovingBgTiles	; Removed from caller to make space
 
 	ld a,$02
 	ld [rSVBK],a
@@ -147,10 +135,6 @@ GbcVBlankHook:
 .endPaletteConversion
 	xor a
 	ld [rSVBK],a
-	pop hl
-	pop de
-	pop bc
-	pop af
 	ret
 
 

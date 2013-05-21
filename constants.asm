@@ -3548,3 +3548,15 @@ CALL_INDIRECT: MACRO
 	ld hl, \1
 	call Bankswitch
 ENDM
+
+NumRstFuncs = 0
+
+DEFINE_RSTFUNC: MACRO
+
+	db BANK(\1)
+	dw \1
+	db 0
+
+NumRstFuncs = NumRstFuncs+1
+
+ENDM

@@ -31,6 +31,9 @@ f:6fb8: battle initialization function.
 
 1c:616d: Unused GBC Code?
 
+0f:60df: function where lifebar is moved down. Returns when finished.
+03:7a1d Function where lifebar is decreased.
+
 TODO
 
 - Change box: pokeball colors
