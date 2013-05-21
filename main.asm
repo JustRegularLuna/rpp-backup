@@ -4834,6 +4834,8 @@ DelayFrameHook:
 	ld a,1
 	ld [H_VBLANKOCCURRED],a
 
+	; Not totally sure why interrupts are a problem, but they are
+	di
 	push bc
 	push de
 	push hl
@@ -4843,6 +4845,7 @@ DelayFrameHook:
 	pop hl
 	pop de
 	pop bc
+	ei
 	ret
 
 	ORG $00, $1dde
@@ -128912,16 +128915,15 @@ LoadIntroMonTilesAndPalettes:
 	ret
 
 
-INCLUDE "bank2c.asm"
-INCLUDE "bank2d.asm"
-INCLUDE "bank2e.asm"
-INCLUDE "bank2f.asm"
+INCLUDE "color/refreshmaps.asm"
+INCLUDE "color/loadpalettes.asm"
+INCLUDE "color/sprites.asm"
 
 SECTION "bank30",DATA,BANK[$30]
-INCBIN "bank30.bin",$0000,$c4000-$c0000
+INCBIN "color/bank30.bin",$0000,$c4000-$c0000
 
 SECTION "bank31",DATA,BANK[$31]
-INCBIN "bank31.bin",$0000,$c8000-$c4000
+INCBIN "color/bank31.bin",$0000,$c8000-$c4000
 
 SECTION "bank32",DATA,BANK[$32]
 

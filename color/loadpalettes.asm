@@ -1,9 +1,9 @@
 SECTION "bank2D",DATA[$4000],BANK[$2D]
 
 BgPalettes:
-	INCBIN "bank2d.bin",$0000,$0200 ; BG palettes
+	INCBIN "color/bank2d.bin",$0000,$0200 ; BG palettes
 SprPalettes:
-	INCBIN "bank2d.bin",$0200,$0200 ; SPR palettes
+	INCBIN "color/bank2d.bin",$0200,$0200 ; SPR palettes
 
 	ORG $2d, $4400
 
@@ -225,11 +225,11 @@ SetWhiteColor:
 
 	ORG $2d, $4f00
 MapPaletteData:
-	INCBIN "bank2d.bin",$0f00,$00c0 ; Map palette data indices
+	INCBIN "color/bank2d.bin",$0f00,$00c0 ; Map palette data indices
 
 	ORG $2d, $5000
 MapPaletteArrangements:
-	INCBIN "bank2d.bin",$1000,$0900 ; Map and tile color assignments
+	INCBIN "color/bank2d.bin",$1000,$0900 ; Map and tile color assignments
 
 	ORG $2d, $6000
 ; Load color for new map and tile placement
@@ -350,4 +350,4 @@ LoadTownPalette:
 
 	ORG $2d, $7000
 TownData:
-	INCBIN "bank2d.bin",$3000,$00a0 ; Town color assignments
+	INCBIN "color/bank2d.bin",$3000,$00a0 ; Town color assignments
