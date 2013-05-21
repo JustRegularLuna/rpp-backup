@@ -1213,7 +1213,7 @@ PlayMapChangeSound: ; 08c9 (0:08c9)
 	ld a,[$d35d]
 	and a
 	ret nz
-	jp GBFadeIn1
+	jp GBFadeOut_Custom ; HAX: Fade to white instead of black. Looks nicer IMO.
 
 ; function to set the Z flag if the tileset number is 0 or the map is Route 12
 ; strangely, Route 12 has tileset 0, so the check is redundant
@@ -5391,6 +5391,7 @@ GBPalTable_00: ; 2116 (0:2116)
 DecGradGBPalTable_01: ; 2118 (0:2118)
 	db %11100000
 	;19
+IncGradGBPalTable_Custom:
 	db %11100100
 	db %11100100
 	db %11100000
@@ -10691,6 +10692,12 @@ RstFuncRet:
 	pop af
 	ld [$2000],a
 	ret
+
+; Fade out from map screen
+GBFadeOut_Custom:
+	ld hl,IncGradGBPalTable_Custom	;1c
+	ld b,$04
+	jp GBFadeOutCommon
 
 
 SECTION "bank1",DATA,BANK[$1]
@@ -102289,9 +102296,9 @@ ENDC
 	RGB 24,20,30
 	RGB 11,20,30
 	RGB 3,2,2
-	RGB 31,29,31 ; PAL_MEWMON	(index $10)
-	RGB 21,17,25
-	RGB 22,3,22
+	RGB 31,29,31 ; PAL_MEWMON (index $10)
+	RGB 30,22,17
+	RGB 16,14,19
 	RGB 3,2,2
 	RGB 31,29,31 ; PAL_BLUEMON
 	RGB 18,20,27
