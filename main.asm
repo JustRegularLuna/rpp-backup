@@ -1,7 +1,7 @@
 INCLUDE "constants.asm"
 
 ; Put rstFuncs at the top so its defines are visible everywhere
-SECTION "RstFuncs", HOME
+SECTION "RstFuncs", HOME[$3ff0]
 
 RstFuncTable:
 
@@ -4829,6 +4829,22 @@ HaxFunc3: ; 1d6d
 ; unrolled loop and using pop for speed
 ;TransferBgRows: ; 1d9e (0:1d9e)
 
+; HAX: Squeeze this little function in here
+DelayFrameHook:
+	ld a,1
+	ld [H_VBLANKOCCURRED],a
+
+	push bc
+	push de
+	push hl
+	ld b, BANK(PrepareOAMData)
+	ld hl, PrepareOAMData
+	call Bankswitch
+	pop hl
+	pop de
+	pop bc
+	ret
+
 	ORG $00, $1dde
 
 JpPoint:
@@ -5241,11 +5257,21 @@ VBlankHandler: ; 2024 (0:2024)
 	;call UpdateMovingBgTiles
 	ld b, RSTFUNC_GbcVBlankHook
 	rst $10
+	;ld a,$01
+	nop
+	nop
+	;ld [H_LOADEDROMBANK],a
+	nop
+	nop
+	;ld [$2000],a
+	nop
+	nop
+	nop
+	;call PrepareOAMData ; update OAM buffer with current sprite data
+	nop
+	nop
+	nop
 	call $ff80 ; OAM DMA
-	ld a,$01
-	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
-	call PrepareOAMData ; update OAM buffer with current sprite data
 	call GenRandom
 	ld a,[H_VBLANKOCCURRED]
 	and a
@@ -5295,8 +5321,8 @@ VBlankHandler: ; 2024 (0:2024)
 
 DelayFrame: ; 20af (0:20af)
 ; delay for one frame
-	ld a,1
-	ld [H_VBLANKOCCURRED],a
+	call DelayFrameHook
+	nop
 
 ; wait for the next Vblank, halting to conserve battery
 .halt
@@ -10698,7 +10724,6 @@ GBFadeOut_Custom:
 	ld hl,IncGradGBPalTable_Custom	;1c
 	ld b,$04
 	jp GBFadeOutCommon
-
 
 SECTION "bank1",DATA,BANK[$1]
 
