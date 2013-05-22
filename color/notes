@@ -32,7 +32,9 @@ f:6fb8: battle initialization function.
 1c:616d: Unused GBC Code?
 
 0f:60df: function where lifebar is moved down. Returns when finished.
-03:7a1d Function where lifebar is decreased.
+03:7a1d: Function where lifebar is decreased.
+
+1c:4b5d: Flashing palette before battle
 
 TODO
 
@@ -40,3 +42,11 @@ TODO
 - Intro colors
 - Attacks
 - Dynamic lifebar colors
+- Double-check palettes imported from yellow
+- Trainer card colors are wrong
+
+POKEMON YELLOW:
+
+1:DEE3 = location of pokemon's palette (palette id 1)
+1c:6af9 = location of pokemon yellow's palette data (at least for GBC Mode)
+1e:4e11 = growl / screen shake function. There's a problem, present in the original, where it updates winX/winY in the middle of rendering.

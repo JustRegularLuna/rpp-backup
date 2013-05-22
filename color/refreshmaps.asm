@@ -165,6 +165,13 @@ ENDR
 	jr nz,tileBasedPalettes
 
 staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
+	ld a,[W2_StaticPaletteChanged]
+	and a
+	jp z, palettesDone
+
+	dec a
+	ld [W2_StaticPaletteChanged],a
+
 	push hl
 	ld h,d
 	ld l,e
@@ -178,9 +185,6 @@ staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
 .drawRow_Pal
 	ld c,20
 .palLoop
-	ld a,[rSTAT]
-	and 2
-	jr nz,.palLoop
 	ld a,[de]
 	inc de
 	ld [hli],a

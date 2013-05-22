@@ -2071,7 +2071,7 @@ ROCK_ANIM EQU $C9 ; throw rock
 BAIT_ANIM EQU $CA ; throw bait
 
 ; super game boy palettes
-PAL_ROUTE     EQU $00
+PAL_TOWN2     EQU $00
 PAL_PALLET    EQU $01
 PAL_VIRIDIAN  EQU $02
 PAL_PEWTER    EQU $03
@@ -3541,22 +3541,12 @@ W2_LastOBP EQU $d088
 W2_MapPaletteArrangement EQU $d200
 
 SECTION "moreVariables",BSS[$d500]
-W2_TileBasedPalettes:	db
+
+W2_TileBasedPalettes:		db
+W2_StaticPaletteChanged		db ; Set to 3 if modified, since the window is drawn in thirds
 
 CALL_INDIRECT: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
 	call Bankswitch
-ENDM
-
-NumRstFuncs = 0
-
-DEFINE_RSTFUNC: MACRO
-
-	db BANK(\1)
-	dw \1
-	db 0
-
-NumRstFuncs = NumRstFuncs+1
-
 ENDM

@@ -1,14 +1,5 @@
 INCLUDE "constants.asm"
 
-; Put rstFuncs at the top so its defines are visible everywhere
-SECTION "RstFuncs", HOME[$3ff0]
-
-RstFuncTable:
-
-RSTFUNC_GbcVBlankHook EQU NumRstFuncs
-	DEFINE_RSTFUNC GbcVBlankHook
-
-
 SECTION "rst0",HOME[0]
 	db $FF
 RefreshMapColorsScrolling:
@@ -23,9 +14,11 @@ _RefreshMapColors:
 	ld a, BANK(RefreshMapColors)
 	jp CallToBank
 
-; HAX: rst10 is used as a convenient way to hook into custom code
+; HAX: rst10 is used for the vblank hook
 SECTION "rst10",HOME[$10]
-	jp HandleRstFunc
+	ld b, BANK(GbcVBlankHook)
+	ld hl, GbcVBlankHook
+	jp Bankswitch
 
 SECTION "rst18",HOME[$18]
 	db $FF
@@ -5258,8 +5251,9 @@ VBlankHandler: ; 2024 (0:2024)
 	call VBlankCopy
 	call VBlankCopyDouble
 	;call UpdateMovingBgTiles
-	ld b, RSTFUNC_GbcVBlankHook
 	rst $10
+	nop
+	nop
 	;ld a,$01
 	nop
 	nop
@@ -10695,30 +10689,6 @@ _LoadTownPalette:
 
 LoadTownPalette_Ret:
 	ld a,[H_LOADEDROMBANK]
-	ld [$2000],a
-	ret
-
-HandleRstFunc:
-	ld a,[H_LOADEDROMBANK]
-	push af
-	ld a,b
-	add a
-	add a
-	ld hl,RstFuncTable
-	add l
-	ld l,a
-	ld a,[hli]
-	ld [$2000],a
-	ld [H_LOADEDROMBANK],a
-	ld a,[hli]
-	ld h,[hl]
-	ld l,a
-	ld de,RstFuncRet
-	push de
-	jp [hl]
-
-RstFuncRet:
-	pop af
 	ld [$2000],a
 	ret
 
@@ -102115,7 +102085,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_BROWNMON  ; PIDGEY
 	db PAL_BROWNMON  ; PIDGEOTTO
 	db PAL_BROWNMON  ; PIDGEOT
-	db PAL_GREYMON   ; RATTATA
+	db PAL_PURPLEMON ; RATTATA (HAX)
 	db PAL_GREYMON   ; RATICATE
 	db PAL_BROWNMON  ; SPEAROW
 	db PAL_BROWNMON  ; FEAROW
@@ -102228,7 +102198,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_REDMON    ; MAGIKARP
 	db PAL_BLUEMON   ; GYARADOS
 	db PAL_CYANMON   ; LAPRAS
-	db PAL_GREYMON   ; DITTO
+	db PAL_PINKMON   ; DITTO (HAX)
 	db PAL_GREYMON   ; EEVEE
 	db PAL_CYANMON   ; VAPOREON
 	db PAL_YELLOWMON ; JOLTEON
@@ -102250,180 +102220,10 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; MEW
 
 ; palettes for overworlds, title screen, monsters
-; Partially HAXed
+; HAX: Use Pokemon Yellow palettes because they look better on GBC
 SuperPalettes: ; 72660 (1c:6660)
-	RGB 31,29,31 ; PAL_TOWN2
-	RGB 24,17,7
-	RGB 24,17,7
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_PALLET
-	RGB 25,28,27
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_VIRIDIAN
-	RGB 17,26,3
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_PEWTER
-	RGB 23,25,16
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_CERULEAN
-	RGB 17,20,30
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_LAVENDER
-	RGB 27,20,27
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_VERMILION
-	RGB 30,18,0
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_CELADON
-	RGB 16,30,22
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_FUCHSIA
-	RGB 31,15,22
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_CINNABAR
-	RGB 26,10,6
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_INDIGO
-	RGB 22,14,24
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_SAFFRON
-	RGB 27,27,3
-	RGB 20,26,31
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_TOWNMAP
-	RGB 15,15,31
-	RGB 2,25,3
-	RGB 3,2,2
-IF _RED
-	RGB 31,29,31 ; PAL_LOGO1
-	RGB 30,30,17
-	RGB 17,23,10
-	RGB 21,0,4
-ENDC
-IF _BLUE
-	RGB 31,29,31 ; PAL_LOGO1
-	RGB 30,30,17
-	RGB 21,0,4
-	RGB 14,19,29
-ENDC
-	RGB 31,29,31 ; XXX
-	RGB 30,30,17
-	RGB 18,18,24
-	RGB 7,7,16
-	RGB 31,29,31 ; PAL_LOGO2
-	RGB 24,20,30
-	RGB 11,20,30
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_MEWMON (index $10)
-	RGB 30,22,17
-	RGB 16,14,19
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_BLUEMON
-	RGB 18,20,27
-	RGB 11,15,23
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_REDMON
-	RGB 31,20,10
-	RGB 26,10,6
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_CYANMON
-	RGB 21,25,29
-	RGB 14,19,25
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_PURPLEMON
-	RGB 27,22,24
-	RGB 21,15,23
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_BROWNMON
-	RGB 28,20,15
-	RGB 21,14,9
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_GREENMON
-	RGB 20,26,16
-	RGB 9,20,11
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_PINKMON
-	RGB 30,22,24
-	RGB 28,15,21
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_YELLOWMON
-	RGB 31,28,14
-	RGB 26,20,0
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_GREYMON
-	RGB 26,21,22
-	RGB 15,15,18
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_SLOTS1
-	RGB 26,21,22
-	RGB 27,20,6
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_SLOTS2
-	RGB 31,31,17
-IF _RED
-	RGB 25,17,21
-ENDC
-IF _BLUE
-	RGB 16,19,29
-ENDC
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_SLOTS3
-	RGB 22,31,16
-IF _RED
-	RGB 25,17,21
-ENDC
-IF _BLUE
-	RGB 16,19,29
-ENDC
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_SLOTS4
-IF _RED
-	RGB 16,19,29
-	RGB 25,17,21
-ENDC
-IF _BLUE
-	RGB 25,17,21
-	RGB 16,19,29
-ENDC
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_BLACK	(index $1e)
-	RGB 7,7,7
-	RGB 2,3,3
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_GREENBAR
-	RGB 30,26,15
-	RGB 9,20,11
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_YELLOWBAR
-	RGB 30,26,15
-	RGB 26,20,0
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_REDBAR
-	RGB 30,26,15
-	RGB 26,10,6
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_BADGE
-	RGB 30,22,17
-	RGB 11,15,23
-	RGB 3,2,2
-	RGB 31,29,31 ; PAL_CAVE
-	RGB 21,14,9
-	RGB 18,24,22
-	RGB 3,2,2
-	RGB 31,29,31 ; XXX
-	RGB 31,28,14
-	RGB 24,20,10
-	RGB 3,2,2
+	INCLUDE "color/palettes.asm"
+
 BorderPalettes: ; 72788 (1c:6788)
 
 IF _RED
@@ -128334,7 +128134,7 @@ PalCode_00:
 	ret
 
 ; Set proper palettes for pokemon/trainers
-PalCode_01:	; $5e06
+PalCode_01:
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, W_PLAYERMONID        ; player Pokemon ID
 	call DeterminePaletteID
@@ -128382,6 +128182,8 @@ PalCode_01:	; $5e06
 
 	xor a
 	ld [W2_TileBasedPalettes],a	; Use a direct color map instead of assigning colors to tiles
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 
 	; Top half; enemy lifebar
 	ld hl,$d200
@@ -128449,7 +128251,7 @@ PalCode_01:	; $5e06
 	ret
 
 ; Load town map
-PalCode_02:	; $5e48
+PalCode_02:
 	ld a,2
 	ld [rSVBK],a
 
@@ -128481,7 +128283,7 @@ PalCode_02:	; $5e48
 	ret
 
 ; Status screen
-PalCode_03:	; $5e4f
+PalCode_03:
 	ld a, [$cf91]
 	cp $bf
 	jr c, .asm_71e64
@@ -128512,6 +128314,8 @@ PalCode_03:	; $5e4f
 	; Set palette map
 	xor a
 	ld [W2_TileBasedPalettes],a
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 
 	; Set everything to the lifebar palette
 	ld hl,$d200
@@ -128544,12 +128348,15 @@ PalCode_03:	; $5e4f
 	ld [rSVBK],a
 	ret
 
-PalCode_0a:	; $5e7b
+; Open pokemon menu
+PalCode_0a:
 	ld a,2
 	ld [rSVBK],a
 
 	xor a
 	ld [W2_TileBasedPalettes],a
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 
 	ld d,$1f	; Filler for palette 0 (technically, green)
 	ld e,0
@@ -128590,7 +128397,7 @@ PalCode_0a:	; $5e7b
 	ret
 
 ; Show pokedex data
-PalCode_04:	; $5e82
+PalCode_04:
 	ld a, [$cf91]
 	call DeterminePaletteID_NoStatusCheck	; Call DeterminePaletteID without status check
 	ld d,a
@@ -128611,6 +128418,8 @@ ENDC
 
 	xor a
 	ld [W2_TileBasedPalettes],a
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 
 	ld bc,20*18
 	ld hl,$d200
@@ -128641,12 +128450,12 @@ ENDC
 	ld [rSVBK],a
 	ret
 
-PalCode_05:	; $5e9f
+PalCode_05:
 ret
 INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
 
 ; Set intro palettes
-PalCode_06:	; $5ea6
+PalCode_06:
 	ld a,[W_WHICHTRADE]
 	call DeterminePaletteID_NoStatusCheck
 	ld d,a
@@ -128684,7 +128493,12 @@ PalCode_06:	; $5ea6
 	dec c
 	jr nz,.logoLoop
 
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 	xor a
+	ld [W2_TileBasedPalettes],a
+
+	;xor a
 	ld [W2_LastBGP],a	; Palettes must be redrawn
 
 	;xor a
@@ -128695,12 +128509,14 @@ PalCode_06:	; $5ea6
 	ld [W_PALREFRESHCMD],a
 	ret
 ; Pokedex screen (just clears to a single color)
-PalCode_08:	; $5ead
+PalCode_08:
 	ld a,2
 	ld [rSVBK],a
 
 	xor a
 	ld [W2_TileBasedPalettes],a
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 
 	ld d,$21	; Red lifebar color (for pokeballs)
 	ld e,0
@@ -128721,12 +128537,12 @@ PalCode_08:	; $5ead
 	ld [rSVBK],a
 	ret
 
-PalCode_07:	; $5eb4
+PalCode_07:
 	ret
 	ld hl, Unknown_724b8 ; $64b8
 	ld de, Unknown_722c1 ; $62c1
 	ret
-PalCode_0c: ; $5ebb
+PalCode_0c:
 	ret
 	ld hl, Unknown_724c8 ; $64c8
 	ld de, Unknown_723dd ; $63dd
@@ -128735,7 +128551,7 @@ PalCode_0c: ; $5ebb
 	ret
 
 ; Loading a map
-PalCode_09: ; $5ec7
+PalCode_09:
 	ld a,2
 	ld [rSVBK],a
 	ld a,1
@@ -128757,7 +128573,7 @@ PalCode_09: ; $5ec7
 	ld [rVBK],a
 	ret
 
-PalCode_0b; $5f17
+PalCode_0b;
 	ret
 	push bc
 	ld hl, Unknown_72428 ; $6428
@@ -128777,8 +128593,8 @@ PalCode_0b; $5f17
 	ld de, Unknown_7219e ; $619e
 	ret
 
-; Uses palettes $10, $22, $12, $18
-PalCode_0d: ; $5f3b
+; Trainer card
+PalCode_0d:
 	ld a,2
 	ld [rSVBK],a
 	
@@ -128870,6 +128686,8 @@ PalCode_0e:
 
 	xor a
 	ld [W2_TileBasedPalettes],a
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 
 	ld d,$15	; PAL_BROWNMON
 	ld e,0

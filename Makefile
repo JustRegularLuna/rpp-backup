@@ -1,6 +1,6 @@
 .SUFFIXES: .asm .tx .o .gbc
 
-ASMFILES = constants.asm color/loadpalettes.asm color/refreshmaps.asm color/sprites.asm
+ASMFILES = constants.asm $(wildcard color/*.asm)
 TEXTFILES =	text/oakspeech.tx text/pokedex.tx text/mapRedsHouse1F.tx \
 		text/mapBluesHouse.tx text/mapPalletTown.tx
 
