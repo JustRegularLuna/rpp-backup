@@ -1,17 +1,10 @@
-BATTLES:
-
-GoPAL_SET (3def)
-	Calls 1c:5ddf.
-
 DeterminePaletteID (1c:5f97)
-	Calls GoPAL_SET through Predef. Something's fishy?
+	Given a pokemon/trainer in A, it returns the appropriate palette.
+	DeterminePaletteID_NoStatusCheck (as I call it) is usually preferable.
 
-1c:5ddf:
-	Called from GoPAL_SET. calls DeterminePaletteID, then apparently sets the palettes.
-	
 f:6fb8: battle initialization function.
 
-1c:5ddf: Essentially GoPAL_SET.
+1c:5ddf: Called from GoPAL_SET.
 	It accepts a "command" in b. It jumps to index b in a table at 5F73. Values:
 		00 = Set black palettes at beginning of battle
 		01 = Set proper palettes for pokemon/trainers in battle
@@ -20,26 +13,28 @@ f:6fb8: battle initialization function.
 		04 = Show pokedex data
 		06 = Set titlescreen palettes
 		07 = Called before intro
-		08 = Open pokedex (just clear it)
+		08 = Open pokedex
 		09 = Load maps
-		0A = Sets pokemon menu
+		0A = Load pokemon menu
 		0D = Trainer card
-		FC = Called 6 times when loading pokemon menu: status bars
+		FC = Called 6 times when loading pokemon menu (before 0A).
 		FF = Use code [cf1c] instead. Useful for reloading after a menu clears something.
 
-1c:5fb6: For code FC. Determines lifebar color and displays it.
+1c:5fb6: For code FC. Determines lifebar color for one of 6 pokemon.
 
-1c:616d: Unused GBC Code?
+1c:616d = Unused GBC Code?
 
-0f:60df: function where lifebar is moved down. Returns when finished.
-03:7a1d: Function where lifebar is decreased.
+0f:60df = function where lifebar is moved down. Returns when finished.
+03:7a1d = Function where lifebar is decreased.
 
-1c:4b5d: Flashing palette before battle
+1c:4b5d = Flashing palette before battle
+
+1e:4e11 = growl / screen shake function. There's a problem, present in the original, where it updates winX/winY in the middle of rendering.
 
 TODO
 
 - Change box: pokeball colors
-- Intro colors
+- Intro colors (glitches, prof oak speech)
 - Attacks
 - Dynamic lifebar colors
 - Double-check palettes imported from yellow
@@ -49,4 +44,3 @@ POKEMON YELLOW:
 
 1:DEE3 = location of pokemon's palette (palette id 1)
 1c:6af9 = location of pokemon yellow's palette data (at least for GBC Mode)
-1e:4e11 = growl / screen shake function. There's a problem, present in the original, where it updates winX/winY in the middle of rendering.

@@ -3550,3 +3550,5 @@ CALL_INDIRECT: MACRO
 	ld hl, \1
 	call Bankswitch
 ENDM
+
+YELLOW_MONS EQU 0

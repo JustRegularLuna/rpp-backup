@@ -24,6 +24,9 @@ InitGbcPalettes:
 	call InitSpritePalettes
 
 	ld a,$01
+	; Make the game think we're running in SGB Mode.
+	ld [$cf1b],a
+
 	ld [rSVBK],a
 	ld [$ff4d],a
 	stop	; Automatically adds a nop
