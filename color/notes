@@ -31,14 +31,28 @@ f:6fb8: battle initialization function.
 
 1e:4e11 = growl / screen shake function. There's a problem, present in the original, where it updates winX/winY in the middle of rendering.
 
+attack data copied to $cfd2
+
+Func_78e23 modifies palettes when attacking (when in SGB Mode) so sprites are just black and white
+1e:4000 looks key to set battle attack colors.
+
+Locations where FF68 is set to black/white only: (bank 1e)
+	- 5c7a, !5c87, 416a, !4176 (for Razor Leaf)
+	- 416a (release from pokeball)
+	- !4176 (revert after pokeball)
+	- 4e23 (ish)
+
 TODO
 
 - Change box: pokeball colors
 - Intro colors (glitches, prof oak speech)
-- Attacks
+- Wrap up
 - Dynamic lifebar colors
 - Double-check palettes imported from yellow
 - Trainer card colors are wrong
+- Pokecenter balls
+- Exclamation marks
+- Fix fading
 
 POKEMON YELLOW:
 

@@ -2,15 +2,16 @@ SECTION "bank2D",DATA[$4000],BANK[$2D]
 
 BgPalettes:
 	INCBIN "color/bank2d.bin",$0000,$0200 ; BG palettes
-SprPalettes:
-	INCBIN "color/bank2d.bin",$0200,$0200 ; SPR palettes
 
 	ORG $2d, $4400
 
 ; Load initial colors
 InitGbcPalettes:
+	ld a,$2d
+	ld [H_LOADEDROMBANK],a
 	ld a,$02
 	ld [rSVBK],a
+
 	ld de,W2_BgPaletteData
 	ld hl,BgPalettes
 	ld b,$08
@@ -21,28 +22,13 @@ InitGbcPalettes:
 	dec b
 	jr nz,.bgCopyLoop
 
-	call InitSpritePalettes
+	CALL_INDIRECT LoadSpritePalettes
 
 	ld a,$01
-	; Make the game think we're running in SGB Mode.
-	ld [$cf1b],a
-
 	ld [rSVBK],a
 	ld [$ff4d],a
 	stop	; Automatically adds a nop
 	jp LoadBank1
-
-InitSpritePalettes:
-	ld de,W2_SprPaletteData
-	ld hl,SprPalettes
-	ld b,$40
-.sprCopyLoop
-	ld a,[hli]
-	ld [de],a
-	inc de
-	dec b
-	jr nz,.sprCopyLoop
-	ret
 
 	ORG $2d, $4800
 
@@ -54,7 +40,7 @@ GbcVBlankHook:
 	ld [rSVBK],a
 	ld a,[rBGP]
 	ld b,a
-	ld a,[W2_LastBGP]	; TODO
+	ld a,[W2_LastBGP]
 	cp b
 	jr z,.checkSprPalettes
 	ld a,$80
@@ -165,7 +151,6 @@ SetColor:
 	swap a
 	rra
 	rra		; Move top 2 bits to bottom
-	;xor $03
 	add a
 	ld d,a
 	ld a,b
@@ -235,15 +220,20 @@ MapPaletteArrangements:
 	INCBIN "color/bank2d.bin",$1000,$0900 ; Map and tile color assignments
 
 	ORG $2d, $6000
-; Load color for new map and tile placement
+; Load colors for new map and tile placement
 LoadTilesetPalette:
 	push bc
 	push de
 	push hl
+	ld a,[rSVBK]
+	ld d,a
+	xor a
+	ld [rSVBK],a
 	ld a,[W_CURMAPTILESET]
 	ld b,a
 	ld a,$02
 	ld [rSVBK],a
+	push de ; push previous wram bank
 
 	ld a,1
 	ld [W2_TileBasedPalettes],a
@@ -310,7 +300,7 @@ LoadTilesetPalette:
 	dec b
 	jr nz,.fillLoop
 
-	xor a
+	pop af
 	ld [rSVBK],a
 	pop hl
 	pop de
@@ -320,11 +310,17 @@ LoadTilesetPalette:
 	ORG $2d, $6200
 ; Towns have different roof colors while using the same tileset
 LoadTownPalette:
+	ld a,[rSVBK]
+	ld b,a
+	xor a
+	ld [rSVBK],a
+
 	ld a, [W_CURMAP]
 	ld c,a
 
 	ld a,$02
 	ld [rSVBK],a
+	push bc ; push previous wram bank
 
 	push de
 	push hl
@@ -347,6 +343,7 @@ LoadTownPalette:
 	xor a
 	ld [W2_LastBGP],a
 	ld [W2_LastOBP],a
+	pop af
 	ld [rSVBK],a
 	ret
 

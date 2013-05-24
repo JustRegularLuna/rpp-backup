@@ -1,0 +1,102 @@
+BAD ANIMATIONS
+26
+36
+4b (razor leaf still has issues)
+4c (could use colors)
+50 (double-check; what attack is it?)
+5e (psychic)
+65 (similar)
+68/70 (could use colors)
+7b (smog; could use colors)
+87 (uses "humps")
+95 (weird colors)
+a1: using duplicate tiles (as 50, b0)
+aa & co: palettes not set properly
+
+
+; Break at 1e:414f and look at A to see the animation ID.
+
+; Left off at animation 35
+
+; 00: Glitch?
+; 01: Razor leaf attack
+; 02: Hit all around
+; 03: Slow, generic hit
+; 04: Ball smoke / Hit sprite from bottomright to topleft of 'mon
+; 05: Very fast ball smoke
+; 06: Throw ball
+; 07: Throw ball
+; 08: Throw ball (less curved?)
+; 09: Jiggle ball
+; 0a: release from pokeball
+; 0b: Block ball
+; 0c: Water?
+; 0d: Same as 0c but 2 layers
+; 0e: 3 layers
+; 0f: Scratch
+; 10: Gust RtoL
+; 11: More water?
+; 12: Attract / music note / Attract /
+; 13: Acid
+; 14: Acid dripping
+; 15: Pre-Sonicboom
+; 16: Slice
+; 17: Player confused
+; 18: Enemy confused / swords / confused /
+; 19: Rock
+; 1a: firy pillars
+; 1b: Leech Seed
+; 1c: Leech Seed p2
+; 1d: Rocks moving up
+; 1e: Rocks moving away
+; 1f: Spray water / fire / 
+; 20: Water in cross-shape
+; 21: Close in to absorb
+; 22: Continue; grabs and retrieves
+; 23: Wrap enemy
+; 24: Wrap player
+; 25: Questionmark
+; 26: Questionmark
+; 27: Poison
+; 28: Sand attack
+; 29: Glitchy fuzz
+; 2a: Slice inward
+; 2b: Glitchy fuzz
+; 2c: Water gun
+; 2d: Absorb something
+; 2e: Solarbeam
+; 2f: Freeze pokemon
+; 30: Falling rocks
+; 31: Supersonic
+; 32: Absorb sprite does something
+; 33: Reflect
+; 34: ???
+; 35: Bubblebeam
+; 36: powder
+; 37: String shot
+; 38: Icicles pile up
+; 39: ???
+; 3a: Sleep???
+; 3b: asleep
+; 3c: Barrier???
+; 3d: Water
+; 3e: Ball smoke moves to the other pokemon???
+; 3f: Icicles/something shot to other pokemon
+; 40: Attract / Music note / Attract
+; 41: Ball from enemy to player
+; 42: Something explodes?
+; 44: Razor leaf attack
+; 45: Horn attack(ish)
+; 46: Horn attack
+; 
+; 52: Payday coin
+
+; SPECIAL
+; E1: Delay, maybe?
+; E7: Falling leaves
+; F0: Whiteify screen (DOESN'T WORK PROPERLY WITH COLOR)
+; F1: Shift pokemon left
+; F2: Shift pokemon right
+; FC: Normal-ify screen
+; FD: invert screen
+; FE: momentary fadeout

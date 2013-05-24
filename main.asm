@@ -20,8 +20,10 @@ SECTION "rst10",HOME[$10]
 	ld hl, GbcVBlankHook
 	jp Bankswitch
 
+; HAX: rst18 can be used for "Bankswitch"
 SECTION "rst18",HOME[$18]
-	db $FF
+	jp Bankswitch
+
 SECTION "rst20",HOME[$20]
 	db $FF
 SECTION "rst28",HOME[$28]
@@ -141,9 +143,9 @@ Initialize:
 	ld a,$30
 	ld [$2000],a
 	jr loop3
-_SetSpriteAttributes: ; $00dc
+_ColorOverworldSprites: ; $00dc
 	push af
-	ld a, BANK(SetSpriteAttributes)
+	ld a, BANK(ColorOverworldSprites)
 	jr CallToBank
 _LoadTilesetPatternsAndPalettes: ; $00e1
 	push af
@@ -4827,19 +4829,22 @@ DelayFrameHook:
 	ld a,1
 	ld [H_VBLANKOCCURRED],a
 
-	; Not totally sure why interrupts are a problem, but they are
 	di
 	push bc
 	push de
 	push hl
 	ld b, BANK(PrepareOAMData)
 	ld hl, PrepareOAMData
-	call Bankswitch
+	rst $18
+	jr z, .spritesDrawn
+	ld b, BANK(ColorNonOverworldSprites)
+	ld hl, ColorNonOverworldSprites
+	rst $18
+.spritesDrawn
 	pop hl
 	pop de
 	pop bc
-	ei
-	ret
+	reti
 
 	ORG $00, $1dde
 
@@ -5250,25 +5255,26 @@ VBlankHandler: ; 2024 (0:2024)
 	call RedrawExposedScreenEdge
 	call VBlankCopy
 	call VBlankCopyDouble
-	;call UpdateMovingBgTiles
-	rst $10
-	nop
-	nop
-	;ld a,$01
-	nop
-	nop
-	;ld [H_LOADEDROMBANK],a
-	nop
-	nop
-	;ld [$2000],a
-	nop
-	nop
-	nop
-	;call PrepareOAMData ; update OAM buffer with current sprite data
-	nop
+;	call UpdateMovingBgTiles
+	rst $10 ; HAX: VBlank hook
 	nop
 	nop
 	call $ff80 ; OAM DMA
+	; HAX: don't update sprites here. They're updated elsewhere to prevent wobbliness.
+;	ld a,$01
+	nop
+	nop
+;	ld [H_LOADEDROMBANK],a
+	nop
+	nop
+;	ld [$2000],a
+	nop
+	nop
+	nop
+;	call PrepareOAMData ; update OAM buffer with current sprite data
+	nop
+	nop
+	nop
 	call GenRandom
 	ld a,[H_VBLANKOCCURRED]
 	and a
@@ -11721,7 +11727,7 @@ PrepareOAMData: ; 4b0f (1:4b0f)
 	ld a, [$FF00+$94]        ; load bit 7 (set to $80 if sprite is in grass and should be drawn behind it)
 	or [hl]
 .alwaysInForeground
-	call _SetSpriteAttributes	; HAX
+	call _ColorOverworldSprites	; HAX
 	bit 0, a                 ; test for OAMFLAG_ENDOFDATA
 	jr z, .spriteTilesLoop
 	ld a, e
@@ -108195,6 +108201,8 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	jr z,.AnimationOver
 	cp a,$C0 ; is this subanimation or a special effect?
 	jr c,.playSubanimation
+;	jp StartAnimationHook ; HAX
+;	nop
 .doSpecialEffect
 	ld c,a
 	ld de,SpecialEffectPointers
@@ -108258,7 +108266,9 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ld a,[rOBP0]
 	push af
 	ld a,[$CC79]
-	ld [rOBP0],a
+;	ld [rOBP0],a	; HAX
+	nop
+	nop
 	call LoadAnimationTileset
 	call LoadSubanimation
 	call PlaySubanimation
@@ -108341,23 +108351,31 @@ GetSubanimationTransform2: ; 781ca (1e:41ca)
 	ret
 
 ; loads tile patterns for battle animations
+; I HAXed with this function by shaving off a few bytes in order to
+; call a function to load sprite palettes.
 LoadAnimationTileset: ; 781d2 (1e:41d2)
 	ld a,[$D09F] ; tileset select
 	add a
 	add a
-	ld hl,AnimationTilesetPointers
 	ld e,a
 	ld d,0
-	add hl,de
+
+	; HAX: Load corresponding palettes as well
+	ld b, BANK(LoadAnimationTilesetPalettes)
+	ld hl, LoadAnimationTilesetPalettes
+	rst $18
+
+;	ld hl,AnimationTilesetPointers
+;	add hl,de
 	ld a,[hli]
 	ld [$D07D],a ; number of tiles
+	push af
 	ld a,[hli]
 	ld e,a
-	ld a,[hl]
-	ld d,a ; de = address of tileset
+	ld d,[hl] ; de = address of tileset
 	ld hl,$8310 ; destination address in VRAM
 	ld b,$1E ; ROM bank
-	ld a,[$D07D]
+	pop af ; a = [$D07D]
 	ld c,a ; number of tiles
 	jp CopyVideoData ; load tileset
 
@@ -108517,7 +108535,7 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld a, [$cf1b]
 	and a
 	ld a, $e4
-	jr z, .asm_78e47
+	jr z,.asm_78e47
 	ld a, $f0
 	ld [$cc79], a
 	ld b, $e4
@@ -108529,9 +108547,13 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld b, $f0
 .asm_78e3f
 	ld a, b
-	ld [rOBP0], a ; $FF00+$48
+;	ld [rOBP0], a ; HAX
+	nop
+	nop
 	ld a, $6c
-	ld [rOBP1], a ; $FF00+$49
+;	ld [rOBP1], a ; HAX
+	nop
+	nop
 	ret
 .asm_78e47
 	ld a, $e4
@@ -128193,6 +128215,9 @@ PalCode_01:
 	ld a,$02
 	ld [rSVBK],a
 
+	ld a,1
+	ld [W2_ColorizeNonOverworldSprites],a
+
 	; Player palette
 	push bc
 	ld d,b
@@ -128225,7 +128250,7 @@ PalCode_01:
 	call LoadSGBPalette
 
 	; Restore sprite palettes which were set to black
-	CALL_INDIRECT InitSpritePalettes
+	CALL_INDIRECT LoadSpritePalettes
 
 
 	; Now set the tilemap
@@ -128417,8 +128442,11 @@ PalCode_0a:
 
 	xor a
 	ld [W2_TileBasedPalettes],a
+	ld [W2_ColorizeNonOverworldSprites],a
 	ld a,3
 	ld [W2_StaticPaletteChanged],a
+
+	CALL_INDIRECT LoadSpritePalettes
 
 	ld d,$1f	; Filler for palette 0 (technically, green)
 	ld e,0
@@ -128617,23 +128645,22 @@ PalCode_0c:
 PalCode_09:
 	ld a,2
 	ld [rSVBK],a
-	ld a,1
+	dec a ; ld a,1
 	ld [W2_TileBasedPalettes],a
 	xor a
-	ld [rSVBK],a
+	ld [W2_ColorizeNonOverworldSprites],a
 
-	ld a,9
-	ld [W_PALREFRESHCMD],a
-
-	ld b, BANK(LoadTilesetPalette)
-	ld hl, LoadTilesetPalette
-	call Bankswitch
+	CALL_INDIRECT LoadSpritePalettes
+	CALL_INDIRECT LoadTilesetPalette
 
 	call _LoadTownPalette
 
 	xor a
 	ld [rSVBK],a
 	ld [rVBK],a
+
+	ld a,9
+	ld [W_PALREFRESHCMD],a
 	ret
 
 PalCode_0b;

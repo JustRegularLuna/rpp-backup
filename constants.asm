@@ -3528,7 +3528,7 @@ ORG: MACRO
 
 W_PALREFRESHCMD EQU $CF1C
 
-; GB CStuff in wram bank 2
+; GBC Stuff in wram bank 2
 
 SECTION "variables",BSS[$d000]
 
@@ -3538,17 +3538,30 @@ W2_SprPaletteData:	ds $40
 W2_LastBGP EQU $d087
 W2_LastOBP EQU $d088
 
-W2_MapPaletteArrangement EQU $d200
+; If W2_TileBasedPalettes is set, each number corresponds to a tile.
+; Otherwise this is a 20x18 map of palettes.
+W2_TilesetPaletteMap	EQU $d200
+
+; Each number here corresponds to a tile, but this isn't used for
+; overworld sprites. I've got a better system for that.
+W2_SpritePaletteMap		EQU $d400
 
 SECTION "moreVariables",BSS[$d500]
 
-W2_TileBasedPalettes:		db
-W2_StaticPaletteChanged		db ; Set to 3 if modified, since the window is drawn in thirds
+W2_TileBasedPalettes:			db
+W2_StaticPaletteChanged			db ; Set to 3 if modified, since the window is drawn in thirds
+W2_ColorizeNonOverworldSprites	db
 
 CALL_INDIRECT: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
-	call Bankswitch
+	rst $18
+ENDM
+
+DSB: MACRO
+	REPT \1
+	db \2
+	ENDR
 ENDM
 
 YELLOW_MONS EQU 0

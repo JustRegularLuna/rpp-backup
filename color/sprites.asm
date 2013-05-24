@@ -1,8 +1,42 @@
 ; Handles sprite attributes
 
+PAL_ORANGE	EQU 0
+PAL_BLUE	EQU 1
+PAL_GREEN	EQU 2
+PAL_BROWN	EQU 3
+
+ATK_PAL_GREY	EQU 0
+ATK_PAL_BLUE	EQU 1
+ATK_PAL_RED		EQU 2
+ATK_PAL_BROWN	EQU 3
+ATK_PAL_YELLOW	EQU 4
+ATK_PAL_GREEN	EQU 5
+
 	ORG $2e, $4000
 
-SetSpriteAttributes:
+LoadSpritePalettes:
+	ld hl,SpritePalettes
+	jr LoadPaletteData
+
+LoadAttackSpritePalettes:
+	ld hl,AttackSpritePalettes
+
+LoadPaletteData:
+	ld de,W2_SprPaletteData
+	ld b,$40
+.sprCopyLoop
+	ld a,[hli]
+	ld [de],a
+	inc de
+	dec b
+	jr nz,.sprCopyLoop
+	xor a
+	ld [W2_LastOBP],a
+	ret
+
+; Set overworld sprite colors
+; On entering, A contains the flags (without a color palette) and de is the destination.
+ColorOverworldSprites:
 	push af
 	push bc
 	push de
@@ -15,7 +49,7 @@ SetSpriteAttributes:
 	ld a,[de]		; Load A with picture ID
 	dec a
 
-	ld de, SpritePalettes
+	ld de, SpritePaletteAssignments
 	add e
 	ld e,a
 	jr nc,.noCarry
@@ -43,16 +77,106 @@ SetSpriteAttributes:
 	pop af
 	ret
 
+; Currently this just colorized attack sprites but it can be
+; used in other non-overworld scenarios.
+ColorNonOverworldSprites:
+	ld a,2
+	ld [rSVBK],a
+
+	ld a,[W2_ColorizeNonOverworldSprites]
+	and a
+	jr z,.end
+
+	ld hl, W_OAMBUFFER
+	ld b, 40
+	ld d, W2_SpritePaletteMap>>8
+.nextSprite
+	ld a,[hli] ; y-coord
+	and a
+	jr z,.end
+
+	inc hl
+	ld a,[hli] ; tile
+	ld e, a
+	ld c,[hl] ; flags
+	ld a,[de]
+	cp 8
+	jr c,.setPalette
+
+	push hl
+	ld a,[$cfd5] ; Move type
+	ld hl, TypeColorTable
+	add l
+	ld l,a
+	jr nc,.noCarry
+	inc h
+.noCarry
+	ld a,[hl]
+	pop hl
+
+.setPalette
+	or c
+	ld [hli],a
+
+	dec b
+	jr nz, .nextSprite
+
+.end
+	xor a
+	ld [rSVBK],a
+	ret
+
+LoadAnimationTilesetPalettes:
+	di
+	push de
+	ld a,[$D09F] ; Animation tileset
+	ld c,a
+	ld a,2
+	ld [rSVBK],a
+
+	call LoadAttackSpritePalettes
+
+	ld a,c
+	and a
+	ld hl, AnimationTileset1Palettes
+	jr z,.gotPalette
+	ld hl, AnimationTileset2Palettes
+.gotPalette
+	ld de, W2_SpritePaletteMap
+	ld b, $80
+.copyLoop
+	ld a,[hli]
+	ld [de],a
+	inc e
+	dec b
+	jr nz,.copyLoop
+
+	xor a
+	ld [rSVBK],a
+
+	pop de
+	; Next lines were cut out from the caller
+	ld hl,AnimationTilesetPointers
+	add hl,de
+	reti
+
+; Set all sprite palettes to color 0. Non-overworld stuff only.
+; ASSUMES THAT WRAM BANK 2 IS LOADED.
+ClearSpritePalettes:
+	ld hl, W2_SpritePaletteMap
+	ld b,$02
+	xor a
+.loop
+	ld [hli],a
+	dec b
+	jr nz,.loop
+	ret
+
 	ORG $2e, $6000
 
-	jp $4000
+	jp ColorOverworldSprites
 
-PAL_ORANGE	EQU 0
-PAL_BLUE	EQU 1
-PAL_GREEN	EQU 2
-PAL_BROWN	EQU 3
-
-SpritePalettes:
+SpritePaletteAssignments: ; Characters on the overworld
 	; SPRITE_RED
 	db PAL_ORANGE
 
@@ -231,7 +355,7 @@ SpritePalettes:
 	db 4
 
 	; SPRITE_SEEL
-	db PAL_BLUE
+	db PAL_ORANGE
 
 	; SPRITE_BALL
 	db PAL_ORANGE
@@ -268,3 +392,41 @@ SpritePalettes:
 
 	; SPRITE_LYING_OLD_MAN
 	db 4
+
+
+AnimationTileset1Palettes:
+	INCBIN "color/animtileset1palettes.bin"
+
+AnimationTileset2Palettes:
+	INCBIN "color/animtileset2palettes.bin"
+
+TypeColorTable: ; Used for a select few sprites to be colorized based on attack type
+	db 0 ; NORMAL EQU $00
+	db 0 ; FIGHTING EQU $01
+	db 0 ; FLYING EQU $02
+	db 0 ; POISON EQU $03
+	db 0 ; GROUND EQU $04
+	db 0 ; ROCK EQU $05
+	db 0
+	db 0 ; BUG EQU $07
+	db 0 ; GHOST EQU $08
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 2 ; FIRE EQU $14
+	db 1 ; WATER EQU $15
+	db 0 ; GRASS EQU $16
+	db 0 ; ELECTRIC EQU $17
+	db 0 ; PSYCHIC EQU $18
+	db 0 ; ICE EQU $19
+	db 1 ; DRAGON EQU $1A
+
+INCLUDE "color/spritepalettes.asm"
