@@ -7,7 +7,6 @@
 	RGB 31,31,31 ; PAL_TOWN2 (second palette used on the town map)
 	RGB 16,31,4
 	RGB 19,11,4
-	;RGB 11,23,31
 	RGB 3,3,3
 
 	RGB 31,31,31 ; PAL_PALLET
@@ -176,8 +175,8 @@
 	RGB 3,3,3
 
 	RGB 31,31,31 ; PAL_BADGE
-	RGB 23,8,0
-	RGB 17,14,11
+	RGB 2,4,24
+	RGB 4,4,20
 	RGB 3,3,3
 
 	RGB 31,31,31 ; PAL_CAVE

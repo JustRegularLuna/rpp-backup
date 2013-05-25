@@ -128522,11 +128522,6 @@ ENDC
 	ld e,1
 	call LoadSGBPalette
 
-	xor a
-	ld [W2_TileBasedPalettes],a
-	ld a,3
-	ld [W2_StaticPaletteChanged],a
-
 	ld bc,20*18
 	ld hl,$d200
 	ld d,1
@@ -128552,7 +128547,14 @@ ENDC
 	dec b
 	jr nz,.pokeLoop
 
+
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 	xor a
+	ld [W2_TileBasedPalettes],a
+	ld [W2_ColorizeNonOverworldSprites],a
+
+;	xor a
 	ld [rSVBK],a
 	ret
 

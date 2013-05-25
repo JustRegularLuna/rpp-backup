@@ -52,8 +52,8 @@ AttackSpritePalettes:
 	RGB 0,0,0
 	; BLUE
 	RGB 31,31,31
-	RGB 0,0,31
-	RGB 2,0,20
+	RGB 5,4,31
+	RGB 1,1,18
 	RGB 0,0,0
 	; ORANGE
 	RGB 31,31,31

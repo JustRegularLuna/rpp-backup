@@ -104,7 +104,14 @@ ColorNonOverworldSprites:
 	jr c,.setPalette
 
 	push hl
+	ld a,[H_WHOSETURN]
+	and a
+	jr z,.playersTurn
+	ld a,[$cfcf] ; Enemy move type
+	jr .gotType
+.playersTurn
 	ld a,[$cfd5] ; Move type
+.gotType
 	ld hl, TypeColorTable
 	add l
 	ld l,a
