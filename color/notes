@@ -44,15 +44,17 @@ Locations where FF68 is set to black/white only: (bank 1e)
 
 TODO
 
-- Change box: pokeball colors
-- Intro colors (glitches, prof oak speech)
-- Wrap up
-- Dynamic lifebar colors
-- Double-check palettes imported from yellow
-- Trainer card colors are wrong
+- Enemy attack colors
 - Pokecenter balls
+- Intro colors (glitches, prof oak speech)
+- Dynamic lifebar colors
+- Roof colors
+- Check town tilesets
+- Trainer card colors are wrong
 - Exclamation marks
-- Fix fading
+- Change box: pokeball colors
+- Wrap up attacks
+- Double-check palettes imported from yellow
 
 POKEMON YELLOW:
 

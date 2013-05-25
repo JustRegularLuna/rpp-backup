@@ -130,22 +130,9 @@ ENDR
 	dec b
 	jr nz,.drawRow
 
-
-; BEGIN loading palettes
-
-	ld a,$02
-	ld [rSVBK],a	; Wram bank 2
-	ld a,$01
-	ld [rVBK],a
-
-	; This craziness restores sp, and restores de and hl to src and dest maps again.
+	; Restore sp and set hl to point to destination again
 	ld b,h
 	ld c,l
-	ld hl,[sp+$00]
-	ld de, -20*6
-	add hl,de
-	ld d,h
-	ld e,l
 
 	ld a,[$ff00+$bf]
 	ld h,a
@@ -158,75 +145,44 @@ ENDR
 	ld bc, -$c0
 	add hl,bc
 
-	ld b,6
+; BEGIN loading palettes
+
+	ld a,1
+	ld [rVBK],a
+	inc a
+	ld [rSVBK],a
 
 	ld a,[W2_TileBasedPalettes]
 	and a
-	jr nz,tileBasedPalettes
+	jr nz,.continue
 
-staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
-	ld a,[W2_StaticPaletteChanged]
+	ld a,[W2_StaticPaletteModified]
 	and a
-	jp z, palettesDone
+	jr z, .palettesDone
 
-	dec a
-	ld [W2_StaticPaletteChanged],a
+	xor a
+	ld [W2_StaticPaletteModified],a
 
-	push hl
-	ld h,d
-	ld l,e
-	ld de,$d200 - W_SCREENTILESBUFFER
-	add hl,de
-	ld d,h
-	ld e,l	; de now points to the appropriate location in the palette grid @ $d200
-	pop hl
-	
-	ld b,6
-.drawRow_Pal
-	ld c,20
-.palLoop
-	ld a,[de]
-	inc de
-	ld [hli],a
-	dec c
-	jr nz,.palLoop
+.continue
 
-	ld a,32-20
-	add l
-	ld l,a
-	jr nc,.noCarry
-	inc h
-.noCarry
-	dec b
-	jr nz,.drawRow_Pal
+	ld c,$51
+	ld a, W2_ScreenPalettesBuffer>>8
+	ld [$ff00+c],a
+	inc c
+	ld a, W2_ScreenPalettesBuffer&$ff
+	ld [$ff00+c],a
+	inc c
+	ld a, h
+	ld [$ff00+c],a
+	inc c
+	ld a, l
+	ld [$ff00+c],a
+	inc c
 
-	jr palettesDone
+	ld a, 6*32/$10-1
+	ld [$ff00+c],a ; Start DMA transfer
 
-tileBasedPalettes:	; Palettes are loaded based on the tile at that location
-.drawRow_Pal
-	push bc
-	ld b,$d2
-REPT 20
-	ld a,[de]
-	inc de
-	ld c,a
-
-	ld a,[bc]
-	ld [hli],a
-ENDR
-
-	ld a,32-20
-	add l
-	ld l,a
-	jr nc,.noCarry
-	inc h
-.noCarry
-	pop bc
-	dec b
-	jr nz,.drawRow_Pal
-
-palettesDone:
-
+.palettesDone
 	xor a
 	ld [rVBK],a
 	ld [rSVBK],a

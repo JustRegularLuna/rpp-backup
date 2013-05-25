@@ -3534,34 +3534,40 @@ SECTION "variables",BSS[$d000]
 
 W2_BgPaletteData:	ds $40
 W2_SprPaletteData:	ds $40
-
-W2_LastBGP EQU $d087
-W2_LastOBP EQU $d088
+W2_LastBGP:			db
+W2_LastOBP:			db
 
 ; If W2_TileBasedPalettes is set, each number corresponds to a tile.
 ; Otherwise this is a 20x18 map of palettes.
 W2_TilesetPaletteMap	EQU $d200
-
 ; Each number here corresponds to a tile, but this isn't used for
 ; overworld sprites. I've got a better system for that.
 W2_SpritePaletteMap		EQU $d400
 
-SECTION "moreVariables",BSS[$d500]
+; Palette calculations for W_SCREENTILESBUFFER are stored here before vblank.
+W2_ScreenPalettesBuffer	EQU $d480 ; 32x6 bytes (DMA-able), $d480-$d540
+
+SECTION "moreVariables",BSS[$d600]
 
 W2_TileBasedPalettes:			db
-W2_StaticPaletteChanged			db ; Set to 3 if modified, since the window is drawn in thirds
+W2_StaticPaletteChanged			db ; Set to a number >=3 if modified, since the window is drawn in thirds
 W2_ColorizeNonOverworldSprites	db
+W2_BgPaletteDataBuffer			ds $40
+W2_SprPaletteDataBuffer			ds $40
+
+W2_BgPaletteDataModified		db
+W2_SprPaletteDataModified		db
+
+; Analagous to StaticPaletteChanged, but only used between Pre-vblank and
+; actual-vblank routines.
+W2_StaticPaletteModified		db
+
+W2_LastAutoCopyDest				db
 
 CALL_INDIRECT: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
 	rst $18
-ENDM
-
-DSB: MACRO
-	REPT \1
-	db \2
-	ENDR
 ENDM
 
 YELLOW_MONS EQU 0

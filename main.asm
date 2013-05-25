@@ -36,16 +36,24 @@ SECTION "rst38",HOME[$38]
 ; interrupts
 SECTION "interrupts",HOME[$40]
 vblank:
-	jp VBlankHandler
+	push hl
+	ld hl, VBlankHandler
+	jp InterruptWrapper
 
-	ORG 0, $48
-	db $FF	; lcd
+	ORG 0, $48 ; lcd
+	push hl
+	ld hl, DelayFrameHook
+	jp InterruptWrapper
 
 	ORG 0, $50
-	jp TimerHandler	; timer
+	push hl
+	ld hl, TimerHandler	; timer
+	jp InterruptWrapper
 
 	ORG 0, $58
-	jp SerialInterruptHandler
+	push hl
+	ld hl, SerialInterruptHandler
+	jp InterruptWrapper
 
 	ORG 0, $60
 	reti
@@ -4826,24 +4834,15 @@ HaxFunc3: ; 1d6d
 
 ; HAX: Squeeze this little function in here
 DelayFrameHook:
-	ld a,1
-	ld [H_VBLANKOCCURRED],a
-
-	di
+	push af
 	push bc
 	push de
 	push hl
-	ld b, BANK(PrepareOAMData)
-	ld hl, PrepareOAMData
-	rst $18
-	jr z, .spritesDrawn
-	ld b, BANK(ColorNonOverworldSprites)
-	ld hl, ColorNonOverworldSprites
-	rst $18
-.spritesDrawn
+	CALL_INDIRECT GbcPrepareVBlank
 	pop hl
 	pop de
 	pop bc
+	pop af
 	reti
 
 	ORG $00, $1dde
@@ -5324,8 +5323,10 @@ VBlankHandler: ; 2024 (0:2024)
 
 DelayFrame: ; 20af (0:20af)
 ; delay for one frame
-	call DelayFrameHook
-	nop
+;	call DelayFrameHook
+;	nop
+	ld a,1
+	ld [H_VBLANKOCCURRED],a
 
 ; wait for the next Vblank, halting to conserve battery
 .halt
@@ -5333,7 +5334,6 @@ DelayFrame: ; 20af (0:20af)
 	ld a,[H_VBLANKOCCURRED]
 	and a
 	jr nz,.halt
-	;jp HaxFunc4	; HAX
 
 	ret
 
@@ -10702,6 +10702,26 @@ GBFadeOut_Custom:
 	ld hl,IncGradGBPalTable_Custom
 	ld b,$04
 	jp GBFadeOutCommon
+
+InterruptWrapper:
+	push af
+	push bc
+	push de
+	ld a,[rSVBK]
+	ld b,a
+	xor a
+	ld [rSVBK],a
+	ld de,.ret
+	push de
+	jp [hl]
+.ret
+	ld a,b
+	ld [rSVBK],a
+	pop de
+	pop bc
+	pop af
+	pop hl
+	reti
 
 SECTION "bank1",DATA,BANK[$1]
 
@@ -101592,11 +101612,11 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 	ld de,PalCodeRet
 	push de
 
-	di
+;	di
 	jp [hl]
 
 PalCodeRet:
-	ei
+;	ei
 	ret
 
 
@@ -128440,12 +128460,6 @@ PalCode_0a:
 	ld a,2
 	ld [rSVBK],a
 
-	xor a
-	ld [W2_TileBasedPalettes],a
-	ld [W2_ColorizeNonOverworldSprites],a
-	ld a,3
-	ld [W2_StaticPaletteChanged],a
-
 	CALL_INDIRECT LoadSpritePalettes
 
 	ld d,$1f	; Filler for palette 0 (technically, green)
@@ -128481,6 +128495,12 @@ PalCode_0a:
 	ld l,a
 	dec b
 	jr nz,.loop
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld [W2_ColorizeNonOverworldSprites],a
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 
 	xor a
 	ld [rSVBK],a
@@ -128604,11 +128624,6 @@ PalCode_08:
 	ld a,2
 	ld [rSVBK],a
 
-	xor a
-	ld [W2_TileBasedPalettes],a
-	ld a,3
-	ld [W2_StaticPaletteChanged],a
-
 	ld d,$21	; Red lifebar color (for pokeballs)
 	ld e,0
 	call LoadSGBPalette
@@ -128623,6 +128638,11 @@ PalCode_08:
 	ld a,b
 	or c
 	jr nz,.palLoop
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 
 	xor a
 	ld [rSVBK],a
@@ -128825,6 +128845,7 @@ LoadIntroMonTilesAndPalettes:
 
 INCLUDE "color/refreshmaps.asm"
 INCLUDE "color/loadpalettes.asm"
+INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
 
 SECTION "bank30",DATA,BANK[$30]
