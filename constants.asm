@@ -3535,7 +3535,8 @@ SECTION "variables",BSS[$d000]
 W2_BgPaletteData:	ds $40
 W2_SprPaletteData:	ds $40
 W2_LastBGP:			db
-W2_LastOBP:			db
+W2_LastOBP0:		db
+W2_LastOBP1:		db
 
 ; If W2_TileBasedPalettes is set, each number corresponds to a tile.
 ; Otherwise this is a 20x18 map of palettes.
@@ -3552,6 +3553,7 @@ SECTION "moreVariables",BSS[$d600]
 W2_TileBasedPalettes:			db
 W2_StaticPaletteChanged			db ; Set to a number >=3 if modified, since the window is drawn in thirds
 W2_ColorizeNonOverworldSprites	db
+W2_UseOBP1						db ; If set, sprite palettes 4-7 use OBP1 instead of OBP0
 W2_BgPaletteDataBuffer			ds $40
 W2_SprPaletteDataBuffer			ds $40
 

@@ -5409,7 +5409,7 @@ IncGradGBPalTable_01: ; 210d (0:210d)
 	             ;and so on...
 	db %11111110
 	db %11111010
-	db %11111000
+	db %11111010
 
 	db %11111001
 	db %11100100
@@ -5418,12 +5418,12 @@ GBPalTable_00: ; 2116 (0:2116)
 	db %11100100
 	db %11100100
 DecGradGBPalTable_01: ; 2118 (0:2118)
-	db %11100000
+	db %11100100
 	;19
 IncGradGBPalTable_Custom:
 	db %11100100
 	db %11100100
-	db %11100000
+	db %11100100
 IncGradGBPalTable_02: ; 211c (0:211c)
 	db %10010000
 	db %10010000
@@ -10685,7 +10685,7 @@ _LoadTownPalette:
 	and a
 	ret nz
 	ld a,[W_CURMAP]
-	ld [rOBP1],a
+;	ld [rOBP1],a
 	ld bc, LoadTownPalette_Ret
 	push bc
 	ld a, BANK(LoadTownPalette)
@@ -98768,6 +98768,8 @@ Func_70423: ; 70423 (1c:4423)
 	ld [$cfc7], a
 	jp GBFadeOut2
 
+; This function does the flashing pokeballs when healing pokemon
+; HAXed to look better in color
 ; known jump sources: 7027 (1:7027)
 Func_70433: ; 70433 (1c:4433)
 	ld de, Unknown_704b7 ; $44b7
@@ -98782,7 +98784,9 @@ Func_70433: ; 70433 (1c:4433)
 	ld a, [rOBP1] ; $FF00+$49
 	push af
 	ld a, $e0
-	ld [rOBP1], a ; $FF00+$49
+;	ld [rOBP1], a ; $FF00+$49
+	nop
+	nop
 	ld hl, $c384
 	ld de, Unknown_704d7 ; $44d7
 	call Func_70503
@@ -98818,7 +98822,7 @@ Func_70433: ; 70433 (1c:4433)
 	ld a, $e8
 	ld [$c0ee], a
 	call PlaySound
-	ld d, $28
+	ld d, %01110100
 	call Func_704f3
 .asm_704a2
 	ld a, [$c026]
@@ -98836,8 +98840,16 @@ Func_70433: ; 70433 (1c:4433)
 Unknown_704b7: ; 704b7 (1c:44b7)
 INCBIN "baserom.gbc",$704b7,$704d7 - $704b7
 
+; Pokeball sprites for the pokecenter
+; HAXed to use palette 4
 Unknown_704d7: ; 704d7 (1c:44d7)
-INCBIN "baserom.gbc",$704d7,$704f3 - $704d7
+	db $24, $34, $7c, $14
+	db $2b, $30, $7d, $14
+	db $2b, $38, $7d, $34
+	db $30, $30, $7d, $14
+	db $30, $38, $7d, $34
+	db $35, $30, $7d, $14
+	db $35, $38, $7d, $34
 
 ; known jump sources: 7049f (1c:449f), 708f3 (1c:48f3)
 Func_704f3: ; 704f3 (1c:44f3)
@@ -108567,7 +108579,7 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld b, $f0
 .asm_78e3f
 	ld a, b
-;	ld [rOBP0], a ; HAX
+;	ld [rOBP0], a ; HAX: don't mess with these palettes in-battle
 	nop
 	nop
 	ld a, $6c
@@ -128214,7 +128226,7 @@ PalCode_00:
 
 	xor a
 	ld [W2_LastBGP],a
-	ld [W2_LastOBP],a	; Palettes must be refreshed
+	ld [W2_LastOBP0],a	; Palettes must be refreshed
 
 	;xor a
 	ld [rSVBK],a
@@ -128347,8 +128359,9 @@ PalCode_01:
 	jr nz,.eDrawLine
 
 	xor a
+	ld [W2_UseOBP1],a
 	ld [W2_LastBGP],a
-	ld [W2_LastOBP],a	; Palettes must be redrawn
+	ld [W2_LastOBP0],a	; Palettes must be redrawn
 
 	;xor a
 	ld [rSVBK],a
@@ -128675,6 +128688,8 @@ PalCode_09:
 
 	call _LoadTownPalette
 
+	ld a,1
+	ld [W2_UseOBP1],a ; Pokecenter uses OBP1 when healing pokemons
 	xor a
 	ld [rSVBK],a
 	ld [rVBK],a

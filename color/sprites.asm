@@ -31,7 +31,7 @@ LoadPaletteData:
 	dec b
 	jr nz,.sprCopyLoop
 	xor a
-	ld [W2_LastOBP],a
+	ld [W2_LastOBP0],a
 	ret
 
 ; Set overworld sprite colors

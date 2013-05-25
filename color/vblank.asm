@@ -63,9 +63,15 @@ RefreshPaletteData:
 .checkSprPalettes
 	ld a,[rOBP0]
 	ld b,a
-	ld a,[W2_LastOBP]
+	ld a,[W2_LastOBP0]
+	cp b
+	jr nz,.continue
+	ld a,[rOBP1]
+	ld b,a
+	ld a,[W2_LastOBP1]
 	cp b
 	jr z,.end
+.continue
 
 	ld a,1
 	ld [W2_SprPaletteDataModified],a
@@ -87,6 +93,18 @@ RefreshPaletteData:
 
 .doNextSprPal
 	ld e,4
+
+	ld a,[W2_UseOBP1]
+	and a
+	jr z,.obp0
+	ld a,11
+	cp b
+	jr nc,.obp0
+.obp1
+	ld a,[rOBP1]
+	ld d,a
+	jr .doNextSprColor
+.obp0
 	ld a,[rOBP0]
 	ld d,a
 
@@ -106,7 +124,9 @@ RefreshPaletteData:
 	ld a,[rBGP]
 	ld [W2_LastBGP],a
 	ld a,[rOBP0]
-	ld [W2_LastOBP],a
+	ld [W2_LastOBP0],a
+	ld a,[rOBP1]
+	ld [W2_LastOBP1],a
 	ret
 
 

@@ -159,7 +159,7 @@ LoadTownPalette:
 
 	xor a
 	ld [W2_LastBGP],a
-	ld [W2_LastOBP],a
+	ld [W2_LastOBP0],a
 	pop af
 	ld [rSVBK],a
 	ret
