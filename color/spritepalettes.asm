@@ -86,3 +86,5 @@ AttackSpritePalettes:
 	RGB 12,0,13
 	RGB 0,0,0
 
+SlotPaletteMap:
+	INCBIN "color/slotpalettes.bin"

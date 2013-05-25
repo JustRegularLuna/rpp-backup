@@ -128288,9 +128288,9 @@ PalCode_01:
 	jr nz,.eFillLoop
 
 	; Bottom half; player lifebar
-	ld hl,$d200+6*18
+	ld hl,$d200+6*20
 	ld d,2
-	ld bc,20*6
+	ld bc,20*12
 .pFillLoop
 	ld [hl],d
 	inc hl
@@ -128298,18 +128298,6 @@ PalCode_01:
 	ld a,b
 	or c
 	jr nz,.pFillLoop
-
-	; All the way at the bottom: text & stuff
-	ld hl,$d200+12*18
-	ld d,4
-	ld bc,20*6
-.tFillLoop
-	ld [hl],d
-	inc hl
-	dec bc
-	ld a,b
-	or c
-	jr nz,.tFillLoop
 
 	; Player pokemon
 	ld hl,$d200+4*20
@@ -128559,8 +128547,31 @@ ENDC
 	ret
 
 PalCode_05:
-ret
-INCBIN "baserom.gbc",$71e9f,$71ea6 - $71e9f
+	ld a,2
+	ld [rSVBK],a
+
+	ld d, PAL_SLOTS1
+	ld e, 0
+	call LoadSGBPalette
+	ld d, PAL_SLOTS2
+	ld e, 1
+	call LoadSGBPalette
+	ld d, PAL_SLOTS3
+	ld e, 2
+	call LoadSGBPalette
+	ld d, PAL_SLOTS4
+	ld e, 3
+	call LoadSGBPalette
+
+	ld hl, SlotPaletteMap
+	ld de, $d200
+	ld bc, $80
+	ld a, BANK(SlotPaletteMap)
+	call FarCopyData
+
+	xor a
+	ld [rSVBK],a
+	ret
 
 ; Intro with cycling pokemon
 PalCode_06:

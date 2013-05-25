@@ -11,6 +11,7 @@ f:6fb8: battle initialization function.
 		02 = Map
 		03 = Pokemon status
 		04 = Show pokedex data
+		05 = Slots
 		06 = Set titlescreen palettes
 		07 = Called before intro
 		08 = Open pokedex
@@ -51,6 +52,7 @@ TODO
 - Change box: pokeball colors
 - Wrap up attacks
 - Double-check palettes imported from yellow
+- Slots
 
 POKEMON YELLOW:
 
