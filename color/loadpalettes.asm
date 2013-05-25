@@ -118,7 +118,20 @@ LoadTilesetPalette:
 	jr nz,.fillLoop
 
 	pop af
+	ld b,a
+
+	xor a
 	ld [rSVBK],a
+	ld a,[W_CURMAPTILESET]
+
+	ld c,a
+	ld a,b
+	ld [rSVBK],a ; Restore previous wram bank
+
+	ld a,c
+	and a ; Check whether tileset 0 is loaded
+	call z, LoadTownPalette
+
 	pop hl
 	pop de
 	pop bc
@@ -157,11 +170,14 @@ LoadTownPalette:
 	pop hl
 	pop de
 
+	ld a,c
+	ld [W2_TownMapLoaded],a
+
 	xor a
 	ld [W2_LastBGP],a
 	ld [W2_LastOBP0],a
 	pop af
-	ld [rSVBK],a
+	ld [rSVBK],a ; Restore wram bank
 	ret
 
 

@@ -10680,23 +10680,6 @@ Func_3f0f: ; 3f0f (0:3f0f)
 	dw $7c0d
 	dw $7c45
 
-_LoadTownPalette:
-	ld a,[W_CURMAPTILESET]
-	and a
-	ret nz
-	ld a,[W_CURMAP]
-;	ld [rOBP1],a
-	ld bc, LoadTownPalette_Ret
-	push bc
-	ld a, BANK(LoadTownPalette)
-	ld [$2000],a
-	jp LoadTownPalette
-
-LoadTownPalette_Ret:
-	ld a,[H_LOADEDROMBANK]
-	ld [$2000],a
-	ret
-
 ; Fade out from map screen
 GBFadeOut_Custom:
 	ld hl,IncGradGBPalTable_Custom
@@ -128683,16 +128666,15 @@ PalCode_09:
 	xor a
 	ld [W2_ColorizeNonOverworldSprites],a
 
-	CALL_INDIRECT LoadSpritePalettes
-	CALL_INDIRECT LoadTilesetPalette
-
-	call _LoadTownPalette
-
 	ld a,1
 	ld [W2_UseOBP1],a ; Pokecenter uses OBP1 when healing pokemons
+
+	CALL_INDIRECT LoadSpritePalettes
+
 	xor a
 	ld [rSVBK],a
-	ld [rVBK],a
+
+	CALL_INDIRECT LoadTilesetPalette
 
 	ld a,9
 	ld [W_PALREFRESHCMD],a

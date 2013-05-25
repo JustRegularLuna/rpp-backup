@@ -16,6 +16,7 @@ f:6fb8: battle initialization function.
 		08 = Open pokedex
 		09 = Load maps
 		0A = Load pokemon menu
+		0C = first screen
 		0D = Trainer card
 		FC = Called 6 times when loading pokemon menu (before 0A).
 		FF = Use code [cf1c] instead. Useful for reloading after a menu clears something.

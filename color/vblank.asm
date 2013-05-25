@@ -264,19 +264,41 @@ GbcVBlankHook:
 	or $40
 	ld [rSTAT],a
 
+	; Check if the town has been changed
+	ld a,[W_CURMAP]
+	ld b,a
+	ld a,[W_CURMAPTILESET]
+	ld c,a
+
+	ld a,2
+	ld [rSVBK],a
+
+	jr .skipCheckTownTileset
+	ld a,c
+	and a
+	jr .checkTownTileset
+	ld a,$ff
+	ld [W2_TownMapLoaded],a
+	jr .skipCheckTownTileset
+.checkTownTileset
+	ld a,[W2_TownMapLoaded]
+	cp b
+	jr z,.skipCheckTownTileset
+	CALL_INDIRECT LoadTownPalette
+
+.skipCheckTownTileset
+
 	; If we've passed line $95, there's probably not enough time to update palettes.
 	; Leave it for next frame.
 	ld a,[$ff44]
 	cp $96
-	ret nc
+	jr nc,.end
 	cp $90
-	ret c
+	jr c,.end
 
 	; If necessary, copy palettes which were generated in the
 	; pre-vblank routines
 .checkBgPalettes
-	ld a,2
-	ld [rSVBK],a
 	ld a,[W2_BgPaletteDataModified]
 	and a
 	jr z, .checkSpritePalettes

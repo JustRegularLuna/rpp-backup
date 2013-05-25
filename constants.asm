@@ -3550,6 +3550,7 @@ W2_ScreenPalettesBuffer	EQU $d480 ; 32x6 bytes (DMA-able), $d480-$d540
 
 SECTION "moreVariables",BSS[$d600]
 
+W2_TownMapLoaded				db
 W2_TileBasedPalettes:			db
 W2_StaticPaletteChanged			db ; Set to a number >=3 if modified, since the window is drawn in thirds
 W2_ColorizeNonOverworldSprites	db
