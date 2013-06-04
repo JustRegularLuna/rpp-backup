@@ -46,7 +46,7 @@ LoadTilesetPalette:
 	ld d,a
 	xor a
 	ld [rSVBK],a
-	ld a,[W_CURMAPTILESET]
+	ld a,[W_CURMAPTILESET] ; Located in wram bank 0
 	ld b,a
 	ld a,$02
 	ld [rSVBK],a
@@ -173,9 +173,10 @@ LoadTownPalette:
 	ld a,c
 	ld [W2_TownMapLoaded],a
 
-	xor a
+	ld a,1
 	ld [W2_LastBGP],a
-	ld [W2_LastOBP0],a
+	ld [W2_LastOBP0],a ; Palettes must be refreshed
+
 	pop af
 	ld [rSVBK],a ; Restore wram bank
 	ret

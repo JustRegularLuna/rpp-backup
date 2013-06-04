@@ -128207,11 +128207,9 @@ PalCode_00:
 	inc a
 	jr nz,.palLoop
 
-	xor a
+	ld a,1
 	ld [W2_LastBGP],a
 	ld [W2_LastOBP0],a	; Palettes must be refreshed
-
-	;xor a
 	ld [rSVBK],a
 	ret
 
@@ -128329,15 +128327,13 @@ PalCode_01:
 	dec b
 	jr nz,.eDrawLine
 
-	xor a
+	ld a,1
 	ld [W2_UseOBP1],a
 	ld [W2_LastBGP],a
 	ld [W2_LastOBP0],a	; Palettes must be redrawn
-
-	;xor a
 	ld [rSVBK],a
 
-	ld a,$01
+;	ld a,$01
 	ld [W_PALREFRESHCMD],a
 	ret
 
@@ -128617,10 +128613,10 @@ PalCode_06:
 	xor a
 	ld [W2_TileBasedPalettes],a
 
-	;xor a
+	ld a,1
 	ld [W2_LastBGP],a	; Palettes must be redrawn
 
-	;xor a
+;	ld a,1
 	ld [rSVBK],a
 
 	; Execute code 0e after titlescreen to set prof oak's color.
@@ -128741,7 +128737,7 @@ PalCode_0d:
 	dec b
 	jr nz,.copyLoop
 
-	xor a
+	ld a,1
 	ld [W2_LastBGP],a
 	ld [rSVBK],a
 	ret

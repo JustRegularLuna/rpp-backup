@@ -44,15 +44,21 @@ Locations where FF68 is set to black/white only: (bank 1e)
 	- !4176 (revert after pokeball)
 	- 4e23 (ish)
 
+=== RAM LOCATIONS ===
+
+cf1b = SGB flag
+
 TODO
 
+- Fix item graphical glitches
+- Evolutions
 - Intro colors (glitches, prof oak speech)
 - Dynamic lifebar colors
 - Check town tilesets
 - Change box: pokeball colors
 - Wrap up attacks
 - Double-check palettes imported from yellow
-- Slots
+- Fix VBA glitches
 
 POKEMON YELLOW:
 
