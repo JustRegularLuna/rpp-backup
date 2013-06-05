@@ -4,29 +4,13 @@ BgPalettes:
 	INCBIN "color/bank2d.bin",$0000,$0200 ; BG palettes
 
 ; Load initial colors
-InitGbcPalettes:
-	ld a,$2d
-	ld [H_LOADEDROMBANK],a
-	ld a,$02
-	ld [rSVBK],a
-
-	ld de,W2_BgPaletteData
-	ld hl,BgPalettes
-	ld b,$08
-.bgCopyLoop
-	ld a,[hli]
-	ld [de],a
-	inc de
-	dec b
-	jr nz,.bgCopyLoop
-
-	CALL_INDIRECT LoadSpritePalettes
-
+InitGbcMode:
 	ld a,$01
-	ld [rSVBK],a
+	; Also set double speed mode
 	ld [$ff4d],a
 	stop	; Automatically adds a nop
 	jp LoadBank1
+
 
 	ORG $2d, $4f00
 MapPaletteData:
