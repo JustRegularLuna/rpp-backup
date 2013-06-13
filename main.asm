@@ -101711,16 +101711,25 @@ Unknown_72538: ; 72538 (1c:6538)
 INCBIN "baserom.gbc",$72538,$725c8 - $72538
 
 MonsterPalettes: ; 725c8 (1c:65c8)
-INCBIN "color/monsterpalettes.bin"
+IF GEN_2_GRAPHICS
+	INCBIN "color/gen2_monsterpalettes.bin"
+ELSE
+	INCLUDE "color/monsterpalettes.asm"
+ENDC
+
 TrainerPalettes:
-INCBIN "color/trainerpalettes.bin"
+	INCBIN "color/trainerpalettes.bin"
 
 
 ; palettes for overworlds, title screen, monsters
-; HAX: Use Pokemon Yellow palettes because they look better on GBC
+; HAX: Either uses Pokemon Yellow or Pokemon Gold/Silver/Crystal palettes,
+; depending on whether Gen II graphics are enabled.
 SuperPalettes: ; 72660 (1c:6660)
-	INCBIN "color/palettes.bin"
-;	INCLUDE "color/palettes.asm"
+IF GEN_2_GRAPHICS
+	INCBIN "color/gen2_palettes.bin"
+ELSE
+	INCLUDE "color/palettes.asm"
+ENDC
 
 
 	ORG $1c, $6e88
