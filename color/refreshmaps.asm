@@ -68,10 +68,10 @@ RefreshWindow:
 
 	ld hl,[sp+$00]
 	ld a,h
-	ld [$ff00+$bf],a
+	ld [H_SPTEMP],a
 	ld a,l
-	ld [$ff00+$c0],a	; Store stack pointer
-	ld a,[$ff00+$bb]
+	ld [H_SPTEMP+1],a	; Store stack pointer
+	ld a,[H_AUTOBGTRANSFERPORTION]
 	and a
 	jr z,.firstThird
 	dec a
@@ -79,9 +79,9 @@ RefreshWindow:
 .thirdThird
 	ld hl,W_SCREENTILESBUFFER+6*20*2
 	ld sp,hl
-	ld a,[$ff00+$bd]
+	ld a,[H_AUTOBGTRANSFERDEST+1]
 	ld h,a
-	ld a,[$ff00+$bc]
+	ld a,[H_AUTOBGTRANSFERDEST]
 	ld l,a
 	ld de,$0180
 	add hl,de
@@ -90,18 +90,18 @@ RefreshWindow:
 .firstThird:
 	ld hl,W_SCREENTILESBUFFER
 	ld sp,hl
-	ld a,[$ff00+$bd]
+	ld a,[H_AUTOBGTRANSFERDEST+1]
 	ld h,a
-	ld a,[$ff00+$bc]
+	ld a,[H_AUTOBGTRANSFERDEST]
 	ld l,a
 	ld a,$01
 	jr .startCopy
 .secondThird:
 	ld hl,W_SCREENTILESBUFFER+6*20
 	ld sp,hl
-	ld a,[$ff00+$bd]
+	ld a,[H_AUTOBGTRANSFERDEST+1]
 	ld h,a
-	ld a,[$ff00+$bc]
+	ld a,[H_AUTOBGTRANSFERDEST]
 	ld l,a
 	ld de,$00c0
 	add hl,de
@@ -109,19 +109,26 @@ RefreshWindow:
 
 ; sp now points to map data in wram, hl points to vram destination.
 .startCopy:
-	ld [$ff00+$bb],a
+	ld [H_AUTOBGTRANSFERPORTION],a
 	ld b,$06
 
 .drawRow:
-REPT 10
+REPT 9
 	pop de
 	ld [hl],e
 	inc l
 	ld [hl],d
 	inc l
 ENDR
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+	; Don't inc l this time.
+	; Careful here, because credits break due to carry if you inc l and add a
+	; with 12 instead of 13.
 
-	ld a,$0c
+	ld a, 13
 	add l
 	ld l,a
 	jr nc,.noCarry
@@ -258,6 +265,7 @@ label_018:
 
 	ORG $2f, $6000
 ; Refresh map when scrolling
+; I don't think this is ever called anymore?
 
 	ld a,$02
 	ld [rSVBK],a
@@ -291,8 +299,8 @@ label_021:
 	ld [de],a
 	pop hl
 	xor a
-	ld [$ff00+$4f],a
-	ld [$ff00+$70],a
+	ld [rVBK],a
+	ld [rSVBK],a
 	ld a,[hli]
 	add sp,$04
 	push af
