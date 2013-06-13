@@ -1,24 +1,42 @@
 SECTION "bank2D",DATA[$4000],BANK[$2D]
 
 BgPalettes:
-	INCBIN "color/bank2d.bin",$0000,$0200 ; BG palettes
+	INCBIN "color/bank2d.bin",$0000,$0200
 
-; Load initial colors
-InitGbcMode:
+	ORG $2d, $4200
+; 8 bytes per map for 8 palettes, which are taken from BgPalettes.
+MapPaletteData:
+	INCBIN "color/bank2d.bin",$0f00,$00c0
+
+	ORG $2d, $4300
+; $60 bytes for each map. Each byte is the palette number for a tile.
+; Remaining $a0 tiles aren't part of the tileset and are set to zero.
+MapPaletteAssignments:
+	INCBIN "color/bank2d.bin",$1000,$0900 ; Map and tile color assignments
+
+
+InitGbcMode: ; Sets double speed & clears extra memory
 	ld a,$01
-	; Also set double speed mode
+	; Set double speed mode
 	ld [$ff4d],a
-	stop	; Automatically adds a nop
+	stop
+
+	; Clear memory
+	ld d,7
+.clearBank
+	ld a,d
+	ld [rSVBK],a
+	xor a
+	ld hl, $d000
+	ld bc, $1000
+	call FillMemory
+	dec d
+	jr nz,.clearBank
+
+	xor a
+	ld [rSVBK],a
 	jp LoadBank1
 
-
-	ORG $2d, $4f00
-MapPaletteData:
-	INCBIN "color/bank2d.bin",$0f00,$00c0 ; Map palette data indices
-
-	ORG $2d, $5000
-MapPaletteArrangements:
-	INCBIN "color/bank2d.bin",$1000,$0900 ; Map and tile color assignments
 
 	ORG $2d, $6000
 ; Load colors for new map and tile placement
@@ -39,18 +57,18 @@ LoadTilesetPalette:
 	ld a,1
 	ld [W2_TileBasedPalettes],a
 
-	ld a,b
+	ld a,b ; Get W_CURMAPTILESET
 	push af
 	sla a
 	sla a
 	sla a
 	ld e,a
-	ld d, MapPaletteData>>8	; de points to map palette assignment
-	ld hl,W2_BgPaletteData
+	ld d, MapPaletteData>>8	; de points to map palette indices
+	ld hl,W2_BgPaletteData ; palette data to be copied to wram at hl
 	ld b,$08
 .nextPalette
 	ld c,$08
-	ld a,[de]	; # at de is the palette index for BgPalettes
+	ld a,[de] ; # at de is the palette index for BgPalettes
 	inc de
 	push de
 	sla a
@@ -69,21 +87,21 @@ LoadTilesetPalette:
 	jr nz,.nextPalette
 
 	; Start copying palette assignments
-	pop af	; Retrieve W_CURMAPTILESET into A
+	pop af	; Retrieve W_CURMAPTILESET
 	ld hl,$0000
 	cp $00
 	jr z,.doneMultiplication
 	ld c,a
-	ld de,$0060	; Each palette arrangement takes $60 bytes
+	ld de,$0060	; Each palette assignment takes $60 bytes
 .addLoop
 	add hl,de
 	dec c
 	jr nz,.addLoop
 .doneMultiplication:
-	ld bc, MapPaletteArrangements
+	ld bc, MapPaletteAssignments
 	add hl,bc
 	push hl
-	pop de
+	pop de ; de points to MapPaletteAssignments
 	ld hl, $d200
 	ld b,$60
 .copyLoop
@@ -107,8 +125,8 @@ LoadTilesetPalette:
 	xor a
 	ld [rSVBK],a
 	ld a,[W_CURMAPTILESET]
-
 	ld c,a
+
 	ld a,b
 	ld [rSVBK],a ; Restore previous wram bank
 

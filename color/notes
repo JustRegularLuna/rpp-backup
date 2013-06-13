@@ -56,18 +56,18 @@ TODO
 
 - Fix item menu scroll glitches
 - Evolutions
-- Intro colors (glitches, prof oak speech)
+- Intro colors (prof oak speech)
 - Dynamic lifebar colors
 - Check town tilesets
 - Change box: pokeball colors
-- Wrap up attacks (Razor Leaf)
+- Wrap up attacks
  - Ice Beam
 - Slots
 - Exclamations marks
 - Cave entrance
 - Fix VBA glitches
+- Pokedex blue square
 
 POKEMON YELLOW:
 
-1:DEE3 = location of pokemon's palette (palette id 1)
 1c:6af9 = location of pokemon yellow's palette data (at least for GBC Mode)

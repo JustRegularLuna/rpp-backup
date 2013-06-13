@@ -134,7 +134,7 @@ SECTION "Initialization",HOME[$c0]
 
 IsGBC:
 	ld hl,Start
-	push hl
+	push hl ; hijack ret
 	ld a,BANK(InitGbcMode)
 	ld [$2000],a
 	jp InitGbcMode
@@ -10689,6 +10689,7 @@ InterruptWrapper:
 	pop af
 	pop hl
 	reti
+
 
 SECTION "bank1",DATA,BANK[$1]
 
@@ -28698,14 +28699,8 @@ UpdateHPBar_AnimateHPBar: ; fab1 (3:7ab1)
 	pop hl
 	ret
 
-; compares old HP and new HP and sets c and z flags accordingly
-UpdateHPBar_CompareNewHPToOldHP: ; fad1 (3:7ad1)
-	ld a, d
-	sub b
-	ret nz
-	ld a, e
-	sub c
-	ret
+; Removed UpdateHPBar_CompareNewHPToOldHP from here
+	ORG $03, $7ad1
 
 ; known jump sources: fa2b (3:7a2b)
 ; calcs HP difference between bc and de (into de)
@@ -28888,6 +28883,54 @@ UnnamedText_fc45: ; fc45 (3:7c45)
 	TX_FAR _UnnamedText_fc45
 	db $50
 ; 0xfc45 + 5 bytes
+
+
+; compares old HP and new HP and sets c and z flags accordingly
+; HAX: this function also updates HP color.
+UpdateHPBar_CompareNewHPToOldHP: ; fad1 (3:7ad1)
+	push bc
+	push de
+	push hl
+
+	pop hl
+	pop de
+	pop bc
+	ld a, d
+	sub b
+	ret nz
+	ld a, e
+	sub c
+	ret
+
+UpdateHPBar_Palettes:
+	ld hl, $cf1d
+	push de
+	call Func_3df9
+	pop de
+	ld hl, $cf1e
+	call Func_3df9
+
+	ld a,2
+	ld [rSVBK],a
+	; Player
+	ld a,[$cf1d]
+	add $1f
+	ld d,a
+	ld e,2
+	CALL_INDIRECT LoadSGBPalette
+	; Enemy
+	ld a,[$cf1e]
+	add $1f
+	ld d,a
+	ld e,3
+	CALL_INDIRECT LoadSGBPalette
+
+	ld a,1
+	ld [W2_LastBGP],a
+
+	xor a
+	ld [rSVBK],a
+	ret
 
 SECTION "bank4",DATA,BANK[$4]
 
@@ -128187,7 +128230,7 @@ INCBIN "color/bank30.bin",$0000,$c4000-$c0000
 SECTION "bank31",DATA,BANK[$31]
 INCBIN "color/bank31.bin",$0000,$c8000-$c4000
 
-; Inserted pokemons go here
+; Inserted pokemon images go here
 
 SECTION "bank32",DATA,BANK[$32]
 
