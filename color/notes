@@ -20,11 +20,14 @@ f:6fb8: battle initialization function.
 		08 = Open pokedex
 		09 = Load maps
 		0A = Load pokemon menu
-		0B = Evolution (???)
+		0B = Evolution
 		0C = Initialization
 		0D = Trainer card
 		FC = Called 6 times when loading pokemon menu (before 0A).
 		FF = Use code [cf1c] instead. Useful for reloading after a menu clears something.
+
+	To this I have added:
+		0E = Clear colors after the titlescreen
 
 1c:5fb6: For code FC. Determines lifebar color for one of 6 pokemon.
 
@@ -35,12 +38,11 @@ f:6fb8: battle initialization function.
 
 1c:4b5d = Flashing palette before battle
 
-1e:4e11 = growl / screen shake function. There's a problem, present in the original, where it updates winX/winY in the middle of rendering.
+1e:4e11 = growl / screen shake function. There's a problem, present in the original, where it updates winX/winY in the middle of rendering. Not a huge deal though.
 
 attack data copied to $cfd2
 
-Func_78e23 modifies palettes when attacking (when in SGB Mode) so sprites are just black and white
-1e:4000 looks key to set battle attack colors.
+Func_78e23 modifies palettes when attacking (when in SGB Mode) so sprites are just black and white. Because this isn't a super gameboy this limitation is unnecessary.
 
 Locations where FF68 is set to black/white only: (bank 1e)
 	- 5c7a, !5c87, 416a, !4176 (for Razor Leaf)
@@ -55,7 +57,6 @@ cf1b = SGB flag
 TODO
 
 - Fix item menu scroll glitches
-- Evolutions
 - Intro colors (prof oak speech)
 - Dynamic lifebar colors
 - Weird colored tables in (which city?)
@@ -63,11 +64,12 @@ TODO
 - Wrap up attacks
  - Ice Beam
 - Slots
-- Exclamations marks
+- Exclamation marks
 - Cave entrance
 - Fix VBA glitches
 - Pokedex blue square
 - Revamped sprites from Gen II graphics patch
+- Nidorino/Gengar in the intro
 
 POKEMON YELLOW:
 

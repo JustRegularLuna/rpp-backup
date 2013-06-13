@@ -11151,8 +11151,8 @@ Func_4496: ; 4496 (1:4496)
 	ld [$FF00+$b0], a
 	ld d,$1
 	; HAX; palette must be refreshed
-	ld b, BANK(LoadIntroMonTilesAndPalettes)
-	ld hl, LoadIntroMonTilesAndPalettes
+	ld b, BANK(LoadTitleMonTilesAndPalettes)
+	ld hl, LoadTitleMonTilesAndPalettes
 	call Bankswitch
 	ret
 
@@ -14187,9 +14187,17 @@ OakSpeech: ; 6115 (1:6115)
 	call Function62CE
 	xor a
 	ld [$FFD7],a
-	ld a,[$D732]
-	bit 1,a ; XXX when is bit 1 set?
-	jp nz,Function61BC ; easter egg: skip the intro
+	ld a, $86
+	call GotPalID ; HAX
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+;	ld a,[$D732]
+;	bit 1,a ; XXX when is bit 1 set?
+;	jp nz,Function61BC ; easter egg: skip the intro
 	ld de,ProfOakPic
 	ld bc,$1300
 	call IntroPredef3B   ; displays Oak pic?
@@ -14197,7 +14205,8 @@ OakSpeech: ; 6115 (1:6115)
 	ld hl,OakSpeechText1
 	call PrintText      ; prints text box
 	call GBFadeOut2
-	call ClearScreen
+;	call ClearScreen
+	call GetNidorinoPalID ; HAX
 	ld a,NIDORINO
 	ld [$D0B5],a    ; pic displayed is stored at this location
 	ld [$CF91],a
@@ -14205,22 +14214,20 @@ OakSpeech: ; 6115 (1:6115)
 	FuncCoord 6, 4 ; $c3f6
 	ld hl,Coord     ; position on tilemap the pic is displayed
 	call LoadFlippedFrontSpriteByMonIndex      ; displays pic?
-	;call _LoadIntroNidorinoPal	; HAX
 	call MovePicLeft
 	ld hl,OakSpeechText2
 	call PrintText      ; Prints text box
 	call GBFadeOut2
-	call ClearScreen
+	call GetRedPalID ; HAX
 	ld de,RedPicFront
 	ld bc,$0400     ; affects the position of the player pic
 	call IntroPredef3B      ; displays player pic?
-;	call _LoadIntroPlayerPal	; HAX
 	call MovePicLeft
 	ld hl,IntroducePlayerText
 	call PrintText
 	call Func_695d ; brings up NewName/Red/etc menu
 	call GBFadeOut2
-	call ClearScreen
+	call GetRivalPalID ; HAX
 	ld de,Rival1Pic
 	ld bc,$1300
 	call IntroPredef3B ; displays rival pic
@@ -14231,11 +14238,10 @@ OakSpeech: ; 6115 (1:6115)
 	call Func_69a4
 Function61BC: ; 61bc (1:61bc)
 	call GBFadeOut2
-	call ClearScreen
+	call GetRedPalID ; HAX
 	ld de,RedPicFront
 	ld bc,$0400
 	call IntroPredef3B
-;	call _LoadIntroPlayerPal2	; HAX
 	call GBFadeIn2
 	ld a,[$D72D]
 	and a
@@ -17758,6 +17764,33 @@ Func_7c18: ; 7c18 (1:7c18)
 	ld [$cc3c], a
 	ret
 ; 0x7c49
+
+; HAX functions for oak intro
+
+GetNidorinoPalID:
+	call ClearScreen
+	ld a, $3d
+	jr GotPalID
+GetRedPalID:
+	call ClearScreen
+	ld a, $84
+	jr GotPalID
+GetRivalPalID:
+	call ClearScreen
+	ld a, $85
+	jr GotPalID
+
+GotPalID:
+	ld e,0
+	ld d,a
+
+	ld a,2
+	ld [rSVBK],a
+	CALL_INDIRECT LoadSGBPalette
+	xor a
+	ld [rSVBK],a
+	ret
+
 
 SECTION "bank2",DATA,BANK[$2]
 
@@ -28996,17 +29029,36 @@ FontGraphics: ; 11a80 (4:5a80)
 
 INCBIN "baserom.gbc",$11e80,$11ea0 - $11e80
 
+IF GEN_2_GRAPHICS
+
+HpBarAndStatusGraphics: ; 11ea0 (4:5ea0)
+	INCBIN "gfx/gen2_hp_bar_and_status.2bpp"
+
+Unknown_12080: ; 12080 (4:6080)
+	INCBIN "gfx/gen2_battle_arrow.1bpp"
+
+Unknown_12098: ; 12098 (4:6098)
+	INCBIN "gfx/gen2_battle_arrow_lines.1bpp"
+
+Unknown_120b0: ; 120b0 (4:60b0)
+	INCBIN "gfx/gen2_battle_arrow_more_lines.1bpp"
+
+ELSE
+
 HpBarAndStatusGraphics: ; 11ea0 (4:5ea0)
 	INCBIN "gfx/hp_bar_and_status.2bpp"
 
 Unknown_12080: ; 12080 (4:6080)
-INCBIN "baserom.gbc",$12080,$12098 - $12080
+	INCBIN "gfx/battle_arrow.1bpp"
 
 Unknown_12098: ; 12098 (4:6098)
-INCBIN "baserom.gbc",$12098,$120b0 - $12098
+	INCBIN "gfx/battle_arrow_lines.1bpp"
 
 Unknown_120b0: ; 120b0 (4:60b0)
-INCBIN "baserom.gbc",$120b0,$120c8 - $120b0
+	INCBIN "gfx/battle_arrow_more_lines.1bpp"
+
+ENDC
+
 
 NintendoCopyrightLogoGraphics: ; 120c8 (4:60c8)
 INCBIN "baserom.gbc",$120c8,$121f8 - $120c8
@@ -47100,7 +47152,7 @@ DugtrioBaseStats: ; 38956 (e:4956)
 
 	db 50 ; catch rate
 	db 153 ; base exp yield
-	IF GEN_2_SPRITES
+	IF GEN_2_GRAPHICS
 		db $77 ; sprite dimensions
 	ELSE
 		db $66 ; sprite dimensions
@@ -48436,7 +48488,7 @@ DewgongBaseStats: ; 38d46 (e:4d46)
 
 	db 75 ; catch rate
 	db 176 ; base exp yield
-	IF GEN_2_SPRITES
+	IF GEN_2_GRAPHICS
 		db $77 ; sprite dimensions
 	ELSE
 		db $66 ; sprite dimensions
@@ -48625,7 +48677,7 @@ GastlyBaseStats: ; 38dd2 (e:4dd2)
 
 	db 190 ; catch rate
 	db 95 ; base exp yield
-	IF GEN_2_SPRITES
+	IF GEN_2_GRAPHICS
 		db $66 ; sprite dimensions
 	ELSE
 		db $77 ; sprite dimensions
@@ -63522,7 +63574,7 @@ LoadMonBackSprite: ; 3f103 (f:7103)
 	call UncompressMonSprite
 	ld a, $3
 
-	IF GEN_2_SPRITES
+	IF GEN_2_GRAPHICS
 		call LoadMonBackSpriteHook
 		nop
 		nop
@@ -101126,7 +101178,7 @@ UnnamedText_71dda: ; 71dda (1c:5dda)
 
 ; HAX: This is the super gameboy palette command handler.
 ; I hijaxed a jump table so I can reimplement all SGB colorization functions.
-; Value of b is the "command". Jumps to function "PalCode_XX" where X is the command.
+; Value of b is the "command". Jumps to function "PalCmd_XX" where X is the command.
 ; known jump sources: 3df6 (0:3df6)
 Func_71ddf: ; 71ddf (1c:5ddf)
 	call Load16BitRegisters
@@ -101148,19 +101200,19 @@ Func_71ddf: ; 71ddf (1c:5ddf)
 
 	;ld de, SetPalettesAndMaps ; $6156
 
-	ld de,PalCodeRet
+	ld de,PalCmdRet
 	push de
 
 ;	di
 	jp [hl]
 
-PalCodeRet:
+PalCmdRet:
 ;	ei
 	ret
 
 
 ; HAX: Custom functions squeezed in here
-; Before, PalCode functions were here
+; Before, PalCmd functions were here
 
 WaitForVBlank:
 	ld a,[rSTAT]
@@ -101214,25 +101266,23 @@ startPaletteTransfer:
 
 ; Palette commands are moved to the end of the bank
 Unknown_71f73: ; 71f73 (1c:5f73)
-	dw PalCode_00
-	dw PalCode_01
-	dw PalCode_02
-	dw PalCode_03
-	dw PalCode_04
-	dw PalCode_05
-	dw PalCode_06
-	dw PalCode_07
-	dw PalCode_08
-	dw PalCode_09
-	dw PalCode_0a
-	dw PalCode_0b
-	dw PalCode_0c
-	dw PalCode_0d
-	; Past here are codes which didn't previously exist.
-	dw PalCode_0e	; Set prof oak's color
-	dw PalCode_0f	; Set intro pokemon (nidorino)'s color
+	dw PalCmd_00
+	dw PalCmd_01
+	dw PalCmd_02
+	dw PalCmd_03
+	dw PalCmd_04
+	dw PalCmd_05
+	dw PalCmd_06
+	dw PalCmd_07
+	dw PalCmd_08
+	dw PalCmd_09
+	dw PalCmd_0a
+	dw PalCmd_0b
+	dw PalCmd_0c
+	dw PalCmd_0d
+	; Past here are commands which didn't previously exist.
+	dw PalCmd_0e	; Clear colors after the titlescreen
 
-; HAXed to use pokemon index instead of pokedex number
 DeterminePaletteID: ; 71f97 (1c:5f97)
 	bit 3, a                 ; bit 3 of battle status 3 (unused?)
 	ld a, PAL_GREYMON
@@ -127561,7 +127611,7 @@ SECTION "bank1C_extension",DATA,BANK[$1C]
 
 
 ; Set all palettes to black at beginning of battle
-PalCode_00:
+PalCmd_00:
 	; Code $ff sometimes calls this (by accident?)
 	inc b
 	ret z
@@ -127590,7 +127640,7 @@ PalCode_00:
 	ret
 
 ; Set proper palettes for pokemon/trainers
-PalCode_01:
+PalCmd_01:
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, W_PLAYERMONID        ; player Pokemon ID
 	call DeterminePaletteID
@@ -127638,7 +127688,7 @@ PalCode_01:
 	ld e,4
 	call LoadSGBPalette
 
-	; Restore sprite palettes which were set to black
+	; Restore sprite palettes which may have been set to black
 	CALL_INDIRECT LoadSpritePalettes
 
 
@@ -127714,7 +127764,7 @@ PalCode_01:
 	ret
 
 ; Load town map
-PalCode_02:
+PalCmd_02:
 	ld a,2
 	ld [rSVBK],a
 
@@ -127746,7 +127796,7 @@ PalCode_02:
 	ret
 
 ; Status screen
-PalCode_03:
+PalCmd_03:
 	ld a, [$cf91]
 	cp $bf
 	jr c, .asm_71e64
@@ -127812,7 +127862,7 @@ PalCode_03:
 	ret
 
 ; Show pokedex data
-PalCode_04:
+PalCmd_04:
 	ld a, [$cf91]
 	call DeterminePaletteID_NoStatusCheck	; Call DeterminePaletteID without status check
 	ld d,a
@@ -127868,7 +127918,7 @@ ENDC
 	ret
 
 ; Slots
-PalCode_05:
+PalCmd_05:
 	ld a,2
 	ld [rSVBK],a
 
@@ -127896,7 +127946,7 @@ PalCode_05:
 	ret
 
 ; Intro with cycling pokemon
-PalCode_06:
+PalCmd_06:
 	ld a,[W_WHICHTRADE]
 	call DeterminePaletteID_NoStatusCheck
 	ld d,a
@@ -127945,17 +127995,17 @@ PalCode_06:
 ;	ld a,1
 	ld [rSVBK],a
 
-	; Execute code 0e after titlescreen to set prof oak's color.
+	; Execute custom command 0e after titlescreen to clear colors.
 	ld a,$e
 	ld [W_PALREFRESHCMD],a
 	ret
 
 ; Called during the intro
-PalCode_07:
+PalCmd_07:
 	ret
 
 ; Pokedex screen
-PalCode_08:
+PalCmd_08:
 	ld a,2
 	ld [rSVBK],a
 
@@ -127984,7 +128034,7 @@ PalCode_08:
 	ret
 
 ; Loading a map
-PalCode_09:
+PalCmd_09:
 	ld a,2
 	ld [rSVBK],a
 	dec a ; ld a,1
@@ -128007,7 +128057,7 @@ PalCode_09:
 	ret
 
 ; Open pokemon menu
-PalCode_0a:
+PalCmd_0a:
 	ld a,2
 	ld [rSVBK],a
 
@@ -128059,7 +128109,7 @@ PalCode_0a:
 
 
 ; Evolutions
-PalCode_0b:
+PalCmd_0b:
 	ld a, c
 	and a
 	ld a, $1e ; Black palette
@@ -128092,7 +128142,7 @@ PalCode_0b:
 
 
 ; Called as the game starts up
-PalCode_0c:
+PalCmd_0c:
 	ld a,$02
 	ld [rSVBK],a
 
@@ -128110,7 +128160,7 @@ PalCode_0c:
 	ret
 
 ; Trainer card
-PalCode_0d:
+PalCmd_0d:
 	ld a,2
 	ld [rSVBK],a
 	
@@ -128163,8 +128213,9 @@ BadgePalettes:
 	db 0,0,0,0	; Leader 8
 	db 1,1,1,1
 
-; First colors in intro
-PalCode_0e:
+
+; Clear colors after titlescreen
+PalCmd_0e:
 	ld a,2
 	ld [rSVBK],a
 
@@ -128172,10 +128223,6 @@ PalCode_0e:
 	ld [W2_TileBasedPalettes],a
 	ld a,3
 	ld [W2_StaticPaletteChanged],a
-
-	ld d,$15	; PAL_BROWNMON
-	ld e,0
-	call LoadSGBPalette
 
 	ld bc,20*18
 	ld hl,$d200
@@ -128192,21 +128239,10 @@ PalCode_0e:
 	ld [rSVBK],a
 	ret
 
-; Loads palette c to slot 0.
-PalCode_0f:
-	ld a,2
-	ld [rSVBK],a
 
-	ld d,c
-	ld e,0
-	call LoadSGBPalette
-
-	xor a
-	ld [rSVBK],a
-	ld [W_PALREFRESHCMD],a
-	ret
-
-LoadIntroMonTilesAndPalettes:
+; Code for the pokemon in the titlescreen.
+; There's no particular reason it needs to be in this bank.
+LoadTitleMonTilesAndPalettes:
 	push de
 	ld b,6
 	call GoPAL_SET

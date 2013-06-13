@@ -8,15 +8,15 @@ BAD ANIMATIONS
 65 (similar)
 68/70 (could use colors)
 7b (smog; could use colors)
-87 (uses "humps")
+87
 95 (weird colors)
 a1: using duplicate tiles (as 50, b0)
 aa & co: palettes not set properly
 
 
-; Break at 1e:414f and look at A to see the animation ID.
+SUB animations
 
-; Left off at animation 35
+; Break at 1e:414f and look at A to see the animation ID.
 
 ; 00: Glitch?
 ; 01: Razor leaf attack
@@ -36,20 +36,20 @@ aa & co: palettes not set properly
 ; 0f: Scratch
 ; 10: Gust RtoL
 ; 11: More water?
-; 12: Attract / music note / Attract /
+; 12: Attract / music note
 ; 13: Acid
 ; 14: Acid dripping
 ; 15: Pre-Sonicboom
 ; 16: Slice
 ; 17: Player confused
-; 18: Enemy confused / swords / confused /
+; 18: Enemy confused / swords
 ; 19: Rock
 ; 1a: firy pillars
 ; 1b: Leech Seed
 ; 1c: Leech Seed p2
 ; 1d: Rocks moving up
 ; 1e: Rocks moving away
-; 1f: Spray water / fire / 
+; 1f: Spray water / fire
 ; 20: Water in cross-shape
 ; 21: Close in to absorb
 ; 22: Continue; grabs and retrieves
