@@ -128047,9 +128047,42 @@ PalCode_0a:
 	dec b
 	jr nz,.loop
 
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
 	xor a
 	ld [W2_TileBasedPalettes],a
 	ld [W2_ColorizeNonOverworldSprites],a
+
+;	xor a
+	ld [rSVBK],a
+	ret
+
+
+; Evolutions
+PalCode_0b:
+	ld a, c
+	and a
+	ld a, $1e ; Black palette
+	jr nz, .loadPalette
+	ld a, [$cf1d]
+	call DeterminePaletteID_NoStatusCheck
+
+.loadPalette
+	ld d,a
+	ld a,2
+	ld [rSVBK],a
+
+	ld e,0
+	call LoadSGBPalette
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+
+	inc a ; ld a,1
+	ld [W2_LastBGP],a ; Refresh palettes
 	ld a,3
 	ld [W2_StaticPaletteChanged],a
 
@@ -128058,15 +128091,12 @@ PalCode_0a:
 	ret
 
 
-PalCode_0b:
-	ret
-
-
 ; Called as the game starts up
 PalCode_0c:
 	ld a,$02
 	ld [rSVBK],a
 
+	; Load default palettes
 	ld hl,BgPalettes
 	ld a, BANK(BgPalettes)
 	ld de,W2_BgPaletteData
@@ -128110,38 +128140,6 @@ PalCode_0d:
 	ld a,1
 	ld [W2_LastBGP],a
 	ld [rSVBK],a
-	ret
-	ld de, Unknown_71f8f ; $5f8f
-	ld hl, $cc5d
-	ld a, [W_OBTAINEDBADGES] ; $d356
-	ld c, $8
-.asm_71f52
-	srl a
-	push af
-	jr c, .asm_71f62
-	push bc
-	ld a, [de]
-	ld c, a
-	xor a
-.asm_71f5b
-	ld [hli], a
-	dec c
-	jr nz, .asm_71f5b
-	pop bc
-	jr .asm_71f67
-.asm_71f62
-	ld a, [de]
-.asm_71f63
-	inc hl
-	dec a
-	jr nz, .asm_71f63
-.asm_71f67
-	pop af
-	inc de
-	dec c
-	jr nz, .asm_71f52
-	ld hl, Unknown_72498 ; $6498
-	ld de, $cc5b
 	ret
 
 BadgePalettes:
