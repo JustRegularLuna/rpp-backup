@@ -14187,7 +14187,11 @@ OakSpeech: ; 6115 (1:6115)
 	call Function62CE
 	xor a
 	ld [$FFD7],a
+IF GEN_2_GRAPHICS
 	ld a, $86
+ELSE
+	ld a, PAL_BROWNMON
+ENDC
 	call GotPalID ; HAX
 	nop
 	nop
@@ -17769,15 +17773,27 @@ Func_7c18: ; 7c18 (1:7c18)
 
 GetNidorinoPalID:
 	call ClearScreen
+IF GEN_2_GRAPHICS
 	ld a, $3d
+ELSE
+	ld a, PAL_PURPLEMON
+ENDC
 	jr GotPalID
 GetRedPalID:
 	call ClearScreen
+IF GEN_2_GRAPHICS
 	ld a, $84
+ELSE
+	ld a, PAL_REDMON
+ENDC
 	jr GotPalID
 GetRivalPalID:
 	call ClearScreen
+IF GEN_2_GRAPHICS
 	ld a, $85
+ELSE
+	ld a, PAL_PURPLEMON
+ENDC
 	jr GotPalID
 
 GotPalID:
@@ -76752,96 +76768,96 @@ SafariZoneSecretHouseBlocks: ; 4a37f (12:637f)
 SECTION "bank13",DATA,BANK[$13]
 
 YoungsterPic: ; 4c000 (13:4000)
-	INCBIN "pic/trainer/youngster.pic"
+	INCBIN_TRAINER youngster.pic
 BugCatcherPic: ; 4c0c6 (13:40c6)
-	INCBIN "pic/trainer/bugcatcher.pic"
+	INCBIN_TRAINER bugcatcher.pic
 LassPic: ; 4c200 (13:4200)
-	INCBIN "pic/trainer/lass.pic"
+	INCBIN_TRAINER lass.pic
 SailorPic: ; 4c2db (13:42db)
-	INCBIN "pic/trainer/sailor.pic"
+	INCBIN_TRAINER sailor.pic
 JrTrainerMPic: ; 4c450 (13:4450)
-	INCBIN "pic/trainer/jr.trainerm.pic"
+	INCBIN_TRAINER jr.trainerm.pic
 JrTrainerFPic: ; 4c588 (13:4588)
-	INCBIN "pic/trainer/jr.trainerf.pic"
+	INCBIN_TRAINER jr.trainerf.pic
 PokemaniacPic: ; 4c6c9 (13:46c9)
-	INCBIN "pic/trainer/pokemaniac.pic"
+	INCBIN_TRAINER pokemaniac.pic
 SuperNerdPic: ; 4c7f1 (13:47f1)
-	INCBIN "pic/trainer/supernerd.pic"
+	INCBIN_TRAINER supernerd.pic
 HikerPic: ; 4c8e7 (13:48e7)
-	INCBIN "pic/trainer/hiker.pic"
+	INCBIN_TRAINER hiker.pic
 BikerPic: ; 4cabe (13:4abe)
-	INCBIN "pic/trainer/biker.pic"
+	INCBIN_TRAINER biker.pic
 BurglarPic: ; 4cc91 (13:4c91)
-	INCBIN "pic/trainer/burglar.pic"
+	INCBIN_TRAINER burglar.pic
 EngineerPic: ; 4ce0a (13:4e0a)
-	INCBIN "pic/trainer/engineer.pic"
+	INCBIN_TRAINER engineer.pic
 FisherPic: ; 4cf87 (13:4f87)
-	INCBIN "pic/trainer/fisher.pic"
+	INCBIN_TRAINER fisher.pic
 SwimmerPic: ; 4d133 (13:5133)
-	INCBIN "pic/trainer/swimmer.pic"
+	INCBIN_TRAINER swimmer.pic
 CueBallPic: ; 4d24f (13:524f)
-	INCBIN "pic/trainer/cueball.pic"
+	INCBIN_TRAINER cueball.pic
 GamblerPic: ; 4d421 (13:5421)
-	INCBIN "pic/trainer/gambler.pic"
+	INCBIN_TRAINER gambler.pic
 BeautyPic: ; 4d5df (13:55df)
-	INCBIN "pic/trainer/beauty.pic"
+	INCBIN_TRAINER beauty.pic
 PsychicPic: ; 4d728 (13:5728)
-	INCBIN "pic/trainer/psychic.pic"
+	INCBIN_TRAINER psychic.pic
 RockerPic: ; 4d843 (13:5843)
-	INCBIN "pic/trainer/rocker.pic"
+	INCBIN_TRAINER rocker.pic
 JugglerPic: ; 4d97d (13:597d)
-	INCBIN "pic/trainer/juggler.pic"
+	INCBIN_TRAINER juggler.pic
 TamerPic: ; 4db4e (13:5b4e)
-	INCBIN "pic/trainer/tamer.pic"
+	INCBIN_TRAINER tamer.pic
 BirdKeeperPic: ; 4dcdb (13:5cdb)
-	INCBIN "pic/trainer/birdkeeper.pic"
+	INCBIN_TRAINER birdkeeper.pic
 BlackbeltPic: ; 4de76 (13:5e76)
-	INCBIN "pic/trainer/blackbelt.pic"
+	INCBIN_TRAINER blackbelt.pic
 Rival1Pic: ; 4e049 (13:6049)
-	INCBIN "pic/trainer/rival1.pic"
+	INCBIN_TRAINER rival1.pic
 ProfOakPic: ; 4e15f (13:615f)
-	INCBIN "pic/trainer/prof.oak.pic"
+	INCBIN_TRAINER prof.oak.pic
 ChiefPic: ; 4e27d (13:627d)
 ScientistPic: ; 4e27d (13:627d)
-	INCBIN "pic/trainer/scientist.pic"
+	INCBIN_TRAINER scientist.pic
 GiovanniPic: ; 4e3be (13:63be)
-	INCBIN "pic/trainer/giovanni.pic"
+	INCBIN_TRAINER giovanni.pic
 RocketPic: ; 4e49f (13:649f)
-	INCBIN "pic/trainer/rocket.pic"
+	INCBIN_TRAINER rocket.pic
 CooltrainerMPic: ; 4e635 (13:6635)
-	INCBIN "pic/trainer/cooltrainerm.pic"
+	INCBIN_TRAINER cooltrainerm.pic
 CooltrainerFPic: ; 4e7be (13:67be)
-	INCBIN "pic/trainer/cooltrainerf.pic"
+	INCBIN_TRAINER cooltrainerf.pic
 BrunoPic: ; 4e943 (13:6943)
-	INCBIN "pic/trainer/bruno.pic"
+	INCBIN_TRAINER bruno.pic
 BrockPic: ; 4eb3e (13:6b3e)
-	INCBIN "pic/trainer/brock.pic"
+	INCBIN_TRAINER brock.pic
 MistyPic: ; 4ec40 (13:6c40)
-	INCBIN "pic/trainer/misty.pic"
+	INCBIN_TRAINER misty.pic
 LtSurgePic: ; 4ed30 (13:6d30)
-	INCBIN "pic/trainer/lt.surge.pic"
+	INCBIN_TRAINER lt.surge.pic
 ErikaPic: ; 4eeb5 (13:6eb5)
-	INCBIN "pic/trainer/erika.pic"
+	INCBIN_TRAINER erika.pic
 KogaPic: ; 4efd6 (13:6fd6)
-	INCBIN "pic/trainer/koga.pic"
+	INCBIN_TRAINER koga.pic
 BlainePic: ; 4f150 (13:7150)
-	INCBIN "pic/trainer/blaine.pic"
+	INCBIN_TRAINER blaine.pic
 SabrinaPic: ; 4f252 (13:7252)
-	INCBIN "pic/trainer/sabrina.pic"
+	INCBIN_TRAINER sabrina.pic
 GentlemanPic: ; 4f3d0 (13:73d0)
-	INCBIN "pic/trainer/gentleman.pic"
+	INCBIN_TRAINER gentleman.pic
 Rival2Pic: ; 4f4cf (13:74cf)
-	INCBIN "pic/trainer/rival2.pic"
+	INCBIN_TRAINER rival2.pic
 Rival3Pic: ; 4f623 (13:7623)
-	INCBIN "pic/trainer/rival3.pic"
+	INCBIN_TRAINER rival3.pic
 LoreleiPic: ; 4f779 (13:7779)
-	INCBIN "pic/trainer/lorelei.pic"
+	INCBIN_TRAINER lorelei.pic
 ChannelerPic: ; 4f8a4 (13:78a4)
-	INCBIN "pic/trainer/channeler.pic"
+	INCBIN_TRAINER channeler.pic
 AgathaPic: ; 4fa71 (13:7a71)
-	INCBIN "pic/trainer/agatha.pic"
+	INCBIN_TRAINER agatha.pic
 LancePic: ; 4fba2 (13:7ba2)
-	INCBIN "pic/trainer/lance.pic"
+	INCBIN_TRAINER lance.pic
 
 BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 	db $15 ; tileset

@@ -3589,3 +3589,10 @@ INCBIN_MONBACK: MACRO
 		INCBIN "pic/monback/\1"
 	ENDC
 ENDM
+INCBIN_TRAINER: MACRO
+	IF GEN_2_GRAPHICS
+		INCBIN "pic/gstrainer/\1"
+	ELSE
+		INCBIN "pic/trainer/\1"
+	ENDC
+ENDM
