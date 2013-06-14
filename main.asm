@@ -14196,9 +14196,6 @@ ENDC
 	nop
 	nop
 	nop
-	nop
-	nop
-	nop
 ;	ld a,[$D732]
 ;	bit 1,a ; XXX when is bit 1 set?
 ;	jp nz,Function61BC ; easter egg: skip the intro
@@ -17772,6 +17769,8 @@ Func_7c18: ; 7c18 (1:7c18)
 ; HAX functions for oak intro
 
 GetNidorinoPalID:
+	ld a,8
+	ld [W_PALREFRESHCMD],a
 	call ClearScreen
 IF GEN_2_GRAPHICS
 	ld a, $3d
@@ -17779,6 +17778,7 @@ ELSE
 	ld a, PAL_PURPLEMON
 ENDC
 	jr GotPalID
+
 GetRedPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
@@ -17787,6 +17787,7 @@ ELSE
 	ld a, PAL_REDMON
 ENDC
 	jr GotPalID
+
 GetRivalPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
@@ -76859,6 +76860,8 @@ AgathaPic: ; 4fa71 (13:7a71)
 LancePic: ; 4fba2 (13:7ba2)
 	INCBIN_TRAINER lance.pic
 
+	ORG $13, $7d04
+
 BattleCenterM_h: ; 0x4fd04 to 0x4fd10 (12 bytes) (id=239)
 	db $15 ; tileset
 	db BATTLE_CENTER_HEIGHT, BATTLE_CENTER_WIDTH ; dimensions (y, x)
@@ -128029,8 +128032,12 @@ PalCmd_06:
 PalCmd_07:
 	ret
 
-; Pokedex screen
+; Pokedex screen or name select
 PalCmd_08:
+	ld a, [W_PALREFRESHCMD]
+	cp 8
+	ret z ; I use PALREFRESHMCMD==8 as a signal that this is the name select rather than the pokedex.
+
 	ld a,2
 	ld [rSVBK],a
 
