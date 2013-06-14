@@ -98269,11 +98269,23 @@ Func_7033e: ; 7033e (1c:433e)
 	ld de, RedPicBack ; $7e0a
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
+
+IF GEN_2_GRAPHICS ; Use uncompressed red sprite
+	ld a,$66
+	ld c,a
+	ld de, $9310
+	call LoadUncompressedSpriteData
+	nop
+	nop
+	nop
+	nop
+ELSE
 	ld a, $3
 	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
 	ld de, $9310
 	call InterlaceMergeSpriteBuffers
 	ld c, $1
+ENDC
 
 ; known jump sources: 702b8 (1c:42b8), 702ce (1c:42ce)
 Func_7036d: ; 7036d (1c:436d)
@@ -101357,6 +101369,7 @@ DetermineBackSpritePaletteID: ; DeterminePaletteID with a special check for the 
 	ld a, PAL_GREYMON
 	ret nz
 	ld a, [hl]
+DetermineBackSpritePaletteID_NoStatusCheck:
 	ld [$D11E], a
 	and a
 
@@ -128205,14 +128218,15 @@ PalCmd_0a:
 	ret
 
 
-; Evolutions
+; Evolution / Hall of Fame
 PalCmd_0b:
 	ld a, c
 	and a
 	ld a, $1e ; Black palette
 	jr nz, .loadPalette
 	ld a, [$cf1d]
-	call DeterminePaletteID_NoStatusCheck
+	; Use the "BackSprite" version for the player sprite in the hall of fame.
+	call DetermineBackSpritePaletteID_NoStatusCheck
 
 .loadPalette
 	ld d,a
