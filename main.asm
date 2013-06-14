@@ -128162,19 +128162,19 @@ PalCmd_09:
 
 	CALL_INDIRECT LoadTilesetPalette
 
-	ld c,2
-	call DelayFrames
-
 	; Wait 2 frames before updating palettes
 	ld c,2
 	call DelayFrames
+
+	ld a,2
+	ld [rSVBK],a
 
 	; Signal to refresh palettes
 	ld a,1
 	ld [W2_LastBGP],a
 	ld [W2_LastOBP0],a
 
-	xor a
+;	xor a
 	ld [rSVBK],a
 
 	ld a,9
