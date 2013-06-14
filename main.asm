@@ -128073,6 +128073,8 @@ PalCmd_06:
 	ld e,2
 	call LoadSGBPalette
 
+	CALL_INDIRECT LoadSpritePalettes
+
 	ld hl,$d200
 	ld a,1
 	ld b,8
@@ -128110,6 +128112,17 @@ PalCmd_06:
 
 ; Called during the intro
 PalCmd_07:
+	ld a,2
+	ld [rSVBK],a
+
+	ld d, PAL_PURPLEMON
+	ld e,0
+	call LoadSGBPalette_Sprite
+
+	ld a,1
+	ld [W2_LastOBP0],a
+	xor a
+	ld [rSVBK],a
 	ret
 
 ; Pokedex screen or name select

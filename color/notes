@@ -62,6 +62,8 @@ TODO
 - Fix item menu scroll glitches
 - Weird colored tables in (which city?)
 - Change box: pokeball colors
+- Right ledges
+- Occasional shaky sprites
 - Wrap up attacks
  - Ice Beam
 - Exclamation marks
@@ -71,6 +73,7 @@ TODO
 - Revise map colors
 - When using an item in the overworld, there's still a problem with palettes sometimes?
 - When naming pokemon: animation isn't right
+- Double blackout when entering battle (does that usually happen?)
 
 POKEMON YELLOW:
 

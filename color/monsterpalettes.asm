@@ -1,3 +1,5 @@
+; This file is only used when GEN_2_GRAPHICS == 0.
+
 	db PAL_MEWMON    ; MISSINGNO
 	db PAL_GREENMON  ; BULBASAUR
 	db PAL_GREENMON  ; IVYSAUR
