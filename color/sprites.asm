@@ -272,7 +272,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; SPRITE_LANCE
-	db 4
+	db PAL_ORANGE
 
 	; SPRITE_OAK_SCIENTIST_AIDE
 	db PAL_BROWN
@@ -353,13 +353,13 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_ORANGE
 
 	; SPRITE_AGATHA
-	db 4
+	db PAL_BLUE
 
 	; SPRITE_BRUNO
-	db 4
+	db PAL_BROWN
 
 	; SPRITE_LORELEI
-	db 4
+	db PAL_ORANGE
 
 	; SPRITE_SEEL
 	db PAL_ORANGE
