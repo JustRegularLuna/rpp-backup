@@ -44083,8 +44083,6 @@ INCBIN "baserom.gbc",$22325,$23f52 - $22325
 
 SECTION "bank9",DATA,BANK[$9]
 
-; Removed 'mon sprites from here
-
 MoltresPicFront: ; 2bbac (a:7bac)
 	INCBIN_MONFRONT moltres.pic
 MoltresPicBack: ; 2be02 (a:7e02)
@@ -44417,8 +44415,6 @@ UnnamedText_27fb3: ; 27fb3 (9:7fb3)
 
 SECTION "bankA",DATA,BANK[$A]
 
-; Removed 'mon sprites from here
-
 HaunterPicFront: ; 3318a (c:718a)
 	INCBIN_MONFRONT haunter.pic
 HaunterPicBack: ; 33345 (c:7345)
@@ -44444,9 +44440,9 @@ StarmiePicFront: ; 33c1c (c:7c1c)
 StarmiePicBack: ; 33dac (c:7dac)
 	INCBIN_MONBACK starmieb.pic
 RedPicBack: ; 33e0a (c:7e0a)
-	INCBIN "pic/trainer/redb.pic"
+	INCBIN_TRAINER redb.pic
 OldManPic: ; 33e9a (c:7e9a)
-	INCBIN "pic/trainer/oldman.pic"
+	INCBIN_TRAINER oldman.pic
 
 GastlyPicFront: ; 26f77 (9:6f77)
 	INCBIN_MONFRONT gastly.pic
@@ -62880,8 +62876,17 @@ Func_3ec92: ; 3ec92 (f:6c92)
 .asm_3ec9e
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
+
+IF GEN_2_GRAPHICS
+	call LoadMonBackSpriteHook ; No pixelated backsprites
+	nop
+	nop
+ELSE
+	; This is unchanged
 	ld a, $3
 	call Predef ; indirect jump to ScaleSpriteByTwo (2fe40 (b:7e40))
+ENDC
+
 	ld hl, W_OAMBUFFER
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $FF00+$8b
@@ -62913,8 +62918,15 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld e, a
 	dec b
 	jr nz, .asm_3ecb2
+IF GEN_2_GRAPHICS
+	REPT 6
+	nop
+	ENDR
+ELSE
+	; unchanged
 	ld de, $9310
 	call InterlaceMergeSpriteBuffers
+ENDC
 	ld a, $a
 	ld [$0], a
 	xor a
@@ -128208,6 +128220,14 @@ PalCmd_0d:
 	ld d,$18
 	ld e,3
 	call LoadSGBPalette
+	; Red's palette
+	IF GEN_2_GRAPHICS
+		ld d, $84
+	ELSE
+		ld d, PAL_REDMON
+	ENDC
+	ld e,4
+	call LoadSGBPalette
 
 	ld hl, BadgePalettes
 	ld de, $d200
@@ -128225,8 +128245,8 @@ PalCmd_0d:
 	ret
 
 BadgePalettes:
-	REPT $20
-	db 0
+	REPT $20 ; Red's palette
+	db 4
 	ENDR
 	db 0,0,0,0	; Leader 1
 	db 0,0,0,0	; Badge 1
