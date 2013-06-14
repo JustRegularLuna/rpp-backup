@@ -29040,7 +29040,8 @@ LyingOldManSprite: ; 11340 (4:5340)
 	INCBIN "gfx/sprites/lying_old_man.2bpp" ; was $11340
 	
 PokemonLogoGraphics: ; 11380 (4:5380)
-	INCBIN "gfx/pokemon_logo.2bpp"
+	INCBIN "gfx/new_pokemon_logo.2bpp"
+
 FontGraphics: ; 11a80 (4:5a80)
 	INCBIN "gfx/font.1bpp"
 
@@ -101314,6 +101315,7 @@ Unknown_71f73: ; 71f73 (1c:5f73)
 	; Past here are commands which didn't previously exist.
 	dw PalCmd_0e	; Clear colors after the titlescreen
 
+; HAXed to give trainers palettes independantly
 DeterminePaletteID: ; 71f97 (1c:5f97)
 	bit 3, a                 ; bit 3 of battle status 3 (unused?)
 	ld a, PAL_GREYMON
@@ -101327,11 +101329,56 @@ DeterminePaletteID_NoStatusCheck: ; 71f9d (1c:5f9d) - DeterminePaletteID without
 	ld a, $3A
 	call Predef ; turn Pokemon ID number into Pokedex number
 	pop bc
-	ld a, [$D11E]
 
+	ld a, [$D11E]
+	ld hl, MonsterPalettes
+	and a
+
+IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
+	jr nz,.getPaletteID ; Check if trainer?
+	ld a,[$D031] ; Get trainer ID
+	ld hl, TrainerPalettes
+ELSE ; Trainers are given a single palette (PAL_MEWMON)
+	REPT 8
+	nop
+	ENDR
+ENDC
+
+.getPaletteID
 	ld e, a
 	ld d, $00
+	add hl, de
+	ld a, [hl]
+	ret
+	
+
+DetermineBackSpritePaletteID: ; DeterminePaletteID with a special check for the player sprite
+	bit 3, a                 ; bit 3 of battle status 3 (unused?)
+	ld a, PAL_GREYMON
+	ret nz
+	ld a, [hl]
+	ld [$D11E], a
+	and a
+
+	push bc
+	ld a, $3A
+	call Predef ; turn Pokemon ID number into Pokedex number
+	pop bc
+
+	ld a, [$D11E]
 	ld hl, MonsterPalettes
+	and a
+	jr nz,.getPaletteID ; Check if trainer?
+
+IF GEN_2_GRAPHICS
+	ld a, $87
+ELSE
+	ld a, PAL_REDMON
+ENDC
+	ret
+.getPaletteID
+	ld e, a
+	ld d, $00
 	add hl, de
 	ld a, [hl]
 	ret
@@ -101741,15 +101788,21 @@ INCBIN "baserom.gbc",$72518,$72538 - $72518
 Unknown_72538: ; 72538 (1c:6538)
 INCBIN "baserom.gbc",$72538,$725c8 - $72538
 
-MonsterPalettes: ; 725c8 (1c:65c8)
-IF GEN_2_GRAPHICS
-	INCBIN "color/gen2_monsterpalettes.bin"
-ELSE
-	INCLUDE "color/monsterpalettes.asm"
-ENDC
 
-TrainerPalettes:
+IF GEN_2_GRAPHICS
+
+MonsterPalettes: ; 725c8 (1c:65c8)
+	INCBIN "color/gen2_monsterpalettes.bin"
+TrainerPalettes: ; Gen II trainer sprites are given their own palettes
 	INCBIN "color/trainerpalettes.bin"
+
+ELSE
+
+MonsterPalettes: ; 725c8 (1c:65c8)
+	INCLUDE "color/monsterpalettes.asm"
+; Trainers use index 0 of MonsterPalettes
+
+ENDC
 
 
 ; palettes for overworlds, title screen, monsters
@@ -101757,7 +101810,7 @@ TrainerPalettes:
 ; depending on whether Gen II graphics are enabled.
 SuperPalettes: ; 72660 (1c:6660)
 IF GEN_2_GRAPHICS
-	INCBIN "color/gen2_palettes.bin"
+	INCLUDE "color/gen2_palettes.asm"
 ELSE
 	INCLUDE "color/palettes.asm"
 ENDC
@@ -127683,7 +127736,7 @@ PalCmd_00:
 PalCmd_01:
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, W_PLAYERMONID        ; player Pokemon ID
-	call DeterminePaletteID
+	call DetermineBackSpritePaletteID
 	ld b, a
 
 	ld a, [W_ENEMYBATTSTATUS3]
@@ -127985,7 +128038,7 @@ PalCmd_05:
 	ld [rSVBK],a
 	ret
 
-; Intro with cycling pokemon
+; Titlescreen with cycling pokemon
 PalCmd_06:
 	ld a,[W_WHICHTRADE]
 	call DeterminePaletteID_NoStatusCheck
@@ -127997,7 +128050,7 @@ PalCmd_06:
 
 	call LoadSGBPalette
 
-	ld d,$e	; PAL_YELLOWMON
+	ld d,$e	; Title logo
 	ld e,1
 	call LoadSGBPalette
 
