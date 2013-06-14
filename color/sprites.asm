@@ -77,7 +77,7 @@ ColorOverworldSprites:
 	pop af
 	ret
 
-; Currently this just colorized attack sprites but it can be
+; Currently this just colorizes attack sprites but it can be
 ; used in other non-overworld scenarios.
 ColorNonOverworldSprites:
 	ld a,2
@@ -98,7 +98,9 @@ ColorNonOverworldSprites:
 	inc hl
 	ld a,[hli] ; tile
 	ld e, a
-	ld c,[hl] ; flags
+	ld a,[hl] ; flags
+	and $f8
+	ld c,a
 	ld a,[de]
 	cp 8
 	jr c,.setPalette

@@ -1,6 +1,6 @@
 
-SpritePalettes: ; Taken from pokemon crystal.
-; Palettes 4-6 aren't used.
+SpritePalettes: ; Taken from pokemon GSC.
+; Palettes 5-7 aren't used.
 ; Palette 4 is used for flashing pokeballs in the pokecenter.
 
 	RGB 27,31,27

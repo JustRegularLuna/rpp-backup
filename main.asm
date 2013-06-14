@@ -14711,8 +14711,11 @@ Func_6596: ; 6596 (1:6596)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld b, $8
+
+	; HAX: Use command $0f instead of $08
+	ld b, $0f
 	call GoPAL_SET
+
 	call LoadHpBarAndStatusTilePatterns
 	call Func_675b
 	ld b, BANK(Func_7176c)
@@ -17769,8 +17772,6 @@ Func_7c18: ; 7c18 (1:7c18)
 ; HAX functions for oak intro
 
 GetNidorinoPalID:
-	ld a,8
-	ld [W_PALREFRESHCMD],a
 	call ClearScreen
 IF GEN_2_GRAPHICS
 	ld a, $3d
@@ -101326,6 +101327,7 @@ Unknown_71f73: ; 71f73 (1c:5f73)
 	dw PalCmd_0d
 	; Past here are commands which didn't previously exist.
 	dw PalCmd_0e	; Clear colors after the titlescreen
+	dw PalCmd_0f	; Name entry (partially replaces 08)
 
 ; HAXed to give trainers palettes independantly
 DeterminePaletteID: ; 71f97 (1c:5f97)
@@ -128112,34 +128114,31 @@ PalCmd_07:
 
 ; Pokedex screen or name select
 PalCmd_08:
-	ld a, [W_PALREFRESHCMD]
-	cp 8
-	ret z ; I use PALREFRESHMCMD==8 as a signal that this is the name select rather than the pokedex.
-
 	ld a,2
 	ld [rSVBK],a
 
 	ld d,$21	; Red lifebar color (for pokeballs)
 	ld e,0
+	push de
 	call LoadSGBPalette
+	pop de
+	inc e
+	call LoadSGBPalette ; Load it into the second slot as well. Prevents a minor glitch.
 
 	ld bc,20*18
 	ld hl,$d200
-	ld d,0
-.palLoop
-	ld [hl],d
-	inc hl
-	dec bc
-	ld a,b
-	or c
-	jr nz,.palLoop
-
 	xor a
-	ld [W2_TileBasedPalettes],a
+	call FillMemory
+
 	ld a,3
 	ld [W2_StaticPaletteChanged],a
-
 	xor a
+	ld [W2_TileBasedPalettes],a
+
+	ld a,1
+	ld [W2_LastBGP],a
+
+;	xor a
 	ld [rSVBK],a
 	ret
 
@@ -128374,6 +128373,20 @@ PalCmd_0e:
 	jr nz,.palLoop
 
 	xor a
+	ld [rSVBK],a
+	ret
+
+; Name entry
+; Deals with sprites for the pokemon naming screen
+PalCmd_0f:
+	ld a,2
+	ld [rSVBK],a
+
+	CALL_INDIRECT LoadSpritePalettes
+
+	xor a
+	ld [W2_ColorizeNonOverworldSprites],a
+;	xor a
 	ld [rSVBK],a
 	ret
 

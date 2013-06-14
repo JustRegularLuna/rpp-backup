@@ -17,7 +17,7 @@ f:6fb8: battle initialization function.
 		05 = Slots
 		06 = Set titlescreen palettes
 		07 = Intro pokemon battle
-		08 = Open pokedex
+		08 = Open pokedex / Name Entry
 		09 = Load maps
 		0A = Load pokemon menu
 		0B = Evolution / Hall of Fame
@@ -28,6 +28,7 @@ f:6fb8: battle initialization function.
 
 	To this I have added:
 		0E = Clear colors after the titlescreen
+		0F = Name entry (instead of 08)
 
 1c:5fb6: For code FC. Determines lifebar color for one of 6 pokemon.
 
@@ -56,22 +57,20 @@ cf1b = SGB flag
 
 TODO
 
-- Fix item menu scroll glitches
-- Intro colors (prof oak speech)
+- Slots
 - Dynamic lifebar colors
+- Fix item menu scroll glitches
 - Weird colored tables in (which city?)
 - Change box: pokeball colors
 - Wrap up attacks
  - Ice Beam
-- Slots
 - Exclamation marks
 - Cave entrance
 - Fix VBA glitches
-- Pokedex blue square
 - Nidorino/Gengar in the intro
-- Split-second incorrect palettes when exiting from pokemon menu to in-battle
 - Revise map colors
 - When using an item in the overworld, there's still a problem with palettes sometimes?
+- When naming pokemon: animation isn't right
 
 POKEMON YELLOW:
 
