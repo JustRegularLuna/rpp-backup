@@ -127831,11 +127831,11 @@ PalCmd_01:
 
 	; Player pokemon
 	ld hl,$d200+4*20
-	ld de,20-8
+	ld de,20-9
 	ld b,8
 	ld a,0
 .pDrawLine
-	ld c,8
+	ld c,9
 .pPalLoop
 	ld [hli],a
 	dec c
@@ -127859,6 +127859,10 @@ PalCmd_01:
 	dec b
 	jr nz,.eDrawLine
 
+	; Wait 2 frames before updating palettes
+	ld c,2
+	call DelayFrames
+
 	ld a,1
 	ld [W2_UseOBP1],a
 	ld [W2_LastBGP],a
@@ -127878,10 +127882,6 @@ PalCmd_02:
 	ld e,0
 	call LoadSGBPalette
 
-	ld d,$0 ;PAL_BROWNMON
-	ld e,1
-	call LoadSGBPalette
-
 	ld a,1
 	ld [W2_TileBasedPalettes],a
 
@@ -127893,9 +127893,9 @@ PalCmd_02:
 	dec b
 	jr nz,.loop
 
-	; Give tile $65 a brownish color
-	ld hl,$d265
-	ld [hl], 1
+	; Give tile $65 a different color
+;	ld hl,$d265
+;	ld [hl], 1
 
 	xor a
 	ld [rSVBK],a
@@ -128162,6 +128162,21 @@ PalCmd_09:
 
 	CALL_INDIRECT LoadTilesetPalette
 
+	ld c,2
+	call DelayFrames
+
+	; Wait 2 frames before updating palettes
+	ld c,2
+	call DelayFrames
+
+	; Signal to refresh palettes
+	ld a,1
+	ld [W2_LastBGP],a
+	ld [W2_LastOBP0],a
+
+	xor a
+	ld [rSVBK],a
+
 	ld a,9
 	ld [W_PALREFRESHCMD],a
 	ret
@@ -128305,6 +128320,10 @@ PalCmd_0d:
 	inc de
 	dec b
 	jr nz,.copyLoop
+
+	; Wait 2 frames before updating palettes
+	ld c,2
+	call DelayFrames
 
 	ld a,1
 	ld [W2_LastBGP],a

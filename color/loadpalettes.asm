@@ -175,10 +175,6 @@ LoadTownPalette:
 	ld a,c
 	ld [W2_TownMapLoaded],a
 
-	ld a,1
-	ld [W2_LastBGP],a
-	ld [W2_LastOBP0],a ; Palettes must be refreshed
-
 	pop af
 	ld [rSVBK],a ; Restore wram bank
 	ret
