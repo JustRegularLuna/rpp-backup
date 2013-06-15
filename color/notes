@@ -53,14 +53,16 @@ Locations where FF68 is set to black/white only: (bank 1e)
 
 === RAM LOCATIONS ===
 
-cf1b = SGB flag
+cf1b = SGB flag (for various reasons I leave it set in GBC mode)
 
 TODO
 
 - Sprites changing color after events
+- Glitch in the pokemart, when getting oak's parcel
+- The town map in Gary's house causes some... odd... glitches...
 - Exclamation marks
 - Fix item menu scroll glitches
-- Cave entrance
+- Cave entrance near Lavender is a bit weird?
 - Fix VBA glitches
 - Revise map colors (Viridian forest)
 - When using an item in the overworld, there's still a problem with palettes sometimes?
@@ -68,9 +70,6 @@ TODO
 - When switching pokemon, for a split second their lifebar colors are wrong
 - Extraneous line on pokemon status screen (gen II patch)
 - Color of pokeballs with status conditions
-
-Enemy health bar update: f:619a
-Player health bar update: f:6258
 
 POKEMON YELLOW:
 
