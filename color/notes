@@ -69,6 +69,7 @@ TODO
 - Double blackout when entering battle (does that usually happen?)
 - Color of the fuzz at the bottom of the titlescreen
 - When switching pokemon, for a split second their lifebar colors are wrong
+- Extraneous line on pokemon status screen (gen II patch)
 
 Enemy health bar update: f:619a
 Player health bar update: f:6258

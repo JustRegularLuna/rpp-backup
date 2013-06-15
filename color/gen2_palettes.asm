@@ -1,10 +1,12 @@
 ; This file is only used if GEN2_GRAPHICS is one.
 
-; 0x00
-	RGB 31,31,31
-	RGB 22,25,19
-	RGB 16,21,30
+; The first several palettes are no longer needed and can be replaced with whatever.
+
+; 0x00: PAL_TOWNMAP2 (second palette used on the town map)
+	RGB 29,12,4
 	RGB 0,0,0
+	RGB 10,28,0
+	RGB 1,1,1
 
 ; 0x01
 	RGB 31,31,31
@@ -72,11 +74,11 @@
 	RGB 15,20,31
 	RGB 0,0,0
 
-; 0x0c
+; 0x0c: PAL_TOWNMAP
 	RGB 31,31,31
-	RGB 20,26,31
-	RGB 17,23,10
-	RGB 0,0,0
+	RGB 0,21,31
+	RGB 10,28,0
+	RGB 1,1,1
 
 ; 0x0d
 	RGB 31,31,31

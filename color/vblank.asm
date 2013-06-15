@@ -260,7 +260,7 @@ GbcVBlankHook:
 	or $40
 	ld [rSTAT],a
 
-	; Check if the town has been changed
+	; Get these variables before changing the bank
 	ld a,[W_CURMAP]
 	ld b,a
 	ld a,[W_CURMAPTILESET]
@@ -268,21 +268,6 @@ GbcVBlankHook:
 
 	ld a,2
 	ld [rSVBK],a
-
-	jr .skipCheckTownTileset
-	ld a,c
-	and a
-	jr .checkTownTileset
-	ld a,$ff
-	ld [W2_TownMapLoaded],a
-	jr .skipCheckTownTileset
-.checkTownTileset
-	ld a,[W2_TownMapLoaded]
-	cp b
-	jr z,.skipCheckTownTileset
-	CALL_INDIRECT LoadTownPalette
-
-.skipCheckTownTileset
 
 	; If we've passed line $95, there's probably not enough time to update palettes.
 	; Leave it for next frame.
@@ -351,7 +336,7 @@ GetPaletteNumber:
 	jr nz,.loop
 	ret
 
-; Sets a palette color from palette #b to the index of first 2 bits of a.
+; Sets a palette color from palette #b to the index of last 2 bits of a.
 ; hl points to the data register (BGPD or OBPD)
 SetColor:
 	push de

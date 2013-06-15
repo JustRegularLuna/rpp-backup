@@ -2071,7 +2071,7 @@ ROCK_ANIM EQU $C9 ; throw rock
 BAIT_ANIM EQU $CA ; throw bait
 
 ; super game boy palettes
-PAL_TOWN2     EQU $00
+PAL_TOWNMAP2  EQU $00
 PAL_PALLET    EQU $01
 PAL_VIRIDIAN  EQU $02
 PAL_PEWTER    EQU $03

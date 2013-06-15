@@ -127995,24 +127995,25 @@ PalCmd_02:
 	ld a,2
 	ld [rSVBK],a
 
-	ld d,$c ;PAL_TOWNMAP
+	ld d, PAL_TOWNMAP
 	ld e,0
+	call LoadSGBPalette
+
+	ld d, PAL_TOWNMAP2
+	ld e,1
 	call LoadSGBPalette
 
 	ld a,1
 	ld [W2_TileBasedPalettes],a
 
 	ld hl,$d200
-	ld b,$80
+	ld bc, $100
 	xor a
-.loop:
-	ld [hli],a
-	dec b
-	jr nz,.loop
+	call FillMemory
 
 	; Give tile $65 a different color
-;	ld hl,$d265
-;	ld [hl], 1
+	ld hl,$d265
+	ld [hl], 1
 
 	xor a
 	ld [rSVBK],a
