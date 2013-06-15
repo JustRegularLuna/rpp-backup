@@ -266,9 +266,6 @@ GbcVBlankHook:
 	ld a,[W_CURMAPTILESET]
 	ld c,a
 
-	ld a,2
-	ld [rSVBK],a
-
 	; If we've passed line $95, there's probably not enough time to update palettes.
 	; Leave it for next frame.
 	ld a,[$ff44]
@@ -276,9 +273,17 @@ GbcVBlankHook:
 	jr nc,.end
 	cp $90
 	jr c,.end
+	call RefreshPalettes
+
+.end
+	ret
 
 	; If necessary, copy palettes which were generated in the
 	; pre-vblank routines
+RefreshPalettes:
+	ld a,2
+	ld [rSVBK],a
+
 .checkBgPalettes
 	ld a,[W2_BgPaletteDataModified]
 	and a

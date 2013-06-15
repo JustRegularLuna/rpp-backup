@@ -56628,7 +56628,9 @@ EffectsArray5B: ; 3c049 (f:4049)
 
 ; known jump sources: 3eff0 (f:6ff0)
 Func_3c04c: ; 3c04c (f:404c)
-	call Func_3ec92
+	; I switched stuff around with Func_3efeb. Call 3ec92, THEN GoPAL_SET with b=0.
+	; This prevents flickering when entering battle.
+	call GoPAL_SET
 	ld a, $1
 	ld [$d125], a
 	call DisplayTextBoxID
@@ -63544,9 +63546,11 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 
 ; known jump sources: 3ef88 (f:6f88)
 Func_3efeb: ; 3efeb (f:6feb)
+	; I switched stuff around with Func_3c04c. Call 3ec92, THEN GoPAL_SET with b=0.
+	; This prevents flickering when entering battle.
+	call Func_3ec92
 	ld b, $0
-	call GoPAL_SET
-	call Func_3c04c	; Comment this stuff to make room for the hook
+	call Func_3c04c
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $FF00+$ba
 	ld hl, Unknown_3f04a
@@ -127856,9 +127860,13 @@ PalCmd_00:
 	inc a
 	jr nz,.palLoop
 
-	ld a,1
-	ld [W2_LastBGP],a
-	ld [W2_LastOBP0],a	; Palettes must be refreshed
+	; This prevents extra flickering when entering battle
+	xor a
+	ld [rBGP],a
+	ld [rOBP0],a
+	ld [rOBP1],a
+
+;	xor a
 	ld [rSVBK],a
 	ret
 
