@@ -28979,15 +28979,33 @@ UpdateHPBar_Palettes:
 	ld hl, $cf1d
 	call Func_3df9
 
+	ld a,2
+	ld [rSVBK],a
+
 	; $cf94 = 0 for enemy hp bar, 1 for player hp bar.
 	ld a,[$cf94]
 	ld c,a
 
-	ld a,2
-	ld [rSVBK],a
+	cp 2
+	jr nz,.inBattle
 
-	; Color was stored to $cf1d earlier
-	ld a,[$cf1d]
+.inMenu
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*2
+	ld a, [W_CURMENUITEMID]
+	call AddNTimes
+
+	ld bc, 20*2
+	ld a, [$cf1d] ; Palette # was stored to here
+	inc a
+	call FillMemory
+
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
+	jr .done
+
+.inBattle
+	ld a,[$cf1d] ; Palette # was stored to here
 	add $1f
 	ld d,a
 
@@ -28999,12 +29017,55 @@ UpdateHPBar_Palettes:
 .loadPalette
 	CALL_INDIRECT LoadSGBPalette
 
+.done
 	ld a,1
 	ld [W2_LastBGP],a
 
 	xor a
 	ld [rSVBK],a
 	ret
+
+UpdateHPBar_Hook:
+	push bc
+	push de
+	push hl
+
+	ld a,[$cf94]
+	cp 2
+	jr nz,.inBattle
+	
+	; In the pokemon menu
+	ld a, [W_CURMENUITEMID]
+	ld bc, $2c
+	ld hl, W_PARTYMON1_NUM ; $d16b (aliases: W_PARTYMON1DATA)
+	call AddNTimes
+	ld bc, 33
+	add hl,bc
+	jr .gotPokemon
+
+.inBattle
+	and a
+	jr nz,.playerPokemon
+.enemyPokemon
+	ld hl, W_ENEMYMONLEVEL
+	jr .gotPokemon
+.playerPokemon
+	ld hl, W_PLAYERMONLEVEL ; $d022
+;	jr .gotPokemon
+
+	; Load pokemon data
+.gotPokemon
+	ld de, $cfb9
+	ld bc, $b
+	call CopyData
+
+.gotData
+	pop hl
+	pop de
+	pop bc
+	; Animate the hp bar
+	jp UpdateHPBar
+
 
 SECTION "bank4",DATA,BANK[$4]
 
@@ -61326,7 +61387,7 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 	xor a
 	ld [$cf94],a
 	ld a,$48
-	call AnimateHPBar_Pre ; HAX
+	call Predef ; animate the HP bar shortening
 ApplyAttackToEnemyPokemonDone: ; 3e19d (f:619d)
 	jp Func_3cd5a ; redraw pokemon names and HP bars
 
@@ -61446,7 +61507,7 @@ ApplyDamageToPlayerPokemon: ; 3e200 (f:6200)
 	ld a,$01
 	ld [$cf94],a
 	ld a,$48
-	call AnimateHPBar_Pre ; HAX
+	call Predef ; animate the HP bar shortening
 ApplyAttackToPlayerPokemonDone
 	jp Func_3cd5a ; redraw pokemon names and HP bars
 
@@ -65023,32 +65084,6 @@ LoadMonBackSpriteHook: ; HAX
 	ld de,$9310
 	ld c,a
 	jp LoadUncompressedSpriteData
-
-AnimateHPBar_Pre:
-	push bc
-	push de
-	push hl
-
-	; Load pokemon data
-	ld a,[$cf94]
-	and a
-	jr nz,.playerPokemon
-	ld hl, W_ENEMYMONLEVEL
-	jr .gotPokemon
-.playerPokemon
-	ld hl, W_PLAYERMONLEVEL ; $d022
-
-.gotPokemon
-	ld de, $cfb9
-	ld bc, $b
-	call CopyData
-
-	pop hl
-	pop de
-	pop bc
-	; Animate the hp bar
-	ld a,$48
-	jp Predef
 
 
 SECTION "bank10",DATA,BANK[$10]
@@ -77246,7 +77281,7 @@ Predef3BPredef: ; 4ff2a (13:7f2a)
 	dbw $1C,$5DDF
 	dbw $17,$40DC; 46 load dex screen
 	dbw $03,$72E5
-	dbw $03,$7A1D
+	dbw BANK(UpdateHPBar_Hook), UpdateHPBar_Hook ; HAX
 	dbw $0F,$4DEC
 	dbw $1C,$4F60
 	dbw $09,$7D6B
