@@ -42,7 +42,7 @@ vblank:
 
 	ORG 0, $48 ; lcd
 	push hl
-	ld hl, DelayFrameHook
+	ld hl, _GbcPrepareVBlank
 	jp InterruptWrapper
 
 	ORG 0, $50
@@ -4817,7 +4817,7 @@ HaxFunc3: ; 1d6d
 ;TransferBgRows: ; 1d9e (0:1d9e)
 
 ; HAX: Squeeze this little function in here
-DelayFrameHook:
+_GbcPrepareVBlank:
 	push af
 	push bc
 	push de
@@ -5307,10 +5307,10 @@ VBlankHandler: ; 2024 (0:2024)
 
 DelayFrame: ; 20af (0:20af)
 ; delay for one frame
-;	call DelayFrameHook
-;	nop
-	ld a,1
-	ld [H_VBLANKOCCURRED],a
+	call DelayFrameHook ; HAX
+	nop
+;	ld a,1
+;	ld [H_VBLANKOCCURRED],a
 
 ; wait for the next Vblank, halting to conserve battery
 .halt
@@ -10689,6 +10689,37 @@ InterruptWrapper:
 	pop af
 	pop hl
 	reti
+
+; Whenever DelayFrame is called, update the sprites.
+; This is done here instead of at vblank to prevent sprite wobbliness when scrolling.
+; In some situations, DelayFrame is not called every frame, and this could be problematic.
+; But I think when sprites are being animated or moved around, it is always called.
+DelayFrameHook:
+	push bc
+	push de
+	push hl
+
+	ld a, [rSVBK]
+	ld b,a
+	xor a
+	ld [rSVBK],a
+	push bc ; Save wram bank
+
+	di
+	CALL_INDIRECT PrepareOAMData
+	jr z, .spritesDrawn
+	CALL_INDIRECT ColorNonOverworldSprites
+.spritesDrawn
+	ei
+
+	pop af
+	ld [rSVBK],a ; Restore wram bank
+	ld a,1
+	ld [H_VBLANKOCCURRED],a
+	pop hl
+	pop de
+	pop bc
+	ret
 
 
 SECTION "bank1",DATA,BANK[$1]

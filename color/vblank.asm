@@ -3,10 +3,6 @@ SECTION "VBlank Stuff",DATA,BANK[$2D]
 ; Prepare stuff to be done during vblank
 ; This is called from the lcd interrupt, at line $70
 GbcPrepareVBlank:
-	CALL_INDIRECT PrepareOAMData
-	jr z, .spritesDrawn
-	CALL_INDIRECT ColorNonOverworldSprites
-.spritesDrawn
 	ld a,2
 	ld [rSVBK],a
 	call RefreshWindowPalettes
