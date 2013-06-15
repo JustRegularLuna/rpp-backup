@@ -56628,7 +56628,7 @@ EffectsArray5B: ; 3c049 (f:4049)
 
 ; known jump sources: 3eff0 (f:6ff0)
 Func_3c04c: ; 3c04c (f:404c)
-	; I switched stuff around with Func_3efeb. Call 3ec92, THEN GoPAL_SET with b=0.
+	; HAX: I switched stuff around with Func_3efeb. Call 3ec92, THEN GoPAL_SET with b=0.
 	; This prevents flickering when entering battle.
 	call GoPAL_SET
 	ld a, $1
@@ -63546,7 +63546,7 @@ Func_3ef8b: ; 3ef8b (f:6f8b)
 
 ; known jump sources: 3ef88 (f:6f88)
 Func_3efeb: ; 3efeb (f:6feb)
-	; I switched stuff around with Func_3c04c. Call 3ec92, THEN GoPAL_SET with b=0.
+	; HAX: I switched stuff around with Func_3c04c. Call 3ec92, THEN GoPAL_SET with b=0.
 	; This prevents flickering when entering battle.
 	call Func_3ec92
 	ld b, $0
@@ -128441,8 +128441,8 @@ PalCmd_0c:
 	ld [rSVBK],a
 
 	; Load default palettes
-	ld hl,BgPalettes
-	ld a, BANK(BgPalettes)
+	ld hl,MapPalettes
+	ld a, BANK(MapPalettes)
 	ld de,W2_BgPaletteData
 	ld bc, $08
 	call FarCopyData
