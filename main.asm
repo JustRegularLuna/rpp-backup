@@ -28782,7 +28782,7 @@ UpdateHPBar_AnimateHPBar: ; fab1 (3:7ab1)
 	ret
 
 ; Removed UpdateHPBar_CompareNewHPToOldHP from here
-	ORG $03, $7ad1
+	ORG $03, $7ad7
 
 ; known jump sources: fa2b (3:7a2b)
 ; calcs HP difference between bc and de (into de)
