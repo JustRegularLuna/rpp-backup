@@ -58,22 +58,24 @@ cf1b = SGB flag
 TODO
 
 - Slots
-- Dynamic lifebar colors
 - Fix item menu scroll glitches
 - Weird colored tables in (which city?)
 - Change box: pokeball colors
 - Right ledges
 - Occasional shaky sprites
 - Wrap up attacks
- - Ice Beam
+ - Ice Beam, Razor Leaf
 - Exclamation marks
 - Cave entrance
 - Fix VBA glitches
-- Nidorino/Gengar in the intro
 - Revise map colors
 - When using an item in the overworld, there's still a problem with palettes sometimes?
-- When naming pokemon: animation isn't right
 - Double blackout when entering battle (does that usually happen?)
+- Color of the fuzz at the bottom of the titlescreen
+- When switching pokemon, for a split second their lifebar colors are wrong
+
+Enemy health bar update: f:619a
+Player health bar update: f:6258
 
 POKEMON YELLOW:
 

@@ -28942,7 +28942,7 @@ UpdateHPBar_CompareNewHPToOldHP: ; fad1 (3:7ad1)
 	push bc
 	push de
 	push hl
-
+	call UpdateHPBar_Palettes
 	pop hl
 	pop de
 	pop bc
@@ -28954,26 +28954,49 @@ UpdateHPBar_CompareNewHPToOldHP: ; fad1 (3:7ad1)
 	ret
 
 UpdateHPBar_Palettes:
+	; Store variables to be retrieved after the Bankswitch function.
+	; Using Predef causes glitches, because this is called FROM a predef.
+	ld a, [$cfba]
+	ld d, a
+	ld a, [$cfbb]
+	ld e, a
+
+	ld hl,$CC51
+	ld a,d
+	ld [hli],a
+	ld a,e
+	ld [hli],a
+
+	; ld $CC53,bc
+	ld a,b
+	ld [hli],a
+	ld [hl],c
+
+	; Convert hp into another format (??)
+	CALL_INDIRECT Func_f9dc
+
+	; Pass this other hp format to Func_3df9 which determines HP bar color
 	ld hl, $cf1d
-	push de
 	call Func_3df9
-	pop de
-	ld hl, $cf1e
-	call Func_3df9
+
+	; $cf94 = 0 for enemy hp bar, 1 for player hp bar.
+	ld a,[$cf94]
+	ld c,a
 
 	ld a,2
 	ld [rSVBK],a
-	; Player
+
+	; Color was stored to $cf1d earlier
 	ld a,[$cf1d]
 	add $1f
 	ld d,a
+
+	ld a,c
+	and a ; Check: enemy or player
 	ld e,2
-	CALL_INDIRECT LoadSGBPalette
-	; Enemy
-	ld a,[$cf1e]
-	add $1f
-	ld d,a
-	ld e,3
+	jr nz,.loadPalette
+	inc e
+.loadPalette
 	CALL_INDIRECT LoadSGBPalette
 
 	ld a,1
@@ -61303,7 +61326,7 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 	xor a
 	ld [$cf94],a
 	ld a,$48
-	call Predef ; animate the HP bar shortening
+	call AnimateHPBar_Pre ; HAX
 ApplyAttackToEnemyPokemonDone: ; 3e19d (f:619d)
 	jp Func_3cd5a ; redraw pokemon names and HP bars
 
@@ -61423,7 +61446,7 @@ ApplyDamageToPlayerPokemon: ; 3e200 (f:6200)
 	ld a,$01
 	ld [$cf94],a
 	ld a,$48
-	call Predef ; animate the HP bar shortening
+	call AnimateHPBar_Pre ; HAX
 ApplyAttackToPlayerPokemonDone
 	jp Func_3cd5a ; redraw pokemon names and HP bars
 
@@ -65000,6 +65023,32 @@ LoadMonBackSpriteHook: ; HAX
 	ld de,$9310
 	ld c,a
 	jp LoadUncompressedSpriteData
+
+AnimateHPBar_Pre:
+	push bc
+	push de
+	push hl
+
+	; Load pokemon data
+	ld a,[$cf94]
+	and a
+	jr nz,.playerPokemon
+	ld hl, W_ENEMYMONLEVEL
+	jr .gotPokemon
+.playerPokemon
+	ld hl, W_PLAYERMONLEVEL ; $d022
+
+.gotPokemon
+	ld de, $cfb9
+	ld bc, $b
+	call CopyData
+
+	pop hl
+	pop de
+	pop bc
+	; Animate the hp bar
+	ld a,$48
+	jp Predef
 
 
 SECTION "bank10",DATA,BANK[$10]
@@ -128069,12 +128118,17 @@ PalCmd_06:
 	ld e,1
 	call LoadSGBPalette
 
-	ld d,$d	; PAL_LOGO1
+	ld d, PAL_LOGO1
 	ld e,2
+	call LoadSGBPalette
+
+	ld d, PAL_BLACK
+	ld e,3
 	call LoadSGBPalette
 
 	CALL_INDIRECT LoadSpritePalettes
 
+	; Pokemon logo
 	ld hl,$d200
 	ld a,1
 	ld b,8
@@ -128087,12 +128141,15 @@ PalCmd_06:
 	dec b
 	jr nz,.logo2Loop
 
+	; "Red/Blue Version"
+	ld bc,20
 	ld a,2
-	ld c,20
-.logoLoop
-	ldi [hl],a
-	dec c
-	jr nz,.logoLoop
+	call FillMemory
+
+	ld hl, $d200 + 17*20
+	ld bc, 20
+	ld a,3
+	call FillMemory
 
 	ld a,3
 	ld [W2_StaticPaletteChanged],a
@@ -128125,7 +128182,7 @@ PalCmd_07:
 	ld [rSVBK],a
 	ret
 
-; Pokedex screen or name select
+; Pokedex screen
 PalCmd_08:
 	ld a,2
 	ld [rSVBK],a
@@ -128293,7 +128350,7 @@ PalCmd_0c:
 
 	CALL_INDIRECT LoadSpritePalettes
 
-	ld a,$01
+	xor a
 	ld [rSVBK],a
 	ret
 
