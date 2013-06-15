@@ -128479,22 +128479,25 @@ PalCmd_0d:
 	ld e,4
 	call LoadSGBPalette
 
+	; Load palette map
 	ld hl, BadgePalettes
 	ld de, $d200
-	ld b, $60
-.copyLoop
-	ld a,[hli]
-	ld [de],a
-	inc de
-	dec b
-	jr nz,.copyLoop
+	ld bc, $60
+	call CopyData
+	; Zero the rest
+	push de
+	pop hl
+	ld bc, $a0
+	xor a
+	call FillMemory
+	
 
 	; Wait 2 frames before updating palettes
 	ld c,2
 	call DelayFrames
 
 	ld a,1
-	ld [W2_LastBGP],a
+	ld [W2_LastBGP],a ; Signal to update palettes
 	ld [rSVBK],a
 	ret
 
