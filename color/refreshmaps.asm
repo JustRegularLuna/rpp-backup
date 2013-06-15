@@ -166,7 +166,6 @@ ENDR
 	ld a,[W2_StaticPaletteModified]
 	and a
 	jr z, .palettesDone
-
 	xor a
 	ld [W2_StaticPaletteModified],a
 

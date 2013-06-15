@@ -28982,7 +28982,7 @@ UpdateHPBar_Palettes:
 	ld a,2
 	ld [rSVBK],a
 
-	; $cf94 = 0 for enemy hp bar, 1 for player hp bar.
+	; $cf94 = 0 for enemy hp bar, 1 for player hp bar, 2 for pokemon menu.
 	ld a,[$cf94]
 	ld c,a
 
@@ -28991,7 +28991,7 @@ UpdateHPBar_Palettes:
 
 .inMenu
 	ld hl, W2_TilesetPaletteMap
-	ld bc, 20*2
+	ld bc, 20*2 ; 2 rows for each pokemon in the menu
 	ld a, [W_CURMENUITEMID]
 	call AddNTimes
 

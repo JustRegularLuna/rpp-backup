@@ -143,6 +143,9 @@ LoadAnimationTilesetPalettes:
 	ld a,2
 	ld [rSVBK],a
 
+	xor a
+	ld [W2_UseOBP1],a
+
 	call LoadAttackSpritePalettes
 
 	ld a,c
