@@ -3,15 +3,15 @@
 ; The first several palettes are no longer needed and can be replaced with whatever.
 
 ; 0x00: PAL_TOWNMAP2 (second palette used on the town map)
-	RGB 29,12,4
+	RGB 25,15,0
+	RGB 15,8,0
 	RGB 0,0,0
-	RGB 10,28,0
-	RGB 1,1,1
+	RGB 0,0,0
 
-; 0x01
+; 0x01: PAL_SLOTS5
 	RGB 31,31,31
-	RGB 27,28,31
-	RGB 15,20,31
+	RGB 17,1,2
+	RGB 26,0,0
 	RGB 0,0,0
 
 ; 0x02
@@ -158,28 +158,28 @@
 	RGB 15,15,18
 	RGB 0,0,0
 
-; 0x1a
+; 0x1a: PAL_SLOTS1
 	RGB 31,31,31
-	RGB 26,21,22
-	RGB 27,20,6
+	RGB 0,14,0
+	RGB 2,20,3
 	RGB 0,0,0
 
-; 0x1b
+; 0x1b: PAL_SLOTS2
 	RGB 31,31,31
-	RGB 31,31,17
-	RGB 25,17,21
+	RGB 26,0,0
+	RGB 2,20,3
 	RGB 0,0,0
 
-; 0x1c
+; 0x1c: PAL_SLOTS3
 	RGB 31,31,31
-	RGB 22,31,16
-	RGB 25,17,21
+	RGB 8,4,22
+	RGB 2,20,3
 	RGB 0,0,0
 
-; 0x1d
+; 0x1d: PAL_SLOTS4
 	RGB 31,31,31
-	RGB 16,19,29
-	RGB 25,17,21
+	RGB 29,30,1
+	RGB 2,20,3
 	RGB 0,0,0
 
 ; 0x1e

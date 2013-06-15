@@ -7,16 +7,16 @@
 ; The first several palettes are no longer needed and can be replaced with whatever.
 
 ; 0x00: PAL_TOWNMAP2 (second palette used on the town map)
-	RGB 29,12,4
+	RGB 25,15,0
+	RGB 15,8,0
 	RGB 0,0,0
-	RGB 10,28,0
-	RGB 1,1,1
+	RGB 0,0,0
 
-; 0x01: PAL_PALLET
+; 0x01: PAL_SLOTS5
 	RGB 31,31,31
-	RGB 23,17,31
-	RGB 11,23,31
-	RGB 3,3,3
+	RGB 17,1,2
+	RGB 26,0,0
+	RGB 0,0,0
 
 ; 0x02: PAL_VIRIDIAN
 	RGB 31,31,31
@@ -164,27 +164,27 @@
 
 ; 0x1a: PAL_SLOTS1
 	RGB 31,31,31
-	RGB 25,1,31 ; TODO: slot colors may have been modified in pokemon yellow
-	RGB 31,0,0
-	RGB 3,3,3
+	RGB 0,14,0
+	RGB 2,20,3
+	RGB 0,0,0
 
 ; 0x1b: PAL_SLOTS2
 	RGB 31,31,31
-	RGB 20,4,0
-	RGB 17,11,0
-	RGB 3,3,3
+	RGB 26,0,0
+	RGB 2,20,3
+	RGB 0,0,0
 
 ; 0x1c: PAL_SLOTS3
 	RGB 31,31,31
-	RGB 10,4,0
-	RGB 17,11,0
-	RGB 3,3,3
+	RGB 8,4,22
+	RGB 2,20,3
+	RGB 0,0,0
 
 ; 0x1d: PAL_SLOTS4
 	RGB 31,31,31
-	RGB 2,15,2
-	RGB 17,11,0
-	RGB 3,3,3
+	RGB 29,30,1
+	RGB 2,20,3
+	RGB 0,0,0
 
 ; 0x1e: PAL_BLACK	(index $1e)
 	RGB 31,31,31

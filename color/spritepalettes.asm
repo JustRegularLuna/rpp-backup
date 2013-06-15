@@ -63,14 +63,14 @@ AttackSpritePalettes:
 	RGB 5,4,31
 	RGB 1,1,18
 	RGB 0,0,0
-	; ORANGE
+	; RED
 	RGB 31,31,31
 	RGB 31,19,10
 	RGB 31,7,1
 	RGB 0,0,0
 	; BROWN
 	RGB 31,31,31
-	RGB 16,11,1
+	RGB 20,14,0
 	RGB 10,6,0
 	RGB 0,0,0
 	; YELLOW (4)
@@ -95,4 +95,18 @@ AttackSpritePalettes:
 	RGB 0,0,0
 
 SlotPaletteMap:
-	INCBIN "color/slotpalettes.bin"
+	INCBIN "color/slotpalettemap.bin"
+
+SlotSpritePaletteMap:
+	; Seven
+	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
+	; Bar 
+	db ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE
+	; Cherry
+	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
+	; Fish
+	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
+	; Penguin/Bird/SomethingOrOther
+	db ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE
+	; Rat
+	db ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN

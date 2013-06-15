@@ -57,16 +57,15 @@ cf1b = SGB flag
 
 TODO
 
-- Slots
+- Double blackout when entering battle (does that usually happen?)
 - Fix item menu scroll glitches
 - Weird colored tables in Celadon
 - Change box: pokeball colors
 - Exclamation marks
 - Cave entrance
 - Fix VBA glitches
-- Revise map colors
+- Revise map colors (Viridian forest)
 - When using an item in the overworld, there's still a problem with palettes sometimes?
-- Double blackout when entering battle (does that usually happen?)
 - Color of the fuzz at the bottom of the titlescreen
 - When switching pokemon, for a split second their lifebar colors are wrong
 - Extraneous line on pokemon status screen (gen II patch)

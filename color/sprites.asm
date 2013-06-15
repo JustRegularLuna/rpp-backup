@@ -1,16 +1,19 @@
 ; Handles sprite attributes
 
-PAL_ORANGE	EQU 0
-PAL_BLUE	EQU 1
-PAL_GREEN	EQU 2
-PAL_BROWN	EQU 3
-
 ATK_PAL_GREY	EQU 0
 ATK_PAL_BLUE	EQU 1
 ATK_PAL_RED		EQU 2
 ATK_PAL_BROWN	EQU 3
 ATK_PAL_YELLOW	EQU 4
 ATK_PAL_GREEN	EQU 5
+ATK_PAL_ICE		EQU 6
+ATK_PAL_PURPLE	EQU 7
+
+
+PAL_ORANGE	EQU 0
+PAL_BLUE	EQU 1
+PAL_GREEN	EQU 2
+PAL_BROWN	EQU 3
 
 	ORG $2e, $4000
 
@@ -30,7 +33,7 @@ LoadPaletteData:
 	inc de
 	dec b
 	jr nz,.sprCopyLoop
-	xor a
+	ld a,1
 	ld [W2_LastOBP0],a
 	ret
 

@@ -128158,11 +128158,35 @@ PalCmd_05:
 	ld d, PAL_SLOTS4
 	ld e, 3
 	call LoadSGBPalette
+	ld d, PAL_SLOTS5
+	ld e, 4
+	call LoadSGBPalette
 
 	ld hl, SlotPaletteMap
-	ld de, $d200
-	ld bc, $80
 	ld a, BANK(SlotPaletteMap)
+	ld de, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FarCopyData
+
+	ld a,3
+	ld [W2_StaticPaletteChanged],a
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+
+	; Manage sprites
+
+	CALL_INDIRECT LoadAttackSpritePalettes
+
+	ld a,1
+	ld [W2_ColorizeNonOverworldSprites],a
+	xor a
+	ld [W2_UseOBP1],a
+
+	ld hl, SlotSpritePaletteMap
+	ld a, BANK(SlotSpritePaletteMap)
+	ld de, W2_SpritePaletteMap
+	ld bc, $18
 	call FarCopyData
 
 	xor a
@@ -128171,7 +128195,7 @@ PalCmd_05:
 
 ; Titlescreen with cycling pokemon
 PalCmd_06:
-	ld a,[W_WHICHTRADE]
+	ld a,[W_WHICHTRADE] ; Get the pokemon on the screen
 	call DeterminePaletteID_NoStatusCheck
 	ld d,a
 	ld e,0
