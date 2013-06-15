@@ -12,7 +12,7 @@ MapPaletteData:
 ; $60 bytes for each map. Each byte is the palette number for a tile.
 ; Remaining $a0 tiles aren't part of the tileset and are set to zero.
 MapPaletteAssignments:
-	INCBIN "color/bank2d.bin",$1000,$0900 ; Map and tile color assignments
+	INCBIN "color/palettemaps.bin"
 
 
 InitGbcMode: ; Sets double speed & clears extra memory
