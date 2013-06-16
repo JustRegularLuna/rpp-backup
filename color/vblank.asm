@@ -262,12 +262,12 @@ GbcVBlankHook:
 
 	; If we've passed line $95, there's probably not enough time to update palettes.
 	; Leave it for next frame.
-	; This has caused issues with VBA, so, comment it for now.
-;	ld a,[$ff44]
-;	cp $96
-;	jr nc,.end
-;	cp $90
-;	jr c,.end
+	; This is causing issues with VBA.
+	ld a,[$ff44]
+	cp $96
+	jr nc,.end
+	cp $90
+	jr c,.end
 	call RefreshPalettes
 
 .end
