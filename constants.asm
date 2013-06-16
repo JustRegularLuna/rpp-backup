@@ -3538,22 +3538,21 @@ W2_LastBGP:			db
 W2_LastOBP0:		db
 W2_LastOBP1:		db
 
-; If W2_TileBasedPalettes is set, each number corresponds to a tile.
-; Otherwise this is a 20x18 map of palettes.
+; If W2_TileBasedPalettes is set, each number corresponds to a tile. (takes $180 bytes)
+; Otherwise this is a 20x18 map of palettes. (takes $168 bytes)
 W2_TilesetPaletteMap	EQU $d200
 ; Each number here corresponds to a tile, but this isn't used for
 ; overworld sprites. I've got a better system for that.
 W2_SpritePaletteMap		EQU $d400
 
 ; Palette calculations for W_SCREENTILESBUFFER are stored here before vblank.
-W2_ScreenPalettesBuffer	EQU $d480 ; 32x6 bytes (DMA-able), $d480-$d540
+W2_ScreenPalettesBuffer	EQU $d500 ; 32x6 bytes (DMA-able), $d500-$d5c0
 
-SECTION "moreVariables",BSS[$d600]
+SECTION "moreVariables",BSS[$d700]
 
 W2_TownMapLoaded				db
 W2_TileBasedPalettes:			db
 W2_StaticPaletteChanged			db ; Set to a number >=3 if palette map is modified, since the window is drawn in thirds. Only for when TileBasedPalettes == 0.
-W2_ColorizeNonOverworldSprites	db
 W2_UseOBP1						db ; If set, sprite palettes 4-7 use OBP1 instead of OBP0
 W2_BgPaletteDataBuffer			ds $40
 W2_SprPaletteDataBuffer			ds $40

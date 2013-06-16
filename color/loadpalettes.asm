@@ -119,10 +119,10 @@ LoadTilesetPalette:
 	dec b
 	jr nz,.fillLoop
 
-	; Except for tile $78, which is either a pokeball, or an unused japanese character.
+	; Exception:
+	; Tile $78, which is either a pokeball, or an unused japanese character.
 	ld a, 3
 	ld [W2_TilesetPaletteMap + $78], a
-
 
 	pop af
 	ld b,a

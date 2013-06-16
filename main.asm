@@ -99321,15 +99321,25 @@ INCBIN "baserom.gbc",$70a3f,$70a44 - $70a3f
 Unknown_70a44: ; 70a44 (1c:4a44)
 INCBIN "baserom.gbc",$70a44,$70a4d - $70a44
 
+; Load a black tile for battle transition.
+; HAXed to set the palette as well.
+; The tile itself was relocated to make room.
 ; known jump sources: 709b3 (1c:49b3)
 Func_70a4d: ; 70a4d (1c:4a4d)
+	ld a,2
+	ld [rSVBK],a
+	ld a, 7
+	ld [W2_TilesetPaletteMap + $ff], a
+	xor a
+	ld [rSVBK],a
+	
 	ld hl, $8ff0
-	ld de, Unknown_70a59 ; $4a59
-	ld bc, (BANK(Unknown_70a59) << 8) + $01
+	ld de, BlackTile
+	ld bc, (BANK(BlackTile) << 8) + $01
 	jp CopyVideoData
 
-Unknown_70a59: ; 70a59 (1c:4a59)
-INCBIN "baserom.gbc",$70a59,$70a69 - $70a59
+
+	ORG $1c, $4a69
 
 ; known jump sources: 70a9f (1c:4a9f), 70bc2 (1c:4bc2), 70c0a (1c:4c0a), 70ca7 (1c:4ca7), 70cd5 (1c:4cd5), 70d4d (1c:4d4d)
 Func_70a69: ; 70a69 (1c:4a69)
@@ -102721,6 +102731,11 @@ PadSRAM_FF: ; 73b8f (1c:7b8f)
 	ld bc, $2000
 	ld a, $ff
 	jp FillMemory
+
+BlackTile:
+	REPT 16
+	db $ff
+	ENDR
 
 
 SECTION "bank1D",DATA,BANK[$1D]
@@ -127885,9 +127900,6 @@ PalCmd_01:
 	ld a,$02
 	ld [rSVBK],a
 
-	ld a,1
-	ld [W2_ColorizeNonOverworldSprites],a
-
 	; Player palette
 	push bc
 	ld d,b
@@ -128138,12 +128150,12 @@ ENDC
 	dec b
 	jr nz,.pokeLoop
 
+	CALL_INDIRECT ClearSpritePaletteMap
 
 	ld a,3
 	ld [W2_StaticPaletteChanged],a
 	xor a
 	ld [W2_TileBasedPalettes],a
-	ld [W2_ColorizeNonOverworldSprites],a
 
 ;	xor a
 	ld [rSVBK],a
@@ -128186,8 +128198,6 @@ PalCmd_05:
 
 	CALL_INDIRECT LoadAttackSpritePalettes
 
-	ld a,1
-	ld [W2_ColorizeNonOverworldSprites],a
 	xor a
 	ld [W2_UseOBP1],a
 
@@ -128317,13 +128327,20 @@ PalCmd_09:
 	ld [rSVBK],a
 	dec a ; ld a,1
 	ld [W2_TileBasedPalettes],a
-	xor a
-	ld [W2_ColorizeNonOverworldSprites],a
+	
+	CALL_INDIRECT ClearSpritePaletteMap
 
 	ld a,1
 	ld [W2_UseOBP1],a ; Pokecenter uses OBP1 when healing pokemons
 
 	CALL_INDIRECT LoadSpritePalettes
+	; Make exclamation mark bubble black & white
+	ld a, 5
+	ld hl, W2_SpritePaletteMap + $f8
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
 
 	xor a
 	ld [rSVBK],a
@@ -128390,11 +128407,12 @@ PalCmd_0a:
 	dec b
 	jr nz,.loop
 
+	CALL_INDIRECT ClearSpritePaletteMap
+
 	ld a,3
 	ld [W2_StaticPaletteChanged],a
 	xor a
 	ld [W2_TileBasedPalettes],a
-	ld [W2_ColorizeNonOverworldSprites],a
 
 ;	xor a
 	ld [rSVBK],a
@@ -128481,9 +128499,10 @@ PalCmd_0d:
 
 	; Load palette map
 	ld hl, BadgePalettes
+	ld a, BANK(BadgePalettes)
 	ld de, $d200
 	ld bc, $60
-	call CopyData
+	call FarCopyData
 	; Zero the rest
 	push de
 	pop hl
@@ -128500,27 +128519,6 @@ PalCmd_0d:
 	ld [W2_LastBGP],a ; Signal to update palettes
 	ld [rSVBK],a
 	ret
-
-BadgePalettes:
-	REPT $20 ; Red's palette
-	db 4
-	ENDR
-	db 0,0,0,0	; Leader 1
-	db 0,0,0,0	; Badge 1
-	db 0,0,0,0	; Leader 2
-	db 1,1,1,1
-	db 0,0,0,0	; Leader 3
-	db 3,3,3,3
-	db 0,0,0,0	; Leader 4
-	db 0,2,1,3
-	db 0,0,0,0	; Leader 5
-	db 2,2,2,2
-	db 0,0,0,0	; Leader 6
-	db 3,3,3,3
-	db 0,0,0,0	; Leader 7
-	db 2,2,2,2
-	db 0,0,0,0	; Leader 8
-	db 1,1,1,1
 
 
 ; Clear colors after titlescreen
@@ -128556,9 +128554,9 @@ PalCmd_0f:
 
 	CALL_INDIRECT LoadSpritePalettes
 
+	CALL_INDIRECT ClearSpritePaletteMap
+
 	xor a
-	ld [W2_ColorizeNonOverworldSprites],a
-;	xor a
 	ld [rSVBK],a
 	ret
 
@@ -128580,6 +128578,7 @@ INCLUDE "color/refreshmaps.asm"
 INCLUDE "color/loadpalettes.asm"
 INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
+INCLUDE "color/badgepalettemap.asm" ; This ends up in whatever bank was used last
 
 SECTION "bank30",DATA,BANK[$30]
 INCBIN "color/bank30.bin",$0000,$c4000-$c0000

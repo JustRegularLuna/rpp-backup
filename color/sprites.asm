@@ -86,10 +86,6 @@ ColorNonOverworldSprites:
 	ld a,2
 	ld [rSVBK],a
 
-	ld a,[W2_ColorizeNonOverworldSprites]
-	and a
-	jr z,.end
-
 	ld hl, W_OAMBUFFER
 	ld b, 40
 	ld d, W2_SpritePaletteMap>>8
@@ -102,12 +98,16 @@ ColorNonOverworldSprites:
 	ld a,[hli] ; tile
 	ld e, a
 	ld a,[hl] ; flags
-	and $f8
 	ld c,a
 	ld a,[de]
-	cp 8
-	jr c,.setPalette
+	cp 8 ; if 8, colorize based on attack type
+	jr z,.getAttackType
+	cp 9 ; if 9, do not colorize
+	jr nz,.setPalette
+	xor a
+	jr .setPalette
 
+.getAttackType
 	push hl
 	ld a,[H_WHOSETURN]
 	and a
@@ -175,17 +175,18 @@ LoadAnimationTilesetPalettes:
 	add hl,de
 	reti
 
-; Set all sprite palettes to color 0. Non-overworld stuff only.
+; Set all sprite palettes to not be colorized by "ColorNonOverworldSprites".
 ; ASSUMES THAT WRAM BANK 2 IS LOADED.
-ClearSpritePalettes:
+ClearSpritePaletteMap:
 	ld hl, W2_SpritePaletteMap
-	ld b,$02
-	xor a
+	ld b,$0 ; $100
+	ld a,9
 .loop
 	ld [hli],a
 	dec b
 	jr nz,.loop
 	ret
+
 
 	ORG $2e, $6000
 

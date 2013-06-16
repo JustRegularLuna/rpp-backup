@@ -1,7 +1,8 @@
 
 SpritePalettes: ; Taken from pokemon GSC.
-; Palettes 5-7 aren't used, I don't know what they were used for in GSC? Trees maybe?
 ; Palette 4 is used for flashing pokeballs in the pokecenter.
+; Palette 5 is used for exclamation mark bubbles.
+; Palettes 6-7 aren't used, I don't know what they were used for in GSC? Trees maybe?
 
 ; 0
 	RGB 27,31,27
