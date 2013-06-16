@@ -195,17 +195,17 @@
 	RGB 30,10,6
 	RGB 7,7,7
 
-; 0x20
-	RGB 0,0,0
-	RGB 0,0,0
-	RGB 0,0,0
-	RGB 0,0,0
+; 0x20: Rocks in viridian forest
+	RGB 22,31,10
+	RGB 24,18,7
+	RGB 20,15,3
+	RGB 7,7,7
 
 ; 0x21
-	RGB 0,0,0
-	RGB 0,0,0
-	RGB 0,0,0
-	RGB 0,0,0
+	RGB 22,31,10
+	RGB 20,31,14
+	RGB 11,23,5
+	RGB 7,7,7
 
 ; 0x22
 	RGB 0,0,0

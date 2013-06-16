@@ -59,10 +59,10 @@ LoadTilesetPalette:
 
 	ld a,b ; Get W_CURMAPTILESET
 	push af
-	sla a
-	sla a
-	sla a
 	ld e,a
+	sla e
+	sla e
+	sla e
 	ld d, MapPaletteSets>>8	; de points to map palette indices
 	ld hl,W2_BgPaletteData ; palette data to be copied to wram at hl
 	ld b,$08
@@ -71,11 +71,20 @@ LoadTilesetPalette:
 	ld a,[de] ; # at de is the palette index for MapPalettes
 	inc de
 	push de
-	sla a
-	sla a
-	sla a
+	ld d,0
 	ld e,a
-	ld d, MapPalettes>>8	; de now points to map's palette data
+	sla e
+	rl d
+	sla e
+	rl d
+	sla e
+	rl d
+	push hl
+	ld hl, MapPalettes
+	add hl,de
+	ld d,h
+	ld e,l ; de now points to map's palette data
+	pop hl
 .nextColor
 	ld a,[de]
 	inc de

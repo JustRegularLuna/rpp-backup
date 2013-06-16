@@ -45,11 +45,13 @@ attack data copied to $cfd2
 
 Func_78e23 modifies palettes when attacking (when in SGB Mode) so sprites are just black and white. Because this isn't a super gameboy this limitation is unnecessary.
 
-Locations where FF68 is set to black/white only: (bank 1e)
-	- 5c7a, !5c87, 416a, !4176 (for Razor Leaf)
-	- 416a (release from pokeball)
-	- !4176 (revert after pokeball)
-	- 4e23 (ish)
+1e:5d77 = function to load sprite on top of player/pokemon image? (For paralysis)
+	I think it's actually the paralysis animation function.
+
+Sprite Loaders:
+	1c:492a
+	1e:7de9 (not really)
+	More are not visible through the disassembly
 
 === RAM LOCATIONS ===
 
@@ -59,6 +61,7 @@ TODO
 
 - Color of pokeballs with status conditions
 - Test things without the gen II patch
+- Paralysis wrecks other pokemon's palette
 - Fix item menu scroll glitches
 - Sprites changing color after events (old man in viridian?)
 - Cave entrance near Lavender is a bit weird?
