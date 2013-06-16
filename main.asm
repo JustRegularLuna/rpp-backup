@@ -109931,7 +109931,52 @@ Unknown_79b02: ; 79b02 (1e:5b02)
 INCBIN "baserom.gbc",$79b02,$79b1b - $79b02
 
 Unknown_79b1b: ; 79b1b (1e:5b1b)
-INCBIN "baserom.gbc",$79b1b,$79dda - $79b1b
+INCBIN "baserom.gbc",$79b1b,$79d77 - $79b1b
+
+
+; This animates paralysis. It uses sprites to seamlessly "cover up" a pokemon's image.
+; It is HAXed so that the sprites use the correct palette.
+ParalyzeEnemyAnimation: ; 79d77 (1e:5d77)
+
+	call SpriteifyPlayerPokemon
+	REPT 9
+	nop
+	ENDR
+
+	xor a
+	ld [$ffae],a
+	ld hl,$9800
+	call $5e0d
+	ld a,$90
+	ld [$ffb0],a
+	ld hl,$9b20
+	call $5e0d
+	ld a,$38
+	ld [$ffb0],a
+	call $52fd
+	ld hl,$9800
+	call $5e0d
+	call Func_79801
+	call Delay3
+	ld de,$0208
+	call $5de9
+	call Func_7939e
+	call CleanLCD_OAM
+	ld a,$90
+	ld [$ffb0],a
+	ld hl,$9c00
+	call $5e0d
+	xor a
+	ld [$ffb0],a
+	call SaveScreenTilesToBuffer1
+	ld hl,$9800
+	call $5e0d
+	call ClearScreen
+	call Delay3
+	call LoadScreenTilesFromBuffer1
+	ld hl,$9c00
+	jp $5e0d
+
 
 ; known jump sources: 41846 (10:5846), 70374 (1c:4374)
 Func_79dda: ; 79dda (1e:5dda)
@@ -110602,7 +110647,31 @@ Func_7bf86: ; 7bf86 (1e:7f86)
 	ret
 
 Unknown_7bfa7: ; 7bfa7 (1e:7fa7)
-INCBIN "baserom.gbc",$7bfa7,$7c000 - $7bfa7
+INCBIN "baserom.gbc",$7bfa7,$7bfc2 - $7bfa7
+
+
+; Actually this doesn't do everything needed to spriteify
+; It copies the tiles and the palette of the player pokemon.
+SpriteifyPlayerPokemon:
+	ld de,$9310
+	ld hl,$8000
+	ld bc,$0031
+	call CopyVideoData
+
+	ld a,2
+	ld [rSVBK],a
+	ld hl, W2_BgPaletteData
+	ld de, W2_SprPaletteData
+	ld bc, 8
+	call CopyData
+
+	ld a,1
+	ld [W2_LastOBP0],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
 
 SECTION "bank1F",DATA,BANK[$1F]
 

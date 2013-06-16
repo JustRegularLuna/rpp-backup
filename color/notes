@@ -30,12 +30,7 @@ f:6fb8: battle initialization function.
 		0E = Clear colors after the titlescreen
 		0F = Name entry (instead of 08)
 
-1c:5fb6: For code FC. Determines lifebar color for one of 6 pokemon.
-
 1c:616d = Unused GBC Code?
-
-0f:60df = function where lifebar is moved down. Returns when finished.
-03:7a1d = Function where lifebar is decreased.
 
 1c:4b5d = Flashing palette before battle
 
@@ -45,8 +40,10 @@ attack data copied to $cfd2
 
 Func_78e23 modifies palettes when attacking (when in SGB Mode) so sprites are just black and white. Because this isn't a super gameboy this limitation is unnecessary.
 
-1e:5d77 = function to load sprite on top of player/pokemon image? (For paralysis)
-	I think it's actually the paralysis animation function.
+
+Func_3fbb9 performs the paralysis animation for player turn? (a == [d07c] == 0xa9)
+	Ultimately calls 1e:5d77 = paralysis animation which turns player pokemon into sprites
+		I hacked this to copy the pokemon palette also.
 
 Sprite Loaders:
 	1c:492a
@@ -63,6 +60,7 @@ TODO
 - Test things without the gen II patch
 - Paralysis wrecks other pokemon's palette
 - Fix item menu scroll glitches
+- Razor leaf has black and white leaves at first
 - Sprites changing color after events (old man in viridian?)
 - Cave entrance near Lavender is a bit weird?
 - Fix VBA glitches
