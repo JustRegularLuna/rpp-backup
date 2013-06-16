@@ -260,19 +260,14 @@ GbcVBlankHook:
 	or $40
 	ld [rSTAT],a
 
-	; Get these variables before changing the bank
-	ld a,[W_CURMAP]
-	ld b,a
-	ld a,[W_CURMAPTILESET]
-	ld c,a
-
 	; If we've passed line $95, there's probably not enough time to update palettes.
 	; Leave it for next frame.
-	ld a,[$ff44]
-	cp $96
-	jr nc,.end
-	cp $90
-	jr c,.end
+	; This has caused issues with VBA, so, comment it for now.
+;	ld a,[$ff44]
+;	cp $96
+;	jr nc,.end
+;	cp $90
+;	jr c,.end
 	call RefreshPalettes
 
 .end

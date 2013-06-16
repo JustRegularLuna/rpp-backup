@@ -51,7 +51,6 @@ cf1b = SGB flag (for various reasons I leave it set in GBC mode)
 
 TODO
 
-- Color of pokeballs with status conditions / empty pokemon slot
 - Test things without the gen II patch
 - Fix item menu scroll glitches
 - Razor leaf has black and white leaves at first
@@ -59,7 +58,7 @@ TODO
 - Cave entrance near Lavender is a bit weird?
 - Fix VBA glitches
 - When using an item in the overworld, there's still a problem with palettes sometimes?
-- Color of the fuzz at the bottom of the titlescreen
+- Color of the fuzz at the bottom of the titlescreen changes
 - When switching pokemon, for a split second their lifebar colors are wrong
 - Extraneous line on pokemon status screen (gen II patch)
 
