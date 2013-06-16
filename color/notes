@@ -57,13 +57,11 @@ cf1b = SGB flag (for various reasons I leave it set in GBC mode)
 
 TODO
 
-- Sprites changing color after events
-- Glitch in the pokemart, when getting oak's parcel
 - Exclamation marks
 - Fix item menu scroll glitches
+- Sprites changing color after events (old man in viridian?)
 - Cave entrance near Lavender is a bit weird?
 - Fix VBA glitches
-- Revise map colors (Viridian forest)
 - When using an item in the overworld, there's still a problem with palettes sometimes?
 - Color of the fuzz at the bottom of the titlescreen
 - When switching pokemon, for a split second their lifebar colors are wrong
