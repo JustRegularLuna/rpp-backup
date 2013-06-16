@@ -57,7 +57,8 @@ cf1b = SGB flag (for various reasons I leave it set in GBC mode)
 
 TODO
 
-- Exclamation marks
+- Color of pokeballs with status conditions
+- Test things without the gen II patch
 - Fix item menu scroll glitches
 - Sprites changing color after events (old man in viridian?)
 - Cave entrance near Lavender is a bit weird?
@@ -66,7 +67,6 @@ TODO
 - Color of the fuzz at the bottom of the titlescreen
 - When switching pokemon, for a split second their lifebar colors are wrong
 - Extraneous line on pokemon status screen (gen II patch)
-- Color of pokeballs with status conditions
 
 POKEMON YELLOW:
 
