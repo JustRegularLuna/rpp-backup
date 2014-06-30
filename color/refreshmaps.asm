@@ -141,9 +141,9 @@ ENDR
 	ld b,h
 	ld c,l
 
-	ld a,[$ff00+$bf]
+	ld a,[$ffbf]
 	ld h,a
-	ld a,[$ff00+$c0]
+	ld a,[$ffc0]
 	ld l,a
 	ld sp,hl
 
@@ -220,13 +220,13 @@ label_014:
 	jr nz,label_014
 	add sp,-$14
 	ld a,$01
-	ld [$ff00+$4f],a
+	ld [$ff4f],a
 	ld c,$0a
 label_015:
 	pop de
 	ld d,$d2
 label_016:
-	ld a,[$ff00+$41]
+	ld a,[$ff41]
 	bit 1,a
 	jr nz,label_016
 	ld a,[de]
@@ -236,7 +236,7 @@ label_016:
 	ld e,d
 	ld d,$d2
 label_017:
-	ld a,[$ff00+$41]
+	ld a,[$ff41]
 	bit 1,a
 	jr nz,label_017
 	ld a,[de]
@@ -244,8 +244,8 @@ label_017:
 	dec c
 	jr nz,label_015
 	xor a
-	ld [$ff00+$4f],a
-	ld [$ff00+$70],a
+	ld [$ff4f],a
+	ld [$ff70],a
 	ld a,$0c
 	add l
 	ld l,a
@@ -254,9 +254,9 @@ label_017:
 label_018:
 	dec b
 	jr nz,label_011
-	ld a,[$ff00+$bf]
+	ld a,[$ffbf]
 	ld h,a
-	ld a,[$ff00+$c0]
+	ld a,[$ffc0]
 	ld l,a
 	ld sp,hl
 	ret
@@ -279,13 +279,13 @@ label_018:
 	ld [de],a
 	pop hl
 	xor a
-	ld [$ff00+$4f],a
+	ld [$ff4f],a
 	ld a,[hli]
 
 	ld [de],a
 	inc de
 	ld a,$01
-	ld [$ff00+$4f],a
+	ld [$ff4f],a
 	ld a,[hl]
 	push hl
 	ld h,$d2

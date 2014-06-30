@@ -27,7 +27,7 @@ InitGbcMode: ; Sets double speed & clears extra memory
 	ld a,d
 	ld [rSVBK],a
 	xor a
-	ld hl, $d000
+	ld hl, W2_BgPaletteData
 	ld bc, $1000
 	call FillMemory
 	dec d
