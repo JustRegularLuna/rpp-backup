@@ -730,10 +730,3 @@ INCLUDE "color/loadpalettes.asm"
 INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
 INCLUDE "color/badgepalettemap.asm" ; This ends up in whatever bank was used last
-
-SECTION "bank30",ROMX,BANK[$30]
-INCBIN "color/bank30.bin",$0000,$c4000-$c0000
-
-
-SECTION "bank31",ROMX,BANK[$31]
-INCBIN "color/bank31.bin",$0000,$c8000-$c4000
