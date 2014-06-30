@@ -256,7 +256,7 @@ RecoilEffect_: ; 1392c (4:792c)
 	xor a
 .asm_13990
 	ld [wListMenuID], a ; wListMenuID
-	predef UpdateHPBar2
+	predef UpdateHPBar_Hook
 	ld hl, HitWithRecoilText ; $799e
 	jp PrintText
 HitWithRecoilText: ; 1399e (4:799e)

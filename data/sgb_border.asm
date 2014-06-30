@@ -1,10 +1,4 @@
-BorderPalettes: ; 72788 (1c:6788)
-IF _RED
-	INCBIN "gfx/red/sgbborder.map"
-ENDC
-IF _BLUE
-	INCBIN "gfx/blue/sgbborder.map"
-ENDC
+	ORG $1c, $6e88
 
 	ds $100
 

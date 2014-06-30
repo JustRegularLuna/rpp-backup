@@ -26,4 +26,4 @@ db %11001000
 db %11100011
 db %00001000
 db %00100110
-db 0 ; padding
+db BANK(CharmeleonPicFront)

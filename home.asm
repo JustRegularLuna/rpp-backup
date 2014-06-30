@@ -1,12 +1,27 @@
-; The rst vectors are unused.
 SECTION "rst00", ROM0[$00]
 	rst $38
-SECTION "rst08", ROM0[$08]
+RefreshMapColorsScrolling:
+	push af
+	ld a,$2f
+	jp CallToBank
+
+SECTION "rst8",ROM0[$8]
 	rst $38
+_RefreshMapColors:
+	push af
+	ld a,BANK(RefreshMapColors)
+	jp CallToBank
+
+; HAX: rst10 is used for the vblank hook
 SECTION "rst10", ROM0[$10]
-	rst $38
+	ld b, BANK(GbcVBlankHook)
+	ld hl, GbcVBlankHook
+	jp Bankswitch
+
+; HAX: rst18 can be used for "Bankswitch"
 SECTION "rst18", ROM0[$18]
-	rst $38
+	jp Bankswitch
+
 SECTION "rst20", ROM0[$20]
 	rst $38
 SECTION "rst28", ROM0[$28]
@@ -18,13 +33,21 @@ SECTION "rst38", ROM0[$38]
 
 ; interrupts
 SECTION "vblank", ROM0[$40]
-	jp VBlank
+	push hl
+	ld hl, VBlank
+	jp InterruptWrapper
 SECTION "lcdc",   ROM0[$48]
-	rst $38
+	push hl
+	ld hl, _GbcPrepareVBlank
+	jp InterruptWrapper
 SECTION "timer",  ROM0[$50]
-	jp Timer
+	push hl
+	ld hl, Timer
+	jp InterruptWrapper
 SECTION "serial", ROM0[$58]
-	jp Serial
+	push hl
+	ld hl, Serial
+	jp InterruptWrapper
 SECTION "joypad", ROM0[$60]
 	reti
 
@@ -104,16 +127,62 @@ CopyData::
 	jr nz, CopyData
 	ret
 
+SECTION "Initialization",HOME[$c0]
+
+IsGBC:
+	ld hl,Start
+	push hl ; hijack ret
+	ld a,BANK(InitGbcMode)
+	ld [$2000],a
+	jp InitGbcMode
+
+LoadBank1:
+	xor a
+	ld [$2000],a
+	ret
+
+Initialize:
+	cp $11
+	jr z,IsGBC
+.IsNotGBC
+	ld a,$30
+	ld [$2000],a
+	jr loop3
+_ColorOverworldSprites: ; $00dc
+	push af
+	ld a,BANK(ColorOverworldSprites)
+	jr CallToBank
+_LoadTilesetPatternsAndPalettes: ; $00e1
+	push af
+	ld a, BANK(LoadTilesetPalette)
+loop3
+	ld [$2000],a
+	call $00f5
+	pop af
+	call LoadTilesetTilePatternData
+	ret
+	nop
+	nop
+CallToBank: ; $00f1
+	ld [$2000],a
+	pop af
+	push af
+	call $6000
+	ld a,[$ff00+$b8]
+	ld [$2000],a
+	pop af
+	ret
+
 
 SECTION "Entry", ROM0[$100]
-	nop
-	jp Start
+	jp Initialize
 
 
 SECTION "Start", ROM0[$150]
 
 Start::
 	cp GBC
+Start_2:
 	jr z, .gbc
 	xor a
 	jr .ok
@@ -719,42 +788,26 @@ UncompressMonSprite:: ; 1627 (0:1627)
 	ld [W_SPRITEINPUTPTR],a    ; fetch sprite input pointer
 	ld a,[hl]
 	ld [W_SPRITEINPUTPTR+1],a
-; define (by index number) the bank that a pokemon's image is in
-; index = Mew, bank 1
-; index = Kabutops fossil, bank $B
-;	index < $1F, bank 9
-; $1F ≤ index < $4A, bank $A
-; $4A ≤ index < $74, bank $B
-; $74 ≤ index < $99, bank $C
-; $99 ≤ index,       bank $D
-	ld a,[wcf91] ; XXX name for this ram location
-	ld b,a
-	cp MEW
-	ld a,BANK(MewPicFront)
-	jr z,.GotBank
-	ld a,b
+
+	; HAX: code from Danny-E33's hack
+	; Each pokemon's picture bank is defined with an unused byte in its stats.
+	ld a, [$CF91] ; get Pokémon ID
+	ld b, BANK(FossilKabutopsPic)
 	cp FOSSIL_KABUTOPS
-	ld a,BANK(FossilKabutopsPic)
-	jr z,.GotBank
+	jr z,.RecallBank
+	cp FOSSIL_AERODACTYL
+	jr z,.RecallBank
+	cp MON_GHOST
+	jr z,.RecallBank
+
+	ld a, [$D0D3] ; Get bank from base stats
+	jr .GotBank
+.RecallBank
 	ld a,b
-	cp TANGELA + 1
-	ld a,BANK(TangelaPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp MOLTRES + 1
-	ld a,BANK(MoltresPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp BEEDRILL + 2
-	ld a,BANK(BeedrillPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp STARMIE + 1
-	ld a,BANK(StarmiePicFront)
-	jr c,.GotBank
-	ld a,BANK(VictreebelPicFront)
 .GotBank
 	jp UncompressSpriteData
+
+SECTION "LoadMonFrontSprite", ROM0[$1665]
 
 ; de: destination location
 LoadMonFrontSprite:: ; 1665 (0:1665)
@@ -5031,7 +5084,8 @@ GBPalNormal::
 ; Reset BGP and OBP0.
 	ld a, %11100100 ; 3210
 	ld [rBGP], a
-	ld a, %11010000 ; 3100
+;	ld a,%11010000
+	ld a,%11100100	; HAX
 	ld [rOBP0], a
 	ret
 
@@ -5268,3 +5322,60 @@ PointerTable_3f22:: ; 3f22 (0:3f22)
 	dw BookOrSculptureText                  ; id = 40
 	dw ElevatorText                         ; id = 41
 	dw PokemonStuffText                     ; id = 42
+
+; Fade out from map screen
+GBFadeOut_Custom:
+	ld hl,FadePal5
+	ld b,$04
+	jp GBFadeOutCommon
+
+InterruptWrapper:
+	push af
+	push bc
+	push de
+	ld a,[rSVBK]
+	ld b,a
+	xor a
+	ld [rSVBK],a
+	ld de,.ret
+	push de
+	jp [hl]
+.ret
+	ld a,b
+	ld [rSVBK],a
+	pop de
+	pop bc
+	pop af
+	pop hl
+	reti
+
+; Whenever DelayFrame is called, update the sprites.
+; This is done here instead of at vblank to prevent sprite wobbliness when scrolling.
+; In some situations, DelayFrame is not called every frame, and this could be problematic.
+; But I think when sprites are being animated or moved around, it is always called.
+DelayFrameHook:
+	push bc
+	push de
+	push hl
+
+	ld a, [rSVBK]
+	ld b,a
+	xor a
+	ld [rSVBK],a
+	push bc ; Save wram bank
+
+	di
+	CALL_INDIRECT PrepareOAMData
+	jr z, .spritesDrawn
+	CALL_INDIRECT ColorNonOverworldSprites
+.spritesDrawn
+	ei
+
+	pop af
+	ld [rSVBK],a ; Restore wram bank
+	ld a,1
+	ld [H_VBLANKOCCURRED],a
+	pop hl
+	pop de
+	pop bc
+	ret

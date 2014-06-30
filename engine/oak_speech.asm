@@ -53,9 +53,18 @@ OakSpeech: ; 6115 (1:6115)
 	call Func_62ce
 	xor a
 	ld [$FFD7],a
-	ld a,[wd732]
-	bit 1,a ; XXX when is bit 1 set?
-	jp nz,Func_61bc ; easter egg: skip the intro
+IF GEN_2_GRAPHICS
+	ld a, $86
+ELSE
+	ld a, PAL_BROWNMON
+ENDC
+	call GotPalID ; HAX
+	nop
+	nop
+	nop
+	;ld a,[$D732]
+	;bit 1,a ; XXX when is bit 1 set?
+	;jp nz,Function61BC ; easter egg: skip the intro
 	ld de,ProfOakPic
 	ld bc, (Bank(ProfOakPic) << 8) | $00
 	call IntroPredef3B   ; displays Oak pic?
@@ -63,7 +72,8 @@ OakSpeech: ; 6115 (1:6115)
 	ld hl,OakSpeechText1
 	call PrintText      ; prints text box
 	call GBFadeOut2
-	call ClearScreen
+	;call ClearScreen
+	call GetNidorinoPalID ; HAX
 	ld a,NIDORINO
 	ld [wd0b5],a    ; pic displayed is stored at this location
 	ld [wcf91],a
@@ -74,7 +84,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld hl,OakSpeechText2
 	call PrintText      ; Prints text box
 	call GBFadeOut2
-	call ClearScreen
+	call GetRedPalID ; HAX
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
 	call IntroPredef3B      ; displays player pic?
@@ -83,7 +93,7 @@ OakSpeech: ; 6115 (1:6115)
 	call PrintText
 	call LoadDefaultNamesPlayer ; brings up NewName/Red/etc menu
 	call GBFadeOut2
-	call ClearScreen
+	call GetRivalPalID ; HAX
 	ld de,Rival1Pic
 	ld bc,(Bank(Rival1Pic) << 8) | $00
 	call IntroPredef3B ; displays rival pic
@@ -94,7 +104,7 @@ OakSpeech: ; 6115 (1:6115)
 
 Func_61bc: ; 61bc (1:61bc)
 	call GBFadeOut2
-	call ClearScreen
+	call GetRedPalID ; HAX
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
 	call IntroPredef3B

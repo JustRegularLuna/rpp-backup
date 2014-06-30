@@ -9,7 +9,11 @@ db WATER ; species type 1
 db ICE ; species type 2
 db 75 ; catch rate
 db 176 ; base exp yield
-db $66 ; sprite dimensions
+IF GEN_2_GRAPHICS
+	db $77 ; sprite dimensions
+ELSE
+	db $66 ; sprite dimensions
+ENDC
 dw DewgongPicFront
 dw DewgongPicBack
 ; attacks known at lvl 0
@@ -26,4 +30,4 @@ db %11000000
 db %10000010
 db %00001000
 db %00110010
-db 0 ; padding
+db BANK(DewgongPicFront)

@@ -523,3 +523,13 @@ WEST_MAP_CONNECTION: MACRO
 	db (\2 * 2) - 1 ; x alignment
 	dw wOverworldMap + 6 + (2 * \2) ; window (position of the upper left block after entring the map)
 ENDM
+
+ORG: MACRO
+	SECTION "ORG\@",ROMX[\2],BANK[\1]
+	ENDM
+
+CALL_INDIRECT: MACRO
+	ld b, BANK(\1)
+	ld hl, \1
+	rst $18
+ENDM

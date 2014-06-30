@@ -92,7 +92,7 @@ HealEffect_: ; 3b9ec (e:79ec)
 	xor a
 .asm_3ba83
 	ld [wListMenuID], a ; wListMenuID
-	predef UpdateHPBar2
+	predef UpdateHPBar_Hook
 	ld hl, Func_3cd5a ; $4d5a
 	call BankswitchEtoF
 	ld hl, RegainedHealthText ; $7aac

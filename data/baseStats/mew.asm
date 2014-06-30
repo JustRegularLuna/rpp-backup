@@ -26,4 +26,4 @@ db %11111111
 db %11111111
 db %11111111
 db %11111111
-db %11111111 ; usually spacing
+db BANK(MewPicFront)

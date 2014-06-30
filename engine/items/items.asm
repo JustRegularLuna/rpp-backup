@@ -924,7 +924,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [$fff6],a
 	ld a,$02
 	ld [wListMenuID],a
-	predef UpdateHPBar2 ; animate HP bar decrease of pokemon that used Softboiled
+	predef UpdateHPBar_Hook ; animate HP bar decrease of pokemon that used Softboiled
 	ld a,[$fff6]
 	res 0,a
 	ld [$fff6],a
@@ -1074,7 +1074,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [$fff6],a
 	ld a,$02
 	ld [wListMenuID],a
-	predef UpdateHPBar2 ; animate the HP bar lengthening
+	predef UpdateHPBar_Hook ; animate the HP bar lengthening
 	ld a,[$fff6]
 	res 0,a
 	ld [$fff6],a

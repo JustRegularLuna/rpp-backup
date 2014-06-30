@@ -88,8 +88,11 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld b, $8
+
+	; HAX: Use command $0f instead of $08
+	ld b, $0f
 	call GoPAL_SET
+
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
 	callba Func_7176c

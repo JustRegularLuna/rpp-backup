@@ -36,6 +36,7 @@ ClearBgMap:: ; 1cf0 (0:1cf0)
 ; When the player takes a step, a row or column of 2x2 tile blocks at the edge
 ; of the screen toward which they moved is exposed and has to be redrawn.
 ; This function does the redrawing.
+; This function has beex HAXed to call other functions, which will also refresh palettes.
 RedrawExposedScreenEdge:: ; 1d01 (0:1d01)
 	ld a,[H_SCREENEDGEREDRAW]
 	and a
@@ -45,155 +46,62 @@ RedrawExposedScreenEdge:: ; 1d01 (0:1d01)
 	ld [H_SCREENEDGEREDRAW],a
 	dec b
 	jr nz,.redrawRow
-.redrawColumn
-	ld hl,wScreenEdgeTiles
-	ld a,[H_SCREENEDGEREDRAWADDR]
-	ld e,a
-	ld a,[H_SCREENEDGEREDRAWADDR + 1]
-	ld d,a
-	ld c,18 ; screen height
-.loop1
-	ld a,[hli]
-	ld [de],a
-	inc de
-	ld a,[hli]
-	ld [de],a
-	ld a,31
-	add e
-	ld e,a
-	jr nc,.noCarry
-	inc d
-.noCarry
-; the following 4 lines wrap us from bottom to top if necessary
-	ld a,d
-	and a,$03
-	or a,$98
-	ld d,a
-	dec c
-	jr nz,.loop1
-	xor a
-	ld [H_SCREENEDGEREDRAW],a
+	CALL_INDIRECT DrawMapColumn
 	ret
 .redrawRow
-	ld hl,wScreenEdgeTiles
-	ld a,[H_SCREENEDGEREDRAWADDR]
-	ld e,a
-	ld a,[H_SCREENEDGEREDRAWADDR + 1]
-	ld d,a
-	push de
-	call .drawHalf ; draw upper half
-	pop de
-	ld a,32 ; width of VRAM background map
-	add e
-	ld e,a
-			 ; draw lower half
-.drawHalf
-	ld c,10
-.loop2
-	ld a,[hli]
-	ld [de],a
-	inc de
-	ld a,[hli]
-	ld [de],a
-	ld a,e
-	inc a
-; the following 6 lines wrap us from the right edge to the left edge if necessary
-	and a,$1f
-	ld b,a
-	ld a,e
-	and a,$e0
-	or b
-	ld e,a
-	dec c
-	jr nz,.loop2
+	CALL_INDIRECT DrawMapRow
 	ret
 
+SECTION "AutoBgMapTransfer", ROM0[$1d57]
+
 ; This function automatically transfers tile number data from the tile map at
-; wTileMap to VRAM during V-blank. Note that it only transfers one third of the
+; C3A0 to VRAM during V-blank. Note that it only transfers one third of the
 ; background per V-blank. It cycles through which third it draws.
 ; This transfer is turned off when walking around the map, but is turned
 ; on when talking to sprites, battling, using menus, etc. This is because
 ; the above function, RedrawExposedScreenEdge, is used when walking to
 ; improve efficiency.
-AutoBgMapTransfer:: ; 1d57 (0:1d57)
-	ld a,[H_AUTOBGTRANSFERENABLED]
-	and a
-	ret z
-	ld hl,[sp + 0]
-	ld a,h
-	ld [H_SPTEMP],a
-	ld a,l
-	ld [H_SPTEMP + 1],a ; save stack pinter
-	ld a,[H_AUTOBGTRANSFERPORTION]
-	and a
-	jr z,.transferTopThird
-	dec a
-	jr z,.transferMiddleThird
-.transferBottomThird
-	hlCoord 0, 12
-	ld sp,hl
-	ld a,[H_AUTOBGTRANSFERDEST + 1]
-	ld h,a
-	ld a,[H_AUTOBGTRANSFERDEST]
-	ld l,a
-	ld de,(12 * 32)
-	add hl,de
-	xor a ; TRANSFERTOP
-	jr .doTransfer
-.transferTopThird
-	hlCoord 0, 0
-	ld sp,hl
-	ld a,[H_AUTOBGTRANSFERDEST + 1]
-	ld h,a
-	ld a,[H_AUTOBGTRANSFERDEST]
-	ld l,a
-	ld a,TRANSFERMIDDLE
-	jr .doTransfer
-.transferMiddleThird
-	hlCoord 0, 6
-	ld sp,hl
-	ld a,[H_AUTOBGTRANSFERDEST + 1]
-	ld h,a
-	ld a,[H_AUTOBGTRANSFERDEST]
-	ld l,a
-	ld de,(6 * 32)
-	add hl,de
-	ld a,TRANSFERBOTTOM
-.doTransfer
-	ld [H_AUTOBGTRANSFERPORTION],a ; store next portion
-	ld b,6
+AutoBgMapTransfer: ; 1d57 (0:1d57)	; HAXED function
+	ld a,BANK(RefreshWindow)
+	ld [$2000],a
+	call RefreshWindow
+	ld a,[H_LOADEDROMBANK]
+	ld [$2000],a
+	ret
 
-TransferBgRows:: ; 1d9e (0:1d9e)
+; More HAX functions
+
+_RefreshWindowInitial: ; 1d65
+	ld a,BANK(RefreshWindowInitial)
+	ld [$2000],a
+	jp RefreshWindowInitial
+
+HaxFunc3: ; 1d6d
+	ld a,[H_LOADEDROMBANK]
+	ld [$2000],a
+	ret
+
+; HAX: This function is reimplemented.
+;TransferBgRows:: ; 1d9e (0:1d9e)
 ; unrolled loop and using pop for speed
 
-	rept 20 / 2 - 1
+; HAX: Squeeze this little function in here
+_GbcPrepareVBlank:
+	push af
+	push bc
+	push de
+	push hl
+	CALL_INDIRECT GbcPrepareVBlank
+	pop hl
 	pop de
-	ld [hl], e
-	inc l
-	ld [hl], d
-	inc l
-	endr
+	pop bc
+	pop af
+	reti
 
-	pop de
-	ld [hl], e
-	inc l
-	ld [hl], d
+SECTION "JpPoint", ROM0[$1dde]
 
-	ld a, 32 - (20 - 1)
-	add l
-	ld l, a
-	jr nc, .ok
-	inc h
-.ok
-	dec b
-	jr nz, TransferBgRows
-
-	ld a, [H_SPTEMP]
-	ld h, a
-	ld a, [H_SPTEMP + 1]
-	ld l, a
-	ld sp, hl
-	ret
+JpPoint:
+	jp _RefreshWindowInitial	; HAX
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
 ; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
@@ -219,7 +127,7 @@ VBlankCopyBgMap:: ; 1de1 (0:1de1)
 	ld b,a
 	xor a
 	ld [H_VBCOPYBGSRC],a ; disable transfer so it doesn't continue next V-blank
-	jr TransferBgRows
+	jr JpPoint	; HAX
 
 
 VBlankCopyDouble::
@@ -391,27 +299,23 @@ UpdateMovingBgTiles::
 	ld hl, vTileset + $14 * $10
 	ld c, $10
 
+	; HAX
+	ld a,$2c
+	ld [$2000],a
+
 	ld a, [wd085]
 	inc a
 	and 7
 	ld [wd085], a
 
 	and 4
-	jr nz, .left
-.right
-	ld a, [hl]
-	rrca
-	ld [hli], a
-	dec c
-	jr nz, .right
-	jr .done
-.left
-	ld a, [hl]
-	rlca
-	ld [hli], a
-	dec c
-	jr nz, .left
-.done
+	; HAX
+	jp nz,$7000
+	jp $7080
+
+	ld a,[H_LOADEDROMBANK]
+	ld [$2000],a
+
 	ld a, [$ffd7]
 	rrca
 	ret nc

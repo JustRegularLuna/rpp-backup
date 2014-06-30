@@ -26,4 +26,4 @@ db %11001110
 db %11000010
 db %10001000
 db %00100110
-db 0 ; padding
+db BANK(SandshrewPicFront)

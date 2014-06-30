@@ -26,4 +26,4 @@ db %11110001
 db %10100011
 db %00111000
 db %01100011
-db 0 ; padding
+db BANK(JigglypuffPicFront)

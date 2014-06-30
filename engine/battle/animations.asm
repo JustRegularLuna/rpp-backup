@@ -181,6 +181,8 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	jr z,.AnimationOver
 	cp a,$C0 ; is this subanimation or a special effect?
 	jr c,.playSubanimation
+;	jp StartAnimationHook ; HAX
+;	nop
 .doSpecialEffect
 	ld c,a
 	ld de,SpecialEffectPointers
@@ -244,7 +246,9 @@ PlayAnimation: ; 780f1 (1e:40f1)
 	ld a,[rOBP0]
 	push af
 	ld a,[wcc79]
-	ld [rOBP0],a
+;	ld [rOBP0],a	; HAX
+	nop
+	nop
 	call LoadAnimationTileset
 	call LoadSubanimation
 	call PlaySubanimation
@@ -327,23 +331,31 @@ GetSubanimationTransform2: ; 781ca (1e:41ca)
 	ret
 
 ; loads tile patterns for battle animations
+; I HAXed with this function by shaving off a few bytes in order to
+; call a function to load sprite palettes.
 LoadAnimationTileset: ; 781d2 (1e:41d2)
 	ld a,[wd09f] ; tileset select
 	add a
 	add a
-	ld hl,AnimationTilesetPointers
 	ld e,a
 	ld d,0
-	add hl,de
+
+	; HAX: Load corresponding palettes as well
+	ld b, BANK(LoadAnimationTilesetPalettes)
+	ld hl, LoadAnimationTilesetPalettes
+	rst $18
+
+	;ld hl,AnimationTilesetPointers
+	;add hl,de
 	ld a,[hli]
 	ld [wd07d],a ; number of tiles
+	push af
 	ld a,[hli]
 	ld e,a
-	ld a,[hl]
-	ld d,a ; de = address of tileset
+	ld d,[hl] ; de = address of tileset
 	ld hl,vSprites + $310
 	ld b, BANK(AnimationTileset1) ; ROM bank
-	ld a,[wd07d]
+	pop af ; a = [$D07D]
 	ld c,a ; number of tiles
 	jp CopyVideoData ; load tileset
 
@@ -532,9 +544,13 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld b, $f0
 .asm_78e3f
 	ld a, b
-	ld [rOBP0], a ; $ff48
+	;ld [rOBP0], a ; HAX: don't mess with these palettes in-battle
+	nop
+	nop
 	ld a, $6c
-	ld [rOBP1], a ; $ff49
+	;ld [rOBP1], a ; HAX
+	nop
+	nop
 	ret
 .asm_78e47
 	ld a, $e4
@@ -2735,10 +2751,11 @@ Unknown_79d63: ; 79d63 (1e:5d63)
 	db $00,$84,$06,$81,$02,$88,$01,$83,$05,$89,$09,$80,$07,$87,$03,$82,$04,$85,$08,$86
 
 AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
-	ld de, vBackPic
-	ld hl, vSprites
-	ld bc, 7 * 7
-	call CopyVideoData
+	call SpriteifyPlayerPokemon
+	REPT 9
+	nop
+	ENDR
+
 	xor a
 	ld [$ffae], a
 	ld hl, vBGMap0

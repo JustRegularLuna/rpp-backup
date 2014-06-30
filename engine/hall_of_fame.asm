@@ -192,10 +192,22 @@ Func_7033e: ; 7033e (1c:433e)
 	ld de, RedPicBack ; $7e0a
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
+
+IF GEN_2_GRAPHICS ; Use uncompressed red sprite
+	ld a,$66
+	ld c,a
+	ld de, $9310
+	call LoadUncompressedSpriteData
+	nop
+	nop
+	nop
+	nop
+ELSE
 	predef ScaleSpriteByTwo
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
 	ld c, $1
+ENDC
 
 Func_7036d: ; 7036d (1c:436d)
 	ld b, $0

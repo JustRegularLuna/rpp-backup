@@ -32,4 +32,4 @@ db %11110000
 db %01000011
 db %00101000
 db %00000010
-db 0 ; padding
+db BANK(VenomothPicFront)

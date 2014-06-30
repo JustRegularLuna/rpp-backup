@@ -74,7 +74,7 @@ Func_7861: ; 7861 (1:7861)
 	xor a
 .asm_78aa
 	ld [wListMenuID], a ; wListMenuID
-	predef UpdateHPBar2
+	predef UpdateHPBar_Hook
 	predef Func_3cd60
 	predef Func_3cdec
 	callab ReadPlayerMonCurHPAndStatus

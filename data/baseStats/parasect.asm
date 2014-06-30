@@ -26,4 +26,4 @@ db %11001000
 db %10000011
 db %00001000
 db %00000110
-db 0 ; padding
+db BANK(ParasectPicFront)

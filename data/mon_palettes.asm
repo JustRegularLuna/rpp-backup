@@ -1,4 +1,9 @@
 MonsterPalettes: ; 725c8 (1c:65c8)
+IF GEN_2_GRAPHICS
+	INCBIN "color/gen2_monsterpalettes.bin"
+TrainerPalettes: ; Gen II trainer sprites are given their own palettes
+	INCBIN "color/trainerpalettes.bin"
+ELSE
 	db PAL_MEWMON    ; MISSINGNO
 	db PAL_GREENMON  ; BULBASAUR
 	db PAL_GREENMON  ; IVYSAUR
@@ -18,7 +23,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_BROWNMON  ; PIDGEY
 	db PAL_BROWNMON  ; PIDGEOTTO
 	db PAL_BROWNMON  ; PIDGEOT
-	db PAL_GREYMON   ; RATTATA
+	db PAL_PURPLEMON ; RATTATA (HAX)
 	db PAL_GREYMON   ; RATICATE
 	db PAL_BROWNMON  ; SPEAROW
 	db PAL_BROWNMON  ; FEAROW
@@ -131,7 +136,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_REDMON    ; MAGIKARP
 	db PAL_BLUEMON   ; GYARADOS
 	db PAL_CYANMON   ; LAPRAS
-	db PAL_GREYMON   ; DITTO
+	db PAL_PINKMON   ; DITTO (HAX)
 	db PAL_GREYMON   ; EEVEE
 	db PAL_CYANMON   ; VAPOREON
 	db PAL_YELLOWMON ; JOLTEON
@@ -151,3 +156,5 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_BROWNMON  ; DRAGONITE
 	db PAL_MEWMON    ; MEWTWO
 	db PAL_MEWMON    ; MEW
+; Trainers use index 0 of MonsterPalettes
+ENDC

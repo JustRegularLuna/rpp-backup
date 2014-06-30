@@ -92,7 +92,9 @@ EffectsArray5B: ; 3c049 (f:4049)
 	db -1
 
 Func_3c04c: ; 3c04c (f:404c)
-	call Func_3ec92
+	; HAX: I switched stuff around with Func_3efeb. Call 3ec92, THEN GoPAL_SET with b=0.
+	; This prevents flickering when entering battle.
+	call GoPAL_SET
 	ld a, $1
 	ld [wd125], a
 	call DisplayTextBoxID
@@ -743,7 +745,7 @@ UpdateCurMonHPBar: ; 3c4f6 (f:44f6)
 .playersTurn
 	push bc
 	ld [wListMenuID], a ; wListMenuID
-	predef UpdateHPBar2
+	predef UpdateHPBar_Hook
 	pop bc
 	ret
 
@@ -4717,7 +4719,7 @@ ApplyDamageToEnemyPokemon: ; 3e142 (f:6142)
 	hlCoord 2, 2
 	xor a
 	ld [wListMenuID],a
-	predef UpdateHPBar2 ; animate the HP bar shortening
+	predef UpdateHPBar_Hook
 ApplyAttackToEnemyPokemonDone: ; 3e19d (f:619d)
 	jp Func_3cd5a ; redraw pokemon names and HP bars
 
@@ -4835,7 +4837,7 @@ ApplyDamageToPlayerPokemon: ; 3e200 (f:6200)
 	hlCoord 10, 9
 	ld a,$01
 	ld [wListMenuID],a
-	predef UpdateHPBar2 ; animate the HP bar shortening
+	predef UpdateHPBar_Hook
 ApplyAttackToPlayerPokemonDone
 	jp Func_3cd5a ; redraw pokemon names and HP bars
 
@@ -6165,7 +6167,16 @@ Func_3ec92: ; 3ec92 (f:6c92)
 .asm_3ec9e
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
+
+IF GEN_2_GRAPHICS
+	call LoadMonBackSpriteHook ; No pixelated backsprites
+	nop
+	nop
+ELSE
+	; This is unchanged
 	predef ScaleSpriteByTwo
+ENDC
+
 	ld hl, wOAMBuffer
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
@@ -6197,8 +6208,15 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld e, a
 	dec b
 	jr nz, .asm_3ecb2
+IF GEN_2_GRAPHICS
+	REPT 6
+	nop
+	ENDR
+ELSE
+	; unchanged
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
+ENDC
 	ld a, $a
 	ld [$0], a
 	xor a
@@ -6672,8 +6690,10 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	predef Func_3f0c6
 
 Func_3efeb: ; 3efeb (f:6feb)
+	; HAX: I switched stuff around with Func_3c04c. Call 3ec92, THEN GoPAL_SET with b=0.
+	; This prevents flickering when entering battle.
+	call Func_3ec92
 	ld b, $0
-	call GoPAL_SET
 	call Func_3c04c
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -6840,9 +6860,22 @@ LoadMonBackPic:
 	call ClearScreenArea
 	ld hl,  W_MONHBACKSPRITE - W_MONHEADER
 	call UncompressMonSprite
-	predef ScaleSpriteByTwo
-	ld de, vBackPic
-	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+	ld a, $3
+
+	IF GEN_2_GRAPHICS
+		call LoadMonBackSpriteHook
+		nop
+		nop
+		nop
+		nop
+		nop
+		nop
+	ELSE
+		call Predef ; ScaleSpriteByTwo
+		ld de, vBackPic
+		call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+	ENDC
+
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
@@ -8448,3 +8481,9 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	pop de
 	pop hl
 	ret
+
+LoadMonBackSpriteHook: ; HAX
+	ld a,$66
+	ld de,vBackPic
+	ld c,a
+	jp LoadUncompressedSpriteData
