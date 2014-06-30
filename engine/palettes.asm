@@ -52,7 +52,7 @@ LoadSGBPalette:
 	ld de,SuperPalettes
 	add hl,de
 
-	ld de,$d000
+	ld de,W2_BgPaletteData
 	jr startPaletteTransfer
 
 LoadSGBPalette_Sprite:
@@ -66,7 +66,7 @@ LoadSGBPalette_Sprite:
 	ld de,SuperPalettes
 	add hl,de
 
-	ld de,$d040
+	ld de,W2_BgPaletteData + $40
 
 startPaletteTransfer:
 	add a
@@ -124,7 +124,7 @@ DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d) - DeterminePaletteID without st
 
 IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
 	jr nz,.getPaletteID ; Check if trainer?
-	ld a,[$D031] ; Get trainer ID
+	ld a,[W_TRAINERCLASS] ; Get trainer ID
 	ld hl, TrainerPalettes
 ELSE ; Trainers are given a single palette (PAL_MEWMON)
 	REPT 8
@@ -146,7 +146,7 @@ DetermineBackSpritePaletteID: ; DeterminePaletteID with a special check for the 
 	ret nz
 	ld a, [hl]
 DetermineBackSpritePaletteID_NoStatusCheck:
-	ld [$D11E], a
+	ld [wd11e], a
 	and a
 
 	push bc
@@ -154,7 +154,7 @@ DetermineBackSpritePaletteID_NoStatusCheck:
 	call Predef ; turn Pokemon ID number into Pokedex number
 	pop bc
 
-	ld a, [$D11E]
+	ld a, [wd11e]
 	ld hl, MonsterPalettes
 	and a
 	jr nz,.getPaletteID ; Check if trainer?

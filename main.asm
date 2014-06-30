@@ -4637,18 +4637,18 @@ UpdateHPBar_CompareNewHPToOldHP: ; fad1 (3:7ad1)
 UpdateHPBar_Palettes:
 	; Store variables to be retrieved after the Bankswitch function.
 	; Using Predef causes glitches, because this is called FROM a predef.
-	ld a, [$cfba]
+	ld a, [wcfba]
 	ld d, a
-	ld a, [$cfbb]
+	ld a, [wcfbb]
 	ld e, a
 
-	ld hl,$CC51
+	ld hl,wPredefRegisters + 2
 	ld a,d
 	ld [hli],a
 	ld a,e
 	ld [hli],a
 
-	; ld $CC53,bc
+	; ld wPredefRegisters + 4,bc
 	ld a,b
 	ld [hli],a
 	ld [hl],c
@@ -4657,14 +4657,14 @@ UpdateHPBar_Palettes:
 	CALL_INDIRECT HPBarLength
 
 	; Pass this other hp format to Func_3df9 which determines HP bar color
-	ld hl, $cf1d
+	ld hl, wcf1d
 	call GetHealthBarColor
 
 	ld a,2
 	ld [rSVBK],a
 
-	; $cf94 = 0 for enemy hp bar, 1 for player hp bar, 2 for pokemon menu.
-	ld a,[$cf94]
+	; wListMenuID = 0 for enemy hp bar, 1 for player hp bar, 2 for pokemon menu.
+	ld a,[wListMenuID]
 	ld c,a
 
 	cp 2
@@ -4677,7 +4677,7 @@ UpdateHPBar_Palettes:
 	call AddNTimes
 
 	ld bc, 20*2
-	ld a, [$cf1d] ; Palette # was stored to here
+	ld a, [wcf1d] ; Palette # was stored to here
 	inc a
 	call FillMemory
 
@@ -4686,7 +4686,7 @@ UpdateHPBar_Palettes:
 	jr .done
 
 .inBattle
-	ld a,[$cf1d] ; Palette # was stored to here
+	ld a,[wcf1d] ; Palette # was stored to here
 	add $1f
 	ld d,a
 
@@ -4711,7 +4711,7 @@ UpdateHPBar_Hook:
 	push de
 	push hl
 
-	ld a,[$cf94]
+	ld a,[wListMenuID]
 	cp 2
 	jr nz,.inBattle
 	
@@ -4736,7 +4736,7 @@ UpdateHPBar_Hook:
 
 	; Load pokemon data
 .gotPokemon
-	ld de, $cfb9
+	ld de, wcfb9
 	ld bc, $b
 	call CopyData
 

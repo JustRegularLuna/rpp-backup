@@ -61,14 +61,14 @@ BuildBattlePalPacket:
 	call LoadSGBPalette
 
 	; Player lifebar
-	ld a, [$cf1d]
+	ld a, [wcf1d]
 	add $1f
 	ld d,a
 	ld e,2
 	call LoadSGBPalette
 
 	; Enemy lifebar
-	ld a, [$cf1e]
+	ld a, [wcf1e]
 	add $1f
 	ld d,a
 	ld e,3
@@ -91,7 +91,7 @@ BuildBattlePalPacket:
 	ld [W2_StaticPaletteChanged],a
 
 	; Top half; enemy lifebar
-	ld hl,$d200
+	ld hl,W2_TilesetPaletteMap
 	ld d,3
 	ld bc,20*6
 .eFillLoop
@@ -103,7 +103,7 @@ BuildBattlePalPacket:
 	jr nz,.eFillLoop
 
 	; Bottom half; player lifebar
-	ld hl,$d200+6*20
+	ld hl,W2_TilesetPaletteMap+6*20
 	ld d,2
 	ld bc,20*12
 .pFillLoop
@@ -115,7 +115,7 @@ BuildBattlePalPacket:
 	jr nz,.pFillLoop
 
 	; Player pokemon
-	ld hl,$d200+4*20
+	ld hl,W2_TilesetPaletteMap+4*20
 	ld de,20-9
 	ld b,8
 	ld a,0
@@ -130,7 +130,7 @@ BuildBattlePalPacket:
 	jr nz,.pDrawLine
 
 	; Enemy pokemon
-	ld hl,$d200 + 11
+	ld hl,W2_TilesetPaletteMap + 11
 	ld de,20-9
 	ld b,7
 	ld a,1
@@ -174,13 +174,13 @@ SendPalPacket_TownMap:
 	ld a,1
 	ld [W2_TileBasedPalettes],a
 
-	ld hl,$d200
+	ld hl,W2_TilesetPaletteMap
 	ld bc, $100
 	xor a
 	call FillMemory
 
 	; Give tile $65 a different color
-	ld hl,$d265
+	ld hl,W2_TilesetPaletteMap + $65
 	ld [hl], 1
 
 	xor a
@@ -223,7 +223,7 @@ BuildStatusScreenPalPacket:
 	ld [W2_StaticPaletteChanged],a
 
 	; Set everything to the lifebar palette
-	ld hl,$d200
+	ld hl,W2_TilesetPaletteMap
 	ld bc,18*20
 	ld d,1
 .fillLoop
@@ -235,7 +235,7 @@ BuildStatusScreenPalPacket:
 	jr nz,.fillLoop
 
 	; Set upper-left to pokemon's palette
-	ld hl,$d200
+	ld hl,W2_TilesetPaletteMap
 	ld de,20-8
 	ld b,7
 	xor a
@@ -274,7 +274,7 @@ ENDC
 	call LoadSGBPalette
 
 	ld bc,20*18
-	ld hl,$d200
+	ld hl,W2_TilesetPaletteMap
 	ld d,1
 .palLoop
 	ld [hl],d
@@ -284,7 +284,7 @@ ENDC
 	or c
 	jr nz,.palLoop
 
-	ld hl,$d201+20
+	ld hl,W2_TilesetPaletteMap + 21
 	ld de,20-8
 	ld b,7
 	xor a
@@ -386,7 +386,7 @@ SendPalPacket_Titlescreen:
 	CALL_INDIRECT LoadSpritePalettes
 
 	; Pokemon logo
-	ld hl,$d200
+	ld hl,W2_TilesetPaletteMap
 	ld a,1
 	ld b,8
 .logo2Loop
@@ -403,7 +403,7 @@ SendPalPacket_Titlescreen:
 	ld a,2
 	call FillMemory
 
-	ld hl, $d200 + 17*20
+	ld hl, W2_TilesetPaletteMap + 17*20
 	ld bc, 20
 	ld a,3
 	call FillMemory
@@ -454,7 +454,7 @@ SendPalPacket_Generic:
 	call LoadSGBPalette ; Load it into the second slot as well. Prevents a minor glitch.
 
 	ld bc,20*18
-	ld hl,$d200
+	ld hl,W2_TilesetPaletteMap
 	xor a
 	call FillMemory
 
@@ -538,8 +538,8 @@ SendPalPacket_PartyMenu:
 
 	; Palettes were written to a SGB packet. Extract them.
 	ld b,9		; there are only 6 pokemon but iterate 9 times to fill the whole screen
-	ld hl,$cf37
-	ld de,$d200
+	ld hl,wcf37
+	ld de,W2_TilesetPaletteMap
 .loop
 	ld a,[hl]
 	and 3
@@ -577,7 +577,7 @@ SendPokemonPalette_WholeScreen:
 	and a
 	ld a, $1e ; Black palette
 	jr nz, .loadPalette
-	ld a, [$cf1d]
+	ld a, [wcf1d]
 	; Use the "BackSprite" version for the player sprite in the hall of fame.
 	call DetermineBackSpritePaletteID_NoStatusCheck
 
@@ -652,7 +652,7 @@ BuildTrainerCardPalPacket:
 	; Load palette map
 	ld hl, BadgePalettes
 	ld a, BANK(BadgePalettes)
-	ld de, $d200
+	ld de, W2_TilesetPaletteMap
 	ld bc, $60
 	call FarCopyData
 	; Zero the rest
@@ -684,7 +684,7 @@ PalCmd_0e:
 	ld [W2_StaticPaletteChanged],a
 
 	ld bc,20*18
-	ld hl,$d200
+	ld hl,W2_TilesetPaletteMap
 	ld d,0
 .palLoop
 	ld [hl],d
@@ -720,9 +720,7 @@ LoadTitleMonTilesAndPalettes:
 	ld b,6
 	call GoPAL_SET
 	pop de
-	ld b, BANK(TitleScroll)
-	ld hl, TitleScroll
-	call Bankswitch ; indirect jump to TitleScroll (37258 (d:7258))
+	callba TitleScroll
 	ret
 
 INCLUDE "color/refreshmaps.asm"

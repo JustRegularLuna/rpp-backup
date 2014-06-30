@@ -111,10 +111,10 @@ ColorNonOverworldSprites:
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.playersTurn
-	ld a,[$cfcf] ; Enemy move type
+	ld a,[W_ENEMYMOVETYPE] ; Enemy move type
 	jr .gotType
 .playersTurn
-	ld a,[$cfd5] ; Move type
+	ld a,[W_PLAYERMOVETYPE] ; Move type
 .gotType
 	ld hl, TypeColorTable
 	add l
@@ -140,7 +140,7 @@ ColorNonOverworldSprites:
 LoadAnimationTilesetPalettes:
 	di
 	push de
-	ld a,[$D09F] ; Animation tileset
+	ld a,[wd09f] ; Animation tileset
 	ld c,a
 	ld a,2
 	ld [rSVBK],a

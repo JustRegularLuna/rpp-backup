@@ -132,7 +132,7 @@ RefreshWindowPalettes:
 	and a
 	ret z
 
-	ld a,[$ff00+$bb]
+	ld a,[$ffbb]
 	and a
 	jr z,.firstThird
 	dec a
@@ -188,10 +188,10 @@ RefreshWindowPalettes:
 	push hl
 	ld h,d
 	ld l,e
-	ld de,$d200 - wTileMap
+	ld de,W2_TilesetPaletteMap - wTileMap
 	add hl,de
 	ld d,h
-	ld e,l ; de now points to the appropriate location in the palette grid @ $d200
+	ld e,l ; de now points to the appropriate location in the palette grid @ W2_TilesetPaletteMap
 	pop hl
 	
 	ld b,6

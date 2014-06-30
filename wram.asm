@@ -994,6 +994,8 @@ W_MONHGROWTHRATE:: ; d0cb
 W_MONHLEARNSET:: ; d0cc
 ; bit field
 	flag_array 50 + 5
+
+W_MONHPICBANK:: ; d0d3
 	ds 1
 
 wd0d4:: ds 3

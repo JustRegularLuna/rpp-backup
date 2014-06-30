@@ -196,7 +196,7 @@ Func_7033e: ; 7033e (1c:433e)
 IF GEN_2_GRAPHICS ; Use uncompressed red sprite
 	ld a,$66
 	ld c,a
-	ld de, $9310
+	ld de, vBackPic
 	call LoadUncompressedSpriteData
 	nop
 	nop
