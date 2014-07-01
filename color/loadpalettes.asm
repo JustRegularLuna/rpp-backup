@@ -196,4 +196,4 @@ LoadTownPalette:
 
 	ORG $2d, $7000
 TownData:
-	INCBIN "color/bank2d.bin",$3000,$00a0 ; Town color assignments
+	INCLUDE "color/roofpalettes.asm"
