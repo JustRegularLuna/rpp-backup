@@ -22,7 +22,7 @@ RoofPalettes:
 	dw LavenderRoof  ; ROUTE_9
 	dw LavenderRoof  ; ROUTE_10
 	dw VermilionRoof ; ROUTE_11
-	dw LavenderRoof  ; ROUTE_12
+	dw VermilionRoof ; ROUTE_12
 	dw FuchsiaRoof   ; ROUTE_13
 	dw FuchsiaRoof   ; ROUTE_14
 	dw FuchsiaRoof   ; ROUTE_15
