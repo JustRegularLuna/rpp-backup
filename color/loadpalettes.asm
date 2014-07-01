@@ -147,6 +147,8 @@ LoadTilesetPalette:
 	ld a,c
 	and a ; Check whether tileset 0 is loaded
 	call z, LoadTownPalette
+	cp PLATEAU ; tileset 0 isn't the only outside tileset
+	call z, LoadTownPalette
 
 	pop hl
 	pop de
@@ -162,6 +164,7 @@ LoadTownPalette:
 	ld [rSVBK],a
 
 	ld a, [W_CURMAP]
+	add a
 	ld c,a
 
 	ld a,$02
@@ -170,13 +173,14 @@ LoadTownPalette:
 
 	push de
 	push hl
+	ld hl, RoofPalettes
+	ld b, 0
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
 	ld hl, W2_BgPaletteData + $32
 	ld b,$04
-	ld d, TownData>>8
-	ld a, c
-	add a
-	add a
-	ld e,a
 .copyLoop
 	ld a,[de]
 	inc de
@@ -186,7 +190,7 @@ LoadTownPalette:
 	pop hl
 	pop de
 
-	ld a,c
+	ld a, [W_CURMAP]
 	ld [W2_TownMapLoaded],a
 
 	pop af
@@ -195,5 +199,4 @@ LoadTownPalette:
 
 
 	ORG $2d, $7000
-TownData:
 	INCLUDE "color/roofpalettes.asm"
