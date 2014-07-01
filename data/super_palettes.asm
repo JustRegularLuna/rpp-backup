@@ -86,10 +86,18 @@ ELSE
 	RGB 1,1,1
 
 ; 0x0d: PAL_LOGO1
+IF _RED
 	RGB 31,31,31
-	RGB 31,31,0 ; TODO: differentiate logo palette for red/blue
+	RGB 31,31,0
 	RGB 31,0,0
 	RGB 31,0,0
+ENDC
+IF _BLUE
+	RGB 31,31,31
+	RGB 30,30,17
+	RGB 21,0,4
+	RGB 14,19,29
+ENDC
 
 ; 0x0e: Pokemon Logo
 	RGB 31,31,31
