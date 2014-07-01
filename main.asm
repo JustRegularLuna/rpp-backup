@@ -1952,7 +1952,7 @@ GetRivalPalID:
 IF GEN_2_GRAPHICS
 	ld a, $85
 ELSE
-	ld a, PAL_PURPLEMON
+	ld a, PAL_MEWMON
 ENDC
 	jr GotPalID
 
