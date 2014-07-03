@@ -4785,7 +4785,11 @@ LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
 SECTION "Graphics", ROMX, BANK[GFX]
 
 PokemonLogoGraphics:            INCBIN "gfx/gs/new_pokemon_logo.2bpp"
+IF GEN_2_GRAPHICS
+FontGraphics:                   INCBIN "gfx/gs/font.1bpp"
+ELSE
 FontGraphics:                   INCBIN "gfx/font.1bpp"
+ENDC
 ABTiles:                        INCBIN "gfx/AB.2bpp"
 IF GEN_2_GRAPHICS
 HpBarAndStatusGraphics:  INCBIN "gfx/gs/gen2_hp_bar_and_status.2bpp"
