@@ -1,3 +1,5 @@
+GEN_2_GRAPHICS	EQU 1
+
 INCLUDE "version.asm"
 
 INCLUDE "macros.asm"
@@ -32,5 +34,3 @@ INCLUDE "constants/music_constants.asm"
 INCLUDE "constants/tilesets.asm"
 INCLUDE "constants/starter_mons.asm"
 INCLUDE "color/wram.asm"
-
-GEN_2_GRAPHICS	EQU 1

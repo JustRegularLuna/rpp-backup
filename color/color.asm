@@ -383,7 +383,13 @@ SendPalPacket_Titlescreen:
 	ld e,3
 	callba LoadSGBPalette
 
-	CALL_INDIRECT LoadSpritePalettes
+IF GEN_2_GRAPHICS
+	ld d, PAL_HERO
+ELSE
+	ld d, PAL_REDMON
+ENDC
+	ld e,0
+	callba LoadSGBPalette_Sprite
 
 	; Pokemon logo
 	ld hl,W2_TilesetPaletteMap
@@ -429,12 +435,22 @@ SendPalPacket_NidorinoIntro:
 	ld a,2
 	ld [rSVBK],a
 
+IF GEN_2_GRAPHICS
+	ld d, PAL_NIDORINO
+ELSE
 	ld d, PAL_PURPLEMON
+ENDC
 	ld e,0
 	callba LoadSGBPalette_Sprite
 
+	ld d, PAL_PURPLEMON
+	ld e,0
+	callba LoadSGBPalette
+
 	ld a,1
 	ld [W2_LastOBP0],a
+	ld [W2_LastBGP],a	; Palettes must be redrawn
+
 	xor a
 	ld [rSVBK],a
 	ret
@@ -617,7 +633,21 @@ SendPalPacket_GameFreakIntro:
 	ld bc, $08
 	call FarCopyData
 
-	CALL_INDIRECT LoadSpritePalettes
+	ld d, PAL_GAMEFREAK
+	ld e,0
+	callba LoadSGBPalette_Sprite
+
+	ld d, PAL_REDMON
+	ld e,1
+	callba LoadSGBPalette_Sprite
+
+	ld d, PAL_VIRIDIAN
+	ld e,2
+	callba LoadSGBPalette_Sprite
+
+	ld d, PAL_BLUEMON
+	ld e,3
+	callba LoadSGBPalette_Sprite
 
 	xor a
 	ld [rSVBK],a

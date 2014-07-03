@@ -1,7 +1,7 @@
-; This file is only used if GEN2_GRAPHICS is one.
+; These palettes are only used if GEN2_GRAPHICS is one.
 
 ; The first several palettes are no longer needed and can be replaced with whatever.
-
+SuperPalettes:
 ; 0x00: PAL_TOWNMAP2 (second palette used on the town map)
 	RGB 25,15,0
 	RGB 15,8,0

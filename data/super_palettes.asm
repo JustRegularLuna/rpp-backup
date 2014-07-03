@@ -4,9 +4,6 @@
 ; depending on whether Gen II graphics are enabled.
 ; The first several palettes are no longer needed and can be replaced with whatever.
 SuperPalettes:
-IF GEN_2_GRAPHICS
-	INCLUDE "color/gen2_palettes.asm"
-ELSE
 ; 0x00: PAL_TOWNMAP2 (second palette used on the town map)
 	RGB 25,15,0
 	RGB 15,8,0
@@ -88,9 +85,9 @@ ELSE
 ; 0x0d: PAL_LOGO1
 IF _RED
 	RGB 31,31,31
-	RGB 31,31,0
-	RGB 31,0,0
-	RGB 31,0,0
+	RGB 30,30,17
+	RGB 17,23,10
+	RGB 21,0,4
 ENDC
 IF _BLUE
 	RGB 31,31,31
@@ -115,7 +112,7 @@ ENDC
 	RGB 31,31,31
 	RGB 29,19,13
 	RGB 14,4,20
-	RGB 3,2,2
+	RGB 3,3,3
 
 ; 0x11: PAL_BLUEMON
 	RGB 31,31,31
@@ -197,26 +194,26 @@ ENDC
 
 ; 0x1e: PAL_BLACK
 	RGB 31,31,31
-	RGB 3,3,3
-	RGB 3,3,3
-	RGB 3,3,3
+	RGB 7,7,7
+	RGB 2,3,3
+	RGB 0,0,0
 
 ; 0x1f: PAL_GREENBAR
 	RGB 31,31,31
-	RGB 31,31,0
-	RGB 0,31,0
+	RGB 29,25,15
+	RGB 0,23,0
 	RGB 3,3,3
 
 ; 0x20: PAL_YELLOWBAR
 	RGB 31,31,31
-	RGB 31,31,0
-	RGB 31,18,0
+	RGB 29,25,15
+	RGB 30,20,0
 	RGB 3,3,3
 
 ; 0x21: PAL_REDBAR
 	RGB 31,31,31
-	RGB 31,31,0
-	RGB 31,0,0
+	RGB 29,25,15
+	RGB 30,0,0
 	RGB 3,3,3
 
 ; 0x22: PAL_BADGE
@@ -233,7 +230,6 @@ ENDC
 
 ; 0x24: PAL_GAMEFREAK
 	RGB 31,31,31
-	RGB 31,19,0
-	RGB 19,19,0
+	RGB 31,28,14
+	RGB 24,20,10
 	RGB 3,3,3
-ENDC
