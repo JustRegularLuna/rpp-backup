@@ -4800,7 +4800,11 @@ BattleHudTiles3:         INCBIN "gfx/battle_hud3.1bpp"
 ENDC
 NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
+IF GEN_2_GRAPHICS
+TextBoxGraphics:                INCBIN "gfx/gs/text_box.2bpp"
+ELSE
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
+ENDC
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
 WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"

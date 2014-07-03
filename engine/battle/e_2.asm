@@ -300,3 +300,17 @@ ReflectGainedArmorText: ; 3bbdc (e:7bdc)
 BankswitchEtoF: ; 3bbe1 (e:7be1)
 	ld b, BANK(BattleCore)
 	jp Bankswitch
+
+IF GEN_2_GRAPHICS
+PlayerHUDHAX:
+	ld hl, PlayerHUDTileMap
+	jp PlayerHUDUpdateDone
+	
+PlayerHUDTileMap:
+	db $73, $75, $6F
+
+EnemyHUDHAX:
+	ld de, $0001
+	ld [hl], $72
+	jp EnemyHUDUpdateDone
+ENDC

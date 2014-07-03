@@ -1829,7 +1829,13 @@ Func_3cd60: ; 3cd60 (f:4d60)
 	ld [hl], $73
 	ld de, wBattleMonNick
 	hlCoord 10, 7
+IF GEN_2_GRAPHICS
+	nop
+	nop
+	nop
+ELSE
 	call Func_3ce9c
+ENDC
 	call PlaceString
 	ld hl, wBattleMonSpecies
 	ld de, wcf98
@@ -1890,7 +1896,11 @@ Func_3cdec: ; 3cdec (f:4dec)
 	hlCoord 1, 0
 	call Func_3ce9c
 	call PlaceString
+IF GEN_2_GRAPHICS
+	hlCoord 6, 1
+ELSE
 	hlCoord 4, 1
+ENDC
 	push hl
 	inc hl
 	ld de, wEnemyMonStatus ; wcfe9
