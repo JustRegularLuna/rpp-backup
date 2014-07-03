@@ -3006,7 +3006,11 @@ DrawBadges: ; ea03 (3:6a03)
 	db $20, $28, $30, $38, $40, $48, $50, $58
 
 GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
+IF GEN_2_GRAPHICS
+	INCBIN "gfx/gs/badges.2bpp"
+ELSE
 	INCBIN "gfx/badges.2bpp"
+ENDC
 
 Func_ee9e: ; ee9e (3:6e9e)
 	call GetPredefRegisters
