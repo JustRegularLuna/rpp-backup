@@ -54,7 +54,7 @@ OakSpeech: ; 6115 (1:6115)
 	xor a
 	ld [$FFD7],a
 IF GEN_2_GRAPHICS
-	ld a, $86
+	ld a, PAL_OAK
 ELSE
 	ld a, PAL_BROWNMON
 ENDC

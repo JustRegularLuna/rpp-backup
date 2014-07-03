@@ -1932,7 +1932,7 @@ Func_7c18: ; 7c18 (1:7c18)
 GetNidorinoPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
-	ld a, $3d
+	ld a, PAL_NIDORINO
 ELSE
 	ld a, PAL_PURPLEMON
 ENDC
@@ -1941,7 +1941,7 @@ ENDC
 GetRedPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
-	ld a, $84
+	ld a, PAL_HERO
 ELSE
 	ld a, PAL_REDMON
 ENDC
@@ -1950,7 +1950,7 @@ ENDC
 GetRivalPalID:
 	call ClearScreen
 IF GEN_2_GRAPHICS
-	ld a, $85
+	ld a, PAL_GARY1
 ELSE
 	ld a, PAL_MEWMON
 ENDC

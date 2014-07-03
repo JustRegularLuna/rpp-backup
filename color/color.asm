@@ -9,14 +9,14 @@ SendPalPacket_Black:
 	ld a,$02
 	ld [rSVBK],a
 
-	ld d,$1e	; Black palette
+	ld d,PAL_BLACK
 	ld e,7
 .palLoop	; Set all bg and sprite palettes to SGB Palette $1e
 	push de
-	call LoadSGBPalette
+	callba LoadSGBPalette
 	pop de
 	push de
-	call LoadSGBPalette_Sprite
+	callba LoadSGBPalette_Sprite
 	pop de
 	dec e
 	ld a,e
@@ -52,35 +52,32 @@ BuildBattlePalPacket:
 	push bc
 	ld d,b
 	ld e,0
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	; Enemy palette
 	pop bc
 	ld d,c
 	ld e,1
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	; Player lifebar
 	ld a, [wcf1d]
-	add $1f
+	add PAL_GREENBAR
 	ld d,a
 	ld e,2
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	; Enemy lifebar
 	ld a, [wcf1e]
-	add $1f
+	add PAL_GREENBAR
 	ld d,a
 	ld e,3
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	; Black palette
 	ld d, PAL_BLACK
 	ld e,4
-	call LoadSGBPalette
-
-	; Restore sprite palettes which may have been set to black
-	CALL_INDIRECT LoadSpritePalettes
+	callba LoadSGBPalette
 
 
 	; Now set the tilemap
@@ -148,6 +145,9 @@ BuildBattlePalPacket:
 	ld c,2
 	call DelayFrames
 
+	; Restore sprite palettes which may have been set to black
+	CALL_INDIRECT LoadSpritePalettes
+
 	ld a,1
 	ld [W2_UseOBP1],a
 	ld [W2_LastBGP],a
@@ -165,11 +165,11 @@ SendPalPacket_TownMap:
 
 	ld d, PAL_TOWNMAP
 	ld e,0
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	ld d, PAL_TOWNMAP2
 	ld e,1
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	ld a,1
 	ld [W2_TileBasedPalettes],a
@@ -204,16 +204,16 @@ BuildStatusScreenPalPacket:
 
 	; Load Lifebar palette
 	ld a, [wcf25]
-	add $1f
+	add PAL_GREENBAR
 	ld d,a
 	ld e,1
-	call LoadSGBPalette	
+	callba LoadSGBPalette	
 
 	; Load pokemon palette
 	pop af
 	ld d,a
 	ld e,0
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 
 	; Set palette map
@@ -263,7 +263,7 @@ SendPalPacket_Pokedex:
 	ld a,2
 	ld [rSVBK],a
 
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 IF _BLUE
 	ld d,$11	; PAL_BLUEMON
@@ -271,7 +271,7 @@ ELSE
 	ld d,$12	; PAL_REDMON
 ENDC
 	ld e,1
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	ld bc,20*18
 	ld hl,W2_TilesetPaletteMap
@@ -316,19 +316,19 @@ SendPalPacket_Slots:
 
 	ld d, PAL_SLOTS1
 	ld e, 0
-	call LoadSGBPalette
+	callba LoadSGBPalette
 	ld d, PAL_SLOTS2
 	ld e, 1
-	call LoadSGBPalette
+	callba LoadSGBPalette
 	ld d, PAL_SLOTS3
 	ld e, 2
-	call LoadSGBPalette
+	callba LoadSGBPalette
 	ld d, PAL_SLOTS4
 	ld e, 3
-	call LoadSGBPalette
+	callba LoadSGBPalette
 	ld d, PAL_SLOTS5
 	ld e, 4
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	ld hl, SlotPaletteMap
 	ld a, BANK(SlotPaletteMap)
@@ -369,19 +369,19 @@ SendPalPacket_Titlescreen:
 	ld a,2
 	ld [rSVBK],a
 
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
-	ld d,$e	; Title logo
+	ld d,PAL_LOGO2	; Title logo
 	ld e,1
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	ld d, PAL_LOGO1
 	ld e,2
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	ld d, PAL_BLACK
 	ld e,3
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	CALL_INDIRECT LoadSpritePalettes
 
@@ -431,7 +431,7 @@ SendPalPacket_NidorinoIntro:
 
 	ld d, PAL_PURPLEMON
 	ld e,0
-	call LoadSGBPalette_Sprite
+	callba LoadSGBPalette_Sprite
 
 	ld a,1
 	ld [W2_LastOBP0],a
@@ -445,13 +445,13 @@ SendPalPacket_Generic:
 	ld a,2
 	ld [rSVBK],a
 
-	ld d,$21	; Red lifebar color (for pokeballs)
+	ld d,PAL_REDBAR	; Red lifebar color (for pokeballs)
 	ld e,0
 	push de
-	call LoadSGBPalette
+	callba LoadSGBPalette
 	pop de
 	inc e
-	call LoadSGBPalette ; Load it into the second slot as well. Prevents a minor glitch.
+	callba LoadSGBPalette ; Load it into the second slot as well. Prevents a minor glitch.
 
 	ld bc,20*18
 	ld hl,W2_TilesetPaletteMap
@@ -523,18 +523,18 @@ SendPalPacket_PartyMenu:
 
 	CALL_INDIRECT LoadSpritePalettes
 
-	ld d,$1f	; Filler for palette 0 (technically, green)
+	ld d,PAL_GREENBAR	; Filler for palette 0 (technically, green)
 	ld e,0
-	call LoadSGBPalette
-	ld d,$1f	; Green
+	callba LoadSGBPalette
+	ld d,PAL_GREENBAR
 	ld e,1
-	call LoadSGBPalette
-	ld d,$20	; Yellow
+	callba LoadSGBPalette
+	ld d,PAL_YELLOWBAR
 	ld e,2
-	call LoadSGBPalette
-	ld d,$21	; Red
+	callba LoadSGBPalette
+	ld d,PAL_REDBAR
 	ld e,3
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	; Palettes were written to a SGB packet. Extract them.
 	ld b,9		; there are only 6 pokemon but iterate 9 times to fill the whole screen
@@ -575,7 +575,7 @@ SendPalPacket_PartyMenu:
 SendPokemonPalette_WholeScreen:
 	ld a, c
 	and a
-	ld a, $1e ; Black palette
+	ld a, PAL_BLACK
 	jr nz, .loadPalette
 	ld a, [wcf1d]
 	; Use the "BackSprite" version for the player sprite in the hall of fame.
@@ -587,7 +587,7 @@ SendPokemonPalette_WholeScreen:
 	ld [rSVBK],a
 
 	ld e,0
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	xor a
 	ld [W2_TileBasedPalettes],a
@@ -628,26 +628,26 @@ BuildTrainerCardPalPacket:
 	ld a,2
 	ld [rSVBK],a
 	
-	ld d,$10
+	ld d,PAL_MEWMON
 	ld e,0
-	call LoadSGBPalette
-	ld d,$22
+	callba LoadSGBPalette
+	ld d,PAL_BADGE
 	ld e,1
-	call LoadSGBPalette
-	ld d,$12
+	callba LoadSGBPalette
+	ld d,PAL_REDMON
 	ld e,2
-	call LoadSGBPalette
-	ld d,$18
+	callba LoadSGBPalette
+	ld d,PAL_YELLOWMON
 	ld e,3
-	call LoadSGBPalette
+	callba LoadSGBPalette
 	; Red's palette
 	IF GEN_2_GRAPHICS
-		ld d, $84
+		ld d, PAL_HERO
 	ELSE
 		ld d, PAL_REDMON
 	ENDC
 	ld e,4
-	call LoadSGBPalette
+	callba LoadSGBPalette
 
 	; Load palette map
 	ld hl, BadgePalettes
@@ -728,3 +728,4 @@ INCLUDE "color/loadpalettes.asm"
 INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
 INCLUDE "color/badgepalettemap.asm" ; This ends up in whatever bank was used last
+INCLUDE "color/super_palettes.asm"

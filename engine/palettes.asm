@@ -42,48 +42,6 @@ WaitForVBlank:
 	jr nz,WaitForVBlank
  	ret
 
-LoadSGBPalette:
-	ld a,e
-	ld l,d
-	ld h,0
-	add hl
-	add hl
-	add hl
-	ld de,SuperPalettes
-	add hl,de
-
-	ld de,W2_BgPaletteData
-	jr startPaletteTransfer
-
-LoadSGBPalette_Sprite:
-	ld a,e
-
-	ld l,d
-	ld h,0
-	add hl
-	add hl
-	add hl
-	ld de,SuperPalettes
-	add hl,de
-
-	ld de,W2_BgPaletteData + $40
-
-startPaletteTransfer:
-	add a
-	add a
-	add a
-	add e
-	ld e,a
-	ld b,8
-	
-.palLoop
-	ld a,[hli]
-	ld [de],a
-	inc de
-	dec b
-	jr nz,.palLoop
-	ret
-
 ; Palette commands are moved to the end of the bank
 PointerTable_71f73: ; 71f73 (1c:5f73)
 	dw SendPalPacket_Black
@@ -150,8 +108,7 @@ DetermineBackSpritePaletteID_NoStatusCheck:
 	and a
 
 	push bc
-	ld a, $3A
-	call Predef ; turn Pokemon ID number into Pokedex number
+	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
 	pop bc
 
 	ld a, [wd11e]
@@ -160,7 +117,7 @@ DetermineBackSpritePaletteID_NoStatusCheck:
 	jr nz,.getPaletteID ; Check if trainer?
 
 IF GEN_2_GRAPHICS
-	ld a, $87
+	ld a, PAL_HERO
 ELSE
 	ld a, PAL_REDMON
 ENDC
@@ -503,7 +460,5 @@ Func_72188: ; 72188 (1c:6188)
 INCLUDE "data/sgb_packets.asm"
 
 INCLUDE "data/mon_palettes.asm"
-
-INCLUDE "data/super_palettes.asm"
 
 INCLUDE "data/sgb_border.asm"

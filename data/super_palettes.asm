@@ -1,4 +1,4 @@
-; This file is only used if GEN2_GRAPHICS is zero.
+; These palettes are only used if GEN2_GRAPHICS is zero.
 
 ; HAX: Either uses Pokemon Yellow or Pokemon Gold/Silver/Crystal palettes,
 ; depending on whether Gen II graphics are enabled.
@@ -99,13 +99,13 @@ IF _BLUE
 	RGB 14,19,29
 ENDC
 
-; 0x0e: Pokemon Logo
+; 0x0e: PAL_LOGO2
 	RGB 31,31,31
 	RGB 28,24,0
 	RGB 18,19,18
 	RGB 5,12,22
 
-; 0x0f: PAL_LOGO2
+; 0x0f: PAL_0F
 	RGB 31,31,31
 	RGB 13,1,31
 	RGB 0,9,31
@@ -195,7 +195,7 @@ ENDC
 	RGB 2,20,3
 	RGB 0,0,0
 
-; 0x1e: PAL_BLACK	(index $1e)
+; 0x1e: PAL_BLACK
 	RGB 31,31,31
 	RGB 3,3,3
 	RGB 3,3,3
@@ -231,7 +231,7 @@ ENDC
 	RGB 17,14,11
 	RGB 3,3,3
 
-; 0x24: XXX
+; 0x24: PAL_GAMEFREAK
 	RGB 31,31,31
 	RGB 31,19,0
 	RGB 19,19,0
