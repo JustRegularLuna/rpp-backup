@@ -146,7 +146,11 @@ Func_5525f: ; 5525f (15:525f)
 	call PrintText
 	xor a
 	ld [wcc49], a
+IF GEN_2_GRAPHICS
+	call AnimateEXPBar
+ELSE
 	call LoadMonData
+ENDC
 	pop hl
 	ld bc, $13
 	add hl, bc
@@ -156,7 +160,11 @@ Func_5525f: ; 5525f (15:525f)
 	ld a, [hl]
 	cp d
 	jp z, Func_55436
+IF GEN_2_GRAPHICS
+	call KeepEXPBarFull
+ELSE
 	ld a, [W_CURENEMYLVL]
+ENDC
 	push af
 	push hl
 	ld a, d
@@ -235,7 +243,11 @@ Func_5525f: ; 5525f (15:525f)
 	call PrintText
 	xor a
 	ld [wcc49], a
+IF GEN_2_GRAPHICS
+	call AnimateEXPBarAgain
+ELSE
 	call LoadMonData
+ENDC
 	ld d, $1
 	callab PrintStatsBox
 	call WaitForTextScrollButtonPress

@@ -1814,6 +1814,15 @@ wBoxMonOT::    ds 11 * MONS_PER_BOX ; dd2a
 wBoxMonNicks:: ds 11 * MONS_PER_BOX ; de06
 wBoxMonNicksEnd:: ; dee2
 
+IF GEN_2_GRAPHICS
+wEXPBarPixelLength::  ds 1
+wEXPBarBaseEXP::      ds 3
+wEXPBarCurEXP::       ds 3
+wEXPBarNeededEXP::    ds 3
+wEXPBarKeepFullFlag:: ds 1
+
+; deed
+ENDC
 
 SECTION "Stack", WRAMX[$dfff], BANK[1]
 wStack:: ; dfff

@@ -1,0 +1,66 @@
+AnimateEXPBarAgain:
+	call LoadMonData
+	call IsCurrentMonBattleMon
+	ret nz
+	xor a
+	ld [wEXPBarPixelLength], a
+	hlCoord 17, 11
+	ld a, $c0
+	ld c, $08
+.loop
+	ld [hld], a
+	dec c
+	jr nz, .loop
+AnimateEXPBar:
+	call LoadMonData
+	call IsCurrentMonBattleMon
+	ret nz
+	ld a, (SFX_08_3d - SFX_Headers_08) / 3
+	call PlaySoundWaitForCurrent
+	callab CalcEXPBarPixelLength
+	ld a, [wEXPBarPixelLength]
+	ld b, a
+	ld a, [H_QUOTIENT + 3]
+	sub b
+	jr z, .done
+	ld b, a
+	ld c, $08
+	hlCoord 17, 11
+.loop1
+	ld a, [hl]
+	cp $c8
+	jr nz, .loop2
+	dec hl
+	dec c
+	jr z, .done
+	jr .loop1
+.loop2
+	inc a
+	ld [hl], a
+	call DelayFrame
+	dec b
+	jr z, .done
+	jr .loop1
+.done
+	ld bc, $08
+	hlCoord 10, 11
+	ld de, wTileMapBackup + 10 + 11 * 20
+	call CopyData
+	ld c, $20
+	jp DelayFrames
+
+KeepEXPBarFull:
+	call IsCurrentMonBattleMon
+	ret nz
+	ld a, [wEXPBarKeepFullFlag]
+	set 0, a
+	ld [wEXPBarKeepFullFlag], a
+	ld a, [W_CURENEMYLVL]
+	ret
+
+IsCurrentMonBattleMon:
+	ld a, [wPlayerMonNumber]
+	ld b, a
+	ld a, [wWhichPokemon]
+	cp b
+	ret

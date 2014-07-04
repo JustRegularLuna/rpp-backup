@@ -3706,6 +3706,11 @@ LoadTextBoxTilePatterns:: ; 36a0 (0:36a0)
 
 ; copies HP bar and status display tile patterns into VRAM
 LoadHpBarAndStatusTilePatterns:: ; 36c0 (0:36c0)
+IF GEN_2_GRAPHICS
+	callba LoadHPBarAndEXPBar
+	ret
+	ds $17
+ELSE
 	ld a,[rLCDC]
 	bit 7,a ; is the LCD enabled?
 	jr nz,.lcdEnabled
@@ -3720,6 +3725,7 @@ LoadHpBarAndStatusTilePatterns:: ; 36c0 (0:36c0)
 	ld hl,vChars2 + $620
 	ld bc,(BANK(HpBarAndStatusGraphics) << 8 | $1e)
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
+ENDC
 
 ;Fills memory range with the specified byte.
 ;input registers a = fill_byte, bc = length, hl = address

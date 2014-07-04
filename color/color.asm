@@ -74,8 +74,13 @@ BuildBattlePalPacket:
 	ld e,3
 	callba LoadSGBPalette
 
+IF GEN_2_GRAPHICS
+	; Player exp bar
+	ld d, PAL_EXP
+ELSE
 	; Black palette
 	ld d, PAL_BLACK
+ENDC
 	ld e,4
 	callba LoadSGBPalette
 
@@ -140,6 +145,17 @@ BuildBattlePalPacket:
 	add hl,de
 	dec b
 	jr nz,.eDrawLine
+
+IF GEN_2_GRAPHICS
+	; Player exp bar
+	ld hl, W2_TilesetPaletteMap + 10 + 11 * 20
+	ld b, 8
+	ld a, 4
+.expLoop
+	ld [hli], a
+	dec b
+	jr nz, .expLoop
+ENDC
 
 	; Wait 2 frames before updating palettes
 	ld c,2
