@@ -537,7 +537,7 @@ TradeCenter_SelectMon:
 	ld [wTileMap + $141], a
 .asm_574a
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	and a
 	jr z, .asm_574a ; 0x5750 $f8
 	bit 0, a
@@ -570,13 +570,13 @@ Func_577d: ; 577d (1:577d)
 	xor a
 	ld [wd72d], a
 	dec a
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	call LoadMapData
-	callba Func_c335
+	callba ClearVariablesAfterLoadingMapData
 	pop hl
 	pop af
 	ld [hl], a
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ret
 
 Func_57a2:
@@ -826,7 +826,7 @@ TradeCenter_Trade:
 .asm_59d9
 	predef Func_410f3
 .asm_59de
-	callab Func_3ad0e
+	callab TryEvolvingMon
 	call ClearScreen
 	call LoadTrainerInfoTextBoxTiles
 	call Func_226e
@@ -896,7 +896,7 @@ Func_5a5f: ; 5a5f (1:5a5f)
 	ld [W_GRASSRATE], a ; W_GRASSRATE
 	inc a
 	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
-	ld [$ffb5], a
+	ld [hJoy5], a
 	ld a, $a
 	ld [wMusicHeaderPointer], a
 	ld a, BANK(Music_Celadon)

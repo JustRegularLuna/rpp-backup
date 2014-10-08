@@ -10,9 +10,9 @@ db GROUND ; species type 2
 db 50 ; catch rate
 db 153 ; base exp yield
 IF GEN_2_GRAPHICS
-	db $77 ; sprite dimensions
+	INCBIN "pic/gsmon/dugtrio.pic",0,1 ; 77, sprite dimensions
 ELSE
-	db $66 ; sprite dimensions
+	INCBIN "pic/bmon/dugtrio.pic",0,1 ; 66, sprite dimensions
 ENDC
 dw DugtrioPicFront
 dw DugtrioPicBack

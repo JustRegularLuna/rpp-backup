@@ -10,9 +10,9 @@ db POISON ; species type 2
 db 190 ; catch rate
 db 95 ; base exp yield
 IF GEN_2_GRAPHICS
-	db $66 ; sprite dimensions
+	INCBIN "pic/gsmon/gastly.pic",0,1 ; 66, sprite dimensions
 ELSE
-	db $77 ; sprite dimensions
+	INCBIN "pic/bmon/gastly.pic",0,1 ; 77, sprite dimensions
 ENDC
 dw GastlyPicFront
 dw GastlyPicBack

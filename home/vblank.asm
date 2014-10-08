@@ -8,15 +8,15 @@ VBlank::
 	ld a, [H_LOADEDROMBANK]
 	ld [wd122], a
 
-	ld a, [$ffae]
+	ld a, [hSCX]
 	ld [rSCX], a
-	ld a, [$ffaf]
+	ld a, [hSCY]
 	ld [rSCY], a
 
 	ld a, [wd0a0]
 	and a
 	jr nz, .ok
-	ld a, [$ffb0]
+	ld a, [hWY]
 	ld [rWY], a
 .ok
 
@@ -31,13 +31,13 @@ VBlank::
 	nop
 	call $ff80 ; OAM DMA
 	; HAX: don't update sprites here. They're updated elsewhere to prevent wobbliness.
-	;ld a,$01
+	;ld a, Bank(PrepareOAMData)
 	nop
 	nop
-	;ld [H_LOADEDROMBANK],a
+	;ld [H_LOADEDROMBANK], a
 	nop
 	nop
-	;ld [$2000],a
+	;ld [MBC1RomBank], a
 	nop
 	nop
 	nop
@@ -68,7 +68,7 @@ VBlank::
 
 	ld a, [wc0ef] ; music ROM bank
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 
 	cp BANK(Music2_UpdateMusic)
 	jr nz, .notbank2
@@ -86,7 +86,7 @@ VBlank::
 	call Music1f_UpdateMusic
 .afterMusic
 
-	callba Func_18dee ; keep track of time played
+	callba TrackPlayTime ; keep track of time played
 
 	ld a, [$fff9]
 	and a
@@ -94,7 +94,7 @@ VBlank::
 
 	ld a, [wd122]
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 
 	pop hl
 	pop de

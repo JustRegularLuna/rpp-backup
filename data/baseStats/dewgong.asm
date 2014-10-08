@@ -10,9 +10,9 @@ db ICE ; species type 2
 db 75 ; catch rate
 db 176 ; base exp yield
 IF GEN_2_GRAPHICS
-	db $77 ; sprite dimensions
+	INCBIN "pic/gsmon/dewgong.pic",0,1 ; 77, sprite dimensions
 ELSE
-	db $66 ; sprite dimensions
+	INCBIN "pic/bmon/dewgong.pic",0,1 ; 66, sprite dimensions
 ENDC
 dw DewgongPicFront
 dw DewgongPicBack

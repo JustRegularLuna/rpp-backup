@@ -119,10 +119,10 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call FillMemory
 	call ClearSprites
 	ld a, $ff
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld hl, wd730
 	set 6, [hl]
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	ld a, $e4
 	jr z, .asm_411e5
@@ -175,7 +175,7 @@ Func_41245: ; 41245 (10:5245)
 	ld a, $ab
 	ld [rLCDC], a ; $ff40
 	ld a, $50
-	ld [$ffb0], a
+	ld [hWY], a
 	ld a, $86
 	ld [rWX], a ; $ff4b
 	ld [$ffae], a
@@ -203,9 +203,9 @@ Func_41245: ; 41245 (10:5245)
 	and a
 	jr nz, .asm_41273
 	call Delay50
-	ld a, $ad
+	ld a, ANIM_AD
 	call Func_41676
-	ld a, $aa
+	ld a, ANIM_AA
 	call Func_41676
 	ld a, [wWhichTrade] ; wWhichTrade
 	call PlayCry
@@ -242,9 +242,9 @@ Func_41298: ; 41298 (10:5298)
 	ret
 
 Func_412d2: ; 412d2 (10:52d2)
-	ld a, $ab
+	ld a, ANIM_AB
 	call Func_41676
-	ld c, $a
+	ld c, 10
 	call DelayFrames
 	ld a, $e4
 	ld [rOBP0], a ; $ff48
@@ -295,7 +295,7 @@ UnknownOAM_4132e: ; 4132e (10:532e)
 	db $7E,$40,$7E,$60
 
 Func_41336: ; 41336 (10:5336)
-	ld a, $ac
+	ld a, ANIM_AC
 	call Func_41676
 	call Func_415c8
 	hlCoord 4, 10
@@ -308,7 +308,7 @@ Func_41336: ; 41336 (10:5336)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	ld a, [wTrainerEngageDistance]
 	call Func_415a4
-	ld a, $ad
+	ld a, ANIM_AD
 	call Func_41676
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
@@ -397,7 +397,7 @@ Func_41411: ; 41411 (10:5411)
 	xor a
 	ld [$ffae], a
 	ld a, $90
-	ld [$ffb0], a
+	ld [hWY], a
 	ret
 
 Func_4142d: ; 4142d (10:542d)
@@ -475,7 +475,7 @@ Func_4149f: ; 4149f (10:549f)
 Func_414ae: ; 414ae (10:54ae)
 	push hl
 	hlCoord 0, 4
-	call ScheduleRowRedrawHelper
+	call CopyToScreenEdgeTiles
 	pop hl
 	ld a, h
 	ld [H_SCREENEDGEREDRAWADDR + 1], a
@@ -655,7 +655,7 @@ Func_415c8: ; 415c8 (10:55c8)
 	ld a, $7
 	ld [rWX], a ; $ff4b
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	ld a, $90
 	ld [$ffae], a
 	ret

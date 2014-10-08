@@ -587,7 +587,7 @@ Func_39b87: ; 39b87 (e:5b87)
 	jr z, .asm_39bc1
 	push hl
 	ld [wd0b5], a
-	ld a, $2c
+	ld a, BANK(MoveNames)
 	ld [wPredefBank], a
 	ld a, MOVE_NAME
 	ld [W_LISTTYPE], a
@@ -1203,11 +1203,11 @@ Func_3a72a: ; 3a72a (e:672a)
 
 	ld a,d ; how many available monsters are there?
 	cp 2 ; don't bother if only 1 or 2
-	jp nc,Func_3a74b
+	jp nc,SwitchEnemyMon
 	and a
 	ret
 
-Func_3a74b: ; 3a74b (e:674b)
+SwitchEnemyMon: ; 3a74b (e:674b)
 
 ; prepare to withdraw the active monster: copy hp, number, and status to roster
 
@@ -1411,14 +1411,14 @@ SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 	ld [hl], $20
 	ld a, $f8
 	ld [wTrainerEngageDistance], a
-	ld hl, wOAMBuffer + $18
+	ld hl, wOAMBuffer + PARTY_LENGTH * 4
 	jp Func_3a8e1
 
 SetupPokeballs: ; 0x3a8a6
 	ld a, [de]
 	push af
 	ld de, wBuffer
-	ld c, $6 ; max num of partymons
+	ld c, PARTY_LENGTH
 	ld a, $34 ; empty pokeball
 .emptyloop
 	ld [de], a
@@ -1466,7 +1466,7 @@ PickPokeball: ; 3a8c2 (e:68c2)
 
 Func_3a8e1: ; 3a8e1 (e:68e1)
 	ld de, wHPBarMaxHP
-	ld c, $6
+	ld c, PARTY_LENGTH
 .asm_3a8e6
 	ld a, [W_BASECOORDY] ; wd082
 	ld [hli], a

@@ -49,10 +49,10 @@ OakSpeech: ; 6115 (1:6115)
 	ld [wcf96],a
 	call AddItemToInventory  ; give one potion
 	ld a,[W_ANIMATIONID]
-	ld [wd71a],a
-	call Func_62ce
+	ld [wDestinationMap],a
+	call SpecialWarpIn
 	xor a
-	ld [$FFD7],a
+	ld [hTilesetType],a
 IF GEN_2_GRAPHICS
 	ld a, PAL_OAK
 ELSE
@@ -71,7 +71,7 @@ ENDC
 	call FadeInIntroPic
 	ld hl,OakSpeechText1
 	call PrintText      ; prints text box
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	;call ClearScreen
 	call GetNidorinoPalID ; HAX
 	ld a,NIDORINO
@@ -83,7 +83,7 @@ ENDC
 	call MovePicLeft
 	ld hl,OakSpeechText2
 	call PrintText      ; Prints text box
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call GetRedPalID ; HAX
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
@@ -92,7 +92,7 @@ ENDC
 	ld hl,IntroducePlayerText
 	call PrintText
 	call LoadDefaultNamesPlayer ; brings up NewName/Red/etc menu
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call GetRivalPalID ; HAX
 	ld de,Rival1Pic
 	ld bc,(Bank(Rival1Pic) << 8) | $00
@@ -103,12 +103,12 @@ ENDC
 	call LoadDefaultNamesRival
 
 Func_61bc: ; 61bc (1:61bc)
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	call GetRedPalID ; HAX
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
 	call IntroPredef3B
-	call GBFadeIn2
+	call GBFadeInFromWhite
 	ld a,[wd72d]
 	and a
 	jr nz,.next
@@ -158,10 +158,10 @@ Func_61bc: ; 61bc (1:61bc)
 	call ClearScreenArea
 	call LoadTextBoxTilePatterns
 	ld a,1
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld c,$32
 	call DelayFrames
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	jp ClearScreen
 OakSpeechText1: ; 6253 (1:6253)
 	TX_FAR _OakSpeechText1

@@ -11,16 +11,30 @@ page   EQUS "db $49,"     ; Start a new Pokedex page.
 dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 
 
+percent EQUS "* $ff / 100"
+
+
+; Constant enumeration is useful for monsters, items, moves, etc.
+const_def: MACRO
+const_value = 0
+ENDM
+
+const: MACRO
+\1 EQU const_value
+const_value = const_value + 1
+ENDM
+
+
 homecall: MACRO
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, BANK(\1)
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	call \1
 	pop af
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	ENDM
 
 callba: MACRO
@@ -188,6 +202,24 @@ predef_jump: MACRO
 	jp Predef
 	ENDM
 
+
+add_tx_pre: MACRO
+\1_id:: dw \1
+ENDM
+
+tx_pre_id: MACRO
+	ld a, (\1_id - TextPredefs) / 2
+ENDM
+
+tx_pre: MACRO
+	tx_pre_id \1
+	call PrintPredefTextID
+ENDM
+
+tx_pre_jump: MACRO
+	tx_pre_id \1
+	jp PrintPredefTextID
+ENDM
 
 
 ;1_channel	EQU $00

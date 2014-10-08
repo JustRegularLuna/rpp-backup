@@ -10,7 +10,7 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	ld [wLastMenuItem],a
 	inc a
 	ld [wd11e],a
-	ld [$ffb7],a
+	ld [hJoy7],a
 .setUpGraphics
 	ld b,$08
 	call GoPAL_SET
@@ -35,9 +35,9 @@ ShowPokedexMenu: ; 40000 (10:4000)
 	ld [wcc37],a
 	ld [wCurrentMenuItem],a
 	ld [wLastMenuItem],a
-	ld [$ffb7],a
-	ld [wcd3a],a
-	ld [wcd3b],a
+	ld [hJoy7],a
+	ld [wWastedByteCD3A],a
+	ld [wOverrideSimulatedJoypadStatesMask],a
 	pop af
 	ld [wListScrollOffset],a
 	call GBPalWhiteOutWithDelay3
@@ -404,10 +404,10 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call GoPAL_SET
 	pop af
 	ld [wd11e],a
-	ld a,[$ffd7]
+	ld a,[hTilesetType]
 	push af
 	xor a
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	hlCoord 0, 0
 	ld de,1
 	ld bc,$6414
@@ -550,11 +550,11 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld [$fff4],a
 .waitForButtonPress
 	call JoypadLowSensitivity
-	ld a,[$ffb5]
+	ld a,[hJoy5]
 	and a,%00000011 ; A button and B button
 	jr z,.waitForButtonPress
 	pop af
-	ld [$ffd7],a
+	ld [hTilesetType],a
 	call GBPalWhiteOut
 	call ClearScreen
 	call GoPAL_SET_CF1C

@@ -1,8 +1,8 @@
 
-H_SPRITEWIDTH           EQU $FF8B ; in bytes
+H_SPRITEWIDTH            EQU $FF8B ; in tiles
 H_SPRITEINTERLACECOUNTER EQU $FF8B
-H_SPRITEHEIGHT          EQU $FF8C ; in bytes
-H_SPRITEOFFSET          EQU $FF8D
+H_SPRITEHEIGHT           EQU $FF8C ; in tiles
+H_SPRITEOFFSET           EQU $FF8D
 
 hSoftReset EQU $FF8A
 ; Initialized to 16.
@@ -14,28 +14,42 @@ hSoftReset EQU $FF8A
 H_DOWNARROWBLINKCNT1 EQU $FF8B
 H_DOWNARROWBLINKCNT2 EQU $FF8C
 
-; Note: the following multiplication and division addresses are used for multiple purposes
-; and so they overlap with each other
+H_SPRITEDATAOFFSET EQU $FF8B
+H_SPRITEINDEX      EQU $FF8C
 
-H_MULTIPLICAND EQU $FF96 ; 3 bytes, big endian order
+; DisplayTextID's argument
+hSpriteIndexOrTextID EQU $FF8C
+
+; Multiplcation and division variables are meant
+; to overlap for back-to-back usage. Big endian.
+
+H_MULTIPLICAND EQU $FF96 ; 3 bytes
 H_MULTIPLIER   EQU $FF99 ; 1 byte
-H_PRODUCT      EQU $FF95 ; 4 bytes, big endian order
+H_PRODUCT      EQU $FF95 ; 4 bytes
 
-H_DIVIDEND     EQU $FF95 ; 4 bytes, big endian order
+H_DIVIDEND     EQU $FF95 ; 4 bytes
 H_DIVISOR      EQU $FF99 ; 1 byte
-H_QUOTIENT     EQU $FF95 ; 4 bytes, big endian order
+H_QUOTIENT     EQU $FF95 ; 4 bytes
 H_REMAINDER    EQU $FF99 ; 1 byte
 
-; used to convert numbers to decimal
-H_PASTLEADINGZEROES EQU $FF95 ; flag to indicate that a nonzero digit has been printed
-H_NUMTOPRINT        EQU $FF96 ; 3 bytes, big endian order
-H_POWEROFTEN        EQU $FF99 ; 3 bytes, big endian order
-H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes, big endian order (to back out of a subtraction)
+; PrintNumber (big endian).
+H_PASTLEADINGZEROES EQU $FF95 ; last char printed
+H_NUMTOPRINT        EQU $FF96 ; 3 bytes
+H_POWEROFTEN        EQU $FF99 ; 3 bytes
+H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
 
-hJoyHeldLast     EQU $FFB1
-hJoyReleased  EQU $FFB2
-hJoyPressed   EQU $FFB3
-hJoyHeld EQU $FFB4
+; these values are copied to SCX, SCY, and WY during V-blank
+hSCX EQU $FFAE
+hSCY EQU $FFAF
+hWY  EQU $FFB0
+
+hJoyHeldLast EQU $FFB1
+hJoyReleased EQU $FFB2
+hJoyPressed  EQU $FFB3
+hJoyHeld     EQU $FFB4
+hJoy5        EQU $FFB5
+hJoy6        EQU $FFB6
+hJoy7        EQU $FFB7
 
 H_LOADEDROMBANK     EQU $FFB8
 
@@ -111,6 +125,12 @@ H_FRAMECOUNTER EQU $FFD5 ; decremented every V-blank (used for delays)
 ; So, by setting it to a nonzero value and waiting for it to become 0 again,
 ; you can detect that the V-blank handler has run since then.
 H_VBLANKOCCURRED EQU $FFD6
+
+; 00 = indoor
+; 01 = cave
+; 02 = outdoor
+; this is often set to 00 in order to turn off water and flower BG tile animations
+hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
