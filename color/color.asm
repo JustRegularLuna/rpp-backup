@@ -281,7 +281,7 @@ SendPalPacket_Pokedex:
 
 	callba LoadSGBPalette
 
-IF _BLUE
+IF DEF(_BLUE)
 	ld d,PAL_BLUEMON
 ELSE
 	ld d,PAL_REDMON

@@ -1,7 +1,5 @@
 GEN_2_GRAPHICS	EQU 1
 
-INCLUDE "version.asm"
-
 INCLUDE "macros.asm"
 
 INCLUDE "hram.asm"
@@ -29,6 +27,7 @@ INCLUDE "constants/list_constants.asm"
 INCLUDE "constants/map_constants.asm"
 INCLUDE "constants/map_dimensions.asm"
 INCLUDE "constants/connection_constants.asm"
+INCLUDE "constants/hide_show_constants.asm"
 INCLUDE "constants/credits_constants.asm"
 INCLUDE "constants/music_constants.asm"
 INCLUDE "constants/tilesets.asm"
