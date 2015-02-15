@@ -14,7 +14,7 @@ dw OnixPicFront
 dw OnixPicBack
 ; attacks known at lvl 0
 db TACKLE
-db SCREECH
+db HARDEN
 db 0
 db 0
 db 0 ; growth rate
@@ -26,4 +26,4 @@ db %11001110
 db %10001010
 db %11001000
 db %00100010
-db 0 ; padding
+db BANK(OnixPicFront)

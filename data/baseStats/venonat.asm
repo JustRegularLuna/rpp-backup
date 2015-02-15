@@ -35,4 +35,4 @@ IF _YELLOW
 	db %00100010
 ENDC
 
-db 0 ; padding
+db BANK(VenonatPicFront)

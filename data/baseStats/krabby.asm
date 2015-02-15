@@ -14,7 +14,7 @@ dw KrabbyPicFront
 dw KrabbyPicBack
 ; attacks known at lvl 0
 db BUBBLE
-db LEER
+db 0
 db 0
 db 0
 db 0 ; growth rate
@@ -26,4 +26,4 @@ db %11000000
 db %00000010
 db %00001000
 db %00110110
-db 0 ; padding
+db BANK(KrabbyPicFront)

@@ -2811,9 +2811,13 @@ Func_79e0d: ; 79e0d (1e:5e0d)
 	jp Delay3
 
 TossBallAnimation: ; 79e16 (1e:5e16)
+	ld a,[wcf91]
+	cp a,THIEF_BALL
+	jp z,.skipTrainerCheck
 	ld a,[W_ISINBATTLE]
 	cp a,2
 	jr z,.BlockBall ; if in trainer battle, play different animation
+.skipTrainerCheck
 	ld a,[wd11e]
 	ld b,a
 

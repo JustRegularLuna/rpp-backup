@@ -2,7 +2,7 @@ Moves: ; 38000 (e:4000)
 ; characteristics of each move
 ; animation, effect, power, type, accuracy, PP
 	db POUND       ,NO_ADDITIONAL_EFFECT      ,$28,NORMAL,  $FF,35
-	db KARATE_CHOP ,NO_ADDITIONAL_EFFECT      ,$32,NORMAL,  $FF,25
+	db KARATE_CHOP ,NO_ADDITIONAL_EFFECT      ,$32,FIGHTING,$FF,25
 	db DOUBLESLAP  ,TWO_TO_FIVE_ATTACKS_EFFECT,$0F,NORMAL,  $D8,10
 	db COMET_PUNCH ,TWO_TO_FIVE_ATTACKS_EFFECT,$12,NORMAL,  $D8,15
 	db MEGA_PUNCH  ,NO_ADDITIONAL_EFFECT      ,$50,NORMAL,  $D8,20
@@ -16,7 +16,7 @@ Moves: ; 38000 (e:4000)
 	db RAZOR_WIND  ,CHARGE_EFFECT             ,$50,NORMAL,  $BF,10
 	db SWORDS_DANCE,ATTACK_UP2_EFFECT         ,$00,NORMAL,  $FF,30
 	db CUT         ,NO_ADDITIONAL_EFFECT      ,$32,NORMAL,  $F2,30
-	db GUST        ,NO_ADDITIONAL_EFFECT      ,$28,NORMAL,  $FF,35
+	db GUST        ,NO_ADDITIONAL_EFFECT      ,$28,FLYING,  $FF,35
 	db WING_ATTACK ,NO_ADDITIONAL_EFFECT      ,$23,FLYING,  $FF,35
 	db WHIRLWIND   ,SWITCH_AND_TELEPORT_EFFECT,$00,NORMAL,  $D8,20
 	db FLY         ,FLY_EFFECT                ,$46,FLYING,  $F2,15
@@ -28,7 +28,7 @@ Moves: ; 38000 (e:4000)
 	db MEGA_KICK   ,NO_ADDITIONAL_EFFECT      ,$78,NORMAL,  $BF,5
 	db JUMP_KICK   ,JUMP_KICK_EFFECT          ,$46,FIGHTING,$F2,25
 	db ROLLING_KICK,FLINCH_SIDE_EFFECT2       ,$3C,FIGHTING,$D8,15
-	db SAND_ATTACK ,ACCURACY_DOWN1_EFFECT     ,$00,NORMAL,  $FF,15
+	db SAND_ATTACK ,ACCURACY_DOWN1_EFFECT     ,$00,GROUND,  $FF,15
 	db HEADBUTT    ,FLINCH_SIDE_EFFECT2       ,$46,NORMAL,  $FF,15
 	db HORN_ATTACK ,NO_ADDITIONAL_EFFECT      ,$41,NORMAL,  $FF,25
 	db FURY_ATTACK ,TWO_TO_FIVE_ATTACKS_EFFECT,$0F,NORMAL,  $D8,20
@@ -44,7 +44,7 @@ Moves: ; 38000 (e:4000)
 	db TWINEEDLE   ,TWINEEDLE_EFFECT          ,$19,BUG,     $FF,20
 	db PIN_MISSILE ,TWO_TO_FIVE_ATTACKS_EFFECT,$0E,BUG,     $D8,20
 	db LEER        ,DEFENSE_DOWN1_EFFECT      ,$00,NORMAL,  $FF,30
-	db BITE        ,FLINCH_SIDE_EFFECT1       ,$3C,NORMAL,  $FF,25
+	db BITE        ,FLINCH_SIDE_EFFECT1       ,$3C,DARK,    $FF,25
 	db GROWL       ,ATTACK_DOWN1_EFFECT       ,$00,NORMAL,  $FF,40
 	db ROAR        ,SWITCH_AND_TELEPORT_EFFECT,$00,NORMAL,  $FF,20
 	db SING        ,SLEEP_EFFECT              ,$00,NORMAL,  $8C,15
@@ -145,7 +145,7 @@ Moves: ; 38000 (e:4000)
 	db LOVELY_KISS ,SLEEP_EFFECT              ,$00,NORMAL,  $BF,10
 	db SKY_ATTACK  ,CHARGE_EFFECT             ,$8C,FLYING,  $E5,5
 	db TRANSFORM   ,TRANSFORM_EFFECT          ,$00,NORMAL,  $FF,10
-	db BUBBLE      ,SPEED_DOWN_SIDE_EFFECT    ,$14,WATER,   $FF,30
+	db BUBBLE      ,SPEED_DOWN_SIDE_EFFECT    ,$28,WATER,   $FF,30
 	db DIZZY_PUNCH ,NO_ADDITIONAL_EFFECT      ,$46,NORMAL,  $FF,10
 	db SPORE       ,SLEEP_EFFECT              ,$00,GRASS,   $FF,15
 	db FLASH       ,ACCURACY_DOWN1_EFFECT     ,$00,NORMAL,  $B2,20
@@ -166,3 +166,87 @@ Moves: ; 38000 (e:4000)
 	db SLASH       ,NO_ADDITIONAL_EFFECT      ,$46,NORMAL,  $FF,20
 	db SUBSTITUTE  ,SUBSTITUTE_EFFECT         ,$00,NORMAL,  $FF,10
 	db STRUGGLE    ,RECOIL_EFFECT             ,$32,NORMAL,  $FF,10
+	db SLASH       ,NO_ADDITIONAL_EFFECT      ,$32,STEEL,	$F2,35 ; Metal Claw
+	db COMET_PUNCH ,NO_ADDITIONAL_EFFECT      ,$28,STEEL,   $FF,30 ; Bullet Punch
+	db AURORA_BEAM ,SPECIAL_DOWN_SIDE_EFFECT  ,$50,STEEL,   $FF,10 ; Flash Cannon
+	db CUT         ,DEFENSE_DOWN_SIDE_EFFECT  ,$64,STEEL,   $B2,15 ; Iron Tail
+	db STRENGTH    ,NO_ADDITIONAL_EFFECT      ,$5A,STEEL,   $F2,10 ; Meteor Mash
+	db BITE        ,DEFENSE_DOWN_SIDE_EFFECT  ,$50,DARK,    $FF,15 ; Crunch
+	db PSYCHIC     ,FLINCH_SIDE_EFFECT1       ,$50,DARK,    $FF,15 ; Dark Pulse
+	db TACKLE      ,SWIFT_EFFECT              ,$3C,DARK,    $FF,20 ; Feint Attack
+	db CUT         ,NO_ADDITIONAL_EFFECT      ,$46,DARK,    $FF,15 ; Night Slash
+	db SEISMIC_TOSS,SPECIAL_DOWN_SIDE_EFFECT  ,$5F,FAIRY,   $FF,15 ; Moonblast
+	db LOVELY_KISS ,DRAIN_HP_EFFECT           ,$32,FAIRY,   $FF,10 ; Draining Kiss
+	db SCREECH     ,SWIFT_EFFECT              ,$28,FAIRY,   $FF,15 ; Disarming Voice
+	db FLASH       ,NO_ADDITIONAL_EFFECT      ,$50,FAIRY,   $FF,10 ; Dazzling Gleam
+	db SEISMIC_TOSS,SPECIAL_DOWN_SIDE_EFFECT  ,$82,DRAGON,  $E5,5  ; Draco Meteor
+	db FLAMETHROWER,PARALYZE_SIDE_EFFECT1     ,$3C,DRAGON,  $FF,20 ; Dragonbreath
+	db SLASH       ,NO_ADDITIONAL_EFFECT      ,$50,DRAGON,  $FF,15 ; Dragon Claw
+	db AURORA_BEAM ,NO_ADDITIONAL_EFFECT      ,$55,DRAGON,  $FF,10 ; Dragon Pulse
+	db WHIRLWIND   ,FLINCH_SIDE_EFFECT1       ,$28,DRAGON,  $FF,20 ; Twister
+	db RAGE        ,TRAPPING_EFFECT           ,$78,DRAGON,  $FF,10 ; Outrage
+	db SLASH       ,NO_ADDITIONAL_EFFECT      ,$46,GHOST,   $FF,15 ; Shadow Claw
+	db WING_ATTACK ,NO_ADDITIONAL_EFFECT      ,$46,STEEL,   $E5,25 ; Steel Wing
+	db BARRIER     ,DEFENSE_UP2_EFFECT        ,$00,STEEL,   $FF,15 ; Iron Defense
+	db CUT         ,FLINCH_SIDE_EFFECT2       ,$4B,FLYING,  $F2,15 ; Air Slash
+	db BITE        ,FIRE_FANG_EFFECT          ,$41,FIRE,    $F2,15 ; Fire Fang
+	db EMBER       ,RECOIL_EFFECT             ,$78,FIRE,    $FF,14 ; Flare Blitz
+	db FIRE_BLAST  ,HYPER_BEAM_EFFECT         ,$96,FIRE,    $E5,5  ; Blast Burn
+	db BITE        ,ICE_FANG_EFFECT           ,$41,ICE,     $F2,15 ; Ice Fang
+	db BITE        ,THUNDER_FANG_EFFECT       ,$41,ELECTRIC,$F2,15 ; Thunder Fang
+	db BUBBLEBEAM  ,CONFUSION_SIDE_EFFECT     ,$3C,WATER,   $FF,20 ; Water Pulse
+	db SURF        ,NO_ADDITIONAL_EFFECT      ,$5A,WATER,   $FF,10 ; Aqua Tail
+	db AURORA_BEAM ,HYPER_BEAM_EFFECT         ,$96,WATER,   $E5,5  ; Hydro Cannon
+	db VINE_WHIP   ,HYPER_BEAM_EFFECT         ,$96,GRASS,   $E5,5  ; Frenzy Plant
+	db MEGA_PUNCH  ,NO_ADDITIONAL_EFFECT      ,$50,DARK,    $FF,5  ; Sucker Punch
+	db BARRAGE     ,SPECIAL_DOWN_SIDE_EFFECT  ,$50,GHOST,   $FF,15 ; Shadow Ball
+	db EMBER       ,BURN_SIDE_EFFECT1         ,$3C,FIRE,    $FF,25 ; Flame Wheel
+	db FOCUS_ENERGY,HEAL_EFFECT               ,$00,FAIRY,   $FF,20 ; Moonlight
+	db PSYCHIC_M   ,NO_ADDITIONAL_EFFECT      ,$41,GHOST,   $FF,10 ; Hex
+	db MEGA_PUNCH  ,SWIFT_EFFECT              ,$3C,GHOST,   $FF,20 ; Shadow Punch
+	db WING_ATTACK ,SWIFT_EFFECT              ,$3C,FLYING,  $FF,20 ; Aerial Ace
+	db QUICK_ATTACK,NO_ADDITIONAL_EFFECT      ,$6E,FLYING,  $FF,15 ; Acrobatics
+	db CUT         ,NO_ADDITIONAL_EFFECT      ,$3C,FLYING,  $FF,25 ; Air Cutter
+	db GUST        ,SPEED_DOWN_SIDE_EFFECT    ,$37,ICE,     $F2,15 ; Icy Wind
+	db BLIZZARD    ,NO_ADDITIONAL_EFFECT      ,$28,ICE,     $FF,30 ; Ice Shard
+	db BLIZZARD    ,OHKO_EFFECT               ,$01,ICE,     $4C,5  ; Sheer Cold
+	db THUNDER     ,NO_ADDITIONAL_EFFECT      ,$50,ELECTRIC,$FF,10 ; Electro Ball
+	db TACKLE      ,NUZZLE_EFFECT             ,$14,ELECTRIC,$FF,20 ; Nuzzle
+	db THUNDERBOLT ,PARALYZE_SIDE_EFFECT1     ,$50,ELECTRIC,$FF,15 ; Discharge
+	db QUICK_ATTACK,VOLT_TACKLE_EFFECT        ,$78,ELECTRIC,$FF,15 ; Volt Tackle
+	db SPLASH      ,ACCURACY_DOWN1_EFFECT     ,$5A,WATER,   $D8,10 ; Muddy Water
+	db GUST        ,TRAPPING_EFFECT           ,$23,WATER,   $D8,15 ; Whirlpool
+	db MEGA_DRAIN  ,DRAIN_HP_EFFECT           ,$4B,GRASS,   $FF,10 ; Giga Drain
+	db PETAL_DANCE ,NO_ADDITIONAL_EFFECT      ,$5A,GRASS,   $FF,15 ; Petal Blizzard
+	db CUT         ,NO_ADDITIONAL_EFFECT      ,$5A,GRASS,   $FF,15 ; Leaf Blade
+	db ROCK_THROW  ,RECOIL_EFFECT             ,$78,GRASS,   $FF,15 ; Wood Hammer
+	db COMET_PUNCH ,POISON_SIDE_EFFECT2       ,$50,POISON,  $FF,20 ; Poison Jab
+	db SLUDGE      ,POISON_SIDE_EFFECT2       ,$78,POISON,  $D8,5  ; Gunk Shot
+	db BITE        ,POISON_FANG_EFFECT        ,$32,POISON,  $FF,15 ; Poison Fang
+	db SURF        ,POISON_SIDE_EFFECT1       ,$5F,POISON,  $FF,10 ; Sludge Wave
+	db MIST        ,NO_ADDITIONAL_EFFECT      ,$3C,BUG,     $FF,5  ; Silver Wind
+	db SUPERSONIC  ,SPECIAL_DOWN_SIDE_EFFECT  ,$5A,BUG,     $FF,10 ; Bug Buzz
+	db HORN_ATTACK ,NO_ADDITIONAL_EFFECT      ,$78,BUG,     $D8,10 ; Megahorn
+	db CUT         ,NO_ADDITIONAL_EFFECT      ,$50,BUG,     $FF,15 ; X-Scissor
+	db AURORA_BEAM ,CONFUSION_SIDE_EFFECT     ,$4B,BUG,     $FF,15 ; Signal Beam
+	db EARTHQUAKE  ,SPECIAL_DOWN_SIDE_EFFECT  ,$5A,GROUND,  $FF,10 ; Earth Power
+	db SAND_ATTACK ,ACCURACY_DOWN1_EFFECT     ,$14,GROUND,  $FF,10 ; Mud-Slap
+	db FISSURE     ,ACCURACY_DOWN1_EFFECT     ,$41,GROUND,  $D8,10 ; Mud Bomb
+	db CONFUSION   ,FLINCH_SIDE_EFFECT1       ,$50,PSYCHIC, $FF,20 ; Extrasensory
+	db HEADBUTT    ,FLINCH_SIDE_EFFECT2       ,$50,PSYCHIC, $FF,15 ; Zen Headbutt
+	db CUT         ,NO_ADDITIONAL_EFFECT      ,$46,PSYCHIC, $FF,20 ; Psycho Cut
+	db SING        ,NO_ADDITIONAL_EFFECT      ,$5A,NORMAL,  $FF,10 ; Hyper Voice
+	db QUICK_ATTACK,NO_ADDITIONAL_EFFECT      ,$50,NORMAL,  $FF,5  ; Extremespeed
+	db SLAM        ,HYPER_BEAM_EFFECT         ,$96,NORMAL,  $E5,5  ; Giga Impact
+	db KINESIS     ,NO_ADDITIONAL_EFFECT      ,$50,ROCK,    $FF,20 ; Power Gem
+	db BARRAGE     ,TWO_TO_FIVE_ATTACKS_EFFECT,$19,ROCK,    $F2,10 ; Rock Blast
+	db CONVERSION  ,SPEED_UP2_EFFECT          ,$00,ROCK,    $FF,20 ; Rock Polish
+	db ROCK_SLIDE  ,SPEED_DOWN_SIDE_EFFECT    ,$3C,ROCK,    $F2,15 ; Rock Tomb
+	db MEGA_PUNCH  ,CONFUSION_SIDE_EFFECT     ,$64,FIGHTING,$7F,5  ; Dynamicpunch
+	db COUNTER     ,NO_ADDITIONAL_EFFECT      ,$3C,FIGHTING,$E5,10 ; Circle Throw
+	db KARATE_CHOP ,NO_ADDITIONAL_EFFECT      ,$64,FIGHTING,$D8,5  ; Cross Chop
+	db MEGA_KICK   ,SPEED_DOWN_SIDE_EFFECT    ,$41,FIGHTING,$FF,20 ; Low Sweep
+	db WHIRLWIND   ,CONFUSION_SIDE_EFFECT     ,$6E,FLYING,  $D8,10 ; Hurricane
+	db LEER        ,ATTACK_DOWN1_EFFECT       ,$00,FAIRY,   $FF,30 ; Baby Doll Eyes
+	db BONEMERANG  ,TWO_TO_FIVE_ATTACKS_EFFECT,$19,GROUND,  $E5,10 ; Bone Rush
+	

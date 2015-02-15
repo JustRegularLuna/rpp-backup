@@ -14,7 +14,7 @@ dw TangelaPicFront
 dw TangelaPicBack
 ; attacks known at lvl 0
 db CONSTRICT
-db BIND
+db 0
 db 0
 db 0
 db 0 ; growth rate
@@ -26,4 +26,4 @@ db %11000000
 db %10000010
 db %00001000
 db %00000110
-db 0 ; padding
+db BANK(TangelaPicFront)

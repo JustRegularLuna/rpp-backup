@@ -15,7 +15,7 @@ dw FarfetchdPicBack
 ; attacks known at lvl 0
 db PECK
 db SAND_ATTACK
-db 0
+db LEER
 db 0
 db 0 ; growth rate
 ; learnset
@@ -26,4 +26,4 @@ db %11000000
 db %11000011
 db %00001000
 db %00001110
-db 0 ; padding
+db BANK(FarfetchdPicFront)

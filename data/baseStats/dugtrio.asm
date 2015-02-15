@@ -31,4 +31,4 @@ ENDC
 IF _YELLOW
 	db %00000110
 ENDC
-db 0 ; padding
+db BANK(DugtrioPicFront)

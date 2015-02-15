@@ -1,5 +1,8 @@
 LoadDefaultNamesPlayer: ; 695d (1:695d)
 	call Func_6a12
+	ld a, [wd798]   ; Added gender check
+	bit 2, a        ; Added gender check
+	jr nz, .AreGirl ; Skip to girl names if you are a girl instead
 	ld de, DefaultNamesPlayer ; $6aa8
 	call DisplayIntroNameTextBox
 	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
@@ -10,6 +13,17 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	ld de, wPlayerName ; wd158
 	call Func_69ec
 	jr .asm_6999
+.AreGirl ; Copy of the boy naming routine, just with girl's names
+	ld de, DefaultNamesGirl ; $6aa8
+	call DisplayIntroNameTextBox
+	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	and a
+	jr z, .asm_697a
+	ld hl, DefaultNamesGirlList ; $6af2
+	call Func_6ad6
+	ld de, wPlayerName ; wd158
+	call Func_69ec
+	jr .asm_6999 ; End of new Girl Names routine
 .asm_697a
 	ld hl, wPlayerName ; wd158
 	xor a
@@ -22,6 +36,12 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	call Delay3
 	ld de, RedPicFront ; $6ede
 	ld b, BANK(RedPicFront)
+	ld a, [wd798] ; Added gender check
+	bit 2, a      ; Added gender check
+	jr z, .AreBoy3
+	ld de, LeafPicFront
+	ld b, BANK(LeafPicFront)
+.AreBoy3
 	call IntroPredef3B
 .asm_6999
 	ld hl, YourNameIsText
@@ -188,6 +208,13 @@ DefaultNamesPlayer: ; 6aa8 (1:6aa8)
 	next "ASH"
 	next "JACK"
 	db   "@"
+	
+DefaultNamesGirl:
+	db   "NEW NAME"
+	next "SCARLET"
+	next "LEAF"
+	next "NICOLE"
+	db   "@"
 
 DefaultNamesRival: ; 6abe (1:6abe)
 	db   "NEW NAME"
@@ -203,6 +230,13 @@ DefaultNamesPlayer: ; 6aa8 (1:6aa8)
 	next "BLUE"
 	next "GARY"
 	next "JOHN"
+	db   "@"
+	
+DefaultNamesGirl:
+	db   "NEW NAME"
+	next "SCARLET"
+	next "LEAF"
+	next "NICOLE"
 	db   "@"
 
 DefaultNamesRival: ; 6abe (1:6abe)
@@ -239,12 +273,16 @@ DefaultNamesPlayerList: ; 6af2 (1:6af2)
 	db "NEW NAME@RED@ASH@JACK@"
 DefaultNamesRivalList: ; 6b08 (1:6b08)
 	db "NEW NAME@BLUE@GARY@JOHN@"
+DefaultNamesGirlList:
+	db "NEW NAME@SCARLET@LEAF@NICOLE@"
 ENDC
 IF _BLUE
 DefaultNamesPlayerList: ; 6af2 (1:6af2)
 	db "NEW NAME@BLUE@GARY@JOHN@"
 DefaultNamesRivalList: ; 6b08 (1:6b08)
 	db "NEW NAME@RED@ASH@JACK@"
+DefaultNamesGirlList:
+	db "NEW NAME@SCARLET@LEAF@NICOLE@"
 ENDC
 
 TextTerminator_6b20: ; 6b20 (1:6b20)

@@ -3,6 +3,7 @@
 ; {status condition}_side_effect means that the move has a side chance of causing that condition
 ; {status condition}_effect means that the move causes the status condition every time it hits the target
 NO_ADDITIONAL_EFFECT       EQU $00
+; unused effect            EQU $01
 POISON_SIDE_EFFECT1        EQU $02
 DRAIN_HP_EFFECT            EQU $03
 BURN_SIDE_EFFECT1          EQU $04
@@ -36,7 +37,7 @@ FLINCH_SIDE_EFFECT1        EQU $1F
 SLEEP_EFFECT               EQU $20
 POISON_SIDE_EFFECT2        EQU $21
 BURN_SIDE_EFFECT2          EQU $22
-; unused effect            EQU $23
+FREEZE_SIDE_EFFECT2        EQU $23 ; 30.1% chance to freeze opponent
 PARALYZE_SIDE_EFFECT2      EQU $24
 FLINCH_SIDE_EFFECT2        EQU $25
 OHKO_EFFECT                EQU $26 ; moves like Horn Drill
@@ -73,13 +74,13 @@ ATTACK_DOWN_SIDE_EFFECT    EQU $44
 DEFENSE_DOWN_SIDE_EFFECT   EQU $45
 SPEED_DOWN_SIDE_EFFECT     EQU $46
 SPECIAL_DOWN_SIDE_EFFECT   EQU $47
-; unused effect            EQU $48
-; unused effect            EQU $49
+ACCURACY_DOWN_SIDE_EFFECT  EQU $48
+EVASION_DOWN_SIDE_EFFECT   EQU $49
 ; unused effect            EQU $4A
 ; unused effect            EQU $4B
 CONFUSION_SIDE_EFFECT      EQU $4C
 TWINEEDLE_EFFECT           EQU $4D
-; unused effect            EQU $4E
+NUZZLE_EFFECT              EQU $4E
 SUBSTITUTE_EFFECT          EQU $4F
 HYPER_BEAM_EFFECT          EQU $50
 RAGE_EFFECT                EQU $51
@@ -88,6 +89,11 @@ METRONOME_EFFECT           EQU $53
 LEECH_SEED_EFFECT          EQU $54
 SPLASH_EFFECT              EQU $55
 DISABLE_EFFECT             EQU $56
+FIRE_FANG_EFFECT           EQU $57
+ICE_FANG_EFFECT            EQU $58
+THUNDER_FANG_EFFECT        EQU $59
+VOLT_TACKLE_EFFECT         EQU $5A
+POISON_FANG_EFFECT         EQU $5B
 
 ; fixed damage constants
 SONICBOOM_DAMAGE   EQU 20

@@ -15,7 +15,7 @@ dw LaprasPicBack
 ; attacks known at lvl 0
 db WATER_GUN
 db GROWL
-db 0
+db SING
 db 0
 db 5 ; growth rate
 ; learnset
@@ -26,4 +26,4 @@ db %11010001
 db %10000011
 db %00101000
 db %00110010
-db 0 ; padding
+db BANK(LaprasPicFront)

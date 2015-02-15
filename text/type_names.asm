@@ -8,7 +8,7 @@ TypeNamePointers: ; 27dae (9:7dae)
 	dw Type06Name
 	dw Type07Name
 	dw Type08Name
-	dw Type00Name
+	dw Type09Name
 	dw Type00Name
 	dw Type00Name
 	dw Type00Name
@@ -26,6 +26,8 @@ TypeNamePointers: ; 27dae (9:7dae)
 	dw Type18Name
 	dw Type19Name
 	dw Type1AName
+	dw Type1BName
+	dw Type1CName
 
 Type00Name: ; 27de4 (9:7de4)
 	db "NORMAL@"
@@ -59,3 +61,9 @@ Type08Name: ; 27e3d (9:7e3d)
 	db "GHOST@"
 Type1AName: ; 27e43 (9:7e43)
 	db "DRAGON@"
+Type09Name:
+	db "STEEL@"
+Type1BName:
+	db "DARK@"
+Type1CName:
+	db "FAIRY@"

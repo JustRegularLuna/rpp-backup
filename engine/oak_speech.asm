@@ -56,6 +56,16 @@ OakSpeech: ; 6115 (1:6115)
 	ld a,[wd732]
 	bit 1,a ; XXX when is bit 1 set?
 	jp nz,Func_61bc ; easter egg: skip the intro
+	ld hl,BoyGirlText  ; added to the same file as the other oak text
+	call PrintText     ; show this text
+	call BoyGirlChoice ; added routine at the end of this file
+	ld a, [$cc26]
+	and a
+	jr z, .AfterSettingGirl ; skip setting the girl and leave that flag alone if you chose the boy
+	ld hl, wd798 ; load ram address of Gender
+	set 2, [hl]      ; sets you as a girl
+.AfterSettingGirl: ; resume main intro, jumps here if you were a guy
+	call ClearScreen ; clear the screen before resuming normal intro
 	ld de,ProfOakPic
 	ld bc, (Bank(ProfOakPic) << 8) | $00
 	call IntroPredef3B   ; displays Oak pic?
@@ -64,7 +74,7 @@ OakSpeech: ; 6115 (1:6115)
 	call PrintText      ; prints text box
 	call GBFadeOut2
 	call ClearScreen
-	ld a,NIDORINO
+	ld a,MEW
 	ld [wd0b5],a    ; pic displayed is stored at this location
 	ld [wcf91],a
 	call GetMonHeader      ; this is also related to the pic
@@ -77,6 +87,12 @@ OakSpeech: ; 6115 (1:6115)
 	call ClearScreen
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
+	ld a, [wd798] ; check gender
+	bit 2, a      ; check gender
+	jr z, .NotLeaf1
+	ld de,LeafPicFront
+	ld bc,(Bank(LeafPicFront) << 8) | $00
+.NotLeaf1:
 	call IntroPredef3B      ; displays player pic?
 	call MovePicLeft
 	ld hl,IntroducePlayerText
@@ -97,6 +113,12 @@ Func_61bc: ; 61bc (1:61bc)
 	call ClearScreen
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
+	ld a, [wd798] ; check gender
+	bit 2, a      ; check gender
+	jr z, .NotLeaf2
+	ld de,LeafPicFront
+	ld bc,(Bank(LeafPicFront) << 8) | $00
+.NotLeaf2:
 	call IntroPredef3B
 	call GBFadeIn2
 	ld a,[wd72d]
@@ -115,8 +137,14 @@ Func_61bc: ; 61bc (1:61bc)
 	ld c,4
 	call DelayFrames
 	ld de,RedSprite ; $4180
-	ld hl,vSprites
 	ld bc,(BANK(RedSprite) << 8) | $0C
+	ld a, [wd798] ; check gender
+	bit 2, a      ; check gender
+	jr z, .NotLeaf3
+	ld de,LeafSprite
+	ld bc,(BANK(LeafSprite) << 8) | $0C
+.NotLeaf3:
+	ld hl,vSprites
 	call CopyVideoData
 	ld de,ShrinkPic1
 	ld bc,(BANK(ShrinkPic1) << 8) | $00
@@ -169,6 +197,9 @@ IntroduceRivalText: ; 6267 (1:6267)
 	db "@"
 OakSpeechText3: ; 626c (1:626c)
 	TX_FAR _OakSpeechText3
+	db "@"
+BoyGirlText: ; This is new so we had to add a reference to get it to compile
+	TX_FAR _BoyGirlText
 	db "@"
 
 FadeInIntroPic: ; 6271 (1:6271)
@@ -230,3 +261,24 @@ IntroPredef3B: ; 62a4 (1:62a4)
 	xor a
 	ld [$FFE1],a
 	predef_jump Func_3f0c6
+
+	
+; displays boy/girl choice
+; yes -> set carry flag
+BoyGirlChoice::
+	call SaveScreenTilesToBuffer1
+	call InitBoyGirlTextBoxParameters
+	jr DisplayBoyGirlChoice
+	
+InitBoyGirlTextBoxParameters::
+	ld a, $1 ; loads the value for the unused North/West choice, that was changed to say Boy/Girl
+	ld [wd12c], a
+	hlCoord 11, 7 
+	ld bc, $80c
+	ret
+	
+DisplayBoyGirlChoice::
+	ld a, $14
+	ld [wd125], a
+	call DisplayTextBoxID
+	jp LoadScreenTilesFromBuffer1

@@ -13,8 +13,8 @@ db $55 ; sprite dimensions
 dw MachopPicFront
 dw MachopPicBack
 ; attacks known at lvl 0
-db KARATE_CHOP
-db 0
+db LOW_KICK
+db LEER
 db 0
 db 0
 db 3 ; growth rate
@@ -26,4 +26,4 @@ db %11001110
 db %10100110
 db %10001000
 db %00100010
-db 0 ; padding
+db BANK(MachopPicFront)

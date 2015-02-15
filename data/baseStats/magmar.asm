@@ -13,8 +13,8 @@ db $66 ; sprite dimensions
 dw MagmarPicFront
 dw MagmarPicBack
 ; attacks known at lvl 0
-db EMBER
-db 0
+db SMOG
+db LEER
 db 0
 db 0
 db 0 ; growth rate
@@ -26,4 +26,4 @@ db %11110000
 db %10100110
 db %00101000
 db %00100010
-db 0 ; padding
+db BANK(MagmarPicFront)

@@ -6,7 +6,7 @@ db 70 ; base defense
 db 45 ; base speed
 db 95 ; base special
 db ELECTRIC ; species type 1
-db ELECTRIC ; species type 2
+db STEEL ; species type 2
 db 190 ; catch rate
 db 89 ; base exp yield
 db $55 ; sprite dimensions
@@ -26,4 +26,4 @@ db %11100001
 db %01000011
 db %00011000
 db %01000010
-db 0 ; padding
+db BANK(MagnemitePicFront)

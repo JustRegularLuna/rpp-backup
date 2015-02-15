@@ -535,10 +535,10 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $40 ; byte count
 	db BANK(OldAmberSprite)
 
-	; SPRITE_LYING_OLD_MAN_UNUSED_1
-	dw LyingOldManSprite
+	; SPRITE_POKEDEX
+	dw PokedexSprite
 	db $40 ; byte count
-	db BANK(LyingOldManSprite)
+	db BANK(PokedexSprite)
 
 	; SPRITE_LYING_OLD_MAN_UNUSED_2
 	dw LyingOldManSprite

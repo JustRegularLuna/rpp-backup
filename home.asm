@@ -728,33 +728,21 @@ UncompressMonSprite:: ; 1627 (0:1627)
 ; $74 ≤ index < $99, bank $C
 ; $99 ≤ index,       bank $D
 	ld a,[wcf91] ; XXX name for this ram location
-	ld b,a
-	cp MEW
-	ld a,BANK(MewPicFront)
-	jr z,.GotBank
-	ld a,b
 	cp FOSSIL_KABUTOPS
+	jr z,.RecallBank
+	cp FOSSIL_AERODACTYL
+	jr z,.RecallBank
+	cp MON_GHOST
+	jr z,.RecallBank
+	ld a,[$D0D3]
+	jr .GotBank
+.RecallBank
 	ld a,BANK(FossilKabutopsPic)
-	jr z,.GotBank
-	ld a,b
-	cp TANGELA + 1
-	ld a,BANK(TangelaPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp MOLTRES + 1
-	ld a,BANK(MoltresPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp BEEDRILL + 2
-	ld a,BANK(BeedrillPicFront)
-	jr c,.GotBank
-	ld a,b
-	cp STARMIE + 1
-	ld a,BANK(StarmiePicFront)
-	jr c,.GotBank
-	ld a,BANK(VictreebelPicFront)
 .GotBank
 	jp UncompressSpriteData
+
+	ds $19
+
 
 ; de: destination location
 LoadMonFrontSprite:: ; 1665 (0:1665)
@@ -763,6 +751,7 @@ LoadMonFrontSprite:: ; 1665 (0:1665)
 	call UncompressMonSprite
 	ld hl, W_MONHSPRITEDIM
 	ld a, [hli]
+LoadUncompressedBackSprite:
 	ld c, a
 	pop de
 	; fall through
@@ -3780,10 +3769,14 @@ GetName:: ; 376b (0:376b)
 ; [wPredefBank] = bank of list
 ;
 ; returns pointer to name in de
+	ld a, [W_LISTTYPE] ; added check for list type
+	cp a, ITEM_NAME    ; compare to move list
 	ld a,[wd0b5]
 	ld [wd11e],a
+	jr nz, .nonMachine  ; SHOULD skip the HM check if in move names
 	cp a,$C4        ;it's TM/HM
 	jp nc,GetMachineName
+.nonMachine            ; Return here if not an item
 	ld a,[H_LOADEDROMBANK]
 	push af
 	push hl

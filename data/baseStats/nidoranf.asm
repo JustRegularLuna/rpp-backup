@@ -13,8 +13,8 @@ db $55 ; sprite dimensions
 dw NidoranFPicFront
 dw NidoranFPicBack
 ; attacks known at lvl 0
+db SCRATCH
 db GROWL
-db TACKLE
 db 0
 db 0
 db 3 ; growth rate
@@ -26,4 +26,4 @@ db %11000001
 db %10000011
 db %00001000
 db %00000010
-db 0 ; padding
+db BANK(NidoranFPicFront)

@@ -65,7 +65,7 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUseEvoStone   ; LEAF_STONE
 	dw ItemUseCardKey    ; CARD_KEY
 	dw UnusableItem      ; NUGGET
-	dw UnusableItem      ; ??? PP_UP
+	dw ItemThiefBall     ; THIEF_BALL
 	dw ItemUsePokedoll   ; POKE_DOLL
 	dw ItemUseMedicine   ; FULL_HEAL
 	dw ItemUseMedicine   ; REVIVE
@@ -100,12 +100,19 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUsePPRestore  ; ELIXER
 	dw ItemUsePPRestore  ; MAX_ELIXER
 
+ItemThiefBall:
+	ld a,[W_ISINBATTLE]
+	and a
+	jp z,ItemUseNotTime ; not in battle
+	jp BallAnyway	
+	
 ItemUseBall: ; d687 (3:5687)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp z,ItemUseNotTime ; not in battle
 	dec a
 	jp nz,ThrowBallAtTrainerMon
+BallAnyway:
 	ld a,[W_BATTLETYPE]
 	dec a
 	jr z,.UseBall
@@ -158,6 +165,11 @@ ItemUseBall: ; d687 (3:5687)
 .loop	;$56fa
 	call Random
 	ld b,a
+	; Add cheat for B + Down
+	ld a, [hJoyInput]
+	cp a, $82 ; B_BUTTON + D_DOWN
+	jp z,.BallSuccess
+	; Original code here
 	ld hl,wcf91
 	ld a,[hl]
 	cp a,MASTER_BALL

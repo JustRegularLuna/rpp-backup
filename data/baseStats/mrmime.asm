@@ -6,7 +6,7 @@ db 65 ; base defense
 db 90 ; base speed
 db 100 ; base special
 db PSYCHIC ; species type 1
-db PSYCHIC ; species type 2
+db FAIRY ; species type 2
 db 45 ; catch rate
 db 136 ; base exp yield
 db $66 ; sprite dimensions
@@ -26,4 +26,4 @@ db %11110001
 db %10000111
 db %00111000
 db %01000010
-db 0 ; padding
+db BANK(MrMimePicFront)

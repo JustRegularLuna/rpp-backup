@@ -13,7 +13,7 @@ db $55 ; sprite dimensions
 dw TentacoolPicFront
 dw TentacoolPicBack
 ; attacks known at lvl 0
-db ACID
+db POISON_STING
 db 0
 db 0
 db 0
@@ -26,4 +26,4 @@ db %11000000
 db %10000011
 db %00001000
 db %00010110
-db 0 ; padding
+db BANK(TentacoolPicFront)

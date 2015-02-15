@@ -13,7 +13,7 @@ db $55 ; sprite dimensions
 dw PidgeyPicFront
 dw PidgeyPicBack
 ; attacks known at lvl 0
-db GUST
+db TACKLE
 db 0
 db 0
 db 0
@@ -26,4 +26,4 @@ db %11000000
 db %01000011
 db %00001100
 db %00001010
-db 0 ; padding
+db BANK(PidgeyPicFront)

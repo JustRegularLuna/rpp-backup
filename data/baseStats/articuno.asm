@@ -13,8 +13,8 @@ db $77 ; sprite dimensions
 dw ArticunoPicFront
 dw ArticunoPicBack
 ; attacks known at lvl 0
-db PECK
-db ICE_BEAM
+db GUST
+db ICY_WIND
 db 0
 db 0
 db 5 ; growth rate
@@ -26,4 +26,4 @@ db %11000000
 db %01000011
 db %00001100
 db %00001010
-db 0 ; padding
+db BANK(ArticunoPicFront)

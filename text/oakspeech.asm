@@ -1,11 +1,13 @@
 _OakSpeechText1::
-	text "Hello there!"
-	line "Welcome to the"
-	cont "world of #MON!"
+	text "Hello! Welcome to"
+	line "my updated Red"
+	cont "Version!"
 
-	para "My name is OAK!"
-	line "People call me"
-	cont "the #MON PROF!"
+	para "Just call me"
+	line "ROMHACKER MATEO."
+	
+	para "I made this for"
+	line "you guys."
 	prompt
 
 _OakSpeechText2A::
@@ -22,20 +24,22 @@ _OakSpeechText2B::
 
 	para "Myself..."
 
-	para "I study #MON"
-	line "as a profession."
+	para "I hack #MON"
+	line "for some reason."
 	prompt
 
 _IntroducePlayerText::
-	text "First, what is"
+	text "First off, what's"
 	line "your name?"
 	prompt
 
 _IntroduceRivalText::
-	text "This is my grand-"
-	line "son. He's been"
-	cont "your rival since"
-	cont "you were a baby."
+	text "This is your"
+	line "neighbor."
+	
+	para "He's been your"
+	line "rival since you"
+	cont "were little."
 
 	para "...Erm, what is"
 	line "his name again?"
@@ -51,6 +55,10 @@ _OakSpeechText3::
 	para "A world of dreams"
 	line "and adventures"
 	cont "with #MON"
-	cont "awaits! Let's go!"
+	cont "awaits...Let's go!"
 	done
 
+_BoyGirlText::
+	text "Play as a boy, or"
+	line "as a girl?"
+	done

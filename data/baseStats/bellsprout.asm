@@ -14,7 +14,7 @@ dw BellsproutPicFront
 dw BellsproutPicBack
 ; attacks known at lvl 0
 db VINE_WHIP
-db GROWTH
+db 0
 db 0
 db 0
 db 3 ; growth rate
@@ -26,4 +26,4 @@ db %11000000
 db %00000011
 db %00001000
 db %00000110
-db 0 ; padding
+db BANK(BellsproutPicFront)

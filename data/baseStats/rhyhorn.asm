@@ -14,7 +14,7 @@ dw RhyhornPicFront
 dw RhyhornPicBack
 ; attacks known at lvl 0
 db HORN_ATTACK
-db 0
+db TAIL_WHIP
 db 0
 db 0
 db 5 ; growth rate
@@ -26,4 +26,4 @@ db %11001111
 db %10100010
 db %10001000
 db %00100010
-db 0 ; padding
+db BANK(RhyhornPicFront)

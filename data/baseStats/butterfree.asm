@@ -31,4 +31,4 @@ ENDC
 IF _YELLOW
 	db %01000010
 ENDC
-db 0 ; padding
+db BANK(ButterfreePicFront)

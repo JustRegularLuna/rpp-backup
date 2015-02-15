@@ -13,15 +13,10 @@ db $66 ; sprite dimensions
 dw ChanseyPicFront
 dw ChanseyPicBack
 ; attacks known at lvl 0
+db DOUBLE_EDGE
+db DEFENSE_CURL
 db POUND
-IF !_YELLOW
-	db DOUBLESLAP
-ENDC
-IF _YELLOW
-	db TAIL_WHIP
-ENDC
-db 0
-db 0
+db GROWL
 db 4 ; growth rate
 ; learnset
 db %10110001
@@ -31,4 +26,4 @@ db %11110001
 db %10110111
 db %00111001
 db %01100011
-db 0 ; padding
+db BANK(ChanseyPicFront)

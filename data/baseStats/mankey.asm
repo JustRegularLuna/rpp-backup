@@ -9,7 +9,7 @@ db FIGHTING ; species type 1
 db FIGHTING ; species type 2
 db 190 ; catch rate
 db 74 ; base exp yield
-db $55 ; sprite dimensions
+db $66 ; sprite dimensions
 dw MankeyPicFront
 dw MankeyPicBack
 ; attacks known at lvl 0
@@ -26,4 +26,4 @@ db %11001001
 db %11000110
 db %10001000
 db %00100010
-db 0 ; padding
+db BANK(MankeyPicFront)

@@ -55,8 +55,9 @@ _OaksLabReceivedMonText:: ; 94ea0 (25:4ea0)
 	text "!@@"
 
 _OaksLabLastMonText:: ; 94eb6 (25:4eb6)
-	text "That's PROF.OAK's"
-	line "last #MON!"
+	text "OAK: Now, now."
+	line "Let's not get too"
+	cont "greedy."
 	done
 
 _OaksLabText_1d2f0:: ; 94ed2 (25:4ed2)
@@ -162,9 +163,8 @@ _OaksLabText_1d31d:: ; 951e9 (25:51e9)
 	prompt
 
 _OaksLabText_1d32c:: ; 95236 (25:5236)
-	text "It's encyclopedia-"
-	line "like, but the"
-	cont "pages are blank!"
+	text "It's a small red"
+	line "electronic device."
 	done
 
 _OaksLabText8:: ; 95268 (25:5268)

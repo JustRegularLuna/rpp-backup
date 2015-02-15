@@ -14,7 +14,7 @@ dw GeodudePicFront
 dw GeodudePicBack
 ; attacks known at lvl 0
 db TACKLE
-db 0
+db DEFENSE_CURL
 db 0
 db 0
 db 3 ; growth rate
@@ -26,4 +26,4 @@ db %11001110
 db %00101110
 db %11001000
 db %00100010
-db 0 ; padding
+db BANK(GeodudePicFront)

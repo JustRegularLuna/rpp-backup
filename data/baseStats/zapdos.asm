@@ -13,8 +13,8 @@ db $77 ; sprite dimensions
 dw ZapdosPicFront
 dw ZapdosPicBack
 ; attacks known at lvl 0
+db PECK
 db THUNDERSHOCK
-db DRILL_PECK
 db 0
 db 0
 db 5 ; growth rate
@@ -26,4 +26,4 @@ db %11000001
 db %01000011
 db %00011100
 db %01001010
-db 0 ; padding
+db BANK(ZapdosPicFront)

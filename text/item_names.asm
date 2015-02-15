@@ -48,7 +48,7 @@ ItemNames: ; 472b (1:472b)
 	db "LEAF STONE@"
 	db "CARD KEY@"
 	db "NUGGET@"
-	db "PP UP@"
+	db "THIEF BALL@"
 	db "POKé DOLL@"
 	db "FULL HEAL@"
 	db "REVIVE@"

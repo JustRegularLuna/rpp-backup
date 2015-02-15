@@ -2097,8 +2097,8 @@ _FrozenText:: ; 9476d (25:476d)
 	prompt
 
 _FireDefrostedText:: ; 94782 (25:4782)
-	text "Fire defrosted"
-	line $59, "!"
+	text $59
+	line "was defrosted!"
 	prompt
 
 _MonsStatsRoseText:: ; 94795 (25:4795)

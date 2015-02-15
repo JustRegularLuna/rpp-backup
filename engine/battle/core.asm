@@ -39,7 +39,7 @@ EffectsArray3: ; 3c014 (f:4014)
 	db DEFENSE_DOWN1_EFFECT
 	db SPEED_DOWN1_EFFECT
 	db SPECIAL_DOWN1_EFFECT
-	db ACCURACY_DOWN1_EFFECT
+;	db ACCURACY_DOWN1_EFFECT
 	db EVASION_DOWN1_EFFECT
 	db BIDE_EFFECT
 	db SLEEP_EFFECT
@@ -380,7 +380,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	and a
 	ret nz
 	ld a, [wBattleMonStatus]
-	and $27
+	and SLP ; Check if sleeping
 	jr nz, .asm_3c2a6 ; 0x3c271 $33
 	ld a, [W_PLAYERBATTSTATUS1]
 	and $21
@@ -436,14 +436,33 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	callab Func_3a74b
 .noLinkBattle
 	ld a, [wPlayerSelectedMove]
+	cp EXTREMESPEED
+	jr z, .PriorityMoveUsed
+	cp BABYDOLLEYES
+	jr z, .PriorityMoveUsed
+	cp SUCKER_PUNCH
+	jr z, .PriorityMoveUsed
 	cp QUICK_ATTACK
 	jr nz, .playerDidNotUseQuickAttack
+.PriorityMoveUsed
 	ld a, [wEnemySelectedMove]
+	cp EXTREMESPEED
+	jr z, .compareSpeed
+	cp BABYDOLLEYES
+	jr z, .compareSpeed
+	cp SUCKER_PUNCH
+	jr z, .compareSpeed
 	cp QUICK_ATTACK
 	jr z, .compareSpeed  ; both used Quick Attack
 	jp .playerMovesFirst ; player used Quick Attack
 .playerDidNotUseQuickAttack
 	ld a, [wEnemySelectedMove]
+	cp EXTREMESPEED
+	jr z, .enemyMovesFirst
+	cp BABYDOLLEYES
+	jr z, .enemyMovesFirst
+	cp SUCKER_PUNCH
+	jr z, .enemyMovesFirst
 	cp QUICK_ATTACK
 	jr z, .enemyMovesFirst
 	ld a, [wPlayerSelectedMove]
@@ -2799,7 +2818,7 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	hlCoord 1, 10
 	ld de, DisabledText
 	call PlaceString
-	jr .asm_3d54e
+	jp .asm_3d54e
 .asm_3d4df
 	ld hl, wCurrentMenuItem ; wCurrentMenuItem
 	dec [hl]
@@ -2826,13 +2845,31 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 	ld a, [hl]
 	and $3f
 	ld [wcd6d], a
+	ld a, [wPlayerSelectedMove]
+	call PhysicalSpecialSplit
+	cp a,$02
+	jp z, .OtherTextShow
+	cp a,$01
+	jp nz, .PhysicalTextShow
 	hlCoord 1, 9
-	ld de, TypeText
+	ld de,SpecialText
+	;ld de, TypeText
 	call PlaceString
+	jp .RestOfTheRoutineThing
+.PhysicalTextShow
+	hlCoord 1,9
+	ld de,PhysicalText
+	call PlaceString
+	jr .RestOfTheRoutineThing
+.OtherTextShow
+	hlCoord 1,9
+	ld de,OtherText
+	call PlaceString
+.RestOfTheRoutineThing
 	hlCoord 7, 11
 	ld [hl], "/"
-	hlCoord 5, 9
-	ld [hl], "/"
+	;hlCoord 5, 9
+	;ld [hl], "/"
 	hlCoord 5, 11
 	ld de, wcd6d
 	ld bc, $102
@@ -2852,8 +2889,14 @@ Func_3d4b6: ; 3d4b6 (f:54b6)
 DisabledText: ; 3d555 (f:5555)
 	db "disabled!@"
 
-TypeText: ; 3d55f (f:555f)
-	db "TYPE@"
+OtherText: ; 3d55f (f:555f)
+	db "STATUS/@"
+	
+PhysicalText: ; Added for PS Split
+	db "PHYSICAL/@"
+	
+SpecialText: ; added for PS Split
+	db "SPECIAL/@"
 
 SelectEnemyMove: ; 3d564 (f:5564)
 	ld a, [W_ISLINKBATTLE]
@@ -2885,7 +2928,7 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	and $12     ; using multi-turn move or bide
 	ret nz
 	ld a, [wEnemyMonStatus]
-	and SLP | 1 << FRZ ; sleeping or frozen
+	and SLP ; sleeping
 	ret nz
 	ld a, [W_ENEMYBATTSTATUS1]
 	and $21      ; using fly/dig or thrash/petal dance
@@ -3268,12 +3311,34 @@ Func_3d854: ; 3d854 (f:5854)
 .FrozenCheck
 	bit FRZ,[hl] ; frozen?
 	jr z,.HeldInPlaceCheck ; to 5898
+	; Adding checks for Flame Wheel and Flare Blitz to thaw you
+	ld a, [wPlayerSelectedMove]
+	cp FLAME_WHEEL
+	jr z, .defrostMon
+	cp FLARE_BLITZ
+	jr z, .defrostMon
+	; Adding chance to defrost naturally
+	call BattleRandom
+	cp $19
+	jr c, .defrostMon
+	; Continues to original routine, calling you frozen
 	ld hl,IsFrozenText
 	call PrintText
 	xor a
 	ld [wccf1],a
 	ld hl,Func_3d80a
 	jp Func_3da37
+	
+.defrostMon ; New routine to thaw Pokemon, called from FrozenCheck
+	ld hl, wBattleMonStatus
+	res FRZ, [hl]
+	xor a
+	inc a
+	ld [H_WHOSETURN],a
+	ld hl, FireDefrostedText
+	call PrintText
+	xor a
+	ld [H_WHOSETURN],a
 
 .HeldInPlaceCheck
 	ld a,[W_ENEMYBATTSTATUS1]
@@ -4060,9 +4125,13 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	and a
 	ld d, a         ;*D = attack base, used later
 	ret z           ;return if attack is zero
-	ld a, [hl]      ;*test attacking type
-	cp a, $14       ;types >= $14 are all special
-	jr nc, .specialAttack
+	;ld a, [hl]      ;*test attacking type
+	;cp a, $14       ;types >= $14 are all special
+	ld a,[W_PLAYERMOVENUM]
+	call PhysicalSpecialSplit
+	dec a
+	;jr nc, .specialAttack
+	jr z, .specialAttack
 .physicalAttack
 	ld hl, wEnemyMonDefense    ;opponent defense
 	ld a, [hli]                 ;*BC = opponent defense used later
@@ -4152,7 +4221,7 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	and a
 	ret
 
-Func_3de75: ; 3de75 (f:5e75)
+Func_3de75: ; 3de75 (f:5e75) Enemy_Calc_Damage
 	ld hl, W_DAMAGE ; W_DAMAGE
 	xor a
 	ld [hli], a
@@ -4162,9 +4231,13 @@ Func_3de75: ; 3de75 (f:5e75)
 	ld d, a
 	and a
 	ret z
-	ld a, [hl]
-	cp $14
-	jr nc, .asm_3debc
+	;ld a, [hl]
+	;cp $14
+	ld a,[W_ENEMYMOVENUM]
+	call PhysicalSpecialSplit
+	dec a
+	;jr nc, .asm_3debc
+	jr z, .asm_3debc
 	ld hl, wBattleMonDefense
 	ld a, [hli]
 	ld b, a
@@ -4467,22 +4540,9 @@ UnusedHighCriticalMoves: ; 3e01e (f:601e)
 ; 3e023
 
 ; determines if attack is a critical hit
-; azure heights claims "the fastest pokémon (who are,not coincidentally,
-; among the most popular) tend to CH about 20 to 25% of the time."
 CriticalHitTest: ; 3e023 (f:6023)
 	xor a
-	ld [wd05e], a
-	ld a, [H_WHOSETURN] ; $fff3
-	and a
-	ld a, [wEnemyMonSpecies]
-	jr nz, .asm_3e032
-	ld a, [wBattleMonSpecies]
-.asm_3e032
-	ld [wd0b5], a
-	call GetMonHeader
-	ld a, [W_MONHBASESPEED]
-	ld b, a
-	srl b                        ; (effective (base speed/2))
+	ld [wd05e], a ; Critical Hit flag
 	ld a, [H_WHOSETURN] ; $fff3
 	and a
 	ld hl, W_PLAYERMOVEPOWER ; W_PLAYERMOVEPOWER
@@ -4494,46 +4554,57 @@ CriticalHitTest: ; 3e023 (f:6023)
 	ld a, [hld]                  ; read base power from RAM
 	and a
 	ret z                        ; do nothing if zero
-	dec hl
-	ld c, [hl]                   ; read move id
-	ld a, [de]
-	bit 2, a                     ; test for focus energy
-	jr nz, .focusEnergyUsed      ; bug: using focus energy causes a shift to the right instead of left,
-	                             ; resulting in 1/4 the usual crit chance
-	sla b                        ; (effective (base speed/2)*2)
-	jr nc, .noFocusEnergyUsed
-	ld b, $ff                    ; cap at 255/256
-	jr .noFocusEnergyUsed
-.focusEnergyUsed
-	srl b
-.noFocusEnergyUsed
-	ld hl, HighCriticalMoves      ; table of high critical hit moves
-.Loop
-	ld a, [hli]                  ; read move from move table
-	cp c                         ; does it match the move about to be used?
-	jr z, .HighCritical          ; if so, the move about to be used is a high critical hit ratio move
-	inc a                        ; move on to the next move, FF terminates loop
-	jr nz, .Loop                 ; check the next move in HighCriticalMoves
-	srl b                        ; /2 for regular move (effective (base speed / 2))
-	jr .SkipHighCritical         ; continue as a normal move
+	
+	ld c, 0 ; Set default entry as 0
+	ld a,[de]
+	bit 2, a ; Check for Focus Energy
+	jr z, .CheckCritMove
+	inc c
+.CheckCritMove
+	ld hl, HighCriticalMoves
+	ld a, [H_WHOSETURN]
+	and a
+	jr z, .PlayersTurn
+.EnemyTurn
+	ld a, [wEnemySelectedMove]
+	ld b, a
+	jr .loop
+.PlayersTurn
+	ld a, [wPlayerSelectedMove]
+	ld b,a
+.loop
+	ld a, [hli]
+	cp b
+	jr z, .HighCritical
+	inc a
+	jr nz, .loop
+	jr .SkipHighCritical
 .HighCritical
-	sla b                        ; *2 for high critical hit moves
-	jr nc, .noCarry
-	ld b, $ff                    ; cap at 255/256
-.noCarry
-	sla b                        ; *4 for high critical move (effective (base speed/2)*8))
-	jr nc, .SkipHighCritical
-	ld b, $ff
+	inc c
+	inc c
 .SkipHighCritical
-	call BattleRandom          ; generates a random value, in "a"
-	rlc a
-	rlc a
-	rlc a
-	cp b                         ; check a against calculated crit rate
-	ret nc                       ; no critical hit if no borrow
-	ld a, $1
-	ld [wd05e], a                ; set critical hit flag
+	; Add cheat for A + Left
+	ld a, [hJoyInput]
+	cp a, $21 ; A + Left
+	jr nz, .Calculate
+	inc c
+	inc c
+.Calculate
+	ld hl, .Chances
+	ld b, 0
+	add hl,bc
+	call BattleRandom
+	cp [hl]
+	ret nc
+	ld a,1
+	ld [wd05e],a ; Critical Hit Flag
 	ret
+	
+.Chances
+	; 6.25% 12.1% 24.6% 33.2% 49.6% 49.6% 49.6%
+	db $11,  $20,  $40,  $55,  $80,  $80,  $80
+	;   0     1     2     3     4     5     6
+	
 
 ; high critical hit moves
 HighCriticalMoves: ; 3e08e (f:608e)
@@ -4541,6 +4612,11 @@ HighCriticalMoves: ; 3e08e (f:608e)
 	db RAZOR_LEAF
 	db CRABHAMMER
 	db SLASH
+	db NIGHT_SLASH
+	db CROSS_CHOP
+	db PSYCHO_CUT
+	db LEAF_BLADE
+	db AIR_CUTTER
 	db $FF
 
 
@@ -5008,10 +5084,12 @@ MetronomePickMove: ; 3e348 (f:6348)
 	call BattleRandom
 	and a
 	jr z,.pickMoveLoop
-	cp a,NUM_ATTACKS + 1 ; max normal move number + 1 (this is Struggle's move number)
-	jr nc,.pickMoveLoop
+	cp a,STRUGGLE
+	jr z,.pickMoveLoop
 	cp a,METRONOME
 	jr z,.pickMoveLoop
+	cp a,$F9 ; Bone Rush is $F8
+	jr nc,.pickMoveLoop
 	ld [hl],a
 	jr ReloadMoveData
 
@@ -5668,14 +5746,37 @@ Func_3e88f: ; 3e88f (f:688f)
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
 .asm_3e8bf
-	bit 5, [hl]
+	bit FRZ, [hl]
 	jr z, .asm_3e8d3
+	; Add check for Flame Wheel and Flare Blitz
+	ld a, [wEnemySelectedMove]
+	cp FLAME_WHEEL
+	jr z, .defrostMon
+	cp FLARE_BLITZ
+	jr z, .defrostMon
+	; Add chance to defrost naturally
+	call BattleRandom
+	cp $19
+	jr c, .defrostMon
+	; Original routine continues here
 	ld hl, IsFrozenText
 	call PrintText
 	xor a
 	ld [wccf2], a
 	ld hl, Func_3e88c ; $688c
 	jp Func_3eab8
+	
+.defrostMon ; New routine to thaw mon
+	ld hl, wEnemyMonStatus
+	res FRZ, [hl]
+	xor a
+	ld [H_WHOSETURN],a
+	ld hl, FireDefrostedText
+	call PrintText
+	xor a
+	inc a
+	ld [H_WHOSETURN],a
+	
 .asm_3e8d3
 	ld a, [W_PLAYERBATTSTATUS1] ; W_PLAYERBATTSTATUS1
 	bit 5, a
@@ -6159,13 +6260,21 @@ Func_3ec81: ; 3ec81 (f:6c81)
 Func_3ec92: ; 3ec92 (f:6c92)
 	ld a, [W_BATTLETYPE] ; wd05a
 	dec a
-	ld de, RedPicBack ; $7e0a
-	jr nz, .asm_3ec9e
-	ld de, OldManPic ; $7e9a
+	ld de, OldManPic ; $7e0a
+	jr z, .asm_3ec9e
+	ld a, [wd798]
+	bit 2, a
+	jr z, .RedBack
+	ld de, LeafPicBack
+	jr .asm_3ec9e
+.RedBack
+	ld de, RedPicBack ; $7e9a
 .asm_3ec9e
 	ld a, BANK(RedPicBack)
 	call UncompressSpriteFromDE
-	predef ScaleSpriteByTwo
+	call LoadBackSpriteUnzoomed
+	nop
+	nop
 	ld hl, wOAMBuffer
 	xor a
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
@@ -6197,8 +6306,12 @@ Func_3ec92: ; 3ec92 (f:6c92)
 	ld e, a
 	dec b
 	jr nz, .asm_3ecb2
-	ld de, vBackPic
-	call InterlaceMergeSpriteBuffers
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
 	ld a, $a
 	ld [$0], a
 	xor a
@@ -6840,15 +6953,15 @@ LoadMonBackPic:
 	call ClearScreenArea
 	ld hl,  W_MONHBACKSPRITE - W_MONHEADER
 	call UncompressMonSprite
-	predef ScaleSpriteByTwo
-	ld de, vBackPic
-	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+	call LoadBackSpriteUnzoomed
 	ld hl, vSprites
 	ld de, vBackPic
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; count of 16-byte chunks to be copied
 	ld a, [H_LOADEDROMBANK]
 	ld b, a
 	jp CopyVideoData
+
+	ds $8
 
 Func_3f132: ; 3f132 (f:7132)
 	call JumpMoveEffect
@@ -6908,7 +7021,7 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw SleepEffect               ; SLEEP_EFFECT
 	 dw PoisonEffect              ; POISON_SIDE_EFFECT2
 	 dw FreezeBurnParalyzeEffect  ; BURN_SIDE_EFFECT2
-	 dw FreezeBurnParalyzeEffect  ; unused effect
+	 dw FreezeBurnParalyzeEffect  ; FREEZE_SIDE_EFFECT2
 	 dw FreezeBurnParalyzeEffect  ; PARALYZE_SIDE_EFFECT2
 	 dw FlichSideEffect           ; FLINCH_SIDE_EFFECT2
 	 dw OneHitKOEffect            ; OHKO_EFFECT
@@ -6945,13 +7058,13 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw StatModifierDownEffect    ; DEFENSE_DOWN_SIDE_EFFECT
 	 dw StatModifierDownEffect    ; SPEED_DOWN_SIDE_EFFECT
 	 dw StatModifierDownEffect    ; SPECIAL_DOWN_SIDE_EFFECT
-	 dw StatModifierDownEffect    ; unused effect
-	 dw StatModifierDownEffect    ; unused effect
+	 dw StatModifierDownEffect    ; ACCURACY_DOWN_SIDE_EFFECT
+	 dw StatModifierDownEffect    ; EVASION_DOWN_SIDE_EFFECT
 	 dw StatModifierDownEffect    ; unused effect
 	 dw StatModifierDownEffect    ; unused effect
 	 dw ConfusionSideEffect       ; CONFUSION_SIDE_EFFECT
 	 dw TwoToFiveAttacksEffect    ; TWINEEDLE_EFFECT
-	 dw $0000                     ; unused effect
+	 dw ParalyzeEffect            ; NUZZLE_EFFECT
 	 dw SubstituteEffect          ; SUBSTITUTE_EFFECT
 	 dw HyperBeamEffect           ; HYPER_BEAM_EFFECT
 	 dw RageEffect                ; RAGE_EFFECT
@@ -6960,6 +7073,11 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw LeechSeedEffect           ; LEECH_SEED_EFFECT
 	 dw SplashEffect              ; SPLASH_EFFECT
 	 dw DisableEffect             ; DISABLE_EFFECT
+	 dw FangAttacks               ; FIRE_FANG_EFFECT
+	 dw FangAttacks               ; ICE_FANG_EFFECT
+	 dw FangAttacks               ; THUNDER_FANG_EFFECT
+	 dw VoltTackleEffect          ; VOLT_TACKLE_EFFECT
+	 dw PoisonFangEffect          ; POISON_FANG_EFFECT
 
 SleepEffect: ; 3f1fc (f:71fc)
 	ld de, wEnemyMonStatus ; wcfe9
@@ -7153,6 +7271,9 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	cp a, 7         ;10% status effects are 04, 05, 06 so 07 will set carry for those
 	ld b, $1a       ;[1A-1]/100 or [26-1]/256 = 9.8%~ chance
 	jr c, .next1  ;branch ahead if this is a 10% chance effect..
+	cp a, $5B       ;Fang effects are 57, 58, 59 and Volt Tackle is 5A so 5B will set carry for those
+	ld b, $1A       ;10% effect again
+	jr c, .next1   ;branch ahead if it's a fang effect
 	ld b, $4d       ;..or use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
 	sub a, $1e      ;subtract $1E to map to equivalent 10% chance effects
 .next1
@@ -7165,7 +7286,11 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld a, b     ;what type of effect is this?
 	cp a, BURN_SIDE_EFFECT1
 	jr z, .burn
+	cp a, FIRE_FANG_EFFECT
+	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
+	jr z, .freeze
+	cp a, ICE_FANG_EFFECT
 	jr z, .freeze
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
@@ -7216,7 +7341,11 @@ opponentAttacker: ; 3f382 (f:7382)
 	ld a, b
 	cp a, BURN_SIDE_EFFECT1
 	jr z, .burn
+	cp a, FIRE_FANG_EFFECT
+	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
+	jr z, .freeze
+	cp a, ICE_FANG_EFFECT
 	jr z, .freeze
 	ld a, 1 << PAR
 	ld [wBattleMonStatus], a
@@ -8104,7 +8233,7 @@ Func_3f9a6: ; 3f9a6 (f:79a6)
 	ld c, $32
 	call DelayFrames
 	jp Func_3fb4e
-
+	
 ParalyzeEffect: ; 3f9b1 (f:79b1)
 	ld hl, ParalyzeEffect_
 	ld b, BANK(ParalyzeEffect_)
@@ -8448,3 +8577,278 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	pop de
 	pop hl
 	ret
+	
+FangAttacks:
+	call FlichSideEffect
+	call FreezeBurnParalyzeEffect
+	ret
+	
+VoltTackleEffect:
+	call RecoilEffect
+	call FreezeBurnParalyzeEffect
+	ret
+	
+PoisonFangEffect:
+	call FlichSideEffect
+	call PoisonEffect
+	ret
+	
+PhysicalSpecialSplit: ;Determines if a move is Physical or Special
+	ld c,a
+	ld b, $00
+	ld hl,.MovesTable
+	add hl,bc
+	ld a,[hl]
+	ret
+
+	
+.MovesTable
+	db OTHER_M ;NOTHING      EQU $00
+	db PHYSICAL;POUND        EQU $01
+	db PHYSICAL;KARATE_CHOP  EQU $02
+	db PHYSICAL;DOUBLESLAP   EQU $03
+	db PHYSICAL;COMET_PUNCH  EQU $04
+	db PHYSICAL;MEGA_PUNCH   EQU $05
+	db PHYSICAL;PAY_DAY      EQU $06
+	db PHYSICAL;FIRE_PUNCH   EQU $07
+	db PHYSICAL;ICE_PUNCH    EQU $08
+	db PHYSICAL;THUNDERPUNCH EQU $09
+	db PHYSICAL;SCRATCH      EQU $0A
+	db PHYSICAL;VICEGRIP     EQU $0B
+	db PHYSICAL;GUILLOTINE   EQU $0C
+	db SPECIAL ;RAZOR_WIND   EQU $0D
+	db OTHER_M ;SWORDS_DANCE EQU $0E
+	db PHYSICAL;CUT          EQU $0F
+	db SPECIAL ;GUST         EQU $10
+	db PHYSICAL;WING_ATTACK  EQU $11
+	db OTHER_M ;WHIRLWIND    EQU $12
+	db PHYSICAL;FLY          EQU $13
+	db PHYSICAL;BIND         EQU $14
+	db PHYSICAL;SLAM         EQU $15
+	db PHYSICAL;VINE_WHIP    EQU $16
+	db PHYSICAL;STOMP        EQU $17
+	db PHYSICAL;DOUBLE_KICK  EQU $18
+	db PHYSICAL;MEGA_KICK    EQU $19
+	db PHYSICAL;JUMP_KICK    EQU $1A
+	db PHYSICAL;ROLLING_KICK EQU $1B
+	db OTHER_M ;SAND_ATTACK  EQU $1C
+	db PHYSICAL;HEADBUTT     EQU $1D
+	db PHYSICAL;HORN_ATTACK  EQU $1E
+	db PHYSICAL;FURY_ATTACK  EQU $1F
+	db PHYSICAL;HORN_DRILL   EQU $20
+	db PHYSICAL;TACKLE       EQU $21
+	db PHYSICAL;BODY_SLAM    EQU $22
+	db PHYSICAL;WRAP         EQU $23
+	db PHYSICAL;TAKE_DOWN    EQU $24
+	db PHYSICAL;THRASH       EQU $25
+	db PHYSICAL;DOUBLE_EDGE  EQU $26
+	db OTHER_M ;TAIL_WHIP    EQU $27
+	db PHYSICAL;POISON_STING EQU $28
+	db PHYSICAL;TWINEEDLE    EQU $29
+	db PHYSICAL;PIN_MISSILE  EQU $2A
+	db OTHER_M ;LEER         EQU $2B
+	db PHYSICAL;BITE         EQU $2C
+	db OTHER_M ;GROWL        EQU $2D
+	db OTHER_M ;ROAR         EQU $2E
+	db OTHER_M ;SING         EQU $2F
+	db OTHER_M ;SUPERSONIC   EQU $30
+	db SPECIAL ;SONICBOOM    EQU $31
+	db OTHER_M ;DISABLE      EQU $32
+	db SPECIAL ;ACID         EQU $33
+	db SPECIAL ;EMBER        EQU $34
+	db SPECIAL ;FLAMETHROWER EQU $35
+	db OTHER_M ;MIST         EQU $36
+	db SPECIAL ;WATER_GUN    EQU $37
+	db SPECIAL ;HYDRO_PUMP   EQU $38
+	db SPECIAL ;SURF         EQU $39
+	db SPECIAL ;ICE_BEAM     EQU $3A
+	db SPECIAL ;BLIZZARD     EQU $3B
+	db SPECIAL ;PSYBEAM      EQU $3C
+	db SPECIAL ;BUBBLEBEAM   EQU $3D
+	db SPECIAL ;AURORA_BEAM  EQU $3E
+	db SPECIAL ;HYPER_BEAM   EQU $3F
+	db PHYSICAL;PECK         EQU $40
+	db PHYSICAL;DRILL_PECK   EQU $41
+	db PHYSICAL;SUBMISSION   EQU $42
+	db PHYSICAL;LOW_KICK     EQU $43
+	db PHYSICAL;COUNTER      EQU $44
+	db PHYSICAL;SEISMIC_TOSS EQU $45
+	db PHYSICAL;STRENGTH     EQU $46
+	db SPECIAL ;ABSORB       EQU $47
+	db SPECIAL ;MEGA_DRAIN   EQU $48
+	db OTHER_M ;LEECH_SEED   EQU $49
+	db OTHER_M ;GROWTH       EQU $4A
+	db SPECIAL ;RAZOR_LEAF   EQU $4B
+	db SPECIAL ;SOLARBEAM    EQU $4C
+	db OTHER_M ;POISONPOWDER EQU $4D
+	db OTHER_M ;STUN_SPORE   EQU $4E
+	db OTHER_M ;SLEEP_POWDER EQU $4F
+	db SPECIAL ;PETAL_DANCE  EQU $50
+	db OTHER_M ;STRING_SHOT  EQU $51
+	db SPECIAL ;DRAGON_RAGE  EQU $52
+	db SPECIAL ;FIRE_SPIN    EQU $53
+	db SPECIAL ;THUNDERSHOCK EQU $54
+	db SPECIAL ;THUNDERBOLT  EQU $55
+	db OTHER_M ;THUNDER_WAVE EQU $56
+	db SPECIAL ;THUNDER      EQU $57
+	db PHYSICAL;ROCK_THROW   EQU $58
+	db PHYSICAL;EARTHQUAKE   EQU $59
+	db PHYSICAL;FISSURE      EQU $5A
+	db PHYSICAL;DIG          EQU $5B
+	db OTHER_M ;TOXIC        EQU $5C
+	db SPECIAL ;CONFUSION    EQU $5D
+	db SPECIAL ;PSYCHIC_M    EQU $5E
+	db OTHER_M ;HYPNOSIS     EQU $5F
+	db OTHER_M ;MEDITATE     EQU $60
+	db OTHER_M ;AGILITY      EQU $61
+	db PHYSICAL;QUICK_ATTACK EQU $62
+	db PHYSICAL;RAGE         EQU $63
+	db OTHER_M ;TELEPORT     EQU $64
+	db SPECIAL ;NIGHT_SHADE  EQU $65
+	db OTHER_M ;MIMIC        EQU $66
+	db OTHER_M ;SCREECH      EQU $67
+	db OTHER_M ;DOUBLE_TEAM  EQU $68
+	db OTHER_M ;RECOVER      EQU $69
+	db OTHER_M ;HARDEN       EQU $6A
+	db OTHER_M ;MINIMIZE     EQU $6B
+	db OTHER_M ;SMOKESCREEN  EQU $6C
+	db OTHER_M ;CONFUSE_RAY  EQU $6D
+	db OTHER_M ;WITHDRAW     EQU $6E
+	db OTHER_M ;DEFENSE_CURL EQU $6F
+	db OTHER_M ;BARRIER      EQU $70
+	db OTHER_M ;LIGHT_SCREEN EQU $71
+	db OTHER_M ;HAZE         EQU $72
+	db OTHER_M ;REFLECT      EQU $73
+	db OTHER_M ;FOCUS_ENERGY EQU $74
+	db PHYSICAL;BIDE         EQU $75
+	db OTHER_M ;METRONOME    EQU $76
+	db OTHER_M ;MIRROR_MOVE  EQU $77
+	db PHYSICAL;SELFDESTRUCT EQU $78
+	db PHYSICAL;EGG_BOMB     EQU $79
+	db PHYSICAL;LICK         EQU $7A
+	db SPECIAL ;SMOG         EQU $7B
+	db SPECIAL ;SLUDGE       EQU $7C
+	db PHYSICAL;BONE_CLUB    EQU $7D
+	db SPECIAL ;FIRE_BLAST   EQU $7E
+	db PHYSICAL;WATERFALL    EQU $7F
+	db PHYSICAL;CLAMP        EQU $80
+	db SPECIAL ;SWIFT        EQU $81
+	db PHYSICAL;SKULL_BASH   EQU $82
+	db PHYSICAL;SPIKE_CANNON EQU $83
+	db PHYSICAL;CONSTRICT    EQU $84
+	db OTHER_M ;AMNESIA      EQU $85
+	db OTHER_M ;KINESIS      EQU $86
+	db OTHER_M ;SOFTBOILED   EQU $87
+	db PHYSICAL;HI_JUMP_KICK EQU $88
+	db OTHER_M ;GLARE        EQU $89
+	db SPECIAL ;DREAM_EATER  EQU $8A
+	db OTHER_M ;POISON_GAS   EQU $8B
+	db PHYSICAL;BARRAGE      EQU $8C
+	db PHYSICAL;LEECH_LIFE   EQU $8D
+	db OTHER_M ;LOVELY_KISS  EQU $8E
+	db PHYSICAL;SKY_ATTACK   EQU $8F
+	db OTHER_M ;TRANSFORM    EQU $90
+	db SPECIAL ;BUBBLE       EQU $91
+	db PHYSICAL;DIZZY_PUNCH  EQU $92
+	db OTHER_M ;SPORE        EQU $93
+	db OTHER_M ;FLASH        EQU $94
+	db SPECIAL ;PSYWAVE      EQU $95
+	db OTHER_M ;SPLASH       EQU $96
+	db OTHER_M ;ACID_ARMOR   EQU $97
+	db PHYSICAL;CRABHAMMER   EQU $98
+	db PHYSICAL;EXPLOSION    EQU $99
+	db PHYSICAL;FURY_SWIPES  EQU $9A
+	db PHYSICAL;BONEMERANG   EQU $9B
+	db OTHER_M ;REST         EQU $9C
+	db PHYSICAL;ROCK_SLIDE   EQU $9D
+	db PHYSICAL;HYPER_FANG   EQU $9E
+	db OTHER_M ;SHARPEN      EQU $9F
+	db OTHER_M ;CONVERSION   EQU $A0
+	db SPECIAL ;TRI_ATTACK   EQU $A1
+	db PHYSICAL;SUPER_FANG   EQU $A2
+	db PHYSICAL;SLASH        EQU $A3
+	db OTHER_M ;SUBSTITUTE   EQU $A4
+	db PHYSICAL;STRUGGLE     EQU $A5
+	db PHYSICAL;METAL_CLAW   EQU $A6
+	db PHYSICAL;BULLET_PUNCH EQU $A7
+	db SPECIAL ;FLASH_CANNON EQU $A8
+	db PHYSICAL;IRON_TAIL    EQU $A9
+	db PHYSICAL;METEOR_MASH  EQU $AA
+	db PHYSICAL;CRUNCH       EQU $AB
+	db SPECIAL ;DARK_PULSE   EQU $AC
+	db PHYSICAL;FEINT_ATTACK EQU $AD
+	db PHYSICAL;NIGHT_SLASH  EQU $AE
+	db SPECIAL ;MOONBLAST    EQU $AF
+	db SPECIAL ;DRAININGKISS EQU $B0
+	db SPECIAL ;DISARM_VOICE EQU $B1
+	db SPECIAL ;DAZZLINGLEAM EQU $B2
+	db SPECIAL ;DRACO_METEOR EQU $B3
+	db SPECIAL ;DRAGONBREATH EQU $B4
+	db PHYSICAL;DRAGON_CLAW  EQU $B5
+	db SPECIAL ;DRAGON_PULSE EQU $B6
+	db SPECIAL ;TWISTER      EQU $B7
+	db PHYSICAL;OUTRAGE      EQU $B8
+	db PHYSICAL;SHADOW_CLAW  EQU $B9
+	db PHYSICAL;STEEL WING
+	db OTHER_M ;Iron Defense
+	db SPECIAL ;Air Slash
+	db PHYSICAL;Fire Fang
+	db PHYSICAL;Flare Blitz
+	db SPECIAL ;Blast Burn
+	db PHYSICAL;Ice Fang
+	db PHYSICAL;Thunder Fang
+	db SPECIAL ;Water Pulse
+	db PHYSICAL;Aqua Tail
+	db SPECIAL ;Hydro Cannon
+	db SPECIAL ;Frenzy Plant
+	db PHYSICAL;Sucker Punch
+	db SPECIAL ;Shadow Ball
+	db PHYSICAL;Flame Wheel
+	db OTHER_M ;Moonlight
+	db SPECIAL ;Hex
+	db PHYSICAL;Shadow Punch
+	db PHYSICAL;Aerial Ace
+	db PHYSICAL;Acrobatics
+	db SPECIAL ;Air Cutter
+	db SPECIAL ;Icy Wind
+	db PHYSICAL;Ice Shard
+	db SPECIAL ;Sheer Cold
+	db SPECIAL ;Electro Ball
+	db PHYSICAL;Nuzzle
+	db SPECIAL ;Discharge
+	db PHYSICAL;Volt Tackle
+	db SPECIAL ;Muddy Water
+	db SPECIAL ;Whirlpool
+	db SPECIAL ;Giga Drain
+	db PHYSICAL;Petal Blizzard
+	db PHYSICAL;Leaf Blade
+	db PHYSICAL;Wood Hammer
+	db PHYSICAL;Poison Jab
+	db PHYSICAL;Gunk Shot
+	db PHYSICAL;Poison Fang
+	db SPECIAL ;Sludge Wave
+	db SPECIAL ;Silver Wind
+	db SPECIAL ;Bug Buzz
+	db PHYSICAL;Megahorn
+	db PHYSICAL;X-Scissor
+	db SPECIAL ;Signal Beam
+	db SPECIAL ;Earth Power
+	db SPECIAL ;Mud Slap
+	db SPECIAL ;Mud Bomb
+	db SPECIAL ;Extrasensory
+	db PHYSICAL;Zen Headbutt
+	db PHYSICAL;Psycho Cut
+	db SPECIAL ;Hyper Voice
+	db PHYSICAL;Extremespeed
+	db PHYSICAL;Giga Impact
+	db SPECIAL ;Power Gem
+	db PHYSICAL;Rock Blast
+	db OTHER_M ;Rock Polish
+	db PHYSICAL;Rock Tomb
+	db PHYSICAL;Dynamicpunch
+	db PHYSICAL;Circle Throw
+	db PHYSICAL;Cross Chop
+	db PHYSICAL;Low Sweep
+	db SPECIAL ;Hurricane
+	db OTHER_M ;Baby Doll Eyes
+	db PHYSICAL;Bone Rush

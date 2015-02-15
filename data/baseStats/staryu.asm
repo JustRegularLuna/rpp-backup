@@ -14,7 +14,7 @@ dw StaryuPicFront
 dw StaryuPicBack
 ; attacks known at lvl 0
 db TACKLE
-db 0
+db HARDEN
 db 0
 db 0
 db 5 ; growth rate
@@ -26,4 +26,4 @@ db %11110001
 db %11000011
 db %00111000
 db %01010011
-db 0 ; padding
+db BANK(StaryuPicFront)

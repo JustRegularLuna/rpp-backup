@@ -5,8 +5,8 @@ db 70 ; base attack
 db 73 ; base defense
 db 60 ; base speed
 db 85 ; base special
-db NORMAL ; species type 1
-db NORMAL ; species type 2
+db FAIRY ; species type 1
+db FAIRY ; species type 2
 db 25 ; catch rate
 db 129 ; base exp yield
 db $66 ; sprite dimensions
@@ -26,4 +26,4 @@ db %11110001
 db %10100111
 db %00111000
 db %01100011
-db 0 ; padding
+db BANK(ClefablePicFront)

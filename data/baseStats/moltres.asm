@@ -13,7 +13,7 @@ db $77 ; sprite dimensions
 dw MoltresPicFront
 dw MoltresPicBack
 ; attacks known at lvl 0
-db PECK
+db WING_ATTACK
 db FIRE_SPIN
 db 0
 db 0
@@ -26,4 +26,4 @@ db %11000000
 db %01100011
 db %00001100
 db %00001010
-db 0 ; padding
+db BANK(MoltresPicFront)
