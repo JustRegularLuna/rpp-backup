@@ -1216,7 +1216,7 @@ VictreebelDexEntry: ; 40fd1 (10:4fd1)
 
 LugiaDexEntry: ; 40fe5 (10:4fe5)
 	db "DIVING@"
-	db 5,7
-	dw 1220
-	TX_FAR _ArticunoDexEntry
+	db 17,1
+	dw 4762
+	TX_FAR _LugiaDexEntry
 	db "@"

@@ -1508,3 +1508,12 @@ _VictreebelDexEntry::
 	next "from there"
 	dex
 
+_LugiaDexEntry::
+	text "It is said to be"
+	next "the guardian of"
+	next "the seas. It is"
+
+	page "rumored to have"
+	next "been seen on the"
+	next "night of a storm."
+	dex
