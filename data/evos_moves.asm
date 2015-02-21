@@ -1,201 +1,157 @@
 EvosMovesPointerTable: ; 3b05c (e:705c)
-	dw Mon112_EvosMoves
-	dw Mon115_EvosMoves
-	dw Mon032_EvosMoves
-	dw Mon035_EvosMoves
-	dw Mon021_EvosMoves
-	dw Mon100_EvosMoves
-	dw Mon034_EvosMoves
-	dw Mon080_EvosMoves
-	dw Mon002_EvosMoves
-	dw Mon103_EvosMoves
-	dw Mon108_EvosMoves
-	dw Mon102_EvosMoves
-	dw Mon088_EvosMoves
-	dw Mon094_EvosMoves
-	dw Mon029_EvosMoves
-	dw Mon031_EvosMoves
-	dw Mon104_EvosMoves
-	dw Mon111_EvosMoves
-	dw Mon131_EvosMoves
-	dw Mon059_EvosMoves
-	dw Mon151_EvosMoves
-	dw Mon130_EvosMoves
-	dw Mon090_EvosMoves
-	dw Mon072_EvosMoves
-	dw Mon092_EvosMoves
-	dw Mon123_EvosMoves
-	dw Mon120_EvosMoves
-	dw Mon009_EvosMoves
-	dw Mon127_EvosMoves
-	dw Mon114_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon058_EvosMoves
-	dw Mon095_EvosMoves
-	dw Mon022_EvosMoves
-	dw Mon016_EvosMoves
-	dw Mon079_EvosMoves
-	dw Mon064_EvosMoves
-	dw Mon075_EvosMoves
-	dw Mon113_EvosMoves
-	dw Mon067_EvosMoves
-	dw Mon122_EvosMoves
-	dw Mon106_EvosMoves
-	dw Mon107_EvosMoves
-	dw Mon024_EvosMoves
-	dw Mon047_EvosMoves
-	dw Mon054_EvosMoves
-	dw Mon096_EvosMoves
-	dw Mon076_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon126_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon125_EvosMoves
-	dw Mon082_EvosMoves
-	dw Mon109_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon056_EvosMoves
-	dw Mon086_EvosMoves
-	dw Mon050_EvosMoves
-	dw Mon128_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon083_EvosMoves
-	dw Mon048_EvosMoves
-	dw Mon149_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon084_EvosMoves
-	dw Mon060_EvosMoves
-	dw Mon124_EvosMoves
-	dw Mon146_EvosMoves
-	dw Mon144_EvosMoves
-	dw Mon145_EvosMoves
-	dw Mon132_EvosMoves
-	dw Mon052_EvosMoves
-	dw Mon098_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon037_EvosMoves
-	dw Mon038_EvosMoves
-	dw Mon025_EvosMoves
-	dw Mon026_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon147_EvosMoves
-	dw Mon148_EvosMoves
-	dw Mon140_EvosMoves
-	dw Mon141_EvosMoves
-	dw Mon116_EvosMoves
-	dw Mon117_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon027_EvosMoves
-	dw Mon028_EvosMoves
-	dw Mon138_EvosMoves
-	dw Mon139_EvosMoves
-	dw Mon039_EvosMoves
-	dw Mon040_EvosMoves
-	dw Mon133_EvosMoves
-	dw Mon136_EvosMoves
-	dw Mon135_EvosMoves
-	dw Mon134_EvosMoves
-	dw Mon066_EvosMoves
-	dw Mon041_EvosMoves
-	dw Mon023_EvosMoves
-	dw Mon046_EvosMoves
-	dw Mon061_EvosMoves
-	dw Mon062_EvosMoves
-	dw Mon013_EvosMoves
-	dw Mon014_EvosMoves
-	dw Mon015_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon085_EvosMoves
-	dw Mon057_EvosMoves
-	dw Mon051_EvosMoves
-	dw Mon049_EvosMoves
-	dw Mon087_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon010_EvosMoves
-	dw Mon011_EvosMoves
-	dw Mon012_EvosMoves
-	dw Mon068_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon055_EvosMoves
-	dw Mon097_EvosMoves
-	dw Mon042_EvosMoves
-	dw Mon150_EvosMoves
-	dw Mon143_EvosMoves
-	dw Mon129_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon089_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon099_EvosMoves
-	dw Mon091_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon101_EvosMoves
-	dw Mon036_EvosMoves
-	dw Mon110_EvosMoves
-	dw Mon053_EvosMoves
-	dw Mon105_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon093_EvosMoves
-	dw Mon063_EvosMoves
-	dw Mon065_EvosMoves
-	dw Mon017_EvosMoves
-	dw Mon018_EvosMoves
-	dw Mon121_EvosMoves
-	dw Mon001_EvosMoves
-	dw Mon003_EvosMoves
-	dw Mon073_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon118_EvosMoves
-	dw Mon119_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon077_EvosMoves
-	dw Mon078_EvosMoves
-	dw Mon019_EvosMoves
-	dw Mon020_EvosMoves
-	dw Mon033_EvosMoves
-	dw Mon030_EvosMoves
-	dw Mon074_EvosMoves
-	dw Mon137_EvosMoves
-	dw Mon142_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon081_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon004_EvosMoves
-	dw Mon007_EvosMoves
-	dw Mon005_EvosMoves
-	dw Mon008_EvosMoves
-	dw Mon006_EvosMoves
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon000_EvosMoves	;MissingNo
-	dw Mon043_EvosMoves
-	dw Mon044_EvosMoves
-	dw Mon045_EvosMoves
-	dw Mon069_EvosMoves
-	dw Mon070_EvosMoves
-	dw Mon071_EvosMoves
+dw Mon001_EvosMoves
+dw Mon002_EvosMoves
+dw Mon003_EvosMoves
+dw Mon004_EvosMoves
+dw Mon005_EvosMoves
+dw Mon006_EvosMoves
+dw Mon007_EvosMoves
+dw Mon008_EvosMoves
+dw Mon009_EvosMoves
+dw Mon010_EvosMoves
+dw Mon011_EvosMoves
+dw Mon012_EvosMoves
+dw Mon013_EvosMoves
+dw Mon014_EvosMoves
+dw Mon015_EvosMoves
+dw Mon016_EvosMoves
+dw Mon017_EvosMoves
+dw Mon018_EvosMoves
+dw Mon019_EvosMoves
+dw Mon020_EvosMoves
+dw Mon021_EvosMoves
+dw Mon022_EvosMoves
+dw Mon023_EvosMoves
+dw Mon024_EvosMoves
+dw Mon025_EvosMoves
+dw Mon026_EvosMoves
+dw Mon027_EvosMoves
+dw Mon028_EvosMoves
+dw Mon029_EvosMoves
+dw Mon030_EvosMoves
+dw Mon031_EvosMoves
+dw Mon032_EvosMoves
+dw Mon033_EvosMoves
+dw Mon034_EvosMoves
+dw Mon035_EvosMoves
+dw Mon036_EvosMoves
+dw Mon037_EvosMoves
+dw Mon038_EvosMoves
+dw Mon039_EvosMoves
+dw Mon040_EvosMoves
+dw Mon041_EvosMoves
+dw Mon042_EvosMoves
+dw Mon043_EvosMoves
+dw Mon044_EvosMoves
+dw Mon045_EvosMoves
+dw Mon046_EvosMoves
+dw Mon047_EvosMoves
+dw Mon048_EvosMoves
+dw Mon049_EvosMoves
+dw Mon050_EvosMoves
+dw Mon051_EvosMoves
+dw Mon052_EvosMoves
+dw Mon053_EvosMoves
+dw Mon054_EvosMoves
+dw Mon055_EvosMoves
+dw Mon056_EvosMoves
+dw Mon057_EvosMoves
+dw Mon058_EvosMoves
+dw Mon059_EvosMoves
+dw Mon060_EvosMoves
+dw Mon061_EvosMoves
+dw Mon062_EvosMoves
+dw Mon063_EvosMoves
+dw Mon064_EvosMoves
+dw Mon065_EvosMoves
+dw Mon066_EvosMoves
+dw Mon067_EvosMoves
+dw Mon068_EvosMoves
+dw Mon069_EvosMoves
+dw Mon070_EvosMoves
+dw Mon071_EvosMoves
+dw Mon072_EvosMoves
+dw Mon073_EvosMoves
+dw Mon074_EvosMoves
+dw Mon075_EvosMoves
+dw Mon076_EvosMoves
+dw Mon077_EvosMoves
+dw Mon078_EvosMoves
+dw Mon079_EvosMoves
+dw Mon080_EvosMoves
+dw Mon081_EvosMoves
+dw Mon082_EvosMoves
+dw Mon083_EvosMoves
+dw Mon084_EvosMoves
+dw Mon085_EvosMoves
+dw Mon086_EvosMoves
+dw Mon087_EvosMoves
+dw Mon088_EvosMoves
+dw Mon089_EvosMoves
+dw Mon090_EvosMoves
+dw Mon091_EvosMoves
+dw Mon092_EvosMoves
+dw Mon093_EvosMoves
+dw Mon094_EvosMoves
+dw Mon095_EvosMoves
+dw Mon096_EvosMoves
+dw Mon097_EvosMoves
+dw Mon098_EvosMoves
+dw Mon099_EvosMoves
+dw Mon100_EvosMoves
+dw Mon101_EvosMoves
+dw Mon102_EvosMoves
+dw Mon103_EvosMoves
+dw Mon104_EvosMoves
+dw Mon105_EvosMoves
+dw Mon106_EvosMoves
+dw Mon107_EvosMoves
+dw Mon108_EvosMoves
+dw Mon109_EvosMoves
+dw Mon110_EvosMoves
+dw Mon111_EvosMoves
+dw Mon112_EvosMoves
+dw Mon113_EvosMoves
+dw Mon114_EvosMoves
+dw Mon115_EvosMoves
+dw Mon116_EvosMoves
+dw Mon117_EvosMoves
+dw Mon118_EvosMoves
+dw Mon119_EvosMoves
+dw Mon120_EvosMoves
+dw Mon121_EvosMoves
+dw Mon122_EvosMoves
+dw Mon123_EvosMoves
+dw Mon124_EvosMoves
+dw Mon125_EvosMoves
+dw Mon126_EvosMoves
+dw Mon127_EvosMoves
+dw Mon128_EvosMoves
+dw Mon129_EvosMoves
+dw Mon130_EvosMoves
+dw Mon131_EvosMoves
+dw Mon132_EvosMoves
+dw Mon133_EvosMoves
+dw Mon134_EvosMoves
+dw Mon135_EvosMoves
+dw Mon136_EvosMoves
+dw Mon137_EvosMoves
+dw Mon138_EvosMoves
+dw Mon139_EvosMoves
+dw Mon140_EvosMoves
+dw Mon141_EvosMoves
+dw Mon142_EvosMoves
+dw Mon143_EvosMoves
+dw Mon144_EvosMoves
+dw Mon145_EvosMoves
+dw Mon146_EvosMoves
+dw Mon147_EvosMoves
+dw Mon148_EvosMoves
+dw Mon149_EvosMoves
+dw Mon150_EvosMoves
+dw Mon151_EvosMoves
+dw Mon152_EvosMoves
 
-Mon000_EvosMoves:
-;Missingno.
-;Evolutions
-	db 0
-;Learnset
-	db 0
 	
 Mon001_EvosMoves: ; 3b844 (e:7844)
 ;BULBASAUR
@@ -3176,6 +3132,23 @@ Mon151_EvosMoves: ; 3b2e0 (e:72e0)
 	db 80,SHADOW_BALL
 	db 90,DAZZLINGLEAM
 	db 100,HYPER_BEAM
+	db 0
+	
+Mon152_EvosMoves: 
+;LUGIA
+;Evolutions
+	db 0
+;Learnset
+	db 37,HYDRO_PUMP
+	db 43,AEROBLAST
+	db 50,DARK_PULSE
+	db 57,ROCK_TOMB
+	db 65,MIST
+	db 71,RECOVER
+	db 79,PSYCHIC_M
+	db 85,HYPER_BEAM
+	db 93,AMNESIA
+	db 99,HURRICANE
 	db 0
 	
 	

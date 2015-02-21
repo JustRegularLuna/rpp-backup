@@ -249,4 +249,5 @@ Moves: ; 38000 (e:4000)
 	db WHIRLWIND   ,CONFUSION_SIDE_EFFECT     ,$6E,FLYING,  $D8,10 ; Hurricane
 	db LEER        ,ATTACK_DOWN1_EFFECT       ,$00,FAIRY,   $FF,30 ; Baby Doll Eyes
 	db BONEMERANG  ,TWO_TO_FIVE_ATTACKS_EFFECT,$19,GROUND,  $E5,10 ; Bone Rush
+	db AURORA_BEAM ,NO_ADDITIONAL_EFFECT      ,$64,FLYING,  $FF,5  ; Aeroblast
 	

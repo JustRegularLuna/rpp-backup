@@ -4532,10 +4532,6 @@ Func_3e016: ; 3e016 (f:6016)
 
 
 UnusedHighCriticalMoves: ; 3e01e (f:601e)
-	db KARATE_CHOP
-	db RAZOR_LEAF
-	db CRABHAMMER
-	db SLASH
 	db $FF
 ; 3e023
 
@@ -4617,6 +4613,7 @@ HighCriticalMoves: ; 3e08e (f:608e)
 	db PSYCHO_CUT
 	db LEAF_BLADE
 	db AIR_CUTTER
+	db AEROBLAST
 	db $FF
 
 
@@ -8852,3 +8849,4 @@ PhysicalSpecialSplit: ;Determines if a move is Physical or Special
 	db SPECIAL ;Hurricane
 	db OTHER_M ;Baby Doll Eyes
 	db PHYSICAL;Bone Rush
+	db SPECIAL ;Aeroblast

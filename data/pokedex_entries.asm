@@ -1,194 +1,156 @@
 PokedexEntryPointers: ; 4047e (10:447e)
-	dw RhydonDexEntry
-	dw KangaskhanDexEntry
-	dw NidoranMDexEntry
-	dw ClefairyDexEntry
-	dw SpearowDexEntry
-	dw VoltorbDexEntry
-	dw NidokingDexEntry
-	dw SlowbroDexEntry
-	dw IvysaurDexEntry
-	dw ExeggutorDexEntry
-	dw LickitungDexEntry
-	dw ExeggcuteDexEntry
-	dw GrimerDexEntry
-	dw GengarDexEntry
-	dw NidoranFDexEntry
-	dw NidoqueenDexEntry
-	dw CuboneDexEntry
-	dw RhyhornDexEntry
-	dw LaprasDexEntry
-	dw ArcanineDexEntry
-	dw MewDexEntry
-	dw GyaradosDexEntry
-	dw ShellderDexEntry
-	dw TentacoolDexEntry
-	dw GastlyDexEntry
-	dw ScytherDexEntry
-	dw StaryuDexEntry
-	dw BlastoiseDexEntry
-	dw PinsirDexEntry
-	dw TangelaDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw GrowlitheDexEntry
-	dw OnixDexEntry
-	dw FearowDexEntry
-	dw PidgeyDexEntry
-	dw SlowpokeDexEntry
-	dw KadabraDexEntry
-	dw GravelerDexEntry
-	dw ChanseyDexEntry
-	dw MachokeDexEntry
-	dw MrMimeDexEntry
-	dw HitmonleeDexEntry
-	dw HitmonchanDexEntry
-	dw ArbokDexEntry
-	dw ParasectDexEntry
-	dw PsyduckDexEntry
-	dw DrowzeeDexEntry
-	dw GolemDexEntry
-	dw MissingNoDexEntry
-	dw MagmarDexEntry
-	dw MissingNoDexEntry
-	dw ElectabuzzDexEntry
-	dw MagnetonDexEntry
-	dw KoffingDexEntry
-	dw MissingNoDexEntry
-	dw MankeyDexEntry
-	dw SeelDexEntry
-	dw DiglettDexEntry
-	dw TaurosDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw FarfetchdDexEntry
-	dw VenonatDexEntry
-	dw DragoniteDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw DoduoDexEntry
-	dw PoliwagDexEntry
-	dw JynxDexEntry
-	dw MoltresDexEntry
-	dw ArticunoDexEntry
-	dw ZapdosDexEntry
-	dw DittoDexEntry
-	dw MeowthDexEntry
-	dw KrabbyDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw VulpixDexEntry
-	dw NinetalesDexEntry
-	dw PikachuDexEntry
-	dw RaichuDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw DratiniDexEntry
-	dw DragonairDexEntry
-	dw KabutoDexEntry
-	dw KabutopsDexEntry
-	dw HorseaDexEntry
-	dw SeadraDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw SandshrewDexEntry
-	dw SandslashDexEntry
-	dw OmanyteDexEntry
-	dw OmastarDexEntry
-	dw JigglypuffDexEntry
-	dw WigglytuffDexEntry
-	dw EeveeDexEntry
-	dw FlareonDexEntry
-	dw JolteonDexEntry
-	dw VaporeonDexEntry
-	dw MachopDexEntry
-	dw ZubatDexEntry
-	dw EkansDexEntry
-	dw ParasDexEntry
-	dw PoliwhirlDexEntry
-	dw PoliwrathDexEntry
-	dw WeedleDexEntry
-	dw KakunaDexEntry
-	dw BeedrillDexEntry
-	dw MissingNoDexEntry
-	dw DodrioDexEntry
-	dw PrimeapeDexEntry
-	dw DugtrioDexEntry
-	dw VenomothDexEntry
-	dw DewgongDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw CaterpieDexEntry
-	dw MetapodDexEntry
-	dw ButterfreeDexEntry
-	dw MachampDexEntry
-	dw MissingNoDexEntry
-	dw GolduckDexEntry
-	dw HypnoDexEntry
-	dw GolbatDexEntry
-	dw MewtwoDexEntry
-	dw SnorlaxDexEntry
-	dw MagikarpDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MukDexEntry
-	dw MissingNoDexEntry
-	dw KinglerDexEntry
-	dw CloysterDexEntry
-	dw MissingNoDexEntry
-	dw ElectrodeDexEntry
-	dw ClefableDexEntry
-	dw WeezingDexEntry
-	dw PersianDexEntry
-	dw MarowakDexEntry
-	dw MissingNoDexEntry
-	dw HaunterDexEntry
-	dw AbraDexEntry
-	dw AlakazamDexEntry
-	dw PidgeottoDexEntry
-	dw PidgeotDexEntry
-	dw StarmieDexEntry
-	dw BulbasaurDexEntry
-	dw VenusaurDexEntry
-	dw TentacruelDexEntry
-	dw MissingNoDexEntry
-	dw GoldeenDexEntry
-	dw SeakingDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw PonytaDexEntry
-	dw RapidashDexEntry
-	dw RattataDexEntry
-	dw RaticateDexEntry
-	dw NidorinoDexEntry
-	dw NidorinaDexEntry
-	dw GeodudeDexEntry
-	dw PorygonDexEntry
-	dw AerodactylDexEntry
-	dw MissingNoDexEntry
-	dw MagnemiteDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw CharmanderDexEntry
-	dw SquirtleDexEntry
-	dw CharmeleonDexEntry
-	dw WartortleDexEntry
-	dw CharizardDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw MissingNoDexEntry
-	dw OddishDexEntry
-	dw GloomDexEntry
-	dw VileplumeDexEntry
-	dw BellsproutDexEntry
-	dw WeepinbellDexEntry
-	dw VictreebelDexEntry
+dw BulbasaurDexEntry
+dw IvysaurDexEntry
+dw VenusaurDexEntry
+dw CharmanderDexEntry
+dw CharmeleonDexEntry
+dw CharizardDexEntry
+dw SquirtleDexEntry
+dw WartortleDexEntry
+dw BlastoiseDexEntry
+dw CaterpieDexEntry
+dw MetapodDexEntry
+dw ButterfreeDexEntry
+dw WeedleDexEntry
+dw KakunaDexEntry
+dw BeedrillDexEntry
+dw PidgeyDexEntry
+dw PidgeottoDexEntry
+dw PidgeotDexEntry
+dw RattataDexEntry
+dw RaticateDexEntry
+dw SpearowDexEntry
+dw FearowDexEntry
+dw EkansDexEntry
+dw ArbokDexEntry
+dw PikachuDexEntry
+dw RaichuDexEntry
+dw SandshrewDexEntry
+dw SandslashDexEntry
+dw NidoranFDexEntry
+dw NidorinaDexEntry
+dw NidoqueenDexEntry
+dw NidoranMDexEntry
+dw NidorinoDexEntry
+dw NidokingDexEntry
+dw ClefairyDexEntry
+dw ClefableDexEntry
+dw VulpixDexEntry
+dw NinetalesDexEntry
+dw JigglypuffDexEntry
+dw WigglytuffDexEntry
+dw ZubatDexEntry
+dw GolbatDexEntry
+dw OddishDexEntry
+dw GloomDexEntry
+dw VileplumeDexEntry
+dw ParasDexEntry
+dw ParasectDexEntry
+dw VenonatDexEntry
+dw VenomothDexEntry
+dw DiglettDexEntry
+dw DugtrioDexEntry
+dw MeowthDexEntry
+dw PersianDexEntry
+dw PsyduckDexEntry
+dw GolduckDexEntry
+dw MankeyDexEntry
+dw PrimeapeDexEntry
+dw GrowlitheDexEntry
+dw ArcanineDexEntry
+dw PoliwagDexEntry
+dw PoliwhirlDexEntry
+dw PoliwrathDexEntry
+dw AbraDexEntry
+dw KadabraDexEntry
+dw AlakazamDexEntry
+dw MachopDexEntry
+dw MachokeDexEntry
+dw MachampDexEntry
+dw BellsproutDexEntry
+dw WeepinbellDexEntry
+dw VictreebelDexEntry
+dw TentacoolDexEntry
+dw TentacruelDexEntry
+dw GeodudeDexEntry
+dw GravelerDexEntry
+dw GolemDexEntry
+dw PonytaDexEntry
+dw RapidashDexEntry
+dw SlowpokeDexEntry
+dw SlowbroDexEntry
+dw MagnemiteDexEntry
+dw MagnetonDexEntry
+dw FarfetchdDexEntry
+dw DoduoDexEntry
+dw DodrioDexEntry
+dw SeelDexEntry
+dw DewgongDexEntry
+dw GrimerDexEntry
+dw MukDexEntry
+dw ShellderDexEntry
+dw CloysterDexEntry
+dw GastlyDexEntry
+dw HaunterDexEntry
+dw GengarDexEntry
+dw OnixDexEntry
+dw DrowzeeDexEntry
+dw HypnoDexEntry
+dw KrabbyDexEntry
+dw KinglerDexEntry
+dw VoltorbDexEntry
+dw ElectrodeDexEntry
+dw ExeggcuteDexEntry
+dw ExeggutorDexEntry
+dw CuboneDexEntry
+dw MarowakDexEntry
+dw HitmonleeDexEntry
+dw HitmonchanDexEntry
+dw LickitungDexEntry
+dw KoffingDexEntry
+dw WeezingDexEntry
+dw RhyhornDexEntry
+dw RhydonDexEntry
+dw ChanseyDexEntry
+dw TangelaDexEntry
+dw KangaskhanDexEntry
+dw HorseaDexEntry
+dw SeadraDexEntry
+dw GoldeenDexEntry
+dw SeakingDexEntry
+dw StaryuDexEntry
+dw StarmieDexEntry
+dw MrMimeDexEntry
+dw ScytherDexEntry
+dw JynxDexEntry
+dw ElectabuzzDexEntry
+dw MagmarDexEntry
+dw PinsirDexEntry
+dw TaurosDexEntry
+dw MagikarpDexEntry
+dw GyaradosDexEntry
+dw LaprasDexEntry
+dw DittoDexEntry
+dw EeveeDexEntry
+dw VaporeonDexEntry
+dw JolteonDexEntry
+dw FlareonDexEntry
+dw PorygonDexEntry
+dw OmanyteDexEntry
+dw OmastarDexEntry
+dw KabutoDexEntry
+dw KabutopsDexEntry
+dw AerodactylDexEntry
+dw SnorlaxDexEntry
+dw ArticunoDexEntry
+dw ZapdosDexEntry
+dw MoltresDexEntry
+dw DratiniDexEntry
+dw DragonairDexEntry
+dw DragoniteDexEntry
+dw MewtwoDexEntry
+dw MewDexEntry
+dw LugiaDexEntry
 
 ; string: species name
 ; height in feet, inches
@@ -1252,8 +1214,9 @@ VictreebelDexEntry: ; 40fd1 (10:4fd1)
 	TX_FAR _VictreebelDexEntry
 	db "@"
 
-MissingNoDexEntry: ; 40fe5 (10:4fe5)
-	db "???@"
-	db 10 ; 1.0 m
-	db 100 ; 10.0 kg
-	db 0,"コメント さくせいちゅう@" ; コメント作成中 (Comment to be written)
+LugiaDexEntry: ; 40fe5 (10:4fe5)
+	db "DIVING@"
+	db 5,7
+	dw 1220
+	TX_FAR _ArticunoDexEntry
+	db "@"

@@ -247,4 +247,5 @@ MoveNames:: ; b0000 (2c:4000)
 	db "HURRICANE@"
 	db "BABYDOLLEYES@"
 	db "BONE RUSH@"
+	db "AEROBLAST@"
 

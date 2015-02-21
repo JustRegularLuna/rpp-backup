@@ -67,7 +67,7 @@ Func_40b0::
 	predef_jump HealParty
 
 
-INCLUDE "data/baseStats/mew.asm"
+;INCLUDE "data/baseStats/mew.asm"
 
 INCLUDE "engine/battle/safari_zone.asm"
 
@@ -6525,6 +6525,8 @@ MewtwoPicFront::      INCBIN "pic/bmon/mewtwo.pic"
 MewtwoPicBack::       INCBIN "pic/monback/mewtwob.pic"
 MewPicFront::         INCBIN "pic/bmon/mew.pic"
 MewPicBack::          INCBIN "pic/monback/mewb.pic"
+LugiaPicFront::		  INCBIN "pic/bmon/lugia.pic"
+LugiaPicBack::		  INCBIN "pic/monback/lugia.pic"
 
 RedPicBack::  INCBIN "pic/trainer/redb.pic"
 LeafPicBack::  INCBIN "pic/trainer/leafb.pic"

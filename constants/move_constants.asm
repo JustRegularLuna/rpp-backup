@@ -248,6 +248,7 @@ LOW_SWEEP    EQU $F5
 HURRICANE    EQU $F6
 BABYDOLLEYES EQU $F7
 BONE_RUSH    EQU $F8
+AEROBLAST    EQU $F9
 
 
 ; these do double duty as animation identifiers
