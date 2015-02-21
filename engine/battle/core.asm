@@ -5034,7 +5034,10 @@ MirrorMoveCopyMove: ; 3e2fd (f:62fd)
 	cp a,MIRROR_MOVE ; did the target pokemon also use Mirror Move?
 	jr z,.mirrorMoveFailed
 	and a ; null move?
-	jr nz,ReloadMoveData
+	jr z,.mirrorMoveFailed
+	ld a,[bc] ; Load A with whatever move they actually selected
+	ld [hl],a ; This command was originally up top and I just moved it down here because reasons
+	jr ReloadMoveData
 .mirrorMoveFailed
 ; Mirror Move fails on itself and null moves
 	ld hl,MirrorMoveFailedText
@@ -5048,8 +5051,6 @@ MirrorMoveFailedText: ; 3e324 (f:6324)
 
 ; function used to reload move data for moves like Mirror Move and Metronome
 ReloadMoveData: ; 3e329 (f:6329)
-	ld a,[bc] ; Load A with whatever move they actually selected
-	ld [hl],a ; This command was originally up top and I just moved it down here because reasons
 	ld [wd11e],a
 	dec a
 	ld hl,Moves
