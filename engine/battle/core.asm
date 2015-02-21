@@ -5019,16 +5019,18 @@ MirrorMoveCopyMove: ; 3e2fd (f:62fd)
 	ld a,[H_WHOSETURN]
 	and a
 ; values for player turn
-	ld a,[wccf2]
-	ld hl,wPlayerSelectedMove
+	ld a,[wccf2] ; Enemy Used Move
 	ld de,W_PLAYERMOVENUM
+	ld hl,wPlayerSelectedMove
+	ld bc,wEnemySelectedMove ; Added so we can check what they actually selected
 	jr z,.next
 ; values for enemy turn
-	ld a,[wccf1]
+	ld a,[wccf1] ; Player Used Move
 	ld de,W_ENEMYMOVENUM
 	ld hl,wEnemySelectedMove
+	ld bc,wPlayerSelectedMove ; Added so we can check what they actually selected
 .next
-	ld [hl],a
+;	ld [hl],a ; Commented out so we aren't loading the wrong move
 	cp a,MIRROR_MOVE ; did the target pokemon also use Mirror Move?
 	jr z,.mirrorMoveFailed
 	and a ; null move?
@@ -5046,6 +5048,8 @@ MirrorMoveFailedText: ; 3e324 (f:6324)
 
 ; function used to reload move data for moves like Mirror Move and Metronome
 ReloadMoveData: ; 3e329 (f:6329)
+	ld a,[bc] ; Load A with whatever move they actually selected
+	ld [hl],a ; This command was originally up top and I just moved it down here because reasons
 	ld [wd11e],a
 	dec a
 	ld hl,Moves
