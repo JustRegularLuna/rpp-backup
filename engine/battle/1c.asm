@@ -8,7 +8,7 @@ Func_708ca: ; 708ca (1c:48ca)
 	call Delay3
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, $91
+	ld a, MAROWAK
 	ld [wHPBarMaxHP], a
 	ld a, $1
 	ld [H_WHOSETURN], a ; $fff3
