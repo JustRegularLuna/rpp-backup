@@ -25,5 +25,5 @@ db %11001000
 db %11000001
 db %11100011
 db %00011000
-db %00110010
+db %00111010
 db BANK(DragonitePicFront)
