@@ -4127,9 +4127,9 @@ CalculateDamage: ; 3ddcf (f:5dcf)
 	ret z           ;return if attack is zero
 	;ld a, [hl]      ;*test attacking type
 	;cp a, $14       ;types >= $14 are all special
-	ld a,[W_PLAYERMOVENUM]
+	ld a,[wPlayerSelectedMove]
 	call PhysicalSpecialSplit
-	dec a
+	cp a, SPECIAL
 	;jr nc, .specialAttack
 	jr z, .specialAttack
 .physicalAttack
@@ -4233,9 +4233,9 @@ Func_3de75: ; 3de75 (f:5e75) Enemy_Calc_Damage
 	ret z
 	;ld a, [hl]
 	;cp $14
-	ld a,[W_ENEMYMOVENUM]
+	ld a,[wEnemySelectedMove]
 	call PhysicalSpecialSplit
-	dec a
+	cp a, SPECIAL
 	;jr nc, .asm_3debc
 	jr z, .asm_3debc
 	ld hl, wBattleMonDefense
