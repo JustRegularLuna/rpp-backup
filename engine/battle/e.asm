@@ -408,8 +408,8 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 	db 1,0    ; BIRD_KEEPER
 	db 1,0    ; BLACKBELT
 	db 1,0    ; SONY1
-	db 1,3,0  ; PROF_OAK
-	db 1,2,0  ; CHIEF
+	db 1,3,0  ; SWIMMER_F
+	db 1,2,0  ; ROCKET_F
 	db 1,2,0  ; SCIENTIST
 	db 1,3,0  ; GIOVANNI
 	db 1,0    ; ROCKET
@@ -509,10 +509,10 @@ TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 	dw Rival1Pic
 	db 0,$35,0
 
-	dw ProfOakPic
-	db 0,$99,0
+	dw SwimmerFPic
+	db 0,$05,0
 
-	dw ChiefPic
+	dw RocketFPic
 	db 0,$30,0
 
 	dw ScientistPic

@@ -4,7 +4,7 @@ TrainerDataPointers: ; 39d3b (e:5d3b)
 	dw BurglarData,EngineerData,Juggler1Data,FisherData,SwimmerData
 	dw CueBallData,GamblerData,BeautyData,PsychicData,RockerData
 	dw JugglerData,TamerData,BirdKeeperData,BlackbeltData,Green1Data
-	dw ProfOakData,ChiefData,ScientistData,GiovanniData,RocketData
+	dw SwimmerFData,RocketFData,ScientistData,GiovanniData,RocketData
 	dw CooltrainerMData,CooltrainerFData,BrunoData,BrockData,MistyData
 	dw LtSurgeData,ErikaData,KogaData,BlaineData,SabrinaData
 	dw GentlemanData,Green2Data,Green3Data,LoreleiData,ChannelerData
@@ -278,6 +278,7 @@ GamblerData: ; 3a0b3 (e:60b3)
 	db 22,POLIWAG,POLIWAG,POLIWHIRL,0
 	db 22,ONIX,GEODUDE,GRAVELER,0
 	db 24,GROWLITHE,VULPIX,0
+SwimmerFData: ; Swimmer Girl
 BeautyData: ; 3a0d1 (e:60d1)
 	db 21,ODDISH,BELLSPROUT,ODDISH,BELLSPROUT,0
 	db 24,BELLSPROUT,BELLSPROUT,0
@@ -370,12 +371,11 @@ else
 	db $FF,18,PIDGEOTTO,15,ABRA,15,RATTATA,17,BULBASAUR,0
 	db $FF,18,PIDGEOTTO,15,ABRA,15,RATTATA,17,CHARMANDER,0
 endc
-ProfOakData: ; 3a21d (e:621d)
-	db $FF,66,TAUROS,67,EXEGGUTOR,68,ARCANINE,69,BLASTOISE,70,GYARADOS,0
-	db $FF,66,TAUROS,67,EXEGGUTOR,68,ARCANINE,69,VENUSAUR,70,GYARADOS,0
-	db $FF,66,TAUROS,67,EXEGGUTOR,68,ARCANINE,69,CHARIZARD,70,GYARADOS,0
-ChiefData: ; 3a241 (e:6241)
-; none
+;ProfOakData: ; 3a21d (e:621d)
+;	db $FF,66,TAUROS,67,EXEGGUTOR,68,ARCANINE,69,BLASTOISE,70,GYARADOS,0
+;	db $FF,66,TAUROS,67,EXEGGUTOR,68,ARCANINE,69,VENUSAUR,70,GYARADOS,0
+;	db $FF,66,TAUROS,67,EXEGGUTOR,68,ARCANINE,69,CHARIZARD,70,GYARADOS,0
+
 ScientistData: ; 3a241 (e:6241)
 	db 34,KOFFING,VOLTORB,0
 	db 26,GRIMER,WEEZING,KOFFING,WEEZING,0
@@ -400,6 +400,7 @@ else
 	db $FF,37,NIDORINO,35,KANGASKHAN,37,RHYHORN,41,NIDOQUEEN,0
 	db $FF,45,RHYHORN,42,DUGTRIO,44,NIDOQUEEN,45,NIDOKING,50,RHYDON,0
 endc
+RocketFData: ; Rocket Girl
 RocketData: ; 3a29c (e:629c)
 	db 13,RATTATA,ZUBAT,0
 	db 11,SANDSHREW,RATTATA,ZUBAT,0

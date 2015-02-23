@@ -134,7 +134,7 @@ EngineerName: ; 27f13 (9:7f13)
 JugglerXName: ; 27f1c (9:7f1c)
 	db "JUGGLER@"
 SwimmerName: ; 27f24 (9:7f24)
-	db "SWIMMER@"
+	db "SWIMMER♂@"
 BeautyName: ; 27f2c (9:7f2c)
 	db "BEAUTY@"
 RockerName: ; 27f33 (9:7f33)
@@ -144,13 +144,13 @@ JugglerName: ; 27f3a (9:7f3a)
 BlackbeltName: ; 27f42 (9:7f42)
 	db "BLACKBELT@"
 ProfOakName: ; 27f4c (9:7f4c)
-	db "PROF.OAK@"
+	db "SWIMMER♀@"
 ChiefName: ; 27f55 (9:7f55)
-	db "CHIEF@"
+	db "ROCKET♀@"
 ScientistName: ; 27f5b (9:7f5b)
 	db "SCIENTIST@"
 RocketName: ; 27f65 (9:7f65)
-	db "ROCKET@"
+	db "ROCKET♂@"
 CooltrainerMName: ; 27f6c (9:7f6c)
 	db "COOLTRAINER♂@"
 CooltrainerFName: ; 27f79 (9:7f79)
