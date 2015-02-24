@@ -435,10 +435,10 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $c0 ; byte count
 	db BANK(GuardSprite)
 
-	; $32
-	dw GuardSprite
+	; SPRITE_ROCKET_F
+	dw RocketFSprite
 	db $c0 ; byte count
-	db BANK(GuardSprite)
+	db BANK(RocketFSprite)
 
 	; SPRITE_MOM
 	dw MomSprite

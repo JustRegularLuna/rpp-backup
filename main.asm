@@ -4578,6 +4578,7 @@ SECTION "NPC Sprites 1", ROMX, BANK[NPC_SPRITES_1]
 
 GiovanniSprite:        INCBIN "gfx/sprites/giovanni.2bpp"
 RocketSprite:          INCBIN "gfx/sprites/rocket.2bpp"
+RocketFSprite:         INCBIN "gfx/sprites/rocketf.2bpp"
 OakAideSprite:         INCBIN "gfx/sprites/oak_aide.2bpp"
 RockerSprite:          INCBIN "gfx/sprites/rocker.2bpp"
 SwimmerSprite:         INCBIN "gfx/sprites/swimmer.2bpp"
@@ -4596,16 +4597,7 @@ SsCaptainSprite:       INCBIN "gfx/sprites/ss_captain.2bpp"
 Fisher2Sprite:         INCBIN "gfx/sprites/fisher2.2bpp"
 BlackbeltSprite:       INCBIN "gfx/sprites/blackbelt.2bpp"
 GuardSprite:           INCBIN "gfx/sprites/guard.2bpp"
-BallSprite:            INCBIN "gfx/sprites/ball.2bpp"
-OmanyteSprite:         INCBIN "gfx/sprites/omanyte.2bpp"
-BoulderSprite:         INCBIN "gfx/sprites/boulder.2bpp"
-PaperSheetSprite:      INCBIN "gfx/sprites/paper_sheet.2bpp"
-BookMapDexSprite:      INCBIN "gfx/sprites/book_map_dex.2bpp"
-ClipboardSprite:       INCBIN "gfx/sprites/clipboard.2bpp"
-SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
-OldAmberSprite:        INCBIN "gfx/sprites/old_amber.2bpp"
-LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
-PokedexSprite:         INCBIN "gfx/sprites/pokedex.2bpp"
+; Other sprites were moved to another bank
 
 
 
@@ -6528,6 +6520,10 @@ MewPicBack::          INCBIN "pic/monback/mewb.pic"
 LugiaPicFront::		  INCBIN "pic/bmon/lugia.pic"
 LugiaPicBack::		  INCBIN "pic/monback/lugia.pic"
 
+
+
+SECTION "bank2F",ROMX,BANK[$2F]
+
 RedPicBack::  INCBIN "pic/trainer/redb.pic"
 LeafPicBack::  INCBIN "pic/trainer/leafb.pic"
 OldManPic::  INCBIN "pic/trainer/oldman.pic"
@@ -6544,3 +6540,14 @@ TradingAnimationGraphics:
 TradingAnimationGraphics2:
 ; Pokeball traveling through the link cable.
 	INCBIN "gfx/trade2.2bpp"
+	
+BallSprite:            INCBIN "gfx/sprites/ball.2bpp"
+OmanyteSprite:         INCBIN "gfx/sprites/omanyte.2bpp"
+BoulderSprite:         INCBIN "gfx/sprites/boulder.2bpp"
+PaperSheetSprite:      INCBIN "gfx/sprites/paper_sheet.2bpp"
+BookMapDexSprite:      INCBIN "gfx/sprites/book_map_dex.2bpp"
+ClipboardSprite:       INCBIN "gfx/sprites/clipboard.2bpp"
+SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
+OldAmberSprite:        INCBIN "gfx/sprites/old_amber.2bpp"
+LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
+PokedexSprite:         INCBIN "gfx/sprites/pokedex.2bpp"

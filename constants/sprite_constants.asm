@@ -60,7 +60,7 @@ SPRITE_SS_CAPTAIN                EQU $2e
 SPRITE_FISHER2                   EQU $2f
 SPRITE_BLACKBELT                 EQU $30
 SPRITE_GUARD                     EQU $31
-;SPRITE_COP_GUARD                 EQU $32
+SPRITE_ROCKET_F                  EQU $32
 SPRITE_MOM                       EQU $33
 SPRITE_BALDING_GUY               EQU $34
 SPRITE_YOUNG_BOY                 EQU $35

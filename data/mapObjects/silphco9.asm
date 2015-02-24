@@ -12,9 +12,9 @@ SilphCo9Object: ; 0x5d93f (size=74)
 
 	db $4 ; people
 	db SPRITE_NURSE, $e + 4, $3 + 4, $ff, $d0, $1 ; person
-	db SPRITE_ROCKET, $4 + 4, $2 + 4, $ff, $d1, TRAINER | $2, ROCKET + $C8, $25
+	db SPRITE_ROCKET_F, $4 + 4, $2 + 4, $ff, $d1, TRAINER | $2, ROCKET_F + $C8, $25
 	db SPRITE_OAK_AIDE, $d + 4, $15 + 4, $ff, $d0, TRAINER | $3, SCIENTIST + $C8, $a
-	db SPRITE_ROCKET, $10 + 4, $d + 4, $ff, $d1, TRAINER | $4, ROCKET + $C8, $26
+	db SPRITE_ROCKET_F, $10 + 4, $d + 4, $ff, $d1, TRAINER | $4, ROCKET_F + $C8, $26
 
 	; warp-to
 	EVENT_DISP SILPH_CO_9F_WIDTH, $0, $e ; SILPH_CO_10F

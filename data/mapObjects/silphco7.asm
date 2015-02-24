@@ -19,7 +19,7 @@ SilphCo7Object: ; 0x51ed7 (size=128)
 	db SPRITE_ROCKET, $1 + 4, $d + 4, $ff, $d0, TRAINER | $5, ROCKET + $C8, $20
 	db SPRITE_OAK_AIDE, $d + 4, $2 + 4, $ff, $d0, TRAINER | $6, SCIENTIST + $C8, $8
 	db SPRITE_ROCKET, $2 + 4, $14 + 4, $ff, $d2, TRAINER | $7, ROCKET + $C8, $21
-	db SPRITE_ROCKET, $e + 4, $13 + 4, $ff, $d3, TRAINER | $8, ROCKET + $C8, $22
+	db SPRITE_ROCKET_F, $e + 4, $13 + 4, $ff, $d3, TRAINER | $8, ROCKET_F + $C8, $22
 	db SPRITE_BLUE, $7 + 4, $3 + 4, $ff, $d1, $9 ; person
 	db SPRITE_BALL, $9 + 4, $1 + 4, $ff, $ff, ITEM | $a, CALCIUM
 	db SPRITE_BALL, $b + 4, $18 + 4, $ff, $ff, ITEM | $b, TM_03
