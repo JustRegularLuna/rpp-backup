@@ -153,3 +153,52 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; MEW
 	db PAL_BLUEMON   ; LUGIA
 	
+TrainerPalletes:
+	db PAL_GREYMON           ; UNUSED
+	db PAL_MEWMON            ; Youngster
+	db PAL_MEWMON            ; Bug Catcher
+	db PAL_MEWMON            ; Lass
+	db PAL_MEWMON            ; Sailor
+	db PAL_MEWMON            ; Camper
+	db PAL_MEWMON            ; Picnicker
+	db PAL_MEWMON            ; Pokemaniac
+	db PAL_MEWMON            ; Super Nerd
+	db PAL_MEWMON            ; Hiker
+	db PAL_MEWMON            ; Biker
+	db PAL_MEWMON            ; Burglar
+	db PAL_MEWMON            ; Engineer
+	db PAL_MEWMON            ; Juggler (Unused?)
+	db PAL_MEWMON            ; Fisher
+	db PAL_MEWMON            ; Swimmer (Male)
+	db PAL_MEWMON            ; Cue Ball
+	db PAL_MEWMON            ; Gambler
+	db PAL_MEWMON            ; Beauty
+	db PAL_MEWMON            ; Psychic
+	db PAL_MEWMON            ; Rocker
+	db PAL_MEWMON            ; Juggler
+	db PAL_MEWMON            ; Tamer
+	db PAL_MEWMON            ; Bird Keeper
+	db PAL_MEWMON            ; Blackbelt
+	db PAL_MEWMON            ; Gary 1
+	db PAL_MEWMON            ; Swimmer (Female)
+	db PAL_MEWMON            ; Rocket (Female Grunt)
+	db PAL_MEWMON            ; Scientist
+	db PAL_MEWMON            ; Giovanni
+	db PAL_MEWMON            ; Rocket (Male Grunt)
+	db PAL_MEWMON            ; Ace Trainer (Male)
+	db PAL_MEWMON            ; Ace Trainer (Female)
+	db PAL_MEWMON            ; Bruno
+	db PAL_MEWMON            ; Brock
+	db PAL_MEWMON            ; Misty
+	db PAL_MEWMON            ; Lt. Surge
+	db PAL_MEWMON            ; Erika
+	db PAL_MEWMON            ; Koga
+	db PAL_MEWMON            ; Blaine
+	db PAL_MEWMON            ; Sabrina
+	db PAL_MEWMON            ; Gentleman
+	db PAL_MEWMON            ; Gary 2
+	db PAL_MEWMON            ; Gary 3
+	db PAL_MEWMON            ; Lorelei
+	db PAL_MEWMON            ; Channeler
+	db PAL_MEWMON            ; Agatha
+	db PAL_MEWMON            ; Lance

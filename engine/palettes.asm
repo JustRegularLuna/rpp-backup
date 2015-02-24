@@ -32,7 +32,7 @@ BuildBattlePalPacket: ; 71e06 (1c:5e06)
 	call CopyData
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, wBattleMonSpecies
-	call DeterminePaletteID
+	call DeterminePaletteIDBack
 	ld b, a
 	ld a, [W_ENEMYBATTSTATUS3]
 	ld hl, wEnemyMonSpecies2
@@ -266,15 +266,32 @@ DeterminePaletteID: ; 71f97 (1c:5f97)
 DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
 	ld [wd11e], a
 	and a
-	jr z, .idZero
+	jr nz, GetMonPallet
+	ld a, [W_TRAINERCLASS]
+	ld hl, TrainerPalletes
+	jr GetPalletID
+DeterminePaletteIDBack:
+	bit 3, a
+	jr z, .skip
+	ld hl, wPartyMon1
+	ld a, [wPlayerMonNumber]
+	ld bc, $2C
+	call AddNTimes
+.skip
+	ld a, [hl]
+	ld [wd11e],a
+	and a
+	ld a, PAL_MEWMON
+	ret z
+GetMonPallet:
 	push bc
 	predef IndexToPokedex               ; turn Pokemon ID number into Pokedex number
 	pop bc
 	ld a, [wd11e]
-.idZero
+	ld hl, MonsterPalettes
+GetPalletID:
 	ld e, a
 	ld d, $00
-	ld hl, MonsterPalettes   ; not just for Pokemon, Trainers use it too
 	add hl, de
 	ld a, [hl]
 	ret
