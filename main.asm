@@ -5619,7 +5619,6 @@ TamerPic::         INCBIN "pic/trainer/tamer.pic"
 BirdKeeperPic::    INCBIN "pic/trainer/birdkeeper.pic"
 BlackbeltPic::     INCBIN "pic/trainer/blackbelt.pic"
 Rival1Pic::        INCBIN "pic/trainer/rival1.pic"
-ProfOakPic::       INCBIN "pic/trainer/prof.oak.pic"
 SwimmerFPic::      INCBIN "pic/trainer/swimmerf.pic"
 RocketFPic::       INCBIN "pic/trainer/rocketf.pic"
 ScientistPic::     INCBIN "pic/trainer/scientist.pic"
@@ -6524,14 +6523,15 @@ LugiaPicBack::		  INCBIN "pic/monback/lugia.pic"
 
 SECTION "bank2F",ROMX,BANK[$2F]
 
-RedPicBack::  INCBIN "pic/trainer/redb.pic"
-LeafPicBack::  INCBIN "pic/trainer/leafb.pic"
-OldManPic::  INCBIN "pic/trainer/oldman.pic"
+ProfOakPic::            INCBIN "pic/trainer/prof.oak.pic"
+RedPicBack::            INCBIN "pic/trainer/redb.pic"
+LeafPicBack::           INCBIN "pic/trainer/leafb.pic"
+OldManPic::             INCBIN "pic/trainer/oldman.pic"
 LeafFishingTilesFront:: INCBIN "gfx/leaf_fishing_tile_front.2bpp"
 LeafFishingTilesBack::  INCBIN "gfx/leaf_fishing_tile_back.2bpp"
 LeafFishingTilesSide::  INCBIN "gfx/leaf_fishing_tile_side.2bpp"
-RedMugShot::  INCBIN "pic/trainer/RedMug.pic"
-LeafMugShot::  INCBIN "pic/trainer/LeafMug.pic"
+RedMugShot::            INCBIN "pic/trainer/RedMug.pic"
+LeafMugShot::           INCBIN "pic/trainer/LeafMug.pic"
 
 TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
