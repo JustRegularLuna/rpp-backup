@@ -120,9 +120,9 @@ BugCatcherName: ; 27ecc (9:7ecc)
 LassName: ; 27ed8 (9:7ed8)
 	db "LASS@"
 JrTrainerMName: ; 27edd (9:7edd)
-	db "JR.TRAINER♂@"
+	db "CAMPER@"
 JrTrainerFName: ; 27ee9 (9:7ee9)
-	db "JR.TRAINER♀@"
+	db "PICNICKER@"
 PokemaniacName: ; 27ef5 (9:7ef5)
 	db "POKéMANIAC@"
 SuperNerdName: ; 27f00 (9:7f00)
@@ -152,9 +152,9 @@ ScientistName: ; 27f5b (9:7f5b)
 RocketName: ; 27f65 (9:7f65)
 	db "ROCKET♂@"
 CooltrainerMName: ; 27f6c (9:7f6c)
-	db "COOLTRAINER♂@"
+	db "ACE TRAINER♂@"
 CooltrainerFName: ; 27f79 (9:7f79)
-	db "COOLTRAINER♀@"
+	db "ACE TRAINER♀@"
 
 FocusEnergyEffect_: ; 27f86 (9:7f86)
 	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
