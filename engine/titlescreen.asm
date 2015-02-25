@@ -254,12 +254,10 @@ Func_4496: ; 4496 (1:4496)
 .new
 ; Generate a new TitleMon.
 	call Random
-	and $f
-	ld c, a
-	ld b, 0
-	ld hl, TitleMons
-	add hl, bc
-	ld a, [hl]
+	and a
+	jp z, .new         ; Make sure it isn't 0
+	cp NUM_POKEMON + 1 ; Make sure it's a valid mon
+	jr nc, .new        ; If it isn't, try again
 	ld hl, wWhichTrade ; wWhichTrade
 
 ; Can't be the same as before.
