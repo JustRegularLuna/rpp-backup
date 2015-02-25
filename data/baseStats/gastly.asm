@@ -9,7 +9,7 @@ db GHOST ; species type 1
 db POISON ; species type 2
 db 190 ; catch rate
 db 95 ; base exp yield
-db $55 ; sprite dimensions
+db $66 ; sprite dimensions
 dw GastlyPicFront
 dw GastlyPicBack
 ; attacks known at lvl 0

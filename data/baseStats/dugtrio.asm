@@ -9,7 +9,7 @@ db GROUND ; species type 1
 db GROUND ; species type 2
 db 50 ; catch rate
 db 153 ; base exp yield
-db $66 ; sprite dimensions
+db $77 ; sprite dimensions
 dw DugtrioPicFront
 dw DugtrioPicBack
 ; attacks known at lvl 0
