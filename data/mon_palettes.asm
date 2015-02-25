@@ -155,50 +155,50 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	
 TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED
-	db PAL_MEWMON            ; Youngster
-	db PAL_MEWMON            ; Bug Catcher
-	db PAL_MEWMON            ; Lass
-	db PAL_MEWMON            ; Sailor
-	db PAL_MEWMON            ; Camper
-	db PAL_MEWMON            ; Picnicker
+	db PAL_BLUE_TRAINER      ; Youngster
+	db PAL_GREEN_TRAINER     ; Bug Catcher
+	db PAL_CYAN_TRAINER      ; Lass
+	db PAL_BLUE_TRAINER      ; Sailor
+	db PAL_GREEN_TRAINER     ; Camper
+	db PAL_GREEN_TRAINER     ; Picnicker
 	db PAL_MEWMON            ; Pokemaniac
-	db PAL_MEWMON            ; Super Nerd
-	db PAL_MEWMON            ; Hiker
-	db PAL_MEWMON            ; Biker
-	db PAL_MEWMON            ; Burglar
-	db PAL_MEWMON            ; Engineer
+	db PAL_PURPLE_TRAINER    ; Super Nerd
+	db PAL_PURPLE_TRAINER    ; Hiker
+	db PAL_BROWN_TRAINER     ; Biker
+	db PAL_BLUE_TRAINER      ; Burglar
+	db PAL_YELLOW_TRAINER    ; Engineer
 	db PAL_MEWMON            ; Juggler (Unused?)
-	db PAL_MEWMON            ; Fisher
-	db PAL_MEWMON            ; Swimmer (Male)
-	db PAL_MEWMON            ; Cue Ball
-	db PAL_MEWMON            ; Gambler
-	db PAL_MEWMON            ; Beauty
-	db PAL_MEWMON            ; Psychic
-	db PAL_MEWMON            ; Rocker
-	db PAL_MEWMON            ; Juggler
-	db PAL_MEWMON            ; Tamer
-	db PAL_MEWMON            ; Bird Keeper
-	db PAL_MEWMON            ; Blackbelt
-	db PAL_MEWMON            ; Gary 1
-	db PAL_MEWMON            ; Swimmer (Female)
+	db PAL_CYAN_TRAINER      ; Fisher
+	db PAL_BLUE_TRAINER      ; Swimmer (Male)
+	db PAL_BROWN_TRAINER     ; Cue Ball
+	db PAL_BLUE_TRAINER      ; Gambler
+	db PAL_CYAN_TRAINER      ; Beauty
+	db PAL_BLUE_TRAINER      ; Psychic
+	db PAL_RED_TRAINER       ; Rocker
+	db PAL_PURPLE_TRAINER    ; Juggler
+	db PAL_BROWN_TRAINER     ; Tamer
+	db PAL_BLUE_TRAINER      ; Bird Keeper
+	db PAL_BROWN_TRAINER     ; Blackbelt
+	db PAL_BLUE_TRAINER      ; Gary 1
+	db PAL_CYAN_TRAINER      ; Swimmer (Female)
 	db PAL_MEWMON            ; Rocket (Female Grunt)
-	db PAL_MEWMON            ; Scientist
-	db PAL_MEWMON            ; Giovanni
+	db PAL_BLUE_TRAINER      ; Scientist
+	db PAL_BROWN_TRAINER     ; Giovanni
 	db PAL_MEWMON            ; Rocket (Male Grunt)
-	db PAL_MEWMON            ; Ace Trainer (Male)
-	db PAL_MEWMON            ; Ace Trainer (Female)
-	db PAL_MEWMON            ; Bruno
-	db PAL_MEWMON            ; Brock
-	db PAL_MEWMON            ; Misty
-	db PAL_MEWMON            ; Lt. Surge
-	db PAL_MEWMON            ; Erika
-	db PAL_MEWMON            ; Koga
-	db PAL_MEWMON            ; Blaine
-	db PAL_MEWMON            ; Sabrina
+	db PAL_RED_TRAINER       ; Ace Trainer (Male)
+	db PAL_RED_TRAINER       ; Ace Trainer (Female)
+	db PAL_BROWN_TRAINER     ; Bruno
+	db PAL_BROWN_TRAINER     ; Brock
+	db PAL_RED_TRAINER       ; Misty
+	db PAL_GREEN_TRAINER     ; Lt. Surge
+	db PAL_GREEN_TRAINER     ; Erika
+	db PAL_PURPLE_TRAINER    ; Koga
+	db PAL_CYAN_TRAINER      ; Blaine
+	db PAL_RED_TRAINER       ; Sabrina
 	db PAL_MEWMON            ; Gentleman
-	db PAL_MEWMON            ; Gary 2
-	db PAL_MEWMON            ; Gary 3
-	db PAL_MEWMON            ; Lorelei
-	db PAL_MEWMON            ; Channeler
-	db PAL_MEWMON            ; Agatha
-	db PAL_MEWMON            ; Lance
+	db PAL_BLUE_TRAINER      ; Gary 2
+	db PAL_BLUE_TRAINER      ; Gary 3
+	db PAL_RED_TRAINER       ; Lorelei
+	db PAL_BLUE_TRAINER      ; Channeler
+	db PAL_PURPLE_TRAINER    ; Agatha
+	db PAL_RED_TRAINER       ; Lance
