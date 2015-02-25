@@ -1,5 +1,7 @@
 TitleMons: ; 4588 (1:4588)
 ; mons on the title screen are randomly chosen from here
+; this file is now completely unused in Red++
+; because all Pokémon can appear on the title screen
 IF _RED
 	db CHARMANDER
 	db SQUIRTLE
