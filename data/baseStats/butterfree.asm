@@ -9,7 +9,7 @@ db BUG ; species type 1
 db FLYING ; species type 2
 db 45 ; catch rate
 db 160 ; base exp yield
-db $77 ; sprite dimensions
+INCBIN "pic/bmon/butterfree.pic",0,1 ; 77, sprite dimensions
 dw ButterfreePicFront
 dw ButterfreePicBack
 ; attacks known at lvl 0
@@ -25,10 +25,9 @@ db %00111000
 db %11110000
 db %01000011
 db %00101000
-IF !_YELLOW
-	db %00000010
-ENDC
-IF _YELLOW
+IF DEF(_YELLOW)
 	db %01000010
+ELSE
+	db %00000010
 ENDC
 db BANK(ButterfreePicFront)

@@ -11,16 +11,30 @@ page   EQUS "db $49,"     ; Start a new Pokedex page.
 dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 
 
+percent EQUS "* $ff / 100"
+
+
+; Constant enumeration is useful for monsters, items, moves, etc.
+const_def: MACRO
+const_value = 0
+ENDM
+
+const: MACRO
+\1 EQU const_value
+const_value = const_value + 1
+ENDM
+
+
 homecall: MACRO
 	ld a, [H_LOADEDROMBANK]
 	push af
 	ld a, BANK(\1)
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	call \1
 	pop af
 	ld [H_LOADEDROMBANK], a
-	ld [MBC3RomBank], a
+	ld [MBC1RomBank], a
 	ENDM
 
 callba: MACRO
@@ -34,6 +48,20 @@ callab: MACRO
 	ld b, BANK(\1)
 	call Bankswitch
 	ENDM
+
+bcd2: MACRO
+    dn ((\1) / 1000) % 10, ((\1) / 100) % 10
+    dn ((\1) / 10) % 10, (\1) % 10
+    ENDM
+
+bcd3: MACRO
+    dn ((\1) / 100000) % 10, ((\1) / 10000) % 10
+    dn ((\1) / 1000) % 10, ((\1) / 100) % 10
+    dn ((\1) / 10) % 10, (\1) % 10
+    ENDM
+
+coins equs "bcd2"
+money equs "bcd3"
 
 ;\1 = X
 ;\2 = Y
@@ -188,6 +216,24 @@ predef_jump: MACRO
 	jp Predef
 	ENDM
 
+
+add_tx_pre: MACRO
+\1_id:: dw \1
+ENDM
+
+tx_pre_id: MACRO
+	ld a, (\1_id - TextPredefs) / 2
+ENDM
+
+tx_pre: MACRO
+	tx_pre_id \1
+	call PrintPredefTextID
+ENDM
+
+tx_pre_jump: MACRO
+	tx_pre_id \1
+	jp PrintPredefTextID
+ENDM
 
 
 ;1_channel	EQU $00
@@ -434,17 +480,17 @@ dutycycle: MACRO
 ENDM
 
 ;format: callchannel address
-;callchannel: MACRO
-;	db $FD
-;	dw \1
-;ENDM
+callchannel: MACRO
+	db $FD
+	dw \1
+ENDM
 
 ;format: loopchannel count, address
-;loopchannel: MACRO
-;	db $FE
-;	db \1
-;	dw \2
-;ENDM
+loopchannel: MACRO
+	db $FE
+	db \1
+	dw \2
+ENDM
 
 endchannel: MACRO
 	db $FF

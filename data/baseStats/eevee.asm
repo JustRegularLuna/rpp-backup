@@ -9,16 +9,15 @@ db NORMAL ; species type 1
 db NORMAL ; species type 2
 db 45 ; catch rate
 db 92 ; base exp yield
-db $55 ; sprite dimensions
+INCBIN "pic/bmon/eevee.pic",0,1 ; 55, sprite dimensions
 dw EeveePicFront
 dw EeveePicBack
 ; attacks known at lvl 0
 db TACKLE
-IF !_YELLOW
-	db SAND_ATTACK
-ENDC
-IF _YELLOW
+IF DEF(_YELLOW)
 	db TAIL_WHIP
+ELSE
+	db SAND_ATTACK
 ENDC
 db 0
 db 0

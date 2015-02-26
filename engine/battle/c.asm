@@ -5,10 +5,10 @@ MistEffect_: ; 33f2b (c:7f2b)
 	jr z, .asm_33f36
 	ld hl, W_ENEMYBATTSTATUS2
 .asm_33f36
-	bit 1, [hl] ; is mon protected by mist?
+	bit ProtectedByMist, [hl] ; is mon protected by mist?
 	jr nz, .asm_33f4a
-	set 1, [hl] ; mon is now protected by mist
-	callab Func_3fba8
+	set ProtectedByMist, [hl] ; mon is now protected by mist
+	callab PlayCurrentMoveAnimation
 	ld hl, ShroudedInMistText
 	jp PrintText
 .asm_33f4a
@@ -21,12 +21,12 @@ ShroudedInMistText: ; 33f52 (c:7f52)
 	db "@"
 
 OneHitKOEffect_: ; 33f57 (c:7f57)
-	ld hl, W_DAMAGE ; W_DAMAGE
+	ld hl, W_DAMAGE 
 	xor a
 	ld [hli], a
 	ld [hl], a ; set the damage output to zero
 	dec a
-	ld [wd05e], a
+	ld [wCriticalHitOrOHKO], a
 	ld hl, wBattleMonSpeed + 1
 	ld de, wEnemyMonSpeed + 1
 	ld a, [H_WHOSETURN] ; $fff3
@@ -45,14 +45,14 @@ OneHitKOEffect_: ; 33f57 (c:7f57)
 	ld a, [hl]
 	sbc b
 	jr c, .asm_33f8a
-	ld hl, W_DAMAGE ; W_DAMAGE
+	ld hl, W_DAMAGE 
 	ld a, $ff
 	ld [hli], a
 	ld [hl], a
 	ld a, $2
-	ld [wd05e], a
+	ld [wCriticalHitOrOHKO], a
 	ret
 .asm_33f8a
 	ld a, $1
-	ld [W_MOVEMISSED], a ; W_MOVEMISSED
+	ld [W_MOVEMISSED], a 
 	ret

@@ -47,7 +47,7 @@ MtMoon3Script_49d58: ; 49d58 (12:5d58)
 
 MtMoon3ScriptPointers: ; 49d63 (12:5d63)
 	dw MtMoon3Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw MtMoon3Script3
 	dw MtMoon3Script4
@@ -138,17 +138,17 @@ MtMoon3Script5: ; 49dfb (12:5dfb)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld a, $a
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	ld a, [wd7f6]
 	bit 6, a
 	jr z, .asm_49e1d
-	ld a, $6e
+	ld a, HS_MT_MOON_3_FOSSIL_2
 	jr .asm_49e1f
 .asm_49e1d
-	ld a, $6d
+	ld a, HS_MT_MOON_3_FOSSIL_1
 .asm_49e1f
 	ld [wcc4d], a
 	predef HideObject
@@ -228,9 +228,9 @@ MtMoon3Text1: ; 49e79 (12:5e79)
 	set 7, [hl]
 	ld hl, MtMoon3Text_49f8a
 	ld de, MtMoon3Text_49f8a
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $3
@@ -270,7 +270,7 @@ MtMoon3Text5: ; 49edf (12:5edf)
 MtMoon3Text6: ; 49ee9 (12:5ee9)
 	db $08 ; asm
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f24
 	call PrintText
 	call YesNoChoice
@@ -281,7 +281,7 @@ MtMoon3Text6: ; 49ee9 (12:5ee9)
 	call GiveItem
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
-	ld a, $6d
+	ld a, HS_MT_MOON_3_FOSSIL_1
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, wd7f6
@@ -299,7 +299,7 @@ MtMoon3Text_49f24: ; 49f24 (12:5f24)
 MtMoon3Text7: ; 49f29 (12:5f29)
 	db $08 ; asm
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, MtMoon3Text_49f64
 	call PrintText
 	call YesNoChoice
@@ -310,7 +310,7 @@ MtMoon3Text7: ; 49f29 (12:5f29)
 	call GiveItem
 	jp nc, MtMoon3Script_49f76
 	call MtMoon3Script_49f69
-	ld a, $6e
+	ld a, HS_MT_MOON_3_FOSSIL_2
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, wd7f6

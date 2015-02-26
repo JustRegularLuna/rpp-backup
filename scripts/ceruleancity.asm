@@ -8,7 +8,7 @@ CeruleanCityScript_1948c: ; 1948c (6:548c)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_CERULEANCITYCURSCRIPT], a
-	ld a, $5
+	ld a, HS_CERULEAN_RIVAL
 	ld [wcc4d], a
 	predef_jump HideObject
 
@@ -64,7 +64,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld hl, CeruleanCityCoords2
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wd700]
+	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .asm_19512 ; 0x19508 $8
 	ld a, $ff
@@ -85,10 +85,10 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [$ff8c], a
 	ld a, $5
 	ld [$ff8b], a
-	call Func_3500
+	call GetPointerWithinSpriteStateData2
 	ld [hl], $19
 .asm_19535
-	ld a, $5
+	ld a, HS_CERULEAN_RIVAL
 	ld [wcc4d], a
 	predef ShowObject
 	ld de, CeruleanCityMovement1
@@ -117,7 +117,7 @@ CeruleanCityScript_1955d: ; 1955d (6:555d)
 	ld [$ff8c],a
 	xor a
 	ld [$ff8d],a
-	jp Func_34a6 ; face object
+	jp SetSpriteFacingDirectionAndDelay ; face object
 
 CeruleanCityScript1: ; 19567 (6:5567)
 	ld a, [wd730]
@@ -133,7 +133,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	set 7, [hl]
 	ld hl, CeruleanCityText_1966d
 	ld de, CeruleanCityText_19672
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, SONY1 + $c8
 	ld [W_CUROPPONENT], a
 
@@ -204,12 +204,12 @@ CeruleanCityScript3: ; 19610 (6:5610)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $5
+	ld a, HS_CERULEAN_RIVAL
 	ld [wcc4d], a
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
-	call Func_2307
+	call PlayDefaultMusic
 	ld a, $0
 	ld [W_CERULEANCITYCURSCRIPT], a
 	ret
@@ -277,9 +277,9 @@ CeruleanCityText2: ; 1967c (6:567c)
 	set 7, [hl]
 	ld hl, CeruleanCityText_196ee
 	ld de, CeruleanCityText_196ee
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, [$ff8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $4
@@ -296,7 +296,7 @@ CeruleanCityText2: ; 1967c (6:567c)
 	jr .Done
 .Success
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, ReceivedTM28Text
 	call PrintText
 	callba Func_74872

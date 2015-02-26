@@ -9,17 +9,17 @@ db FIGHTING ; species type 1
 db FIGHTING ; species type 2
 db 75 ; catch rate
 db 149 ; base exp yield
-db $77 ; sprite dimensions
+INCBIN "pic/bmon/primeape.pic",0,1 ; 77, sprite dimensions
 dw PrimeapePicFront
 dw PrimeapePicBack
 ; attacks known at lvl 0
 db SCRATCH
-IF !_YELLOW
+IF !DEF(_YELLOW)
 	db LEER
 ENDC
 db KARATE_CHOP
 db FURY_SWIPES
-IF _YELLOW
+IF DEF(_YELLOW)
 	db LOW_KICK
 ENDC
 db 0 ; growth rate

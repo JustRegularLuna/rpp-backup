@@ -1,7 +1,7 @@
 PromptUserToPlaySlots: ; 3730e (d:730e)
 	call SaveScreenTilesToBuffer2
 	ld a, BANK(DisplayTextIDInit)
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	ld b, a
 	ld hl, DisplayTextIDInit
 	call Bankswitch
@@ -12,7 +12,7 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	and a
 	jr nz, .skip
 	dec a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld hl, wcd4f
 	xor a
 	ld [hli], a
@@ -40,9 +40,9 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	ld [W_SUBANIMSUBENTRYADDR], a
 	call GBPalWhiteOutWithDelay3
 	ld a, $1
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	call GoPAL_SET_CF1C
-	call Func_3e08
+	call ReloadMapSpriteTilePatterns
 	call ReloadTilesetTilePatterns
 .skip
 	call LoadScreenTilesFromBuffer2
@@ -135,10 +135,10 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	call PrintText
 	ld hl, wTileMap + $fe
 	ld bc, $0d0f
-	xor a
-	ld [wd12c], a
-	ld a, $14
-	ld [wd125], a
+	xor a ; YES_NO_MENU
+	ld [wTwoOptionMenuID], a
+	ld a, TWO_OPTION_MENU
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, [wCurrentMenuItem]
 	and a
@@ -221,7 +221,7 @@ SlotMachine_374ad: ; 374ad (d:74ad)
 	call SlotMachine_374fb
 	call SlotMachine_37517
 	ret c
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	xor $1
 	inc a
 	ld c, a
@@ -797,7 +797,7 @@ SlotMachine_3784e: ; 3784e (d:784e)
 SlotMachine_37882: ; 37882 (d:7882)
 	call DelayFrame
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	and $1
 	ret z
 	ld hl, wTrainerSpriteOffset
@@ -862,9 +862,12 @@ SLOTSMOUSE	EQU $1614
 INCLUDE "data/slot_machine_wheels.asm"
 
 SlotMachineTiles1: ; 37a51 (d:7a51)
-IF _RED
+IF DEF(_RED)
 	INCBIN "gfx/red/slotmachine1.2bpp"
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	INCBIN "gfx/blue/slotmachine1.2bpp"
+ENDC
+IF DEF(_YELLOW)
+	INCBIN "gfx/yellow/slotmachine1.2bpp"
 ENDC

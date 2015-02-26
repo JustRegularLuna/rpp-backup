@@ -9,7 +9,7 @@ db GROUND ; species type 1
 db GROUND ; species type 2
 db 50 ; catch rate
 db 153 ; base exp yield
-db $77 ; sprite dimensions
+INCBIN "pic/bmon/dugtrio.pic",0,1 ; 66, sprite dimensions
 dw DugtrioPicFront
 dw DugtrioPicBack
 ; attacks known at lvl 0
@@ -25,10 +25,9 @@ db %00001000
 db %11001110
 db %00000010
 db %10001000
-IF !_YELLOW
-	db %00000010
-ENDC
-IF _YELLOW
+IF DEF(_YELLOW)
 	db %00000110
+ELSE
+	db %00000010
 ENDC
 db BANK(DugtrioPicFront)

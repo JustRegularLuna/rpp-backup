@@ -24,7 +24,7 @@ ViridianGymScript_748d6: ; 748d6 (1d:48d6)
 
 ViridianGymScriptPointers: ; 748e1 (1d:48e1)
 	dw ViridianGymScript0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw ViridianGymScript3
 	dw ViridianGymScript4
@@ -35,10 +35,10 @@ ViridianGymScript0: ; 748eb (1d:48eb)
 	ld a, [W_XCOORD] ; wd362
 	ld c, a
 	ld hl, ViridianGymArrowTilePlayerMovement
-	call Func_3442
+	call DecodeArrowMovementRLE
 	cp $ff
 	jp z, CheckFightingMapTrainers
-	call Func_3486
+	call StartSimulatingJoypadStates
 	ld hl, wd736
 	set 7, [hl]
 	ld a, (SFX_02_52 - SFX_Headers_02) / 3
@@ -121,7 +121,7 @@ ViridianGymArrowMovement12: ; 74968 (1d:4968)
 	db $20,$0C,$FF
 
 ViridianGymScript4: ; 7496b (1d:496b)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	jr nz, .asm_74980
 	xor a
@@ -175,7 +175,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	or %00000011
 	ld [wd752], a
 
-	ld a, $23
+	ld a, HS_ROUTE_22_RIVAL_2
 	ld [wcc4d], a
 	predef ShowObject
 	ld hl, wd7eb
@@ -286,16 +286,16 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	jr .asm_6dff7 ; 0x74a7b
 .asm_9fc95 ; 0x74a7d
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, ViridianGymText_74ad9
 	call PrintText
-	call GBFadeIn1
-	ld a, $32
+	call GBFadeOutToBlack
+	ld a, HS_VIRIDIAN_GYM_GIOVANNI
 	ld [wcc4d], a
 	predef HideObject
 	call UpdateSprites
 	call Delay3
-	call GBFadeOut1
+	call GBFadeInFromBlack
 	jr .asm_6dff7 ; 0x74a9e
 .asm_6de66 ; 0x74aa0
 	ld hl, ViridianGymText_74ace
@@ -305,9 +305,9 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	set 7, [hl]
 	ld hl, ViridianGymText_74ad3
 	ld de, ViridianGymText_74ad3
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ldh a, [$8c]
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $8

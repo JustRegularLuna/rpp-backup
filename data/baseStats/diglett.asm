@@ -9,7 +9,7 @@ db GROUND ; species type 1
 db GROUND ; species type 2
 db 255 ; catch rate
 db 81 ; base exp yield
-db $55 ; sprite dimensions
+INCBIN "pic/bmon/diglett.pic",0,1 ; 55, sprite dimensions
 dw DiglettPicFront
 dw DiglettPicBack
 ; attacks known at lvl 0
@@ -25,10 +25,9 @@ db %00001000
 db %11001110
 db %00000010
 db %10001000
-IF !_YELLOW
-	db %00000010
-ENDC
-IF _YELLOW
+IF DEF(_YELLOW)
 	db %00000110
+ELSE
+	db %00000010
 ENDC
 db BANK(DiglettPicFront)

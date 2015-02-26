@@ -201,7 +201,6 @@ DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 .namestring ; 6aa3 (1:6aa3)
 	db "NAME@"
 
-
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
 	db   "NEW NAME"
 	next "RED"
@@ -222,7 +221,6 @@ DefaultNamesRival: ; 6abe (1:6abe)
 	next "GARY"
 	next "JOHN"
 	db   "@"
-
 
 Func_6ad6: ; 6ad6 (1:6ad6)
 	ld b, a
@@ -252,7 +250,6 @@ DefaultNamesRivalList: ; 6b08 (1:6b08)
 	db "NEW NAME@BLUE@GARY@JOHN@"
 DefaultNamesGirlList:
 	db "NEW NAME@GREEN@ASHLEY@NICOLE@"
-
 
 TextTerminator_6b20: ; 6b20 (1:6b20)
 	db "@"

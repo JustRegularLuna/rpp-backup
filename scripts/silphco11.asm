@@ -22,14 +22,14 @@ SilphCo11Script_62110: ; 62110 (18:6110)
 	ld a, $20
 	ld [wd09f], a
 	ld bc, $603
-	predef_jump Func_ee9e
+	predef_jump ReplaceTileBlock
 
 DataTable_62134: ; 62134 (18:6134)
 	db $06,$03,$FF
 
 SilphCo11Script_62137: ; 62137 (18:6137)
 	push hl
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
@@ -53,7 +53,7 @@ SilphCo11Script_62137: ; 62137 (18:6137)
 	ld a, [hli]
 	cp c
 	jr nz, .asm_62143
-	ld hl, wd73f
+	ld hl, wCardKeyDoorY
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -95,14 +95,55 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	jr .asm_62184
 
 MissableObjectIDs_62194: ; 62194 (18:6194)
-	db $11,$12,$13,$14,$15,$16,$FF
+	db HS_SAFFRON_CITY_8
+	db HS_SAFFRON_CITY_9
+	db HS_SAFFRON_CITY_A
+	db HS_SAFFRON_CITY_B
+	db HS_SAFFRON_CITY_C
+	db HS_SAFFRON_CITY_D
+	db $FF
 
 MissableObjectIDs_6219b: ; 6219b (18:619b)
-	db $0A,$0B,$0C,$0D,$0E,$0F,$10,$17
-	db $18,$8A,$8B,$8C,$8D,$8E,$8F,$91
-	db $92,$93,$97,$98,$99,$9A,$9E,$9F
-	db $A0,$A3,$A4,$A5,$A6,$AB,$AC,$AD
-	db $AE,$AF,$B0,$B1,$B2,$B7,$B8,$B9
+	db HS_SAFFRON_CITY_1
+	db HS_SAFFRON_CITY_2
+	db HS_SAFFRON_CITY_3
+	db HS_SAFFRON_CITY_4
+	db HS_SAFFRON_CITY_5
+	db HS_SAFFRON_CITY_6
+	db HS_SAFFRON_CITY_7
+	db HS_SAFFRON_CITY_E
+	db HS_SAFFRON_CITY_F
+	db HS_SILPH_CO_2F_2
+	db HS_SILPH_CO_2F_3
+	db HS_SILPH_CO_2F_4
+	db HS_SILPH_CO_2F_5
+	db HS_SILPH_CO_3F_1
+	db HS_SILPH_CO_3F_2
+	db HS_SILPH_CO_4F_1
+	db HS_SILPH_CO_4F_2
+	db HS_SILPH_CO_4F_3
+	db HS_SILPH_CO_5F_1
+	db HS_SILPH_CO_5F_2
+	db HS_SILPH_CO_5F_3
+	db HS_SILPH_CO_5F_4
+	db HS_SILPH_CO_6F_1
+	db HS_SILPH_CO_6F_2
+	db HS_SILPH_CO_6F_3
+	db HS_SILPH_CO_7F_1
+	db HS_SILPH_CO_7F_2
+	db HS_SILPH_CO_7F_3
+	db HS_SILPH_CO_7F_4
+	db HS_SILPH_CO_8F_1
+	db HS_SILPH_CO_8F_2
+	db HS_SILPH_CO_8F_3
+	db HS_SILPH_CO_9F_1
+	db HS_SILPH_CO_9F_2
+	db HS_SILPH_CO_9F_3
+	db HS_SILPH_CO_10F_1
+	db HS_SILPH_CO_10F_2
+	db HS_SILPH_CO_11F_1
+	db HS_SILPH_CO_11F_2
+	db HS_SILPH_CO_11F_3
 	db $FF
 
 SilphCo11Script_621c4: ; 621c4 (18:61c4)
@@ -116,7 +157,7 @@ SilphCo11Script_621c8: ; 621c8 (18:61c8)
 
 SilphCo11ScriptPointers: ; 621cf (18:61cf)
 	dw SilphCo11Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw SilphCo11Script3
 	dw SilphCo11Script4
@@ -160,7 +201,7 @@ SilphCo11Script_6221a: ; 6221a (18:621a)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, b
 	ld [$ff8d], a
-	jp Func_34a6
+	jp SetSpriteFacingDirectionAndDelay
 
 SilphCo11Script5: ; 62227 (18:6227)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
@@ -182,11 +223,11 @@ SilphCo11Script5: ; 62227 (18:6227)
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	call GBFadeIn1
+	call GBFadeOutToBlack
 	call SilphCo11Script_6216d
 	call UpdateSprites
 	call Delay3
-	call GBFadeOut1
+	call GBFadeInFromBlack
 	ld hl, wd838
 	set 7, [hl]
 	xor a
@@ -221,9 +262,9 @@ SilphCo11Script4: ; 62293 (18:6293)
 	set 7, [hl]
 	ld hl, SilphCo10Text_62330 ; $6330
 	ld de, SilphCo10Text_62330 ; $6330
-	call PreBattleSaveRegisters
+	call SaveEndBattleTextPointers
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	xor a

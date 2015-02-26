@@ -16,7 +16,7 @@ Route12Script_59606: ; 59606 (16:5606)
 
 Route12ScriptPointers: ; 59611 (16:5611)
 	dw Route12Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route12Script3
 
@@ -34,7 +34,7 @@ Route12Script0: ; 59619 (16:5619)
 	ld [W_CUROPPONENT], a ; wd059
 	ld a, 30
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
-	ld a, $1d
+	ld a, HS_ROUTE_12_SNORLAX
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $3
@@ -47,7 +47,7 @@ Route12Script3: ; 5964c (16:564c)
 	cp $ff
 	jr z, Route12Script_59606
 	call UpdateSprites
-	ld a, [wcf0b]
+	ld a, [wBattleResult]
 	cp $2
 	jr z, .asm_59664
 	ld a, $e

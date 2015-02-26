@@ -19,7 +19,7 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	call Delay3
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld [$ffd7], a
+	ld [hTilesetType], a
 	ld a, [wHPBarMaxHP]
 	ld [wcf1d], a
 	ld c, $0
@@ -140,7 +140,7 @@ asm_7befa: ; 7befa (1e:7efa)
 	call DelayFrame
 	push bc
 	call JoypadLowSensitivity
-	ld a, [$ffb5]
+	ld a, [hJoy5]
 	pop bc
 	and $2
 	jr nz, .asm_7bf0d

@@ -9,16 +9,15 @@ db WATER ; species type 1
 db WATER ; species type 2
 db 45 ; catch rate
 db 196 ; base exp yield
-db $66 ; sprite dimensions
+INCBIN "pic/bmon/vaporeon.pic",0,1 ; 66, sprite dimensions
 dw VaporeonPicFront
 dw VaporeonPicBack
 ; attacks known at lvl 0
 db TACKLE
-IF !_YELLOW
-	db SAND_ATTACK
-ENDC
-IF _YELLOW
+IF DEF(_YELLOW)
 	db TAIL_WHIP
+ELSE
+	db SAND_ATTACK
 ENDC
 db QUICK_ATTACK
 db WATER_GUN

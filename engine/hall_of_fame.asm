@@ -18,8 +18,8 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld bc, HOF_TEAM
 	call FillMemory
 	xor a
-	ld [wcfcb], a
-	ld [$ffd7], a
+	ld [wUpdateSpritesEnabled], a
+	ld [hTilesetType], a
 	ld [W_SPRITEFLIPPED], a
 	ld [wd358], a
 	ld [wTrainerScreenY], a
@@ -32,7 +32,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	inc [hl]
 .asm_701eb
 	ld a, $90
-	ld [$ffb0], a
+	ld [hWY], a
 	ld c, BANK(Music_HallOfFame)
 	ld a, MUSIC_HALL_OF_FAME
 	call PlayMusic
@@ -66,7 +66,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call PlaceString
 	ld c, 180
 	call DelayFrames
-	call GBFadeOut2
+	call GBFadeOutToWhite
 	pop bc
 	pop hl
 	jr .asm_701fb
@@ -86,7 +86,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call Func_70377
 	call Func_70423
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	ld hl, rLCDC ; $ff40
 	res 3, [hl]
 	ret
@@ -97,9 +97,9 @@ HallOfFameText: ; 7026b (1c:426b)
 Func_70278: ; 70278 (1c:4278)
 	call ClearScreen
 	ld a, $d0
-	ld [$ffaf], a
+	ld [hSCY], a
 	ld a, $c0
-	ld [$ffae], a
+	ld [hSCX], a
 	ld a, [wWhichTrade] ; wWhichTrade
 	ld [wcf91], a
 	ld [wd0b5], a
@@ -125,23 +125,23 @@ Func_70278: ; 70278 (1c:4278)
 	call Func_7036d
 	ld d, $a0
 	ld e, $4
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	and a
 	jr z, .asm_702c7
 	sla e
 .asm_702c7
 	call .asm_702d5
 	xor a
-	ld [$ffaf], a
+	ld [hSCY], a
 	ld c, a
 	call Func_7036d
 	ld d, $0
 	ld e, $fc
 .asm_702d5
 	call DelayFrame
-	ld a, [$ffae]
+	ld a, [hSCX]
 	add e
-	ld [$ffae], a
+	ld [hSCX], a
 	cp d
 	jr nz, .asm_702d5
 	ret
@@ -170,7 +170,7 @@ Func_702f0: ; 702f0 (1c:42f0)
 	ld a, [wWhichTrade] ; wWhichTrade
 	ld [wd0b5], a
 	hlCoord 3, 9
-	predef Func_27d6b
+	predef PrintMonType
 	ld a, [wWhichTrade] ; wWhichTrade
 	jp PlayCry
 
@@ -218,7 +218,7 @@ Func_7033e: ; 7033e (1c:433e)
 Func_7036d: ; 7036d (1c:436d)
 	ld b, $0
 	hlCoord 12, 5
-	predef_jump Func_79dda
+	predef_jump CopyTileIDsFromList
 
 Func_70377: ; 70377 (1c:4377)
 	ld hl, wd747
@@ -300,4 +300,4 @@ Func_70423: ; 70423 (1c:4423)
 	ld [wcfc9], a
 	ld a, $ff
 	ld [wMusicHeaderPointer], a
-	jp GBFadeOut2
+	jp GBFadeOutToWhite

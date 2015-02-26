@@ -14,7 +14,7 @@ CeladonMartRoofScript_483d8: ; 483d8 (12:43d8)
 	push de
 	ld [wd11e], a
 	ld b, a
-	predef IsItemInBag_ 
+	predef IsItemInBag_
 	pop de
 	pop hl
 	ld a, b
@@ -230,7 +230,7 @@ CeladonMartRoofText2: ; 4856c (12:456c)
 	and a
 	jr z, .asm_914b9 ; 0x48574
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CeladonMartRoofText4
 	call PrintText
 	call YesNoChoice

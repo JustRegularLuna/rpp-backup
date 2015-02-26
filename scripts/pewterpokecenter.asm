@@ -1,5 +1,5 @@
 PewterPokecenterScript: ; 5c587 (17:4587)
-	call Func_22fa
+	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
 PewterPokecenterTextPointers: ; 5c58d (17:458d)
@@ -18,7 +18,7 @@ PewterPokecenterText2: ; 5c596 (17:4596)
 PewterPokecenterText3: ; 5c59b (17:459b)
 	db $8
 	ld a, $1
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, PewterPokecenterText5
 	call PrintText
 	ld a, $ff
@@ -61,7 +61,7 @@ PewterPokecenterText3: ; 5c59b (17:459b)
 	jr nz, .asm_5c5d1 ; 0x5c5f6 $d9
 	ld c, $30
 	call DelayFrames
-	call Func_2307
+	call PlayDefaultMusic
 	jp TextScriptEnd
 
 PewterPokecenterText5: ; 5c603 (17:4603)

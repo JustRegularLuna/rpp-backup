@@ -10,10 +10,10 @@ Route5GateScriptPointers: ; 1df3f (7:5f3f)
 
 Route5GateScript_1df43: ; 1df43 (7:5f43)
 	ld a, $40
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
-	jp Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	jp StartSimulatingJoypadStates
 
 Route5GateScript0: ; 1df50 (7:5f50)
 	ld a, [wd728]
@@ -27,11 +27,11 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	xor a
 	ld [hJoyHeld], a
 	callba RemoveGuardDrink
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_1df82 ; 0x1df70 $10
 	ld a, $2
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	call Route5GateScript_1df43
 	ld a, $1
@@ -39,7 +39,7 @@ Route5GateScript0: ; 1df50 (7:5f50)
 	ret
 .asm_1df82
 	ld a, $3
-	ld [$ff00+$8c], a
+	ld [$ff8c], a
 	call DisplayTextID
 	ld hl, wd728
 	set 6, [hl]
@@ -51,7 +51,7 @@ CoordsData_1df8f: ; 1df8f (7:5f8f)
 	db $ff
 
 Route5GateScript1: ; 1df94 (7:5f94)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
@@ -74,7 +74,7 @@ Route5GateText1: ; 1dfaa (7:5faa)
 	bit 6, a
 	jr nz, .asm_88856 ; 0x1dfb0 $2c
 	callba RemoveGuardDrink
-	ld a, [$ff00+$db]
+	ld a, [$ffdb]
 	and a
 	jr nz, .asm_768a2 ; 0x1dfbd $11
 	ld hl, Route5GateText2

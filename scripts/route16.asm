@@ -16,7 +16,7 @@ Route16Script_59946: ; 59946 (16:5946)
 
 Route16ScriptPointers: ; 59951 (16:5951)
 	dw Route16Script0
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw Route16Script3
 
@@ -34,7 +34,7 @@ Route16Script0: ; 59959 (16:5959)
 	ld [W_CUROPPONENT], a ; wd059
 	ld a, 30
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
-	ld a, $21
+	ld a, HS_ROUTE_16_SNORLAX
 	ld [wcc4d], a
 	predef HideObject
 	call UpdateSprites
@@ -48,7 +48,7 @@ Route16Script3: ; 5998f (16:598f)
 	cp $ff
 	jp z, Route16Script_59946
 	call UpdateSprites
-	ld a, [wcf0b]
+	ld a, [wBattleResult]
 	cp $2
 	jr z, .asm_599a8
 	ld a, $b

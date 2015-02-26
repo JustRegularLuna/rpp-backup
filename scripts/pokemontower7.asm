@@ -14,9 +14,9 @@ PokemonTower7Script_60d18: ; 60d18 (18:4d18)
 	ld [W_CURMAPSCRIPT], a
 	ret
 
-PokemonTower7ScriptPointers: ; 60d23 (18:4d23)
+PokemonTower7ScriptPointers:
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw PokemonTower7Script2
 	dw PokemonTower7Script3
 	dw PokemonTower7Script4
@@ -30,7 +30,7 @@ PokemonTower7Script2: ; 60d23 (18:4d23)
 	call EndTrainerBattle
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 	call PokemonTower7Script_60db6
@@ -44,7 +44,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	bit 0, a
 	ret nz
 	ld hl, W_MISSABLEOBJECTLIST
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld b, a
 .missableObjectsListLoop
 	ld a, [hli]
@@ -55,7 +55,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
 	ld [wda38], a
 	ld a, $0
@@ -66,15 +66,15 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld a, $43
+	ld a, HS_POKEMONTOWER_7_MR_FUJI
 	ld [wcc4d], a
 	predef HideObject
 	ld a, $4
 	ld [wSpriteStateData1 + 9], a
-	ld a, $95
+	ld a, LAVENDER_HOUSE_1
 	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
 	ld a, $1
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	ld a, LAVENDER_TOWN
 	ld [wLastMap], a
 	ld hl, wd72d
@@ -86,7 +86,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 
 PokemonTower7Script_60db6: ; 60db6 (18:4db6)
 	ld hl, CoordsData_60de3 ; $4de3
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	dec a
 	swap a
 	ld d, $0
@@ -106,7 +106,7 @@ PokemonTower7Script_60db6: ; 60db6 (18:4db6)
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	ld a, [wcf13]
+	ld a, [wSpriteIndex]
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	jp MoveSprite
 .asm_60dde
@@ -164,7 +164,7 @@ PokemonTower7TextPointers: ; 60e3f (18:4e3f)
 	dw PokemonTower7Text1
 	dw PokemonTower7Text2
 	dw PokemonTower7Text3
-	dw PokemonTower7Text4
+	dw PokemonTower7FujiText
 
 PokemonTower7TrainerHeaders: ; 60e47 (18:4e47)
 PokemonTower7TrainerHeader0: ; 60e47 (18:4e47)
@@ -214,21 +214,21 @@ PokemonTower7Text3: ; 60e80 (18:4e80)
 	call TalkToTrainer
 	jp TextScriptEnd
 
-PokemonTower7Text4: ; 60e8a (18:4e8a)
-	db $08 ; asm
-	ld hl, PokemonTower7Text_60ec4
+PokemonTower7FujiText:
+	db 8 ; asm
+	ld hl, TowerRescueFujiText
 	call PrintText
 	ld hl, wd7e0
 	set 7, [hl]
 	ld hl, wd769
 	set 7, [hl]
-	ld a, $44
+	ld a, HS_LAVENDER_HOUSE_1_MR_FUJI
 	ld [wcc4d], a
 	predef ShowObject
-	ld a, $17
+	ld a, HS_SAFFRON_CITY_E
 	ld [wcc4d], a
 	predef HideObject
-	ld a, $18
+	ld a, HS_SAFFRON_CITY_F
 	ld [wcc4d], a
 	predef ShowObject
 	ld a, $4
@@ -236,8 +236,8 @@ PokemonTower7Text4: ; 60e8a (18:4e8a)
 	ld [W_CURMAPSCRIPT], a
 	jp TextScriptEnd
 
-PokemonTower7Text_60ec4: ; 60ec4 (18:4ec4)
-	TX_FAR _PokemonTower7Text_60ec4
+TowerRescueFujiText:
+	TX_FAR _TowerRescueFujiText
 	db "@"
 
 PokemonTower7BattleText1: ; 60ec9 (18:4ec9)

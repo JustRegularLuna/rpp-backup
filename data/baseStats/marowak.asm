@@ -9,20 +9,19 @@ db GROUND ; species type 1
 db GROUND ; species type 2
 db 75 ; catch rate
 db 124 ; base exp yield
-db $66 ; sprite dimensions
+INCBIN "pic/bmon/marowak.pic",0,1 ; 66, sprite dimensions
 dw MarowakPicFront
 dw MarowakPicBack
 ; attacks known at lvl 0
 db BONE_CLUB
-IF !_YELLOW
-	db GROWL
-	db LEER
-	db FOCUS_ENERGY
-ENDC
-IF _YELLOW
+IF DEF(_YELLOW)
 	db TAIL_WHIP
 	db 0
 	db 0
+ELSE
+	db GROWL
+	db LEER
+	db FOCUS_ENERGY
 ENDC
 db 0 ; growth rate
 ; learnset

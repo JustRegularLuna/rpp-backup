@@ -1,269 +1,297 @@
-NUM_ATTACKS  EQU $A4
+const_value = 1
 
-POUND        EQU $01
-KARATE_CHOP  EQU $02
-DOUBLESLAP   EQU $03
-COMET_PUNCH  EQU $04
-MEGA_PUNCH   EQU $05
-PAY_DAY      EQU $06
-FIRE_PUNCH   EQU $07
-ICE_PUNCH    EQU $08
-THUNDERPUNCH EQU $09
-SCRATCH      EQU $0A
-VICEGRIP     EQU $0B
-GUILLOTINE   EQU $0C
-RAZOR_WIND   EQU $0D
-SWORDS_DANCE EQU $0E
-CUT          EQU $0F
-GUST         EQU $10
-WING_ATTACK  EQU $11
-WHIRLWIND    EQU $12
-FLY          EQU $13
-BIND         EQU $14
-SLAM         EQU $15
-VINE_WHIP    EQU $16
-STOMP        EQU $17
-DOUBLE_KICK  EQU $18
-MEGA_KICK    EQU $19
-JUMP_KICK    EQU $1A
-ROLLING_KICK EQU $1B
-SAND_ATTACK  EQU $1C
-HEADBUTT     EQU $1D
-HORN_ATTACK  EQU $1E
-FURY_ATTACK  EQU $1F
-HORN_DRILL   EQU $20
-TACKLE       EQU $21
-BODY_SLAM    EQU $22
-WRAP         EQU $23
-TAKE_DOWN    EQU $24
-THRASH       EQU $25
-DOUBLE_EDGE  EQU $26
-TAIL_WHIP    EQU $27
-POISON_STING EQU $28
-TWINEEDLE    EQU $29
-PIN_MISSILE  EQU $2A
-LEER         EQU $2B
-BITE         EQU $2C
-GROWL        EQU $2D
-ROAR         EQU $2E
-SING         EQU $2F
-SUPERSONIC   EQU $30
-SONICBOOM    EQU $31
-DISABLE      EQU $32
-ACID         EQU $33
-EMBER        EQU $34
-FLAMETHROWER EQU $35
-MIST         EQU $36
-WATER_GUN    EQU $37
-HYDRO_PUMP   EQU $38
-SURF         EQU $39
-ICE_BEAM     EQU $3A
-BLIZZARD     EQU $3B
-PSYBEAM      EQU $3C
-BUBBLEBEAM   EQU $3D
-AURORA_BEAM  EQU $3E
-HYPER_BEAM   EQU $3F
-PECK         EQU $40
-DRILL_PECK   EQU $41
-SUBMISSION   EQU $42
-LOW_KICK     EQU $43
-COUNTER      EQU $44
-SEISMIC_TOSS EQU $45
-STRENGTH     EQU $46
-ABSORB       EQU $47
-MEGA_DRAIN   EQU $48
-LEECH_SEED   EQU $49
-GROWTH       EQU $4A
-RAZOR_LEAF   EQU $4B
-SOLARBEAM    EQU $4C
-POISONPOWDER EQU $4D
-STUN_SPORE   EQU $4E
-SLEEP_POWDER EQU $4F
-PETAL_DANCE  EQU $50
-STRING_SHOT  EQU $51
-DRAGON_RAGE  EQU $52
-FIRE_SPIN    EQU $53
-THUNDERSHOCK EQU $54
-THUNDERBOLT  EQU $55
-THUNDER_WAVE EQU $56
-THUNDER      EQU $57
-ROCK_THROW   EQU $58
-EARTHQUAKE   EQU $59
-FISSURE      EQU $5A
-DIG          EQU $5B
-TOXIC        EQU $5C
-CONFUSION    EQU $5D
-PSYCHIC_M    EQU $5E
-HYPNOSIS     EQU $5F
-MEDITATE     EQU $60
-AGILITY      EQU $61
-QUICK_ATTACK EQU $62
-RAGE         EQU $63
-TELEPORT     EQU $64
-NIGHT_SHADE  EQU $65
-MIMIC        EQU $66
-SCREECH      EQU $67
-DOUBLE_TEAM  EQU $68
-RECOVER      EQU $69
-HARDEN       EQU $6A
-MINIMIZE     EQU $6B
-SMOKESCREEN  EQU $6C
-CONFUSE_RAY  EQU $6D
-WITHDRAW     EQU $6E
-DEFENSE_CURL EQU $6F
-BARRIER      EQU $70
-LIGHT_SCREEN EQU $71
-HAZE         EQU $72
-REFLECT      EQU $73
-FOCUS_ENERGY EQU $74
-BIDE         EQU $75
-METRONOME    EQU $76
-MIRROR_MOVE  EQU $77
-SELFDESTRUCT EQU $78
-EGG_BOMB     EQU $79
-LICK         EQU $7A
-SMOG         EQU $7B
-SLUDGE       EQU $7C
-BONE_CLUB    EQU $7D
-FIRE_BLAST   EQU $7E
-WATERFALL    EQU $7F
-CLAMP        EQU $80
-SWIFT        EQU $81
-SKULL_BASH   EQU $82
-SPIKE_CANNON EQU $83
-CONSTRICT    EQU $84
-AMNESIA      EQU $85
-KINESIS      EQU $86
-SOFTBOILED   EQU $87
-HI_JUMP_KICK EQU $88
-GLARE        EQU $89
-DREAM_EATER  EQU $8A
-POISON_GAS   EQU $8B
-BARRAGE      EQU $8C
-LEECH_LIFE   EQU $8D
-LOVELY_KISS  EQU $8E
-SKY_ATTACK   EQU $8F
-TRANSFORM    EQU $90
-BUBBLE       EQU $91
-DIZZY_PUNCH  EQU $92
-SPORE        EQU $93
-FLASH        EQU $94
-PSYWAVE      EQU $95
-SPLASH       EQU $96
-ACID_ARMOR   EQU $97
-CRABHAMMER   EQU $98
-EXPLOSION    EQU $99
-FURY_SWIPES  EQU $9A
-BONEMERANG   EQU $9B
-REST         EQU $9C
-ROCK_SLIDE   EQU $9D
-HYPER_FANG   EQU $9E
-SHARPEN      EQU $9F
-CONVERSION   EQU $A0
-TRI_ATTACK   EQU $A1
-SUPER_FANG   EQU $A2
-SLASH        EQU $A3
-SUBSTITUTE   EQU $A4
-STRUGGLE     EQU $A5
-METAL_CLAW   EQU $A6
-BULLET_PUNCH EQU $A7
-FLASH_CANNON EQU $A8
-IRON_TAIL    EQU $A9
-METEOR_MASH  EQU $AA
-CRUNCH       EQU $AB
-DARK_PULSE   EQU $AC
-FEINT_ATTACK EQU $AD
-NIGHT_SLASH  EQU $AE
-MOONBLAST    EQU $AF
-DRAININGKISS EQU $B0
-DISARM_VOICE EQU $B1
-DAZZLINGLEAM EQU $B2
-DRACO_METEOR EQU $B3
-DRAGONBREATH EQU $B4
-DRAGON_CLAW  EQU $B5
-DRAGON_PULSE EQU $B6
-TWISTER      EQU $B7
-OUTRAGE      EQU $B8
-SHADOW_CLAW  EQU $B9
-STEEL_WING   EQU $BA
-IRON_DEFENSE EQU $BB
-AIR_SLASH    EQU $BC
-FIRE_FANG    EQU $BD
-FLARE_BLITZ  EQU $BE
-BLAST_BURN   EQU $BF
-ICE_FANG     EQU $C0
-THUNDER_FANG EQU $C1
-WATER_PULSE  EQU $C2
-AQUA_TAIL    EQU $C3
-HYDRO_CANNON EQU $C4
-FRENZY_PLANT EQU $C5
-SUCKER_PUNCH EQU $C6
-SHADOW_BALL  EQU $C7
-FLAME_WHEEL  EQU $C8
-MOONLIGHT    EQU $C9
-HEX          EQU $CA
-SHADOW_PUNCH EQU $CB
-AERIAL_ACE   EQU $CC
-ACROBATICS   EQU $CD
-AIR_CUTTER   EQU $CE
-ICY_WIND     EQU $CF
-ICE_SHARD    EQU $D0
-SHEER_COLD   EQU $D1
-ELECTRO_BALL EQU $D2
-NUZZLE       EQU $D3
-DISCHARGE    EQU $D4
-VOLT_TACKLE  EQU $D5
-MUDDY_WATER  EQU $D6
-WHIRLPOOL    EQU $D7
-GIGA_DRAIN   EQU $D8
-PETALBLIZARD EQU $D9
-LEAF_BLADE   EQU $DA
-WOOD_HAMMER  EQU $DB
-POISON_JAB   EQU $DC
-GUNK_SHOT    EQU $DD
-POISON_FANG  EQU $DE
-SLUDGE_WAVE  EQU $DF
-SILVER_WIND  EQU $E0
-BUG_BUZZ     EQU $E1
-MEGAHORN     EQU $E2
-X_SCISSOR    EQU $E3
-SIGNAL_BEAM  EQU $E4
-EARTH_POWER  EQU $E5
-MUD_SLAP     EQU $E6
-MUD_BOMB     EQU $E7
-EXTRASENSORY EQU $E8
-ZEN_HEADBUTT EQU $E9
-PSYCHO_CUT   EQU $EA
-HYPER_VOICE  EQU $EB
-EXTREMESPEED EQU $EC
-GIGA_IMPACT  EQU $ED
-POWER_GEM    EQU $EE
-ROCK_BLAST   EQU $EF
-ROCK_POLISH  EQU $F0
-ROCK_TOMB    EQU $F1
-DYNAMICPUNCH EQU $F2
-CIRCLE_THROW EQU $F3
-CROSS_CHOP   EQU $F4
-LOW_SWEEP    EQU $F5
-HURRICANE    EQU $F6
-BABYDOLLEYES EQU $F7
-BONE_RUSH    EQU $F8
-AEROBLAST    EQU $F9
+	const POUND        ; 01
+	const KARATE_CHOP  ; 02
+	const DOUBLESLAP   ; 03
+	const COMET_PUNCH  ; 04
+	const MEGA_PUNCH   ; 05
+	const PAY_DAY      ; 06
+	const FIRE_PUNCH   ; 07
+	const ICE_PUNCH    ; 08
+	const THUNDERPUNCH ; 09
+	const SCRATCH      ; 0a
+	const VICEGRIP     ; 0b
+	const GUILLOTINE   ; 0c
+	const RAZOR_WIND   ; 0d
+	const SWORDS_DANCE ; 0e
+	const CUT          ; 0f
+	const GUST         ; 10
+	const WING_ATTACK  ; 11
+	const WHIRLWIND    ; 12
+	const FLY          ; 13
+	const BIND         ; 14
+	const SLAM         ; 15
+	const VINE_WHIP    ; 16
+	const STOMP        ; 17
+	const DOUBLE_KICK  ; 18
+	const MEGA_KICK    ; 19
+	const JUMP_KICK    ; 1a
+	const ROLLING_KICK ; 1b
+	const SAND_ATTACK  ; 1c
+	const HEADBUTT     ; 1d
+	const HORN_ATTACK  ; 1e
+	const FURY_ATTACK  ; 1f
+	const HORN_DRILL   ; 20
+	const TACKLE       ; 21
+	const BODY_SLAM    ; 22
+	const WRAP         ; 23
+	const TAKE_DOWN    ; 24
+	const THRASH       ; 25
+	const DOUBLE_EDGE  ; 26
+	const TAIL_WHIP    ; 27
+	const POISON_STING ; 28
+	const TWINEEDLE    ; 29
+	const PIN_MISSILE  ; 2a
+	const LEER         ; 2b
+	const BITE         ; 2c
+	const GROWL        ; 2d
+	const ROAR         ; 2e
+	const SING         ; 2f
+	const SUPERSONIC   ; 30
+	const SONICBOOM    ; 31
+	const DISABLE      ; 32
+	const ACID         ; 33
+	const EMBER        ; 34
+	const FLAMETHROWER ; 35
+	const MIST         ; 36
+	const WATER_GUN    ; 37
+	const HYDRO_PUMP   ; 38
+	const SURF         ; 39
+	const ICE_BEAM     ; 3a
+	const BLIZZARD     ; 3b
+	const PSYBEAM      ; 3c
+	const BUBBLEBEAM   ; 3d
+	const AURORA_BEAM  ; 3e
+	const HYPER_BEAM   ; 3f
+	const PECK         ; 40
+	const DRILL_PECK   ; 41
+	const SUBMISSION   ; 42
+	const LOW_KICK     ; 43
+	const COUNTER      ; 44
+	const SEISMIC_TOSS ; 45
+	const STRENGTH     ; 46
+	const ABSORB       ; 47
+	const MEGA_DRAIN   ; 48
+	const LEECH_SEED   ; 49
+	const GROWTH       ; 4a
+	const RAZOR_LEAF   ; 4b
+	const SOLARBEAM    ; 4c
+	const POISONPOWDER ; 4d
+	const STUN_SPORE   ; 4e
+	const SLEEP_POWDER ; 4f
+	const PETAL_DANCE  ; 50
+	const STRING_SHOT  ; 51
+	const DRAGON_RAGE  ; 52
+	const FIRE_SPIN    ; 53
+	const THUNDERSHOCK ; 54
+	const THUNDERBOLT  ; 55
+	const THUNDER_WAVE ; 56
+	const THUNDER      ; 57
+	const ROCK_THROW   ; 58
+	const EARTHQUAKE   ; 59
+	const FISSURE      ; 5a
+	const DIG          ; 5b
+	const TOXIC        ; 5c
+	const CONFUSION    ; 5d
+	const PSYCHIC_M    ; 5e
+	const HYPNOSIS     ; 5f
+	const MEDITATE     ; 60
+	const AGILITY      ; 61
+	const QUICK_ATTACK ; 62
+	const RAGE         ; 63
+	const TELEPORT     ; 64
+	const NIGHT_SHADE  ; 65
+	const MIMIC        ; 66
+	const SCREECH      ; 67
+	const DOUBLE_TEAM  ; 68
+	const RECOVER      ; 69
+	const HARDEN       ; 6a
+	const MINIMIZE     ; 6b
+	const SMOKESCREEN  ; 6c
+	const CONFUSE_RAY  ; 6d
+	const WITHDRAW     ; 6e
+	const DEFENSE_CURL ; 6f
+	const BARRIER      ; 70
+	const LIGHT_SCREEN ; 71
+	const HAZE         ; 72
+	const REFLECT      ; 73
+	const FOCUS_ENERGY ; 74
+	const BIDE         ; 75
+	const METRONOME    ; 76
+	const MIRROR_MOVE  ; 77
+	const SELFDESTRUCT ; 78
+	const EGG_BOMB     ; 79
+	const LICK         ; 7a
+	const SMOG         ; 7b
+	const SLUDGE       ; 7c
+	const BONE_CLUB    ; 7d
+	const FIRE_BLAST   ; 7e
+	const WATERFALL    ; 7f
+	const CLAMP        ; 80
+	const SWIFT        ; 81
+	const SKULL_BASH   ; 82
+	const SPIKE_CANNON ; 83
+	const CONSTRICT    ; 84
+	const AMNESIA      ; 85
+	const KINESIS      ; 86
+	const SOFTBOILED   ; 87
+	const HI_JUMP_KICK ; 88
+	const GLARE        ; 89
+	const DREAM_EATER  ; 8a
+	const POISON_GAS   ; 8b
+	const BARRAGE      ; 8c
+	const LEECH_LIFE   ; 8d
+	const LOVELY_KISS  ; 8e
+	const SKY_ATTACK   ; 8f
+	const TRANSFORM    ; 90
+	const BUBBLE       ; 91
+	const DIZZY_PUNCH  ; 92
+	const SPORE        ; 93
+	const FLASH        ; 94
+	const PSYWAVE      ; 95
+	const SPLASH       ; 96
+	const ACID_ARMOR   ; 97
+	const CRABHAMMER   ; 98
+	const EXPLOSION    ; 99
+	const FURY_SWIPES  ; 9a
+	const BONEMERANG   ; 9b
+	const REST         ; 9c
+	const ROCK_SLIDE   ; 9d
+	const HYPER_FANG   ; 9e
+	const SHARPEN      ; 9f
+	const CONVERSION   ; a0
+	const TRI_ATTACK   ; a1
+	const SUPER_FANG   ; a2
+	const SLASH        ; a3
+	const SUBSTITUTE   ; a4
+	const STRUGGLE
+	const METAL_CLAW
+	const BULLET_PUNCH
+	const FLASH_CANNON
+	const IRON_TAIL
+	const METEOR_MASH
+	const CRUNCH
+	const DARK_PULSE
+	const FEINT_ATTACK
+	const NIGHT_SLASH
+	const MOONBLAST
+	const DRAININGKISS
+	const DISARM_VOICE
+	const DAZZLINGLEAM
+	const DRACO_METEOR
+	const DRAGONBREATH
+	const DRAGON_CLAW
+	const DRAGON_PULSE
+	const TWISTER
+	const OUTRAGE
+	const SHADOW_CLAW
+	const STEEL_WING
+	const IRON_DEFENSE
+	const AIR_SLASH
+	const FIRE_FANG
+	const FLARE_BLITZ
+	const BLAST_BURN
+	const ICE_FANG
+	const THUNDER_FANG
+	const WATER_PULSE
+	const AQUA_TAIL
+	const HYDRO_CANNON
+	const FRENZY_PLANT
+	const SUCKER_PUNCH
+	const SHADOW_BALL
+	const FLAME_WHEEL
+	const MOONLIGHT
+	const HEX
+	const SHADOW_PUNCH
+	const AERIAL_ACE
+	const ACROBATICS
+	const AIR_CUTTER
+	const ICY_WIND
+	const ICE_SHARD
+	const SHEER_COLD
+	const ELECTRO_BALL
+	const NUZZLE
+	const DISCHARGE
+	const VOLT_TACKLE
+	const MUDDY_WATER
+	const WHIRLPOOL
+	const GIGA_DRAIN
+	const PETALBLIZARD
+	const LEAF_BLADE
+	const WOOD_HAMMER
+	const POISON_JAB
+	const GUNK_SHOT
+	const POISON_FANG
+	const SLUDGE_WAVE
+	const SILVER_WIND
+	const BUG_BUZZ
+	const MEGAHORN
+	const X_SCISSOR
+	const SIGNAL_BEAM
+	const EARTH_POWER
+	const MUD_SLAP
+	const MUD_BOMB
+	const EXTRASENSORY
+	const ZEN_HEADBUTT
+	const PSYCHO_CUT
+	const HYPER_VOICE
+	const EXTREMESPEED
+	const GIGA_IMPACT
+	const POWER_GEM
+	const ROCK_BLAST
+	const ROCK_POLISH
+	const ROCK_TOMB
+	const DYNAMICPUNCH
+	const CIRCLE_THROW
+	const CROSS_CHOP
+	const LOW_SWEEP
+	const HURRICANE
+	const BABYDOLLEYES
+	const BONE_RUSH
+	const AEROBLAST
+
+NUM_ATTACKS EQU const_value
+const_value = STRUGGLE + 1
 
 
-; these do double duty as animation identifiers
-SHOWPIC_ANIM EQU $A6 ; redraw monster pic
-STATUS_AFFECTED_ANIM EQU $A7 ; effect when monster receives a status aliment
-XSTATITEM_ANIM EQU $AE ; use X Attack/Defense/Speed/Special
-BURN_PSN_ANIM EQU $BA ; Plays when a monster is burned or poisoned
-SLP_ANIM     EQU $BD ; sleeping monster
-CONF_ANIM    EQU $BF ; confused monster
-TOSS_ANIM    EQU $C1 ; toss Poké Ball
-SHAKE_ANIM   EQU $C2 ; shaking Poké Ball when catching monster
-POOF_ANIM    EQU $C3 ; puff of smoke
-BLOCKBALL_ANIM EQU $C4 ; trainer knocks away Poké Ball
-GREATTOSS_ANIM EQU $C5 ; toss Great Ball
-ULTRATOSS_ANIM EQU $C6 ; toss Ultra Ball or Master Ball
-HIDEPIC_ANIM EQU $C8 ; monster disappears
-ROCK_ANIM EQU $C9 ; throw rock
-BAIT_ANIM EQU $CA ; throw bait
+	; Moves do double duty as animation identifiers.
+
+	const SHOWPIC_ANIM
+	const STATUS_AFFECTED_ANIM
+	const ANIM_A8
+	const ANIM_A9
+	const TRADE_BALL_DROP_ANIM
+	const TRADE_BALL_SHAKE_ANIM
+	const TRADE_BALL_TILT_ANIM
+	const TRADE_BALL_POOF_ANIM
+	const XSTATITEM_ANIM ; use X Attack/Defense/Speed/Special
+	const ANIM_AF
+	const ANIM_B0
+	const ANIM_B1
+	const ANIM_B2
+	const ANIM_B3
+	const ANIM_B4
+	const ANIM_B5
+	const ANIM_B6
+	const ANIM_B7
+	const ANIM_B8
+	const ANIM_B9
+	const BURN_PSN_ANIM ; Plays when a monster is burned or poisoned
+	const ANIM_BB
+	const ANIM_BC
+	const SLP_ANIM ; sleeping monster
+	const ANIM_BE
+	const CONF_ANIM ; confused monster
+	const ANIM_C0
+	const TOSS_ANIM ; toss Poké Ball
+	const SHAKE_ANIM ; shaking Poké Ball when catching monster
+	const POOF_ANIM ; puff of smoke
+	const BLOCKBALL_ANIM ; trainer knocks away Poké Ball
+	const GREATTOSS_ANIM ; toss Great Ball
+	const ULTRATOSS_ANIM ; toss Ultra Ball or Master Ball
+	const ANIM_C7
+	const HIDEPIC_ANIM ; monster disappears
+	const ROCK_ANIM ; throw rock
+	const BAIT_ANIM ; throw bait
+	
+	

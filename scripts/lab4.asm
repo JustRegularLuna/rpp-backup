@@ -6,24 +6,28 @@ Lab4TextPointers: ; 75d34 (1d:5d34)
 	dw Lab4Text2
 
 Lab4Script_75d38: ; 75d38 (1d:5d38)
+; construct a list of all fossils in the player's bag
+
 	xor a
 	ld [wcd37], a
 	ld de, wcc5b
 	ld hl, FossilsList
-.asm_75d42
+.loop
 	ld a, [hli]
 	and a
-	jr z, .asm_75d64
+	jr z, .done
 	push hl
 	push de
 	ld [wd11e], a
 	ld b, a
-	predef IsItemInBag_ 
+	predef IsItemInBag_
 	pop de
 	pop hl
 	ld a, b
 	and a
-	jr z, .asm_75d42
+	jr z, .loop
+
+	; A fossil's in the bag
 	ld a, [wd11e]
 	ld [de], a
 	inc de
@@ -31,8 +35,8 @@ Lab4Script_75d38: ; 75d38 (1d:5d38)
 	ld hl, wcd37
 	inc [hl]
 	pop hl
-	jr .asm_75d42
-.asm_75d64
+	jr .loop
+.done
 	ld a, $ff
 	ld [de], a
 	ret
@@ -75,7 +79,7 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	set 2, [hl]
 	ld a, [W_FOSSILMON]
 	ld b, a
-	ld c, $1e
+	ld c, 30
 	call GivePokemon
 	jr nc, .asm_75d93 ; 0x75db9 $d8
 	ld hl, wd7a3
@@ -104,7 +108,7 @@ Lab4Text2: ; 75dda (1d:5dda)
 	db $08 ; asm
 	ld a, $3
 	ld [wWhichTrade], a
-	predef Predef54 
+	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 
 LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)

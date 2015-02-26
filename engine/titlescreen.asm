@@ -11,7 +11,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld de, W_RIVALNAME ; wd34a
 	call CopyFixedLengthText
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	ld [wd358], a
 	ld hl, wd732
 	ld [hli], a
@@ -26,12 +26,12 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	xor a
-	ld [$ffd7], a
-	ld [$ffae], a
+	ld [hTilesetType], a
+	ld [hSCX], a
 	ld a, $40
-	ld [$ffaf], a
+	ld [hSCY], a
 	ld a, $90
-	ld [$ffb0], a
+	ld [hWY], a
 	call ClearScreen
 	call DisableLCD
 	call LoadFontTilePatterns
@@ -56,11 +56,11 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX ; $402f
-IF _RED
+IF DEF(_RED)
 	ld de,vChars2 + $600
 	ld bc,$50
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	ld de,vChars2 + $600 + $10
 	ld bc,$50 - $10
 ENDC
@@ -114,10 +114,10 @@ ENDC
 	call SaveScreenTilesToBuffer2
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
-IF _RED
+IF DEF(_RED)
 	ld a,CHARMANDER ; which Pokemon to show first on the title screen
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
 ENDC
 
@@ -127,7 +127,7 @@ ENDC
 	call Func_4533
 	call SaveScreenTilesToBuffer1
 	ld a, $40
-	ld [$ffb0], a
+	ld [hWY], a
 	call LoadScreenTilesFromBuffer2
 	ld a, $98
 	call Func_4533
@@ -182,7 +182,7 @@ ENDC
 	call PlaySound
 	call PrintGameVersionOnTitleScreen
 	ld a, $90
-	ld [$ffb0], a
+	ld [hWY], a
 	ld d, $90
 .asm_440a
 	ld h, d
@@ -225,7 +225,7 @@ ENDC
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	call ClearScreen
@@ -237,14 +237,14 @@ ENDC
 	call LoadGBPal
 	ld a, [hJoyHeld]
 	ld b, a
-	and $46
-	cp $46
-	jp z, Func_448e
+	and D_UP | SELECT | B_BUTTON
+	cp D_UP | SELECT | B_BUTTON
+	jp z, .doClearSaveDialogue
 	jp MainMenu
 
-Func_448e: ; 448e (1:448e)
-	ld b, BANK(Func_1c98a)
-	ld hl, Func_1c98a
+.doClearSaveDialogue
+	ld b, BANK(DoClearSaveDialogue)
+	ld hl, DoClearSaveDialogue
 	jp Bankswitch
 
 Func_4496: ; 4496 (1:4496)
@@ -268,7 +268,7 @@ Func_4496: ; 4496 (1:4496)
 	call Func_4524
 
 	ld a, $90
-	ld [$ffb0], a
+	ld [hWY], a
 	ld d, 1 ; scroll out
 	callba TitleScroll
 	ret
@@ -277,7 +277,7 @@ Func_44c1: ; 44c1 (1:44c1)
 	ld d, 0 ; scroll in
 	callba TitleScroll
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	ret
 
 Func_44cf: ; 44cf (1:44cf)
@@ -351,7 +351,7 @@ Func_4533: ; 4533 (1:4533)
 
 LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 	xor a
-	ld [$ffb0], a
+	ld [hWY], a
 	call ClearScreen
 	call LoadTextBoxTilePatterns
 
@@ -380,9 +380,4 @@ PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
 VersionOnTitleScreenText: ; 45a1 (1:45a1)
-IF _RED
 	db $60,$61,$62,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
-ENDC
-IF _BLUE
-	db $61,$62,$63,$64,$65,$66,$67,$68,"@" ; "Blue Version"
-ENDC

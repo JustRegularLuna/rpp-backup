@@ -19,26 +19,26 @@ Route25Script_515e1: ; 515e1 (14:55e1)
 	bit 5, [hl]
 	jr nz, .asm_515ff
 	res 6, [hl]
-	ld a, $61
+	ld a, HS_BILL_POKEMON
 	ld [wcc4d], a
 	predef_jump ShowObject
 .asm_515ff
 	bit 4, [hl]
 	ret z
 	set 7, [hl]
-	ld a, $24
+	ld a, HS_NUGGET_BRIDGE_GUY
 	ld [wcc4d], a
 	predef HideObject
-	ld a, $62
+	ld a, HS_BILL_1
 	ld [wcc4d], a
 	predef HideObject
-	ld a, $63
+	ld a, HS_BILL_2
 	ld [wcc4d], a
 	predef_jump ShowObject
 
 Route25ScriptPointers: ; 51622 (14:5622)
 	dw CheckFightingMapTrainers
-	dw Func_324c
+	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
 Route25TextPointers: ; 51628 (14:5628)

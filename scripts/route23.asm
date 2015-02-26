@@ -16,10 +16,10 @@ Route23Script_511e9: ; 511e9 (14:51e9)
 	ld hl, wd813
 	res 0, [hl]
 	res 6, [hl]
-	ld a, $7a
+	ld a, HS_VICTORY_ROAD_3_BOULDER
 	ld [wcc4d], a
 	predef ShowObject
-	ld a, $60
+	ld a, HS_VICTORY_ROAD_2_BOULDER
 	ld [wcc4d], a
 	predef_jump HideObject
 
@@ -118,16 +118,16 @@ CascadeBadgeText: ; 512cb (14:52cb)
 
 Route23Script_512d8: ; 512d8 (14:52d8)
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $80
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	xor a
 	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a
-	jp Func_3486
+	jp StartSimulatingJoypadStates
 
 Route23Script1: ; 512ec (14:52ec)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 Route23Script2: ; 512f1 (14:52f1)

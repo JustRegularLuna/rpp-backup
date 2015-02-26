@@ -11,11 +11,11 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [wPlayerMonNumber],a
 	inc a
 	ld [wcf93],a
-	ld a,$13
-	ld [wd125],a
+	ld a,MONEY_BOX
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw money text box
-	ld a,$15
-	ld [wd125],a
+	ld a,BUY_SELL_QUIT_MENU
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; do buy/sell/quit menu
 	ld hl,wd128 ; pointer to this pokemart's inventory
 	ld a,[hli]
@@ -45,14 +45,14 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call SaveScreenTilesToBuffer1 ; save screen
 .sellMenuLoop
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
-	ld a,$13
-	ld [wd125],a
+	ld a,MONEY_BOX
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw money text box
 	ld hl,wNumBagItems
 	ld a,l
-	ld [wcf8b],a
+	ld [wList],a
 	ld a,h
-	ld [wcf8c],a
+	ld [wList + 1],a
 	xor a
 	ld [wcf93],a
 	ld [wCurrentMenuItem],a
@@ -79,8 +79,8 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call PrintText
 	hlCoord 14, 7
 	ld bc,$080f
-	ld a,$14
-	ld [wd125],a
+	ld a,TWO_OPTION_MENU
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
 	ld a,[wd12e]
 	cp a,$02
@@ -119,14 +119,14 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call SaveScreenTilesToBuffer1 ; save screen
 .buyMenuLoop
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
-	ld a,$13
-	ld [wd125],a
+	ld a,MONEY_BOX
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw money text box
 	ld hl,wStringBuffer2 + 11
 	ld a,l
-	ld [wcf8b],a
+	ld [wList],a
 	ld a,h
-	ld [wcf8c],a
+	ld [wList + 1],a
 	xor a
 	ld [wCurrentMenuItem],a
 	inc a
@@ -150,8 +150,8 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call PrintText
 	hlCoord 14, 7
 	ld bc,$080f
-	ld a,$14
-	ld [wd125],a
+	ld a,TWO_OPTION_MENU
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
 	ld a,[wd12e]
 	cp a,$02
@@ -173,15 +173,15 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld [wcf0a],a
 .skipSettingFlag2
 	ld a,(SFX_02_5a - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
-	call WaitForSoundToFinish ; wait until sound is done playing
+	call PlaySoundWaitForCurrent
+	call WaitForSoundToFinish
 	ld hl,PokemartBoughtItemText
 	call PrintText
 	jp .buyMenuLoop
 .returnToMainPokemartMenu
-	call LoadScreenTilesFromBuffer1 ; restore save screen
-	ld a,$13
-	ld [wd125],a
+	call LoadScreenTilesFromBuffer1
+	ld a,MONEY_BOX
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; draw money text box
 	ld hl,PokemartAnythingElseText
 	call PrintText
@@ -203,7 +203,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld hl,PokemartThankYouText
 	call PrintText
 	ld a,$01
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call UpdateSprites ; move sprites
 	ld a,[wd07e]
 	ld [wListScrollOffset],a

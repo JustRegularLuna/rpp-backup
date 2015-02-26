@@ -55,16 +55,16 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	bit 2, a
 	jr nz, .asm_19810 ; 0x19804 $a
 	ld b, $3f
-	predef IsItemInBag_ 
+	predef IsItemInBag_
 	ld a, b
 	and a
 	ret nz
 .asm_19810
 	ld a, $40
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $1
 	ld [W_VERMILIONCITYCURSCRIPT], a
 	ret
@@ -85,17 +85,17 @@ VermilionCityScript2: ; 19833 (6:5833)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $40
-	ld [wccd3], a
+	ld [wSimulatedJoypadStatesEnd], a
 	ld [wccd4], a
 	ld a, $2
-	ld [wcd38], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_VERMILIONCITYCURSCRIPT], a
 	ret
 
 VermilionCityScript3: ; 1984e (6:584e)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	xor a
@@ -106,7 +106,7 @@ VermilionCityScript3: ; 1984e (6:584e)
 	ret
 
 VermilionCityScript1: ; 1985f (6:585f)
-	ld a, [wcd38]
+	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	ld c, $a
@@ -175,7 +175,7 @@ VermilionCityText3: ; 198b1 (6:58b1)
 	ld hl, SSAnneWelcomeText9
 	call PrintText
 	ld b, S_S__TICKET
-	predef IsItemInBag_ 
+	predef IsItemInBag_
 	ld a, b
 	and a
 	jr nz, .asm_0419b ; 0x198df

@@ -1,76 +1,77 @@
-Func_137aa: ; 137aa (4:77aa)
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
-	cp $4
-	jr nz, .asm_137eb
+EndOfBattle: ; 137aa (4:77aa)
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
+	jr nz, .notLinkBattle
+; link battle
 	ld a, [wEnemyMonPartyPos]
 	ld hl, wEnemyMon1Status
 	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
-	ld a, [wEnemyMonStatus] ; wcfe9
+	ld a, [wEnemyMonStatus]
 	ld [hl], a
 	call ClearScreen
-	callab Func_372d6
-	ld a, [wcf0b]
+	callab DisplayLinkBattleVersusTextBox
+	ld a, [wBattleResult]
 	cp $1
 	ld de, YouWinText
-	jr c, .asm_137de
+	jr c, .placeWinOrLoseString
 	ld de, YouLoseText
-	jr z, .asm_137de
+	jr z, .placeWinOrLoseString
 	ld de, DrawText
-.asm_137de
+.placeWinOrLoseString
 	hlCoord 6, 8
 	call PlaceString
 	ld c, $c8
 	call DelayFrames
-	jr .asm_1380a
-.asm_137eb
-	ld a, [wcf0b]
+	jr .evolution
+.notLinkBattle
+	ld a, [wBattleResult]
 	and a
-	jr nz, .asm_13813
-	ld hl, wcce5
+	jr nz, .resetVariables
+	ld hl, wTotalPayDayMoney
 	ld a, [hli]
 	or [hl]
 	inc hl
 	or [hl]
-	jr z, .asm_1380a
-	ld de, wPlayerMoney + 2 ; wd349
+	jr z, .evolution ; if pay day money is 0, jump
+	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef AddBCDPredef
 	ld hl, PickUpPayDayMoneyText
 	call PrintText
-.asm_1380a
+.evolution
 	xor a
 	ld [wccd4], a
-	predef Func_3ad1c
-.asm_13813
+	predef EvolutionAfterBattle
+.resetVariables
 	xor a
 	ld [wd083], a
 	ld [wc02a], a
-	ld [W_ISINBATTLE], a ; W_ISINBATTLE
-	ld [W_BATTLETYPE], a ; wd05a
-	ld [W_MOVEMISSED], a ; W_MOVEMISSED
-	ld [W_CUROPPONENT], a ; wd059
+	ld [W_ISINBATTLE], a
+	ld [W_BATTLETYPE], a
+	ld [W_MOVEMISSED], a
+	ld [W_CUROPPONENT], a
 	ld [wd11f], a
-	ld [wd120], a
-	ld [wd078], a
+	ld [wNumRunAttempts], a
+	ld [wEscapedFromBattle], a
 	ld hl, wcc2b
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld [wListScrollOffset], a ; wcc36
-	ld hl, wd060
+	ld [wListScrollOffset], a
+	ld hl, wPlayerStatsToDouble
 	ld b, $18
-.asm_1383e
+.loop
 	ld [hli], a
 	dec b
-	jr nz, .asm_1383e
+	jr nz, .loop
 	ld hl, wd72c
 	set 0, [hl]
 	call WaitForSoundToFinish
 	call GBPalWhiteOut
 	ld a, $ff
-	ld [wd42f], a
+	ld [wDestinationWarpID], a
 	ret
 
 YouWinText: ; 13853 (4:7853)
@@ -86,95 +87,106 @@ PickUpPayDayMoneyText: ; 1386b (4:786b)
 	TX_FAR _PickUpPayDayMoneyText
 	db "@"
 
-Func_13870: ; 13870 (4:7870)
-	ld a, [wcc57]
+; try to initiate a wild pokemon encounter
+; returns success in Z
+TryDoWildEncounter: ; 13870 (4:7870)
+	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, [wd736]
 	and a
 	ret nz
-	callab Func_c49d
-	jr nc, .asm_13888
-.asm_13884
+	callab IsPlayerStandingOnDoorTileOrWarpTile
+	jr nc, .notStandingOnDoorOrWarpTile
+.CantEncounter
 	ld a, $1
 	and a
 	ret
-.asm_13888
-	callab Func_128d8
-	jr z, .asm_13884
-	ld a, [wd0db]
+.notStandingOnDoorOrWarpTile
+	callab IsPlayerJustOutsideMap
+	jr z, .CantEncounter
+	ld a, [wRepelRemainingSteps]
 	and a
 	jr z, .asm_1389e
 	dec a
-	jr z, .asm_13905
-	ld [wd0db], a
+	jr z, .lastRepelStep
+	ld [wRepelRemainingSteps], a
 .asm_1389e
+; determine if wild pokémon can appear in the half-block we’re standing in	
+; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
 	hlCoord 9, 9
 	ld c, [hl]
 	ld a, [W_GRASSTILE]
 	cp c
-	ld a, [W_GRASSRATE] ; W_GRASSRATE
-	jr z, .asm_138c4
-	ld a, $14
+	ld a, [W_GRASSRATE]
+	jr z, .CanEncounter
+	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
-	ld a, [W_WATERRATE] ; wEnemyMon1Species
-	jr z, .asm_138c4
-	ld a, [W_CURMAP] ; W_CURMAP
-	cp REDS_HOUSE_1F
-	jr c, .asm_13912
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld a, [W_WATERRATE]
+	jr z, .CanEncounter
+; even if not in grass/water, standing anywhere we can encounter pokémon
+; so long as the map is “indoor” and has wild pokémon defined.
+; …as long as it’s not Viridian Forest or Safari Zone.
+	ld a, [W_CURMAP]
+	cp REDS_HOUSE_1F ; is this an indoor map?
+	jr c, .CantEncounter2
+	ld a, [W_CURMAPTILESET]
 	cp FOREST ; Viridian Forest/Safari Zone
-	jr z, .asm_13912
-	ld a, [W_GRASSRATE] ; W_GRASSRATE
-.asm_138c4
+	jr z, .CantEncounter2
+	ld a, [W_GRASSRATE]
+.CanEncounter
+; compare encounter chance with a random number to determine if there will be an encounter
 	ld b, a
 	ld a, [hRandomAdd]
 	cp b
-	jr nc, .asm_13912
+	jr nc, .CantEncounter2
 	ld a, [hRandomSub]
 	ld b, a
-	ld hl, WildMonEncounterSlotChances ; $7918
-.asm_138d0
+	ld hl, WildMonEncounterSlotChances
+.determineEncounterSlot
 	ld a, [hli]
 	cp b
-	jr nc, .asm_138d7
+	jr nc, .gotEncounterSlot
 	inc hl
-	jr .asm_138d0
-.asm_138d7
+	jr .determineEncounterSlot
+.gotEncounterSlot
+; determine which wild pokémon (grass or water) can appear in the half-block we’re standing in
 	ld c, [hl]
-	ld hl, W_GRASSMONS ; wd888
-	aCoord 8, 9
-	cp $14
-	jr nz, .asm_138e5
-	ld hl, W_WATERMONS ; wd8a5 (aliases: wEnemyMon1HP)
-.asm_138e5
+	ld hl, W_GRASSMONS
+	aCoord 8, 9	
+	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?	
+	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
+	ld hl, W_WATERMONS
+; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
+; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.	
+.gotWildEncounterType
 	ld b, $0
 	add hl, bc
 	ld a, [hli]
-	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
+	ld [W_CURENEMYLVL], a
 	ld a, [hl]
 	ld [wcf91], a
 	ld [wEnemyMonSpecies2], a
-	ld a, [wd0db]
+	ld a, [wRepelRemainingSteps]
 	and a
-	jr z, .asm_13916
-	ld a, [wPartyMon1Level] ; wPartyMon1Level
+	jr z, .willEncounter
+	ld a, [wPartyMon1Level]
 	ld b, a
-	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
+	ld a, [W_CURENEMYLVL]
 	cp b
-	jr c, .asm_13912
-	jr .asm_13916
-.asm_13905
-	ld [wd0db], a
+	jr c, .CantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
+	jr .willEncounter
+.lastRepelStep
+	ld [wRepelRemainingSteps], a
 	ld a, $d2
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [H_DOWNARROWBLINKCNT2], a
 	call EnableAutoTextBoxDrawing
 	call DisplayTextID
-.asm_13912
+.CantEncounter2
 	ld a, $1
 	and a
 	ret
-.asm_13916
+.willEncounter
 	xor a
 	ret
 
@@ -195,16 +207,16 @@ WildMonEncounterSlotChances: ; 13918 (4:7918)
 	db $FF, $12 ;  3/256 =  1.2% chance of slot 9
 
 RecoilEffect_: ; 1392c (4:792c)
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
-	ld a, [W_PLAYERMOVENUM] ; wcfd2
-	ld hl, wBattleMonMaxHP ; wd023
+	ld a, [W_PLAYERMOVENUM]
+	ld hl, wBattleMonMaxHP
 	jr z, .asm_1393d
-	ld a, [W_ENEMYMOVENUM] ; W_ENEMYMOVENUM
-	ld hl, wEnemyMonMaxHP ; wEnemyMonMaxHP
+	ld a, [W_ENEMYMOVENUM]
+	ld hl, wEnemyMonMaxHP
 .asm_1393d
 	ld d, a
-	ld a, [W_DAMAGE] ; W_DAMAGE
+	ld a, [W_DAMAGE]
 	ld b, a
 	ld a, [W_DAMAGE + 1]
 	ld c, a
@@ -248,16 +260,16 @@ RecoilEffect_: ; 1392c (4:792c)
 	ld [hl], a
 .asm_13982
 	hlCoord 10, 9
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
 	ld a, $1
 	jr z, .asm_13990
 	hlCoord 2, 2
 	xor a
 .asm_13990
-	ld [wListMenuID], a ; wListMenuID
+	ld [wHPBarType], a
 	predef UpdateHPBar2
-	ld hl, HitWithRecoilText ; $799e
+	ld hl, HitWithRecoilText
 	jp PrintText
 HitWithRecoilText: ; 1399e (4:799e)
 	TX_FAR _HitWithRecoilText
@@ -276,15 +288,15 @@ ConversionEffect_: ; 139a3 (4:79a3)
 	pop de
 	ld a, [W_PLAYERBATTSTATUS1]
 .asm_139b8
-	bit 6, a ; is mon immune to typical attacks (dig/fly)
+	bit Invulnerable, a ; is mon immune to typical attacks (dig/fly)
 	jr nz, PrintButItFailedText
 	ld a, [hli]
 	ld [de], a
 	inc de
 	ld a, [hl]
 	ld [de], a
-	ld hl, Func_3fba8
-	call Func_139d5
+	ld hl, PlayCurrentMoveAnimation
+	call CallBankF
 	ld hl, ConvertedTypeText
 	jp PrintText
 
@@ -294,22 +306,22 @@ ConvertedTypeText: ; 139cd (4:79cd)
 
 PrintButItFailedText: ; 139d2 (4:79d2)
 	ld hl, PrintButItFailedText_
-Func_139d5: ; 139d5 (4:79d5)
+CallBankF: ; 139d5 (4:79d5)
 	ld b, BANK(PrintButItFailedText_)
 	jp Bankswitch
 
 HazeEffect_: ; 139da (4:79da)
 	ld a, $7
 	ld hl, wPlayerMonAttackMod
-	call Func_13a43
+	call ResetStatMods
 	ld hl, wEnemyMonAttackMod
-	call Func_13a43
-	ld hl, wcd12
+	call ResetStatMods
+	ld hl, wPlayerMonUnmodifiedAttack
 	ld de, wBattleMonAttack
-	call Func_13a4a
-	ld hl, wcd26
+	call ResetStats
+	ld hl, wEnemyMonUnmodifiedAttack
 	ld de, wEnemyMonAttack
-	call Func_13a4a
+	call ResetStats
 	ld hl, wEnemyMonStatus
 	ld de, wEnemySelectedMove
 	ld a, [H_WHOSETURN]
@@ -334,26 +346,26 @@ HazeEffect_: ; 139da (4:79da)
 	ld [hli], a
 	ld [hl], a
 	ld hl, W_PLAYERBATTSTATUS1
-	call Func_13a37
+	call CureStatuses
 	ld hl, W_ENEMYBATTSTATUS1
-	call Func_13a37
-	ld hl, Func_3fba8
-	call Func_139d5
+	call CureStatuses
+	ld hl, PlayCurrentMoveAnimation
+	call CallBankF
 	ld hl, StatusChangesEliminatedText
 	jp PrintText
 
-Func_13a37: ; 13a37 (4:7a37)
-	res 7, [hl]
-	inc hl
+CureStatuses: ; 13a37 (4:7a37)
+	res Confused, [hl]
+	inc hl ; BATTSTATUS2
 	ld a, [hl]
-	and $78
-	ld [hli], a
+	and (1 << UsingRage) | (1 << NeedsToRecharge) | (1 << HasSubstituteUp) | (1 << 3) ; clear all but these from BATTSTATUS2
+	ld [hli], a ; BATTSTATUS3
 	ld a, [hl]
-	and $f8
+	and %11110000 | (1 << Transformed) ; clear Bad Poison, Reflect and Light Screen statuses
 	ld [hl], a
 	ret
 
-Func_13a43: ; 13a43 (4:7a43)
+ResetStatMods: ; 13a43 (4:7a43)
 	ld b, $8
 .loop
 	ld [hli], a
@@ -361,7 +373,7 @@ Func_13a43: ; 13a43 (4:7a43)
 	jr nz, .loop
 	ret
 
-Func_13a4a: ; 13a4a (4:7a4a)
+ResetStats: ; 13a4a (4:7a4a)
 	ld b, $8
 .loop
 	ld a, [hli]
@@ -376,12 +388,12 @@ StatusChangesEliminatedText: ; 13a53 (4:7a53)
 	db "@"
 
 GetTrainerName_: ; 13a58 (4:7a58)
-	ld hl, W_GRASSRATE ; W_GRASSRATE
-	ld a, [W_ISLINKBATTLE] ; W_ISLINKBATTLE
+	ld hl, W_GRASSRATE
+	ld a, [wLinkState]
 	and a
 	jr nz, .rival
-	ld hl, W_RIVALNAME ; wd34a
-	ld a, [W_TRAINERCLASS] ; wd031
+	ld hl, W_RIVALNAME
+	ld a, [W_TRAINERCLASS]
 	cp SONY1
 	jr z, .rival
 	cp SONY2
@@ -390,8 +402,8 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	jr z, .rival
 	ld [wd0b5], a
 	ld a, TRAINER_NAME
-	ld [W_LISTTYPE], a
-	ld a, $e
+	ld [wNameListType], a
+	ld a, BANK(TrainerNames)
 	ld [wPredefBank], a
 	call GetName
 	ld hl, wcd6d

@@ -14,8 +14,8 @@ MainMenu: ; 5af2 (1:5af2)
 .next0
 	ld c,20
 	call DelayFrames
-	xor a
-	ld [W_ISLINKBATTLE],a
+	xor a ; LINK_STATE_NONE
+	ld [wLinkState],a
 	ld hl,wcc2b
 	ld [hli],a
 	ld [hli],a
@@ -111,16 +111,16 @@ MainMenu: ; 5af2 (1:5af2)
 	call DelayFrames
 	ld a,[wd5a2]
 	and a
-	jp z,Func_5d5f
+	jp z,SpecialEnterMap
 	ld a,[W_CURMAP] ; map ID
 	cp a,HALL_OF_FAME
-	jp nz,Func_5d5f
+	jp nz,SpecialEnterMap
 	xor a
-	ld [wd71a],a
+	ld [wDestinationMap],a
 	ld hl,wd732
-	set 2,[hl]
-	call Func_62ce
-	jp Func_5d5f
+	set 2,[hl] ; fly warp or dungeon warp
+	call SpecialWarpIn
+	jp SpecialEnterMap
 Func_5bff: ; 5bff (1:5bff)
 	ld a,1
 	ld [wd358],a
@@ -133,7 +133,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld [wd358], a
 	ld hl, wd72e
 	set 6, [hl]
-	ld hl, TextTerminator_6b20 ; $6b20
+	ld hl, TextTerminator_6b20
 	call PrintText
 	call SaveScreenTilesToBuffer1
 	ld hl, WhereWouldYouLikeText
@@ -149,7 +149,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	xor a
 	ld [wcd37], a
 	ld [wd72d], a
-	ld hl, wTopMenuItemY ; wTopMenuItemY
+	ld hl, wTopMenuItemY
 	ld a, $7
 	ld [hli], a
 	ld a, $6
@@ -163,97 +163,101 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld [hli], a
 	xor a
 	ld [hl], a
-.asm_5c52
+.waitForInputLoop
 	call HandleMenuInput
-	and $3
+	and A_BUTTON | B_BUTTON
 	add a
 	add a
 	ld b, a
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wCurrentMenuItem]
 	add b
 	add $d0
-	ld [wcc42], a
-	ld [wcc43], a
-.asm_5c66
-	call Func_2247
-	ld a, [wcc3d]
+	ld [wLinkMenuSelectionSendBuffer], a
+	ld [wLinkMenuSelectionSendBuffer + 1], a
+.exchangeMenuSelectionLoop
+	call Serial_ExchangeLinkMenuSelection
+	ld a, [wLinkMenuSelectionReceiveBuffer]
 	ld b, a
 	and $f0
 	cp $d0
 	jr z, .asm_5c7d
-	ld a, [wcc3e]
+	ld a, [wLinkMenuSelectionReceiveBuffer + 1]
 	ld b, a
 	and $f0
 	cp $d0
-	jr nz, .asm_5c66
+	jr nz, .exchangeMenuSelectionLoop
 .asm_5c7d
 	ld a, b
-	and $c
-	jr nz, .asm_5c8b
-	ld a, [wcc42]
-	and $c
-	jr z, .asm_5c52
-	jr .asm_5ca1
-.asm_5c8b
-	ld a, [wcc42]
-	and $c
-	jr z, .asm_5c98
-	ld a, [$ffaa]
-	cp $2
-	jr z, .asm_5ca1
-.asm_5c98
+	and $c ; did the enemy press A or B?
+	jr nz, .enemyPressedAOrB
+; the enemy didn't press A or B
+	ld a, [wLinkMenuSelectionSendBuffer]
+	and $c ; did the player press A or B?
+	jr z, .waitForInputLoop ; if neither the player nor the enemy pressed A or B, try again
+	jr .doneChoosingMenuSelection ; if the player pressed A or B but the enemy didn't, use the player's selection
+.enemyPressedAOrB
+	ld a, [wLinkMenuSelectionSendBuffer]
+	and $c ; did the player press A or B?
+	jr z, .useEnemyMenuSelection ; if the enemy pressed A or B but the player didn't, use the enemy's selection
+; the enemy and the player both pressed A or B
+; The gameboy that is clocking the connection wins.
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
+	jr z, .doneChoosingMenuSelection
+.useEnemyMenuSelection
 	ld a, b
-	ld [wcc42], a
+	ld [wLinkMenuSelectionSendBuffer], a
 	and $3
 	ld [wCurrentMenuItem], a ; wCurrentMenuItem
-.asm_5ca1
-	ld a, [$ffaa]
-	cp $2
-	jr nz, .asm_5cb1
+.doneChoosingMenuSelection
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
+	jr nz, .skipStartingTransfer
 	call DelayFrame
 	call DelayFrame
-	ld a, $81
-	ld [$ff02], a
-.asm_5cb1
+	ld a, START_TRANSFER_INTERNAL_CLOCK
+	ld [rSC], a
+.skipStartingTransfer
 	ld b, $7f
 	ld c, $7f
 	ld d, $ec
-	ld a, [wcc42]
-	and $8
-	jr nz, .asm_5ccc
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wLinkMenuSelectionSendBuffer]
+	and (B_BUTTON << 2) ; was B button pressed?
+	jr nz, .updateCursorPosition
+; A button was pressed
+	ld a, [wCurrentMenuItem]
 	cp $2
-	jr z, .asm_5ccc
+	jr z, .updateCursorPosition
 	ld c, d
 	ld d, b
 	dec a
-	jr z, .asm_5ccc
+	jr z, .updateCursorPosition
 	ld b, c
 	ld c, d
-.asm_5ccc
+.updateCursorPosition
 	ld a, b
 	Coorda 6, 7
 	ld a, c
 	Coorda 6, 9
 	ld a, d
 	Coorda 6, 11
-	ld c, $28
+	ld c, 40
 	call DelayFrames
 	call LoadScreenTilesFromBuffer1
-	ld a, [wcc42]
-	and $8
-	jr nz, .asm_5d2d
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld a, [wLinkMenuSelectionSendBuffer]
+	and (B_BUTTON << 2) ; was B button pressed?
+	jr nz, .choseCancel ; cancel if B pressed
+	ld a, [wCurrentMenuItem]
 	cp $2
-	jr z, .asm_5d2d
+	jr z, .choseCancel
 	xor a
-	ld [wd700], a
-	ld a, [wCurrentMenuItem] ; wCurrentMenuItem
+	ld [wWalkBikeSurfState], a ; start walking
+	ld a, [wCurrentMenuItem]
 	and a
 	ld a, TRADE_CENTER
-	jr nz, .asm_5cfc
+	jr nz, .next
 	ld a, BATTLE_CENTER
-.asm_5cfc
+.next
 	ld [wd72d], a
 	ld hl, PleaseWaitText
 	call PrintText
@@ -261,23 +265,23 @@ LinkMenu: ; 5c0a (1:5c0a)
 	call DelayFrames
 	ld hl, wd732
 	res 1, [hl]
-	ld a, [W_ANIMATIONID] ; W_ANIMATIONID
-	ld [wd71a], a
-	call Func_62ce
+	ld a, [W_ANIMATIONID]
+	ld [wDestinationMap], a
+	call SpecialWarpIn
 	ld c, $14
 	call DelayFrames
 	xor a
-	ld [wMenuJoypadPollCount], a ; wMenuJoypadPollCount
-	ld [wcc42], a
-	inc a
-	ld [W_ISLINKBATTLE], a ; W_ISLINKBATTLE
+	ld [wMenuJoypadPollCount], a
+	ld [wSerialExchangeNybbleSendData], a
+	inc a ; LINK_STATE_IN_CABLE_CLUB
+	ld [wLinkState], a
 	ld [wcc47], a
-	jr Func_5d5f
-.asm_5d2d
+	jr SpecialEnterMap
+.choseCancel
 	xor a
-	ld [wMenuJoypadPollCount], a ; wMenuJoypadPollCount
+	ld [wMenuJoypadPollCount], a
 	call Delay3
-	call Func_72d7
+	call CloseLinkConnection
 	ld hl, LinkCanceledText
 	call PrintText
 	ld hl, wd72e
@@ -303,16 +307,17 @@ Func_5d52: ; 5d52 (1:5d52)
 	ld c, $14
 	call DelayFrames
 
-Func_5d5f: ; 5d5f (1:5d5f)
+; enter map after using a special warp or loading the game from the main menu
+SpecialEnterMap: ; 5d5f (1:5d5f)
 	xor a
 	ld [hJoyPressed], a
 	ld [hJoyHeld], a
-	ld [$ffb5], a
+	ld [hJoy5], a
 	ld [wd72d], a
 	ld hl, wd732
-	set 0, [hl]
+	set 0, [hl] ; count play time
 	call ResetPlayerSpriteData
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 	ld a, [wcc47]
 	and a
@@ -461,7 +466,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	call SetOptionsFromCursorPositions
 .getJoypadStateLoop
 	call JoypadLowSensitivity
-	ld a,[$ffb5]
+	ld a,[hJoy5]
 	ld b,a
 	and a,%11111011 ; any key besides select pressed?
 	jr z,.getJoypadStateLoop

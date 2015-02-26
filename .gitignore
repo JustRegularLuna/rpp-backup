@@ -12,11 +12,7 @@
 *.gb
 
 # rgbds extras
-*.map
 *.sym
-
-# generated
-*.tx
 
 # converted image data
 *.2bpp

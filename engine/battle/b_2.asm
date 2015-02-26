@@ -88,40 +88,40 @@ PayDayEffect_ ; 2feb8 (b:7eb8)
 	xor a
 	ld hl, wcd6d
 	ld [hli], a
-	ld a, [$fff3]
+	ld a, [H_WHOSETURN]
 	and a
 	ld a, [wBattleMonLevel]
-	jr z, .asm_2fec8 ; 0x2fec3 $3
+	jr z, .asm_2fec8
 	ld a, [wEnemyMonLevel]
 .asm_2fec8
 	add a
-	ld [$ff98], a
+	ld [H_DIVIDEND + 3], a
 	xor a
-	ld [$ff95], a
-	ld [$ff96], a
-	ld [$ff97], a
+	ld [H_DIVIDEND], a
+	ld [H_DIVIDEND + 1], a
+	ld [H_DIVIDEND + 2], a
 	ld a, $64
-	ld [$ff99], a
+	ld [H_DIVISOR], a
 	ld b, $4
 	call Divide
-	ld a, [$ff98]
+	ld a, [H_QUOTIENT + 3]
 	ld [hli], a
-	ld a, [$ff99]
-	ld [$ff98], a
+	ld a, [H_REMAINDER]
+	ld [H_DIVIDEND + 3], a
 	ld a, $a
-	ld [$ff99], a
+	ld [H_DIVISOR], a
 	ld b, $4
 	call Divide
-	ld a, [$ff98]
+	ld a, [H_QUOTIENT + 3]
 	swap a
 	ld b, a
-	ld a, [$ff99]
+	ld a, [H_REMAINDER]
 	add b
 	ld [hl], a
-	ld de, wcce7
+	ld de, wTotalPayDayMoney + 2
 	ld c, $3
 	predef AddBCDPredef
-	ld hl, CoinsScatteredText ; $7f04
+	ld hl, CoinsScatteredText
 	jp PrintText
 
 CoinsScatteredText: ; 2ff04 (b:7f04)

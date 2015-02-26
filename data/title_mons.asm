@@ -2,7 +2,7 @@ TitleMons: ; 4588 (1:4588)
 ; mons on the title screen are randomly chosen from here
 ; this file is now completely unused in Red++
 ; because all Pokémon can appear on the title screen
-IF _RED
+IF DEF(_RED)
 	db CHARMANDER
 	db SQUIRTLE
 	db BULBASAUR
@@ -20,7 +20,7 @@ IF _RED
 	db PONYTA
 	db MAGIKARP
 ENDC
-IF _GREEN
+IF DEF(_GREEN)
 	db BULBASAUR
 	db CHARMANDER
 	db SQUIRTLE
@@ -38,7 +38,7 @@ IF _GREEN
 	db PONYTA
 	db MAGIKARP
 ENDC
-IF _BLUE
+IF DEF(_BLUE)
 	db SQUIRTLE
 	db CHARMANDER
 	db BULBASAUR

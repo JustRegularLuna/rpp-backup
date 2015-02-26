@@ -39,7 +39,7 @@ BillsHouseScript2: ; 1e7a6 (7:67a6)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld a, $61
+	ld a, HS_BILL_POKEMON
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, wd7f2
@@ -57,7 +57,7 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $2
-	ld [wcf13], a
+	ld [wSpriteIndex], a
 	ld a, $c
 	ld [$ffeb], a
 	ld a, $40
@@ -66,8 +66,8 @@ BillsHouseScript3: ; 1e7c5 (7:67c5)
 	ld [$ffed], a
 	ld a, $5
 	ld [$ffee], a
-	call Func_32f9
-	ld a, $62
+	call SetSpritePosition1
+	ld a, HS_BILL_1
 	ld [wcc4d], a
 	predef ShowObject
 	ld c, $8
@@ -161,10 +161,10 @@ BillsHouseText2: ; 1e874 (7:6874)
 	call PrintText
 	ld hl, wd7f2
 	set 4, [hl]
-	ld a, $7
+	ld a, HS_CERULEAN_GUARD_1
 	ld [wcc4d], a
 	predef ShowObject
-	ld a, $9
+	ld a, HS_CERULEAN_GUARD_2
 	ld [wcc4d], a
 	predef HideObject
 .asm_5491f ; 0x1e8a9

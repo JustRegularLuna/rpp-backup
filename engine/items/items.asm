@@ -117,10 +117,10 @@ BallAnyway:
 	dec a
 	jr z,.UseBall
 	ld a,[wPartyCount]	;is Party full?
-	cp a,6
+	cp a,PARTY_LENGTH
 	jr nz,.UseBall
 	ld a,[W_NUMINBOX]	;is Box full?
-	cp a,20
+	cp a,MONS_PER_BOX
 	jp z,BoxFullCannotThrowBall
 .UseBall	;$56a7
 ;ok, you can use a ball
@@ -249,7 +249,7 @@ BallAnyway:
 	ld [H_QUOTIENT + 3],a
 .next9	;$5776
 	pop bc
-	ld a,[wd007]	;enemy: Catch Rate
+	ld a,[wEnemyMonCatchRate]	;enemy: Catch Rate
 	cp b
 	jr c,.next10
 	ld a,[H_QUOTIENT + 2]
@@ -268,7 +268,7 @@ BallAnyway:
 	xor a
 	ld [H_MULTIPLICAND],a
 	ld [H_MULTIPLICAND + 1],a
-	ld a,[wd007]	;enemy: Catch Rate
+	ld a,[wEnemyMonCatchRate]	;enemy: Catch Rate
 	ld [H_MULTIPLICAND + 2],a
 	ld a,100
 	ld [H_MULTIPLIER],a
@@ -369,13 +369,13 @@ BallAnyway:
 	push af		;...and status ailments
 	push hl
 	ld hl,W_ENEMYBATTSTATUS3
-	bit 3,[hl]
+	bit Transformed,[hl]
 	jr z,.next15
 	ld a,$4c
 	ld [wEnemyMonSpecies2],a
 	jr .next16
 .next15	;$5871
-	set 3,[hl]
+	set Transformed,[hl]
 	ld hl,wcceb
 	ld a,[wEnemyMonDVs]
 	ld [hli],a
@@ -388,7 +388,7 @@ BallAnyway:
 	ld [wcf91],a
 	ld a,[wEnemyMonLevel]
 	ld [W_CURENEMYLVL],a
-	callab Func_3eb01
+	callab LoadEnemyMonData
 	pop af
 	ld [wcf91],a
 	pop hl
@@ -433,7 +433,7 @@ BallAnyway:
 	predef ShowPokedexData
 .checkParty	;$58f4
 	ld a,[wPartyCount]
-	cp a,6		;is party full?
+	cp a,PARTY_LENGTH		;is party full?
 	jr z,.sendToBox
 	xor a
 	ld [wcc49],a
@@ -442,7 +442,7 @@ BallAnyway:
 	jr .End
 .sendToBox	;$5907
 	call ClearSprites
-	call Func_e7a4
+	call SendNewMonToBox
 	ld hl,ItemUseBallText07
 	ld a,[wd7f1]
 	bit 0,a		;already met Bill?
@@ -519,8 +519,8 @@ ItemUseBicycle: ; d977 (3:5977)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld a,[wd700]
-	ld [wd11a],a
+	ld a,[wWalkBikeSurfState]
+	ld [wWalkBikeSurfStateCopy],a
 	cp a,2 ; is the player surfing?
 	jp z,ItemUseNotTime
 	dec a ; is player already bicycling?
@@ -528,8 +528,8 @@ ItemUseBicycle: ; d977 (3:5977)
 .getOffBike
 	call ItemUseReloadOverworldData
 	xor a
-	ld [wd700],a ; change player state to walking
-	call Func_2307 ; play walking music
+	ld [wWalkBikeSurfState],a ; change player state to walking
+	call PlayDefaultMusic ; play walking music
 	ld hl,GotOffBicycleText
 	jr .printText
 .tryToGetOnBike
@@ -539,16 +539,16 @@ ItemUseBicycle: ; d977 (3:5977)
 	xor a ; no keys pressed
 	ld [hJoyHeld],a ; current joypad state
 	inc a
-	ld [wd700],a ; change player state to bicycling
+	ld [wWalkBikeSurfState],a ; change player state to bicycling
 	ld hl,GotOnBicycleText
-	call Func_2307 ; play bike riding music
+	call PlayDefaultMusic ; play bike riding music
 .printText
 	jp PrintText
 
 ; used for Surf out-of-battle effect
 ItemUseSurfboard: ; d9b4 (3:59b4)
-	ld a,[wd700]
-	ld [wd11a],a
+	ld a,[wWalkBikeSurfState]
+	ld [wWalkBikeSurfStateCopy],a
 	cp a,2 ; is the player already surfing?
 	jr z,.tryToStopSurfing
 .tryToSurf
@@ -562,8 +562,8 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld hl,wd730
 	set 7,[hl]
 	ld a,2
-	ld [wd700],a ; change player state to surfing
-	call Func_2307 ; play surfing music
+	ld [wWalkBikeSurfState],a ; change player state to surfing
+	call PlayDefaultMusic ; play surfing music
 	ld hl,SurfingGotOnText
 	jp PrintText
 .tryToStopSurfing
@@ -582,7 +582,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a ; hl now points to passable tiles
-	ld a,[wcfc6] ; tile in front of the player
+	ld a,[wTileInFrontOfPlayer] ; tile in front of the player
 	ld b,a
 .passableTileLoop
 	ld a,[hli]
@@ -598,31 +598,31 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	ld hl,wd730
 	set 7,[hl]
 	xor a
-	ld [wd700],a ; change player state to walking
+	ld [wWalkBikeSurfState],a ; change player state to walking
 	dec a
 	ld [wJoyIgnore],a
-	call Func_2307 ; play walking music
+	call PlayDefaultMusic ; play walking music
 	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward
 .makePlayerMoveForward
 	ld a,[wd52a] ; direction the player is going
 	bit 3,a
-	ld b,%01000000 ; Up key
+	ld b,D_UP
 	jr nz,.storeSimulatedButtonPress
 	bit 2,a
-	ld b,%10000000 ; Down key
+	ld b,D_DOWN
 	jr nz,.storeSimulatedButtonPress
 	bit 1,a
-	ld b,%00100000 ; Left key
+	ld b,D_LEFT
 	jr nz,.storeSimulatedButtonPress
-	ld b,%00010000 ; Right key
+	ld b,D_RIGHT
 .storeSimulatedButtonPress
 	ld a,b
-	ld [wccd3],a ; base address of simulated button presses
+	ld [wSimulatedJoypadStatesEnd],a
 	xor a
-	ld [wcd39],a
+	ld [wWastedByteCD39],a
 	inc a
-	ld [wcd38],a ; index of current simulated button press
+	ld [wSimulatedJoypadStatesIndex],a
 	ret
 
 SurfingGotOnText: ; da4c (3:5a4c)
@@ -648,7 +648,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,$05 ; evolution stone party menu
 	ld [wd07d],a
 	ld a,$ff
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
 	pop bc
 	jr c,.canceledItemUse
@@ -659,7 +659,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
 	call WaitForSoundToFinish ; wait for sound to end
-	callab Func_3ad0e ; try to evolve pokemon
+	callab TryEvolvingMon ; try to evolve pokemon
 	ld a,[wd121]
 	and a
 	jr z,.noEffect
@@ -693,7 +693,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,$01
 	ld [wd07d],a ; item use party menu
 	ld a,$ff
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld a,[wd152]
 	and a ; using Softboiled?
 	jr z,.notUsingSoftboiled
@@ -782,14 +782,14 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wBattleMonStatus],a ; remove the status ailment in the in-battle pokemon data
 	push hl
 	ld hl,W_PLAYERBATTSTATUS3
-	res 0,[hl] ; heal Toxic status
+	res BadlyPoisoned,[hl] ; heal Toxic status
 	pop hl
 	ld bc,30
 	add hl,bc ; hl now points to party stats
 	ld de,wBattleMonMaxHP
 	ld bc,10
 	call CopyData ; copy party stats to in-battle stat data
-	predef Func_3ed02
+	predef DoubleOrHalveSelectedStats
 	jp .doneHealing
 .healHP
 	inc hl ; hl = address of current HP
@@ -817,7 +817,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push bc
 	ld a,[wcf06]
 	ld c,a
-	ld hl,wccf5
+	ld hl,wPartyFoughtCurrentEnemyFlags
 	ld b,$02
 	predef FlagActionPredef
 	ld a,c
@@ -825,7 +825,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,.next
 	ld a,[wcf06]
 	ld c,a
-	ld hl,wPartyAliveFlags
+	ld hl,wPartyGainExpFlags
 	ld b,$01
 	predef FlagActionPredef
 .next
@@ -931,15 +931,15 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a,(SFX_02_3d - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent ; play sound
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	set 0,a
-	ld [$fff6],a
+	ld [hFlags_0xFFF6],a
 	ld a,$02
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2 ; animate HP bar decrease of pokemon that used Softboiled
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	res 0,a
-	ld [$fff6],a
+	ld [hFlags_0xFFF6],a
 	pop af
 	ld b,a ; store heal amount (1/5 of max HP)
 	ld hl,wHPBarOldHP + 1
@@ -1081,15 +1081,15 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,.playStatusAilmentCuringSound
 	ld a,(SFX_02_3d - SFX_Headers_02) / 3 ; HP healing sound
 	call PlaySoundWaitForCurrent ; play sound
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	set 0,a
-	ld [$fff6],a
+	ld [hFlags_0xFFF6],a
 	ld a,$02
-	ld [wListMenuID],a
+	ld [wHPBarType],a
 	predef UpdateHPBar2 ; animate the HP bar lengthening
-	ld a,[$fff6]
+	ld a,[hFlags_0xFFF6]
 	res 0,a
-	ld [$fff6],a
+	ld [hFlags_0xFFF6],a
 	ld a,$f7 ; revived message
 	ld [wd07d],a
 	ld a,[wcf91]
@@ -1102,19 +1102,19 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr .showHealingItemMessage
 .playStatusAilmentCuringSound
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3 ; status ailment curing sound
-	call PlaySoundWaitForCurrent ; play sound
+	call PlaySoundWaitForCurrent
 .showHealingItemMessage
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
 	dec a
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	call RedrawPartyMenu ; redraws the party menu and displays the message
 	ld a,1
 	ld [H_AUTOBGTRANSFERENABLED],a
 	ld c,50
 	call DelayFrames
-	call WaitForTextScrollButtonPress ; wait for a button press
+	call WaitForTextScrollButtonPress
 	jr .done
 .canceledItemUse
 	xor a
@@ -1130,7 +1130,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[W_ISINBATTLE]
 	and a
 	ret nz
-	jp ReloadMapData ; restore saved screen
+	jp ReloadMapData
 .useVitamin
 	push hl
 	ld a,[hl]
@@ -1285,12 +1285,12 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call WaitForTextScrollButtonPress ; wait for button press
 	xor a
 	ld [wcc49],a
-	predef Func_3af5b ; learn level up move, if any
+	predef LearnMoveFromLevelUp ; learn level up move, if any
 	xor a
 	ld [wccd4],a
-	callab Func_3ad0e ; evolve pokemon, if appropriate
+	callab TryEvolvingMon ; evolve pokemon, if appropriate
 	ld a,$01
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	pop af
 	ld [wcf91],a
 	pop af
@@ -1315,17 +1315,17 @@ VitaminText: ; df2e (3:5f2e)
 ItemUseBait: ; df52 (3:5f52)
 	ld hl,ThrewBaitText
 	call PrintText
-	ld hl,wd007 ; catch rate
+	ld hl,wEnemyMonCatchRate ; catch rate
 	srl [hl] ; halve catch rate
 	ld a,BAIT_ANIM
-	ld hl,wcce9 ; bait factor
-	ld de,wcce8 ; escape factor
+	ld hl,wSafariBaitFactor ; bait factor
+	ld de,wSafariEscapeFactor ; escape factor
 	jr BaitRockCommon
 
 ItemUseRock: ; df67 (3:5f67)
 	ld hl,ThrewRockText
 	call PrintText
-	ld hl,wd007 ; catch rate
+	ld hl,wEnemyMonCatchRate ; catch rate
 	ld a,[hl]
 	add a ; double catch rate
 	jr nc,.noCarry
@@ -1333,8 +1333,8 @@ ItemUseRock: ; df67 (3:5f67)
 .noCarry
 	ld [hl],a
 	ld a,ROCK_ANIM
-	ld hl,wcce8 ; escape factor
-	ld de,wcce9 ; bait factor
+	ld hl,wSafariEscapeFactor ; escape factor
+	ld de,wSafariBaitFactor ; bait factor
 
 BaitRockCommon: ; df7f (3:5f7f)
 	ld [W_ANIMATIONID],a
@@ -1395,7 +1395,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	ld [W_NUMSAFARIBALLS],a
 	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
 	inc a
-	ld [wd078],a
+	ld [wEscapedFromBattle],a
 	ld [wcd6a],a ; item used
 	ld a,[wd152]
 	and a ; using Dig?
@@ -1419,7 +1419,7 @@ ItemUseRepelCommon: ; e005 (3:6005)
 	and a
 	jp nz,ItemUseNotTime
 	ld a,b
-	ld [wd0db],a
+	ld [wRepelRemainingSteps],a
 	jp PrintItemUseTextAndRemoveItem
 
 ; handles X Accuracy item
@@ -1428,7 +1428,7 @@ ItemUseXAccuracy: ; e013 (3:6013)
 	and a
 	jp z,ItemUseNotTime
 	ld hl,W_PLAYERBATTSTATUS2
-	set 0,[hl] ; X Accuracy bit
+	set UsingXAccuracy,[hl] ; X Accuracy bit
 	jp PrintItemUseTextAndRemoveItem
 
 ; This function is bugged and never works. It always jumps to ItemUseNotTime.
@@ -1436,8 +1436,8 @@ ItemUseXAccuracy: ; e013 (3:6013)
 ItemUseCardKey: ; e022 (3:6022)
 	xor a
 	ld [wd71f],a
-	call Func_c586
-	ld a,[Func_c586] ; $4586
+	call GetTileAndCoordsInFrontOfPlayer
+	ld a,[GetTileAndCoordsInFrontOfPlayer] ; $4586
 	cp a,$18
 	jr nz,.next0
 	ld hl,CardKeyTable1
@@ -1529,7 +1529,7 @@ ItemUsePokedoll: ; e0cd (3:60cd)
 	dec a
 	jp nz,ItemUseNotTime
 	ld a,$01
-	ld [wd078],a
+	ld [wEscapedFromBattle],a
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseGuardSpec: ; e0dc (3:60dc)
@@ -1537,7 +1537,7 @@ ItemUseGuardSpec: ; e0dc (3:60dc)
 	and a
 	jp z,ItemUseNotTime
 	ld hl,W_PLAYERBATTSTATUS2
-	set 1,[hl] ; Mist bit
+	set ProtectedByMist,[hl] ; Mist bit
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseSuperRepel: ; e0eb (3:60eb)
@@ -1553,7 +1553,7 @@ ItemUseDireHit: ; e0f5 (3:60f5)
 	and a
 	jp z,ItemUseNotTime
 	ld hl,W_PLAYERBATTSTATUS2
-	set 2,[hl] ; Focus Energy bit
+	set GettingPumped,[hl] ; Focus Energy bit
 	jp PrintItemUseTextAndRemoveItem
 
 ItemUseXStat: ; e104 (3:6104)
@@ -1739,7 +1739,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 	ld a,[wc028]
 	cp a,$b8
 	jr z,.musicWaitLoop
-	call Func_2307 ; start playing normal music again
+	call PlayDefaultMusic ; start playing normal music again
 .done
 	jp TextScriptEnd ; end text
 
@@ -1808,7 +1808,7 @@ RodResponse: ; e28d (3:628d)
 	ld [W_CUROPPONENT], a
 
 .next
-	ld hl, wd700
+	ld hl, wWalkBikeSurfState
 	ld a, [hl] ; store the value in a
 	push af
 	push hl
@@ -1830,7 +1830,7 @@ FishingInit: ; e2b4 (3:62b4)
 .notInBattle
 	call IsNextTileShoreOrWater
 	ret c
-	ld a,[wd700]
+	ld a,[wWalkBikeSurfState]
 	cp a,2 ; Surfing?
 	jr z,.surfing
 	call ItemUseReloadOverworldData
@@ -1889,7 +1889,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld [wWhichTrade],a
 .chooseMon
 	xor a
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld a,$01 ; item use party menu
 	ld [wd07d],a
 	call DisplayPartyMenu
@@ -2096,7 +2096,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld [wd11e],a
 	predef TMToMove ; get move ID from TM/HM ID
 	ld a,[wd11e]
-	ld [wd0e0],a
+	ld [wMoveNum],a
 	call GetMoveName
 	call CopyStringToCF4B ; copy name to wcf4b
 	pop af
@@ -2109,8 +2109,8 @@ ItemUseTMHM: ; e479 (3:6479)
 	call PrintText
 	hlCoord 14, 7
 	ld bc,$080f
-	ld a,$14
-	ld [wd125],a
+	ld a,TWO_OPTION_MENU
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
 	ld a,[wCurrentMenuItem]
 	and a
@@ -2129,7 +2129,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld bc,14
 	call CopyData
 	ld a,$ff
-	ld [wcfcb],a
+	ld [wUpdateSpritesEnabled],a
 	ld a,$03 ; teach TM/HM party menu
 	ld [wd07d],a
 	call DisplayPartyMenu
@@ -2500,8 +2500,8 @@ TossItem_: ; e6f1 (3:66f1)
 	call PrintText
 	hlCoord 14, 7
 	ld bc,$080f
-	ld a,$14
-	ld [wd125],a
+	ld a,TWO_OPTION_MENU
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
 	ld a,[wd12e]
 	cp a,2
@@ -2579,7 +2579,7 @@ IsKeyItem_: ; e764 (3:6764)
 
 INCLUDE "data/key_items.asm"
 
-Func_e7a4: ; e7a4 (3:67a4)
+SendNewMonToBox: ; e7a4 (3:67a4)
 	ld de, W_NUMINBOX ; wda80
 	ld a, [de]
 	inc a
@@ -2756,7 +2756,7 @@ IsNextTileShoreOrWater: ; e8b8 (3:68b8)
 	jr nc, .notShoreOrWater
 	ld a, [W_CURMAPTILESET]
 	cp SHIP_PORT ; Vermilion Dock tileset
-	ld a, [wcfc6] ; tile in front of player
+	ld a, [wTileInFrontOfPlayer] ; tile in front of player
 	jr z, .skipShoreTiles ; if it's the Vermilion Dock tileset
 	cp $48 ; eastern shore tile in Safari Zone
 	jr z, .shoreOrWater
@@ -2830,49 +2830,51 @@ ItemUseReloadOverworldData: ; e9c5 (3:69c5)
 	call LoadCurrentMapView
 	jp UpdateSprites
 
-Func_e9cb: ; e9cb (3:69cb)
-	ld hl, WildDataPointers ; $4eeb
-	ld de, wHPBarMaxHP
+; creates a list at wBuffer of maps where the mon in [wd11e] can be found.
+; this is used by the pokedex to display locations the mon can be found on the map.
+FindWildLocationsOfMon: ; e9cb (3:69cb)
+	ld hl, WildDataPointers
+	ld de, wBuffer
 	ld c, $0
-.asm_e9d3
+.loop
 	inc hl
 	ld a, [hld]
 	inc a
-	jr z, .asm_e9ec
+	jr z, .done
 	push hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, [hli]
 	and a
-	call nz, Func_e9f0
+	call nz, CheckMapForMon ; land
 	ld a, [hli]
 	and a
-	call nz, Func_e9f0
+	call nz, CheckMapForMon ; water
 	pop hl
 	inc hl
 	inc hl
 	inc c
-	jr .asm_e9d3
-.asm_e9ec
-	ld a, $ff
+	jr .loop
+.done
+	ld a, $ff ; list terminator
 	ld [de], a
 	ret
 
-Func_e9f0: ; e9f0 (3:69f0)
+CheckMapForMon: ; e9f0 (3:69f0)
 	inc hl
 	ld b, $a
-.asm_e9f3
+.loop
 	ld a, [wd11e]
 	cp [hl]
-	jr nz, .asm_e9fc
+	jr nz, .nextEntry
 	ld a, c
 	ld [de], a
 	inc de
-.asm_e9fc
+.nextEntry
 	inc hl
 	inc hl
 	dec b
-	jr nz, .asm_e9f3
+	jr nz, .loop
 	dec hl
 	ret

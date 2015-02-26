@@ -1,8 +1,8 @@
 Museum1FScript: ; 5c0f7 (17:40f7)
 	ld a, $1
-	ld [wcf0c], a
+	ld [wAutoTextBoxDrawingControl], a
 	xor a
-	ld [wcc3c], a
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, Museum1FScriptPointers
 	ld a, [W_MUSEUM1FCURSCRIPT]
 	jp CallFunctionInTable
@@ -70,7 +70,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	jp asm_d1145
 .asm_3ded4
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	xor a
 	ld [hJoyHeld], a
@@ -105,7 +105,7 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld c, $3
 	predef SubBCDPredef
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
@@ -115,10 +115,10 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld hl, Museum1FText_5c21a ; $421a
 	call PrintText
 	ld a, $1
-	ld [wcd38], a
+	ld [wSimulatedJoypadStatesIndex], a
 	ld a, $80
-	ld [wccd3], a
-	call Func_3486
+	ld [wSimulatedJoypadStatesEnd], a
+	call StartSimulatingJoypadStates
 	call UpdateSprites
 	jr asm_d1145
 .asm_0b094
@@ -200,7 +200,7 @@ Museum1FText3: ; 5c256 (17:4256)
 	jr nc, .BagFull
 	ld hl, wd754
 	set 1, [hl]
-	ld a, $34
+	ld a, HS_OLD_AMBER
 	ld [wcc4d], a
 	predef HideObject
 	ld hl, ReceivedOldAmberText

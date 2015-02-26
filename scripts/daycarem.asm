@@ -24,13 +24,13 @@ DayCareMText1: ; 56254 (15:6254)
 	ld hl, DayCareMText_56414
 	call PrintText
 	xor a
-	ld [wcfcb], a
+	ld [wUpdateSpritesEnabled], a
 	ld [wd07d], a
-	ld [wcc35], a
+	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3
-	call Func_3dbe
+	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	pop af
 	ld hl, DayCareMText_56437
@@ -65,11 +65,11 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld a, $3
 	ld [wcc49], a
 	call LoadMonData
-	callab Func_58f43
+	callab CalcLevelFromExperience
 	ld a, d
-	cp $64
+	cp MAX_LEVEL
 	jr c, .asm_56315
-	ld d, $64
+	ld d, MAX_LEVEL
 	callab CalcExperience
 	ld hl, wDayCareMonExp
 	ld a, [H_NUMTOPRINT]
@@ -78,7 +78,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld [hli], a
 	ld a, [$ff98]
 	ld [hl], a
-	ld d, $64
+	ld d, MAX_LEVEL
 
 .asm_56315
 	xor a
@@ -100,7 +100,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 .asm_56333
 	call PrintText
 	ld a, [wPartyCount]
-	cp $6
+	cp PARTY_LENGTH
 	ld hl, DayCareMText_56440
 	jp z, .asm_56403
 	ld de, wTrainerFacingDirection
@@ -129,7 +129,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld hl, DayCareMText_56428
 	call PrintText
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
 	ld hl, DayCareMText_56437
@@ -159,7 +159,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
 	ld a, $13
-	ld [wd125], a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, DayCareMText_5644f
 	call PrintText

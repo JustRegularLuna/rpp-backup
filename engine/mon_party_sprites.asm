@@ -21,7 +21,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	ld c, a
 	ld hl, PartyMonSpeeds
 	add hl, bc
-	ld a, [wcf1b]
+	ld a, [wOnSGB]
 	xor $1
 	add [hl]
 	ld c, a
@@ -382,7 +382,7 @@ GetPartyMonSpriteID: ; 718e9 (1c:58e9)
 	ld c, a
 	dec a
 	srl a
-	ld hl, MonPartyData ; $590d
+	ld hl, MonPartyData
 	ld e, a
 	ld d, $0
 	add hl, de
