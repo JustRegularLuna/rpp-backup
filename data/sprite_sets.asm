@@ -83,7 +83,7 @@ SpriteSets: ; 17ab9 (5:7ab9)
 	db SPRITE_LASS
 	db SPRITE_BLACK_HAIR_BOY_1
 	db SPRITE_BALL
-	db SPRITE_LYING_OLD_MAN_UNUSED_2
+	db SPRITE_BERRY_TREE
 
 ; sprite set $03
 	db SPRITE_LITTLE_GIRL
@@ -96,7 +96,7 @@ SpriteSets: ; 17ab9 (5:7ab9)
 	db SPRITE_BLACK_HAIR_BOY_1
 	db SPRITE_GUARD
 	db SPRITE_BALL
-	db SPRITE_LYING_OLD_MAN_UNUSED_2
+	db SPRITE_BERRY_TREE
 
 ; sprite set $04
 	db SPRITE_FOULARD_WOMAN
@@ -109,7 +109,7 @@ SpriteSets: ; 17ab9 (5:7ab9)
 	db SPRITE_LASS
 	db SPRITE_BLACK_HAIR_BOY_1
 	db SPRITE_BALL
-	db SPRITE_LYING_OLD_MAN_UNUSED_2
+	db SPRITE_BERRY_TREE
 
 ; sprite set $05
 	db SPRITE_LITTLE_GIRL
@@ -135,7 +135,7 @@ SpriteSets: ; 17ab9 (5:7ab9)
 	db SPRITE_GUARD
 	db SPRITE_GAMBLER
 	db SPRITE_BALL
-	db SPRITE_LYING_OLD_MAN_UNUSED_2
+	db SPRITE_BERRY_TREE
 
 ; sprite set $07
 	db SPRITE_ROCKET
@@ -148,7 +148,7 @@ SpriteSets: ; 17ab9 (5:7ab9)
 	db SPRITE_BLACK_HAIR_BOY_1
 	db SPRITE_SLOWBRO
 	db SPRITE_BALL
-	db SPRITE_LYING_OLD_MAN_UNUSED_2
+	db SPRITE_BERRY_TREE
 
 ; sprite set $08
 	db SPRITE_BIKER
@@ -490,6 +490,57 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $c0 ; byte count
 	db BANK(SeelSprite)
 
+;
+;	
+; New walking sprites start here
+;
+;	
+	; SPRITE_BROCK
+	dw BrockOverworld
+	db $c0 ; byte count
+	db BANK(BrockOverworld)
+	
+	; SPRITE_MISTY
+	dw MistyOverworld
+	db $c0 ; byte count
+	db BANK(MistyOverworld)
+	
+	; SPRITE_SURGE
+	dw SurgeOverworld
+	db $c0 ; byte count
+	db BANK(SurgeOverworld)
+	
+	; SPRITE_SABRINA
+	dw SabrinaOverworld
+	db $c0 ; byte count
+	db BANK(SabrinaOverworld)
+	
+	; SPRITE_KOGA
+	dw KogaOverworld
+	db $c0 ; byte count
+	db BANK(KogaOverworld)
+	
+	;SPRITE_BLAINE
+	dw BlaineOverworld
+	db $c0 ; byte count
+	db BANK(BlaineOverworld)
+	
+	; SPRITE_BRENDAN
+	dw BrendanOverworld
+	db $c0 ; byte count
+	db BANK(BrendanOverworld)
+	
+	; SPRITE_FLANNERY
+	dw FlanneryOverworld
+	db $c0 ; byte count
+	db BANK(FlanneryOverworld)
+	
+
+;	
+;
+; 1 frame sprites start here
+;
+;
 	; SPRITE_BALL
 	dw BallSprite
 	db $40 ; byte count
@@ -525,10 +576,10 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $40 ; byte count
 	db BANK(SnorlaxSprite)
 
-	; SPRITE_OLD_AMBER_COPY
-	dw OldAmberSprite
+	; SPRITE_BAG
+	dw BagOverworldSprite
 	db $40 ; byte count
-	db BANK(OldAmberSprite)
+	db BANK(BagOverworldSprite)
 
 	; SPRITE_OLD_AMBER
 	dw OldAmberSprite
@@ -540,12 +591,18 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $40 ; byte count
 	db BANK(PokedexSprite)
 
-	; SPRITE_LYING_OLD_MAN_UNUSED_2
-	dw LyingOldManSprite
+	; SPRITE_BERRY_TREE
+	dw BerryTreeSprite
 	db $40 ; byte count
-	db BANK(LyingOldManSprite)
+	db BANK(BerryTreeSprite)
 
 	; SPRITE_LYING_OLD_MAN
 	dw LyingOldManSprite
 	db $40 ; byte count
 	db BANK(LyingOldManSprite)
+	
+	; SPRITE_SUDOWOODO
+	dw SudowoodoSprite
+	db $40 ; byte count
+	db BANK(SudowoodoSprite)
+

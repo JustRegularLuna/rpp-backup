@@ -6692,8 +6692,15 @@ LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
 PokedexSprite:         INCBIN "gfx/sprites/pokedex.2bpp"
 BerryTreeSprite:       INCBIN "gfx/sprites/berry_tree.2bpp"
 SudowoodoSprite:       INCBIN "gfx/sprites/sudowoodo.2bpp"
+BagOverworldSprite:    INCBIN "gfx/sprites/bag.2bpp"
+BrockOverworld:        INCBIN "gfx/sprites/brock.2bpp"
 MistyOverworld:        INCBIN "gfx/sprites/misty.2bpp"
+SurgeOverworld:        INCBIN "gfx/sprites/surge.2bpp"
 SabrinaOverworld:      INCBIN "gfx/sprites/sabrina.2bpp"
+KogaOverworld:         INCBIN "gfx/sprites/koga.2bpp"
+BlaineOverworld:       INCBIN "gfx/sprites/blaine.2bpp"
+BrendanOverworld:      INCBIN "gfx/sprites/brendan.2bpp"
+FlanneryOverworld:     INCBIN "gfx/sprites/flannery.2bpp"
 
 
 IF DEF(_OPTION_BEACH_HOUSE)
