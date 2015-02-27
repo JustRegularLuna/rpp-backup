@@ -6690,6 +6690,10 @@ SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
 OldAmberSprite:        INCBIN "gfx/sprites/old_amber.2bpp"
 LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
 PokedexSprite:         INCBIN "gfx/sprites/pokedex.2bpp"
+BerryTreeSprite:       INCBIN "gfx/sprites/berry_tree.2bpp"
+SudowoodoSprite:       INCBIN "gfx/sprites/sudowoodo.2bpp"
+MistyOverworld:        INCBIN "gfx/sprites/misty.2bpp"
+SabrinaOverworld:      INCBIN "gfx/sprites/sabrina.2bpp"
 
 
 IF DEF(_OPTION_BEACH_HOUSE)
