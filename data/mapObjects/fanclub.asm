@@ -15,7 +15,7 @@ FanClubObject: ; 0x59c97 (size=62)
 	db SPRITE_CLEFAIRY, $4 + 4, $6 + 4, $ff, $d2, $3 ; person
 	db SPRITE_SEEL, $4 + 4, $1 + 4, $ff, $d3, $4 ; person
 	db SPRITE_GENTLEMAN, $1 + 4, $3 + 4, $ff, $d0, $5 ; person
-	db SPRITE_CABLE_CLUB_WOMAN, $1 + 4, $5 + 4, $ff, $d0, $6 ; person
+	db SPRITE_GREETER, $1 + 4, $5 + 4, $ff, $d0, $6 ; person
 
 	; warp-to
 	EVENT_DISP POKEMON_FAN_CLUB_WIDTH, $7, $2

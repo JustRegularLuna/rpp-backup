@@ -8,7 +8,7 @@ FuchsiaGymObject: ; 0x75658 (size=82)
 	db $0 ; signs
 
 	db $8 ; people
-	db SPRITE_BLACKBELT, $a + 4, $4 + 4, $ff, $d0, TRAINER | $1, KOGA + $C8, $1
+	db SPRITE_KOGA, $a + 4, $4 + 4, $ff, $d0, TRAINER | $1, KOGA + $C8, $1
 	db SPRITE_ROCKER, $d + 4, $8 + 4, $ff, $d0, TRAINER | $2, JUGGLER + $C8, $7
 	db SPRITE_ROCKER, $8 + 4, $7 + 4, $ff, $d3, TRAINER | $3, JUGGLER + $C8, $3
 	db SPRITE_ROCKER, $c + 4, $1 + 4, $ff, $d0, TRAINER | $4, JUGGLER + $C8, $8

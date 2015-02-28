@@ -8,7 +8,7 @@ CinnabarGymObject: ; 0x75acc (size=90)
 	db $0 ; signs
 
 	db $9 ; people
-	db SPRITE_FAT_BALD_GUY, $3 + 4, $3 + 4, $ff, $d0, TRAINER | $1, BLAINE + $C8, $1
+	db SPRITE_BLAINE, $3 + 4, $3 + 4, $ff, $d0, TRAINER | $1, BLAINE + $C8, $1
 	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $11 + 4, $ff, $d0, TRAINER | $2, SUPER_NERD + $C8, $9
 	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $11 + 4, $ff, $d0, TRAINER | $3, BURGLAR + $C8, $4
 	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $b + 4, $ff, $d0, TRAINER | $4, SUPER_NERD + $C8, $a

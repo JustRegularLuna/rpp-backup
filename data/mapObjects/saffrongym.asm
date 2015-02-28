@@ -38,7 +38,7 @@ SaffronGymObject: ; 0x5d259 (size=330)
 	db $0 ; signs
 
 	db $9 ; people
-	db SPRITE_GIRL, $8 + 4, $9 + 4, $ff, $d0, TRAINER | $1, SABRINA + $C8, $1
+	db SPRITE_SABRINA, $8 + 4, $9 + 4, $ff, $d0, TRAINER | $1, SABRINA + $C8, $1
 	db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, TRAINER | $2, CHANNELER + $C8, $16
 	db SPRITE_BUG_CATCHER, $1 + 4, $11 + 4, $ff, $d0, TRAINER | $3, PSYCHIC_TR + $C8, $1
 	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, TRAINER | $4, CHANNELER + $C8, $17

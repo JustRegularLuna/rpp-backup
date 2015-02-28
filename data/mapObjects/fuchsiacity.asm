@@ -37,7 +37,7 @@ FuchsiaCityObject: ; 0x18bd4 (size=178)
 	db SPRITE_BALL, $6 + 4, $19 + 4, $ff, $ff, $6 ; person
 	db SPRITE_SLOWBRO, $6 + 4, $c + 4, $fe, $2, $7 ; person
 	db SPRITE_SLOWBRO, $c + 4, $1e + 4, $fe, $2, $8 ; person
-	db SPRITE_SEEL, $11 + 4, $8 + 4, $fe, $0, $9 ; person
+	db SPRITE_LAPRAS, $11 + 4, $8 + 4, $fe, $0, $9 ; person
 	db SPRITE_OMANYTE, $5 + 4, $6 + 4, $ff, $ff, $a ; person
 
 	; warp-to

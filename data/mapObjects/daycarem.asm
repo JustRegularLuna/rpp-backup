@@ -8,7 +8,7 @@ DayCareMObject: ; 0x56459 (size=26)
 	db $0 ; signs
 
 	db $1 ; people
-	db SPRITE_GENTLEMAN, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
+	db SPRITE_OLD_PERSON, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
 
 	; warp-to
 	EVENT_DISP DAYCAREM_WIDTH, $7, $2

@@ -8,7 +8,7 @@ NameRaterObject: ; 0x1dad6 (size=26)
 	db $0 ; signs
 
 	db $1 ; people
-	db SPRITE_MR_MASTERBALL, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
+	db SPRITE_GENTLEMAN, $3 + 4, $5 + 4, $ff, $d2, $1 ; person
 
 	; warp-to
 	EVENT_DISP NAME_RATERS_HOUSE_WIDTH, $7, $2

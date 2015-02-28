@@ -9,7 +9,7 @@ CeruleanMartObject: ; 0x5c8a8 (size=38)
 
 	db $3 ; people
 	db SPRITE_MART_GUY, $5 + 4, $0 + 4, $ff, $d3, $1 ; person
-	db SPRITE_BLACK_HAIR_BOY_1, $4 + 4, $3 + 4, $fe, $1, $2 ; person
+	db SPRITE_BLACK_HAIR_BOY_2, $4 + 4, $3 + 4, $fe, $1, $2 ; person
 	db SPRITE_LASS, $2 + 4, $6 + 4, $fe, $2, $3 ; person
 
 	; warp-to

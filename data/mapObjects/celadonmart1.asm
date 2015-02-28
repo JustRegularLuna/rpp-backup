@@ -14,7 +14,7 @@ CeladonMart1Object: ; 0x60f9e (size=64)
 	db $1, $e, $3 ; CeladonMart1Text3
 
 	db $1 ; people
-	db SPRITE_CABLE_CLUB_WOMAN, $3 + 4, $8 + 4, $ff, $d0, $1 ; person
+	db SPRITE_GREETER, $3 + 4, $8 + 4, $ff, $d0, $1 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_MART_1_WIDTH, $7, $2
