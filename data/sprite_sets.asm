@@ -535,6 +535,21 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $c0 ; byte count
 	db BANK(FlanneryOverworld)
 	
+	; SPRITE_GREETER
+	dw GreeterWoman
+	db $c0 ; byte count
+	db BANK(GreeterWoman)
+	
+	; SPRITE_LAPRAS
+	dw SurfingLapras
+	db $c0 ; byte count
+	db BANK(SurfingLapras)
+	
+	; SPRITE_SURF_PIKACHU
+	dw SurfingPikachu
+	db $c0 ; byte count
+	db BANK(SurfingPikachu)
+	
 
 ;	
 ;

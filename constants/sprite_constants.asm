@@ -81,6 +81,9 @@ const_value = 1
 	const SPRITE_BLAINE                    ;EQU $4F
 	const SPRITE_BRENDAN                   ;EQU $50
 	const SPRITE_FLANNERY                  ;EQU $51
+	const SPRITE_GREETER
+	const SPRITE_LAPRAS
+	const SPRITE_SURF_PIKACHU
 ; Sprites after this are only 1 frame
 	const SPRITE_BALL                      ;EQU $3d
 	const SPRITE_OMANYTE                   ;EQU $3e

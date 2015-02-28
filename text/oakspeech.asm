@@ -6,6 +6,9 @@ _OakSpeechText1::
 	para "Just call me"
 	line "ROMHACKER MATEO."
 	
+	para "I'm totally not"
+	line "PROF. OAK."
+	
 	para "I made this for"
 	line "you guys."
 	prompt

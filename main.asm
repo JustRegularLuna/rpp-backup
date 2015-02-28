@@ -6702,6 +6702,9 @@ KogaOverworld:         INCBIN "gfx/sprites/koga.2bpp"
 BlaineOverworld:       INCBIN "gfx/sprites/blaine.2bpp"
 BrendanOverworld:      INCBIN "gfx/sprites/brendan.2bpp"
 FlanneryOverworld:     INCBIN "gfx/sprites/flannery.2bpp"
+GreeterWoman:          INCBIN "gfx/sprites/greeter_woman.2bpp"
+SurfingPikachu:        INCBIN "gfx/sprites/surfing_pikachu.2bpp"
+SurfingLapras:         INCBIN "gfx/sprites/surf_lapras.2bpp"
 
 
 IF DEF(_OPTION_BEACH_HOUSE)
