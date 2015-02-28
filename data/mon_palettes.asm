@@ -5,7 +5,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_GREENMON  ; VENUSAUR
 	db PAL_REDMON    ; CHARMANDER
 	db PAL_REDMON    ; CHARMELEON
-	db PAL_REDMON    ; CHARIZARD
+	db PAL_BLUE_TRAINER    ; CHARIZARD
 	db PAL_CYAN_TRAINER   ; SQUIRTLE
 	db PAL_CYAN_TRAINER   ; WARTORTLE
 	db PAL_CYAN_TRAINER   ; BLASTOISE
@@ -179,7 +179,7 @@ TrainerPalletes:
 	db PAL_BROWN_TRAINER     ; Tamer
 	db PAL_BLUE_TRAINER      ; Bird Keeper
 	db PAL_BROWN_TRAINER     ; Blackbelt
-	db PAL_BLUE_TRAINER      ; Gary 1
+	db PAL_MEWMON            ; Gary 1
 	db PAL_CYAN_TRAINER      ; Swimmer (Female)
 	db PAL_MEWMON            ; Rocket (Female Grunt)
 	db PAL_BLUE_TRAINER      ; Scientist
@@ -196,8 +196,8 @@ TrainerPalletes:
 	db PAL_CYAN_TRAINER      ; Blaine
 	db PAL_RED_TRAINER       ; Sabrina
 	db PAL_MEWMON            ; Gentleman
-	db PAL_BLUE_TRAINER      ; Gary 2
-	db PAL_BLUE_TRAINER      ; Gary 3
+	db PAL_MEWMON            ; Gary 2
+	db PAL_MEWMON            ; Gary 3
 	db PAL_RED_TRAINER       ; Lorelei
 	db PAL_BLUE_TRAINER      ; Channeler
 	db PAL_PURPLE_TRAINER    ; Agatha
