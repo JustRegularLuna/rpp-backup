@@ -11,7 +11,7 @@ TrainerNames: ; 399ff (e:59ff)
 	db "BIKER@"
 	db "BURGLAR@"
 	db "ENGINEER@"
-	db "JUGGLER@"
+	db "COUPLE@"
 	db "FISHERMAN@"
 	db "SWIMMER♂@"
 	db "CUE BALL@"

@@ -398,7 +398,7 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 	db 1,0    ; BIKER
 	db 1,3,0  ; BURGLAR
 	db 1,0    ; ENGINEER
-	db 1,2,0  ; JUGGLER_X
+	db 1,0    ; Couple
 	db 1,3,0  ; FISHER
 	db 1,3,0  ; SWIMMER
 	db 0      ; CUE_BALL
@@ -473,7 +473,7 @@ TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 	dw EngineerPic
 	money 5000
 
-	dw JugglerPic
+	dw YoungCouplePic
 	money 3500
 
 	dw FisherPic
@@ -921,7 +921,7 @@ TrainerAIPointers: ; 3a55c (e:655c)
 	dbw 3,GenericAI
 	dbw 3,GenericAI
 	dbw 3,GenericAI
-	dbw 3,JugglerAI ; juggler_x
+	dbw 3,GenericAI ; couple
 	dbw 3,GenericAI
 	dbw 3,GenericAI
 	dbw 3,GenericAI

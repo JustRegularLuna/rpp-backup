@@ -1,7 +1,7 @@
 TrainerDataPointers: ; 39d3b (e:5d3b)
 	dw YoungsterData,BugCatcherData,LassData,SailorData,JrTrainerMData
 	dw JrTrainerFData,PokemaniacData,SuperNerdData,HikerData,BikerData
-	dw BurglarData,EngineerData,Juggler1Data,FisherData,SwimmerData
+	dw BurglarData,EngineerData,CoupleData,FisherData,SwimmerData
 	dw CueBallData,GamblerData,BeautyData,PsychicData,RockerData
 	dw JugglerData,TamerData,BirdKeeperData,BlackbeltData,Green1Data
 	dw SwimmerFData,RocketFData,ScientistData,GiovanniData,RocketData
@@ -230,8 +230,10 @@ EngineerData: ; 3a007 (e:6007)
 	db 21,VOLTORB,MAGNEMITE,0
 	db 21,MAGNEMITE,0
 	db 18,MAGNEMITE,MAGNEMITE,MAGNETON,0
-Juggler1Data: ; 3a013 (e:6013)
-; none
+
+CoupleData: 
+	db $FF,20,CUBONE,16,WEEPINBELL,0
+
 FisherData: ; 3a013 (e:6013)
 	db 17,GOLDEEN,TENTACOOL,GOLDEEN,0
 	db 17,TENTACOOL,STARYU,SHELLDER,0

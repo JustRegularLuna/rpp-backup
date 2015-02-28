@@ -11,7 +11,7 @@ HIKER         EQU $09
 BIKER         EQU $0A
 BURGLAR       EQU $0B
 ENGINEER      EQU $0C
-JUGGLER_X     EQU $0D
+COUPLE        EQU $0D
 FISHER        EQU $0E
 SWIMMER       EQU $0F
 CUE_BALL      EQU $10

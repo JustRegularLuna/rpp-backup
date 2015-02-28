@@ -7,7 +7,6 @@ FemaleTrainerList:: ; 3434 (0:3434)
 	db $FF
 
 EvilTrainerList:: ; 3439 (0:3439)
-	db $c8+JUGGLER_X
 	db $c8+GAMBLER
 	db $c8+ROCKER
 	db $c8+JUGGLER

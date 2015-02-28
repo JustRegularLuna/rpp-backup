@@ -169,7 +169,7 @@ TrainerPalletes:
 	db PAL_BROWN_TRAINER     ; Biker
 	db PAL_BLUE_TRAINER      ; Burglar
 	db PAL_YELLOW_TRAINER    ; Engineer
-	db PAL_MEWMON            ; Juggler (Unused?)
+	db PAL_BLUE_TRAINER      ; Young Couple
 	db PAL_CYAN_TRAINER      ; Fisher
 	db PAL_BLUE_TRAINER      ; Swimmer (Male)
 	db PAL_BROWN_TRAINER     ; Cue Ball
