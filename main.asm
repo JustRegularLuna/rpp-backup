@@ -6657,6 +6657,10 @@ MewPicFront::         INCBIN "pic/bmon/mew.pic"
 MewPicBack::          INCBIN "pic/monback/mewb.pic"
 LugiaPicFront::		  INCBIN "pic/bmon/lugia.pic"
 LugiaPicBack::		  INCBIN "pic/monback/lugia.pic"
+HoundourPicFront::    INCBIN "pic/bmon/houndour.pic"
+HoundourPicBack::     INCBIN "pic/monback/houndour.pic"
+HoundoomPicFront::    INCBIN "pic/bmon/houndoom.pic"
+HoundoomPicBack::     INCBIN "pic/monback/houndoom.pic"
 
 
 

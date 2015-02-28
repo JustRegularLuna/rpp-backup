@@ -10,8 +10,8 @@ Route7Mons:
 		db 18,MANKEY
 		db 18,GROWLITHE
 		db 20,GROWLITHE
-		db 19,MANKEY
-		db 20,MANKEY
+		db 19,HOUNDOUR
+		db 20,HOUNDOUR
 	ENDC
 
 	IF DEF(_GREEN) || !DEF(_JAPAN) && DEF(_BLUE)

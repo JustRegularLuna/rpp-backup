@@ -75,3 +75,4 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_SNAKE, SPRITE_SNAKE			;Dratini/Dragonair
 	dn SPRITE_SNAKE, SPRITE_MON				;Dragonite/Mewtwo
 	dn SPRITE_MON, SPRITE_BIRD_M			;Mew/Lugia
+	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED   ;Houndour/Houndoom

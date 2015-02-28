@@ -151,6 +151,8 @@ dw DragoniteDexEntry
 dw MewtwoDexEntry
 dw MewDexEntry
 dw LugiaDexEntry
+dw HoundourDexEntry
+dw HoundoomDexEntry
 
 ; string: species name
 ; height in feet, inches
@@ -1220,3 +1222,18 @@ LugiaDexEntry: ; 40fe5 (10:4fe5)
 	dw 4762
 	TX_FAR _LugiaDexEntry
 	db "@"
+	
+HoundourDexEntry:
+	db "DARK@"
+	db 2,0
+	dw 0238
+	TX_FAR _HoundourDexEntry
+	db "@"
+	
+HoundoomDexEntry:
+	db "DARK@"
+	db 6,3
+	dw 1091
+	TX_FAR _HoundoomDexEntry
+	db "@"
+	

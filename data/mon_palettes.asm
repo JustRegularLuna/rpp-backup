@@ -152,6 +152,8 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; MEWTWO
 	db PAL_PINKMON   ; MEW
 	db PAL_BLUEMON   ; LUGIA
+	db PAL_REDMON    ; Houndour
+	db PAL_REDMON    ; Houndoom
 	
 TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED

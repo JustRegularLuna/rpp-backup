@@ -151,5 +151,7 @@ db "DRAGONITE@"
 db "MEWTWO@@@@"
 db "MEW@@@@@@@"
 db "LUGIA@@@@@"
+db "HOUNDOUR@@"
+db "HOUNDOOM@@"
 
 

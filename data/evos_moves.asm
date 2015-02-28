@@ -151,6 +151,8 @@ dw Mon149_EvosMoves
 dw Mon150_EvosMoves
 dw Mon151_EvosMoves
 dw Mon152_EvosMoves
+dw Mon153_EvosMoves
+dw Mon154_EvosMoves
 
 	
 Mon001_EvosMoves: ; 3b844 (e:7844)
@@ -3149,6 +3151,49 @@ Mon152_EvosMoves:
 	db 85,HYPER_BEAM
 	db 93,AMNESIA
 	db 99,HURRICANE
+	db 0
+	
+Mon153_EvosMoves:
+;HOUNDOUR
+;Evolutions
+	db EV_LEVEL,24,HOUNDOOM
+	db 0
+;Learnset
+	db 4,GROWL
+	db 8,SMOG
+	db 13,ROAR
+	db 16,BITE
+	db 20,SMOKESCREEN
+	db 25,NIGHT_SLASH
+	db 28,FIRE_FANG
+	db 32,FEINT_ATTACK
+	db 37,HEX
+	db 40,SHADOW_BALL
+	db 44,FLAMETHROWER
+	db 49,CRUNCH
+	db 52,DARK_PULSE
+	db 56,FLARE_BLITZ
+	db 0
+	
+Mon154_EvosMoves:
+;HOUNDOOM
+;Evolutions
+	db 0
+;Learnset
+	db 4,GROWL
+	db 8,SMOG
+	db 13,ROAR
+	db 16,BITE
+	db 20,SMOKESCREEN
+	db 26,NIGHT_SLASH
+	db 30,FIRE_FANG
+	db 35,FEINT_ATTACK
+	db 41,HEX
+	db 45,SHADOW_BALL
+	db 50,FLAMETHROWER
+	db 56,CRUNCH
+	db 60,DARK_PULSE
+	db 65,FLARE_BLITZ
 	db 0
 	
 	
