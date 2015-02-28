@@ -605,4 +605,10 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	dw SudowoodoSprite
 	db $40 ; byte count
 	db BANK(SudowoodoSprite)
+	
+	; SPRITE_POKEY
+	dw SlowpokeOverworld
+	db $40 ; byte count
+	db BANK(SlowpokeOverworld)
+	
 
