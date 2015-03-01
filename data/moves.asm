@@ -259,3 +259,4 @@ endm
 	move LEER,         ATTACK_DOWN1_EFFECT,          0, FAIRY,    100, 30 ; Baby Doll Eyes
 	move BONEMERANG,   TWO_TO_FIVE_ATTACKS_EFFECT,  25, GROUND,    90, 10 ; Bone Rush
 	move AURORA_BEAM,  NO_ADDITIONAL_EFFECT,       100, FLYING,   100,  5 ; Aeroblast
+	move ROCK_THROW,   NO_ADDITIONAL_EFFECT,        60, ROCK,     100,  5 ; Ancient Power

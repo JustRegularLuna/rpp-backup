@@ -9082,3 +9082,4 @@ PhysicalSpecialSplit: ;Determines if a move is Physical or Special
 	db OTHER_M ;Baby Doll Eyes
 	db PHYSICAL;Bone Rush
 	db SPECIAL ;Aeroblast
+	db SPECIAL ;AncientPower

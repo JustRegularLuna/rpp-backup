@@ -249,6 +249,7 @@ const_value = 1
 	const BABYDOLLEYES
 	const BONE_RUSH
 	const AEROBLAST
+	const ANCIENTPOWER
 
 NUM_ATTACKS EQU const_value
 const_value = STRUGGLE + 1
