@@ -156,6 +156,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; Houndoom
 	db PAL_MEWMON    ; Murkrow
 	db PAL_MEWMON    ; Honchkrow
+	db PAL_BLUEMON   ; Heracross
 	
 TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED

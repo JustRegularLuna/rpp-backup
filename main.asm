@@ -6666,6 +6666,8 @@ MurkrowPicFront::     INCBIN "pic/bmon/murkrow.pic"
 MurkrowPicBack::      INCBIN "pic/monback/murkrow.pic"
 HonchkrowPicFront::   INCBIN "pic/bmon/honchkrow.pic"
 HonchkrowPicBack::    INCBIN "pic/monback/honchkrow.pic"
+HeracrossPicFront::   INCBIN "pic/bmon/heracross.pic"
+HeracrossPicBack::    INCBIN "pic/monback/heracross.pic"
 
 
 

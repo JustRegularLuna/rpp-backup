@@ -1557,3 +1557,14 @@ _HonchkrowDexEntry::
 	next "mistakes of its"
 	next "MURKROW followers"
 	dex
+	
+_HeracrossDexEntry::
+	text "Usually docile, if"
+	next "disturbed while"
+	next "sipping honey, it"
+	
+	page "chases off the"
+	next "intruder with its"
+	next "horn"
+	dex
+	

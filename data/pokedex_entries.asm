@@ -155,6 +155,7 @@ dw HoundourDexEntry
 dw HoundoomDexEntry
 dw MurkrowDexEntry
 dw HonchkrowDexEntry
+dw HeracrossDexEntry
 
 ; string: species name
 ; height in feet, inches
@@ -1251,6 +1252,13 @@ HonchkrowDexEntry:
 	db 2,11
 	dw 602
 	TX_FAR _HonchkrowDexEntry
+	db "@"
+	
+HeracrossDexEntry:
+	db "SINGLEHORN@"
+	db 4,11
+	dw 507
+	TX_FAR _HeracrossDexEntry
 	db "@"
 	
 	

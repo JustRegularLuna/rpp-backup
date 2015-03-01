@@ -152,3 +152,8 @@ db $0F, $3C, $C0; Dragonite
 db $1E, $99, $FF; Mewtwo
 db $1E, $EE, $FF; Mew
 db $09, $80, $40; Lugia 
+db $1F, $20, $40; Houndour
+db $15, $00, $80; Houndoom
+db $14, $28, $C0; Murkrow
+db $14, $11, $FF; Honchkrow
+db $14, $00, $80; Heracross

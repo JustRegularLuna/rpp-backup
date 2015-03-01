@@ -144,18 +144,15 @@ _OaksLabDeliverParcelText1:: ; 94f69 (25:4f69)
 
 _OaksLabDeliverParcelText2:: ; 9500f (25:500f)
 	db $0
-	para "Ah! This is the"
-	line "custom # BALL"
-	cont "I ordered!"
-IF DEF(_YELLOW)
+	para "Ah! These are the"
+	line "custom # BALLs"
+	cont "I ordered from"
+	cont "KURT in JOHTO!"
 	cont "Thanks, ",$52,"!"
 
 	para "By the way, I must"
 	line "ask you to do"
 	cont "something for me."
-ELSE
-	cont "Thank you!"
-ENDC
 	done
 
 _OaksLabAroundWorldText:: ; 95045 (25:5045)

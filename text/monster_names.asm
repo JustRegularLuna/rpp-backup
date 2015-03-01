@@ -155,5 +155,6 @@ db "HOUNDOUR@@"
 db "HOUNDOOM@@"
 db "MURKROW@@@"
 db "HONCHKROW@"
+db "HERACROSS@"
 
 

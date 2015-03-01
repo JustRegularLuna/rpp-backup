@@ -155,6 +155,7 @@ dw Mon153_EvosMoves
 dw Mon154_EvosMoves
 dw Mon155_EvosMoves
 dw Mon156_EvosMoves
+dw Mon157_EvosMoves
 
 	
 Mon001_EvosMoves: ; 3b844 (e:7844)
@@ -3238,5 +3239,23 @@ Mon156_EvosMoves:
 	db 55,NIGHT_SLASH
 	db 61,HEX
 	db 65,DARK_PULSE
+	db 0
+	
+Mon157_EvosMoves
+;HERACROSS
+;Evolutions
+	db 0
+;Learnset
+	db 7,FEINT_ATTACK
+	db 10,AERIAL_ACE
+	db 16,MEGA_PUNCH
+	db 19,COUNTER
+	db 25,FURY_ATTACK
+	db 28,CROSS_CHOP
+	db 31,PIN_MISSILE
+	db 34,TAKE_DOWN
+	db 37,MEGAHORN
+	db 43,LOW_SWEEP
+	db 46,X_SCISSOR
 	db 0
 	

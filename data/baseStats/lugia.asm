@@ -9,7 +9,7 @@ db PSYCHIC ; species type 1
 db FLYING  ; species type 2
 db 45 ; catch rate
 db 64 ; base exp yield
-db $77 ; sprite dimensions
+INCBIN "pic/bmon/lugia.pic",0,1 ; 77, sprite dimensions
 dw LugiaPicFront
 dw LugiaPicBack
 ; attacks known at lvl 0
