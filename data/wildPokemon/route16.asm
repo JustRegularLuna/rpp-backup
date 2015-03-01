@@ -7,8 +7,8 @@ Route16Mons:
 		db 24,DODUO
 		db 24,RATTATA
 		db 26,DODUO
-		db 23,SPEAROW
-		db 24,FEAROW
+		db 23,MURKROW
+		db 24,MURKROW
 		db 25,RATICATE
 		db 26,RATICATE
 	ELSE

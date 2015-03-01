@@ -6662,6 +6662,10 @@ HoundourPicFront::    INCBIN "pic/bmon/houndour.pic"
 HoundourPicBack::     INCBIN "pic/monback/houndour.pic"
 HoundoomPicFront::    INCBIN "pic/bmon/houndoom.pic"
 HoundoomPicBack::     INCBIN "pic/monback/houndoom.pic"
+MurkrowPicFront::     INCBIN "pic/bmon/murkrow.pic"
+MurkrowPicBack::      INCBIN "pic/monback/murkrow.pic"
+HonchkrowPicFront::   INCBIN "pic/bmon/honchkrow.pic"
+HonchkrowPicBack::    INCBIN "pic/monback/honchkrow.pic"
 
 
 

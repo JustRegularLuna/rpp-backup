@@ -153,5 +153,7 @@ db "MEW@@@@@@@"
 db "LUGIA@@@@@"
 db "HOUNDOUR@@"
 db "HOUNDOOM@@"
+db "MURKROW@@@"
+db "HONCHKROW@"
 
 

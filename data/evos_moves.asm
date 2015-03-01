@@ -153,6 +153,8 @@ dw Mon151_EvosMoves
 dw Mon152_EvosMoves
 dw Mon153_EvosMoves
 dw Mon154_EvosMoves
+dw Mon155_EvosMoves
+dw Mon156_EvosMoves
 
 	
 Mon001_EvosMoves: ; 3b844 (e:7844)
@@ -3197,4 +3199,44 @@ Mon154_EvosMoves:
 	db 65,FLARE_BLITZ
 	db 0
 	
+Mon155_EvosMoves:
+;MURKROW
+;Evolutions
+	db EV_ITEM,MOON_STONE,1,HONCHKROW
+	db 0
+;Learnset
+	db 5,QUICK_ATTACK
+	db 11,HAZE
+	db 15,WING_ATTACK
+	db 21,NIGHT_SHADE
+	db 25,MOONLIGHT
+	db 31,SHADOW_BALL
+	db 35,FEINT_ATTACK
+	db 41,GLARE
+	db 45,SUCKER_PUNCH
+	db 50,ACROBATICS
+	db 55,NIGHT_SLASH
+	db 61,HEX
+	db 65,DARK_PULSE
+	db 0
+	
+Mon156_EvosMoves:
+;HONCHKROW
+;Evolutions
+	db 0
+;Learnset
+	db 5,QUICK_ATTACK
+	db 11,HAZE
+	db 15,WING_ATTACK
+	db 21,NIGHT_SHADE
+	db 25,MOONLIGHT
+	db 31,SHADOW_BALL
+	db 35,FEINT_ATTACK
+	db 41,GLARE
+	db 45,SUCKER_PUNCH
+	db 50,ACROBATICS
+	db 55,NIGHT_SLASH
+	db 61,HEX
+	db 65,DARK_PULSE
+	db 0
 	

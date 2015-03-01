@@ -1538,3 +1538,22 @@ _HoundoomDexEntry::
 	next "away"
 	dex
 	
+_MurkrowDexEntry::
+	text "Feared and loathed"
+	next "by many, it is"
+	next "believed to bring"
+	
+	page "misfortune to all"
+	next "those who see it"
+	next "at night"
+	dex
+	
+_HonchkrowDexEntry::
+	text "It is merciless by"
+	next "nature. It is said"
+	next "that it never"
+	
+	page "forgives the"
+	next "mistakes of its"
+	next "MURKROW followers"
+	dex

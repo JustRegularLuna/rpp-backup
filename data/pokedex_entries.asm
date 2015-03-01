@@ -153,6 +153,8 @@ dw MewDexEntry
 dw LugiaDexEntry
 dw HoundourDexEntry
 dw HoundoomDexEntry
+dw MurkrowDexEntry
+dw HonchkrowDexEntry
 
 ; string: species name
 ; height in feet, inches
@@ -1236,4 +1238,19 @@ HoundoomDexEntry:
 	dw 1091
 	TX_FAR _HoundoomDexEntry
 	db "@"
+	
+MurkrowDexEntry:
+	db "DARKNESS@"
+	db 1,8
+	dw 46
+	TX_FAR _MurkrowDexEntry
+	db "@"
+	
+HonchkrowDexEntry:
+	db "BIG BOSS@"
+	db 2,11
+	dw 602
+	TX_FAR _HonchkrowDexEntry
+	db "@"
+	
 	
