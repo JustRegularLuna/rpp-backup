@@ -6668,6 +6668,16 @@ HonchkrowPicFront::   INCBIN "pic/bmon/honchkrow.pic"
 HonchkrowPicBack::    INCBIN "pic/monback/honchkrow.pic"
 HeracrossPicFront::   INCBIN "pic/bmon/heracross.pic"
 HeracrossPicBack::    INCBIN "pic/monback/heracross.pic"
+EspeonPicFront::      INCBIN "pic/bmon/espeon.pic"
+EspeonPicBack::       INCBIN "pic/monback/espeon.pic"
+UmbreonPicFront::     INCBIN "pic/bmon/umbreon.pic"
+UmbreonPicBack::      INCBIN "pic/monback/umbreon.pic"
+GlaceonPicFront::     INCBIN "pic/bmon/glaceon.pic"
+GlaceonPicBack::      INCBIN "pic/monback/glaceon.pic"
+LeafeonPicFront::     INCBIN "pic/bmon/leafeon.pic"
+LeafeonPicBack::      INCBIN "pic/monback/leafeon.pic"
+SylveonPicFront::     INCBIN "pic/bmon/sylveon.pic"
+SylveonPicBack::      INCBIN "pic/monback/sylveon.pic"
 
 
 

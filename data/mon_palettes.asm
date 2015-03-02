@@ -157,6 +157,11 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; Murkrow
 	db PAL_MEWMON    ; Honchkrow
 	db PAL_BLUEMON   ; Heracross
+	db PAL_PURPLEMON ; Espeon
+	db PAL_MEWMON    ; Umbreon
+	db PAL_BLUEMON   ; Glaceon
+	db PAL_GREEN_TRAINER ; Leafeon
+	db PAL_PINKMON   ; Sylveon
 	
 TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED

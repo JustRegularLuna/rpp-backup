@@ -1568,3 +1568,52 @@ _HeracrossDexEntry::
 	next "horn"
 	dex
 	
+_EspeonDexEntry::
+	text "By reading air"
+	next "currents, it can"
+	next "predict things"
+	
+	page "such as the weather"
+	next "or its foe's next"
+	next "move"
+	dex
+	
+_UmbreonDexEntry::
+	text "When darkness falls,"
+	next "the rings on the"
+	next "body begin to glow,"
+	
+	page "striking fear in the"
+	next "hearts of anyone"
+	next "nearby"
+	dex
+	
+_GlaceonDexEntry::
+	text "It causes small ice"
+	next "crystals to form by"
+	next "lowering the"
+	
+	page "temperature of the"
+	next "surrounding"
+	next "atmosphere"
+	dex
+	
+_LeafeonDexEntry::
+	text "Just like a plant,"
+	next "it uses photo-"
+	next "synthesis. As a"
+	
+	page "result, it is"
+	next "always enveloped"
+	next "in clean air"
+	dex
+	
+_SylveonDexEntry::
+	text "It sends a soothing"
+	next "aura from its"
+	next "ribbonlike feelers"
+	
+	page "to calm fights"
+	dex
+	
+	

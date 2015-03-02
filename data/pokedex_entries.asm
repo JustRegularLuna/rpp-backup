@@ -156,6 +156,11 @@ dw HoundoomDexEntry
 dw MurkrowDexEntry
 dw HonchkrowDexEntry
 dw HeracrossDexEntry
+dw EspeonDexEntry
+dw UmbreonDexEntry
+dw GlaceonDexEntry
+dw LeafeonDexEntry
+dw SylveonDexEntry
 
 ; string: species name
 ; height in feet, inches
@@ -1260,5 +1265,41 @@ HeracrossDexEntry:
 	dw 507
 	TX_FAR _HeracrossDexEntry
 	db "@"
+	
+EspeonDexEntry:
+	db "SUN@"
+	db 2,11
+	dw 584
+	TX_FAR _EspeonDexEntry
+	db "@"
+	
+UmbreonDexEntry:
+	db "MOONLIGHT@"
+	db 3,3
+	dw 595
+	TX_FAR _UmbreonDexEntry
+	db "@"
+	
+GlaceonDexEntry:
+	db "FRESH SNOW@"
+	db 2,7
+	dw 571
+	TX_FAR _GlaceonDexEntry
+	db "@"
+	
+LeafeonDexEntry:
+	db "VERDANT@"
+	db 3,3
+	dw 562
+	TX_FAR _LeafeonDexEntry
+	db "@"
+	
+SylveonDexEntry:
+	db "AFFECTION@"
+	db 3,3
+	dw 518
+	TX_FAR _SylveonDexEntry
+	db "@"
+	
 	
 	

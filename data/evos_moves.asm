@@ -156,6 +156,11 @@ dw Mon154_EvosMoves
 dw Mon155_EvosMoves
 dw Mon156_EvosMoves
 dw Mon157_EvosMoves
+dw Mon158_EvosMoves
+dw Mon159_EvosMoves
+dw Mon160_EvosMoves
+dw Mon161_EvosMoves
+dw Mon162_EvosMoves
 
 	
 Mon001_EvosMoves: ; 3b844 (e:7844)
@@ -2796,6 +2801,12 @@ Mon133_EvosMoves: ; 3b644 (e:7644)
 	db EV_ITEM,FIRE_STONE,1,FLAREON
 	db EV_ITEM,THUNDER_STONE ,1,JOLTEON
 	db EV_ITEM,WATER_STONE ,1,VAPOREON
+	db EV_ITEM,MOON_STONE,1,UMBREON
+	db EV_ITEM,LEAF_STONE,1,LEAFEON
+	;placeholders until I add custom items and evolution methods
+	db EV_LEVEL,31,SYLVEON
+	db EV_LEVEL,31,ESPEON
+	db EV_LEVEL,31,GLACEON
 	db 0
 ;Learnset
 	db 5,TAIL_WHIP
@@ -3241,7 +3252,7 @@ Mon156_EvosMoves:
 	db 65,DARK_PULSE
 	db 0
 	
-Mon157_EvosMoves
+Mon157_EvosMoves:
 ;HERACROSS
 ;Evolutions
 	db 0
@@ -3257,5 +3268,95 @@ Mon157_EvosMoves
 	db 37,MEGAHORN
 	db 43,LOW_SWEEP
 	db 46,X_SCISSOR
+	db 0
+	
+Mon158_EvosMoves:
+;ESPEON
+;Evolutions
+	db 0
+;Learnset
+	db 5,SAND_ATTACK
+	db 9,CONFUSION
+	db 13,QUICK_ATTACK
+	db 17,SWIFT
+	db 20,PSYBEAM
+	db 25,ZEN_HEADBUTT
+	db 29,AMNESIA
+	db 33,RECOVER
+	db 37,PSYCHIC_M
+	db 41,ZEN_HEADBUTT
+	db 45,EXTRASENSORY
+	db 0
+	
+Mon159_EvosMoves:
+;UMBREON
+;Evolutions
+	db 0
+;Learnset
+	db 5,SAND_ATTACK
+	db 9,BITE
+	db 13,QUICK_ATTACK
+	db 17,CONFUSE_RAY
+	db 20,FEINT_ATTACK
+	db 25,CRUNCH
+	db 29,SCREECH
+	db 33,MOONLIGHT
+	db 37,GLARE
+	db 41,SHADOW_BALL
+	db 45,DARK_PULSE
+	db 0
+	
+Mon160_EvosMoves:
+;GLACEON
+;Evolutions
+	db 5,SAND_ATTACK
+	db 9,ICY_WIND
+	db 13,QUICK_ATTACK
+	db 17,BITE
+	db 20,ICE_FANG
+	db 25,ICE_SHARD
+	db 29,BARRIER
+	db 33,REFLECT
+	db 37,SHEER_COLD
+	db 41,MIST
+	db 45,BLIZZARD
+	db 0
+;Learnset
+	db 0
+	
+Mon161_EvosMoves:
+;LEAFEON
+;Evolutions
+	db 5,SAND_ATTACK
+	db 9,RAZOR_LEAF
+	db 13,QUICK_ATTACK
+	db 17,MEGA_DRAIN
+	db 20,SWIFT
+	db 25,GIGA_DRAIN
+	db 29,SWORDS_DANCE
+	db 33,RECOVER
+	db 37,PETAL_DANCE
+	db 41,SOLARBEAM
+	db 45,LEAF_BLADE
+	db 0
+;Learnset
+	db 0
+	
+Mon162_EvosMoves:
+;SYLVEON
+;Evolutions
+	db 5,SAND_ATTACK
+	db 9,BABYDOLLEYES
+	db 13,QUICK_ATTACK
+	db 17,SWIFT
+	db 20,DRAININGKISS
+	db 25,MOONLIGHT
+	db 29,LOVELY_KISS
+	db 33,LIGHT_SCREEN
+	db 37,MOONBLAST
+	db 41,AMNESIA
+	db 45,DAZZLINGLEAM
+	db 0
+;Learnset
 	db 0
 	

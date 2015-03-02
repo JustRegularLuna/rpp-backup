@@ -77,4 +77,6 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_BIRD_M			;Mew/Lugia
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED   ;Houndour/Houndoom
 	dn SPRITE_BIRD_M, SPRITE_BIRD_M         ;Murkrow/Honchkrow
-	dn SPRITE_BUG,0                         ;Heracross/Padding
+	dn SPRITE_BUG, SPRITE_QUADRUPED         ;Heracross/Espeon
+	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED   ;Umbreon/Glaceon
+	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED   ;Leafeon/Sylveon

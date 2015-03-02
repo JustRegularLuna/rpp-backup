@@ -156,5 +156,11 @@ db "HOUNDOOM@@"
 db "MURKROW@@@"
 db "HONCHKROW@"
 db "HERACROSS@"
+db "ESPEON@@@@"
+db "UMBREON@@@"
+db "GLACEON@@@"
+db "LEAFEON@@@"
+db "SYLVEON@@@"
+
 
 

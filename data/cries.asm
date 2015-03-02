@@ -157,3 +157,9 @@ db $15, $00, $80; Houndoom
 db $14, $28, $C0; Murkrow
 db $14, $11, $FF; Honchkrow
 db $14, $00, $80; Heracross
+db $1A, $88, $60; Espeon
+db $1A, $88, $60; Umbreon
+db $1A, $88, $60; Glaceon
+db $1A, $88, $60; Leafeon
+db $1A, $88, $60; Sylveon
+
