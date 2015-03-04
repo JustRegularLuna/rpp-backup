@@ -4263,6 +4263,8 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 	ld hl, W_DAMAGE ; damage to eventually inflict, initialise to zero
 	ldi [hl], a
 	ld [hl], a
+	call CheckForHex
+	call CheckForElectroBall
 	ld hl, W_PLAYERMOVEPOWER
 	ld a, [hli]
 	and a
@@ -4377,6 +4379,8 @@ GetDamageVarsForEnemyAttack: ; 3de75 (f:5e75)
 	xor a
 	ld [hli], a
 	ld [hl], a
+	call CheckForHex
+	call CheckForElectroBall
 	ld hl, W_ENEMYMOVEPOWER
 	ld a, [hli]
 	ld d, a ; d = move power
@@ -8821,6 +8825,86 @@ PoisonFangEffect:
 	call FlinchSideEffect
 	call PoisonEffect
 	ret
+	
+CheckForHex:
+	ld a, [H_WHOSETURN]
+	and a
+	jr z, .notEnemyTurn
+	ld a,[wEnemySelectedMove]
+	cp HEX
+	ret nz
+	ld a,[wBattleMonStatus]
+	and a
+	ld hl,W_ENEMYMOVEPOWER
+	ld a,65
+	jp z, .skip1
+	ld a,130
+.skip1
+	ld [hl],a
+	ret
+.notEnemyTurn
+	ld a,[wPlayerSelectedMove]
+	cp HEX
+	ret nz
+	ld a,[wEnemyMonStatus]
+	and a
+	ld hl,W_PLAYERMOVEPOWER
+	ld a,65
+	jp z, .skip2
+	ld a,130
+.skip2
+	ld [hl],a
+	ret
+
+CheckForElectroBall:
+	ld a, [H_WHOSETURN]
+	and a
+	jr z, .notEnemyTurn
+; Enemy's Turn
+	ld a, [wEnemySelectedMove]
+	cp ELECTRO_BALL
+	ret nz
+	ld de, wBattleMonSpeed ; player speed value
+	ld hl, wEnemyMonSpeed ; enemy speed value
+	ld c, $2
+	call StringCmp ; compare speed values
+	ld hl,W_ENEMYMOVEPOWER
+	jr z, .speedEqual1
+	jr nc, .playerFaster1 ; if player is faster
+; Enemy Faster 1
+	ld a,120
+	jp .done
+.speedEqual1
+	ld a,80
+	jp .done
+.playerFaster1
+	ld a,60
+	jp .done
+.notEnemyTurn
+; Player's turn
+	ld a, [wPlayerSelectedMove]
+	cp ELECTRO_BALL
+	ret nz
+	ld de, wBattleMonSpeed ; player speed value
+	ld hl, wEnemyMonSpeed ; enemy speed value
+	ld c, $2
+	call StringCmp ; compare speed values
+	ld hl,W_PLAYERMOVEPOWER
+	jr z, .speedEqual2
+	jr nc, .playerFaster2 ; if player is faster
+; Enemy Faster 2
+	ld a,60
+	jp .done
+.speedEqual2
+	ld a,80
+	jp .done
+.playerFaster2
+	ld a,120
+; fall through
+.done
+	ld [hl],a
+	ret
+	
 	
 PhysicalSpecialSplit: ;Determines if a move is Physical or Special
 	ld c,a
