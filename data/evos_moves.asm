@@ -2802,11 +2802,10 @@ Mon133_EvosMoves: ; 3b644 (e:7644)
 	db EV_ITEM,THUNDER_STONE ,1,JOLTEON
 	db EV_ITEM,WATER_STONE ,1,VAPOREON
 	db EV_ITEM,MOON_STONE,1,UMBREON
-	db EV_ITEM,LEAF_STONE,1,LEAFEON
-	;placeholders until I add custom items and evolution methods
-	db EV_LEVEL,31,SYLVEON
-	db EV_LEVEL,31,ESPEON
-	db EV_LEVEL,31,GLACEON
+	db EV_ITEM,MOON_STONE,1,ESPEON ; Will be changed to Sun Stone soon
+	db EV_MAP,VIRIDIAN_FOREST,LEAFEON ; The only map lol
+	db EV_MAP,SEAFOAM_ISLANDS_5,GLACEON ; The floor with Articuno
+	db EV_MAP,MT_MOON_3,SYLVEON ; The floor with the fossils and stuff
 	db 0
 ;Learnset
 	db 5,TAIL_WHIP

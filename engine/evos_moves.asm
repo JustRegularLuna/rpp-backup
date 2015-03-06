@@ -82,6 +82,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, b
 	cp EV_LEVEL
 	jr z, .checkLevel
+	cp EV_MAP
+	jr z, .checkMapEvo
 .checkTradeEvo
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
@@ -92,6 +94,13 @@ Evolution_PartyMonLoop: ; loop over party mons
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
 	jr .asm_3adb6
+.checkMapEvo
+	ld a, [hli]
+	ld b, a ; Map to evolve on
+	ld a, [W_CURMAP]
+	cp b ; Are we on the right map?
+	jp nz, .nextEvoEntry2
+	jr .asm_3adb6 ; Do evolution
 .checkItemEvo
 	ld a, [hli]
 	ld b, a ; evolution item
