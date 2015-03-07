@@ -67,7 +67,6 @@ ResetStatusAndHalveMoneyOnBlackout::
 	predef_jump HealParty
 
 
-;INCLUDE "data/baseStats/mew.asm"
 
 INCLUDE "engine/battle/safari_zone.asm"
 
@@ -5376,7 +5375,6 @@ INCLUDE "engine/game_corner_slots.asm"
 
 SECTION "bankE",ROMX,BANK[$E]
 
-BaseStats: INCLUDE "data/base_stats.asm"
 INCLUDE "engine/battle/e.asm"
 INCLUDE "engine/battle/e_2.asm"
 
@@ -6726,6 +6724,12 @@ FlanneryOverworld:     INCBIN "gfx/sprites/flannery.2bpp"
 GreeterWoman:          INCBIN "gfx/sprites/greeter_woman.2bpp"
 SurfingPikachu:        INCBIN "gfx/sprites/surfing_pikachu.2bpp"
 SurfingLapras:         INCBIN "gfx/sprites/surf_lapras.2bpp"
+
+
+SECTION "bank30",ROMX,BANK[$30]
+
+BaseStats: INCLUDE "data/base_stats.asm"
+
 
 
 IF DEF(_OPTION_BEACH_HOUSE)

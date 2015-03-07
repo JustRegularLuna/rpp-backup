@@ -84,6 +84,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jr z, .checkLevel
 	cp EV_MAP
 	jr z, .checkMapEvo
+	cp EV_MOVE
+	jr z, .checkMoveEvo
 .checkTradeEvo
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
@@ -101,6 +103,14 @@ Evolution_PartyMonLoop: ; loop over party mons
 	cp b ; Are we on the right map?
 	jp nz, .nextEvoEntry2
 	jr .asm_3adb6 ; Do evolution
+.checkMoveEvo
+	ld a, [hli] ; get the move number
+	ld [wMoveNum],a ; store it here to hang onto it
+	push hl ; We don't want to lose our place
+	call CheckForMove ; New routine based on the one used by TMs
+	pop hl ; Get our place back
+	jp nc, .nextEvoEntry2 ; If they didn't know the move, go to next evolution
+	jr .asm_3adb6 ; If they did know it, do the evolution
 .checkItemEvo
 	ld a, [hli]
 	ld b, a ; evolution item
@@ -173,7 +183,11 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld bc, $1c
 	call AddNTimes
 	ld de, W_MONHEADER
-	call CopyData
+	;call CopyData
+; New thing to move BaseStats into another bank
+	ld a, BANK(BaseStats)
+	call FarCopyData
+;End new thing
 	ld a, [wd0b5]
 	ld [W_MONHDEXNUM], a
 	pop af
@@ -505,5 +519,25 @@ WriteMonMoves_ShiftMoveData: ; 3b04e (e:704e)
 
 Evolution_FlagAction: ; 3b057 (e:7057)
 	predef_jump FlagActionPredef
+	
+CheckForMove: ; New routine used by EV_MOVE
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1Moves
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [wMoveNum]
+	ld b, a
+	ld c, NUM_MOVES
+.loop
+	ld a, [hli]
+	cp b
+	jr z, .known
+	dec c
+	jr nz, .loop
+	and a
+	ret
+.known
+	scf
+	ret
 
 INCLUDE "data/evos_moves.asm"
