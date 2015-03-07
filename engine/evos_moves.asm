@@ -86,6 +86,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jr z, .checkMapEvo
 	cp EV_MOVE
 	jr z, .checkMoveEvo
+	cp EV_RAND
+	jr z, .checkRandomEvo
 .checkTradeEvo
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
@@ -95,14 +97,14 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
-	jr .asm_3adb6
+	jr .doEvolution
 .checkMapEvo
 	ld a, [hli]
 	ld b, a ; Map to evolve on
 	ld a, [W_CURMAP]
 	cp b ; Are we on the right map?
 	jp nz, .nextEvoEntry2
-	jr .asm_3adb6 ; Do evolution
+	jr .doEvolution; Do evolution
 .checkMoveEvo
 	ld a, [hli] ; get the move number
 	ld [wMoveNum],a ; store it here to hang onto it
@@ -110,7 +112,19 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call CheckForMove ; New routine based on the one used by TMs
 	pop hl ; Get our place back
 	jp nc, .nextEvoEntry2 ; If they didn't know the move, go to next evolution
-	jr .asm_3adb6 ; If they did know it, do the evolution
+	jr .doEvolution; If they did know it, do the evolution
+.checkRandomEvo
+	ld a, [hli] ; get level to evolve
+	ld b, a
+	ld a, [wLoadedMonLevel]
+	cp b
+	jp c, .nextEvoEntry1 ; if too low, go to next evolution
+	call Random ; get a random number from the RNG
+	cp $55      ; this looks like 1/3 of the time, but it seems to favor low numbers
+	jr c, .skipInc ; If the number is lower than $55, pick first 'mon
+	inc hl         ; Otherwise, pick the second 'mon
+.skipInc
+	jr .doEvolution ; Do evolution
 .checkItemEvo
 	ld a, [hli]
 	ld b, a ; evolution item
@@ -123,7 +137,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, .nextEvoEntry2 ; if so, go the next evolution entry
-.asm_3adb6
+.doEvolution
 	ld [W_CURENEMYLVL], a
 	ld a, $1
 	ld [wd121], a
@@ -509,12 +523,12 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 ; shifts all move data one up (freeing 4th move slot)
 WriteMonMoves_ShiftMoveData: ; 3b04e (e:704e)
 	ld c, $3
-.asm_3b050
+.loop
 	inc de
 	ld a, [de]
 	ld [hli], a
 	dec c
-	jr nz, .asm_3b050
+	jr nz, .loop
 	ret
 
 Evolution_FlagAction: ; 3b057 (e:7057)
