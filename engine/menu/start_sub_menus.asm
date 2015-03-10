@@ -462,6 +462,7 @@ UsableItems_PartyMenu: ; 13434 (4:7434)
 	db FIRE_STONE
 	db THUNDER_STONE
 	db WATER_STONE
+	db SUN_STONE
 	db HP_UP
 	db PROTEIN
 	db IRON
