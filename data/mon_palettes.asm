@@ -162,6 +162,25 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_BLUEMON   ; Glaceon
 	db PAL_GREEN_TRAINER ; Leafeon
 	db PAL_PINKMON   ; Sylveon
+	db PAL_REDMON    ; Scizor
+	db PAL_GREYMON   ; Steelix
+	db PAL_PURPLEMON ; Crobat
+	db PAL_GREENMON  ; Politoed
+	db PAL_PINKMON   ; Slowking
+	db PAL_PINKMON   ; Bellossom
+	db PAL_CYAN_TRAINER ; Kingdra
+	db PAL_PINKMON   ; Blissey
+	db PAL_PINKMON   ; Porygon 2
+	db PAL_PINKMON   ; Porygon Z
+	db PAL_RED_TRAINER ; Magmortar
+	db PAL_YELLOWMON ; Electivire
+	db PAL_GREYMON   ; Magnezone
+	db PAL_BROWNMON  ; Rhyperior
+	db PAL_GREENMON  ; Tangrowth
+	db PAL_PINKMON   ; Lickilicky
+	db PAL_CYAN_TRAINER ; Togepi
+	db PAL_CYAN_TRAINER ; Togetic
+	db PAL_CYANMON   ; Togekiss
 	
 TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED

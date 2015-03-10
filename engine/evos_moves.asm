@@ -130,7 +130,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld b, a ; evolution item
 	ld a, [wcf91] ; this is supposed to be the last item used, but it is also used to hold species numbers
 	cp b ; was the evolution item in this entry used?
-	jp nz, .nextEvoEntry1 ; if not, go to the next evolution entry
+	jp nz, .nextEvoEntry2 ; if not, go to the next evolution entry
 .checkLevel
 	ld a, [hli] ; level requirement
 	ld b, a

@@ -18,16 +18,21 @@ MAX_POTION    EQU $11
 HYPER_POTION  EQU $12
 SUPER_POTION  EQU $13
 POTION        EQU $14
+
+; Used for Safari Zone, Duplicate names
+SAFARI_BAIT   EQU $15
+SAFARI_ROCK   EQU $16
+
+; Only used to show the badges in Cerulean House
 BOULDERBADGE  EQU $15
 CASCADEBADGE  EQU $16
-SAFARI_BAIT   EQU $15 ; overload
-SAFARI_ROCK   EQU $16 ; overload
 THUNDERBADGE  EQU $17
 RAINBOWBADGE  EQU $18
 SOULBADGE     EQU $19
 MARSHBADGE    EQU $1A
 VOLCANOBADGE  EQU $1B
 EARTHBADGE    EQU $1C
+
 ESCAPE_ROPE   EQU $1D
 REPEL         EQU $1E
 OLD_AMBER     EQU $1F
@@ -43,7 +48,7 @@ RARE_CANDY    EQU $28
 DOME_FOSSIL   EQU $29
 HELIX_FOSSIL  EQU $2A
 SECRET_KEY    EQU $2B
-; XXX ????? EQU $2C
+SUN_STONE     EQU $2C
 BIKE_VOUCHER  EQU $2D
 X_ACCURACY    EQU $2E
 LEAF_STONE    EQU $2F
@@ -58,7 +63,7 @@ GUARD_SPEC_   EQU $37
 SUPER_REPEL   EQU $38
 MAX_REPEL     EQU $39
 DIRE_HIT      EQU $3A
-COIN          EQU $3B
+COIN          EQU $3B ; unused?
 FRESH_WATER   EQU $3C
 SODA_POP      EQU $3D
 LEMONADE      EQU $3E
@@ -78,12 +83,31 @@ EXP__ALL      EQU $4B
 OLD_ROD       EQU $4C
 GOOD_ROD      EQU $4D
 SUPER_ROD     EQU $4E
-; XXX todo: compare this to $32
 PP_UP         EQU $4F
 ETHER         EQU $50
 MAX_ETHER     EQU $51
 ELIXER        EQU $52
 MAX_ELIXER    EQU $53
+
+; Only used for elevator menus
+ITEM_B2F      EQU $54
+ITEM_B1F      EQU $55
+ITEM_1F       EQU $56
+ITEM_2F       EQU $57
+ITEM_3F       EQU $58
+ITEM_4F       EQU $59
+ITEM_5F       EQU $5A
+ITEM_6F       EQU $5B
+ITEM_7F       EQU $5C
+ITEM_8F       EQU $5D
+ITEM_9F       EQU $5E
+ITEM_10F      EQU $5F
+ITEM_11F      EQU $60
+ITEM_B4F      EQU $61
+
+
+
+; Don't call actual item scripts
 HM_01         EQU $C4
 HM_02         EQU $C5
 HM_03         EQU $C6

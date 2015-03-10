@@ -59,7 +59,7 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw UnusableItem      ; DOME_FOSSIL
 	dw UnusableItem      ; HELIX_FOSSIL
 	dw UnusableItem      ; SECRET_KEY
-	dw UnusableItem
+	dw ItemUseEvoStone   ; SUN_STONE
 	dw UnusableItem      ; BIKE_VOUCHER
 	dw ItemUseXAccuracy  ; X_ACCURACY
 	dw ItemUseEvoStone   ; LEAF_STONE
@@ -99,6 +99,20 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUsePPRestore  ; MAX_ETHER
 	dw ItemUsePPRestore  ; ELIXER
 	dw ItemUsePPRestore  ; MAX_ELIXER
+	dw UnusableItem      ; B2F
+	dw UnusableItem      ; B1F
+	dw UnusableItem      ; 1F
+	dw UnusableItem      ; 2F
+	dw UnusableItem      ; 3F
+	dw UnusableItem      ; 4F
+	dw UnusableItem      ; 5F
+	dw UnusableItem      ; 6F
+	dw UnusableItem      ; 7F
+	dw UnusableItem      ; 8F
+	dw UnusableItem      ; 9F
+	dw UnusableItem      ; 10F
+	dw UnusableItem      ; 11F
+	dw UnusableItem      ; B4F
 
 ItemThiefBall:
 	ld a,[W_ISINBATTLE]

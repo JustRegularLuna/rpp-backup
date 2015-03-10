@@ -1573,9 +1573,9 @@ _EspeonDexEntry::
 	next "currents, it can"
 	next "predict things"
 	
-	page "such as the weather"
-	next "or its foe's next"
-	next "move"
+	page "such as its foe's"
+	next "next move, or the"
+	next "weather"
 	dex
 	
 _UmbreonDexEntry::
@@ -1615,5 +1615,4 @@ _SylveonDexEntry::
 	
 	page "to calm fights"
 	dex
-	
 	

@@ -80,3 +80,13 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_BUG, SPRITE_QUADRUPED         ;Heracross/Espeon
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED   ;Umbreon/Glaceon
 	dn SPRITE_QUADRUPED, SPRITE_QUADRUPED   ;Leafeon/Sylveon
+	dn SPRITE_BUG, SPRITE_SNAKE             ;Scizor/Steelix
+	dn SPRITE_MON, SPRITE_MON               ;Crobat/Politoed
+	dn SPRITE_MON, SPRITE_GRASS             ;Slowking/Bellossom
+	dn SPRITE_WATER, SPRITE_FAIRY           ;Kingdra/Blissey
+	dn SPRITE_BALL_M, SPRITE_BALL_M         ;Porygon 2/Porygon Z
+	dn SPRITE_MON, SPRITE_MON               ;Magmortar/Electivire
+	dn SPRITE_BALL_M, SPRITE_MON            ;Magnezone/Rhyperior
+	dn SPRITE_GRASS, SPRITE_MON             ;Tangrowth/Lickilicky
+	dn SPRITE_FAIRY, SPRITE_FAIRY           ;Togepi/Togetic
+	dn SPRITE_BIRD_M, 0                     ;Togekiss/Padding

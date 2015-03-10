@@ -8,7 +8,7 @@ ItemPrices: ; 4608 (1:4608)
 	money 0     ; SURFBOARD
 	money 1000  ; SAFARI_BALL
 	money 0     ; POKEDEX
-	money 0     ; MOON_STONE
+	money 2100  ; MOON_STONE
 	money 100   ; ANTIDOTE
 	money 250   ; BURN_HEAL
 	money 250   ; ICE_HEAL
@@ -42,7 +42,7 @@ ItemPrices: ; 4608 (1:4608)
 	money 0     ; DOME_FOSSIL
 	money 0     ; HELIX_FOSSIL
 	money 0     ; SECRET_KEY
-	money 0     ; XXX
+	money 2100  ; SUN_STONE
 	money 0     ; BIKE_VOUCHER
 	money 950   ; X_ACCURACY
 	money 2100  ; LEAF_STONE

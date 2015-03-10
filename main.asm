@@ -6676,11 +6676,14 @@ LeafeonPicFront::     INCBIN "pic/bmon/leafeon.pic"
 LeafeonPicBack::      INCBIN "pic/monback/leafeon.pic"
 SylveonPicFront::     INCBIN "pic/bmon/sylveon.pic"
 SylveonPicBack::      INCBIN "pic/monback/sylveon.pic"
+ScizorPicFront:       INCBIN "pic/bmon/scizor.pic"
+ScizorPicBack:        INCBIN "pic/monback/scizor.pic"
 
 
 
 SECTION "bank2F",ROMX,BANK[$2F]
 
+MissingnoPic::          INCBIN "pic/other/missingno.pic"
 ProfOakPic::            INCBIN "pic/trainer/prof.oak.pic"
 RedPicBack::            INCBIN "pic/trainer/redb.pic"
 LeafPicBack::           INCBIN "pic/trainer/leafb.pic"
@@ -6730,6 +6733,50 @@ SECTION "bank30",ROMX,BANK[$30]
 
 BaseStats: INCLUDE "data/base_stats.asm"
 
+
+SECTION "bank31",ROMX,BANK[$31]
+
+SteelixPicFront:      INCBIN "pic/bmon/steelix.pic"
+SteelixPicBack:       INCBIN "pic/monback/steelix.pic"
+CrobatPicFront:         INCBIN "pic/bmon/crobat.pic"
+CrobatPicBack:          INCBIN "pic/monback/crobat.pic"
+PolitoedPicFront:       INCBIN "pic/bmon/politoed.pic"
+PolitoedPicBack:        INCBIN "pic/monback/politoed.pic"
+SlowkingPicFront:       INCBIN "pic/bmon/slowking.pic"
+SlowkingPicBack:        INCBIN "pic/monback/slowking.pic"
+BellossomPicFront:      INCBIN "pic/bmon/bellossom.pic"
+BellossomPicBack:       INCBIN "pic/monback/bellossom.pic"
+KingdraPicFront:        INCBIN "pic/bmon/kingdra.pic"
+KingdraPicBack:         INCBIN "pic/monback/kingdra.pic"
+BlisseyPicFront:        INCBIN "pic/bmon/blissey.pic"
+BlisseyPicBack:         INCBIN "pic/monback/blissey.pic"
+Porygon2PicFront:       INCBIN "pic/bmon/porygon2.pic"
+Porygon2PicBack:        INCBIN "pic/monback/porygon2.pic"
+PorygonZPicFront:       INCBIN "pic/bmon/porygonz.pic"
+PorygonZPicBack:        INCBIN "pic/monback/porygonz.pic"
+MagmortarPicFront:      INCBIN "pic/bmon/magmortar.pic"
+MagmortarPicBack:       INCBIN "pic/monback/magmortar.pic"
+ElectivirePicFront:     INCBIN "pic/bmon/electivire.pic"
+ElectivirePicBack:      INCBIN "pic/monback/electivire.pic"
+MagnezonePicFront:      INCBIN "pic/bmon/magnezone.pic"
+MagnezonePicBack:       INCBIN "pic/monback/magnezone.pic"
+RhyperiorPicFront:      INCBIN "pic/bmon/rhyperior.pic"
+RhyperiorPicBack:       INCBIN "pic/monback/rhyperior.pic"
+TangrowthPicFront:      INCBIN "pic/bmon/tangrowth.pic"
+TangrowthPicBack:       INCBIN "pic/monback/tangrowth.pic"
+LickilickyPicFront:     INCBIN "pic/bmon/lickilicky.pic"
+LickilickyPicBack:      INCBIN "pic/monback/lickilicky.pic"
+TogepiPicFront:         INCBIN "pic/bmon/togepi.pic"
+TogepiPicBack:          INCBIN "pic/monback/togepi.pic"
+TogeticPicFront:        INCBIN "pic/bmon/togetic.pic"
+TogeticPicBack:         INCBIN "pic/monback/togetic.pic"
+TogekissPicFront:       INCBIN "pic/bmon/togekiss.pic"
+TogekissPicBack:        INCBIN "pic/monback/togekiss.pic"
+
+
+;============================
+; BANK $32 holds Pokedex text
+;============================
 
 
 IF DEF(_OPTION_BEACH_HOUSE)

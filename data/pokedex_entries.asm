@@ -161,6 +161,26 @@ dw UmbreonDexEntry
 dw GlaceonDexEntry
 dw LeafeonDexEntry
 dw SylveonDexEntry
+dw ScizorDexEntry
+dw SteelixDexEntry
+dw CrobatDexEntry
+dw PolitoedDexEntry
+dw SlowkingDexEntry
+dw BellossomDexEntry
+dw KingdraDexEntry
+dw BlisseyDexEntry
+dw Porygon2DexEntry
+dw PorygonZDexEntry
+dw MagmortarDexEntry
+dw ElectivireDexEntry
+dw MagnezoneDexEntry
+dw RhyperiorDexEntry
+dw TangrowthDexEntry
+dw LickilickyDexEntry
+dw TogepiDexEntry
+dw TogeticDexEntry
+dw TogekissDexEntry
+
 
 ; string: species name
 ; height in feet, inches
@@ -1301,5 +1321,137 @@ SylveonDexEntry:
 	TX_FAR _SylveonDexEntry
 	db "@"
 	
+ScizorDexEntry:
+	db "PINCER@"
+	db 5,11
+	dw 2601
+	TX_FAR _ScizorDexEntry
+	db "@"
+	
+SteelixDexEntry:
+	db "IRON SNAKE@"
+	db 30,2
+	dw 8818
+	TX_FAR _SteelixDexEntry
+	db "@"
+	
+CrobatDexEntry:
+	db "BAT@"
+	db 5,11
+	dw 1653
+	TX_FAR _CrobatDexEntry
+	db "@"
+	
+PolitoedDexEntry:
+	db "FROG@"
+	db 3,7
+	dw 747
+	TX_FAR _PolitoedDexEntry
+	db "@"
+	
+SlowkingDexEntry:
+	db "ROYAL@"
+	db 6,7
+	dw 1753
+	TX_FAR _SlowkingDexEntry
+	db "@"
+	
+BellossomDexEntry:
+	db "FLOWER@"
+	db 1,4
+	dw 128
+	TX_FAR _BellossomDexEntry
+	db "@"
+	
+KingdraDexEntry:
+	db "DRAGON@"
+	db 5,11
+	dw 3351
+	TX_FAR _KingdraDexEntry
+	db "@"
+	
+BlisseyDexEntry:
+	db "HAPPINESS@"
+	db 4,11
+	dw 1032
+	TX_FAR _BlisseyDexEntry
+	db "@"
+	
+Porygon2DexEntry:
+	db "VIRTUAL@"
+	db 2,0
+	dw 716
+	TX_FAR _Porygon2DexEntry
+	db "@"
+	
+PorygonZDexEntry:
+	db "VIRTUAL@"
+	db 2,11
+	dw 750
+	TX_FAR _PorygonZDexEntry
+	db "@"
+	
+MagmortarDexEntry:
+	db "ASS@"
+	db 5,3
+	dw 1499
+	TX_FAR _MagmortarDexEntry
+	db "@"
+	
+ElectivireDexEntry:
+	db "ELECTRIC@"
+	db 5,11
+	dw 3056
+	TX_FAR _ElectivireDexEntry
+	db "@"
+	
+MagnezoneDexEntry:
+	db "MAGNET@"
+	db 3,11
+	dw 3968
+	TX_FAR _MagnezoneDexEntry
+	db "@"
+	
+RhyperiorDexEntry:
+	db "DRILL@"
+	db 7,10
+	dw 6235
+	TX_FAR _RhyperiorDexEntry
+	db "@"
+	
+TangrowthDexEntry:
+	db "VINE@"
+	db 6,7
+	dw 2835
+	TX_FAR _TangrowthDexEntry
+	db "@"
+	
+LickilickyDexEntry:
+	db "LICKING@"
+	db 5,7
+	dw 3086
+	TX_FAR _LickilickyDexEntry
+	db "@"
+	
+TogepiDexEntry:
+	db "SPIKE BALL@"
+	db 1,0
+	dw 33
+	TX_FAR _TogepiDexEntry
+	db "@"
+	
+TogeticDexEntry:
+	db "HAPPINESS@"
+	db 2,0
+	dw 71
+	TX_FAR _TogeticDexEntry
+	db "@"
+	
+TogekissDexEntry:
+	db "JUBILEE@"
+	db 4,11
+	dw 838
+	TX_FAR _TogekissDexEntry
+	db "@"
 	
 	
