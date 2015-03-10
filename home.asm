@@ -741,7 +741,7 @@ UncompressMonSprite:: ; 1627 (0:1627)
 	jr z,.RecallBank
 	cp MON_GHOST
 	jr z,.RecallBank
-	ld a,[$D0D3]
+	ld a,[W_MONHPICBANK]
 	jr .GotBank
 .RecallBank
 	ld a,BANK(FossilKabutopsPic)
