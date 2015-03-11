@@ -1820,7 +1820,6 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 FieldMoveNames: ; 778d (1:778d)
 	db "CUT@"
 	db "FLY@"
-	db "@"
 	db "SURF@"
 	db "STRENGTH@"
 	db "FLASH@"
@@ -1894,7 +1893,6 @@ GetMonFieldMoves: ; 77d6 (1:77d6)
 FieldMoveDisplayData: ; 7823 (1:7823)
 	db CUT, $01, $0C
 	db FLY, $02, $0C
-	db $B4, $03, $0C ; unused field move
 	db SURF, $04, $0C
 	db STRENGTH, $05, $0A
 	db FLASH, $06, $0C
