@@ -3232,7 +3232,7 @@ WaitForSoundToFinish:: ; 3748 (0:3748)
 NamePointers:: ; 375d (0:375d)
 	dw MonsterNames
 	dw MoveNames
-	dw UnusedNames
+	dw MoveNames ; Unused
 	dw ItemNames
 	dw wPartyMonOT ; player's OT names list
 	dw wEnemyMonOT ; enemy's OT names list
