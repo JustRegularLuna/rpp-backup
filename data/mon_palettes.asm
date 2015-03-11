@@ -161,7 +161,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; Umbreon
 	db PAL_BLUEMON   ; Glaceon
 	db PAL_GREEN_TRAINER ; Leafeon
-	db PAL_PINKMON   ; Sylveon
+	db PAL_MEWMON    ; Sylveon
 	db PAL_REDMON    ; Scizor
 	db PAL_GREYMON   ; Steelix
 	db PAL_PURPLEMON ; Crobat

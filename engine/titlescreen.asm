@@ -107,7 +107,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call SaveScreenTilesToBuffer2
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
-	ld a,SYLVEON ; which Pokemon to show first on the title screen
+	ld a,CHARIZARD ; which Pokemon to show first on the title screen
 	ld [wWhichTrade], a ; wWhichTrade
 	call Func_4524
 	ld a, $9b

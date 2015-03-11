@@ -633,7 +633,7 @@ TextCommandSounds:: ; 1c64 (0:1c64)
 	db $10,(SFX_02_3b - SFX_Headers_02) / 3
 	db $11,(SFX_02_42 - SFX_Headers_02) / 3
 	db $13,(SFX_08_45 - SFX_Headers_08) / 3
-	db $14,MEW      ; used in OakSpeech
+	db $14,SYLVEON  ; used in OakSpeech
 	db $15,PIDGEOT  ; used in SaffronCityText12
 	db $16,DEWGONG  ; unused?
 

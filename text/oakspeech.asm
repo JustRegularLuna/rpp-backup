@@ -1,48 +1,52 @@
 _OakSpeechText1::
 	text "Hello! Welcome to"
-	line "my updated Red"
+	line "this updated Red"
 	cont "Version!"
 
-	para "Just call me"
-	line "ROMHACKER MATEO."
+	para "You've probably"
+	line "heard of me, I'm"
+	cont "PROF. OAK."
 	
-	para "I'm totally not"
-	line "PROF. OAK."
+	para "This hack was"
+	line "created by"
+	cont "ROMHACKER MATEO."
 	
-	para "I made this for"
-	line "you guys."
+	para "It has a lot of"
+	line "new features that"
+	cont "weren't in Gen 1."
 	prompt
 
 _OakSpeechText2A::
-	text "This world is"
-	line "inhabited by"
-	cont "creatures called"
-	cont "#MON!@@"
+	text "As you can see,"
+	line "there are several"
+	cont "new #MON, too.@@"
 
 _OakSpeechText2B::
-	text $51,"For some people,"
-	line "#MON are"
-	cont "pets. Others use"
-	cont "them for fights."
+	text $51,"Most are new"
+	line "evolved forms,"
+	cont "others are just"
+	cont "there for fun."
+	
+	para "Where do you find"
+	line "them?"
 
-	para "Myself..."
-
-	para "I hack #MON"
-	line "for some reason."
+	para "I guess you'll"
+	line "have to play and"
+	cont "find out!"
 	prompt
 
 _IntroducePlayerText::
-	text "First off, what's"
+	text "But first, what's"
 	line "your name?"
 	prompt
 
 _IntroduceRivalText::
-	text "This is your"
-	line "neighbor."
+	text "This is my"
+	line "grandson."
 	
 	para "He's been your"
 	line "rival since you"
-	cont "were little."
+	cont "were younger."
 
 	para "...Erm, what is"
 	line "his name again?"
