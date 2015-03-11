@@ -533,51 +533,51 @@ SpriteCollisionBitTable:
 	db %01000000,%00000000
 	db %10000000,%00000000
 
-TestBattle:
-	ret
-
-.loop
-	call GBPalNormal
-
-	; Don't mess around
-	; with obedience.
-	ld a, %10000000 ; EARTHBADGE
-	ld [W_OBTAINEDBADGES], a
-
-	ld hl, W_FLAGS_D733
-	set 0, [hl]
-
-	; Reset the party.
-	ld hl, wPartyCount
-	xor a
-	ld [hli], a
-	dec a
-	ld [hl], a
-
-	; Give the player a
-	; level 20 Rhydon.
-	ld a, RHYDON
-	ld [wcf91], a
-	ld a, 20
-	ld [W_CURENEMYLVL], a
-	xor a
-	ld [wcc49], a
-	ld [W_CURMAP], a
-	call AddPartyMon
-
-	; Fight against a
-	; level 20 Rhydon.
-	ld a, RHYDON
-	ld [W_CUROPPONENT], a
-
-	predef InitOpponent
-
-	; When the battle ends,
-	; do it all again.
-	ld a, 1
-	ld [wUpdateSpritesEnabled], a
-	ld [H_AUTOBGTRANSFERENABLED], a
-	jr .loop
+;TestBattle:
+;	ret
+;
+;.loop
+;	call GBPalNormal
+;
+;	; Don't mess around
+;	; with obedience.
+;	ld a, %10000000 ; EARTHBADGE
+;	ld [W_OBTAINEDBADGES], a
+;
+;	ld hl, W_FLAGS_D733
+;	set 0, [hl]
+;
+;	; Reset the party.
+;	ld hl, wPartyCount
+;	xor a
+;	ld [hli], a
+;	dec a
+;	ld [hl], a
+;
+;	; Give the player a
+;	; level 20 Rhydon.
+;	ld a, RHYDON
+;	ld [wcf91], a
+;	ld a, 20
+;	ld [W_CURENEMYLVL], a
+;	xor a
+;	ld [wcc49], a
+;	ld [W_CURMAP], a
+;	call AddPartyMon
+;
+;	; Fight against a
+;	; level 20 Rhydon.
+;	ld a, RHYDON
+;	ld [W_CUROPPONENT], a
+;
+;	predef InitOpponent
+;
+;	; When the battle ends,
+;	; do it all again.
+;	ld a, 1
+;	ld [wUpdateSpritesEnabled], a
+;	ld [H_AUTOBGTRANSFERENABLED], a
+;	jr .loop
 
 INCLUDE "engine/overworld/item.asm"
 INCLUDE "engine/overworld/movement.asm"
