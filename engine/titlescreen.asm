@@ -56,15 +56,8 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX ; $402f
-IF DEF(_RED)
 	ld de,vChars2 + $600
 	ld bc,$50
-ENDC
-IF DEF(_BLUE)
-	ld de,vChars2 + $600 + $10
-	ld bc,$50 - $10
-ENDC
-
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
 	call Func_4519
@@ -114,13 +107,7 @@ ENDC
 	call SaveScreenTilesToBuffer2
 	call LoadScreenTilesFromBuffer2
 	call EnableLCD
-IF DEF(_RED)
-	ld a,CHARMANDER ; which Pokemon to show first on the title screen
-ENDC
-IF DEF(_BLUE)
-	ld a,SQUIRTLE ; which Pokemon to show first on the title screen
-ENDC
-
+	ld a,SYLVEON ; which Pokemon to show first on the title screen
 	ld [wWhichTrade], a ; wWhichTrade
 	call Func_4524
 	ld a, $9b
