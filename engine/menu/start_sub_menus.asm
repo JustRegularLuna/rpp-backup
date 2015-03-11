@@ -123,7 +123,6 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	dw .cut
 	dw .fly
 	dw .surf
-	dw .surf
 	dw .strength
 	dw .flash
 	dw .dig
