@@ -1,57 +1,27 @@
 Route25Mons:
+; Grass Mons
 	db $0F
-
-	IF DEF(_RED)
-		db 8,WEEDLE
-		db 9,KAKUNA
-		db 13,PIDGEY
-		db 12,ODDISH
-		db 13,ODDISH
-		db 12,ABRA
-		db 14,ODDISH
-		db 10,ABRA
-		db 7,METAPOD
-		db 8,CATERPIE
-	ENDC
-
-	IF DEF(_GREEN) || !DEF(_JAPAN) && DEF(_BLUE)
-		db 8,CATERPIE
-		db 9,METAPOD
-		db 13,PIDGEY
-		db 12,BELLSPROUT
-		db 13,BELLSPROUT
-		db 12,ABRA
-		db 14,BELLSPROUT
-		db 10,ABRA
-		db 7,KAKUNA
-		db 8,WEEDLE
-	ENDC
-
-	IF DEF(_JAPAN) && DEF(_BLUE)
-		db 8,CATERPIE
-		db 9,METAPOD
-		db 13,PIDGEY
-		db 12,ODDISH
-		db 13,ODDISH
-		db 12,ABRA
-		db 14,ODDISH
-		db 10,ABRA
-		db 7,KAKUNA
-		db 8,WEEDLE
-	ENDC
-
-	IF DEF(_YELLOW)
-		db 12,ODDISH
+	db 12,ODDISH
 	db 12,BELLSPROUT
-	db 13,PIDGEY
+	db 13,MEOWTH
 	db 14,ODDISH
 	db 14,BELLSPROUT
-	db 15,PIDGEY
+	db 15,ABRA
 	db 13,VENONAT
 	db 16,VENONAT
-	db 17,PIDGEY
-	db 17,PIDGEOTTO
-	ENDC
+	db 17,ABRA
+	db 17,ABRA
 
-	db $00
+; Water Mons
+	db $03
+	db 12,GOLDEEN
+	db 12,GOLDEEN
+	db 13,GOLDEEN
+	db 14,GOLDEEN
+	db 14,GOLDEEN
+	db 15,GOLDEEN
+	db 13,STARYU
+	db 16,STARYU
+	db 17,SEAKING
+	db 17,SEAKING
 

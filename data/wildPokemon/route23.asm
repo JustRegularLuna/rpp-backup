@@ -1,39 +1,27 @@
 Route23Mons:
+; Grass Mons
 	db $0A
-
-	IF DEF(_YELLOW)
-		db 41,NIDORINO
-		db 41,NIDORINA
-		db 36,MANKEY
-		db 44,NIDORINO
-		db 44,NIDORINA
-		db 40,FEAROW
-		db 41,MANKEY
-		db 45,FEAROW
-		db 41,PRIMEAPE
-		db 46,PRIMEAPE
-	ELSE
-		IF DEF(_RED)
-			db 26,EKANS
-		ENDC
-		IF !DEF(_RED)
-			db 26,SANDSHREW
-		ENDC
-		db 33,DITTO
-		db 26,SPEAROW
-		db 38,FEAROW
-		db 38,DITTO
-		db 38,FEAROW
-		IF DEF(_RED)
-			db 41,ARBOK
-		ENDC
-		IF !DEF(_RED)
-			db 41,SANDSLASH
-		ENDC
-		db 43,DITTO
-		db 41,FEAROW
-		db 43,FEAROW
-	ENDC
-
-	db $00
+	db 26,EKANS
+	db 33,DITTO
+	db 26,SPEAROW
+	db 38,ARBOK
+	db 38,DITTO
+	db 38,FEAROW
+	db 41,ARBOK
+	db 43,DITTO
+	db 41,SANDSLASH
+	db 43,FEAROW
+	
+; Water Mons
+	db $05
+	db 20,PSYDUCK
+	db 25,PSYDUCK
+	db 30,PSYDUCK
+	db 20,SLOWPOKE
+	db 25,SLOWPOKE
+	db 30,SLOWPOKE
+	db 35,GOLDUCK
+	db 35,SLOWBRO
+	db 40,GOLDUCK
+	db 40,SLOWBRO
 

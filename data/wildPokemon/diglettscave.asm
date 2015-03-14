@@ -1,4 +1,5 @@
 CaveMons:
+; Grass Mons
 	db $14
 	db 18,DIGLETT
 	db 19,DIGLETT
@@ -10,5 +11,7 @@ CaveMons:
 	db 22,DIGLETT
 	db 29,DUGTRIO
 	db 31,DUGTRIO
+	
+; Water Mons
 	db $00
 
