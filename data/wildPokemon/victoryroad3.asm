@@ -1,16 +1,16 @@
 PlateauMons3:
 ; Grass Mons
 	db $0F
-	db 36,GEODUDE
-	db 44,GOLBAT
-	db 41,GEODUDE
-	db 49,ONIX
-	db 46,GEODUDE
+	db 40,SANDSLASH
+	db 42,RHYHORN
 	db 41,GRAVELER
-	db 42,MACHOKE
+	db 49,ONIX
+	db 46,GRAVELER
+	db 41,GRAVELER
+	db 42,GOLBAT
 	db 45,MACHOKE
 	db 47,GRAVELER
-	db 47,GRAVELER
+	db 49,STEELIX
 
 ; Water Mons
 	db $00

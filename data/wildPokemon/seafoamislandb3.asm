@@ -22,7 +22,7 @@ IslandMonsB3:
 	db 30,STARYU
 	db 40,TENTACOOL
 	db 30,STARYU
-	db 30,STARYU
-	db 30,STARYU
+	db 30,STARMIE
+	db 30,STARMIE
 
 
