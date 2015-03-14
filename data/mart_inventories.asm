@@ -151,13 +151,12 @@ FuchsiaMartText1:: ; 24a8 (0:24a8)
 	db $FF
 
 ; unused? 24b1
+FossilMartText::
 	db MART_LIST
-	db 5
-	db GREAT_BALL
-	db HYPER_POTION
-	db SUPER_POTION
-	db FULL_HEAL
-	db REVIVE
+	db 3
+	db OLD_AMBER
+	db DOME_FOSSIL
+	db HELIX_FOSSIL
 	db $FF
 
 ; Cinnabar

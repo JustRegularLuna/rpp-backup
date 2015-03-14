@@ -29,7 +29,7 @@ ItemPrices: ; 4608 (1:4608)
 	money 0     ; EARTHBADGE
 	money 550   ; ESCAPE_ROPE
 	money 350   ; REPEL
-	money 0     ; OLD_AMBER
+	money 4200  ; OLD_AMBER
 	money 2100  ; FIRE_STONE
 	money 2100  ; THUNDER_STONE
 	money 2100  ; WATER_STONE
@@ -39,8 +39,8 @@ ItemPrices: ; 4608 (1:4608)
 	money 9800  ; CARBOS
 	money 9800  ; CALCIUM
 	money 4800  ; RARE_CANDY
-	money 0     ; DOME_FOSSIL
-	money 0     ; HELIX_FOSSIL
+	money 4200  ; DOME_FOSSIL
+	money 4200  ; HELIX_FOSSIL
 	money 0     ; SECRET_KEY
 	money 2100  ; SUN_STONE
 	money 0     ; BIKE_VOUCHER
