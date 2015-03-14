@@ -27,8 +27,11 @@ Museum2FText4: ; 5c337 (17:4337)
 	db "@"
 
 Museum2FText5: ; 5c33c (17:433c)
-	TX_FAR _Museum2FText5
-	db "@"
+	db $08 ; asm
+	ld a, $2
+	ld [wWhichTrade], a
+	predef DoInGameTradeDialogue
+	jp TextScriptEnd
 
 Museum2FText6: ; 5c341 (17:4341)
 	TX_FAR _Museum2FText6
