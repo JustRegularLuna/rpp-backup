@@ -10,7 +10,7 @@ MansionMonsB1:
 	db 34,PONYTA
 	db 35,HOUNDOUR
 	db 42,MAGMAR
-	db 42,MUK
+	db 42,MAGMAR
 
 ; Water Mons
 	db $00

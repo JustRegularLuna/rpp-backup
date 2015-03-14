@@ -6,7 +6,7 @@ MansionMons2:
 	db 34,KOFFING
 	db 30,PONYTA
 	db 30,KOFFING
-	db 32,PONYTA
+	db 32,NINETALES
 	db 30,GRIMER
 	db 28,MUK
 	db 39,WEEZING
