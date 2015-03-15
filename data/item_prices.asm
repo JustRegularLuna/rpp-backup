@@ -96,3 +96,13 @@ ItemPrices: ; 4608 (1:4608)
 	money 0     ; 10F
 	money 0     ; 11F
 	money 0     ; B4F
+	money 10    ; ORAN_BERRY
+	money 10    ; SITRUS_BERRY
+	money 10    ; LEPPA_BERRY
+	money 10    ; PECHA_BERRY
+	money 10    ; RAWST_BERRY
+	money 10    ; ASPEAR_BERRY
+	money 10    ; CHESTO_BERRY
+	money 10    ; CHERI_BERRY
+	money 10    ; LUM_BERRY
+	money 10    ; SWEG_BERRY

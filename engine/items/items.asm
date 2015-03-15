@@ -113,6 +113,16 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw UnusableItem      ; 10F
 	dw UnusableItem      ; 11F
 	dw UnusableItem      ; B4F
+	dw ItemUseMedicine   ; ORAN_BERRY
+	dw ItemUseMedicine   ; SITRUS_BERRY
+	dw ItemUsePPRestore  ; LEPPA_BERRY
+	dw ItemUseMedicine   ; PECHA_BERRY
+	dw ItemUseMedicine   ; RAWST_BERRY
+	dw ItemUseMedicine   ; ASPEAR_BERRY
+	dw ItemUseMedicine   ; CHESTO_BERRY
+	dw ItemUseMedicine   ; CHERI_BERRY
+	dw ItemUseMedicine   ; LUM_BERRY
+	dw ItemUseVitamin    ; SWEG_BERRY
 
 ItemThiefBall:
 	ld a,[W_ISINBATTLE]
@@ -750,14 +760,20 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,ItemUseMedicine ; if so, force another choice
 .checkItemType
 	ld a,[wcf91]
+	cp a,SWEG_BERRY
+	jp z,.useVitamin
+	cp a,PECHA_BERRY
+	jp nc,.cureStatusAilment
+	cp a,ORAN_BERRY
+	jp nc,.healHP
 	cp a,REVIVE
-	jr nc,.healHP ; if it's a Revive or Max Revive
+	jp nc,.healHP ; if it's a Revive or Max Revive
 	cp a,FULL_HEAL
-	jr z,.cureStatusAilment ; if it's a Full Heal
+	jp z,.cureStatusAilment ; if it's a Full Heal
 	cp a,HP_UP
 	jp nc,.useVitamin ; if it's a vitamin or Rare Candy
 	cp a,FULL_RESTORE
-	jr nc,.healHP ; if it's a Full Restore or one of the potions
+	jp nc,.healHP ; if it's a Full Restore or one of the potions
 ; fall through if it's one of the status-specifc healing items
 .cureStatusAilment
 	ld bc,4
@@ -766,19 +782,29 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,$f008
 	cp a,ANTIDOTE
 	jr z,.checkMonStatus
+	cp a,PECHA_BERRY
+	jr z,.checkMonStatus
 	ld bc,$f110
 	cp a,BURN_HEAL
+	jr z,.checkMonStatus
+	cp a,RAWST_BERRY
 	jr z,.checkMonStatus
 	ld bc,$f220
 	cp a,ICE_HEAL
 	jr z,.checkMonStatus
+	cp a,ASPEAR_BERRY
+	jr z,.checkMonStatus
 	ld bc,$f307
 	cp a,AWAKENING
+	jr z,.checkMonStatus
+	cp a,CHESTO_BERRY
 	jr z,.checkMonStatus
 	ld bc,$f440
 	cp a,PARLYZ_HEAL
 	jr z,.checkMonStatus
-	ld bc,$f6ff ; Full Heal
+	cp a,CHERI_BERRY
+	jr z,.checkMonStatus
+	ld bc,$f6ff ; Full Heal or Lum Berry
 .checkMonStatus
 	ld a,[hl] ; pokemon's status
 	and c ; does the pokemon have a status ailment the item can cure?
@@ -968,6 +994,12 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr .addHealAmount
 .notUsingSoftboiled2
 	ld a,[wcf91]
+	cp a,SITRUS_BERRY
+	ld b,30
+	jr z,.addHealAmount
+	cp a,ORAN_BERRY
+	ld b,10
+	jr z,.addHealAmount
 	cp a,SODA_POP
 	ld b,60 ; Soda Pop heal amount
 	jr z,.addHealAmount
@@ -1089,6 +1121,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	pop hl
 .skipRemovingItem
 	ld a,[wcf91]
+	cp a,PECHA_BERRY
+	jr nc,.playStatusAilmentCuringSound
 	cp a,FULL_RESTORE
 	jr c,.playStatusAilmentCuringSound
 	cp a,FULL_HEAL
@@ -1163,6 +1197,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	pop hl
 	ld a,[wcf91]
 	cp a,RARE_CANDY
+	jp z,.useRareCandy
+	cp a,SWEG_BERRY
 	jp z,.useRareCandy
 	push hl
 	sub a,HP_UP
@@ -1912,7 +1948,9 @@ ItemUsePPRestore: ; e31e (3:631e)
 .chooseMove
 	ld a,[wWhichTrade]
 	cp a,ELIXER
-	jp nc,.useElixir ; if Elixir or Max Elixir
+	jp z,.useElixir ; if Elixir or Max Elixir
+	cp a,MAX_ELIXER
+	jp z,.useElixir
 	ld a,$02
 	ld [wMoveMenuType],a
 	ld hl,RaisePPWhichTechniqueText
