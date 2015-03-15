@@ -21,7 +21,7 @@ ViridianCityObject: ; 0x18384 (size=104)
 	db SPRITE_GAMBLER, $8 + 4, $1e + 4, $ff, $ff, $2 ; person
 	db SPRITE_BUG_CATCHER, $19 + 4, $1e + 4, $fe, $0, $3 ; person
 	db SPRITE_GIRL, $9 + 4, $11 + 4, $ff, $d3, $4 ; person
-	db SPRITE_LYING_OLD_MAN, $9 + 4, $12 + 4, $ff, $ff, $5 ; person
+	db SPRITE_GAMBLER, $9 + 4, $12 + 4, $ff, $d3, $5 ; person
 	db SPRITE_FISHER2, $17 + 4, $6 + 4, $ff, $d0, $6 ; person
 	db SPRITE_GAMBLER, $5 + 4, $11 + 4, $fe, $2, $7 ; person
 

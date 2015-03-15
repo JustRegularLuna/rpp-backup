@@ -70,7 +70,7 @@ SpriteSets: ; 17ab9 (5:7ab9)
 	db SPRITE_OAK
 	db SPRITE_SWIMMER
 	db SPRITE_BALL
-	db SPRITE_LYING_OLD_MAN
+	db SPRITE_BERRY_TREE
 
 ; sprite set $02
 	db SPRITE_BUG_CATCHER
