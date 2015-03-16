@@ -26,3 +26,4 @@ Tilesets: ; c7be (3:47be)
 IF DEF(_OPTION_BEACH_HOUSE)
 	tileset BeachHouse_Block,  BeachHouse_GFX,  BeachHouse_Coll,  $FF,$FF,$FF, $FF, INDOOR
 ENDC
+	tileset Forest_Block,      Safari_GFX,      Forest_Coll,      $FF,$FF,$FF, $20, CAVE

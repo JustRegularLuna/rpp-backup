@@ -23,6 +23,7 @@ WarpTileIDPointers: ; c4cc (3:44cc)
 	dw ClubWarpTileIDs
 	dw FacilityWarpTileIDs
 	dw PlateauWarpTileIDs
+	dw ForestWarpTileIDs ; Safari Zone
 
 OverworldWarpTileIDs: ; c4fc (3:44fc)
 	db $1B,$58,$FF

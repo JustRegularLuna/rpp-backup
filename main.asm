@@ -6382,8 +6382,8 @@ ForestGate_Block:
 Museum_Block:
 Gate_Block:        INCBIN "gfx/blocksets/gate.bst"
 
-Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
-Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
+;Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
+;Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 Facility_GFX:      INCBIN "gfx/tilesets/facility.2bpp"
 Facility_Block:    INCBIN "gfx/blocksets/facility.bst"
 
@@ -6778,10 +6778,11 @@ TogekissPicBack:        INCBIN "pic/monback/togekiss.pic"
 
 
 
-;SECTION "bank3C",ROMX[$4314],BANK[$33]
+SECTION "bank33",ROMX[$4314],BANK[$33]
 
-;Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
-;Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
+Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
+Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
+Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 
 ;BeachHouse_GFX:    INCBIN "gfx/tilesets/beachhouse.2bpp"
 ;BeachHouse_Block:  INCBIN "gfx/blocksets/beachhouse.bst"

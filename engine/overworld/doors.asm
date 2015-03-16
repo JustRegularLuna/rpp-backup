@@ -52,6 +52,9 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	dw FacilityDoorTileIDs
 	db PLATEAU
 	dw PlateauDoorTileIDs
+; Added Safar Zone
+	db SAFARI
+	dw ForestDoorTileIDs
 	db $ff
 
 OverworldDoorTileIDs: ; 1a654 (6:6654)

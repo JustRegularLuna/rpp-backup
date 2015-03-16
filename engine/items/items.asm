@@ -1458,7 +1458,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	jp ItemUseNotTime
 
 EscapeRopeTilesets: ; dffd (3:5ffd)
-	db FOREST, CEMETERY, CAVERN, FACILITY, INTERIOR
+	db FOREST, CEMETERY, CAVERN, FACILITY, INTERIOR, SAFARI,
 	db $ff ; terminator
 
 ItemUseRepel: ; e003 (3:6003)
@@ -2826,7 +2826,7 @@ IsNextTileShoreOrWater: ; e8b8 (3:68b8)
 
 ; tilesets with water
 WaterTilesets: ; e8e0 (3:68e0)
-	db OVERWORLD, FOREST, DOJO, GYM, SHIP, SHIP_PORT, CAVERN, FACILITY, PLATEAU
+	db OVERWORLD, FOREST, DOJO, GYM, SHIP, SHIP_PORT, CAVERN, FACILITY, PLATEAU, SAFARI,
 	db $ff ; terminator
 
 ReadSuperRodData: ; e8ea (3:68ea)
