@@ -6777,13 +6777,13 @@ TogekissPicBack:        INCBIN "pic/monback/togekiss.pic"
 ;============================
 
 
-IF DEF(_OPTION_BEACH_HOUSE)
-SECTION "bank3C",ROMX[$4314],BANK[$3C]
 
-BeachHouse_GFX:
-	INCBIN "gfx/tilesets/beachhouse.2bpp"
+;SECTION "bank3C",ROMX[$4314],BANK[$33]
 
-BeachHouse_Block:
-	INCBIN "gfx/blocksets/beachhouse.bst"
-ENDC
+;Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
+;Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
+
+;BeachHouse_GFX:    INCBIN "gfx/tilesets/beachhouse.2bpp"
+;BeachHouse_Block:  INCBIN "gfx/blocksets/beachhouse.bst"
+
 
