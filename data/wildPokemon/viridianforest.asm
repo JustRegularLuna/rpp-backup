@@ -1,6 +1,6 @@
 ForestMons:
 ; Grass Mons
-	db $08
+	db $19
 	db 4,WEEDLE
 	db 4,CATERPIE
 	db 3,WEEDLE
