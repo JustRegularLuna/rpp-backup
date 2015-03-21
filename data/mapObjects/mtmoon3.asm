@@ -18,7 +18,7 @@ MtMoon3Object: ; 0x49fdb (size=102)
 	db SPRITE_OMANYTE, $6 + 4, $c + 4, $ff, $ff, $6 ; person
 	db SPRITE_OMANYTE, $6 + 4, $d + 4, $ff, $ff, $7 ; person
 	db SPRITE_BALL, $15 + 4, $19 + 4, $ff, $ff, ITEM | $8, HP_UP
-	db SPRITE_BALL, $5 + 4, $1d + 4, $ff, $ff, ITEM | $9, TM_01
+	db SPRITE_BALL, $5 + 4, $1d + 4, $ff, $ff, ITEM | $9, TM_34
 
 	; warp-to
 	EVENT_DISP MT_MOON_3_WIDTH, $9, $19 ; MT_MOON_2
