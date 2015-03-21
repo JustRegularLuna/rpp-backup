@@ -16,13 +16,11 @@ _ReceivedTM36Text:: ; 824ba (20:64ba)
 	text "!@@"
 
 _TM36ExplanationText:: ; 824c9 (20:64c9)
-	text "TM36 is"
-	line "SELFDESTRUCT!"
+	text "TM01 is"
+	line "DYNAMICPUNCH!"
 
-	para "It's powerful, but"
-	line "the #MON that"
-	cont "uses it faints!"
-	cont "Be careful."
+	para "It's powerful, so"
+	line "use it wisely."
 	done
 
 _TM36NoRoomText:: ; 8251c (20:651c)

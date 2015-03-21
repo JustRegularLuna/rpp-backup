@@ -70,7 +70,7 @@ _ReceivedTM21Text:: ; 9d50c (27:550c)
 _TM21ExplanationText:: ; 9d520 (27:5520)
 	db $0
 	para "TM21 contains"
-	line "MEGA DRAIN."
+	line "GIGA DRAIN."
 
 	para "Half the damage"
 	line "it inflicts is"
@@ -86,8 +86,8 @@ _TM21NoRoomText:: ; 9d576 (27:5576)
 _CeladonGymBattleText2:: ; 9d596 (27:5596)
 	text "Hey!"
 
-	para "You are not"
-	line "allowed in here!"
+	para "What are you"
+	line "doing in here?"
 	done
 
 _CeladonGymEndBattleText2:: ; 9d5b9 (27:55b9)
@@ -96,7 +96,7 @@ _CeladonGymEndBattleText2:: ; 9d5b9 (27:55b9)
 	prompt
 
 _CeladonGymAfterBattleText2:: ; 9d5cb (27:55cb)
-	text "Bleaah!"
+	text "Ugg!"
 	line "I hope ERIKA"
 	cont "wipes you out!"
 	done
@@ -122,8 +122,8 @@ _CeladonGymAfterBattleText3:: ; 9d612 (27:5612)
 	done
 
 _CeladonGymBattleText4:: ; 9d675 (27:5675)
-	text "Aren't you the"
-	line "peeping Tom?"
+	text "Someone has been"
+	line "spying on us!"
 	done
 
 _CeladonGymEndBattleText4:: ; 9d691 (27:5691)

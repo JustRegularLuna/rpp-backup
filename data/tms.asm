@@ -43,7 +43,7 @@ TechnicalMachines: ; 13773 (4:7773)
 	db DREAM_EATER
 	db SKY_ATTACK
 	db REST
-	db THUNDERBOLT
+	db THUNDER_WAVE
 	db PSYWAVE
 	db EXPLOSION
 	db ROCK_SLIDE

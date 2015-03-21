@@ -94,8 +94,8 @@ CeladonMart2Text2:: ; 2482 (0:2482)
 	db TM_33
 	db TM_02
 	db TM_07
-	db TM_37
-	db TM_01
+	db TM_34
+	db TM_41
 	db TM_05
 	db TM_09
 	db TM_17

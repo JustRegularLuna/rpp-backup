@@ -1,18 +1,10 @@
 _CeladonCityText1:: ; a59fb (29:59fb)
 	text "I got my KOFFING"
-IF DEF(_YELLOW)
 	line "from my friend!"
 
 	para "We get along now,"
 	line "because I was"
 	cont "very nice to it!"
-ELSE
-	line "in CINNABAR!"
-
-	para "It's nice, but it"
-	line "breathes poison"
-	cont "when it's angry!"
-ENDC
 	done
 
 _CeladonCityText2:: ; a5a4b (29:5a4b)
@@ -54,14 +46,11 @@ _ReceivedTM41Text:: ; a5b5a (29:5b5a)
 	text "!@@"
 
 _TM41ExplanationText:: ; a5b6e (29:5b6e)
-	text "TM41 teaches"
-	line "SOFTBOILED!"
+	text "TM43 teaches"
+	line "DARK PULSE!"
 
-	para "Only one #MON"
-	line "can use it!"
-
-	para "That #MON is"
-	line "CHANSEY!"
+	para "It's kinda strong,"
+	line "so use it wisely!"
 	done
 
 _TM41NoRoomText:: ; a5bb8 (29:5bb8)
@@ -71,16 +60,16 @@ _TM41NoRoomText:: ; a5bb8 (29:5bb8)
 
 _CeladonCityText6:: ; a5bd9 (29:5bd9)
 	text "This is my trusted"
-	line "pal, POLIWRATH!"
+	line "pal, SLOWKING!"
 
 	para "It evolved from"
-	line "POLIWHIRL when I"
-	cont "used WATER STONE!"
+	line "SLOWPOKE when I"
+	cont "used a MOON STONE!"
 	done
 
 _CeladonCityText7:: ; a5c30 (29:5c30)
-	text "POLIWRATH: Ribi"
-	line "ribit!@@"
+	text "SLOWKING: ..."
+	line "...Yawn?@@"
 
 _CeladonCityText8:: ; a5c49 (29:5c49)
 	text "What are you"
@@ -119,11 +108,7 @@ _CeladonCityText13:: ; a5d41 (29:5d41)
 	line "#MON GYM"
 	cont "LEADER: ERIKA"
 
-IF DEF(_YELLOW)
 	para "The Nature-Loving"
-ELSE
-	para "The Nature Loving"
-ENDC
 	line "Princess!"
 	done
 
@@ -143,8 +128,7 @@ _CeladonCityText16:: ; a5dbf (29:5dbf)
 	para "GUARD SPEC."
 	line "protects #MON"
 	cont "against SPECIAL"
-	cont "attacks such as"
-	cont "fire and water!"
+	cont "attacks!"
 
 	para "Get your items at"
 	line "CELADON DEPT."
@@ -159,11 +143,7 @@ _CeladonCityText17:: ; a5e3e (29:5e3e)
 
 _CeladonCityText18:: ; a5e6a (29:5e6a)
 	text "ROCKET GAME CORNER"
-	line "The playground"
-IF DEF(_YELLOW)
-	cont "for grownups!"
-ELSE
-	cont "for grown-ups!"
-ENDC
+	line "The Playground for"
+	cont "Everybody!"
 	done
 
