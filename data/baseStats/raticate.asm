@@ -24,6 +24,6 @@ db %01111111
 db %10001000
 db %11001001
 db %11000010
-db %00001000
+db %00001001
 db %00000010
 db BANK(RaticatePicFront)

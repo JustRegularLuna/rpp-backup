@@ -23,7 +23,7 @@ db %10110101
 db %00000011
 db %01001111
 db %11001000
-db %11100011
+db %11111011
 db %00001000
 db %00100110
 db BANK(CharmanderPicFront)

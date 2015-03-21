@@ -14,11 +14,7 @@ dw VaporeonPicFront
 dw VaporeonPicBack
 ; attacks known at lvl 0
 db TACKLE
-IF DEF(_YELLOW)
-	db TAIL_WHIP
-ELSE
-	db SAND_ATTACK
-ENDC
+db TAIL_WHIP
 db QUICK_ATTACK
 db WATER_GUN
 db 0 ; growth rate
@@ -28,6 +24,6 @@ db %01111111
 db %00001000
 db %11000000
 db %11000011
-db %00001000
+db %00001001
 db %00010010
 db BANK(VaporeonPicFront)

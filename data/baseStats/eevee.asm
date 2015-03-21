@@ -14,11 +14,7 @@ dw EeveePicFront
 dw EeveePicBack
 ; attacks known at lvl 0
 db TACKLE
-IF DEF(_YELLOW)
-	db TAIL_WHIP
-ELSE
-	db SAND_ATTACK
-ENDC
+db TAIL_WHIP
 db 0
 db 0
 db 0 ; growth rate
@@ -28,6 +24,6 @@ db %00000011
 db %00001000
 db %11000000
 db %11000011
-db %00001000
+db %00001001
 db %00000010
 db BANK(EeveePicFront)

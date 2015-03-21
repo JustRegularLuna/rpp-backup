@@ -23,7 +23,7 @@ db %10110001
 db %01000011
 db %10001111
 db %11110001
-db %11000111
+db %11010111
 db %00111000
 db %01100010
 db BANK(ElectivirePicFront)
