@@ -3,7 +3,6 @@ _PewterGymText_5c4a3:: ; 98000 (26:4000)
 	line "kinds of trainers"
 	cont "in the world!"
 
-IF DEF(_YELLOW)
 	para "Some raise #MON"
 	line "for fights. Some"
 	cont "see them as pets."
@@ -19,16 +18,6 @@ IF DEF(_YELLOW)
 	cont "CERULEAN and test"
 	cont "your abilities!"
 	done
-ELSE
-	para "You appear to be"
-	line "very gifted as a"
-	cont "#MON trainer!"
-
-	para "Go to the GYM in"
-	line "CERULEAN and test"
-	cont "your abilities!"
-	done
-ENDC
 
 _TM34PreReceiveText:: ; 98092 (26:4092)
 	text "Wait! Take this"
@@ -37,7 +26,7 @@ _TM34PreReceiveText:: ; 98092 (26:4092)
 
 _ReceivedTM34Text:: ; 980ad (26:40ad)
 	text $52, " received"
-	line "TM34!@@"
+	line "TM36!@@"
 
 _TM34ExplanationText:: ; 980c0 (26:40c0)
 	db $0
@@ -53,13 +42,13 @@ _TM34ExplanationText:: ; 980c0 (26:40c0)
 	cont "pick the #MON"
 	cont "carefully!"
 
-	para "TM34 contains"
-	line "BIDE!"
+	para "TM36 contains"
+	line "ROCK TOMB!"
 
-	para "Your #MON will"
-	line "absorb damage in"
-	cont "battle then pay"
-	cont "it back double!"
+	para "It reduces your"
+	line "opponent's speed,"
+	cont "helping you get"
+	cont "the first hit in!"
 	done
 
 _TM34NoRoomText:: ; 981ab (26:41ab)
@@ -90,11 +79,7 @@ _PewterGymText_5c4c1:: ; 98232 (26:4232)
 
 	para "The technique"
 	line "FLASH can now be"
-IF DEF(_YELLOW)
 	cont "used anytime!"
-ELSE
-	cont "used any time!"
-ENDC
 	prompt
 
 _PewterGymBattleText1:: ; 982ae (26:42ae)
