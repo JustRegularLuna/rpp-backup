@@ -6,9 +6,9 @@ UseItem_: ; d5c7 (3:55c7)
 	jp nc,ItemUseTMHM
 	ld hl,ItemUsePtrTable
 	dec a
-	add a
 	ld c,a
 	ld b,0
+	add hl,bc
 	add hl,bc
 	ld a,[hli]
 	ld h,[hl]
