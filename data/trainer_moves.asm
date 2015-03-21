@@ -8,7 +8,7 @@ LoneMoves: ; 39d22 (e:5d22)
 ; first byte:  pokemon in the trainer's party that gets the move
 ; second byte: move
 ; unterminated
-	db 1,BIDE
+	db 1,ROCK_TOMB
 	db 1,BUBBLEBEAM
 	db 2,THUNDERBOLT
 	db 2,MEGA_DRAIN
@@ -50,8 +50,14 @@ TeamMoves:
 	db 0
 
 	db BROCK,$1
-	db 2,3,BIND
-	db 2,4,BIDE
+	db 1,1,TACKLE
+	db 1,2,DEFENSE_CURL
+	db 1,3,HARDEN
+	db 1,4,ROCK_POLISH
+	db 2,1,TACKLE
+	db 2,2,BIND
+	db 2,3,HARDEN
+	db 2,4,ROCK_TOMB
 	db 0
 
 	db MISTY,$1

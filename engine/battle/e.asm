@@ -1250,7 +1250,7 @@ AIBattleWithdrawText: ; 3a781 (e:6781)
 AIUseFullHeal: ; 3a786 (e:6786)
 	call Func_3a69b
 	call AICureStatus
-	ld a,FULL_HEAL
+	ld a,LUM_BERRY
 	jp AIPrintItemUse
 
 AICureStatus: ; 3a791 (e:6791)
