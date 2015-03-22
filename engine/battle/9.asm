@@ -51,17 +51,6 @@ PrintType_: ; 27d9f (9:7d9f)
 
 INCLUDE "text/type_names.asm"
 
-SaveTrainerName: ; 27e4a (9:7e4a)
-    ld hl,W_TRAINERNAME
-	ld de,wcd6d
-.CopyCharacter
-	ld a,[hli]
-	ld [de],a
-	inc de
-	cp "@"
-	jr nz,.CopyCharacter
-	ret
-
 FocusEnergyEffect_: ; 27f86 (9:7f86)
 	ld hl, W_PLAYERBATTSTATUS2
 	ld a, [H_WHOSETURN]

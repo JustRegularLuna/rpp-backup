@@ -36,7 +36,7 @@ _CardKeyFailText:: ; 80029 (20:4029)
 	done
 
 _TrainerNameText:: ; 80045 (20:4045)
-	TX_RAM wcd6d
+	TX_RAM W_TRAINERNAME
 	text ": @@"
 
 _NoNibbleText:: ; 8004d (20:404d)
