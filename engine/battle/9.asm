@@ -52,17 +52,6 @@ PrintType_: ; 27d9f (9:7d9f)
 INCLUDE "text/type_names.asm"
 
 SaveTrainerName: ; 27e4a (9:7e4a)
-; ***Removed to just load W_TRAINERNAME since half of them did anyway
-;	ld hl,TrainerNamePointers
-;	ld a,[W_TRAINERCLASS]
-;	dec a
-;	ld c,a
-;	ld b,0
-;	add hl,bc
-;	add hl,bc
-;	ld a,[hli]
-;	ld h,[hl]
-;	ld l,a
     ld hl,W_TRAINERNAME
 	ld de,wcd6d
 .CopyCharacter
@@ -72,100 +61,6 @@ SaveTrainerName: ; 27e4a (9:7e4a)
 	cp "@"
 	jr nz,.CopyCharacter
 	ret
-
-;TrainerNamePointers: ; 27e64 (9:7e64)
-; what is the point of these?
-; ***Removed because they are redundant
-;	dw YoungsterName
-;	dw BugCatcherName
-;	dw LassName
-;	dw W_TRAINERNAME
-;	dw JrTrainerMName
-;	dw JrTrainerFName
-;	dw PokemaniacName
-;	dw SuperNerdName
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw BurglarName
-;	dw EngineerName
-;	dw JugglerXName
-;	dw W_TRAINERNAME
-;	dw SwimmerName
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw BeautyName
-;	dw W_TRAINERNAME
-;	dw RockerName
-;	dw JugglerName
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw BlackbeltName
-;	dw W_TRAINERNAME
-;	dw ProfOakName
-;	dw ChiefName
-;	dw ScientistName
-;	dw W_TRAINERNAME
-;	dw RocketName
-;	dw CooltrainerMName
-;	dw CooltrainerFName
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-;	dw W_TRAINERNAME
-
-;YoungsterName: ; 27ec2 (9:7ec2)
-;	db "YOUNGSTER@"
-;BugCatcherName: ; 27ecc (9:7ecc)
-;	db "BUG CATCHER@"
-;LassName: ; 27ed8 (9:7ed8)
-;	db "LASS@"
-;JrTrainerMName: ; 27edd (9:7edd)
-;	db "CAMPER@"
-;JrTrainerFName: ; 27ee9 (9:7ee9)
-;	db "PICNICKER@"
-;PokemaniacName: ; 27ef5 (9:7ef5)
-;	db "POKéMANIAC@"
-;SuperNerdName: ; 27f00 (9:7f00)
-;	db "SUPER NERD@"
-;BurglarName: ; 27f0b (9:7f0b)
-;	db "BURGLAR@"
-;EngineerName: ; 27f13 (9:7f13)
-;	db "ENGINEER@"
-;JugglerXName: ; 27f1c (9:7f1c)
-;	db "JUGGLER@"
-;SwimmerName: ; 27f24 (9:7f24)
-;	db "SWIMMER♂@"
-;BeautyName: ; 27f2c (9:7f2c)
-;	db "BEAUTY@"
-;RockerName: ; 27f33 (9:7f33)
-;	db "ROCKER@"
-;JugglerName: ; 27f3a (9:7f3a)
-;	db "JUGGLER@"
-;BlackbeltName: ; 27f42 (9:7f42)
-;	db "BLACKBELT@"
-;ProfOakName: ; 27f4c (9:7f4c)
-;	db "SWIMMER♀@"
-;ChiefName: ; 27f55 (9:7f55)
-;	db "ROCKET♀@"
-;ScientistName: ; 27f5b (9:7f5b)
-;	db "SCIENTIST@"
-;RocketName: ; 27f65 (9:7f65)
-;	db "ROCKET♂@"
-;CooltrainerMName: ; 27f6c (9:7f6c)
-;	db "ACE TRAINER♂@"
-;CooltrainerFName: ; 27f79 (9:7f79)
-;	db "ACE TRAINER♀@"
 
 FocusEnergyEffect_: ; 27f86 (9:7f86)
 	ld hl, W_PLAYERBATTSTATUS2
