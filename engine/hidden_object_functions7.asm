@@ -448,9 +448,9 @@ BillsHousePokemonListText1: ; 1ec7f (7:6c7f)
 
 BillsMonListText: ; 1ec84 (7:6c84)
 	db   "EEVEE"
-	next "FLAREON"
-	next "JOLTEON"
 	next "VAPOREON"
+	next "JOLTEON"
+	next "FLAREON"
 	next "CANCEL@"
 
 BillsHousePokemonListText2: ; 1ecaa (7:6caa)
