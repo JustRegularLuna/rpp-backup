@@ -186,7 +186,7 @@ TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED
 	db PAL_BLUE_TRAINER      ; Youngster
 	db PAL_GREEN_TRAINER     ; Bug Catcher
-	db PAL_CYAN_TRAINER      ; Lass
+	db PAL_BLUE_TRAINER      ; Lass
 	db PAL_BLUE_TRAINER      ; Sailor
 	db PAL_GREEN_TRAINER     ; Camper
 	db PAL_GREEN_TRAINER     ; Picnicker
