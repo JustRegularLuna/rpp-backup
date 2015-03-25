@@ -89,4 +89,8 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_BALL_M, SPRITE_MON            ;Magnezone/Rhyperior
 	dn SPRITE_GRASS, SPRITE_MON             ;Tangrowth/Lickilicky
 	dn SPRITE_FAIRY, SPRITE_FAIRY           ;Togepi/Togetic
-	dn SPRITE_BIRD_M, 0                     ;Togekiss/Padding
+	dn SPRITE_BIRD_M, SPRITE_MON            ;Togekiss/Sneasel
+	dn SPRITE_MON, SPRITE_BIRD_M            ;Weavile/Skarmory
+	dn SPRITE_MON, SPRITE_MON               ;Misdreavus/Mismagius
+	dn SPRITE_QUADRUPED, SPRITE_WATER       ;Miltank/Chinchou
+	dn SPRITE_WATER, 0                      ;Lanturn/Padding

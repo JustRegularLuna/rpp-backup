@@ -1579,19 +1579,19 @@ _EspeonDexEntry::
 	dex
 	
 _UmbreonDexEntry::
-	text "When darkness falls,"
-	next "the rings on the"
-	next "body begin to glow,"
+	text "When darkness"
+	next "falls, the rings"
+	next "on its body begin"
 	
-	page "striking fear in the"
-	next "hearts of anyone"
-	next "nearby"
+	page "to glow, striking"
+	next "fear in the hearts"
+	next "of those nearby"
 	dex
 	
 _GlaceonDexEntry::
-	text "It causes small ice"
-	next "crystals to form by"
-	next "lowering the"
+	text "It causes tiny ice"
+	next "crystals to form"
+	next "by lowering the"
 	
 	page "temperature of the"
 	next "surrounding"
@@ -1609,10 +1609,11 @@ _LeafeonDexEntry::
 	dex
 	
 _SylveonDexEntry::
-	text "It sends a soothing"
-	next "aura from its"
-	next "ribbonlike feelers"
+	text "It sends out a"
+	next "soothing aura from"
+	next "its ribbon-like"
 	
-	page "to calm fights"
+	page "feelers in order"
+	next "to calm fights"
 	dex
 	

@@ -180,6 +180,14 @@ dw LickilickyDexEntry
 dw TogepiDexEntry
 dw TogeticDexEntry
 dw TogekissDexEntry
+dw SneaselDexEntry
+dw WeavileDexEntry
+dw SkarmoryDexEntry
+dw MisdreavusDexEntry
+dw MismagiusDexEntry
+dw MiltankDexEntry
+dw ChinchouDexEntry
+dw LanturnDexEntry
 
 
 ; string: species name
@@ -1454,4 +1462,59 @@ TogekissDexEntry:
 	TX_FAR _TogekissDexEntry
 	db "@"
 	
+SneaselDexEntry:
+	db "SHARP CLAW@"
+	db 2,11
+	dw 617
+	TX_FAR _SneaselDexEntry
+	db "@"
+	
+WeavileDexEntry:
+	db "SHARP CLAW@"
+	db 3,7
+	dw 750
+	TX_FAR _WeavileDexEntry
+	db "@"
+	
+SkarmoryDexEntry:
+	db "ARMOR BIRD@"
+	db 5,7
+	dw 1113
+	TX_FAR _SkarmoryDexEntry
+	db "@"
+	
+MisdreavusDexEntry:
+	db "SCREECH@"
+	db 2,4
+	dw 22
+	TX_FAR _MisdreavusDexEntry
+	db "@"
+	
+MismagiusDexEntry:
+	db "MAGICAL@"
+	db 2,11
+	dw 97
+	TX_FAR _MismagiusDexEntry
+	db "@"
+	
+MiltankDexEntry:
+	db "MILK COW@"
+	db 3,11
+	dw 1664
+	TX_FAR _MiltankDexEntry
+	db "@"
+	
+ChinchouDexEntry:
+	db "ANGLER@"
+	db 1,8
+	dw 265
+	TX_FAR _ChinchouDexEntry
+	db "@"
+	
+LanturnDexEntry:
+	db "LIGHT@"
+	db 3,11
+	dw 496
+	TX_FAR _LanturnDexEntry
+	db "@"
 	

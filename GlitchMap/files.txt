@@ -1,0 +1,48 @@
+Map Constants,constants/map_constants.asm,
+Item Constants,constants/item_constants.asm,
+Pokemon Constants,constants/pokemon_constants.asm,
+Trainer Constants,constants/trainer_constants.asm,
+Sprite Constants,constants/overworld_sprite_constants.asm,
+Map Dimensions,constants/map_dimensions.asm,
+Tilesets,constants/tilesets.asm,
+Map Header Names,data/map_header_pointers.asm,MapHeaderPointers::
+Wild Pokemon Names,data/wild_mons.asm,WildDataPointers:
+Tileset Headers,data/tileset_headers.asm,Tilesets:
+Map Sprite Sets,data/sprite_sets.asm,MapSpriteSets:
+Sprite Data,data/sprite_sets.asm,SpriteSheetPointerTable:
+Map Header Data,data/mapHeaders
+Map Object Data,data/mapObjects,
+Map Text Pointers,scripts,
+Map Scripts,scripts,
+Wild Pokemon Data,data/wildPokemon,
+Text Data,scripts,data/mart_inventories.asm,home.asm,text/maps,text.asm
+Trainer Party Data,data/trainer_parties.asm,TrainerDataPointers:
+Hidden Object Maps,data/hidden_objects.asm,HiddenObjectMaps:
+Hidden Object Pointers,data/hidden_objects.asm,HiddenObjectPointers:
+Warp Tiles,data/warp_tile_ids.asm,WarpTileIDPointers:
+Door Tiles,engine/overworld/doors.asm,DoorTileIDPointers:
+Bookshelf Tiles,engine/hidden_object_functions3.asm,BookshelfTileIDs:
+Ledge Tiles,engine/overworld/ledges.asm,LedgeTiles:
+Ledges Script,engine/overworld/ledges.asm,HandleLedges:
+Land Tile Pair Collisions,home/overworld.asm,TilePairCollisionsLand::
+Water Tile Pair Collisions,home/overworld.asm,TilePairCollisionsWater::
+Dungeon Tilesets,data/dungeon_tilesets.asm,DungeonTilesets:
+Bike Riding Tilesets,data/bike_riding_tilesets.asm,BikeRidingTilesets::
+Escape Rope Tilesets,engine/items/items.asm,EscapeRopeTilesets:
+Water Tilesets,engine/items/items.asm,WaterTilesets:
+Split Map Sprite Sets,data/sprite_sets.asm,SplitMapSpriteSets:
+Sprite Sets,data/sprite_sets.asm,SpriteSets:
+Super Rod Data,data/super_rod.asm,SuperRodData:
+Force Bike or Surf,data/force_bike_surf.asm,ForcedBikeOrSurfMaps:
+Hide or Show Data,data/hide_show_data.asm,MapHSPointers:
+Collisions,data/collision.asm
+Map Blocks,main.asm,
+Tileset Blocks,main.asm,
+Tileset GFX,main.asm,
+Sprite GFX,main.asm,
+Hidden Coins,data/hidden_coins.asm,HiddenCoinCoords:
+Hidden Items,data/hidden_item_coords.asm,HiddenItemCoords:
+Special Warps,data/special_warps.asm,
+Fly Warp Data,data/special_warps.asm,FlyWarpDataPtr:
+Dungeon Warp List,data/special_warps.asm,DungeonWarpList:
+Dungeon Warp Data,data/special_warps.asm,DungeonWarpData:

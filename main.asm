@@ -6333,8 +6333,8 @@ INCLUDE "engine/hidden_object_functions18.asm"
 
 SECTION "bank19",ROMX,BANK[$19]
 
-Overworld_GFX:     INCBIN "gfx/tilesets/overworld.t2.2bpp"
-Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
+;Overworld_GFX:     INCBIN "gfx/tilesets/overworld.t2.2bpp"
+;Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 RedsHouse1_GFX:
 RedsHouse2_GFX:    INCBIN "gfx/tilesets/reds_house.t7.2bpp"
@@ -6770,6 +6770,18 @@ TogeticPicFront:        INCBIN "pic/bmon/togetic.pic"
 TogeticPicBack:         INCBIN "pic/monback/togetic.pic"
 TogekissPicFront:       INCBIN "pic/bmon/togekiss.pic"
 TogekissPicBack:        INCBIN "pic/monback/togekiss.pic"
+SneaselPicFront:        INCBIN "pic/bmon/sneasel.pic"
+SneaselPicBack:         INCBIN "pic/monback/sneasel.pic"
+WeavilePicFront:        INCBIN "pic/bmon/weavile.pic"
+WeavilePicBack:         INCBIN "pic/monback/weavile.pic"
+SkarmoryPicFront:       INCBIN "pic/bmon/skarmory.pic"
+SkarmoryPicBack:        INCBIN "pic/monback/skarmory.pic"
+MisdreavusPicFront:     INCBIN "pic/bmon/misdreavus.pic"
+MisdreavusPicBack:      INCBIN "pic/monback/misdreavus.pic"
+MismagiusPicFront:      INCBIN "pic/bmon/mismagius.pic"
+MismagiusPicBack:       INCBIN "pic/monback/mismagius.pic"
+MiltankPicFront:        INCBIN "pic/bmon/miltank.pic"
+MiltankPicBack:         INCBIN "pic/monback/miltank.pic"
 
 
 ;============================
@@ -6780,9 +6792,17 @@ TogekissPicBack:        INCBIN "pic/monback/togekiss.pic"
 
 SECTION "bank33",ROMX[$4314],BANK[$33]
 
+ChinchouPicFront:       INCBIN "pic/bmon/chinchou.pic"
+ChinchouPicBack:        INCBIN "pic/monback/chinchou.pic"
+LanturnPicFront:        INCBIN "pic/bmon/lanturn.pic"
+LanturnPicBack:         INCBIN "pic/monback/lanturn.pic"
+
 Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
 Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
 Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
+
+Overworld_GFX:     INCBIN "gfx/tilesets/overworld.t2.2bpp"
+Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 ;BeachHouse_GFX:    INCBIN "gfx/tilesets/beachhouse.2bpp"
 ;BeachHouse_Block:  INCBIN "gfx/blocksets/beachhouse.bst"

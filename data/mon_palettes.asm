@@ -181,6 +181,14 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_CYAN_TRAINER ; Togepi
 	db PAL_CYAN_TRAINER ; Togetic
 	db PAL_CYANMON   ; Togekiss
+	db PAL_SNEASEL   ; Sneasel
+	db PAL_SNEASEL   ; Weavile
+	db PAL_GREYMON   ; Skarmory
+	db PAL_SNEASEL   ; Misdreavus
+	db PAL_SNEASEL   ; Mismagius
+	db PAL_SNEASEL   ; Miltank
+	db PAL_BLUE_TRAINER ; Chinchou
+	db PAL_BLUE_TRAINER ; Lanturn
 	
 TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED

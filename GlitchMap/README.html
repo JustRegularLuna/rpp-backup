@@ -1,0 +1,627 @@
+<html>
+	<head>
+		<title>GlitchMap README</title>
+		<style>
+		body{
+			font-size:20px;
+			font-family:Arial;
+			min-width:1000px;
+			-webkit-user-select: none;
+		}
+		div.section{
+			text-align:center;
+			padding:50px;
+			margin:50px;
+			border:1px solid black;
+			border-radius:10px;
+			background-color:#dddddd;
+			overflow:hidden;
+			display:inline-block;
+		}
+		#description:first-line,#sources:first-line{
+			font-size:2em;
+		}
+		#description[size=shrunk]{
+			height:20px;
+		}
+		ul {
+			text-align:left;
+			margin-left:25%;
+		}
+		#files_info{
+			margin-left:10%;
+		}
+		#files_info > li{
+			margin-top:10px;
+		}
+		#files_table{
+			display:inline-block;
+			text-align:center;
+			width:80%;
+			border:1px solid black;
+			overflow:hidden;
+		}
+		div.files_row{
+			display:inline-block;
+			width:100%;
+			border-bottom:1px solid black;
+			text-align:left;
+			text-indent:50px;
+			padding-left:10px;
+			cursor:hand;
+		}
+		div.files_row:last-of-type{
+			border:none;
+		}
+		div.files_row[size=shrunk]{
+			height:30px;
+		}
+		div.files_row[type=constants]{
+			background-color:#db8b27;
+		}
+		div.files_row[type=pointer_src]{
+			background-color:#25a0ba;
+		}
+		div.files_row[type=multiple_sources]{
+			background-color:#39ba25;
+		}
+		div.files_row[type=shared]{
+			background-color:#e174d7;
+		}
+		div.files_row[type=includes]{
+			background-color:#e0e174;
+		}
+		div.files_row[type=script]{
+			background-color:#e14e4e;
+		}
+		div.files_row::first-line{
+			line-height:30px;
+			font-size:25px;
+		}
+		div.files_row:nth-of-type(1){
+			background-color:white;
+			text-indent:20px;
+			text-align:center;
+			padding-left:0px;
+		}
+		div.files_row > span{
+			display:inline-block;
+			width:20px;
+			height:20px;
+			margin-right:100px;
+			border:1px solid black;
+			margin-top:3px;
+			float:right;
+		}
+		div.files_row > span[on=true]{
+			background-color:green;
+		}
+		div.files_row > span[on=false]{
+			background-color:red;
+		}
+		div.files_row > span.table_titles{
+			border:none;
+			margin-right:0px;
+			width:150px;
+		}
+		</style>
+		<script type="text/javascript">
+		function toggleAttr(el,att,val1,val2){
+			val = el.getAttribute(att);
+			new_val = val == val1 ? val2 : val1;
+			el.setAttribute(att,new_val);
+		};
+		
+		//contains information about each file
+		files = [
+			{
+				name : "Map Constants",
+				dir : false,
+				mult : false,
+				ptr : false,
+				type : "constants",
+				desc : ["This information is used to create the 'List of Maps' in the program.","This is used to verify certain data is a map or not, to create a dropdowns of maps, and to convert between map name and map index.","The last index in this list is used as the 'number of maps' in the program, which is vital for parsing certain tables.","No other data should be in this file."],
+			},
+			{
+				name : "Item Constants",
+				dir : false,
+				mult : false,
+				ptr : false,
+				type : "constants",
+				desc : [],
+			},
+			{
+				name : "Pokemon Constants",
+				dir : false,
+				mult : false,
+				ptr : false,
+				type : "constants",
+				desc : [],
+			},
+			{
+				name : "Trainer Constants",
+				dir : false,
+				mult : false,
+				ptr : false,
+				type : "constants",
+				desc : [],
+			},
+			{
+				name : "Sprite Constants",
+				dir : false,
+				mult : false,
+				ptr : false,
+				type : "constants",
+				desc : [],
+			},
+			{
+				name : "Map Dimensions",
+				dir : false,
+				mult : false,
+				ptr : false,
+				type : "constants",
+				desc : [],
+			},
+			{
+				name : "Tilesets",
+				dir : false,
+				mult : false,
+				ptr : false,
+				type : "constants",
+				desc : [],
+			},
+			{
+				name : "Special Warps",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "constants",
+				desc : [],
+			},
+			{
+				name : "Map Header Names",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "pointer_src",
+				desc : [],
+			},
+			{
+				name : "Wild Pokemon Names",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "pointer_src",
+				desc : [],
+			},
+			{
+				name : "Tileset Headers",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "pointer_src",
+				desc : [],
+			},
+			{
+				name : "Map Sprite Sets",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "pointer_src",
+				desc : [],
+			},
+			{
+				name : "Sprite Data",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "pointer_src",
+				desc : [],
+			},
+			{
+				name : "Hidden Object Maps",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "pointer_src",
+				desc : [],
+			},
+			{
+				name : "Dungeon Warp List",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "pointer_src",
+				desc : [],
+			},
+			{
+				name : "Map Header Data",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "multiple_sources",
+				desc : [],
+			},
+			{
+				name : "Map Object Data",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "multiple_sources",
+				desc : [],
+			},
+			{
+				name : "Map Text Pointers",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "multiple_sources",
+				desc : [],
+			},
+			{
+				name : "Map Scripts",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "multiple_sources",
+				desc : [],
+			},
+			{
+				name : "Wild Pokemon Data",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "multiple_sources",
+				desc : [],
+			},
+			{
+				name : "Text Data",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "multiple_sources",
+				desc : [],
+			},
+			{
+				name : "Trainer Party Data",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Hidden Object Pointers",
+				dir : false,
+				mult : false,
+				ptr : false,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Warp Tiles",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Door Tiles",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Bookshelf Tiles",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Ledge Tiles",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Land Tile Pair Collisions",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Water Tile Pair Collisions",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Dungeon Tilesets",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Bike Riding Tilesets",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Escape Rope Tilesets",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Water Tilesets",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Split Map Sprite Sets",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Sprite Sets",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Super Rod Data",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Force Bike or Surf",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Hide or Show Data",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Dungeon Warp Data",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Fly Warp Data",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "shared",
+				desc : [],
+			},
+			{
+				name : "Collisions",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "includes",
+				desc : [],
+			},
+			{
+				name : "Map Blocks",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "includes",
+				desc : [],
+			},
+			{
+				name : "Tileset Blocks",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "includes",
+				desc : [],
+			},
+			{
+				name : "Tileset GFX",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "includes",
+				desc : [],
+			},
+			{
+				name : "Sprite GFX",
+				dir : true,
+				mult : true,
+				ptr : false,
+				type : "includes",
+				desc : [],
+			},
+			{
+				name : "Hidden Coins",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "script",
+				desc : [],
+			},
+			{
+				name : "Hidden Items",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "script",
+				desc : [],
+			},
+			{
+				name : "Ledges Script",
+				dir : false,
+				mult : false,
+				ptr : true,
+				type : "script",
+				desc : [],
+			},
+		];
+		
+		//to build the file sections
+		function buildFiles(){
+			var table = document.getElementById("files_table");
+			for(var i=0;i<files.length;i++){
+				data = files[i];
+				var row = document.createElement("div");
+				row.className = "files_row";
+				row.setAttribute("type",data.type);
+				row.setAttribute("size","shrunk");
+				row.onclick = function(){
+					toggleAttr(this,'size','full','shrunk');
+				};
+				
+				var text = document.createTextNode(data.name);
+				row.appendChild(text);
+				
+				var span = document.createElement("span");
+				span.setAttribute("on",data.dir);
+				row.appendChild(span);
+				
+				var span = document.createElement("span");
+				span.setAttribute("on",data.mult);
+				row.appendChild(span);
+				
+				var span = document.createElement("span");
+				span.setAttribute("on",data.ptr);
+				row.appendChild(span);
+				
+				for(var j=0;j<data.desc.length;j++){
+					var br = document.createElement("br");
+					row.appendChild(br);
+					
+					var text=document.createTextNode(data.desc[j]);
+					row.appendChild(text)
+				}
+				table.appendChild(row);
+			}
+		};
+		</script>
+	</head>
+	<body onload="buildFiles();">
+		<div id="description" class="section" onclick="toggleAttr(this,'size','full','shrunk');">
+			Description
+			<br><br>
+			GlitchMap is a two part program, where the interaction with the pokered files occurs through python scripts, and the manipulation of
+			the data occurs inside the browser.
+			<br><br>
+			To run this program, you will need the following:
+			<br>
+			<ul>
+				<li><a href="https://www.python.org/downloads/release/python-340/">Latest Python (3+)</a>
+				<li><a href="https://www.chromium.org/getting-involved/dev-channel">Latest Google Chrome (41+ recommended)</a>
+			</ul>
+			<br>
+			To set up, you simply need to add the files into a "GlitchMap" directory inside your top pokered directory.
+			<br>
+			If you want to use this with an older version of pokered or with an already modified version of pokered, you might need to edit the Sources 
+			(see below) to make sure the python script can find the data it is looking for.
+			<br><br>
+			To run this program:
+			<br>
+			<ul>
+				<li> Open up terminal or command prompt
+				<li> cd to the GlitchMap folder that you placed in your pokered directory
+				<li> Submit the following command: python glitchmap.py
+			</ul>
+			That is all you need to do.  Whewn you do this, the python script will begin parsing the sources in the pokered directory to the find the data it is looking for
+			and will extract the necessary data (and save it to an external file - 'data.js'.
+			<br>
+			Once it is done extracting the data, it will create a local server and open up the GUI in your browser.
+			The local server is necessary because to save the data to the pokered files, the browser needs to communicate with another python script.
+			<br>
+			When you are done, simply close out of the browser window and out of the terminal window.
+			<br><br>
+			The data.js file is kept up to date every time you save and will never be cached, so you can re-open GlitchMap in your browser (if the local server is still running)
+			and it will have the latest data.  Due to this, you will also notice that every other time you type in run the open.py script, it will skip the parsing of the files and 
+			immediate create the server, which reduces start up time.
+			<br><br>
+			If for some reason you think the data.js file is not up to date (or you might have changed some data using anothe program), you can force a reload of the data from 
+			the pokered source files by typing the following into the terminal:
+			<ul>
+				<li>python glitchmap.py -reload
+			</ul>
+		</div>
+		<div id="sources" class="section">
+			Sources
+			<br><br>
+			The 'files.txt' contains information about where the python script will look to find the data necessary.
+			<br>
+			The format is as follows:
+			<br><br>
+			Data Name, Source1[, Source2,...SourceN],Label
+			<br><br>
+			<ul id="files_info">
+				<li>The Data Name should not be changed, it is used when parsing data to run the appropriate function.
+				<li>The Sources are the files/directories that the software needs to look to find the desired files (note, only certain types of data will allow more than source or the use of a directory as a source).
+				<li>The Label is the name/pointer of the dataset to be parsed.  This will be found immediately before the data and will end with a colon (:).  The label is used in the in-game routines when they need to references the data.
+				(note, not all types of data will require a label.  Some of them, the label names are extracted from other types of data).  If a directory is given, then each file within thta directory will be parsed.
+			</ul>
+			<br><br>
+			If you are using the latest pokered, then you will not need to update any information within the files.txt.  If you are using an older or modified version, you might need to change the source files and/or pointer names 
+			(or even create a brand new file to serve the required purpose).
+			<br>
+			To do this, I recommend looking up the data information in the latest pokered (i.e. going to the appropriate file and finding the label) and then find the same table within your version of pokered.
+			<br><br>
+			Please look at the following table to see more info about each type of data that GlitchMap will extract.
+			<br>
+			If you have a modified or old version of pokered, this might help you if GlitchMap is unable to extract the information from your files.
+			<br><br>
+			<div id="files_table">
+				<div class="files_row">
+					<span class="table_titles">
+						Directories
+					</span>
+					<span class="table_titles">
+						Multiple Files
+					</span>
+					<span class="table_titles">
+						Pointer
+					</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

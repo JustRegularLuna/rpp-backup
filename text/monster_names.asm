@@ -180,6 +180,14 @@ db "LICKILICKY"
 db "TOGEPI@@@@"
 db "TOGETIC@@@"
 db "TOGEKISS@@"
+db "SNEASEL@@@"
+db "WEAVILE@@@"
+db "SKARMORY@@"
+db "MISDREAVUS"
+db "MISMAGIUS@"
+db "MILTANK@@@"
+db "CHINCHOU@@"
+db "LANTURN@@@"
 
 
 
