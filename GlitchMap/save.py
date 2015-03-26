@@ -397,7 +397,88 @@ def saveWildPokemon(input):
   
   copyRemaining(obj)
   saveFile(obj["output"],input["path"])
-          
+
+def saveSuperRodData(input,obj):    
+  #if we are saving as new, then add the new pointer:
+  if input["save_as_new"]:
+    #save the old line
+    old_line = obj["output"].pop()
+    
+    addLine(obj,input["data"]["new_name"] + ":")
+  #otherwise, remove the pokemon info for the one we are editing
+  else:
+    #get the size (ignoring empty lines)
+    line = getNextLine(obj,False)
+    while line == '':
+      line = getNextLine(obj,False)
+    length = convertHex(line)
+    for i in range(length):
+      #remove the pokemon info
+      line = getNextLine(obj,False)
+      while line == '':
+        line = getNextLine(obj,False)
+        
+  #add the pokemon info:
+  addLine(obj,"\tdb " + str(len(input["data"]["pokemon"])))
+  for mons in input["data"]["pokemon"]:
+    addLine(obj,"\tdb " + str(mons[0]) + "," + mons[1])
+    
+  #restore the old line
+  if input["save_as_new"]:
+    obj["output"].append(old_line)
+
+def saveMapSuperRodName(input,obj):
+  #remove the table up to FF
+  line = getNextLine(obj,False).split(",")
+  
+  old_names = []
+  
+  #keep removing lines until we reach the number
+  while(255 not in convertHex(line)):
+    #ignore empty lines:
+    if len(line) > 1:
+      #save the list name to the old names list
+      if line[1] not in old_names:
+        old_names.append(line[1])
+    line = getNextLine(obj,False).split(",")
+    
+  list = input["data"]
+  for arr in list:
+    #if the name of this super rod data is in the old names list, then remove it from the old names list
+    if arr[1] in old_names:
+      old_names.pop(old_names.index(arr[1]))
+    for map in arr[0]:
+      addLine(obj,"\tdbw " + map + ", " + arr[1])
+  addLine(obj,"\tdb $FF")
+  
+  with open("GlitchMap/test.txt", "w+") as f:
+  
+    #to delete the rod names that aren't used anymore
+    saved_data = []
+    while len(old_names) > 0:
+      saved_data.append(obj["original"][0])
+      line = getNextLine(obj,False)
+      #check each name we are deleting
+      for name in old_names:
+        #see if we've reached the line
+        if name + ":" == line:
+          old_names.pop(old_names.index(name))
+          #remove the ptr name
+          saved_data.pop()
+          #get the size (ignoring empty lines)
+          line = getNextLine(obj,False)
+          while line == '':
+            line = getNextLine(obj,False)
+          length = convertHex(line)
+          for i in range(length):
+            #remove the pokemon info
+            line = getNextLine(obj,False)
+            while line == '':
+              line = getNextLine(obj,False)
+    
+  #restore the saved data
+  obj["original"] = saved_data + obj["original"]
+  
 def saveMapBlocks(input):
   saveBinary(input["data"],input["path"])
   #if we need to save this as a new file
@@ -809,6 +890,14 @@ save_functions = {
   "wild_pokemon" : {
     "save" : saveWildPokemon,
   },
+  "super_rod_data" : {
+    "save" : saveSuperRodData,
+    "file" : "Super Rod Data",
+  },
+  "map_super_rod_name" : {
+    "save" : saveMapSuperRodName,
+    "file" : "Super Rod Data",
+  },
 }
 '''
   "map_objects" : {
@@ -833,10 +922,6 @@ save_functions = {
   },
   "text_data" : {
     "save" : saveTextData,
-  },
-  "super_rod_data" : {
-    "save" : saveSuperRodData,
-    "file" : "Super Rod Data",
   },
   "hidden_objects" : {
     "save" : saveHiddenObjects,

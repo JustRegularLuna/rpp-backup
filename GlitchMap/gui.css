@@ -427,12 +427,18 @@ div.apply_to_other_label{
 	left:5em;
 	top:1.5em;
 }
+#current_super_rod_data_container{
+	position:absolute;
+	left:5em;
+	top:65em;
+}
 
-#wild_pokemon_selection{
+#wild_pokemon_selection,#super_rod_data_selection{
 	position:relative;
 	top:-0.25em;
 	left:0.5em;
 }
+
 div.wild_pokemon_container{
 	padding:1em;
 	position:absolute;
@@ -495,6 +501,19 @@ div.wild_pokemon_list[version=YELLOW]{
 	background-color:#4d4d1d;
 }
 
+#super_rod_pokemon_list{
+	background-color:#717200;
+	position:absolute;
+	top:67em;
+	left:50%;
+	margin-left:-7em;
+	overflow-y:scroll;
+	width:14em;
+}
+#super_rod_add_pokemon{
+	width:10em;
+}
+
 input.level,input.catch_rate{
 	float:left;
 	width:4.5em;
@@ -511,7 +530,7 @@ select.pokemon{
 }
 
 
-#save_new_wild_pokemon_container{
+#save_new_wild_pokemon_container,#save_new_super_rod_data_container{
 	position:absolute;
 	right:5em;
 	top:1.5em;
@@ -522,7 +541,11 @@ select.pokemon{
 	text-align:right;
 }
 
-#save_new_wild_pokemon{
+#save_new_super_rod_data_container{
+	top:65em;
+}
+
+#save_new_wild_pokemon,#save_new_super_rod_data{
 	position:relative;
 	top:.25em;
 }
@@ -876,6 +899,21 @@ div.value{
 	float:right;
 	margin-left:0.5em;
 	margin-right:0.5em;
+}
+
+div.delete_button{
+	display:inlne-block;
+	height:1.25em;
+	position:relative;
+	left:-0.25em;
+	width:1.25em;
+	float:right;
+	cursor:hand;
+	line-height:1.25em;
+	border-radius:4px;
+	color:white;
+	background-color:#9c1717;
+	border:1px solid black;
 }
 
 div.button{

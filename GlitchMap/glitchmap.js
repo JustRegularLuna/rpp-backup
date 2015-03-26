@@ -1,8 +1,13 @@
 /***********************"
 Notes:
 -Add in toggle "subblock borders" button for Objects page
-
+-When editing super rod data: if it is "None" and you add a pokemon, auto check "save as new"
 -Don't save "Map Dimensions" if the value is an int (rather than a string that appears in the Map Constants list).  instead, save the map header
+
+-For all, check to see if anything actually did change.  If nothing changed, then don't save that feature
+
+-prevent non-alphanumberic (and _) from being saved as a new file name
+-if you cancel the "new_file_name", then reset the file_names (otherwise, it will not pop up next time)
 
 For Readme:
 -It is assumed the connection map uses the same tileset
@@ -467,12 +472,45 @@ function GlitchMap(){
 		pokemon : new function(){
 			//pokemon.build
 			this.build = function(){
-				//to build the wild pokemon dropdown:
+				//to build the fishing group dropdown:
+				var div = newElement("div",{
+					id : "current_super_rod_data_container",
+					text : "Super Rod Group: "
+				},
+				this.page);
+				elements.containers.current_super_rod_data = div;
+				
+				//create the fishing group dropdown
+				var input = createSelectFromList(data.pointers.super_rod_data,1);
+				var option = newElement("option",{
+					text : "None",
+					value : "None",
+				},
+				input);
+				input.id = "super_rod_selection";
+				elements.fields.super_rod_list = input;
+				input.addEventListener("change",function(){
+					setModified("map_super_rod_name");
+					//if the current list was "none", then just reset modified for "super rod data"
+					if(current_data.super_rod_data.name == "None"){
+						resetModified("super_rod_data")
+					}
+					//set the "super_rod_data" callback to be "ShowHideSaveAs"
+					setCallback("load_super_rod_data",function(){
+						pages.pokemon.refresh();
+						showHideSaveAs("super_rod_data");
+					});
+					change("super_rod_data",this.options[this.selectedIndex].value);
+				})
+				div.appendChild(input);
+				
+				//to build the wild pokemon dropdown container:
 				var div = newElement("div",{
 					id : "current_wild_pokemon_container",
 					text : "Wild Pokemon: "
 				},
 				this.page);
+				elements.containers.current_wild_pokemon_data = div;
 				
 				//create the wild pokemon dropdown
 				var input = createSelectFromList(data.pointers.wild_pokemon,1);
@@ -480,9 +518,28 @@ function GlitchMap(){
 				elements.fields.wild_pokemon_list = input;
 				input.addEventListener("change",function(){
 					setModified("map_pokemon");
+					//set the "wild_pokemon" callback to be "ShowHideSaveAs"
+					setCallback("load_wild_pokemon",function(){
+						pages.pokemon.refresh();
+						showHideSaveAs("wild_pokemon");
+					});
 					change("wild_pokemon",this.options[this.selectedIndex].value);
 				})
 				div.appendChild(input);
+			
+				
+				/**************Save as New Super Rod Data Element**************/
+				var div = createSaveAsNew("super_rod_data");
+				this.page.appendChild(div);
+				
+				//the Super Rod List container
+				var div = newElement("div",{
+					id : "super_rod_pokemon_list",
+					class : "wild_pokemon_list",
+					text : "Super Rod Pokemon"
+				},
+				this.page);
+				elements.containers.super_rod_list = div;
 			
 				
 				/**************Save as New Wild Pokemon List Element**************/
@@ -626,6 +683,11 @@ function GlitchMap(){
 				elements.tabs.pokemon.setAttribute("state","active");		
 				
 				elements.fields.wild_pokemon_list.selectedIndex = getSortedPointerIndex(data.pointers.wild_pokemon,1,current_data.wild_pokemon.name);
+				var sr_index = getSortedPointerIndex(data.pointers.super_rod_data,1,current_data.super_rod_data.name);
+				if(sr_index == -1){
+					sr_index = data.pointers.super_rod_data.length;
+				}
+				elements.fields.super_rod_list.selectedIndex = sr_index;
 				
 				wp_data = current_data.wild_pokemon.data;
 				
@@ -1199,13 +1261,25 @@ function GlitchMap(){
 			new_name : true,
 			file_name : '',
 			title : "Wild Pokemon",
-			src : "removeFromArray(getIndexInPointerList('wild_pokemon',current_data.wild_pokemon.name,0).slice(),current_data.map.name)",
+			src : "removeFromArray(getIndexInPointerList('wild_pokemon',current_data.wild_pokemon.name,0),current_data.map.name)",
 			alert : false,
 			shared_array : [],
 			tab : 'pokemon',
 			also_modify : ["map_pokemon"],
 		},
+		super_rod_data : {
+			save_new : false,
+			new_name : true,
+			file_name : '',
+			title : "Super Rod Data",
+			src : "removeFromArray(getIndexInPointerList('super_rod_data',current_data.super_rod_data.name,0),current_data.map.name)",
+			alert : false,
+			shared_array : [],
+			tab : 'pokemon',
+			also_modify : ["map_super_rod_name"],
+		},
 	};
+	this.new_files = new_files;
 	
 	//contains the connection data (needs to be separate because these values need to be known, but not stored as part of the current data unless it is toggled on)
 	var connections_data = {
@@ -1231,9 +1305,11 @@ function GlitchMap(){
 	var callback_functions = {
 		load_tileset : [],
 		load_wild_pokemon : [],
+		load_super_rod_data : [],
 		load_map : [],
 		save_map : [],
 		save_wild_pokemon : [],
+		save_super_rod_data : [],
 		save_tileset : []
 	};
 	this.callbacks = callback_functions
@@ -1250,8 +1326,14 @@ function GlitchMap(){
 	};
 	
 	//to set a callback
-	function setCallback(id,f){
-		callback_functions[id].push(f);
+	//if back is set to be true, then place at back.  otherwise, place at front
+	function setCallback(id,f,back){
+		if(back){
+			callback_functions[id].push(f);
+		}
+		else{
+			callback_functions[id].unshift(f);
+		}
 	};
 	
 	//to clear the given callbacks
@@ -1266,6 +1348,7 @@ function GlitchMap(){
 		map_dimensions : false,
 		map_blocks : false,
 		map_header : false,
+		map_super_rod_name : false,
 		tileset_blocks : false,
 		tileset_collision : false,
 		tileset_door_tiles : false,
@@ -1282,6 +1365,7 @@ function GlitchMap(){
 		tileset_gfx : false,
 		map_pokemon : false,
 		wild_pokemon : false,
+		super_rod_data : false,
 	};
 	
 	//functions to update the internal data for each type of data
@@ -1634,6 +1718,13 @@ function GlitchMap(){
 			var name = current_data.wild_pokemon.name;
 			var old_name = getFromPointerList("wild_pokemon",current_data.map.name,1);
 			
+			//if we saved a new name
+			if(new_files.wild_pokemon.save_new){
+				//get the new name
+				var name = new_files.wild_pokemon.file_name;
+			}
+			
+			
 			//only update the internal data if the name is different from the old name
 			if(name != old_name){
 				//remove this map from the old list
@@ -1658,14 +1749,13 @@ function GlitchMap(){
 					var option = list.childNodes[list_index];
 					list.removeChild(option);
 					
+					delete data.wild_pokemon[old_name];
+					
 					data.pointers.wild_pokemon.splice(index,1);
 				}
 				
 				//if we saved a new name
-				if(new_files.wild_pokemon.save_new){
-					//get the new name
-					var name = new_files.wild_pokemon.file_name;
-					
+				if(new_files.wild_pokemon.save_new){					
 					//add a new element to the list
 					var arr = [[current_data.map.name],name,file];
 					data.pointers.wild_pokemon.push(arr);
@@ -1678,6 +1768,7 @@ function GlitchMap(){
 					
 					index = getSortedPointerIndex(data.pointers.wild_pokemon,1,name);
 					list.insertBefore(option,list.childNodes[index]);
+					list.selectedIndex = index;
 				}
 				else{
 					//add this map to the new list
@@ -1736,6 +1827,100 @@ function GlitchMap(){
 				pointer : name,
 				data_names : [list_name + " (Wild Pokemon Data)"],
 			}
+		},
+		map_super_rod_name : function(){
+		
+			var name = current_data.super_rod_data.name;
+			var old_name = getFromPointerList("super_rod_data",current_data.map.name,1);
+			
+			//if we saved a new name
+			if(new_files.super_rod_data.save_new){
+				//get the new name
+				var name = new_files.super_rod_data.file_name;
+			}
+			
+			
+			//only update the internal data if the name is different from the old name
+			if(name != old_name){
+				var list = elements.fields.super_rod_list;
+				
+				//remove this map from the old list (if old_name isn't false)
+				if(old_name !== false){
+					var arr = getFromPointerList("super_rod_data",current_data.map.name,0);
+					var index = getFromPointerList("super_rod_data",current_data.map.name);
+					arr.splice(arr.indexOf(current_data.map.name),1);
+					
+					//if this is empty, then remove
+					if(arr.length == 0){				
+						//to remove from the dropdown list
+						var list_index = getSortedPointerIndex(data.pointers.super_rod_data,1,old_name);
+						var option = list.childNodes[list_index];
+						list.removeChild(option);
+						
+						delete data.super_rod_data[old_name];
+						
+						data.pointers.super_rod_data.splice(index,1);
+					}
+				}
+				
+				//if we saved a new name
+				if(new_files.super_rod_data.save_new){					
+					//add a new element to the list
+					var arr = [[current_data.map.name],name];
+					data.pointers.super_rod_data.push(arr);
+					
+					//to add new element to dropdown
+					var option = document.createElement("option");
+					option.value = name;
+					var text = document.createTextNode(name);
+					option.appendChild(text);
+					
+					index = getSortedPointerIndex(data.pointers.super_rod_data,1,name);
+					list.insertBefore(option,list.childNodes[index]);
+					list.selectedIndex = index;
+				}
+				//add it to the new list if the new name is "None"
+				else if(name != "None"){
+					//add this map to the new list
+					var arr = getIndexInPointerList("super_rod_data",name,0);
+					arr.push(current_data.map.name);
+				}
+			}
+		
+			return {
+				data : data.pointers.super_rod_data,
+				data_names : ["Super Rod Map List"],
+			}
+		},
+		super_rod_data : function(){
+			var name = current_data.super_rod_data.name;
+			var og_name = name
+			
+			//if the og name is none, then set it to be the first name in the list
+			if(og_name == "None"){
+				og_name = data.pointers.super_rod_data[0][1];
+			}
+			
+			var sr_data = {};
+			
+			//if we saved a new name
+			if(new_files.super_rod_data.save_new){
+				//get the new name
+				name = new_files.super_rod_data.file_name;
+				sr_data.new_name = name;
+				
+				current_data.super_rod_data.name = name;
+			}
+			
+			data.super_rod_data[name] = current_data.super_rod_data.data;
+			sr_data.pokemon = data.super_rod_data[name];
+			
+			return {
+				data : sr_data,
+				pointer : og_name +":",
+				save_as_new : new_files.super_rod_data.save_new,
+				data_names : [name + " (Super Rod Data)"],
+			};
 		},
 	};
 	
@@ -2738,7 +2923,9 @@ function GlitchMap(){
 		},
 		saveChanges : function(params){
 			var box = elements.containers.alert_box_text;
-			var text = document.createTextNode("There are changes to the data associated with this " + params.type.replace("_"," ") + ".");
+			var text = document.createTextNode("There are changes to the data associated with this " + params.type.replace(/^[a-z]|[\b_][a-z]/g,function(match){
+				return match.replace("_"," ").toUpperCase();
+			}));
 			box.appendChild(text);
 			var br = document.createElement("br");
 			box.appendChild(br);
@@ -2899,6 +3086,10 @@ function GlitchMap(){
 		},
 		wild_pokemon : function(name){
 			new_files.wild_pokemon.file_name = name;
+			return name;
+		},
+		super_rod_data : function(name){
+			new_files.super_rod_data.file_name = name;
 			return name;
 		},
 	};
@@ -3703,6 +3894,96 @@ function GlitchMap(){
 		arr.sort();
 		return arr.indexOf(name);
 	};
+	
+	//to build the super rod data list
+	function buildSuperRodData(){
+		var el = elements.containers.super_rod_list;
+		clearNodes(el);
+		
+		var text = document.createTextNode("Super Rod Pokemon");
+		el.appendChild(text);
+		
+		var br = document.createElement("br");
+		el.appendChild(br);
+		
+		for(var i=0;i<current_data.super_rod_data.data.length;i++){
+			var input = newElement("input",{
+				type : "number",
+				min : 0,
+				max : 255,
+				class : "level",
+				which : i,
+				value : current_data.super_rod_data.data[i][0],
+			},
+			el);
+			input.addEventListener("input",function(){
+				var which = parseInt(this.getAttribute("which"));
+				//see if the input if a not number
+				if(this.validity.badInput){
+					//if so, reset the value
+					this.value = current_data.super_rod_data.data[which][0];
+				}
+				//if the number is below 0 or empty, set to 0
+				else {
+					if(this.value < 0 || this.value == ''){
+						this.value = 0;
+					}
+					//if the number exceed 255, set to 255
+					else if(this.value > 255){
+						this.value = 255;
+					}
+					setModified("super_rod_data");
+					current_data.super_rod_data.data[which][0] = this.value;
+				}
+			});
+			
+			var div = newElement("div",{
+				which : i,
+				class : "delete_button",
+				text : "X"
+			},el);
+			div.addEventListener(("click"),function(){
+				setModified("super_rod_data");
+				var which = parseInt(this.getAttribute("which"));
+				current_data.super_rod_data.data.splice(which,1);
+				buildSuperRodData();
+			});
+									
+			var input = createSelectFromList(data.lists.pokemon,0);
+			input.setAttribute("which",i);
+			input.className = "pokemon";
+			input.selectedIndex = getSortedPointerIndex(data.lists.pokemon,0,current_data.super_rod_data.data[i][1]);
+			input.addEventListener("change",function(){
+				setModified("super_rod_data");
+				var which = parseInt(this.getAttribute("which"));
+				current_data.super_rod_data.data[which][1] = this.value;
+			});
+			el.appendChild(input);
+			
+			var br = document.createElement("br");
+			el.appendChild(br);
+		
+		}
+		
+		//to create the "add pokemon" button
+		var div = newElement("div",{
+			text : "Add Pokemon",
+			class : "button",
+			state : "active",
+			id : "super_rod_add_pokemon"
+		},el);
+		div.addEventListener("click",function(){
+			//if the current list is "none", then auto set save-as-new
+			if(elements.fields.super_rod_list.selectedIndex == data.pointers.super_rod_data.length){
+				toggleNewFile("super_rod_data")
+			}
+			setModified("super_rod_data");
+			var arr = [0,getIndexInSorted(data.lists.pokemon,0)];
+			current_data.super_rod_data.data.push(arr);
+			buildSuperRodData();
+		});
+		
+	};
 	/*************************************************************************
 	Functions that deal with the loading of data
 	*************************************************************************/
@@ -4018,7 +4299,7 @@ function GlitchMap(){
 	function showHideSaveAs(key){
 		//if this map shares blocks with another, then alert the user
 		for(var each in new_files){
-			if(key == "map" || new_files[each].tab == key){
+			if(key == "map" || each == key || new_files[each].tab == key){
 				var shared_array = eval(new_files[each].src);
 				//if the pointer exists
 				if(shared_array !== false){
@@ -4046,15 +4327,16 @@ function GlitchMap(){
 		pages.connections.refresh();
 		pages.objects.refresh();
 		pages.sprites.refresh();
+		pages.pokemon.refresh();
+		
+		//close the loading textbox
+		closeAlert();
 		
 		//to show or hide the save as features
 		showHideSaveAs("map");
 			
 		scrollCheck();
 		
-		//close the loading textbox
-		closeAlert();
-
 		callback("load_map");
 	};
 	
@@ -4095,15 +4377,18 @@ function GlitchMap(){
 			elements.containers.header_fields.style.visibility = 'visible';
 			elements.containers.tabs.style.visibility = 'visible';
 			
+			var wild_pk_name = getFromPointerList("wild_pokemon",current_data.map.name,1);
+			load("wild_pokemon",wild_pk_name);
+			
+			var sr_data_name = getFromPointerList("super_rod_data",current_data.map.name,1);
+			load("super_rod_data",sr_data_name);
+			
 			//set the tileset callback function to be "finishLoadingMap";
 			setCallback("load_tileset",finishLoadingMap);
 			
-			//load the tileset
+			//load the tileset (and place the "change_tab" at the front of the callback order)
 			var tset = current_data.map.header.tileset;
-			load("tileset",{tset : tset});
-			
-			var wild_pk_name = getFromPointerList("wild_pokemon",current_data.map.name,1);
-			load("wild_pokemon",wild_pk_name);
+			load("tileset",{tset : tset},false,true);
 		},
 		tileset : function(input){
 			var tset = input.tset;
@@ -4209,7 +4494,7 @@ function GlitchMap(){
 								
 				//to refresh the tileset page (pass along if we are just updating the gfx or not)
 				pages.tileset.refresh(gfx_only);
-				
+
 				callback("load_tileset");
 			}
 		},
@@ -4237,20 +4522,36 @@ function GlitchMap(){
 				}
 			}
 			
-			showHideSaveAs("pokemon");
-			
-			pages.pokemon.refresh();
-			
 			callback("load_wild_pokemon");
+		},
+		super_rod_data : function(name){
+			if(!name || name == "None"){
+				name = "None";
+				var sr_data = [];
+			}
+			else{
+				var sr_data = data.super_rod_data[name];
+			}
+			
+			//update the current_data to a copy of this super rod data
+			current_data.super_rod_data = {
+				data : JSON.parse(JSON.stringify(sr_data)),
+				name : name,
+			};
+			
+			buildSuperRodData();
+			
+			callback("load_super_rod_data");
 		},
 	};
 	
 	//to run the functions to load a certain type of data into memory
-	function load(type,input,partial){
+	function load(type,input,partial,front){
+		var back = front !== true;
 		//set the "load" callback to be "changeTab"
 		setCallback("load_" + type,function(){
 			changeTab(currentTab);
-		});
+		},back);
 
 		//determine if we are loading brand new data or just partial data
 		if(typeof partial === 'undefined'){
@@ -4903,6 +5204,10 @@ function GlitchMap(){
 	
 	//to remove the given name fromthe given array
 	function removeFromArray(array,name){
+		if(!array){
+			return false;
+		}
+		array = array.slice();
 		if(array.indexOf(name) > -1){
 			array.splice(array.indexOf(name),1);
 		}

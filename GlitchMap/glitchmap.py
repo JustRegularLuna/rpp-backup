@@ -66,6 +66,7 @@ datasets = {
   "tile_pair_collision" : {},
   "map_objects" : {},
   "wild_pokemon" : {},
+  "super_rod_data" : {},
   "tileset_lists" : {},
   "bookshelf_tiles" : {},
   "sprite_sets" : {},
@@ -317,6 +318,13 @@ def writeData():
   #End of Wild Pokemon Data
   dataLine("},")
   
+  #beginning of super rod data
+  dataLine("super_rod_data : {")
+  nestedObjs(datasets["super_rod_data"])  
+  #End of Super Rod Data
+  dataLine("},")
+  
+  
   #Beginning of Lists Data
   dataLine("lists : {")
     
@@ -418,9 +426,9 @@ def extractConstantsCommon(line):
     ret["name"] = removeSpaces(line[0])
     ret["id"] = convertHex(removeSpaces(line[1]))
     ret["success"] = True
-  elif "const " in line and removeSpaces(line).startswith("const"):
+  elif re.compile("const[ \t]",re.IGNORECASE).search(line) and removeSpaces(line).startswith("const"):
     #to remove the const
-    line = line.split("const ")[-1]
+    line = re.compile("const[ \t]",re.IGNORECASE).split(line)[-1]
     const_count += 1
     ret["name"] = removeSpaces(line)
     ret["id"] = const_count
@@ -706,6 +714,7 @@ def extractSuperRodData(content):
     line = getNextLine(content).split(",")
 
   new_arr = []
+  new_obj = {}
   for i in range(len(pointer_names)):
     title = getNextLine(content).replace(":","")
     size = convertHex(getNextLine(content))
@@ -720,9 +729,11 @@ def extractSuperRodData(content):
       index = ptrs.index(title)
       ptrs.pop(index)
       map_list.append(maps.pop(index))
-    new_arr.append([map_list,title,poke_list])
+    new_arr.append([map_list,title])
+    new_obj[title] = poke_list
   
   pointers["super_rod_data"] = new_arr
+  datasets["super_rod_data"] = new_obj
   
 def extractHiddenObjectPointers(content):
   arr = []
