@@ -3,6 +3,7 @@ Notes:
 -Add in toggle "subblock borders" button for Objects page
 -When editing super rod data: if it is "None" and you add a pokemon, auto check "save as new"
 -Don't save "Map Dimensions" if the value is an int (rather than a string that appears in the Map Constants list).  instead, save the map header
+-- In the map header, save as text or int (depending on what it was originally). right now it just saves as int
 
 -For all, check to see if anything actually did change.  If nothing changed, then don't save that feature
 

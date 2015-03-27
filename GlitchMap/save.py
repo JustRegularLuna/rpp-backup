@@ -2,6 +2,13 @@
 
 import inspect, os, sys, json, cgi, re
 
+'''
+Create a global list that contains:
+[file to save to,data to save]
+and only run when every obj gets edited? this way nothing will be mismatched
+'''
+
+
 #############################################################
 #############        Save Functions        ##################
 #############################################################
@@ -98,7 +105,7 @@ def saveMapPokemon(input,obj):
   addLine(obj,"\tdw " + input["data"]["name"])
   
 #to extract wild pokemon data
-def extractWildPokemonData(obj): 
+def extractWildPokemonData(obj):
   content = obj["original"]
   
   #to initialize the wild data
@@ -115,7 +122,7 @@ def extractWildPokemonData(obj):
     "water_mons_YELLOW" : [],
     "water_mons_BLUE" : [],
     "water_mons_JAPAN" : [],
-		}
+    }
   
   #to parse an IF statement to see which versions these following data applies to
   def parseIF(statement,name):
@@ -184,14 +191,17 @@ def extractWildPokemonData(obj):
     #ignore empty lines
     while(removeAll(poke_data) == ''):
       poke_data = getNextLine(obj,False,False)
+      
     poke_data = poke_data.replace("\t","").split(",")
-    
     for version in version_list:
       wild_data[name + version].append([convertHex(poke_data[0]),poke_data[1]])
   
   #to get the catch rate for the given versions (if it doesn't have one get)
   def getRate(name,version_list):
     value = removeAll(content[0])
+    #ignore blank lines
+    while(value == ''):
+      value = removeAll(content[0])
     added_rate = False
     #check each version
     for version in version_list:
@@ -205,7 +215,7 @@ def extractWildPokemonData(obj):
     if added_rate:
       removed_line = content.pop(0)
       #if its empty, then keep going until we get non empty one
-      if(removeAll(removed_line) == ''):
+      while(removeAll(removed_line) == ''):
         removed_line = content.pop(0)
       return value
     else:
@@ -409,13 +419,13 @@ def saveSuperRodData(input,obj):
   else:
     #get the size (ignoring empty lines)
     line = getNextLine(obj,False)
-    while line == '':
+    while removeAll(line) == '':
       line = getNextLine(obj,False)
     length = convertHex(line)
     for i in range(length):
       #remove the pokemon info
       line = getNextLine(obj,False)
-      while line == '':
+      while removeAll(line) == '':
         line = getNextLine(obj,False)
         
   #add the pokemon info:
@@ -451,30 +461,28 @@ def saveMapSuperRodName(input,obj):
       addLine(obj,"\tdbw " + map + ", " + arr[1])
   addLine(obj,"\tdb $FF")
   
-  with open("GlitchMap/test.txt", "w+") as f:
-  
-    #to delete the rod names that aren't used anymore
-    saved_data = []
-    while len(old_names) > 0:
-      saved_data.append(obj["original"][0])
-      line = getNextLine(obj,False)
-      #check each name we are deleting
-      for name in old_names:
-        #see if we've reached the line
-        if name + ":" == line:
-          old_names.pop(old_names.index(name))
-          #remove the ptr name
-          saved_data.pop()
-          #get the size (ignoring empty lines)
+  #to delete the rod names that aren't used anymore
+  saved_data = []
+  while len(old_names) > 0:
+    saved_data.append(obj["original"][0])
+    line = getNextLine(obj,False)
+    #check each name we are deleting
+    for name in old_names:
+      #see if we've reached the line
+      if name + ":" == line:
+        old_names.pop(old_names.index(name))
+        #remove the ptr name
+        saved_data.pop()
+        #get the size (ignoring empty lines)
+        line = getNextLine(obj,False)
+        while removeAll(line) == '':
           line = getNextLine(obj,False)
-          while line == '':
+        length = convertHex(line)
+        for i in range(length):
+          #remove the pokemon info
+          line = getNextLine(obj,False)
+          while removeAll(line) == '':
             line = getNextLine(obj,False)
-          length = convertHex(line)
-          for i in range(length):
-            #remove the pokemon info
-            line = getNextLine(obj,False)
-            while line == '':
-              line = getNextLine(obj,False)
     
   #restore the saved data
   obj["original"] = saved_data + obj["original"]
@@ -1018,11 +1026,11 @@ def removeSize(str):
   #to remove the space and size for every line in the given content (or line)
 def removeAll(content,path = ''):
   if type(content) is str:
-    return removeSpaces(removeSize(content))
+    return removeSpaces(removeSize(content.split(";")[0]))
   else:
     arr = []
     for line in content:
-      arr.append(removeSpaces(removeSize(line)))
+      arr.append(removeSpaces(removeSize(line.split(";")[0])))
     return arr
     
 #to convert a str to decimal if its hex
