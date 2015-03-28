@@ -10,22 +10,10 @@ _MomWakeUpText::
 	done
 
 _MomHealText1::
-IF DEF(_YELLOW)
-	text "MOM: ",$52,", if"
-	line "your drive your"
-	cont "#MON too hard,"
-	cont "they'll dislike"
-	cont "you."
-
-	para "You should take a"
-	line "rest."
-	prompt
-ELSE
 	text "MOM: ",$52,"!"
 	line "You should take a"
 	cont "quick rest."
 	prompt
-ENDC
 
 _MomHealText2::
 	text "MOM: Oh good!"
@@ -48,3 +36,20 @@ _TVWrongSideText::
 	text "Oops, wrong side."
 	done
 
+_FridgeText::
+	text "Let's see what's"
+	line "in the fridge..."
+	
+	para "MOUNTAIN DEW and"
+	line "CHERRY COKE!"
+	done
+	
+_StoveText::
+	text "Nothing on the"
+	line "stove."
+	done
+	
+_SinkText::
+	text "The sink is shiny"
+	line "and clean."
+	done

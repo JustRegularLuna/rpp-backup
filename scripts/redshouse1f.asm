@@ -4,6 +4,9 @@ RedsHouse1FScript: ; 48168 (12:4168)
 RedsHouse1FTextPointers: ; 4816b (12:416b)
 	dw RedsHouse1FText1
 	dw RedsHouse1FText2
+	dw RedsHouse1FText3
+	dw RedsHouse1FText4
+	dw RedsHouse1FText5
 
 RedsHouse1FText1: ; 4816f (12:416f) ; 416F Mom
 	db 8
@@ -67,3 +70,16 @@ StandByMeText: ; 481da (12:41da)
 TVWrongSideText: ; 481df (12:41df)
 	TX_FAR _TVWrongSideText
 	db "@"
+
+RedsHouse1FText3:
+	TX_FAR _FridgeText
+	db "@"
+	
+RedsHouse1FText4:
+	TX_FAR _StoveText
+	db "@"
+	
+RedsHouse1FText5:
+	TX_FAR _SinkText
+	db "@"
+	
