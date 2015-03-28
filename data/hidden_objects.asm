@@ -198,15 +198,15 @@ RedsHouse2FHiddenObjects: ; 46b5a (11:6b5a)
 	dbw BANK(PrintRedsNESText), PrintRedsNESText
 	db $FF
 BluesHouseHiddenObjects: ; 46b67 (11:6b67)
-	db $01,$00,$04
-	db BANK(PrintBookcaseText)
-	dw PrintBookcaseText
-	db $01,$01,$04
-	db BANK(PrintBookcaseText)
-	dw PrintBookcaseText
-	db $01,$07,$04
-	db BANK(PrintBookcaseText)
-	dw PrintBookcaseText
+;	db $01,$00,$04
+;	db BANK(PrintBookcaseText)
+;	dw PrintBookcaseText
+;	db $01,$01,$04
+;	db BANK(PrintBookcaseText)
+;	dw PrintBookcaseText
+;	db $01,$07,$04
+;	db BANK(PrintBookcaseText)
+;	dw PrintBookcaseText
 	db $FF
 OaksLabHiddenObjects: ; 46b7a (11:6b7a)
 	db $00,$04,$04

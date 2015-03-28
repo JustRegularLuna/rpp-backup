@@ -48,3 +48,16 @@ _BluesHouseText3::
 	line "This is useful!"
 	done
 
+_BluesTVText::
+	text "There's a show on"
+	line "TV."
+	
+	para "A man in a brown"
+	line "pinstripe suit is"
+	cont "running toward a"
+	cont "blue Police Box."
+	
+	para "I'd better get"
+	line "going too."
+	done
+	
