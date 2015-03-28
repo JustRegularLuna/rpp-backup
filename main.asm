@@ -6801,7 +6801,7 @@ Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
 Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
 Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 
-Overworld_GFX:     INCBIN "gfx/tilesets/overworld.t2.2bpp"
+Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
 Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 ;BeachHouse_GFX:    INCBIN "gfx/tilesets/beachhouse.2bpp"
