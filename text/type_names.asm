@@ -11,7 +11,7 @@ TypeNames:
 	dw .Ghost
 	dw .Steel
 	
-	dw .Normal ; Unused
+	dw .Unk    ; Unused
 	dw .Normal ; Unused
 	dw .Normal ; Unused
 	dw .Normal ; Unused
@@ -51,3 +51,4 @@ TypeNames:
 .Steel:    db "STEEL@"
 .Dark:     db "DARK@"
 .Fairy:    db "FAIRY@"
+.Unk       db "???@"

@@ -174,7 +174,7 @@ endm
 	move SUPER_FANG,   SUPER_FANG_EFFECT,            1, NORMAL,    90, 10
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, NORMAL,   100, 20
 	move SUBSTITUTE,   SUBSTITUTE_EFFECT,            0, NORMAL,   100, 10
-	move STRUGGLE,     RECOIL_EFFECT,               50, NORMAL,   100, 10
+	move STRUGGLE,     RECOIL_EFFECT,               50, UNK_TYPE, 100, 10
 	move SLASH,        NO_ADDITIONAL_EFFECT,        50, STEEL,     95, 35 ; Metal Claw
 	move COMET_PUNCH,  NO_ADDITIONAL_EFFECT,        40, STEEL,    100, 30 ; Bullet Punch
 	move AURORA_BEAM,  SPECIAL_DOWN_SIDE_EFFECT,    80, STEEL,    100, 10 ; Flash Cannon
