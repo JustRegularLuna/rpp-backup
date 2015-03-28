@@ -6337,7 +6337,7 @@ SECTION "bank19",ROMX,BANK[$19]
 ;Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 RedsHouse1_GFX:
-RedsHouse2_GFX:    INCBIN "gfx/tilesets/reds_house.t7.2bpp"
+RedsHouse2_GFX:    INCBIN "gfx/tilesets/reds_house.2bpp"
 RedsHouse1_Block:
 RedsHouse2_Block:  INCBIN "gfx/blocksets/reds_house.bst"
 
