@@ -40,24 +40,22 @@ PrintBookshelfText: ; fb50 (3:7b50)
 
 ; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)
+	db MANSION,50,64
 	db REDS_HOUSE_1,50,64
+	db GYM,29,64
+	db GATE,34,64
+	db PLATEAU,48,58
+	db LAB,40,64
+	db SHIP,54,64
 	db MART,84,66
 	db MART,85,66
-	db LAB,40,64
-	db MANSION,50,64
 	db HOUSE,61,63
 	db HOUSE,30,64
+	db OAK_TS,92,64
+	db OAK_TS,94,64
 	db LOBBY,22,65
 	db LOBBY,80,66
 	db LOBBY,82,66
-	db POKECENTER,84,66
-	db POKECENTER,85,66
-	db PLATEAU,48,58
-	db GYM,29,64
-	db SHIP,54,64
-	db OAK_TS,92,64
-	db OAK_TS,94,64
-	db GATE,34,64
 	db $FF
 
 IndigoPlateauStatues: ; fbbf (3:7bbf)

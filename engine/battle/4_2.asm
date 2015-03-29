@@ -154,13 +154,13 @@ TryDoWildEncounter: ; 13870 (4:7870)
 .gotEncounterSlot
 ; determine which wild pokémon (grass or water) can appear in the half-block we’re standing in
 	ld c, [hl]
-	ld hl, W_GRASSMONS
+	ld hl, W_WATERMONS
 	aCoord 8, 9	
 	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?	
-	jr nz, .gotWildEncounterType ; else, it's treated as a grass tile by default
-	ld hl, W_WATERMONS
-; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
-; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters.	
+	jr z, .gotWildEncounterType ; if so, it's water
+	cp $32 ; is the bottom left tile (8,9) of the half-block we're standing in a shore tile?
+	jr z, .gotWildEncounterType ; if so, it's water
+	ld hl, W_GRASSMONS ; otherwise, it's a grass tile by default	
 .gotWildEncounterType
 	ld b, $0
 	add hl, bc

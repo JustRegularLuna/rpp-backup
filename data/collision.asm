@@ -2,7 +2,7 @@ Underground_Coll::  INCBIN  "gfx/tilesets/underground.tilecoll"
 Overworld_Coll::    INCBIN  "gfx/tilesets/overworld.tilecoll"
 RedsHouse1_Coll::
 RedsHouse2_Coll::   INCBIN  "gfx/tilesets/reds_house.tilecoll"
-Mart_Coll::
+Mart_Coll::         INCBIN  "gfx/tilesets/mart.tilecoll"
 Pokecenter_Coll::   INCBIN  "gfx/tilesets/pokecenter.tilecoll"
 OakTS_Coll::        INCBIN  "gfx/tilesets/oakts.tilecoll"
 Gym_Coll::          INCBIN  "gfx/tilesets/gym.tilecoll"

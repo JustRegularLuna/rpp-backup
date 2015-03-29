@@ -6371,9 +6371,7 @@ OakTS_Block:       INCBIN "gfx/blocksets/oakts.bst"
 Gym_GFX:           INCBIN "gfx/tilesets/gym.2bpp"
 Gym_Block:         INCBIN "gfx/blocksets/gym.bst"
 
-Mart_GFX:
 Pokecenter_GFX:    INCBIN "gfx/tilesets/pokecenter.2bpp"
-Mart_Block:
 Pokecenter_Block:  INCBIN "gfx/blocksets/pokecenter.bst"
 
 ForestGate_GFX:
@@ -6802,6 +6800,9 @@ Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 
 Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
 Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
+
+Mart_GFX:          INCBIN "gfx/tilesets/mart.2bpp"
+Mart_Block:        INCBIN "gfx/blocksets/mart.bst"
 
 ;BeachHouse_GFX:    INCBIN "gfx/tilesets/beachhouse.2bpp"
 ;BeachHouse_Block:  INCBIN "gfx/blocksets/beachhouse.bst"

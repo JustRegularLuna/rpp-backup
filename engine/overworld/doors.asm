@@ -30,8 +30,8 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	dw OverworldDoorTileIDs
 	db FOREST
 	dw ForestDoorTileIDs
-	db MART
-	dw MartDoorTileIDs
+	db POKECENTER
+	dw PokecenterDoorTileIDs
 	db HOUSE
 	dw HouseDoorTileIDs
 	db FOREST_GATE
@@ -52,7 +52,6 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	dw FacilityDoorTileIDs
 	db PLATEAU
 	dw PlateauDoorTileIDs
-; Added Safar Zone
 	db SAFARI
 	dw ForestDoorTileIDs
 	db REDS_HOUSE_1
@@ -67,8 +66,8 @@ OverworldDoorTileIDs: ; 1a654 (6:6654)
 ForestDoorTileIDs: ; 1a657 (6:6657)
 	db $3a,$00
 
-MartDoorTileIDs: ; 1a659 (6:6659)
-	db $5e,$00
+PokecenterDoorTileIDs: ; 1a659 (6:6659)
+	db $57,$5e,$00
 
 HouseDoorTileIDs: ; 1a65b (6:665b)
 	db $54,$00
