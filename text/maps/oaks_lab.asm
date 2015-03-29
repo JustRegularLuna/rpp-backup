@@ -37,17 +37,10 @@ ENDC
 	done
 
 _OaksLabText39:: ; 94ddf (25:4ddf)
-IF DEF(_YELLOW)
-	text "That's a #"
-	line "BALL. There's a"
-	cont "#MON inside!"
+	text "It contains a"
+	line "#MON caught by"
+	cont "PROF. OAK!"
 	done
-ELSE
-	text "Those are #"
-	line "BALLs. They"
-	cont "contain #MON!"
-	done
-ENDC
 
 IF DEF(_YELLOW)
 _OaksLabPikachuText::

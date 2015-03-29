@@ -3,7 +3,7 @@ REDS_HOUSE_1 EQU 1
 MART         EQU 2
 FOREST       EQU 3
 REDS_HOUSE_2 EQU 4
-DOJO         EQU 5
+OAK_TS       EQU 5
 POKECENTER   EQU 6
 GYM          EQU 7
 HOUSE        EQU 8

@@ -6365,9 +6365,10 @@ IF DEF(_BLUE)
 	INCBIN "gfx/blue/blueversion.1bpp" ; 8 tiles
 ENDC
 
-Dojo_GFX:
+OakTS_GFX:         INCBIN "gfx/tilesets/oakts.2bpp"
+OakTS_Block:       INCBIN "gfx/blocksets/oakts.bst"
+
 Gym_GFX:           INCBIN "gfx/tilesets/gym.2bpp"
-Dojo_Block:
 Gym_Block:         INCBIN "gfx/blocksets/gym.bst"
 
 Mart_GFX:
@@ -6382,8 +6383,6 @@ ForestGate_Block:
 Museum_Block:
 Gate_Block:        INCBIN "gfx/blocksets/gate.bst"
 
-;Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
-;Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 Facility_GFX:      INCBIN "gfx/tilesets/facility.2bpp"
 Facility_Block:    INCBIN "gfx/blocksets/facility.bst"
 

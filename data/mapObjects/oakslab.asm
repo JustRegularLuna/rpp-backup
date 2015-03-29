@@ -1,5 +1,5 @@
 OaksLabObject: ; 0x1d40a (size=88)
-	db $3 ; border block
+	db $0 ; border block
 
 	db $2 ; warps
 	db $b, $4, $2, $ff

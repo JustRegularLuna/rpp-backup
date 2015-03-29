@@ -4,7 +4,7 @@ Tilesets: ; c7be (3:47be)
 	tileset Mart_Block,        Mart_GFX,        Mart_Coll,        $18,$19,$1E, $FF, INDOOR
 	tileset Forest_Block,      Forest_GFX,      Forest_Coll,      $FF,$FF,$FF, $20, CAVE
 	tileset RedsHouse2_Block,  RedsHouse2_GFX,  RedsHouse2_Coll,  $FF,$FF,$FF, $FF, INDOOR
-	tileset Dojo_Block,        Dojo_GFX,        Dojo_Coll,        $3A,$FF,$FF, $FF, OUTDOOR
+	tileset OakTS_Block,	OakTS_GFX,	OakTS_Coll,	255,255,255, 255, 0
 	tileset Pokecenter_Block,  Pokecenter_GFX,  Pokecenter_Coll,  $18,$19,$1E, $FF, INDOOR
 	tileset Gym_Block,         Gym_GFX,         Gym_Coll,         $3A,$FF,$FF, $FF, OUTDOOR
 	tileset House_Block,       House_GFX,       House_Coll,       $FF,$FF,$FF, $FF, INDOOR

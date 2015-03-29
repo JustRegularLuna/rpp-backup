@@ -4,7 +4,7 @@ RedsHouse1_Coll::
 RedsHouse2_Coll::   INCBIN  "gfx/tilesets/reds_house.tilecoll"
 Mart_Coll::
 Pokecenter_Coll::   INCBIN  "gfx/tilesets/pokecenter.tilecoll"
-Dojo_Coll::
+OakTS_Coll::        INCBIN  "gfx/tilesets/oakts.tilecoll"
 Gym_Coll::          INCBIN  "gfx/tilesets/gym.tilecoll"
 Forest_Coll::       INCBIN  "gfx/tilesets/forest.tilecoll"
 House_Coll::        INCBIN  "gfx/tilesets/house.tilecoll"

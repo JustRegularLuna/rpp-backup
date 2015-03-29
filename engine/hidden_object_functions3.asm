@@ -40,23 +40,24 @@ PrintBookshelfText: ; fb50 (3:7b50)
 
 ; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)
-	db PLATEAU,      $30, $3A
-	db HOUSE,        $3D, $3F
-	db HOUSE,        $1E, $40
-	db MANSION,      $32, $40
-	db REDS_HOUSE_1, $32, $40
-	db LAB,          $28, $40
-	db LOBBY,        $16, $41
-	db GYM,          $1D, $40
-	db DOJO,         $1D, $40
-	db GATE,         $22, $40
-	db MART,         $54, $42
-	db MART,         $55, $42
-	db POKECENTER,   $54, $42
-	db POKECENTER,   $55, $42
-	db LOBBY,        $50, $42
-	db LOBBY,        $52, $42
-	db SHIP,         $36, $40
+	db REDS_HOUSE_1,50,64
+	db MART,84,66
+	db MART,85,66
+	db LAB,40,64
+	db MANSION,50,64
+	db HOUSE,61,63
+	db HOUSE,30,64
+	db LOBBY,22,65
+	db LOBBY,80,66
+	db LOBBY,82,66
+	db POKECENTER,84,66
+	db POKECENTER,85,66
+	db PLATEAU,48,58
+	db GYM,29,64
+	db SHIP,54,64
+	db OAK_TS,92,64
+	db OAK_TS,94,64
+	db GATE,34,64
 	db $FF
 
 IndigoPlateauStatues: ; fbbf (3:7bbf)

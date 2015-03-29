@@ -4,7 +4,7 @@ WarpTileIDPointers: ; c4cc (3:44cc)
 	dw MartWarpTileIDs
 	dw ForestWarpTileIDs
 	dw RedsHouse2WarpTileIDs
-	dw DojoWarpTileIDs
+	dw OakTSWarpTileIDs
 	dw PokecenterWarpTileIDs
 	dw GymWarpTileIDs
 	dw HouseWarpTileIDs
@@ -23,64 +23,47 @@ WarpTileIDPointers: ; c4cc (3:44cc)
 	dw ClubWarpTileIDs
 	dw FacilityWarpTileIDs
 	dw PlateauWarpTileIDs
-	dw ForestWarpTileIDs ; Safari Zone
-
-OverworldWarpTileIDs: ; c4fc (3:44fc)
-	db $1B,$58,$FF
-
-ForestGateWarpTileIDs: ; c4ff (3:44ff)
-MuseumWarpTileIDs: ; c4ff (3:44ff)
-GateWarpTileIDs: ; c4ff (3:44ff)
-	db $3B
-
-RedsHouse1WarpTileIDs: ; c500 (3:4500)
-RedsHouse2WarpTileIDs: ; c500 (3:4500)
-	db $1A,$1C,$FF
-
-MartWarpTileIDs: ; c503 (3:4503)
-PokecenterWarpTileIDs: ; c503 (3:4503)
-	db $5E,$FF
-
-ForestWarpTileIDs: ; c505 (3:4505)
-	db $5A,$5C,$3A,$FF
-
-DojoWarpTileIDs: ; c509 (3:4509)
-GymWarpTileIDs: ; c509 (3:4509)
-	db $4A,$FF
-
-HouseWarpTileIDs: ; c50b (3:450b)
-	db $54,$5C,$32,$FF
-
-ShipWarpTileIDs: ; c50f (3:450f)
-	db $37,$39,$1E,$4A,$FF
-
-InteriorWarpTileIDs: ; c514 (3:4514)
-	db $15,$55,$04,$FF
-
-CavernWarpTileIDs: ; c518 (3:4518)
-	db $18,$1A,$22,$FF
-
-LobbyWarpTileIDs: ; c51c (3:451c)
-	db $1A,$1C,$38,$FF
-
-MansionWarpTileIDs: ; c520 (3:4520)
-	db $1A,$1C,$53,$FF
-
-LabWarpTileIDs: ; c524 (3:4524)
-	db $34,$FF
-
-FacilityWarpTileIDs: ; c526 (3:4526)
-	db $43,$58,$20
-
-CemeteryWarpTileIDs: ; c529 (3:4529)
-	db $1B
-
-UndergroundWarpTileIDs: ; c52a (3:452a)
-	db $13,$FF
-
-PlateauWarpTileIDs: ; c52c (3:452c)
-	db $1B,$3B
-
-ShipPortWarpTileIDs: ; c52e (3:452e)
-ClubWarpTileIDs: ; c52e (3:452e)
+	dw ForestWarpTileIDs
+OverworldWarpTileIDs:
+	db 27,88,$FF
+ForestGateWarpTileIDs:
+MuseumWarpTileIDs:
+GateWarpTileIDs:
+	db 59,26,28,$FF
+RedsHouse1WarpTileIDs:
+RedsHouse2WarpTileIDs:
+	db 26,28,$FF
+MartWarpTileIDs:
+PokecenterWarpTileIDs:
+	db 94,$FF
+ForestWarpTileIDs:
+	db 90,92,58,$FF
+OakTSWarpTileIDs:
+	db 2,$FF
+GymWarpTileIDs:
+	db 74,$FF
+HouseWarpTileIDs:
+	db 84,92,50,$FF
+ShipWarpTileIDs:
+	db 55,57,30,74,$FF
+InteriorWarpTileIDs:
+	db 21,85,4,$FF
+CavernWarpTileIDs:
+	db 24,26,34,$FF
+LobbyWarpTileIDs:
+	db 26,28,56,$FF
+MansionWarpTileIDs:
+	db 26,28,83,$FF
+LabWarpTileIDs:
+	db 52,$FF
+FacilityWarpTileIDs:
+	db 67,88,32,27,19,$FF
+CemeteryWarpTileIDs:
+	db 27,19,$FF
+UndergroundWarpTileIDs:
+	db 19,$FF
+PlateauWarpTileIDs:
+	db 27,59,$FF
+ShipPortWarpTileIDs:
+ClubWarpTileIDs:
 	db $FF
