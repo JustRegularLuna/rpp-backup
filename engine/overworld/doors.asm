@@ -30,6 +30,8 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	dw OverworldDoorTileIDs
 	db FOREST
 	dw ForestDoorTileIDs
+	db SAFARI
+	dw ForestDoorTileIDs
 	db POKECENTER
 	dw PokecenterDoorTileIDs
 	db HOUSE
@@ -52,46 +54,32 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	dw FacilityDoorTileIDs
 	db PLATEAU
 	dw PlateauDoorTileIDs
-	db SAFARI
-	dw ForestDoorTileIDs
 	db REDS_HOUSE_1
 	dw RedsHouseDoorTileIDs
 	db REDS_HOUSE_2
 	dw RedsHouseDoorTileIDs
-	db $ff
-
-OverworldDoorTileIDs: ; 1a654 (6:6654)
-	db $1B,$58,$00
-
-ForestDoorTileIDs: ; 1a657 (6:6657)
-	db $3a,$00
-
-PokecenterDoorTileIDs: ; 1a659 (6:6659)
-	db $57,$5e,$00
-
-HouseDoorTileIDs: ; 1a65b (6:665b)
-	db $54,$00
-
-TilesetMuseumDoorTileIDs: ; 1a65d (6:665d)
-	db $3b,$00
-
-ShipDoorTileIDs: ; 1a65f (6:665f)
-	db $1e,$00
-
-LobbyDoorTileIDs: ; 1a661 (6:6661)
-	db $1c,$38,$1a,$00
-
-MansionDoorTileIDs: ; 1a665 (6:6665)
-	db $1a,$1c,$53,$00
-
-LabDoorTileIDs: ; 1a669 (6:6669)
-	db $34,$00
-
-FacilityDoorTileIDs: ; 1a66b (6:666b)
-	db $43,$58,$1b,$00
-
-PlateauDoorTileIDs: ; 1a66f (6:666f)
-	db $3b,$1b,$00
-	
+	db $FF
+OverworldDoorTileIDs:
+	db 27,88,$00
+ForestDoorTileIDs:
+	db 58,$00
+PokecenterDoorTileIDs:
+	db 87,94,$00
+HouseDoorTileIDs:
+	db 84,$00
+TilesetMuseumDoorTileIDs:
+	db 59,$00
+ShipDoorTileIDs:
+	db 30,$00
+LobbyDoorTileIDs:
+	db 28,56,26,$00
+MansionDoorTileIDs:
+	db 26,28,83,$00
+LabDoorTileIDs:
+	db 52,$00
+FacilityDoorTileIDs:
+	db 67,88,27,$00
+PlateauDoorTileIDs:
+	db 59,27,$00
 RedsHouseDoorTileIDs:
-	db $1A,$1C,$00
+	db 26,28,$00
