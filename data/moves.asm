@@ -260,3 +260,5 @@ endm
 	move BONEMERANG,   TWO_TO_FIVE_ATTACKS_EFFECT,  25, GROUND,    90, 10 ; Bone Rush
 	move AURORA_BEAM,  NO_ADDITIONAL_EFFECT,       100, FLYING,   100,  5 ; Aeroblast
 	move ROCK_THROW,   NO_ADDITIONAL_EFFECT,        60, ROCK,     100,  5 ; Ancient Power
+	move SURF,         CHARGE_EFFECT,               80, WATER,    100, 10 ; Dive (Unused)
+	

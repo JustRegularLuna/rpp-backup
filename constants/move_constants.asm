@@ -250,6 +250,7 @@ const_value = 1
 	const BONE_RUSH
 	const AEROBLAST
 	const ANCIENTPOWER
+	const DIVE ; Unused
 
 NUM_ATTACKS EQU const_value
 const_value = STRUGGLE + 1

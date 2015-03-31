@@ -9170,3 +9170,5 @@ PhysicalSpecialSplit: ;Determines if a move is Physical or Special
 	db PHYSICAL;Bone Rush
 	db SPECIAL ;Aeroblast
 	db SPECIAL ;AncientPower
+	db PHYSICAL;Dive (Unused)
+	

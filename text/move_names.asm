@@ -249,4 +249,5 @@ MoveNames:: ; b0000 (2c:4000)
 	db "BONE RUSH@"
 	db "AEROBLAST@"
 	db "ANCIENTPOWER@"
+	db "DIVE@"
 
