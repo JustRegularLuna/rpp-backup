@@ -192,7 +192,7 @@ endm
 	move FLAMETHROWER, PARALYZE_SIDE_EFFECT1,       60, DRAGON,   100, 20 ; Dragonbreath
 	move SLASH,        NO_ADDITIONAL_EFFECT,        80, DRAGON,   100, 15 ; Dragon Claw
 	move AURORA_BEAM,  NO_ADDITIONAL_EFFECT,        90, DRAGON,   100, 10 ; Dragon Pulse
-	move WHIRLWIND,    FLINCH_SIDE_EFFECT1,         40, DRAGON,   100, 20 ; Twister
+	move SONICBOOM,    FLINCH_SIDE_EFFECT1,         40, DRAGON,   100, 20 ; Twister
 	move RAGE,         TRAPPING_EFFECT,            120, DRAGON,   100, 10 ; Outrage
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, GHOST,    100, 15 ; Shadow Claw
 	move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        70, STEEL,     90, 25 ; Steel Wing
@@ -255,7 +255,7 @@ endm
 	move COUNTER,      NO_ADDITIONAL_EFFECT,        60, FIGHTING,  90, 10 ; Circle Throw
 	move KARATE_CHOP,  NO_ADDITIONAL_EFFECT,       100, FIGHTING,  85,  5 ; Cross Chop
 	move MEGA_KICK,    SPEED_DOWN_SIDE_EFFECT,      65, FIGHTING, 100, 20 ; Low Sweep
-	move WHIRLWIND,    CONFUSION_SIDE_EFFECT,      120, FLYING,    85, 10 ; Hurricane
+	move SONICBOOM,    CONFUSION_SIDE_EFFECT,      120, FLYING,    85, 10 ; Hurricane
 	move LEER,         ATTACK_DOWN1_EFFECT,          0, FAIRY,    100, 30 ; Baby Doll Eyes
 	move BONEMERANG,   TWO_TO_FIVE_ATTACKS_EFFECT,  25, GROUND,    90, 10 ; Bone Rush
 	move AURORA_BEAM,  NO_ADDITIONAL_EFFECT,       100, FLYING,   100,  5 ; Aeroblast
