@@ -120,7 +120,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_REDMON    ; GOLDEEN
 	db PAL_REDMON    ; SEAKING
 	db PAL_REDMON    ; STARYU
-	db PAL_GREYMON   ; STARMIE
+	db PAL_PURPLE_TRAINER   ; STARMIE
 	db PAL_PINKMON   ; MR_MIME
 	db PAL_GREENMON  ; SCYTHER
 	db PAL_PURPLE_TRAINER    ; JYNX
@@ -136,7 +136,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_CYANMON   ; VAPOREON
 	db PAL_YELLOWMON ; JOLTEON
 	db PAL_REDMON    ; FLAREON
-	db PAL_GREYMON   ; PORYGON
+	db PAL_MEWMON    ; PORYGON
 	db PAL_BLUEMON   ; OMANYTE
 	db PAL_BLUEMON   ; OMASTAR
 	db PAL_BROWNMON  ; KABUTO
@@ -170,8 +170,8 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_PINKMON   ; Bellossom
 	db PAL_CYAN_TRAINER ; Kingdra
 	db PAL_PINKMON   ; Blissey
-	db PAL_PINKMON   ; Porygon 2
-	db PAL_PINKMON   ; Porygon Z
+	db PAL_MEWMON    ; Porygon 2
+	db PAL_MEWMON    ; Porygon Z
 	db PAL_RED_TRAINER ; Magmortar
 	db PAL_YELLOWMON ; Electivire
 	db PAL_GREYMON   ; Magnezone
