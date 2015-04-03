@@ -104,6 +104,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [W_CURMAP]
 	cp b ; Are we on the right map?
 	jp nz, .nextEvoEntry2
+	ld a, [wLoadedMonLevel] ; This has to be in "a" for the evolution to work properly
 	jr .doEvolution; Do evolution
 .checkMoveEvo
 	ld a, [hli] ; get the move number
@@ -112,6 +113,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	call CheckForMove ; New routine based on the one used by TMs
 	pop hl ; Get our place back
 	jp nc, .nextEvoEntry2 ; If they didn't know the move, go to next evolution
+	ld a, [wLoadedMonLevel] ; This has to be in "a" for the evolution to work properly
 	jr .doEvolution; If they did know it, do the evolution
 .checkRandomEvo
 	ld a, [hli] ; get level to evolve
@@ -124,6 +126,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jr c, .skipInc ; If the number is lower than $55, pick first 'mon
 	inc hl         ; Otherwise, pick the second 'mon
 .skipInc
+	ld a, [wLoadedMonLevel] ; This has to be in "a" for the evolution to work properly
 	jr .doEvolution ; Do evolution
 .checkItemEvo
 	ld a, [hli]
