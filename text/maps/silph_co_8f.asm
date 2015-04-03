@@ -41,17 +41,19 @@ _SilphCo8AfterBattleText2:: ; 84b81 (21:4b81)
 	done
 
 _SilphCo8BattleText3:: ; 84bb1 (21:4bb1)
-	text "I am one of the 4"
-	line "ROCKET BROTHERS!"
+	text "You think you can"
+	line "beat me?"
+	
+	para "Ha, don't make me"
+	line "laugh!"
 	done
 
 _SilphCo8EndBattleText3:: ; 84bd5 (21:4bd5)
 	text "Whoo!"
-	line "Oh brothers!"
 	prompt
 
 _SilphCo8AfterBattleText3:: ; 84be9 (21:4be9)
 	text "I'll leave you up"
-	line "to my brothers!"
+	line "to the others!"
 	done
 

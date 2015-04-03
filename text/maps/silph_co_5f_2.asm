@@ -40,7 +40,7 @@ _SilphCo5Text10:: ; 840f2 (21:40f2)
 	text "It's a #MON"
 	line "REPORT!"
 
-	para "Over 160 #MON"
+	para "Over 200 #MON"
 	line "techniques have"
 	cont "been confirmed."
 	done
@@ -49,8 +49,8 @@ _SilphCo5Text11:: ; 84134 (21:4134)
 	text "It's a #MON"
 	line "REPORT!"
 
-	para "4 #MON evolve"
-	line "only when traded"
-	cont "by link-cable."
+	para "Some #MON only"
+	line "evolve in certain"
+	cont "locations."
 	done
 

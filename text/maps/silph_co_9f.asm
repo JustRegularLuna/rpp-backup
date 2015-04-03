@@ -47,17 +47,22 @@ _SilphCo9AfterBattleText2:: ; 84cf6 (21:4cf6)
 	done
 
 _SilphCo9BattleText3:: ; 84d33 (21:4d33)
-	text "I am one of the 4"
-	line "ROCKET BROTHERS!"
+	text "Looking for the"
+	line "BOSS?"
+	
+	para "I'm the only boss"
+	line "you'll get to"
+	cont "fight!"
 	done
 
 _SilphCo9EndBattleText3:: ; 84d57 (21:4d57)
-	text "Warg!"
-	line "Brothers, I lost!"
+	text "No!"
+	line "How could I lose?"
 	prompt
 
 _SilphCo9AfterBattleText3:: ; 84d70 (21:4d70)
-	text "My brothers will"
-	line "avenge me!"
+	text "Don't get too"
+	line "cocky just because"
+	cont "you beat me!"
 	done
 

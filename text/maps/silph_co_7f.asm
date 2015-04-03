@@ -117,19 +117,23 @@ _SilphCo7AfterBattleText2:: ; 84790 (21:4790)
 	done
 
 _SilphCo7BattleText3:: ; 847be (21:47be)
-	text "I am one of the 4"
-	line "ROCKET BROTHERS!"
+	text "Hold it right"
+	line "there!"
+	
+	para "We can't have you"
+	line "meddling around in"
+	cont "here!"
 	done
 
 _SilphCo7EndBattleText3:: ; 847e2 (21:47e2)
-	text "Aack!"
-	line "Brothers, I lost!"
+	text "This can't be"
+	line "happening!"
 	prompt
 
 _SilphCo7AfterBattleText3:: ; 847fb (21:47fb)
 	text "Doesn't matter."
-	line "My brothers will"
-	cont "repay the favor!"
+	line "You won't make it"
+	cont "to the BOSS."
 	done
 
 _SilphCo7BattleText4:: ; 8482d (21:482d)
@@ -171,11 +175,7 @@ _SilphCo7Text_51ec3:: ; 848a2 (21:48a2)
 	done
 
 _SilphCo7Text_51ec8:: ; 8494a (21:494a)
-IF DEF(_YELLOW)
 	text "Oh-oh!"
-ELSE
-	text "Oh ho!"
-ENDC
 	line "So, you are ready"
 	cont "for BOSS ROCKET!"
 	prompt

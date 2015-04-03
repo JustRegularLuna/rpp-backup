@@ -56,8 +56,12 @@ _SilphCo6Text_1a2ab:: ; 842dd (21:42dd)
 	done
 
 _SilphCo6BattleText2:: ; 84306 (21:4306)
-	text "I am one of the 4"
-	line "ROCKET BROTHERS!"
+	text "What's a kid like"
+	line "you doing in a"
+	cont "place like this?"
+	
+	para "Doesn't matter!"
+	line "You're going down!"
 	done
 
 _SilphCo6EndBattleText2:: ; 8432a (21:432a)
@@ -67,7 +71,7 @@ _SilphCo6EndBattleText2:: ; 8432a (21:432a)
 
 _SilphCo6AfterBattleText2:: ; 84336 (21:4336)
 	text "No matter!"
-	line "My brothers will"
+	line "The others will"
 	cont "avenge me!"
 	done
 
