@@ -69,13 +69,13 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw BikeShop_h
 	dw CeruleanMart_h
 	dw MtMoonPokecenter_h
-	dw CeruleanHouseTrashed_h ; copy
+	dw CeruleanHouseTrashed_h
 	dw Route5Gate_h
 	dw UndergroundPathEntranceRoute5_h
 	dw DayCareM_h
 	dw Route6Gate_h
 	dw UndergroundPathEntranceRoute6_h
-	dw UndergroundPathEntranceRoute6_h ; unused
+	dw UndergroundPathEntranceRoute6_h
 	dw Route7Gate_h
 	dw UndergroundPathEntranceRoute7_h
 	dw UndergroundPathEntranceRoute7Copy_h
