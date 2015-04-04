@@ -1,5 +1,5 @@
 Route5Object: ; 0x545a3 (size=47)
-	db $a ; border block
+	db $f ; border block
 
 	db $5 ; warps
 	db $1d, $a, $3, ROUTE_5_GATE

@@ -10,7 +10,7 @@ LoneMoves: ; 39d22 (e:5d22)
 ; unterminated
 	db 1,ROCK_TOMB
 	db 1,WATER_PULSE
-	db 2,THUNDERBOLT
+	db 0,THUNDERBOLT
 	db 2,GIGA_DRAIN
 	db 3,TOXIC
 	db 3,PSYWAVE
@@ -28,8 +28,8 @@ TeamMoves: ; 39d32 (e:5d32)
 ; ff-terminated
 	db LORELEI,BLIZZARD
 	db BRUNO,FISSURE
-	db AGATHA,TOXIC
-	db LANCE,BARRIER
+	db AGATHA,HEX
+	db LANCE,DRAGONBREATH
 	db $FF
 
 ELSE

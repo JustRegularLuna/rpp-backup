@@ -96,10 +96,19 @@ _SSAnne8Text9:: ; 81736 (20:5736)
 	done
 
 _SSAnne8Text11:: ; 81759 (20:5759)
-	text "Ssh! I'm a GLOBAL"
-	line "POLICE agent!"
+	text "Hello there!"	
+	line "I'm THE DOCT-"
+	
+	para "Wait, no."
+	line "What is it they"
+	cont "call me here?"
+	
+	para "Oh, right."
+	line "I'm THE LOOKER!"
 
-	para "I'm on the trail"
-	line "of TEAM ROCKET!"
+	para "I'm a GLOBAL"
+	line "POLICE agent."
+	cont "On the trail of"
+	cont "TEAM ROCKET!"
 	done
 

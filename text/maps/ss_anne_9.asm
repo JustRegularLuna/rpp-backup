@@ -1,9 +1,5 @@
 _SSAnne9Text_61bf2:: ; 81799 (20:5799)
-IF DEF(_YELLOW)
 	text "In all my travels,"
-ELSE
-	text "In all my travels"
-ENDC
 	line "I've never seen"
 	cont "any #MON sleep"
 	cont "like this one!"
@@ -112,7 +108,9 @@ _SSAnne9EndBattleText4:: ; 81a7c (20:5a7c)
 	prompt
 
 _SSAnne9AfterBattleText4:: ; 81a8b (20:5a8b)
-	text "Oh, I adore your"
-	line "strong #MON!"
+	text "I thought I saw"
+	line "DAVID TENNANT at"
+	cont "the party, but I"
+	cont "was mistaken."
 	done
 
