@@ -22,7 +22,7 @@ SSAnne8Object: ; 0x61a60 (size=127)
 	db SPRITE_CLEFAIRY, $b + 4, $3 + 4, $ff, $d0, $8 ; person
 	db SPRITE_GIRL, $d + 4, $a + 4, $ff, $d3, $9 ; person
 	db SPRITE_BALL, $f + 4, $c + 4, $ff, $ff, ITEM | $a, TM_08
-	db SPRITE_GENTLEMAN, $d + 4, $15 + 4, $fe, $2, $b ; person
+	db SPRITE_LOOKER, $d + 4, $15 + 4, $fe, $2, $b ; person
 
 	; warp-to
 	EVENT_DISP SS_ANNE_8_WIDTH, $0, $0 ; SS_ANNE_1

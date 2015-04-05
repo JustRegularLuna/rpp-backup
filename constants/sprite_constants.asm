@@ -84,6 +84,7 @@ const_value = 1
 	const SPRITE_GREETER
 	const SPRITE_LAPRAS
 	const SPRITE_SURF_PIKACHU
+	const SPRITE_LOOKER
 ; Sprites after this are only 1 frame
 	const SPRITE_BALL                      ;EQU $3d
 	const SPRITE_OMANYTE                   ;EQU $3e

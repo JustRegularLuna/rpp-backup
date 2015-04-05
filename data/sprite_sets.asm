@@ -550,6 +550,10 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $c0 ; byte count
 	db BANK(SurfingPikachu)
 	
+	; SPRITE_LOOKER
+	dw LookerOverworld
+	db $c0 ; byte count
+	db BANK(LookerOverworld)
 
 ;	
 ;
