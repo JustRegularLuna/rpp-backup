@@ -58,6 +58,8 @@ DoorTileIDPointers: ; 1a62c (6:662c)
 	dw RedsHouseDoorTileIDs
 	db REDS_HOUSE_2
 	dw RedsHouseDoorTileIDs
+	db MART
+	dw MartDoorTileIDs
 	db $FF
 OverworldDoorTileIDs:
 	db 27,88,$00
@@ -83,3 +85,5 @@ PlateauDoorTileIDs:
 	db 59,27,$00
 RedsHouseDoorTileIDs:
 	db 26,28,$00
+MartDoorTileIDs:
+	db 80,82,86,$00

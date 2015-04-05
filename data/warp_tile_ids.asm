@@ -34,7 +34,7 @@ RedsHouse1WarpTileIDs:
 RedsHouse2WarpTileIDs:
 	db 26,28,$FF
 MartWarpTileIDs:
-	db 94,$FF
+	db 80,82,86,$FF
 PokecenterWarpTileIDs:
 	db 87,94,$FF
 ForestWarpTileIDs:
