@@ -164,93 +164,93 @@ const_value = 1
 	const SUPER_FANG   ; a2
 	const SLASH        ; a3
 	const SUBSTITUTE   ; a4
-	const STRUGGLE
-	const METAL_CLAW
-	const BULLET_PUNCH
-	const FLASH_CANNON
-	const IRON_TAIL
-	const METEOR_MASH
-	const CRUNCH
-	const DARK_PULSE
-	const FEINT_ATTACK
-	const NIGHT_SLASH
-	const MOONBLAST
-	const DRAININGKISS
-	const DISARM_VOICE
-	const DAZZLINGLEAM
-	const DRACO_METEOR
-	const DRAGONBREATH
-	const DRAGON_CLAW
-	const DRAGON_PULSE
-	const TWISTER
-	const OUTRAGE
-	const SHADOW_CLAW
-	const STEEL_WING
-	const IRON_DEFENSE
-	const AIR_SLASH
-	const FIRE_FANG
-	const FLARE_BLITZ
-	const BLAST_BURN
-	const ICE_FANG
-	const THUNDER_FANG
-	const WATER_PULSE
-	const AQUA_TAIL
-	const HYDRO_CANNON
-	const FRENZY_PLANT
-	const SUCKER_PUNCH
-	const SHADOW_BALL
-	const FLAME_WHEEL
-	const MOONLIGHT
-	const HEX
-	const SHADOW_PUNCH
-	const AERIAL_ACE
-	const ACROBATICS
-	const AIR_CUTTER
-	const ICY_WIND
-	const ICE_SHARD
-	const SHEER_COLD
-	const ELECTRO_BALL
-	const NUZZLE
-	const DISCHARGE
-	const VOLT_TACKLE
-	const MUDDY_WATER
-	const WHIRLPOOL
-	const GIGA_DRAIN
-	const PETALBLIZARD
-	const LEAF_BLADE
-	const WOOD_HAMMER
-	const POISON_JAB
-	const GUNK_SHOT
-	const POISON_FANG
-	const SLUDGE_WAVE
-	const SILVER_WIND
-	const BUG_BUZZ
-	const MEGAHORN
-	const X_SCISSOR
-	const SIGNAL_BEAM
-	const EARTH_POWER
-	const MUD_SLAP
-	const MUD_BOMB
-	const EXTRASENSORY
-	const ZEN_HEADBUTT
-	const PSYCHO_CUT
-	const HYPER_VOICE
-	const EXTREMESPEED
-	const GIGA_IMPACT
-	const POWER_GEM
-	const ROCK_BLAST
-	const ROCK_POLISH
-	const ROCK_TOMB
-	const DYNAMICPUNCH
-	const CIRCLE_THROW
-	const CROSS_CHOP
-	const LOW_SWEEP
-	const HURRICANE
-	const BABYDOLLEYES
-	const BONE_RUSH
-	const AEROBLAST
-	const ANCIENTPOWER
-	const DIVE ; Unused
+	const STRUGGLE     ; a5
+	const METAL_CLAW   ; a6
+	const BULLET_PUNCH ; a7
+	const FLASH_CANNON ; a8
+	const IRON_TAIL    ; a9
+	const METEOR_MASH  ; aa
+	const CRUNCH       ; ab
+	const DARK_PULSE   ; ac
+	const FEINT_ATTACK ; ad
+	const NIGHT_SLASH  ; ae
+	const MOONBLAST    ; af
+	const DRAININGKISS ; b0
+	const DISARM_VOICE ; b1
+	const DAZZLINGLEAM ; b2
+	const DRACO_METEOR ; b3
+	const DRAGONBREATH ; b4
+	const DRAGON_CLAW  ; b5
+	const DRAGON_PULSE ; b6
+	const TWISTER      ; b7
+	const OUTRAGE      ; b8
+	const SHADOW_CLAW  ; b9
+	const STEEL_WING   ; ba
+	const IRON_DEFENSE ; bb
+	const AIR_SLASH    ; bc
+	const FIRE_FANG    ; bd
+	const FLARE_BLITZ  ; be
+	const BLAST_BURN   ; bf
+	const ICE_FANG     ; c0
+	const THUNDER_FANG ; c1
+	const WATER_PULSE  ; c2
+	const AQUA_TAIL    ; c3
+	const HYDRO_CANNON ; c4
+	const FRENZY_PLANT ; c5
+	const SUCKER_PUNCH ; c6
+	const SHADOW_BALL  ; c7
+	const FLAME_WHEEL  ; c8
+	const MOONLIGHT    ; c9
+	const HEX          ; ca
+	const SHADOW_PUNCH ; cb
+	const AERIAL_ACE   ; cc
+	const ACROBATICS   ; cd
+	const AIR_CUTTER   ; ce
+	const ICY_WIND     ; cf
+	const ICE_SHARD    ; d0
+	const SHEER_COLD   ; d1
+	const ELECTRO_BALL ; d2
+	const NUZZLE       ; d3
+	const DISCHARGE    ; d4
+	const VOLT_TACKLE  ; d5
+	const MUDDY_WATER  ; d6
+	const WHIRLPOOL    ; d7
+	const GIGA_DRAIN   ; d8
+	const PETALBLIZARD ; d9
+	const LEAF_BLADE   ; da
+	const WOOD_HAMMER  ; db
+	const POISON_JAB   ; dc
+	const GUNK_SHOT    ; dd
+	const POISON_FANG  ; de
+	const SLUDGE_WAVE  ; df
+	const SILVER_WIND  ; e0
+	const BUG_BUZZ     ; e1
+	const MEGAHORN     ; e2
+	const X_SCISSOR    ; e3
+	const SIGNAL_BEAM  ; e4
+	const EARTH_POWER  ; e5
+	const MUD_SLAP     ; e6
+	const MUD_BOMB     ; e7
+	const EXTRASENSORY ; e8
+	const ZEN_HEADBUTT ; e9
+	const PSYCHO_CUT   ; ea
+	const HYPER_VOICE  ; eb
+	const EXTREMESPEED ; ec
+	const GIGA_IMPACT  ; ed
+	const POWER_GEM    ; ee
+	const ROCK_BLAST   ; ef
+	const ROCK_POLISH  ; f0
+	const ROCK_TOMB    ; f1
+	const DYNAMICPUNCH ; f2
+	const CIRCLE_THROW ; f3
+	const CROSS_CHOP   ; f4
+	const LOW_SWEEP    ; f5
+	const HURRICANE    ; f6
+	const BABYDOLLEYES ; f7
+	const BONE_RUSH    ; f8
+	const AEROBLAST    ; f9
+	const ANCIENTPOWER ; fa
+	const DIVE         ; fb (Unused) 
 
 NUM_ATTACKS EQU const_value
 const_value = STRUGGLE + 1
