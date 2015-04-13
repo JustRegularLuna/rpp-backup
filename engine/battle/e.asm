@@ -773,7 +773,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 ; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
 	ld a,[hli]
 	and a ; have we reached the end of the trainer data?
-	jr z,.AddLoneMove
+	jr z,.AddCustomMoves
 	ld [W_CURENEMYLVL],a
 	ld a,[hli]
 	ld [wcf91],a
@@ -783,69 +783,52 @@ ReadTrainer: ; 39c53 (e:5c53)
 	call AddPartyMon
 	pop hl
 	jr .SpecialTrainer
-.AddLoneMove
-; does the trainer have a single monster with a different move
-	ld a,[W_LONEATTACKNO] ; Brock is 01, Misty is 02, Erika is 04, etc
+; Custom routine to load data in Yellow's format
+; Original R/B Routines removed
+.AddCustomMoves
+	ld hl, TeamMoves
+.ReadEntry
+	ld a,[hli]
+	cp a, $ff
+	jr z, .FinishUp
+	ld b, a
+	ld a, [W_CUROPPONENT]
+	sub $c8
+	cp a, b
+	jr nz, .NextEntry
+	ld a, [hli]
+	ld b, a
+	ld a, [W_TRAINERNO]
+	cp a, b
+	jr nz, .NextEntry
+.MoveLoop
+	ld a, [hli] ; Which Pokemon?
 	and a
-	jr z,.AddTeamMove
-	dec a
-	add a,a
-	ld c,a
-	ld b,0
-	ld hl,LoneMoves
-	add hl,bc
-	ld a,[hli]
-	ld d,[hl]
-	ld hl,wEnemyMon1Moves + 2
-	ld bc,wEnemyMon2 - wEnemyMon1
+	jr z, .FinishUp
+	dec a       ; Decrease so we aren't adding too many times
+	push af     ; hang on to this for later
+	ld a, [hli] ; get slot number
+	dec a       ; decrease so we aren't adding too many times
+	ld b, 0
+	ld c, a
+	pop af      ; get the Pokemon count back
+	push hl     ; Don't lose our place
+	ld hl, wEnemyMon1Moves
+	add hl,bc   ; bc has the slot number
+	ld bc, wEnemyMon2 - wEnemyMon1
 	call AddNTimes
-	ld [hl],d
-	jr .FinishUp
-.AddTeamMove
-; check if our trainer's team has special moves
-
-; get trainer class number
-	ld a,[W_CUROPPONENT]
-	sub $C8
-	ld b,a
-	ld hl,TeamMoves
-
-; iterate through entries in TeamMoves, checking each for our trainer class
-.IterateTeamMoves
-	ld a,[hli]
-	cp b
-	jr z,.GiveTeamMoves ; is there a match?
-	inc hl ; if not, go to the next entry
-	inc a
-	jr nz,.IterateTeamMoves
-
-	; no matches found. is this trainer champion rival?
-	ld a,b
-	cp SONY3
-	jr z,.ChampionRival
-	jr .FinishUp ; nope
-.GiveTeamMoves
-	ld a,[hl]
-	ld [wEnemyMon5Moves + 2],a
-	jr .FinishUp
-.ChampionRival ; give moves to his team
-
-; pidgeot
-	ld a,SKY_ATTACK
-	ld [wEnemyMon1Moves + 2],a
-
-; starter
-	ld a,[W_RIVALSTARTER]
-	cp STARTER3
-	ld b,MEGA_DRAIN
-	jr z,.GiveStarterMove
-	cp STARTER1
-	ld b,FIRE_BLAST
-	jr z,.GiveStarterMove
-	ld b,BLIZZARD ; must be squirtle
-.GiveStarterMove
-	ld a,b
-	ld [wEnemyMon6Moves + 2],a
+	push hl     ; hold on to the address to load this move
+	pop de      ; put it in de
+	pop hl      ; get our place in the move data back
+	ld a, [hli] ; get the move to store
+	ld [de], a  ; store it
+	jr .MoveLoop
+.NextEntry
+	ld a, [hli]
+	and a
+	jr z, .ReadEntry
+	jr .NextEntry
+; Original routine continues here
 .FinishUp ; XXX this needs documenting
 	xor a       ; clear D079-D07B
 	ld de,wd079
