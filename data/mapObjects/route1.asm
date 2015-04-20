@@ -4,7 +4,7 @@ Route1Object: ; 0x1c0e5 (size=19)
 	db $0 ; warps
 
 	db $1 ; signs
-	db $1b, $9, $3 ; Route1Text3
+	db $1b, $9, $4 ; Route1Text3
 
 	db $3 ; people
 	db SPRITE_BUG_CATCHER, $18 + 4, $5 + 4, $fe, $1, $1 ; person
