@@ -395,7 +395,7 @@ BallAnyway:
 	ld hl,W_ENEMYBATTSTATUS3
 	bit Transformed,[hl]
 	jr z,.next15
-	ld a,$4c
+	ld a,DITTO ; A Pokémon that has transformed is treated as Ditto once caught
 	ld [wEnemyMonSpecies2],a
 	jr .next16
 .next15	;$5871
