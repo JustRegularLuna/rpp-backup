@@ -2023,7 +2023,7 @@ Func_7c18: ; 7c18 (1:7c18)
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
-
+	
 
 SECTION "bank3",ROMX,BANK[$3]
 
