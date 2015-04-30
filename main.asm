@@ -5400,6 +5400,7 @@ INCLUDE "engine/intro.asm"
 INCLUDE "engine/trade2.asm"
 INCLUDE "data/moves.asm"
 INCLUDE "data/cries.asm"
+INCLUDE "engine/overworld/berrytree.asm"
 
 SECTION "bank11",ROMX,BANK[$11]
 
