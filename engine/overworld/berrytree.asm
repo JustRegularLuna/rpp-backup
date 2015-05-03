@@ -73,21 +73,21 @@ PackFullText:
 	
 ; The table is not terminated, so don't use invalid tree numbers
 BerryTable:
-	db ORAN_BERRY ; Route 1
-	db ORAN_BERRY ; Route 2
-	db ORAN_BERRY ; Pewter City 1
-	db ORAN_BERRY ; Pewter City 2
-	db ORAN_BERRY ; Route 8
-	db ORAN_BERRY ; Route 11
-	db ORAN_BERRY ; Fuchsia City
-	db ORAN_BERRY ; Tree 8
-	db ORAN_BERRY ; Tree 9
-	db ORAN_BERRY ; Tree 10
-	db ORAN_BERRY ; Tree 11
-	db ORAN_BERRY ; Tree 12
-	db ORAN_BERRY ; Tree 13
-	db ORAN_BERRY ; Tree 14
-	db ORAN_BERRY ; Tree 15
-	db ORAN_BERRY ; Tree 16	
+	db ORAN_BERRY   ; Route 1
+	db PECHA_BERRY  ; Route 2, Tree 1
+	db RAWST_BERRY  ; Pewter City, Tree 1
+	db CHESTO_BERRY ; Pewter City, Tree 2
+	db CHERI_BERRY  ; Route 8
+	db SITRUS_BERRY ; Route 11
+	db ASPEAR_BERRY ; Fuchsia City
+	db LEPPA_BERRY  ; Route 4, Tree 1
+	db LUM_BERRY    ; Route 4, Tree 2
+	db PECHA_BERRY  ; Route 15
+	db LEPPA_BERRY  ; Route 16
+	db PECHA_BERRY  ; Route 2, Tree 2
+	db ORAN_BERRY   ; Viridian Forest
+	db SITRUS_BERRY ; Route 7
+	db SWEG_BERRY   ; Faraway Island
+	db SWEG_BERRY   ; South Isle	
 	
 	
