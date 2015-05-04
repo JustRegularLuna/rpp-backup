@@ -11,7 +11,7 @@ Route11Object: ; 0x584e0 (size=127)
 	db $1 ; signs
 	db $5, $1, $b ; Route11Text11
 
-	db $a ; people
+	db $b ; people
 	db SPRITE_GAMBLER, $e + 4, $a + 4, $ff, $d0, TRAINER | $1, GAMBLER + $C8, $1
 	db SPRITE_GAMBLER, $9 + 4, $1a + 4, $ff, $d0, TRAINER | $2, GAMBLER + $C8, $2
 	db SPRITE_BUG_CATCHER, $5 + 4, $d + 4, $ff, $d2, TRAINER | $3, YOUNGSTER + $C8, $9
@@ -22,6 +22,7 @@ Route11Object: ; 0x584e0 (size=127)
 	db SPRITE_BUG_CATCHER, $5 + 4, $2b + 4, $ff, $d3, TRAINER | $8, YOUNGSTER + $C8, $b
 	db SPRITE_BLACK_HAIR_BOY_2, $10 + 4, $2d + 4, $ff, $d2, TRAINER | $9, ENGINEER + $C8, $3
 	db SPRITE_BUG_CATCHER, $c + 4, $16 + 4, $ff, $d1, TRAINER | $a, YOUNGSTER + $C8, $c
+	db SPRITE_BERRY_TREE, $c + 4, $30 + 4, $ff, $ff, $c
 
 	; warp-to
 	EVENT_DISP ROUTE_11_WIDTH, $8, $31 ; ROUTE_11_GATE_1F

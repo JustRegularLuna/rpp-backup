@@ -19,6 +19,8 @@ Route4TextPointers: ; 55671 (15:5671)
 	dw PokeCenterSignText
 	dw Route4Text5
 	dw Route4Text6
+	dw Route4Tree1
+	dw Route4Tree2
 
 Route4TrainerHeaders: ; 5567d (15:567d)
 Route4TrainerHeader0: ; 5567d (15:567d)
@@ -61,3 +63,17 @@ Route4Text5: ; 556a8 (15:56a8)
 Route4Text6: ; 556ad (15:56ad)
 	TX_FAR _Route4Text6
 	db "@"
+
+Route4Tree1:
+	db $08 ; asm
+	ld a, 8
+	ld [wWhichTrade], a
+	callba BerryTreeScript
+	jp TextScriptEnd
+	
+Route4Tree2:
+	db $08 ; asm
+	ld a, 9
+	ld [wWhichTrade], a
+	callba BerryTreeScript
+	jp TextScriptEnd

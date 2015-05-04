@@ -27,6 +27,7 @@ ViridianForestTextPointers: ; 61126 (18:5126)
 	dw ViridianForestText12
 	dw ViridianForestText13
 	dw ViridianForestText14
+	dw ViridianForestTree1
 
 ViridianForestTrainerHeaders: ; 61142 (18:5142)
 ViridianForestTrainerHeader0: ; 61142 (18:5142)
@@ -143,3 +144,10 @@ ViridianForestText13: ; 611d0 (18:51d0)
 ViridianForestText14: ; 611d5 (18:51d5)
 	TX_FAR _ViridianForestText14
 	db "@"
+
+ViridianForestTree1:
+	db $08 ; asm
+	ld a, 13
+	ld [wWhichTrade], a
+	callba BerryTreeScript
+	jp TextScriptEnd

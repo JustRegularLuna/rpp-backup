@@ -79,11 +79,11 @@ BerryTable:
 	db CHESTO_BERRY ; Pewter City, Tree 2
 	db CHERI_BERRY  ; Route 8
 	db SITRUS_BERRY ; Route 11
-	db ASPEAR_BERRY ; Fuchsia City
+	db ASPEAR_BERRY ; Unused
 	db LEPPA_BERRY  ; Route 4, Tree 1
 	db LUM_BERRY    ; Route 4, Tree 2
-	db PECHA_BERRY  ; Route 15
-	db LEPPA_BERRY  ; Route 16
+	db PECHA_BERRY  ; Unused
+	db LEPPA_BERRY  ; Unused
 	db PECHA_BERRY  ; Route 2, Tree 2
 	db ORAN_BERRY   ; Viridian Forest
 	db SITRUS_BERRY ; Route 7
