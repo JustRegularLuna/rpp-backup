@@ -6,6 +6,7 @@ BerryTreeScript::
 	
 ; Check to see if the player can get a berry from this tree right now
 	ld a, [wWhichTrade] ; Which tree is this?
+	dec a
 	ld c, a ; We need this in register c
 	ld b, 2 ; We want to read this value to see if it's been taken or not
 	ld hl, W_BERRYTREEFLAGS
@@ -29,6 +30,7 @@ BerryTreeScript::
 	
 ; Mark the berry as taken
 	ld a, [wWhichTrade] ; Which tree is this?
+	dec a
 	ld c, a ; We need this in c
 	ld b, 1 ; We want to set this tree's bit
 	ld hl, W_BERRYTREEFLAGS
@@ -90,4 +92,13 @@ BerryTable:
 	db SWEG_BERRY   ; Faraway Island
 	db SWEG_BERRY   ; South Isle	
 	
+BerryReset::
+; Called to reset berry trees
+; Happens when the berry counter hits 0
+	xor a
+	ld hl, W_BERRYTREEFLAGS
+	ld [hli],a
+	ld [hl],a
+	ret
+
 	
