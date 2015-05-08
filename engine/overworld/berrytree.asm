@@ -95,8 +95,13 @@ BerryTable:
 BerryReset::
 ; Called to reset berry trees
 ; Happens when the berry counter hits 0
+	ld a, [wBerryStepCounter + 1]
+	cp a, $4
+	ret nz
 	xor a
 	ld hl, W_BERRYTREEFLAGS
+	ld [hli],a
+	ld [hli],a
 	ld [hli],a
 	ld [hl],a
 	ret

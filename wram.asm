@@ -2247,7 +2247,7 @@ wBoxMonNicksEnd:: ; dee2
 W_BERRYTREEFLAGS::
 	ds 2
 wBerryStepCounter:: ; deee
-	ds 1
+	ds 2
 
 SECTION "Stack", WRAMX[$dfff], BANK[1]
 wStack:: ; dfff
