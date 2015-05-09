@@ -294,7 +294,7 @@ OverworldLoopLessDelay::
 	dec [hl]
 ; berry steps
 	ld hl,wBerryStepCounter
-	dec [hl]
+	inc [hl]
 	ld a,[hli]
 	and a
 	jp nz, .originalRoutine
