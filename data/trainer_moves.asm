@@ -158,50 +158,50 @@ TeamMoves:
 	db 5,4,SUBMISSION
 	db 0
 
-	db AGATHA,$1 ; placeholder data until I finalize her team
-	db 1,1,TACKLE
-	db 1,2,TACKLE
-	db 1,3,TACKLE
-	db 1,4,TACKLE
-	db 2,1,TACKLE
-	db 2,2,TACKLE
-	db 2,3,TACKLE
-	db 2,4,TACKLE
-	db 3,1,TACKLE
-	db 3,2,TACKLE
-	db 3,3,TACKLE
-	db 3,4,TACKLE
-	db 4,1,TACKLE
-	db 4,2,TACKLE
-	db 4,3,TACKLE
-	db 4,4,TACKLE
-	db 5,1,TACKLE
-	db 5,2,TACKLE
-	db 5,3,TACKLE
-	db 5,4,TACKLE
+	db AGATHA,$1
+	db 1,1,POWER_GEM
+	db 1,2,SHADOW_BALL
+	db 1,3,HEX
+	db 1,4,PSYBEAM	
+	db 2,1,NIGHT_SLASH
+	db 2,2,HEX
+	db 2,3,MOONLIGHT
+	db 2,4,ACROBATICS	
+	db 3,1,FLAMETHROWER
+	db 3,2,SHADOW_BALL
+	db 3,3,HEX
+	db 3,4,BITE	
+	db 4,1,DARK_PULSE
+	db 4,2,NIGHT_SHADE
+	db 4,3,HEX
+	db 4,4,CONFUSE_RAY	
+	db 5,1,HYPNOSIS
+	db 5,2,DREAM_EATER
+	db 5,3,HEX
+	db 5,4,MOONLIGHT
 	db 0
 
-	db LANCE,$1 ; placeholder data until I finalize his team
-	db 1,1,TACKLE
-	db 1,2,TACKLE
-	db 1,3,TACKLE
-	db 1,4,TACKLE
-	db 2,1,TACKLE
-	db 2,2,TACKLE
-	db 2,3,TACKLE
-	db 2,4,TACKLE
-	db 3,1,TACKLE
-	db 3,2,TACKLE
-	db 3,3,TACKLE
-	db 3,4,TACKLE
-	db 4,1,TACKLE
-	db 4,2,TACKLE
-	db 4,3,TACKLE
-	db 4,4,TACKLE
-	db 5,1,TACKLE
-	db 5,2,TACKLE
-	db 5,3,TACKLE
-	db 5,4,TACKLE
+	db LANCE,$1
+	db 1,1,DRAGONBREATH
+	db 1,2,TWISTER
+	db 1,3,HYPER_BEAM
+	db 1,4,ICE_FANG	
+	db 2,1,FLAMETHROWER
+	db 2,2,DRAGONBREATH
+	db 2,3,EARTHQUAKE
+	db 2,4,METAL_CLAW	
+	db 3,1,WHIRLPOOL
+	db 3,2,DRAGONBREATH
+	db 3,3,DRAGON_PULSE
+	db 3,4,FOCUS_ENERGY	
+	db 4,1,AERIAL_ACE
+	db 4,2,DRAGONBREATH
+	db 4,3,ANCIENTPOWER
+	db 4,4,STEEL_WING	
+	db 5,1,AMNESIA
+	db 5,2,DRAGONBREATH
+	db 5,3,DRACO_METEOR
+	db 5,4,THUNDER_WAVE
 	db 0
 
 	db SONY3,$1
