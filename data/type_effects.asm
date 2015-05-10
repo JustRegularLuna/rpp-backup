@@ -123,4 +123,5 @@ TypeEffects: ; 3e474 (f:6474)
 	db PSYCHIC,STEEL,05
 	db ICE,STEEL,05
 	db DRAGON,STEEL,05
+	db ICE,FIRE,05
 	db $FF
