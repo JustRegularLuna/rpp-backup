@@ -131,12 +131,8 @@ _SaffronGymEndBattleText2:: ; a2002 (28:6002)
 
 _SaffronGymAfterBattleText2:: ; a2019 (28:6019)
 	text "Psychic #MON"
-IF DEF(_YELLOW)
-	line "fear only bugs!"
-ELSE
-	line "fear only ghosts"
-	cont "and bugs!"
-ENDC
+	line "don't have many"
+	cont "weaknesses!"
 	done
 
 _SaffronGymBattleText3:: ; a2042 (28:6042)

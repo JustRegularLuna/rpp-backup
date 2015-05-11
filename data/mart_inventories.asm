@@ -5,8 +5,9 @@
 ; Viridian
 ViridianMartText6:: ; 2442 (0:2442)
 	db MART_LIST
-	db 4
+	db 5
 	db POKE_BALL
+	db POTION
 	db ANTIDOTE
 	db PARLYZ_HEAL
 	db BURN_HEAL
@@ -15,11 +16,10 @@ ViridianMartText6:: ; 2442 (0:2442)
 ; Pewter
 PewterMartText1:: ; 2449 (0:2449)
 	db MART_LIST
-	db 8
+	db 7
 	db POKE_BALL
 	db POTION
 	db ESCAPE_ROPE
-	db REPEL
 	db ANTIDOTE
 	db BURN_HEAL
 	db AWAKENING
@@ -40,10 +40,10 @@ CeruleanMartText1:: ; 2453 (0:2453)
 	db $FF
 
 ; Bike shop
-	db MART_LIST
-	db 1
-	db BICYCLE
-	db $FF
+;	db MART_LIST
+;	db 1
+;	db BICYCLE
+;	db $FF
 
 ; Vermilion
 VermilionMartText1:: ; 2461 (0:2461)
