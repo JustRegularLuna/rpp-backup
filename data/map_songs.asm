@@ -104,8 +104,8 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne8
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne9
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; SSAnne10
-	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ;unused
-	db MUSIC_DUNGEON2, BANK(Music_Dungeon2) ;unused
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; MT_MOON_SQUARE
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; MT_MOON_SHOP
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; VictoryRoad1
 	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ;unused

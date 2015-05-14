@@ -1,11 +1,12 @@
 MtMoon3Object: ; 0x49fdb (size=102)
 	db $3 ; border block
 
-	db $4 ; warps
+	db $5 ; warps
 	db $9, $19, $1, MT_MOON_2
 	db $11, $15, $4, MT_MOON_2
 	db $1b, $f, $5, MT_MOON_2
 	db $7, $5, $6, MT_MOON_2
+	db $16, $1B, $0, MT_MOON_SQUARE
 
 	db $0 ; signs
 
@@ -25,3 +26,4 @@ MtMoon3Object: ; 0x49fdb (size=102)
 	EVENT_DISP MT_MOON_3_WIDTH, $11, $15 ; MT_MOON_2
 	EVENT_DISP MT_MOON_3_WIDTH, $1b, $f ; MT_MOON_2
 	EVENT_DISP MT_MOON_3_WIDTH, $7, $5 ; MT_MOON_2
+	EVENT_DISP MT_MOON_3_WIDTH, $16, $1B ; MT_MOON_SQUARE

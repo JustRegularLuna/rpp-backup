@@ -7,7 +7,7 @@ Tilesets: ; c7be (3:47be)
 	tileset OakTS_Block,	OakTS_GFX,	OakTS_Coll,	255,255,255, 255, 0
 	tileset Pokecenter_Block,	Pokecenter_GFX,	Pokecenter_Coll,	92,75,255, 255, 0
 	tileset Gym_Block,         Gym_GFX,         Gym_Coll,         $3A,$FF,$FF, $FF, OUTDOOR
-	tileset House_Block,       House_GFX,       House_Coll,       $FF,$FF,$FF, $FF, INDOOR
+	tileset House_Block,	House_GFX,	House_Coll,	54,255,255, 255, 0
 	tileset ForestGate_Block,  ForestGate_GFX,  ForestGate_Coll,  $17,$32,$FF, $FF, INDOOR
 	tileset Museum_Block,      Museum_GFX,      Museum_Coll,      $17,$32,$FF, $FF, INDOOR
 	tileset Underground_Block, Underground_GFX, Underground_Coll, $FF,$FF,$FF, $FF, INDOOR

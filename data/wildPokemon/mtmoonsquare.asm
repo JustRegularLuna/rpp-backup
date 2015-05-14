@@ -1,0 +1,26 @@
+MtMoonSquareMons:
+; Grass Mons
+	db $0A
+	db 9,PIDGEY
+	db 9,GEODUDE
+	db 10,RATTATA
+	db 10,GEODUDE
+	db 11,SANDSHREW
+	db 10,SPEAROW
+	db 12,ONIX
+	db 10,CLEFAIRY
+	db 12,CLEFAIRY
+	db 12,MURKROW
+
+; Water Mons
+	db $05
+	db 10,GOLDEEN
+	db 10,GOLDEEN
+	db 10,SLOWPOKE
+	db 15,SLOWPOKE
+	db 15,POLIWAG
+	db 15,POLIWAG
+	db 20,SEAKING
+	db 20,SEAKING
+	db 25,SLOWBRO
+	db 25,SLOWKING

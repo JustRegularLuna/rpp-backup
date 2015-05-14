@@ -6799,3 +6799,18 @@ Mart_GFX:          INCBIN "gfx/tilesets/mart.2bpp"
 Mart_Block:        INCBIN "gfx/blocksets/mart.bst"
 
 
+
+SECTION "bank34",ROMX,BANK[$34]
+
+; Mt Moon Square
+INCLUDE "data/mapHeaders/mtmoonsquare.asm"
+INCLUDE "scripts/mtmoonsquare.asm"
+INCLUDE "data/mapObjects/mtmoonsquare.asm"
+MtMoonSquareBlocks: INCBIN "maps/mtmoonsquare.blk"
+
+; Mt Moon Shop
+INCLUDE "data/mapHeaders/mtmoonshop.asm"
+INCLUDE "scripts/mtmoonshop.asm"
+INCLUDE "data/mapObjects/mtmoonshop.asm"
+MtMoonShopBlocks: INCBIN "maps/mtmoonshop.blk"
+

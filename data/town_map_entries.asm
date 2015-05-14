@@ -58,6 +58,7 @@ InternalMapEntries: ; 71382 (1c:5382)
 	IMAP $59,$C,$0,SeaCottageName
 	IMAP $5F,$A,$9,VermilionCityName
 	IMAP $69,$9,$A,SSAnneName
+	IMAP $6B,$6,$2,MountMoonName
 	IMAP $6D,$0,$4,VictoryRoadName
 	IMAP $77,$0,$2,PokemonLeagueName
 	IMAP $78,$A,$5,UndergroundPathName

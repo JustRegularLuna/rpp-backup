@@ -81,7 +81,7 @@ BerryTable:
 	db CHESTO_BERRY ; Pewter City, Tree 2
 	db CHERI_BERRY  ; Route 8
 	db SITRUS_BERRY ; Route 11
-	db ASPEAR_BERRY ; Unused
+	db ASPEAR_BERRY ; Mt Moon Square
 	db LEPPA_BERRY  ; Route 4, Tree 1
 	db LUM_BERRY    ; Route 4, Tree 2
 	db PECHA_BERRY  ; Unused
