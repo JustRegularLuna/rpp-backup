@@ -2,7 +2,7 @@ CopycatsHouse2FObject: ; 0x5cd21 (size=48)
 	db $a ; border block
 
 	db $1 ; warps
-	db $1, $7, $2, COPYCATS_HOUSE_1F
+	db $0, $7, $2, COPYCATS_HOUSE_1F
 
 	db $2 ; signs
 	db $5, $3, $6 ; CopycatsHouse2FText6
@@ -16,4 +16,4 @@ CopycatsHouse2FObject: ; 0x5cd21 (size=48)
 	db SPRITE_CLEFAIRY, $6 + 4, $1 + 4, $ff, $d3, $5 ; person
 
 	; warp-to
-	EVENT_DISP COPYCATS_HOUSE_2F_WIDTH, $1, $7 ; COPYCATS_HOUSE_1F
+	EVENT_DISP COPYCATS_HOUSE_2F_WIDTH, $0, $7 ; COPYCATS_HOUSE_1F

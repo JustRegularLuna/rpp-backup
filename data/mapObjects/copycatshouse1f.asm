@@ -4,7 +4,7 @@ CopycatsHouse1FObject: ; 0x75ee3 (size=46)
 	db $3 ; warps
 	db $7, $2, $0, $ff
 	db $7, $3, $0, $ff
-	db $1, $7, $0, COPYCATS_HOUSE_2F
+	db $0, $7, $0, COPYCATS_HOUSE_2F
 
 	db $0 ; signs
 
@@ -16,4 +16,4 @@ CopycatsHouse1FObject: ; 0x75ee3 (size=46)
 	; warp-to
 	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $7, $2
 	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $7, $3
-	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $1, $7 ; COPYCATS_HOUSE_2F
+	EVENT_DISP COPYCATS_HOUSE_1F_WIDTH, $0, $7 ; COPYCATS_HOUSE_2F

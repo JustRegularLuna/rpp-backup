@@ -68,7 +68,7 @@ ForestDoorTileIDs:
 PokecenterDoorTileIDs:
 	db 87,94,$00
 HouseDoorTileIDs:
-	db 84,$00
+	db 62,$00
 TilesetMuseumDoorTileIDs:
 	db 59,$00
 ShipDoorTileIDs:
