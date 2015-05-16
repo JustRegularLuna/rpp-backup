@@ -19,11 +19,11 @@ db 0
 db 0
 db 3 ; growth rate
 ; learnset
-db %10110001
-db %00000011
-db %00001111
-db %11110000
-db %10000111
-db %00111001
-db %01000011
+db %00100000
+db %00000000
+db %10011000
+db %11010001
+db %00000010
+db %01101111
+db %00000010
 db BANK(MisdreavusPicFront)

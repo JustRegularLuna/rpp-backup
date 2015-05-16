@@ -19,11 +19,11 @@ db 0
 db 0
 db 3 ; growth rate
 ; learnset
-db %10110001
-db %00000011
-db %00001111
-db %11110000
-db %10000111
-db %00111001
-db %01000011
+db %00101110
+db %01000010
+db %00001011
+db %10000010
+db %01001011
+db %10001100
+db %01001110
 db BANK(SkarmoryPicFront)
