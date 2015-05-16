@@ -13,6 +13,24 @@ PewterCityScriptPointers: ; 19243 (6:5243)
 	dw PewterCityScript5
 	dw PewterCityScript6
 
+PewterCityTextPointers: ; 1938b (6:538b)
+	dw PewterCityText1
+	dw PewterCityText2
+	dw PewterCityText3
+	dw PewterCityText4
+	dw PewterCityText5
+	dw PewterCityTree1
+	dw PewterCityTree2
+	dw PewterCityText6
+	dw PewterCityText7
+	dw MartSignText
+	dw PokeCenterSignText
+	dw PewterCityText10
+	dw PewterCityText11
+	dw PewterCityText12
+	dw PewterCityText13
+	dw PewterCityText14
+   
 PewterCityScript0: ; 19251 (6:5251)
 	xor a
 	ld [W_MUSEUM1FCURSCRIPT], a
@@ -56,7 +74,7 @@ PewterCityScript1: ; 19280 (6:5280)
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
-	ld a, $d
+	ld a, $f
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $3c
@@ -120,7 +138,7 @@ PewterCityScript4: ; 19305 (6:5305)
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
-	ld a, $e
+	ld a, $10
 	ld [$ff8c], a
 	call DisplayTextID
 	ld a, $3c
@@ -168,24 +186,6 @@ PewterCityScript6: ; 1936f (6:536f)
 	ld a, $0
 	ld [W_PEWTERCITYCURSCRIPT], a
 	ret
-
-PewterCityTextPointers: ; 1938b (6:538b)
-	dw PewterCityText1
-	dw PewterCityText2
-	dw PewterCityText3
-	dw PewterCityText4
-	dw PewterCityText5
-	dw PewterCityText6
-	dw PewterCityText7
-	dw MartSignText
-	dw PokeCenterSignText
-	dw PewterCityText10
-	dw PewterCityText11
-	dw PewterCityText12
-	dw PewterCityText13
-	dw PewterCityText14
-	dw PewterCityTree1
-	dw PewterCityTree2
 
 PewterCityText1: ; 193a7 (6:53a7)
 	TX_FAR _PewterCityText1

@@ -23,8 +23,8 @@ Route11TextPointers: ; 59465 (16:5465)
 	dw Route11Text8
 	dw Route11Text9
 	dw Route11Text10
-	dw Route11Text11
 	dw Route11Tree1
+	dw Route11Text11
 
 Route11TrainerHeaders: ; 5947b (16:547b)
 Route11TrainerHeader0: ; 5947b (16:547b)

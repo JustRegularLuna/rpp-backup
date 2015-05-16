@@ -16,11 +16,11 @@ Route4TextPointers: ; 55671 (15:5671)
 	dw Route4Text1
 	dw Route4Text2
 	dw Predef5CText
+	dw Route4Tree1
+	dw Route4Tree2
 	dw PokeCenterSignText
 	dw Route4Text5
 	dw Route4Text6
-	dw Route4Tree1
-	dw Route4Tree2
 
 Route4TrainerHeaders: ; 5567d (15:567d)
 Route4TrainerHeader0: ; 5567d (15:567d)

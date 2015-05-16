@@ -22,8 +22,8 @@ Route8TextPointers: ; 591cf (16:51cf)
 	dw Route8Text7
 	dw Route8Text8
 	dw Route8Text9
-	dw Route8Text10
 	dw Route8Tree1
+	dw Route8Text10
 
 Route8TrainerHeaders: ; 591e3 (16:51e3)
 Route8TrainerHeader0: ; 591e3 (16:51e3)

@@ -9,10 +9,10 @@ Route7Object: ; 0x48022 (size=47)
 	db $d, $5, $0, PATH_ENTRANCE_ROUTE_7
 
 	db $1 ; signs
-	db $d, $3, $1 ; Route7Text1
+	db $d, $3, $2 ; Route7Text1
 
 	db $1 ; people
-	db SPRITE_BERRY_TREE, $5 + 4, $F + 4, $ff, $ff, $2
+	db SPRITE_BERRY_TREE, $5 + 4, $F + 4, $ff, $ff, $1
 
 	; warp-to
 	EVENT_DISP ROUTE_7_WIDTH, $9, $12 ; ROUTE_7_GATE

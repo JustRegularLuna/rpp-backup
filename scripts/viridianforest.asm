@@ -21,13 +21,13 @@ ViridianForestTextPointers: ; 61126 (18:5126)
 	dw Predef5CText
 	dw Predef5CText
 	dw ViridianForestText8
+   	dw ViridianForestTree1
 	dw ViridianForestText9
 	dw ViridianForestText10
 	dw ViridianForestText11
 	dw ViridianForestText12
 	dw ViridianForestText13
 	dw ViridianForestText14
-	dw ViridianForestTree1
 
 ViridianForestTrainerHeaders: ; 61142 (18:5142)
 ViridianForestTrainerHeader0: ; 61142 (18:5142)
