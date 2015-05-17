@@ -13,5 +13,15 @@ Route10Mons:
 	db 18,MACHOP
 
 ; Water Mons
-	db $00
+	db $0F
+   	db 16,GOLDEEN
+	db 18,CHINCHOU
+	db 18,CHINCHOU
+	db 18,POLIWAG
+	db 17,SLOWPOKE
+	db 17,SLOWPOKE
+	db 25,SLOWBRO
+	db 25,SLOWBRO
+	db 30,LANTURN
+	db 30,LANTURN
 
