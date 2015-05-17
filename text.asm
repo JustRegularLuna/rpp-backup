@@ -3136,12 +3136,11 @@ _Thanks2Text:: ; a8209 (2a:4209)
 	done
 
 _AfterTrade2Text:: ; a8212 (2a:4212)
-	text "The @"
+	text "Hello there! Your"
+    line "old @"
 	TX_RAM wInGameTradeGiveMonName
-	text " you"
-	line "traded to me"
-
-	para "went and evolved!"
+	text " is"
+	cont "magnificent!"
 	done
 
 _WannaTrade3Text:: ; a8240 (2a:4240)
