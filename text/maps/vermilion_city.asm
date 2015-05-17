@@ -1,10 +1,10 @@
 _VermilionCityText1:: ; a5668 (29:5668)
-	text "We're careful"
-	line "about pollution!"
+	text "We get visitors"
+	line "from all over."
 
-	para "We've heard GRIMER"
-	line "multiplies in"
-	cont "toxic sludge!"
+	para "I met someone from"
+	line "the LATIO region"
+	cont "once."
 	done
 
 _VermilionCityText_198a7:: ; a56b5 (29:56b5)
