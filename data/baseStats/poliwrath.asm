@@ -1,7 +1,7 @@
 PoliwrathBaseStats: ; 38a8a (e:4a8a)
 db DEX_POLIWRATH ; pokedex id
 db 90 ; base hp
-db 85 ; base attack
+db 95 ; base attack
 db 95 ; base defense
 db 70 ; base speed
 db 70 ; base special

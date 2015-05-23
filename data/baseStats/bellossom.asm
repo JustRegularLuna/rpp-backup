@@ -2,7 +2,7 @@ BellossomBaseStats: ; 388ae (e:48ae)
 db DEX_BELLOSSOM ; pokedex id
 db 75 ; base hp
 db 80 ; base attack
-db 85 ; base defense
+db 95 ; base defense
 db 50 ; base speed
 db 100 ; base special
 db GRASS ; species type 1

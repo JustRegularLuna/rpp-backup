@@ -2,7 +2,7 @@ PikachuBaseStats: ; 3867e (e:467e)
 db DEX_PIKACHU ; pokedex id
 db 35 ; base hp
 db 55 ; base attack
-db 30 ; base defense
+db 40 ; base defense
 db 90 ; base speed
 db 50 ; base special
 db ELECTRIC ; species type 1
