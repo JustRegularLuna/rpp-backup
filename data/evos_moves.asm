@@ -177,6 +177,7 @@ dw Mon175_EvosMoves
 dw Mon176_EvosMoves
 dw Mon177_EvosMoves
 dw Mon178_EvosMoves
+dw Mon179_EvosMoves
 dw Mon180_EvosMoves
 dw Mon181_EvosMoves
 dw Mon182_EvosMoves
