@@ -1,5 +1,5 @@
 FuchsiaHouse3Object: ; 0x56221 (size=34)
-	db $c ; border block
+	db $a ; border block
 
 	db $3 ; warps
 	db $0, $2, $8, $ff

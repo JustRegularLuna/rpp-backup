@@ -25,5 +25,5 @@ db %10101111
 db %11110001
 db %10110111
 db %00111001
-db %01100011
+db %01101011
 db BANK(TogekissPicFront)

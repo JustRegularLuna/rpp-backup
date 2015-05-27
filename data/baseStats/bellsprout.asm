@@ -25,5 +25,5 @@ db %00111000
 db %11000000
 db %00000011
 db %00001000
-db %00000110
+db %01000110
 db BANK(BellsproutPicFront)

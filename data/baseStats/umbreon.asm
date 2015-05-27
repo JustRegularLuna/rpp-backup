@@ -20,10 +20,10 @@ db 0
 db 0 ; growth rate
 ; learnset
 db %10100000
-db %01111111
+db %01001111
 db %00001000
-db %11000000
+db %11010000
 db %11000011
 db %00001101
-db %00010010
+db %01000010
 db BANK(UmbreonPicFront)
