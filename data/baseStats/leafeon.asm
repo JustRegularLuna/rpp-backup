@@ -1,10 +1,10 @@
 LeafeonBaseStats: ; 3926a (e:526a)
 db DEX_LEAFEON ; pokedex id
 db 65 ; base hp
-db 60 ; base attack
-db 110 ; base defense
-db 65 ; base speed
-db 130 ; base special
+db 110 ; base attack
+db 130 ; base defense
+db 95 ; base speed
+db 65 ; base special
 db GRASS ; species type 1
 db GRASS ; species type 2
 db 45 ; catch rate

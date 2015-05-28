@@ -121,7 +121,7 @@ SpriteSets: ; 17ab9 (5:7ab9)
 	db SPRITE_SLOWBRO
 	db SPRITE_GUARD
 	db SPRITE_ROCKET
-	db SPRITE_BALL
+	db SPRITE_BERRY_TREE
 	db SPRITE_SNORLAX
 
 ; sprite set $06
