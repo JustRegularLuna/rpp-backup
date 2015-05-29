@@ -199,15 +199,15 @@ WildMonEncounterSlotChances: ; 13918 (4:7918)
 ; those 10 slots is. A random number is generated and then the first byte of each pair in this
 ; table is compared against that random number. If the random number is less than or equal
 ; to the first byte, then that slot is chosen.  The second byte is double the slot number.
-	db $32, $00 ; 51/256 = 19.9% chance of slot 0
-	db $65, $02 ; 51/256 = 19.9% chance of slot 1
-	db $8C, $04 ; 39/256 = 15.2% chance of slot 2
+	db $31, $00 ; 51/256 = 19.9% chance of slot 0
+	db $63, $02 ; 51/256 = 19.9% chance of slot 1
+	db $8A, $04 ; 39/256 = 15.2% chance of slot 2
 	db $A5, $06 ; 25/256 =  9.8% chance of slot 3
-	db $BE, $08 ; 25/256 =  9.8% chance of slot 4
-	db $D7, $0A ; 25/256 =  9.8% chance of slot 5
-	db $E4, $0C ; 13/256 =  5.1% chance of slot 6
-	db $F1, $0E ; 13/256 =  5.1% chance of slot 7
-	db $FC, $10 ; 11/256 =  4.3% chance of slot 8
+	db $BC, $08 ; 25/256 =  9.8% chance of slot 4
+	db $D3, $0A ; 25/256 =  9.8% chance of slot 5
+	db $DE, $0C ; 13/256 =  5.1% chance of slot 6
+	db $E9, $0E ; 13/256 =  5.1% chance of slot 7
+	db $F4, $10 ; 11/256 =  4.3% chance of slot 8
 	db $FF, $12 ;  3/256 =  1.2% chance of slot 9
 
 RecoilEffect_: ; 1392c (4:792c)
