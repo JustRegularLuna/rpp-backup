@@ -1,8 +1,8 @@
 MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_MEWMON    ; MISSINGNO
 	db PAL_GREENMON  ; BULBASAUR
-	db PAL_GREENMON  ; IVYSAUR
-	db PAL_GREENMON  ; VENUSAUR
+	db PAL_BELLOSSOM  ; IVYSAUR
+	db PAL_BELLOSSOM  ; VENUSAUR
 	db PAL_REDMON    ; CHARMANDER
 	db PAL_REDMON    ; CHARMELEON
 	db PAL_BLUE_TRAINER    ; CHARIZARD
@@ -43,8 +43,8 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_BLUEMON   ; ZUBAT
 	db PAL_BLUEMON   ; GOLBAT
 	db PAL_GREENMON  ; ODDISH
-	db PAL_REDMON    ; GLOOM
-	db PAL_REDMON    ; VILEPLUME
+	db PAL_SNEASEL    ; GLOOM
+	db PAL_SNEASEL    ; VILEPLUME
 	db PAL_REDMON    ; PARAS
 	db PAL_REDMON    ; PARASECT
 	db PAL_PURPLEMON ; VENONAT
@@ -167,7 +167,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_PURPLEMON ; Crobat
 	db PAL_GREENMON  ; Politoed
 	db PAL_PINKMON   ; Slowking
-	db PAL_PINKMON   ; Bellossom
+	db PAL_BELLOSSOM   ; Bellossom
 	db PAL_CYAN_TRAINER ; Kingdra
 	db PAL_PINKMON   ; Blissey
 	db PAL_MEWMON    ; Porygon 2
