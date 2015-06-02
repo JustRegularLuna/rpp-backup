@@ -19,11 +19,11 @@ db FEINT_ATTACK
 db 0
 db 0 ; growth rate
 ; learnset
-db %00101010
-db %00000011
-db %00001000
-db %11000000
-db %01000010
-db %00001101
-db %00001010
+db %00101000 ;8  - 1
+db %01000010 ;16 - 9
+db %00001000 ;24 - 17
+db %11010000 ;32 - 25
+db %01000000 ;40 - 33
+db %00011111 ;48 - 41
+db %00001010 ;H6 - 49
 db BANK(HonchkrowPicFront)

@@ -19,11 +19,11 @@ db ACID
 db PETAL_DANCE
 db 3 ; growth rate
 ; learnset
-db %10100100
-db %01000011
-db %00111000
-db %11000000
-db %00000011
-db %00001000
-db %00000110
+db %00100100 ;8  - 1
+db %01000011 ;16 - 9
+db %00001000 ;24 - 17
+db %11000000 ;32 - 25
+db %00000001 ;40 - 33
+db %00001000 ;48 - 41
+db %01000010 ;H6 - 49
 db BANK(BellossomPicFront)

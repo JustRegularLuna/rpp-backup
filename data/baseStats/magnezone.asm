@@ -19,11 +19,11 @@ db THUNDERSHOCK
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100000
-db %01000011
-db %10001000
-db %11100001
-db %01000011
-db %00011000
-db %01000010
+db %00100000 ;8  - 1
+db %01000011 ;16 - 9
+db %10001000 ;24 - 17
+db %11100001 ;32 - 25
+db %01000001 ;40 - 33
+db %01011000 ;48 - 41
+db %01000011 ;H6 - 49
 db BANK(MagnezonePicFront)
