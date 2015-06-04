@@ -2,7 +2,7 @@ GainExperience: ; 5524f (15:524f)
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
-	call DivideExpDataByNumMonsGainingExp
+;	call DivideExpDataByNumMonsGainingExp
 	ld hl, wPartyMon1
 	xor a
 	ld [wWhichPokemon], a
