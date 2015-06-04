@@ -9,8 +9,8 @@ PlateauMons3:
 	db 41,GRAVELER
 	db 42,GOLBAT
 	db 45,MACHOKE
-	db 47,GRAVELER
-	db 49,STEELIX
+	db 47,HITMONCHAN
+	db 49,HITMONLEE
 
 ; Water Mons
 	db $00

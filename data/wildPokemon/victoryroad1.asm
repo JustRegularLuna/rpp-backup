@@ -9,8 +9,8 @@ PlateauMons1:
 	db 42,ONIX
 	db 44,RHYDON
 	db 44,CROBAT
-	db 42,MACHOKE
-	db 43,MAROWAK
+	db 42,HITMONCHAN
+	db 43,HITMONLEE
 
 ; Water Mons
 	db $00
