@@ -1,13 +1,13 @@
 _Route15GateUpstairsText_4968c:: ; 8cbac (23:4bac)
-	text "EXP.ALL gives"
+	text "EXP.SHARE gives"
 	line "EXP points to all"
 	cont "the #MON with"
 	cont "you, even if they"
 	cont "don't fight."
 
 	para "It does, however,"
-	line "reduce the amount"
-	cont "of EXP for each"
+	line "halve the amount"
+	cont "of EXP for other"
 	cont "#MON."
 
 	para "If you don't need"

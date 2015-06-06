@@ -12,7 +12,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	jr nz, .asm_49683 ; 0x49657 $2a
 	ld a, 50 ; pokemon needed
 	ld [$ffdb], a
-	ld a, EXP__ALL ; oak's aide reward
+	ld a, EXP_SHARE ; oak's aide reward
 	ld [$ffdc], a
 	ld [wd11e], a
 	call GetItemName

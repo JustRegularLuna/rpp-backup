@@ -916,7 +916,7 @@ FaintEnemyPokemon ; 0x3c567
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wBattleResult], a
-	ld b, EXP__ALL
+	ld b, EXP_SHARE
 	call IsItemInBag
 	push af
 	jr z, .giveExpToMonsThatFought ; if no exp all, then jump

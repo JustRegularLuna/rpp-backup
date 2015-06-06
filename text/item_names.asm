@@ -73,7 +73,7 @@ ItemNames: ; 472b (1:472b)
 	db "SILPH SCOPE@"
 	db "POKé FLUTE@"
 	db "LIFT KEY@"
-	db "EXP.ALL@"
+	db "EXP.SHARE@"
 	db "OLD ROD@"
 	db "GOOD ROD@"
 	db "SUPER ROD@"

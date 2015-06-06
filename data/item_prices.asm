@@ -73,7 +73,7 @@ ItemPrices: ; 4608 (1:4608)
 	money 0     ; SILPH_SCOPE
 	money 0     ; POKE_FLUTE
 	money 0     ; LIFT_KEY
-	money 0     ; EXP__ALL
+	money 0     ; EXP_SHARE
 	money 0     ; OLD_ROD
 	money 0     ; GOOD_ROD
 	money 0     ; SUPER_ROD

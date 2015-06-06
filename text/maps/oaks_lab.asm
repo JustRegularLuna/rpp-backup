@@ -416,7 +416,7 @@ _OaksLabText_4421a:: ; 9596d (25:596d)
 	text "You finally got at"
 	line "least 50 species!"
 	cont "Be sure to get"
-	cont "EXP.ALL from my"
+	cont "EXP.SHARE from my"
 	cont "AIDE!"
 	done
 

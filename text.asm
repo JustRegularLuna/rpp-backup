@@ -1432,7 +1432,7 @@ _GainedText:: ; 89bc2 (22:5bc2)
 	line "@@"
 
 _WithExpAllText:: ; 89bd0 (22:5bd0)
-	text "with EXP.ALL,"
+	text "with EXP.SHARE,"
 	cont "@@"
 
 _BoostedText:: ; 89be1 (22:5be1)
