@@ -433,7 +433,7 @@ BallAnyway:
 	ld hl,ItemUseBallText05
 	call PrintText
     ; added
-    callba GainExperience
+    ; callba GainExperience
     ; old code resumes here
 	predef IndexToPokedex
 	ld a,[wd11e]
