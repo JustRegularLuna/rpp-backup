@@ -30,7 +30,7 @@ _TM35NoRoomText:: ; a0fc7 (28:4fc7)
 
 _Lab3Text2:: ; a0fe3 (28:4fe3)
 	text "EEVEE can evolve"
-	line "into 1 of 3 kinds"
+	line "into 1 of 8 kinds"
 	cont "of #MON."
 	done
 
