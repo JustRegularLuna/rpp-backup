@@ -214,7 +214,7 @@ endm
 	move PSYCHIC_M,    NO_ADDITIONAL_EFFECT,        65, GHOST,    100, 10 ; Hex
 	move MEGA_PUNCH,   SWIFT_EFFECT,                60, GHOST,    100, 20 ; Shadow Punch
 	move WING_ATTACK,  SWIFT_EFFECT,                60, FLYING,   100, 20 ; Aerial Ace
-	move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,        55, FLYING,   100, 15 ; Acrobatics
+	move QUICK_ATTACK, NO_ADDITIONAL_EFFECT,       110, FLYING,   100, 15 ; Acrobatics
 	move CUT,          NO_ADDITIONAL_EFFECT,        60, FLYING,   100, 25 ; Air Cutter
 	move GUST,         SPEED_DOWN_SIDE_EFFECT,      55, ICE,       95, 15 ; Icy Wind
 	move BLIZZARD,     NO_ADDITIONAL_EFFECT,        40, ICE,      100, 30 ; Ice Shard
