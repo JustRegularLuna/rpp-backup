@@ -155,7 +155,7 @@ endm
 	move SKY_ATTACK,   CHARGE_EFFECT,              140, FLYING,    90,  5
 	move TRANSFORM,    TRANSFORM_EFFECT,             0, NORMAL,   100, 10
 	move BUBBLE,       SPEED_DOWN_SIDE_EFFECT,      40, WATER,    100, 30
-	move DIZZY_PUNCH,  NO_ADDITIONAL_EFFECT,        70, NORMAL,   100, 10
+	move DIZZY_PUNCH,  CONFUSION_SIDE_EFFECT,       70, NORMAL,   100, 10
 	move SPORE,        SLEEP_EFFECT,                 0, GRASS,    100, 15
 	move FLASH,        ACCURACY_DOWN1_EFFECT,        0, NORMAL,    70, 20
 	move PSYWAVE,      SPECIAL_DAMAGE_EFFECT,        1, PSYCHIC,  100, 15
@@ -166,7 +166,7 @@ endm
 	move FURY_SWIPES,  TWO_TO_FIVE_ATTACKS_EFFECT,  18, NORMAL,    80, 15
 	move BONEMERANG,   ATTACK_TWICE_EFFECT,         50, GROUND,    90, 10
 	move REST,         HEAL_EFFECT,                  0, PSYCHIC,  100, 10
-	move ROCK_SLIDE,   NO_ADDITIONAL_EFFECT,        75, ROCK,      90, 10
+	move ROCK_SLIDE,   FLINCH_SIDE_EFFECT1,         75, ROCK,      90, 10
 	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80, NORMAL,    90, 15
 	move SHARPEN,      ATTACK_UP1_EFFECT,            0, NORMAL,   100, 30
 	move CONVERSION,   CONVERSION_EFFECT,            0, NORMAL,   100, 30

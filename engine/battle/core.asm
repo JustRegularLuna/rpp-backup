@@ -467,6 +467,10 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jr z, .PriorityMoveUsed
 	cp SUCKER_PUNCH
 	jr z, .PriorityMoveUsed
+    cp ICE_SHARD
+    jr z, .PriorityMoveUsed
+    cp BULLET_PUNCH
+    jr z, .PriorityMoveUsed
 	cp QUICK_ATTACK
 	jr nz, .playerDidNotUseQuickAttack
 .PriorityMoveUsed
@@ -476,6 +480,10 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	cp BABYDOLLEYES
 	jr z, .compareSpeed
 	cp SUCKER_PUNCH
+	jr z, .compareSpeed
+    cp ICE_SHARD
+	jr z, .compareSpeed
+    cp BULLET_PUNCH
 	jr z, .compareSpeed
 	cp QUICK_ATTACK
 	jr z, .compareSpeed  ; if both used Quick Attack
@@ -487,6 +495,10 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	cp BABYDOLLEYES
 	jr z, .enemyMovesFirst
 	cp SUCKER_PUNCH
+	jr z, .enemyMovesFirst
+    cp ICE_SHARD
+	jr z, .enemyMovesFirst
+    cp BULLET_PUNCH
 	jr z, .enemyMovesFirst
 	cp QUICK_ATTACK
 	jr z, .enemyMovesFirst ; if enemy used Quick Attack and player didn't
