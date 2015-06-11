@@ -24,6 +24,6 @@ db %00000011
 db %00001000
 db %11000000
 db %11000011
-db %00001000
+db %00001100
 db %00001110
 db BANK(FarfetchdPicFront)

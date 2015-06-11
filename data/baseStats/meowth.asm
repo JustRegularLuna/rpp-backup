@@ -25,5 +25,5 @@ db %10001000
 db %11000001
 db %11000010
 db %00001101
-db %00000010
+db %00000110
 db BANK(MeowthPicFront)

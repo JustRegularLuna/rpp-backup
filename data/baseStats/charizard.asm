@@ -24,6 +24,6 @@ db %01000011
 db %01001111
 db %11001110
 db %11111011
-db %00001000
+db %00001100
 db %00101110
 db BANK(CharizardPicFront)

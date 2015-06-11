@@ -24,6 +24,6 @@ db %01111111
 db %00001111
 db %11001110
 db %10001011
-db %00001100
+db %00001000
 db %00110010
 db BANK(BlastoisePicFront)
