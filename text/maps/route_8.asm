@@ -78,18 +78,20 @@ _Route8AfterBattleText5:: ; 8e060 (23:6060)
 	done
 
 _Route8BattleText6:: ; 8e092 (23:6092)
-	text "MEOWTH is so cute,"
-	line "meow, meow, meow!"
+	text "I like skirts,"
+	line "they're cute and"
+    cont "comfy to wear!"
 	done
 
 _Route8EndBattleText6:: ; 8e0b8 (23:60b8)
-	text "Meow!"
+	text "Oh my!"
 	prompt
 
 _Route8AfterBattleText6:: ; 8e0bf (23:60bf)
-	text "I think PIDGEY"
-	line "and RATTATA"
-	cont "are cute too!"
+	text "Oh well, I'm more"
+	line "worried about"
+	cont "having fun than"
+    cont "being competitive."
 	done
 
 _Route8BattleText7:: ; 8e0e9 (23:60e9)
