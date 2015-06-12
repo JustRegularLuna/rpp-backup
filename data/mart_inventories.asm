@@ -39,12 +39,6 @@ CeruleanMartText1:: ; 2453 (0:2453)
 	db PARLYZ_HEAL
 	db $FF
 
-; Bike shop
-;	db MART_LIST
-;	db 1
-;	db BICYCLE
-;	db $FF
-
 ; Vermilion
 VermilionMartText1:: ; 2461 (0:2461)
 	db MART_LIST
@@ -151,7 +145,7 @@ FuchsiaMartText1:: ; 24a8 (0:24a8)
 	db SUPER_REPEL
 	db $FF
 
-; unused? 24b1
+; Mt. Moon Square
 FossilMartText::
 	db MART_LIST
 	db 3
