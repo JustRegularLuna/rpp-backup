@@ -4742,7 +4742,7 @@ NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
-WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
+;WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
 
 
@@ -6798,6 +6798,7 @@ Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 Mart_GFX:          INCBIN "gfx/tilesets/mart.2bpp"
 Mart_Block:        INCBIN "gfx/blocksets/mart.bst"
 
+WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
 
 
 SECTION "bank34",ROMX,BANK[$34]

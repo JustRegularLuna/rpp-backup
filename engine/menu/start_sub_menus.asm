@@ -297,6 +297,7 @@ ErasePartyMenuCursors: ; 132ed (4:72ed)
 
 ItemMenuLoop: ; 132fc (4:72fc)
 	call LoadScreenTilesFromBuffer2DisableBGTransfer ; restore saved screen
+    call ReloadMapData
 	call GoPAL_SET_CF1C
 
 StartMenu_Item: ; 13302 (4:7302)
@@ -324,8 +325,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	jr nc,.choseItem
 .exitMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	call LoadTextBoxTilePatterns
-	call UpdateSprites ; move sprites
+	call ReloadMapData
 	jp RedisplayStartMenu
 .choseItem
 ; erase menu cursor (blank each tile in front of an item name)

@@ -284,8 +284,8 @@ LoadTownMap: ; 7109b (1c:509b)
 	call TextBoxBorder
 	call DisableLCD
 	ld hl, WorldMapTileGraphics ; $65a8
-	ld de, vChars2 + $600
-	ld bc, $100
+    ld de, vChars2
+    ld bc, $300
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
 	ld hl, MonNestIcon ; $56be
@@ -294,25 +294,15 @@ LoadTownMap: ; 7109b (1c:509b)
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
 	ld hl, wTileMap
-	ld de, CompressedMap ; $5100
-.asm_710d3
+	ld de, UncompressedMap ; $5100
+.loop
 	ld a, [de]
-	and a
-	jr z, .asm_710e9
-	ld b, a
-	and $f
-	ld c, a
-	ld a, b
-	swap a
-	and $f
-	add $60
-.asm_710e2
-	ld [hli], a
-	dec c
-	jr nz, .asm_710e2
-	inc de
-	jr .asm_710d3
-.asm_710e9
+	cp $ff
+	jr z, .doneCopying
+    ld [hli], a
+    inc de
+    jr .loop
+.doneCopying
 	call EnableLCD
 	ld b, $2
 	call GoPAL_SET
@@ -324,9 +314,9 @@ LoadTownMap: ; 7109b (1c:509b)
 	ld [wTownMapSpriteBlinkingEnabled], a
 	ret
 
-CompressedMap: ; 71100 (1c:5100)
-; you can decompress this file with the redrle program in the extras/ dir
-	INCBIN "gfx/town_map.rle"
+UncompressedMap: ; Uses the Gen 2 format
+    INCBIN "gfx/town_map.map"
+    db $ff ; Marks the end of the map data
 
 Func_711ab: ; 711ab (1c:51ab)
 	xor a
