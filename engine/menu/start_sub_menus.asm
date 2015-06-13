@@ -325,6 +325,8 @@ StartMenu_Item: ; 13302 (4:7302)
 	jr nc,.choseItem
 .exitMenu
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
+    call LoadTextBoxTilePatterns
+    call UpdateSprites ; move sprites
 	call ReloadMapData
 	jp RedisplayStartMenu
 .choseItem
