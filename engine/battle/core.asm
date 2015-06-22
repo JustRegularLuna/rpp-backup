@@ -7561,11 +7561,14 @@ opponentAttacker: ; 3f382 (f:7382)
 	cp b
 	ret z
 	ld a, [W_ENEMYMOVEEFFECT]
-	cp a, PARALYZE_SIDE_EFFECT1 + 1
-	ld b, $1a
-	jr c, .next1
-	ld b, $4d
-	sub a, $1e
+	cp a, PARALYZE_SIDE_EFFECT1 + 1 ; 10% status effects are 04, 05, 06 so 07 will set carry for those
+	ld b, $1a       ;[1A-1]/100 or [26-1]/256 = 9.8%~ chance
+	jr c, .next1  ;branch ahead if this is a 10% chance effect..
+	cp a, $5B       ;Fang effects are 57, 58, 59 and Volt Tackle is 5A so 5B will set carry for those
+	ld b, $1A       ;10% effect again
+	jr c, .next1   ;branch ahead if it's a fang effect
+	ld b, $4d       ;..or use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
+	sub a, $1e      ;subtract $1E to map to equivalent 10% chance effects
 .next1
 	push af
 	call BattleRandom
