@@ -27,9 +27,9 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
 	xor a
 	ld [hTilesetType], a
-	ld [$ffae], a
+	ld [hSCX], a
 	ld a, $40
-	ld [$ffaf], a
+	ld [hSCY], a
 	ld a, $90
 	ld [hWY], a
 	call ClearScreen
@@ -237,14 +237,14 @@ ENDC
 	call LoadGBPal
 	ld a, [hJoyHeld]
 	ld b, a
-	and $46
-	cp $46
-	jp z, Func_448e
+	and D_UP | SELECT | B_BUTTON
+	cp D_UP | SELECT | B_BUTTON
+	jp z, .doClearSaveDialogue
 	jp MainMenu
 
-Func_448e: ; 448e (1:448e)
-	ld b, BANK(Func_1c98a)
-	ld hl, Func_1c98a
+.doClearSaveDialogue
+	ld b, BANK(DoClearSaveDialogue)
+	ld hl, DoClearSaveDialogue
 	jp Bankswitch
 
 Func_4496: ; 4496 (1:4496)

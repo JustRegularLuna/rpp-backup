@@ -1,14 +1,78 @@
+DrawHP: ; 128ef (4:68ef)
+; Draws the HP bar in the stats screen
+	call GetPredefRegisters
+	ld a, $1
+	jr DrawHP_
+
+DrawHP2: ; 128f6 (4:68f6)
+; Draws the HP bar in the party screen
+	call GetPredefRegisters
+	ld a, $2
+
+DrawHP_: ; 128fb (4:68fb)
+	ld [wHPBarType], a
+	push hl
+	ld a, [wLoadedMonHP]
+	ld b, a
+	ld a, [wLoadedMonHP + 1]
+	ld c, a
+	or b
+	jr nz, .nonzeroHP
+	xor a
+	ld c, a
+	ld e, a
+	ld a, $6
+	ld d, a
+	jp .drawHPBarAndPrintFraction
+.nonzeroHP
+	ld a, [wLoadedMonMaxHP]
+	ld d, a
+	ld a, [wLoadedMonMaxHP + 1]
+	ld e, a
+	predef HPBarLength
+	ld a, $6
+	ld d, a
+	ld c, a
+.drawHPBarAndPrintFraction
+	pop hl
+	push de
+	push hl
+	push hl
+	call DrawHPBar
+	pop hl
+	ld a, [hFlags_0xFFF6]
+	bit 0, a
+	jr z, .printFractionBelowBar
+	ld bc, $9 ; right of bar
+	jr .printFraction
+.printFractionBelowBar
+	ld bc, SCREEN_WIDTH + 1 ; below bar
+.printFraction
+	add hl, bc
+	ld de, wLoadedMonHP
+	ld bc, $203
+	call PrintNumber
+	ld a, "/"
+	ld [hli], a
+	ld de, wLoadedMonMaxHP
+	ld bc, $203
+	call PrintNumber
+	pop hl
+	pop de
+	ret
+
+
 ; Predef 0x37
 StatusScreen: ; 12953 (4:6953)
 	call LoadMonData
 	ld a, [wcc49]
 	cp $2 ; 2 means we're in a PC box
 	jr c, .DontRecalculate ; 0x1295b $14
-	ld a, [wcf9b]
-	ld [wcfb9], a
+	ld a, [wLoadedMonBoxLevel]
+	ld [wLoadedMonLevel], a
 	ld [W_CURENEMYLVL], a
-	ld hl, wcfa8
-	ld de, wcfba
+	ld hl, wLoadedMonHPExp - 1
+	ld de, wLoadedMonStats
 	ld b, $1
 	call CalcStats ; Recalculate stats
 .DontRecalculate
@@ -55,13 +119,13 @@ StatusScreen: ; 12953 (4:6953)
 	ld de, Type1Text
 	call PlaceString ; "TYPE1/"
 	hlCoord 11, 3
-	predef DrawHP ; predef $5f
+	predef DrawHP
 	ld hl, wcf25
 	call GetHealthBarColor
 	ld b, $3
 	call GoPAL_SET ; SGB palette
 	hlCoord 16, 6
-	ld de, wcf9c
+	ld de, wLoadedMonStatus
 	call PrintStatusCondition
 	jr nz, .StatusWritten ; 0x129fc $9
 	hlCoord 16, 6
@@ -82,7 +146,7 @@ StatusScreen: ; 12953 (4:6953)
 	ld bc, $8103 ; Zero-padded, 3
 	call PrintNumber ; Pokémon no.
 	hlCoord 11, 10
-	predef Func_27d6b ; Prints the type (?)
+	predef PrintMonType
 	ld hl, NamePointers2 ; $6a9d
 	call .unk_12a7e
 	ld d, h
@@ -96,7 +160,7 @@ StatusScreen: ; 12953 (4:6953)
 	hlCoord 12, 16
 	call PlaceString ; OT
 	hlCoord 12, 14
-	ld de, wcfa4
+	ld de, wLoadedMonOTID
 	ld bc, $8205 ; 5
 	call PrintNumber ; ID Number
 	ld d, $0
@@ -203,14 +267,14 @@ PrintStatsBox: ; 12ae4 (4:6ae4)
 	pop hl
 	pop bc
 	add hl, bc
-	ld de, wcfbc
+	ld de, wLoadedMonAttack
 	ld bc, $0203 ; three digits
 	call PrintStat
-	ld de, wcfbe
+	ld de, wLoadedMonDefense
 	call PrintStat
-	ld de, wcfc0
+	ld de, wLoadedMonSpeed
 	call PrintStat
-	ld de, wcfc2
+	ld de, wLoadedMonSpecial
 	jp PrintNumber
 PrintStat
 	push hl
@@ -233,13 +297,13 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld [hTilesetType], a
 	ld [$ffba], a
 	ld bc, $0005
-	ld hl, wd0dc
+	ld hl, wMoves
 	call FillMemory
-	ld hl, wcfa0
-	ld de, wd0dc
-	ld bc, $0004
+	ld hl, wLoadedMonMoves
+	ld de, wMoves
+	ld bc, NUM_MOVES
 	call CopyData
-	callab Func_39b87
+	callab FormatMovesString
 	hlCoord 9, 2
 	ld bc, $050a
 	call ClearScreenArea ; Clear under name
@@ -250,7 +314,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld c, $12
 	call TextBoxBorder ; Draw move container
 	hlCoord 2, 9
-	ld de, wd0e1
+	ld de, wMovesString
 	call PlaceString ; Print moves
 	ld a, [wcd6c]
 	inc a
@@ -269,7 +333,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld a, "-"
 	call Func_12ccb ; Fill the rest with --
 .InitPP ; 12bbb
-	ld hl, wcfa0
+	ld hl, wLoadedMonMoves
 	deCoord 14, 10
 	ld b, $0
 .PrintPP ; 12bc3
@@ -323,12 +387,12 @@ StatusScreen2: ; 12b57 (4:6b57)
 	hlCoord 9, 3
 	ld de, EXPPointsText
 	call PlaceString
-	ld a, [wcfb9] ; level
+	ld a, [wLoadedMonLevel] ; level
 	push af
 	cp MAX_LEVEL
 	jr z, .Level100 ; 0x12c20 $4
 	inc a
-	ld [wcfb9], a ; Increase temporarily if not 100
+	ld [wLoadedMonLevel], a ; Increase temporarily if not 100
 .Level100
 	hlCoord 14, 6
 	ld [hl], $70 ; 1-tile "to"
@@ -336,13 +400,13 @@ StatusScreen2: ; 12b57 (4:6b57)
 	inc hl
 	call PrintLevel
 	pop af
-	ld [wcfb9], a
-	ld de, wcfa6
+	ld [wLoadedMonLevel], a
+	ld de, wLoadedMonExp
 	hlCoord 12, 4
 	ld bc, $0307
 	call PrintNumber ; exp
 	call .asm_12c86
-	ld de, wcfa6
+	ld de, wLoadedMonExp
 	hlCoord 7, 6
 	ld bc, $0307
 	call PrintNumber
@@ -368,13 +432,13 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call GBPalWhiteOut
 	jp ClearScreen
 .asm_12c86 ; This does some magic with lvl/exp?
-	ld a, [wcfb9] ; Load level
+	ld a, [wLoadedMonLevel] ; Load level
 	cp MAX_LEVEL
 	jr z, .asm_12ca7 ; 0x12c8b $1a ; If 100
 	inc a
 	ld d, a
 	callab CalcExperience
-	ld hl, wcfa8
+	ld hl, wLoadedMonExp + 2
 	ld a, [$ff98]
 	sub [hl]
 	ld [hld], a
@@ -386,7 +450,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld [hld], a
 	ret
 .asm_12ca7
-	ld hl, wcfa6
+	ld hl, wLoadedMonExp
 	xor a
 	ld [hli], a
 	ld [hli], a

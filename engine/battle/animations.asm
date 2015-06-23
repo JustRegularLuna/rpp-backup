@@ -419,7 +419,7 @@ MoveAnimation: ; 78d5e (1e:4d5e)
 	ld c,30
 	call DelayFrames
 .next4
-	call Func_78dbd ; reload pic and flash the pic in and out (to show damage)
+	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
 .AnimationFinished
 	call WaitForSoundToFinish
 	xor a
@@ -457,56 +457,58 @@ ShareMoveAnimations: ; 78da6 (1e:4da6)
 	ld [W_ANIMATIONID],a
 	ret
 
-Func_78dbd: ; 78dbd (1e:4dbd)
-	ld a,[wcc5b]
+PlayApplyingAttackAnimation: ; 78dbd (1e:4dbd)
+; Generic animation that shows after the move's individual animation
+; Different animation depending on whether the move has an additional effect and on whose turn it is
+	ld a,[wAnimationType]
 	and a
 	ret z
 	dec a
 	add a
 	ld c,a
 	ld b,0
-	ld hl,PointerTable_78dcf
+	ld hl,AnimationTypePointerTable
 	add hl,bc
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
 	jp [hl]
 
-PointerTable_78dcf: ; 78dcf (1e:4dcf)
-	dw Func_78ddb
-	dw Func_78de3
-	dw Func_78deb
-	dw Func_78df0
-	dw Func_78df6
-	dw Func_78dfe
+AnimationTypePointerTable: ; 78dcf (1e:4dcf)
+	dw ShakeScreenVertically ; enemy mon has used a damaging move without a side effect
+	dw ShakeScreenHorizontallyHeavy ; enemy mon has used a damaging move with a side effect
+	dw ShakeScreenHorizontallySlow ; enemy mon has used a non-damaging move
+	dw BlinkEnemyMonSprite ; player mon has used a damaging move without a side effect
+	dw ShakeScreenHorizontallyLight ; player mon has used a damaging move with a side effect
+	dw ShakeScreenHorizontallySlow2 ; player mon has used a non-damaging move
 
-Func_78ddb: ; 78ddb (1e:4ddb)
-	call Func_79e6a
+ShakeScreenVertically: ; 78ddb (1e:4ddb)
+	call PlayApplyingAttackSound
 	ld b, $8
-	jp Func_79209
+	jp AnimationShakeScreenVertically
 
-Func_78de3: ; 78de3 (1e:4de3)
-	call Func_79e6a
+ShakeScreenHorizontallyHeavy: ; 78de3 (1e:4de3)
+	call PlayApplyingAttackSound
 	ld b, $8
-	jp Func_79210
+	jp AnimationShakeScreenHorizontallyFast
 
-Func_78deb: ; 78deb (1e:4deb)
+ShakeScreenHorizontallySlow: ; 78deb (1e:4deb)
 	ld bc, $602
-	jr Func_78e01
+	jr AnimationShakeScreenHorizontallySlow
 
-Func_78df0: ; 78df0 (1e:4df0)
-	call Func_79e6a
+BlinkEnemyMonSprite: ; 78df0 (1e:4df0)
+	call PlayApplyingAttackSound
 	jp AnimationBlinkEnemyMon
 
-Func_78df6: ; 78df6 (1e:4df6)
-	call Func_79e6a
+ShakeScreenHorizontallyLight: ; 78df6 (1e:4df6)
+	call PlayApplyingAttackSound
 	ld b, $2
-	jp Func_79210
+	jp AnimationShakeScreenHorizontallyFast
 
-Func_78dfe: ; 78dfe (1e:4dfe)
+ShakeScreenHorizontallySlow2: ; 78dfe (1e:4dfe)
 	ld bc, $302
 
-Func_78e01: ; 78e01 (1e:4e01)
+AnimationShakeScreenHorizontallySlow: ; 78e01 (1e:4e01)
 	push bc
 	push bc
 .asm_78e03
@@ -528,7 +530,7 @@ Func_78e01: ; 78e01 (1e:4e01)
 	jr nz, .asm_78e11
 	pop bc
 	dec c
-	jr nz, Func_78e01
+	jr nz, AnimationShakeScreenHorizontallySlow
 	ret
 
 Func_78e23: ; 78e23 (1e:4e23)
@@ -540,9 +542,9 @@ Func_78e23: ; 78e23 (1e:4e23)
 	ld [wcc79], a
 	ld b, $e4
 	ld a, [W_ANIMATIONID] ; W_ANIMATIONID
-	cp ANIM_AA
+	cp TRADE_BALL_DROP_ANIM
 	jr c, .asm_78e3f
-	cp ANIM_AD + 1
+	cp TRADE_BALL_POOF_ANIM + 1
 	jr nc, .asm_78e3f
 	ld b, $f0
 .asm_78e3f
@@ -716,13 +718,13 @@ AnimationIdSpecialEffects: ; 78ef5 (1e:4ef5)
 	db ROCK_SLIDE
 	dw DoRockSlideSpecialEffects
 
-	db ANIM_AA
+	db TRADE_BALL_DROP_ANIM
 	dw Func_79041
 
-	db ANIM_AB
+	db TRADE_BALL_SHAKE_ANIM
 	dw Func_7904c
 
-	db ANIM_AC
+	db TRADE_BALL_TILT_ANIM
 	dw Func_7907c
 
 	db TOSS_ANIM
@@ -976,9 +978,9 @@ Func_7907c ; 507C
 	ld c,5
 	call DelayFrames
 	pop bc
-	ld a,[$ffae] ; background scroll X
+	ld a,[hSCX] ; background scroll X
 	sub a,8 ; scroll to the left
-	ld [$ffae],a
+	ld [hSCX],a
 	pop de
 	jr .loop
 
@@ -1241,14 +1243,14 @@ Func_791fc: ; 791fc (1e:51fc)
 
 	ld b, $5
 
-Func_79209: ; 79209 (1e:5209)
+AnimationShakeScreenVertically: ; 79209 (1e:5209)
 	predef_jump Func_480ff
 
 AnimationShakeScreen: ; 7920e (1e:520e)
 ; Shakes the screen for a while. Used in Earthquake/Fissure/etc. animations.
 	ld b, $8
 
-Func_79210: ; 79210 (1e:5210)
+AnimationShakeScreenHorizontallyFast: ; 79210 (1e:5210)
 	predef_jump Func_48125
 
 AnimationWaterDropletsEverywhere: ; 79215 (1e:5215)
@@ -1323,9 +1325,9 @@ AnimationSlideMonUp: ; 7927a (1e:527a)
 AnimationSlideMonDown: ; 79297 (1e:5297)
 ; Slides the mon's sprite down out of the screen.
 	xor a
-	call Func_79842
+	call GetTileIDList
 .asm_7929b
-	call Func_79820
+	call GetMonSpriteTileMapPointerFromRowCount
 	push bc
 	push de
 	call Func_79aae
@@ -1514,8 +1516,8 @@ AnimationFlashEnemyMonPic: ; 79398 (1e:5398)
 
 AnimationShowMonPic: ; 7939e (1e:539e)
 	xor a
-	call Func_79842
-	call Func_79820
+	call GetTileIDList
+	call GetMonSpriteTileMapPointerFromRowCount
 	call Func_79aae
 	jp Delay3
 
@@ -1549,7 +1551,7 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 	push af
 	push hl
 	push hl
-	call Func_79842
+	call GetTileIDList
 	pop hl
 	call Func_79aae
 	call Delay3
@@ -1557,7 +1559,7 @@ AnimationShakeBackAndForth: ; 793b1 (1e:53b1)
 	ld bc, $0709
 	call ClearScreenArea
 	pop af
-	call Func_79842
+	call GetTileIDList
 	pop hl
 	call Func_79aae
 	call Delay3
@@ -1584,7 +1586,7 @@ AnimationMoveMonHorizontally: ; 793f9 (1e:53f9)
 .asm_79407
 	xor a
 	push hl
-	call Func_79842
+	call GetTileIDList
 	pop hl
 	call Func_79aae
 	ld c, $3
@@ -1879,8 +1881,8 @@ AnimationSlideMonDownAndHide: ; 795c9 (1e:55c9)
 	call AnimationHideMonPic
 	pop af
 	push af
-	call Func_79842
-	call Func_79820
+	call GetTileIDList
+	call GetMonSpriteTileMapPointerFromRowCount
 	call Func_79aae
 	ld c, $8
 	call DelayFrames
@@ -2149,8 +2151,8 @@ Func_79793: ; 79793 (1e:5793)
 	call GetMonHeader
 	predef LoadMonBackPic
 	xor a
-	call Func_79842
-	call Func_79820
+	call GetTileIDList
+	call GetMonSpriteTileMapPointerFromRowCount
 	call Func_79aae
 	pop af
 	ld [wBattleMonSpecies2], a
@@ -2210,37 +2212,46 @@ Func_7980c: ; 7980c (1e:580c)
 	pop hl
 	ret
 
-Func_79820: ; 79820 (1e:5820)
+; puts the tile map destination address of a mon sprite in hl, given the row count in b
+; The usual row count is 7, but it may be smaller when sliding a mon sprite in/out,
+; in order to show only a portion of the mon sprite.
+GetMonSpriteTileMapPointerFromRowCount: ; 79820 (1e:5820)
 	push de
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
-	jr nz, .asm_7982a
-	ld a, $65
-	jr .asm_7982c
-.asm_7982a
-	ld a, $c
-.asm_7982c
+	jr nz, .enemyTurn
+	ld a, 20 * 5 + 1
+	jr .next
+.enemyTurn
+	ld a, 12
+.next
 	ld hl, wTileMap
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
-	ld a, $7
+	ld a, 7
 	sub b
 	and a
-	jr z, .asm_79840
-	ld de, $14
-.asm_7983c
+	jr z, .done
+	ld de, 20
+.loop
 	add hl, de
 	dec a
-	jr nz, .asm_7983c
-.asm_79840
+	jr nz, .loop
+.done
 	pop de
 	ret
 
-Func_79842: ; 79842 (1e:5842)
-	ld hl, PointerTable_79aea ; $5aea
+; Input:
+; a = tile ID list index
+; Output:
+; de = tile ID list pointer
+; b = number of rows
+; c = number of columns
+GetTileIDList: ; 79842 (1e:5842)
+	ld hl, TileIDListPointerTable
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	add hl, de
 	add hl, de
@@ -2334,181 +2345,182 @@ IsCryMove: ; 798ad (1e:58ad)
 	ret
 
 MoveSoundTable: ; 798bc (1e:58bc)
-	db $a0,$00,$80
-	db $a2,$10,$80
-	db $b3,$00,$80
-	db $a1,$01,$80
-	db $a3,$00,$40
-	db $e9,$00,$ff
-	db $a3,$10,$60
-	db $a3,$20,$80
-	db $a3,$00,$a0
-	db $a6,$00,$80
-	db $a5,$20,$40
-	db $a5,$00,$80
-	db $a4,$00,$a0
-	db $a7,$10,$c0
-	db $a7,$00,$a0
-	db $a8,$00,$c0
-	db $a8,$10,$a0
-	db $a9,$00,$e0
-	db $a7,$20,$c0
-	db $aa,$00,$80
-	db $b9,$00,$80
-	db $ab,$01,$80
-	db $b7,$00,$80
-	db $ad,$f0,$40
-	db $b0,$00,$80
-	db $ad,$00,$80
-	db $b8,$10,$80
-	db $b1,$01,$a0
-	db $ae,$00,$80
-	db $b4,$00,$60
-	db $b4,$01,$40
-	db $b6,$00,$a0
-	db $b0,$10,$a0
-	db $b7,$00,$c0
-	db $aa,$10,$60
-	db $b0,$00,$a0
-	db $b9,$11,$c0
-	db $b0,$20,$c0
-	db $b8,$00,$80
-	db $b1,$00,$80
-	db $b1,$20,$c0
-	db $af,$00,$80
-	db $db,$ff,$40
-	db $b4,$00,$80
-	db $a1,$00,$c0
-	db $a1,$00,$40
-	db $e4,$00,$80
-	db $bf,$40,$60
-	db $bf,$00,$80
-	db $bf,$ff,$40
-	db $c7,$80,$c0
-	db $af,$10,$a0
-	db $af,$21,$e0
-	db $c5,$00,$80
-	db $bb,$20,$60
-	db $c7,$00,$80
-	db $cc,$00,$80
-	db $c2,$40,$80
-	db $c5,$f0,$e0
-	db $cf,$00,$80
-	db $c7,$f0,$60
-	db $c2,$00,$80
-	db $e6,$00,$80
-	db $9d,$01,$a0
-	db $a9,$f0,$20
-	db $ba,$01,$c0
-	db $ba,$00,$80
-	db $b0,$00,$e0
-	db $be,$01,$60
-	db $be,$20,$40
-	db $bb,$00,$80
-	db $bb,$40,$c0
-	db $b1,$03,$60
-	db $bd,$11,$e0
-	db $a8,$20,$e0
-	db $d2,$00,$80
-	db $b2,$00,$80
-	db $b2,$11,$a0
-	db $b2,$01,$c0
-	db $a9,$14,$c0
-	db $b1,$02,$a0
-	db $c5,$f0,$80
-	db $c5,$20,$c0
-	db $d5,$00,$20
-	db $d5,$20,$80
-	db $d2,$12,$60
-	db $be,$00,$80
-	db $aa,$01,$e0
-	db $c5,$0f,$e0
-	db $c5,$11,$20
-	db $a6,$10,$40
-	db $a5,$10,$c0
-	db $aa,$00,$20
-	db $d8,$00,$80
-	db $e4,$11,$18
-	db $9f,$20,$c0
-	db $9e,$20,$c0
-	db $bd,$00,$10
-	db $be,$f0,$20
-	db $df,$f0,$c0
-	db $a7,$f0,$e0
-	db $9f,$f0,$40
-	db $db,$00,$80
-	db $df,$80,$40
-	db $df,$00,$80
-	db $aa,$11,$20
-	db $aa,$22,$10
-	db $b1,$f1,$ff
-	db $a9,$f1,$ff
-	db $aa,$33,$30
-	db $dd,$40,$c0
-	db $a4,$20,$20
-	db $a4,$f0,$10
-	db $a5,$f8,$10
-	db $a7,$f0,$10
-	db $bd,$00,$80
-	db $ae,$00,$c0
-	db $dd,$c0,$ff
-	db $9f,$f2,$20
-	db $e1,$00,$80
-	db $e1,$00,$40
-	db $9f,$00,$40
-	db $a7,$10,$ff
-	db $c7,$20,$20
-	db $dd,$00,$80
-	db $c5,$1f,$20
-	db $bd,$2f,$80
-	db $a5,$1f,$ff
-	db $ca,$1f,$60
-	db $be,$1e,$20
-	db $be,$1f,$18
-	db $aa,$0f,$80
-	db $9f,$f8,$10
-	db $9e,$18,$20
-	db $dd,$08,$40
-	db $ad,$01,$e0
-	db $a7,$09,$ff
-	db $e4,$42,$01
-	db $b2,$00,$ff
-	db $dd,$08,$e0
-	db $bb,$00,$80
-	db $9f,$88,$10
-	db $bd,$48,$ff
-	db $9e,$ff,$ff
-	db $bb,$ff,$10
-	db $9e,$ff,$04
-	db $b2,$01,$ff
-	db $a9,$f8,$ff
-	db $a2,$f0,$f0
-	db $a5,$08,$10
-	db $a3,$f0,$ff
-	db $b0,$f0,$ff
-	db $e1,$10,$ff
-	db $a4,$f0,$20
-	db $ca,$f0,$60
-	db $b8,$12,$10
-	db $e6,$f0,$20
-	db $b4,$12,$ff
-	db $db,$80,$04
-	db $df,$f0,$10
-	db $c5,$f8,$ff
-	db $be,$f0,$ff
-	db $a7,$01,$ff
-	db $cc,$d8,$04
-	db $a1,$00,$80
-	db $a1,$00,$80
+	db (SFX_08_4a - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_4c - SFX_Headers_08) / 3,$10,$80
+	db (SFX_08_5d - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_4b - SFX_Headers_08) / 3,$01,$80
+	db (SFX_08_4d - SFX_Headers_08) / 3,$00,$40
+	db (SFX_08_77 - SFX_Headers_08) / 3,$00,$ff
+	db (SFX_08_4d - SFX_Headers_08) / 3,$10,$60
+	db (SFX_08_4d - SFX_Headers_08) / 3,$20,$80
+	db (SFX_08_4d - SFX_Headers_08) / 3,$00,$a0
+	db (SFX_08_50 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_4f - SFX_Headers_08) / 3,$20,$40
+	db (SFX_08_4f - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_4e - SFX_Headers_08) / 3,$00,$a0
+	db (SFX_08_51 - SFX_Headers_08) / 3,$10,$c0
+	db (SFX_08_51 - SFX_Headers_08) / 3,$00,$a0
+	db (SFX_08_52 - SFX_Headers_08) / 3,$00,$c0
+	db (SFX_08_52 - SFX_Headers_08) / 3,$10,$a0
+	db (SFX_08_53 - SFX_Headers_08) / 3,$00,$e0
+	db (SFX_08_51 - SFX_Headers_08) / 3,$20,$c0
+	db (SFX_08_54 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_62 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_55 - SFX_Headers_08) / 3,$01,$80
+	db (SFX_08_60 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_57 - SFX_Headers_08) / 3,$f0,$40
+	db (SFX_08_5a - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_57 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_61 - SFX_Headers_08) / 3,$10,$80
+	db (SFX_08_5b - SFX_Headers_08) / 3,$01,$a0
+	db (SFX_08_58 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_5e - SFX_Headers_08) / 3,$00,$60
+	db (SFX_08_5e - SFX_Headers_08) / 3,$01,$40
+	db (SFX_08_5f - SFX_Headers_08) / 3,$00,$a0
+	db (SFX_08_5a - SFX_Headers_08) / 3,$10,$a0
+	db (SFX_08_60 - SFX_Headers_08) / 3,$00,$c0
+	db (SFX_08_54 - SFX_Headers_08) / 3,$10,$60
+	db (SFX_08_5a - SFX_Headers_08) / 3,$00,$a0
+	db (SFX_08_62 - SFX_Headers_08) / 3,$11,$c0
+	db (SFX_08_5a - SFX_Headers_08) / 3,$20,$c0
+	db (SFX_08_61 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_5b - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_5b - SFX_Headers_08) / 3,$20,$c0
+	db (SFX_08_59 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_71 - SFX_Headers_08) / 3,$ff,$40
+	db (SFX_08_5e - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$c0
+	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$40
+	db (SFX_08_75 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_67 - SFX_Headers_08) / 3,$40,$60
+	db (SFX_08_67 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_67 - SFX_Headers_08) / 3,$ff,$40
+	db (SFX_08_6a - SFX_Headers_08) / 3,$80,$c0
+	db (SFX_08_59 - SFX_Headers_08) / 3,$10,$a0
+	db (SFX_08_59 - SFX_Headers_08) / 3,$21,$e0
+	db (SFX_08_69 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_64 - SFX_Headers_08) / 3,$20,$60
+	db (SFX_08_6a - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_6c - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_68 - SFX_Headers_08) / 3,$40,$80
+	db (SFX_08_69 - SFX_Headers_08) / 3,$f0,$e0
+	db (SFX_08_6d - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_6a - SFX_Headers_08) / 3,$f0,$60
+	db (SFX_08_68 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_76 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_47 - SFX_Headers_08) / 3,$01,$a0
+	db (SFX_08_53 - SFX_Headers_08) / 3,$f0,$20
+	db (SFX_08_63 - SFX_Headers_08) / 3,$01,$c0
+	db (SFX_08_63 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_5a - SFX_Headers_08) / 3,$00,$e0
+	db (SFX_08_66 - SFX_Headers_08) / 3,$01,$60
+	db (SFX_08_66 - SFX_Headers_08) / 3,$20,$40
+	db (SFX_08_64 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_64 - SFX_Headers_08) / 3,$40,$c0
+	db (SFX_08_5b - SFX_Headers_08) / 3,$03,$60
+	db (SFX_08_65 - SFX_Headers_08) / 3,$11,$e0
+	db (SFX_08_52 - SFX_Headers_08) / 3,$20,$e0
+	db (SFX_08_6e - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_5c - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_5c - SFX_Headers_08) / 3,$11,$a0
+	db (SFX_08_5c - SFX_Headers_08) / 3,$01,$c0
+	db (SFX_08_53 - SFX_Headers_08) / 3,$14,$c0
+	db (SFX_08_5b - SFX_Headers_08) / 3,$02,$a0
+	db (SFX_08_69 - SFX_Headers_08) / 3,$f0,$80
+	db (SFX_08_69 - SFX_Headers_08) / 3,$20,$c0
+	db (SFX_08_6f - SFX_Headers_08) / 3,$00,$20
+	db (SFX_08_6f - SFX_Headers_08) / 3,$20,$80
+	db (SFX_08_6e - SFX_Headers_08) / 3,$12,$60
+	db (SFX_08_66 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_54 - SFX_Headers_08) / 3,$01,$e0
+	db (SFX_08_69 - SFX_Headers_08) / 3,$0f,$e0
+	db (SFX_08_69 - SFX_Headers_08) / 3,$11,$20
+	db (SFX_08_50 - SFX_Headers_08) / 3,$10,$40
+	db (SFX_08_4f - SFX_Headers_08) / 3,$10,$c0
+	db (SFX_08_54 - SFX_Headers_08) / 3,$00,$20
+	db (SFX_08_70 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_75 - SFX_Headers_08) / 3,$11,$18
+	db (SFX_08_49 - SFX_Headers_08) / 3,$20,$c0
+	db (SFX_08_48 - SFX_Headers_08) / 3,$20,$c0
+	db (SFX_08_65 - SFX_Headers_08) / 3,$00,$10
+	db (SFX_08_66 - SFX_Headers_08) / 3,$f0,$20
+	db (SFX_08_73 - SFX_Headers_08) / 3,$f0,$c0
+	db (SFX_08_51 - SFX_Headers_08) / 3,$f0,$e0
+	db (SFX_08_49 - SFX_Headers_08) / 3,$f0,$40
+	db (SFX_08_71 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_73 - SFX_Headers_08) / 3,$80,$40
+	db (SFX_08_73 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_54 - SFX_Headers_08) / 3,$11,$20
+	db (SFX_08_54 - SFX_Headers_08) / 3,$22,$10
+	db (SFX_08_5b - SFX_Headers_08) / 3,$f1,$ff
+	db (SFX_08_53 - SFX_Headers_08) / 3,$f1,$ff
+	db (SFX_08_54 - SFX_Headers_08) / 3,$33,$30
+	db (SFX_08_72 - SFX_Headers_08) / 3,$40,$c0
+	db (SFX_08_4e - SFX_Headers_08) / 3,$20,$20
+	db (SFX_08_4e - SFX_Headers_08) / 3,$f0,$10
+	db (SFX_08_4f - SFX_Headers_08) / 3,$f8,$10
+	db (SFX_08_51 - SFX_Headers_08) / 3,$f0,$10
+	db (SFX_08_65 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_58 - SFX_Headers_08) / 3,$00,$c0
+	db (SFX_08_72 - SFX_Headers_08) / 3,$c0,$ff
+	db (SFX_08_49 - SFX_Headers_08) / 3,$f2,$20
+	db (SFX_08_74 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_74 - SFX_Headers_08) / 3,$00,$40
+	db (SFX_08_49 - SFX_Headers_08) / 3,$00,$40
+	db (SFX_08_51 - SFX_Headers_08) / 3,$10,$ff
+	db (SFX_08_6a - SFX_Headers_08) / 3,$20,$20
+	db (SFX_08_72 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_69 - SFX_Headers_08) / 3,$1f,$20
+	db (SFX_08_65 - SFX_Headers_08) / 3,$2f,$80
+	db (SFX_08_4f - SFX_Headers_08) / 3,$1f,$ff
+	db (SFX_08_6b - SFX_Headers_08) / 3,$1f,$60
+	db (SFX_08_66 - SFX_Headers_08) / 3,$1e,$20
+	db (SFX_08_66 - SFX_Headers_08) / 3,$1f,$18
+	db (SFX_08_54 - SFX_Headers_08) / 3,$0f,$80
+	db (SFX_08_49 - SFX_Headers_08) / 3,$f8,$10
+	db (SFX_08_48 - SFX_Headers_08) / 3,$18,$20
+	db (SFX_08_72 - SFX_Headers_08) / 3,$08,$40
+	db (SFX_08_57 - SFX_Headers_08) / 3,$01,$e0
+	db (SFX_08_51 - SFX_Headers_08) / 3,$09,$ff
+	db (SFX_08_75 - SFX_Headers_08) / 3,$42,$01
+	db (SFX_08_5c - SFX_Headers_08) / 3,$00,$ff
+	db (SFX_08_72 - SFX_Headers_08) / 3,$08,$e0
+	db (SFX_08_64 - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_49 - SFX_Headers_08) / 3,$88,$10
+	db (SFX_08_65 - SFX_Headers_08) / 3,$48,$ff
+	db (SFX_08_48 - SFX_Headers_08) / 3,$ff,$ff
+	db (SFX_08_64 - SFX_Headers_08) / 3,$ff,$10
+	db (SFX_08_48 - SFX_Headers_08) / 3,$ff,$04
+	db (SFX_08_5c - SFX_Headers_08) / 3,$01,$ff
+	db (SFX_08_53 - SFX_Headers_08) / 3,$f8,$ff
+	db (SFX_08_4c - SFX_Headers_08) / 3,$f0,$f0
+	db (SFX_08_4f - SFX_Headers_08) / 3,$08,$10
+	db (SFX_08_4d - SFX_Headers_08) / 3,$f0,$ff
+	db (SFX_08_5a - SFX_Headers_08) / 3,$f0,$ff
+	db (SFX_08_74 - SFX_Headers_08) / 3,$10,$ff
+	db (SFX_08_4e - SFX_Headers_08) / 3,$f0,$20
+	db (SFX_08_6b - SFX_Headers_08) / 3,$f0,$60
+	db (SFX_08_61 - SFX_Headers_08) / 3,$12,$10
+	db (SFX_08_76 - SFX_Headers_08) / 3,$f0,$20
+	db (SFX_08_5e - SFX_Headers_08) / 3,$12,$ff
+	db (SFX_08_71 - SFX_Headers_08) / 3,$80,$04
+	db (SFX_08_73 - SFX_Headers_08) / 3,$f0,$10
+	db (SFX_08_69 - SFX_Headers_08) / 3,$f8,$ff
+	db (SFX_08_66 - SFX_Headers_08) / 3,$f0,$ff
+	db (SFX_08_51 - SFX_Headers_08) / 3,$01,$ff
+	db (SFX_08_6c - SFX_Headers_08) / 3,$d8,$04
+	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$80
+	db (SFX_08_4b - SFX_Headers_08) / 3,$00,$80
 
 Func_79aae: ; 79aae (1e:5aae)
-	ld a, [H_WHOSETURN] ; $fff3
+	ld a, [H_WHOSETURN]
 	and a
-	ld a, $31
+	ld a, $31 ; base tile ID of player mon sprite
 	jr z, .asm_79ab6
-	xor a
+; enemy turn
+	xor a ; base tile ID of enemy mon sprite
 .asm_79ab6
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [hBaseTileID], a
 	jr asm_79acb
 
 Func_79aba: ; 79aba (1e:5aba)
@@ -2522,34 +2534,36 @@ Func_79aba: ; 79aba (1e:5aba)
 	ld de, Unknown_79b1b ; $5b1b
 asm_79acb: ; 79acb (1e:5acb)
 	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 
-Func_79ace: ; 79ace (1e:5ace)
+; b = number of rows
+; c = number of columns
+CopyTileIDs: ; 79ace (1e:5ace)
 	push hl
-.asm_79acf
+.rowLoop
 	push bc
 	push hl
-	ld a, [H_DOWNARROWBLINKCNT1] ; $ff8b
+	ld a, [hBaseTileID]
 	ld b, a
-.asm_79ad4
+.columnLoop
 	ld a, [de]
 	add b
 	inc de
 	ld [hli], a
 	dec c
-	jr nz, .asm_79ad4
+	jr nz, .columnLoop
 	pop hl
-	ld bc, $14
+	ld bc, 20
 	add hl, bc
 	pop bc
 	dec b
-	jr nz, .asm_79acf
+	jr nz, .rowLoop
 	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
+	ld [H_AUTOBGTRANSFERENABLED], a
 	pop hl
 	ret
 
-PointerTable_79aea: ; 79aea (1e:5aea)
+TileIDListPointerTable: ; 79aea (1e:5aea)
 	dw Unknown_79b24
 	db $77
 	dw Unknown_79b55
@@ -2568,34 +2582,79 @@ PointerTable_79aea: ; 79aea (1e:5aea)
 	db $3C
 
 Unknown_79b02: ; 79b02 (1e:5b02)
-	db $31,$38,$46,$54,$5B,$32,$39,$47,$55,$5C,$34,$3B,$49,$57,$5E,$36,$3D,$4B,$59,$60,$37,$3E,$4C,$5A,$61
+	db $31,$38,$46,$54,$5B
+	db $32,$39,$47,$55,$5C
+	db $34,$3B,$49,$57,$5E
+	db $36,$3D,$4B,$59,$60
+	db $37,$3E,$4C,$5A,$61
 
 Unknown_79b1b: ; 79b1b (1e:5b1b)
-	db $31,$46,$5B,$34,$49,$5E,$37,$4C,$61
+	db $31,$46,$5B
+	db $34,$49,$5E
+	db $37,$4C,$61
 
 Unknown_79b24: ; 79b24 (1e:5b24)
-	db $00,$07,$0E,$15,$1C,$23,$2A,$01,$08,$0F,$16,$1D,$24,$2B,$02,$09,$10,$17,$1E,$25,$2C,$03,$0A,$11,$18,$1F,$26,$2D,$04,$0B,$12,$19,$20,$27,$2E,$05,$0C,$13,$1A,$21,$28,$2F,$06,$0D,$14,$1B,$22,$29,$30
+	db $00,$07,$0E,$15,$1C,$23,$2A
+	db $01,$08,$0F,$16,$1D,$24,$2B
+	db $02,$09,$10,$17,$1E,$25,$2C
+	db $03,$0A,$11,$18,$1F,$26,$2D
+	db $04,$0B,$12,$19,$20,$27,$2E
+	db $05,$0C,$13,$1A,$21,$28,$2F
+	db $06,$0D,$14,$1B,$22,$29,$30
 
 Unknown_79b55: ; 79b55 (1e:5b55)
-	db $00,$07,$0E,$15,$1C,$23,$2A,$01,$08,$0F,$16,$1D,$24,$2B,$03,$0A,$11,$18,$1F,$26,$2D,$04,$0B,$12,$19,$20,$27,$2E,$05,$0C,$13,$1A,$21,$28,$2F
+	db $00,$07,$0E,$15,$1C,$23,$2A
+	db $01,$08,$0F,$16,$1D,$24,$2B
+	db $03,$0A,$11,$18,$1F,$26,$2D
+	db $04,$0B,$12,$19,$20,$27,$2E
+	db $05,$0C,$13,$1A,$21,$28,$2F
 
 Unknown_79b78: ; 79b78 (1e:5b78)
-	db $00,$07,$0E,$15,$1C,$23,$2A,$02,$09,$10,$17,$1E,$25,$2C,$04,$0B,$12,$19,$20,$27,$2E
+	db $00,$07,$0E,$15,$1C,$23,$2A
+	db $02,$09,$10,$17,$1E,$25,$2C
+	db $04,$0B,$12,$19,$20,$27,$2E
 
 Unknown_79b8d: ; 79b8d (1e:5b8d)
-	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$19,$00,$02,$06,$0B,$10,$14,$1A,$00,$00,$07,$0C,$11,$15,$1B,$00,$03,$08,$0D,$12,$16,$1C,$00,$04,$09,$0E,$13,$17,$1D,$1F,$05,$0A,$0F,$01,$18,$1E,$20
+	db $00,$00,$00,$00,$00,$00,$00
+	db $00,$00,$00,$00,$00,$19,$00
+	db $02,$06,$0B,$10,$14,$1A,$00
+	db $00,$07,$0C,$11,$15,$1B,$00
+	db $03,$08,$0D,$12,$16,$1C,$00
+	db $04,$09,$0E,$13,$17,$1D,$1F
+	db $05,$0A,$0F,$01,$18,$1E,$20
 
 Unknown_79bbe: ; 79bbe (1e:5bbe)
-	db $00,$00,$00,$30,$00,$37,$00,$00,$00,$2B,$31,$34,$38,$3D,$21,$26,$2C,$01,$35,$39,$3E,$22,$27,$2D,$32,$36,$01,$00,$23,$28,$2E,$33,$01,$3A,$00,$24,$29,$2F,$01,$01,$3B,$00,$25,$2A,$01,$01,$01,$3C,$00
+	db $00,$00,$00,$30,$00,$37,$00
+	db $00,$00,$2B,$31,$34,$38,$3D
+	db $21,$26,$2C,$01,$35,$39,$3E
+	db $22,$27,$2D,$32,$36,$01,$00
+	db $23,$28,$2E,$33,$01,$3A,$00
+	db $24,$29,$2F,$01,$01,$3B,$00
+	db $25,$2A,$01,$01,$01,$3C,$00
 
 Unknown_79bef: ; 79bef (1e:5bef)
-	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$47,$4D,$00,$00,$00,$00,$00,$48,$4E,$52,$56,$5B,$3F,$43,$49,$4F,$53,$57,$5C,$40,$44,$4A,$50,$54,$58,$00,$41,$45,$4B,$51,$4C,$59,$5D,$42,$46,$4C,$4C,$55,$5A,$5E
+	db $00,$00,$00,$00,$00,$00,$00
+	db $00,$00,$47,$4D,$00,$00,$00
+	db $00,$00,$48,$4E,$52,$56,$5B
+	db $3F,$43,$49,$4F,$53,$57,$5C
+	db $40,$44,$4A,$50,$54,$58,$00
+	db $41,$45,$4B,$51,$4C,$59,$5D
+	db $42,$46,$4C,$4C,$55,$5A,$5E
 
 Unknown_79c20: ; 79c20 (1e:5c20)
-	db $31,$32,$32,$32,$32,$33,$34,$35,$36,$36,$37,$38,$34,$39,$3A,$3A,$3B,$38,$3C,$3D,$3E,$3E,$3F,$40,$41,$42,$43,$43,$44,$45,$46,$47,$43,$48,$49,$4A,$41,$43,$4B,$4C,$4D,$4E,$4F,$50,$50,$50,$51,$52
+	db $31,$32,$32,$32,$32,$33
+	db $34,$35,$36,$36,$37,$38
+	db $34,$39,$3A,$3A,$3B,$38
+	db $3C,$3D,$3E,$3E,$3F,$40
+	db $41,$42,$43,$43,$44,$45
+	db $46,$47,$43,$48,$49,$4A
+	db $41,$43,$4B,$4C,$4D,$4E
+	db $4F,$50,$50,$50,$51,$52
 
 Unknown_79c50: ; 79c50 (1e:5c50)
-	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53,$43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54,$43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
+	db $43,$55,$56,$53,$53,$53,$53,$53,$53,$53,$53,$53
+	db $43,$57,$58,$54,$54,$54,$54,$54,$54,$54,$54,$54
+	db $43,$59,$5A,$43,$43,$43,$43,$43,$43,$43,$43,$43
 
 AnimationLeavesFalling: ; 79c74 (1e:5c74)
 ; Makes leaves float down from the top of the screen. This is used
@@ -2760,7 +2819,7 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	ENDR
 
 	xor a
-	ld [$ffae], a
+	ld [hSCX], a
 	ld hl, vBGMap0
 	call Func_79e0d
 	ld a, $90
@@ -2793,34 +2852,36 @@ AnimationShakeEnemyHUD: ; 79d77 (1e:5d77)
 	ld hl, vBGMap1
 	jp Func_79e0d
 
-Func_79dda: ; 79dda (1e:5dda)
+; b = tile ID list index
+; c = base tile ID
+CopyTileIDsFromList: ; 79dda (1e:5dda)
 	call GetPredefRegisters
 	ld a, c
-	ld [H_DOWNARROWBLINKCNT1], a ; $ff8b
+	ld [hBaseTileID], a
 	ld a, b
 	push hl
-	call Func_79842
+	call GetTileIDList
 	pop hl
-	jp Func_79ace
+	jp CopyTileIDs
 
 Func_79de9: ; 79de9 (1e:5de9)
-	ld a, [$ffae]
+	ld a, [hSCX]
 	ld [wTrainerSpriteOffset], a
 .asm_79dee
 	ld a, [wTrainerSpriteOffset]
 	add d
-	ld [$ffae], a
+	ld [hSCX], a
 	ld c, $2
 	call DelayFrames
 	ld a, [wTrainerSpriteOffset]
 	sub d
-	ld [$ffae], a
+	ld [hSCX], a
 	ld c, $2
 	call DelayFrames
 	dec e
 	jr nz, .asm_79dee
 	ld a, [wTrainerSpriteOffset]
-	ld [$ffae], a
+	ld [hSCX], a
 	ret
 
 Func_79e0d: ; 79e0d (1e:5e0d)
@@ -2887,9 +2948,11 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 	ld [W_ANIMATIONID],a
 	jp PlayAnimation
 
-Func_79e6a: ; 79e6a (1e:5e6a)
+PlayApplyingAttackSound: ; 79e6a (1e:5e6a)
+; play a different sound depending if move is not very effective, neutral, or super-effective
+; don't play any sound at all if move is ineffective
 	call WaitForSoundToFinish
-	ld a, [wd05b]
+	ld a, [wDamageMultipliers]
 	and $7f
 	ret z
 	cp $a

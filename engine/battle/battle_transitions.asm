@@ -1,87 +1,3 @@
-Func_708ca: ; 708ca (1c:48ca)
-	ld a, $e4
-	ld [rOBP1], a ; $ff49
-	call Func_7092a
-	hlCoord 12, 0
-	ld bc, $707
-	call ClearScreenArea
-	call Delay3
-	xor a
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld a, $91
-	ld [wHPBarMaxHP], a
-	ld a, $1
-	ld [H_WHOSETURN], a ; $fff3
-	callab Func_79793
-	ld d, $80
-	call Func_704f3
-.asm_708f6
-	ld c, $a
-	call DelayFrames
-	ld a, [rOBP1] ; $ff49
-	sla a
-	sla a
-	ld [rOBP1], a ; $ff49
-	jr nz, .asm_708f6
-	call ClearSprites
-	call Func_7092a
-	ld b, $e4
-.asm_7090d
-	ld c, $a
-	call DelayFrames
-	ld a, [rOBP1] ; $ff49
-	srl b
-	rra
-	srl b
-	rra
-	ld [rOBP1], a ; $ff49
-	ld a, b
-	and a
-	jr nz, .asm_7090d
-	ld a, $1
-	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	call Delay3
-	jp ClearSprites
-
-Func_7092a: ; 7092a (1c:492a)
-	ld de, vFrontPic
-	ld hl, vSprites
-	ld bc, 7 * 7
-	call CopyVideoData
-	ld a, $10
-	ld [W_BASECOORDY], a ; wd082
-	ld a, $70
-	ld [W_BASECOORDX], a ; wd081
-	ld hl, wOAMBuffer
-	ld bc, $606
-	ld d, $8
-.asm_70948
-	push bc
-	ld a, [W_BASECOORDY] ; wd082
-	ld e, a
-.asm_7094d
-	ld a, e
-	add $8
-	ld e, a
-	ld [hli], a
-	ld a, [W_BASECOORDX] ; wd081
-	ld [hli], a
-	ld a, d
-	ld [hli], a
-	ld a, $10
-	ld [hli], a
-	inc d
-	dec c
-	jr nz, .asm_7094d
-	inc d
-	ld a, [W_BASECOORDX] ; wd081
-	add $8
-	ld [W_BASECOORDX], a ; wd081
-	pop bc
-	dec b
-	jr nz, .asm_70948
-	ret
-
 BattleTransition: ; 7096d (1c:496d)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -127,8 +43,8 @@ BattleTransition: ; 7096d (1c:496d)
 	call Delay3
 	call LoadBattleTransitionTile
 	ld bc, $0
-	ld a, [W_ISLINKBATTLE]
-	cp $4
+	ld a, [wLinkState]
+	cp LINK_STATE_BATTLING
 	jr z, .linkBattle
 	call GetBattleTransitionID_WildOrTrainer
 	call GetBattleTransitionID_CompareLevels
@@ -280,9 +196,9 @@ LoadBattleTransitionTile: ; 70a4d (1c:4a4d)
 
 BattleTransition_BlackScreen: ; 70a69 (1c:4a69)
 	ld a, $ff
-	ld [rBGP], a ; $ff47
-	ld [rOBP0], a ; $ff48
-	ld [rOBP1], a ; $ff49
+	ld [rBGP], a
+	ld [rOBP0], a
+	ld [rOBP1], a
 	ret
 
 ; for non-dungeon trainer battles

@@ -29,9 +29,9 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	call LoadGBPal
 	jp RedisplayStartMenu
 .chosePokemon
-	call SaveScreenTilesToBuffer1 ; save screen
-	ld a,$04
-	ld [wd125],a
+	call SaveScreenTilesToBuffer1
+	ld a,FIELD_MOVE_MON_MENU
+	ld [wTextBoxID],a
 	call DisplayTextBoxID ; display pokemon menu options
 	ld hl,wWhichTrade
 	ld bc,$020c ; max menu item ID, top menu item Y
@@ -300,18 +300,18 @@ ItemMenuLoop: ; 132fc (4:72fc)
 	call GoPAL_SET_CF1C
 
 StartMenu_Item: ; 13302 (4:7302)
-	ld a,[W_ISLINKBATTLE]
-	dec a
-	jr nz,.notInLinkBattle
+	ld a,[wLinkState]
+	dec a ; is the player in the Colosseum or Trade Centre?
+	jr nz,.notInCableClubRoom
 	ld hl,CannotUseItemsHereText
 	call PrintText
 	jr .exitMenu
-.notInLinkBattle
+.notInCableClubRoom
 	ld bc,wNumBagItems
-	ld hl,wcf8b
+	ld hl,wList
 	ld a,c
 	ld [hli],a
-	ld [hl],b ; store item bag pointer at wcf8b (for DisplayListMenuID)
+	ld [hl],b ; store item bag pointer at wList (for DisplayListMenuID)
 	xor a
 	ld [wcf93],a
 	ld a,ITEMLISTMENU
@@ -341,8 +341,8 @@ StartMenu_Item: ; 13302 (4:7302)
 	cp a,BICYCLE
 	jp z,.useOrTossItem
 .notBicycle1
-	ld a,$06 ; use/toss menu
-	ld [wd125],a
+	ld a,USE_TOSS_MENU_TEMPLATE
+	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld hl,wTopMenuItemY
 	ld a,11

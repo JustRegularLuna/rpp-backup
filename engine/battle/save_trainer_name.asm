@@ -1,48 +1,3 @@
-Func_27d6b: ; 27d6b (9:7d6b)
-	call GetPredefRegisters
-	push hl
-	call GetMonHeader
-	pop hl
-	push hl
-	ld a, [W_MONHTYPE1]
-	call Func_27d89
-	ld a, [W_MONHTYPE1]
-	ld b, a
-	ld a, [W_MONHTYPE2]
-	cp b
-	pop hl
-	jr z, asm_27d8c
-	ld bc, $28
-	add hl, bc
-
-Func_27d89: ; 27d89 (9:7d89)
-	push hl
-	jr asm_27d9f
-asm_27d8c: ; 27d8c (9:7d8c)
-	ld a, $7f
-	ld bc, $13
-	add hl, bc
-	ld bc, $6
-	jp FillMemory
-
-Func_27d98: ; 27d98 (9:7d98)
-	call GetPredefRegisters
-	push hl
-	ld a, [W_PLAYERMOVETYPE] ; wcfd5
-asm_27d9f: ; 27d9f (9:7d9f)
-	add a
-	ld hl, TypeNames
-	ld e, a
-	ld d, $0
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld d, [hl]
-	pop hl
-	jp PlaceString
-
-INCLUDE "text/type_names.asm"
-
 SaveTrainerName: ; 27e4a (9:7e4a)
 	ld hl,TrainerNamePointers
 	ld a,[W_TRAINERCLASS]
@@ -155,28 +110,3 @@ CooltrainerMName: ; 27f6c (9:7f6c)
 	db "COOLTRAINER♂@"
 CooltrainerFName: ; 27f79 (9:7f79)
 	db "COOLTRAINER♀@"
-
-FocusEnergyEffect_: ; 27f86 (9:7f86)
-	ld hl, W_PLAYERBATTSTATUS2 ; W_PLAYERBATTSTATUS2
-	ld a, [H_WHOSETURN] ; $fff3
-	and a
-	jr z, .asm_27f91
-	ld hl, W_ENEMYBATTSTATUS2 ; W_ENEMYBATTSTATUS2
-.asm_27f91
-	bit 2, [hl] ; is mon already using focus energy?
-	jr nz, .asm_27fa5
-	set 2, [hl] ; mon is now using focus energy
-	callab Func_3fba8
-	ld hl, GettingPumpedText ; $7fb2
-	jp PrintText
-.asm_27fa5
-	ld c, $32
-	call DelayFrames
-	ld hl, PrintButItFailedText_
-	ld b, BANK(PrintButItFailedText_)
-	jp Bankswitch
-
-GettingPumpedText: ; 27fb3 (9:7fb3)
-	db $0a
-	TX_FAR _GettingPumpedText
-	db "@"

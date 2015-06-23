@@ -66,8 +66,8 @@ DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 	xor a
 	ld [hWY], a
 	call SaveScreenTilesToBuffer1
-	ld a, $11
-	ld [wd125], a
+	ld a, MON_SPRITE_POPUP
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call UpdateSprites
 	ld a, [wcf91]

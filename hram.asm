@@ -10,6 +10,10 @@ hSoftReset EQU $FF8A
 ; presses the reset sequence (A+B+SEL+START).
 ; Soft reset when 0 is reached.
 
+hBaseTileID EQU $FF8B
+
+hItemPrice EQU $FF8B
+
 ; counters for blinking down arrow
 H_DOWNARROWBLINKCNT1 EQU $FF8B
 H_DOWNARROWBLINKCNT2 EQU $FF8C
@@ -19,6 +23,8 @@ H_SPRITEINDEX      EQU $FF8C
 
 ; DisplayTextID's argument
 hSpriteIndexOrTextID EQU $FF8C
+
+hPartyMonIndex EQU $FF8C
 
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
@@ -38,12 +44,25 @@ H_NUMTOPRINT        EQU $FF96 ; 3 bytes
 H_POWEROFTEN        EQU $FF99 ; 3 bytes
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
 
+hSerialReceivedNewData EQU $FFA9
+
+; $01 = using external clock
+; $02 = using internal clock
+; $ff = establishing connection
+hSerialConnectionStatus EQU $FFAA
+
+hSerialIgnoringInitialData EQU $FFAB
+
+hSerialSendData EQU $FFAC
+
+hSerialReceiveData EQU $FFAD
+
 ; these values are copied to SCX, SCY, and WY during V-blank
 hSCX EQU $FFAE
 hSCY EQU $FFAF
 hWY  EQU $FFB0
 
-hJoyHeldLast EQU $FFB1
+hJoyLast     EQU $FFB1
 hJoyReleased EQU $FFB2
 hJoyPressed  EQU $FFB3
 hJoyHeld     EQU $FFB4
@@ -135,6 +154,10 @@ hTilesetType EQU $FFD7
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
+
+; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
+; bit 1: menu is double spaced
+hFlags_0xFFF6 EQU $FFF6
 
 hJoyInput EQU $FFF8
 
