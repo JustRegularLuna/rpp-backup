@@ -26,6 +26,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .exitMenu
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
+    call ReloadMapData
 	call LoadGBPal
 	jp RedisplayStartMenu
 .chosePokemon
@@ -274,6 +275,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	db "@"
 .goBackToMap
 	call RestoreScreenTilesAndReloadTilePatterns
+    call ReloadMapData
 	jp CloseTextDisplay
 .newBadgeRequired
 	ld hl,.newBadgeRequiredText
