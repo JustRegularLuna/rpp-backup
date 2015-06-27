@@ -28,7 +28,7 @@ _FuchsiaCityText4:: ; a5f6b (29:5f6b)
 	done
 
 _FuchsiaCityText5:: ; a5f96 (29:5f96)
-	text "!"
+	text $E9, $EA, $EB ; Lenny Face
 	done
 
 _FuchsiaCityText11:: ; a5f99 (29:5f99)
