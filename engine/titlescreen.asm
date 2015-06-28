@@ -357,8 +357,6 @@ CopyrightTextString: ; 4556 (1:4556)
 	next $60,$61,$62,$61,$63,$61,$64,$7F,$73,$74,$75,$76,$77,$78,$79,$7A,$7B ; ©'95.'96.'98 GAME FREAK inc.
 	db   "@"
 
-;INCLUDE "data/title_mons.asm"
-
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
 	hlCoord 7, 8

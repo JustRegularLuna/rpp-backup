@@ -6350,13 +6350,7 @@ SECTION "bank1A",ROMX,BANK[$1A]
 
 INCLUDE "engine/battle/1a.asm"
 
-Version_GFX:
-IF DEF(_RED)
-	INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
-ENDC
-IF DEF(_BLUE)
-	INCBIN "gfx/blue/blueversion.1bpp" ; 8 tiles
-ENDC
+Version_GFX:       INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
 
 OakTS_GFX:         INCBIN "gfx/tilesets/oakts.2bpp"
 OakTS_Block:       INCBIN "gfx/blocksets/oakts.bst"
