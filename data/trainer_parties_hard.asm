@@ -292,8 +292,8 @@ BurglarData: ; COMPLETED
 	
 EngineerData: ; COMPLETED
 	db 21,MAGNEMITE,PIKACHU,0 ;                              UNKNOWN
-	db 51,MAGNETON,ELECTRODE,0 ; route 12 4u
-	db 51,MAGNETON,RAICHU,0 ; route 12 5
+	db 21,MAGNETON,ELECTRODE,0 ; route 11 4u
+	db 21,MAGNETON,RAICHU,0 ; route 11 5
 
 CoupleData: ; COMPLETED
 	db $FF,25,CUBONE,25,WEEPINBELL,0 ; route 6
