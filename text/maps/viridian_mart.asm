@@ -47,3 +47,4 @@ _ViridianMartText3:: ; 95cf6 (25:5cf6)
 	line "has some POTIONs"
 	cont "in stock."
 	done
+

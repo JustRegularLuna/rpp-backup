@@ -19,3 +19,4 @@ MtMoonShopText3:
 	cont "place is here."
 	done
 	db "@"
+
