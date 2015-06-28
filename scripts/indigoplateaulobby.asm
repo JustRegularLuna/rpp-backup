@@ -26,6 +26,8 @@ IndigoPlateauLobbyTextPointers: ; 19c7f (6:5c7f)
 	dw IndigoPlateauLobbyText4
 	dw IndigoPlateauLobbyText5
 
+INCLUDE "data/martInventories/indigo_plateau.asm"
+
 IndigoPlateauLobbyText1: ; 19c89 (6:5c89)
 	db $ff
 

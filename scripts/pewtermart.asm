@@ -9,6 +9,8 @@ PewterMartTextPointers: ; 74cb6 (1d:4cb6)
 	dw PewterMartText2
 	dw PewterMartText3
 
+INCLUDE "data/martInventories/pewter.asm"
+
 PewterMartText2: ; 74cbc (1d:4cbc)
 	db $08 ; asm
 	ld hl, PewterMartText_74cc6

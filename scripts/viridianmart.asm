@@ -73,6 +73,8 @@ ViridianMartTextPointers: ; 1d4e0 (7:54e0)
 	dw ViridianMartText2
 	dw ViridianMartText3
 
+INCLUDE "data/martInventories/viridian.asm"
+
 ViridianMartText1: ; 1d4f0 (7:54f0)
 	TX_FAR _ViridianMartText1
 	db "@"

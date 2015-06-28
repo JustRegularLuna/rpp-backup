@@ -922,8 +922,6 @@ UpdateSprites:: ; 2429 (0:2429)
 	ld [$2000], a
 	ret
 
-INCLUDE "data/mart_inventories.asm"
-
 TextScriptEndingChar:: ; 24d6 (0:24d6)
 	db "@"
 TextScriptEnd:: ; 24d7 (0:24d7)

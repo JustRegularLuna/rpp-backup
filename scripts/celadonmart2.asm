@@ -8,6 +8,8 @@ CeladonMart2TextPointers: ; 560f8 (15:60f8)
 	dw CeladonMart2Text4
 	dw CeladonMart2Text5
 
+INCLUDE "data/martInventories/celadon_2.asm"
+
 CeladonMart2Text3: ; 56102 (15:6102)
 	TX_FAR _CeladonMart2Text3
 	db "@"

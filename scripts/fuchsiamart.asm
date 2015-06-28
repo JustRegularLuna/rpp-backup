@@ -6,6 +6,8 @@ FuchsiaMartTextPointers: ; 1dd8b (7:5d8b)
 	dw FuchsiaMartText2
 	dw FuchsiaMartText3
 
+INCLUDE "data/martInventories/fuchsia.asm"
+
 FuchsiaMartText2: ; 1dd91 (7:5d91)
 	TX_FAR _FuchsiaMartText2
 	db "@"
