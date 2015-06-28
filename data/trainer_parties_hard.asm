@@ -1,4 +1,4 @@
-TrainerDataPointers:
+TrainerDataPointers: ; Last Updated 28/06/2015 by Neodymium / Free to use and modify without crediting
 	dw YoungsterData
 	dw BugCatcherData
 	dw LassData
@@ -58,25 +58,25 @@ TrainerDataPointers:
 
 	
 BrockData:
-	db $FF,14,GEODUDE,15,KABUTO,13,OMANYTE,12,AERODACTYL,15,ONIX,0 ; Additional Remark: Made sure all pokemon (except Geodude) have 40+ HP to prevent charmander from 1H-KO
+	db $FF,14,GEODUDE,15,KABUTOPS,13,OMASTAR,12,AERODACTYL,15,GRAVELER,0 ; Additional Remark: Made sure all pokemon (except Geodude) have 40+ HP to prevent charmander from 1H-KO
 	
 MistyData:
-	db $FF,25,STARYU,25,POLIWRATH,25,DEWGONG,26,VAPOREON,26,STARMIE,0 ; Additional remark: made sure all pokemon have at least 81 HP. Do prevent 2 HKO from charmander.
+	db $FF,25,VAPOREON,25,POLIWRATH,25,DEWGONG,26,STARMIE,25,LAPRAS,0 ; Additional remark: made sure all pokemon have at least 81 HP. Do prevent 2 HKO from charmander.
 	
 LtSurgeData:
 	db $FF,35,ELECTRODE,34,MAGNETON,35,JOLTEON,34,ELECTABUZZ,36,RAICHU,0
 	
 ErikaData:
-	db $FF,45,VILEPLUME,44,BELLOSSOM,44,TANGELA,45,VICTREEBEL,46,EXEGGUTOR,0
+	db $FF,45,VILEPLUME,44,VENUSAUR,44,TANGELA,45,VICTREEBEL,46,EXEGGUTOR,0
 	
 KogaData:
-	db $FF,60,VENOMOTH,59,WEEZING,60,NIDOKING,59,TENTACRUEL,61,ARBOK,0
+	db $FF,60,VENOMOTH,59,WEEZING,60,NIDOKING,59,TENTACRUEL,61,GENGAR,0
 	
 BlaineData:
 	db $FF,65,CHARIZARD,64,RAPIDASH,64,FLAREON,65,ARCANINE,66,MAGMAR,0
 	
 SabrinaData:
-	db $FF,55,MR_MIME,54,SLOWKING,54,HYPNO,55,ESPEON,56,ALAKAZAM,0
+	db $FF,55,JYNX,54,SLOWKING,54,HYPNO,55,ALAKAZAM,56,SLOWBRO,0
 	
 GiovanniData:
 	db $FF,47,STEELIX,46,DUGTRIO,47,NIDOQUEEN,46,NIDOKING,47,RHYDON,48,TAUROS,0 ; GAME CORNER
@@ -84,7 +84,7 @@ GiovanniData:
 	db $FF,66,GENGAR,66,STEELIX,67,NIDOQUEEN,68,NIDOKING,67,RHYPERIOR,67,TAUROS,0 ; GYM
 	
 LoreleiData:
-	db $FF,77,VAPOREON,78,CLOYSTER,76,SLOWKING,77,JYNX,78,LAPRAS,0
+	db $FF,77,CLOYSTER,78,VAPOREON,76,SLOWKING,77,JYNX,78,LAPRAS,0
 	
 BrunoData:
 	db $FF,78,STEELIX,77,HITMONCHAN,77,HITMONLEE,78,PRIMEAPE,77,MACHAMP,0	
@@ -195,13 +195,13 @@ CamperData:
 	db 6,DIGLETT,DIGLETT,SANDSHREW,0 ;                          UNKNOWN
 	db 32,GROWLITHE,CHARMELEON,0 ; Route 9 3u
 	db 32,RATICATE,DUGTRIO,ARBOK,SANDSLASH,0 ; Route 9 4rl
-	db 29,NIDORAN_M,NIDORINO,0 ; Route 13 R4
+	db 53,NIDOKING,0 ; Route 13 R4
 	
-PicnickerData:
+PicnickerData: ; COMPLETED
 	db 25,GOLDEEN,0 ; Cerulean City GYM
 	db 25,RATTATA,PIKACHU,0 ; Route 6 2
 	db 25,RATTATA,SPEAROW,0 ; Route 6 4
-	db 6,BULBASAUR,0 ;                                        	UNKNOWN
+	db 5,BULBASAUR,0 ;                                        	UNKNOWN
 	db 32,GLOOM,WEEPINBELL,0 ; Route 9 1
 	db 33,PERSIAN,0 ; Route 9 5
 	db 36,RAICHU,CLEFABLE,0 ; Rocktunnel Outside
@@ -209,22 +209,22 @@ PicnickerData:
 	db 37,WIGGLYTUFF,PIDGEOT,0 ; Rocktunnel 9
 	db 36,GLOOM,IVYSAUR,0 ; Rocktunnel 3
 	db 42,BULBASAUR,IVYSAUR,VENUSAUR,0 ; Celadon City Gym r.
-	db 24,PIDGEY,MEOWTH,RATTATA,PIKACHU,MEOWTH,0 ; Route 13 r1
-	db 30,POLIWAG,POLIWAG,0 ; route 13 rtl
-	db 27,PIDGEY,MEOWTH,PIDGEY,PIDGEOTTO,0 ; Route 13 rb
-	db 28,GOLDEEN,POLIWAG,HORSEA,0 ; Route 13 r3
-	db 31,GOLDEEN,SEAKING,0 ; After Seafoam
+	db 52,PIDGEOT,RAICHU,PERSIAN,0 ; Route 13 r1
+	db 52,POLIWRATH,0 ; route 13 rtl
+	db 52,PIDGEOT,PIDGEOT,0 ; Route 13 rb
+	db 52,SEAKING,SEADRA,0 ; Route 13 r3
+	db 56,SEAKING,SEAKING,0 ; After Seafoam
 	db 36,WEEPINBELL,CLEFABLE,0 ; Rocktunnel 12
 	db 36,VILEPLUME,PERSIAN,0 ; Rocktunnel 14
 	db 36,PIDGEOT,RATICATE,0 ; Rocktunnel 13
-	db 28,GLOOM,ODDISH,ODDISH,0 ; Route 15 4
-	db 29,PIKACHU,RAICHU,0 ; Route 15 7t
-	db 33,CLEFAIRY,0 ; Route 15 btl
-	db 29,BELLSPROUT,ODDISH,TANGELA,0 ; Route 15 1
-	db 30,TENTACOOL,HORSEA,SEEL,0 ; After seafoam
+	db 54,VILEPLUME,0 ; Route 15 4
+	db 54,RAICHU,0 ; Route 15 7t
+	db 54,CLEFABLE,0 ; Route 15 btl
+	db 54,VICTREEBEL,TANGELA,0 ; Route 15 1
+	db 56,TENTACRUEL,SEADRA,DEWGONG,0 ; After seafoam
 	
 PokemaniacData: ; COMPLETED
-	db 30,RHYHORN,LICKITUNG,0 ;                         UNKNOWN
+	db 5,RHYHORN,LICKITUNG,0 ;                         UNKNOWN
 	db 37,MAROWAK,SANDSLASH,0 ; ROCKTUNNEL OUTSIDE LOWER
 	db 36,SLOWBRO,MAROWAK,0 ; ROCKTUNNEL 11
 	db 36,CHARMELEON,MAROWAK,0 ; ROCKTUNNEL 4
@@ -292,8 +292,8 @@ BurglarData: ; COMPLETED
 	
 EngineerData: ; COMPLETED
 	db 21,MAGNEMITE,PIKACHU,0 ;                              UNKNOWN
-	db 23,MAGNEMITE,ELECTRODE,0 ; route 11 4u
-	db 25,MAGNEMITE,RAICHU,0 ; route 11 5
+	db 51,MAGNETON,ELECTRODE,0 ; route 12 4u
+	db 51,MAGNETON,RAICHU,0 ; route 12 5
 
 CoupleData: ; COMPLETED
 	db $FF,25,CUBONE,25,WEEPINBELL,0 ; route 6
@@ -411,8 +411,8 @@ BirdKeeperData: ; COMPLETED
 	db 55,FEAROW,FEAROW,PIDGEOT,0 ; Route 19 After seafoam
 	db 39,PIDGEOTTO,PIDGEOTTO,PIDGEY,PIDGEOTTO,0 ;             UNKNOWN 
 	db 42,FARFETCH_D,FEAROW,0 ;                                UNKNOWN
-	db 28,PIDGEY,DODUO,PIDGEOTTO,0 ;                        UNKNOWN
-	db 26,MURKROW,SPEAROW,MURKROW,FEAROW,0 ;             UNKNOWN
+	db 52,DODRIO,PIDGEOT,0 ;                        UNKNOWN / somewhere on route 13
+	db 52,MURKROW,FEAROW,0 ; Route 13 LB
 	db 53,PIDGEOT,FEAROW,0 ; Route 14 4R
 	db 53,MURKROW,FEAROW,0 ; Route 14 3R
 	
@@ -517,7 +517,7 @@ RocketData: ; COMPLETED
 	db 47,GOLBAT,HYPNO,0 ; SILPHCO 9 B
 	db 47,MACHAMP,0 ; SILPHCO 10 2
 	db 47,RATICATE,ARBOK,GOLBAT,0 ; SILPHCO 11 1
-	db 32,CUBONE,DROWZEE,MAROWAK,0 ;                              UNKNOWN
+	db 47,HYPNO,MAROWAK,0 ; SILPHCO 13 1
 	
 AceTrainerMData: ; COMPLETED
 	db 61,NIDOKING,0 ; VIRIDIAN GYM C2T
