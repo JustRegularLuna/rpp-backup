@@ -1807,9 +1807,42 @@ CoinCaseNumCoinsText: ; e247 (3:6247)
 OldRodCode: ; e24c (3:624c)
 	call FishingInit
 	jp c, ItemUseNotTime
-	ld bc, (5 << 8) | MAGIKARP
-	ld a, $1 ; set bite
-	jr RodResponse ; 0xe257 $34
+.RandomLoop ; choose which slot
+	call Random
+	srl a
+	jr c, .SetBite
+	and %111
+	cp 6
+	jr nc, .RandomLoop
+; Determine if we need to load normal or sea route data
+    push af
+    ld a,[W_CURMAP]
+    ld hl,OldRodMons2 ; Sea Routes
+    cp ROUTE_19
+    jr z,.done
+    cp ROUTE_20
+    jr z,.done
+    cp ROUTE_21
+    jr z,.done
+	ld hl,OldRodMons1 ; Normal Routes
+.done
+; Set up the encounter
+    pop af
+	add a,a
+	ld c,a
+	ld b,0
+	add hl,bc
+	ld b,[hl]
+	inc hl
+	ld c,[hl]
+	and a
+.SetBite
+	ld a,0
+	rla
+	xor 1
+	jr RodResponse
+    
+INCLUDE "data/old_rod.asm"
 
 GoodRodCode: ; e259 (3:6259)
 	call FishingInit
@@ -1818,8 +1851,8 @@ GoodRodCode: ; e259 (3:6259)
 	call Random
 	srl a
 	jr c, .SetBite
-	and %11
-	cp 2
+	and %111
+	cp 6
 	jr nc, .RandomLoop
 	; choose which monster appears
 	ld hl,GoodRodMons
