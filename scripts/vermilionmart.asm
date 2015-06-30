@@ -6,8 +6,6 @@ VermilionMartTextPointers: ; 5c9e4 (17:49e4)
 	dw VermilionMartText2
 	dw VermilionMartText3
 
-INCLUDE "data/martInventories/vermillion.asm"
-
 VermilionMartText2: ; 5c9ea (17:49ea)
 	TX_FAR _VermilionMartText2
 	db "@"

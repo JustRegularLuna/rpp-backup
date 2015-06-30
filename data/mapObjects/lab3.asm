@@ -1,5 +1,5 @@
 Lab3Object: ; 0x75cec (size=41)
-	db $17 ; border block
+	db $0 ; border block
 
 	db $2 ; warps
 	db $7, $2, $3, CINNABAR_LAB_1

@@ -6,8 +6,6 @@ MtMoonShopTextPointers:
 	dw MtMoonShopText2
 	dw MtMoonShopText3
 
-INCLUDE "data/martInventories/mt_moon_square.asm"
-
 MtMoonShopText2:
 	text "This shop sells"
 	line "fossils that were"

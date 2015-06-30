@@ -6,8 +6,6 @@ CeruleanMartTextPointers: ; 5c898 (17:4898)
 	dw CeruleanMartText2
 	dw CeruleanMartText3
 
-INCLUDE "data/martInventories/cerulean.asm"
-
 CeruleanMartText2: ; 5c89e (17:489e)
 	TX_FAR _CeruleanMartText2
 	db "@"

@@ -6,8 +6,6 @@ CinnabarMartTextPointers: ; 75e81 (1d:5e81)
 	dw CinnabarMartText2
 	dw CinnabarMartText3
 
-INCLUDE "data/martInventories/cinnabar.asm"
-
 CinnabarMartText2: ; 75e87 (1d:5e87)
 	TX_FAR _CinnabarMartText2
 	db "@"
