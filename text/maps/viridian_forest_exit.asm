@@ -9,12 +9,9 @@ _ViridianForestExitText1:: ; 8a6fd (22:66fd)
 	done
 
 _ViridianForestExitText2:: ; 8a75d (22:675d)
-	text "Have you noticed"
-	line "the bushes on the"
-	cont "roadside?"
-
-	para "They can be cut"
-	line "down by a special"
-	cont "#MON move."
-	done
+	text "When I was raising"
+	line "my EEVEE in the"
+	cont "forest, it went"
+    cont "and evolved!"
+    done
 

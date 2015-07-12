@@ -70,7 +70,7 @@ PokecenterDoorTileIDs:
 HouseDoorTileIDs:
 	db 62,$00
 TilesetMuseumDoorTileIDs:
-	db 59,$00
+	db 22,59,$00
 ShipDoorTileIDs:
 	db 30,$00
 LobbyDoorTileIDs:

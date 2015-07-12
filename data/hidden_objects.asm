@@ -606,7 +606,7 @@ Route13HiddenObjects: ; 46ed2 (11:6ed2)
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
 SafariZoneEntranceHiddenObjects: ; 46edf (11:6edf)
-	db $01,$0a,NUGGET
+	db $05,$01,NUGGET
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
 SafariZoneWestHiddenObjects: ; 46ee6 (11:6ee6)

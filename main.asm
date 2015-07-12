@@ -6371,11 +6371,7 @@ Gym_Block:         INCBIN "gfx/blocksets/gym.bst"
 Pokecenter_GFX:    INCBIN "gfx/tilesets/pokecenter.2bpp"
 Pokecenter_Block:  INCBIN "gfx/blocksets/pokecenter.bst"
 
-ForestGate_GFX:
-Museum_GFX:
 Gate_GFX:          INCBIN "gfx/tilesets/gate.t1.2bpp"
-ForestGate_Block:
-Museum_Block:
 Gate_Block:        INCBIN "gfx/blocksets/gate.bst"
 
 Facility_GFX:      INCBIN "gfx/tilesets/facility.2bpp"
@@ -6821,4 +6817,10 @@ INCLUDE "scripts/mtmoonshop.asm"
 INCLUDE "data/mapObjects/mtmoonshop.asm"
 INCLUDE "data/martInventories/mt_moon_square.asm"
 MtMoonShopBlocks: INCBIN "maps/mtmoonshop.blk"
+
+ForestGate_GFX:      INCBIN "gfx/tilesets/forest_gate.2bpp"
+ForestGate_Block:    INCBIN "gfx/blocksets/forest_gate.bst"
+
+Museum_GFX:          INCBIN "gfx/tilesets/museum.2bpp"
+Museum_Block:        INCBIN "gfx/blocksets/museum.bst"
 

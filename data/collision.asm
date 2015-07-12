@@ -8,8 +8,8 @@ OakTS_Coll::        INCBIN  "gfx/tilesets/oakts.tilecoll"
 Gym_Coll::          INCBIN  "gfx/tilesets/gym.tilecoll"
 Forest_Coll::       INCBIN  "gfx/tilesets/forest.tilecoll"
 House_Coll::        INCBIN  "gfx/tilesets/house.tilecoll"
-ForestGate_Coll::
-Museum_Coll::
+ForestGate_Coll::   INCBIN  "gfx/tilesets/forest_gate.tilecoll"
+Museum_Coll::       INCBIN  "gfx/tilesets/museum.tilecoll"
 Gate_Coll::         INCBIN  "gfx/tilesets/gate.tilecoll"
 Ship_Coll::         INCBIN  "gfx/tilesets/ship.tilecoll"
 ShipPort_Coll::     INCBIN  "gfx/tilesets/ship_port.tilecoll"

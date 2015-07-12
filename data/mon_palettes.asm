@@ -213,7 +213,7 @@ TrainerPalletes:
 	db PAL_BLUE_TRAINER      ; Psychic
 	db PAL_RED_TRAINER       ; Rocker
 	db PAL_PURPLE_TRAINER    ; Juggler
-	db PAL_BROWN_TRAINER     ; Tamer
+	db PAL_MEWMON            ; Tamer
 	db PAL_BLUE_TRAINER      ; Bird Keeper
 	db PAL_BROWN_TRAINER     ; Blackbelt
 	db PAL_MEWMON            ; Gary 1

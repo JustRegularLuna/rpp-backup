@@ -1,5 +1,5 @@
 Lab2Object: ; 0x75c45 (size=38)
-	db $17 ; border block
+	db $A ; border block
 
 	db $2 ; warps
 	db $7, $2, $2, CINNABAR_LAB_1

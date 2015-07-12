@@ -1,5 +1,5 @@
 Lab1Object: ; 0x75bb3 (size=62)
-	db $17 ; border block
+	db $A ; border block
 
 	db $5 ; warps
 	db $7, $2, $2, $ff

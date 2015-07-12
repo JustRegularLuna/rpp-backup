@@ -16,8 +16,9 @@ _Museum2FText2:: ; 96869 (25:6869)
 	done
 
 _Museum2FText3:: ; 968b1 (25:68b1)
-	text "We have a space"
-	line "exhibit now."
+	text "The space exhibit"
+	line "is being displayed"
+    cont "abroad for now."
 	done
 
 _Museum2FText4:: ; 968cf (25:68cf)
@@ -34,12 +35,11 @@ _Museum2FText5:: ; 96911 (25:6911)
 	done
 
 _Museum2FText6:: ; 96933 (25:6933)
-	text "SPACE SHUTTLE"
-	line "COLUMBIA"
+	text "Fossils from the"
+	line "HOENN region."
 	done
 
 _Museum2FText7:: ; 9694b (25:694b)
 	text "Meteorite that"
 	line "fell on MT.MOON."
-	cont "(MOON STONE?)"
 	done

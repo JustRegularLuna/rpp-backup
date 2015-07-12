@@ -16,7 +16,7 @@ HiddenItemCoords: ; 766b8 (1d:66b8)
 	db ROUTE_13,$0e,$01
 	db ROUTE_13,$0d,$10
 	db MANSION_4,$09,$01
-	db SAFARI_ZONE_ENTRANCE,$01,$0a
+	db SAFARI_ZONE_ENTRANCE,$05,$01
 	db SAFARI_ZONE_WEST,$05,$06
 	db SILPH_CO_5F,$03,$0c
 	db SILPH_CO_9F,$0f,$02

@@ -29,7 +29,7 @@ OverworldWarpTileIDs:
 ForestGateWarpTileIDs:
 MuseumWarpTileIDs:
 GateWarpTileIDs:
-	db 59,26,28,$FF
+	db 22,26,28,59,$FF
 RedsHouse1WarpTileIDs:
 RedsHouse2WarpTileIDs:
 	db 26,28,$FF
