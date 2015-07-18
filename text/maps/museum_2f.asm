@@ -17,7 +17,7 @@ _Museum2FText2:: ; 96869 (25:6869)
 
 _Museum2FText3:: ; 968b1 (25:68b1)
 	text "The space exhibit"
-	line "is being displayed"
+	line "is being shown"
     cont "abroad for now."
 	done
 
