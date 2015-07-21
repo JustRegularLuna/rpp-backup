@@ -61,24 +61,24 @@ PlaceNextChar:: ; 1956 (0:1956)
 .PlaceText
 	cp $4E
 	jr nz,.next
-	ld bc,$0028
+	ld bc,SCREEN_WIDTH * 2
 	ld a,[hFlags_0xFFF6]
 	bit 2,a
 	jr z,.next2
-	ld bc,$14
+	ld bc,SCREEN_WIDTH
 .next2
 	pop hl
 	add hl,bc
 	push hl
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 .next
 	cp $4F
 	jr nz,.next3
 	pop hl
-	hlCoord 1, 16
+	coord hl, 1, 16
 	push hl
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 .next3 ; Check against a dictionary
 	and a
@@ -123,7 +123,7 @@ PlaceNextChar:: ; 1956 (0:1956)
 	jp z,Char5A
 	ld [hli],a
 	call PrintLetterDelay
-Next19E8:: ; 19e8 (0:19e8)
+PlaceNextChar_inc:: ; 19e8 (0:19e8)
 	inc de
 	jp PlaceNextChar
 
@@ -207,7 +207,7 @@ MonsterNameCharsCommon:: ; 1a37 (0:1a37)
 	ld de,wBattleMonNick ; player active monster name
 	jr FinishDTE
 
-.Enemy ; 1A40
+.Enemy
 	; print “Enemy ”
 	ld de,Char5AText
 	call PlaceString
@@ -273,7 +273,7 @@ Char58:: ; 1a95 (0:1a95)
 Next1AA2:: ; 1aa2 (0:1aa2)
 	call ProtectedDelay3
 	call ManualTextScroll
-	ld a,$7F
+	ld a, " "
 	Coorda 18, 16
 Char57:: ; 1aad (0:1aad)
 	pop hl
@@ -290,14 +290,14 @@ Char51:: ; 1ab4 (0:1ab4)
 	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
-	hlCoord 1, 13
+	coord hl, 1, 13
 	ld bc,$0412
 	call ClearScreenArea
-	ld c,$14
+	ld c,20
 	call DelayFrames
 	pop de
-	hlCoord 1, 14
-	jp Next19E8
+	coord hl, 1, 14
+	jp PlaceNextChar_inc
 
 Char49:: ; 1ad5 (0:1ad5)
 	push de
@@ -305,16 +305,16 @@ Char49:: ; 1ad5 (0:1ad5)
 	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
-	hlCoord 1, 10
+	coord hl, 1, 10
 	ld bc,$0712
 	call ClearScreenArea
-	ld c,$14
+	ld c,20
 	call DelayFrames
 	pop de
 	pop hl
-	hlCoord 1, 11
+	coord hl, 1, 11
 	push hl
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 Char4B:: ; 1af8 (0:1af8)
 	ld a,$EE
@@ -323,30 +323,30 @@ Char4B:: ; 1af8 (0:1af8)
 	push de
 	call ManualTextScroll
 	pop de
-	ld a,$7F
+	ld a, " "
 	Coorda 18, 16
 	;fall through
 Char4C:: ; 1b0a (0:1b0a)
 	push de
 	call Next1B18
 	call Next1B18
-	hlCoord 1, 16
+	coord hl, 1, 16
 	pop de
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 Next1B18:: ; 1b18 (0:1b18)
-	hlCoord 0, 14
-	deCoord 0, 13
-	ld b,$3C
+	coord hl, 0, 14
+	coord de, 0, 13
+	ld b,60
 .next
 	ld a,[hli]
 	ld [de],a
 	inc de
 	dec b
 	jr nz,.next
-	hlCoord 1, 16
-	ld a,$7F
-	ld b,$12
+	coord hl, 1, 16
+	ld a, " "
+	ld b,SCREEN_WIDTH - 2
 .next2
 	ld [hli],a
 	dec b
@@ -368,13 +368,13 @@ ProtectedDelay3:: ; 1b3a (0:1b3a)
 	ret
 
 TextCommandProcessor:: ; 1b40 (0:1b40)
-	ld a,[wd358]
+	ld a,[wLetterPrintingDelayFlags]
 	push af
 	set 1,a
 	ld e,a
 	ld a,[$fff4]
 	xor e
-	ld [wd358],a
+	ld [wLetterPrintingDelayFlags],a
 	ld a,c
 	ld [wcc3a],a
 	ld a,b
@@ -385,7 +385,7 @@ NextTextCommand:: ; 1b55 (0:1b55)
 	cp a, "@" ; terminator
 	jr nz,.doTextCommand
 	pop af
-	ld [wd358],a
+	ld [wLetterPrintingDelayFlags],a
 	ret
 .doTextCommand
 	push hl
@@ -499,7 +499,7 @@ TextCommand03:: ; 1bb7 (0:1bb7)
 ; (no arguments)
 TextCommand05:: ; 1bc5 (0:1bc5)
 	pop hl
-	bcCoord 1, 16 ; address of second line of dialogue text box
+	coord bc, 1, 16 ; address of second line of dialogue text box
 	jp NextTextCommand
 
 ; blink arrow and wait for A or B to be pressed
@@ -528,7 +528,7 @@ TextCommand07:: ; 1be7 (0:1be7)
 	call Next1B18 ; scroll up text
 	call Next1B18
 	pop hl
-	bcCoord 1, 16 ; address of second line of dialogue text box
+	coord bc, 1, 16 ; address of second line of dialogue text box
 	jp NextTextCommand
 
 ; execute asm inline
@@ -576,7 +576,7 @@ TextCommand0A:: ; 1c1d (0:1c1d)
 	push bc
 	call Joypad
 	ld a,[hJoyHeld]
-	and a,%00000011 ; A and B buttons
+	and a,A_BUTTON | B_BUTTON
 	jr nz,.skipDelay
 	ld c,30
 	call DelayFrames
@@ -626,13 +626,13 @@ TextCommand0B:: ; 1c31 (0:1c31)
 
 ; format: text command ID, sound ID or cry ID
 TextCommandSounds:: ; 1c64 (0:1c64)
-	db $0B,(SFX_02_3a - SFX_Headers_02) / 3
-	db $12,(SFX_08_46 - SFX_Headers_08) / 3
-	db $0E,(SFX_02_41 - SFX_Headers_02) / 3
-	db $0F,(SFX_02_3a - SFX_Headers_02) / 3
-	db $10,(SFX_02_3b - SFX_Headers_02) / 3
-	db $11,(SFX_02_42 - SFX_Headers_02) / 3
-	db $13,(SFX_08_45 - SFX_Headers_08) / 3
+	db $0B,SFX_GET_ITEM_1
+	db $12,SFX_BATTLE_06
+	db $0E,SFX_POKEDEX_RATING
+	db $0F,SFX_GET_ITEM_1
+	db $10,SFX_GET_ITEM_2
+	db $11,SFX_GET_KEY_ITEM
+	db $13,SFX_BATTLE_05
 	db $14,NIDORINA ; used in OakSpeech
 	db $15,PIDGEOT  ; used in SaffronCityText12
 	db $16,DEWGONG  ; unused?
@@ -654,7 +654,7 @@ TextCommand0C:: ; 1c78 (0:1c78)
 	call Joypad
 	pop de
 	ld a,[hJoyHeld] ; joypad state
-	and a,%00000011 ; is A or B button pressed?
+	and a,A_BUTTON | B_BUTTON
 	jr nz,.skipDelay ; if so, skip the delay
 	ld c,10
 	call DelayFrames
@@ -690,7 +690,7 @@ TextCommand17:: ; 1ca3 (0:1ca3)
 	ld d,a
 	ld a,[hli]
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	push hl
 	ld l,e
 	ld h,d
@@ -698,7 +698,7 @@ TextCommand17:: ; 1ca3 (0:1ca3)
 	pop hl
 	pop af
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	jp NextTextCommand
 
 TextCommandJumpTable:: ; 1cc1 (0:1cc1)

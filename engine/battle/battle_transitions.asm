@@ -104,12 +104,12 @@ GetBattleTransitionID_CompareLevels: ; 709ef (1c:49ef)
 	jr nc, .highLevelEnemy
 	res 1, c
 	ld a, $1
-	ld [wcd47], a
+	ld [wBattleTransitionSpiralDirection], a
 	ret
 .highLevelEnemy
 	set 1, c
 	xor a
-	ld [wcd47], a
+	ld [wBattleTransitionSpiralDirection], a
 	ret
 
 ; fails to recognize VICTORY_ROAD_2, VICTORY_ROAD_3, all ROCKET_HIDEOUT maps,
@@ -206,13 +206,13 @@ BattleTransition_BlackScreen: ; 70a69 (1c:4a69)
 ; outward spiral if enemy is at least 3 levels
 ; higher than player and does an inward spiral otherwise
 BattleTransition_Spiral: ; 70a72 (1c:4a72)
-	ld a, [wcd47]
+	ld a, [wBattleTransitionSpiralDirection]
 	and a
 	jr z, .outwardSpiral
 	call BattleTransition_InwardSpiral
 	jr .done
 .outwardSpiral
-	hlCoord 10, 10
+	coord hl, 10, 10
 	ld a, $3
 	ld [wd09f], a
 	ld a, l
@@ -241,14 +241,14 @@ BattleTransition_Spiral: ; 70a72 (1c:4a72)
 BattleTransition_InwardSpiral: ; 70aaa (1c:4aaa)
 	ld a, $7
 	ld [wWhichTrade], a
-	ld hl, wTileMap
+	coord hl, 0, 0
 	ld c, $11
-	ld de, $14
+	ld de, SCREEN_WIDTH
 	call BattleTransition_InwardSpiral_
 	inc c
 	jr .skip
 .loop
-	ld de, $14
+	ld de, SCREEN_WIDTH
 	call BattleTransition_InwardSpiral_
 .skip
 	inc c
@@ -256,10 +256,10 @@ BattleTransition_InwardSpiral: ; 70aaa (1c:4aaa)
 	call BattleTransition_InwardSpiral_
 	dec c
 	dec c
-	ld de, $ffec
+	ld de, -SCREEN_WIDTH
 	call BattleTransition_InwardSpiral_
 	inc c
-	ld de, rIE
+	ld de, -1
 	call BattleTransition_InwardSpiral_
 	dec c
 	dec c
@@ -288,8 +288,8 @@ BattleTransition_InwardSpiral_: ; 70ae0 (1c:4ae0)
 	ret
 
 BattleTransition_OutwardSpiral_: ; 70af9 (1c:4af9)
-	ld bc, $ffec
-	ld de, $14
+	ld bc, -SCREEN_WIDTH
+	ld de, SCREEN_WIDTH
 	ld a, [wd09b]
 	ld l, a
 	ld a, [wd09a]
@@ -362,7 +362,7 @@ BattleTransition_FlashScreen_: ; 70b5d (1c:4b5d)
 	cp $1
 	jr z, .done
 	ld [rBGP], a
-	ld c, $2
+	ld c, 2
 	call DelayFrames
 	jr .loop
 .done
@@ -376,59 +376,59 @@ BattleTransition_FlashScreenPalettes: ; 70b72 (1c:4b72)
 
 ; used for low level trainer dungeon battles
 BattleTransition_Shrink: ; 70b7f (1c:4b7f)
-	ld c, $9
+	ld c, SCREEN_HEIGHT / 2
 .loop
 	push bc
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	hlCoord 0, 7
-	deCoord 0, 8
-	ld bc, $ffd8
+	coord hl, 0, 7
+	coord de, 0, 8
+	ld bc, -SCREEN_WIDTH * 2
 	call BattleTransition_CopyTiles1
-	hlCoord 0, 10
-	deCoord 0, 9
-	ld bc, $28
+	coord hl, 0, 10
+	coord de, 0, 9
+	ld bc, SCREEN_WIDTH * 2
 	call BattleTransition_CopyTiles1
-	hlCoord 8, 0
-	deCoord 9, 0
-	ld bc, $fffe
+	coord hl, 8, 0
+	coord de, 9, 0
+	ld bc, -2
 	call BattleTransition_CopyTiles2
-	hlCoord 11, 0
-	deCoord 10, 0
+	coord hl, 11, 0
+	coord de, 10, 0
 	ld bc, $2
 	call BattleTransition_CopyTiles2
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld c, $6
+	ld c, 6
 	call DelayFrames
 	pop bc
 	dec c
 	jr nz, .loop
 	call BattleTransition_BlackScreen
-	ld c, $a
+	ld c, 10
 	jp DelayFrames
 
 ; used for high level trainer dungeon battles
 BattleTransition_Split: ; 70bca (1c:4bca)
-	ld c, $9
+	ld c, SCREEN_HEIGHT / 2
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 .loop
 	push bc
-	hlCoord 0, 16
-	deCoord 0, 17
-	ld bc, $ffd8
+	coord hl, 0, 16
+	coord de, 0, 17
+	ld bc, -SCREEN_WIDTH * 2
 	call BattleTransition_CopyTiles1
-	hlCoord 0, 1
-	ld de, wTileMap
-	ld bc, $28
+	coord hl, 0, 1
+	coord de, 0, 0
+	ld bc, SCREEN_WIDTH * 2
 	call BattleTransition_CopyTiles1
-	hlCoord 18, 0
-	deCoord 19, 0
-	ld bc, $fffe
+	coord hl, 18, 0
+	coord de, 19, 0
+	ld bc, -2
 	call BattleTransition_CopyTiles2
-	hlCoord 1, 0
-	ld de, wTileMap
+	coord hl, 1, 0
+	coord de, 0, 0
 	ld bc, $2
 	call BattleTransition_CopyTiles2
 	call BattleTransition_TransferDelay3
@@ -437,7 +437,7 @@ BattleTransition_Split: ; 70bca (1c:4bca)
 	dec c
 	jr nz, .loop
 	call BattleTransition_BlackScreen
-	ld c, $a
+	ld c, 10
 	jp DelayFrames
 
 BattleTransition_CopyTiles1: ; 70c12 (1c:4c12)
@@ -450,7 +450,7 @@ BattleTransition_CopyTiles1: ; 70c12 (1c:4c12)
 	push bc
 	push hl
 	push de
-	ld bc, $14
+	ld bc, SCREEN_WIDTH
 	call CopyData
 	pop hl
 	pop de
@@ -465,7 +465,7 @@ BattleTransition_CopyTiles1: ; 70c12 (1c:4c12)
 	ld l, e
 	ld h, d
 	ld a, $ff
-	ld c, $14
+	ld c, SCREEN_WIDTH
 .loop2
 	ld [hli], a
 	dec c
@@ -477,23 +477,23 @@ BattleTransition_CopyTiles2: ; 70c3f (1c:4c3f)
 	ld [wWhichTrade], a
 	ld a, b
 	ld [wTrainerEngageDistance], a
-	ld c, $9
+	ld c, SCREEN_HEIGHT / 2
 .loop1
 	push bc
 	push hl
 	push de
-	ld c, $12
+	ld c, SCREEN_HEIGHT
 .loop2
 	ld a, [hl]
 	ld [de], a
 	ld a, e
-	add $14
+	add SCREEN_WIDTH
 	jr nc, .noCarry1
 	inc d
 .noCarry1
 	ld e, a
 	ld a, l
-	add $14
+	add SCREEN_WIDTH
 	jr nc, .noCarry2
 	inc h
 .noCarry2
@@ -512,8 +512,8 @@ BattleTransition_CopyTiles2: ; 70c3f (1c:4c3f)
 	jr nz, .loop1
 	ld l, e
 	ld h, d
-	ld de, $14
-	ld c, $12
+	ld de, SCREEN_WIDTH
+	ld c, SCREEN_HEIGHT
 .loop3
 	ld [hl], $ff
 	add hl, de
@@ -523,9 +523,9 @@ BattleTransition_CopyTiles2: ; 70c3f (1c:4c3f)
 
 ; used for high level wild dungeon battles
 BattleTransition_VerticalStripes: ; 70c7e (1c:4c7e)
-	ld c, $12
-	ld hl, wTileMap
-	deCoord 1, 17
+	ld c, SCREEN_HEIGHT
+	coord hl, 0, 0
+	coord de, 1, 17
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 .loop
@@ -538,12 +538,12 @@ BattleTransition_VerticalStripes: ; 70c7e (1c:4c7e)
 	call BattleTransition_VerticalStripes_
 	call BattleTransition_TransferDelay3
 	pop hl
-	ld bc, $ffec
+	ld bc, -SCREEN_WIDTH
 	add hl, bc
 	ld e, l
 	ld d, h
 	pop hl
-	ld bc, $14
+	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	dec c
@@ -551,7 +551,7 @@ BattleTransition_VerticalStripes: ; 70c7e (1c:4c7e)
 	jp BattleTransition_BlackScreen
 
 BattleTransition_VerticalStripes_: ; 70caa (1c:4caa)
-	ld c, $a
+	ld c, SCREEN_WIDTH / 2
 .loop
 	ld [hl], $ff
 	inc hl
@@ -562,9 +562,9 @@ BattleTransition_VerticalStripes_: ; 70caa (1c:4caa)
 
 ; used for low level wild dungeon battles
 BattleTransition_HorizontalStripes: ; 70cb4 (1c:4cb4)
-	ld c, $14
-	ld hl, wTileMap
-	deCoord 19, 1
+	ld c, SCREEN_WIDTH
+	coord hl, 0, 0
+	coord de, 19, 1
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 .loop
@@ -586,8 +586,8 @@ BattleTransition_HorizontalStripes: ; 70cb4 (1c:4cb4)
 	jp BattleTransition_BlackScreen
 
 BattleTransition_HorizontalStripes_: ; 70cd8 (1c:4cd8)
-	ld c, $9
-	ld de, $28
+	ld c, SCREEN_HEIGHT / 2
+	ld de, SCREEN_WIDTH * 2
 .loop
 	ld [hl], $ff
 	add hl, de
@@ -600,10 +600,10 @@ BattleTransition_HorizontalStripes_: ; 70cd8 (1c:4cd8)
 ; by animating each half circle one at a time
 BattleTransition_Circle: ; 70ce4 (1c:4ce4)
 	call BattleTransition_FlashScreen
-	ld bc, $000a
+	ld bc, SCREEN_WIDTH / 2
 	ld hl, BattleTransition_HalfCircle1
 	call BattleTransition_Circle_Sub1
-	ld c, $a
+	ld c, SCREEN_WIDTH / 2
 	ld b, $1
 	ld hl, BattleTransition_HalfCircle2
 	call BattleTransition_Circle_Sub1
@@ -643,7 +643,7 @@ BattleTransition_TransferDelay3: ; 70d19 (1c:4d19)
 ; by animating both half circles at the same time
 BattleTransition_DoubleCircle: ; 70d24 (1c:4d24)
 	call BattleTransition_FlashScreen
-	ld c, $a
+	ld c, SCREEN_WIDTH / 2
 	ld hl, BattleTransition_HalfCircle1
 	ld de, BattleTransition_HalfCircle2
 .loop
@@ -784,9 +784,9 @@ BattleTransition_Circle_Sub3: ; 70dc5 (1c:4dc5)
 	pop hl
 	ld a, [wWhichTrade]
 	and a
-	ld bc, $14
+	ld bc, SCREEN_WIDTH
 	jr z, .skip3
-	ld bc, $ffec
+	ld bc, -SCREEN_WIDTH
 .skip3
 	add hl, bc
 	ld a, [de]

@@ -1,9 +1,3 @@
-
-H_SPRITEWIDTH            EQU $FF8B ; in tiles
-H_SPRITEINTERLACECOUNTER EQU $FF8B
-H_SPRITEHEIGHT           EQU $FF8C ; in tiles
-H_SPRITEOFFSET           EQU $FF8D
-
 hSoftReset EQU $FF8A
 ; Initialized to 16.
 ; Decremented each input iteration if the player
@@ -12,7 +6,27 @@ hSoftReset EQU $FF8A
 
 hBaseTileID EQU $FF8B
 
+; 3-byte BCD number
 hItemPrice EQU $FF8B
+
+hDexWeight EQU $FF8B
+
+hWarpDestinationMap EQU $FF8B
+
+hOAMTile EQU $FF8B
+
+hROMBankTemp EQU $FF8B
+
+hPreviousTileset EQU $FF8B
+
+hEastWestConnectedMapWidth EQU $FF8B
+
+hSlideAmount EQU $FF8B
+
+H_SPRITEWIDTH            EQU $FF8B ; in tiles
+H_SPRITEINTERLACECOUNTER EQU $FF8B
+H_SPRITEHEIGHT           EQU $FF8C ; in tiles
+H_SPRITEOFFSET           EQU $FF8D
 
 ; counters for blinking down arrow
 H_DOWNARROWBLINKCNT1 EQU $FF8B
@@ -21,10 +35,65 @@ H_DOWNARROWBLINKCNT2 EQU $FF8C
 H_SPRITEDATAOFFSET EQU $FF8B
 H_SPRITEINDEX      EQU $FF8C
 
+hMapStride EQU $FF8B
+hMapWidth  EQU $FF8C
+
+hNorthSouthConnectionStripWidth EQU $FF8B
+hNorthSouthConnectedMapWidth    EQU $FF8C
+
 ; DisplayTextID's argument
 hSpriteIndexOrTextID EQU $FF8C
 
 hPartyMonIndex EQU $FF8C
+
+; the total number of tiles being shifted each time the pic slides by one tile
+hSlidingRegionSize EQU $FF8C
+
+; 2 bytes
+hEnemySpeed EQU $FF8D
+
+hVRAMSlot EQU $FF8D
+
+hFourTileSpriteCount EQU $FF8E
+
+; -1 = left
+;  0 = right
+hSlideDirection EQU $FF8D
+
+hSpriteFacingDirection EQU $FF8D
+
+hSpriteMovementByte2 EQU $FF8D
+
+hSpriteImageIndex EQU $FF8D
+
+hLoadSpriteTemp1 EQU $FF8D
+hLoadSpriteTemp2 EQU $FF8E
+
+hHalveItemPrices EQU $FF8E
+
+hSpriteOffset2 EQU $FF8F
+
+hOAMBufferOffset EQU $FF90
+
+hSpriteScreenX EQU $FF91
+hSpriteScreenY EQU $FF92
+
+hTilePlayerStandingOn EQU $FF93
+
+hSpritePriority EQU $FF94
+
+; 2 bytes
+hSignCoordPointer EQU $FF95
+
+hNPCMovementDirections2Index EQU $FF95
+
+; CalcPositionOfPlayerRelativeToNPC
+hNPCSpriteOffset EQU $FF95
+
+; temp value used when swapping bytes
+hSwapTemp EQU $FF95
+
+hExperience EQU $FF96 ; 3 bytes, big endian
 
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
@@ -43,6 +112,42 @@ H_PASTLEADINGZEROES EQU $FF95 ; last char printed
 H_NUMTOPRINT        EQU $FF96 ; 3 bytes
 H_POWEROFTEN        EQU $FF99 ; 3 bytes
 H_SAVEDNUMTOPRINT   EQU $FF9C ; 3 bytes
+
+; distance in steps between NPC and player
+hNPCPlayerYDistance EQU $FF95
+hNPCPlayerXDistance EQU $FF96
+
+hFindPathNumSteps EQU $FF97
+
+; bit 0: set when the end of the path's Y coordinate matches the target's
+; bit 1: set when the end of the path's X coordinate matches the target's
+; When both bits are set, the end of the path is at the target's position
+; (i.e. the path has been found).
+hFindPathFlags EQU $FF98
+
+hFindPathYProgress EQU $FF99
+hFindPathXProgress EQU $FF9A
+
+; 0 = from player to NPC
+; 1 = from NPC to player
+hNPCPlayerRelativePosPerspective EQU $FF9B
+
+; bit 0:
+; 0 = target is to the south or aligned
+; 1 = target is to the north
+; bit 1:
+; 0 = target is to the east or aligned
+; 1 = target is to the west
+hNPCPlayerRelativePosFlags EQU $FF9D
+
+; some code zeroes this for no reason when writing a coin amount
+hUnusedCoinsByte EQU $FF9F
+
+hMoney EQU $FF9F ; 3-byte BCD number
+hCoins EQU $FFA0 ; 2-byte BCD number
+
+hDivideBCDDivisor  EQU $FFA2 ; 3-byte BCD number
+hDivideBCDQuotient EQU $FFA2 ; 3-byte BCD number
 
 hSerialReceivedNewData EQU $FFA9
 
@@ -153,11 +258,28 @@ hTilesetType EQU $FFD7
 
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
 
+hVendingMachineItem  EQU $FFDB
+hVendingMachinePrice EQU $FFDC ; 3-byte BCD number
+
+hNewPartyLength EQU $FFE4
+
+hDividend2 EQU $FFE5
+hDivisor2  EQU $FFE6
+hQuotient2 EQU $FFE7
+
+hSpriteVRAMSlotAndFacing EQU $FFE9
+
+hCoordsInFrontOfPlayerMatch EQU $FFEA
+
+hSpriteAnimFrameCounter EQU $FFEA
+
 H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 
 ; bit 0: draw HP fraction to the right of bar instead of below (for party menu)
 ; bit 1: menu is double spaced
 hFlags_0xFFF6 EQU $FFF6
+
+hFieldMoveMonMenuTopMenuItemX EQU $FFF7
 
 hJoyInput EQU $FFF8
 

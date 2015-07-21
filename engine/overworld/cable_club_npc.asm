@@ -5,7 +5,7 @@ CableClubNPC: ; 71c5 (1:71c5)
 	bit 5, a ; received pokedex?
 	jp nz, .receivedPokedex
 ; if the player hasn't received the pokedex
-	ld c, $3c
+	ld c, 60
 	call DelayFrames
 	ld hl, CableClubNPCMakingPreparationsText
 	call PrintText
@@ -57,7 +57,7 @@ CableClubNPC: ; 71c5 (1:71c5)
 	jr nz, .choseNo
 	callab SaveSAVtoSRAM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_5d - SFX_Headers_02) / 3
+	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	ld hl, CableClubNPCPleaseWaitText
 	call PrintText
@@ -72,24 +72,24 @@ CableClubNPC: ; 71c5 (1:71c5)
 	ld hl, wUnknownSerialCounter
 	ld a, [hli]
 	inc a
-	jr nz, Func_72a8 ; 0x726b $3b
+	jr nz, Func_72a8
 	ld a, [hl]
 	inc a
-	jr nz, Func_72a8 ; 0x726f $37
+	jr nz, Func_72a8
 	ld b, $a
 .asm_7273
 	call DelayFrame
 	call Serial_SendZeroByte
 	dec b
-	jr nz, .asm_7273 ; 0x727a $f7
+	jr nz, .asm_7273
 	call CloseLinkConnection
 	ld hl, CableClubNPCLinkClosedBecauseOfInactivityText
 	call PrintText
-	jr Func_7298 ; 0x7285 $11
+	jr Func_7298
 .failedToEstablishConnection
 	ld hl, CableClubNPCAreaReservedFor2FriendsLinkedByCableText
 	call PrintText
-	jr Func_7298 ; 0x728d $9
+	jr Func_7298
 .choseNo
 	call CloseLinkConnection
 	ld hl, CableClubNPCPleaseComeAgainText
@@ -111,9 +111,7 @@ Func_72a8: ; 72a8 (1:72a8)
 	xor a
 	ld [hld], a
 	ld [hl], a
-	ld hl, LinkMenu
-	ld b, BANK(LinkMenu)
-	jp Bankswitch
+	jpab LinkMenu
 
 CableClubNPCAreaReservedFor2FriendsLinkedByCableText: ; 72b3 (1:72b3)
 	TX_FAR _CableClubNPCAreaReservedFor2FriendsLinkedByCableText

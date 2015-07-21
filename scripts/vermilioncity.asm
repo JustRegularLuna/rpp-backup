@@ -40,7 +40,7 @@ VermilionCityScriptPointers: ; 197dc (6:57dc)
 
 VermilionCityScript0: ; 197e6 (6:57e6)
 	ld a, [wSpriteStateData1 + 9]
-	and a
+	and a ; cp SPRITE_FACING_DOWN
 	ret nz
 	ld hl, CoordsData_19823
 	call ArePlayerCoordsInArray
@@ -49,18 +49,18 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	ld [hJoyHeld], a
 	ld [wcf0d], a
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, [wd803]
 	bit 2, a
-	jr nz, .asm_19810 ; 0x19804 $a
-	ld b, $3f
+	jr nz, .asm_19810
+	ld b, S_S__TICKET
 	predef IsItemInBag_
 	ld a, b
 	and a
 	ret nz
 .asm_19810
-	ld a, $40
+	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld a, $1
 	ld [wSimulatedJoypadStatesIndex], a
@@ -84,7 +84,7 @@ VermilionCityScript4: ; 19826 (6:5826)
 VermilionCityScript2: ; 19833 (6:5833)
 	ld a, $ff
 	ld [wJoyIgnore], a
-	ld a, $40
+	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	ld [wccd4], a
 	ld a, $2
@@ -109,7 +109,7 @@ VermilionCityScript1: ; 1985f (6:585f)
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld c, $a
+	ld c, 10
 	call DelayFrames
 	ld a, $0
 	ld [W_VERMILIONCITYCURSCRIPT], a
@@ -135,17 +135,17 @@ VermilionCityText1: ; 19889 (6:5889)
 	db "@"
 
 VermilionCityText2: ; 1988e (6:588e)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd803]
 	bit 2, a
-	jr nz, .asm_359bd ; 0x19894
+	jr nz, .asm_1989e
 	ld hl, VermilionCityText_198a7
 	call PrintText
-	jr .asm_735d9 ; 0x1989c
-.asm_359bd ; 0x1989e
+	jr .asm_198a4
+.asm_1989e
 	ld hl, VermilionCityText_198ac
 	call PrintText
-.asm_735d9 ; 0x198a4
+.asm_198a4
 	jp TextScriptEnd
 
 VermilionCityText_198a7: ; 198a7 (6:58a7)
@@ -157,41 +157,41 @@ VermilionCityText_198ac: ; 198ac (6:58ac)
 	db "@"
 
 VermilionCityText3: ; 198b1 (6:58b1)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd803]
 	bit 2, a
-	jr nz, .asm_3e0e9 ; 0x198b7
+	jr nz, .asm_198f6
 	ld a, [wSpriteStateData1 + 9]
-	cp $c
-	jr z, .asm_07af3 ; 0x198be
+	cp SPRITE_FACING_RIGHT
+	jr z, .asm_198c8
 	ld hl, VermilionCityCoords1
 	call ArePlayerCoordsInArray
-	jr nc, .asm_57b73 ; 0x198c6
-.asm_07af3 ; 0x198c8
+	jr nc, .asm_198d0
+.asm_198c8
 	ld hl, SSAnneWelcomeText4
 	call PrintText
-	jr .asm_79bd1 ; 0x198ce
-.asm_57b73 ; 0x198d0
+	jr .asm_198fc
+.asm_198d0
 	ld hl, SSAnneWelcomeText9
 	call PrintText
 	ld b, S_S__TICKET
 	predef IsItemInBag_
 	ld a, b
 	and a
-	jr nz, .asm_0419b ; 0x198df
+	jr nz, .asm_198e9
 	ld hl, SSAnneNoTicketText
 	call PrintText
-	jr .asm_79bd1 ; 0x198e7
-.asm_0419b ; 0x198e9
+	jr .asm_198fc
+.asm_198e9
 	ld hl, SSAnneFlashedTicketText
 	call PrintText
 	ld a, $4
 	ld [W_VERMILIONCITYCURSCRIPT], a
-	jr .asm_79bd1 ; 0x198f4
-.asm_3e0e9 ; 0x198f6
+	jr .asm_198fc
+.asm_198f6
 	ld hl, SSAnneNotHereText
 	call PrintText
-.asm_79bd1 ; 0x198fc
+.asm_198fc
 	jp TextScriptEnd
 
 VermilionCityCoords1: ; 198ff (6:58ff)
@@ -225,11 +225,11 @@ VermilionCityText4: ; 1991d (6:591d)
 
 VermilionCityText5: ; 19922 (6:5922)
 	TX_FAR _VermilionCityText5
-	db $08 ; asm
+	TX_ASM
 	ld a, MACHOP
 	call PlayCry
 	call WaitForSoundToFinish
-	ld hl, VermilionCityText14 ; $5933
+	ld hl, VermilionCityText14
 	ret
 
 VermilionCityText14: ; 19933 (6:5933)

@@ -20,7 +20,7 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld a, [wd764]
 	bit 7, a
 	ret nz
-	ld hl, CoordsData_6055e ; $455e
+	ld hl, CoordsData_6055e
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
@@ -31,24 +31,24 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	call PlayMusic
 	ld hl, wd764
 	res 6, [hl]
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $1
-	ld a, $8
-	ld b, $0
-	jr nz, .asm_60544 ; 0x60539 $9
+	ld a, PLAYER_DIR_UP
+	ld b, SPRITE_FACING_DOWN
+	jr nz, .asm_60544
 	ld hl, wd764
 	set 6, [hl]
-	ld a, $2
-	ld b, $c
+	ld a, PLAYER_DIR_LEFT
+	ld b, SPRITE_FACING_RIGHT
 .asm_60544
-	ld [wd528], a
+	ld [wPlayerMovingDirection], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, b
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
@@ -69,16 +69,16 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld hl, wd764
 	set 7, [hl]
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld de, MovementData_605b2
 	ld a, [wd764]
 	bit 6, a
-	jr nz, .asm_60589 ; 0x60584 $3
+	jr nz, .asm_60589
 	ld de, MovementData_605a9
 .asm_60589
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $ff
 	ld [wc0ee], a
@@ -90,10 +90,26 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ret
 
 MovementData_605a9: ; 605a9 (18:45a9)
-	db $C0,$00,$00,$C0,$00,$00,$C0,$C0,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 MovementData_605b2: ; 605b2 (18:45b2)
-	db $00,$00,$C0,$C0,$C0,$C0,$00,$00,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
 PokemonTower2Script2: ; 605bb (18:45bb)
 	ld a, [wd730]
@@ -115,21 +131,21 @@ PokemonTower2TextPointers: ; 605db (18:45db)
 	dw PokemonTower2Text2
 
 PokemonTower2Text1: ; 605df (18:45df)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd764]
 	bit 7, a
-	jr z, .asm_16f24 ; 0x605e5
+	jr z, .asm_16f24
 	ld hl, PokemonTower2Text_6063c
 	call PrintText
-	jr .asm_41852 ; 0x605ed
-.asm_16f24 ; 0x605ef
+	jr .asm_41852
+.asm_16f24
 	ld hl, PokemonTower2Text_6062d
 	call PrintText
 	ld hl, wd72d
 	set 6, [hl]
 	set 7, [hl]
 	ld hl, PokemonTower2Text_60632
-	ld de, PokemonTower2Text_60637 ; XXX $4637
+	ld de, PokemonTower2Text_60637
 	call SaveEndBattleTextPointers
 	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a
@@ -137,15 +153,15 @@ PokemonTower2Text1: ; 605df (18:45df)
 	; select which team to use during the encounter
 	ld a, [W_RIVALSTARTER]
 	cp STARTER2
-	jr nz, .NotSquirtle ; 0x6060f
+	jr nz, .NotSquirtle
 	ld a, $4
 	jr .done
-.NotSquirtle ; 0x60615
+.NotSquirtle
 	cp STARTER3
-	jr nz, .Charmander ; 0x60617
+	jr nz, .Charmander
 	ld a, $5
 	jr .done
-.Charmander ; 0x6061d
+.Charmander
 	ld a, $6
 .done
 	ld [W_TRAINERNO], a
@@ -153,7 +169,7 @@ PokemonTower2Text1: ; 605df (18:45df)
 	ld a, $1
 	ld [W_POKEMONTOWER2CURSCRIPT], a
 	ld [W_CURMAPSCRIPT], a
-.asm_41852 ; 0x6062a
+.asm_41852
 	jp TextScriptEnd
 
 PokemonTower2Text_6062d: ; 6062d (18:462d)

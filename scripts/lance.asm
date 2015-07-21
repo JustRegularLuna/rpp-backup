@@ -60,11 +60,11 @@ LanceScript0: ; 5a305 (16:6305)
 	jp nc, CheckFightingMapTrainers
 	xor a
 	ld [hJoyHeld], a
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wCoordIndex]
 	cp $3
 	jr nc, .asm_5a325
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .asm_5a325
 	cp $5
@@ -75,7 +75,7 @@ LanceScript0: ; 5a305 (16:6305)
 	ret nz
 	ld hl, wd126
 	set 5, [hl]
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	jp LanceScript_5a2c4
 
@@ -89,11 +89,11 @@ CoordsData_5a33e: ; 5a33e (16:633e)
 
 LanceScript2: ; 5a349 (16:6349)
 	call EndTrainerBattle
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, LanceScript_5a2f5
 	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
 LanceScript_5a35b: ; 5a35b (16:635b)
@@ -111,10 +111,10 @@ LanceScript_5a35b: ; 5a35b (16:635b)
 	ret
 
 RLEList_5a379: ; 5a379 (16:6379)
-	db $40, $0C
-	db $20, $0C
-	db $80, $07
-	db $20, $06
+	db D_UP, $0C
+	db D_LEFT, $0C
+	db D_DOWN, $07
+	db D_LEFT, $06
 	db $FF
 
 LanceScript3: ; 5a382 (16:6382)
@@ -136,15 +136,15 @@ LanceTrainerHeader0: ; 5a397 (16:6397)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
 	dw wd866 ; flag's byte
-	dw LanceBeforeBattleText ; 0x63ae TextBeforeBattle
-	dw LanceAfterBattleText ; 0x63b8 TextAfterBattle
-	dw LanceEndBattleText ; 0x63b3 TextEndBattle
-	dw LanceEndBattleText ; 0x63b3 TextEndBattle
+	dw LanceBeforeBattleText ; TextBeforeBattle
+	dw LanceAfterBattleText ; TextAfterBattle
+	dw LanceEndBattleText ; TextEndBattle
+	dw LanceEndBattleText ; TextEndBattle
 
 	db $ff
 
 LanceText1: ; 5a3a4 (16:63a4)
-	db $08 ; asm
+	TX_ASM
 	ld hl, LanceTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -159,7 +159,7 @@ LanceEndBattleText: ; 5a3b3 (16:63b3)
 
 LanceAfterBattleText: ; 5a3b8 (16:63b8)
 	TX_FAR _LanceAfterBattleText
-	db $8
+	TX_ASM
 	ld hl, wd866
 	set 6, [hl]
 	jp TextScriptEnd

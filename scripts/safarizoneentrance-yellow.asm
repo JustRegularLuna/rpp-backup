@@ -61,7 +61,7 @@
 	ld [wSafariSteps],a
 	ld a,l
 	ld [wSafariSteps + 1],a
-	ld a,$40
+	ld a,D_UP
 	ld c,3
 	call SafariZoneEntranceAutoWalk
 	ld hl,wd790
@@ -75,7 +75,7 @@
 	ld hl,.PleaseComeAgainText
 	call PrintText
 .CantPayWalkDown
-	ld a,$80
+	ld a,D_DOWN
 	ld c,1
 	call SafariZoneEntranceAutoWalk
 	ld a,4
@@ -155,8 +155,8 @@ SafariZoneEntranceAutoWalk:
 	ld bc,3
 	call FillMemory
 	ld hl,.OhAllRightText
-	call Func_3c59
-	ld a,$13
+	call PrintText_NoCreatingTextBox
+	ld a,MONEY_BOX
 	ld a,[$d124]
 	call DisplayTextBoxID
 	ld hl,.CantGive30BallsText

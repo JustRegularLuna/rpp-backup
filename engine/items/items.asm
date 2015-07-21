@@ -1,6 +1,6 @@
 UseItem_: ; d5c7 (3:55c7)
 	ld a,1
-	ld [wcd6a],a
+	ld [wActionResultOrTookBattleTurn],a ; initialise to success value
 	ld a,[wcf91]	;contains item_ID
 	cp a,HM_01
 	jp nc,ItemUseTMHM
@@ -115,7 +115,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[W_NUMINBOX]	;is Box full?
 	cp a,MONS_PER_BOX
 	jp z,BoxFullCannotThrowBall
-.UseBall	;$56a7
+.UseBall
 ;ok, you can use a ball
 	xor a
 	ld [wd11c],a
@@ -126,7 +126,7 @@ ItemUseBall: ; d687 (3:5687)
 	; remove a Safari Ball from inventory
 	ld hl,W_NUMSAFARIBALLS
 	dec [hl]
-.skipSafariZoneCode	;$56b6
+.skipSafariZoneCode
 	call GoPAL_SET_CF1C
 	ld a,$43
 	ld [wd11e],a
@@ -144,8 +144,8 @@ ItemUseBall: ; d687 (3:5687)
 	ld de,wPlayerName
 	ld bc,11
 	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno glitch)
-	jp .BallSuccess	;$578b
-.notOldManBattle	;$56e9
+	jp .BallSuccess
+.notOldManBattle
 	ld a,[W_CURMAP]
 	cp a,POKEMONTOWER_6
 	jr nz,.loop
@@ -155,13 +155,13 @@ ItemUseBall: ; d687 (3:5687)
 	jp z,.next12
 ; if not fighting ghost Marowak, loop until a random number in the current
 ; pokeball's allowed range is found
-.loop	;$56fa
+.loop
 	call Random
 	ld b,a
 	ld hl,wcf91
 	ld a,[hl]
 	cp a,MASTER_BALL
-	jp z,.BallSuccess	;$578b
+	jp z,.BallSuccess
 	cp a,POKE_BALL
 	jr z,.checkForAilments
 	ld a,200
@@ -173,7 +173,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,150	;get only numbers <= 150 for Ultra Ball
 	cp b
 	jr c,.loop
-.checkForAilments	;$571a
+.checkForAilments
 ; pokemon can be caught more easily with any (primary) status ailment
 ; Frozen/Asleep pokemon are relatively even easier to catch
 ; for Frozen/Asleep pokemon, any random number from 0-24 ensures a catch.
@@ -185,12 +185,12 @@ ItemUseBall: ; d687 (3:5687)
 	ld c,12
 	jr z,.notFrozenOrAsleep
 	ld c,25
-.notFrozenOrAsleep	;$5728
+.notFrozenOrAsleep
 	ld a,b
 	sub c
-	jp c,.BallSuccess	;$578b
+	jp c,.BallSuccess
 	ld b,a
-.noAilments	;$572e
+.noAilments
 	push bc		;save RANDOM number
 	xor a
 	ld [H_MULTIPLICAND],a
@@ -207,7 +207,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,12		;any other BallFactor
 	jr nz,.next7
 	ld a,8
-.next7	;$574d
+.next7
 	ld [H_DIVISOR],a
 	ld b,4		; number of bytes in dividend
 	call Divide
@@ -226,7 +226,7 @@ ItemUseBall: ; d687 (3:5687)
 	and a
 	jr nz,.next8
 	inc a
-.next8	;$5766
+.next8
 	ld [H_DIVISOR],a
 	ld b,4
 	call Divide	; ((MaxHP * 255) / BallFactor) / (CurHP / 4)
@@ -235,7 +235,7 @@ ItemUseBall: ; d687 (3:5687)
 	jr z,.next9
 	ld a,255
 	ld [H_QUOTIENT + 3],a
-.next9	;$5776
+.next9
 	pop bc
 	ld a,[wEnemyMonCatchRate]	;enemy: Catch Rate
 	cp b
@@ -248,9 +248,9 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[H_QUOTIENT + 3]
 	cp b
 	jr c,.next10
-.BallSuccess	;$578b
+.BallSuccess
 	jr .BallSuccess2
-.next10	;$578d
+.next10
 	ld a,[H_QUOTIENT + 3]
 	ld [wd11e],a
 	xor a
@@ -271,7 +271,7 @@ ItemUseBall: ; d687 (3:5687)
 	ld b,150
 	cp a,ULTRA_BALL
 	jr z,.next11
-.next11	;$57b8
+.next11
 	ld a,b
 	ld [H_DIVISOR],a
 	ld b,4
@@ -294,11 +294,11 @@ ItemUseBall: ; d687 (3:5687)
 	ld b,5
 	jr z,.next14
 	ld b,10
-.next14	;$57e6
+.next14
 	ld a,[H_QUOTIENT + 3]
 	add b
 	ld [H_QUOTIENT + 3],a
-.next13	;$57eb
+.next13
 	ld a,[H_QUOTIENT + 3]
 	cp a,10
 	ld b,$20
@@ -310,10 +310,10 @@ ItemUseBall: ; d687 (3:5687)
 	ld b,$62
 	jr c,.next12
 	ld b,$63
-.next12	;$5801
+.next12
 	ld a,b
 	ld [wd11e],a
-.BallSuccess2	;$5805
+.BallSuccess2
 	ld c,20
 	call DelayFrames
 	ld a,TOSS_ANIM
@@ -362,14 +362,14 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,$4c
 	ld [wEnemyMonSpecies2],a
 	jr .next16
-.next15	;$5871
+.next15
 	set Transformed,[hl]
 	ld hl,wcceb
 	ld a,[wEnemyMonDVs]
 	ld [hli],a
 	ld a,[wEnemyMonDVs + 1]
 	ld [hl],a
-.next16	;$587e
+.next16
 	ld a,[wcf91]
 	push af
 	ld a,[wEnemyMonSpecies2]
@@ -400,15 +400,15 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,2
-	ld hl,wPokedexOwned	;Dex_own_flags (pokemon)
+	ld b,FLAG_TEST
+	ld hl,wPokedexOwned
 	predef FlagActionPredef
 	ld a,c
 	push af
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,1
+	ld b,FLAG_SET
 	predef FlagActionPredef
 	pop af
 	and a
@@ -419,16 +419,16 @@ ItemUseBall: ; d687 (3:5687)
 	ld a,[wEnemyMonSpecies]	;caught mon_ID
 	ld [wd11e],a
 	predef ShowPokedexData
-.checkParty	;$58f4
+.checkParty
 	ld a,[wPartyCount]
 	cp a,PARTY_LENGTH		;is party full?
 	jr z,.sendToBox
-	xor a
-	ld [wcc49],a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call ClearSprites
 	call AddPartyMon	;add mon to Party
 	jr .End
-.sendToBox	;$5907
+.sendToBox
 	call ClearSprites
 	call SendNewMonToBox
 	ld hl,ItemUseBallText07
@@ -436,22 +436,22 @@ ItemUseBall: ; d687 (3:5687)
 	bit 0,a		;already met Bill?
 	jr nz,.sendToBox2
 	ld hl,ItemUseBallText08
-.sendToBox2	;$591a
+.sendToBox2
 	call PrintText
 	jr .End
-.printText1	;$591f
+.printText1
 	ld hl,ItemUseBallText05
-.printText0	;$5922
+.printText0
 	call PrintText
 	call ClearSprites
-.End	;$5928
+.End
 	ld a,[W_BATTLETYPE]
 	and a
 	ret nz
 	ld hl,wNumBagItems
 	inc a
-	ld [wcf96],a
-	jp RemoveItemFromInventory	;remove ITEM (XXX)
+	ld [wItemQuantity],a
+	jp RemoveItemFromInventory
 ItemUseBallText00: ; d937 (3:5937)
 ;"It dodged the thrown ball!"
 ;"This pokemon can't be caught"
@@ -499,9 +499,7 @@ ItemUseTownMap: ; d968 (3:5968)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld b, BANK(DisplayTownMap)
-	ld hl, DisplayTownMap
-	jp Bankswitch ; display Town Map
+	jpba DisplayTownMap
 
 ItemUseBicycle: ; d977 (3:5977)
 	ld a,[W_ISINBATTLE]
@@ -556,11 +554,11 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	jp PrintText
 .tryToStopSurfing
 	xor a
-	ld [$ff8c],a
+	ld [hSpriteIndexOrTextID],a
 	ld d,16 ; talking range in pixels (normal range)
 	call IsSpriteInFrontOfPlayer2
 	res 7,[hl]
-	ld a,[$ff8c]
+	ld a,[hSpriteIndexOrTextID]
 	and a ; is there a sprite in the way?
 	jr nz,.cannotStopSurfing
 	ld hl,TilePairCollisionsWater
@@ -593,14 +591,14 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward
 .makePlayerMoveForward
-	ld a,[wd52a] ; direction the player is going
-	bit 3,a
+	ld a,[wPlayerDirection] ; direction the player is going
+	bit PLAYER_DIR_BIT_UP,a
 	ld b,D_UP
 	jr nz,.storeSimulatedButtonPress
-	bit 2,a
+	bit PLAYER_DIR_BIT_DOWN,a
 	ld b,D_DOWN
 	jr nz,.storeSimulatedButtonPress
-	bit 1,a
+	bit PLAYER_DIR_BIT_LEFT,a
 	ld b,D_LEFT
 	jr nz,.storeSimulatedButtonPress
 	ld b,D_RIGHT
@@ -633,8 +631,8 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,[wcf91]
 	ld [wd156],a
 	push af
-	ld a,$05 ; evolution stone party menu
-	ld [wd07d],a
+	ld a,EVO_STONE_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
@@ -643,10 +641,10 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,b
 	ld [wcf91],a
 	ld a,$01
-	ld [wccd4],a
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
-	call WaitForSoundToFinish ; wait for sound to end
+	ld [wForceEvolution],a
+	ld a,SFX_HEAL_AILMENT
+	call PlaySoundWaitForCurrent
+	call WaitForSoundToFinish
 	callab TryEvolvingMon ; try to evolve pokemon
 	ld a,[wd121]
 	and a
@@ -655,13 +653,13 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld [wWhichPokemon],a
 	ld hl,wNumBagItems
 	ld a,1 ; remove 1 stone
-	ld [wcf96],a
+	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 .noEffect
 	call ItemUseNoEffect
 .canceledItemUse
 	xor a
-	ld [wcd6a],a
+	ld [wActionResultOrTookBattleTurn],a ; item not used
 	pop af
 	ret
 
@@ -678,8 +676,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push af
 	ld a,[wcf91]
 	push af
-	ld a,$01
-	ld [wd07d],a ; item use party menu
+	ld a,USE_ITEM_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
 	ld a,[wd152]
@@ -691,7 +689,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 .emptyParty
 	ld hl,.emptyPartyText
 	xor a
-	ld [wcd6a],a ; item use failed
+	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	jp PrintText
 .emptyPartyText
 	text "You don't have"
@@ -706,7 +704,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wWhichPokemon]
 	call AddNTimes
 	ld a,[wWhichPokemon]
-	ld [wcf06],a
+	ld [wUsedItemOnWhichPokemon],a
 	ld d,a
 	ld a,[wcf91]
 	ld e,a
@@ -737,22 +735,22 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,4
 	add hl,bc ; hl now points to status
 	ld a,[wcf91]
-	ld bc,$f008
+	ld bc, (ANTIDOTE_MSG << 8) | (1 << PSN)
 	cp a,ANTIDOTE
 	jr z,.checkMonStatus
-	ld bc,$f110
+	ld bc, (BURN_HEAL_MSG << 8) | (1 << BRN)
 	cp a,BURN_HEAL
 	jr z,.checkMonStatus
-	ld bc,$f220
+	ld bc, (ICE_HEAL_MSG << 8) | (1 << FRZ)
 	cp a,ICE_HEAL
 	jr z,.checkMonStatus
-	ld bc,$f307
+	ld bc, (AWAKENING_MSG << 8) | SLP
 	cp a,AWAKENING
 	jr z,.checkMonStatus
-	ld bc,$f440
+	ld bc, (PARALYZ_HEAL_MSG << 8) | (1 << PAR)
 	cp a,PARLYZ_HEAL
 	jr z,.checkMonStatus
-	ld bc,$f6ff ; Full Heal
+	ld bc, (FULL_HEAL_MSG << 8) | $ff ; Full Heal
 .checkMonStatus
 	ld a,[hl] ; pokemon's status
 	and c ; does the pokemon have a status ailment the item can cure?
@@ -761,7 +759,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	xor a
 	ld [hl],a ; remove the status ailment in the party data
 	ld a,b
-	ld [wd07d],a ; the message to display for the item used
+	ld [wPartyMenuTypeOrMessageID],a ; the message to display for the item used
 	ld a,[wPlayerMonNumber]
 	cp d ; is pokemon the item was used on active in battle?
 	jp nz,.doneHealing
@@ -803,18 +801,18 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push hl
 	push de
 	push bc
-	ld a,[wcf06]
+	ld a,[wUsedItemOnWhichPokemon]
 	ld c,a
 	ld hl,wPartyFoughtCurrentEnemyFlags
-	ld b,$02
+	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
 	and a
 	jr z,.next
-	ld a,[wcf06]
+	ld a,[wUsedItemOnWhichPokemon]
 	ld c,a
 	ld hl,wPartyGainExpFlags
-	ld b,$01
+	ld b,FLAG_SET
 	predef FlagActionPredef
 .next
 	pop bc
@@ -913,12 +911,12 @@ ItemUseMedicine: ; dabb (3:5abb)
 	sbc b
 	ld [hl],a
 	ld [wHPBarNewHP+1],a
-	hlCoord 4, 1
+	coord hl, 4, 1
 	ld a,[wWhichPokemon]
 	ld bc,2 * 20
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
-	ld a,(SFX_02_3d - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
+	ld a,SFX_HEAL_HP
+	call PlaySoundWaitForCurrent
 	ld a,[hFlags_0xFFF6]
 	set 0,a
 	ld [hFlags_0xFFF6],a
@@ -1067,8 +1065,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr c,.playStatusAilmentCuringSound
 	cp a,FULL_HEAL
 	jr z,.playStatusAilmentCuringSound
-	ld a,(SFX_02_3d - SFX_Headers_02) / 3 ; HP healing sound
-	call PlaySoundWaitForCurrent ; play sound
+	ld a,SFX_HEAL_HP
+	call PlaySoundWaitForCurrent
 	ld a,[hFlags_0xFFF6]
 	set 0,a
 	ld [hFlags_0xFFF6],a
@@ -1078,18 +1076,18 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[hFlags_0xFFF6]
 	res 0,a
 	ld [hFlags_0xFFF6],a
-	ld a,$f7 ; revived message
-	ld [wd07d],a
+	ld a,REVIVE_MSG
+	ld [wPartyMenuTypeOrMessageID],a
 	ld a,[wcf91]
 	cp a,REVIVE
 	jr z,.showHealingItemMessage
 	cp a,MAX_REVIVE
 	jr z,.showHealingItemMessage
-	ld a,$f5 ; standard HP healed message
-	ld [wd07d],a
+	ld a,POTION_MSG
+	ld [wPartyMenuTypeOrMessageID],a
 	jr .showHealingItemMessage
 .playStatusAilmentCuringSound
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3 ; status ailment curing sound
+	ld a,SFX_HEAL_AILMENT
 	call PlaySoundWaitForCurrent
 .showHealingItemMessage
 	xor a
@@ -1106,7 +1104,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr .done
 .canceledItemUse
 	xor a
-	ld [wcd6a],a ; item use failed
+	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	pop af
 	pop af
 .done
@@ -1178,8 +1176,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld de,wcf4b
 	ld bc,10
 	call CopyData ; copy the stat's name to wcf4b
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
-	call PlaySound ; play sound
+	ld a,SFX_HEAL_AILMENT
+	call PlaySound
 	ld hl,VitaminStatRoseText
 	call PrintText
 	jp RemoveUsedItem
@@ -1216,11 +1214,11 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,-19
 	add hl,bc ; hl now points to experience
 ; update experience to minimum for new level
-	ld a,[$ff96]
+	ld a,[hExperience]
 	ld [hli],a
-	ld a,[$ff97]
+	ld a,[hExperience + 1]
 	ld [hli],a
-	ld a,[$ff98]
+	ld a,[hExperience + 2]
 	ld [hl],a
 	pop hl
 	ld a,[wWhichPokemon]
@@ -1257,25 +1255,25 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[hl]
 	adc b
 	ld [hl],a
-	ld a,$f8 ; level up message
-	ld [wd07d],a
+	ld a,RARE_CANDY_MSG
+	ld [wPartyMenuTypeOrMessageID],a
 	call RedrawPartyMenu
 	pop de
 	ld a,d
 	ld [wWhichPokemon],a
 	ld a,e
 	ld [wd11e],a
-	xor a
-	ld [wcc49],a ; load from player's party
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call LoadMonData
 	ld d,$01
 	callab PrintStatsBox ; display new stats text box
 	call WaitForTextScrollButtonPress ; wait for button press
-	xor a
-	ld [wcc49],a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	predef LearnMoveFromLevelUp ; learn level up move, if any
 	xor a
-	ld [wccd4],a
+	ld [wForceEvolution],a
 	callab TryEvolvingMon ; evolve pokemon, if appropriate
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a
@@ -1384,7 +1382,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
 	inc a
 	ld [wEscapedFromBattle],a
-	ld [wcd6a],a ; item used
+	ld [wActionResultOrTookBattleTurn],a ; item used
 	ld a,[wd152]
 	and a ; using Dig?
 	ret nz ; if so, return
@@ -1550,7 +1548,7 @@ ItemUseXStat: ; e104 (3:6104)
 	jr nz,.inBattle
 	call ItemUseNotTime
 	ld a,2
-	ld [wcd6a],a ; item not used
+	ld [wActionResultOrTookBattleTurn],a ; item not used
 	ret
 .inBattle
 	ld hl,W_PLAYERMOVENUM
@@ -1618,8 +1616,8 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jp PrintText
 .inBattle
 	xor a
-	ld [wWhichTrade],a ; initialize variable that indicates if any pokemon were woken up to zero
-	ld b,~SLP & $FF
+	ld [wWereAnyMonsAsleep],a
+	ld b,~SLP & $ff
 	ld hl,wPartyMon1Status
 	call WakeUpEntireParty
 	ld a,[W_ISINBATTLE]
@@ -1638,7 +1636,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	and b ; remove Sleep status
 	ld [hl],a
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	ld a,[wWhichTrade]
+	ld a,[wWereAnyMonsAsleep]
 	and a ; were any pokemon asleep before playing the flute?
 	ld hl,PlayedFluteNoEffectText
 	jp z,PrintText ; if no pokemon were asleep
@@ -1662,9 +1660,9 @@ ItemUsePokeflute: ; e140 (3:6140)
 ; INPUT:
 ; hl must point to status of first pokemon in party (player's or enemy's)
 ; b must equal ~SLP
-; [wWhichTrade] should be initialized to 0
+; [wWereAnyMonsAsleep] should be initialized to 0
 ; OUTPUT:
-; [wWhichTrade]: set to 1 if any pokemon were asleep
+; [wWereAnyMonsAsleep]: set to 1 if any pokemon were asleep
 WakeUpEntireParty: ; e1e5 (3:61e5)
 	ld de,44
 	ld c,6
@@ -1674,7 +1672,7 @@ WakeUpEntireParty: ; e1e5 (3:61e5)
 	and a,SLP ; is pokemon asleep?
 	jr z,.notAsleep
 	ld a,1
-	ld [wWhichTrade],a ; indicate that a pokemon had to be woken up
+	ld [wWereAnyMonsAsleep],a ; indicate that a pokemon had to be woken up
 .notAsleep
 	pop af
 	and b ; remove Sleep status
@@ -1713,16 +1711,16 @@ FluteWokeUpText: ; e210 (3:6210)
 PlayedFluteHadEffectText: ; e215 (3:6215)
 	TX_FAR _PlayedFluteHadEffectText
 	db $06
-	db $08
+	TX_ASM
 	ld a,[W_ISINBATTLE]
 	and a
 	jr nz,.done
 ; play out-of-battle pokeflute music
 	ld a,$ff
 	call PlaySound ; turn off music
-	ld a, (SFX_02_5e - SFX_Headers_02) / 3
+	ld a, SFX_POKEFLUE
 	ld c, BANK(SFX_02_5e)
-	call PlayMusic ; play music
+	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[wc028]
 	cp a,$b8
@@ -1747,7 +1745,7 @@ OldRodCode: ; e24c (3:624c)
 	jp c, ItemUseNotTime
 	ld bc, (5 << 8) | MAGIKARP
 	ld a, $1 ; set bite
-	jr RodResponse ; 0xe257 $34
+	jr RodResponse
 
 GoodRodCode: ; e259 (3:6259)
 	call FishingInit
@@ -1780,10 +1778,10 @@ INCLUDE "data/good_rod.asm"
 SuperRodCode: ; e283 (3:6283)
 	call FishingInit
 	jp c, ItemUseNotTime
-	call ReadSuperRodData ; 0xe8ea
+	call ReadSuperRodData
 	ld a, e
 RodResponse: ; e28d (3:628d)
-	ld [wWhichTrade], a
+	ld [wRodResponse], a
 
 	dec a ; is there a bite?
 	jr nz, .next
@@ -1801,7 +1799,7 @@ RodResponse: ; e28d (3:628d)
 	push af
 	push hl
 	ld [hl], 0
-	callba Func_707b6
+	callba FishingAnim
 	pop hl
 	pop af
 	ld [hl], a
@@ -1824,8 +1822,8 @@ FishingInit: ; e2b4 (3:62b4)
 	call ItemUseReloadOverworldData
 	ld hl,ItemUseText00
 	call PrintText
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
-	call PlaySound ; play sound
+	ld a,SFX_HEAL_AILMENT
+	call PlaySound
 	ld c,80
 	call DelayFrames
 	and a
@@ -1847,10 +1845,10 @@ ItemUseItemfinder: ; e2e1 (3:62e1)
 	jr nc,.printText ; if no hidden items
 	ld c,4
 .loop
-	ld a,(SFX_02_4a - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
-	ld a,(SFX_02_5a - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
+	ld a,SFX_HEALING_MACHINE
+	call PlaySoundWaitForCurrent
+	ld a,SFX_PURCHASE
+	call PlaySoundWaitForCurrent
 	dec c
 	jr nz,.loop
 	ld hl,ItemfinderFoundItemText
@@ -1874,23 +1872,23 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld a,[wWhichPokemon]
 	push af
 	ld a,[wcf91]
-	ld [wWhichTrade],a
+	ld [wPPRestoreItem],a
 .chooseMon
 	xor a
 	ld [wUpdateSpritesEnabled],a
-	ld a,$01 ; item use party menu
-	ld [wd07d],a
+	ld a,USE_ITEM_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	jr nc,.chooseMove
 	jp .itemNotUsed
 .chooseMove
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ELIXER
 	jp nc,.useElixir ; if Elixir or Max Elixir
 	ld a,$02
 	ld [wMoveMenuType],a
 	ld hl,RaisePPWhichTechniqueText
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ETHER ; is it a PP Up?
 	jr c,.printWhichTechniqueMessage ; if so, print the raise PP message
 	ld hl,RestorePPWhichTechniqueText ; otherwise, print the restore PP message
@@ -1911,7 +1909,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	call GetMoveName
 	call CopyStringToCF4B ; copy name to wcf4b
 	pop hl
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ETHER
 	jr nc,.useEther ; if Ether or Max Ether
 .usePPUp
@@ -1951,7 +1949,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld bc,4
 	call CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	ld hl,PPRestoredText
 	call PrintText
@@ -1963,8 +1961,8 @@ ItemUsePPRestore: ; e31e (3:631e)
 ; unsets zero flag if PP was restored, sets zero flag if not
 ; however, this is bugged for Max Ethers and Max Elixirs (see below)
 .restorePP
-	xor a
-	ld [wcc49],a ; party pokemon
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation],a
 	call GetMaxPP
 	ld hl,wPartyMon1Moves
 	ld bc,44
@@ -1973,7 +1971,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	add hl,bc ; hl now points to move's PP
 	ld a,[wd11e]
 	ld b,a ; b = max PP
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,MAX_ETHER
 	jr z,.fullyRestorePP
 	ld a,[hl] ; move PP
@@ -2005,7 +2003,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	jr .storeNewAmount
 .useElixir
 ; decrement the item ID so that ELIXER becomes ETHER and MAX_ELIXER becomes MAX_ETHER
-	ld hl,wWhichTrade
+	ld hl,wPPRestoreItem
 	dec [hl]
 	dec [hl]
 	xor a
@@ -2043,7 +2041,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	call GoPAL_SET_CF1C
 	pop af
 	xor a
-	ld [wcd6a],a ; item use failed
+	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	ret
 
 RaisePPWhichTechniqueText: ; e45d (3:645d)
@@ -2095,7 +2093,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	call PrintText
 	ld hl,TeachMachineMoveText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
@@ -2104,7 +2102,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	and a
 	jr z,.useMachine
 	ld a,2
-	ld [wcd6a],a ; item not used
+	ld [wActionResultOrTookBattleTurn],a ; item not used
 	ret
 .useMachine
 	ld a,[wWhichPokemon]
@@ -2118,8 +2116,8 @@ ItemUseTMHM: ; e479 (3:6479)
 	call CopyData
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
-	ld a,$03 ; teach TM/HM party menu
-	ld [wd07d],a
+	ld a,TMHM_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	push af
 	ld hl,wd036
@@ -2146,8 +2144,8 @@ ItemUseTMHM: ; e479 (3:6479)
 	and a ; can the pokemon learn the move?
 	jr nz,.checkIfAlreadyLearnedMove
 ; if the pokemon can't learn the move
-	ld a,(SFX_02_51 - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
+	ld a,SFX_DENIED
+	call PlaySoundWaitForCurrent
 	ld hl,MonCannotLearnMachineMoveText
 	call PrintText
 	jr .chooseMon
@@ -2186,14 +2184,14 @@ MonCannotLearnMachineMoveText: ; e55e (3:655e)
 PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 	ld hl,ItemUseText00
 	call PrintText
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
-	call PlaySound ; play sound
+	ld a,SFX_HEAL_AILMENT
+	call PlaySound
 	call WaitForTextScrollButtonPress ; wait for button press
 
 RemoveUsedItem: ; e571 (3:6571)
 	ld hl,wNumBagItems
 	ld a,1 ; one item
-	ld [wcf96],a ; store quantity
+	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 
 ItemUseNoEffect: ; e57c (3:657c)
@@ -2234,7 +2232,7 @@ SurfingAttemptFailed: ; e5b6 (3:65b6)
 
 ItemUseFailed: ; e5b9 (3:65b9)
 	xor a
-	ld [wcd6a],a ; item use failed
+	ld [wActionResultOrTookBattleTurn],a ; item use failed
 	jp PrintText
 
 ItemUseNotTimeText: ; e5c0 (3:65c0)
@@ -2301,13 +2299,13 @@ RestoreBonusPP: ; e606 (3:6606)
 	ld a,[wWhichPokemon]
 	call AddNTimes
 	push hl
-	ld de,wcd78 - 1
-	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wcd78
+	ld de,wNormalMaxPPList - 1
+	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wNormalMaxPPList
 	pop hl
 	ld c,21
 	ld b,0
 	add hl,bc ; hl now points to move 1 PP
-	ld de,wcd78
+	ld de,wNormalMaxPPList
 	ld b,0 ; initialize move counter to zero
 ; loop through the pokemon's moves
 .loop
@@ -2379,7 +2377,7 @@ AddBonusPP: ; e642 (3:6642)
 ; gets max PP of a pokemon's move (including PP from PP Ups)
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon within party/box
-; [wcc49] = pokemon source
+; [wMonDataLocation] = pokemon source
 ; 00: player's party
 ; 01: enemy's party
 ; 02: current box
@@ -2389,7 +2387,7 @@ AddBonusPP: ; e642 (3:6642)
 ; OUTPUT:
 ; [wd11e] = max PP
 GetMaxPP: ; e677 (3:6677)
-	ld a,[wcc49]
+	ld a,[wMonDataLocation]
 	and a
 	ld hl,wPartyMon1Moves
 	ld bc,wPartyMon2 - wPartyMon1
@@ -2420,13 +2418,13 @@ GetMaxPP: ; e677 (3:6677)
 	ld de,wcd6d
 	ld a,BANK(Moves)
 	call FarCopyData
-	ld de,wcd72
+	ld de,wcd6d + 5 ; PP is byte 5 of move data
 	ld a,[de]
 	ld b,a ; b = normal max PP
 	pop hl
 	push bc
 	ld bc,21 ; PP offset if not player's in-battle pokemon data
-	ld a,[wcc49]
+	ld a,[wMonDataLocation]
 	cp a,4 ; player's in-battle pokemon?
 	jr nz,.addPPOffset
 	ld bc,17 ; PP offset if player's in-battle pokemon data
@@ -2464,7 +2462,7 @@ GetSelectedMoveOffset2: ; e6e9 (3:66e9)
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wcf91] = item ID
 ; [wWhichPokemon] = index of item within inventory
-; [wcf96] = quantity to toss
+; [wItemQuantity] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
 TossItem_: ; e6f1 (3:66f1)
@@ -2475,7 +2473,7 @@ TossItem_: ; e6f1 (3:66f1)
 	jr c,.tooImportantToToss
 	push hl
 	call IsKeyItem_
-	ld a,[wd124]
+	ld a,[wIsKeyItem]
 	pop hl
 	and a
 	jr nz,.tooImportantToToss
@@ -2486,16 +2484,16 @@ TossItem_: ; e6f1 (3:66f1)
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl,IsItOKToTossItemText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
-	ld a,[wd12e]
-	cp a,2
+	ld a,[wMenuExitMethod]
+	cp a,CHOSE_SECOND_ITEM
 	pop hl
 	scf
-	ret z
+	ret z ; return if the player chose No
 ; if the player chose Yes
 	push hl
 	ld a,[wWhichPokemon]
@@ -2533,12 +2531,12 @@ TooImportantToTossText: ; e75f (3:675f)
 ; INPUT:
 ; [wcf91] = item ID
 ; OUTPUT:
-; [wd124] = result
+; [wIsKeyItem] = result
 ; 00: item is not key item
 ; 01: item is key item
 IsKeyItem_: ; e764 (3:6764)
 	ld a,$01
-	ld [wd124],a
+	ld [wIsKeyItem],a
 	ld a,[wcf91]
 	cp a,HM_01 ; is the item an HM or TM?
 	jr nc,.checkIfItemIsHM
@@ -2552,8 +2550,8 @@ IsKeyItem_: ; e764 (3:6764)
 	dec a
 	ld c,a
 	ld hl,wHPBarMaxHP
-	ld b,$02 ; test bit
-	predef FlagActionPredef ; bitfield operation function
+	ld b,FLAG_TEST
+	predef FlagActionPredef
 	ld a,c
 	and a
 	ret nz
@@ -2562,13 +2560,13 @@ IsKeyItem_: ; e764 (3:6764)
 	call IsItemHM
 	ret c
 	xor a
-	ld [wd124],a
+	ld [wIsKeyItem],a
 	ret
 
 INCLUDE "data/key_items.asm"
 
 SendNewMonToBox: ; e7a4 (3:67a4)
-	ld de, W_NUMINBOX ; wda80
+	ld de, W_NUMINBOX
 	ld a, [de]
 	inc a
 	ld [de], a
@@ -2587,7 +2585,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	call GetMonHeader
 	ld hl, wBoxMonOT
 	ld bc, $b
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [W_NUMINBOX]
 	dec a
 	jr z, .asm_e7ee
 	dec a
@@ -2598,7 +2596,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [W_NUMINBOX]
 	dec a
 	ld b, a
 .asm_e7db
@@ -2615,11 +2613,11 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e7db
 .asm_e7ee
-	ld hl, wPlayerName ; wd158
+	ld hl, wPlayerName
 	ld de, wBoxMonOT
 	ld bc, $b
 	call CopyData
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [W_NUMINBOX]
 	dec a
 	jr z, .asm_e82a
 	ld hl, wBoxMonNicks
@@ -2632,7 +2630,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [W_NUMINBOX]
 	dec a
 	ld b, a
 .asm_e817
@@ -2650,10 +2648,10 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	jr nz, .asm_e817
 .asm_e82a
 	ld hl, wBoxMonNicks
-	ld a, $2
-	ld [wd07d], a
+	ld a, NAME_MON_SCREEN
+	ld [wNamingScreenType], a
 	predef AskName
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [W_NUMINBOX]
 	dec a
 	jr z, .asm_e867
 	ld hl, wBoxMons
@@ -2666,7 +2664,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [W_NUMINBOX]
 	dec a
 	ld b, a
 .asm_e854
@@ -2683,13 +2681,13 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e854
 .asm_e867
-	ld a, [wEnemyMonLevel] ; wEnemyMonLevel
+	ld a, [wEnemyMonLevel]
 	ld [wEnemyMonBoxLevel], a
 	ld hl, wEnemyMon
 	ld de, wBoxMon1
 	ld bc, $c
 	call CopyData
-	ld hl, wPlayerID ; wPlayerID
+	ld hl, wPlayerID
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -2697,17 +2695,17 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [de], a
 	inc de
 	push de
-	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
+	ld a, [W_CURENEMYLVL]
 	ld d, a
 	callab CalcExperience
 	pop de
-	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [hExperience]
 	ld [de], a
 	inc de
-	ld a, [$ff97]
+	ld a, [hExperience + 1]
 	ld [de], a
 	inc de
-	ld a, [$ff98]
+	ld a, [hExperience + 2]
 	ld [de], a
 	inc de
 	xor a
@@ -2723,7 +2721,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ld hl, wEnemyMonPP ; wcffe
+	ld hl, wEnemyMonPP
 	ld b, $4
 .asm_e8b1
 	ld a, [hli]
@@ -2777,7 +2775,7 @@ ReadSuperRodData: ; e8ea (3:68ea)
 	ld e, $2 ; $2 if no fishing groups found
 	ret
 
-.ReadFishingGroup ; 0xe8f6
+.ReadFishingGroup
 ; hl points to the fishing group entry in the index
 	inc hl ; skip map id
 
@@ -2790,7 +2788,7 @@ ReadSuperRodData: ; e8ea (3:68ea)
 	inc hl ; point to data
 	ld e, $0 ; no bite yet
 
-.RandomLoop ; 0xe90c
+.RandomLoop
 	call Random
 	srl a
 	ret c ; 50% chance of no battle

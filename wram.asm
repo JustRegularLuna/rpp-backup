@@ -236,15 +236,32 @@ wLastMenuItem:: ; cc2a
 ; id of previously selected menu item
 	ds 1
 
-; group these 3 addresses together because of an ld a,[hli]
-wcc2b:: ds 1 ; used in party menu
-wcc2c:: ds 1 ; used in item related menus (inventory, pc)
-wcc2d:: ds 1 ; also used in inventory, supposed to save an item id
+wPartyAndBillsPCSavedMenuItem:: ; cc2b
+; It is mainly used by the party menu to remember the cursor position while the
+; menu isn't active.
+; It is also used to remember the cursor position of mon lists (for the
+; withdraw/deposit/release actions) in Bill's PC so that it doesn't get lost
+; when you choose a mon from the list and a sub-menu is shown. It's reset when
+; you return to the main Bill's PC menu.
+	ds 1
+
+wBagSavedMenuItem:: ; cc2c
+; It is used by the bag list to remember the cursor position while the menu
+; isn't active.
+	ds 1
+
+wBattleAndStartSavedMenuItem:: ; cc2d
+; It is used by the start menu to remember the cursor position while the menu
+; isn't active.
+; The battle menu uses it so that the cursor position doesn't get lost when
+; a sub-menu is shown. It's reset at the start of each battle.
+	ds 1
 
 wPlayerMoveListIndex:: ; cc2e
 	ds 1
 
 wPlayerMonNumber:: ; cc2f
+; index in party of currently battling mon
 	ds 1
 
 wMenuCursorLocation:: ; cc30
@@ -266,7 +283,12 @@ wListScrollOffset:: ; cc36
 ; keeps track of what section of the list is on screen
 	ds 1
 
-wcc37:: ds 1 ; menu related thing, used in pokedex and dialog boxes
+wMenuWatchMovingOutOfBounds:: ; cc37
+; If non-zero, then when wrapping is disabled and the player tries to go past
+; the top or bottom of the menu, return from HandleMenuInput. This is useful for
+; menus that have too many items to display at once on the screen because it
+; allows the caller to scroll the entire menu up or down when this happens.
+	ds 1
 
 wTradeCenterPointerTableIndex:: ; cc38
 	ds 1
@@ -321,7 +343,17 @@ wWhichTradeMonSelectionMenu:: ; cc49
 ; $00 = player mons
 ; $01 = enemy mons
 
-wcc49:: ds 1 ; used in some pokemon related stuff (some kind of species storage byte)
+wMonDataLocation:: ; cc49
+; 0 = player's party
+; 1 = enemy party
+; 2 = current box
+; 3 = daycare
+; 4 = in-battle mon
+;
+; AddPartyMon uses it slightly differently.
+; If the lower nybble is 0, the mon is added to the player's party, else the enemy's.
+; If the entire value is 0, then the player is allowed to name the mon.
+	ds 1
 
 wMenuWrappingEnabled:: ; cc4a
 ; set to 1 if you can go from the bottom to the top or top to bottom of a menu
@@ -352,15 +384,29 @@ wNPCMovementScriptBank:: ; cc58
 
 	ds 2
 
+wSlotMachineSevenAndBarModeChance:: ; cc5b
+; If a random number greater than this value is generated, then the player is
+; allowed to have three 7 symbols or bar symbols line up.
+; So, this value is actually the chance of NOT entering that mode.
+; If the slot is lucky, it equals 250, giving a 5/256 (~2%) chance.
+; Otherwise, it equals 253, giving a 2/256 (~0.8%) chance.
+
 wHallOfFame:: ; cc5b
 wBoostExpByExpAll:: ; cc5b
 wAnimationType:: ; cc5b
 ; values between 0-6. Shake screen horizontally, shake screen vertically, blink Pokemon...
 
+wNPCMovementDirections:: ; cc5b
+
 wcc5b:: ds 1 ; these upcoming values below are miscellaneous storage values
 wcc5c:: ds 1 ; used in pokedex evaluation as well
 wcc5d:: ds 1 ; used in pokedex evaluation
-wcc5e:: ds 13 ; as well as used as miscellaneous storage value, this is also used for the game corner slots
+
+wSlotMachineSavedROMBank:: ; cc5e
+; ROM back to return to when the player is done with the slot machine
+	ds 1
+
+	ds 12
 
 wcc6b:: ds 14 ; doesn't seem to be used for anything, probably just more storage
 wcc79:: ds 30 ; used in battle animations
@@ -371,18 +417,33 @@ wSwitchPartyMonTempBuffer:: ; cc97
 ; temporary buffer when swapping party mon data
 	ds 10
 
-wcca1:: ds 49 ; used in overworld npc movement
+wNumStepsToTake:: ; cca1
+; used in Pallet Town scripted movement
+	ds 49
 
 wRLEByteCount:: ; ccd2
 	ds 1
+
+wAddedToParty:: ; ccd3
+; 0 = not added
+; 1 = added
 
 wSimulatedJoypadStatesEnd:: ; ccd3
 ; this is the end of the joypad states
 ; the list starts above this address and extends downwards in memory until here
 ; overloaded with below labels
 
-wccd3:: ds 1 ; used in battle, pokemon, PC and game corner stuff
-wccd4:: ds 1 ; used in evolving pokemon and has a direct reference for simulated joypad stuff in vermillion and seafoam
+wParentMenuItem:: ; ccd3
+
+wCanEvolveFlags:: ; ccd3
+; 1 flag for each party member indicating whether it can evolve
+; The purpose of these flags is to track which mons levelled up during the
+; current battle at the end of the battle when evolution occurs.
+; Other methods of evolution simply set it by calling TryEvolvingMon.
+	ds 1
+
+wForceEvolution::
+wccd4:: ds 1 ; has a direct reference for simulated joypad stuff in vermillion and seafoam
 
 ; if [ccd5] != 1, the second AI layer is not applied
 wAILayer2Encouragement:: ; ccd5
@@ -445,7 +506,7 @@ wccf0:: ds 1 ; used as a check if a mon fainted
 wPlayerUsedMove:: ds 1 ; ccf1
 wEnemyUsedMove:: ds 1 ; ccf2
 
-wccf3:: ds 1 ; used with the move minimize
+wEnemyMonMinimized:: ds 1 ; ccf3
 
 wMoveDidntMiss:: ds 1 ; ccf4
 
@@ -454,9 +515,11 @@ wPartyFoughtCurrentEnemyFlags:: ; ccf5
 	flag_array 6
 
 wccf6:: ds 1 ; used in some hp bar thing
-wccf7:: ds 14 ; used with substitute move sliding thing? (not sure)
+wPlayerMonMinimized:: ds 1 ; ccf7
 
-wUnknownSlotVar:: ; cd05
+	ds 13
+
+wLuckySlotHiddenObjectIndex:: ; cd05
 
 wEnemyNumHits:: ; cd05
 ; number of hits by enemy in attacks like Double Slap, etc.
@@ -464,11 +527,11 @@ wEnemyNumHits:: ; cd05
 wEnemyBideAccumulatedDamage:: ; cd05
 ; the amount of damage accumulated by the enemy while biding (2 bytes)
 
-ds 10
+	ds 10
 
 wInGameTradeGiveMonSpecies:: ; cd0f
 
-wPlayerMonUnmodifiedLevel:: ; cd0f 
+wPlayerMonUnmodifiedLevel:: ; cd0f
 	ds 1
 
 wInGameTradeTextPointerTablePointer:: ; cd10
@@ -581,6 +644,74 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 
 	ds 1
 
+wHoFTeamIndex:: ; cd3d
+
+wSSAnneSmokeDriftAmount:: ; cd3d
+; multiplied by 16 to get the number of times to go right by 2 pixels
+
+wRivalStarterTemp:: ; cd3d
+
+wBoxMonCounts:: ; cd3d
+; 12 bytes
+; array of the number of mons in each box
+
+wDexMaxSeenMon:: ; cd3d
+
+wPPRestoreItem:: ; cd3d
+
+wWereAnyMonsAsleep:: ; cd3d
+
+wCanPlaySlots:: ; cd3d
+
+wNumShakes:: ; cd3d
+
+wDayCareStartLevel:: ; cd3d
+; the level of the mon at the time it entered day care
+
+wWhichBadge:: ; cd3d
+
+wPriceTemp:: ; cd3d
+; 3-byte BCD number
+
+wTitleMonSpecies:: ; cd3d
+
+wPlayerCharacterOAMTile:: ; cd3d
+
+wMoveDownSmallStarsOAMCount:: ; cd3d
+; the number of small stars OAM entries to move down
+
+wChargeMoveNum:: ; cd3d
+
+wCoordIndex:: ; cd3d
+
+wOptionsTextSpeedCursorX:: ; cd3d
+
+wBoxNumString:: ; cd3d
+
+wTrainerInfoTextBoxWidthPlus1:: ; cd3d
+
+wSwappedMenuItem:: ; cd3d
+
+wHoFMonSpecies:: ; cd3d
+
+wFieldMoves:: ; cd3d
+; 4 bytes
+; the current mon's field moves
+
+wBadgeNumberTile:: ; cd3d
+; tile ID of the badge number being drawn
+
+wRodResponse:: ; cd3d
+; 0 = no bite
+; 1 = bite
+; 2 = no fish on map
+
+wWhichTownMapLocation:: ; cd3d
+
+wStoppingWhichSlotMachineWheel:: ; cd3d
+; which wheel the player is trying to stop
+; 0 = none, 1 = wheel 1, 2 = wheel 2, 3 or greater = wheel 3
+
 wTradedPlayerMonSpecies:: ; cd3d
 
 wTradingWhichPlayerMon:: ; cd3d
@@ -602,7 +733,32 @@ wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
 
 wTrainerSpriteOffset:: ; cd3d
+
+wUnusedCD3D:: ; cd3d
 	ds 1
+
+wSSAnneSmokeX:: ; cd3e
+
+wRivalStarterBallSpriteIndex:: ; cd3e
+
+wDayCareNumLevelsGrown:: ; cd3e
+
+wOptionsBattleAnimCursorX:: ; cd3e
+
+wTrainerInfoTextBoxWidth:: ; cd3e
+
+wHoFPartyMonIndex:: ; cd3e
+
+wNumCreditsMonsDisplayed:: ; cd3e
+; the number of credits mons that have been displayed so far
+
+wBadgeNameTile:: ; cd3e
+; first tile ID of the name being drawn
+
+wFlyLocationsList:: ; cd3e
+; 11 bytes plus $ff sentinel values at each end
+
+wSlotMachineWheel1Offset:: ; cd3e
 
 wTradedEnemyMonSpecies:: ; cd3e
 
@@ -619,6 +775,21 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 wTrainerEngageDistance:: ; cd3e
 	ds 1
 
+wJigglypuffFacingDirections:: ; cd3f
+
+wOptionsBattleStyleCursorX:: ; cd3f
+
+wTrainerInfoTextBoxNextRowOffset:: ; cd3f
+
+wHoFMonLevel:: ; cd3f
+
+wBadgeOrFaceTiles:: ; cd3f
+; 8 bytes
+; a list of the first tile IDs of each badge or face (depending on whether the
+; badge is owned) to be drawn on the trainer screen
+
+wSlotMachineWheel2Offset:: ; cd3f
+
 wNameOfPlayerMonToBeTraded:: ; cd3f
 
 wFlyAnimBirdSpriteImageIndex:: ; cd3f
@@ -633,6 +804,13 @@ wTrainerFacingDirection:: ; cd3f
 wcd3f:: ; used with daycare text for money amount
 	ds 1
 
+wHoFMonOrPlayer:: ; cd40
+; show mon or show player?
+; 0 = mon
+; 1 = player
+
+wSlotMachineWheel3Offset:: ; cd40
+
 wPlayerSpinInPlaceAnimSoundID:: ; cd40
 
 wHiddenObjectY:: ; cd40
@@ -640,38 +818,129 @@ wHiddenObjectY:: ; cd40
 wTrainerScreenY:: ; cd40
 	ds 1
 
+wHoFTeamIndex2:: ; cd41
+
+wHiddenItemOrCoinsIndex:: ; cd41
+
 wTradedPlayerMonOT:: ; cd41
 
 wHiddenObjectX:: ; cd41
+
+wSlotMachineWinningSymbol:: ; cd41
+; the OAM tile number of the upper left corner of the winning symbol minus 2
+
+wNumFieldMoves:: ; cd41
+
+wSlotMachineWheel1BottomTile:: ; cd41
 
 wTrainerScreenX:: ; cd41
 	ds 1
 ; a lot of the uses for these values use more than the said address
 
+wHoFTeamNo:: ; cd42
+
+wSlotMachineWheel1MiddleTile:: ; cd42
+
+wFieldMovesLeftmostXCoord:: ; cd42
+
 wcd42:: ds 1 ; used in pewter center script, printing field mon moves, slot machines and HoF PC
-wcd43:: ds 1 ; slot machine stuff and GetMonFieldMoves
-wcd44:: ds 1 ; just slot machine
-wcd45:: ds 1 ; slot machine...
-wcd46:: ds 1 ; slot machine...
-wcd47:: ds 1 ; used in slot machine and spinning player sprite
-wcd48:: ds 1 ; same as above
-wcd49:: ds 1 ; used in slot machine, displaying the gym leaders/badges on the trainer card, and displaying the town map
-wcd4a:: ds 1 ; probably used in one of the above mentioned functions
-wcd4b:: ds 1 ; same as above
+
+wLastFieldMoveID:: ; cd43
+; unused
+
+wSlotMachineWheel1TopTile:: ; cd43
+	ds 1
+
+wSlotMachineWheel2BottomTile:: ; cd44
+	ds 1
+
+wSlotMachineWheel2MiddleTile:: ; cd45
+	ds 1
+
+wTempCoins1:: ; cd46
+; 2 bytes
+; temporary variable used to add payout amount to the player's coins
+
+wSlotMachineWheel2TopTile:: ; cd46
+	ds 1
+
+wBattleTransitionSpiralDirection:: ; cd47
+; 0 = outward, 1 = inward
+
+wSlotMachineWheel3BottomTile:: ; cd47
+	ds 1
+
+wSlotMachineWheel3MiddleTile:: ; cd48
+
+wFacingDirectionList:: ; cd48
+; 4 bytes (also, the byte before the start of the list (cd47) is used a temp
+;          variable when the list is rotated)
+; used when spinning the player's sprite
+	ds 1
+
+wSlotMachineWheel3TopTile:: ; cd49
+
+wTempObtainedBadgesBooleans::
+; 8 bytes
+; temporary list created when displaying the badges on the trainer screen
+; one byte for each badge; 0 = not obtained, 1 = obtained
+	ds 1
+
+wTempCoins2:: ; cd4a
+; 2 bytes
+; temporary variable used to subtract the bet amount from the player's coins
+
+wPayoutCoins:: ; cd4a
+; 2 bytes
+	ds 2
 
 wTradedPlayerMonOTID:: ; cd4c
 
-wcd4c:: ds 1 ; slot machine and probably other above stuff
-wcd4d:: ds 1 ; used with cut and slot machine
+wSlotMachineFlags:: ; cd4c
+; These flags are set randomly and control when the wheels stop.
+; bit 6: allow the player to win in general
+; bit 7: allow the player to win with 7 or bar (plus the effect of bit 6)
+	ds 1
+
+wSlotMachineWheel1SlipCounter:: ; cd4d
+; wheel 1 can "slip" while this is non-zero
+
+wCutTile:: ; cd4d
+; $3d = tree tile
+; $52 = grass tile
+	ds 1
+
+wSlotMachineWheel2SlipCounter:: ; cd4e
+; wheel 2 can "slip" while this is non-zero
 
 wTradedEnemyMonOT:: ; cd4e
+	ds 1
 
-wcd4e:: ds 1 ; used with in-game trades and slot machine
-wcd4f:: ds 1 ; used with in-game trades, emotion bubbles, and player animations
-wcd50:: ds 9 ; used with in-game trades, emotion bubbles, and player and miscellaneous sprite animations
+wSavedPlayerScreenY:: ; cd4f
+
+wSlotMachineRerollCounter:: ; cd4f
+; The remaining number of times wheel 3 will roll down a symbol until a match is
+; found, when winning is enabled. It's initialized to 4 each bet.
+
+wEmotionBubbleSpriteIndex:: ; cd4f
+; the index of the sprite the emotion bubble is to be displayed above
+	ds 1
+
+wWhichEmotionBubble:: ; cd50
+
+wSlotMachineBet:: ; cd50
+; how many coins the player bet on the slot machine (1 to 3)
+
+wSavedPlayerFacingDirection:: ; cd50
+
+wWhichAnimationOffsets:: ; cd50
+; 0 = cut animation, 1 = boulder dust animation
+	ds 9
 
 wTradedEnemyMonOTID:: ; cd59
 	ds 2
+
+wOAMBaseTile:: ; cd5b
 
 wcd5b:: ds 1 ; used in some sprite stuff, town map and surge gym trash cans
 wcd5c:: ds 1 ; used in town map
@@ -690,25 +959,49 @@ wRightGBMonSpecies:: ; cd5f
 wFlags_0xcd60:: ; cd60
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
 ; bit 1: boulder dust animation (from using Strength) pending
+; bit 3: using generic PC
 ; bit 5: don't play sound when A or B is pressed in menu
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 	ds 1
 
 	ds 9
 
-wcd6a:: ds 1 ; used as the output of the outcome of an item (successful, unsuccessful, can't be used now, etc.)
+wActionResultOrTookBattleTurn:: ; cd6a
+; This has overlapping related uses.
+; When the player tries to use an item or use certain field moves, 0 is stored
+; when the attempt fails and 1 is stored when the attempt succeeds.
+; In addition, some items store 2 for certain types of failures, but this
+; cannot happen in battle.
+; In battle, a non-zero value indicates the player has taken their turn using
+; something other than a move (e.g. using an item or switching pokemon).
+; So, when an item is successfully used in battle, this value becomes non-zero
+; and the player is not allowed to make a move and the two uses are compatible.
+	ds 1
 
 wJoyIgnore:: ; cd6b
 ; Set buttons are ignored.
 	ds 1
 
-; as well as the said function, these values are used as a buffer for PlaceString
-wcd6c:: ds 1 ; used in pokemon status screen and battle stuff
-wcd6d:: ds 4 ; used solely for PlaceString
-wcd71:: ds 1 ; used with pokemon status screen
-wcd72:: ds 5 ; used with restoring PP
-wcd77:: ds 1 ; used as an end terminator for GetMonName: (@ is written to this location)
-wcd78:: ds 9 ; also used with restoring PP
+wDownscaledMonSize:: ; cd6c
+; size of downscaled mon pic used in pokeball entering/exiting animation
+; $00 = 5×5
+; $01 = 3×3
+
+wNumMovesMinusOne:: ; cd6c
+; FormatMovesString stores the number of moves minus one here
+	ds 1
+
+wcd6d:: ds 4 ; buffer for various data
+
+wStatusScreenCurrentPP:: ; cd71
+; temp variable used to print a move's current PP on the status screen
+	ds 1
+
+	ds 6
+
+wNormalMaxPPList:: ; cd78
+; list of normal max PP (without PP up) values
+	ds 9
 
 wSerialOtherGameboyRandomNumberListBlock:: ; cd81
 ; buffer for transferring the random number list generated by the other gameboy
@@ -717,12 +1010,32 @@ wTileMapBackup2:: ; cd81
 ; second buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
 	ds 20 * 18
 
+wEvoOldSpecies:: ; cee9
+
 wBuffer:: ; cee9
 ; Temporary storage area of 30 bytes.
+
+wTownMapCoords:: ; cee9
+; lower nybble is x, upper nybble is y
+
+wLearningMovesFromDayCare:: ; cee9
+; whether WriteMonMoves is being used to make a mon learn moves from day care
+; non-zero if so
+
 wHPBarMaxHP:: ; cee9
-	ds 2
+	ds 1
+
+wEvoNewSpecies:: ; ceea
+	ds 1
+
+wEvoMonTileOffset:: ; ceeb
+
 wHPBarOldHP:: ; ceeb
-	ds 2
+	ds 1
+
+wEvoCancelled:: ; ceec
+	ds 1
+
 wHPBarNewHP:: ; ceed
 	ds 2
 wHPBarDelta:: ; ceef
@@ -735,16 +1048,31 @@ wHPBarHPDifference:: ; cefd
 	ds 1
 	ds 7
 
-wcf05:: ds 1 ; used with enemy using healing moves
-wcf06:: ds 1 ; used with healing items as a storage value to store wWhichPokemon
+wAIItem:: ; cf05
+; the item that the AI used
+	ds 1
+
+wUsedItemOnWhichPokemon:: ; cf05
+	ds 1
 
 wAnimSoundID:: ; cf07
 ; sound ID during battle animations
 	ds 1
 
-wcf08:: ds 1 ; used as a storage value for the bank to return to after a BankswitchHome (bankswitch in homebank)
-wcf09:: ds 1 ; used as a temp storage value for the bank to switch to
-wcf0a:: ds 1 ; used as flags for Poke Mart
+wBankswitchHomeSavedROMBank:: ; cf08
+; used as a storage value for the bank to return to after a BankswitchHome (bankswitch in homebank)
+	ds 1
+
+wBankswitchHomeTemp:: ; cf09
+; used as a temp storage value for the bank to switch to
+	ds 1
+
+wBoughtOrSoldItemInMart:: ; cf0a
+; 0 = nothing bought or sold in pokemart
+; 1 = bought or sold something in pokemart
+; this value is not used for anything
+	ds 1
+
 wBattleResult:: ; cf0b
 ; $00 - win
 ; $01 - lose
@@ -756,15 +1084,22 @@ wAutoTextBoxDrawingControl:: ; cf0c
 	ds 1
 
 wcf0d:: ds 1 ; used with some overworld scripts (not exactly sure what it's used for)
-wcf0e:: ds 1 ; used with some overworld collison check
-wcf0f:: ds 1 ; used with moving overworld sprites
+
+wTilePlayerStandingOn:: ; cf0e
+; used in CheckForTilePairCollisions2 to store the tile the player is on
+	ds 1
+
+wNPCNumScriptedSteps:: ds 1 ; cf0f
 
 wNPCMovementScriptFunctionNum:: ; cf10
 ; which script function within the pointer table indicated by
 ; wNPCMovementScriptPointerTableNum
 	ds 1
 
-wcf11:: ds 1 ; used as a flag if the game needs to switch to the bank which the map is in when displaying a text id (flag is set during predefs)
+wTextPredefFlag:: ; cf11
+; bit 0: set when printing a text predef so that DisplayTextID doesn't switch
+;        to the current map's bank
+	ds 1
 
 wPredefParentBank:: ; cf12
 	ds 1
@@ -781,7 +1116,10 @@ wNPCMovementScriptSpriteOffset:: ; cf17
 ; sprite offset of sprite being controlled by NPC movement script
 	ds 1
 
-wcf18:: ds 2 ; used with overworld movement
+wScriptedNPCWalkCounter:: ; cf18
+	ds 1
+
+	ds 1
 
 wGBC:: ; cf1a
 	ds 1
@@ -802,19 +1140,19 @@ wcf37:: ds 20 ; used with palletes too (used for Party Menu)
 wcf4b:: ds 1 ; storage buffer for various strings
 wcf4c:: ds 1 ; used with displaying EXP value, probably also overflowed with wcf4b
 wGainBoostedExp:: ; cf4d
-    ds 1
+	ds 1
 	ds 17
 
 wGymCityName:: ; cf5f
-wStringBuffer1:: ; cf5f
-	ds 16 + 1
-wGymLeaderName:: ; cf70
-wStringBuffer2:: ; cf70
-	ds 16 + 1
-wStringBuffer3:: ; cf81
-	ds 9 + 1
+	ds 17
 
-wList:: ; cf8b
+wGymLeaderName:: ; cf70
+	ds 11
+
+wItemList:: ; cf7b
+	ds 16
+
+wListPointer:: ; cf8b
 	ds 2
 
 wcf8d:: ds 1 ; used in GetMonName
@@ -829,7 +1167,9 @@ wWhichPokemon:: ; cf92
 ; which pokemon you selected
 	ds 1
 
-wcf93:: ds 1 ; used with lists
+wPrintItemPrices:: ; cf93
+; if non-zero, then print item prices when displaying lists
+	ds 1
 
 wHPBarType:: ; cf94
 ; type of HP bar
@@ -841,9 +1181,22 @@ wListMenuID:: ; cf94
 ; ID used by DisplayListMenuID
 	ds 1
 
-wcf95:: ds 1 ; used with RemovePokemon (BoxMons, Daycare, Trades, etc.)
-wcf96:: ds 1 ; used with removing items
-wcf97:: ds 1 ; used with printing item quantities?
+wRemoveMonFromBox:: ; cf95
+; if non-zero, RemovePokemon will remove the mon from the current box,
+; else it will remove the mon from the party
+
+wMoveMonType:: ; cf95
+; 0 = move from box to party
+; 1 = move from party to box
+; 2 = move from daycare to party
+; 3 = move from party to daycare
+	ds 1
+
+wItemQuantity:: ; cf96
+	ds 1
+
+wMaxItemQuantity:: ; cf97
+	ds 1
 
 ; LoadMonData copies mon data here
 wLoadedMon:: party_struct wLoadedMon ; cf98
@@ -872,7 +1225,10 @@ wcfc9:: ds 1 ; also used with audio
 wcfca:: ds 1 ; also used with audio too
 
 wUpdateSpritesEnabled:: ; cfcb
-; $01 enables UpdateSprites; anything else disables it
+; $00 = causes sprites to be hidden and the value to change to $ff
+; $01 = enabled
+; $ff = disabled
+; other values aren't used
 	ds 1
 
 W_ENEMYMOVENUM:: ; cfcc
@@ -953,7 +1309,7 @@ W_TRAINERCLASS:: ; d031
 
 	ds 1
 
-wTrainerPicPointer:: ; wd033
+wTrainerPicPointer:: ; d033
 	ds 2
 	ds 1
 wd036:: ds 16 ; used as a temporary buffer to print "XXX learned YYY"
@@ -1071,7 +1427,7 @@ wPlayerNumAttacksLeft::
 ; when the player is attacking multiple times, the number of attacks left
 	ds 1
 
-W_PLAYERCONFUSEDCOUNTER:: ; wd06b
+W_PLAYERCONFUSEDCOUNTER:: ; d06b
 	ds 1
 
 W_PLAYERTOXICCOUNTER:: ; d06c
@@ -1087,7 +1443,7 @@ wEnemyNumAttacksLeft:: ; d06f
 ; when the enemy is attacking multiple times, the number of attacks left
 	ds 1
 
-W_ENEMYCONFUSEDCOUNTER:: ; wd070
+W_ENEMYCONFUSEDCOUNTER:: ; d070
 	ds 1
 
 W_ENEMYTOXICCOUNTER:: ; d071
@@ -1123,8 +1479,20 @@ W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation
 	ds 1
 
-wd07d:: ds 1 ; used with naming functions and party display type
-wd07e:: ds 3 ; used with mart and inventory
+wNamingScreenType:: ; d07d
+
+wPartyMenuTypeOrMessageID:: ; d07d
+
+wTempTilesetNumTiles:: ; d07d
+; temporary storage for the number of tiles in a tileset
+	ds 1
+
+wSavedListScrollOffset:: ; d07e
+; used by the pokemart code to save the existing value of wListScrollOffset
+; so that it can be restored when the player is done with the pokemart NPC
+	ds 1
+
+	ds 2
 
 ; base coordinates of frame block
 W_BASECOORDX:: ; d081
@@ -1149,7 +1517,10 @@ W_SUBANIMCOUNTER:: ; d087
 ; counts the number of subentries left in the current subanimation
 	ds 1
 
-wd088:: ds 1 ; savefile checksum (if file is corrupted)
+wSaveFileStatus::
+; 1 = no save file or save file is corrupted
+; 2 = save file exists and no corruption has been detected
+	ds 1
 
 W_NUMFBTILES:: ; d089
 ; number of tiles in current battle animation frame block
@@ -1158,11 +1529,12 @@ W_NUMFBTILES:: ; d089
 wTradedMonMovingRight:: ; d08a
 ; $01 if mon is moving from left gameboy to right gameboy; $00 if vice versa
 
+wOptionsInitialized:: ; d08a
+
 wd08a:: ds 1 ; used with sprites and displaying the option menu on the main menu screen?
 
-wTownMapSpriteBlinkingCounter:: ; d08b
-
-wPartyMonAnimCounter:: ; d08b
+wAnimCounter:: ; d08b
+; generic counter variable for various animations
 
 W_SUBANIMTRANSFORM:: ; d08b
 ; controls what transformations are applied to the subanimation
@@ -1188,6 +1560,13 @@ wEndBattleTextRomBank:: ; d092
 W_SUBANIMADDRPTR:: ; d094
 ; the address _of the address_ of the current subanimation entry
 	ds 2
+
+wSlotMachineAllowMatchesCounter:: ; d096
+; If non-zero, the allow matches flag is always set.
+; There is a 1/256 (~0.4%) chance that this value will be set to 60, which is
+; the only way it can increase. Winning certain payout amounts will decrement it
+; or zero it.
+
 W_SUBANIMSUBENTRYADDR:: ; d096
 ; the address of the current subentry of the current subanimation
 	ds 2
@@ -1221,7 +1600,7 @@ W_FBMODE:: ; d09e
 wNewTileBlockID:: ; d09f
 
 wd09f:: ds 1 ; used with predef ReplaceTileBlock
-wd0a0:: ds 1 ; used in VBlank and ChangeBGPalColor0_4Frames
+wDisableVBlankWYUpdate:: ds 1 ; if non-zero, don't update WY during V-blank
 
 W_SPRITECURPOSX:: ; d0a1
 	ds 1
@@ -1324,7 +1703,11 @@ W_MONHLEARNSET:: ; d0cc
 W_MONHPICBANK:: ; d0d3
 	ds 1
 
-wd0d4:: ds 3 ; temp storage for hTilesetType
+wSavedTilesetType:: ; d0d4
+; saved at the start of a battle and then written back at the end of the battle
+	ds 1
+
+	ds 2
 
 W_MONHPADDING:: ; d0d7
 
@@ -1332,12 +1715,12 @@ W_MONHPADDING:: ; d0d7
 W_DAMAGE:: ; d0d7
 	ds 2
 
-ds 2
+	ds 2
 
-wRepelRemainingSteps:: ; wd0db
-    ds 1
+wRepelRemainingSteps:: ; d0db
+	ds 1
 
-wMoves:: ; wd0dc
+wMoves:: ; d0dc
 ; list of moves for FormatMovesString
 	ds 4
 
@@ -1353,7 +1736,10 @@ wWalkBikeSurfStateCopy:: ; d11a
 ; wWalkBikeSurfState is sometimes copied here, but it doesn't seem to be used for anything
 	ds 1
 
-wd11b:: ds 1 ; used with mart text box and cable club
+wInitListType:: ; d11b
+; the type of list for InitList to init
+	ds 1
+
 wd11c:: ds 1 ; temp storage value for catching pokemon
 wd11d:: ds 1 ; used with battle switchout and testing if the enemy mon fainted
 wd11e:: ds 1 ; used as a Pokemon and Item storage value. Also used as an output value for CountSetBits
@@ -1365,7 +1751,7 @@ wNumRunAttempts::
 
 wd121:: ds 1 ; used with evolving pokemon
 wd122:: ds 2 ; saved ROM bank number for vblank
-wd124:: ds 1 ; used as an output value when determining if an item is a key item
+wIsKeyItem:: ds 1 ; d124
 
 wTextBoxID:: ; d125
 	ds 1
@@ -1375,16 +1761,37 @@ wd126:: ds 1 ; not exactly sure what this is used for, but it seems to be used a
 W_CURENEMYLVL:: ; d127
 	ds 1
 
-wd128:: ds 1 ; used as a pointer to displaying Poke Mart inventory, also used to store the pointer of LoadItemList (pointer to item list initially in hl)
-wd129:: ds 1 ; second half of above mentioned pointer
-wd12a:: ds 1 ; Number of list entries for displaying a list
+wItemListPointer:: ; d128
+; pointer to list of items terminated by $FF
+	ds 2
+
+wListCount::
+; number of entries in a list
+	ds 1
 
 wLinkState:: ; d12b
 	ds 1
 
-wTwoOptionMenuID:: ds 1
-wd12d:: ds 1 ; used with item menus and pokemart menu, also used with testing if all Pokemon Fainted?
-wd12e:: ds 1 ; used as an output value to determine if A or B was pressed in a yes/no box
+wTwoOptionMenuID:: ; d12c
+	ds 1
+
+wChosenMenuItem:: ; d12d
+; the id of the menu item the player ultimately chose
+
+wOutOfBattleBlackout:: ; d12d
+; non-zero when the whole party has fainted due to out-of-battle poison damage
+	ds 1
+
+wMenuExitMethod:: ; d12e
+; the way the user exited a menu
+; for list menus and the buy/sell/quit menu:
+; $01 = the user pressed A to choose a menu item
+; $02 = the user pressed B to cancel
+; for two-option menus:
+; $01 = the user pressed A with the first menu item selected
+; $02 = the user pressed B or pressed A with the second menu item selected
+	ds 1
+
 wd12f:: ds 1 ; used in some coordinatestuff, npc pathstuff, and game corner prize stuff
 wd130:: ds 1 ; saved value of screen Y coord of trainer sprite
 wd131:: ds 1 ; saved value of screen X coord of trainer sprite
@@ -1493,7 +1900,12 @@ W_OBTAINEDBADGES:: ; d356
 
 	ds 1
 
-wd358:: ds 1 ; bit 0 set = no delay when printing text (W_OPTIONS is still checked though)
+wLetterPrintingDelayFlags:: ; d358
+; bit 0: If 0, limit the delay to 1 frame. Note that this has no effect if
+;        the delay has been disabled entirely through bit 1 of this variable
+;        or bit 6 of wd730.
+; bit 1: If 0, no delay.
+	ds 1
 
 wPlayerID:: ; d359
 	ds 2
@@ -1559,58 +1971,98 @@ W_MAPCONNECTIONS:: ; d370
 W_MAPCONN1PTR:: ; d371
 	ds 1
 
-wd372:: ds 1 ; some connection stuff, too bothered to label it
-wd373:: ds 1
-wd374:: ds 1
-wd375:: ds 1
-wd376:: ds 1
-wd377:: ds 1
-wd378:: ds 1
-wd379:: ds 1
-wd37a:: ds 1
-wd37b:: ds 1
+wNorthConnectionStripSrc:: ; d372
+	ds 2
+
+wNorthConnectionStripDest:: ; d374
+	ds 2
+
+wNorthConnectionStripWidth:: ; d376
+	ds 1
+
+wNorthConnectedMapWidth:: ; d377
+	ds 1
+
+wNorthConnectedMapYAlignment:: ; d378
+	ds 1
+
+wNorthConnectedMapXAlignment:: ; d379
+	ds 1
+
+wNorthConnectedMapViewPointer:: ; d37a
+	ds 2
 
 W_MAPCONN2PTR:: ; d37c
 	ds 1
 
-wd37d:: ds 1
-wd37e:: ds 1
-wd37f:: ds 1
-wd380:: ds 1
-wd381:: ds 1
-wd382:: ds 1
-wd383:: ds 1
-wd384:: ds 1
-wd385:: ds 1
-wd386:: ds 1
+wSouthConnectionStripSrc:: ; d37d
+	ds 2
+
+wSouthConnectionStripDest:: ; d37f:
+	ds 2
+
+wSouthConnectionStripWidth:: ; d381
+	ds 1
+
+wSouthConnectedMapWidth:: ; d382
+	ds 1
+
+wSouthConnectedMapYAlignment:: ; d383
+	ds 1
+
+wSouthConnectedMapXAlignment:: ; d384
+	ds 1
+
+wSouthConnectedMapViewPointer:: ; d385
+	ds 2
 
 W_MAPCONN3PTR:: ; d387
 	ds 1
 
-wd388:: ds 1
-wd389:: ds 1
-wd38a:: ds 1
-wd38b:: ds 1
-wd38c:: ds 1
-wd38d:: ds 1
-wd38e:: ds 1
-wd38f:: ds 1
-wd390:: ds 1
-wd391:: ds 1
+wWestConnectionStripSrc:: ; d388
+	ds 2
+
+wWestConnectionStripDest:: ; d38a
+	ds 2
+
+wWestConnectionStripHeight:: ; d38c
+	ds 1
+
+wWestConnectedMapWidth:: ; d38d
+	ds 1
+
+wWestConnectedMapYAlignment:: ; d38e
+	ds 1
+
+wWestConnectedMapXAlignment:: ; d38f
+	ds 1
+
+wWestConnectedMapViewPointer:: ; d390
+	ds 2
 
 W_MAPCONN4PTR:: ; d392
 	ds 1
 
-wd393:: ds 1
-wd394:: ds 1
-wd395:: ds 1
-wd396:: ds 1
-wd397:: ds 1
-wd398:: ds 1
-wd399:: ds 1
-wd39a:: ds 1
-wd39b:: ds 1
-wd39c:: ds 1
+wEastConnectionStripSrc:: ; d393
+	ds 2
+
+wEastConnectionStripDest:: ; d395
+	ds 2
+
+wEastConnectionStripHeight:: ; d397
+	ds 1
+
+wEastConnectedMapWidth:: ; d398
+	ds 1
+
+wEastConnectedMapYAlignment:: ; d399
+	ds 1
+
+wEastConnectedMapXAlignment:: ; d39a
+	ds 1
+
+wEastConnectedMapViewPointer:: ; d39b
+	ds 2
 
 W_SPRITESET:: ; d39d
 ; sprite set for the current map (11 sprite picture ID's)
@@ -1620,9 +2072,14 @@ W_SPRITESETID:: ; d3a8
 ; sprite set ID for the current map
 	ds 1
 
-wd3a9:: ds 1 ; used when getting the object data pointer
-wd3aa:: ds 3 ; second part of the pointer
-wd3ad:: ds 1 ; used as the beginning value for copying warp data
+wObjectDataPointerTemp:: ; d3a9
+	ds 2
+
+	ds 2
+
+wMapBackgroundTile:: ; d3ad
+; the tile shown outside the boundaries of the map
+	ds 1
 
 wNumberOfWarps:: ; d3ae
 ; number of warps in current map
@@ -1638,9 +2095,17 @@ wDestinationWarpID:: ; d42f
 
 	ds 128
 
-wd4b0:: ds 1 ; number of signs on the map
-wd4b1:: ds 32 ; starting address for sign coords
-wd4d1:: ds 16 ; starting address for sign text IDs
+wNumSigns:: ; d4b0
+; number of signs in the current map (up to 16)
+	ds 1
+
+wSignCoords:: ; d4b1
+; 2 bytes each
+; Y, X
+	ds 32
+
+wSignTextIDs:: ; d4d1
+	ds 16
 
 W_NUMSPRITES:: ; d4e1
 ; number of sprites on the current map
@@ -1661,16 +2126,35 @@ W_MAPSPRITEEXTRADATA:: ; d504
 ; two bytes per sprite (trainer class/item ID, trainer set ID)
 	ds 32
 
-wd524:: ds 1 ; map height in 2x2 metatiles, also used with checking connections
-wd525:: ds 1 ; map width in 2x2 metatiles, also used with checking connections
+wCurrentMapHeight2:: ; d524
+; map height in 2x2 meta-tiles
+	ds 1
+
+wCurrentMapWidth2:: ; d525
+; map width in 2x2 meta-tiles
+	ds 1
 
 wMapViewVRAMPointer:: ; d526
 ; the address of the upper left corner of the visible portion of the BG tile map in VRAM
 	ds 2
 
-wd528:: ds 1 ; additional storage for directions
-wd529:: ds 1 ; same case as above, but used differently
-wd52a:: ds 1 ; same case as above
+; In the comments for the player direction variables below, "moving" refers to
+; both walking and changing facing direction without taking a step.
+
+wPlayerMovingDirection:: ; d528
+; if the player is moving, the current direction
+; if the player is not moving, zero
+; map scripts write to this in order to change the player's facing direction
+	ds 1
+
+wPlayerLastStopDirection:: ; d529
+; the direction in which the player was moving before the player last stopped
+	ds 1
+
+wPlayerDirection:: ; d52a
+; if the player is moving, the current direction
+; if the player is not moving, the last the direction in which the player moved
+	ds 1
 
 W_TILESETBANK:: ; d52b
 	ds 1
@@ -1701,8 +2185,15 @@ wBoxItems:: ; d53b
 	ds 50 * 2
 	ds 1 ; end
 
-wd5a0:: ds 2 ; current box number
-wd5a2:: ds 1 ; number of HOF teams
+wCurrentBoxNum:: ; d5a0
+; bits 0-6: box number
+; bit 7: whether the player has changed boxes before
+	ds 2
+
+wNumHoFTeams:: ; d5a2
+; number of HOF teams
+	ds 1
+
 wd5a3:: ds 1 ; unused? (written to when loading map data)
 
 wPlayerCoins:: ; d5a4
@@ -1937,8 +2428,11 @@ W_ROUTE18GATECURSCRIPT:: ; d669
 
 	ds 134
 
-wd6f0:: ds 14 ; flags for hidden items?
-wd6fe:: ds 2 ; flags for hidden coins?
+wObtainedHiddenItemsFlags::
+	ds 14
+
+wObtainedHiddenCoinsFlags::
+	ds 2
 
 wWalkBikeSurfState:: ; d700
 ; $00 = walking
@@ -2022,13 +2516,16 @@ wd72c:: ; d72c
 
 wd72d:: ds 1 ; misc temp flags? (in some scripts, bit 6 and 7 set after a special battle (e.g. gym leaders) has been won)
              ; also used as a start menu flag
-wd72e:: ds 2 ; more temp misc flags, used with npc movement, main menu and other stuff
+
+wd72e::
+; bit 7: set if scripted NPC movement has been initialised
+	ds 2 ; more temp misc flags, used with npc movement, main menu and other stuff
 
 wd730::
 ; bit 0: NPC sprite being moved by script
 ; bit 5: ignore joypad input
 ; bit 6: print text with no delay between each letter
-; bit 7: set if joypad states are being simulated in the overworld
+; bit 7: set if joypad states are being simulated in the overworld or an NPC's movement is being scripted
 	ds 1
 
 	ds 1
@@ -2058,7 +2555,8 @@ wd736:: ; d736
 ; bit 0: check if the player is standing on a door and make him walk down a step if so
 ; bit 1: the player is currently stepping down from a door
 ; bit 2: standing on a warp
-; bit 6: jumping down a ledge
+; bit 6: jumping down a ledge / fishing animation
+; bit 7: player sprite spinning due to spin tiles (Rocket hidehout / Viridian Gym)
 	ds 1
 
 wCompletedInGameTradeFlags:: ; d737
@@ -2307,12 +2805,4 @@ wStack:: ; dfff
 	ds -$100
 
 
-SECTION "Sprite Buffers", SRAM, BANK[0]
-
-S_SPRITEBUFFER0:: ds SPRITEBUFFERSIZE ; a000
-S_SPRITEBUFFER1:: ds SPRITEBUFFERSIZE ; a188
-S_SPRITEBUFFER2:: ds SPRITEBUFFERSIZE ; a310
-
-	ds $100
-
-sHallOfFame:: ds HOF_TEAM * NUM_HOF_TEAMS ; a598
+INCLUDE "sram.asm"

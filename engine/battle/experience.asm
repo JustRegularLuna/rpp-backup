@@ -15,7 +15,7 @@ GainExperience: ; 5524f (15:524f)
 	ld hl, wPartyGainExpFlags
 	ld a, [wWhichPokemon]
 	ld c, a
-	ld b, $2
+	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
 	and a ; is mon's gain exp flag set?
@@ -148,8 +148,8 @@ GainExperience: ; 5524f (15:524f)
 	call GetPartyMonName
 	ld hl, GainedText
 	call PrintText
-	xor a ; party mon data
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 IF GEN_2_GRAPHICS
 	call AnimateEXPBar
 ELSE
@@ -250,8 +250,8 @@ ENDC
 .printGrewLevelText
 	ld hl, GrewLevelText
 	call PrintText
-	xor a ; party mon data
-	ld [wcc49], a
+	xor a ;PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 IF GEN_2_GRAPHICS
 	call AnimateEXPBarAgain
 ELSE
@@ -261,15 +261,15 @@ ENDC
 	callab PrintStatsBox
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	ld a, [wd0b5]
 	ld [wd11e], a
 	predef LearnMoveFromLevelUp
-	ld hl, wccd3
+	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	predef FlagActionPredef
 	pop hl
 	pop af
@@ -293,7 +293,7 @@ ENDC
 	ld [hl], a ; clear gain exp flags
 	ld a, [wPlayerMonNumber]
 	ld c, a
-	ld b, $1
+	ld b, FLAG_SET
 	push bc
 	predef FlagActionPredef ; set the gain exp flag for the mon that is currently out
 	ld hl, wPartyFoughtCurrentEnemyFlags
@@ -353,7 +353,7 @@ BoostExp: ; 5549f (15:549f)
 
 GainedText: ; 554b2 (15:54b2)
 	TX_FAR _GainedText
-	db $08 ; asm
+	TX_ASM
 	ld a, [wBoostExpByExpAll]
 	ld hl, WithExpAllText
 	and a
@@ -367,7 +367,7 @@ GainedText: ; 554b2 (15:54b2)
 
 WithExpAllText: ; 554cb (15:54cb)
 	TX_FAR _WithExpAllText
-	db $08 ; asm
+	TX_ASM
 	ld hl, ExpPointsText
 	ret
 

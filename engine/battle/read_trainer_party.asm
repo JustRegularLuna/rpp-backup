@@ -55,8 +55,8 @@ ReadTrainer: ; 39c53 (e:5c53)
 	and a ; have we reached the end of the trainer data?
 	jr z,.FinishUp
 	ld [wcf91],a ; write species somewhere (XXX why?)
-	ld a,1
-	ld [wcc49],a
+	ld a,ENEMY_PARTY_DATA
+	ld [wMonDataLocation],a
 	push hl
 	call AddPartyMon
 	pop hl
@@ -72,8 +72,8 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [W_CURENEMYLVL],a
 	ld a,[hli]
 	ld [wcf91],a
-	ld a,1
-	ld [wcc49],a
+	ld a,ENEMY_PARTY_DATA
+	ld [wMonDataLocation],a
 	push hl
 	call AddPartyMon
 	pop hl
@@ -143,7 +143,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [wEnemyMon6Moves + 2],a
 .FinishUp
 ; clear wAmountMoneyWon addresses
-	xor a       
+	xor a
 	ld de,wAmountMoneyWon
 	ld [de],a
 	inc de

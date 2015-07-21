@@ -1,16 +1,16 @@
 DisplayStartMenu:: ; 2acd (0:2acd)
-	ld a,$04 ; hardcoded Bank, not sure what's it refers to
+	ld a,BANK(StartMenu_Pokedex)
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a ; ROM bank 4
+	ld [MBC1RomBank],a
 	ld a,[wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy],a
-	ld a, (SFX_02_3f - SFX_Headers_02) / 3 ; Start menu sound
+	ld a, SFX_START_MENU
 	call PlaySound
 
 RedisplayStartMenu:: ; 2adf (0:2adf)
 	callba DrawStartMenu
 	callba PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 .loop
 	call HandleMenuInput
 	ld b,a
@@ -54,7 +54,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 .buttonPressed ; A, B, or Start button pressed
 	call PlaceUnfilledArrowMenuCursor
 	ld a,[wCurrentMenuItem]
-	ld [wcc2d],a ; save current menu item ID
+	ld [wBattleAndStartSavedMenuItem],a ; save current menu selection
 	ld a,b
 	and a,%00001010 ; was the Start button or B button pressed?
 	jp nz,CloseStartMenu

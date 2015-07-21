@@ -23,7 +23,7 @@ EnemyHUDHAX:
 	ld a, c
 	and a
 	jr z, .notOwned
-	hlCoord 1, 1
+	coord hl, 1, 1
 	ld [hl], $E9
 .notOwned
 	pop hl

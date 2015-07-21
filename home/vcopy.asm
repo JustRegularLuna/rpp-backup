@@ -63,10 +63,10 @@ SECTION "AutoBgMapTransfer", ROM0[$1d57]
 ; improve efficiency.
 AutoBgMapTransfer: ; 1d57 (0:1d57)	; HAXED function
 	ld a,BANK(RefreshWindow)
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	call RefreshWindow
 	ld a,[H_LOADEDROMBANK]
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	ret
 
 ; More HAX functions

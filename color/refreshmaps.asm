@@ -66,51 +66,51 @@ RefreshWindow:
 	and a
 	ret z
 
-	ld hl,[sp+$00]
+	ld hl,[sp + 0]
 	ld a,h
 	ld [H_SPTEMP],a
 	ld a,l
 	ld [H_SPTEMP+1],a	; Store stack pointer
 	ld a,[H_AUTOBGTRANSFERPORTION]
 	and a
-	jr z,.firstThird
+	jr z,.transferTopThird
 	dec a
-	jr z,.secondThird
-.thirdThird
-	ld hl,wTileMap+6*20*2
+	jr z,.transferMiddleThird
+.transferBottomThird
+	coord hl, 0, 12
 	ld sp,hl
 	ld a,[H_AUTOBGTRANSFERDEST+1]
 	ld h,a
 	ld a,[H_AUTOBGTRANSFERDEST]
 	ld l,a
-	ld de,$0180
+	ld de,(12 * 32)
 	add hl,de
-	xor a
-	jr .startCopy
-.firstThird:
-	ld hl,wTileMap
+	xor a ; TRANSFERTOP
+	jr .doTransfer
+.transferTopThird
+	coord hl, 0, 0
 	ld sp,hl
 	ld a,[H_AUTOBGTRANSFERDEST+1]
 	ld h,a
 	ld a,[H_AUTOBGTRANSFERDEST]
 	ld l,a
-	ld a,$01
-	jr .startCopy
-.secondThird:
-	ld hl,wTileMap+6*20
+	ld a,TRANSFERMIDDLE
+	jr .doTransfer
+.transferMiddleThird
+	coord hl, 0, 6
 	ld sp,hl
 	ld a,[H_AUTOBGTRANSFERDEST+1]
 	ld h,a
 	ld a,[H_AUTOBGTRANSFERDEST]
 	ld l,a
-	ld de,$00c0
+	ld de,(6 * 32)
 	add hl,de
-	ld a,$02
+	ld a,TRANSFERBOTTOM
 
 ; sp now points to map data in wram, hl points to vram destination.
-.startCopy:
+.doTransfer
 	ld [H_AUTOBGTRANSFERPORTION],a
-	ld b,$06
+	ld b,6
 
 .drawRow:
 REPT 9
@@ -403,7 +403,7 @@ DrawMapColumn:
 	ld e,a
 	ld a,[H_SCREENEDGEREDRAWADDR + 1]
 	ld d,a
-	ld c,18 ; screen height
+	ld c,SCREEN_HEIGHT
 .loop1
 	ld a,[hli]
 	ld [de],a

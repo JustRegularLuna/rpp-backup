@@ -40,7 +40,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	and a
 	jr z, .loopFindMinimumEntries
 	push hl
-	ld hl, AIMoveChoiceModificationFunctionPointers ; $57a3
+	ld hl, AIMoveChoiceModificationFunctionPointers
 	dec a
 	add a
 	ld c, a
@@ -81,7 +81,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 .filterMinimalEntries ; all minimal entries now have value 1. All other slots will be disabled (move set to 0)
 	ld a, [de]
 	and a
-	jr nz, .moveExisting ; 0x3978a $1
+	jr nz, .moveExisting
 	ld [hl], a
 .moveExisting
 	ld a, [hl]
@@ -145,7 +145,7 @@ AIMoveChoiceModification1: ; 397ab (e:57ab)
 	ld [hl], a
 	jr .nextMove
 
-StatusAilmentMoveEffects ; 57e2
+StatusAilmentMoveEffects: ; 57e2
 	db $01 ; unused sleep effect
 	db SLEEP_EFFECT
 	db POISON_EFFECT
@@ -157,7 +157,7 @@ StatusAilmentMoveEffects ; 57e2
 ; that fall in-bewteen
 AIMoveChoiceModification2: ; 397e7 (e:57e7)
 	ld a, [wAILayer2Encouragement]
-	cp $1 
+	cp $1
 	ret nz
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
@@ -325,8 +325,8 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 	db 1,3,0  ; LANCE
 
 INCLUDE "engine/battle/trainer_pic_money_pointers.asm"
-	
-INCLUDE "text/trainer_names.asm"	
+
+INCLUDE "text/trainer_names.asm"
 
 INCLUDE "engine/battle/bank_e_misc.asm"
 
@@ -337,7 +337,6 @@ INCLUDE "data/trainer_moves.asm"
 INCLUDE "data/trainer_parties.asm"
 
 TrainerAI: ; 3a52e (e:652e)
-;XXX called at 34964, 3c342, 3c398
 	and a
 	ld a,[W_ISINBATTLE]
 	dec a
@@ -553,14 +552,14 @@ DecrementAICount: ; 3a695 (e:6695)
 	scf
 	ret
 
-Func_3a69b: ; 3a69b (e:669b)
-	ld a,(SFX_08_3e - SFX_Headers_08) / 3
+AIPlayRestoringSFX: ; 3a69b (e:669b)
+	ld a,SFX_HEAL_AILMENT
 	jp PlaySoundWaitForCurrent
 
 AIUseFullRestore: ; 3a6a0 (e:66a0)
 	call AICureStatus
 	ld a,FULL_RESTORE
-	ld [wcf05],a
+	ld [wAIItem],a
 	ld de,wHPBarOldHP
 	ld hl,wEnemyMonHP + 1
 	ld a,[hld]
@@ -601,7 +600,7 @@ AIUseHyperPotion: ; 3a6d6 (e:66d6)
 
 AIRecoverHP: ; 3a6da (e:66da)
 ; heal b HP and print "trainer used $(a) on pokemon!"
-	ld [wcf05],a
+	ld [wAIItem],a
 	ld hl,wEnemyMonHP + 1
 	ld a,[hl]
 	ld [wHPBarOldHP],a
@@ -642,7 +641,7 @@ AIRecoverHP: ; 3a6da (e:66da)
 
 AIPrintItemUseAndUpdateHPBar: ; 3a718 (e:6718)
 	call AIPrintItemUse_
-	hlCoord 2, 2
+	coord hl, 2, 2
 	xor a
 	ld [wHPBarType],a
 	predef UpdateHPBar_Hook
@@ -712,7 +711,7 @@ AIBattleWithdrawText: ; 3a781 (e:6781)
 	db "@"
 
 AIUseFullHeal: ; 3a786 (e:6786)
-	call Func_3a69b
+	call AIPlayRestoringSFX
 	call AICureStatus
 	ld a,FULL_HEAL
 	jp AIPrintItemUse
@@ -731,21 +730,21 @@ AICureStatus: ; 3a791 (e:6791)
 	ret
 
 AIUseXAccuracy: ; 0x3a7a8 unused
-	call Func_3a69b
+	call AIPlayRestoringSFX
 	ld hl,W_ENEMYBATTSTATUS2
 	set 0,[hl]
 	ld a,X_ACCURACY
 	jp AIPrintItemUse
 
 AIUseGuardSpec: ; 3a7b5 (e:67b5)
-	call Func_3a69b
+	call AIPlayRestoringSFX
 	ld hl,W_ENEMYBATTSTATUS2
 	set 1,[hl]
 	ld a,GUARD_SPEC_
 	jp AIPrintItemUse
 
 AIUseDireHit: ; 0x3a7c2 unused
-	call Func_3a69b
+	call AIPlayRestoringSFX
 	ld hl,W_ENEMYBATTSTATUS2
 	set 2,[hl]
 	ld a,DIRE_HIT
@@ -798,7 +797,7 @@ AIUseXSpecial: ; 3a804 (e:6804)
 	; fallthrough
 
 AIIncreaseStat: ; 3a808 (e:6808)
-	ld [wcf05],a
+	ld [wAIItem],a
 	push bc
 	call AIPrintItemUse_
 	pop bc
@@ -820,13 +819,13 @@ AIIncreaseStat: ; 3a808 (e:6808)
 	jp DecrementAICount
 
 AIPrintItemUse: ; 3a82c (e:682c)
-	ld [wcf05],a
+	ld [wAIItem],a
 	call AIPrintItemUse_
 	jp DecrementAICount
 
 AIPrintItemUse_: ; 3a835 (e:6835)
-; print "x used [wcf05] on z!"
-	ld a,[wcf05]
+; print "x used [wAIItem] on z!"
+	ld a,[wAIItem]
 	ld [wd11e],a
 	call GetItemName
 	ld hl, AIBattleUseItemText

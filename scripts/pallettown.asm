@@ -28,14 +28,14 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	ret nz
 	xor a
 	ld [hJoyHeld],a
-	ld a,4
-	ld [wd528],a
+	ld a,PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection],a
 	ld a,$FF
 	call PlaySound ; stop music
 	ld a, BANK(Music_MeetProfOak)
-	ld c,a ; song bank
+	ld c,a
 	ld a, MUSIC_MEET_PROF_OAK ; “oak appears” music
-	call PlayMusic ; plays music
+	call PlayMusic
 	ld a,$FC
 	ld [wJoyIgnore],a
 	ld hl,wd74b
@@ -50,7 +50,7 @@ PalletTownScript1: ; 18eb2 (6:4eb2)
 	xor a
 	ld [wcf0d],a
 	ld a,1
-	ld [$FF8C],a
+	ld [hSpriteIndexOrTextID],a
 	call DisplayTextID
 	ld a,$FF
 	ld [wJoyIgnore],a
@@ -65,25 +65,25 @@ PalletTownScript1: ; 18eb2 (6:4eb2)
 
 PalletTownScript2: ; 18ed2 (6:4ed2)
 	ld a,1
-	ld [$FF8C],a
-	ld a,4
-	ld [$FF8D],a
+	ld [H_SPRITEINDEX],a
+	ld a,SPRITE_FACING_UP
+	ld [hSpriteFacingDirection],a
 	call SetSpriteFacingDirectionAndDelay
 	call Delay3
 	ld a,1
 	ld [W_YCOORD],a
 	ld a,1
-	ld [$FF9B],a
+	ld [hNPCPlayerRelativePosPerspective],a
 	ld a,1
 	swap a
-	ld [$FF95],a
+	ld [hNPCSpriteOffset],a
 	predef CalcPositionOfPlayerRelativeToNPC
-	ld hl,$FF95
+	ld hl,hNPCPlayerYDistance
 	dec [hl]
 	predef FindPathToPlayer ; load Oak’s movement into wNPCMovementDirections2
 	ld de,wNPCMovementDirections2
 	ld a,1 ; oak
-	ld [$FF8C],a
+	ld [H_SPRITEINDEX],a
 	call MoveSprite
 	ld a,$FF
 	ld [wJoyIgnore],a
@@ -97,15 +97,16 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ld a,[wd730]
 	bit 0,a
 	ret nz
-	xor a
+	xor a ; ld a, SPRITE_FACING_DOWN
 	ld [wSpriteStateData1 + 9],a
 	ld a,1
 	ld [wcf0d],a
 	ld a,$FC
 	ld [wJoyIgnore],a
 	ld a,1
-	ld [$FF8C],a
+	ld [hSpriteIndexOrTextID],a
 	call DisplayTextID
+; set up movement script that causes the player to follow Oak to his lab
 	ld a,$FF
 	ld [wJoyIgnore],a
 	ld a,1
@@ -124,7 +125,7 @@ PalletTownScript3: ; 18f12 (6:4f12)
 
 PalletTownScript4: ; 18f4b (6:4f4b)
 	ld a,[wNPCMovementScriptPointerTableNum]
-	and a
+	and a ; is the movement script over?
 	ret nz
 
 	; trigger the next script
@@ -166,7 +167,7 @@ PalletTownTextPointers: ; 18f88 (6:4f88)
 	dw PalletTownText7
 
 PalletTownText1: ; 18f96 (6:4f96)
-	db 8
+	TX_ASM
 	ld a,[wcf0d]
 	and a
 	jr nz,.next
@@ -182,15 +183,15 @@ PalletTownText1: ; 18f96 (6:4f96)
 
 OakAppearsText: ; 18fb0 (6:4fb0)
 	TX_FAR _OakAppearsText
-	db 8
+	TX_ASM
 	ld c,10
 	call DelayFrames
 	xor a
-	ld [wcd4f],a
-	ld [wcd50],a
-	predef EmotionBubble ; display ! over head
-	ld a,4
-	ld [wd528],a
+	ld [wEmotionBubbleSpriteIndex],a ; player's sprite
+	ld [wWhichEmotionBubble],a ; EXCLAMATION_BUBBLE
+	predef EmotionBubble
+	ld a,PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection],a
 	jp TextScriptEnd
 
 OakWalksUpText: ; 18fce (6:4fce)

@@ -2,7 +2,7 @@ HandleLedges: ; 1a672 (6:6672)
 	ld a, [wd736]
 	bit 6, a ; already jumping down ledge
 	ret nz
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld a, [W_CURMAPTILESET]
 	and a ; OVERWORLD
 	ret nz
 	predef GetTileAndCoordsInFrontOfPlayer
@@ -50,7 +50,7 @@ HandleLedges: ; 1a672 (6:6672)
 	ld a, $2
 	ld [wSimulatedJoypadStatesIndex], a
 	call LoadHoppingShadowOAM
-	ld a, (SFX_02_4e - SFX_Headers_02) / 3
+	ld a, SFX_LEDGE
 	call PlaySound
 	ret
 

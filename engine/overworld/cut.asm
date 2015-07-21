@@ -1,7 +1,7 @@
 UsedCut: ; ef54 (3:6f54)
 	xor a
-	ld [wcd6a], a
-	ld a, [W_CURMAPTILESET] ; W_CURMAPTILESET
+	ld [wActionResultOrTookBattleTurn], a ; initialise to failure value
+	ld a, [W_CURMAPTILESET]
 	and a ; OVERWORLD
 	jr z, .asm_ef6b
 	cp GYM
@@ -9,28 +9,28 @@ UsedCut: ; ef54 (3:6f54)
 	ld a, [wTileInFrontOfPlayer]
 	cp $50 ; gym cut tree
 	jr nz, .asm_ef77
-	jr asm_ef82
+	jr .asm_ef82
 .asm_ef6b
 	dec a
 	ld a, [wTileInFrontOfPlayer]
 	cp $3d ; cut tree
-	jr z, asm_ef82
+	jr z, .asm_ef82
 	cp $52 ; grass
-	jr z, asm_ef82
+	jr z, .asm_ef82
 .asm_ef77
-	ld hl, NothingToCutText
+	ld hl, .NothingToCutText
 	jp PrintText
 
-NothingToCutText: ; ef7d (3:6f7d)
+.NothingToCutText
 	TX_FAR _NothingToCutText
 	db "@"
 
-asm_ef82: ; ef82 (3:6f82)
-	ld [wcd4d], a
+.asm_ef82
+	ld [wCutTile], a
 	ld a, $1
-	ld [wcd6a], a
-	ld a, [wWhichPokemon] ; wWhichPokemon
-	ld hl, wPartyMonNicks ; wPartyMonNicks
+	ld [wActionResultOrTookBattleTurn], a ; used cut
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, wd730
 	set 6, [hl]
@@ -54,13 +54,13 @@ asm_ef82: ; ef82 (3:6f82)
 	ld a, $ff
 	ld [wUpdateSpritesEnabled], a
 	call AnimateCutTree
-	ld de, CutTreeBlockSwaps ; $7100
+	ld de, CutTreeBlockSwaps
 	call Func_f09f
 	call RedrawMapView
 	callba Func_79e96
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
-	ld a, (SFX_02_56 - SFX_Headers_02) / 3
+	ld a, SFX_CUT
 	call PlaySound
 	ld a, $90
 	ld [hWY], a
@@ -73,17 +73,17 @@ UsedCutText: ; eff2 (3:6ff2)
 
 AnimateCutTree: ; eff7 (3:6ff7)
 	xor a
-	ld [wcd50], a
+	ld [wWhichAnimationOffsets], a
 	ld a, $e4
-	ld [rOBP1], a ; $ff49
-	ld a, [wcd4d]
+	ld [rOBP1], a
+	ld a, [wCutTile]
 	cp $52
 	jr z, .asm_f020
-	ld de, Overworld_GFX + $2d0 ; $42d0 ; cuttable tree sprite top row
+	ld de, Overworld_GFX + $2d0 ; cuttable tree sprite top row
 	ld hl, vChars1 + $7c0
 	ld bc, (BANK(Overworld_GFX) << 8) + $02
 	call CopyVideoData
-	ld de, Overworld_GFX + $3d0 ; $43d0 ; cuttable tree sprite bottom row
+	ld de, Overworld_GFX + $3d0 ; cuttable tree sprite bottom row
 	ld hl, vChars1 + $7e0
 	ld bc, (BANK(Overworld_GFX) << 8) + $02
 	call CopyVideoData
@@ -111,7 +111,7 @@ AnimateCutTree: ; eff7 (3:6ff7)
 	ret
 
 LoadCutTreeAnimationTilePattern: ; f04c (3:704c)
-	ld de, AnimationTileset2 + $60 ; $474e ; tile depicting a leaf
+	ld de, AnimationTileset2 + $60 ; tile depicting a leaf
 	ld bc, (BANK(AnimationTileset2) << 8) + $01
 	jp CopyVideoData
 
@@ -138,7 +138,7 @@ GetCutTreeBoulderDustAnimationOffsets: ; f068 (3:7068)
 	srl a
 	ld e, a
 	ld d, $0 ; de holds direction (00: down, 02: up, 04: left, 06: right)
-	ld a, [wcd50]
+	ld a, [wWhichAnimationOffsets]
 	and a
 	ld hl, CutTreeAnimationOffsets
 	jr z, .asm_f084
@@ -173,7 +173,7 @@ BoulderDustAnimationOffsets: ; f097 (3:7097)
 
 Func_f09f: ; f09f (3:709f)
 	push de
-	ld a, [W_CURMAPWIDTH] ; wd369
+	ld a, [W_CURMAPWIDTH]
 	add $6
 	ld c, a
 	ld b, $0
@@ -185,27 +185,27 @@ Func_f09f: ; f09f (3:709f)
 	add hl, bc
 	ld a, [wSpriteStateData1 + 9]
 	and a
-	jr z, .asm_f0c7
-	cp $4
-	jr z, .asm_f0cf
-	cp $8
-	jr z, .asm_f0d7
-	ld a, [W_XBLOCKCOORD] ; wd364
+	jr z, .down
+	cp SPRITE_FACING_UP
+	jr z, .up
+	cp SPRITE_FACING_LEFT
+	jr z, .left
+	ld a, [W_XBLOCKCOORD]
 	and a
 	jr z, .asm_f0e0
 	jr .asm_f0ec
-.asm_f0c7
-	ld a, [W_YBLOCKCOORD] ; wd363
+.down
+	ld a, [W_YBLOCKCOORD]
 	and a
 	jr z, .asm_f0e0
 	jr .asm_f0df
-.asm_f0cf
-	ld a, [W_YBLOCKCOORD] ; wd363
+.up
+	ld a, [W_YBLOCKCOORD]
 	and a
 	jr z, .asm_f0e1
 	jr .asm_f0e0
-.asm_f0d7
-	ld a, [W_XBLOCKCOORD] ; wd364
+.left
+	ld a, [W_XBLOCKCOORD]
 	and a
 	jr z, .asm_f0e6
 	jr .asm_f0e0

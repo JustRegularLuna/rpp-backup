@@ -1,7 +1,7 @@
 ; This function does the flashing pokeballs when healing pokemon
 ; HAXed to look better in color
 AnimateHealingMachine: ; 70433 (1c:4433)
-	ld de, PokeCenterFlashingMonitorAndHealBall ; $44b7
+	ld de, PokeCenterFlashingMonitorAndHealBall
 	ld hl, vChars0 + $7c0
 	ld bc, (BANK(PokeCenterFlashingMonitorAndHealBall) << 8) + $03
 	call CopyVideoData
@@ -10,15 +10,15 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	push af
 	ld [hl], $ff
 	push hl
-	ld a, [rOBP1] ; $ff49
+	ld a, [rOBP1]
 	push af
 	ld a, $e0
-	;ld [rOBP1], a ; $ff49
+	;ld [rOBP1], a
 	nop
 	nop
 	ld hl, wOAMBuffer + $84
-	ld de, PokeCenterOAMData ; $44d7
-	call Func_70503
+	ld de, PokeCenterOAMData
+	call CopyHealingMachineOAM
 	ld a, $4
 	ld [wMusicHeaderPointer], a
 	ld a, $ff
@@ -28,18 +28,18 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld a, [wMusicHeaderPointer]
 	and a
 	jr nz, .asm_70464
-	ld a, [wPartyCount] ; wPartyCount
+	ld a, [wPartyCount]
 	ld b, a
 .asm_7046e
-	call Func_70503
-	ld a, (SFX_02_4a - SFX_Headers_02) / 3
+	call CopyHealingMachineOAM
+	ld a, SFX_HEALING_MACHINE
 	call PlaySound
-	ld c, $1e
+	ld c, 30
 	call DelayFrames
 	dec b
 	jr nz, .asm_7046e
 	ld a, [wc0ef]
-	cp $1f
+	cp BANK(Music1f_UpdateMusic)
 	ld [wc0f0], a
 	jr nz, .asm_70495
 	ld a, $ff
@@ -57,10 +57,10 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld a, [wc026]
 	cp MUSIC_PKMN_HEALED
 	jr z, .asm_704a2
-	ld c, $20
+	ld c, 32
 	call DelayFrames
 	pop af
-	ld [rOBP1], a ; $ff49
+	ld [rOBP1], a
 	pop hl
 	pop af
 	ld [hl], a
@@ -93,7 +93,8 @@ FlashSprite8Times: ; 704f3 (1c:44f3)
 	jr nz, .loop
 	ret
 
-Func_70503: ; 70503 (1c:4503)
+CopyHealingMachineOAM: ; 70503 (1c:4503)
+; copy one OAM entry and advance the pointers
 	ld a, [de]
 	inc de
 	ld [hli], a

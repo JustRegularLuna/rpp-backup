@@ -1,6 +1,6 @@
 AnimateBoulderDust: ; 79f54 (1e:5f54)
 	ld a, $1
-	ld [wcd50], a ; select the boulder dust offsets
+	ld [wWhichAnimationOffsets], a ; select the boulder dust offsets
 	ld a, [wUpdateSpritesEnabled]
 	push af
 	ld a, $ff
@@ -84,7 +84,7 @@ LoadSmokeTileFourTimes: ; 79fc0 (1e:5fc0)
 	ret
 
 LoadSmokeTile: ; 79fd4 (1e:5fd4)
-	ld de, SSAnneSmokePuffTile ; $5fdd
+	ld de, SSAnneSmokePuffTile
 	ld bc, (BANK(SSAnneSmokePuffTile) << 8) + $01
 	jp CopyVideoData
 

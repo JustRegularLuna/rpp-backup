@@ -1,17 +1,17 @@
 Func_1c9c6: ; 1c9c6 (7:49c6)
 	ld hl, WhichFloorText
 	call PrintText
-	ld hl, wStringBuffer2 + 11
+	ld hl, wItemList
 	ld a, l
-	ld [wList], a
+	ld [wListPointer], a
 	ld a, h
-	ld [wList + 1], a
+	ld [wListPointer + 1], a
 	ld a, [wListScrollOffset]
 	push af
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wListScrollOffset], a
-	ld [wcf93], a
+	ld [wPrintItemPrices], a
 	ld a, $4
 	ld [wListMenuID], a
 	call DisplayListMenuID
