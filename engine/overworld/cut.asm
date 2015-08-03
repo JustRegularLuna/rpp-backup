@@ -37,6 +37,7 @@ asm_ef82: ; ef82 (3:6f82)
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
 	call RestoreScreenTilesAndReloadTilePatterns
+    call ReloadMapData
 	ld a, $90
 	ld [hWY], a
 	call Delay3
