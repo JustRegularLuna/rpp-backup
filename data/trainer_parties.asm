@@ -46,6 +46,7 @@ TrainerDataPointers:
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
+    dw FlanneryData
 
 ; if first byte != FF, then
 	; first byte is level (of all pokemon on this team)
@@ -541,3 +542,5 @@ AceTrainerFData:
 	db 45,NIDORINA,NIDOQUEEN,0
 	db 43,PERSIAN,NINETALES,RAICHU,0
 
+FlanneryData:
+    db $FF,20,PONYTA,23,VULPIX,0

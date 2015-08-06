@@ -46,3 +46,4 @@ TrainerNames: ; 399ff (e:59ff)
 	db "CHANNELER@"
 	db "AGATHA@"
 	db "LANCE@"
+    db "FLANNERY@"

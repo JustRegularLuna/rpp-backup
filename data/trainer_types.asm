@@ -4,6 +4,7 @@ FemaleTrainerList:: ; 3434 (0:3434)
 	db $c8+BEAUTY
 	db $c8+COOLTRAINER_F
 	db $c8+SWIMMER_F
+    db $c8+FLANNERY
 	db $FF
 
 EvilTrainerList:: ; 3439 (0:3439)

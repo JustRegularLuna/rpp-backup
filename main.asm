@@ -5775,6 +5775,7 @@ ChannelerPic::     INCBIN "pic/trainer/channeler.pic"
 AgathaPic::        INCBIN "pic/trainer/agatha.pic"
 LancePic::         INCBIN "pic/trainer/lance.pic"
 YoungCouplePic::   INCBIN "pic/trainer/young_couple.pic"
+FlanneryPic::      INCBIN "pic/trainer/flannery.pic"
 
 INCLUDE "data/mapHeaders/battlecenterm.asm"
 INCLUDE "scripts/battlecenterm.asm"

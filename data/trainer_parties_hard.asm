@@ -46,6 +46,7 @@ TrainerDataPointers: ; Last Updated 28/06/2015 by Neodymium / Free to use and mo
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
+    dw FlanneryData
 
 ; if first byte != FF, then
 	; first byte is level (of all pokemon on this team)
@@ -541,3 +542,5 @@ AceTrainerFData: ; COMPLETED
 	db 45,NIDORINA,NIDOQUEEN,0 ;                                  UNKNOWN
 	db 43,PERSIAN,NINETALES,RAICHU,0 ;                            UNKNOWN
 
+FlanneryData:
+    db $FF,25,PONYTA,29,VULPIX,0

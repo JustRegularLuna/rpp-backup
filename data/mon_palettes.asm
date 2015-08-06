@@ -239,3 +239,4 @@ TrainerPalletes:
 	db PAL_BLUE_TRAINER      ; Channeler
 	db PAL_PURPLE_TRAINER    ; Agatha
 	db PAL_RED_TRAINER       ; Lance
+    db PAL_RED_TRAINER       ; Flannery
