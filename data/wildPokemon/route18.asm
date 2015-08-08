@@ -6,7 +6,7 @@ Route18Mons:
 	db 25,RATICATE
 	db 24,DODUO
 	db 25,FEAROW
-	db 26,DODUO
+	db 26,SLUGMA
 	db 28,DODUO
 	db 29,RATICATE
 	db 27,MURKROW

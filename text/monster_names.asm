@@ -188,6 +188,8 @@ db "MISMAGIUS@"
 db "MILTANK@@@"
 db "CHINCHOU@@"
 db "LANTURN@@@"
-
+db "SLUGMA@@@@"
+db "MAGCARGO@@"
+db "TORKOAL@@@"
 
 

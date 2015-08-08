@@ -93,4 +93,5 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_BIRD_M            ;Weavile/Skarmory
 	dn SPRITE_MON, SPRITE_MON               ;Misdreavus/Mismagius
 	dn SPRITE_QUADRUPED, SPRITE_WATER       ;Miltank/Chinchou
-	dn SPRITE_WATER, 0                      ;Lanturn/Padding
+	dn SPRITE_WATER, SPRITE_SNAKE           ;Lanturn/Slugma
+    dn SPRITE_SNAKE, SPRITE_QUADRUPED       ;Magcargo,Torkoal

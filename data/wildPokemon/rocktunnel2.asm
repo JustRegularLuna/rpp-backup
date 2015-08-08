@@ -8,7 +8,7 @@ TunnelMonsB2:
 	db 22,ZUBAT
 	db 21,GEODUDE
 	db 20,MACHOP
-	db 14,ONIX
+	db 14,TORKOAL
 	db 18,ONIX
 	db 22,ONIX
 

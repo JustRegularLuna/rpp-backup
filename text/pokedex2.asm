@@ -266,4 +266,34 @@ _LanturnDexEntry::
 	next "in a single gulp"
 	dex
 
-	
+_SlugmaDexEntry::
+    text "These #MON"
+    next "gather together in"
+    next "areas that are"
+    
+    page "hotter than usual."
+    next "If it cools off,"
+    next "its skin hardens"
+    dex
+    
+_MagcargoDexEntry::
+    text "Its body is as hot"
+    next "as lava, and is"
+    next "always billowing."
+    
+    page "Flames will"
+    next "occasionally burst"
+    next "from its shell"
+    dex
+    
+_TorkoalDexEntry::
+    text "You find abandoned"
+    next "coal mines full of"
+    next "them."
+    
+    page "They will dig"
+    next "tirelessly in"
+    next "search of coal"
+    dex
+    
+    

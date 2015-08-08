@@ -189,6 +189,9 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_SNEASEL   ; Miltank
 	db PAL_BLUE_TRAINER ; Chinchou
 	db PAL_BLUE_TRAINER ; Lanturn
+    db PAL_REDMON    ; Slugma
+    db PAL_REDMON    ; Magcargo
+    db PAL_REDMON    ; Torkoal
 	
 TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED

@@ -187,4 +187,7 @@ INCLUDE "data/baseStats/mismagius.asm"
 INCLUDE "data/baseStats/miltank.asm"
 INCLUDE "data/baseStats/chinchou.asm"
 INCLUDE "data/baseStats/lanturn.asm"
+INCLUDE "data/baseStats/slugma.asm"
+INCLUDE "data/baseStats/magcargo.asm"
+INCLUDE "data/baseStats/torkoal.asm"
 

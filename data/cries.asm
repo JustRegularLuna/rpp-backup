@@ -189,3 +189,7 @@ db $1C, $60, $40; Mismagius
 db $1D, $50, $80; Miltank
 db $0E, $F0, $60; Chinchou
 db $0E, $40, $60; Lanturn
+db $05, $00, $80; Slugma
+db $07, $EF, $FF; Magcargo
+db $1D, $20, $40; Torkoal
+

@@ -6803,6 +6803,12 @@ Mart_Block:        INCBIN "gfx/blocksets/mart.bst"
 
 WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
 
+SlugmaPicFront::   INCBIN "pic/bmon/slugma.pic"
+SlugmaPicBack::    INCBIN "pic/monback/slugma.pic"
+MagcargoPicFront:: INCBIN "pic/bmon/magcargo.pic"
+MagcargoPicBack::  INCBIN "pic/monback/magcargo.pic"
+TorkoalPicFront::  INCBIN "pic/bmon/torkoal.pic"
+TorkoalPicBack::   INCBIN "pic/monback/torkoal.pic"
 
 SECTION "bank34",ROMX,BANK[$34]
 

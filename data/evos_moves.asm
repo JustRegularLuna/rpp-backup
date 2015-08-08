@@ -188,6 +188,9 @@ dw Mon186_EvosMoves
 dw Mon187_EvosMoves
 dw Mon188_EvosMoves
 dw Mon189_EvosMoves
+dw Mon190_EvosMoves
+dw Mon191_EvosMoves
+dw Mon192_EvosMoves
 
 	
 Mon001_EvosMoves: ; 3b844 (e:7844)
@@ -3957,3 +3960,72 @@ Mon189_EvosMoves:
 	db 58,THUNDER
 	db 0
 	
+Mon190_EvosMoves:
+;SLUGMA
+;Evolutions
+    db EV_LEVEL,38,MAGCARGO
+    db 0
+;Learnset
+    db 6,EMBER
+    db 8,ROCK_THROW
+    db 13,HARDEN
+    db 15,FIRE_SPIN
+    db 20,HAZE
+    db 22,ANCIENTPOWER
+    db 27,FLAME_WHEEL
+    db 29,ROCK_SLIDE
+    db 34,FLAMETHROWER
+    db 36,AMNESIA
+    db 41,BODY_SLAM
+    db 43,RECOVER
+    db 48,FIRE_BLAST
+    db 50,EARTH_POWER
+    db 0
+    
+Mon191_EvosMoves:
+;MAGCARGO
+;Evolutions
+    db 0
+;Learnset
+    db 6,EMBER
+    db 8,ROCK_THROW
+    db 13,HARDEN
+    db 15,FIRE_SPIN
+    db 20,HAZE
+    db 22,ANCIENTPOWER
+    db 27,FLAME_WHEEL
+    db 29,ROCK_SLIDE
+    db 34,FLAMETHROWER
+    db 36,AMNESIA
+    db 38,EARTHQUAKE
+    db 43,BODY_SLAM
+    db 47,RECOVER
+    db 54,FIRE_BLAST
+    db 58,EARTH_POWER
+    db 0
+    
+Mon192_EvosMoves:
+;TORKOAL
+;Evolutions
+    db 0
+;Learnset
+    db 4,SMOG
+    db 7,WITHDRAW
+    db 10,QUICK_ATTACK
+    db 13,FIRE_SPIN
+    db 15,SMOKESCREEN
+    db 18,FLAME_WHEEL
+    db 22,HEX
+    db 25,EARTHQUAKE
+    db 27,BODY_SLAM
+    db 30,HAZE
+    db 34,FLAMETHROWER
+    db 38,IRON_DEFENSE
+    db 40,AMNESIA
+    db 42,FOCUS_ENERGY
+    db 45,FIRE_BLAST
+    db 47,STOMP
+    db 50,GIGA_IMPACT
+    db 0
+    
+    

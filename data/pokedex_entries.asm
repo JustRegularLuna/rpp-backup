@@ -188,6 +188,9 @@ dw MismagiusDexEntry
 dw MiltankDexEntry
 dw ChinchouDexEntry
 dw LanturnDexEntry
+dw SlugmaDexEntry
+dw MagcargoDexEntry
+dw TorkoalDexEntry
 
 
 ; string: species name
@@ -1518,3 +1521,24 @@ LanturnDexEntry:
 	TX_FAR _LanturnDexEntry
 	db "@"
 	
+SlugmaDexEntry:
+    db "LAVA@"
+    db 2,4
+    dw 772
+    TX_FAR _SlugmaDexEntry
+    db "@"
+    
+MagcargoDexEntry:
+    db "LAVA@"
+    db 2,7
+    dw 1213
+    TX_FAR _MagcargoDexEntry
+    db "@"
+    
+TorkoalDexEntry:
+    db "COAL@"
+    db 1,8
+    dw 1772
+    TX_FAR _TorkoalDexEntry
+    db "@"
+    

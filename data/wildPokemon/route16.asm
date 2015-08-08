@@ -5,7 +5,7 @@ Route16Mons:
 	db 22,DODUO
 	db 23,RATTATA
 	db 24,DODUO
-	db 24,RATTATA
+	db 24,SLUGMA
 	db 26,DODUO
 	db 23,MURKROW
 	db 24,MURKROW

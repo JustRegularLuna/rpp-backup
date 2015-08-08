@@ -7,7 +7,7 @@ TunnelMonsB1:
 	db 15,MACHOP
 	db 16,GEODUDE
 	db 18,DITTO
-	db 15,ZUBAT
+	db 15,TORKOAL
 	db 17,MACHOP
 	db 13,ONIX
 	db 15,ONIX

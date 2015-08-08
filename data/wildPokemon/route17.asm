@@ -5,7 +5,7 @@ Route17Mons:
 	db 27,FEAROW
 	db 27,DODUO
 	db 28,DODUO
-	db 28,PONYTA
+	db 28,SLUGMA
 	db 30,PONYTA
 	db 29,FEAROW
 	db 28,DODUO
