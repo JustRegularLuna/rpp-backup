@@ -1,5 +1,5 @@
 _DayCareMText_5640f:: ; 8ab95 (22:6b95)
-	text "I run a DAYCARE."
+	text "We run a DAYCARE."
 	line "Would you like me"
 	cont "to raise one of"
 	cont "your #MON?"
@@ -60,6 +60,6 @@ _DayCareMText_56432:: ; 8acc1 (22:6cc1)
 	TX_RAM wcd6d
 	db $0
 	cont "needs some more"
-	cont "time with me."
+	cont "time with us."
 	prompt
 

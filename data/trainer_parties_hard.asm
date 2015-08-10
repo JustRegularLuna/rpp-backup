@@ -543,4 +543,4 @@ AceTrainerFData: ; COMPLETED
 	db 43,PERSIAN,NINETALES,RAICHU,0 ;                            UNKNOWN
 
 FlanneryData:
-    db $FF,25,SLUGMA,25,SLUGMA,30,TORKOAL,0
+    db $FF,50,SLUGMA,50,SLUGMA,55,TORKOAL,0

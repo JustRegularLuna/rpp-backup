@@ -630,4 +630,9 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $40 ; byte count
 	db BANK(SlowpokeOverworld)
 	
+    ; SPRITE_DITTO
+    dw DittoOverworld
+    db $40 ; byte count
+    db BANK(DittoOverworld)
+    
 

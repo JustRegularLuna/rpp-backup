@@ -100,6 +100,7 @@ const_value = 1
 	const SPRITE_LYING_OLD_MAN             ;EQU $48
 	const SPRITE_SUDOWOODO                 ;EQU $49
 	const SPRITE_POKEY
+    const SPRITE_DITTO
 	
 
 ; different kinds of people events

@@ -2,7 +2,9 @@ DayCareMScript: ; 5624f (15:624f)
 	jp EnableAutoTextBoxDrawing
 
 DayCareMTextPointers: ; 56252 (15:6252)
-	dw DayCareMText1
+	dw DayCareMText1 ; Day Care Lady
+    dw DayCareMText2 ; Day Care Man
+    dw DayCareMText3 ; Ditto
 
 DayCareMText1: ; 56254 (15:6254)
 	db $8
@@ -263,3 +265,12 @@ DayCareMText_5644f: ; 5644f (15:644f)
 DayCareMText_56454: ; 56454 (15:6454)
 	TX_FAR _DayCareMText_56454
 	db "@"
+
+DayCareMText2: ; Day Care Man
+    TX_FAR _DayCareMText2
+    db "@"
+    
+DayCareMText3: ; Ditto
+    TX_FAR _DayCareMText3
+    db "@"
+

@@ -32,3 +32,17 @@ _DayCareMText_56454:: ; 8c0ad (23:40ad)
 	line "have enough ¥!"
 	done
 
+_DayCareMText2::
+    text "Hello there! I'm"
+    line "the DAY CARE MAN."
+    
+    para "Come back and see"
+    line "me another time."
+    done
+    
+_DayCareMText3::
+    text "It's a DITTO that"
+    line "belongs to the"
+    cont "DAY CARE MAN."
+    done
+    

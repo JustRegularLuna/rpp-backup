@@ -6719,6 +6719,7 @@ GreeterWoman:          INCBIN "gfx/sprites/greeter_woman.2bpp"
 SurfingPikachu:        INCBIN "gfx/sprites/surfing_pikachu.2bpp"
 SurfingLapras:         INCBIN "gfx/sprites/surf_lapras.2bpp"
 LookerOverworld:       INCBIN "gfx/sprites/tennant.2bpp"
+DittoOverworld:        INCBIN "gfx/sprites/ditto.2bpp"
 
 
 SECTION "bank30",ROMX,BANK[$30]
