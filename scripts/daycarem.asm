@@ -267,8 +267,9 @@ DayCareMText_56454: ; 56454 (15:6454)
 	db "@"
 
 DayCareMText2: ; Day Care Man
-    TX_FAR _DayCareMText2
-    db "@"
+    db $08
+    callba DayCareManScript
+    jp TextScriptEnd
     
 DayCareMText3: ; Ditto
     TX_FAR _DayCareMText3

@@ -6832,3 +6832,4 @@ ForestGate_Block:    INCBIN "gfx/blocksets/forest_gate.bst"
 Museum_GFX:          INCBIN "gfx/tilesets/museum.2bpp"
 Museum_Block:        INCBIN "gfx/blocksets/museum.bst"
 
+INCLUDE "scripts/DayCareManScript.asm"

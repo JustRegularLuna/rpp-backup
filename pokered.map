@@ -4808,7 +4808,7 @@ ROM Bank #15:
     SLACK: $011D bytes
 
 ROM Bank #16:
-  SECTION: $4000-$736D ($336E bytes)
+  SECTION: $4000-$7377 ($3378 bytes)
            $735F = BerryReset
            $7074 = CryData
            $6A92 = Moves
@@ -5116,7 +5116,7 @@ ROM Bank #16:
            $5921 = PlayIntro
            $5381 = Func_410e2
            $42D1 = ShowPokedexData
-    SLACK: $0C92 bytes
+    SLACK: $0C88 bytes
 
 ROM Bank #17:
   SECTION: $4000-$7098 ($3099 bytes)
@@ -6925,7 +6925,7 @@ ROM Bank #20:
     SLACK: $15BE bytes
 
 ROM Bank #21:
-  SECTION: $4000-$6AC9 ($2ACA bytes)
+  SECTION: $4000-$6AD0 ($2AD1 bytes)
            $4000 = Route2_h
            $41DE = Route3_h
            $4388 = Route4_h
@@ -6940,13 +6940,13 @@ ROM Bank #21:
            $6136 = CeladonMart2_h
            $60B1 = VermilionHouse2_h
            $61D5 = FuchsiaHouse3_h
-           $64F2 = Route12House_h
-           $6577 = SilphCo8_h
-           $6900 = TrainerWalkUpToPlayer
-           $6878 = _GetSpritePosition1
-           $6898 = _GetSpritePosition2
-           $68BC = _SetSpritePosition1
-           $68DC = _SetSpritePosition2
+           $64F9 = Route12House_h
+           $657E = SilphCo8_h
+           $6907 = TrainerWalkUpToPlayer
+           $687F = _GetSpritePosition1
+           $689F = _GetSpritePosition2
+           $68C3 = _SetSpritePosition1
+           $68E3 = _SetSpritePosition2
            $5071 = Route21Blocks
            $4076 = Route2Blocks
            $424D = Route3Blocks
@@ -6955,8 +6955,8 @@ ROM Bank #21:
            $4702 = Route9Blocks
            $4EF5 = Route19Blocks
            $5253 = GainExperience
-           $6761 = DisplayDiploma
-           $698E = TrainerEngage
+           $6768 = DisplayDiploma
+           $6995 = TrainerEngage
            $54E7 = Route2TextPointers
            $54E4 = Route2Script
            $4022 = Route2Object
@@ -7404,10 +7404,10 @@ ROM Bank #21:
            $5233 = DayCareMBlocks
            $62B7 = DayCareMTextPointers
            $62B4 = DayCareMScript
-           $64CC = DayCareMObject
+           $64D3 = DayCareMObject
            $62BD = DayCareMText1
            $64C2 = DayCareMText2
-           $64C7 = DayCareMText3
+           $64CE = DayCareMText3
            $634A = DayCareMScript_562e1
            $6478 = DayCareMText_5640f
            $64A4 = DayCareMText_5643b
@@ -7427,55 +7427,55 @@ ROM Bank #21:
            $64B8 = DayCareMText_5644f
            $6496 = DayCareMText_5642d
            $5233 = Route12HouseBlocks
-           $6501 = Route12HouseTextPointers
-           $64FE = Route12HouseScript
-           $655D = Route12HouseObject
-           $6503 = Route12HouseText1
-           $653F = Route12HouseText_564c0
-           $6544 = Route12HouseText_564c5
-           $6558 = Route12HouseText_564d9
-           $654E = Route12HouseText_564cf
-           $6553 = Route12HouseText_564d4
-           $66EC = SilphCo8Blocks
-           $65FC = SilphCo8TextPointers
-           $6583 = SilphCo8Script
-           $6692 = SilphCo8Object
-           $6599 = SilphCo8Script_5651a
-           $6604 = SilphCo8TrainerHeader0
-           $65F6 = SilphCo8ScriptPointers
-           $65BD = DataTable_5653e
-           $65C0 = SilphCo8Script_56541
-           $65EC = SilphCo8Script_5656d
-           $6629 = SilphCo8Text1
-           $6647 = SilphCo8Text2
-           $6651 = SilphCo8Text3
-           $665B = SilphCo8Text4
-           $6665 = SilphCo8BattleText1
-           $666F = SilphCo8AfterBattleText1
-           $666A = SilphCo8EndBattleText1
-           $6674 = SilphCo8BattleText2
-           $667E = SilphCo8AfterBattleText2
-           $6679 = SilphCo8EndBattleText2
-           $6683 = SilphCo8BattleText3
-           $668D = SilphCo8AfterBattleText3
-           $6688 = SilphCo8EndBattleText3
-           $6642 = SilphCo8Text_565c3
-           $663D = SilphCo8Text_565be
-           $6610 = SilphCo8TrainerHeader1
-           $661C = SilphCo8TrainerHeader2
-           $6803 = DiplomaTextPointersAndCoords
-           $6817 = DiplomaText
-           $6821 = DiplomaPlayer
-           $6828 = DiplomaEmptyText
-           $6829 = DiplomaCongrats
-           $686D = DiplomaGameFreak
-           $6982 = GetSpriteDataPointer
-           $6A0D = ReadTrainerScreenPosition
-           $6A07 = TrainerEngage.noEngage
-           $6A2E = CheckSpriteCanSeePlayer
-           $6A62 = CheckPlayerIsInFrontOfSprite
-           $6AC1 = CheckPlayerIsInFrontOfSprite.engage
-    SLACK: $1536 bytes
+           $6508 = Route12HouseTextPointers
+           $6505 = Route12HouseScript
+           $6564 = Route12HouseObject
+           $650A = Route12HouseText1
+           $6546 = Route12HouseText_564c0
+           $654B = Route12HouseText_564c5
+           $655F = Route12HouseText_564d9
+           $6555 = Route12HouseText_564cf
+           $655A = Route12HouseText_564d4
+           $66F3 = SilphCo8Blocks
+           $6603 = SilphCo8TextPointers
+           $658A = SilphCo8Script
+           $6699 = SilphCo8Object
+           $65A0 = SilphCo8Script_5651a
+           $660B = SilphCo8TrainerHeader0
+           $65FD = SilphCo8ScriptPointers
+           $65C4 = DataTable_5653e
+           $65C7 = SilphCo8Script_56541
+           $65F3 = SilphCo8Script_5656d
+           $6630 = SilphCo8Text1
+           $664E = SilphCo8Text2
+           $6658 = SilphCo8Text3
+           $6662 = SilphCo8Text4
+           $666C = SilphCo8BattleText1
+           $6676 = SilphCo8AfterBattleText1
+           $6671 = SilphCo8EndBattleText1
+           $667B = SilphCo8BattleText2
+           $6685 = SilphCo8AfterBattleText2
+           $6680 = SilphCo8EndBattleText2
+           $668A = SilphCo8BattleText3
+           $6694 = SilphCo8AfterBattleText3
+           $668F = SilphCo8EndBattleText3
+           $6649 = SilphCo8Text_565c3
+           $6644 = SilphCo8Text_565be
+           $6617 = SilphCo8TrainerHeader1
+           $6623 = SilphCo8TrainerHeader2
+           $680A = DiplomaTextPointersAndCoords
+           $681E = DiplomaText
+           $6828 = DiplomaPlayer
+           $682F = DiplomaEmptyText
+           $6830 = DiplomaCongrats
+           $6874 = DiplomaGameFreak
+           $6989 = GetSpriteDataPointer
+           $6A14 = ReadTrainerScreenPosition
+           $6A0E = TrainerEngage.noEngage
+           $6A35 = CheckSpriteCanSeePlayer
+           $6A69 = CheckPlayerIsInFrontOfSprite
+           $6AC8 = CheckPlayerIsInFrontOfSprite.engage
+    SLACK: $152F bytes
 
 ROM Bank #22:
   SECTION: $4000-$65EC ($25ED bytes)
@@ -14073,13 +14073,14 @@ ROM Bank #51:
     SLACK: $0567 bytes
 
 ROM Bank #52:
-  SECTION: $4000-$5E28 ($1E29 bytes)
+  SECTION: $4000-$6173 ($2174 bytes)
            $4000 = MtMoonSquare_h
            $4171 = MtMoonShop_h
            $4229 = ForestGate_GFX
            $4829 = ForestGate_Block
            $5029 = Museum_GFX
            $5629 = Museum_Block
+           $5E29 = DayCareManScript
            $40EA = MtMoonSquareBlocks
            $400F = MtMoonSquareTextPointers
            $400C = MtMoonSquareScript
@@ -14095,7 +14096,27 @@ ROM Bank #52:
            $4213 = FossilMartText
            $4186 = MtMoonShopText2
            $41BD = MtMoonShopText3
-    SLACK: $21D7 bytes
+           $5E70 = DayCareManScript.NoDayCareMon
+           $5F9B = DayCareManText1
+           $5E9F = IsABabymon
+           $5E77 = DayCareManScript.isBaby
+           $5EB1 = CanBreed
+           $5E7E = DayCareManScript.cannotBreed
+           $5E85 = DayCareManScript.noEggs
+           $5E8C = DayCareManScript.partyFull
+           $5FC8 = DayCareManText2
+           $5E93 = DayCareManScript.nevermind
+           $5EC3 = GetBabyID
+           $6014 = DayCareManText3
+           $6019 = DayCareManText4
+           $606C = DayCareManText5
+           $60A6 = DayCareManText6
+           $60F7 = DayCareManText7
+           $6149 = DayCareManText8
+           $5F99 = BabyMonList
+           $5F91 = NoBreedList
+           $5ED1 = BreedingList
+    SLACK: $1E8C bytes
 
 WRAM Bank #0:
   SECTION: $C000-$C0FF ($0100 bytes)

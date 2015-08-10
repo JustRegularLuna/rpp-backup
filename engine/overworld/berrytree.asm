@@ -104,6 +104,12 @@ BerryReset::
 	ld [hli],a
 	ld [hli],a
 	ld [hl],a
+; Added part to mark there being a baby at the Day Care
+    ld a, [W_DAYCARE_IN_USE]
+    and a
+    ret z
+    ld hl, wd798 ; Extra flags
+    set 3, [hl] ; Mark there being a babymon at Day Care
 	ret
 
 	
