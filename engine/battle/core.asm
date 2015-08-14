@@ -3227,7 +3227,8 @@ PlayerCalcMoveDamage: ; 3d6dc (f:56dc)
 	ld hl,SetDamageEffects
 	ld de,1
 	call IsInArray
-	jp c,.moveHitTest ; SetDamageEffects moves (e.g. Seismic Toss and Super Fang) skip damage calculation
+    jp c,.skipCalc
+;	jp c,.moveHitTest ; SetDamageEffects moves (e.g. Seismic Toss and Super Fang) skip damage calculation
 	call CriticalHitTest
 	call HandleCounterMove
 	jr z,asm_3d705
@@ -3235,6 +3236,7 @@ PlayerCalcMoveDamage: ; 3d6dc (f:56dc)
 	call CalculateDamage
 	jp z,asm_3d74b ; for moves with 0 BP, skip any further damage calculation and, for now, skip MoveHitTest
 	               ; for these moves, accuracy tests will only occur if they are called as part of the effect itself
+.skipCalc ; Hopefully by calling this first, it will fix the Dragon Rage issue
 	call AdjustDamageForMoveType
 	call RandomizeDamage
 .moveHitTest
@@ -5275,7 +5277,7 @@ MetronomePickMove: ; 3e348 (f:6348)
 	jr z,.pickMoveLoop
 	cp a,METRONOME
 	jr z,.pickMoveLoop
-	cp a,$F9 ; Bone Rush is $F8
+	cp a,DIVE ; Dive is the last move, and currently unused
 	jr nc,.pickMoveLoop
 	ld [hl],a
 	jr ReloadMoveData
@@ -5767,7 +5769,8 @@ EnemyCalcMoveDamage: ; 3e750 (f:6750)
 	ld hl, SetDamageEffects
 	ld de, $1
 	call IsInArray
-	jp c, Func_3e77f
+    jp c,.skipCalc ; Skip here if it's Dragon Rage or something
+;	jp c, Func_3e77f
 	call CriticalHitTest
 	call HandleCounterMove
 	jr z, asm_3e782
@@ -5776,6 +5779,7 @@ EnemyCalcMoveDamage: ; 3e750 (f:6750)
 	call SwapPlayerAndEnemyLevels
 	call CalculateDamage
 	jp z, Func_3e7d1
+.skipCalc ; Jumps here instead of the old place, so hopefully it will miss properly
 	call AdjustDamageForMoveType
 	call RandomizeDamage
 

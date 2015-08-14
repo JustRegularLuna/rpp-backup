@@ -4571,7 +4571,7 @@ ROM Bank #15:
            $4000 = ResidualEffects1
            $4048 = SpecialEffectsCont
            $4011 = SetDamageEffects
-           $5776 = PlayerCalcMoveDamage.moveHitTest
+           $5770 = PlayerCalcMoveDamage.skipCalc
            $60CC = CriticalHitTest
            $6134 = HandleCounterMove
            $5E67 = GetDamageVarsForPlayerAttack
@@ -4673,7 +4673,7 @@ ROM Bank #15:
            $69AB = ExecuteEnemyMoveDone
            $69AE = CheckEnemyStatusConditions
            $6DC4 = SwapPlayerAndEnemyLevels
-           $689E = Func_3e77f
+           $6898 = EnemyCalcMoveDamage.skipCalc
            $5F18 = GetDamageVarsForEnemyAttack
            $68F0 = Func_3e7d1
            $681B = CheckIfEnemyNeedsToChargeUp
