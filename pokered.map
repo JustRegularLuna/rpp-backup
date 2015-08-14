@@ -4432,7 +4432,7 @@ ROM Bank #14:
     SLACK: $0D40 bytes
 
 ROM Bank #15:
-  SECTION: $4000-$7EE2 ($3EE3 bytes)
+  SECTION: $4000-$7EE4 ($3EE5 bytes)
            $4ABE = AnyPartyAlive
            $7061 = InitBattle
            $721F = asm_3f0d0
@@ -4443,7 +4443,7 @@ ROM Bank #15:
            $6C44 = LoadEnemyMonData
            $759D = StatModifierUpEffect
            $5254 = MoveSelectionMenu
-           $7D1D = PlayCurrentMoveAnimation
+           $7D1F = PlayCurrentMoveAnimation
            $7CC8 = PrintButItFailedText_
            $4D95 = DrawHUDsAndHPBars
            $668A = MoveHitTest
@@ -4553,7 +4553,7 @@ ROM Bank #15:
            $54CE = SwapMovesInMenu.swapBytes
            $55B3 = DisabledText
            $55AC = PrintMenuItem.moveDisabled
-           $7DD5 = PhysicalSpecialSplit
+           $7DD7 = PhysicalSpecialSplit
            $557B = PrintMenuItem.OtherTextShow
            $5570 = PrintMenuItem.PhysicalTextShow
            $55CF = SpecialText
@@ -4649,8 +4649,8 @@ ROM Bank #15:
            $5E4E = LoafingAroundText
            $5E5D = TurnedAwayText
            $5E62 = IgnoredOrdersText
-           $7D52 = CheckForHex
-           $7D83 = CheckForElectroBall
+           $7D54 = CheckForHex
+           $7D85 = CheckForElectroBall
            $5FCA = GetEnemyMonStat
            $60C4 = Func_3e016
            $6129 = HighCriticalMoves
@@ -4691,7 +4691,7 @@ ROM Bank #15:
            $684A = EnemyCanExecuteMove
            $6C0F = GetCurrentMove.player
            $4C4E = LoadEnemyMonFromParty
-           $7EDA = LoadBackSpriteUnzoomed
+           $7EDC = LoadBackSpriteUnzoomed
            $6E76 = QuarterSpeedDueToParalysis
            $6EB3 = HalveAttackDueToBurn
            $6EF4 = CalculateModifiedStat
@@ -4739,20 +4739,20 @@ ROM Bank #15:
            $7BF1 = LeechSeedEffect
            $7BF9 = SplashEffect
            $7BFF = DisableEffect
-           $7D3D = FangAttacks
-           $7D44 = VoltTackleEffect
-           $7D4B = PoisonFangEffect
+           $7D3F = FangAttacks
+           $7D46 = VoltTackleEffect
+           $7D4D = PoisonFangEffect
            $735F = SleepEffect.sleepEffect
            $739B = AlreadyAsleepText
-           $7CFE = Func_3fb89
+           $7D00 = Func_3fb89
            $7396 = FellAsleepText
            $7CD3 = PrintDidntAffectText
            $743D = BadlyPoisonedText
            $7438 = PoisonedText
-           $7D0B = Func_3fb96
+           $7D0D = Func_3fb96
            $74E9 = opponentAttacker
            $7557 = CheckDefrost
-           $7D2E = PlayBattleAnimation
+           $7D30 = PlayBattleAnimation
            $7CE3 = PrintMayNotAttackText
            $754D = BurnedText
            $7B44 = ClearHyperBeam
@@ -4793,11 +4793,11 @@ ROM Bank #15:
            $7CCE = ButItFailedText
            $7CD9 = DidntAffectText
            $7CE9 = ParalyzedMayNotAttackText
-           $7D31 = Func_3fbbc
-           $7D6B = CheckForHex.skip1
-           $7D81 = CheckForHex.skip2
-           $7DD3 = CheckForElectroBall.done
-           $7DDE = PhysicalSpecialSplit.MovesTable
+           $7D33 = Func_3fbbc
+           $7D6D = CheckForHex.skip1
+           $7D83 = CheckForHex.skip2
+           $7DD5 = CheckForElectroBall.done
+           $7DE0 = PhysicalSpecialSplit.MovesTable
            $7215 = Func_3f0c6
            $71C2 = Func_3f073
            $7252 = LoadMonBackPic
@@ -4805,7 +4805,7 @@ ROM Bank #15:
            $7067 = InitOpponent
            $5CE9 = PrintDoesntAffectText
            $6EE8 = CalculateModifiedStats
-    SLACK: $011D bytes
+    SLACK: $011B bytes
 
 ROM Bank #16:
   SECTION: $4000-$7377 ($3378 bytes)
