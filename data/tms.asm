@@ -41,7 +41,7 @@ TechnicalMachines: ; 13773 (4:7773)
 	db SKULL_BASH
 	db SHADOW_BALL
 	db DREAM_EATER
-	db SKY_ATTACK
+	db DARK_PULSE
 	db REST
 	db THUNDER_WAVE
 	db PSYWAVE

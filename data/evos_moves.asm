@@ -1271,6 +1271,7 @@ Mon056_EvosMoves: ; 3b4a4 (e:74a4)
 	db 0
 ;Learnset
 	db 5,FOCUS_ENERGY
+    db 7,LOW_KICK
 	db 9,FURY_SWIPES
 	db 13,KARATE_CHOP
 	db 17,SEISMIC_TOSS

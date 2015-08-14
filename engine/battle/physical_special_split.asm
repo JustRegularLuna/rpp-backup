@@ -83,7 +83,7 @@ PhysicalSpecialSplit: ;Determines if a move is Physical or Special
 	db SPECIAL ;MEGA_DRAIN   EQU $48
 	db OTHER_M ;LEECH_SEED   EQU $49
 	db OTHER_M ;GROWTH       EQU $4A
-	db SPECIAL ;RAZOR_LEAF   EQU $4B
+	db PHYSICAL;RAZOR_LEAF   EQU $4B
 	db SPECIAL ;SOLARBEAM    EQU $4C
 	db OTHER_M ;POISONPOWDER EQU $4D
 	db OTHER_M ;STUN_SPORE   EQU $4E
