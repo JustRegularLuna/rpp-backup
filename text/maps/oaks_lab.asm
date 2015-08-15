@@ -139,8 +139,8 @@ _OaksLabGivePokeballsText2:: ; 950f2 (25:50f2)
 	cont "it's fair game."
 
 	para "Just throw a #"
-	line "BALL at it and try"
-	cont "to catch it!"
+	line "BALL at it and"
+	cont "try to catch it!"
 
 	para "This won't always"
 	line "work, though."
