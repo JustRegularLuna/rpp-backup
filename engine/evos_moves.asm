@@ -131,6 +131,9 @@ Evolution_PartyMonLoop: ; loop over party mons
 .checkItemEvo
 	ld a, [hli]
 	ld b, a ; evolution item
+    ld a,[W_ISINBATTLE] ; check if we're in a battle
+	and a
+	jp nz, .nextEvoEntry1 ; If we are, skip ahead
 	ld a, [wcf91] ; this is supposed to be the last item used, but it is also used to hold species numbers
 	cp b ; was the evolution item in this entry used?
 	jp nz, .nextEvoEntry1 ; if not, go to the next evolution entry
