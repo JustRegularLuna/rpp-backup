@@ -85,7 +85,7 @@ $(all_obj): $$*.asm $$($$*_dep)
 # Link objects together to build a rom.
 
 # Make a symfile for debugging. Add the mapfile back in
-link = rgblink -n poke$*.sym -m poke$*.map
+link = rgblink -n poke$*.sym
 
 poke%.gbc: $$(%_obj)
 	$(link) -o $@ $^
