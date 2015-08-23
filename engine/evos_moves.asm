@@ -14,7 +14,7 @@ EvolutionAfterBattle: ; 3ad1c (e:6d1c)
 	ld a, [hTilesetType]
 	push af
 	xor a
-	ld [wd121], a
+	ld [wEvolutionOccurred], a
 	dec a
 	ld [wWhichPokemon], a
 	push hl
@@ -91,7 +91,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
-	jr .asm_3adb6
+	jr .doEvolution
 .checkItemEvo
 	ld a, [hli]
 	ld b, a ; evolution item
@@ -104,10 +104,10 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, .nextEvoEntry2 ; if so, go the next evolution entry
-.asm_3adb6
+.doEvolution
 	ld [W_CURENEMYLVL], a
-	ld a, $1
-	ld [wd121], a
+	ld a, 1
+	ld [wEvolutionOccurred], a
 	push hl
 	ld a, [hl]
 	ld [wEvoNewSpecies], a
@@ -161,12 +161,12 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd11e]
 	dec a
 	ld hl, BaseStats
-	ld bc, $1c
+	ld bc, MonBaseStatsEnd - MonBaseStats
 	call AddNTimes
 	ld de, W_MONHEADER
 	call CopyData
 	ld a, [wd0b5]
-	ld [W_MONHDEXNUM], a
+	ld [W_MONHINDEX], a
 	pop af
 	ld [wd11e], a
 	ld hl, wLoadedMonHPExp - 1
@@ -252,17 +252,17 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [W_ISINBATTLE]
 	and a
 	ret nz
-	ld a, [wd121]
+	ld a, [wEvolutionOccurred]
 	and a
 	call nz, PlayDefaultMusic
 	ret
 
-; checks if the evolved mon's name is different from the standard name (i.e. it has a nickname)
-; if so, rename it to is evolved form's standard name
 RenameEvolvedMon: ; 3aef7 (e:6ef7)
+; Renames the mon to its new, evolved form's standard name unless it had a
+; nickname, in which case the nickname is kept.
 	ld a, [wd0b5]
 	push af
-	ld a, [W_MONHDEXNUM]
+	ld a, [W_MONHINDEX]
 	ld [wd0b5], a
 	call GetName
 	pop af
@@ -275,10 +275,10 @@ RenameEvolvedMon: ; 3aef7 (e:6ef7)
 	cp [hl]
 	inc hl
 	ret nz
-	cp $50
+	cp "@"
 	jr nz, .compareNamesLoop
 	ld a, [wWhichPokemon]
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	ld hl, wPartyMonNicks
 	call AddNTimes
 	push hl
@@ -443,7 +443,7 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	jr nz, .findEmptySlotLoop
 
 ; no empty move slots found
-	pop de                        
+	pop de
 	push de
 	push hl
 	ld h, d
@@ -472,14 +472,14 @@ WriteMonMoves: ; 3afb8 (e:6fb8)
 	jr z, .nextMove
 
 ; write move PP value if learning moves from day care
-	push hl            
+	push hl
 	ld a, [hl]
 	ld hl, wPartyMon1PP - wPartyMon1Moves
 	add hl, de
 	push hl
 	dec a
 	ld hl, Moves
-	ld bc, 6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wBuffer
 	ld a, BANK(Moves)

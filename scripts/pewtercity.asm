@@ -16,14 +16,12 @@ PewterCityScriptPointers: ; 19243 (6:5243)
 PewterCityScript0: ; 19251 (6:5251)
 	xor a
 	ld [W_MUSEUM1FCURSCRIPT], a
-	ld hl, wd754
-	res 0, [hl]
+	ResetEvent EVENT_BOUGHT_MUSEUM_TICKET
 	call PewterCityScript_1925e
 	ret
 
 PewterCityScript_1925e: ; 1925e (6:525e)
-	ld a, [wd755]
-	bit 7, a
+	CheckEvent EVENT_BEAT_BROCK
 	ret nz
 	ld hl, CoordsData_19277
 	call ArePlayerCoordsInArray
@@ -90,7 +88,7 @@ PewterCityScript2: ; 192d3 (6:52d3)
 	bit 0, a
 	ret nz
 	ld a, HS_MUSEUM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $3
 	ld [W_PEWTERCITYCURSCRIPT], a
@@ -101,7 +99,7 @@ PewterCityScript3: ; 192e9 (6:52e9)
 	ld [wSpriteIndex], a
 	call SetSpritePosition2
 	ld a, HS_MUSEUM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	xor a
 	ld [wJoyIgnore], a
@@ -159,7 +157,7 @@ PewterCityScript5: ; 19359 (6:5359)
 	bit 0, a
 	ret nz
 	ld a, HS_GYM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $6
 	ld [W_PEWTERCITYCURSCRIPT], a
@@ -170,7 +168,7 @@ PewterCityScript6: ; 1936f (6:536f)
 	ld [wSpriteIndex], a
 	call SetSpritePosition2
 	ld a, HS_GYM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	xor a
 	ld [wJoyIgnore], a

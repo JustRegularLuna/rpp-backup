@@ -5,8 +5,8 @@ AskName: ; 64eb (1:64eb)
 	ld a, [W_ISINBATTLE]
 	dec a
 	coord hl, 0, 0
-	ld b, $4
-	ld c, $b
+	ld b, 4
+	ld c, 11
 	call z, ClearScreenArea ; only if in wild batle
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -14,7 +14,7 @@ AskName: ; 64eb (1:64eb)
 	ld hl, DoYouWantToNicknameText
 	call PrintText
 	coord hl, 14, 7
-	ld bc, $80f
+	lb bc, 8, 15
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -46,7 +46,7 @@ AskName: ; 64eb (1:64eb)
 	ld d, h
 	ld e, l
 	ld hl, wcd6d
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 DoYouWantToNicknameText: ; 0x6557
@@ -54,7 +54,7 @@ DoYouWantToNicknameText: ; 0x6557
 	db "@"
 
 DisplayNameRaterScreen: ; 655c (1:655c)
-	ld hl, wHPBarMaxHP
+	ld hl, wBuffer
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	ld a, NAME_MON_SCREEN
@@ -64,16 +64,16 @@ DisplayNameRaterScreen: ; 655c (1:655c)
 	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	ld a, [wcf4b]
-	cp $50
+	cp "@"
 	jr z, .playerCancelled
 	ld hl, wPartyMonNicks
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, wHPBarMaxHP
-	ld bc, 11
+	ld hl, wBuffer
+	ld bc, NAME_LENGTH
 	call CopyData
 	and a
 	ret
@@ -90,31 +90,31 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call UpdateSprites
 
 	; HAX: Use command $0f instead of $08
-	ld b, $0f
-	call GoPAL_SET
+	ld b, SET_PAL_NAMING_SCREEN
+	call RunPaletteCommand
 
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
 	callba LoadMonPartySpriteGfx
 	coord hl, 0, 4
-	ld b, $9
-	ld c, $12
+	ld b, 9
+	ld c, 18
 	call TextBoxBorder
 	call PrintNamingText
-	ld a, $3
+	ld a, 3
 	ld [wTopMenuItemY], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemX], a
 	ld [wLastMenuItem], a
 	ld [wCurrentMenuItem], a
 	ld a, $ff
 	ld [wMenuWatchedKeys], a
-	ld a, $7
+	ld a, 7
 	ld [wMaxMenuItem], a
 	ld a, $50
 	ld [wcf4b], a
 	xor a
-	ld hl, wHPBarMaxHP + 1
+	ld hl, wNamingScreenSubmitName
 	ld [hli], a
 	ld [hli], a
 	ld [wAnimCounter], a
@@ -122,7 +122,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call PrintAlphabet
 	call GBPalNormal
 .ABStartReturnPoint
-	ld a, [wHPBarMaxHP + 1]
+	ld a, [wNamingScreenSubmitName]
 	and a
 	jr nz, .submitNickname
 	call PrintNicknameAndUnderscores
@@ -161,12 +161,12 @@ DisplayNamingScreen: ; 6596 (1:6596)
 .submitNickname
 	pop de
 	ld hl, wcf4b
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call ClearSprites
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call GBPalNormal
 	xor a
 	ld [W_SUBANIMTRANSFORM], a
@@ -200,14 +200,14 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld de, .selectReturnPoint
 	push de
 .pressedSelect
-	ld a, [wHPBarOldHP]
+	ld a, [wAlphabetCase]
 	xor $1
-	ld [wHPBarOldHP], a
+	ld [wAlphabetCase], a
 	ret
 
 .pressedStart
-	ld a, $1
-	ld [wHPBarMaxHP + 1], a
+	ld a, 1
+	ld [wNamingScreenSubmitName], a
 	ret
 
 .pressedA
@@ -219,7 +219,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	jr z, .pressedStart
 .didNotPressED
 	ld a, [wCurrentMenuItem]
-	cp $6 ; case swtich row
+	cp $6 ; case switch row
 	jr nz, .didNotPressCaseSwtich
 	ld a, [wTopMenuItemX]
 	cp $1 ; case switch column
@@ -231,9 +231,9 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld l, a
 	inc hl
 	ld a, [hl]
-	ld [wHPBarNewHP], a
+	ld [wNamingScreenLetter], a
 	call CalcStringLength
-	ld a, [wHPBarNewHP]
+	ld a, [wNamingScreenLetter]
 	cp $e5
 	ld de, Dakutens
 	jr z, .dakutensAndHandakutens
@@ -243,11 +243,11 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
 	jr nc, .checkMonNameLength
-	ld a, [wHPBarMaxHP]
+	ld a, [wNamingScreenNameLength]
 	cp $7 ; max length of player/rival names
 	jr .checkNameLength
 .checkMonNameLength
-	ld a, [wHPBarMaxHP]
+	ld a, [wNamingScreenNameLength]
 	cp $a ; max length of pokemon nicknames
 .checkNameLength
 	jr c, .addLetter
@@ -260,19 +260,19 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ret nc
 	dec hl
 .addLetter
-	ld a, [wHPBarNewHP]
+	ld a, [wNamingScreenLetter]
 	ld [hli], a
 	ld [hl], $50
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	ret
 .pressedB
-	ld a, [wHPBarMaxHP]
+	ld a, [wNamingScreenNameLength]
 	and a
 	ret z
 	call CalcStringLength
 	dec hl
-	ld [hl], $50
+	ld [hl], "@"
 	ret
 .pressedRight
 	ld a, [wCurrentMenuItem]
@@ -329,23 +329,26 @@ DisplayNamingScreen: ; 6596 (1:6596)
 LoadEDTile: ; 675b (1:675b)
 	ld de, ED_Tile
 	ld hl, vFont + $700
-	ld bc, $1
+	ld bc, (ED_TileEnd - ED_Tile) / $8
+	; to fix the graphical bug on poor emulators
+	;lb bc, BANK(ED_Tile), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
 
 ED_Tile: ; 6767 (1:6767)
 	INCBIN "gfx/ED_tile.1bpp"
+ED_TileEnd:
 
 PrintAlphabet: ; 676f (1:676f)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
-	ld a, [wHPBarOldHP]
+	ld a, [wAlphabetCase]
 	and a
 	ld de, LowerCaseAlphabet
 	jr nz, .lowercase
 	ld de, UpperCaseAlphabet
 .lowercase
 	coord hl, 2, 5
-	ld bc, $509 ; 5 rows, 9 columns
+	lb bc, 5, 9 ; 5 rows, 9 columns
 .outerLoop
 	push bc
 .innerLoop
@@ -374,9 +377,9 @@ UpperCaseAlphabet: ; 67d6 (1:67d6)
 PrintNicknameAndUnderscores: ; 680e (1:680e)
 	call CalcStringLength
 	ld a, c
-	ld [wHPBarMaxHP], a
+	ld [wNamingScreenNameLength], a
 	coord hl, 10, 2
-	ld bc, $10a
+	lb bc, 1, 10
 	call ClearScreenArea
 	coord hl, 10, 2
 	ld de, wcf4b
@@ -397,7 +400,7 @@ PrintNicknameAndUnderscores: ; 680e (1:680e)
 	jr nz, .placeUnderscoreLoop
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN
-	ld a, [wHPBarMaxHP]
+	ld a, [wNamingScreenNameLength]
 	jr nc, .pokemon2
 	cp 7 ; player or rival max name length
 	jr .playerOrRival2
@@ -436,7 +439,7 @@ DakutensAndHandakutens: ; 6871 (1:6871)
 	ret nc
 	inc hl
 	ld a, [hl]
-	ld [wHPBarNewHP], a
+	ld [wNamingScreenLetter], a
 	ret
 
 Dakutens: ; 6885 (1:6885)
@@ -461,7 +464,7 @@ CalcStringLength: ; 68eb (1:68eb)
 	ld c, $0
 .loop
 	ld a, [hl]
-	cp $50
+	cp "@"
 	ret z
 	inc hl
 	inc c

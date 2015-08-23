@@ -26,7 +26,7 @@ GainExperience: ; 5524f (15:524f)
 	ld d, h
 	ld e, l
 	ld hl, wEnemyMonBaseStats
-	ld c, $5
+	ld c, NUM_STATS
 .gainStatExpLoop
 	ld a, [hli]
 	ld b, a ; enemy mon base stat
@@ -66,7 +66,7 @@ GainExperience: ; 5524f (15:524f)
 	ld [H_DIVISOR], a
 	ld b, 4
 	call Divide
-	ld hl, -((wPartyMon1HPExp + 1) - wPartyMon1OTID + 4 * 2)
+	ld hl, wPartyMon1OTID - (wPartyMon1DVs - 1)
 	add hl, de
 	ld b, [hl] ; party mon OTID
 	inc hl
@@ -76,11 +76,11 @@ GainExperience: ; 5524f (15:524f)
 	ld b, [hl]
 	ld a, [wPlayerID + 1]
 	cp b
-	ld a, $0
+	ld a, 0
 	jr z, .next
 .tradedMon
 	call BoostExp ; traded mon exp boost
-	ld a, $1
+	ld a, 1
 .next
 	ld [wGainBoostedExp], a
 	ld a, [W_ISINBATTLE]
@@ -92,12 +92,12 @@ GainExperience: ; 5524f (15:524f)
 ; add the gained exp to the party mon's exp
 	ld b, [hl]
 	ld a, [H_QUOTIENT + 3]
-	ld [wcf4c], a
+	ld [wExpAmountGained + 1], a
 	add b
 	ld [hld], a
 	ld b, [hl]
 	ld a, [H_QUOTIENT + 2]
-	ld [wcf4b], a
+	ld [wExpAmountGained], a
 	adc b
 	ld [hl], a
 	jr nc, .noCarry
@@ -228,7 +228,7 @@ ENDC
 	add hl, bc
 	push hl
 	ld de, wBattleMonLevel
-	ld bc, $b ; size of stats
+	ld bc, 1 + NUM_STATS * 2 ; size of stats
 	call CopyData
 	pop hl
 	ld a, [W_PLAYERBATTSTATUS3]
@@ -236,11 +236,11 @@ ENDC
 	jr nz, .recalcStatChanges
 ; the mon is not transformed, so update the unmodified stats
 	ld de, wPlayerMonUnmodifiedLevel
-	ld bc, $b
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 .recalcStatChanges
-	xor a
-	ld [wd11e], a
+	xor a ; battle mon
+	ld [wCalculateWhoseStats], a
 	callab CalculateModifiedStats
 	callab ApplyBurnAndParalysisPenaltiesToPlayer
 	callab ApplyBadgeStatBoosts
@@ -320,7 +320,7 @@ DivideExpDataByNumMonsGainingExp: ; 5546c (15:546c)
 	ret c ; return if only one mon is gaining exp
 	ld [wd11e], a ; store number of mons gaining exp
 	ld hl, wEnemyMonBaseStats
-	ld c, $7
+	ld c, wEnemyMonBaseExp + 1 - wEnemyMonBaseStats
 .divideLoop
 	xor a
 	ld [H_DIVIDEND], a

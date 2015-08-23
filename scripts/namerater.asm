@@ -10,15 +10,15 @@ NameRaterScript_1da15: ; 1da15 (7:5a15)
 
 NameRaterScript_1da20: ; 1da20 (7:5a20)
 	ld hl, wPartyMonOT
-	ld bc, $000b
+	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld de, wPlayerName
-	ld c, $b
+	ld c, NAME_LENGTH
 	call .asm_1da47
 	jr c, .asm_1da52
 	ld hl, wPartyMon1OTID
-	ld bc, $002c
+	ld bc, wPartyMon2 - wPartyMon1
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld de, wPlayerID

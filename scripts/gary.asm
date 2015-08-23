@@ -64,7 +64,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld hl, GaryText_760f9
 	ld de, GaryText_760fe
 	call SaveEndBattleTextPointers
-	ld a, SONY3 + $c8
+	ld a, OPP_SONY3
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
@@ -94,8 +94,7 @@ GaryScript3: ; 75fbb (1d:5fbb)
 	cp $ff
 	jp z, GaryScript_75f29
 	call UpdateSprites
-	ld hl, wd867
-	set 1, [hl]
+	SetEvent EVENT_BEAT_CHAMPION_RIVAL
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $1
@@ -121,7 +120,7 @@ GaryScript4: ; 75fe4 (1d:5fe4)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, HS_CHAMPIONS_ROOM_OAK
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, $5
 	ld [W_GARYCURSCRIPT], a
@@ -198,7 +197,7 @@ GaryScript8: ; 76083 (1d:6083)
 	bit 0, a
 	ret nz
 	ld a, HS_CHAMPIONS_ROOM_OAK
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $9
 	ld [W_GARYCURSCRIPT], a
@@ -249,8 +248,7 @@ GaryTextPointers: ; 760d6 (1d:60d6)
 
 GaryText1: ; 760e0 (1d:60e0)
 	TX_ASM
-	ld a, [wd867]
-	bit 1, a
+	CheckEvent EVENT_BEAT_CHAMPION_RIVAL
 	ld hl, GaryText_760f4
 	jr z, .asm_17e9f
 	ld hl, GaryText_76103

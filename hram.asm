@@ -4,6 +4,7 @@ hSoftReset EQU $FF8A
 ; presses the reset sequence (A+B+SEL+START).
 ; Soft reset when 0 is reached.
 
+; base tile ID to which offsets are added
 hBaseTileID EQU $FF8B
 
 ; 3-byte BCD number
@@ -22,6 +23,8 @@ hPreviousTileset EQU $FF8B
 hEastWestConnectedMapWidth EQU $FF8B
 
 hSlideAmount EQU $FF8B
+
+hRLEByteValue EQU $FF8B
 
 H_SPRITEWIDTH            EQU $FF8B ; in tiles
 H_SPRITEINTERLACECOUNTER EQU $FF8B
@@ -107,6 +110,10 @@ H_DIVISOR      EQU $FF99 ; 1 byte
 H_QUOTIENT     EQU $FF95 ; 4 bytes
 H_REMAINDER    EQU $FF99 ; 1 byte
 
+H_DIVIDEBUFFER EQU $FF9A
+
+H_MULTIPLYBUFFER EQU $FF9B
+
 ; PrintNumber (big endian).
 H_PASTLEADINGZEROES EQU $FF95 ; last char printed
 H_NUMTOPRINT        EQU $FF96 ; 3 bytes
@@ -175,7 +182,9 @@ hJoy5        EQU $FFB5
 hJoy6        EQU $FFB6
 hJoy7        EQU $FFB7
 
-H_LOADEDROMBANK     EQU $FFB8
+H_LOADEDROMBANK EQU $FFB8
+
+hSavedROMBank EQU $FFB9
 
 ; is automatic background transfer during V-blank enabled?
 ; if nonzero, yes
@@ -233,12 +242,12 @@ H_VBCOPYDOUBLEDEST EQU $FFCE
 ; 00 = no redraw
 ; 01 = redraw column
 ; 02 = redraw row
-H_SCREENEDGEREDRAW EQU $FFD0
+hRedrawRowOrColumnMode EQU $FFD0
 
-REDRAWCOL EQU 1
-REDRAWROW EQU 2
+REDRAW_COL EQU 1
+REDRAW_ROW EQU 2
 
-H_SCREENEDGEREDRAWADDR EQU $FFD1
+hRedrawRowOrColumnDest EQU $FFD1
 
 hRandomAdd EQU $FFD3
 hRandomSub EQU $FFD4
@@ -256,10 +265,37 @@ H_VBLANKOCCURRED EQU $FFD6
 ; this is often set to 00 in order to turn off water and flower BG tile animations
 hTilesetType EQU $FFD7
 
+hMovingBGTilesCounter1 EQU $FFD8
+
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
+
+hItemCounter EQU $FFDB
+
+hGymGateIndex EQU $FFDB
+
+hGymTrashCanRandNumMask EQU $FFDB
+
+hDexRatingNumMonsSeen  EQU $FFDB
+hDexRatingNumMonsOwned EQU $FFDC
+
+; $00 = bag full
+; $01 = got item
+; $80 = didn't meet required number of owned mons
+; $FF = player cancelled
+hOaksAideResult       EQU $FFDB
+
+hOaksAideRequirement  EQU $FFDB ; required number of owned mons
+hOaksAideRewardItem   EQU $FFDC
+hOaksAideNumMonsOwned EQU $FFDD
+
+hItemToRemoveID    EQU $FFDB
+hItemToRemoveIndex EQU $FFDC
 
 hVendingMachineItem  EQU $FFDB
 hVendingMachinePrice EQU $FFDC ; 3-byte BCD number
+
+; the first tile ID in a sequence of tile IDs that increase by 1 each step
+hStartTileID EQU $FFE1
 
 hNewPartyLength EQU $FFE4
 
@@ -280,6 +316,8 @@ H_WHOSETURN EQU $FFF3 ; 0 on player’s turn, 1 on enemy’s turn
 hFlags_0xFFF6 EQU $FFF6
 
 hFieldMoveMonMenuTopMenuItemX EQU $FFF7
+
+hDisableJoypadPolling EQU $FFF9
 
 hJoyInput EQU $FFF8
 

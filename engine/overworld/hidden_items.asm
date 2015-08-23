@@ -29,7 +29,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, wObtainedHiddenItemsFlags
-	ld a, [wTrainerScreenX]
+	ld a, [wHiddenItemOrCoinsIndex]
 	ld c, a
 	ld b, FLAG_SET
 	predef FlagActionPredef
@@ -51,7 +51,7 @@ HiddenItemBagFullText: ; 76794 (1d:6794)
 
 HiddenCoins: ; 76799 (1d:6799)
 	ld b, COIN_CASE
-	predef IsItemInBag_
+	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
 	ret z
@@ -100,7 +100,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld c, $2
 	predef AddBCDPredef
 	ld hl, wObtainedHiddenCoinsFlags
-	ld a, [wTrainerScreenX]
+	ld a, [wHiddenItemOrCoinsIndex]
 	ld c, a
 	ld b, FLAG_SET
 	predef FlagActionPredef

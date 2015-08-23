@@ -24,11 +24,11 @@ SetDefaultNames: ; 60ca (1:60ca)
 	call z, InitOptions
 	ld hl, NintenText
 	ld de, wPlayerName
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, SonyText
 	ld de, W_RIVALNAME
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 OakSpeech: ; 6115 (1:6115)
@@ -66,7 +66,7 @@ ENDC
 	;bit 1,a ; possibly a debug mode bit
 	;jp nz,.skipChoosingNames
 	ld de,ProfOakPic
-	ld bc, (Bank(ProfOakPic) << 8) | $00
+	lb bc, Bank(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,OakSpeechText1
@@ -86,7 +86,7 @@ ENDC
 	call GBFadeOutToWhite
 	call GetRedPalID ; HAX
 	ld de,RedPicFront
-	ld bc,(Bank(RedPicFront) << 8) | $00
+	lb bc, Bank(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl,IntroducePlayerText
@@ -95,7 +95,7 @@ ENDC
 	call GBFadeOutToWhite
 	call GetRivalPalID ; HAX
 	ld de,Rival1Pic
-	ld bc,(Bank(Rival1Pic) << 8) | $00
+	lb bc, Bank(Rival1Pic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
@@ -105,7 +105,7 @@ ENDC
 	call GBFadeOutToWhite
 	call GetRedPalID ; HAX
 	ld de,RedPicFront
-	ld bc,(Bank(RedPicFront) << 8) | $00
+	lb bc, Bank(RedPicFront), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a,[wd72d]
@@ -125,26 +125,26 @@ ENDC
 	call DelayFrames
 	ld de,RedSprite
 	ld hl,vSprites
-	ld bc,(BANK(RedSprite) << 8) | $0C
+	lb bc, BANK(RedSprite), $0C
 	call CopyVideoData
 	ld de,ShrinkPic1
-	ld bc,(BANK(ShrinkPic1) << 8) | $00
+	lb bc, BANK(ShrinkPic1), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	ld c,4
 	call DelayFrames
 	ld de,ShrinkPic2
-	ld bc,(BANK(ShrinkPic2) << 8) | $00
+	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
 	ld a,[H_LOADEDROMBANK]
 	push af
 	ld a, BANK(Music_PalletTown)
-	ld [wc0ef],a
-	ld [wc0f0],a
-	ld a,$A
-	ld [wMusicHeaderPointer],a
+	ld [wAudioROMBank],a
+	ld [wAudioSavedROMBank],a
+	ld a, 10
+	ld [wAudioFadeOutControl],a
 	ld a,$FF
-	ld [wc0ee],a
+	ld [wNewSoundID],a
 	call PlaySound ; stop music
 	pop af
 	ld [H_LOADEDROMBANK],a
@@ -239,5 +239,5 @@ IntroDisplayPicCenteredOrUpperRight: ; 62a4 (1:62a4)
 	coord hl, 6, 4
 .next
 	xor a
-	ld [$FFE1],a
+	ld [hStartTileID],a
 	predef_jump CopyUncompressedPicToTilemap

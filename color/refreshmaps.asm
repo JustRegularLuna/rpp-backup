@@ -313,10 +313,10 @@ label_022:
 	ret
 
 DrawMapRow:
-	ld hl,wScreenEdgeTiles
-	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld hl,wRedrawRowOrColumnSrcTiles
+	ld a,[hRedrawRowOrColumnDest]
 	ld e,a
-	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld a,[hRedrawRowOrColumnDest + 1]
 	ld d,a
 	push de
 	call .drawHalf ; draw upper half
@@ -331,10 +331,10 @@ DrawMapRow:
 	ld [rSVBK],a
 	ld a,1
 	ld [rVBK],a
-	ld hl,wScreenEdgeTiles
-	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld hl,wRedrawRowOrColumnSrcTiles
+	ld a,[hRedrawRowOrColumnDest]
 	ld e,a
-	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld a,[hRedrawRowOrColumnDest + 1]
 	ld d,a
 
 	push de
@@ -398,10 +398,10 @@ ENDR
 
 DrawMapColumn:
 	; Draw tiles
-	ld hl,wScreenEdgeTiles
-	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld hl,wRedrawRowOrColumnSrcTiles
+	ld a,[hRedrawRowOrColumnDest]
 	ld e,a
-	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld a,[hRedrawRowOrColumnDest + 1]
 	ld d,a
 	ld c,SCREEN_HEIGHT
 .loop1
@@ -431,10 +431,10 @@ jr nc,.noCarry
 	ld a,1
 	ld [rVBK],a
 
-	ld hl,wScreenEdgeTiles
-	ld a,[H_SCREENEDGEREDRAWADDR]
+	ld hl,wRedrawRowOrColumnSrcTiles
+	ld a,[hRedrawRowOrColumnDest]
 	ld e,a
-	ld a,[H_SCREENEDGEREDRAWADDR + 1]
+	ld a,[hRedrawRowOrColumnDest + 1]
 	ld d,a
 	ld b,$d2
 REPT 18
@@ -461,7 +461,7 @@ jr nc,.noCarry\@
 ENDR
 
 	xor a
-	ld [H_SCREENEDGEREDRAW],a
+	ld [hRedrawRowOrColumnMode],a
 	ld [rVBK],a
 	ld [rSVBK],a
 	ret

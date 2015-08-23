@@ -33,17 +33,20 @@ ClearBgMap:: ; 1cf0 (0:1cf0)
 	jr nz,.loop
 	ret
 
-; When the player takes a step, a row or column of 2x2 tile blocks at the edge
-; of the screen toward which they moved is exposed and has to be redrawn.
-; This function does the redrawing.
+RedrawRowOrColumn:: ; 1d01 (0:1d01)
+; This function redraws a BG row of height 2 or a BG column of width 2.
+; One of its main uses is redrawing the row or column that will be exposed upon
+; scrolling the BG when the player takes a step. Redrawing only the exposed
+; row or column is more efficient than redrawing the entire screen.
+; However, this function is also called repeatedly to redraw the whole screen
+; when necessary. It is also used in trade animation and elevator code.
 ; This function has beex HAXed to call other functions, which will also refresh palettes.
-RedrawExposedScreenEdge:: ; 1d01 (0:1d01)
-	ld a,[H_SCREENEDGEREDRAW]
+	ld a,[hRedrawRowOrColumnMode]
 	and a
 	ret z
 	ld b,a
 	xor a
-	ld [H_SCREENEDGEREDRAW],a
+	ld [hRedrawRowOrColumnMode],a
 	dec b
 	jr nz,.redrawRow
 	CALL_INDIRECT DrawMapColumn
@@ -59,7 +62,7 @@ SECTION "AutoBgMapTransfer", ROM0[$1d57]
 ; background per V-blank. It cycles through which third it draws.
 ; This transfer is turned off when walking around the map, but is turned
 ; on when talking to sprites, battling, using menus, etc. This is because
-; the above function, RedrawExposedScreenEdge, is used when walking to
+; the above function, RedrawRowOrColumn, is used when walking to
 ; improve efficiency.
 AutoBgMapTransfer: ; 1d57 (0:1d57)	; HAXED function
 	ld a,BANK(RefreshWindow)
@@ -210,12 +213,11 @@ VBlankCopyDouble::
 
 
 VBlankCopy::
-; Copy [H_VBCOPYSIZE] 2bpp tiles
+; Copy [H_VBCOPYSIZE] 2bpp tiles (or 16 * [H_VBCOPYSIZE] tile map entries)
 ; from H_VBCOPYSRC to H_VBCOPYDEST.
 
-; Source and destination addresses
-; are updated, so transfer can
-; continue in subsequent calls.
+; Source and destination addresses are updated,
+; so transfer can continue in subsequent calls.
 
 	ld a, [H_VBCOPYSIZE]
 	and a
@@ -288,30 +290,32 @@ UpdateMovingBgTiles::
 	and a
 	ret z ; no animations if indoors (or if a menu set this to 0)
 
-	ld a, [$ffd8]
+	ld a, [hMovingBGTilesCounter1]
 	inc a
-	ld [$ffd8], a
-	cp $14
+	ld [hMovingBGTilesCounter1], a
+	cp 20
 	ret c
-	cp $15
+	cp 21
 	jr z, .flower
+
+; water
 
 	ld hl, vTileset + $14 * $10
 	ld c, $10
 
 	; HAX
-	ld a,$2c
-	ld [$2000],a
+	ld a,BANK(label_2c_l000)
+	ld [MBC1RomBank],a
 
-	ld a, [wd085]
+	ld a, [wMovingBGTilesCounter2]
 	inc a
 	and 7
-	ld [wd085], a
+	ld [wMovingBGTilesCounter2], a
 
 	and 4
 	; HAX
-	jp nz,$7000
-	jp $7080
+	jp nz,label_2c_l000
+	jp label_2c_l002
 
 	ld a,[H_LOADEDROMBANK]
 	ld [MBC1RomBank],a
@@ -321,14 +325,14 @@ UpdateMovingBgTiles::
 	ret nc
 ; if in a cave, no flower animations
 	xor a
-	ld [$ffd8], a
+	ld [hMovingBGTilesCounter1], a
 	ret
 
 .flower
 	xor a
-	ld [$ffd8], a
+	ld [hMovingBGTilesCounter1], a
 
-	ld a, [wd085]
+	ld a, [wMovingBGTilesCounter2]
 	and 3
 	cp 2
 	ld hl, FlowerTile1

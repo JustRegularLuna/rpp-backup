@@ -21,8 +21,8 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	call GBPalWhiteOutWithDelay3
 	call LoadSlotMachineTiles
 	call LoadFontTilePatterns
-	ld b, $5
-	call GoPAL_SET
+	ld b, SET_PAL_SLOTS
+	call RunPaletteCommand
 	call GBPalNormal
 	ld a, $e4
 	ld [rOBP0], a
@@ -41,7 +41,7 @@ PromptUserToPlaySlots: ; 3730e (d:730e)
 	call GBPalWhiteOutWithDelay3
 	ld a, $1
 	ld [wUpdateSpritesEnabled], a
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call ReloadMapSpriteTilePatterns
 	call ReloadTilesetTilePatterns
 .done
@@ -134,7 +134,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
 	coord hl, 14, 12
-	ld bc, $0d0f
+	lb bc, 13, 15
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
 	ld a, TWO_OPTION_MENU
@@ -411,7 +411,7 @@ SlotMachine_CheckForMatches: ; 37588 (d:7588)
 	call PrintText
 .done
 	xor a
-	ld [wc002], a
+	ld [wMuteAudioAndPauseMusic], a
 	ret
 .rollWheel3DownByOneSymbol
 	call SlotMachine_AnimWheel3
@@ -649,12 +649,12 @@ SlotMachine_PrintCreditCoins: ; 37754 (d:7754)
 SlotMachine_PrintPayoutCoins: ; 3775f (d:775f)
 	coord hl, 11, 1
 	ld de, wPayoutCoins
-	ld bc, $8204 ; 2 bytes, 4 digits, leading zeroes
+	lb bc, LEADING_ZEROES | 2, 4 ; 2 bytes, 4 digits
 	jp PrintNumber
 
 SlotMachine_PayCoinsToPlayer: ; 3776b (d:776b)
 	ld a, $1
-	ld [wc002], a
+	ld [wMuteAudioAndPauseMusic], a
 	call WaitForSoundToFinish
 
 ; Put 1 in the temp coins variable. This value is added to the player's coins
@@ -711,12 +711,12 @@ SlotMachine_PayCoinsToPlayer: ; 3776b (d:776b)
 
 SlotMachine_PutOutLitBalls: ; 377ce (d:77ce)
 	ld a, $23
-	ld [wd08a], a
+	ld [wNewSlotMachineBallTile], a
 	jr SlotMachine_UpdateThreeCoinBallTiles
 
 SlotMachine_LightBalls: ; 377d5 (d:77d5)
 	ld a, $14
-	ld [wd08a], a
+	ld [wNewSlotMachineBallTile], a
 	ld a, [wSlotMachineBet]
 	dec a
 	jr z, SlotMachine_UpdateOneCoinBallTiles
@@ -739,7 +739,7 @@ SlotMachine_UpdateOneCoinBallTiles: ; 377fb (d:77fb)
 	coord hl, 3, 6
 
 SlotMachine_UpdateBallTiles: ; 377fe (d:77fe)
-	ld a, [wd08a]
+	ld a, [wNewSlotMachineBallTile]
 	ld [hl], a
 	ld bc, 13
 	add hl, bc

@@ -149,7 +149,7 @@ PalletMovementScript_Done: ; 1a4f4 (6:64f4)
 	and a
 	ret nz
 	ld a, $0
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, wd730
 	res 7, [hl]
@@ -163,10 +163,10 @@ PewterMuseumGuyMovementScriptPointerTable: ; 1a510 (6:6510)
 
 PewterMovementScript_WalkToMuseum: ; 1a514 (6:6514)
 	ld a, BANK(Music_MuseumGuy)
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_MUSEUM_GUY
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld a, [wSpriteIndex]
 	swap a
@@ -178,7 +178,7 @@ PewterMovementScript_WalkToMuseum: ; 1a514 (6:6514)
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
 	xor a
-	ld [wd12f], a
+	ld [wWhichPewterGuy], a
 	predef PewterGuys
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterMuseumGuy
@@ -219,10 +219,10 @@ PewterGymGuyMovementScriptPointerTable: ; 1a57d (6:657d)
 
 PewterMovementScript_WalkToGym: ; 1a581 (6:6581)
 	ld a, BANK(Music_MuseumGuy)
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_MUSEUM_GUY
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld a, [wSpriteIndex]
 	swap a
@@ -234,8 +234,8 @@ PewterMovementScript_WalkToGym: ; 1a581 (6:6581)
 	call DecodeRLEList
 	dec a
 	ld [wSimulatedJoypadStatesIndex], a
-	ld a, $1
-	ld [wd12f], a
+	ld a, 1
+	ld [wWhichPewterGuy], a
 	predef PewterGuys
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterGymGuy
@@ -286,7 +286,7 @@ FreezeEnemyTrainerSprite: ; 1a5e7 (6:65e7)
 	jp SetSpriteMovementBytesToFF
 
 RivalIDs: ; 1a605 (6:6605)
-	db SONY1 + $c8
-	db SONY2 + $c8
-	db SONY3 + $c8
+	db OPP_SONY1
+	db OPP_SONY2
+	db OPP_SONY3
 	db $ff

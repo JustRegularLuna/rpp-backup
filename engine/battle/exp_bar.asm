@@ -15,7 +15,7 @@ AnimateEXPBar:
 	call LoadMonData
 	call IsCurrentMonBattleMon
 	ret nz
-	ld a, (SFX_08_3d - SFX_Headers_08) / 3
+	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	callab CalcEXPBarPixelLength
 	ld a, [wEXPBarPixelLength]

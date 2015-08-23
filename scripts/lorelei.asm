@@ -13,18 +13,17 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, wd734
+	ld hl, wBeatLorelei
 	set 1, [hl]
-	ld a, [wd863]
-	bit 1, a
+	CheckEvent EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	jr z, .asm_761a9
 	ld a, $5
 	jr .asm_761ab
 .asm_761a9
 	ld a, $24
 .asm_761ab
-	ld [wd09f], a
-	ld bc, $2
+	ld [wNewTileBlockID], a
+	lb bc, 0, 2
 	predef_jump ReplaceTileBlock
 
 LoreleiScript_761b6: ; 761b6 (1d:61b6)
@@ -71,9 +70,7 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	ld a, [wCoordIndex]
 	cp $3
 	jr c, .asm_76206
-	ld hl, wd863
-	bit 6, [hl]
-	set 6, [hl]
+	CheckAndSetEvent EVENT_AUTOWALKED_INTO_LORELEIS_ROOM
 	jr z, LoreleiScript_761c6
 .asm_76206
 	ld a, $2
@@ -121,9 +118,9 @@ LoreleiTextPointers: ; 76251 (1d:6251)
 
 LoreleiTrainerHeaders: ; 76255 (1d:6255)
 LoreleiTrainerHeader0: ; 76255 (1d:6255)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd863 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_LORELEIS_ROOM_TRAINER_0
 	dw LoreleiBeforeBattleText ; TextBeforeBattle
 	dw LoreleiAfterBattleText ; TextAfterBattle
 	dw LoreleiEndBattleText ; TextEndBattle

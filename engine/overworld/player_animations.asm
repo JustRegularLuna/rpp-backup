@@ -9,7 +9,7 @@ EnterMapAnim: ; 70510 (1c:4510)
 	bit 7, [hl] ; used fly out of battle?
 	res 7, [hl]
 	jr nz, .flyAnimation
-	ld a, SFX_TELEPORT_2
+	ld a, SFX_TELEPORT_ENTER_1
 	call PlaySound
 	ld hl, wd732
 	bit 4, [hl] ; used dungeon warp?
@@ -17,7 +17,7 @@ EnterMapAnim: ; 70510 (1c:4510)
 	pop hl
 	jr nz, .dungeonWarpAnimation
 	call PlayerSpinWhileMovingDown
-	ld a, SFX_FLY_1
+	ld a, SFX_TELEPORT_ENTER_2
 	call PlaySound
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
@@ -47,10 +47,10 @@ EnterMapAnim: ; 70510 (1c:4510)
 	pop hl
 	ld de, BirdSprite
 	ld hl, vNPCSprites
-	ld bc, (BANK(BirdSprite) << 8) + $0c
+	lb bc, BANK(BirdSprite), $0c
 	call CopyVideoData
 	call LoadBirdSpriteGraphics
-	ld a, SFX_FLY_2
+	ld a, SFX_FLY
 	call PlaySound
 	ld hl, wFlyAnimUsingCoordList
 	xor a ; is using coord list
@@ -99,7 +99,7 @@ _LeaveMapAnim: ; 705ba (1c:45ba)
 	dec a
 	jp nz, LeaveMapThroughHoleAnim
 .spinWhileMovingUp
-	ld a, SFX_TELEPORT_1
+	ld a, SFX_TELEPORT_EXIT_1
 	call PlaySound
 	ld hl, wPlayerSpinWhileMovingUpOrDownAnimDeltaY
 	ld a, -$10
@@ -133,7 +133,7 @@ _LeaveMapAnim: ; 705ba (1c:45ba)
 	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayDelta
 	xor a
 	ld [hli], a ; wPlayerSpinInPlaceAnimFrameDelayEndValue
-	ld [hl], SFX_TELEPORT_3 ; wPlayerSpinInPlaceAnimSoundID
+	ld [hl], SFX_TELEPORT_EXIT_2 ; wPlayerSpinInPlaceAnimSoundID
 	ld hl, wFacingDirectionList
 	call PlayerSpinInPlace
 	jr .spinWhileMovingUp
@@ -146,7 +146,7 @@ _LeaveMapAnim: ; 705ba (1c:45ba)
 	ld [hli], a ; wFlyAnimCounter
 	ld [hl], $c ; wFlyAnimBirdSpriteImageIndex
 	call DoFlyAnimation
-	ld a, SFX_FLY_2
+	ld a, SFX_FLY
 	call PlaySound
 	ld hl, wFlyAnimUsingCoordList
 	xor a ; is using coord list
@@ -250,11 +250,11 @@ DoFlyAnimation: ; 706ae (1c:46ae)
 LoadBirdSpriteGraphics: ; 706d7 (1c:46d7)
 	ld de, BirdSprite
 	ld hl, vNPCSprites
-	ld bc, (BANK(BirdSprite) << 8) + $0c
+	lb bc, BANK(BirdSprite), $0c
 	call CopyVideoData
 	ld de, BirdSprite + $c0 ; moving animation sprite
 	ld hl, vNPCSprites2
-	ld bc, (BANK(BirdSprite) << 8) + $0c
+	lb bc, BANK(BirdSprite), $0c
 	jp CopyVideoData
 
 InitFacingDirectionList: ; 706ef (1c:46ef)
@@ -370,10 +370,10 @@ IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
 	ld b, [hl]
 .done
 	ld a, b
-	ld [wcd5b], a
+	ld [wStandingOnWarpPadOrHole], a
 	ret
 
-; format: db tileset id, tile id, value to be put in wcd5b
+; format: db tileset id, tile id, value to be put in [wStandingOnWarpPadOrHole]
 .warpPadAndHoleData: ; 707a9 (1c:47a9)
 	db FACILITY, $20, 1 ; warp pad
 	db FACILITY, $11, 2 ; hole
@@ -388,7 +388,7 @@ FishingAnim: ; 707b6 (1c:47b6)
 	set 6, [hl] ; reserve the last 4 OAM entries
 	ld de, RedSprite
 	ld hl, vNPCSprites
-	ld bc, (BANK(RedSprite) << 8) + $0c
+	lb bc, BANK(RedSprite), $0c
 	call CopyVideoData
 	ld a, $4
 	ld hl, RedFishingTiles

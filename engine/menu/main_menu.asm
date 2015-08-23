@@ -24,7 +24,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld hl,wd72e
 	res 6,[hl]
 	call ClearScreen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
 	ld hl,wd730
@@ -61,7 +61,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld [wTopMenuItemX],a
 	inc a
 	ld [wTopMenuItemY],a
-	ld a,$B
+	ld a,A_BUTTON | B_BUTTON | START
 	ld [wMenuWatchedKeys],a
 	ld a,[wSaveFileStatus]
 	ld [wMaxMenuItem],a
@@ -150,7 +150,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld de, CableClubOptionsText
 	call PlaceString
 	xor a
-	ld [wcd37], a
+	ld [wUnusedCD37], a
 	ld [wd72d], a
 	ld hl, wTopMenuItemY
 	ld a, $7
@@ -163,7 +163,8 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld a, $2
 	ld [hli], a
 	inc a
-	ld [hli], a
+	; ld a, A_BUTTON | B_BUTTON
+	ld [hli], a ; wMenuWatchedKeys
 	xor a
 	ld [hl], a
 .waitForInputLoop
@@ -278,7 +279,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld [wSerialExchangeNybbleSendData], a
 	inc a ; LINK_STATE_IN_CABLE_CLUB
 	ld [wLinkState], a
-	ld [wcc47], a
+	ld [wEnteringCableClub], a
 	jr SpecialEnterMap
 .choseCancel
 	xor a
@@ -322,7 +323,7 @@ SpecialEnterMap: ; 5d5f (1:5d5f)
 	call ResetPlayerSpriteData
 	ld c, 20
 	call DelayFrames
-	ld a, [wcc47]
+	ld a, [wEnteringCableClub]
 	and a
 	ret nz
 	jp EnterMap
@@ -395,8 +396,8 @@ PrintNumBadges: ; 5e2f (1:5e2f)
 	ld b, $1
 	call CountSetBits
 	pop hl
-	ld de, wd11e
-	ld bc, $102
+	ld de, wNumSetBits
+	lb bc, 1, 2
 	jp PrintNumber
 
 PrintNumOwnedMons: ; 5e42 (1:5e42)
@@ -405,18 +406,18 @@ PrintNumOwnedMons: ; 5e42 (1:5e42)
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	pop hl
-	ld de, wd11e
-	ld bc, $103
+	ld de, wNumSetBits
+	lb bc, 1, 3
 	jp PrintNumber
 
 PrintPlayTime: ; 5e55 (1:5e55)
 	ld de, W_PLAYTIMEHOURS + 1
-	ld bc, $103
+	lb bc, 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
 	ld de, W_PLAYTIMEMINUTES + 1
-	ld bc, $8102
+	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
 SaveScreenInfoText: ; 5e6a (1:5e6a)
@@ -455,7 +456,7 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	ld [wLastMenuItem],a
 	inc a
 	ld [wLetterPrintingDelayFlags],a
-	ld [wTrainerScreenY],a
+	ld [wUnusedCD40],a
 	ld a,3 ; text speed cursor Y coordinate
 	ld [wTopMenuItemY],a
 	call SetCursorPositionsFromOptions
@@ -689,7 +690,7 @@ CheckForPlayerNameInSRAM: ; 609e (1:609e)
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	ld b, $b
+	ld b, NAME_LENGTH
 	ld hl, sPlayerName
 .loop
 	ld a, [hli]

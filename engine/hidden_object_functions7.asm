@@ -19,8 +19,8 @@ DisplayOakLabRightPoster: ; 1e965 (7:6965)
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [wd11e]
-	cp $2
+	ld a, [wNumSetBits]
+	cp 2
 	tx_pre_id SaveOptionText
 	jr c, .ownThreeOrMoreMon
 	tx_pre_id StrengthsAndWeaknessesText
@@ -36,8 +36,7 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 	db "@"
 
 SafariZoneCheck: ; 1e988 (7:6988)
-	ld hl, wd790
-	bit 7, [hl]; if we are not in the Safari Zone,
+	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
 	ld a, [W_NUMSAFARIBALLS]
 	and a
@@ -64,30 +63,29 @@ SafariZoneGameStillGoing: ; 1e9ab (7:69ab)
 SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	call EnableAutoTextBoxDrawing
 	xor a
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	dec a
 	call PlaySound
-	ld c, BANK(SFX_02_5f)
+	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .asm_1e9c2
-	ld a, [wc02a]
+	ld a, [wChannelSoundIDs + CH4]
 	cp $b9
 	jr nz, .asm_1e9c2
-	ld a, $d3
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld a, TEXT_SAFARI_GAME_OVER
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wPlayerMovingDirection], a
 	ld a, SAFARI_ZONE_ENTRANCE
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hWarpDestinationMap], a
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
-	ld hl, wd790
-	set 6, [hl]
-	ld a, $1
+	SetEvent EVENT_SAFARI_GAME_OVER
+	ld a, 1
 	ld [wSafariZoneGameOver], a
 	ret
 
@@ -127,21 +125,21 @@ PrintCinnabarQuiz: ; 1ea17 (7:6a17)
 CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	TX_ASM
 	xor a
-	ld [wda38], a
+	ld [wOpponentAfterWrongAnswer], a
 	ld a, [wHiddenObjectFunctionArgument]
 	push af
 	and $f
-	ld [$ffdb], a
+	ld [hGymGateIndex], a
 	pop af
 	and $f0
 	swap a
 	ld [$ffdc], a
 	ld hl, CinnabarGymQuizIntroText
 	call PrintText
-	ld a, [$ffdb]
+	ld a, [hGymGateIndex]
 	dec a
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	ld hl, CinnabarQuizQuestions
 	add hl, de
@@ -190,8 +188,8 @@ CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
 	TX_FAR _CinnabarQuizQuestionsText6
 	db "@"
 
-CinnabarGymQuiz_1ea8a: ; 1ea8a (7:6a8a)
-	ld hl, wd79c
+CinnabarGymGateFlagAction: ; 1ea8a (7:6a8a)
+	EventFlagAddress hl, EVENT_CINNABAR_GYM_GATE0_UNLOCKED
 	predef_jump FlagActionPredef
 
 CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
@@ -200,37 +198,39 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld c, a
 	ld a, [wCurrentMenuItem]
 	cp c
-	jr nz, .asm_1eab8
+	jr nz, .wrongAnswer
 	ld hl, wd126
 	set 5, [hl]
-	ld a, [$ffdb]
+	ld a, [hGymGateIndex]
 	ld [$ffe0], a
 	ld hl, CinnabarGymQuizCorrectText
 	call PrintText
 	ld a, [$ffe0]
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_SET
-	call CinnabarGymQuiz_1ea8a
-	jp CinnabarGymQuiz_1eb0a
-.asm_1eab8
+	call CinnabarGymGateFlagAction
+	jp UpdateCinnabarGymGateTileBlocks_
+.wrongAnswer
 	call WaitForSoundToFinish
 	ld a, SFX_DENIED
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, CinnabarGymQuizIncorrectText
 	call PrintText
-	ld a, [$ffdb]
+	ld a, [hGymGateIndex]
 	add $2
+	AdjustEventBit EVENT_BEAT_CINNABAR_GYM_TRAINER_0, 2
 	ld c, a
 	ld b, FLAG_TEST
-	ld hl, wd79a
+	EventFlagAddress hl, EVENT_BEAT_CINNABAR_GYM_TRAINER_0
 	predef FlagActionPredef
 	ld a, c
 	and a
 	ret nz
-	ld a, [$ffdb]
+	ld a, [hGymGateIndex]
 	add $2
-	ld [wda38], a
+	ld [wOpponentAfterWrongAnswer], a
 	ret
 
 CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
@@ -240,9 +240,10 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	TX_ASM
 
 	ld a, [$ffe0]
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
-	call CinnabarGymQuiz_1ea8a
+	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
 	jp nz, TextScriptEnd
@@ -256,15 +257,17 @@ CinnabarGymQuizIncorrectText: ; 1eb05 (7:6b05)
 	TX_FAR _CinnabarGymQuizIncorrectText
 	db "@"
 
-CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
-	ld a, $6
-	ld [$ffdb], a
-.asm_1eb0e
-	ld a, [$ffdb]
+UpdateCinnabarGymGateTileBlocks_: ; 1eb0a (7:6b0a)
+; Update the overworld map with open floor blocks or locked gate blocks
+; depending on event flags.
+	ld a, 6
+	ld [hGymGateIndex], a
+.loop
+	ld a, [hGymGateIndex]
 	dec a
 	add a
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	ld hl, CinnabarGymGateCoords
 	add hl, de
@@ -273,27 +276,28 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	ld c, a
 	inc hl
 	ld a, [hl]
-	ld [wd12f], a
+	ld [wGymGateTileBlock], a
 	push bc
-	ld a, [$ffdb]
+	ld a, [hGymGateIndex]
 	ld [$ffe0], a
+	AdjustEventBit EVENT_CINNABAR_GYM_GATE0_UNLOCKED, 0
 	ld c, a
 	ld b, FLAG_TEST
-	call CinnabarGymQuiz_1ea8a
+	call CinnabarGymGateFlagAction
 	ld a, c
 	and a
-	jr nz, .asm_1eb36
-	ld a, [wd12f]
-	jr .asm_1eb38
-.asm_1eb36
+	jr nz, .unlocked
+	ld a, [wGymGateTileBlock]
+	jr .next
+.unlocked
 	ld a, $e
-.asm_1eb38
+.next
 	pop bc
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
-	ld hl, $ffdb
+	ld hl, hGymGateIndex
 	dec [hl]
-	jr nz, .asm_1eb0e
+	jr nz, .loop
 	ret
 
 CinnabarGymGateCoords: ; 1eb48 (7:6b48)
@@ -320,12 +324,11 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	ret nz
-	ld a, [wd7f2]
-	bit 7, a
+	CheckEvent EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	jr nz, .asm_1ebd2
-	bit 3, a
+	CheckEventReuseA EVENT_USED_CELL_SEPARATOR_ON_BILL
 	jr nz, .asm_1eb86
-	bit 6, a
+	CheckEventReuseA EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	jr nz, .asm_1eb8b
 .asm_1eb86
 	tx_pre_jump BillsHouseMonitorText
@@ -354,8 +357,7 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	call PlaySound
 	call WaitForSoundToFinish
 	call PlayDefaultMusic
-	ld hl, wd7f2
-	set 3, [hl]
+	SetEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret
 .asm_1ebd2
 	ld a, $1
@@ -372,7 +374,7 @@ BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	db $06
 	TX_ASM
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld c, 16
 	call DelayFrames
@@ -392,7 +394,7 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	ld [W_ANIMATIONID], a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $4
 	ld [wMaxMenuItem], a
@@ -400,7 +402,7 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	ld [wTopMenuItemY], a
 	ld a, $1
 	ld [wTopMenuItemX], a
-.asm_1ec2d
+.billsPokemonLoop
 	ld hl, wd730
 	set 6, [hl]
 	coord hl, 0, 0
@@ -414,24 +416,24 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	call PrintText
 	call SaveScreenTilesToBuffer2
 	call HandleMenuInput
-	bit 1, a
-	jr nz, .asm_1ec74
+	bit 1, a ; pressed b
+	jr nz, .cancel
 	ld a, [wCurrentMenuItem]
 	add EEVEE
 	cp EEVEE
-	jr z, .asm_1ec6c
+	jr z, .displayPokedex
 	cp FLAREON
-	jr z, .asm_1ec6c
+	jr z, .displayPokedex
 	cp JOLTEON
-	jr z, .asm_1ec6c
+	jr z, .displayPokedex
 	cp VAPOREON
-	jr z, .asm_1ec6c
-	jr .asm_1ec74
-.asm_1ec6c
+	jr z, .displayPokedex
+	jr .cancel
+.displayPokedex
 	call DisplayPokedex
 	call LoadScreenTilesFromBuffer2
-	jr .asm_1ec2d
-.asm_1ec74
+	jr .billsPokemonLoop
+.cancel
 	ld hl, wd730
 	res 6, [hl]
 	call LoadScreenTilesFromBuffer2

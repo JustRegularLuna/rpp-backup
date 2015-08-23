@@ -66,15 +66,15 @@ jpab: MACRO
 	ENDM
 
 bcd2: MACRO
-    dn ((\1) / 1000) % 10, ((\1) / 100) % 10
-    dn ((\1) / 10) % 10, (\1) % 10
-    ENDM
+	dn ((\1) / 1000) % 10, ((\1) / 100) % 10
+	dn ((\1) / 10) % 10, (\1) % 10
+	ENDM
 
 bcd3: MACRO
-    dn ((\1) / 100000) % 10, ((\1) / 10000) % 10
-    dn ((\1) / 1000) % 10, ((\1) / 100) % 10
-    dn ((\1) / 10) % 10, (\1) % 10
-    ENDM
+	dn ((\1) / 100000) % 10, ((\1) / 10000) % 10
+	dn ((\1) / 1000) % 10, ((\1) / 100) % 10
+	dn ((\1) / 10) % 10, (\1) % 10
+	ENDM
 
 coins equs "bcd2"
 money equs "bcd3"
@@ -102,6 +102,14 @@ Coorda: MACRO
 ;\2 = Y
 dwCoord: MACRO
 	dw wTileMap + 20 * \2 + \1
+	ENDM
+
+;\1 = r
+;\2 = X
+;\3 = Y
+;\4 = map width
+overworldMapCoord: MACRO
+	ld \1, wOverworldMap + ((\2) + 3) + (((\3) + 3) * ((\4) + (3 * 2)))
 	ENDM
 
 ;\1 = Map Width
@@ -263,7 +271,7 @@ NONE  EQU $FF
 ;\7 trainers only: trainer class/pokemon id
 ;\8 trainers only: trainer number/pokemon level
 object: MACRO
-    db \1
+	db \1
 	db \3 + 4
 	db \2 + 4
 	db \4
@@ -642,4 +650,15 @@ CALL_INDIRECT: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
 	rst $18
+ENDM
+
+tmlearn: MACRO
+x = 0
+	rept _NARG
+if \1 != 0
+x = x | (1 << ((\1 - 1) % 8))
+endc
+	shift
+	endr
+	db x
 ENDM

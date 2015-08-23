@@ -16,9 +16,9 @@ CeladonMartElevatorScript: ; 48600 (12:4600)
 
 CeladonMartElevatorScript_4861c: ; 4861c (12:461c)
 	ld hl, wWarpEntries
-	ld a, [wd73b]
+	ld a, [wWarpedFromWhichWarp]
 	ld b, a
-	ld a, [wd73c]
+	ld a, [wWarpedFromWhichMap]
 	ld c, a
 	call CeladonMartElevatorScript_4862a
 
@@ -35,13 +35,17 @@ CeladonMartElevatorScript_48631: ; 48631 (12:4631)
 	ld hl, CeladonMartElavatorFloors
 	call LoadItemList
 	ld hl, CeldaonMartElevatorWarpMaps
-	ld de, wcc5b
-	ld bc, $000a
+	ld de, wElevatorWarpMaps
+	ld bc, CeldaonMartElevatorWarpMapsEnd - CeldaonMartElevatorWarpMaps
 	jp CopyData
 
 CeladonMartElavatorFloors: ; 48643 (12:4643)
 	db $05 ; num elements in list
-	db $56, $57, $58, $59, $5A ; "1F", "2F", "3F", "4F, "5F"
+	db FLOOR_1F
+	db FLOOR_2F
+	db FLOOR_3F
+	db FLOOR_4F
+	db FLOOR_5F
 	db $FF ; terminator
 
 CeldaonMartElevatorWarpMaps: ; 4864a (12:464a)
@@ -53,6 +57,7 @@ CeldaonMartElevatorWarpMaps: ; 4864a (12:464a)
 	db $02, CELADON_MART_3
 	db $02, CELADON_MART_4
 	db $02, CELADON_MART_5
+CeldaonMartElevatorWarpMapsEnd:
 
 CeladonMartElevatorScript_48654: ; 48654 (12:4654)
 	jpba ShakeElevator
@@ -64,5 +69,5 @@ CeladonMartElevatorText1: ; 4865e (12:465e)
 	TX_ASM
 	call CeladonMartElevatorScript_48631
 	ld hl, CeldaonMartElevatorWarpMaps
-	predef Func_1c9c6
+	predef DisplayElevatorFloorMenu
 	jp TextScriptEnd

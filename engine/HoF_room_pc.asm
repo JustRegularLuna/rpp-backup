@@ -65,18 +65,18 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	call GetMonHeader
 	call LoadFrontSpriteByMonIndex
 	ld hl,vBGMap0 + $c
-	call CopyTileMapToVRAM
+	call CreditsCopyTileMapToVRAM
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call LoadScreenTilesFromBuffer1
 	ld hl,vBGMap0
-	call CopyTileMapToVRAM
+	call CreditsCopyTileMapToVRAM
 	ld a,$A7
 	ld [rWX],a
 	ld hl,vBGMap1
-	call CopyTileMapToVRAM
+	call CreditsCopyTileMapToVRAM
 	call FillMiddleOfScreenWithWhite
-	ld a,%11111100 ; make the mon a black silhouette 
+	ld a,%11111100 ; make the mon a black silhouette
 	ld [rBGP],a
 
 ; scroll the mon left by one tile 7 times
@@ -88,7 +88,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 
 ; scroll the mon left by one tile 20 times
 ; This time, we have to move the window left too in order to hide the text that
-; is wrapping around to the right side of the screen. 
+; is wrapping around to the right side of the screen.
 	ld c,20
 .scrollLoop2
 	call ScrollCreditsMonLeft
@@ -136,12 +136,12 @@ HoFGBPalettes: ; 74160 (1d:4160)
 	db %11100000
 	db %11110000
 
-CopyTileMapToVRAM: ; 74164 (1d:4164)
+CreditsCopyTileMapToVRAM: ; 74164 (1d:4164)
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a
 	ld a, h
 	ld [H_AUTOBGTRANSFERDEST + 1], a
-	ld a, $1
+	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
 
@@ -164,7 +164,7 @@ FillFourRowsWithBlack: ; 7417b (1d:417b)
 FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
 	coord hl, 0, 4
 	ld bc, SCREEN_WIDTH * 10
-	ld a, $7f ; blank white tile
+	ld a, " "
 	jp FillMemory
 
 Credits: ; 7418e (1d:418e)
@@ -246,7 +246,7 @@ Credits: ; 7418e (1d:418e)
 	pop de
 	ld de, TheEndGfx
 	ld hl, vChars2 + $600
-	ld bc, (BANK(TheEndGfx) << 8) + $0a
+	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / $10
 	call CopyVideoData
 	coord hl, 4, 8
 	ld de, TheEndTextString
@@ -267,3 +267,4 @@ INCLUDE "text/credits_text.asm"
 
 TheEndGfx: ; 7473e (1d:473e) (7473f on blue)
 	INCBIN "gfx/theend.interleave.2bpp"
+TheEndGfxEnd:

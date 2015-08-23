@@ -69,16 +69,17 @@ LedgeTiles: ; 1a6cf (6:66cf)
 LoadHoppingShadowOAM: ; 1a6f0 (6:66f0)
 	ld hl, vChars1 + $7f0
 	ld de, LedgeHoppingShadow
-	ld bc, (BANK(LedgeHoppingShadow) << 8) + $01
+	lb bc, BANK(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / $8
 	call CopyVideoDataDouble
 	ld a, $9
-	ld bc, $5448 ; b, c = y, x coordinates of shadow
+	lb bc, $54, $48 ; b, c = y, x coordinates of shadow
 	ld de, LedgeHoppingShadowOAM
 	call WriteOAMBlock
 	ret
 
 LedgeHoppingShadow: ; 1a708 (6:6708)
 	INCBIN "gfx/ledge_hopping_shadow.1bpp"
+LedgeHoppingShadowEnd:
 
 LedgeHoppingShadowOAM: ; 1a710 (6:6710)
 	db $FF,$10,$FF,$20

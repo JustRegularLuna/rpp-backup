@@ -34,7 +34,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; display pokemon menu options
 	ld hl,wFieldMoves
-	ld bc,$020c ; max menu item ID, top menu item Y
+	lb bc, $02, $0c ; max menu item ID, top menu item Y
 	ld e,5
 .adjustMenuVariablesLoop
 	dec e
@@ -57,7 +57,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	inc hl
 	ld a,b
 	ld [hli],a ; max menu item ID
-	ld a,%00000011 ; A button, B button
+	ld a,A_BUTTON | B_BUTTON
 	ld [hli],a ; menu watched keys
 	xor a
 	ld [hl],a
@@ -167,7 +167,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp z,.loop
 	ld a,SURFBOARD
 	ld [wcf91],a
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	call UseItem
 	ld a,[wActionResultOrTookBattleTurn]
 	and a
@@ -195,7 +195,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .dig
 	ld a,ESCAPE_ROPE
 	ld [wcf91],a
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	call UseItem
 	ld a,[wActionResultOrTookBattleTurn]
 	and a
@@ -260,7 +260,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	push af
 	ld a,POTION
 	ld [wcf91],a
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	call UseItem
 	pop af
 	ld [wPartyAndBillsPCSavedMenuItem],a
@@ -297,7 +297,7 @@ ErasePartyMenuCursors: ; 132ed (4:72ed)
 
 ItemMenuLoop: ; 132fc (4:72fc)
 	call LoadScreenTilesFromBuffer2DisableBGTransfer ; restore saved screen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 
 StartMenu_Item: ; 13302 (4:7302)
 	ld a,[wLinkState]
@@ -354,7 +354,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	inc hl
 	inc a ; a = 1
 	ld [hli],a ; max menu item ID
-	ld a,%00000011 ; A button, B button
+	ld a,A_BUTTON | B_BUTTON
 	ld [hli],a ; menu watched keys
 	xor a
 	ld [hl],a ; old menu item id
@@ -381,8 +381,8 @@ StartMenu_Item: ; 13302 (4:7302)
 	ld a,[wCurrentMenuItem]
 	and a
 	jr nz,.tossItem
-.useItem
-	ld [wd152],a
+; use item
+	ld [wPseudoItemID],a ; a must be 0 due to above conditional jump
 	ld a,[wcf91]
 	cp a,HM_01
 	jr nc,.useItem_partyMenu
@@ -399,7 +399,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	jp ItemMenuLoop
 .useItem_closeMenu
 	xor a
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	call UseItem
 	ld a,[wActionResultOrTookBattleTurn]
 	and a
@@ -506,14 +506,14 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 	ld [hTilesetType],a
 	call DrawTrainerInfo
 	predef DrawBadges ; draw badges
-	ld b,$0d
-	call GoPAL_SET
+	ld b, SET_PAL_TRAINER_CARD
+	call RunPaletteCommand
 	call GBPalNormal
 	call WaitForTextScrollButtonPress ; wait for button press
 	call GBPalWhiteOut
 	call LoadFontTilePatterns
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call ReloadMapData
 	call LoadGBPal
 	pop af
@@ -523,7 +523,7 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 ; loads tile patterns and draws everything except for gym leader faces / badges
 DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,RedPicFront
-	ld bc,(BANK(RedPicFront) << 8) | $01
+	lb bc, BANK(RedPicFront), $01
 	predef DisplayPicCenteredOrUpperRight
 	call DisableLCD
 	coord hl, 0, 2
@@ -602,16 +602,16 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	call PrintBCDNumber
 	coord hl, 9, 6
 	ld de,W_PLAYTIMEHOURS + 1 ; hours
-	ld bc,$4103
+	lb bc, LEFT_ALIGN | 1, 3
 	call PrintNumber
 	ld [hl],$d6 ; colon tile ID
 	inc hl
 	ld de,W_PLAYTIMEMINUTES + 1 ; minutes
-	ld bc,$8102
+	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
 TrainerInfo_FarCopyData: ; 1357f (4:757f)
-	ld a,$0b
+	ld a,BANK(TrainerInfoTextBoxTileGraphics)
 	jp FarCopyData2
 
 TrainerInfo_NameMoneyTimeText: ; 13584 (4:7584)
@@ -632,7 +632,7 @@ TrainerInfo_BadgesText: ; 13597 (4:7597)
 ; [wTrainerInfoTextBoxNextRowOffset] = distance from the end of a text box row to the start of the next
 TrainerInfo_DrawTextBox: ; 135a0 (4:75a0)
 	ld a,$79 ; upper left corner tile ID
-	ld de,$7a7b ; top edge and upper right corner tile ID's
+	lb de, $7a, $7b ; top edge and upper right corner tile ID's
 	call TrainerInfo_DrawHorizontalEdge ; draw top edge
 	call TrainerInfo_NextTextBoxRow
 	ld a,[wTrainerInfoTextBoxWidthPlus1]
@@ -647,7 +647,7 @@ TrainerInfo_DrawTextBox: ; 135a0 (4:75a0)
 	dec c
 	jr nz,.loop
 	ld a,$7d ; lower left corner tile ID
-	ld de,$777e ; bottom edge and lower right corner tile ID's
+	lb de,$77, $7e ; bottom edge and lower right corner tile ID's
 
 TrainerInfo_DrawHorizontalEdge: ; 135c3 (4:75c3)
 	ld [hli],a ; place left corner tile
@@ -813,36 +813,36 @@ SwitchPartyMon_InitVarOrSwapData: ; 13653 (4:7653)
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonOT
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wCurrentMenuItem]
 	call SkipFixedLengthTextEntries
 	push hl
 	ld de, wSwitchPartyMonTempBuffer
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonNicks
 	ld a, [wMenuItemToSwap]
 	call SkipFixedLengthTextEntries
 	pop de
 	push hl
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop de
 	ld hl, wSwitchPartyMonTempBuffer
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMenuItemToSwap]
 	ld [wSwappedMenuItem], a

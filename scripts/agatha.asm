@@ -13,8 +13,7 @@ AgathaScript_76443: ; 76443 (1d:6443)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd865]
-	bit 1, a
+	CheckEvent EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
 	jr z, .asm_76457
 	ld a, $e
 	jp AgathaScript_76459
@@ -22,8 +21,8 @@ AgathaScript_76443: ; 76443 (1d:6443)
 	ld a, $3b
 
 AgathaScript_76459: ; 76459 (1d:6459)
-	ld [wd09f], a
-	ld bc, $2
+	ld [wNewTileBlockID], a
+	lb bc, 0, 2
 	predef_jump ReplaceTileBlock
 
 AgathaScript_76464: ; 76464 (1d:6464)
@@ -70,9 +69,7 @@ AgathaScript0: ; 76490 (1d:6490)
 	ld a, [wCoordIndex]
 	cp $3
 	jr c, .asm_764b4
-	ld hl, wd865
-	bit 6, [hl]
-	set 6, [hl]
+	CheckAndSetEvent EVENT_AUTOWALKED_INTO_AGATHAS_ROOM
 	jr z, AgathaScript_76474
 .asm_764b4
 	ld a, $2
@@ -124,9 +121,9 @@ AgathaTextPointers: ; 76505 (1d:6505)
 
 AgathaTrainerHeaders: ; 76509 (1d:6509)
 AgathaTrainerHeader0: ; 76509 (1d:6509)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd865 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_AGATHAS_ROOM_TRAINER_0
 	dw AgathaBeforeBattleText ; TextBeforeBattle
 	dw AgathaAfterBattleText ; TextAfterBattle
 	dw AgathaEndBattleText ; TextEndBattle

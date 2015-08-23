@@ -291,7 +291,7 @@ Char51:: ; 1ab4 (0:1ab4)
 	call ProtectedDelay3
 	call ManualTextScroll
 	coord hl, 1, 13
-	ld bc,$0412
+	lb bc, 4, 18
 	call ClearScreenArea
 	ld c,20
 	call DelayFrames
@@ -306,7 +306,7 @@ Char49:: ; 1ad5 (0:1ad5)
 	call ProtectedDelay3
 	call ManualTextScroll
 	coord hl, 1, 10
-	ld bc,$0712
+	lb bc, 7, 18
 	call ClearScreenArea
 	ld c,20
 	call DelayFrames
@@ -376,9 +376,9 @@ TextCommandProcessor:: ; 1b40 (0:1b40)
 	xor e
 	ld [wLetterPrintingDelayFlags],a
 	ld a,c
-	ld [wcc3a],a
+	ld [wUnusedCC3A],a
 	ld a,b
-	ld [wcc3b],a
+	ld [wUnusedCC3B],a
 
 NextTextCommand:: ; 1b55 (0:1b55)
 	ld a,[hli]
@@ -487,10 +487,10 @@ TextCommand02:: ; 1ba5 (0:1ba5)
 TextCommand03:: ; 1bb7 (0:1bb7)
 	pop hl
 	ld a,[hli]
-	ld [wcc3a],a
+	ld [wUnusedCC3A],a
 	ld c,a
 	ld a,[hli]
-	ld [wcc3b],a
+	ld [wUnusedCC3B],a
 	ld b,a
 	jp NextTextCommand
 
@@ -561,7 +561,7 @@ TextCommand09:: ; 1bff (0:1bff)
 	ld a,b
 	and a,$f0
 	swap a
-	set 6,a
+	set BIT_LEFT_ALIGN,a
 	ld b,a
 	call PrintNumber
 	ld b,h
@@ -627,12 +627,12 @@ TextCommand0B:: ; 1c31 (0:1c31)
 ; format: text command ID, sound ID or cry ID
 TextCommandSounds:: ; 1c64 (0:1c64)
 	db $0B,SFX_GET_ITEM_1
-	db $12,SFX_BATTLE_06
+	db $12,SFX_CAUGHT_MON
 	db $0E,SFX_POKEDEX_RATING
 	db $0F,SFX_GET_ITEM_1
 	db $10,SFX_GET_ITEM_2
 	db $11,SFX_GET_KEY_ITEM
-	db $13,SFX_BATTLE_05
+	db $13,SFX_DEX_PAGE_ADDED
 	db $14,NIDORINA ; used in OakSpeech
 	db $15,PIDGEOT  ; used in SaffronCityText12
 	db $16,DEWGONG  ; unused?

@@ -28,12 +28,11 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd77e]
-	bit 1, a
+	CheckEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ret nz
 	ld a, $2a
-	ld [wd09f], a
-	ld bc, $0208
+	ld [wNewTileBlockID], a
+	lb bc, 2, 8
 	predef_jump ReplaceTileBlock
 
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
@@ -108,7 +107,7 @@ CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, HS_GAME_CORNER_ROCKET
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, wd126
 	set 5, [hl]
@@ -227,8 +226,7 @@ CeladonGameCornerText4: ; 48d45 (12:4d45)
 
 CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	TX_ASM
-	ld a, [wd77e]
-	bit 2, a
+	CheckEvent EVENT_GOT_10_COINS
 	jr nz, .asm_48d89
 	ld hl, CeladonGameCornerText_48d9c
 	call PrintText
@@ -246,8 +244,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wd77e
-	set 2, [hl]
+	SetEvent EVENT_GOT_10_COINS
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, Received10CoinsText
@@ -286,8 +283,7 @@ CeladonGameCornerText6: ; 48db1 (12:4db1)
 
 CeladonGameCornerText7: ; 48db6 (12:4db6)
 	TX_ASM
-	ld a, [wd77c]
-	bit 1, a
+	CheckEvent EVENT_BEAT_ERIKA
 	ld hl, CeladonGameCornerText_48dca
 	jr z, .asm_48dc4
 	ld hl, CeladonGameCornerText_48dcf
@@ -309,8 +305,7 @@ CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 
 CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	TX_ASM
-	ld a, [wd77e]
-	bit 4, a
+	CheckEvent EVENT_GOT_20_COINS_2
 	jr nz, .asm_48e13
 	ld hl, CeladonGameCornerText_48e26
 	call PrintText
@@ -328,8 +323,7 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wd77e
-	set 4, [hl]
+	SetEvent EVENT_GOT_20_COINS_2
 	ld hl, Received20CoinsText
 	jr .asm_48e20
 .asm_48e13
@@ -362,8 +356,7 @@ CeladonGameCornerText_48e36: ; 48e36 (12:4e36)
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	TX_ASM
-	ld a, [wd77e]
-	bit 3, a
+	CheckEvent EVENT_GOT_20_COINS
 	jr nz, .asm_48e75
 	ld hl, CeladonGameCornerText_48e88
 	call PrintText
@@ -381,8 +374,7 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wd77e
-	set 3, [hl]
+	SetEvent EVENT_GOT_20_COINS
 	ld hl, CeladonGameCornerText_48e8d
 	jr .asm_48e82
 .asm_48e75
@@ -457,11 +449,10 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, wd77e
-	set 1, [hl]
+	SetEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ld a, $43
-	ld [wd09f], a
-	ld bc, $0208
+	ld [wNewTileBlockID], a
+	lb bc, 2, 8
 	predef ReplaceTileBlock
 	jp TextScriptEnd
 
@@ -486,8 +477,8 @@ CeladonGameCornerScript_48f1e: ; 48f1e (12:4f1e)
 	call TextBoxBorder
 	call UpdateSprites
 	coord hl, 12, 1
-	ld b, $4
-	ld c, $7
+	ld b, 4
+	ld c, 7
 	call ClearScreenArea
 	coord hl, 12, 2
 	ld de, GameCornerMoneyText

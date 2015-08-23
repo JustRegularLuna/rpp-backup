@@ -25,7 +25,7 @@ SSAnne2Script0: ; 613be (18:53be)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -33,7 +33,7 @@ SSAnne2Script0: ; 613be (18:53be)
 	ld a, [wCoordIndex]
 	ld [$ffdb], a
 	ld a, HS_SS_ANNE_2_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	call Delay3
 	ld a, $2
@@ -97,7 +97,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	call Delay3
-	ld a, SONY2 + $c8
+	ld a, OPP_SONY2
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
@@ -146,7 +146,7 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $3
@@ -171,7 +171,7 @@ SSAnne2Script3: ; 614be (18:54be)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, HS_SS_ANNE_2_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call PlayDefaultMusic
 	ld a, $4

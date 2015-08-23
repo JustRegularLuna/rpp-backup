@@ -5,8 +5,7 @@ DisplayPCMainMenu:: ; 213c8 (8:53c8)
 	ld a, [wNumHoFTeams]
 	and a
 	jr nz, .leaguePCAvailable
-	ld a, [wd74b]
-	bit 5, a ; received pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	jr z, .noOaksPC
 	ld a, [wNumHoFTeams]
 	and a
@@ -29,8 +28,7 @@ DisplayPCMainMenu:: ; 213c8 (8:53c8)
 	call UpdateSprites
 	ld a, 3
 	ld [wMaxMenuItem], a
-	ld a, [wd7f1]
-	bit 0, a
+	CheckEvent EVENT_MET_BILL
 	jr nz, .metBill
 	coord hl, 2, 2
 	ld de, SomeonesPCText
@@ -47,8 +45,7 @@ DisplayPCMainMenu:: ; 213c8 (8:53c8)
 	ld h, b
 	ld de, PlayersPCText
 	call PlaceString
-	ld a, [wd74b]
-	bit 5, a ; received pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	jr z, .noOaksPC2
 	coord hl, 2, 6
 	ld de, OaksPCText
@@ -119,7 +116,7 @@ BillsPCMenu: ; 214e8 (8:54e8)
 	ld [wCurrentMenuItem], a
 	ld hl, vChars2 + $780
 	ld de, PokeballTileGraphics
-	ld bc, (BANK(PokeballTileGraphics) << 8) + $01
+	lb bc, BANK(PokeballTileGraphics), $01
 	call CopyVideoData
 	call LoadScreenTilesFromBuffer2DisableBGTransfer
 	coord hl, 0, 0
@@ -453,7 +450,7 @@ DisplayDepositWithdrawMenu: ; 2174b (8:574b)
 	predef StatusScreen2
 	call LoadScreenTilesFromBuffer1
 	call ReloadTilesetTilePatterns
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadGBPal
 	jr .loop
 

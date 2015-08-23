@@ -1,6 +1,5 @@
 OaksLabScript: ; 1cb0e (7:4b0e)
-	ld a, [wd74b]
-	bit 6, a
+	CheckEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS_2
 	call nz, OaksLabScript_1d076
 	ld a, $1
 	ld [wAutoTextBoxDrawingControl], a
@@ -32,14 +31,13 @@ OaksLabScriptPointers: ; 1cb28 (7:4b28)
 	dw OaksLabScript18
 
 OaksLabScript0: ; 1cb4e (7:4b4e)
-	ld a, [wd74b]
-	bit 7, a
+	CheckEvent EVENT_OAK_APPEARED_IN_PALLET
 	ret z
 	ld a, [wNPCMovementScriptFunctionNum]
 	and a
 	ret nz
 	ld a, HS_OAKS_LAB_OAK_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld hl, wd72e
 	res 4, [hl]
@@ -69,10 +67,10 @@ OaksLabScript2: ; 1cb82 (7:4b82)
 	bit 0, a
 	ret nz
 	ld a, HS_OAKS_LAB_OAK_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_OAKS_LAB_OAK_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 
 	ld a, $3
@@ -110,10 +108,8 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld hl, wd747
-	set 0, [hl]
-	ld hl, wd74b
-	set 0, [hl]
+	SetEvent EVENT_FOLLOWED_OAK_INTO_LAB
+	SetEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_UP
@@ -146,8 +142,7 @@ OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $14
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd74b
-	set 1, [hl]
+	SetEvent EVENT_OAK_ASKED_TO_CHOOSE_MON
 	xor a
 	ld [wJoyIgnore], a
 
@@ -320,7 +315,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 .asm_1cd30
 	ld a, HS_STARTER_BALL_3
 .asm_1cd32
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call Delay3
 	ld a, [wRivalStarterTemp]
@@ -336,8 +331,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $e
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd74b
-	set 2, [hl]
+	SetEvent EVENT_GOT_STARTER
 	xor a
 	ld [wJoyIgnore], a
 
@@ -387,7 +381,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ret nz
 
 	; define which team rival uses, and fight it
-	ld a, SONY1 + $C8
+	ld a, OPP_SONY1
 	ld [W_CUROPPONENT], a
 	ld a, [W_RIVALSTARTER]
 	cp STARTER2
@@ -435,8 +429,7 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	predef HealParty
-	ld hl, wd74b
-	set 3, [hl]
+	SetEvent EVENT_BATTLED_RIVAL_IN_OAKS_LAB
 
 	ld a, $d
 	ld [W_OAKSLABCURSCRIPT], a
@@ -456,13 +449,13 @@ OaksLabScript13: ; 1ce32 (7:4e32)
 	ld a, [W_XCOORD]
 	cp $4
 	; move left or right depending on where the player is standing
-	jr nz, .asm_1ce5b
-	ld a, $c0
-	jr .asm_1ce5d
-.asm_1ce5b
-	ld a, $80
-.asm_1ce5d
-	ld [wcc5b], a
+	jr nz, .moveLeft
+	ld a, NPC_MOVEMENT_RIGHT
+	jr .next
+.moveLeft
+	ld a, NPC_MOVEMENT_LEFT
+.next
+	ld [wNPCMovementDirections], a
 
 	ld a, $e
 	ld [W_OAKSLABCURSCRIPT], a
@@ -482,7 +475,7 @@ OaksLabScript14: ; 1ce6d (7:4e6d)
 	bit 0, a
 	jr nz, .asm_1ce8c
 	ld a, HS_OAKS_LAB_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
@@ -518,7 +511,7 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	ld [hJoyHeld], a
 	call EnableAutoTextBoxDrawing
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $15
@@ -526,14 +519,14 @@ OaksLabScript15: ; 1ceb0 (7:4eb0)
 	call DisplayTextID
 	call OaksLabScript_1d02b
 	ld a, HS_OAKS_LAB_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, [wNPCMovementDirections2Index]
-	ld [wd157], a
-	ld b, $0
+	ld [wSavedNPCMovementDirections2Index], a
+	ld b, 0
 	ld c, a
 	ld hl, wNPCMovementDirections2
-	ld a, $40
+	ld a, NPC_MOVEMENT_UP
 	call FillMemory
 	ld [hl], $ff
 	ld a, $1
@@ -585,10 +578,10 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	call DisplayTextID
 	call Delay3
 	ld a, HS_POKEDEX_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_POKEDEX_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call OaksLabScript_1cefd
 	ld a, $1a
@@ -603,25 +596,23 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, $1b
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wd74b
-	set 5, [hl]
-	ld hl, wd74e
-	set 0, [hl]
+	SetEvent EVENT_GOT_POKEDEX
+	SetEvent EVENT_OAK_GOT_PARCEL
 	ld a, HS_LYING_OLD_MAN
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_OLD_MAN
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
-	ld a, [wd157]
-	ld b, $0
+	ld a, [wSavedNPCMovementDirections2Index]
+	ld b, 0
 	ld c, a
 	ld hl, wNPCMovementDirections2
-	xor a
+	xor a ; NPC_MOVEMENT_DOWN
 	call FillMemory
 	ld [hl], $ff
 	ld a, $ff
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $1
@@ -639,14 +630,13 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 	ret nz
 	call PlayDefaultMusic
 	ld a, HS_OAKS_LAB_RIVAL
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld hl, wd7eb
-	set 0, [hl]
-	res 1, [hl]
-	set 7, [hl]
+	SetEvent EVENT_1ST_ROUTE22_RIVAL_BATTLE
+	ResetEventReuseHL EVENT_2ND_ROUTE22_RIVAL_BATTLE
+	SetEventReuseHL EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 	ld a, HS_ROUTE_22_RIVAL_1
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, $5
 	ld [W_PALLETTOWNCURSCRIPT], a
@@ -660,19 +650,19 @@ OaksLabScript17: ; 1cfd4 (7:4fd4)
 OaksLabScript18: ; 1d009 (7:5009)
 	ret
 
-OaksLabScript_1d00a: ; 1d00a (7:500a)
+OaksLabScript_RemoveParcel: ; 1d00a (7:500a)
 	ld hl, wBagItems
 	ld bc, $0000
-.asm_1d010
+.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp OAKS_PARCEL
-	jr z, .GotParcel
+	jr z, .foundParcel
 	inc hl
 	inc c
-	jr .asm_1d010
-.GotParcel
+	jr .loop
+.foundParcel
 	ld hl, wNumBagItems
 	ld a, c
 	ld [wWhichPokemon], a
@@ -772,8 +762,7 @@ OaksLabTextPointers: ; 1d082 (7:5082)
 OaksLabText28: ; 1d0ce (7:50ce)
 OaksLabText1: ; 1d0ce (7:50ce)
 	TX_ASM
-	ld a, [wd74b]
-	bit 0, a
+	CheckEvent EVENT_FOLLOWED_OAK_INTO_LAB_2
 	jr nz, .asm_1d0de
 	ld hl, OaksLabGaryText1
 	call PrintText
@@ -839,10 +828,9 @@ OaksLabScript_1d133: ; 1d133 (7:5133)
 	ld [wd11e], a
 	ld a, b
 	ld [wSpriteIndex], a
-	ld a, [wd74b]
-	bit 2, a
+	CheckEvent EVENT_GOT_STARTER
 	jp nz, OaksLabScript_1d22d
-	bit 1, a
+	CheckEventReuseA EVENT_OAK_ASKED_TO_CHOOSE_MON
 	jr nz, OaksLabScript_1d157
 	ld hl, OaksLabText39
 	call PrintText
@@ -867,7 +855,7 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld [hl], SPRITE_FACING_RIGHT
 	ld hl, wd730
 	set 6, [hl]
-	predef StarterDex  ; StarterDex
+	predef StarterDex
 	ld hl, wd730
 	res 6, [hl]
 	call ReloadMapData
@@ -926,7 +914,7 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 .asm_1d1e3
 	ld a, HS_STARTER_BALL_3
 .asm_1d1e5
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -976,17 +964,15 @@ OaksLabLastMonText: ; 1d243 (7:5243)
 OaksLabText32: ; 1d248 (7:5248)
 OaksLabText5: ; 1d248 (7:5248)
 	TX_ASM
-	ld a, [wd747]
-	bit 6, a
+	CheckEvent EVENT_PALLET_AFTER_GETTING_POKEBALLS
 	jr nz, .asm_1d266
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
-	ld a, [wd11e]
-	cp $2
+	ld a, [wNumSetBits]
+	cp 2
 	jr c, .asm_1d279
-	ld a, [wd74b]
-	bit 5, a
+	CheckEvent EVENT_GOT_POKEDEX
 	jr z, .asm_1d279
 .asm_1d266
 	ld hl, OaksLabText_1d31d
@@ -999,13 +985,11 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld b,POKE_BALL
 	call IsItemInBag
 	jr nz, .asm_1d2e7
-	ld a, [wd7eb]
-	bit 5, a
+	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	jr nz, .asm_1d2d0
-	ld a, [wd74b]
-	bit 5, a
+	CheckEvent EVENT_GOT_POKEDEX
 	jr nz, .asm_1d2c8
-	bit 3, a
+	CheckEventReuseA EVENT_BATTLED_RIVAL_IN_OAKS_LAB
 	jr nz, .asm_1d2a9
 	ld a, [wd72e]
 	bit 3, a
@@ -1027,7 +1011,7 @@ OaksLabText5: ; 1d248 (7:5248)
 .asm_1d2b8
 	ld hl, OaksLabDeliverParcelText
 	call PrintText
-	call OaksLabScript_1d00a
+	call OaksLabScript_RemoveParcel
 	ld a, $f
 	ld [W_OAKSLABCURSCRIPT], a
 	jr .asm_1d2ed
@@ -1036,11 +1020,9 @@ OaksLabText5: ; 1d248 (7:5248)
 	call PrintText
 	jr .asm_1d2ed
 .asm_1d2d0
-	ld hl, wd74b
-	bit 4, [hl]
-	set 4, [hl]
+	CheckAndSetEvent EVENT_GOT_POKEBALLS_FROM_OAK
 	jr nz, .asm_1d2e7
-	ld bc, (POKE_BALL << 8) | 5
+	lb bc, POKE_BALL, 5
 	call GiveItem
 	ld hl, OaksLabGivePokeballsText
 	call PrintText

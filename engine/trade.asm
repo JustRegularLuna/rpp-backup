@@ -149,7 +149,7 @@ Trade_Delay80: ; 41191 (10:5191)
 
 Trade_ClearTileMap: ; 41196 (10:5196)
 	coord hl, 0, 0
-	ld bc, 20 * 18
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	ld a, " "
 	jp FillMemory
 
@@ -158,12 +158,12 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call DisableLCD
 	ld hl, TradingAnimationGraphics
 	ld de, vChars2 + $310
-	ld bc, $310
+	ld bc, TradingAnimationGraphicsEnd - TradingAnimationGraphics
 	ld a, BANK(TradingAnimationGraphics)
 	call FarCopyData2
 	ld hl, TradingAnimationGraphics2
 	ld de, vSprites + $7c0
-	ld bc, $40
+	ld bc, TradingAnimationGraphics2End - TradingAnimationGraphics2
 	ld a, BANK(TradingAnimationGraphics2)
 	call FarCopyData2
 	ld hl, vBGMap0
@@ -190,7 +190,7 @@ LoadTradingGFXAndMonNames: ; 411a1 (10:51a1)
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wcf4b
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wTradedEnemyMonSpecies]
 	ld [wd11e], a
@@ -204,15 +204,15 @@ Trade_LoadMonPartySpriteGfx: ; 4120b (10:520b)
 Trade_SwapNames: ; 41217 (10:5217)
 	ld hl, wPlayerName
 	ld de, wBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wLinkEnemyTrainerName
 	ld de, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wBuffer
 	ld de, wLinkEnemyTrainerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 Trade_Cleanup: ; 4123b (10:523b)
@@ -268,8 +268,8 @@ Trade_DrawOpenEndOfLinkCable: ; 41298 (10:5298)
 	call Trade_ClearTileMap
 	ld b, vBGMap0 / $100
 	call CopyScreenTileBufferToVRAM
-	ld b, $8
-	call GoPAL_SET
+	ld b, SET_PAL_GENERIC
+	call RunPaletteCommand
 
 ; This function call is pointless. It just copies blank tiles to VRAM that was
 ; already filled with blank tiles.
@@ -304,25 +304,25 @@ Trade_AnimateBallEnteringLinkCable: ; 412d2 (10:52d2)
 	ld a, %11100100
 	ld [rOBP0], a
 	xor a
-	ld [wd09f], a
+	ld [wLinkCableAnimBulgeToggle], a
 	ld bc, $2060
 .moveBallInsideLinkCableLoop
 	push bc
 	xor a
 	ld de, Trade_BallInsideLinkCableOAM
 	call WriteOAMBlock
-	ld a, [wd09f]
+	ld a, [wLinkCableAnimBulgeToggle]
 	xor $1
-	ld [wd09f], a
+	ld [wLinkCableAnimBulgeToggle], a
 	add $7e
 	ld hl, wOAMBuffer + $02
-	ld de, $4
+	ld de, 4
 	ld c, e
-.cycleSpriteFramesLoop
+.cycleLinkCableBulgeTile
 	ld [hl], a
 	add hl, de
 	dec c
-	jr nz, .cycleSpriteFramesLoop
+	jr nz, .cycleLinkCableBulgeTile
 	call Delay3
 	pop bc
 	ld a, c
@@ -371,7 +371,7 @@ Trade_ShowEnemyMon: ; 41336 (10:5336)
 	call PlayCry
 	call Trade_Delay100
 	coord hl, 4, 10
-	ld bc, $80c
+	lb bc, 8, 12
 	call ClearScreenArea
 	jp PrintTradeTakeCareText
 
@@ -552,14 +552,14 @@ Trade_CopyCableTilesOffScreen: ; 414ae (10:54ae)
 ; continues when the screen is scrolled.
 	push hl
 	coord hl, 0, 4
-	call CopyToScreenEdgeTiles
+	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld a, h
-	ld [H_SCREENEDGEREDRAWADDR + 1], a
+	ld [hRedrawRowOrColumnDest + 1], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a
-	ld a, REDRAWROW
-	ld [H_SCREENEDGEREDRAW], a
+	ld [hRedrawRowOrColumnDest], a
+	ld a, REDRAW_ROW
+	ld [hRedrawRowOrColumnMode], a
 	ld c, 10
 	jp DelayFrames
 
@@ -647,14 +647,14 @@ Trade_AnimMonMoveVertical: ; 41525 (10:5525)
 	and a
 	jr z, .movingLeft
 ; moving right
-	ld bc, $400 ; move right
+	lb bc, 4, 0 ; move right
 	call .doAnim
-	ld bc, $a ; move down
+	lb bc, 0, 10 ; move down
 	jr .doAnim
 .movingLeft
-	ld bc, $f6 ; move up
+	lb bc, 0, -10 ; move up
 	call .doAnim
-	ld bc, $fc00 ; move left
+	lb bc, -4, 0 ; move left
 .doAnim
 	ld a, b
 	ld [W_BASECOORDX], a
@@ -727,10 +727,10 @@ Trade_CircleOAM3: ; 4159c (10:559c)
 Trade_LoadMonSprite: ; 415a4 (10:55a4)
 	ld [wcf91], a
 	ld [wd0b5], a
-	ld [wcf1d], a
-	ld b, $b
-	ld c, $0
-	call GoPAL_SET
+	ld [wWholeScreenPaletteMonSpecies], a
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld c, 0
+	call RunPaletteCommand
 	ld a, [H_AUTOBGTRANSFERENABLED]
 	xor $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -849,5 +849,5 @@ TradeforText: ; 41671 (10:5671)
 Trade_ShowAnimation: ; 41676 (10:5676)
 	ld [W_ANIMATIONID], a
 	xor a
-	ld [wcc5b], a
+	ld [wAnimationType], a
 	predef_jump MoveAnimation

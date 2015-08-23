@@ -12,8 +12,7 @@ CopycatsHouse2FTextPointers: ; 5cc74 (17:4c74)
 
 CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	TX_ASM
-	ld a, [wd7af]
-	bit 0, a
+	CheckEvent EVENT_GOT_TM31
 	jr nz, .asm_7ccf3
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -24,7 +23,7 @@ CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	jr z, .asm_62ecd
 	ld hl, TM31PreReceiveText
 	call PrintText
-	ld bc, (TM_31 << 8) | 1
+	lb bc, TM_31, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM31Text
@@ -32,8 +31,7 @@ CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	ld a, POKE_DOLL
 	ld [$ffdb], a
 	callba RemoveItemByID
-	ld hl, wd7af
-	set 0, [hl]
+	SetEvent EVENT_GOT_TM31
 	jr .asm_62ecd
 .BagFull
 	ld hl, TM31NoRoomText

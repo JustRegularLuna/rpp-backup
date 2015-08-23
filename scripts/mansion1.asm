@@ -13,35 +13,34 @@ Mansion1Subscript1: ; 442c5 (11:42c5)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd796]
-	bit 0, a
+	CheckEvent EVENT_MANSION_SWITCH_ON
 	jr nz, .asm_442ec
-	ld bc, $060c
+	lb bc, 6, 12
 	call Mansion1Script_4430b
-	ld bc, $0308
+	lb bc, 3, 8
 	call Mansion1Script_44304
-	ld bc, $080a
+	lb bc, 8, 10
 	call Mansion1Script_44304
-	ld bc, $0d0d
+	lb bc, 13, 13
 	jp Mansion1Script_44304
 .asm_442ec
-	ld bc, $060c
+	lb bc, 6, 12
 	call Mansion1Script_44304
-	ld bc, $0308
+	lb bc, 3, 8
 	call Mansion1Script_4430b
-	ld bc, $080a
+	lb bc, 8, 10
 	call Mansion1Script_4430b
-	ld bc, $0d0d
+	lb bc, 13, 13
 	jp Mansion1Script_4430b
 
 Mansion1Script_44304: ; 44304 (11:4304)
 	ld a, $2d
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	jr Mansion1ReplaceBlock
 
 Mansion1Script_4430b: ; 4430b (11:430b)
 	ld a, $e
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 Mansion1ReplaceBlock: ; 44310 (11:4310)
 	predef ReplaceTileBlock
 	ret
@@ -69,9 +68,9 @@ Mansion1TextPointers: ; 4432c (11:432c)
 
 Mansion1TrainerHeaders: ; 44334 (11:4334)
 Mansion1TrainerHeader0: ; 44334 (11:4334)
-	db $1 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_MANSION_1_TRAINER_0
 	db ($3 << 4) ; trainer's view range
-	dw wd798 ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_MANSION_1_TRAINER_0
 	dw Mansion1BattleText2 ; TextBeforeBattle
 	dw Mansion1AfterBattleText2 ; TextAfterBattle
 	dw Mansion1EndBattleText2 ; TextEndBattle
@@ -113,11 +112,9 @@ Mansion1Text4: ; 4435a (11:435a)
 	call PrintText
 	ld a, SFX_GO_INSIDE
 	call PlaySound
-	ld hl, wd796
-	bit 0, [hl]
-	set 0, [hl]
+	CheckAndSetEvent EVENT_MANSION_SWITCH_ON
 	jr z, .asm_44392
-	res 0, [hl]
+	ResetEventReuseHL EVENT_MANSION_SWITCH_ON
 	jr .asm_44392
 .asm_4438c
 	ld hl, MansionSwitchNotPressedText

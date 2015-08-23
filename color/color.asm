@@ -1,7 +1,7 @@
 SECTION "bank1C_extension",ROMX,BANK[$1C]
 
 ; Set all palettes to black at beginning of battle
-SendPalPacket_Black:
+SetPal_BattleBlack:
 	; Code $ff sometimes calls this (by accident?)
 	inc b
 	ret z
@@ -34,7 +34,7 @@ SendPalPacket_Black:
 	ret
 
 ; Set proper palettes for pokemon/trainers
-BuildBattlePalPacket:
+SetPal_Battle:
  	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, wBattleMonSpecies        ; player Pokemon ID
 	call DetermineBackSpritePaletteID
@@ -61,14 +61,14 @@ BuildBattlePalPacket:
 	callba LoadSGBPalette
 
 	; Player lifebar
-	ld a, [wcf1d]
+	ld a, [wPlayerHPBarColor]
 	add PAL_GREENBAR
 	ld d,a
 	ld e,2
 	callba LoadSGBPalette
 
 	; Enemy lifebar
-	ld a, [wcf1e]
+	ld a, [wEnemyHPBarColor]
 	add PAL_GREENBAR
 	ld d,a
 	ld e,3
@@ -175,7 +175,7 @@ ENDC
 	ret
 
 ; Load town map
-SendPalPacket_TownMap:
+SetPal_TownMap:
 	ld a,2
 	ld [rSVBK],a
 
@@ -204,7 +204,7 @@ SendPalPacket_TownMap:
 	ret
 
 ; Status screen
-BuildStatusScreenPalPacket:
+SetPal_StatusScreen:
 	ld a, [wcf91]
 	cp VICTREEBEL + 1
 	jr c, .pokemon
@@ -219,7 +219,7 @@ BuildStatusScreenPalPacket:
 	push bc
 
 	; Load Lifebar palette
-	ld a, [wcf25]
+	ld a, [wStatusScreenHPBarColor]
 	add PAL_GREENBAR
 	ld d,a
 	ld e,1
@@ -270,7 +270,7 @@ BuildStatusScreenPalPacket:
 	ret
 
 ; Show pokedex data
-SendPalPacket_Pokedex:
+SetPal_Pokedex:
 	ld a, [wcf91]
 	call DeterminePaletteIDOutOfBattle	; Call DeterminePaletteID without status check
 	ld d,a
@@ -326,7 +326,7 @@ ENDC
 	ret
 
 ; Slots
-SendPalPacket_Slots:
+SetPal_Slots:
 	ld a,2
 	ld [rSVBK],a
 
@@ -376,7 +376,7 @@ SendPalPacket_Slots:
 	ret
 
 ; Titlescreen with cycling pokemon
-SendPalPacket_Titlescreen:
+SetPal_TitleScreen:
 	ld a,[wWhichTrade] ; Get the pokemon on the screen
 	call DeterminePaletteIDOutOfBattle
 	ld d,a
@@ -447,7 +447,7 @@ ENDC
 	ret
 
 ; Called during the intro
-SendPalPacket_NidorinoIntro:
+SetPal_NidorinoIntro:
 	ld a,2
 	ld [rSVBK],a
 
@@ -473,7 +473,7 @@ ENDC
 
 ; used mostly for menus and the Oak intro
 ; Pokedex screen
-SendPalPacket_Generic:
+SetPal_Generic:
 	ld a,2
 	ld [rSVBK],a
 
@@ -504,7 +504,7 @@ SendPalPacket_Generic:
 
 ; uses PalPacket_Empty to build a packet based on the current map
 ; Loading a map
-BuildOverworldPalPacket:
+SetPal_Overworld:
 	ld a,2
 	ld [rSVBK],a
 	dec a ; ld a,1
@@ -549,7 +549,7 @@ BuildOverworldPalPacket:
 	ret
 
 ; Open pokemon menu
-SendPalPacket_PartyMenu:
+SetPal_PartyMenu:
 	ld a,2
 	ld [rSVBK],a
 
@@ -570,7 +570,7 @@ SendPalPacket_PartyMenu:
 
 	; Palettes were written to a SGB packet. Extract them.
 	ld b,9		; there are only 6 pokemon but iterate 9 times to fill the whole screen
-	ld hl,wcf37
+	ld hl,wPartyMenuBlkPacket + 9
 	ld de,W2_TilesetPaletteMap
 .loop
 	ld a,[hl]
@@ -604,12 +604,12 @@ SendPalPacket_PartyMenu:
 ; used when a Pokemon is the only thing on the screen
 ; such as evolution, trading and the Hall of Fame
 ; Evolution / Hall of Fame
-SendPokemonPalette_WholeScreen:
+SetPal_PokemonWholeScreen:
 	ld a, c
 	and a
 	ld a, PAL_BLACK
 	jr nz, .loadPalette
-	ld a, [wcf1d]
+	ld a, [wPlayerHPBarColor]
 	; Use the "BackSprite" version for the player sprite in the hall of fame.
 	call DetermineBackSpritePaletteID_NoStatusCheck
 
@@ -638,7 +638,7 @@ SendPokemonPalette_WholeScreen:
 
 
 ; Called as the game starts up
-SendPalPacket_GameFreakIntro:
+SetPal_GameFreakIntro:
 	ld a,$02
 	ld [rSVBK],a
 
@@ -670,7 +670,7 @@ SendPalPacket_GameFreakIntro:
  	ret
 
 ; Trainer card
-BuildTrainerCardPalPacket:
+SetPal_TrainerCard:
 	ld a,2
 	ld [rSVBK],a
 	
@@ -763,8 +763,8 @@ PalCmd_0f:
 ; There's no particular reason it needs to be in this bank.
 LoadTitleMonTilesAndPalettes:
 	push de
-	ld b,6
-	call GoPAL_SET
+	ld b,SET_PAL_TITLE_SCREEN
+	call RunPaletteCommand
 	pop de
 	callba TitleScroll
 	ret

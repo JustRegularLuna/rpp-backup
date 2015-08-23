@@ -8,7 +8,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call DisableLCD
 	ld hl,vBGMap0
 	ld bc, $800
-	ld a, $7f
+	ld a, " "
 	call FillMemory
 	call EnableLCD
 	ld hl, rLCDC
@@ -104,7 +104,7 @@ HoFShowMonOrPlayer: ; 70278 (1c:4278)
 	ld [wcf91], a
 	ld [wd0b5], a
 	ld [wBattleMonSpecies2], a
-	ld [wcf1d], a
+	ld [wWholeScreenPaletteMonSpecies], a
 	ld a, [wHoFMonOrPlayer]
 	and a
 	jr z, .showMon
@@ -117,9 +117,9 @@ HoFShowMonOrPlayer: ; 70278 (1c:4278)
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
 .next1
-	ld b, $b
-	ld c, $0
-	call GoPAL_SET
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld c, 0
+	call RunPaletteCommand
 	ld a, %11100100
 	ld [rBGP], a
 	ld c, $31 ; back pic
@@ -187,7 +187,7 @@ HoFLoadPlayerPics: ; 7033e (1c:433e)
 	ld a, BANK(RedPicFront)
 	call UncompressSpriteFromDE
 	ld hl, S_SPRITEBUFFER1
-	ld de, $a000
+	ld de, S_SPRITEBUFFER0
 	ld bc, $310
 	call CopyData
 	ld de, vFrontPic
@@ -219,8 +219,7 @@ HoFLoadMonPlayerPicTileIDs: ; 7036d (1c:436d)
 	predef_jump CopyTileIDsFromList
 
 HoFDisplayPlayerStats: ; 70377 (1c:4377)
-	ld hl, wd747
-	set 3, [hl]
+	SetEvent EVENT_HALL_OF_FAME_DEX_RATING
 	predef DisplayDexRating
 	coord hl, 0, 4
 	ld b, $6
@@ -238,12 +237,12 @@ HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	call PlaceString
 	coord hl, 5, 7
 	ld de, W_PLAYTIMEHOURS + 1
-	ld bc, $103
+	lb bc, 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
 	ld de, W_PLAYTIMEMINUTES + 1
-	ld bc, $8102
+	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber
 	coord hl, 1, 9
 	ld de, HoFMoneyText
@@ -256,7 +255,7 @@ HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	call HoFPrintTextAndDelay
 	ld hl, DexRatingText
 	call HoFPrintTextAndDelay
-	ld hl, wcc5d
+	ld hl, wDexRatingText
 
 HoFPrintTextAndDelay: ; 703e2 (1c:43e2)
 	call PrintText
@@ -289,13 +288,13 @@ HoFRecordMonInfo: ; 70404 (1c:4404)
 	ld e, l
 	ld d, h
 	ld hl, wcd6d
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 HoFFadeOutScreenAndMusic: ; 70423 (1c:4423)
-	ld a, $a
-	ld [wcfc8], a
-	ld [wcfc9], a
+	ld a, 10
+	ld [wAudioFadeOutCounterReloadValue], a
+	ld [wAudioFadeOutCounter], a
 	ld a, $ff
-	ld [wMusicHeaderPointer], a
+	ld [wAudioFadeOutControl], a
 	jp GBFadeOutToWhite

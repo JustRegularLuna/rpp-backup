@@ -88,7 +88,7 @@ LoadMonData_:
 ;  2: boxmon
 ;  3: daycaremon
 ; Return monster id at wcf91 and its data at wLoadedMon.
-; Also load base stats at W_MONHDEXNUM for convenience.
+; Also load base stats at W_MONHEADER for convenience.
 
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
@@ -286,7 +286,7 @@ DetectCollisionBetweenSprites:
 	ld [hld], a ; zero [$c1ic] (directions in which collisions occurred)
 
 	ld a, [$ff91]
-	ld [hld], a ; [$c1ib] = adjusted X coordiate
+	ld [hld], a ; [$c1ib] = adjusted X coordinate
 	ld a, [$ff90]
 	ld [hl], a ; [$c1ia] = adjusted Y coordinate
 
@@ -592,7 +592,7 @@ INCLUDE "engine/cable_club.asm"
 LoadTrainerInfoTextBoxTiles: ; 5ae6 (1:5ae6)
 	ld de, TrainerInfoTextBoxTileGraphics
 	ld hl, vChars2 + $760
-	ld bc, (BANK(TrainerInfoTextBoxTileGraphics) << 8) +$09
+	lb bc, BANK(TrainerInfoTextBoxTileGraphics), (TrainerInfoTextBoxTileGraphicsEnd - TrainerInfoTextBoxTileGraphics) / $10
 	jp CopyVideoData
 
 INCLUDE "engine/menu/main_menu.asm"
@@ -689,9 +689,9 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	ld a, [wWhichDungeonWarp]
 	ld c, a
 	ld hl, DungeonWarpList
-	ld de, $0
-	ld a, $6
-	ld [wd12f], a
+	ld de, 0
+	ld a, 6
+	ld [wDungeonWarpDataEntrySize], a
 .dungeonWarpListLoop
 	ld a, [hli]
 	cp b
@@ -703,7 +703,7 @@ LoadSpecialWarpData: ; 62ff (1:62ff)
 	cp c
 	jr z, .matchedDungeonWarpID
 .nextDungeonWarp
-	ld a, [wd12f]
+	ld a, [wDungeonWarpDataEntrySize]
 	add e
 	ld e, a
 	jr .dungeonWarpListLoop
@@ -1004,8 +1004,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 ; if text ID is 0 (i.e. the start menu)
 ; Note that the start menu text border is also drawn in the function directly
 ; below this, so this seems unnecessary.
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 ; start menu with pokedex
 	coord hl, 10, 0
 	ld b,$0e
@@ -1073,8 +1072,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 
 ; function that displays the start menu
 DrawStartMenu: ; 710b (1:710b)
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
 	coord hl, 10, 0
 	ld b,$0e
@@ -1086,7 +1084,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld c,$08
 .drawTextBoxBorder
 	call TextBoxBorder
-	ld a,%11001011 ; bit mask for down, up, start, B, and A buttons
+	ld a,D_DOWN | D_UP | START | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys],a
 	ld a,$02
 	ld [wTopMenuItemY],a ; Y position of first menu choice
@@ -1100,8 +1098,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld hl,wd730
 	set 6,[hl] ; no pauses between printing each letter
 	coord hl, 12, 2
-	ld a,[wd74b]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 ; case for not having pokdex
 	ld a,$06
 	jr z,.storeMenuItemCount
@@ -1440,8 +1437,8 @@ DisplayMoneyBox: ; 74ba (1:74ba)
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	coord hl, 13, 1
-	ld b, $1
-	ld c, $6
+	ld b, 1
+	ld c, 6
 	call ClearScreenArea
 	coord hl, 12, 1
 	ld de, wPlayerMoney
@@ -1647,39 +1644,39 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 ; The bottom and right edges of the menu may remain after the function returns.
 
 TwoOptionMenu_SaveScreenTiles: ; 763e (1:763e)
-	ld de, wHPBarMaxHP
-	ld bc, $506
-.asm_7644
+	ld de, wBuffer
+	lb bc, 5, 6
+.loop
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec c
-	jr nz, .asm_7644
+	jr nz, .loop
 	push bc
-	ld bc, 14
+	ld bc, SCREEN_WIDTH - 6
 	add hl, bc
 	pop bc
 	ld c, $6
 	dec b
-	jr nz, .asm_7644
+	jr nz, .loop
 	ret
 
 TwoOptionMenu_RestoreScreenTiles: ; 7656 (1:7656)
-	ld de, wHPBarMaxHP
-	ld bc, $506
-.asm_765c
+	ld de, wBuffer
+	lb bc, 5, 6
+.loop
 	ld a, [de]
 	inc de
 	ld [hli], a
 	dec c
-	jr nz, .asm_765c
+	jr nz, .loop
 	push bc
-	ld bc, $e
+	ld bc, SCREEN_WIDTH - 6
 	add hl, bc
 	pop bc
-	ld c, $6
+	ld c, 6
 	dec b
-	jr nz, .asm_765c
+	jr nz, .loop
 	call UpdateSprites
 	ret
 
@@ -1972,7 +1969,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 .asm_7ba6
 	ld d, h
 	ld e, l
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld bc, wPartyMonNicks
 	ld a, [wRemoveMonFromBox]
@@ -2012,12 +2009,12 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	jr z, .asm_7bfa
 	ld hl, wBoxMonNicks
 .asm_7bfa
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld bc, wPokedexOwned
 	ld a, [wRemoveMonFromBox]
@@ -2126,7 +2123,7 @@ INCLUDE "data/map_songs.asm"
 INCLUDE "data/map_header_banks.asm"
 
 ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
 	ld [rWY], a
 	xor a
@@ -2137,12 +2134,12 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld [hJoyReleased], a
 	ld [hJoyHeld], a
 	ld [wActionResultOrTookBattleTurn], a
-	ld [wd5a3], a
+	ld [wUnusedD5A3], a
 	ld hl, wCardKeyDoorY
 	ld [hli], a
 	ld [hl], a
 	ld hl, wWhichTrade
-	ld bc, $1e
+	ld bc, wStandingOnWarpPadOrHole - wWhichTrade
 	call FillMemory
 	ret
 
@@ -2388,12 +2385,12 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	cp UNKNOWN_DUNGEON_2
 	ret nc
 	coord hl, 0, 0
-	ld b, $3
-	ld c, $7
+	ld b, 3
+	ld c, 7
 	call TextBoxBorder
 	coord hl, 1, 1
 	ld de, wSafariSteps
-	ld bc, $203
+	lb bc, 2, 3
 	call PrintNumber
 	coord hl, 4, 1
 	ld de, SafariSteps
@@ -2402,15 +2399,15 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	ld de, SafariBallText
 	call PlaceString
 	ld a, [W_NUMSAFARIBALLS]
-	cp $a
+	cp 10
 	jr nc, .asm_c56d
 	coord hl, 5, 3
-	ld a, $7f
+	ld a, " "
 	ld [hl], a
 .asm_c56d
 	coord hl, 6, 3
 	ld de, W_NUMSAFARIBALLS
-	ld bc, $102
+	lb bc, 1, 2
 	jp PrintNumber
 
 SafariSteps: ; c579 (3:4579)
@@ -2834,9 +2831,7 @@ CheckForForcedBikeSurf: ; cdc0 (3:4dc0)
 	ld a, [W_CURMAP]
 	cp SEAFOAM_ISLANDS_5
 	ret nz
-	ld a, [wd881]
-	and $3
-	cp $3
+	CheckBothEventsSet EVENT_SEAFOAM4_BOULDER1_DOWN_HOLE, EVENT_SEAFOAM4_BOULDER2_DOWN_HOLE
 	ret z
 	ld hl, CoordsData_cdf7
 	call ArePlayerCoordsInArray
@@ -3236,7 +3231,7 @@ RedrawMapView: ; eedc (3:6edc)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld [hTilesetType], a ; no flower/water BG tile animations
 	call LoadCurrentMapView
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	ld hl, wMapViewVRAMPointer
 	ld a, [hli]
 	ld h, [hl]
@@ -3247,9 +3242,9 @@ RedrawMapView: ; eedc (3:6edc)
 	and $3
 	or $98
 	ld a, l
-	ld [wHPBarMaxHP], a
+	ld [wBuffer], a
 	ld a, h
-	ld [wHPBarMaxHP + 1], a
+	ld [wBuffer + 1], a ; this copy of the address is not used
 	ld a, 2
 	ld [$ffbe], a
 	ld c, 9 ; number of rows of 2x2 tiles (this covers the whole screen)
@@ -3257,30 +3252,30 @@ RedrawMapView: ; eedc (3:6edc)
 	push bc
 	push hl
 	push hl
-	ld hl, wTileMap - 2 * 20
-	ld de, 20
+	ld hl, wTileMap - 2 * SCREEN_WIDTH
+	ld de, SCREEN_WIDTH
 	ld a, [$ffbe]
-.asm_ef1a
+.calcWRAMAddrLoop
 	add hl, de
 	dec a
-	jr nz, .asm_ef1a
-	call CopyToScreenEdgeTiles
+	jr nz, .calcWRAMAddrLoop
+	call CopyToRedrawRowOrColumnSrcTiles
 	pop hl
 	ld de, $20
 	ld a, [$ffbe]
 	ld c, a
-.asm_ef28
+.calcVRAMAddrLoop
 	add hl, de
 	ld a, h
 	and $3
 	or $98
 	dec c
-	jr nz, .asm_ef28
-	ld [H_SCREENEDGEREDRAWADDR + 1], a
+	jr nz, .calcVRAMAddrLoop
+	ld [hRedrawRowOrColumnDest + 1], a
 	ld a, l
-	ld [H_SCREENEDGEREDRAWADDR], a
-	ld a, REDRAWROW
-	ld [H_SCREENEDGEREDRAW], a
+	ld [hRedrawRowOrColumnDest], a
+	ld a, REDRAW_ROW
+	ld [hRedrawRowOrColumnMode], a
 	call DelayFrame
 	ld hl, $ffbe
 	inc [hl]
@@ -3376,12 +3371,12 @@ LoadMissableObjects: ; f132 (3:7132)
 
 InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld bc, $20
+	ld bc, wMissableObjectFlagsEnd - W_MISSABLEOBJECTFLAGS
 	xor a
 	call FillMemory ; clear missable objects flags
 	ld hl, MapHS00
 	xor a
-	ld [wd048], a
+	ld [wMissableObjectCounter], a
 .missableObjectsLoop
 	ld a, [hli]
 	cp $ff          ; end of list
@@ -3390,14 +3385,14 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	inc hl
 	ld a, [hl]
 	cp Hide
-	jr nz, .asm_f19d
+	jr nz, .skip
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld a, [wd048]
+	ld a, [wMissableObjectCounter]
 	ld c, a
 	ld b, FLAG_SET
-	call MissableObjectFlagAction ; set flag iff Item is hidden
-.asm_f19d
-	ld hl, wd048
+	call MissableObjectFlagAction ; set flag if Item is hidden
+.skip
+	ld hl, wMissableObjectCounter
 	inc [hl]
 	pop hl
 	inc hl
@@ -3431,21 +3426,21 @@ IsObjectHidden: ; f1a6 (3:71a6)
 	ret
 
 ; adds missable object (items, leg. pokemon, etc.) to the map
-; [wcc4d]: index of the missable object to be added (global index)
+; [wMissableObjectIndex]: index of the missable object to be added (global index)
 ShowObject: ; f1c8 (3:71c8)
 ShowObject2:
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld a, [wcc4d]
+	ld a, [wMissableObjectIndex]
 	ld c, a
 	ld b, FLAG_RESET
 	call MissableObjectFlagAction   ; reset "removed" flag
 	jp UpdateSprites
 
 ; removes missable object (items, leg. pokemon, etc.) from the map
-; [wcc4d]: index of the missable object to be removed (global index)
+; [wMissableObjectIndex]: index of the missable object to be removed (global index)
 HideObject: ; f1d7 (3:71d7)
 	ld hl, W_MISSABLEOBJECTFLAGS
-	ld a, [wcc4d]
+	ld a, [wMissableObjectIndex]
 	ld c, a
 	ld b, FLAG_SET
 	call MissableObjectFlagAction   ; set "removed" flag
@@ -3667,7 +3662,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMonDataLocation]
 	and a
@@ -3720,8 +3715,8 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
 	call FlagAction
-	ld a, c
-	ld [wd153], a
+	ld a, c ; whether the mon was already flagged as owned
+	ld [wUnusedD153], a ; not read
 	ld a, [wd11e]
 	dec a
 	ld c, a
@@ -3771,7 +3766,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	inc de
 	jr .copyMonTypesAndMoves
 .copyEnemyMonData
-	ld bc, wPartyMon1DVs - wPartyMon1
+	ld bc, wEnemyMon1DVs - wEnemyMon1
 	add hl, bc
 	ld a, [wEnemyMonDVs] ; copy IVs from cur enemy mon
 	ld [hli], a
@@ -3842,7 +3837,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [hExperience + 2]
 	ld [de], a
 	xor a
-	ld b, $a
+	ld b, NUM_STATS * 2
 .writeEVsLoop              ; set all EVs to 0
 	inc de
 	ld [de], a
@@ -3866,7 +3861,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	jr .done
 .calcFreshStats
 	pop hl
-	ld bc, $10
+	ld bc, wPartyMon1HPExp - 1 - wPartyMon1
 	add hl, bc
 	ld b, $0
 	call CalcStats         ; calculate fresh set of stats
@@ -3878,7 +3873,7 @@ LoadMovePPs: ; f473 (3:7473)
 	call GetPredefRegisters
 	; fallthrough
 AddPartyMon_WriteMovePP: ; f476 (3:7476)
-	ld b, $4
+	ld b, NUM_MOVES
 .pploop
 	ld a, [hli]     ; read move ID
 	and a
@@ -3888,7 +3883,7 @@ AddPartyMon_WriteMovePP: ; f476 (3:7476)
 	push de
 	push bc
 	ld hl, Moves
-	ld bc, $6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
@@ -3938,7 +3933,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonOT
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, $000b
+	ld bc, NAME_LENGTH
 	call CopyData    ; write new mon's OT name (from an enemy mon)
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
@@ -3949,7 +3944,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, $000b
+	ld bc, NAME_LENGTH
 	call CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -4080,7 +4075,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f5ec
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMoveMonType]
 	cp PARTY_TO_DAYCARE
@@ -4110,7 +4105,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f62a
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld a, [wMoveMonType]
@@ -4253,7 +4248,7 @@ HealParty:
 	push bc
 
 	ld hl, Moves
-	ld bc, 6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
@@ -4543,7 +4538,7 @@ InitPlayerData2:
 	ld [wPlayerID + 1], a
 
 	ld a, $ff
-	ld [wd71b], a                 ; XXX what's this?
+	ld [wUnusedD71B], a
 
 	ld hl, wPartyCount
 	call InitializeEmptyList
@@ -4575,7 +4570,7 @@ START_MONEY EQU $3000
 	ld [hl], a
 
 	ld hl, W_GAMEPROGRESSFLAGS
-	ld bc, $c8
+	ld bc, wGameProgressFlagsEnd - W_GAMEPROGRESSFLAGS
 	call FillMemory ; clear all game progress flags
 
 	jp InitializeMissableObjectsFlags
@@ -4588,21 +4583,23 @@ InitializeEmptyList:
 	ret
 
 
-IsItemInBag_: ; f8a5 (3:78a5)
+GetQuantityOfItemInBag: ; f8a5 (3:78a5)
+; In: b = item ID
+; Out: b = how many of that item are in the bag
 	call GetPredefRegisters
 	ld hl, wNumBagItems
-.asm_f8ab
+.loop
 	inc hl
 	ld a, [hli]
 	cp $ff
-	jr z, .asm_f8b7
+	jr z, .notInBag
 	cp b
-	jr nz, .asm_f8ab
+	jr nz, .loop
 	ld a, [hl]
 	ld b, a
 	ret
-.asm_f8b7
-	ld b, $0
+.notInBag
+	ld b, 0
 	ret
 
 FindPathToPlayer: ; f8ba (3:78ba)
@@ -4851,7 +4848,7 @@ UpdateHPBar_Palettes:
 	CALL_INDIRECT HPBarLength
 
 	; Pass this other hp format to Func_3df9 which determines HP bar color
-	ld hl, wcf1d
+	ld hl, wPlayerHPBarColor
 	call GetHealthBarColor
 
 	ld a,2
@@ -4866,12 +4863,12 @@ UpdateHPBar_Palettes:
 
 .inMenu
 	ld hl, W2_TilesetPaletteMap
-	ld bc, 20*2 ; 2 rows for each pokemon in the menu
+	ld bc, SCREEN_WIDTH*2 ; 2 rows for each pokemon in the menu
 	ld a, [wCurrentMenuItem]
 	call AddNTimes
 
-	ld bc, 20*2
-	ld a, [wcf1d] ; Palette # was stored to here
+	ld bc, SCREEN_WIDTH*2
+	ld a, [wPlayerHPBarColor] ; Palette # was stored to here
 	inc a
 	call FillMemory
 
@@ -4880,8 +4877,8 @@ UpdateHPBar_Palettes:
 	jr .done
 
 .inBattle
-	ld a,[wcf1d] ; Palette # was stored to here
-	add $1f
+	ld a,[wPlayerHPBarColor] ; Palette # was stored to here
+	add PAL_GREENBAR
 	ld d,a
 
 	ld a,c
@@ -4911,10 +4908,10 @@ UpdateHPBar_Hook:
 	
 	; In the pokemon menu
 	ld a, [wCurrentMenuItem]
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	ld hl, wPartyMon1
 	call AddNTimes
-	ld bc, 33
+	ld bc, wPartyMon1Level - wPartyMon1
 	add hl,bc
 	jr .gotPokemon
 
@@ -4977,31 +4974,45 @@ SECTION "Graphics", ROMX, BANK[GFX]
 PokemonLogoGraphics:            INCBIN "gfx/gs/new_pokemon_logo.2bpp"
 IF GEN_2_GRAPHICS
 FontGraphics:                   INCBIN "gfx/gs/font.1bpp"
+FontGraphicsEnd:
 ELSE
 FontGraphics:                   INCBIN "gfx/font.1bpp"
+FontGraphicsEnd:
 ENDC
 ABTiles:                        INCBIN "gfx/AB.2bpp"
 IF GEN_2_GRAPHICS
 HpBarAndStatusGraphics:  INCBIN "gfx/gs/gen2_hp_bar_and_status.2bpp"
+HpBarAndStatusGraphicsEnd:
 BattleHudTiles1:         INCBIN "gfx/gs/gen2_battle_arrow.1bpp"
+BattleHudTiles1End:
 BattleHudTiles2:         INCBIN "gfx/gs/gen2_battle_arrow_lines.1bpp"
 BattleHudTiles3:         INCBIN "gfx/gs/gen2_battle_arrow_more_lines.1bpp"
+BattleHudTiles3End:
 ELSE
 HpBarAndStatusGraphics:  INCBIN "gfx/hp_bar_and_status.2bpp"
+HpBarAndStatusGraphicsEnd:
 BattleHudTiles1:         INCBIN "gfx/battle_hud1.1bpp"
+BattleHudTiles1End:
 BattleHudTiles2:         INCBIN "gfx/battle_hud2.1bpp"
 BattleHudTiles3:         INCBIN "gfx/battle_hud3.1bpp"
+BattleHudTiles3End:
 ENDC
 NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
+GamefreakLogoGraphicsEnd:
 IF GEN_2_GRAPHICS
 TextBoxGraphics:                INCBIN "gfx/gs/text_box.2bpp"
+TextBoxGraphicsEnd:
 ELSE
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
+TextBoxGraphicsEnd:
 ENDC
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
+PokedexTileGraphicsEnd:
 WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
+WorldMapTileGraphicsEnd:
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
+PlayerCharacterTitleGraphicsEnd:
 
 
 SECTION "Battle (bank 4)", ROMX, BANK[$4]
@@ -5501,6 +5512,7 @@ SECTION "Pics 3", ROMX, BANK[PICS_3]
 INCLUDE "engine/battle/display_effectiveness.asm"
 
 TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
+TrainerInfoTextBoxTileGraphicsEnd:
 BlankLeaderNames:                INCBIN "gfx/blank_leader_names.2bpp"
 CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
 BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
@@ -5550,10 +5562,12 @@ INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
 	INCBIN "gfx/link_cable.2bpp"
+TradingAnimationGraphicsEnd:
 
 TradingAnimationGraphics2:
 ; Pokeball traveling through the link cable.
 	INCBIN "gfx/trade2.2bpp"
+TradingAnimationGraphics2End:
 
 INCLUDE "engine/evos_moves.asm"
 INCLUDE "engine/battle/moveEffects/heal_effect.asm"
@@ -6599,6 +6613,7 @@ ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/blue/blueversion.1bpp" ; 8 tiles
 ENDC
+Version_GFXEnd:
 
 Dojo_GFX:
 Gym_GFX:           INCBIN "gfx/tilesets/gym.2bpp"
@@ -6659,6 +6674,7 @@ BlackTile:
 	REPT 16
 	db $ff
 	ENDR
+BlackTileEnd:
 
 
 SECTION "bank1D",ROMX,BANK[$1D]

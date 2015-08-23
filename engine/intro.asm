@@ -1,3 +1,7 @@
+MOVE_GENGAR_RIGHT   EQU $00
+MOVE_GENGAR_LEFT    EQU $01
+MOVE_NIDORINO_RIGHT EQU $ff
+
 PlayIntro: ; 41682 (10:5682)
 	xor a
 	ld [hJoyHeld], a
@@ -14,8 +18,8 @@ PlayIntro: ; 41682 (10:5682)
 	ret
 
 PlayIntroScene: ; 4169d (10:569d)
-	ld b, $7
-	call GoPAL_SET
+	ld b, SET_PAL_NIDORINO_INTRO
+	call RunPaletteCommand
 	ld a, %11100100
 	ld [rBGP], a
 	ld [rOBP0], a
@@ -28,9 +32,9 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld [W_BASECOORDX], a
 	ld a, 80
 	ld [W_BASECOORDY], a
-	ld bc, $606
+	lb bc, 6, 6
 	call InitIntroNidorinoOAM
-	ld de, $28ff ; move Nidorino right by 80 pixels
+	lb de, 80 / 2, MOVE_NIDORINO_RIGHT
 	call IntroMoveMon
 	ret c
 
@@ -38,7 +42,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, SFX_INTRO_HIP
 	call PlaySound
 	xor a
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation1
 	call AnimateIntroNidorino
 ; hop
@@ -69,7 +73,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	call IntroCopyTiles
 	ld a, SFX_INTRO_RAISE
 	call PlaySound
-	ld de, $401 ; move Gengar left by 8 pixels
+	lb de, 8 / 2, MOVE_GENGAR_LEFT
 	call IntroMoveMon
 	ld c, $1e
 	call CheckForUserInterruption
@@ -80,20 +84,20 @@ PlayIntroScene: ; 4169d (10:569d)
 	call IntroCopyTiles
 	ld a, SFX_INTRO_CRASH
 	call PlaySound
-	ld de, $800 ; move Gengar right by 16 pixels
+	lb de, 16 / 2, MOVE_GENGAR_RIGHT
 	call IntroMoveMon
 ; hip
 	ld a, SFX_INTRO_HIP
 	call PlaySound
 	ld a, $24
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation3
 	call AnimateIntroNidorino
 	ld c, $1e
 	call CheckForUserInterruption
 	ret c
 
-	ld de, $401 ; move Gengar left by 8 pixels
+	lb de, 8 / 2, MOVE_GENGAR_LEFT
 	call IntroMoveMon
 	ld b, $3
 	call IntroCopyTiles
@@ -105,7 +109,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, SFX_INTRO_HIP
 	call PlaySound
 	xor a
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation4
 	call AnimateIntroNidorino
 ; hop
@@ -118,7 +122,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ret c
 
 	ld a, $24
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation6
 	call AnimateIntroNidorino
 	ld c, $1e
@@ -129,7 +133,7 @@ PlayIntroScene: ; 4169d (10:569d)
 	ld a, SFX_INTRO_LUNGE
 	call PlaySound
 	ld a, $48
-	ld [wd09f], a
+	ld [wIntroNidorinoBaseTile], a
 	ld de, IntroNidorinoAnimation7
 	jp AnimateIntroNidorino
 
@@ -152,17 +156,17 @@ AnimateIntroNidorino: ; 41793 (10:5793)
 
 UpdateIntroNidorinoOAM: ; 417ae (10:57ae)
 	ld hl, wOAMBuffer
-	ld a, [wd09f]
+	ld a, [wIntroNidorinoBaseTile]
 	ld d, a
 .loop
 	ld a, [W_BASECOORDY]
 	add [hl]
-	ld [hli], a
+	ld [hli], a ; Y
 	ld a, [W_BASECOORDX]
 	add [hl]
-	ld [hli], a
+	ld [hli], a ; X
 	ld a, d
-	ld [hli], a
+	ld [hli], a ; tile
 	inc hl
 	inc d
 	dec c
@@ -278,28 +282,28 @@ PlayMoveSoundB: ; 41849 (10:5849)
 LoadIntroGraphics: ; 41852 (10:5852)
 	ld hl, FightIntroBackMon
 	ld de, vChars2
-	ld bc, $600
+	ld bc, FightIntroBackMonEnd - FightIntroBackMon
 	ld a, BANK(FightIntroBackMon)
 	call FarCopyData2
 	ld hl, GameFreakIntro
 	ld de, vChars2 + $600
-	ld bc, $140
+	ld bc, GameFreakIntroEnd - GameFreakIntro
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, GameFreakIntro
 	ld de, vChars1
-	ld bc, $140
+	ld bc, GameFreakIntroEnd - GameFreakIntro
 	ld a, BANK(GameFreakIntro)
 	call FarCopyData2
 	ld hl, FightIntroFrontMon
 	ld de, vChars0
-	ld bc, $6c0
+	ld bc, FightIntroFrontMonEnd - FightIntroFrontMon
 	ld a, BANK(FightIntroFrontMon)
 	jp FarCopyData2
 
 PlayShootingStar: ; 4188a (10:588a)
-	ld b, $c
-	call GoPAL_SET
+	ld b, SET_PAL_GAME_FREAK_INTRO
+	call RunPaletteCommand
 	callba LoadCopyrightAndTextBoxTiles
 	ld a, $e4
 	ld [rBGP], a
@@ -325,10 +329,10 @@ PlayShootingStar: ; 4188a (10:588a)
 	call DelayFrames
 .next
 	ld a, BANK(Music_IntroBattle)
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 	ld a, MUSIC_INTRO_BATTLE
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	call IntroClearMiddleOfScreen
 	call ClearSprites
@@ -430,9 +434,11 @@ GameFreakIntro: ; 41959 (10:5959)
 	INCBIN "gfx/gamefreak_intro.2bpp"
 	INCBIN "gfx/gamefreak_logo.2bpp"
 	ds $10 ; blank tile
+GameFreakIntroEnd:
 
 FightIntroBackMon: ; 41a99 (10:5a99)
 	INCBIN "gfx/intro_fight.2bpp"
+FightIntroBackMonEnd:
 
 FightIntroFrontMon: ; 42099 (10:6099)
 
@@ -440,11 +446,13 @@ IF DEF(_RED)
 	INCBIN "gfx/red/intro_nido_1.6x6.2bpp"
 	INCBIN "gfx/red/intro_nido_2.6x6.2bpp"
 	INCBIN "gfx/red/intro_nido_3.6x6.2bpp"
-	ds $10 ; blank tile
 ENDC
 IF DEF(_BLUE)
 	INCBIN "gfx/blue/intro_purin_1.6x6.2bpp"
 	INCBIN "gfx/blue/intro_purin_2.6x6.2bpp"
 	INCBIN "gfx/blue/intro_purin_3.6x6.2bpp"
-	ds $10 ; blank tile
 ENDC
+
+FightIntroFrontMonEnd:
+
+	ds $10 ; blank tile

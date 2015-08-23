@@ -57,23 +57,23 @@ LoadSAV0: ; 73623 (1c:7623)
 .checkSumsMatched
 	ld hl, sPlayerName
 	ld de, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, sMainData
-	ld de, wPokedexOwned
-	ld bc, sSpriteData - sMainData
+	ld de, wMainDataStart
+	ld bc, wMainDataEnd - wMainDataStart
 	call CopyData
 	ld hl, W_CURMAPTILESET
 	set 7, [hl]
 	ld hl, sSpriteData
-	ld de, wSpriteStateData1
-	ld bc, sPartyData - sSpriteData
+	ld de, wSpriteDataStart
+	ld bc, wSpriteDataEnd - wSpriteDataStart
 	call CopyData
 	ld a, [sTilesetType]
 	ld [hTilesetType], a
 	ld hl, sCurBoxData
-	ld de, W_NUMINBOX
-	ld bc, wBoxMonNicksEnd - W_NUMINBOX
+	ld de, wBoxDataStart
+	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 	and a
 	jp SAVGoodChecksum
@@ -92,8 +92,8 @@ LoadSAV1: ; 73690 (1c:7690)
 	cp c
 	jr nz, SAVBadCheckSum
 	ld hl, sCurBoxData
-	ld de, W_NUMINBOX
-	ld bc, wBoxMonNicksEnd - W_NUMINBOX
+	ld de, wBoxDataStart
+	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 	and a
 	jp SAVGoodChecksum
@@ -112,8 +112,8 @@ LoadSAV2: ; 736bd (1c:76bd)
 	cp c
 	jp nz, SAVBadCheckSum
 	ld hl, sPartyData
-	ld de, wPartyCount
-	ld bc, wPokedexOwned - wPartyCount
+	ld de, wPartyDataStart
+	ld bc, wPartyDataEnd - wPartyDataStart
 	call CopyData
 	ld hl, sMainData
 	ld de, wPokedexOwned
@@ -155,8 +155,8 @@ SaveSAV: ; 7370a (1c:770a)
 .save
 	call SaveSAVtoSRAM
 	coord hl, 1, 13
-	ld bc,$0412
-	call ClearScreenArea ; clear area 4x12 starting at 13,1
+	lb bc, 4, 18
+	call ClearScreenArea
 	coord hl, 1, 14
 	ld de,NowSavingString
 	call PlaceString
@@ -176,7 +176,7 @@ NowSavingString:
 SaveSAVConfirm: ; 73768 (1c:7768)
 	call PrintText
 	coord hl, 0, 7
-	ld bc,$0801
+	lb bc, 8, 1
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
@@ -203,19 +203,19 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld [MBC1SRamBank], a
 	ld hl, wPlayerName
 	ld de, sPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
-	ld hl, wPokedexOwned
+	ld hl, wMainDataStart
 	ld de, sMainData
-	ld bc, W_NUMINBOX - wPokedexOwned
+	ld bc, wMainDataEnd - wMainDataStart
 	call CopyData
-	ld hl, wSpriteStateData1
+	ld hl, wSpriteDataStart
 	ld de, sSpriteData
-	ld bc, sPartyData - sSpriteData
+	ld bc, wSpriteDataEnd - wSpriteDataStart
 	call CopyData
-	ld hl, W_NUMINBOX
+	ld hl, wBoxDataStart
 	ld de, sCurBoxData
-	ld bc, wBoxMonNicksEnd - W_NUMINBOX
+	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 	ld a, [hTilesetType]
 	ld [sTilesetType], a
@@ -235,9 +235,9 @@ SaveSAVtoSRAM1: ; 737e2 (1c:77e2)
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	ld hl, W_NUMINBOX
+	ld hl, wBoxDataStart
 	ld de, sCurBoxData
-	ld bc, wBoxMonNicksEnd - W_NUMINBOX
+	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 	ld hl, sPlayerName
 	ld bc, sMainDataCheckSum - sPlayerName
@@ -254,9 +254,9 @@ SaveSAVtoSRAM2: ; 7380f (1c:780f)
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	ld hl, wPartyCount
+	ld hl, wPartyDataStart
 	ld de, sPartyData
-	ld bc, wPokedexOwned - wPartyCount
+	ld bc, wPartyDataEnd - wPartyDataStart
 	call CopyData
 	ld hl, wPokedexOwned ; pokédex only
 	ld de, sMainData
@@ -300,7 +300,7 @@ CalcIndividualBoxCheckSums: ; 73863 (1c:7863)
 .loop
 	push bc
 	push de
-	ld bc, wBoxMonNicksEnd - W_NUMINBOX
+	ld bc, wBoxDataEnd - wBoxDataStart
 	call SAVCheckSum
 	pop de
 	ld [de], a
@@ -356,18 +356,18 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call HandleMenuInput
 	ld hl, hFlags_0xFFF6
 	res 1, [hl]
-	bit 1, a
+	bit 1, a ; pressed b
 	ret nz
 	call GetBoxSRAMLocation
 	ld e, l
 	ld d, h
-	ld hl, W_NUMINBOX
+	ld hl, wBoxDataStart
 	call CopyBoxToOrFromSRAM ; copy old box from WRAM to SRAM
 	ld a, [wCurrentMenuItem]
 	set 7, a
 	ld [wCurrentBoxNum], a
 	call GetBoxSRAMLocation
-	ld de, W_NUMINBOX
+	ld de, wBoxDataStart
 	call CopyBoxToOrFromSRAM ; copy new box from SRAM to WRAM
 	ld hl, W_MAPTEXTPTR
 	ld de, wChangeBoxSavedMapTextPointer
@@ -398,7 +398,7 @@ CopyBoxToOrFromSRAM: ; 7390e (1c:790e)
 	ld [MBC1SRamBankingMode], a
 	ld a, b
 	ld [MBC1SRamBank], a
-	ld bc, wBoxMonNicksEnd - W_NUMINBOX
+	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 	pop hl
 
@@ -644,7 +644,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	call AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, wcc5b
+	ld hl, wHallOfFame
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
 
@@ -653,7 +653,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	ld de, sHallOfFame
 	ld bc, HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	call HallOfFame_Copy
-	ld hl, wcc5b
+	ld hl, wHallOfFame
 	ld de, sHallOfFame + HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
@@ -663,7 +663,7 @@ LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
 	ld bc, HOF_TEAM
 	ld a, [wHoFTeamIndex]
 	call AddNTimes
-	ld de, wcc5b
+	ld de, wHallOfFame
 	ld bc, HOF_TEAM
 	; fallthrough
 

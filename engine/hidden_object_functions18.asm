@@ -19,7 +19,7 @@ GymStatues: ; 62419 (18:6419)
 	jr .loop
 .match
 	ld b, [hl]
-	ld a, [wd72a]
+	ld a, [wBeatGymFlags]
 	and b
 	cp b
 	tx_pre_id GymStatueText2
@@ -152,8 +152,7 @@ CinnabarIslandPokecenterBenchGuyText: ; 624df (18:64df)
 
 SaffronCityPokecenterBenchGuyText: ; 624e4 (18:64e4)
 	TX_ASM
-	ld a, [wd838]
-	bit 7, a
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SaffronCityPokecenterBenchGuyText2
 	jr nz, .asm_624f2
 	ld hl, SaffronCityPokecenterBenchGuyText1

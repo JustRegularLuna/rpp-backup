@@ -140,7 +140,7 @@ ColorNonOverworldSprites:
 LoadAnimationTilesetPalettes:
 	di
 	push de
-	ld a,[wd09f] ; Animation tileset
+	ld a,[wWhichBattleAnimTileset] ; Animation tileset
 	ld c,a
 	ld a,2
 	ld [rSVBK],a

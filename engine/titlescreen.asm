@@ -1,6 +1,6 @@
-; copy text of fixed length $b (like player name, rival name, mon names, ...)
+; copy text of fixed length NAME_LENGTH (like player name, rival name, mon names, ...)
 CopyFixedLengthText: ; 42b1 (1:42b1)
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
@@ -18,8 +18,8 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld [hli], a
 	ld [hl], a
 	ld a, BANK(Music_TitleScreen)
-	ld [wc0ef], a
-	ld [wc0f0], a
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
 
 DisplayTitleScreen: ; 42dd (1:42dd)
 	call GBPalWhiteOut
@@ -56,15 +56,8 @@ DisplayTitleScreen: ; 42dd (1:42dd)
 	ld a, BANK(PokemonLogoGraphics)
 	call FarCopyData2          ; second chunk
 	ld hl, Version_GFX
-IF DEF(_RED)
-	ld de,vChars2 + $600
-	ld bc,$50
-ENDC
-IF DEF(_BLUE)
-	ld de,vChars2 + $600 + $10
-	ld bc,$50 - $10
-ENDC
-
+	ld de,vChars2 + $600 - (Version_GFXEnd - Version_GFX - $50)
+	ld bc, Version_GFXEnd - Version_GFX
 	ld a, BANK(Version_GFX)
 	call FarCopyDataDouble
 	call ClearBothBGMaps
@@ -141,8 +134,8 @@ ENDC
 	call LoadScreenTilesFromBuffer2
 	ld a, vBGMap0 / $100
 	call TitleScreenCopyTileMapToVRAM
-	ld b, $6
-	call GoPAL_SET
+	ld b, SET_PAL_TITLE_SCREEN
+	call RunPaletteCommand
 	call GBPalNormal
 	ld a, %11100100
 	ld [rOBP0], a
@@ -219,10 +212,10 @@ ENDC
 	call Delay3
 	call WaitForSoundToFinish
 	ld a, MUSIC_TITLE_SCREEN
-	ld [wc0ee], a
+	ld [wNewSoundID], a
 	call PlaySound
 	xor a
-	ld [wcc5b], a
+	ld [wUnusedCC5B], a
 
 ; Keep scrolling in new mons indefinitely until the user performs input.
 .awaitUserInterruptionLoop
@@ -318,7 +311,7 @@ ScrollTitleScreenGameVersion: ; 44cf (1:44cf)
 DrawPlayerCharacter: ; 44dd (1:44dd)
 	ld hl, PlayerCharacterTitleGraphics
 	ld de, vSprites
-	ld bc, $230
+	ld bc, PlayerCharacterTitleGraphicsEnd - PlayerCharacterTitleGraphics
 	ld a, BANK(PlayerCharacterTitleGraphics)
 	call FarCopyData2
 	call ClearSprites
@@ -378,7 +371,7 @@ LoadCopyrightAndTextBoxTiles: ; 4538 (1:4538)
 LoadCopyrightTiles: ; 4541 (1:4541)
 	ld de, NintendoCopyrightLogoGraphics
 	ld hl, vChars2 + $600
-	ld bc, (BANK(NintendoCopyrightLogoGraphics) << 8) + $1c
+	lb bc, BANK(NintendoCopyrightLogoGraphics), (GamefreakLogoGraphicsEnd - NintendoCopyrightLogoGraphics) / $10
 	call CopyVideoData
 	coord hl, 2, 7
 	ld de, CopyrightTextString

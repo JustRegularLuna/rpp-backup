@@ -8,8 +8,7 @@ BikeShopTextPointers: ; 1d73f (7:573f)
 
 BikeShopText1: ; 1d745 (7:5745)
 	TX_ASM
-	ld a, [wd75f]
-	bit 0, a
+	CheckEvent EVENT_GOT_BICYCLE
 	jr z, .asm_260d4
 	ld hl, BikeShopText_1d82f
 	call PrintText
@@ -20,14 +19,13 @@ BikeShopText1: ; 1d745 (7:5745)
 	jr z, .asm_41190
 	ld hl, BikeShopText_1d81f
 	call PrintText
-	ld bc, (BICYCLE << 8) | 1
+	lb bc, BICYCLE, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, BIKE_VOUCHER
 	ld [$ffdb], a
 	callba RemoveItemByID
-	ld hl, wd75f
-	set 0, [hl]
+	SetEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d824
 	call PrintText
 	jr .Done
@@ -41,7 +39,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	xor a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld a, $3
+	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $1
 	ld [wMaxMenuItem], a
@@ -66,16 +64,16 @@ BikeShopText1: ; 1d745 (7:5745)
 	call PrintText
 	call HandleMenuInput
 	bit 1, a
-	jr nz, .asm_b7579
+	jr nz, .cancel
 	ld hl, wd730
 	res 6, [hl]
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_b7579
-	ld hl, BikeShopText_1d81a
+	jr nz, .cancel
+	ld hl, BikeShopCantAffordText
 	call PrintText
-.asm_b7579
-	ld hl, BikeShopText_1d82a
+.cancel
+	ld hl, BikeShopComeAgainText
 	call PrintText
 .Done
 	jp TextScriptEnd
@@ -95,8 +93,8 @@ BikeShopText_1d815: ; 1d815 (7:5815)
 	TX_FAR _BikeShopText_1d815
 	db "@"
 
-BikeShopText_1d81a: ; 1d81a (7:581a)
-	TX_FAR _BikeShopText_1d81a
+BikeShopCantAffordText: ; 1d81a (7:581a)
+	TX_FAR _BikeShopCantAffordText
 	db "@"
 
 BikeShopText_1d81f: ; 1d81f (7:581f)
@@ -107,8 +105,8 @@ BikeShopText_1d824: ; 1d824 (7:5824)
 	TX_FAR _BikeShopText_1d824
 	db $11, "@"
 
-BikeShopText_1d82a: ; 1d82a (7:582a)
-	TX_FAR _BikeShopText_1d82a
+BikeShopComeAgainText: ; 1d82a (7:582a)
+	TX_FAR _BikeShopComeAgainText
 	db "@"
 
 BikeShopText_1d82f: ; 1d82f (7:582f)
@@ -131,8 +129,7 @@ BikeShopText_1d843: ; 1d843 (7:5843)
 
 BikeShopText3: ; 1d848 (7:5848)
 	TX_ASM
-	ld a, [wd75f]
-	bit 0, a
+	CheckEvent EVENT_GOT_BICYCLE
 	ld hl, BikeShopText_1d861
 	jr nz, .asm_34d2d
 	ld hl, BikeShopText_1d85c

@@ -8,13 +8,11 @@ Route1TextPointers: ; 1cab2 (7:4ab2)
 
 Route1Text1: ; 1cab8 (7:4ab8)
 	TX_ASM
-	ld hl, wd7bf
-	bit 0, [hl]
-	set 0, [hl]
+	CheckAndSetEvent EVENT_GOT_POTION_SAMPLE
 	jr nz, .asm_1cada
 	ld hl, Route1ViridianMartSampleText
 	call PrintText
-	ld bc, (POTION << 8) | 1
+	lb bc, POTION, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, Route1Text_1cae8

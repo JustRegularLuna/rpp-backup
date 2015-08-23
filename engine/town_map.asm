@@ -20,7 +20,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	call CopyData
 	ld hl, vSprites + $40
 	ld de, TownMapCursor
-	ld bc, (BANK(TownMapCursor) << 8) + $04
+	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
 	call CopyVideoDataDouble
 	xor a
 	ld [wWhichTownMapLocation], a
@@ -29,7 +29,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 
 .townMapLoop
 	coord hl, 0, 0
-	ld bc, $114
+	lb bc, 1, 20
 	call ClearScreenArea
 	ld hl, TownMapOrder
 	ld a, [wWhichTownMapLocation]
@@ -107,6 +107,7 @@ INCLUDE "data/town_map_order.asm"
 
 TownMapCursor: ; 70f40 (1c:4f40)
 	INCBIN "gfx/town_map_cursor.1bpp"
+TownMapCursorEnd:
 
 LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	call LoadTownMap
@@ -140,11 +141,11 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	call LoadFontTilePatterns
 	ld de, BirdSprite
 	ld hl, vSprites + $40
-	ld bc, (BANK(BirdSprite) << 8) + $0c
+	lb bc, BANK(BirdSprite), $0c
 	call CopyVideoData
 	ld de, TownMapUpArrow
 	ld hl, vChars1 + $6d0
-	ld bc, (BANK(TownMapUpArrow) << 8) + $01
+	lb bc, BANK(TownMapUpArrow), (TownMapUpArrowEnd - TownMapUpArrow) / $8
 	call CopyVideoDataDouble
 	call BuildFlyLocationsList
 	ld hl, wUpdateSpritesEnabled
@@ -161,12 +162,12 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	ld hl, wFlyLocationsList
 	coord de, 18, 0
 .townMapFlyLoop
-	ld a, $7f
+	ld a, " "
 	ld [de], a
 	push hl
 	push hl
 	coord hl, 3, 0
-	ld bc, $10f
+	lb bc, 1, 15
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
@@ -271,6 +272,7 @@ BuildFlyLocationsList: ; 71070 (1c:5070)
 
 TownMapUpArrow: ; 71093 (1c:5093)
 	INCBIN "gfx/up_arrow.1bpp"
+TownMapUpArrowEnd:
 
 LoadTownMap: ; 7109b (1c:509b)
 	call GBPalWhiteOutWithDelay3
@@ -283,12 +285,12 @@ LoadTownMap: ; 7109b (1c:509b)
 	call DisableLCD
 	ld hl, WorldMapTileGraphics
 	ld de, vChars2 + $600
-	ld bc, $100
+	ld bc, WorldMapTileGraphicsEnd - WorldMapTileGraphics
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
 	ld hl, MonNestIcon
 	ld de, vSprites + $40
-	ld bc, $8
+	ld bc, MonNestIconEnd - MonNestIcon
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
 	coord hl, 0, 0
@@ -312,8 +314,8 @@ LoadTownMap: ; 7109b (1c:509b)
 	jr .nextTile
 .done
 	call EnableLCD
-	ld b, $2
-	call GoPAL_SET
+	ld b, SET_PAL_TOWN_MAP
+	call RunPaletteCommand
 	call Delay3
 	call GBPalNormal
 	xor a
@@ -336,7 +338,7 @@ ExitTownMap: ; 711ab (1c:51ab)
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
 	call UpdateSprites
-	jp GoPAL_SET_CF1C
+	jp RunDefaultPaletteCommand
 
 DrawPlayerOrBirdSprite: ; 711c4 (1c:51c4)
 ; a = map number
@@ -442,8 +444,8 @@ WritePlayerOrBirdSpriteOAM: ; 7126d (1c:526d)
 
 WriteTownMapSpriteOAM: ; 71279 (1c:5279)
 	push hl
-	ld hl, $fcfc
-	add hl, bc ; subtract 4 from c (X coord) and 3 from b (Y coord)
+	lb hl, -4, -4
+	add hl, bc ; subtract 4 from c (X coord) and 4 from b (Y coord)
 	ld b, h
 	ld c, l
 	pop hl
@@ -451,7 +453,7 @@ WriteTownMapSpriteOAM: ; 71279 (1c:5279)
 WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
 ; Writes 4 OAM blocks for a helix mon party sprite, since it does not have
 ; a vertical line of symmetry.
-	ld de, $202
+	lb de, 2, 2
 .loop
 	push de
 	push bc
@@ -487,24 +489,24 @@ WriteSymmetricMonPartySpriteOAM: ; 712a6 (1c:52a6)
 ; the X-flip OAM bit to be used so that only 2 rather than 4 tile patterns are
 ; needed.
 	xor a
-	ld [wcd5c], a
-	ld de, $202
+	ld [wSymmetricSpriteOAMAttributes], a
+	lb de, 2, 2
 .loop
 	push de
 	push bc
 .innerLoop
 	ld a, b
-	ld [hli], a
+	ld [hli], a ; Y
 	ld a, c
-	ld [hli], a
+	ld [hli], a ; X
 	ld a, [wOAMBaseTile]
-	ld [hli], a
-	ld a, [wcd5c]
-	ld [hli], a
-	xor $20
-	ld [wcd5c], a
+	ld [hli], a ; tile
+	ld a, [wSymmetricSpriteOAMAttributes]
+	ld [hli], a ; attributes
+	xor (1 << OAM_X_FLIP)
+	ld [wSymmetricSpriteOAMAttributes], a
 	inc d
-	ld a, $8
+	ld a, 8
 	add c
 	ld c, a
 	dec e
@@ -516,7 +518,7 @@ WriteSymmetricMonPartySpriteOAM: ; 712a6 (1c:52a6)
 	inc [hl]
 	inc [hl]
 	pop hl
-	ld a, $8
+	ld a, 8
 	add b
 	ld b, a
 	dec d
@@ -582,6 +584,7 @@ INCLUDE "text/map_names.asm"
 
 MonNestIcon: ; 716be (1c:56be)
 	INCBIN "gfx/mon_nest_icon.1bpp"
+MonNestIconEnd:
 
 TownMapSpriteBlinkingAnimation: ; 716c6 (1c:56c6)
 	ld a, [wAnimCounter]
