@@ -26,6 +26,7 @@ _CrobatDexEntry::
 	page "so it may not be"
 	next "noticed even when"
 	next "it is nearby"
+    dex
 	
 _PolitoedDexEntry::
 	text "If POLIWAG and"
