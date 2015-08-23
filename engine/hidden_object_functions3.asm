@@ -125,7 +125,6 @@ TownMapText: ; fc12 (3:7c12)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call LoadFontTilePatterns
 	callba DisplayTownMap
-    call ReloadMapData
 	ld hl, wd730
 	res 6, [hl]
 	ld de, TextScriptEnd

@@ -326,6 +326,7 @@ Func_711ab: ; 711ab (1c:51ab)
 	call ClearSprites
 	call LoadPlayerSpriteGraphics
 	call LoadFontTilePatterns
+    call ReloadMapData ; added
 	call UpdateSprites
 	jp GoPAL_SET_CF1C
 
