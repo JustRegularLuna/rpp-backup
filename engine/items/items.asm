@@ -36,14 +36,14 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUseMedicine   ; HYPER_POTION
 	dw ItemUseMedicine   ; SUPER_POTION
 	dw ItemUseMedicine   ; POTION
-	dw ItemUseBait       ; BOULDERBADGE
-	dw ItemUseRock       ; CASCADEBADGE
-	dw UnusableItem      ; THUNDERBADGE
-	dw UnusableItem      ; RAINBOWBADGE
-	dw UnusableItem      ; SOULBADGE
-	dw UnusableItem      ; MARSHBADGE
-	dw UnusableItem      ; VOLCANOBADGE
-	dw UnusableItem      ; EARTHBADGE
+	dw ItemUseBait       ; SAFARI_BAIT
+	dw ItemUseRock       ; SAFARI_ROCK
+	dw UnusableItem      ; OLD SEA MAP
+	dw UnusableItem      ; FERRY TICKET
+	dw UnusableItem      ; EON TICKET
+	dw UnusableItem      ; TERU-SAMA
+	dw UnusableItem      ; TERU-SAMA
+	dw UnusableItem      ; TERU-SAMA
 	dw ItemUseEscapeRope ; ESCAPE_ROPE
 	dw ItemUseRepel      ; REPEL
 	dw UnusableItem      ; OLD_AMBER
