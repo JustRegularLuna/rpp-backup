@@ -264,7 +264,7 @@ HikerData: ; COMPLETED
 	db 36,GOLEM,0 ; Rocktunnel 8
 	
 BikerData: ; COMPLETED
-	db 2,KOFFING,KOFFING,KOFFING,0 ;                           UNKNOWN
+	db 52,KOFFING,KOFFING,KOFFING,0 ; Route 14
 	db 53,WEEZING,MUK,0 ; Route 14 2l
 	db 54,WEEZING,MUK,0 ; Route 15 6
 	db 54,MUK,WEEZING,0 ; Route 15 5
@@ -400,7 +400,7 @@ TamerData: ; COMPLETED
 	
 BirdKeeperData: ; COMPLETED
 	db 53,PIDGEOT,0 ; Route 13 R 2
-	db 25,SPEAROW,PIDGEY,PIDGEY,SPEAROW,SPEAROW,0  ;             UNKNOWN
+	db 53,SPEAROW,PIDGEY,PIDGEY,SPEAROW,SPEAROW,0  ;             UNKNOWN
 	db 52,PIDGEOT,FEAROW,0 ; Route 13 LB
 	db 53,FARFETCH_D,0 ; Route 14 1R
 	db 54,FEAROW,0 ; Route 15 8
