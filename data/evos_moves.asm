@@ -753,7 +753,7 @@ Mon031_EvosMoves: ; 3b2a8 (e:72a8)
 	db 21,FURY_SWIPES
 	db 24,BITE
 	db 29,DOUBLE_TEAM
-	db 35,SLAM
+	db 35,BODY_SLAM
 	db 36,TOXIC
 	db 39,POISON_JAB
 	db 43,EARTH_POWER
