@@ -569,3 +569,14 @@ WEST_MAP_CONNECTION: MACRO
 	db (\2 * 2) - 1 ; x alignment
 	dw wOverworldMap + 6 + (2 * \2) ; window (position of the upper left block after entring the map)
 ENDM
+
+tmlearn: MACRO
+x = 0
+	rept _NARG
+if \1 != 0
+x = x | (1 << ((\1 - 1) % 8))
+endc
+	shift
+	endr
+	db x
+ENDM
