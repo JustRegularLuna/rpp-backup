@@ -264,7 +264,7 @@ HikerData: ; COMPLETED
 	db 36,GOLEM,0 ; Rocktunnel 8
 	
 BikerData: ; COMPLETED
-	db 52,KOFFING,KOFFING,KOFFING,0 ; Route 14
+	db 52,WEEZING,MUK,ARBOK,0 ; Route 14
 	db 53,WEEZING,MUK,0 ; Route 14 2l
 	db 54,WEEZING,MUK,0 ; Route 15 6
 	db 54,MUK,WEEZING,0 ; Route 15 5
