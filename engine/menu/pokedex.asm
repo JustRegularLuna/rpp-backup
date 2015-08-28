@@ -144,6 +144,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	jr .handleMenuInput
 .choseArea
 	predef LoadTownMap_Nest ; display pokemon areas
+    call ClearScreen ; added
 	ld b,0
 	jr .exitSideMenu
 
