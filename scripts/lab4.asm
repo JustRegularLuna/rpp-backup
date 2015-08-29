@@ -106,7 +106,7 @@ Lab4Text_75dd5: ; 75dd5 (1d:5dd5)
 
 Lab4Text2: ; 75dda (1d:5dda)
 	db $08 ; asm
-	ld a, $3
+	ld a, $9
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
