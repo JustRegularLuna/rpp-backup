@@ -15,7 +15,7 @@ dw HeracrossPicBack
 ; attacks known at lvl 0
 db TACKLE
 db LEER
-db HORN_ATTACK
+db 0
 db 0
 db 5 ; growth rate
 ; learnset
