@@ -3741,7 +3741,7 @@ Mon178_EvosMoves:
 Mon179_EvosMoves:
 ;TOGEPI
 ;Evolutions
-	db EV_LEVEL,16,TOGETIC
+	db EV_LEVEL,15,TOGETIC
 	db 0
 ;Learnset
 	db 5,GROWL
@@ -3767,7 +3767,7 @@ Mon180_EvosMoves:
 	db 5,GROWL
 	db 9,METRONOME
 	db 13,LOVELY_KISS
-	db 14,WING_ATTACK
+	db 15,WING_ATTACK
 	db 17,WITHDRAW
 	db 21,BABYDOLLEYES
 	db 25,HYPER_VOICE
