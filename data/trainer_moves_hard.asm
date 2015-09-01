@@ -1,7 +1,7 @@
 TeamMoves: ; Created and updated on 28/06/2015 by Neodymium / Free to use and modify without crediting
 	db BROCK,$1 ; COMPLETED
     ;Geodude
-	db 1,1,SELFDESTRUCT
+	db 1,1,ROCK_POLISH
 	db 1,2,MUD_SLAP
 	db 1,3,ROCK_TOMB
 	db 1,4,TACKLE
@@ -21,7 +21,7 @@ TeamMoves: ; Created and updated on 28/06/2015 by Neodymium / Free to use and mo
 	db 4,3,ROCK_TOMB
 	db 4,4,AGILITY
     ;Graveler
-	db 5,1,SELFDESTRUCT
+	db 5,1,ROCK_POLISH
 	db 5,2,MUD_SLAP
 	db 5,3,ROCK_TOMB
 	db 5,4,TAKE_DOWN
