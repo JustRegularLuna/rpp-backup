@@ -1512,6 +1512,7 @@ PlaceEnemyHUDTiles: ; 3a919 (e:6919)
 	call CopyData
 	hlCoord 1, 2
 	ld de, $1
+	jp EnemyHealthBarUpdated
 	jr PlaceHUDTiles
 
 EnemyBattleHUDGraphicsTiles: ; 3a92d (e:692d)
@@ -1522,6 +1523,7 @@ EnemyBattleHUDGraphicsTiles: ; 3a92d (e:692d)
 
 PlaceHUDTiles: ; 3a930 (e:6930)
 	ld [hl], $73
+HealthBarUpdateDone:	
 	ld bc, $14
 	add hl, bc
 	ld a, [wTrainerScreenY]

@@ -2249,6 +2249,12 @@ W_BERRYTREEFLAGS::
 wBerryStepCounter:: ; deee
 	ds 2
 
+wEXPBarPixelLength:: ds 1
+wEXPBarBaseEXP:: ds 3
+wEXPBarCurEXP:: ds 3
+wEXPBarNeededEXP:: ds 3
+wEXPBarKeepFullFlag:: ds 1
+	
 SECTION "Stack", WRAMX[$dfff], BANK[1]
 wStack:: ; dfff
 	ds -$100

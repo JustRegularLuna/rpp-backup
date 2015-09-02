@@ -1929,6 +1929,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	hlCoord 10, 7
 	call CenterMonName
 	call PlaceString
+	call PrintEXPBar
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
 	ld bc, $c
@@ -1988,7 +1989,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	hlCoord 1, 0
 	call CenterMonName
 	call PlaceString
-	hlCoord 4, 1
+	hlCoord 6, 1
 	push hl
 	inc hl
 	ld de, wEnemyMonStatus
