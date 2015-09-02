@@ -13,6 +13,10 @@ dex    EQUS "db $5f, $50" ; End a Pokedex entry.
 
 percent EQUS "* $ff / 100"
 
+lb: MACRO ; r, hi, lo
+	ld \1, (\2) << 8 + ((\3) & $ff)
+	ENDM
+
 
 ; Constant enumeration is useful for monsters, items, moves, etc.
 const_def: MACRO
@@ -62,6 +66,13 @@ bcd3: MACRO
 
 coins equs "bcd2"
 money equs "bcd3"
+
+;\1 = r
+;\2 = X
+;\3 = Y
+coord: MACRO
+	ld \1, wTileMap + 20 * \3 + \2
+	ENDM
 
 ;\1 = X
 ;\2 = Y
