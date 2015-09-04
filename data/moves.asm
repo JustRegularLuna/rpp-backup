@@ -182,7 +182,7 @@ endm
 	move STRENGTH,     NO_ADDITIONAL_EFFECT,        90, STEEL,     90, 10 ; Meteor Mash
 	move BITE,         DEFENSE_DOWN_SIDE_EFFECT,    80, DARK,     100, 15 ; Crunch
 	move PSYCHIC,      FLINCH_SIDE_EFFECT1,         80, DARK,     100, 15 ; Dark Pulse
-	move TACKLE,       SWIFT_EFFECT,                60, DARK,     100, 20 ; Feint Attack
+	move QUICK_ATTACK, SWIFT_EFFECT,                60, DARK,     100, 20 ; Feint Attack
 	move CUT,          NO_ADDITIONAL_EFFECT,        70, DARK,     100, 15 ; Night Slash
 	move SEISMIC_TOSS, SPECIAL_DOWN_SIDE_EFFECT,    95, FAIRY,    100, 15 ; Moonblast
 	move LOVELY_KISS,  DRAIN_HP_EFFECT,             50, FAIRY,    100, 10 ; Draining Kiss
@@ -256,7 +256,7 @@ endm
 	move KARATE_CHOP,  NO_ADDITIONAL_EFFECT,       100, FIGHTING,  85,  5 ; Cross Chop
 	move MEGA_KICK,    SPEED_DOWN_SIDE_EFFECT,      65, FIGHTING, 100, 20 ; Low Sweep
 	move SONICBOOM,    CONFUSION_SIDE_EFFECT,      110, FLYING,    85, 10 ; Hurricane
-	move LEER,         ATTACK_DOWN1_EFFECT,          0, FAIRY,    100, 30 ; Baby Doll Eyes
+	move TAIL_WHIP,    ATTACK_DOWN1_EFFECT,          0, FAIRY,    100, 30 ; Baby Doll Eyes
 	move BONEMERANG,   TWO_TO_FIVE_ATTACKS_EFFECT,  25, GROUND,    90, 10 ; Bone Rush
 	move AURORA_BEAM,  NO_ADDITIONAL_EFFECT,       100, FLYING,   100,  5 ; Aeroblast
 	move ROCK_THROW,   NO_ADDITIONAL_EFFECT,        60, ROCK,     100,  5 ; Ancient Power
