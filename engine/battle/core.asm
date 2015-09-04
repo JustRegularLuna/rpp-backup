@@ -1004,7 +1004,7 @@ AnyEnemyPokemonAliveCheck: ; 3c64f (f:464f)
 ; stores whether enemy ran in Z flag
 ReplaceFaintedEnemyMon: ; 3c664 (f:4664)
 	ld hl, wcf1e
-	ld e, $30
+	ld e, $00 ; changed from $30
 	call GetBattleHealthBarColor
 	callab DrawEnemyPokeballs
 	ld a, [wLinkState]
