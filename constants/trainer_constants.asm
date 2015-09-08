@@ -1,3 +1,5 @@
+TRAINER_START EQU $C8 ; This will eventually be changed to EQU NUM_POKEMON so I can have more than 200 more easily
+
 ; sometimes it's necessary to add $C8 to these values
 YOUNGSTER     EQU $01
 BUG_CATCHER   EQU $02
