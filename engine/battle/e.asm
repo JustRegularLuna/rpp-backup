@@ -725,7 +725,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 
 ; get the pointer to trainer data for this class
 	ld a,[W_CUROPPONENT]
-	sub $C9 ; convert value from pokemon to trainer
+	sub TRAINER_START + 1 ; convert value from pokemon to trainer
 	add a,a
 	ld hl,TrainerDataPointers
 	ld c,a
