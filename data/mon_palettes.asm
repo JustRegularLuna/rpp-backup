@@ -223,7 +223,7 @@ TrainerPalletes:
 	db PAL_CYAN_TRAINER      ; Swimmer (Female)
 	db PAL_MEWMON            ; Rocket (Female Grunt)
 	db PAL_BLUE_TRAINER      ; Scientist
-	db PAL_BROWN_TRAINER     ; Giovanni
+	db PAL_MEWMON            ; Giovanni
 	db PAL_MEWMON            ; Rocket (Male Grunt)
 	db PAL_RED_TRAINER       ; Ace Trainer (Male)
 	db PAL_RED_TRAINER       ; Ace Trainer (Female)
