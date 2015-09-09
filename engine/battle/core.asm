@@ -1241,7 +1241,7 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	cp LINK_STATE_BATTLING
 	jr z, .notSony1Battle
 	ld a, [W_CUROPPONENT]
-	cp $c8 + SONY1
+	cp TRAINER_START + SONY1
 	jr nz, .notSony1Battle
 	ld hl, wTileMap  ; sony 1 battle
 	ld bc, $815
@@ -6939,7 +6939,7 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	res 1, [hl]
 	callab InitBattleVariables
 	ld a, [wEnemyMonSpecies2]
-	sub $c8
+	sub TRAINER_START
 	jp c, InitWildBattle
 	ld [W_TRAINERCLASS], a
 	call GetTrainerInformation

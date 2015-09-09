@@ -11,16 +11,16 @@ Route15Object: ; 0x5894e (size=126)
 	db $9, $27, $c ; Route15Text12
 
 	db $b ; people
-	db SPRITE_LASS, $b + 4, $29 + 4, $ff, $d0, TRAINER | $1, JR__TRAINER_F + $C8, $14
-	db SPRITE_LASS, $a + 4, $35 + 4, $ff, $d2, TRAINER | $2, JR__TRAINER_F + $C8, $15
-	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $1f + 4, $ff, $d1, TRAINER | $3, BIRD_KEEPER + $C8, $6
-	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $23 + 4, $ff, $d1, TRAINER | $4, BIRD_KEEPER + $C8, $7
-	db SPRITE_FOULARD_WOMAN, $b + 4, $35 + 4, $ff, $d0, TRAINER | $5, BEAUTY + $C8, $9
-	db SPRITE_FOULARD_WOMAN, $a + 4, $29 + 4, $ff, $d3, TRAINER | $6, BEAUTY + $C8, $a
-	db SPRITE_BIKER, $a + 4, $30 + 4, $ff, $d0, TRAINER | $7, BIKER + $C8, $3
-	db SPRITE_BIKER, $a + 4, $2e + 4, $ff, $d0, TRAINER | $8, BIKER + $C8, $4
-	db SPRITE_LASS, $5 + 4, $25 + 4, $ff, $d3, TRAINER | $9, JR__TRAINER_F + $C8, $16
-	db SPRITE_LASS, $d + 4, $12 + 4, $ff, $d1, TRAINER | $a, JR__TRAINER_F + $C8, $17
+	db SPRITE_LASS, $b + 4, $29 + 4, $ff, $d0, TRAINER | $1, JR__TRAINER_F + TRAINER_START, $14
+	db SPRITE_LASS, $a + 4, $35 + 4, $ff, $d2, TRAINER | $2, JR__TRAINER_F + TRAINER_START, $15
+	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $1f + 4, $ff, $d1, TRAINER | $3, BIRD_KEEPER + TRAINER_START, $6
+	db SPRITE_BLACK_HAIR_BOY_1, $d + 4, $23 + 4, $ff, $d1, TRAINER | $4, BIRD_KEEPER + TRAINER_START, $7
+	db SPRITE_FOULARD_WOMAN, $b + 4, $35 + 4, $ff, $d0, TRAINER | $5, BEAUTY + TRAINER_START, $9
+	db SPRITE_FOULARD_WOMAN, $a + 4, $29 + 4, $ff, $d3, TRAINER | $6, BEAUTY + TRAINER_START, $a
+	db SPRITE_BIKER, $a + 4, $30 + 4, $ff, $d0, TRAINER | $7, BIKER + TRAINER_START, $3
+	db SPRITE_BIKER, $a + 4, $2e + 4, $ff, $d0, TRAINER | $8, BIKER + TRAINER_START, $4
+	db SPRITE_LASS, $5 + 4, $25 + 4, $ff, $d3, TRAINER | $9, JR__TRAINER_F + TRAINER_START, $16
+	db SPRITE_LASS, $d + 4, $12 + 4, $ff, $d1, TRAINER | $a, JR__TRAINER_F + TRAINER_START, $17
 	db SPRITE_BALL, $5 + 4, $12 + 4, $ff, $ff, ITEM | $b, TM_20
 
 	; warp-to

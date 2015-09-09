@@ -2381,7 +2381,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	ld b, $1
 	call TrainerFlagAction   ; flag trainer as fought
 	ld a, [W_ENEMYMONORTRAINERCLASS]
-	cp $c8
+	cp TRAINER_START
 	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
 	ld hl, W_MISSABLEOBJECTLIST
 	ld de, $2
@@ -2417,7 +2417,7 @@ InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld a, [wEngagedTrainerClass]
 	ld [W_CUROPPONENT], a ; wd059
 	ld [W_ENEMYMONORTRAINERCLASS], a
-	cp $c8
+	cp TRAINER_START
 	ld a, [wEngagedTrainerSet] ; wcd2e
 	jr c, .noTrainer
 	ld [W_TRAINERNO], a ; wd05d
@@ -2578,11 +2578,11 @@ Func_33dd:: ; 33dd (0:33dd)
 
 PlayTrainerMusic:: ; 33e8 (0:33e8)
 	ld a, [wEngagedTrainerClass]
-	cp $c8 + SONY1
+	cp TRAINER_START + SONY1
 	ret z
-	cp $c8 + SONY2
+	cp TRAINER_START + SONY2
 	ret z
-	cp $c8 + SONY3
+	cp TRAINER_START + SONY3
 	ret z
 	ld a, [W_GYMLEADERNO] ; W_GYMLEADERNO
 	and a

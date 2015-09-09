@@ -17,12 +17,12 @@ Route16Object: ; 0x58afc (size=136)
 	db $11, $5, $9 ; Route16Text9
 
 	db $7 ; people
-	db SPRITE_BIKER, $c + 4, $11 + 4, $ff, $d2, TRAINER | $1, BIKER + $C8, $5
-	db SPRITE_BIKER, $d + 4, $e + 4, $ff, $d3, TRAINER | $2, CUE_BALL + $C8, $1
-	db SPRITE_BIKER, $c + 4, $b + 4, $ff, $d1, TRAINER | $3, CUE_BALL + $C8, $2
-	db SPRITE_BIKER, $b + 4, $9 + 4, $ff, $d2, TRAINER | $4, BIKER + $C8, $6
-	db SPRITE_BIKER, $a + 4, $6 + 4, $ff, $d3, TRAINER | $5, CUE_BALL + $C8, $3
-	db SPRITE_BIKER, $c + 4, $3 + 4, $ff, $d3, TRAINER | $6, BIKER + $C8, $7
+	db SPRITE_BIKER, $c + 4, $11 + 4, $ff, $d2, TRAINER | $1, BIKER + TRAINER_START, $5
+	db SPRITE_BIKER, $d + 4, $e + 4, $ff, $d3, TRAINER | $2, CUE_BALL + TRAINER_START, $1
+	db SPRITE_BIKER, $c + 4, $b + 4, $ff, $d1, TRAINER | $3, CUE_BALL + TRAINER_START, $2
+	db SPRITE_BIKER, $b + 4, $9 + 4, $ff, $d2, TRAINER | $4, BIKER + TRAINER_START, $6
+	db SPRITE_BIKER, $a + 4, $6 + 4, $ff, $d3, TRAINER | $5, CUE_BALL + TRAINER_START, $3
+	db SPRITE_BIKER, $c + 4, $3 + 4, $ff, $d3, TRAINER | $6, BIKER + TRAINER_START, $7
 	db SPRITE_SNORLAX, $a + 4, $1a + 4, $ff, $d0, $7 ; person
 
 	; warp-to

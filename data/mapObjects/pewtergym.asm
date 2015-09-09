@@ -8,8 +8,8 @@ PewterGymObject: ; 0x5c52e (size=42)
 	db $0 ; signs
 
 	db $3 ; people
-	db SPRITE_BROCK, $1 + 4, $4 + 4, $ff, $d0, TRAINER | $1, BROCK + $C8, $1
-	db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $3 + 4, $ff, $d3, TRAINER | $2, JR__TRAINER_M + $C8, $1
+	db SPRITE_BROCK, $1 + 4, $4 + 4, $ff, $d0, TRAINER | $1, BROCK + TRAINER_START, $1
+	db SPRITE_BLACK_HAIR_BOY_1, $6 + 4, $3 + 4, $ff, $d3, TRAINER | $2, JR__TRAINER_M + TRAINER_START, $1
 	db SPRITE_GYM_HELPER, $a + 4, $7 + 4, $ff, $d0, $3 ; person
 
 	; warp-to

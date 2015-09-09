@@ -10,10 +10,10 @@ VictoryRoad3Object: ; 0x44acd (size=106)
 	db $0 ; signs
 
 	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $1c + 4, $ff, $d2, TRAINER | $1, COOLTRAINER_M + $C8, $2
-	db SPRITE_LASS, $d + 4, $7 + 4, $ff, $d3, TRAINER | $2, COOLTRAINER_F + $C8, $2
-	db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $6 + 4, $ff, $d2, TRAINER | $3, COOLTRAINER_M + $C8, $3
-	db SPRITE_LASS, $3 + 4, $d + 4, $ff, $d3, TRAINER | $4, COOLTRAINER_F + $C8, $3
+	db SPRITE_BLACK_HAIR_BOY_1, $5 + 4, $1c + 4, $ff, $d2, TRAINER | $1, COOLTRAINER_M + TRAINER_START, $2
+	db SPRITE_LASS, $d + 4, $7 + 4, $ff, $d3, TRAINER | $2, COOLTRAINER_F + TRAINER_START, $2
+	db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $6 + 4, $ff, $d2, TRAINER | $3, COOLTRAINER_M + TRAINER_START, $3
+	db SPRITE_LASS, $3 + 4, $d + 4, $ff, $d3, TRAINER | $4, COOLTRAINER_F + TRAINER_START, $3
 	db SPRITE_BALL, $5 + 4, $1a + 4, $ff, $ff, ITEM | $5, MAX_REVIVE
 	db SPRITE_BALL, $7 + 4, $7 + 4, $ff, $ff, ITEM | $6, TM_47
 	db SPRITE_BOULDER, $3 + 4, $16 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $7 ; person

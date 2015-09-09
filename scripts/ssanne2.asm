@@ -92,7 +92,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ld [$ff8c], a
 	call DisplayTextID
 	call Delay3
-	ld a, SONY2 + $c8
+	ld a, SONY2 + TRAINER_START
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter

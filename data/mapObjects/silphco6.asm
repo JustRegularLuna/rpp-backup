@@ -16,9 +16,9 @@ SilphCo6Object: ; 0x1a2fb (size=112)
 	db SPRITE_BRUNETTE_GIRL, $6 + 4, $15 + 4, $ff, $d0, $3 ; person
 	db SPRITE_LASS, $a + 4, $b + 4, $ff, $d3, $4 ; person
 	db SPRITE_LAPRAS_GIVER, $d + 4, $12 + 4, $ff, $d1, $5 ; person
-	db SPRITE_ROCKET, $3 + 4, $11 + 4, $ff, $d3, TRAINER | $6, ROCKET + $C8, $1e
-	db SPRITE_OAK_AIDE, $8 + 4, $7 + 4, $ff, $d0, TRAINER | $7, SCIENTIST + $C8, $7
-	db SPRITE_ROCKET, $f + 4, $e + 4, $ff, $d2, TRAINER | $8, ROCKET + $C8, $1f
+	db SPRITE_ROCKET, $3 + 4, $11 + 4, $ff, $d3, TRAINER | $6, ROCKET + TRAINER_START, $1e
+	db SPRITE_OAK_AIDE, $8 + 4, $7 + 4, $ff, $d0, TRAINER | $7, SCIENTIST + TRAINER_START, $7
+	db SPRITE_ROCKET, $f + 4, $e + 4, $ff, $d2, TRAINER | $8, ROCKET + TRAINER_START, $1f
 	db SPRITE_BALL, $c + 4, $3 + 4, $ff, $ff, ITEM | $9, HP_UP
 	db SPRITE_BALL, $f + 4, $2 + 4, $ff, $ff, ITEM | $a, X_ACCURACY
 

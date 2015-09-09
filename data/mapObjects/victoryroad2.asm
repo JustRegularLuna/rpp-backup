@@ -13,11 +13,11 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	db $0 ; signs
 
 	db $d ; people
-	db SPRITE_HIKER, $9 + 4, $c + 4, $ff, $d2, TRAINER | $1, BLACKBELT + $C8, $9
-	db SPRITE_BLACK_HAIR_BOY_2, $d + 4, $15 + 4, $ff, $d2, TRAINER | $2, JUGGLER + $C8, $2
-	db SPRITE_BLACK_HAIR_BOY_1, $8 + 4, $13 + 4, $ff, $d0, TRAINER | $3, TAMER + $C8, $5
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $d0, TRAINER | $4, POKEMANIAC + $C8, $6
-	db SPRITE_BLACK_HAIR_BOY_2, $3 + 4, $1a + 4, $ff, $d2, TRAINER | $5, JUGGLER + $C8, $5
+	db SPRITE_HIKER, $9 + 4, $c + 4, $ff, $d2, TRAINER | $1, BLACKBELT + TRAINER_START, $9
+	db SPRITE_BLACK_HAIR_BOY_2, $d + 4, $15 + 4, $ff, $d2, TRAINER | $2, JUGGLER + TRAINER_START, $2
+	db SPRITE_BLACK_HAIR_BOY_1, $8 + 4, $13 + 4, $ff, $d0, TRAINER | $3, TAMER + TRAINER_START, $5
+	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $d0, TRAINER | $4, POKEMANIAC + TRAINER_START, $6
+	db SPRITE_BLACK_HAIR_BOY_2, $3 + 4, $1a + 4, $ff, $d2, TRAINER | $5, JUGGLER + TRAINER_START, $5
 	db SPRITE_BIRD, $5 + 4, $b + 4, $ff, $d1, TRAINER | $6, MOLTRES, 50
 	db SPRITE_BALL, $5 + 4, $1b + 4, $ff, $ff, ITEM | $7, TM_23
 	db SPRITE_BALL, $9 + 4, $12 + 4, $ff, $ff, ITEM | $8, FULL_HEAL
