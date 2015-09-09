@@ -797,7 +797,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr z, .FinishUp
 	ld b, a
 	ld a, [W_CUROPPONENT]
-	sub $c8
+	sub TRAINER_START
 	cp a, b
 	jr nz, .NextEntry
 	ld a, [hli]

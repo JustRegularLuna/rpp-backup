@@ -166,7 +166,7 @@ BattleTransitions: ; 709d2 (1c:49d2)
 
 GetBattleTransitionID_WildOrTrainer: ; 709e2 (1c:49e2)
 	ld a, [W_CUROPPONENT]
-	cp $c8
+	cp TRAINER_START
 	jr nc, .trainer
 	res 0, c
 	ret
