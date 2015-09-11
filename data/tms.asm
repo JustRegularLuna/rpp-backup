@@ -1,8 +1,8 @@
 TechnicalMachines: ; 13773 (4:7773)
 	db DYNAMICPUNCH
-	db RAZOR_WIND
+	db RAZOR_WIND ; replace?
 	db SWORDS_DANCE
-	db WHIRLWIND
+	db WHIRLWIND ; replace?
 	db MEGA_KICK
 	db TOXIC
 	db HORN_DRILL
@@ -10,7 +10,7 @@ TechnicalMachines: ; 13773 (4:7773)
 	db TAKE_DOWN
 	db DOUBLE_EDGE
 	db WATER_PULSE
-	db WATER_GUN
+	db WATER_GUN ; replace?
 	db ICE_BEAM
 	db BLIZZARD
 	db HYPER_BEAM
@@ -28,12 +28,12 @@ TechnicalMachines: ; 13773 (4:7773)
 	db FISSURE
 	db DIG
 	db PSYCHIC_M
-	db TELEPORT
+	db TELEPORT ; replace?
 	db MIMIC
 	db DOUBLE_TEAM
 	db REFLECT
 	db HEADBUTT
-	db METRONOME
+	db METRONOME ; replace?
 	db ROCK_TOMB
 	db FLAMETHROWER
 	db FIRE_BLAST
@@ -47,10 +47,10 @@ TechnicalMachines: ; 13773 (4:7773)
 	db PSYWAVE
 	db EXPLOSION
 	db ROCK_SLIDE
-	db TRI_ATTACK
-	db SUBSTITUTE
+	db TRI_ATTACK ; replace?
+	db SUBSTITUTE ; replace?
 	db CUT
 	db FLY
 	db SURF
 	db STRENGTH
-	db FLASH
+	db FLASH ; make a TM, use this slot for Rock Smash or Dive later
