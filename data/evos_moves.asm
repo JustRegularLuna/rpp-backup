@@ -191,6 +191,19 @@ dw Mon189_EvosMoves
 dw Mon190_EvosMoves
 dw Mon191_EvosMoves
 dw Mon192_EvosMoves
+dw Mon193_EvosMoves
+dw Mon194_EvosMoves
+dw Mon195_EvosMoves
+dw Mon196_EvosMoves
+dw Mon197_EvosMoves
+dw Mon198_EvosMoves
+dw Mon199_EvosMoves
+dw Mon200_EvosMoves
+dw Mon201_EvosMoves
+dw Mon202_EvosMoves
+dw Mon203_EvosMoves
+dw Mon204_EvosMoves
+dw Mon205_EvosMoves
 
 	
 Mon001_EvosMoves: ; 3b844 (e:7844)
@@ -3185,7 +3198,7 @@ Mon150_EvosMoves: ; 3b790 (e:7790)
 	db 79,PSYCHO_CUT
 	db 86,HEX
 	db 93,DARK_PULSE
-	db 100,HYPER_BEAM
+	db 100,PSYSTRIKE
 	db 0
 	
 Mon151_EvosMoves: ; 3b2e0 (e:72e0)
@@ -4034,5 +4047,206 @@ Mon192_EvosMoves:
     db 47,STOMP
     db 50,GIGA_IMPACT
     db 0
+    
+Mon193_EvosMoves:
+;LATIAS
+;Evolutions
+    db 0
+;Learnset
+    db 70,RECOVER
+    db 75,CONVERSION
+    db 80,PSYCHIC_M
+    db 85,DRAGON_PULSE
+    db 0
+    
+Mon194_EvosMoves:
+;LATIOS
+;Evolutions
+    db 0
+;Learnset
+    db 70,RECOVER
+    db 75,CONVERSION
+    db 80,PSYCHIC_M
+    db 85,DRAGON_PULSE
+    db 0
+    
+Mon195_EvosMoves:
+;HITMONTOP
+;Evolutions
+    db 0
+;Learnset
+	db 5,MEDITATE
+	db 9,LOW_KICK
+	db 13,QUICK_ATTACK
+	db 17,FOCUS_ENERGY
+	db 21,ROLLING_KICK
+	db 25,DOUBLE_KICK
+	db 29,ACROBATICS
+	db 37,LOW_SWEEP
+	db 45,AGILITY
+	db 49,FEINT_ATTACK
+	db 53,MEGA_KICK
+	db 61,GIGA_IMPACT
+	db 0
+    
+Mon196_EvosMoves:
+;TYROGUE
+;Evolutions
+    db EV_TYROGUE,20,ATK_HIGHER,HITMONLEE
+    db EV_TYROGUE,20,BOTH_EQUAL,HITMONTOP
+    db EV_TYROGUE,20,DEF_HIGHER,HITMONCHAN
+    db 0
+;Learnset
+    db 7,MEDITATE
+    db 10,FOCUS_ENERGY
+    db 0
+    
+Mon197_EvosMoves:
+;PICHU
+;Evolutions
+    db EV_LEVEL,10,PIKACHU
+    db 0
+;Learnset
+    db 7,TAIL_WHIP
+    db 10,LOVELY_KISS
+    db 0
+    
+Mon198_EvosMoves:
+;CLEFFA
+;Evolutions
+    db EV_LEVEL,10,CLEFAIRY
+    db 0
+;Learnset
+    db 7,SING
+    db 10,LOVELY_KISS
+    db 0
+    
+Mon199_EvosMoves:
+;IGGLYBUFF
+;Evolutions
+    db EV_LEVEL,10,JIGGLYPUFF
+    db 0
+;Learnset
+    db 7,POUND
+    db 10,LOVELY_KISS
+    db 0
+    
+Mon200_EvosMoves:
+;SMOOCHUM
+;Evolutions
+    db EV_LEVEL,30,JYNX
+    db 0
+;Learnset
+	db 5,LICK
+	db 8,LOVELY_KISS
+	db 11,ICY_WIND
+	db 15,DOUBLESLAP
+	db 18,ICE_PUNCH
+	db 21,DRAININGKISS
+	db 25,SING
+	db 28,EXTRASENSORY
+	db 33,SCREECH
+	db 39,BLIZZARD
+	db 44,BODY_SLAM
+	db 49,FLASH
+	db 55,PSYCHIC_M
+	db 60,SHEER_COLD
+	db 0
+    
+Mon201_EvosMoves:
+;ELEKID
+;Evolutions
+    db EV_LEVEL,30,ELECTABUZZ
+    db 0
+;Learnset
+	db 5,THUNDERSHOCK
+	db 8,LOW_KICK
+	db 12,SWIFT
+	db 15,SONICBOOM
+	db 19,THUNDER_WAVE
+	db 22,ELECTRO_BALL
+	db 26,LIGHT_SCREEN
+	db 29,THUNDERPUNCH
+	db 36,DISCHARGE
+	db 42,SCREECH
+	db 49,THUNDERBOLT
+	db 55,THUNDER
+	db 0
+    
+Mon202_EvosMoves:
+;MAGBY
+;Evolutions
+    db EV_LEVEL,30,MAGMAR
+    db 0
+;Learnset
+	db 5,EMBER
+	db 8,SMOKESCREEN
+	db 12,FEINT_ATTACK
+	db 15,FIRE_SPIN
+	db 19,HAZE
+	db 22,FLAME_WHEEL
+	db 26,CONFUSE_RAY
+	db 29,FIRE_PUNCH
+	db 36,FLAMETHROWER
+	db 42,FOCUS_ENERGY
+	db 49,FIRE_BLAST
+	db 55,FLARE_BLITZ
+	db 0
+    
+Mon203_EvosMoves:
+;MIME_JR
+;Evolutions
+    db EV_MOVE,MIMIC,MR_MIME
+    db 0
+;Learnset
+	db 4,MIRROR_MOVE
+	db 8,MEDITATE
+	db 11,DOUBLESLAP
+	db 15,MIMIC
+	db 15,PSYWAVE
+	db 18,AMNESIA
+	db 22,LIGHT_SCREEN
+	db 22,REFLECT
+	db 25,PSYBEAM
+	db 29,SUBSTITUTE
+	db 32,COUNTER
+	db 36,CONFUSE_RAY
+	db 39,PSYCHIC_M
+	db 43,MIMIC
+	db 46,DAZZLINGLEAM
+	db 0
+    
+Mon204_EvosMoves:
+;HAPPINY
+;Evolutions
+    db EV_LEVEL,10,CHANSEY
+    db 0
+;Learnset
+    db 7,MIRROR_MOVE
+    db 10,LOVELY_KISS
+    db 0
+    
+Mon205_EvosMoves:
+;MUNCHLAX
+;Evolutions
+    db EV_LEVEL,15,SNORLAX
+    db 0
+;Learnset
+	db 4,DEFENSE_CURL
+	db 9,AMNESIA
+	db 12,LICK
+	db 17,HEADBUTT
+	db 20,BIDE
+	db 25,BITE
+	db 28,REST
+	db 28,ZEN_HEADBUTT
+	db 33,COUNTER
+	db 36,BODY_SLAM
+	db 41,DOUBLE_EDGE
+	db 44,IRON_DEFENSE
+	db 49,CRUNCH
+	db 50,SLAM
+	db 57,GIGA_IMPACT
+	db 0
     
     

@@ -192,6 +192,19 @@ MonsterPalettes: ; 725c8 (1c:65c8)
     db PAL_REDMON    ; Slugma
     db PAL_REDMON    ; Magcargo
     db PAL_REDMON    ; Torkoal
+    db PAL_REDMON    ; Latias
+    db PAL_BLUEMON   ; Latios
+    db PAL_BROWNMON  ; Hitmontop
+    db PAL_BROWNMON  ; Tyrogue
+    db PAL_YELLOWMON ; Pichu
+    db PAL_PINKMON   ; Cleffa
+    db PAL_PINKMON   ; Igglybuff
+    db PAL_PURPLE_TRAINER ; Smoochum
+    db PAL_YELLOWMON ; Elekid
+    db PAL_REDMON    ; Magby
+    db PAL_PURPLEMON ; Mime Jr
+    db PAL_PINKMON   ; Happiny
+    db PAL_MEWMON    ; Munchlax
 	
 TrainerPalletes:
 	db PAL_GREYMON           ; UNUSED

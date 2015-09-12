@@ -192,4 +192,17 @@ db $0E, $40, $60; Lanturn
 db $05, $00, $80; Slugma
 db $07, $EF, $FF; Magcargo
 db $1D, $20, $40; Torkoal
+db $09, $80, $40; Latias
+db $09, $80, $40; Latios
+db $0C, $EE, $C0; Hitmontop
+db $0C, $EE, $C0; Tyrogue
+db $0F, $EE, $01; Pichu
+db $19, $CC, $01; Cleffa
+db $0E, $FF, $35; Igglybuff
+db $0D, $FF, $FF; Smoochum
+db $06, $8F, $FF; Elekid
+db $04, $FF, $30; Magby
+db $20, $08, $40; Mime Jr
+db $14, $0A, $C0; Happiny
+db $05, $55, $01; Munchlax
 

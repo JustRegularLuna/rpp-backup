@@ -251,6 +251,8 @@ const_value = 1
 	const AEROBLAST    ; f9
 	const ANCIENTPOWER ; fa
 	const DIVE         ; fb (Unused) 
+    const LUSTER_PURGE ; fc
+    const PSYSTRIKE    ; fd
 
 NUM_ATTACKS EQU const_value
 const_value = STRUGGLE + 1

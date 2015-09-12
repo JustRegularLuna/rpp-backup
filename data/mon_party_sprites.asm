@@ -94,4 +94,11 @@ MonPartyData: ; 7190d (1c:590d)
 	dn SPRITE_MON, SPRITE_MON               ;Misdreavus/Mismagius
 	dn SPRITE_QUADRUPED, SPRITE_WATER       ;Miltank/Chinchou
 	dn SPRITE_WATER, SPRITE_SNAKE           ;Lanturn/Slugma
-    dn SPRITE_SNAKE, SPRITE_QUADRUPED       ;Magcargo,Torkoal
+    dn SPRITE_SNAKE, SPRITE_QUADRUPED       ;Magcargo/Torkoal
+    dn SPRITE_BIRD_M, SPRITE_BIRD_M         ;Latias/Latios
+    dn SPRITE_MON, SPRITE_MON               ;Hitmontop/Tyrogue
+    dn SPRITE_FAIRY, SPRITE_FAIRY           ;Pichu/Cleffa
+    dn SPRITE_FAIRY, SPRITE_FAIRY           ;Igglybuff/Smoochum
+    dn SPRITE_MON, SPRITE_MON               ;Elekid/Magby
+    dn SPRITE_MON, SPRITE_FAIRY             ;Mime Jr/Happiny
+    dn SPRITE_MON, 0                        ;Munchlax/Padding

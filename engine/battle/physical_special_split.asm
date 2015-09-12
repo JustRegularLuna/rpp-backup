@@ -260,4 +260,6 @@ PhysicalSpecialSplit: ;Determines if a move is Physical or Special
 	db SPECIAL ;Aeroblast
 	db SPECIAL ;AncientPower
 	db PHYSICAL;Dive (Unused)
+    db SPECIAL ;Luster Purge
+    db SPECIAL ;Psystrike
     

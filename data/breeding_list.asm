@@ -24,8 +24,8 @@ db SPEAROW    ; Spearow
 db SPEAROW    ; Fearow
 db EKANS      ; Ekans
 db EKANS      ; Arbok
-db PIKACHU    ; Pikachu
-db PIKACHU    ; Raichu
+db PICHU      ; Pikachu
+db PICHU      ; Raichu
 db SANDSHREW  ; Sandshrew
 db SANDSHREW  ; Sandslash
 db NIDORAN_F  ; Nidoran F
@@ -34,12 +34,12 @@ db NIDORAN_F  ; Nidoqueen
 db NIDORAN_M  ; Nidoran M
 db NIDORAN_M  ; Nidorino
 db NIDORAN_M  ; Nidoking
-db CLEFAIRY   ; Clefairy
-db CLEFAIRY   ; Clefable
+db CLEFFA     ; Clefairy
+db CLEFFA     ; Clefable
 db VULPIX     ; Vulpix
 db VULPIX     ; Ninetails
-db JIGGLYPUFF ; Jigglypuff
-db JIGGLYPUFF ; Wigglytuff
+db IGGLYBUFF  ; Jigglypuff
+db IGGLYBUFF  ; Wigglytuff
 db ZUBAT      ; Zubat
 db ZUBAT      ; Golbat
 db ODDISH     ; Oddish
@@ -105,14 +105,14 @@ db EXEGGCUTE  ; Exeggcute
 db EXEGGCUTE  ; Exeggutor
 db CUBONE     ; Cubone
 db CUBONE     ; Marowak
-db HITMONLEE  ; Hitmonlee
-db HITMONCHAN ; Hitmonchan
+db TYROGUE    ; Hitmonlee
+db TYROGUE    ; Hitmonchan
 db LICKITUNG  ; Lickitung
 db KOFFING    ; Koffing
 db KOFFING    ; Weezing
 db RHYHORN    ; Rhyhorn
 db RHYHORN    ; Rhydon
-db CHANSEY    ; Chansey
+db HAPPINY    ; Chansey
 db TANGELA    ; Tangela
 db KANGASKHAN ; Kangaskhan
 db HORSEA     ; Horsea
@@ -121,11 +121,11 @@ db GOLDEEN    ; Goldeen
 db GOLDEEN    ; Seaking
 db STARYU     ; Staryu
 db STARYU     ; Starmie
-db MR_MIME    ; Mr. Mime
+db MIME_JR    ; Mr. Mime
 db SCYTHER    ; Scyther
-db JYNX       ; Jynx
-db ELECTABUZZ ; Electabuzz
-db MAGMAR     ; Magmar
+db SMOOCHUM   ; Jynx
+db ELEKID     ; Electabuzz
+db MAGBY      ; Magmar
 db PINSIR     ; Pinsir
 db TAUROS     ; Tauros
 db MAGIKARP   ; Magikarp
@@ -142,7 +142,7 @@ db OMANYTE    ; Omastar
 db KABUTO     ; Kabuto
 db KABUTO     ; Kabutops
 db AERODACTYL ; Aerodactyl
-db SNORLAX    ; Snorlax
+db MUNCHLAX   ; Snorlax
 db ARTICUNO   ; Articuno
 db ZAPDOS     ; Zapdos
 db MOLTRES    ; Moltres
@@ -169,11 +169,11 @@ db POLIWAG    ; Politoed
 db SLOWPOKE   ; Slowking
 db ODDISH     ; Bellossom
 db HORSEA     ; Kingdra
-db CHANSEY    ; Blissey
+db HAPPINY    ; Blissey
 db PORYGON    ; Porygon 2
 db PORYGON    ; Porygon Z
-db MAGMAR     ; Magmortar
-db ELECTABUZZ ; Electivire
+db MAGBY      ; Magmortar
+db ELEKID     ; Electivire
 db MAGNEMITE  ; Magnezone
 db RHYHORN    ; Rhyperior
 db TANGELA    ; Tangrowth
@@ -192,3 +192,16 @@ db CHINCHOU   ; Lanturn
 db SLUGMA     ; Slugma
 db SLUGMA     ; Magcargo
 db TORKOAL    ; Torkoal
+db LATIAS     ; Latias
+db LATIOS     ; Latios
+db TYROGUE    ; Hitmontop
+db TYROGUE    ; Tyrogue
+db PICHU      ; Pichu
+db CLEFFA     ; Cleffa
+db IGGLYBUFF  ; Igglybuff
+db SMOOCHUM   ; Smoochum
+db ELEKID     ; Elekid
+db MAGBY      ; Magby
+db MIME_JR    ; Mime Jr
+db HAPPINY    ; Happiny
+db MUNCHLAX   ; Munchlax

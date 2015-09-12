@@ -7078,25 +7078,43 @@ ChinchouPicFront:       INCBIN "pic/bmon/chinchou.pic"
 ChinchouPicBack:        INCBIN "pic/monback/chinchou.pic"
 LanturnPicFront:        INCBIN "pic/bmon/lanturn.pic"
 LanturnPicBack:         INCBIN "pic/monback/lanturn.pic"
-
-Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
-Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
-Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
-
-Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
-Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
-
-Mart_GFX:          INCBIN "gfx/tilesets/mart.2bpp"
-Mart_Block:        INCBIN "gfx/blocksets/mart.bst"
-
-WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
-
 SlugmaPicFront::   INCBIN "pic/bmon/slugma.pic"
 SlugmaPicBack::    INCBIN "pic/monback/slugma.pic"
 MagcargoPicFront:: INCBIN "pic/bmon/magcargo.pic"
 MagcargoPicBack::  INCBIN "pic/monback/magcargo.pic"
 TorkoalPicFront::  INCBIN "pic/bmon/torkoal.pic"
 TorkoalPicBack::   INCBIN "pic/monback/torkoal.pic"
+LatiasPicFront::   INCBIN "pic/bmon/latias.pic"
+LatiasPicBack::    INCBIN "pic/monback/latias.pic"
+LatiosPicFront::   INCBIN "pic/bmon/latios.pic"
+LatiosPicBack::    INCBIN "pic/monback/latios.pic"
+HitmontopPicFront:: INCBIN "pic/bmon/hitmontop.pic"
+HitmontopPicBack::  INCBIN "pic/monback/hitmontop.pic"
+TyroguePicFront::   INCBIN "pic/bmon/tyrogue.pic"
+TyroguePicBack::    INCBIN "pic/monback/tyrogue.pic"
+PichuPicFront::     INCBIN "pic/bmon/pichu.pic"
+PichuPicBack::      INCBIN "pic/monback/pichu.pic"
+CleffaPicFront::    INCBIN "pic/bmon/cleffa.pic"
+CleffaPicBack::     INCBIN "pic/monback/cleffa.pic"
+IgglybuffPicFront:: INCBIN "pic/bmon/igglybuff.pic"
+IgglybuffPicBack::  INCBIN "pic/monback/igglybuff.pic"
+SmoochumPicFront::  INCBIN "pic/bmon/smoochum.pic"
+SmoochumPicBack::   INCBIN "pic/monback/smoochum.pic"
+ElekidPicFront::    INCBIN "pic/bmon/elekid.pic"
+ElekidPicBack::     INCBIN "pic/monback/elekid.pic"
+MagbyPicFront::     INCBIN "pic/bmon/magby.pic"
+MagbyPicBack::      INCBIN "pic/monback/magby.pic"
+MimeJrPicFront::    INCBIN "pic/bmon/mime_jr.pic"
+MimeJrPicBack::     INCBIN "pic/monback/mime_jr.pic"
+HappinyPicFront::   INCBIN "pic/bmon/happiny.pic"
+HappinyPicBack::    INCBIN "pic/monback/happiny.pic"
+MunchlaxPicFront::  INCBIN "pic/bmon/munchlax.pic"
+MunchlaxPicBack::   INCBIN "pic/monback/munchlax.pic"
+
+WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
+
+Mart_GFX:          INCBIN "gfx/tilesets/mart.2bpp"
+Mart_Block:        INCBIN "gfx/blocksets/mart.bst"
 
 SECTION "bank34",ROMX,BANK[$34]
 
@@ -7113,10 +7131,19 @@ INCLUDE "data/mapObjects/mtmoonshop.asm"
 INCLUDE "data/martInventories/mt_moon_square.asm"
 MtMoonShopBlocks: INCBIN "maps/mtmoonshop.blk"
 
+INCLUDE "scripts/DayCareManScript.asm"
+
+SECTION "bank35",ROMX,BANK[$35]
+
+Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
+Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
+
 ForestGate_GFX:      INCBIN "gfx/tilesets/forest_gate.2bpp"
 ForestGate_Block:    INCBIN "gfx/blocksets/forest_gate.bst"
 
 Museum_GFX:          INCBIN "gfx/tilesets/museum.2bpp"
 Museum_Block:        INCBIN "gfx/blocksets/museum.bst"
 
-INCLUDE "scripts/DayCareManScript.asm"
+Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
+Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
+Forest_Block:      INCBIN "gfx/blocksets/forest.bst"

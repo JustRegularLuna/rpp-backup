@@ -250,4 +250,6 @@ MoveNames:: ; b0000 (2c:4000)
 	db "AEROBLAST@"
 	db "ANCIENTPOWER@"
 	db "DIVE@"
+    db "LUSTER PURGE@"
+    db "PSYSTRIKE@"
 
