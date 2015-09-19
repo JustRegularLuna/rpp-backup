@@ -23,3 +23,4 @@ CLUB         EQU 21
 FACILITY     EQU 22
 PLATEAU      EQU 23
 SAFARI       EQU 24
+FERRY        EQU 25

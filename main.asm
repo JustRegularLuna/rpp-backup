@@ -7133,6 +7133,7 @@ MtMoonShopBlocks: INCBIN "maps/mtmoonshop.blk"
 
 INCLUDE "scripts/DayCareManScript.asm"
 
+
 SECTION "bank35",ROMX,BANK[$35]
 
 Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
@@ -7147,3 +7148,10 @@ Museum_Block:        INCBIN "gfx/blocksets/museum.bst"
 Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
 Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
 Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
+
+
+SECTION "bank36",ROMX,BANK[$36]
+
+Ferry_GFX:    INCBIN "gfx/tilesets/ferry.2bpp"
+Ferry_Block:  INCBIN "gfx/blocksets/ferry.bst"
+

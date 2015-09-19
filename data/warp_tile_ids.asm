@@ -24,6 +24,7 @@ WarpTileIDPointers: ; c4cc (3:44cc)
 	dw FacilityWarpTileIDs
 	dw PlateauWarpTileIDs
 	dw ForestWarpTileIDs
+	dw FerryWarpTileIDs
 OverworldWarpTileIDs:
 	db 27,88,$FF
 ForestGateWarpTileIDs:
@@ -68,3 +69,5 @@ PlateauWarpTileIDs:
 ShipPortWarpTileIDs:
 ClubWarpTileIDs:
 	db $FF
+FerryWarpTileIDs:
+	db 16,48,$FF
