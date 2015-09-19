@@ -25,7 +25,7 @@ SAFARI_ROCK   EQU $16
 
 ; Event Items
 OLD_SEA_MAP   EQU $17
-FERRY_TICKET  EQU $18
+MYSTIC_TICKET EQU $18
 EON_TICKET    EQU $19
 
 ; Currently Unused Items

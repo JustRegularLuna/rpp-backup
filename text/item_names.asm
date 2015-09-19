@@ -22,7 +22,7 @@ ItemNames: ; 472b (1:472b)
 	db "BAIT@"
 	db "ROCK@"
 	db "OLD SEA MAP@"
-	db "FERRY TICKET@"
+	db "MYSTICTICKET@"
 	db "EON TICKET@"
 	db "TERU-SAMA@"
 	db "TERU-SAMA@"
