@@ -7131,13 +7131,15 @@ INCLUDE "data/mapObjects/mtmoonshop.asm"
 INCLUDE "data/martInventories/mt_moon_square.asm"
 MtMoonShopBlocks: INCBIN "maps/mtmoonshop.blk"
 
+INCLUDE "data/mapHeaders/vermilionferry.asm"
+INCLUDE "data/mapObjects/vermilionferry.asm"
+INCLUDE "scripts/vermilionferry.asm"
+VermilionFerryBlocks: INCBIN "maps/vermilionferry.blk"
+
 INCLUDE "scripts/DayCareManScript.asm"
 
 
 SECTION "bank35",ROMX,BANK[$35]
-
-Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
-Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 ForestGate_GFX:      INCBIN "gfx/tilesets/forest_gate.2bpp"
 ForestGate_Block:    INCBIN "gfx/blocksets/forest_gate.bst"
@@ -7151,6 +7153,9 @@ Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 
 
 SECTION "bank36",ROMX,BANK[$36]
+
+Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
+Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 Ferry_GFX:    INCBIN "gfx/tilesets/ferry.2bpp"
 Ferry_Block:  INCBIN "gfx/blocksets/ferry.bst"
