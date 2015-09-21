@@ -104,11 +104,10 @@ StatusScreen: ; 12953 (4:6953)
 	push af
 	xor a
 	ld [hTilesetType], a
-	hlCoord 19, 1
-	ld bc, $060a
+	hlCoord 19, 3
+	ld bc, $0208
 	call DrawLineBox ; Draws the box around name, HP and status
-	ld de, $fffa
-	add hl, de
+	hlCoord 2, 7
 	ld [hl], $f2 ; . after No ("." is a different one)
 	dec hl
 	ld [hl], "№"
@@ -124,6 +123,15 @@ StatusScreen: ; 12953 (4:6953)
 	call GetHealthBarColor
 	ld b, $3
 	call GoPAL_SET ; SGB palette
+IF GEN_2_GRAPHICS	
+	deCoord 18, 5
+	ld a, [wLoadedMonLevel]
+	ld [wBattleMonLevel], a
+	push af
+	callba PrintEXPBar
+	pop af
+	ld [wLoadedMonLevel], a
+ENDC	
 	hlCoord 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition

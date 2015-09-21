@@ -223,7 +223,13 @@ BuildStatusScreenPalPacket:
 	add PAL_GREENBAR
 	ld d,a
 	ld e,1
-	callba LoadSGBPalette	
+	callba LoadSGBPalette
+	
+IF GEN_2_GRAPHICS
+	ld d, PAL_EXP
+	ld e,4	
+	callba LoadSGBPalette
+ENDC	
 
 	; Load pokemon palette
 	pop af
@@ -264,6 +270,17 @@ BuildStatusScreenPalPacket:
 	add hl,de
 	dec b
 	jr nz,.drawRow
+	
+IF GEN_2_GRAPHICS
+	; Player exp bar
+	ld hl, W2_TilesetPaletteMap + 11 + 5 * 20
+	ld b, 8
+	ld a, 4
+.expLoop
+	ld [hli], a
+	dec b
+	jr nz, .expLoop
+ENDC	
 
 	xor a
 	ld [rSVBK],a
