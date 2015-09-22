@@ -109,8 +109,8 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(MtMoonShop_h) ;originally unused
 	db BANK(VermilionFerryDock_h) ; originally unused
 	db BANK(VictoryRoad1_h)
-	db $1D ;unused
-	db $1D ;unused
+	db BANK(FarawayIslandOutside_h) ;originally unused
+	db BANK(FarawayIslandInside_h)  ;originally unused
 	db $1D ;unused
 	db $1D ;unused
 	db BANK(Lance_h)

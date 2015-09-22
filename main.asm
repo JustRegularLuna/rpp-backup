@@ -7131,10 +7131,24 @@ INCLUDE "data/mapObjects/mtmoonshop.asm"
 INCLUDE "data/martInventories/mt_moon_square.asm"
 MtMoonShopBlocks: INCBIN "maps/mtmoonshop.blk"
 
+; Vermilion Ferry Dock
 INCLUDE "data/mapHeaders/vermilionferry.asm"
 INCLUDE "data/mapObjects/vermilionferry.asm"
 INCLUDE "scripts/vermilionferry.asm"
 VermilionFerryBlocks: INCBIN "maps/vermilionferry.blk"
+
+; Faraway Island (Outside)
+INCLUDE "data/mapHeaders/farawayoutside.asm"
+INCLUDE "data/mapObjects/farawayoutside.asm"
+INCLUDE "scripts/farawayoutside.asm"
+FarawayIslandOutsideBlocks: INCBIN "maps/farawayoutside.blk"
+
+; Faraway Island (Inside)
+INCLUDE "data/mapHeaders/farawayinside.asm"
+INCLUDE "data/mapObjects/farawayinside.asm"
+INCLUDE "scripts/farawayinside.asm"
+FarawayIslandInsideBlocks: INCBIN "maps/farawayinside.blk"
+
 
 INCLUDE "scripts/DayCareManScript.asm"
 

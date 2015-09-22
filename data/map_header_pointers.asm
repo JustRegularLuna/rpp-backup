@@ -109,8 +109,8 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw MtMoonShop_h ; originally unused
 	dw VermilionFerryDock_h ; originally unused
 	dw VictoryRoad1_h
-	dw Lance_h ; unused
-	dw Lance_h ; unused ;id=110
+	dw FarawayIslandOutside_h ; originally unused
+	dw FarawayIslandInside_h  ; originally unused 
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h

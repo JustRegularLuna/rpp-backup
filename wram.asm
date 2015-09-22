@@ -1681,6 +1681,7 @@ W_OAKSLABCURSCRIPT:: ; d5f0
 	ds 1
 W_PALLETTOWNCURSCRIPT:: ; d5f1
 	ds 1
+wFarawayIslandInsideCurScript:: ; d5f2
 	ds 1
 W_BLUESHOUSECURSCRIPT:: ; d5f3
 	ds 1
