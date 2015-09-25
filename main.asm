@@ -987,7 +987,7 @@ SafariZoneRestHouses:
 	db -1
 
 ; function that performs initialization for DisplayTextID
-DisplayTextIDInit: ; 7096 (1:7096)
+DisplayTextIDInit:: ; 7096 (1:7096)
 	xor a
 	ld [wListMenuID],a
 	ld a,[wAutoTextBoxDrawingControl]
@@ -7174,3 +7174,6 @@ Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 Ferry_GFX:    INCBIN "gfx/tilesets/ferry.2bpp"
 Ferry_Block:  INCBIN "gfx/blocksets/ferry.bst"
 
+SECTION "field moves", ROMX,BANK[$37]
+
+INCLUDE "engine/overworld/field_moves.asm"

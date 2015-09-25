@@ -53,6 +53,8 @@ callab: MACRO
 	call Bankswitch
 	ENDM
 
+farcall EQUS "callba"
+	
 bcd2: MACRO
     dn ((\1) / 1000) % 10, ((\1) / 100) % 10
     dn ((\1) / 10) % 10, (\1) % 10
