@@ -144,6 +144,8 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	jr z, .PokemonTowerOrAgatha
 	cp CAVERN
 	jr z, .caveOrBruno
+	cp FERRY
+	jr z, .townOrRoute
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F
 	jr c, .townOrRoute

@@ -108,8 +108,8 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_ROUTES3, BANK(Music_Routes3) ; MT_MOON_SHOP
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; VermilionFerryDock
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; VictoryRoad1
-	db MUSIC_POKEMON_TOWER, BANK(Music_PokemonTower) ;unused
-	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ;unused
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Faraway Island Outside
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Faraway Island Inside
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ;unused
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ;unused
 	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; Lance

@@ -115,7 +115,7 @@ MapHSPointers: ; c8f5 (3:48f5)
 	dw MapHSXX
 	dw MapHS6C
 	dw MapHSXX
-	dw MapHSXX
+	dw MapHS6E
 	dw MapHSXX
 	dw MapHSXX
 	dw MapHSXX
@@ -573,5 +573,7 @@ MapHSA2: ; cd8d (3:4d8d)
 	db SEAFOAM_ISLANDS_5,$01,Hide
 	db SEAFOAM_ISLANDS_5,$02,Hide
 	db SEAFOAM_ISLANDS_5,$03,Show
-
+MapHS6E:
+	db FARAWAY_ISLAND_INSIDE,$01,Show
+; End of list thing
 	db $FF,$01,Show

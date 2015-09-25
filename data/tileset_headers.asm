@@ -24,4 +24,4 @@ Tilesets: ; c7be (3:47be)
 	tileset Facility_Block,    Facility_GFX,    Facility_Coll,    $12,$FF,$FF, $FF, CAVE
 	tileset Plateau_Block,     Plateau_GFX,     Plateau_Coll,     $FF,$FF,$FF, $45, CAVE
 	tileset Forest_Block,      Safari_GFX,      Forest_Coll,      $FF,$FF,$FF, $20, CAVE
-	tileset Ferry_Block,	Ferry_GFX,	Ferry_Coll,	255,255,255, 19, 2
+	tileset Ferry_Block,	Ferry_GFX,	Ferry_Coll,	255,255,255, 19, OUTDOOR

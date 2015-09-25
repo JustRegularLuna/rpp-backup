@@ -1,16 +1,19 @@
 FarawayIslandOutsideObject:
 	db $10 ; border block
 
-	db $2 ; warps
+	db $3 ; warps
+	db $27, $e, $2, VERMILION_FERRY_DOCK
 	db $7, $16, $0, FARAWAY_ISLAND_INSIDE
 	db $7, $17, $1, FARAWAY_ISLAND_INSIDE
 
 	db $1 ; signs
-	db $3, $4, $2 ; FarawayIslandSignText
+	db $20, $3, $3 ; FarawayIslandSignText
 
-	db $1 ; people
-	db SPRITE_SS_CAPTAIN, $5 + 4, $5 + 4, $ff, $d1, $1 ; FarawayIslandCaptainText
+	db $2 ; people
+	db SPRITE_SS_CAPTAIN, $27 + 4, $d + 4, $ff, $d1, $1 ; FarawayIslandCaptainText
+	db SPRITE_BERRY_TREE, $e + 4, $14 + 4, $ff, $ff, $2 ; FarawayIslandBerryTreeText
 
 	; warp-to
+	EVENT_DISP FARAWAY_ISLAND_OUTSIDE_WIDTH, $27, $e ; VERMILION_FERRY_DOCK
 	EVENT_DISP FARAWAY_ISLAND_OUTSIDE_WIDTH, $7, $16 ; FARAWAY_ISLAND_INSIDE
 	EVENT_DISP FARAWAY_ISLAND_OUTSIDE_WIDTH, $7, $17 ; FARAWAY_ISLAND_INSIDE

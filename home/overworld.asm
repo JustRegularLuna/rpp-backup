@@ -741,6 +741,8 @@ ExtraWarpCheck:: ; 08e9 (0:08e9)
 	jr z, .useFunction2
 	cp PLATEAU ; Indigo Plateau tileset
 	jr z, .useFunction2
+	cp FERRY ; Ferry and Island tileset
+	jr z, .useFunction2
 .useFunction1
 	ld hl, IsPlayerFacingEdgeOfMap
 	jr .doBankswitch
