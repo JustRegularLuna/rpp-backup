@@ -1913,6 +1913,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	coord hl, 10, 7
 IF GEN_2_GRAPHICS
 	call PlaceString
+	coord de, 17, 11
 	call PrintEXPBar
 ELSE
 	call CenterMonName
@@ -8768,13 +8769,14 @@ LoadMonBackSpriteHook: ; HAX
 
 IF GEN_2_GRAPHICS
 PrintEXPBar:
+	push de
 	call CalcEXPBarPixelLength
 	ld a, [H_QUOTIENT + 3] ; pixel length
 	ld [wEXPBarPixelLength], a
 	ld b, a
 	ld c, $08
 	ld d, $08
-	coord hl, 17, 11
+	pop hl
 .loop
 	ld a, b
 	sub c
@@ -8805,6 +8807,13 @@ CalcEXPBarPixelLength:
 	ret
 
 .start
+	ld hl, wd72c
+	bit 1, [hl]
+	jr z, .isBattleScreen
+	ld hl, wLoadedMonSpecies
+	jr .skip
+
+.isBattleScreen
 	; get the base exp needed for the current level
 	ld a, [W_PLAYERBATTSTATUS3]
 	ld hl, wBattleMonSpecies
@@ -8812,6 +8821,7 @@ CalcEXPBarPixelLength:
 	jr z, .skip
 	ld hl, wPartyMon1
 	call BattleMonPartyAttr
+	
 .skip
 	ld a, [hl]
 	ld [wd0b5], a
@@ -8837,9 +8847,16 @@ CalcEXPBarPixelLength:
 	callab CalcExperience
 
 	; get the address of the active Pokemon's current experience
+	ld hl, wd72c
+	bit 1, [hl]
+	jr z, .isBattleScreen2
+	ld hl, wLoadedMonExp
+	jr .skip2
+.isBattleScreen2	
 	ld hl, wPartyMon1Exp
 	call BattleMonPartyAttr
-
+	
+.skip2
 	; current exp - base exp
 	ld b, h
 	ld c, l

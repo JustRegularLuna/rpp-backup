@@ -105,11 +105,15 @@ StatusScreen: ; 12953 (4:6953)
 	push af
 	xor a
 	ld [hTilesetType], a
+IF GEN_2_GRAPHICS
+	coord hl, 19, 3
+	lb bc, 2, 8
+ELSE
 	coord hl, 19, 1
 	lb bc, 6, 10
+ENDC
 	call DrawLineBox ; Draws the box around name, HP and status
-	ld de, -6
-	add hl, de
+	coord hl, 2, 7
 	ld [hl], $f2 ; . after No ("." is a different one)
 	dec hl
 	ld [hl], "№"
@@ -125,6 +129,15 @@ StatusScreen: ; 12953 (4:6953)
 	call GetHealthBarColor
 	ld b, SET_PAL_STATUS_SCREEN
 	call RunPaletteCommand
+IF GEN_2_GRAPHICS	
+	coord de, 18, 5
+	ld a, [wLoadedMonLevel]
+	ld [wBattleMonLevel], a
+	push af
+	callba PrintEXPBar
+	pop af
+	ld [wLoadedMonLevel], a
+ENDC	
 	coord hl, 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
@@ -310,8 +323,14 @@ StatusScreen2: ; 12b57 (4:6b57)
 	coord hl, 9, 2
 	lb bc, 5, 10
 	call ClearScreenArea ; Clear under name
+IF GEN_2_GRAPHICS
+	coord hl, 19, 1
+	lb bc, 6, 10
+	call DrawLineBox ; Draws the box around name, HP and status
+ELSE
 	coord hl, 19, 3
 	ld [hl], $78
+ENDC
 	coord hl, 0, 8
 	ld b, 8
 	ld c, 18
