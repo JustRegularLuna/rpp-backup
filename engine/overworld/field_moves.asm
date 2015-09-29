@@ -27,6 +27,13 @@ TrySurf:
 	jr z, .no
 
 	call Text2_EnterTheText
+	ld hl,WaterIsCalmTxt
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .no2
+	
 	call GetPartyMonName2
 	ld a, SURFBOARD
 	ld [wcf91], a
@@ -37,7 +44,9 @@ TrySurf:
 .yes
 	xor a
 	ret
-
+	
+.no2
+	call Text3_DrakesDeception
 .no
 	ld a, 1
 	and a
@@ -46,16 +55,27 @@ TrySurf:
 TryCut:
 	call IsCutTile
 	jr nc, .no
+	
+	call Text2_EnterTheText
+	ld hl,CanBeCutTxt
+	call PrintText
+	call ManualTextScroll
 
 	ld d, CUT
 	call HasPartyMove
-	jr nz, .no
+	jr nz, .no2
 
 	ld a, [W_OBTAINEDBADGES]
-	bit 4, a ; SOUL_BADGE
-	jr z, .no
+	bit 1, a ; CASCADE_BADGE
+	jr z, .no2
 
-	call Text2_EnterTheText
+	ld hl,WantToCutTxt
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .no2
+	
 	call GetPartyMonName2
 	farcall Cut2
 	call Text3_DrakesDeception
@@ -63,7 +83,9 @@ TryCut:
 .yes
 	xor a
 	ret
-
+	
+.no2
+	call Text3_DrakesDeception
 .no
 	ld a, 1
 	and a
@@ -204,3 +226,17 @@ Text3_DrakesDeception:
 	ld a,[H_LOADEDROMBANK]
 	push af
 	jp CloseTextDisplay
+	
+CanBeCutTxt:
+	text "This tree can be"
+	line "CUT!@@"
+	
+WantToCutTxt:
+	text "Would you like to"
+	line "use CUT?@@"
+	
+WaterIsCalmTxt:
+	text "The water is calm."
+	line "Would you like to"
+	cont "SURF?@@"
+	
