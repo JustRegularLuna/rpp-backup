@@ -395,7 +395,12 @@ BallAnyway:
 	ld hl,W_ENEMYBATTSTATUS3
 	bit Transformed,[hl]
 	jr z,.next15
-	ld a,DITTO ; A Pokémon that has transformed is treated as Ditto once caught
+	ld a, [W_CURMAP] ; check which map we're on
+	cp FARAWAY_ISLAND_INSIDE ; If we're on Faraway Island, the only Pokemon that can transform is MEW
+	ld a,MEW
+	jr z, .faraway ; if we're on Faraway Island, we're done. Otherwise, load DITTO instead
+	ld a,DITTO ; A Pokémon that has transformed anywhere else is treated as Ditto once caught
+.faraway
 	ld [wEnemyMonSpecies2],a
 	jr .next16
 .next15	;$5871
