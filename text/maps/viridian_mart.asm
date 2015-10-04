@@ -1,19 +1,24 @@
 _ViridianPokeCenterText2:: ; 95ba1 (25:5ba1)
 _ViridianPokeCenterText1:: ; 95ba1 (25:5ba1)
-	text "You can use that"
-	line "PC in the corner."
+	text "Everything in a"
+	line "#MON CENTER is"
+	cont "completely free"
+	cont "to use."
 
 	para "The receptionist"
 	line "told me. So kind!"
 	done
 
 _ViridianPokeCenterText3:: ; 95be8 (25:5be8)
-	text "There's a #MON"
-	line "CENTER in every"
-	cont "town ahead."
-
-	para "They don't charge"
-	line "any money either!"
+	text "The big computer"
+	line "in the middle"
+	cont "accesses the"
+	cont "WONDER TRADE"
+	cont "system."
+	
+	para "You should try it"
+	line "out if you're a"
+	cont "trainer!"
 	done
 
 _ViridianMartText1:: ; 95c36 (25:5c36)

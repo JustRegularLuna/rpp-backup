@@ -40,21 +40,22 @@ PrintBookshelfText: ; fb50 (3:7b50)
 
 ; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)
-	db GYM,29,64
-	db REDS_HOUSE_1,50,64
-	db OAK_TS,92,64
-	db OAK_TS,94,64
-	db SHIP,54,64
-	db PLATEAU,48,58
-	db LAB,40,64
-	db MART,54,66
-	db MART,90,66
-	db MART,92,66
-	db MANSION,50,64
-	db GATE,34,64
 	db LOBBY,22,65
 	db LOBBY,80,66
 	db LOBBY,82,66
+	db PLATEAU,48,58
+	db GATE,34,64
+	db SHIP,54,64
+	db MANSION,50,64
+	db LAB,40,64
+	db REDS_HOUSE_1,50,64
+	db MART,54,66
+	db MART,90,66
+	db MART,92,66
+	db GYM,29,64
+	db OAK_TS,92,64
+	db OAK_TS,94,64
+	db POKECENTER,41,67
 	db HOUSE,60,63
 	db HOUSE,50,64
 	db $FF
@@ -136,3 +137,8 @@ TownMapText: ; fc12 (3:7c12)
 PokemonStuffText: ; fc45 (3:7c45)
 	TX_FAR _PokemonStuffText
 	db "@"
+
+WonderTradeMachineText:
+	db $08
+	callba DoWonderTradeDialogue
+	jp TextScriptEnd
