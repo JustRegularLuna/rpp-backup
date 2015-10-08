@@ -7178,3 +7178,4 @@ SECTION "field moves", ROMX,BANK[$37]
 
 INCLUDE "engine/overworld/field_moves.asm"
 INCLUDE "engine/wonder_trade.asm"
+INCLUDE "engine/overworld/automatic_repel.asm"
