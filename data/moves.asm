@@ -240,7 +240,7 @@ endm
 	move AURORA_BEAM,  CONFUSION_SIDE_EFFECT,       75, BUG,      100, 15 ; Signal Beam
 	move EARTHQUAKE,   SPECIAL_DOWN_SIDE_EFFECT,    90, GROUND,   100, 10 ; Earth Power
 	move SAND_ATTACK,  ACCURACY_DOWN1_EFFECT,       20, GROUND,   100, 10 ; Mud-Slap
-	move FISSURE,      ACCURACY_DOWN1_EFFECT,       65, GROUND,    85, 10 ; Mud Bomb
+	move SAND_ATTACK,  ACCURACY_DOWN1_EFFECT,       65, GROUND,    85, 10 ; Mud Bomb
 	move CONFUSION,    FLINCH_SIDE_EFFECT1,         80, PSYCHIC,  100, 20 ; Extrasensory
 	move HEADBUTT,     FLINCH_SIDE_EFFECT2,         80, PSYCHIC,  100, 15 ; Zen Headbutt
 	move CUT,          NO_ADDITIONAL_EFFECT,        70, PSYCHIC,  100, 20 ; Psycho Cut
