@@ -6670,8 +6670,6 @@ SECTION "bank1B",ROMX,BANK[$1B]
 
 Cemetery_GFX:      INCBIN "gfx/tilesets/cemetery.t4.2bpp"
 Cemetery_Block:    INCBIN "gfx/blocksets/cemetery.bst"
-Cavern_GFX:        INCBIN "gfx/tilesets/cavern.t14.2bpp"
-Cavern_Block:      INCBIN "gfx/blocksets/cavern.bst"
 Lobby_GFX:         INCBIN "gfx/tilesets/lobby.t2.2bpp"
 Lobby_Block:       INCBIN "gfx/blocksets/lobby.bst"
 Ship_GFX:          INCBIN "gfx/tilesets/ship.t6.2bpp"
@@ -7173,6 +7171,10 @@ Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
 
 Ferry_GFX:    INCBIN "gfx/tilesets/ferry.2bpp"
 Ferry_Block:  INCBIN "gfx/blocksets/ferry.bst"
+
+Ice_Cavern_GFX:    INCBIN "gfx/tilesets/ice_cavern.t14.2bpp"
+Cavern_GFX:        INCBIN "gfx/tilesets/cavern.t14.2bpp"
+Cavern_Block:      INCBIN "gfx/blocksets/cavern.bst"
 
 SECTION "field moves", ROMX,BANK[$37]
 

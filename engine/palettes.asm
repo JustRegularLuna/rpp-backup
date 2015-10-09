@@ -146,6 +146,8 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	jr z, .caveOrBruno
 	cp FERRY
 	jr z, .townOrRoute
+	cp ICE_CAVERN
+	jr z, .icePath
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F
 	jr c, .townOrRoute
@@ -176,6 +178,9 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	jr .town
 .caveOrBruno
 	ld a, PAL_CAVE - 1
+	jr .town
+.icePath
+	ld a, PAL_CYANMON - 1
 	jr .town
 .Lorelei
 	xor a
