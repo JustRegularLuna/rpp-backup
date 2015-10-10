@@ -1363,16 +1363,19 @@ CheckForTilePairCollisions:: ; 0c4a (0:0c4a)
 TilePairCollisionsLand:: ; 0c7e (0:0c7e)
 	db CAVERN, $20, $05
 	db CAVERN, $41, $05
-	db FOREST, $30, $2E
 	db CAVERN, $2A, $05
 	db CAVERN, $05, $21
+	db FOREST, $30, $2E
 	db FOREST, $52, $2E
 	db FOREST, $55, $2E
 	db FOREST, $56, $2E
 	db FOREST, $20, $2E
 	db FOREST, $5E, $2E
 	db FOREST, $5F, $2E
-; added for Safari Zone
+	db ICE_CAVERN, $20, $05
+	db ICE_CAVERN, $41, $05
+	db ICE_CAVERN, $2A, $05
+	db ICE_CAVERN, $05, $21
 	db SAFARI, $30, $2E
 	db SAFARI, $2A, $05
 	db SAFARI, $52, $2E
@@ -1387,9 +1390,9 @@ TilePairCollisionsWater:: ; 0ca0 (0:0ca0)
 	db FOREST, $14, $2E
 	db FOREST, $48, $2E
 	db CAVERN, $14, $05
-; Added for Safari Zone
 	db SAFARI, $14, $2E
 	db SAFARI, $48, $2E
+	db ICE_CAVERN, $14, $05
 	db $FF
 
 ; this builds a tile map from the tile block map based on the current X/Y coordinates of the player's character

@@ -1463,8 +1463,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	jp ItemUseNotTime
 
 EscapeRopeTilesets: ; dffd (3:5ffd)
-	db FOREST, CEMETERY, CAVERN, FACILITY, INTERIOR, SAFARI
-	db $ff ; terminator
+	db FOREST,CEMETERY,INTERIOR,CAVERN,FACILITY,SAFARI,ICE_CAVERN,$FF
 
 ItemUseRepel: ; e003 (3:6003)
 	ld b,100
@@ -2864,7 +2863,7 @@ IsNextTileShoreOrWater: ; e8b8 (3:68b8)
 
 ; tilesets with water
 WaterTilesets: ; e8e0 (3:68e0)
-	db OVERWORLD,FOREST,GYM,SHIP,SHIP_PORT,CAVERN,FACILITY,PLATEAU,SAFARI,FERRY,$FF
+	db OVERWORLD,FOREST,GYM,SHIP,SHIP_PORT,CAVERN,FACILITY,PLATEAU,SAFARI,FERRY,ICE_CAVERN,$FF
 
 ReadSuperRodData: ; e8ea (3:68ea)
 ; return e = 2 if no fish on this map

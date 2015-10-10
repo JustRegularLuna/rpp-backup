@@ -372,10 +372,11 @@ IsPlayerStandingOnWarpPadOrHole: ; 70787 (1c:4787)
 
 ; format: db tileset id, tile id, value to be put in wcd5b
 .warpPadAndHoleData: ; 707a9 (1c:47a9)
-	db FACILITY, $20, 1 ; warp pad
-	db FACILITY, $11, 2 ; hole
-	db CAVERN,   $22, 2 ; hole
-	db INTERIOR, $55, 1 ; warp pad
+	db FACILITY,   $20, 1 ; warp pad
+	db FACILITY,   $11, 2 ; hole
+	db CAVERN,     $22, 2 ; hole
+	db INTERIOR,   $55, 1 ; warp pad
+	db ICE_CAVERN, $22, 2 ; hole
 	db $FF
 
 Func_707b6: ; 707b6 (1c:47b6)

@@ -140,6 +140,7 @@ WaterTilesets2: ; Renamed from what Yenatch called it, since that had overlap er
 	db CAVERN
 	db FACILITY
 	db PLATEAU
+	db ICE_CAVERN
 	db -1
 
 IsCutTile:
