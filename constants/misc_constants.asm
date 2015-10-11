@@ -10,6 +10,7 @@ HOF_MON       EQU $10
 HOF_TEAM      EQU PARTY_LENGTH * HOF_MON
 NUM_HOF_TEAMS EQU 50
 
+TRAINER_START EQU $C8 ; Moved this here so Glitchmap will stop complaining
 
 A_BUTTON EQU %00000001
 B_BUTTON EQU %00000010
