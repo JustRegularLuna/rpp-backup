@@ -3188,8 +3188,8 @@ ExecutePlayerMove: ; 3d65e (f:565e)
 	ld hl, W_PLAYERBATTSTATUS1
 	bit ChargingUp, [hl] ; charging up for attack
 	jr nz, PlayerCanExecuteChargingMove
-	call CheckForDisobedience
-	jp z, ExecutePlayerMoveDone
+	;call CheckForDisobedience
+	;jp z, ExecutePlayerMoveDone
 
 CheckIfPlayerNeedsToChargeUp: ; 3d69a (f:569a)
 	ld a, [W_PLAYERMOVEEFFECT]

@@ -79,8 +79,9 @@ GainExperience: ; 5524f (15:524f)
 	ld a, $0
 	jr z, .next
 .tradedMon
-	call BoostExp ; traded mon exp boost
-	ld a, $1
+;	call BoostExp ; traded mon exp boost
+;	ld a, $1
+	ld a, $0 ; Makes traded Pokemon act the same as normal ones
 .next
 	ld [wcf4d], a
 	ld a, [W_ISINBATTLE]
