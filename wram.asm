@@ -2175,11 +2175,20 @@ W_GRASSRATE:: ; d887
 	ds 1
 
 W_GRASSMONS:: ; d888
-	ds 20
-
+	;ds 20
+	ds 11
+; overload grassmons
+wSerialEnemyDataBlock::
+	ds 9
 
 wEnemyPartyCount:: ds 1     ; d89c
 wEnemyPartyMons::  ds PARTY_LENGTH + 1 ; d89d
+
+W_WATERRATE:: db
+W_WATERMONS:: db
+
+; theoretically overload Water Rate
+	ds W_WATERRATE - @
 
 wEnemyMons:: ; d8a4
 wEnemyMon1:: party_struct wEnemyMon1
