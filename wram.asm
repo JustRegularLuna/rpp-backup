@@ -1934,6 +1934,8 @@ W_ROUTE18GATECURSCRIPT:: ; d669
 ; unused
 	ds 134
 
+W_GAMEPROGRESSFLAGSEND::
+
 wd6f0:: ds 14
 wd6fe:: ds 2
 

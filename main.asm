@@ -4426,7 +4426,7 @@ SubBCD::
 
 InitPlayerData:
 InitPlayerData2:
-
+; Start by generating the player ID
 	call Random
 	ld a, [hRandomSub]
 	ld [wPlayerID], a
@@ -4435,9 +4435,11 @@ InitPlayerData2:
 	ld a, [hRandomAdd]
 	ld [wPlayerID + 1], a
 
+; Not sure what this is for?
 	ld a, $ff
 	ld [wd71b], a                 ; XXX what's this?
 
+; Initialize the party, bag, PC, etc.
 	ld hl, wPartyCount
 	call InitializeEmptyList
 	ld hl, W_NUMINBOX
@@ -4447,7 +4449,7 @@ InitPlayerData2:
 	ld hl, wNumBoxItems
 	call InitializeEmptyList
 
-START_MONEY EQU $3000
+; Starting Money
 	ld hl, wPlayerMoney + 1
 	ld a, START_MONEY / $100
 	ld [hld], a
@@ -4456,19 +4458,30 @@ START_MONEY EQU $3000
 	inc hl
 	ld [hl], a
 
+; wMonDataLocation
 	ld [wcc49], a
 
+; Obtained badges
 	ld hl, W_OBTAINEDBADGES
 	ld [hli], a
 
 	ld [hl], a
 
+; Initialize player coins
 	ld hl, wPlayerCoins
 	ld [hli], a
 	ld [hl], a
+	
+; Initialize Berry Tree flags and step counter
+	ld hl, W_BERRYTREEFLAGS
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
 
+; Initialize map script numbers
 	ld hl, W_GAMEPROGRESSFLAGS
-	ld bc, $c8
+	ld bc, W_GAMEPROGRESSFLAGSEND - W_GAMEPROGRESSFLAGS ; originally $c8
 	call FillMemory ; clear all game progress flags
 
 	jp InitializeMissableObjectsFlags
