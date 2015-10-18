@@ -1697,13 +1697,17 @@ W_BLUESHOUSECURSCRIPT:: ; d5f3
 	ds 1
 W_VIRIDIANCITYCURSCRIPT:: ; d5f4
 	ds 1
-	ds 2
+; unused
+	ds 1
+; unused
+	ds 1
 W_PEWTERCITYCURSCRIPT:: ; d5f7
 	ds 1
 W_ROUTE3CURSCRIPT:: ; d5f8
 	ds 1
 W_ROUTE4CURSCRIPT:: ; d5f9
 	ds 1
+; unused
 	ds 1
 W_VIRIDIANGYMCURSCRIPT:: ; d5fb
 	ds 1
@@ -1737,6 +1741,7 @@ W_SSANNE9CURSCRIPT:: ; d609
 	ds 1
 W_ROUTE22CURSCRIPT:: ; d60a
 	ds 1
+; unused
 	ds 1
 W_REDSHOUSE2CURSCRIPT:: ; d60c
 	ds 1
@@ -1746,7 +1751,20 @@ W_ROUTE22GATECURSCRIPT:: ; d60e
 	ds 1
 W_CERULEANCITYCURSCRIPT:: ; d60f
 	ds 1
-	ds 7
+; unused
+	ds 1
+; unused
+	ds 1
+; unused
+	ds 1
+; unused
+	ds 1
+; unused
+	ds 1
+; unused
+	ds 1
+; unused
+	ds 1
 W_SSANNE5CURSCRIPT:: ; d617
 	ds 1
 W_VIRIDIANFORESTCURSCRIPT:: ; d618
@@ -1769,6 +1787,7 @@ W_ROCKTUNNEL2CURSCRIPT:: ; d620
 	ds 1
 W_ROCKTUNNEL1CURSCRIPT:: ; d621
 	ds 1
+; unused
 	ds 1
 W_ROUTE11CURSCRIPT:: ; d623
 	ds 1
@@ -1805,15 +1824,21 @@ W_ROCKETHIDEOUT2CURSCRIPT:: ; d632
 W_ROCKETHIDEOUT3CURSCRIPT:: ; d633
 	ds 1
 W_ROCKETHIDEOUT4CURSCRIPT:: ; d634
-	ds 2
+	ds 1
+; unused
+	ds 1
 W_ROUTE6GATECURSCRIPT:: ; d636
 	ds 1
 W_ROUTE8GATECURSCRIPT:: ; d637
-	ds 2
+	ds 1
+; unused
+	ds 1
 W_CINNABARISLANDCURSCRIPT:: ; d639
 	ds 1
 W_MANSION1CURSCRIPT:: ; d63a
-	ds 2
+	ds 1
+; unused
+	ds 1
 W_MANSION2CURSCRIPT:: ; d63c
 	ds 1
 W_MANSION3CURSCRIPT:: ; d63d
@@ -1823,7 +1848,9 @@ W_MANSION4CURSCRIPT:: ; d63e
 W_VICTORYROAD2CURSCRIPT:: ; d63f
 	ds 1
 W_VICTORYROAD3CURSCRIPT:: ; d640
-	ds 2
+	ds 1
+; unused
+	ds 1
 W_FIGHTINGDOJOCURSCRIPT:: ; d642
 	ds 1
 W_SILPHCO2CURSCRIPT:: ; d643
@@ -1856,19 +1883,29 @@ W_UNKNOWNDUNGEON3CURSCRIPT:: ; d650
 	ds 1
 W_VICTORYROAD1CURSCRIPT:: ; d651
 	ds 1
+; unused
 	ds 1
 W_LANCECURSCRIPT:: ; d653
 	ds 1
-	ds 4
+; unused
+	ds 1
+; unused
+	ds 1
+; unused
+	ds 1
+; unused
+	ds 1
 W_SILPHCO10CURSCRIPT:: ; d658
 	ds 1
 W_SILPHCO11CURSCRIPT:: ; d659
 	ds 1
+; unused
 	ds 1
 W_FUCHSIAGYMCURSCRIPT:: ; d65b
 	ds 1
 W_SAFFRONGYMCURSCRIPT:: ; d65c
 	ds 1
+; unused
 	ds 1
 W_CINNABARGYMCURSCRIPT:: ; d65e
 	ds 1
@@ -1881,11 +1918,8 @@ W_BILLSHOUSECURSCRIPT:: ; d661
 W_ROUTE5GATECURSCRIPT:: ; d662
 	ds 1
 W_POWERPLANTCURSCRIPT:: ; d663
-; overload
-	ds 0
-W_ROUTE7GATECURSCRIPT:: ; d663
-; overload
 	ds 1
+W_ROUTE7GATECURSCRIPT:: ; d664
 	ds 1
 W_SSANNE2CURSCRIPT:: ; d665
 	ds 1
@@ -1897,7 +1931,7 @@ W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
 	ds 1
 W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
-
+; unused
 	ds 134
 
 wd6f0:: ds 14
