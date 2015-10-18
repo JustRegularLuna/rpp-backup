@@ -125,6 +125,8 @@ wc0f2:: ds 14
 
 SECTION "Sprite State Data", WRAM0[$c100]
 
+wSpriteDataStart::
+
 wSpriteStateData1:: ; c100
 ; data for all sprites on the current map
 ; holds info for 16 sprites with $10 bytes each
@@ -148,7 +150,7 @@ wSpriteStateData1:: ; c100
 	ds $10 * $10
 
 
-SECTION "Sprite State Data 2", WRAM0[$c200]
+;SECTION "Sprite State Data 2", WRAM0[$c200]
 
 wSpriteStateData2:: ; c200
 ; more data for all sprites on the current map
@@ -172,6 +174,7 @@ wSpriteStateData2:: ; c200
 ; C2xF
 	ds $10 * $10
 
+wSpriteDataEnd::
 
 SECTION "OAM Buffer", WRAM0[$c300]
 
@@ -1389,6 +1392,9 @@ wd157:: ds 1
 wPlayerName:: ; d158
 	ds 11
 
+
+wPartyDataStart::
+
 wPartyCount::   ds 1 ; d163
 wPartySpecies:: ds PARTY_LENGTH ; d164
 wPartyEnd::     ds 1 ; d16a
@@ -1404,6 +1410,10 @@ wPartyMon6:: party_struct wPartyMon6 ; d247
 wPartyMonOT::    ds 11 * PARTY_LENGTH ; d273
 wPartyMonNicks:: ds 11 * PARTY_LENGTH ; d2b5
 
+wPartyDataEnd::
+
+
+wMainDataStart::
 
 wPokedexOwned:: ; d2f7
 	flag_array NUM_POKEMON
@@ -2231,6 +2241,10 @@ wSafariZoneGameOver:: ; da46
 W_NUMSAFARIBALLS:: ; da47
 	ds 1
 
+W_BERRYTREEFLAGS::
+	ds 2
+wBerryStepCounter:: ; deee
+	ds 2
 
 W_DAYCARE_IN_USE:: ; da48
 ; 0 if no pokemon is in the daycare
@@ -2242,6 +2256,10 @@ W_DAYCAREMONOT::   ds 11 ; da54
 
 wDayCareMon:: box_struct wDayCareMon ; da5f
 
+wMainDataEnd::
+
+
+wBoxDataStart::
 
 W_NUMINBOX::  ds 1 ; da80
 wBoxSpecies:: ds MONS_PER_BOX + 1
@@ -2254,10 +2272,7 @@ wBoxMonOT::    ds 11 * MONS_PER_BOX ; dd2a
 wBoxMonNicks:: ds 11 * MONS_PER_BOX ; de06
 wBoxMonNicksEnd:: ; dee2
 
-W_BERRYTREEFLAGS::
-	ds 2
-wBerryStepCounter:: ; deee
-	ds 2
+wBoxDataEnd::
 
 wEXPBarPixelLength:: ds 1
 wEXPBarBaseEXP:: ds 3
@@ -2269,14 +2284,4 @@ SECTION "Stack", WRAMX[$dfff], BANK[1]
 wStack:: ; dfff
 	ds -$100
 
-
-SECTION "Sprite Buffers", SRAM, BANK[0]
-
-S_SPRITEBUFFER0:: ds SPRITEBUFFERSIZE ; a000
-S_SPRITEBUFFER1:: ds SPRITEBUFFERSIZE ; a188
-S_SPRITEBUFFER2:: ds SPRITEBUFFERSIZE ; a310
-
-	ds $100
-
-sHallOfFame:: ds HOF_TEAM * NUM_HOF_TEAMS ; a598
-
+INCLUDE "sram.asm"

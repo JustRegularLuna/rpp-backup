@@ -684,7 +684,7 @@ Func_609e: ; 609e (1:609e)
 	ld [$6000], a
 	ld [$4000], a
 	ld b, $b
-	ld hl, $a598
+	ld hl, sPlayerName
 .asm_60b0
 	ld a, [hli]
 	cp $50
