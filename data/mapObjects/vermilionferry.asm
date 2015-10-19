@@ -1,9 +1,10 @@
 VermilionFerryObject:
 	db $0 ; border block
 
-	db $2 ; warps
+	db $3 ; warps
 	db $0, $5, $9, VERMILION_CITY
 	db $0, $6, $a, VERMILION_CITY
+	db $5, $6, $0, PALLET_TOWN ; placeholder
 
 	db $0 ; signs
 
@@ -13,4 +14,5 @@ VermilionFerryObject:
 	; warp-to
 	EVENT_DISP VERMILION_FERRY_DOCK_WIDTH, $0, $5 ; VERMILION_CITY
 	EVENT_DISP VERMILION_FERRY_DOCK_WIDTH, $0, $6 ; VERMILION_CITY
+	EVENT_DISP VERMILION_FERRY_DOCK_WIDTH, $5, $6 ; INSIDE_FERRY
 	

@@ -11,7 +11,7 @@ SouthernIslandOutsideObject:
 
 	db $2 ; people
 	db SPRITE_SS_CAPTAIN, $17 + 4, $d + 4, $ff, $d1, $1 ; SouthernIslandCaptainText
-	db SPRITE_BERRY_TREE, $7 + 4, $b + 4, $ff, $ff, $2 ; SouthernIslandBerryTreeText
+	db SPRITE_BERRY_TREE, $e + 4, $16 + 4, $ff, $ff, $2 ; SouthernIslandBerryTreeText
 
 	; warp-to
 	EVENT_DISP SOUTHERN_ISLAND_OUTSIDE_WIDTH, $17, $e ; VERMILION_FERRY_DOCK
