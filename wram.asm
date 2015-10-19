@@ -1697,7 +1697,7 @@ W_BLUESHOUSECURSCRIPT:: ; d5f3
 	ds 1
 W_VIRIDIANCITYCURSCRIPT:: ; d5f4
 	ds 1
-; unused
+wSouthernIslandInsideCurScript::
 	ds 1
 ; unused
 	ds 1

@@ -7160,6 +7160,17 @@ INCLUDE "data/mapObjects/farawayinside.asm"
 INCLUDE "scripts/farawayinside.asm"
 FarawayIslandInsideBlocks: INCBIN "maps/farawayinside.blk"
 
+; Southern Island (Outside)
+INCLUDE "data/mapHeaders/southernoutside.asm"
+INCLUDE "data/mapObjects/southernoutside.asm"
+INCLUDE "scripts/southernoutside.asm"
+SouthernIslandOutsideBlocks: INCBIN "maps/southernoutside.blk"
+
+; Southern Island (Inside)
+INCLUDE "data/mapHeaders/southerninside.asm"
+INCLUDE "data/mapObjects/southerninside.asm"
+INCLUDE "scripts/southerninside.asm"
+SouthernIslandInsideBlocks: INCBIN "maps/southerninside.blk"
 
 INCLUDE "scripts/DayCareManScript.asm"
 

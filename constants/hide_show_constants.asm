@@ -235,6 +235,6 @@ const_value = 0
 	const HS_SEAFOAM_ISLANDS_5_BOULDER_2  ; E2
 	const HS_ARTICUNO                     ; E3 X
 	const HS_MEW                          ; E4
-	const HS_LUGIA                        ; E5
-	const HS_LATIOS                       ; E6
-	const HS_LATIAS                       ; E7
+	const HS_LATIOS                       ; E5
+	const HS_LATIAS                       ; E6
+	const HS_LUGIA                        ; E7

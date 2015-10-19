@@ -110,8 +110,8 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; VictoryRoad1
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Faraway Island Outside
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Faraway Island Inside
-	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ;unused
-	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ;unused
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Southern Island Outside
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Southern Island Inside
 	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; Lance
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
 	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused

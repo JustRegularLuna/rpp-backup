@@ -11,7 +11,7 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(CinnabarIsland_h) ; CINNABAR_ISLAND
 	db BANK(IndigoPlateau_h) ; INDIGO_PLATEAU
 	db BANK(SaffronCity_h) ; SAFFRON_CITY
-	db $1 ; unused
+	db BANK(SaffronCity_h) ; unused
 	db BANK(Route1_h) ; ROUTE_1
 	db BANK(Route2_h) ; ROUTE_2
 	db BANK(Route3_h) ; ROUTE_3
@@ -111,8 +111,8 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(VictoryRoad1_h)
 	db BANK(FarawayIslandOutside_h) ;originally unused
 	db BANK(FarawayIslandInside_h)  ;originally unused
-	db $1D ;unused
-	db $1D ;unused
+	db BANK(SouthernIslandOutside_h);originally unused
+	db BANK(SouthernIslandInside_h) ;originally unused
 	db BANK(Lance_h)
 	db $1D ;unused
 	db $1D ;unused
