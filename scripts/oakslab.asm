@@ -357,6 +357,8 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ret nz
 
 	; define which team rival uses, and fight it
+	ld a, 1
+	ld [wIsTrainerBattle], a
 	ld a, SONY1 + TRAINER_START
 	ld [W_CUROPPONENT], a
 	ld a, [W_RIVALSTARTER]
@@ -391,6 +393,8 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ret
 
 OaksLabScript12: ; 1ce03 (7:4e03)
+	xor a
+	ld [wIsTrainerBattle], a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $8

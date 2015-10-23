@@ -22,3 +22,18 @@ CopyData::
 	or b
 	jr nz, CopyData
 	ret
+
+FarCopyData2::
+; Identical to FarCopyData, but uses $ff8b
+; as temp space instead of wBuffer.
+	ld [$ff8b],a
+	ld a,[H_LOADEDROMBANK]
+	push af
+	ld a,[$ff8b]
+	ld [H_LOADEDROMBANK],a
+	ld [MBC1RomBank],a
+	call CopyData
+	pop af
+	ld [H_LOADEDROMBANK],a
+	ld [MBC1RomBank],a
+	ret

@@ -14,7 +14,7 @@ SeafoamIslands5Object: ; 0x468bc (size=62)
 	db $3 ; people
 	db SPRITE_BOULDER, $f + 4, $4 + 4, $ff, $ff, $1 ; person
 	db SPRITE_BOULDER, $f + 4, $5 + 4, $ff, $ff, $2 ; person
-	db SPRITE_BIRD, $1 + 4, $6 + 4, $ff, $d0, TRAINER | $3, ARTICUNO, 50
+	db SPRITE_BIRD, $1 + 4, $6 + 4, $ff, $d0, TRAINER | $3, ARTICUNO, 50 | OW_POKEMON
 
 	; warp-to
 	EVENT_DISP SEAFOAM_ISLANDS_5_WIDTH, $11, $14 ; SEAFOAM_ISLANDS_4

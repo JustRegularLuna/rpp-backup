@@ -110,6 +110,8 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ld a, $3
 .done
 	ld [W_TRAINERNO], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
 
 	call SSAnne2Script_61416
 	ld a, $2
@@ -120,6 +122,8 @@ SSAnne2Script2: ; 6146d (18:546d)
 	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, SSAnne2Script_613ab
+	xor a
+	ld [wIsTrainerBattle], a
 	call SSAnne2Script_61416
 	ld a, $f0
 	ld [wJoyIgnore], a

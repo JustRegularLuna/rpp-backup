@@ -377,9 +377,10 @@ PlayBattleMusic:: ; 0x90c6
 	ld a, MUSIC_GYM_LEADER_BATTLE
 	jr .playSong
 .notGymLeaderBattle
+	ld a, [wIsTrainerBattle]
+	and a
+	jr z, .wildBattle
 	ld a, [W_CUROPPONENT]
-	cp TRAINER_START
-	jr c, .wildBattle
 	cp SONY3 + TRAINER_START
 	jr z, .finalBattle
 	cp LANCE + TRAINER_START

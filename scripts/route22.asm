@@ -33,6 +33,8 @@ Route22Script_50ed6: ; 50ed6 (14:4ed6)
 .asm_50ee1
 	ld a, [hl]
 	ld [W_TRAINERNO], a ; wd05d
+	ld a, 1
+	ld [wIsTrainerBattle], a
 	ret
 
 Route22MoveRivalSprite: ; 50ee6 (14:4ee6)
@@ -147,6 +149,8 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	ld a, [W_ISINBATTLE]
 	cp $ff
 	jp z, Route22Script_50ece
+	xor a
+	ld [wIsTrainerBattle], a
 	ld a, [wSpriteStateData1 + 9]
 	and a
 	jr nz, .asm_50fc7 ; 0x50fc1 $4
@@ -288,6 +292,8 @@ Route22Script5: ; 510df (14:50df)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, Route22Script_50ece
+	xor a
+	ld [wIsTrainerBattle], a
 	ld a, $2
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	ld a, [wcf0d]

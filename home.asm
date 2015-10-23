@@ -740,8 +740,6 @@ UncompressMonSprite:: ; 1627 (0:1627)
 .GotBank
 	jp UncompressSpriteData
 
-	ds $19
-
 
 ; de: destination location
 LoadMonFrontSprite:: ; 1665 (0:1665)
@@ -2390,16 +2388,20 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	res 0, [hl]                  ; player is no longer engaged by any trainer
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
-	jp z, ResetButtonPressedAndMapScript
+	jr z, EndTrainerBattleWhiteout
 	ld a, $2
 	call ReadTrainerHeaderInfo
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	ld b, $1
 	call TrainerFlagAction   ; flag trainer as fought
-	ld a, [W_ENEMYMONORTRAINERCLASS]
-	cp TRAINER_START
-	jr nc, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
+	ld a, [wWasTrainerBattle]
+	and a
+	jr nz, .skipRemoveSprite    ; test if trainer was fought (in that case skip removing the corresponding sprite)
+	ld a, [W_CURMAP]
+	cp POKEMONTOWER_7
+	jr z, .skipRemoveSprite ; the tower 7f scripts call EndTrainerBattle manually after
+	; wIsTrainerBattle has been unset
 	ld hl, W_MISSABLEOBJECTLIST
 	ld de, $2
 	ld a, [wSpriteIndex]
@@ -2409,6 +2411,8 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	ld [wcc4d], a               ; load corresponding missable object index and remove it
 	predef HideObject
 .skipRemoveSprite
+	xor a
+	ld [wWasTrainerBattle], a
 	ld hl, wd730
 	bit 4, [hl]
 	res 4, [hl]
@@ -2423,6 +2427,13 @@ ResetButtonPressedAndMapScript:: ; 32c1 (0:32c1)
 	ld [W_CURMAPSCRIPT], a               ; reset battle status
 	ret
 
+EndTrainerBattleWhiteout:
+	xor a
+	ld [wIsTrainerBattle], a
+	ld [wWasTrainerBattle], a
+	jp ResetButtonPressedAndMapScript
+	
+	
 ; calls TrainerWalkUpToPlayer
 TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
 	ld b, BANK(TrainerWalkUpToPlayer)
@@ -2434,12 +2445,14 @@ InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld a, [wEngagedTrainerClass]
 	ld [W_CUROPPONENT], a ; wd059
 	ld [W_ENEMYMONORTRAINERCLASS], a
-	cp TRAINER_START
+	ld a, [wIsTrainerBattle]
+	and a
+	jr z, .noTrainer
 	ld a, [wEngagedTrainerSet] ; wcd2e
-	jr c, .noTrainer
 	ld [W_TRAINERNO], a ; wd05d
 	ret
 .noTrainer
+	ld a, [wEngagedTrainerSet]
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ret
 
@@ -2535,7 +2548,17 @@ EngageMapTrainer:: ; 336a (0:336a)
 	ld a, [hli]    ; load trainer class
 	ld [wEngagedTrainerClass], a
 	ld a, [hl]     ; load trainer mon set
+	bit 7, a
+	jr nz, .pokemon
+	ld [wEnemyMonAttackMod], a
+	ld a, 1
+	ld [wIsTrainerBattle], a
+	jp PlayTrainerMusic
+.pokemon
+	and $7F
 	ld [wEnemyMonAttackMod], a ; wcd2e
+	xor a
+	ld [wIsTrainerBattle], a
 	jp PlayTrainerMusic
 
 PrintEndBattleText:: ; 3381 (0:3381)
@@ -3131,7 +3154,6 @@ LoadHpBarAndStatusTilePatterns::
 	ld hl,vChars1 + $400
 	lb bc,BANK(EXPBarGraphics), (EXPBarGraphicsEnd - EXPBarGraphics) / $10
 	jp GoodCopyVideoData
-	ds $8
 
 
 FillMemory::

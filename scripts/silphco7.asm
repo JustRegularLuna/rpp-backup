@@ -194,6 +194,8 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	ld a, $9
 .asm_51cc0
 	ld [W_TRAINERNO], a ; wd05d
+	ld a, 1
+	ld [wIsTrainerBattle], a
 	ld a, $4
 	jp SilphCo7Text_51c10
 
@@ -201,6 +203,8 @@ SilphCo7Script4: ; 51cc8 (14:5cc8)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	cp $ff
 	jp z, SilphCo7Text_51c0c
+	xor a
+	ld [wIsTrainerBattle], a
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld hl, wd82f

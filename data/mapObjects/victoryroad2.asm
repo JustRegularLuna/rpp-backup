@@ -18,7 +18,7 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	db SPRITE_BLACK_HAIR_BOY_1, $8 + 4, $13 + 4, $ff, $d0, TRAINER | $3, TAMER + TRAINER_START, $5
 	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $d0, TRAINER | $4, POKEMANIAC + TRAINER_START, $6
 	db SPRITE_BLACK_HAIR_BOY_2, $3 + 4, $1a + 4, $ff, $d2, TRAINER | $5, JUGGLER + TRAINER_START, $5
-	db SPRITE_BIRD, $5 + 4, $b + 4, $ff, $d1, TRAINER | $6, MOLTRES, 50
+	db SPRITE_BIRD, $5 + 4, $b + 4, $ff, $d1, TRAINER | $6, MOLTRES, 50 | OW_POKEMON
 	db SPRITE_BALL, $5 + 4, $1b + 4, $ff, $ff, ITEM | $7, TM_23
 	db SPRITE_BALL, $9 + 4, $12 + 4, $ff, $ff, ITEM | $8, FULL_HEAL
 	db SPRITE_BALL, $b + 4, $9 + 4, $ff, $ff, ITEM | $9, TM_01

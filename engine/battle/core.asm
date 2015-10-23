@@ -1237,6 +1237,8 @@ ChooseNextMon: ; 3c7d8 (f:47d8)
 ; called when player is out of usable mons.
 ; prints approriate lose message, sets carry flag if player blacked out (special case for initial rival fight)
 HandlePlayerBlackOut: ; 3c837 (f:4837)
+	xor a
+	ld [wIsTrainerBattle], a
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .notSony1Battle
@@ -6938,9 +6940,11 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	push af
 	res 1, [hl]
 	callab InitBattleVariables
+	ld a, [wIsTrainerBattle]
+	and a
+	jp z, InitWildBattle
 	ld a, [wEnemyMonSpecies2]
 	sub TRAINER_START
-	jp c, InitWildBattle
 	ld [W_TRAINERCLASS], a
 	call GetTrainerInformation
 	callab ReadTrainer

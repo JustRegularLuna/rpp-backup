@@ -1388,6 +1388,10 @@ wd153:: ds 3
 wd156:: ds 1
 wd157:: ds 1
 
+wIsTrainerBattle::
+	ds 1
+wWasTrainerBattle::
+	ds 1
 
 wPlayerName:: ; d158
 	ds 11

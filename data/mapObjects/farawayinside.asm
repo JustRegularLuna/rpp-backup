@@ -8,7 +8,7 @@ FarawayIslandInsideObject:
 	db $0 ; signs
 
 	db $1 ; people
-	db SPRITE_SLOWBRO, $c + 4, $c + 4, $ff, $d0, TRAINER | $1, MEW, 30
+	db SPRITE_SLOWBRO, $c + 4, $c + 4, $ff, $d0, TRAINER | $1, MEW, 30 | OW_POKEMON
 
 	; warp-to
 	EVENT_DISP FARAWAY_ISLAND_INSIDE_WIDTH, $13, $c ; FARAWAY_ISLAND_OUTSIDE
