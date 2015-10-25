@@ -7146,6 +7146,7 @@ MtMoonShopBlocks: INCBIN "maps/mtmoonshop.blk"
 INCLUDE "data/mapHeaders/vermilionferry.asm"
 INCLUDE "data/mapObjects/vermilionferry.asm"
 INCLUDE "scripts/vermilionferry.asm"
+NavelRockFerryBlocks:
 VermilionFerryBlocks: INCBIN "maps/vermilionferry.blk"
 
 ; Faraway Island (Outside)
@@ -7171,6 +7172,12 @@ INCLUDE "data/mapHeaders/southerninside.asm"
 INCLUDE "data/mapObjects/southerninside.asm"
 INCLUDE "scripts/southerninside.asm"
 SouthernIslandInsideBlocks: INCBIN "maps/southerninside.blk"
+
+; Navel Rock Ferry Dock
+INCLUDE "data/mapHeaders/navelrockferry.asm"
+INCLUDE "data/mapObjects/navelrockferry.asm"
+INCLUDE "scripts/navelrockferry.asm"
+; uses same map as Vermilion Ferry Dock
 
 INCLUDE "scripts/DayCareManScript.asm"
 

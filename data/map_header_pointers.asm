@@ -114,7 +114,7 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw SouthernIslandOutside_h; originally unused
 	dw SouthernIslandInside_h ; originally unused
 	dw Lance_h
-	dw Lance_h ; unused
+	dw NavelRockFerryDock_h ; originally unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused
 	dw Lance_h ; unused

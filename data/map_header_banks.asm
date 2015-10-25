@@ -114,7 +114,7 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(SouthernIslandOutside_h);originally unused
 	db BANK(SouthernIslandInside_h) ;originally unused
 	db BANK(Lance_h)
-	db $1D ;unused
+	db BANK(NavelRockFerryDock_h) ;originally unused
 	db $1D ;unused
 	db $1D ;unused
 	db $1D ;unused
