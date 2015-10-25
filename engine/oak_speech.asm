@@ -59,7 +59,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld hl,BoyGirlText  ; added to the same file as the other oak text
 	call PrintText     ; show this text
 	call BoyGirlChoice ; added routine at the end of this file
-	ld a, [$cc26]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr z, .AfterSettingGirl ; skip setting the girl and leave that flag alone if you chose the boy
 	ld hl, wd798 ; load ram address of Gender
