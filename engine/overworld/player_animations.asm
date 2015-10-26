@@ -384,8 +384,8 @@ Func_707b6: ; 707b6 (1c:47b6)
 	call DelayFrames
 	ld hl, wd736
 	set 6, [hl]
-	ld a, [wd798] ; added gender check
-	bit 2, a      ; added gender check
+	ld a, [wPlayerGender] ; added gender check
+	and a      ; added gender check
 	jr z, .BoySpriteLoad
 	ld de, LeafSprite
 	ld hl, vNPCSprites
@@ -397,8 +397,8 @@ Func_707b6: ; 707b6 (1c:47b6)
 	ld bc, (BANK(RedSprite) << 8) + $0c
 .KeepLoadingSpriteStuff
 	call CopyVideoData
-	ld a, [wd798] ; added gender check
-	bit 2, a      ; added gender check
+	ld a, [wPlayerGender] ; added gender check
+	and a      ; added gender check
 	jr z, .BoyTiles ; skip loading Leaf's stuff if you're Red
 	ld a, $4
 	ld hl, LeafFishingTiles

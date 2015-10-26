@@ -108,8 +108,8 @@ BerryReset::
     ld a, [W_DAYCARE_IN_USE]
     and a
     ret z
-    ld hl, wd798 ; Extra flags
-    set 3, [hl] ; Mark there being a babymon at Day Care
+    ld hl, wExtraFlags
+    set 1, [hl] ; Mark there being a babymon at Day Care
 	ret
 
 	

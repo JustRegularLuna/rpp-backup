@@ -537,8 +537,8 @@ StartMenu_TrainerInfo: ; 13460 (4:7460)
 DrawTrainerInfo: ; 1349a (4:749a)
 	ld de,RedMugShot
 	ld bc,(BANK(RedMugShot) << 8) | $01
-	ld a, [wd798]
-	bit 2, a
+	ld a, [wPlayerGender]
+	and a
 	jr z, .AreBoy
 	ld de, LeafMugShot
 	ld bc,(BANK(LeafMugShot) << 8) | $01

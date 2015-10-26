@@ -1903,13 +1903,9 @@ W_SILPHCO10CURSCRIPT:: ; d658
 	ds 1
 W_SILPHCO11CURSCRIPT:: ; d659
 	ds 1
-; unused
-	ds 1
 W_FUCHSIAGYMCURSCRIPT:: ; d65b
 	ds 1
 W_SAFFRONGYMCURSCRIPT:: ; d65c
-	ds 1
-; unused
 	ds 1
 W_CINNABARGYMCURSCRIPT:: ; d65e
 	ds 1
@@ -1939,6 +1935,15 @@ W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 134
 
 W_GAMEPROGRESSFLAGSEND::
+
+wPlayerGender::
+; $00 = male
+; $01 = female
+	ds 1
+
+wExtraFlags::
+; bit 1 = baby in Daycare
+	ds 1
 
 wd6f0:: ds 14
 wd6fe:: ds 2

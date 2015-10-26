@@ -60,11 +60,7 @@ OakSpeech: ; 6115 (1:6115)
 	call PrintText     ; show this text
 	call BoyGirlChoice ; added routine at the end of this file
 	ld a, [wCurrentMenuItem]
-	and a
-	jr z, .AfterSettingGirl ; skip setting the girl and leave that flag alone if you chose the boy
-	ld hl, wd798 ; load ram address of Gender
-	set 2, [hl]      ; sets you as a girl
-.AfterSettingGirl: ; resume main intro, jumps here if you were a guy
+	ld [wPlayerGender], a ; store player's gender. 00 for boy, 01 for girl
 	call ClearScreen ; clear the screen before resuming normal intro
 	ld de,ProfOakPic
 	ld bc, (Bank(ProfOakPic) << 8) | $00
@@ -87,8 +83,8 @@ OakSpeech: ; 6115 (1:6115)
 	call ClearScreen
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
-	ld a, [wd798] ; check gender
-	bit 2, a      ; check gender
+	ld a, [wPlayerGender] ; check gender
+	and a      ; check gender
 	jr z, .NotLeaf1
 	ld de,LeafPicFront
 	ld bc,(Bank(LeafPicFront) << 8) | $00
@@ -113,8 +109,8 @@ Func_61bc: ; 61bc (1:61bc)
 	call ClearScreen
 	ld de,RedPicFront
 	ld bc,(Bank(RedPicFront) << 8) | $00
-	ld a, [wd798] ; check gender
-	bit 2, a      ; check gender
+	ld a, [wPlayerGender] ; check gender
+	and a      ; check gender
 	jr z, .NotLeaf2
 	ld de,LeafPicFront
 	ld bc,(Bank(LeafPicFront) << 8) | $00
@@ -138,8 +134,8 @@ Func_61bc: ; 61bc (1:61bc)
 	call DelayFrames
 	ld de,RedSprite ; $4180
 	ld bc,(BANK(RedSprite) << 8) | $0C
-	ld a, [wd798] ; check gender
-	bit 2, a      ; check gender
+	ld a, [wPlayerGender] ; check gender
+	and a      ; check gender
 	jr z, .NotLeaf3
 	ld de,LeafSprite
 	ld bc,(BANK(LeafSprite) << 8) | $0C

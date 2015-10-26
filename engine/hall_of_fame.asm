@@ -180,8 +180,8 @@ HoFMonInfoText: ; 70329 (1c:4329)
 	next "TYPE2/@"
 
 Func_7033e: ; 7033e (1c:433e)
-	ld a, [wd798] ; New gender check
-	bit 2, a      ; New gender check
+	ld a, [wPlayerGender] ; New gender check
+	and a      ; New gender check
 	jr nz, .GirlStuff1
 	ld de, RedPicFront ; $6ede
 	ld a, BANK(RedPicFront)
@@ -197,8 +197,8 @@ Func_7033e: ; 7033e (1c:433e)
 	call CopyData
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
-	ld a, [wd798] ; new gender check
-	bit 2, a      ; new gender check
+	ld a, [wPlayerGender] ; new gender check
+	and a      ; new gender check
 	jr nz, .GirlStuff2
 	ld de, RedPicBack ; $7e0a
 	ld a, BANK(RedPicBack)

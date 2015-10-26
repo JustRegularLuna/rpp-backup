@@ -6471,8 +6471,8 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	dec a
 	ld de, OldManPic ; $7e0a
 	jr z, .next
-	ld a, [wd798]
-	bit 2, a
+	ld a, [wPlayerGender]
+	and a
 	jr z, .RedBack
 	ld de, LeafPicBack
 	jr .next

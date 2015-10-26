@@ -1,7 +1,7 @@
 LoadDefaultNamesPlayer: ; 695d (1:695d)
 	call Func_6a12
-	ld a, [wd798]   ; Added gender check
-	bit 2, a        ; Added gender check
+	ld a, [wPlayerGender]   ; Added gender check
+	and a        ; Added gender check
 	jr nz, .AreGirl ; Skip to girl names if you are a girl instead
 	ld de, DefaultNamesPlayer ; $6aa8
 	call DisplayIntroNameTextBox
@@ -36,8 +36,8 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	call Delay3
 	ld de, RedPicFront ; $6ede
 	ld b, BANK(RedPicFront)
-	ld a, [wd798] ; Added gender check
-	bit 2, a      ; Added gender check
+	ld a, [wPlayerGender] ; Added gender check
+	and a      ; Added gender check
 	jr z, .AreBoy3
 	ld de, LeafPicFront
 	ld b, BANK(LeafPicFront)

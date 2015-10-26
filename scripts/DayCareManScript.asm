@@ -9,8 +9,8 @@ DayCareManScript::
     jp c, .isBaby
     call CanBreed ; Check if it is in the No Breed List (legendaries and Ditto)
     jp c, .cannotBreed
-    ld hl, wd798 ; Extra Flags
-    bit 3, [hl] ; Check to see if there is a baby
+    ld hl, wExtraFlags ; Extra Flags
+    bit 1, [hl] ; Check to see if there is a baby
     jp z, .noEggs
     ld a, [wPartyCount]
     cp $06
@@ -24,8 +24,8 @@ DayCareManScript::
     call GetBabyID ; Reads the entry from the table, and stores it in register b
     ld c, $5
     call GivePokemon
-    ld hl, wd798 ; Extra flags
-    res 3, [hl] ; Mark there not being a babymon at Day Care
+    ld hl, wExtraFlags ; Extra flags
+    res 1, [hl] ; Mark there not being a babymon at Day Care
     ret
     
 .NoDayCareMon ; Runs if you don't have a Pokemon in the Day Care
@@ -54,8 +54,8 @@ DayCareManScript::
     ret
     
 .nevermind
-    ld hl, wd798 ; Extra Flags
-    res 3, [hl] ; Mark there not being a babymon at Day Care
+    ld hl, wExtraFlags ; Extra Flags
+    res 1, [hl] ; Mark there not being a babymon at Day Care
     ld hl, DayCareManText8 ; Ok, I'll give this to someone else, then
     call PrintText
     ret
