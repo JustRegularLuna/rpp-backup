@@ -115,9 +115,9 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw SouthernIslandInside_h ; originally unused
 	dw Lance_h
 	dw NavelRockFerryDock_h ; originally unused
-	dw Lance_h ; unused
-	dw Lance_h ; unused
-	dw Lance_h ; unused
+	dw NavelRockOutside_h ; originally unused
+	dw NavelRockCave1_h ; originally unused
+	dw NavelRockCave2_h ; originally unused
 	dw HallofFameRoom_h
 	dw UndergroundPathNS_h
 	dw Gary_h ;id=120
@@ -238,7 +238,7 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw SilphCo11_h
 	dw SilphCoElevator_h
 	dw SilphCo2_h ; unused
-	dw SilphCo2_h ; unused
+	dw NavelRockLugiaRoom_h ; originally unused
 	dw BattleCenterM_h
 	dw TradeCenterM_h
 	dw SilphCo2_h ; unused

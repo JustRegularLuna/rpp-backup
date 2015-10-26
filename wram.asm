@@ -1703,7 +1703,7 @@ W_VIRIDIANCITYCURSCRIPT:: ; d5f4
 	ds 1
 wSouthernIslandInsideCurScript::
 	ds 1
-; unused
+wNavelRockLugiaRoomCurScript::
 	ds 1
 W_PEWTERCITYCURSCRIPT:: ; d5f7
 	ds 1

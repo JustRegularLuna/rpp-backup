@@ -7179,10 +7179,34 @@ INCLUDE "data/mapObjects/navelrockferry.asm"
 INCLUDE "scripts/navelrockferry.asm"
 ; uses same map as Vermilion Ferry Dock
 
-INCLUDE "scripts/DayCareManScript.asm"
+SECTION "navel rock", ROMX,BANK[$35]
+
+; Navel Rock (Outside)
+INCLUDE "data/mapHeaders/navelrockoutside.asm"
+INCLUDE "data/mapObjects/navelrockoutside.asm"
+INCLUDE "scripts/navelrockoutside.asm"
+NavelRockOutsideBlocks: INCBIN "maps/navelrockoutside.blk"
+
+; Navel Rock (Cave 1)
+INCLUDE "data/mapHeaders/navelrockcave1.asm"
+INCLUDE "data/mapObjects/navelrockcave1.asm"
+INCLUDE "scripts/navelrockcave1.asm"
+NavelRockCave1Blocks: INCBIN "maps/navelrockcave1.blk"
+
+; Navel Rock (Cave 2)
+INCLUDE "data/mapHeaders/navelrockcave2.asm"
+INCLUDE "data/mapObjects/navelrockcave2.asm"
+INCLUDE "scripts/navelrockcave2.asm"
+NavelRockCave2Blocks: INCBIN "maps/navelrockcave2.blk"
+
+; Navel Rock (Lugia Room)
+INCLUDE "data/mapHeaders/navelrocklugiaroom.asm"
+INCLUDE "data/mapObjects/navelrocklugiaroom.asm"
+INCLUDE "scripts/navelrocklugiaroom.asm"
+NavelRockLugiaRoomBlocks: INCBIN "maps/navelrocklugiaroom.blk"
 
 
-SECTION "bank35",ROMX,BANK[$35]
+SECTION "bank36",ROMX,BANK[$36]
 
 ForestGate_GFX:      INCBIN "gfx/tilesets/forest_gate.2bpp"
 ForestGate_Block:    INCBIN "gfx/blocksets/forest_gate.bst"
@@ -7195,7 +7219,7 @@ Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
 Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 
 
-SECTION "bank36",ROMX,BANK[$36]
+SECTION "bank37",ROMX,BANK[$37]
 
 Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
 Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
@@ -7207,8 +7231,9 @@ Ice_Cavern_GFX:    INCBIN "gfx/tilesets/ice_cavern.t14.2bpp"
 Cavern_GFX:        INCBIN "gfx/tilesets/cavern.t14.2bpp"
 Cavern_Block:      INCBIN "gfx/blocksets/cavern.bst"
 
-SECTION "field moves", ROMX,BANK[$37]
+SECTION "field moves", ROMX,BANK[$38]
 
 INCLUDE "engine/overworld/field_moves.asm"
 INCLUDE "engine/wonder_trade.asm"
 INCLUDE "engine/overworld/automatic_repel.asm"
+INCLUDE "scripts/DayCareManScript.asm"

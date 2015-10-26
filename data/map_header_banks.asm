@@ -115,9 +115,9 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(SouthernIslandInside_h) ;originally unused
 	db BANK(Lance_h)
 	db BANK(NavelRockFerryDock_h) ;originally unused
-	db $1D ;unused
-	db $1D ;unused
-	db $1D ;unused
+	db BANK(NavelRockOutside_h) ;originally unused
+	db BANK(NavelRockCave1_h) ;originally unused
+	db BANK(NavelRockCave2_h) ;originally unused
 	db BANK(HallofFameRoom_h)
 	db BANK(UndergroundPathNS_h)
 	db BANK(Gary_h)
@@ -238,7 +238,7 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(SilphCo11_h)
 	db BANK(SilphCoElevator_h)
 	db $11
-	db $11
+	db BANK(NavelRockLugiaRoom_h) ; originally unused
 	db BANK(BattleCenterM_h)
 	db BANK(TradeCenterM_h)
 	db $11

@@ -114,8 +114,8 @@ SOUTHERN_ISLAND_INSIDE  EQU $70 ; originally unused
 LANCES_ROOM EQU $71
 NAVEL_ROCK_FERRY_DOCK EQU $72 ; originally unused
 NAVEL_ROCK_OUTSIDE    EQU $73 ; originally unused
-NAVEL_ROCK_CAVES_1    EQU $74 ; originally unused
-NAVEL_ROCK_CAVES_2    EQU $75 ; originally unused
+NAVEL_ROCK_CAVE_1    EQU $74 ; originally unused
+NAVEL_ROCK_CAVE_2    EQU $75 ; originally unused
 HALL_OF_FAME EQU $76
 UNDERGROUND_PATH_NS EQU $77
 CHAMPIONS_ROOM EQU $78
