@@ -6980,8 +6980,8 @@ OldManPic::             INCBIN "pic/trainer/oldman.pic"
 LeafFishingTilesFront:: INCBIN "gfx/leaf_fishing_tile_front.2bpp"
 LeafFishingTilesBack::  INCBIN "gfx/leaf_fishing_tile_back.2bpp"
 LeafFishingTilesSide::  INCBIN "gfx/leaf_fishing_tile_side.2bpp"
-RedMugShot::            INCBIN "pic/trainer/RedMug.pic"
-LeafMugShot::           INCBIN "pic/trainer/LeafMug.pic"
+;RedMugShot::            INCBIN "pic/trainer/RedMug.pic"
+;LeafMugShot::           INCBIN "pic/trainer/LeafMug.pic"
 
 TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
