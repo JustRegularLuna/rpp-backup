@@ -61,6 +61,15 @@ OakSpeech: ; 6115 (1:6115)
 	call BoyGirlChoice ; added routine at the end of this file
 	ld a, [wCurrentMenuItem]
 	ld [wPlayerGender], a ; store player's gender. 00 for boy, 01 for girl
+	ld hl,ShouldMonsObeyText
+	call PrintText
+	call YesNoChoice
+	ld a,[wCurrentMenuItem]
+	and a
+	jr nz, .canDisobey
+	ld hl,wExtraFlags
+	set 2,[hl]
+.canDisobey
 	call ClearScreen ; clear the screen before resuming normal intro
 	ld de,ProfOakPic
 	ld bc, (Bank(ProfOakPic) << 8) | $00
@@ -196,6 +205,9 @@ OakSpeechText3: ; 626c (1:626c)
 	db "@"
 BoyGirlText: ; This is new so we had to add a reference to get it to compile
 	TX_FAR _BoyGirlText
+	db "@"
+ShouldMonsObeyText: ; Added to ask if you wanted traded Pokemon to obey like normal ones
+	TX_FAR _ShouldMonsObeyText
 	db "@"
 
 FadeInIntroPic: ; 6271 (1:6271)

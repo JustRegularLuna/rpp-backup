@@ -1942,7 +1942,8 @@ wPlayerGender::
 	ds 1
 
 wExtraFlags::
-; bit 1 = baby in Daycare
+; bit 1 = Set means a baby is in Daycare
+; bit 2 = Set means traded mons obey like normal mons
 	ds 1
 
 wd6f0:: ds 14

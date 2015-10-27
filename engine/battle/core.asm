@@ -3190,8 +3190,11 @@ ExecutePlayerMove: ; 3d65e (f:565e)
 	ld hl, W_PLAYERBATTSTATUS1
 	bit ChargingUp, [hl] ; charging up for attack
 	jr nz, PlayerCanExecuteChargingMove
-	;call CheckForDisobedience
-	;jp z, ExecutePlayerMoveDone
+	ld hl, wExtraFlags
+	bit 2, [hl]
+	jr nz, CheckIfPlayerNeedsToChargeUp ; If you chose to let trade mons obey, skip the check
+	call CheckForDisobedience
+	jp z, ExecutePlayerMoveDone
 
 CheckIfPlayerNeedsToChargeUp: ; 3d69a (f:569a)
 	ld a, [W_PLAYERMOVEEFFECT]

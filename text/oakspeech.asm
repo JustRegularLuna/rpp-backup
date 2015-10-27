@@ -69,3 +69,10 @@ _BoyGirlText::
 	text "Play as a boy, or"
 	line "as a girl?"
 	done
+	
+_ShouldMonsObeyText::
+	text "Do you want"
+	line "#MON received"
+	cont "in trades to"
+	cont "always obey?"
+	done
