@@ -71,8 +71,8 @@ _BoyGirlText::
 	done
 	
 _ShouldMonsObeyText::
-	text "Do you want"
-	line "#MON received"
-	cont "in trades to"
-	cont "always obey?"
+	text "Should traded"
+	line "#MON behave"
+	cont "like caught"
+	cont "#MON?"
 	done
