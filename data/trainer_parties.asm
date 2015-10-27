@@ -48,13 +48,25 @@ TrainerDataPointers:
 	dw LanceData
     dw FlanneryData
 
-; if first byte != FF, then
+; if first byte != FF, FE, or FD, then
 	; first byte is level (of all pokemon on this team)
 	; all the next bytes are pokemon species
 	; null-terminated
 ; if first byte == FF, then
 	; first byte is FF (obviously)
 	; every next two bytes are a level and species
+	; null-terminated
+; if first byte == FE, then
+	; first byte is FE
+	; second byte is custom sprite number
+	; third byte is custom AI number
+	; every next two bytes are a level and species
+	; null-terminated
+; if first byte == FD, then
+	; first byte is FD
+	; second byte is custom sprite number
+	; third byte is level (or all pokemon on this team)
+	; all the next bytes are pokemon species
 	; null-terminated
 
 	

@@ -762,6 +762,9 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr z,.SpecialTrainer ; if so, check for special moves
 	cp $FE ; is this an extra-special trainer?
 	jr z,.SpecialTrainer2 ; if so, read the Pic and AI numbers
+	cp $FD ; is this a custom-pic-only trainer?
+	jr z,.PicOnly ; if so, read the pic
+.GenericTrainer ; else, it's a generic trainer
 	ld [W_CURENEMYLVL],a
 .LoopTrainerData
 	ld a,[hli]
@@ -774,6 +777,13 @@ ReadTrainer: ; 39c53 (e:5c53)
 	call AddPartyMon
 	pop hl
 	jr .LoopTrainerData
+	
+.PicOnly
+	ld a,[hli] ; get pic ID
+	ld [wTrainerPicID], a
+	ld a, [hli] ; get the level for that team's Pokemon
+	jr .GenericTrainer
+	
 .SpecialTrainer2
 	ld a, [hli] ; get pic ID
 	ld [wTrainerPicID], a
