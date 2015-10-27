@@ -274,7 +274,7 @@ DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d)
 	ld [wd11e], a
 	and a
 	jr nz, GetMonPallet
-	ld a, [W_TRAINERCLASS]
+	ld a, [wTrainerPicID]
 	ld hl, TrainerPalletes
 	jr GetPalletID
 DeterminePaletteIDBack:

@@ -6656,6 +6656,7 @@ Interior_Block:    INCBIN "gfx/blocksets/interior.bst"
 Plateau_GFX:       INCBIN "gfx/tilesets/plateau.t10.2bpp"
 Plateau_Block:     INCBIN "gfx/blocksets/plateau.bst"
 
+INCLUDE "engine/battle/get_trainer_pic_pointers.asm"
 
 SECTION "bank1A",ROMX,BANK[$1A]
 

@@ -927,7 +927,16 @@ W_TRAINERCLASS:: ; d031
 	ds 1
 
 	ds 1
-
+	
+wTrainerPicID::
+; Defaults to trainer class, can be changed with trainer type $FE
+	ds 1
+	
+wTrainerAINumber::
+; Defaults to trainer class, can be changed with trainer type $FE
+	ds 1
+	
+wTrainerPicBank:: ds 1
 wd033:: ds 1
 wd034:: ds 2
 wd036:: ds 16

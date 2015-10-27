@@ -438,148 +438,148 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 ; trainer pic pointers and base money.
 ; money received after battle = base money × level of highest-level enemy mon
-	dw YoungsterPic
+;	dw YoungsterPic
 	money 1500
 
-	dw BugCatcherPic
+;	dw BugCatcherPic
 	money 1000
 
-	dw LassPic
+;	dw LassPic
 	money 1500
 
-	dw SailorPic
+;	dw SailorPic
 	money 3000
 
-	dw JrTrainerMPic
+;	dw JrTrainerMPic
 	money 2000
 
-	dw JrTrainerFPic
+;	dw JrTrainerFPic
 	money 2000
 
-	dw PokemaniacPic
+;	dw PokemaniacPic
 	money 5000
 
-	dw SuperNerdPic
+;	dw SuperNerdPic
 	money 2500
 
-	dw HikerPic
+;	dw HikerPic
 	money 3500
 
-	dw BikerPic
+;	dw BikerPic
 	money 2000
 
-	dw BurglarPic
+;	dw BurglarPic
 	money 9000
 
-	dw EngineerPic
+;	dw EngineerPic
 	money 5000
 
-	dw YoungCouplePic
+;	dw YoungCouplePic
 	money 3500
 
-	dw FisherPic
+;	dw FisherPic
 	money 3500
 
-	dw SwimmerPic
+;	dw SwimmerPic
 	money 500
 
-	dw CueBallPic
+;	dw CueBallPic
 	money 2500
 
-	dw GamblerPic
+;	dw GamblerPic
 	money 7000
 
-	dw BeautyPic
+;	dw BeautyPic
 	money 7000
 
-	dw PsychicPic
+;	dw PsychicPic
 	money 1000
 
-	dw RockerPic
+;	dw RockerPic
 	money 2500
 
-	dw JugglerPic
+;	dw JugglerPic
 	money 3500
 
-	dw TamerPic
+;	dw TamerPic
 	money 4000
 
-	dw BirdKeeperPic
+;	dw BirdKeeperPic
 	money 2500
 
-	dw BlackbeltPic
+;	dw BlackbeltPic
 	money 2500
 
-	dw Rival1Pic
+;	dw Rival1Pic
 	money 3500
 
-	dw SwimmerFPic
+;	dw SwimmerFPic
 	money 500
 
-	dw RocketFPic
+;	dw RocketFPic
 	money 3000
 
-	dw ScientistPic
+;	dw ScientistPic
 	money 5000
 
-	dw GiovanniPic
+;	dw GiovanniPic
 	money 9900
 
-	dw RocketPic
+;	dw RocketPic
 	money 3000
 
-	dw CooltrainerMPic
+;	dw CooltrainerMPic
 	money 3500
 
-	dw CooltrainerFPic
+;	dw CooltrainerFPic
 	money 3500
 
-	dw BrunoPic
+;	dw BrunoPic
 	money 9900
 
-	dw BrockPic
+;	dw BrockPic
 	money 9900
 
-	dw MistyPic
+;	dw MistyPic
 	money 9900
 
-	dw LtSurgePic
+;	dw LtSurgePic
 	money 9900
 
-	dw ErikaPic
+;	dw ErikaPic
 	money 9900
 
-	dw KogaPic
+;	dw KogaPic
 	money 9900
 
-	dw BlainePic
+;	dw BlainePic
 	money 9900
 
-	dw SabrinaPic
+;	dw SabrinaPic
 	money 9900
 
-	dw GentlemanPic
+;	dw GentlemanPic
 	money 7000
 
-	dw Rival2Pic
+;	dw Rival2Pic
 	money 6500
 
-	dw Rival3Pic
+;	dw Rival3Pic
 	money 9900
 
-	dw LoreleiPic
+;	dw LoreleiPic
 	money 9900
 
-	dw ChannelerPic
+;	dw ChannelerPic
 	money 3000
 
-	dw AgathaPic
+;	dw AgathaPic
 	money 9900
 
-	dw LancePic
+;	dw LancePic
 	money 9900
     
-    dw FlanneryPic
+ ;   dw FlanneryPic
     money 5000
 
 INCLUDE "text/trainer_names.asm"
@@ -724,8 +724,10 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [hl],a
 
 ; get the pointer to trainer data for this class
-	ld a,[W_CUROPPONENT]
-	sub TRAINER_START + 1 ; convert value from pokemon to trainer
+;	ld a,[W_CUROPPONENT]
+;	sub TRAINER_START + 1 ; convert value from pokemon to trainer
+	ld a, [W_TRAINERCLASS]
+	dec a
 	add a,a
 	ld hl,TrainerDataPointers
 	ld c,a
@@ -758,6 +760,8 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[hli]
 	cp $FF ; is the trainer special?
 	jr z,.SpecialTrainer ; if so, check for special moves
+	cp $FE ; is this an extra-special trainer?
+	jr z,.SpecialTrainer2 ; if so, read the Pic and AI numbers
 	ld [W_CURENEMYLVL],a
 .LoopTrainerData
 	ld a,[hli]
@@ -770,6 +774,12 @@ ReadTrainer: ; 39c53 (e:5c53)
 	call AddPartyMon
 	pop hl
 	jr .LoopTrainerData
+.SpecialTrainer2
+	ld a, [hli] ; get pic ID
+	ld [wTrainerPicID], a
+	ld a, [hli] ; get AI ID
+	ld [wTrainerAINumber], a
+	; fallthrough to normal "SpecialTrainer" behaviour
 .SpecialTrainer
 ; if this code is being run:
 ; - each pokemon has a specific level
@@ -796,8 +806,9 @@ ReadTrainer: ; 39c53 (e:5c53)
 	cp a, $ff
 	jr z, .FinishUp
 	ld b, a
-	ld a, [W_CUROPPONENT]
-	sub TRAINER_START
+;	ld a, [W_CUROPPONENT]
+;	sub TRAINER_START
+	ld a, [W_TRAINERCLASS]
 	cp a, b
 	jr nz, .NextEntry
 	ld a, [hli]
@@ -876,7 +887,7 @@ TrainerAI: ; 3a52e (e:652e)
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z
-	ld a,[W_TRAINERCLASS] ; what trainer class is this?
+	ld a,[wTrainerAINumber] ; what trainer class is this?
 	dec a
 	ld c,a
 	ld b,0

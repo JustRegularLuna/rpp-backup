@@ -6949,8 +6949,11 @@ asm_3ef3d: ; 3ef3d (f:6f3d)
 	ld a, [wEnemyMonSpecies2]
 	sub TRAINER_START
 	ld [W_TRAINERCLASS], a
+	ld [wTrainerPicID], a ; new
+	ld [wTrainerAINumber], a ; new
 	call GetTrainerInformation
 	callab ReadTrainer
+	callab LoadTrainerPicPointer ; new
 	call DoBattleTransitionAndInitBattleVariables
 	call _LoadTrainerPic
 	xor a
@@ -7063,12 +7066,13 @@ _LoadTrainerPic: ; 3f04b (f:704b)
 	ld e, a
 	ld a, [wd034]
 	ld d, a ; de contains pointer to trainer pic
-	ld a, [wLinkState]
-	and a
-	ld a, Bank(TrainerPics) ; this is where all the trainer pics are (not counting Red's)
-	jr z, .loadSprite
-	ld a, Bank(RedPicFront)
-.loadSprite
+	ld a, [wTrainerPicBank] ; new
+;	ld a, [wLinkState]
+;	and a
+;	ld a, Bank(TrainerPics) ; this is where all the trainer pics are (not counting Red's)
+;	jr z, .loadSprite
+;	ld a, Bank(RedPicFront)
+;.loadSprite
 	call UncompressSpriteFromDE
 	ld de, vFrontPic
 	ld a, $77

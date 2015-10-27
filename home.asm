@@ -2918,20 +2918,21 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	call GetTrainerName
 	ld a, [wLinkState]
 	and a
-	jr nz, .linkBattle
+;	jr nz, .linkBattle
+	ret nz
 	ld a, Bank(TrainerPicAndMoneyPointers)
 	call BankswitchHome
 	ld a, [W_TRAINERCLASS] ; wd031
 	dec a
 	ld hl, TrainerPicAndMoneyPointers
-	ld bc, $5
+	ld bc, $3 ;originally 5
 	call AddNTimes
-	ld de, wd033
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
+;	ld de, wd033
+;	ld a, [hli]
+;	ld [de], a
+;	inc de
+;	ld a, [hli]
+;	ld [de], a
 	ld de, wd046
 	ld a, [hli]
 	ld [de], a
@@ -2939,13 +2940,13 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	ld a, [hli]
 	ld [de], a
 	jp BankswitchBack
-.linkBattle
-	ld hl, wd033
-	ld de, RedPicFront
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	ret
+;.linkBattle
+;	ld hl, wd033
+;	ld de, RedPicFront
+;	ld [hl], e
+;	inc hl
+;	ld [hl], d
+;	ret
 
 GetTrainerName:: ; 359e (0:359e)
 	ld b, BANK(GetTrainerName_)
