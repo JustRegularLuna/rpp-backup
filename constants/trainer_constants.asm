@@ -56,3 +56,5 @@ const_value = 1
 	const JESSIE_JAMES
 	const COSPLAY_GIRL
 	const JANINE
+	const PLAYER_M
+	const PLAYER_F

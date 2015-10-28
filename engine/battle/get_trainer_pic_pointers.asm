@@ -84,3 +84,5 @@ TrainerPicPointers:
 	add_pic JessieJamesPic
 	add_pic CosplayGirlPic
 	add_pic JaninePic
+	add_pic RedPicFront
+	add_pic LeafPicFront
