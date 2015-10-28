@@ -7238,3 +7238,12 @@ INCLUDE "engine/overworld/field_moves.asm"
 INCLUDE "engine/wonder_trade.asm"
 INCLUDE "engine/overworld/automatic_repel.asm"
 INCLUDE "scripts/DayCareManScript.asm"
+
+SECTION "trainer pics 2", ROMX,BANK[$39]
+
+ExecutiveFPic::  INCBIN "pic/trainer/executivef.pic"
+ExecutiveMPic::  INCBIN "pic/trainer/executivem.pic"
+RockerFPic::     INCBIN "pic/trainer/rockerf.pic"
+JessieJamesPic:: INCBIN "pic/trainer/jessiejames.pic"
+CosplayGirlPic:: INCBIN "pic/trainer/cosplaygirl.pic"
+JaninePic::      INCBIN "pic/trainer/janine.pic"

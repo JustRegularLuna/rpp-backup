@@ -77,5 +77,10 @@ TrainerPicPointers:
 	add_pic ChannelerPic
 	add_pic AgathaPic
 	add_pic LancePic
-    add_pic FlanneryPic
- 
+	add_pic FlanneryPic
+	add_pic ExecutiveFPic
+	add_pic ExecutiveMPic
+	add_pic RockerFPic
+	add_pic JessieJamesPic
+	add_pic CosplayGirlPic
+	add_pic JaninePic

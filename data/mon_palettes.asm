@@ -256,3 +256,9 @@ TrainerPalletes:
 	db PAL_PURPLE_TRAINER    ; Agatha
 	db PAL_RED_TRAINER       ; Lance
     db PAL_RED_TRAINER       ; Flannery
+	db PAL_MEWMON            ; Executive F
+	db PAL_MEWMON            ; Executive M
+	db PAL_RED_TRAINER       ; Rocker F
+	db PAL_RED_TRAINER       ; Jessie James
+	db PAL_YELLOW_TRAINER    ; Cosplay Girl
+	db PAL_PURPLE_TRAINER    ; Janine
