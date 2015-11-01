@@ -264,3 +264,4 @@ TrainerPalletes:
 	db PAL_PURPLE_TRAINER    ; Janine
 	db PAL_MEWMON            ; Male Player
 	db PAL_MEWMON            ; Female Player
+	db PAL_MEWMON            ; Professor Oak
