@@ -86,3 +86,4 @@ TrainerPicPointers:
 	add_pic JaninePic
 	add_pic RedPicFront
 	add_pic LeafPicFront
+	add_pic ProfOakPic

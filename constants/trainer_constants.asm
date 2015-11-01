@@ -58,3 +58,4 @@ const_value = 1
 	const JANINE
 	const PLAYER_M
 	const PLAYER_F
+	const PROF_OAK
