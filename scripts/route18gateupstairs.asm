@@ -8,10 +8,17 @@ Route18GateUpstairsTextPointers: ; 49978 (12:5978)
 
 Route18GateUpstairsText1: ; 4997e (12:597e)
 	db $08 ; asm
+	ld hl, Trader5Name
+	ld de, wCurTrainerName
+	ld bc, $b
+	call CopyData
 	ld a, $5
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
+	
+Trader5Name:
+	db "JAKE@@@@@@@"
 
 Route18GateUpstairsText2: ; 4998c (12:598c)
 	db $8

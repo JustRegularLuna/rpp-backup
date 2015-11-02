@@ -11,7 +11,14 @@ Route2HouseText1: ; 1def4 (7:5ef4)
 
 Route2HouseText2: ; 1def9 (7:5ef9)
 	db $08 ; asm
+	ld hl, Trader1Name
+	ld de, wCurTrainerName
+	ld bc, $b
+	call CopyData
 	ld a, $1
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
+
+Trader1Name:
+	db "CALVIN@@@@@"

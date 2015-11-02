@@ -176,7 +176,7 @@ InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
 	ld de, wTradedPlayerMonOT
 	ld bc, $b
 	call InGameTrade_CopyData
-	ld hl, InGameTrade_TrainerString
+	ld hl, wCurTrainerName;InGameTrade_TrainerString
 	ld de, wcd4e
 	call InGameTrade_CopyData
 	ld de, W_GRASSRATE
@@ -211,7 +211,7 @@ InGameTrade_CopyDataToReceivedMon: ; 71d19 (1c:5d19)
 	ld hl, wPartyMonOT
 	ld bc, $b
 	call InGameTrade_GetReceivedMonPointer
-	ld hl, InGameTrade_TrainerString
+	ld hl, wCurTrainerName;InGameTrade_TrainerString
 	ld bc, $b
 	call CopyData
 	ld hl, wPartyMon1OTID
@@ -231,9 +231,9 @@ InGameTrade_GetReceivedMonPointer: ; 71d4f (1c:5d4f)
 	ld d, h
 	ret
 
-InGameTrade_TrainerString: ; 71d59 (1c:5d59)
+;InGameTrade_TrainerString: ; 71d59 (1c:5d59)
 	; "TRAINER@@@@@@@@@@"
-	db $5d, "@@@@@@@@@@"
+;	db $5d, "@@@@@@@@@@"
 
 InGameTradeTextPointers: ; 71d64 (1c:5d64)
 	dw TradeTextPointers1

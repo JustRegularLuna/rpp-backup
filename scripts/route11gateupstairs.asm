@@ -9,11 +9,18 @@ Route11GateUpstairsTextPointers: ; 49457 (12:5457)
 
 Route11GateUpstairsText1: ; 4945f (12:545f)
 	db $08 ; asm
+	ld hl, Trader0Name
+	ld de, wCurTrainerName
+	ld bc, $b
+	call CopyData
 	xor a
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 asm_49469: ; 49469 (12:5469)
 	jp TextScriptEnd
+	
+Trader0Name:
+	db "TAYLOR@@@@@"
 
 Route11GateUpstairsText2: ; 4946c (12:546c)
 	db $8

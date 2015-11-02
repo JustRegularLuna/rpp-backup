@@ -6,7 +6,14 @@ VermilionHouse3TextPointers: ; 19c15 (6:5c15)
 
 VermilionHouse3Text1: ; 19c17 (6:5c17)
 	db $08 ; asm
+	ld hl, Trader4Name
+	ld de, wCurTrainerName
+	ld bc, $b
+	call CopyData
 	ld a, $4
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
+
+Trader4Name:
+	db "JENNY@@@@@@"

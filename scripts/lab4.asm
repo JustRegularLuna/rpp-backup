@@ -106,10 +106,17 @@ Lab4Text_75dd5: ; 75dd5 (1d:5dd5)
 
 Lab4Text2: ; 75dda (1d:5dda)
 	db $08 ; asm
+	ld hl, Trader9Name
+	ld de, wCurTrainerName
+	ld bc, $b
+	call CopyData
 	ld a, $9
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
+	
+Trader9Name:
+	db "ROSS@@@@@@@"
 
 LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)
 	ld b, BANK(LoadFossilItemAndMonName)
