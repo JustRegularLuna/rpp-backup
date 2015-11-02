@@ -48,6 +48,7 @@ const_value = 1
 	const AGATHA        ;EQU $2E
 	const LANCE         ;EQU $2F
 	const FLANNERY      ;EQU $30
+	const PKMN_TRAINER  ;EQU $31 Defaults to Tracey
 
 ; Entries below this are only sprites, not actual classes
 	const EXECUTIVE_F

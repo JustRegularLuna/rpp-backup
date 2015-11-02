@@ -406,6 +406,9 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	jr z, .rival
 	cp SONY3
 	jr z, .rival
+	ld hl, wCurTrainerName
+	cp PKMN_TRAINER
+	jr z, .rival
 	ld [wd0b5], a
 	ld a, TRAINER_NAME
 	ld [wNameListType], a

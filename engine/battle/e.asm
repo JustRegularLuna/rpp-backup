@@ -433,7 +433,8 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 	db 1,0    ; CHANNELER
 	db 1,0    ; AGATHA
 	db 1,3,0  ; LANCE
-    db 1,0    ; FLANNERY
+	db 1,0    ; FLANNERY
+	db 1,0    ; TRAINER
 
 TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 ; trainer pic pointers and base money.
@@ -581,6 +582,9 @@ TrainerPicAndMoneyPointers: ; 39914 (e:5914)
     
  ;   dw FlanneryPic
     money 5000
+	
+;	dw TrainerPic
+	money 5000
 
 INCLUDE "text/trainer_names.asm"
 
@@ -972,7 +976,8 @@ TrainerAIPointers: ; 3a55c (e:655c)
 	dbw 3,GenericAI
 	dbw 2,AgathaAI ; agatha
 	dbw 1,LanceAI ; lance
-    dbw 3,GenericAI ; flannery
+	dbw 3,GenericAI ; flannery
+	dbw 3,GenericAI ; tracey
 
 JugglerAI: ; 3a5e9 (e:65e9)
 	cp $40

@@ -46,7 +46,8 @@ TrainerDataPointers: ; Last Updated 28/06/2015 by Neodymium / Free to use and mo
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
-    dw FlanneryData
+	dw FlanneryData
+	dw PkmnTrainerData
 
 ; if first byte != FF, then
 	; first byte is level (of all pokemon on this team)
@@ -544,3 +545,6 @@ AceTrainerFData: ; COMPLETED
 
 FlanneryData:
     db $FF,54,SLUGMA,55,SLUGMA,57,TORKOAL,0
+	
+PkmnTrainerData:
+	db 30,SCYTHER,0 ; placeholder

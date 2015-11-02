@@ -23,6 +23,10 @@ SetDefaultNames: ; 60ca (1:60ca)
 	and a
 	call z, Func_5bff
 	ld hl, NintenText
+	ld de, wCurTrainerName
+	ld bc, $b
+	call CopyData
+	ld hl, NintenText
 	ld de, wPlayerName ; wd158
 	ld bc, $b
 	call CopyData

@@ -1720,8 +1720,6 @@ W_ROUTE3CURSCRIPT:: ; d5f8
 	ds 1
 W_ROUTE4CURSCRIPT:: ; d5f9
 	ds 1
-; unused
-	ds 1
 W_VIRIDIANGYMCURSCRIPT:: ; d5fb
 	ds 1
 W_PEWTERGYMCURSCRIPT:: ; d5fc
@@ -1754,8 +1752,6 @@ W_SSANNE9CURSCRIPT:: ; d609
 	ds 1
 W_ROUTE22CURSCRIPT:: ; d60a
 	ds 1
-; unused
-	ds 1
 W_REDSHOUSE2CURSCRIPT:: ; d60c
 	ds 1
 W_VIRIDIANMARKETCURSCRIPT:: ; d60d
@@ -1763,20 +1759,6 @@ W_VIRIDIANMARKETCURSCRIPT:: ; d60d
 W_ROUTE22GATECURSCRIPT:: ; d60e
 	ds 1
 W_CERULEANCITYCURSCRIPT:: ; d60f
-	ds 1
-; unused
-	ds 1
-; unused
-	ds 1
-; unused
-	ds 1
-; unused
-	ds 1
-; unused
-	ds 1
-; unused
-	ds 1
-; unused
 	ds 1
 W_SSANNE5CURSCRIPT:: ; d617
 	ds 1
@@ -1799,8 +1781,6 @@ W_SAFARIZONEENTRANCECURSCRIPT:: ; d61f
 W_ROCKTUNNEL2CURSCRIPT:: ; d620
 	ds 1
 W_ROCKTUNNEL1CURSCRIPT:: ; d621
-	ds 1
-; unused
 	ds 1
 W_ROUTE11CURSCRIPT:: ; d623
 	ds 1
@@ -1838,19 +1818,13 @@ W_ROCKETHIDEOUT3CURSCRIPT:: ; d633
 	ds 1
 W_ROCKETHIDEOUT4CURSCRIPT:: ; d634
 	ds 1
-; unused
-	ds 1
 W_ROUTE6GATECURSCRIPT:: ; d636
 	ds 1
 W_ROUTE8GATECURSCRIPT:: ; d637
 	ds 1
-; unused
-	ds 1
 W_CINNABARISLANDCURSCRIPT:: ; d639
 	ds 1
 W_MANSION1CURSCRIPT:: ; d63a
-	ds 1
-; unused
 	ds 1
 W_MANSION2CURSCRIPT:: ; d63c
 	ds 1
@@ -1861,8 +1835,6 @@ W_MANSION4CURSCRIPT:: ; d63e
 W_VICTORYROAD2CURSCRIPT:: ; d63f
 	ds 1
 W_VICTORYROAD3CURSCRIPT:: ; d640
-	ds 1
-; unused
 	ds 1
 W_FIGHTINGDOJOCURSCRIPT:: ; d642
 	ds 1
@@ -1896,17 +1868,7 @@ W_UNKNOWNDUNGEON3CURSCRIPT:: ; d650
 	ds 1
 W_VICTORYROAD1CURSCRIPT:: ; d651
 	ds 1
-; unused
-	ds 1
 W_LANCECURSCRIPT:: ; d653
-	ds 1
-; unused
-	ds 1
-; unused
-	ds 1
-; unused
-	ds 1
-; unused
 	ds 1
 W_SILPHCO10CURSCRIPT:: ; d658
 	ds 1
@@ -1941,9 +1903,14 @@ W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
 W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
 ; unused
-	ds 134
+	ds 140
 
 W_GAMEPROGRESSFLAGSEND::
+
+
+wCurTrainerName::
+; used to store individual trainer names
+	ds 13
 
 wPlayerGender::
 ; $00 = male
