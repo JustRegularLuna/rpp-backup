@@ -2125,7 +2125,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	jp nz, .handleBattleMenuInput ; handle menu input if it's not the old man tutorial
 ; the following happens for the old man tutorial
 	ld hl, wPlayerName
-	ld de, W_GRASSRATE
+	ld de, wCurTrainerName;W_GRASSRATE
 	ld bc, $b
 	call CopyData  ; temporarily save the player name in unused space,
 	               ; which is supposed to get overwritten when entering a

@@ -171,7 +171,7 @@ BallAnyway:
 	dec a
 	jr nz,.notOldManBattle
 .oldManBattle
-	ld hl,W_GRASSRATE
+	ld hl,wCurTrainerName;W_GRASSRATE
 	ld de,wPlayerName
 	ld bc,11
 	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno glitch)
