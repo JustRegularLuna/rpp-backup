@@ -34,6 +34,8 @@ Route12Script0: ; 59619 (16:5619)
 	ld [W_CUROPPONENT], a ; wd059
 	ld a, 30
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
+	xor a
+	ld [wIsTrainerBattle], a ; wild battle
 	ld a, HS_ROUTE_12_SNORLAX
 	ld [wcc4d], a
 	predef HideObject
