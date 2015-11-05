@@ -266,3 +266,4 @@ TrainerPalletes:
 	db PAL_MEWMON            ; Male Player
 	db PAL_MEWMON            ; Female Player
 	db PAL_MEWMON            ; Professor Oak
+	db PAL_BROWNMON          ; P.I.

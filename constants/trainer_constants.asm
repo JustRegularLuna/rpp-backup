@@ -60,3 +60,4 @@ const_value = 1
 	const PLAYER_M
 	const PLAYER_F
 	const PROF_OAK
+	const PI_TRAINER

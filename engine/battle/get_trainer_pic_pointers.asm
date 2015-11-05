@@ -88,3 +88,4 @@ TrainerPicPointers:
 	add_pic RedPicFront
 	add_pic LeafPicFront
 	add_pic ProfOakPic
+	add_pic PiTrainerPic
