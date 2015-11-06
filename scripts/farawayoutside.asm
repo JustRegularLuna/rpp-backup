@@ -7,7 +7,7 @@ FarawayIslandOutsideTextPointers:
 	dw FarawayIslandSignText
 
 FarawayIslandCaptainText:
-	TX_FAR _ViridianForestEntranceText1
+	TX_FAR _FerrySailorText
 	db "@"
 
 FarawayIslandBerryTreeText:

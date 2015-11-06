@@ -2,8 +2,8 @@ NavelRockOutsideScript:
 	jp EnableAutoTextBoxDrawing
 
 NavelRockOutsideTextPointers:
-	dw NavelRockCaptainText
+	dw NavelRockSignText
 
-NavelRockCaptainText:
+NavelRockSignText:
 	TX_FAR _ViridianForestEntranceText1 ; placeholder
 	db "@"

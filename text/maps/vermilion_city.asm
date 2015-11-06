@@ -125,3 +125,9 @@ _VermilionCityText13:: ; a59e9 (29:59e9)
 	text "VERMILION HARBOR"
 	done
 
+_FerrySailorText::
+	text "The SEAGALLOP"
+	line "FERRIES pride"
+	cont "themselves on"
+	cont "service!"
+	done

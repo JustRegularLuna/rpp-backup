@@ -1,5 +1,5 @@
 NavelRockCave1Object:
-	db $7d ; border block
+	db $19 ; border block
 
 	db $3 ; warps
 	db $7, $2, $0, NAVEL_ROCK_OUTSIDE

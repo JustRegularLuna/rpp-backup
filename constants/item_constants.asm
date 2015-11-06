@@ -117,6 +117,9 @@ CHERI_BERRY   EQU $69
 LUM_BERRY     EQU $6A
 SWEG_BERRY    EQU $6B
 
+; Dummy item used for Ferry list
+GO_HOME       EQU $6C
+
 ; Don't call actual item scripts
 HM_01         EQU $C4
 HM_02         EQU $C5

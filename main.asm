@@ -7206,6 +7206,11 @@ INCLUDE "data/mapObjects/navelrocklugiaroom.asm"
 INCLUDE "scripts/navelrocklugiaroom.asm"
 NavelRockLugiaRoomBlocks: INCBIN "maps/navelrocklugiaroom.blk"
 
+; Inside Ferry
+INCLUDE "data/mapHeaders/insideferry.asm"
+INCLUDE "data/mapObjects/insideferry.asm"
+INCLUDE "scripts/insideferry.asm"
+InsideFerryBlocks: INCBIN "maps/insideferry.blk"
 
 SECTION "bank36",ROMX,BANK[$36]
 
@@ -7238,6 +7243,7 @@ INCLUDE "engine/overworld/field_moves.asm"
 INCLUDE "engine/wonder_trade.asm"
 INCLUDE "engine/overworld/automatic_repel.asm"
 INCLUDE "scripts/DayCareManScript.asm"
+INCLUDE "engine/overworld/ferry_script.asm"
 
 SECTION "trainer pics 2", ROMX,BANK[$39]
 

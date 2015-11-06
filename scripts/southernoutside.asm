@@ -7,7 +7,7 @@ SouthernIslandOutsideTextPointers:
 	dw SouthernIslandSignText
 
 SouthernIslandCaptainText:
-	TX_FAR _ViridianForestEntranceText1 ; placeholder
+	TX_FAR _FerrySailorText
 	db "@"
 
 SouthernIslandBerryTreeText:

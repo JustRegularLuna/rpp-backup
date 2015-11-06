@@ -243,7 +243,7 @@ MapHSPointers: ; c8f5 (3:48f5)
 	dw MapHSEB
 	dw MapHSXX
 	dw MapHSXX
-	dw MapHSXX
+	dw MapHSEE
 	dw MapHSXX
 	dw MapHSXX
 	dw MapHSXX
@@ -578,5 +578,7 @@ MapHS6E:
 MapHS70:
 	db SOUTHERN_ISLAND_INSIDE,$01,Show
 	db SOUTHERN_ISLAND_INSIDE,$02,Show
+MapHSEE:
+	db NAVEL_ROCK_LUGIA_ROOM,$01,Show
 ; End of list thing
 	db $FF,$01,Show
