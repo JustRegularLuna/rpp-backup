@@ -151,6 +151,10 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F
 	jr c, .townOrRoute
+	cp INSIDE_FERRY
+	jr z, .townOrRoute
+	cp NAVEL_ROCK_OUTSIDE
+	jr z, .townOrRoute
 	cp UNKNOWN_DUNGEON_2
 	jr c, .normalDungeonOrBuilding
 	cp NAME_RATERS_HOUSE
