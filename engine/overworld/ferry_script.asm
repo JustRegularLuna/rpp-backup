@@ -12,6 +12,7 @@ EventIslandsFerryScript::
 	ret
 
 .noTicket
+	call ManualTextScroll
 	ld hl,NoTicketText
 	call PrintText
 	ret
@@ -160,7 +161,14 @@ DoIslandMenu:
 	; fallthrough
 
 .islandSelected
-	push bc ; don't lose our place
+; First, see if we need to update the warps
+	ld a, [wWarpEntries + 3] ; Map ID of first warp
+	cp c ; see if we're already at the place we tried to go
+	jr z, .alreadyThere
+
+; Hold onto the warp entry we selected
+	push bc
+	
 ; Mark for it to do the shake animation
 	ld hl, wd126
 	set 7, [hl]
@@ -189,6 +197,11 @@ DoIslandMenu:
 	call PrintText
 	ret
 	
+.alreadyThere
+	ld hl, AlreadyThereText
+	call PrintText
+	ret
+	
 WelcomeToSeagallopText:
 	text "Welcome aboard"
 	line "the SEAGALLOP"
@@ -207,11 +220,23 @@ NoTicketText:
 	line "bad."
 	
 	para "Come back and see"
-	line "us later.@@"
+	line "us later."
+	prompt
+	db "@"
 	
 GoingNowhereText:
 	text "Come back and see"
-	line "us later.@@"
+	line "us later."
+	prompt
+	db "@"
 
 AllAboardText:
-	text "All aboard!@@"
+	text "All aboard!"
+	prompt
+	db "@"
+	
+AlreadyThereText:
+	text "We're already"
+	line "there!"
+	prompt
+	db "@"
