@@ -62,7 +62,7 @@ _SilphCo9EndBattleText3:: ; 84d57 (21:4d57)
 
 _SilphCo9AfterBattleText3:: ; 84d70 (21:4d70)
 	text "Don't get too"
-	line "cocky just because"
+	line "cocky because"
 	cont "you beat me!"
 	done
 

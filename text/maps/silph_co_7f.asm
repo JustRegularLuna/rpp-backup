@@ -116,20 +116,21 @@ _SilphCo7BattleText3:: ; 847be (21:47be)
 	text "Hold it right"
 	line "there!"
 	
-	para "We can't have you"
-	line "meddling around in"
+	para "We can't have"
+	line "meddling kids in"
 	cont "here!"
 	done
 
 _SilphCo7EndBattleText3:: ; 847e2 (21:47e2)
-	text "This can't be"
-	line "happening!"
+	text "What!?"
+	line "This can't be"
+	cont "happening!"
 	prompt
 
 _SilphCo7AfterBattleText3:: ; 847fb (21:47fb)
 	text "Doesn't matter."
-	line "You won't make it"
-	cont "to the BOSS."
+	line "You won't make"
+	cont "it to the BOSS."
 	done
 
 _SilphCo7BattleText4:: ; 8482d (21:482d)
