@@ -1,5 +1,5 @@
 SeafoamIslands3Object: ; 0x464b2 (size=72)
-	db 25 ; border block
+	db 82 ; border block
 
 	db $7 ; warps
 	db $3, $5, $0, SEAFOAM_ISLANDS_2
