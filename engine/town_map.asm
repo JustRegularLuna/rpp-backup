@@ -293,16 +293,10 @@ LoadTownMap: ; 7109b (1c:509b)
 	ld bc, $8
 	ld a, BANK(MonNestIcon)
 	call FarCopyDataDouble
-	ld hl, wTileMap
-	ld de, UncompressedMap ; $5100
-.loop
-	ld a, [de]
-	cp $ff
-	jr z, .doneCopying
-    ld [hli], a
-    inc de
-    jr .loop
-.doneCopying
+	ld hl, UncompressedMap
+	ld de, wTileMap
+	ld bc, UncompressedMapEnd - UncompressedMap
+	call CopyData
 	call EnableLCD
 	ld b, $2
 	call GoPAL_SET
@@ -316,7 +310,7 @@ LoadTownMap: ; 7109b (1c:509b)
 
 UncompressedMap: ; Uses the Gen 2 format
     INCBIN "gfx/town_map.map"
-    db $ff ; Marks the end of the map data
+UncompressedMapEnd:
 
 Func_711ab: ; 711ab (1c:51ab)
 	xor a
