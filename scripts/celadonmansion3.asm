@@ -74,7 +74,12 @@ GameFreakPCText2: ; 487f0 (12:47f0)
 
 GameFreakPCText3: ; 487f5 (12:47f5)
 	TX_FAR _CeladonMansion3Text7
-	db "@"
+	db $6
+	db $8
+	callba ScriptComputerScreen
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	jp TextScriptEnd
 
 GameFreakSignText: ; 487fa (12:47fa)
 	TX_FAR _CeladonMansion3Text8
