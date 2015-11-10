@@ -31,7 +31,7 @@ DirectorText: ; 487b2 (12:47b2)
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wd11e]
-	cp 150
+	cp NUM_POKEMON
 	jr nc, .CompletedDex
 	ld hl, .GameDesigner
 	jr .done
