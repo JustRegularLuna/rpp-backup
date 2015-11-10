@@ -56,7 +56,12 @@ DirectorText: ; 487b2 (12:47b2)
 
 GameFreakPCText1: ; 487eb (12:47eb)
 	TX_FAR _CeladonMansion3Text5
-	db "@"
+	db $6
+	db $8
+	callba ProgrammerComputerScreen
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	jp TextScriptEnd
 
 GameFreakPCText2: ; 487f0 (12:47f0)
 	TX_FAR _CeladonMansion3Text6
