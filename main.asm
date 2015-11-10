@@ -7262,3 +7262,4 @@ WindowsGraphics1:
 WindowsGraphics1End:
 INCLUDE "engine/splashscreens/splashscreen_main.asm"
 INCLUDE "engine/splashscreens/programmer.asm"
+INCLUDE "engine/splashscreens/tetris.asm"

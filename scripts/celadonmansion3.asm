@@ -65,7 +65,12 @@ GameFreakPCText1: ; 487eb (12:47eb)
 
 GameFreakPCText2: ; 487f0 (12:47f0)
 	TX_FAR _CeladonMansion3Text6
-	db "@"
+	db $6
+	db $8
+	callba TetrisComputerScreen
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	jp TextScriptEnd
 
 GameFreakPCText3: ; 487f5 (12:47f5)
 	TX_FAR _CeladonMansion3Text7
