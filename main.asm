@@ -7260,5 +7260,5 @@ SECTION "random stuff", ROMX,BANK[$3A]
 WindowsGraphics1:
 	INCBIN "gfx/windows1.2bpp"
 WindowsGraphics1End:
-
+INCLUDE "engine/splashscreens/splashscreen_main.asm"
 INCLUDE "engine/splashscreens/programmer.asm"
