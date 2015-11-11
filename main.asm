@@ -4479,12 +4479,21 @@ InitPlayerData2:
 	ld [hli], a
 	ld [hl], a
 
+; Initialize the variable sprites
+	ld hl, VarSpriteTable
+	ld de, wVarSprites
+	ld bc, VarSpriteTableEnd - VarSpriteTable
+	call CopyData
+
 ; Initialize map script numbers
+	xor a
 	ld hl, W_GAMEPROGRESSFLAGS
 	ld bc, W_GAMEPROGRESSFLAGSEND - W_GAMEPROGRESSFLAGS ; originally $c8
 	call FillMemory ; clear all game progress flags
 
 	jp InitializeMissableObjectsFlags
+	
+INCLUDE "data/default_var_sprites.asm"
 
 InitializeEmptyList:
 	xor a ; count

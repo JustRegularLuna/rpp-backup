@@ -102,6 +102,13 @@ const_value = 1
 	const SPRITE_POKEY
     const SPRITE_DITTO
 	
+; Variable Sprite IDs Here
+VAR_SPRITE_1 EQU $F1
+VAR_SPRITE_2 EQU $F2
+VAR_SPRITE_3 EQU $F3
+VAR_SPRITE_4 EQU $F4
+VAR_SPRITE_5 EQU $F5
+VAR_SPRITE_6 EQU $F6
 
 ; different kinds of people events
 ITEM    EQU $80

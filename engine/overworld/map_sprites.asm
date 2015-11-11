@@ -95,6 +95,11 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	push af
 	ld a,[hl] ; $C2XE (sprite picture ID)
 	ld b,a ; b = current sprite picture ID
+; add variable sprite IDs
+	cp VAR_SPRITE_1
+	jr c, .notVarSprite
+	call GetVarSpriteIDs
+.notVarSprite
 	cp a,SPRITE_BALL ; is it a 4-tile sprite?
 	jr c,.notFourTileSprite
 	pop af
@@ -435,6 +440,38 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 	ld a,$0a
 	ret c
 	ld a,$01
+	ret
+
+GetVarSpriteIDs:
+	cp VAR_SPRITE_1
+	jr nz, .next1
+	ld a, [wVarSprite1]
+	jr .done
+.next1
+	cp VAR_SPRITE_2
+	jr nz, .next2
+	ld a, [wVarSprite2]
+	jr .done
+.next2
+	cp VAR_SPRITE_3
+	jr nz, .next3
+	ld a, [wVarSprite3]
+	jr .done
+.next3
+	cp VAR_SPRITE_4
+	jr nz, .next4
+	ld a, [wVarSprite4]
+	jr .done
+.next4
+	cp VAR_SPRITE_5
+	jr nz, .next5
+	ld a, [wVarSprite5]
+	jr .done
+.next5
+	;VAR_SPRITE_6
+	ld a, [wVarSprite6]
+.done
+	ld b, a
 	ret
 
 INCLUDE "data/sprite_sets.asm"

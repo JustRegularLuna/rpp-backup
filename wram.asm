@@ -1903,10 +1903,29 @@ W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
 W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
 ; unused
-	ds 140
+	ds 134
 
 W_GAMEPROGRESSFLAGSEND::
 
+
+
+; variable sprites can be changed with scripts
+; useful in the same way it was in Gen 2
+; sprites don't update until the map is reloaded
+; see "data/default_var_sprites.asm"
+wVarSprites::
+wVarSprite1::
+	ds 1
+wVarSprite2::
+	ds 1
+wVarSprite3::
+	ds 1
+wVarSprite4::
+	ds 1
+wVarSprite5::
+	ds 1
+wVarSprite6::
+	ds 1
 
 wCurTrainerName::
 ; used to store individual trainer names
