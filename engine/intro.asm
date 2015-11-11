@@ -292,15 +292,24 @@ LoadIntroGraphics: ; 41852 (10:5852)
 	jp FarCopyData2
 
 PlayShootingStar: ; 4188a (10:588a)
-	ld b, $c
+; load Meowth palette to screen and call Mateo Presents instead of Nintendo Creatures Gamefreak
+	ld a, MEOWTH
+	ld [wcf1d],a
+	ld b, $b
 	call GoPAL_SET
-	callba LoadCopyrightAndTextBoxTiles
+	callba LoadMateoPresentsScreen
 	ld a, $e4
 	ld [rBGP], a ; $ff47
 	ld c, $b4
 	call DelayFrames
+; clear the screen and get ready to show the original stuff properly
+	call GBPalWhiteOut ; addded
 	call ClearScreen
 	call DisableLCD
+	call LoadTextBoxTilePatterns ;added
+	ld b, $c        ; added
+	call GoPAL_SET  ; added
+	call GBPalNormal; added
 	xor a
 	ld [W_CUROPPONENT], a ; wd059
 	call Func_418e9
