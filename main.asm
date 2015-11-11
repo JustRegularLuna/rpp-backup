@@ -130,27 +130,6 @@ LoadMonData_:
 INCLUDE "data/item_prices.asm"
 INCLUDE "text/item_names.asm"
 
-;UnusedNames:
-;	db "かみなりバッヂ@"
-;	db "かいがらバッヂ@"
-;	db "おじぞうバッヂ@"
-;	db "はやぶさバッヂ@"
-;	db "ひんやりバッヂ@"
-;	db "なかよしバッヂ@"
-;	db "バラバッヂ@"
-;	db "ひのたまバッヂ@"
-;	db "ゴールドバッヂ@"
-;	db "たまご@"
-;	db "ひよこ@"
-;	db "ブロンズ@"
-;	db "シルバー@"
-;	db "ゴールド@"
-;	db "プチキャプテン@"
-;	db "キャプテン@"
-;	db "プチマスター@"
-;	db "マスター@"
-;	db "エクセレント"
-
 INCLUDE "engine/overworld/oam.asm"
 INCLUDE "engine/oam_dma.asm"
 
@@ -533,51 +512,6 @@ SpriteCollisionBitTable:
 	db %01000000,%00000000
 	db %10000000,%00000000
 
-;TestBattle:
-;	ret
-;
-;.loop
-;	call GBPalNormal
-;
-;	; Don't mess around
-;	; with obedience.
-;	ld a, %10000000 ; EARTHBADGE
-;	ld [W_OBTAINEDBADGES], a
-;
-;	ld hl, W_FLAGS_D733
-;	set 0, [hl]
-;
-;	; Reset the party.
-;	ld hl, wPartyCount
-;	xor a
-;	ld [hli], a
-;	dec a
-;	ld [hl], a
-;
-;	; Give the player a
-;	; level 20 Rhydon.
-;	ld a, RHYDON
-;	ld [wcf91], a
-;	ld a, 20
-;	ld [W_CURENEMYLVL], a
-;	xor a
-;	ld [wcc49], a
-;	ld [W_CURMAP], a
-;	call AddPartyMon
-;
-;	; Fight against a
-;	; level 20 Rhydon.
-;	ld a, RHYDON
-;	ld [W_CUROPPONENT], a
-;
-;	predef InitOpponent
-;
-;	; When the battle ends,
-;	; do it all again.
-;	ld a, 1
-;	ld [wUpdateSpritesEnabled], a
-;	ld [H_AUTOBGTRANSFERENABLED], a
-;	jr .loop
 
 INCLUDE "engine/overworld/item.asm"
 INCLUDE "engine/overworld/movement.asm"
@@ -4725,8 +4659,6 @@ INCLUDE "engine/hidden_object_functions3.asm"
 
 
 SECTION "NPC Sprites 1", ROMX, BANK[NPC_SPRITES_1]
-
-GiovanniSprite:        INCBIN "gfx/sprites/giovanni.2bpp"
 RocketSprite:          INCBIN "gfx/sprites/rocket.2bpp"
 RocketFSprite:         INCBIN "gfx/sprites/rocketf.2bpp"
 OakAideSprite:         INCBIN "gfx/sprites/oak_aide.2bpp"
@@ -4765,7 +4697,6 @@ NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
-;WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
 
 
@@ -4799,11 +4730,9 @@ LeafCyclingSprite:    INCBIN "gfx/sprites/leafcycling.2bpp"
 BlueSprite:           INCBIN "gfx/sprites/blue.2bpp"
 OakSprite:            INCBIN "gfx/sprites/oak.2bpp"
 BugCatcherSprite:     INCBIN "gfx/sprites/bug_catcher.2bpp"
-SlowbroSprite:        INCBIN "gfx/sprites/slowbro.2bpp"
 LassSprite:           INCBIN "gfx/sprites/lass.2bpp"
 BlackHairBoy1Sprite:  INCBIN "gfx/sprites/black_hair_boy_1.2bpp"
 LittleGirlSprite:     INCBIN "gfx/sprites/little_girl.2bpp"
-BirdSprite:           INCBIN "gfx/sprites/bird.2bpp"
 FatBaldGuySprite:     INCBIN "gfx/sprites/fat_bald_guy.2bpp"
 GamblerSprite:        INCBIN "gfx/sprites/gambler.2bpp"
 BlackHairBoy2Sprite:  INCBIN "gfx/sprites/black_hair_boy_2.2bpp"
@@ -4819,7 +4748,6 @@ BikeShopGuySprite:    INCBIN "gfx/sprites/bike_shop_guy.2bpp"
 MrFujiSprite:         INCBIN "gfx/sprites/mr_fuji.2bpp"
 MediumSprite:         INCBIN "gfx/sprites/medium.2bpp"
 WaiterSprite:         INCBIN "gfx/sprites/waiter.2bpp"
-ErikaSprite:          INCBIN "gfx/sprites/erika.2bpp"
 MomGeishaSprite:      INCBIN "gfx/sprites/mom_geisha.2bpp"
 BrunetteGirlSprite:   INCBIN "gfx/sprites/brunette_girl.2bpp"
 LanceSprite:          INCBIN "gfx/sprites/lance.2bpp"
@@ -4827,11 +4755,9 @@ MomSprite:            INCBIN "gfx/sprites/mom.2bpp"
 BaldingGuySprite:     INCBIN "gfx/sprites/balding_guy.2bpp"
 YoungBoySprite:       INCBIN "gfx/sprites/young_boy.2bpp"
 GameboyKidSprite:     INCBIN "gfx/sprites/gameboy_kid.2bpp"
-ClefairySprite:       INCBIN "gfx/sprites/clefairy.2bpp"
 AgathaSprite:         INCBIN "gfx/sprites/agatha.2bpp"
 BrunoSprite:          INCBIN "gfx/sprites/bruno.2bpp"
 LoreleiSprite:        INCBIN "gfx/sprites/lorelei.2bpp"
-SeelSprite:           INCBIN "gfx/sprites/seel.2bpp"
 
 
 SECTION "Battle (bank 5)", ROMX, BANK[$5]
@@ -6646,9 +6572,6 @@ INCLUDE "engine/hidden_object_functions18.asm"
 
 SECTION "bank19",ROMX,BANK[$19]
 
-;Overworld_GFX:     INCBIN "gfx/tilesets/overworld.t2.2bpp"
-;Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
-
 RedsHouse1_GFX:
 RedsHouse2_GFX:    INCBIN "gfx/tilesets/reds_house.2bpp"
 RedsHouse1_Block:
@@ -6982,17 +6905,6 @@ ScizorPicBack:        INCBIN "pic/monback/scizor.pic"
 
 SECTION "bank2F",ROMX,BANK[$2F]
 
-MissingnoPic::          INCBIN "pic/other/missingno.pic"
-ProfOakPic::            INCBIN "pic/trainer/prof.oak.pic"
-RedPicBack::            INCBIN "pic/trainer/redb.pic"
-LeafPicBack::           INCBIN "pic/trainer/leafb.pic"
-OldManPic::             INCBIN "pic/trainer/oldman.pic"
-LeafFishingTilesFront:: INCBIN "gfx/leaf_fishing_tile_front.2bpp"
-LeafFishingTilesBack::  INCBIN "gfx/leaf_fishing_tile_back.2bpp"
-LeafFishingTilesSide::  INCBIN "gfx/leaf_fishing_tile_side.2bpp"
-;RedMugShot::            INCBIN "pic/trainer/RedMug.pic"
-;LeafMugShot::           INCBIN "pic/trainer/LeafMug.pic"
-
 TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
 	INCBIN "gfx/link_cable.2bpp"
@@ -7000,34 +6912,54 @@ TradingAnimationGraphics:
 TradingAnimationGraphics2:
 ; Pokeball traveling through the link cable.
 	INCBIN "gfx/trade2.2bpp"
-	
-BallSprite:            INCBIN "gfx/sprites/ball.2bpp"
-OmanyteSprite:         INCBIN "gfx/sprites/omanyte.2bpp"
+
+MissingnoPic::          INCBIN "pic/other/missingno.pic"
+
+RedPicBack::            INCBIN "pic/trainer/redb.pic"
+LeafPicBack::           INCBIN "pic/trainer/leafb.pic"
+OldManPic::             INCBIN "pic/trainer/oldman.pic"
+
+LeafFishingTilesFront:: INCBIN "gfx/leaf_fishing_tile_front.2bpp"
+LeafFishingTilesBack::  INCBIN "gfx/leaf_fishing_tile_back.2bpp"
+LeafFishingTilesSide::  INCBIN "gfx/leaf_fishing_tile_side.2bpp"
+
+LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
 BoulderSprite:         INCBIN "gfx/sprites/boulder.2bpp"
 PaperSheetSprite:      INCBIN "gfx/sprites/paper_sheet.2bpp"
 BookMapDexSprite:      INCBIN "gfx/sprites/book_map_dex.2bpp"
 ClipboardSprite:       INCBIN "gfx/sprites/clipboard.2bpp"
-SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
 OldAmberSprite:        INCBIN "gfx/sprites/old_amber.2bpp"
-LyingOldManSprite:     INCBIN "gfx/sprites/lying_old_man.2bpp"
 PokedexSprite:         INCBIN "gfx/sprites/pokedex.2bpp"
 BerryTreeSprite:       INCBIN "gfx/sprites/berry_tree.2bpp"
-SudowoodoSprite:       INCBIN "gfx/sprites/sudowoodo.2bpp"
 BagOverworldSprite:    INCBIN "gfx/sprites/bag.2bpp"
+BallSprite:            INCBIN "gfx/sprites/ball.2bpp"
+OmanyteSprite:         INCBIN "gfx/sprites/omanyte.2bpp"
+SudowoodoSprite:       INCBIN "gfx/sprites/sudowoodo.2bpp"
 SlowpokeOverworld:     INCBIN "gfx/sprites/pokey.2bpp"
+DittoOverworld:        INCBIN "gfx/sprites/ditto.2bpp"
+SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
+
+SurfingPikachu:        INCBIN "gfx/sprites/surfing_pikachu.2bpp"
+SurfingLapras:         INCBIN "gfx/sprites/surf_lapras.2bpp"
+SlowbroSprite:         INCBIN "gfx/sprites/slowbro.2bpp"
+SeelSprite:            INCBIN "gfx/sprites/seel.2bpp"
+BirdSprite:            INCBIN "gfx/sprites/bird.2bpp"
+ClefairySprite:        INCBIN "gfx/sprites/clefairy.2bpp"
+
 BrockOverworld:        INCBIN "gfx/sprites/brock.2bpp"
 MistyOverworld:        INCBIN "gfx/sprites/misty.2bpp"
 SurgeOverworld:        INCBIN "gfx/sprites/surge.2bpp"
+ErikaSprite:           INCBIN "gfx/sprites/erika.2bpp"
 SabrinaOverworld:      INCBIN "gfx/sprites/sabrina.2bpp"
 KogaOverworld:         INCBIN "gfx/sprites/koga.2bpp"
 BlaineOverworld:       INCBIN "gfx/sprites/blaine.2bpp"
+GiovanniSprite:        INCBIN "gfx/sprites/giovanni.2bpp"
+
 BrendanOverworld:      INCBIN "gfx/sprites/brendan.2bpp"
 FlanneryOverworld:     INCBIN "gfx/sprites/flannery.2bpp"
-GreeterWoman:          INCBIN "gfx/sprites/greeter_woman.2bpp"
-SurfingPikachu:        INCBIN "gfx/sprites/surfing_pikachu.2bpp"
-SurfingLapras:         INCBIN "gfx/sprites/surf_lapras.2bpp"
 LookerOverworld:       INCBIN "gfx/sprites/tennant.2bpp"
-DittoOverworld:        INCBIN "gfx/sprites/ditto.2bpp"
+GreeterWoman:          INCBIN "gfx/sprites/greeter_woman.2bpp"
+
 
 
 SECTION "bank30",ROMX,BANK[$30]
@@ -7037,8 +6969,8 @@ BaseStats: INCLUDE "data/base_stats.asm"
 
 SECTION "bank31",ROMX,BANK[$31]
 
-SteelixPicFront:      INCBIN "pic/bmon/steelix.pic"
-SteelixPicBack:       INCBIN "pic/monback/steelix.pic"
+SteelixPicFront:        INCBIN "pic/bmon/steelix.pic"
+SteelixPicBack:         INCBIN "pic/monback/steelix.pic"
 CrobatPicFront:         INCBIN "pic/bmon/crobat.pic"
 CrobatPicBack:          INCBIN "pic/monback/crobat.pic"
 PolitoedPicFront:       INCBIN "pic/bmon/politoed.pic"
@@ -7256,6 +7188,7 @@ INCLUDE "engine/overworld/ferry_script.asm"
 
 SECTION "trainer pics 2", ROMX,BANK[$39]
 
+ProfOakPic::     INCBIN "pic/trainer/prof.oak.pic"
 ExecutiveFPic::  INCBIN "pic/trainer/executivef.pic"
 ExecutiveMPic::  INCBIN "pic/trainer/executivem.pic"
 RockerFPic::     INCBIN "pic/trainer/rockerf.pic"
