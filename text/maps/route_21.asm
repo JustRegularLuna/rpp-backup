@@ -20,12 +20,22 @@ _Route21BattleText2:: ; 92006 (24:6006)
 
 _Route21EndBattleText2:: ; 9202a (24:602a)
 	text "Darn"
+IF DEF(_RED)
 	line "MAGIKARP!"
+ELSE
+	line "GYARADOS!"
+ENDC
 	prompt
 
 _Route21AfterBattleText2:: ; 9203a (24:603a)
+IF DEF(_RED)
 	text "I seem to only"
 	line "catch MAGIKARP!"
+ELSE
+	text "GYARADOS isn't as"
+	line "tough as you"
+	cont "might think."
+ENDC
 	done
 
 _Route21BattleText3:: ; 9205a (24:605a)

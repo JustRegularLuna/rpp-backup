@@ -59,7 +59,11 @@ _Route12EndBattleText3:: ; 9020c (24:420c)
 	prompt
 
 _Route12AfterBattleText3:: ; 90212 (24:4212)
+IF DEF(_RED)
 	text "I could have made"
+ELSE
+	text "I had to make"
+ENDC
 	line "my #MON evolve"
 	cont "with MOON STONE!"
 	done
