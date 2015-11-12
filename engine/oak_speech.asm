@@ -60,6 +60,9 @@ OakSpeech: ; 6115 (1:6115)
 	ld a,[wd732]
 	bit 1,a ; XXX when is bit 1 set?
 	jp nz,Func_61bc ; easter egg: skip the intro
+	
+	callba DisplayHackVersionScreen
+	
 	ld hl,BoyGirlText  ; added to the same file as the other oak text
 	call PrintText     ; show this text
 	call BoyGirlChoice ; added routine at the end of this file
