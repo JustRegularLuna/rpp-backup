@@ -29,8 +29,8 @@ VersionScreenTilesEnd:
 
 VersionScreenTilemap:
 IF DEF(_RED) ; Normal Rom
-	INCBIN "gfx/normal_screen.map"
+	INCBIN "gfx/tilemaps/normal_screen.map"
 ELSE         ; Hard Rom
-	INCBIN "gfx/hard_screen.map"
+	INCBIN "gfx/tilemaps/hard_screen.map"
 ENDC
 VersionScreenTilemapEnd:

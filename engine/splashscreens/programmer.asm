@@ -15,5 +15,5 @@ ProgrammerComputerScreen::
 	jp MainScreenTurnOn
 
 ProgrammerTilemap:
-	INCBIN "gfx/programmer.map"
+	INCBIN "gfx/tilemaps/programmer.map"
 ProgrammerTilemapEnd:

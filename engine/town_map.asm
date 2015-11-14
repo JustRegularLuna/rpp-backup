@@ -309,7 +309,7 @@ LoadTownMap: ; 7109b (1c:509b)
 	ret
 
 UncompressedMap: ; Uses the Gen 2 format
-    INCBIN "gfx/town_map.map"
+    INCBIN "gfx/tilemaps/town_map.map"
 UncompressedMapEnd:
 
 Func_711ab: ; 711ab (1c:51ab)

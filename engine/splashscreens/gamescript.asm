@@ -15,5 +15,5 @@ ScriptComputerScreen::
 	jp MainScreenTurnOn
 
 ScriptTilemap:
-	INCBIN "gfx/gamescript.map"
+	INCBIN "gfx/tilemaps/gamescript.map"
 ScriptTilemapEnd:
