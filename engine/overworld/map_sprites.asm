@@ -443,34 +443,16 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 	ret
 
 GetVarSpriteIDs:
-	cp VAR_SPRITE_1
-	jr nz, .next1
-	ld a, [wVarSprite1]
-	jr .done
-.next1
-	cp VAR_SPRITE_2
-	jr nz, .next2
-	ld a, [wVarSprite2]
-	jr .done
-.next2
-	cp VAR_SPRITE_3
-	jr nz, .next3
-	ld a, [wVarSprite3]
-	jr .done
-.next3
-	cp VAR_SPRITE_4
-	jr nz, .next4
-	ld a, [wVarSprite4]
-	jr .done
-.next4
-	cp VAR_SPRITE_5
-	jr nz, .next5
-	ld a, [wVarSprite5]
-	jr .done
-.next5
-	;VAR_SPRITE_6
-	ld a, [wVarSprite6]
-.done
+	push hl
+	push bc
+	sub VAR_SPRITE_1
+	ld c, a
+	ld b, 0
+	ld hl, wVarSprites
+	add hl, bc
+	ld a, [hl]
+	pop bc
+	pop hl
 	ld b, a
 	ret
 
