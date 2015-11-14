@@ -63,11 +63,16 @@ OakSpeech: ; 6115 (1:6115)
 	
 	callba DisplayHackVersionScreen
 	
+	callba ShowPlayerLargePics
+	
 	ld hl,BoyGirlText  ; added to the same file as the other oak text
 	call PrintText     ; show this text
 	call BoyGirlChoice ; added routine at the end of this file
 	ld a, [wCurrentMenuItem]
 	ld [wPlayerGender], a ; store player's gender. 00 for boy, 01 for girl
+	
+	call ClearScreen ; to erase the large player images after choosing gender
+	
 	ld hl,ShouldMonsObeyText
 	call PrintText
 	call YesNoChoice
