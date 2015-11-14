@@ -1,6 +1,17 @@
 _MomWakeUpText::
 	text "MOM: Right."
-	line "All kids leave"
+	line "All boys leave"
+	cont "home someday."
+	cont "It said so on TV."
+
+	para "PROF.OAK, next"
+	line "door, is looking"
+	cont "for you."
+	done
+	
+_MomWakeUpText2::
+	text "MOM: Right."
+	line "All girls leave"
 	cont "home someday."
 	cont "It said so on TV."
 
@@ -28,6 +39,18 @@ _StandByMeText::
 	line "on TV. Four boys"
 	cont "are walking on"
 	cont "railroad tracks."
+
+	para "I better go too."
+	done
+	
+_WizardOfOzText::
+	text "There's a movie"
+	line "on TV."
+	
+	para "A girl with her"
+	line "hair in pigtails"
+	cont "is walking up a"
+	cont "brick road."
 
 	para "I better go too."
 	done

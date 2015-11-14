@@ -8,11 +8,12 @@ _SaffronGateText_1dfe7:: ; 8aa5c (22:6a5c)
 	done
 
 _SaffronGateText_8aaa9:: ; 8aaa9 (22:6aa9)
-	text "Whoa, boy!"
-	line "I'm parched!"
-	cont "..."
-	cont "Huh? I can have"
-	cont "this drink?"
+	text "Oh, that drink..."
+	line "It looks awfully"
+	cont "tasty..."
+	
+	para "Huh? I can have"
+	line "this drink?"
 	cont "Gee, thanks!@@"
 
 _SaffronGateText_1dff1:: ; 8aaef (22:6aef)
