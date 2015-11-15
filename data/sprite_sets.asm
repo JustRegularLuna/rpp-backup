@@ -554,6 +554,42 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	dw LookerOverworld
 	db $c0 ; byte count
 	db BANK(LookerOverworld)
+	
+	; SPRITE_SWIMMER_F
+	dw SwimmerFSprite
+	db $c0 ; byte count
+	db BANK(SwimmerFSprite)
+	
+	; SPRITE_OFFICER_JENNY
+	dw OfficerJennySprite
+	db $c0 ; byte count
+	db BANK(OfficerJennySprite)
+	
+	; SPRITE_JESSIE
+	dw JessieSprite
+	db $c0 ; byte count
+	db BANK(JessieSprite)
+	
+	; SPRITE_JAMES
+	dw JamesSprite
+	db $c0 ; byte count
+	db BANK(JamesSprite)
+	
+	; SPRITE_HIRO
+	dw HiroSprite
+	db $c0 ; byte count
+	db BANK(HiroSprite)
+	
+	; SPRITE_KRIS
+	dw KrisSprite
+	db $c0 ; byte count
+	db BANK(KrisSprite)
+	
+	; SPRITE_SILVER
+	dw SilverSprite
+	db $c0 ; byte count
+	db BANK(SilverSprite)
+	
 
 ;	
 ;
@@ -634,5 +670,10 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
     dw DittoOverworld
     db $40 ; byte count
     db BANK(DittoOverworld)
+	
+	; SPRITE_CELEBI
+	dw CelebiSprite
+	db $40 ; byte count
+	db BANK(CelebiSprite)
     
 

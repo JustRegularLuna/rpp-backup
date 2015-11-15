@@ -6938,6 +6938,7 @@ SudowoodoSprite:       INCBIN "gfx/sprites/sudowoodo.2bpp"
 SlowpokeOverworld:     INCBIN "gfx/sprites/pokey.2bpp"
 DittoOverworld:        INCBIN "gfx/sprites/ditto.2bpp"
 SnorlaxSprite:         INCBIN "gfx/sprites/snorlax.2bpp"
+CelebiSprite:          INCBIN "gfx/sprites/celebi.2bpp"
 
 SurfingPikachu:        INCBIN "gfx/sprites/surfing_pikachu.2bpp"
 SurfingLapras:         INCBIN "gfx/sprites/surf_lapras.2bpp"
@@ -6959,6 +6960,13 @@ BrendanOverworld:      INCBIN "gfx/sprites/brendan.2bpp"
 FlanneryOverworld:     INCBIN "gfx/sprites/flannery.2bpp"
 LookerOverworld:       INCBIN "gfx/sprites/tennant.2bpp"
 GreeterWoman:          INCBIN "gfx/sprites/greeter_woman.2bpp"
+SwimmerFSprite:        INCBIN "gfx/sprites/swimmer_f.2bpp"
+OfficerJennySprite:    INCBIN "gfx/sprites/officer_jenny.2bpp"
+JessieSprite:          INCBIN "gfx/sprites/jessie.2bpp"
+JamesSprite:           INCBIN "gfx/sprites/james.2bpp"
+HiroSprite:            INCBIN "gfx/sprites/hiro.2bpp"
+KrisSprite:            INCBIN "gfx/sprites/kris.2bpp"
+SilverSprite:          INCBIN "gfx/sprites/silver.2bpp"
 
 
 

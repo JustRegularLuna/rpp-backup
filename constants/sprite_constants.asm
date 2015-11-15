@@ -85,6 +85,13 @@ const_value = 1
 	const SPRITE_LAPRAS
 	const SPRITE_SURF_PIKACHU
 	const SPRITE_LOOKER
+	const SPRITE_SWIMMER_F
+	const SPRITE_OFFICER_JENNY
+	const SPRITE_JESSIE
+	const SPRITE_JAMES
+	const SPRITE_HIRO
+	const SPRITE_KRIS
+	const SPRITE_SILVER
 ; Sprites after this are only 1 frame
 	const SPRITE_BALL                      ;EQU $3d
 	const SPRITE_OMANYTE                   ;EQU $3e
@@ -100,7 +107,9 @@ const_value = 1
 	const SPRITE_LYING_OLD_MAN             ;EQU $48
 	const SPRITE_SUDOWOODO                 ;EQU $49
 	const SPRITE_POKEY
-    const SPRITE_DITTO
+	const SPRITE_DITTO
+	const SPRITE_CELEBI
+	
 	
 ; Variable Sprite IDs Here
 VAR_SPRITE_1 EQU $F1
