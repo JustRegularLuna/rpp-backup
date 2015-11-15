@@ -53,10 +53,15 @@ _MtMoon3Text_49f99:: ; 80a93 (20:4a93)
 	line "this is mine!@@"
 
 _MtMoon3BattleText2:: ; 80ab3 (20:4ab3)
-	text "TEAM ROCKET will"
-	line "find the fossils,"
-	cont "revive and sell"
-	cont "them for cash!"
+	text "It's none of your"
+	line "business what we"
+	cont "want with the"
+	cont "fossils!"
+	
+	para "I won't let some"
+	line "kid like you get"
+	cont "in the way of"
+	cont "this operation."
 	done
 
 _MtMoon3EndBattleText2:: ; 80af6 (20:4af6)
@@ -65,9 +70,12 @@ _MtMoon3EndBattleText2:: ; 80af6 (20:4af6)
 	prompt
 
 _MtMoon3AfterBattleText2:: ; 80b09 (20:4b09)
-	text "You made me mad!"
-	line "TEAM ROCKET will"
-	cont "blacklist you!"
+	text "This isn't the"
+	line "end, it's only"
+	cont "the beginning."
+	
+	para "Just you wait and"
+	line "see!"
 	done
 
 _MtMoon3BattleText3:: ; 80b3b (20:4b3b)
