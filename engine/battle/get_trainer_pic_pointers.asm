@@ -78,6 +78,7 @@ TrainerPicPointers:
 	add_pic AgathaPic
 	add_pic LancePic
 	add_pic FlanneryPic
+	add_pic RedPicFront ; placeholder, pic is loaded manually in trainer data
 	add_pic TraceyPic
 	add_pic ExecutiveFPic
 	add_pic ExecutiveMPic

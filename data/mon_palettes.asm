@@ -256,6 +256,7 @@ TrainerPalletes:
 	db PAL_PURPLE_TRAINER    ; Agatha
 	db PAL_RED_TRAINER       ; Lance
 	db PAL_RED_TRAINER       ; Flannery
+	db PAL_MEWMON            ; Pokemon_Trainer (Placeholder)
 	db PAL_GREEN_TRAINER     ; Tracey
 	db PAL_MEWMON            ; Executive F
 	db PAL_MEWMON            ; Executive M
