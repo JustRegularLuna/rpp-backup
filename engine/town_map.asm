@@ -528,6 +528,7 @@ Func_712f1: ; 712f1 (1c:52f1)
 .asm_712fb
 	cp [hl]
 	jr c, .asm_71301
+	jr z, .asm_71301 ; works on exact entry too
 	add hl, bc
 	jr .asm_712fb
 .asm_71301
