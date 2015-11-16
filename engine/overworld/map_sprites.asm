@@ -386,8 +386,9 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 ; Chooses the correct sprite set ID depending on the player's position within
 ; the map for maps with two sprite sets.
 GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
-	cp a,$f8
-	jr z,.route20
+;	cp a,$f8
+;	jr z,.route20
+;	commented out because $f8 is Route 19 now, and a normal divide
 	ld hl,SplitMapSpriteSets
 	and a,$0f
 	dec a
@@ -419,28 +420,28 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 ; Uses sprite set $01 for West side and $0A for East side.
 ; Route 20 is a special case because the two map sections have a more complex
 ; shape instead of the map simply being split horizontally or vertically.
-.route20
-	ld hl,W_XCOORD
-	ld a,[hl]
-	cp a,$2b
-	ld a,$01
-	ret c
-	ld a,[hl]
-	cp a,$3e
-	ld a,$0a
-	ret nc
-	ld a,[hl]
-	cp a,$37
-	ld b,$08
-	jr nc,.next
-	ld b,$0d
-.next
-	ld a,[W_YCOORD]
-	cp b
-	ld a,$0a
-	ret c
-	ld a,$01
-	ret
+;.route20
+;	ld hl,W_XCOORD
+;	ld a,[hl]
+;	cp a,$2b
+;	ld a,$01
+;	ret c
+;	ld a,[hl]
+;	cp a,$3e
+;	ld a,$0a
+;	ret nc
+;	ld a,[hl]
+;	cp a,$37
+;	ld b,$08
+;	jr nc,.next
+;	ld b,$0d
+;.next
+;	ld a,[W_YCOORD]
+;	cp b
+;	ld a,$0a
+;	ret c
+;	ld a,$01
+;	ret
 
 GetVarSpriteIDs:
 	push hl

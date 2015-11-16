@@ -204,8 +204,8 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw RocketHideout3_h
 	dw RocketHideout4_h
 	dw RocketHideoutElevator_h
-	dw RocketHideoutElevator_h ; unused
-	dw RocketHideoutElevator_h ; unused
+	dw Route19Gate_h ; originally unused
+	dw BeachHouse_h ; originally unused
 	dw RocketHideoutElevator_h ; unused
 	dw SilphCo2_h
 	dw SilphCo3_h

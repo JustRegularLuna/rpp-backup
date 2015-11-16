@@ -204,8 +204,8 @@ MapHeaderBanks: ; c23d (3:423d)
 	db BANK(RocketHideout3_h)
 	db BANK(RocketHideout4_h)
 	db BANK(RocketHideoutElevator_h)
-	db $01
-	db $01
+	db BANK(Route19Gate_h)
+	db Bank(BeachHouse_h)
 	db $01
 	db BANK(SilphCo2_h)
 	db BANK(SilphCo3_h)

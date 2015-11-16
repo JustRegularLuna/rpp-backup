@@ -29,8 +29,8 @@ MapSpriteSets: ; 17a64 (5:7a64)
 	db $f6 ; ROUTE_16
 	db $09 ; ROUTE_17
 	db $f7 ; ROUTE_18
-	db $0a ; ROUTE_19
-	db $f8 ; ROUTE_20
+	db $f8 ; ROUTE_19
+	db $01 ; ROUTE_20
 	db $01 ; ROUTE_21
 	db $01 ; ROUTE_22
 	db $06 ; ROUTE_23
@@ -52,7 +52,7 @@ SplitMapSpriteSets: ; 17a89 (5:7a89)
 	db $01,$08,$0A,$08 ; $f5
 	db $01,$18,$09,$05 ; $f6
 	db $01,$22,$09,$0A ; $f7
-	db $01,$35,$01,$0A ; $f8
+	db $02,$03,$0A,$01 ; $f8
 	db $02,$21,$02,$07 ; $f9
 	db $02,$02,$07,$04 ; $fa
 	db $01,$11,$05,$07 ; $fb
@@ -67,7 +67,7 @@ SpriteSets: ; 17ab9 (5:7ab9)
 	db SPRITE_BLACK_HAIR_BOY_1
 	db SPRITE_GAMBLER
 	db SPRITE_SEEL
-	db SPRITE_OAK
+	db VAR_SPRITE_1
 	db SPRITE_SWIMMER
 	db SPRITE_BALL
 	db SPRITE_BERRY_TREE

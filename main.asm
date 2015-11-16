@@ -4977,9 +4977,14 @@ INCLUDE "data/mapHeaders/route2house.asm"
 INCLUDE "scripts/route2house.asm"
 INCLUDE "data/mapObjects/route2house.asm"
 
+INCLUDE "data/mapHeaders/route19gate.asm"
+INCLUDE "scripts/route19gate.asm"
+INCLUDE "data/mapObjects/route19gate.asm"
+
 INCLUDE "data/mapHeaders/route5gate.asm"
 INCLUDE "scripts/route5gate.asm"
 INCLUDE "data/mapObjects/route5gate.asm"
+Route19GateBlocks:
 Route5GateBlocks: INCBIN "maps/route5gate.blk"
 
 INCLUDE "data/mapHeaders/route6gate.asm"
@@ -7185,6 +7190,11 @@ Ferry_Block:  INCBIN "gfx/blocksets/ferry.bst"
 Ice_Cavern_GFX:    INCBIN "gfx/tilesets/ice_cavern.t14.2bpp"
 Cavern_GFX:        INCBIN "gfx/tilesets/cavern.t14.2bpp"
 Cavern_Block:      INCBIN "gfx/blocksets/cavern.bst"
+
+INCLUDE "data/mapHeaders/beach_house.asm"
+INCLUDE "scripts/beach_house.asm"
+INCLUDE "data/mapObjects/beach_house.asm"
+BeachHouseBlocks: INCBIN "maps/beach_house.blk"
 
 SECTION "field moves", ROMX,BANK[$38]
 

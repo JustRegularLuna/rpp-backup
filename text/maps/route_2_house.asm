@@ -5,3 +5,19 @@ _Route2HouseText1:: ; 8a7b8 (22:67b8)
 	cont "moves like CUT!"
 	done
 
+_BeachHousePikachuText::
+	text "PUKA: Pika-pi!"
+	done
+	
+_BeachHouseGirlText::
+	text "I came inside to"
+	line "get some more"
+	cont "sunscreen."
+	done
+	
+_BeachHouseOldManText::
+	text "Oof, I spent too"
+	line "long in the sun."
+	
+	para "I need to rest..."
+	done
