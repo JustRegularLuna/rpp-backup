@@ -7205,6 +7205,7 @@ CosplayGirlPic:: INCBIN "pic/trainer/cosplaygirl.pic"
 JaninePic::      INCBIN "pic/trainer/janine.pic"
 TraceyPic::      INCBIN "pic/trainer/tracey.pic"
 PiTrainerPic::   INCBIN "pic/trainer/pi.pic"
+HexManiacPic::   INCBIN "pic/trainer/hex_maniac.pic"
 
 SECTION "random stuff", ROMX,BANK[$3A]
 WindowsGraphics1:
