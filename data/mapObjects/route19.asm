@@ -19,10 +19,10 @@ Route19Object: ; 0x54e9a (size=87)
 	db SPRITE_SWIMMER, $1b + 4, $4 + 4, $ff, $d3, TRAINER | $4, SWIMMER + TRAINER_START, $5
 	db SPRITE_SWIMMER, $1f + 4, $10 + 4, $ff, $d1, TRAINER | $5, SWIMMER + TRAINER_START, $6
 	db SPRITE_SWIMMER, $12 + 4, $9 + 4, $ff, $d0, TRAINER | $6, SWIMMER + TRAINER_START, $7
-	db VAR_SPRITE_1, $2b + 4, $8 + 4, $ff, $d2, TRAINER | $7, SWIMMER_F + TRAINER_START, $c
-	db VAR_SPRITE_1, $2b + 4, $b + 4, $ff, $d3, TRAINER | $8, SWIMMER_F + TRAINER_START, $d
+	db SPRITE_SWIMMER_F, $2b + 4, $8 + 4, $ff, $d2, TRAINER | $7, SWIMMER_F + TRAINER_START, $c
+	db SPRITE_SWIMMER_F, $2b + 4, $b + 4, $ff, $d3, TRAINER | $8, SWIMMER_F + TRAINER_START, $d
 	db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, TRAINER | $9, SWIMMER + TRAINER_START, $8
-	db VAR_SPRITE_1, $2c + 4, $a + 4, $ff, $d0, TRAINER | $a, SWIMMER_F + TRAINER_START, $e
+	db SPRITE_SWIMMER_F, $2c + 4, $a + 4, $ff, $d0, TRAINER | $a, SWIMMER_F + TRAINER_START, $e
 
 	; warp-to
 	EVENT_DISP ROUTE_19_WIDTH, $1, $7 ; ROUTE_19_GATE

@@ -116,10 +116,6 @@ PalletTownScript3: ; 18f12 (6:4f12)
 	ld [wNPCMovementScriptPointerTableNum],a
 	ld a,[H_LOADEDROMBANK]
 	ld [wNPCMovementScriptBank],a
-	
-	; get oak out of the spriteset, we're done with him
-	ld a, SPRITE_SWIMMER_F
-	ld [wVarSprite1], a
 
 	; trigger the next script
 	ld a,4
