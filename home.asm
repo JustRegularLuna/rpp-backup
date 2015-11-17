@@ -4774,3 +4774,10 @@ GoodCopyVideoData:
 	pop hl
 	pop de
 	jp FarCopyData2 ; if LCD is off, transfer all at once
+	
+SetCustomName:
+; INPUTS: hl = pointer to name
+	ld de, wCurTrainerName
+	ld bc, $b
+	jp CopyData
+	

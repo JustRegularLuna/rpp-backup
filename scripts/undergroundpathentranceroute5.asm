@@ -12,9 +12,7 @@ UndergroundPathEntranceRoute5TextPointers: ; 5d6b0 (17:56b0)
 UndergroundPathEntranceRoute5Text1: ; 5d6b2 (17:56b2)
 	db $08 ; asm
 	ld hl, Trader3Name
-	ld de, wCurTrainerName
-	ld bc, $b
-	call CopyData
+	call SetCustomName
 	ld a, $3
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue

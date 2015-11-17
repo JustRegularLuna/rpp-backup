@@ -279,10 +279,7 @@ SaffronGymText9: ; 5d1cd (17:51cd)
 	
 SetCustomNameSaffronGym:
 	ld hl,CustomNameTextSaffronGym
-	ld de,wCurTrainerName
-	ld bc, $b
-	call CopyData
-	ret
+	jp SetCustomName
 	
 CustomNameTextSaffronGym:
 	db "HEX MANIAC@"

@@ -13,9 +13,7 @@ Lab2Text1: ; 75c2a (1d:5c2a)
 Lab2Text2: ; 75c2f (1d:5c2f)
 	db $8
 	ld hl, Trader7Name ; the old man
-	ld de, wCurTrainerName
-	ld bc, $b
-	call CopyData
+	call SetCustomName
 	ld a, $7
 	ld [wWhichTrade], a
 	jr asm_78552 ; 0x75c35 $6
@@ -23,9 +21,7 @@ Lab2Text2: ; 75c2f (1d:5c2f)
 Lab2Text3: ; 75c37 (1d:5c37)
 	db $8
 	ld hl, Trader8Name ; the girl
-	ld de, wCurTrainerName
-	ld bc, $b
-	call CopyData
+	call SetCustomName
 	ld a, $8
 	ld [wWhichTrade], a
 asm_78552: ; 75c3d (1d:5c3d)

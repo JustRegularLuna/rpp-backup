@@ -10,9 +10,7 @@ Route11GateUpstairsTextPointers: ; 49457 (12:5457)
 Route11GateUpstairsText1: ; 4945f (12:545f)
 	db $08 ; asm
 	ld hl, Trader0Name
-	ld de, wCurTrainerName
-	ld bc, $b
-	call CopyData
+	call SetCustomName
 	xor a
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue

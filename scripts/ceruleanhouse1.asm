@@ -12,9 +12,7 @@ CeruleanHouse1Text1: ; 1d6fd (7:56fd)
 CeruleanHouse1Text2: ; 1d702 (7:5702)
 	db $08 ; asm
 	ld hl, Trader6Name
-	ld de, wCurTrainerName
-	ld bc, $b
-	call CopyData
+	call SetCustomName
 	ld a, $6
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
