@@ -60,7 +60,7 @@ _RockTunnel2AfterBattleText5:: ; 86b66 (21:6b66)
 	text "Cosplayers dress"
 	line "up as anime"
 	cont "characters and"
-    cont "stuff."
+    cont "#MON for fun."
 	done
 
 _RockTunnel2BattleText6:: ; 86b91 (21:6b91)
