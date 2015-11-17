@@ -98,9 +98,12 @@ _SaffronGymText_5d1eb:: ; a1ef0 (28:5ef0)
 	done
 
 _SaffronGymBattleText1:: ; a1f33 (28:5f33)
-	text "SABRINA is younger"
-	line "than I, but I"
-	cont "respect her!"
+	text "Shall we see"
+	line "which of us is"
+	cont "stronger?"
+	
+	para "Let us go then,"
+	line "you and I."
 	done
 
 _SaffronGymEndBattleText1:: ; a1f62 (28:5f62)
@@ -112,7 +115,7 @@ _SaffronGymAfterBattleText1:: ; a1f74 (28:5f74)
 	text "In a battle of"
 	line "equals, the one"
 	cont "with the stronger"
-	cont "will wins!"
+	cont "will wins."
 
 	para "If you wish"
 	line "to beat SABRINA,"
