@@ -36,7 +36,7 @@ Museum2FText5: ; 5c33c (17:433c)
 	jp TextScriptEnd
 
 Trader2Name:
-	db "BOB@@@@@@@@"
+	db "BOB@"
 
 
 Museum2FText6: ; 5c341 (17:4341)

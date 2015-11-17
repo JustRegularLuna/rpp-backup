@@ -4777,7 +4777,12 @@ GoodCopyVideoData:
 	
 SetCustomName:
 ; INPUTS: hl = pointer to name
+; OUTPUTS: trainer name stored in wCurTrainerName, hl points to byte immediately after name
 	ld de, wCurTrainerName
-	ld bc, $b
-	jp CopyData
-	
+.loop
+	ld a, [hli]
+	ld [de],a
+	inc de
+	cp "@"
+	ret z
+	jr .loop

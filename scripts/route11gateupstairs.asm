@@ -18,7 +18,7 @@ asm_49469: ; 49469 (12:5469)
 	jp TextScriptEnd
 	
 Trader0Name:
-	db "TAYLOR@@@@@"
+	db "TAYLOR@"
 
 Route11GateUpstairsText2: ; 4946c (12:546c)
 	db $8

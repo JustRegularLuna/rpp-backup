@@ -29,7 +29,7 @@ asm_78552: ; 75c3d (1d:5c3d)
 	jp TextScriptEnd
 
 Trader7Name:
-	db "DWAYNE@@@@@"
+	db "DWAYNE@"
 	
 Trader8Name:
-	db "CHRISTY@@@@"
+	db "CHRISTY@"

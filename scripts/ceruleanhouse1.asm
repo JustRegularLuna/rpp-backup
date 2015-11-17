@@ -19,4 +19,4 @@ CeruleanHouse1Text2: ; 1d702 (7:5702)
 	jp TextScriptEnd
 
 Trader6Name:
-	db "RALPH@@@@@@"
+	db "RALPH@"

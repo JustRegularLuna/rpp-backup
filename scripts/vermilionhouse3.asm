@@ -14,4 +14,4 @@ VermilionHouse3Text1: ; 19c17 (6:5c17)
 	jp TextScriptEnd
 
 Trader4Name:
-	db "JENNY@@@@@@"
+	db "JENNY@"
