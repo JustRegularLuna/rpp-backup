@@ -46,7 +46,7 @@ TrainerDataPointers: ; Last Updated 28/06/2015 by Neodymium / Free to use and mo
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
-	dw FlanneryData
+	dw HexManiacData
 	dw PkmnTrainerData
 
 ; if first byte != FF, then
@@ -539,11 +539,11 @@ AceTrainerFData: ; COMPLETED
 	db 45,IVYSAUR,VENUSAUR,0 ;                                    UNKNOWN
 	db 45,NIDORINA,NIDOQUEEN,0 ;                                  UNKNOWN
 	db 43,PERSIAN,NINETALES,RAICHU,0 ;                            UNKNOWN
-
-FlanneryData:
-    db $FF,54,SLUGMA,55,SLUGMA,57,TORKOAL,0
 	
+HexManiacData:
+	db 51,GENGAR,MISDREAVUS,0 ; SAFFRON GYM
+	db 52,GENGAR,MISDREAVUS,0 ; SAFFRON GYM
+	db 53,GENGAR,MISDREAVUS,0 ; SAFFRON GYM
+
 PkmnTrainerData:
-	db $FD,HEX_MANIAC,51,GENGAR,MISDREAVUS,0 ; SAFFRON GYM
-	db $FD,HEX_MANIAC,52,GENGAR,MISDREAVUS,0 ; SAFFRON GYM
-	db $FD,HEX_MANIAC,53,GENGAR,MISDREAVUS,0 ; SAFFRON GYM
+    db $FE,FLANNERY,COOLTRAINER_F,54,SLUGMA,55,SLUGMA,57,TORKOAL,0

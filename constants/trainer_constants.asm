@@ -47,7 +47,7 @@ const_value = 1
 	const CHANNELER     ;EQU $2D
 	const AGATHA        ;EQU $2E
 	const LANCE         ;EQU $2F
-	const FLANNERY      ;EQU $30
+	const HEX_MANIAC    ;EQU $30
 	const PKMN_TRAINER  ;EQU $31
 
 ; Entries below this are only sprites, not actual classes
@@ -62,4 +62,4 @@ const_value = 1
 	const PLAYER_F
 	const PROF_OAK
 	const PI_TRAINER
-	const HEX_MANIAC
+	const FLANNERY

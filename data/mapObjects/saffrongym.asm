@@ -39,11 +39,11 @@ SaffronGymObject: ; 0x5d259 (size=330)
 
 	db $9 ; people
 	db SPRITE_SABRINA, $8 + 4, $9 + 4, $ff, $d0, TRAINER | $1, SABRINA + TRAINER_START, $1
-	db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, TRAINER | $2, PKMN_TRAINER + TRAINER_START, $1
+	db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, TRAINER | $2, HEX_MANIAC + TRAINER_START, $1
 	db SPRITE_BUG_CATCHER, $1 + 4, $11 + 4, $ff, $d0, TRAINER | $3, PSYCHIC_TR + TRAINER_START, $1
-	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, TRAINER | $4, PKMN_TRAINER + TRAINER_START, $2
+	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, TRAINER | $4, HEX_MANIAC + TRAINER_START, $2
 	db SPRITE_BUG_CATCHER, $7 + 4, $11 + 4, $ff, $d0, TRAINER | $5, PSYCHIC_TR + TRAINER_START, $2
-	db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, TRAINER | $6, PKMN_TRAINER + TRAINER_START, $3
+	db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, TRAINER | $6, HEX_MANIAC + TRAINER_START, $3
 	db SPRITE_BUG_CATCHER, $d + 4, $11 + 4, $ff, $d0, TRAINER | $7, PSYCHIC_TR + TRAINER_START, $3
 	db SPRITE_BUG_CATCHER, $1 + 4, $3 + 4, $ff, $d0, TRAINER | $8, PSYCHIC_TR + TRAINER_START, $4
 	db SPRITE_GYM_HELPER, $f + 4, $a + 4, $ff, $d0, $9 ; person

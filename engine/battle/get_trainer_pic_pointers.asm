@@ -77,7 +77,7 @@ TrainerPicPointers:
 	add_pic ChannelerPic
 	add_pic AgathaPic
 	add_pic LancePic
-	add_pic FlanneryPic
+	add_pic HexManiacPic
 	add_pic RedPicFront ; placeholder, pic is loaded manually in trainer data
 	add_pic TraceyPic
 	add_pic ExecutiveFPic
@@ -90,4 +90,4 @@ TrainerPicPointers:
 	add_pic LeafPicFront
 	add_pic ProfOakPic
 	add_pic PiTrainerPic
-	add_pic HexManiacPic
+	add_pic FlanneryPic

@@ -46,7 +46,7 @@ TrainerDataPointers:
 	dw ChannelerData
 	dw AgathaData
 	dw LanceData
-	dw FlanneryData
+	dw HexManiacData
 	dw PkmnTrainerData
 
 ; if first byte != FF, FE, or FD, then
@@ -551,11 +551,11 @@ AceTrainerFData:
 	db 45,IVYSAUR,VENUSAUR,0
 	db 45,NIDORINA,NIDOQUEEN,0
 	db 43,PERSIAN,NINETALES,RAICHU,0
-
-FlanneryData:
-    db $FF,33,SLUGMA,33,SLUGMA,36,TORKOAL,0
 	
+HexManiacData:
+	db 34,GASTLY,HAUNTER,0
+	db 38,HAUNTER,0
+	db 33,GASTLY,GASTLY,HAUNTER,0
+
 PkmnTrainerData:
-	db $FD,HEX_MANIAC,34,GASTLY,HAUNTER,0
-	db $FD,HEX_MANIAC,38,HAUNTER,0
-	db $FD,HEX_MANIAC,33,GASTLY,GASTLY,HAUNTER,0
+    db $FE,FLANNERY,COOLTRAINER_F,33,SLUGMA,33,SLUGMA,36,TORKOAL,0

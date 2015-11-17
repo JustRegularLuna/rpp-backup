@@ -255,7 +255,7 @@ TrainerPalletes:
 	db PAL_BLUE_TRAINER      ; Channeler
 	db PAL_PURPLE_TRAINER    ; Agatha
 	db PAL_RED_TRAINER       ; Lance
-	db PAL_RED_TRAINER       ; Flannery
+	db PAL_MEWMON            ; Hex Maniac
 	db PAL_MEWMON            ; Pokemon_Trainer (Placeholder)
 	db PAL_GREEN_TRAINER     ; Tracey
 	db PAL_MEWMON            ; Executive F
@@ -268,4 +268,4 @@ TrainerPalletes:
 	db PAL_MEWMON            ; Female Player
 	db PAL_MEWMON            ; Professor Oak
 	db PAL_BROWNMON          ; P.I.
-	db PAL_MEWMON            ; Hex Maniac
+	db PAL_RED_TRAINER       ; Flannery

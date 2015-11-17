@@ -220,7 +220,6 @@ SaffronGymText12: ; 5d182 (17:5182)
 
 SaffronGymText2: ; 5d187 (17:5187)
 	db $08 ; asm
-	call SetCustomNameSaffronGym
 	ld hl, SaffronGymTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -233,7 +232,6 @@ SaffronGymText3: ; 5d191 (17:5191)
 
 SaffronGymText4: ; 5d19b (17:519b)
 	db $08 ; asm
-	call SetCustomNameSaffronGym
 	ld hl, SaffronGymTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -246,7 +244,6 @@ SaffronGymText5: ; 5d1a5 (17:51a5)
 
 SaffronGymText6: ; 5d1af (17:51af)
 	db $08 ; asm
-	call SetCustomNameSaffronGym
 	ld hl, SaffronGymTrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -276,13 +273,6 @@ SaffronGymText9: ; 5d1cd (17:51cd)
 	call PrintText
 .asm_e9907 ; 0x5d1e3
 	jp TextScriptEnd
-	
-SetCustomNameSaffronGym:
-	ld hl,CustomNameTextSaffronGym
-	jp SetCustomName
-	
-CustomNameTextSaffronGym:
-	db "HEX MANIAC@"
 
 SaffronGymText_5d1e6: ; 5d1e6 (17:51e6)
 	TX_FAR _SaffronGymText_5d1e6
