@@ -2,7 +2,7 @@ HiddenItems: ; 76688 (1d:6688)
 	ld hl, HiddenItemCoords
 	call Func_76857
 	ld [wTrainerScreenX], a
-	ld hl, wd6f0
+	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wTrainerScreenX]
 	ld c, a
 	ld b, $2
@@ -35,7 +35,7 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	ld c, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, wd6f0
+	ld hl, wObtainedHiddenItemsFlags
 	ld a, [wTrainerScreenX]
 	ld c, a
 	ld b, $1
@@ -65,7 +65,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld hl, HiddenCoinCoords
 	call Func_76857
 	ld [wTrainerScreenX], a
-	ld hl, wd6fe
+	ld hl, wObtainedHiddenCoinsFlags
 	ld a, [wTrainerScreenX]
 	ld c, a
 	ld b, $2
@@ -106,7 +106,7 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld hl, $ffa1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wd6fe
+	ld hl, wObtainedHiddenCoinsFlags
 	ld a, [wTrainerScreenX]
 	ld c, a
 	ld b, $1

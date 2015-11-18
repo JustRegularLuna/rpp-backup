@@ -1941,8 +1941,11 @@ wExtraFlags::
 ; bit 2 = Set means traded mons obey like normal mons
 	ds 1
 
-wd6f0:: ds 14
-wd6fe:: ds 2
+wObtainedHiddenItemsFlags::
+	ds 14
+	
+wObtainedHiddenCoinsFlags::
+	ds 2
 
 wWalkBikeSurfState:: ; d700
 ; $00 = walking
