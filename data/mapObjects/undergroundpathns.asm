@@ -1,5 +1,5 @@
 UndergroundPathNSObject: ; 0x61f2a (size=20)
-	db $1 ; border block
+	db $a ; border block
 
 	db $2 ; warps
 	db $4, $5, $2, PATH_ENTRANCE_ROUTE_5

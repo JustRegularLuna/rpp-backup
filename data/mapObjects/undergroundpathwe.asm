@@ -1,5 +1,5 @@
 UndergroundPathWEObject: ; 0x61f4e (size=20)
-	db $1 ; border block
+	db $a ; border block
 
 	db $2 ; warps
 	db $5, $2, $2, PATH_ENTRANCE_ROUTE_7
