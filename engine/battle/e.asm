@@ -133,7 +133,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	ld [hl], $50  ; forbid (highly discourage) disabled move
 .noMoveDisabled
 	ld hl, TrainerClassMoveChoiceModifications ; 589B
-	ld a, [W_TRAINERCLASS]
+	ld a, [wTrainerAINumber]
 	ld b, a
 .loopTrainerClasses
 	dec b
