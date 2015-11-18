@@ -658,7 +658,7 @@ Mansion2HiddenObjects: ; 46f38 (11:6f38)
 	db $0b,$02,$04
 	db BANK(Mansion2Script_Switches)
 	dw Mansion2Script_Switches
-	db $09,$1A,OLD_SEA_MAP
+	db $07,$1C,CALCIUM
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
 Mansion3HiddenObjects: ; 46f3f (11:6f3f)

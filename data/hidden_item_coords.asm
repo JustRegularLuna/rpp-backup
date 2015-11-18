@@ -28,7 +28,7 @@ HiddenItemCoords: ; 766b8 (1d:66b8)
 	db SEAFOAM_ISLANDS_3,$0f,$0f
 	db SEAFOAM_ISLANDS_5,$11,$19
 	db MANSION_1,$10,$08
-	db MANSION_2,$09,$1A
+	db MANSION_2,$07,$1C
 	db MANSION_3,$09,$01
 	db ROUTE_23,$2c,$09
 	db ROUTE_23,$46,$13
