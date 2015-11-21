@@ -97,7 +97,7 @@ const_value = 1
 	const SPRITE_OMANYTE                   ;EQU $3e
 	const SPRITE_BOULDER                   ;EQU $3f
 	const SPRITE_PAPER_SHEET               ;EQU $40
-	const SPRITE_BOOK_MAP_DEX              ;EQU $41
+	const SPRITE_BOOK                      ;EQU $41
 	const SPRITE_CLIPBOARD                 ;EQU $42
 	const SPRITE_SNORLAX                   ;EQU $43
 	const SPRITE_BAG                       ;EQU $44
@@ -110,6 +110,7 @@ const_value = 1
 	const SPRITE_DITTO
 	const SPRITE_CELEBI
 	const SPRITE_FOSSIL
+	const SPRITE_TOWN_MAP
 	
 	
 ; Variable Sprite IDs Here

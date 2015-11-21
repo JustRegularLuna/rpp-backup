@@ -616,7 +616,7 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	db $40 ; byte count
 	db BANK(PaperSheetSprite)
 
-	; SPRITE_BOOK_MAP_DEX
+	; SPRITE_BOOK
 	dw BookMapDexSprite
 	db $40 ; byte count
 	db BANK(BookMapDexSprite)
@@ -680,5 +680,10 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	dw FossilSprite
 	db $40 ; byte count
 	db BANK(FossilSprite)
+	
+	; SPRITE_TOWN_MAP
+	dw TownMapSprite
+	db $40 ; byte count
+	db BANK(TownMapSprite)
 
 

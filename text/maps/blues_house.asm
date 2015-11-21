@@ -36,8 +36,10 @@ _BluesHouseText2::
 	done
 
 _BluesHouseText3::
-	text "It's a big map!"
-	line "This is useful!"
+	text "It's a TOWN MAP!"
+	
+	para "It's open to the"
+	line "KANTO region."
 	done
 
 _BluesTVText::
