@@ -675,5 +675,10 @@ SpriteSheetPointerTable: ; 17b27 (5:7b27)
 	dw CelebiSprite
 	db $40 ; byte count
 	db BANK(CelebiSprite)
-    
+	
+	; SPRITE_FOSSIL
+	dw FossilSprite
+	db $40 ; byte count
+	db BANK(FossilSprite)
+
 

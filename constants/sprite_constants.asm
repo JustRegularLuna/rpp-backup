@@ -109,6 +109,7 @@ const_value = 1
 	const SPRITE_POKEY
 	const SPRITE_DITTO
 	const SPRITE_CELEBI
+	const SPRITE_FOSSIL
 	
 	
 ; Variable Sprite IDs Here
