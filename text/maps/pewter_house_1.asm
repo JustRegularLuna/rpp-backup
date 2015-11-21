@@ -19,9 +19,4 @@ _PewterHouse1Text3:: ; 984ef (26:44ef)
 	para "He thinks it's"
 	line "like PETCHA, but"
 	cont "I say it's PECCA."
-	
-	para "I think he must"
-	line "be listening to"
-	cont "GalacticElliot on"
-	cont "Twitter..."
 	done
