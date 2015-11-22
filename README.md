@@ -9,9 +9,13 @@ It builds two versions, a "Normal" version and a "Hard" version. The only differ
 
 For a list of features, check out [**FEATURES.md**](FEATURES.md).
 
+* To see a list of all Pokémon included, look [**here**] (constants/pokemon_constants.asm).
+* To see Pokémon skill sets and evolutions, look [**here**](data/evos_moves.asm).
+* To see what the TMs teach, and where to find them, look [**here**] (data/tms.asm).
 
 
-## Setting up your own forked version
+
+## Setting up your own version
 
 To set up the repository, see [**INSTALL.md**](INSTALL.md).
 It is advisable to check the main Pokered repository as well for more info.
