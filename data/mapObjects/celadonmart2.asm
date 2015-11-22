@@ -1,5 +1,5 @@
 CeladonMart2Object: ; 0x56111 (size=55)
-	db $f ; border block
+	db $0 ; border block
 
 	db $3 ; warps
 	db $1, $c, $4, CELADON_MART_1
