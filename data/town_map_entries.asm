@@ -16,7 +16,7 @@ ExternalMapEntries: ; 71313 (1c:5313)
 	EMAP $4,$3,Route3Name
 	EMAP $8,$2,Route4Name
 	EMAP $A,$3,Route5Name
-	EMAP $A,$8,Route6Name
+	EMAP $A,$7,Route6Name
 	EMAP $8,$5,Route7Name
 	EMAP $D,$5,Route8Name
 	EMAP $D,$2,Route9Name
@@ -41,13 +41,13 @@ InternalMapEntries: ; 71382 (1c:5382)
 	IMAP OAKS_LAB,                  $2,$B,PalletTownName
 	IMAP VIRIDIAN_GYM,              $2,$8,ViridianCityName
 	IMAP VIRIDIAN_FOREST_ENTRANCE,  $2,$6,Route2Name
-	IMAP VIRIDIAN_FOREST,           $2,$4,ViridianForestName
+	IMAP VIRIDIAN_FOREST,           $2,$5,ViridianForestName
 	IMAP PEWTER_POKECENTER,         $2,$3,PewterCityName
 	IMAP MT_MOON_3,                 $6,$2,MountMoonName
 	IMAP CERULEAN_MART,             $A,$2,CeruleanCityName
 	IMAP MT_MOON_POKECENTER,        $5,$2,Route4Name
 	IMAP DAYCAREM,                  $A,$4,Route5Name
-	IMAP PATH_ENTRANCE_ROUTE_6,     $A,$6,Route6Name
+	IMAP PATH_ENTRANCE_ROUTE_6,     $A,$7,Route6Name
 	IMAP PATH_ENTRANCE_ROUTE_7,     $9,$5,Route7Name
 	IMAP PATH_ENTRANCE_ROUTE_8,     $B,$5,Route8Name
 	IMAP ROCK_TUNNEL_1,             $E,$3,RockTunnelName
