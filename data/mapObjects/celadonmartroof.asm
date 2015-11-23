@@ -1,5 +1,5 @@
 CeladonMartRoofObject: ; 0x485a8 (size=36)
-	db $42 ; border block
+	db $38 ; border block
 
 	db $1 ; warps
 	db $2, $f, $0, CELADON_MART_5

@@ -1,5 +1,5 @@
 CeladonMartElevatorObject: ; 0x4866d (size=23)
-	db $f ; border block
+	db $0 ; border block
 
 	db $2 ; warps
 	db $3, $1, $5, CELADON_MART_1
