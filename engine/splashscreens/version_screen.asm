@@ -28,9 +28,15 @@ VersionScreenTiles:
 VersionScreenTilesEnd:
 
 VersionScreenTilemap:
+IF DEF(_RED) ; Normal Rom
+	INCBIN "gfx/tilemaps/normal_screen.map"
+ENDC
+
 IF DEF(_BLUE) ; Hard Rom
 	INCBIN "gfx/tilemaps/hard_screen.map"
-ELSE         ; Normal Rom
-	INCBIN "gfx/tilemaps/normal_screen.map"
+ENDC
+
+IF DEF(_FOREVER) ; Forever Rom
+	INCBIN "gfx/tilemaps/forever_screen.map"
 ENDC
 VersionScreenTilemapEnd:
