@@ -880,16 +880,15 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr nz,.LastLoop
 	ret
 
-IF DEF(_RED) ; Normal rom
-    INCLUDE "data/trainer_moves.asm"
-
-    INCLUDE "data/trainer_parties.asm"
-ENDC
 
 IF DEF(_BLUE) ; Difficult rom
     INCLUDE "data/trainer_moves_hard.asm"
 
     INCLUDE "data/trainer_parties_hard.asm"
+ELSE ; Normal rom
+    INCLUDE "data/trainer_moves.asm"
+
+    INCLUDE "data/trainer_parties.asm"
 ENDC
 
 TrainerAI: ; 3a52e (e:652e)

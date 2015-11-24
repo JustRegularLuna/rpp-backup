@@ -59,10 +59,10 @@ _Route17AfterBattleText4:: ; 9145e (24:545e)
 	done
 
 _Route17BattleText5:: ; 9147e (24:547e)
-IF DEF(_RED)
-	text "Let VOLTORB"
-ELSE
+IF DEF(_BLUE)
 	text "Let ELECTRODE"
+ELSE
+	text "Let VOLTORB"
 ENDC
 	line "electrify you!"
 	done
@@ -73,10 +73,10 @@ _Route17EndBattleText5:: ; 9149a (24:549a)
 	prompt
 
 _Route17AfterBattleText5:: ; 914a9 (24:54a9)
-IF DEF(_RED)
-	text "I got my VOLTORB"
-ELSE
+IF DEF(_BLUE)
 	text "I found ELECTRODE"
+ELSE
+	text "I got my VOLTORB"
 ENDC
 	line "at the abandoned"
 	cont "POWER PLANT."

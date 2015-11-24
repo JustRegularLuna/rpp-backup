@@ -40,10 +40,10 @@ _Route8EndBattleText3:: ; 8df7e (23:5f7e)
 	prompt
 
 _Route8AfterBattleText3:: ; 8df90 (23:5f90)
-IF DEF(_RED)
-	text "Go with GRIMER"
-ELSE
+IF DEF(_BLUE)
 	text "Go with MUK"
+ELSE
+	text "Go with GRIMER"
 ENDC
 	line "first...and..."
 	cont "...and...then..."
@@ -143,25 +143,25 @@ _Route8EndBattleText9:: ; 8e1fa (23:61fa)
 	text "Stop!"
 
 	para "Don't be so mean"
-IF DEF(_RED)
-	line "to my CLEFAIRY!"
-ELSE
+IF DEF(_BLUE)
 	line "to my CLEFABLE!"
+ELSE
+	line "to my CLEFAIRY!"
 ENDC
 	prompt
 
 _Route8AfterBattleText9:: ; 8e221 (23:6221)
-IF DEF(_RED)
-	text "I heard that"
-ELSE
+IF DEF(_BLUE)
 	text "Did you know"
+ELSE
+	text "I heard that"
 ENDC
 	line "CLEFAIRY evolves"
 	cont "when it's exposed"
-IF DEF(_RED)
-	cont "to a MOON STONE."
-ELSE
+IF DEF(_BLUE)
 	cont "to a MOON STONE?"
+ELSE
+	cont "to a MOON STONE."
 ENDC
 	done
 
