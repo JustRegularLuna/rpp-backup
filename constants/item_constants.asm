@@ -90,20 +90,20 @@ ELIXER        EQU $52
 MAX_ELIXER    EQU $53
 
 ; Only used for elevator menus
-ITEM_B2F      EQU $54
-ITEM_B1F      EQU $55
-ITEM_1F       EQU $56
-ITEM_2F       EQU $57
-ITEM_3F       EQU $58
-ITEM_4F       EQU $59
-ITEM_5F       EQU $5A
-ITEM_6F       EQU $5B
-ITEM_7F       EQU $5C
-ITEM_8F       EQU $5D
-ITEM_9F       EQU $5E
-ITEM_10F      EQU $5F
-ITEM_11F      EQU $60
-ITEM_B4F      EQU $61
+FLOOR_B2F      EQU $54
+FLOOR_B1F      EQU $55
+FLOOR_1F       EQU $56
+FLOOR_2F       EQU $57
+FLOOR_3F       EQU $58
+FLOOR_4F       EQU $59
+FLOOR_5F       EQU $5A
+FLOOR_6F       EQU $5B
+FLOOR_7F       EQU $5C
+FLOOR_8F       EQU $5D
+FLOOR_9F       EQU $5E
+FLOOR_10F      EQU $5F
+FLOOR_11F      EQU $60
+FLOOR_B4F      EQU $61
 
 ; Berries start here
 ORAN_BERRY    EQU $62
