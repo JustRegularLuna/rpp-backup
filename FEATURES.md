@@ -66,6 +66,16 @@ These features are not in yet, but are planned
 * More
 
 
+## POKéMON FOREVER - A bonus hack
+Previously known as Pokémon: Secrets and Rumours
+
+* Will eventually build as pokeforever.gbc (currently is identical to the normal rom)
+* Will contain all features of Red++
+* Will include "Pokégods" such as Pikablu, Mewthree, Etc.
+* Will include rumoured locations, such as Brick Town
+* Will include rumoured items and events, such as the Mist Stone and the Truck
+
+
 ## BEHIND-THE-SCENES FEATURES
 These are probably only interesting to people wanting to use this as a baserom
 
