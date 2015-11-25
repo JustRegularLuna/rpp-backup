@@ -90,6 +90,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp z, .checkRandomEvo
     cp EV_TYROGUE
     jp z, .checkTyrogueEvo
+	
 .checkTradeEvo
 	ld a, [wLinkState]
 	cp LINK_STATE_TRADING
@@ -100,6 +101,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
 	jp .doEvolution
+	
 .checkMapEvo
 	ld a, [hli]
 	ld b, a ; Map to evolve on
@@ -108,6 +110,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp nz, .nextEvoEntry2
 	ld a, [wLoadedMonLevel] ; This has to be in "a" for the evolution to work properly
 	jp .doEvolution; Do evolution
+	
 .checkMoveEvo
 	ld a, [hli] ; get the move number
 	ld [wMoveNum],a ; store it here to hang onto it
@@ -117,6 +120,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp nc, .nextEvoEntry2 ; If they didn't know the move, go to next evolution
 	ld a, [wLoadedMonLevel] ; This has to be in "a" for the evolution to work properly
 	jp .doEvolution; If they did know it, do the evolution
+	
 .checkRandomEvo
 	ld a, [hli] ; get level to evolve
 	ld b, a
@@ -141,6 +145,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 .randDone
 	ld a, [wLoadedMonLevel] ; This has to be in "a" for the evolution to work properly
 	jr .doEvolution ; Do evolution
+	
 .checkTyrogueEvo
     ld a, [hli] ; level to evolve
     ld b, a
@@ -176,6 +181,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 .TyrogueDone
     ld a, [wLoadedMonLevel]
     jr .doEvolution ; Do first Pokemon if Def is higher
+	
 .checkItemEvo
 	ld a, [hli]
 	ld b, a ; evolution item
@@ -185,12 +191,16 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wcf91] ; this is supposed to be the last item used, but it is also used to hold species numbers
 	cp b ; was the evolution item in this entry used?
 	jp nz, .nextEvoEntry1 ; if not, go to the next evolution entry
+	; fallthrough
+	
 .checkLevel
 	ld a, [hli] ; level requirement
 	ld b, a
 	ld a, [wLoadedMonLevel]
 	cp b ; is the mon's level greater than the evolution requirement?
 	jp c, .nextEvoEntry2 ; if so, go the next evolution entry
+	; fallthrough
+	
 .doEvolution
 	ld [W_CURENEMYLVL], a
 	ld a, $1
