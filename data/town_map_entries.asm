@@ -94,7 +94,7 @@ InternalMapEntries: ; 71382 (1c:5382)
 	IMAP DIGLETTS_CAVE,             $3,$4,DiglettsCaveName
 	IMAP VICTORY_ROAD_3,            $0,$4,VictoryRoadName
 	IMAP ROCKET_HIDEOUT_ELEVATOR,   $7,$5,RocketHQName
-	IMAP BEACH_HOUSE,               $6,$F,Route19Name
+	IMAP BEACH_HOUSE,               $8,$E,Route19Name
 	IMAP SILPH_CO_8F,               $A,$5,SilphCoName
 	IMAP MANSION_4,                 $2,$F,PokemonMansionName
 	IMAP SAFARI_ZONE_REST_HOUSE_4,  $8,$C,SafariZoneName

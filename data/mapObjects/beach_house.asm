@@ -9,7 +9,7 @@ BeachHouseObject: ; 0x1df07 (size=32)
 
 	db $4 ; people
 	db SPRITE_FISHER, $4 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_CLEFAIRY, $3 + 4, $2 + 4, $ff, $d3, $2 ; person
+	db SPRITE_SURF_PIKACHU, $3 + 4, $2 + 4, $ff, $d3, $2 ; person
 	db SPRITE_BRUNETTE_GIRL, $5 + 4, $9 + 4, $ff, $d1, $3 ; person
 	db SPRITE_LYING_OLD_MAN, $7 + 4, $a + 4, $ff, $ff, $4 ; person
 
