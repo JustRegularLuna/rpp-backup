@@ -123,11 +123,22 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wLoadedMonLevel]
 	cp b
 	jp c, .nextEvoEntry1 ; if too low, go to next evolution
-	call Random ; get a random number from the RNG
-	cp $55      ; this looks like 1/3 of the time, but it seems to favor low numbers
-	jr c, .skipInc ; If the number is lower than $55, pick first 'mon
-	inc hl         ; Otherwise, pick the second 'mon
-.skipInc
+	ld a, [hli] ; which method is this?
+	dec a ; is it RAND_1?
+	jr z, .rand1
+;rand2
+	push hl
+	call GetMonDVs
+	pop hl
+	jp c, .nextEvoEntry2
+	jp z, .nextEvoEntry2
+	jr .randDone	
+.rand1
+	push hl
+	call GetMonDVs
+	pop hl
+	jp nc, .nextEvoEntry2
+.randDone
 	ld a, [wLoadedMonLevel] ; This has to be in "a" for the evolution to work properly
 	jr .doEvolution ; Do evolution
 .checkTyrogueEvo
@@ -614,5 +625,18 @@ GetTyrogueAtkDef:
     ld c, $2 ; data length
     call StringCmp ; compare his attack and defense
     ret
+	
+GetMonDVs:
+; new routine for EV_RAND which isn't really random
+; this reads the DVs of the partymon and compares the two bytes
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMon1DVs
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	cp b
+	ret
     
 INCLUDE "data/evos_moves.asm"
