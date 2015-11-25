@@ -2036,7 +2036,7 @@ LoadWalkingPlayerSpriteGraphics:: ; 104d (0:104d)
 	jr LoadPlayerSpriteGraphicsCommon
 
 LoadSurfingPlayerSpriteGraphics:: ; 1055 (0:1055)
-	ld de,SeelSprite
+	ld de,SurfingLapras
 	ld hl,vNPCSprites
 	jr LoadPlayerSpriteGraphicsCommon
 
