@@ -19,11 +19,11 @@ db EMBER
 db LEER
 db 3 ; growth rate
 ; learnset
-db %10110101
-db %01000011
-db %01001111
-db %11001110
-db %11111011
-db %00001100
-db %00101110
+	tmlearn 1,2,3,4,5,6,8
+	tmlearn 9,10,15,16
+	tmlearn 17,18,19,20,22,23
+	tmlearn 26,27,28,31,32
+	tmlearn 33,34,37,38,39,40
+	tmlearn 41,44,
+	tmlearn 51,52,54
 db BANK(CharizardPicFront)

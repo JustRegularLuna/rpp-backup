@@ -19,11 +19,11 @@ db 0
 db 0
 db 3 ; growth rate
 ; learnset
-db %00100000 ;8  - 1
-db %00111110 ;16 - 9
-db %10001000 ;24 - 17
-db %11000001 ;32 - 25
-db %00000000 ;40 - 33
-db %00011000 ;48 - 41
-db %01010010 ;H6 - 49
+	tmlearn 6,8
+	tmlearn 9,10,11,12,13,14
+	tmlearn 24
+	tmlearn 25,30,31,32
+	tmlearn 33,34
+	tmlearn 44,45,46
+	tmlearn 49,50,53,55
 db BANK(ChinchouPicFront)

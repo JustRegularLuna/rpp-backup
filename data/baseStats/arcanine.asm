@@ -19,11 +19,11 @@ db LEER
 db TAKE_DOWN
 db 5 ; growth rate
 ; learnset
-db %10100000
-db %01000011
-db %01001000
-db %11101000
-db %11110011
-db %00001000
-db %00000010
+	tmlearn 6,8
+	tmlearn 9,10,15,16
+	tmlearn 22,23
+	tmlearn 28,32,33
+	tmlearn 34,37,38,39,40
+	tmlearn 41,44
+	tmlearn 54
 db BANK(ArcaninePicFront)

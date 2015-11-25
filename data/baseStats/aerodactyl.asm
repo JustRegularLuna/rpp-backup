@@ -19,11 +19,11 @@ db 0
 db 0
 db 5 ; growth rate
 ; learnset
-db %00101010
-db %01000011
-db %01001000
-db %11000110
-db %01111011
-db %00001000
-db %00001010
+	tmlearn 2,3,4,6
+	tmlearn 9,10,15,16
+	tmlearn 19,23
+	tmlearn 26,27,32
+	tmlearn 34,35,36,37,38,39,40
+	tmlearn 41,44,48
+	tmlearn 52,54
 db BANK(AerodactylPicFront)

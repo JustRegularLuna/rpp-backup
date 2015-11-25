@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100100
-db %01000011
-db %00011000
-db %11000000
-db %11000011
-db %00001000
-db %00000110
+	tmlearn 3,4,6
+	tmlearn 9,10,15
+	tmlearn 0
+	tmlearn 32
+	tmlearn 33,39
+	tmlearn 41,44
+	tmlearn 50,51
 db BANK(BeedrillPicFront)

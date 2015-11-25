@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10101000
-db %00000011
-db %00001000
-db %11000000
-db %10000011
-db %00001100
-db %00001011
+	tmlearn 4,5,6,8
+	tmlearn 9,10
+	tmlearn 0
+	tmlearn 31,32
+	tmlearn 33,34,40
+	tmlearn 41,44
+	tmlearn 52
 db BANK(DoduoPicFront)

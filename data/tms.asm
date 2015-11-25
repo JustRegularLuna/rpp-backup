@@ -39,7 +39,7 @@ TechnicalMachines: ; 13773 (4:7773)
 	db FIRE_BLAST   ; Blaine Prize
 	db SWIFT        ; Route 12
 	db SKULL_BASH   ; Safari Zone
-	db ACROBATICS   ; Celadon Dept
+	db AERIAL_ACE   ; Celadon Dept
 	db DREAM_EATER  ; Viridian City
 	db DARK_PULSE   ; Celadon City
 	db REST         ; SS Anne

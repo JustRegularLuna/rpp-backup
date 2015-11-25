@@ -19,11 +19,11 @@ db POUND
 db GROWL
 db 4 ; growth rate
 ; learnset
-db %10110001 ;8  - 1
-db %10111111 ;16 - 9
-db %10101111 ;24 - 17
-db %11100011 ;32 - 25
-db %11111111 ;40 - 33
-db %10111011 ;48 - 41
-db %01100011 ;H6 - 49
+	tmlearn 1,5,6,8
+	tmlearn 9,10,11,13,14,15,16
+	tmlearn 17,18,19,22,24
+	tmlearn 25,29,30,31,32
+	tmlearn 33,34,36,37,38,40
+	tmlearn 42,44,45,46,48
+	tmlearn 49,50,54
 db BANK(BlisseyPicFront)

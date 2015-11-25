@@ -19,11 +19,11 @@ db DISABLE
 db 0
 db 3 ; growth rate
 ; learnset
-db %10110001
-db %01000011
-db %00001111
-db %11111000
-db %10000111
-db %00111001
-db %01000011
+	tmlearn 1,5,6
+	tmlearn 9,10,15
+	tmlearn 18,19,24
+	tmlearn 29,30,32
+	tmlearn 34,39,40
+	tmlearn 42,43,44,45,46
+	tmlearn 49,50
 db BANK(AlakazamPicFront)
