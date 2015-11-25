@@ -12,7 +12,7 @@ Route2GateText1: ; 5d5db (17:55db)
 	jr nz, .asm_6592c ; 0x5d5e1
 	ld a, 10 ; pokemon needed
 	ldh [$db], a
-	ld a, HM_05 ; oak's aide reward
+	ld a, TM_50 ; oak's aide reward
 	ldh [$dc], a
 	ld [wd11e], a
 	call GetItemName ; $2fcf
