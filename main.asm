@@ -4864,7 +4864,7 @@ UpdateHPBar_Palettes:
 .inMenu
 	ld hl, W2_TilesetPaletteMap
 	ld bc, SCREEN_WIDTH*2 ; 2 rows for each pokemon in the menu
-	ld a, [wCurrentMenuItem]
+	ld a, [wLastMenuItem]
 	call AddNTimes
 
 	ld bc, SCREEN_WIDTH*2
