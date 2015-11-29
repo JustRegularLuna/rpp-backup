@@ -19,11 +19,11 @@ db HORN_ATTACK
 db 0
 db 0 ; growth rate
 ; learnset
-db %11100000
-db %01111111
-db %00001101
-db %11000000
-db %10001011
-db %00001000
-db %00010010
+	tmlearn 6,8
+	tmlearn 9,10,11,12,13,14,15
+	tmlearn 0
+	tmlearn 26,27,31,32
+	tmlearn 33,34,35,36
+	tmlearn 44,48
+	tmlearn 53,54,55
 db BANK(OmastarPicFront)

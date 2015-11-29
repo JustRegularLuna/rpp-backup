@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100000 ;8  - 1
-db %01000011 ;16 - 9
-db %00001000 ;24 - 17
-db %11001000 ;32 - 25
-db %11000011 ;40 - 33
-db %00001001 ;48 - 41
-db %01000010 ;H6 - 49
+	tmlearn 5,6,8
+	tmlearn 9,10,15,16
+	tmlearn 0
+	tmlearn 28,29,30,31,32
+	tmlearn 33,34,39,40
+	tmlearn 42,44,46
+	tmlearn 49,50,54
 db BANK(SylveonPicFront)

@@ -19,11 +19,11 @@ db KARATE_CHOP
 db FURY_SWIPES
 db 0 ; growth rate
 ; learnset
-db %10110001
-db %11000011
-db %10001111
-db %11001111
-db %11001110
-db %10001000
-db %00100010
+	tmlearn 1,3,5,6,8
+	tmlearn 9,10,16
+	tmlearn 17,18,19,24
+	tmlearn 25,26,27,28,31,32
+	tmlearn 34,36,39,40
+	tmlearn 41,44,48
+	tmlearn 54
 db BANK(PrimeapePicFront)

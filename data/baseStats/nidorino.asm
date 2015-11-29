@@ -19,11 +19,11 @@ db HORN_ATTACK
 db 0
 db 3 ; growth rate
 ; learnset
-db %11100000
-db %00111111
-db %10001000
-db %11001001
-db %10000011
-db %00001000
-db %00000010
+	tmlearn 1,3,5,6,7,8
+	tmlearn 9,10,11,12,13,14,16
+	tmlearn 17,18,19,20,24
+	tmlearn 25,26,27,28,31,32
+	tmlearn 33,34,36,37,38,40
+	tmlearn 44,48
+	tmlearn 51,53,54
 db BANK(NidorinoPicFront)

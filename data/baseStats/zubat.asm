@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %00101010
-db %00000011
-db %00011000
-db %11000000
-db %01000010
-db %00001001
-db %00000010
+	tmlearn 3,4,6,8
+	tmlearn 9,10
+	tmlearn 21
+	tmlearn 30,31,32
+	tmlearn 33,34,39
+	tmlearn 41,42,43,44
+	tmlearn 52
 db BANK(ZubatPicFront)

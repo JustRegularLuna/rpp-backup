@@ -24,6 +24,6 @@ db 0 ; growth rate
 	tmlearn 21
 	tmlearn 26,27,28,31,32
 	tmlearn 34,40
-	tmlearn 44,48
+	tmlearn 43,44,48
 	tmlearn 54
 db BANK(ArbokPicFront)

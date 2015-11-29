@@ -19,11 +19,11 @@ db 0
 db 0
 db 3 ; growth rate
 ; learnset
-db %00100101 ;8  - 1
-db %10110011 ;16 - 9
-db %00001010 ;24 - 17
-db %11001000 ;32 - 25
-db %11000011 ;40 - 33
-db %00001111 ;48 - 41
-db %00010110 ;H6 - 49
+	tmlearn 1,3,5,6,8
+	tmlearn 9,10,13,14,16
+	tmlearn 20
+	tmlearn 28,30,31,32
+	tmlearn 34,39,40
+	tmlearn 41,43,44,46
+	tmlearn 51,53,54
 db BANK(SneaselPicFront)

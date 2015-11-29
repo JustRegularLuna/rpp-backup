@@ -19,11 +19,11 @@ db HEX
 db 0
 db 3 ; growth rate
 ; learnset
-db %00100000 ;8  - 1
-db %00000000 ;16 - 9
-db %10001000 ;24 - 17
-db %11010001 ;32 - 25
-db %01000010 ;40 - 33
-db %00111111 ;48 - 41
-db %01000010 ;H6 - 49
+	tmlearn 6,8
+	tmlearn 9,10,15
+	tmlearn 17,18,19,21,24
+	tmlearn 25,29,30,31,32
+	tmlearn 33,34,40
+	tmlearn 41,42,43,44,45,46
+	tmlearn 49,50
 db BANK(MismagiusPicFront)

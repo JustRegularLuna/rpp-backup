@@ -19,11 +19,11 @@ db SLUDGE
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100000
-db %01000000
-db %10001000
-db %11000001
-db %00100010
-db %01001101
-db %00000010
+	tmlearn 6
+	tmlearn 9,10,15
+	tmlearn 24
+	tmlearn 25,30,31,32
+	tmlearn 34,37,38
+	tmlearn 43,44,47
+	tmlearn 50,54
 db BANK(WeezingPicFront)

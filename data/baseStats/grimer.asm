@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100000
-db %00000000
-db %10011000
-db %11000001
-db %00111010
-db %01001001
-db %00000010
+	tmlearn 6,8
+	tmlearn 9,10,12
+	tmlearn 21,24
+	tmlearn 25,28,31,32
+	tmlearn 34,36,37,38
+	tmlearn 44,47,48
+	tmlearn 54
 db BANK(GrimerPicFront)

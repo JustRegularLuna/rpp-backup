@@ -19,11 +19,11 @@ db QUICK_ATTACK
 db EMBER
 db 0 ; growth rate
 ; learnset
-db %10100000
-db %01000011
-db %00101000
-db %11000000
-db %11110011
-db %00001001
-db %00000010
+	tmlearn 5,6,8
+	tmlearn 9,10,15,16
+	tmlearn 0
+	tmlearn 28,30,31,32
+	tmlearn 33,34,37,38,39,40
+	tmlearn 44
+	tmlearn 54
 db BANK(FlareonPicFront)

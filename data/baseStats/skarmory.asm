@@ -19,11 +19,11 @@ db 0
 db 0
 db 3 ; growth rate
 ; learnset
-db %00100100 ;8  - 1
-db %00000011 ;16 - 9
-db %00001010 ;24 - 17
-db %11000000 ;32 - 25
-db %01001001 ;40 - 33
-db %10001100 ;48 - 41
-db %01001110 ;H6 - 49
+	tmlearn 3,4,6
+	tmlearn 9,10,15,16
+	tmlearn 17,18,19,23
+	tmlearn 26,27,31,32
+	tmlearn 33,34,36,39,40
+	tmlearn 41,43,44,48
+	tmlearn 50,51,52,54
 db BANK(SkarmoryPicFront)

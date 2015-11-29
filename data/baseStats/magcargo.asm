@@ -19,11 +19,11 @@ db ROCK_THROW
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100000
-db %01000011
-db %01100010
-db %00001110
-db %01111011
-db %10001000
-db %00100010
+	tmlearn 6,8
+	tmlearn 9,10,15
+	tmlearn 18,22
+	tmlearn 26,27,28,31,32
+	tmlearn 33,34,36,37,38,40
+	tmlearn 44,47,48
+	tmlearn 54
 db BANK(MagcargoPicFront)

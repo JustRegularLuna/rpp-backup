@@ -19,11 +19,11 @@ db TAIL_WHIP
 db FURY_ATTACK
 db 5 ; growth rate
 ; learnset
-db %11110101 ;8  - 1
-db %11111011 ;16 - 9
-db %10001110 ;24 - 17
-db %11001011 ;32 - 25
-db %00111011 ;40 - 33
-db %10001000 ;48 - 41
-db %00110110 ;H6 - 49
+	tmlearn 1,5,6,7,8
+	tmlearn 9,10,11,12,13,14,15,16
+	tmlearn 17,18,19,20,23,24
+	tmlearn 25,26,27,28,31,32
+	tmlearn 34,35,36,37,38,40
+	tmlearn 44,48
+	tmlearn 51,53,54
 db BANK(RhyperiorPicFront)

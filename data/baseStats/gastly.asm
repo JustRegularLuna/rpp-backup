@@ -19,11 +19,11 @@ db 0
 db 0
 db 3 ; growth rate
 ; learnset
-db %00100000
-db %00000000
-db %10011000
-db %11010001
-db %00000010
-db %01101111
-db %00000010
+	tmlearn 6
+	tmlearn 0
+	tmlearn 21,24
+	tmlearn 25,29,30,31,32
+	tmlearn 0
+	tmlearn 42,43,44,46,47
+	tmlearn 49
 db BANK(GastlyPicFront)

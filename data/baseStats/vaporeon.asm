@@ -19,11 +19,11 @@ db QUICK_ATTACK
 db WATER_GUN
 db 0 ; growth rate
 ; learnset
-db %10100000
-db %01111111
-db %00001000
-db %11000000
-db %11000011
-db %00001001
-db %00010010
+	tmlearn 5,6,8
+	tmlearn 9,10,11,12,13,14,15,16
+	tmlearn 0
+	tmlearn 28,30,31,32
+	tmlearn 33,34,39,40
+	tmlearn 44
+	tmlearn 53,54,55
 db BANK(VaporeonPicFront)

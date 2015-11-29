@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10110001 ;8  - 1
-db %01000011 ;16 - 9
-db %10101111 ;24 - 17
-db %11110010 ;32 - 25
-db %10111011 ;40 - 33
-db %10101000 ;48 - 41
-db %00100010 ;H6 - 49
+	tmlearn 1,5,6,8
+	tmlearn 9,10,15
+	tmlearn 17,18,19
+	tmlearn 29,30,31,32
+	tmlearn 34,36,37,38,40
+	tmlearn 44,46
+	tmlearn 54
 db BANK(MagmortarPicFront)

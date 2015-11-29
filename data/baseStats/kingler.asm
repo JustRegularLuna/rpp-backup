@@ -19,11 +19,11 @@ db VICEGRIP
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100100
-db %01111111
-db %00001000
-db %11000000
-db %00001010
-db %00001000
-db %00110110
+	tmlearn 3,6,8
+	tmlearn 9,10,11,12,13,14,15
+	tmlearn 20
+	tmlearn 26,27,28,31,32
+	tmlearn 34,36
+	tmlearn 44
+	tmlearn 51,53,54,55
 db BANK(KinglerPicFront)

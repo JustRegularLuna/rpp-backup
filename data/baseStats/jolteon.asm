@@ -19,11 +19,11 @@ db QUICK_ATTACK
 db THUNDERSHOCK
 db 0 ; growth rate
 ; learnset
-db %10100000
-db %01000011
-db %10001000
-db %11000001
-db %11000011
-db %00011001
-db %01000010
+	tmlearn 5,6,8
+	tmlearn 9,10,15,16
+	tmlearn 24
+	tmlearn 25,28,30,31,32
+	tmlearn 33,34,39,40
+	tmlearn 44,45
+	tmlearn 50,54
 db BANK(JolteonPicFront)

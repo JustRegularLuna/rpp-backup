@@ -19,11 +19,11 @@ db 0
 db 0
 db 5 ; growth rate
 ; learnset
-db %10100100 ;8  - 1
-db %01000011 ;16 - 9
-db %00001111 ;24 - 17
-db %11001010 ;32 - 25
-db %10001010 ;40 - 33
-db %10001000 ;48 - 41
-db %00100110 ;H6 - 49
+	tmlearn 3,5,6,8
+	tmlearn 9,10,15
+	tmlearn 17,18,19
+	tmlearn 26,27,28,31,32
+	tmlearn 34,36
+	tmlearn 41,44,48
+	tmlearn 51,54
 db BANK(HeracrossPicFront)

@@ -19,11 +19,11 @@ db 0
 db 0
 db 3 ; growth rate
 ; include learnset directly
-db %10101000 ;8  - 1
-db %01111110 ;16 - 9
-db %10011000 ;24 - 17
-db %11110011 ;32 - 25
-db %01000011 ;40 - 33
-db %00111111 ;48 - 41
-db %01111010 ;H6 - 49
+	tmlearn 4,6,8
+	tmlearn 9,10,11,12,13,14,15,16
+	tmlearn 22,23,24
+	tmlearn 25,26,27,29,30,31,32
+	tmlearn 33,34,35,36,40
+	tmlearn 41,42,44,45,46
+	tmlearn 50,52,53,54,55
 db BANK(LugiaPicFront)

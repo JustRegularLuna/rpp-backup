@@ -19,11 +19,11 @@ db CONVERSION
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100000 ;8  - 1
-db %01110010 ;16 - 9
-db %11001000 ;24 - 17
-db %11110001 ;32 - 25
-db %11000011 ;40 - 33
-db %00111011 ;48 - 41
-db %01000011 ;H6 - 49
+	tmlearn 6
+	tmlearn 9,10,13,14,15
+	tmlearn 22,24
+	tmlearn 25,29,30,31,32
+	tmlearn 33,34,39,40
+	tmlearn 41,43,44,45,46
+	tmlearn 49,50
 db BANK(PorygonZPicFront)

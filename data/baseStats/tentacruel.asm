@@ -19,11 +19,11 @@ db WRAP
 db 0
 db 5 ; growth rate
 ; learnset
-db %00100100
-db %01111111
-db %00011000
-db %11000000
-db %10000011
-db %00001000
-db %00010110
+	tmlearn 3,6
+	tmlearn 9,10,11,12,13,14,15
+	tmlearn 21
+	tmlearn 30,31,32
+	tmlearn 33,34,40
+	tmlearn 44,45,46
+	tmlearn 49,50,51,53,55
 db BANK(TentacruelPicFront)

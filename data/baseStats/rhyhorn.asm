@@ -19,11 +19,11 @@ db 0
 db 0
 db 5 ; growth rate
 ; learnset
-db %11100000
-db %00000011
-db %10001000
-db %11001111
-db %10111010
-db %10001000
-db %00100010
+	tmlearn 1,5,6,7,8
+	tmlearn 9,10,11,12,13,14,16
+	tmlearn 17,18,19,20,23,24
+	tmlearn 25,26,27,28,31,32
+	tmlearn 34,35,36,37,38,40
+	tmlearn 44,48
+	tmlearn 51,53,54
 db BANK(RhyhornPicFront)

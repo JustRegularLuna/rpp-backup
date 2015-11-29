@@ -19,11 +19,11 @@ db LEER
 db FOCUS_ENERGY
 db 0 ; growth rate
 ; learnset
-db %10110001
-db %01111111
-db %00001111
-db %11001110
-db %10111010
-db %00001000
-db %00100010
+	tmlearn 1,3,5,6,8
+	tmlearn 9,10,13,14,15,16
+	tmlearn 17,18,19
+	tmlearn 26,27,28,31,32
+	tmlearn 34,36,37,38,40
+	tmlearn 41,44,48
+	tmlearn 54
 db BANK(MarowakPicFront)

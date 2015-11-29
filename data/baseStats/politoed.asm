@@ -19,11 +19,11 @@ db DOUBLESLAP
 db BODY_SLAM
 db 3 ; growth rate
 ; learnset
-db %00110001 ;8  - 1
-db %01111111 ;16 - 9
-db %00001111 ;24 - 17
-db %11101110 ;32 - 25
-db %10000111 ;40 - 33
-db %00101000 ;48 - 41
-db %00010010 ;H6 - 49
+	tmlearn 1,5,6,8
+	tmlearn 9,10,11,12,13,14
+	tmlearn 17,18,19
+	tmlearn 26,27,28,29,30,31,32
+	tmlearn 34,40
+	tmlearn 44,46
+	tmlearn 53,54,55
 db BANK(PolitoedPicFront)

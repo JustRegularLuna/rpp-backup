@@ -19,11 +19,11 @@ db STOMP
 db GROWL
 db 0 ; growth rate
 ; learnset
-db %11100000
-db %01000011
-db %00001000
-db %11000000
-db %11110011
-db %00001000
-db %00000010
+	tmlearn 5,6,7,8
+	tmlearn 9,10
+	tmlearn 22
+	tmlearn 31,32
+	tmlearn 33,34,37,38,39,40
+	tmlearn 44
+	tmlearn 54
 db BANK(RapidashPicFront)

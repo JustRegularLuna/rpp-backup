@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100000
-db %00000011
-db %00011000
-db %11001110
-db %10001010
-db %10001100
-db %00100010
+	tmlearn 6,8
+	tmlearn 9,10,16
+	tmlearn 21
+	tmlearn 26,27,28,31,32
+	tmlearn 34,40
+	tmlearn 43,44,48
+	tmlearn 54
 db BANK(EkansPicFront)

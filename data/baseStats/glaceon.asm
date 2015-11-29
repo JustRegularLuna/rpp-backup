@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100000 ;8  - 1
-db %00111111 ;16 - 9
-db %00001000 ;24 - 17
-db %11001000 ;32 - 25
-db %11000011 ;40 - 33
-db %00001001 ;48 - 41
-db %00100010 ;H6 - 49
+	tmlearn 5,6,8
+	tmlearn 9,10,11,13,14,15,16
+	tmlearn 0
+	tmlearn 28,30,31,32
+	tmlearn 33,34,39,40
+	tmlearn 44
+	tmlearn 54
 db BANK(GlaceonPicFront)

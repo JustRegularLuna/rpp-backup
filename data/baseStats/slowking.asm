@@ -19,11 +19,11 @@ db HEADBUTT
 db POWER_GEM
 db 0 ; growth rate
 ; learnset
-db %00110001 ;8  - 1
-db %11111111 ;16 - 9
-db %00001110 ;24 - 17
-db %11101110 ;32 - 25
-db %10110011 ;40 - 33
-db %00101110 ;48 - 41
-db %01010011 ;H6 - 49
+	tmlearn 1,5,6,8
+	tmlearn 9,10,11,12,13,14,15,16
+	tmlearn 17,18,19
+	tmlearn 26,27,28,29,30,31,32
+	tmlearn 33,34,37,38,39,40
+	tmlearn 41,43,44,45,46
+	tmlearn 49,50,53,54,55
 db BANK(SlowkingPicFront)

@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10110000
-db %01000011
-db %00101010
-db %10001110
-db %11111010
-db %10001000
-db %00100010
+	tmlearn 5,6,8
+	tmlearn 9,10,15,16
+	tmlearn 22,23
+	tmlearn 26,27,28,31,32
+	tmlearn 34,36,37,38,40
+	tmlearn 44,48
+	tmlearn 54
 db BANK(TorkoalPicFront)

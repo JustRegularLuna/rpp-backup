@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100110 ;8  - 1
-db %01000011 ;16 - 9
-db %00001010 ;24 - 17
-db %11000000 ;32 - 25
-db %11000011 ;40 - 33
-db %00001000 ;48 - 41
-db %00100110 ;H6 - 49
+	tmlearn 3,6
+	tmlearn 9,10,15
+	tmlearn 17,18,19,20
+	tmlearn 31,32
+	tmlearn 34,39,40
+	tmlearn 41,44
+	tmlearn 51,54
 db BANK(ScizorPicFront)

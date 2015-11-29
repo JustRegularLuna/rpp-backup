@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100000 ;8  - 1
-db %01000011 ;16 - 9
-db %00001000 ;24 - 17
-db %11001110 ;32 - 25
-db %10001011 ;40 - 33
-db %11001000 ;48 - 41
-db %00100110 ;H6 - 49
+	tmlearn 3,6,7,8
+	tmlearn 9,10,15,16
+	tmlearn 18,23
+	tmlearn 26,27,28,31,32
+	tmlearn 34,35,36,40
+	tmlearn 44,47,48
+	tmlearn 54
 db BANK(SteelixPicFront)

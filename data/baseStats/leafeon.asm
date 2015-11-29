@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100100 ;8  - 1
-db %01000011 ;16 - 9
-db %00111000 ;24 - 17
-db %11001000 ;32 - 25
-db %11000011 ;40 - 33
-db %00001001 ;48 - 41
-db %01100010 ;H6 - 49
+	tmlearn 3,5,6,8
+	tmlearn 9,10,15,16
+	tmlearn 21,22
+	tmlearn 28,30,31,32
+	tmlearn 33,34,39,40
+	tmlearn 41,44
+	tmlearn 50,54
 db BANK(LeafeonPicFront)

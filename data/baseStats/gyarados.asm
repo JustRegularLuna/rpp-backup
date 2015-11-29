@@ -19,11 +19,11 @@ db LEER
 db HYDRO_PUMP
 db 5 ; growth rate
 ; learnset
-db %10100000
-db %01111111
-db %11001000
-db %11000111
-db %10110011
-db %00001100
-db %00110010
+	tmlearn 6,8
+	tmlearn 9,10,11,12,13,14,15,16
+	tmlearn 23,24
+	tmlearn 25,26,27,31,32
+	tmlearn 33,34,37,38,40
+	tmlearn 41,43,44
+	tmlearn 53,54,55
 db BANK(GyaradosPicFront)

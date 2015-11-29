@@ -19,11 +19,11 @@ db 0
 db 0
 db 5 ; growth rate
 ; learnset
-db %11100000
-db %01110011
-db %10001000
-db %11000111
-db %10111010
-db %00001000
-db %00100010
+	tmlearn 1,5,6,8
+	tmlearn 9,10,11,13,14,15,16
+	tmlearn 22,24
+	tmlearn 25,26,27,30,31,32
+	tmlearn 34,36,40
+	tmlearn 44,45
+	tmlearn 53,54
 db BANK(TaurosPicFront)

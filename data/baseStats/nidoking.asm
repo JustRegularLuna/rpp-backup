@@ -19,11 +19,11 @@ db POISON_STING
 db THRASH
 db 3 ; growth rate
 ; learnset
-db %11110001
-db %11111111
-db %10001111
-db %11001111
-db %10111011
-db %10001001
-db %00110010
+	tmlearn 1,3,5,6,7,8
+	tmlearn 9,10,11,12,13,14,15,16
+	tmlearn 17,18,19,20,23,24
+	tmlearn 25,26,27,28,30,31,32
+	tmlearn 33,34,36,37,38,40
+	tmlearn 44,48
+	tmlearn 51,53,54
 db BANK(NidokingPicFront)

@@ -19,11 +19,11 @@ db 0
 db 0
 db 3 ; growth rate
 ; learnset
-db %10100000
-db %00111111
-db %00001000
-db %11010000
-db %10000010
-db %00101000
-db %00010010
+	tmlearn 1,5,6,8
+	tmlearn 9,10,11,12,13,14
+	tmlearn 17,18,19
+	tmlearn 26,27,28,29,30,31,32
+	tmlearn 34,40
+	tmlearn 44,46
+	tmlearn 53,54,55
 db BANK(PoliwagPicFront)

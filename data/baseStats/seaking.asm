@@ -19,11 +19,11 @@ db SUPERSONIC
 db 0
 db 0 ; growth rate
 ; learnset
-db %01100000
-db %01111111
-db %00001000
-db %11000000
-db %11000010
-db %00001000
-db %00010010
+	tmlearn 6,7,8
+	tmlearn 9,10,11,12,13,14,15
+	tmlearn 0
+	tmlearn 31,32
+	tmlearn 34,39,40
+	tmlearn 44
+	tmlearn 53,55
 db BANK(SeakingPicFront)

@@ -19,11 +19,11 @@ db QUICK_ATTACK
 db 0
 db 0 ; growth rate
 ; learnset
-db %10100000
-db %01111111
-db %10001000
-db %11001001
-db %11000010
-db %00001001
-db %00000010
+	tmlearn 5,6,8
+	tmlearn 9,10,11,12,13,14,15,16
+	tmlearn 17,18,19,20,24
+	tmlearn 25,28,30,31,32
+	tmlearn 34,39,40
+	tmlearn 44
+	tmlearn 51,54
 db BANK(RaticatePicFront)

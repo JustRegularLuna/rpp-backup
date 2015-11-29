@@ -19,11 +19,11 @@ db 0
 db 0
 db 0 ; growth rate
 ; learnset
-db %00100000
-db %00000001
-db %10001000
-db %11100001
-db %11000011
-db %01011000
-db %01000010
+	tmlearn 6
+	tmlearn 9
+	tmlearn 24
+	tmlearn 25,31,32
+	tmlearn 33,34,39,40
+	tmlearn 44,45,47
+	tmlearn 50
 db BANK(VoltorbPicFront)

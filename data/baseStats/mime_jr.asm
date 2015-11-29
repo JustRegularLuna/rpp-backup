@@ -19,11 +19,11 @@ db CONFUSION
 db 0
 db 0 ; growth rate
 ; learnset
-db %10110001
-db %01000011
-db %10101111
-db %11110001
-db %10000111
-db %00111001
-db %01000010
+	tmlearn 1,5,6,8
+	tmlearn 9,10
+	tmlearn 17,18,19,22,24
+	tmlearn 25,29,30,31,32
+	tmlearn 33,34,40
+	tmlearn 41,42,44,45,46
+	tmlearn 49,50
 db BANK(MimeJrPicFront)

@@ -19,11 +19,11 @@ db 0
 db 0
 db 5 ; growth rate
 ; learnset
-db %00100000
-db %00000011
-db %00001000
-db %11110000
-db %00000011
-db %01101000
-db %00000010
+	tmlearn 3,6
+	tmlearn 9,10
+	tmlearn 21,22
+	tmlearn 29,31,32
+	tmlearn 33,34
+	tmlearn 42,44,46,47
+	tmlearn 50,54
 db BANK(ExeggcutePicFront)
