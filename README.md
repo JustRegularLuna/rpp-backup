@@ -12,6 +12,7 @@ For a list of features, check out [**FEATURES.md**](FEATURES.md).
 * To see a list of all Pokémon included, look [**here**] (constants/pokemon_constants.asm).
 * To see Pokémon skill sets and evolutions, look [**here**](data/evos_moves.asm).
 * To see what the TMs teach, and where to find them, look [**here**] (data/tms.asm).
+* To see Pokémon base stats, and which TMs they learn, look [**here**] (data/baseStats/).
 
 
 
