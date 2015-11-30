@@ -41,7 +41,7 @@ ResidualEffects2: ; 3c014 (f:4014)
 	db DEFENSE_DOWN1_EFFECT
 	db SPEED_DOWN1_EFFECT
 	db SPECIAL_DOWN1_EFFECT
-;	db ACCURACY_DOWN1_EFFECT
+	db ACCURACY_DOWN1_EFFECT
 	db EVASION_DOWN1_EFFECT
 	db BIDE_EFFECT
 	db SLEEP_EFFECT
@@ -7509,10 +7509,14 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	cp a, PARALYZE_SIDE_EFFECT1 + 1 ; 10% status effects are 04, 05, 06 so 07 will set carry for those
 	ld b, $1a       ;[1A-1]/100 or [26-1]/256 = 9.8%~ chance
 	jr c, .next1  ;branch ahead if this is a 10% chance effect..
-	cp a, $5B       ;Fang effects are 57, 58, 59 and Volt Tackle is 5A so 5B will set carry for those
-	ld b, $1A       ;10% effect again
-	jr c, .next1   ;branch ahead if it's a fang effect
-	ld b, $4d       ;..or use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
+	cp PARALYZE_SIDE_EFFECT2 + 1
+	jr c, .effect2
+	; otherwise, it's a fang effect
+	sub a, $53 ; map to the other effects
+	ld b, $1a
+	jr .next1
+.effect2
+	ld b, $4d       ;use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
 	sub a, $1e      ;subtract $1E to map to equivalent 10% chance effects
 .next1
 	push af
@@ -7523,12 +7527,9 @@ FreezeBurnParalyzeEffect: ; 3f30c (f:730c)
 	ld a, b ; what type of effect is this?
 	cp a, BURN_SIDE_EFFECT1
 	jr z, .burn
-	cp a, FIRE_FANG_EFFECT
-	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
 	jr z, .freeze
-	cp a, ICE_FANG_EFFECT
-	jr z, .freeze
+	; ThunderFang and VoltTackle should fall through to Paralyze
 ; .paralyze
 	ld a, 1 << PAR
 	ld [wEnemyMonStatus], a
@@ -7568,10 +7569,14 @@ opponentAttacker: ; 3f382 (f:7382)
 	cp a, PARALYZE_SIDE_EFFECT1 + 1 ; 10% status effects are 04, 05, 06 so 07 will set carry for those
 	ld b, $1a       ;[1A-1]/100 or [26-1]/256 = 9.8%~ chance
 	jr c, .next1  ;branch ahead if this is a 10% chance effect..
-	cp a, $5B       ;Fang effects are 57, 58, 59 and Volt Tackle is 5A so 5B will set carry for those
-	ld b, $1A       ;10% effect again
-	jr c, .next1   ;branch ahead if it's a fang effect
-	ld b, $4d       ;..or use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
+	cp PARALYZE_SIDE_EFFECT2 + 1
+	jr c, .effect2
+	; otherwise, it's a fang effect
+	sub a, $53 ; map to the other effects
+	ld b, $1a
+	jr .next1
+.effect2
+	ld b, $4d       ;use [4D-1]/100 or [76-1]/256 = 29.7%~ chance
 	sub a, $1e      ;subtract $1E to map to equivalent 10% chance effects
 .next1
 	push af
@@ -7582,12 +7587,10 @@ opponentAttacker: ; 3f382 (f:7382)
 	ld a, b
 	cp a, BURN_SIDE_EFFECT1
 	jr z, .burn
-	cp a, FIRE_FANG_EFFECT
-	jr z, .burn
 	cp a, FREEZE_SIDE_EFFECT
 	jr z, .freeze
-	cp a, ICE_FANG_EFFECT
-	jr z, .freeze
+	; ThunderFang and VoltTackle should fallthrough to paralyze
+;paralyze
 	ld a, 1 << PAR
 	ld [wBattleMonStatus], a
 	call QuarterSpeedDueToParalysis

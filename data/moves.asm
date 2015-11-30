@@ -223,7 +223,7 @@ endm
 	move TACKLE,       NUZZLE_EFFECT,               20, ELECTRIC, 100, 20 ; Nuzzle
 	move THUNDERBOLT,  PARALYZE_SIDE_EFFECT1,       80, ELECTRIC, 100, 15 ; Discharge
 	move QUICK_ATTACK, VOLT_TACKLE_EFFECT,         120, ELECTRIC, 100, 15 ; Volt Tackle
-	move SURF,         ACCURACY_DOWN1_EFFECT,       90, WATER,     85, 10 ; Muddy Water
+	move SURF,         ACCURACY_DOWN_SIDE_EFFECT,   90, WATER,     85, 10 ; Muddy Water
 	move GUST,         TRAPPING_EFFECT,             35, WATER,     85, 15 ; Whirlpool
 	move MEGA_DRAIN,   DRAIN_HP_EFFECT,             75, GRASS,    100, 10 ; Giga Drain
 	move PETAL_DANCE,  NO_ADDITIONAL_EFFECT,        90, GRASS,    100, 15 ; Petal Blizzard
@@ -239,8 +239,8 @@ endm
 	move CUT,          NO_ADDITIONAL_EFFECT,        80, BUG,      100, 15 ; X-Scissor
 	move AURORA_BEAM,  CONFUSION_SIDE_EFFECT,       75, BUG,      100, 15 ; Signal Beam
 	move EARTHQUAKE,   SPECIAL_DOWN_SIDE_EFFECT,    90, GROUND,   100, 10 ; Earth Power
-	move SAND_ATTACK,  ACCURACY_DOWN1_EFFECT,       20, GROUND,   100, 10 ; Mud-Slap
-	move SAND_ATTACK,  ACCURACY_DOWN1_EFFECT,       65, GROUND,    85, 10 ; Mud Bomb
+	move SAND_ATTACK,  ACCURACY_DOWN_SIDE_EFFECT,   20, GROUND,   100, 10 ; Mud-Slap
+	move SAND_ATTACK,  ACCURACY_DOWN_SIDE_EFFECT,   65, GROUND,    85, 10 ; Mud Bomb
 	move CONFUSION,    FLINCH_SIDE_EFFECT1,         80, PSYCHIC,  100, 20 ; Extrasensory
 	move HEADBUTT,     FLINCH_SIDE_EFFECT2,         80, PSYCHIC,  100, 15 ; Zen Headbutt
 	move CUT,          NO_ADDITIONAL_EFFECT,        70, PSYCHIC,  100, 20 ; Psycho Cut
