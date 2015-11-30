@@ -1,56 +1,32 @@
-_MtMoon3Text_49f24:: ; 8095e (20:495e)
-	text "You want the"
-	line "DOME FOSSIL?"
+_MtMoon3BattleText1:: ; 809cc (20:49cc)
+	text "Hmm? Fossils?"
+	line "Oh no, those"
+	cont "aren't mine."
+
+	para "I'm trying to"
+	line "find OLD AMBER."
 	done
 
-_MtMoon3Text_49f64:: ; 80979 (20:4979)
-	text "You want the"
-	line "HELIX FOSSIL?"
-	done
-
-_MtMoon3Text_49f6f:: ; 80995 (20:4995)
-	text $52, " got the"
-	line "@"
-	TX_RAM wcf4b
-	text "!@@"
-
-_MtMoon3Text_49f7f:: ; 809a8 (20:49a8)
-	text "Look, you've got"
-	line "no room for this.@@"
-
-_MtMoon3Text_49f85:: ; 809cc (20:49cc)
-	text "Hey, stop!"
-
-	para "I found these"
-	line "fossils! They're"
-	cont "both mine!"
-	done
-
-_MtMoon3Text_49f8a:: ; 80a01 (20:4a01)
-	text "OK!"
-	line "I'll share!"
+_MtMoon3EndBattleText1:: ; 80a01 (20:4a01)
+	text "Oh!"
+	line "You made a fossil"
+	cont "out of me!"
 	prompt
 
-_MtMoon3Text_49f8f:: ; 80a11 (20:4a11)
-	text "We'll each take"
-	line "one!"
-	cont "No being greedy!"
+_MtMoon3AfterBattleText1:: ; 80a11 (20:4a11)
+	text "The DOME FOSSIL"
+	line "is KABUTO, and"
+	cont "the HELIX FOSSIL"
+	cont "is OMANYTE."
+	
+	para "They're both cool"
+	line "and all, but I"
+	cont "want AERODACTYL."
+	
+	para "That's why I'm"
+	line "looking for OLD"
+	cont "AMBER!"
 	done
-
-_MtMoon3Text_49f94:: ; 80a37 (20:4a37)
-	text "Far away, on"
-	line "CINNABAR ISLAND,"
-	cont "there's a #MON"
-	cont "LAB."
-
-	para "They do research"
-	line "on regenerating"
-	cont "fossils."
-	done
-
-_MtMoon3Text_49f99:: ; 80a93 (20:4a93)
-	text "All right. Then"
-	line "this is mine!@@"
 
 _MtMoon3BattleText2:: ; 80ab3 (20:4ab3)
 	text "It's none of your"
