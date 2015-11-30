@@ -4819,12 +4819,7 @@ HandleCounterMove: ; 3e093 (f:6093)
 	ld a,[de]
 	and a
 	ret z ; miss if the opponent's last selected move's Base Power is 0.
-; check if the move the target last selected was Normal or Fighting type
-;	inc de
-;	ld a,[de]
-;	and a ; normal type
-;	jr z,.counterableType
-;	cp a,FIGHTING
+; check if the move the target last selected was Physical
 	ld a,[hl]
 	call PhysicalSpecialSplit
 	cp a, PHYSICAL
@@ -8929,7 +8924,12 @@ CheckForElectroBall:
 .done
 	ld [hl],a
 	ret
-	
-INCLUDE "engine/battle/physical_special_split.asm"	
 
-	
+; Determine if a move is Physical, Special, or Status
+; INPUT: Move ID in register a
+; OUTPUT: Move Physical/Special/Status type in register a
+PhysicalSpecialSplit:
+	ld [wTempMoveID], a
+	callba _PhysicalSpecialSplit
+	ld a, [wTempMoveID]
+	ret

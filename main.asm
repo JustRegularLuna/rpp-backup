@@ -7211,6 +7211,7 @@ INCLUDE "engine/wonder_trade.asm"
 INCLUDE "engine/overworld/automatic_repel.asm"
 INCLUDE "scripts/DayCareManScript.asm"
 INCLUDE "engine/overworld/ferry_script.asm"
+INCLUDE "engine/battle/physical_special_split.asm"
 
 SECTION "trainer pics 2", ROMX,BANK[$39]
 

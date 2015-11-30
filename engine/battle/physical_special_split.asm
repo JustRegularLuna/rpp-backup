@@ -1,9 +1,11 @@
-PhysicalSpecialSplit: ;Determines if a move is Physical or Special
+_PhysicalSpecialSplit:: ;Determines if a move is Physical or Special
+	ld a, [wTempMoveID]
 	ld c,a
 	ld b, $00
 	ld hl,.MovesTable
 	add hl,bc
 	ld a,[hl]
+	ld [wTempMoveID], a
 	ret
 
 	
