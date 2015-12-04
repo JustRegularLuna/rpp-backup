@@ -347,3 +347,29 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 .done
 	ld [wTrainerSpriteOffset], a ; wWhichTrade
 	ret
+
+; Makes Player turn to face enemy trainer
+; Just like every other Pokémon game
+FaceEnemyTrainer::
+	ld a, [wTrainerFacingDirection]
+	and a
+	jr z, .facingDown
+	cp $4
+	jr z, .facingUp
+	cp $8
+	jr z, .facingLeft
+	jr .facingRight
+.facingDown
+	ld a, 8 ; player face up
+	jr .done
+.facingUp
+	ld a, 4 ; player face down
+	jr .done
+.facingLeft
+	ld a, 1 ; player face right
+	jr .done
+.facingRight
+	ld a, 2 ; player face left
+.done
+	ld [wd528], a ; update player facing
+	ret

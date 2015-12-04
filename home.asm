@@ -2360,6 +2360,7 @@ DisplayEnemyTrainerTextAndStartBattle:: ; 324c (0:324c)
 	and $1
 	ret nz ; return if the enemy trainer hasn't finished walking to the player's sprite
 	ld [wJoyIgnore], a
+	callba FaceEnemyTrainer
 	ld a, [wSpriteIndex]
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
