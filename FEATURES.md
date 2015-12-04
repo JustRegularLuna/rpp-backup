@@ -17,6 +17,7 @@ These are notable bugs from original Red that have been fixed
 * No NPCs making impossible claims about Pokémon evolving
 * Fixed the bug where Item Evolutions can happen accidentally by level-up
 * Changed Struggle to be ???-Type so nothing can be immune to it
+* Player turns to face an enemy trainer, like in every game except Red and FireRed
 * More
 
 
@@ -61,7 +62,6 @@ These features are not in yet, but are planned
 * Shiny Pokémon
 * Special Attack/Special Defense split into two stats
 * "PokéCom" Device, basically a Pokégear or Pokénav
-* More updates to the TM list
 * Dive areas
 * More
 
