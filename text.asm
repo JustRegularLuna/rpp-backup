@@ -1881,6 +1881,7 @@ INCLUDE "text/maps/viridian_forest_entrance.asm"
 INCLUDE "text/maps/mt_moon_pokecenter.asm"
 INCLUDE "text/maps/saffron_gates.asm"
 INCLUDE "text/maps/daycare_1.asm"
+INCLUDE "text/maps/beach_house.asm"
 
 
 SECTION "Text 4", ROMX, BANK[TEXT_4]

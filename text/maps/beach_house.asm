@@ -1,103 +1,68 @@
-_SurfinDudeText1::
-	text "Whoa!"
-
-	para "Your PIKACHU knows"
-	line "how to SURF! So,"
-	cont "I'm not alone..."
-
-	para "Great! You earned"
-	line "the right to SURF"
-	cont "with the DUDE!"
-
-	para "Give it a go?"
-	done
-
-_SurfinDudeText2::
-	text "Come SURF anytime,"
-	line "my friend!"
-	done
-
-_SurfinDudeText3::
-	text "Wanna go SURF?"
-	done
-
-_SurfinDudeText4::
-	text "Dogs and burgers"
-	line "on special today!"
-	done
-
 _BeachHousePikachuText::
-	text "PIKACHU: Pikaa."
+	text "PUKA: Pika-pi!"
+	done
+	
+_BeachHouseGirlText::
+	text "I came inside to"
+	line "get some more"
+	cont "sunscreen."
+	done
+	
+_BeachHouseOldManText::
+	text "Oof, I spent too"
+	line "long in the sun."
+	
+	para "I need to rest..."
 	done
 
-_BeachHouseSign1Text1::
-	text "SURFIN' DUDE's"
-	line "scribbles..."
+_BeachHouseGiveSurfText::
+	text "Yo! What's up,"
+	line "little dude?"
+	
+	para "So, you saw some"
+	line "people out there"
+	cont "on the waves,"
+	cont "and now you want"
+	cont "in on that?"
+	
+	para "Well you came to"
+	line "the right place!"
+	prompt
+	
+_BeachHouseGiveSurfText2::
+	text "Yo! What's up,"
+	line "little dudette?"
+	
+	para "So, you saw some"
+	line "people out there"
+	cont "on the waves,"
+	cont "and now you want"
+	cont "in on that?"
+	
+	para "Well you came to"
+	line "the right place!"
+	prompt
 
-	para "When I shoot the"
-	line "tube, the tunes"
-	cont "hit the groove!"
+_ReceivedHM03Text::
+	text $52, " received"
+	line "@"
+	TX_RAM wcf4b
+	text "!@@"
+
+_HM03ExplanationText::
+	text "HM03 is SURF!"
+
+	para "You and your"
+	line "#MON can get"
+	cont "out there and"
+	cont "catch the gnarly"
+	cont "waves!"
 	done
 
-_BeachHouseSign1Text2::
-	text "30 years of waves!"
-	line "SURFIN' DUDE"
+_HM03NoRoomText::
+	text "Whoa, hold up!"
+	
+	para "You don't have"
+	line "room for this"
+	cont "sweet HM!"
 	done
-
-_BeachHouseSign2Text1::
-	text "SURFING TIP 1!"
-
-	para "After flips, line"
-	line "the board up with"
-	cont "a wave for a cool"
-	cont "effect!"
-	done
-
-_BeachHouseSign2Text2::
-	text "SUMMER BEACH HOUSE"
-	line "#MON welcome!"
-	done
-
-_BeachHouseSign3Text1::
-	text "SURFING TIP 2!"
-
-	para "Pulling flips in"
-	line "a jump is totally"
-	cont "rad!"
-	done
-
-_BeachHouseSign3Text2::
-	text "The sea unites"
-	line "all in surfdom!"
-	done
-
-_BeachHousePrinterText1::
-	text "It's some sort of"
-	line "a machine...@@"
-
-_BeachHousePrinterText2::
-	text "SUMMER BEACH HOUSE"
-	line "PRINTER, it says.@@"
-
-_BeachHousePrinterText3::
-	text "The Hi.Score is"
-	line "shown."
-
-	para "PRINT it out?"
-	done
-
-_BeachHousePrinterText4::
-	text "SUMMER BEACH HOUSE"
-	line "PRINTER, it says."
-
-	para "The Hi.Score is"
-	line "shown."
-
-	para "PRINT it out?"
-	done
-
-_BeachHousePrinterText5::
-	text "PRINT completed.@@"
-
-_BeachHousePrinterText6::
-	text "PRINT error!@@"

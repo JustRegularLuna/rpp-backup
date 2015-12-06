@@ -203,8 +203,8 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; RocketHideout3
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; RocketHideout4
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1) ; RocketHideoutElevator
-	db MUSIC_DUNGEON1, BANK(Music_Dungeon1)
-	db MUSIC_DUNGEON1, BANK(Music_Dungeon1)
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; ROUTE_19_GATE
+	db MUSIC_ROUTES3, BANK(Music_Routes3) ; BeachHouse
 	db MUSIC_DUNGEON1, BANK(Music_Dungeon1)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo2
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCo3

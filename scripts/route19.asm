@@ -73,7 +73,7 @@ Route19TrainerHeader4: ; 55da3 (15:5da3)
 
 Route19TrainerHeader5: ; 55daf (15:5daf)
 	db $6 ; flag's bit
-	db ($4 << 4) ; trainer's view range
+	db ($2 << 4) ; trainer's view range
 	dw wd7e5 ; flag's byte
 	dw Route19BattleText6 ; 0x5e9b TextBeforeBattle
 	dw Route19AfterBattleText6 ; 0x5ea5 TextAfterBattle
