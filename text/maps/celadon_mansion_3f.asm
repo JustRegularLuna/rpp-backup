@@ -21,25 +21,50 @@ _WriterText:: ; 9cfe0 (27:4fe0)
 	done
 
 _GameDesignerText:: ; 9d03a (27:503a)
-	text "Is that right?"
+	text "Hiya, I'm the"
+	line "GAME DESIGNER!"
 
-	para "I'm the game"
-	line "designer!"
+	para "You should come"
+	line "back here once"
+	cont "you've caught at"
+	cont "least 150 kinds"
+	cont "of #MON."
 
-	para "Filling up your"
-	line "#DEX is tough,"
-	cont "but don't quit!"
-
-	para "When you finish,"
-	line "come tell me!"
+	para "I'll give you"
+	line "something I think"
+	cont "you'll like."
+	
+	para "No, don't worry,"
+	line "it isn't some"
+	cont "useless Diploma!"	
+	done
+	
+_GameDesignerGiveTicketText::
+	text "Ah! I see you've"
+	line "caught at least"
+	cont "150 kinds of"
+	cont "#MON now."
+	
+	para "I want you to"
+	line "have this."
+	done
+	
+_ReceivedEonTicketText::
+	text $52, " received"
+	line "the EON TICKET!"
 	done
 
-_CompletedDexText:: ; 9d0ad (27:50ad)
-	text "Wow! Excellent!"
-	line "You completed"
-	cont "your #DEX!"
-	cont "Congratulations!"
-	cont "...@@"
+_GameDesignerAlreadyGivenText:: ; 9d0ad (27:50ad)
+	text "The EON TICKET"
+	line "allows you to"
+	cont "visit SOUTHERN"
+	cont "ISLAND in HOENN."
+	
+	para "You can take the"
+	line "SEAGALLOP FERRY"
+	cont "in VERMILION to"
+	cont "get there."
+	done
 
 _CeladonMansion3Text5:: ; 9d0ed (27:50ed)
 	text "It's the game"

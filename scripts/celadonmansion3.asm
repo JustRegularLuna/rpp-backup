@@ -25,34 +25,64 @@ WriterText: ; 487ad (12:47ad)
 
 DirectorText: ; 487b2 (12:47b2)
 	db $08 ; asm
+	ld a, [wExtraFlags]
+	bit 3, a
+	jr nz, .alreadyGiven
 
 	; check pokédex
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wd11e]
-	cp NUM_POKEMON
-	jr nc, .CompletedDex
+	cp 150
+	jr nc, .Enough
+	
+	; if you haven't gotten it yet, and you don't have enough
 	ld hl, .GameDesigner
-	jr .done
-.CompletedDex
-	ld hl, .CompletedDexText
-.done
 	call PrintText
 	jp TextScriptEnd
 
+.Enough
+	ld hl, .GameDesignerGiveTicketText
+	call PrintText
+	ld b, EON_TICKET
+	ld c, 1
+	call GiveItem
+	jr nc, .bagFull
+	ld hl, .ReceivedEonTicketText
+	call PrintText
+	ld hl, wExtraFlags
+	set 3, [hl]
+.alreadyGiven
+	ld hl, .Already
+	call PrintText
+	jp TextScriptEnd
+	
+.bagFull
+	ld hl, .noRoom
+	call PrintText
+	jp TextScriptEnd
+	
 .GameDesigner ; 487d0 (12:47d0)
 	TX_FAR _GameDesignerText
 	db "@"
-
-.CompletedDexText
-	TX_FAR _CompletedDexText
-	db $6
-	db $8 ; asm
-	callab DisplayDiploma
-	ld a, $1
-	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	jp TextScriptEnd
+	
+.Already
+	TX_FAR _GameDesignerAlreadyGivenText
+	db "@"
+	
+.noRoom
+	TX_FAR _NoMoreRoomForItemText
+	db "@"
+	
+.GameDesignerGiveTicketText
+	TX_FAR _GameDesignerGiveTicketText
+	db "@"
+	
+.ReceivedEonTicketText
+	TX_FAR _ReceivedEonTicketText
+	db $0B
+	db "@"
 
 GameFreakPCText1: ; 487eb (12:47eb)
 	TX_FAR _CeladonMansion3Text5

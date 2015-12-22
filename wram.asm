@@ -1939,6 +1939,7 @@ wPlayerGender::
 wExtraFlags::
 ; bit 1 = Set means a baby is in Daycare
 ; bit 2 = Set means traded mons obey like normal mons
+; bit 3 = Set means you've received Eon Ticket in Celadon Mansion
 	ds 1
 
 wObtainedHiddenItemsFlags::
