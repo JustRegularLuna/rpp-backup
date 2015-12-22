@@ -1903,11 +1903,10 @@ W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
 	ds 1
 W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
-; unused
-	ds 134
-
 W_GAMEPROGRESSFLAGSEND::
 
+; unused bytes originally allocated with game progress flags
+	ds 114
 
 
 ; variable sprites can be changed with scripts
