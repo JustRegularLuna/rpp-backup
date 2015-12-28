@@ -1425,7 +1425,7 @@ _TrainerWantsToFightText:: ; 89c5e (22:5c5e)
 	text " @"
 	TX_RAM wCurTrainerName
 	db $0
-	line "wants to fight!"
+	line "wants to battle!"
 	prompt
 
 _UnveiledGhostText:: ; 89c73 (22:5c73)
