@@ -91,8 +91,7 @@ _CeladonGymBattleText2:: ; 9d596 (27:5596)
 	done
 
 _CeladonGymEndBattleText2:: ; 9d5b9 (27:55b9)
-	text "You're"
-	line "too rough!"
+	text "You're too rough!"
 	prompt
 
 _CeladonGymAfterBattleText2:: ; 9d5cb (27:55cb)
@@ -107,8 +106,7 @@ _CeladonGymBattleText3:: ; 9d5f0 (27:55f0)
 	done
 
 _CeladonGymEndBattleText3:: ; 9d606 (27:5606)
-	text "My"
-	line "makeup!"
+	text "My makeup!"
 	prompt
 
 _CeladonGymAfterBattleText3:: ; 9d612 (27:5612)
@@ -127,8 +125,7 @@ _CeladonGymBattleText4:: ; 9d675 (27:5675)
 	done
 
 _CeladonGymEndBattleText4:: ; 9d691 (27:5691)
-	text "I'm"
-	line "in shock!"
+	text "I'm in shock!"
 	prompt
 
 _CeladonGymAfterBattleText4:: ; 9d69f (27:569f)
@@ -166,8 +163,7 @@ _CeladonGymBattleText6:: ; 9d762 (27:5762)
 	done
 
 _CeladonGymEndBattleText6:: ; 9d78d (27:578d)
-	text "Oh!"
-	line "You!"
+	text "Oh! You!"
 	prompt
 
 _CeladonGymAfterBattleText6:: ; 9d797 (27:5797)
@@ -184,8 +180,7 @@ _CeladonGymBattleText7:: ; 9d7d7 (27:57d7)
 	done
 
 _CeladonGymEndBattleText7:: ; 9d808 (27:5808)
-	text "Oh!"
-	line "Splendid!"
+	text "Oh! Splendid!"
 	prompt
 
 _CeladonGymAfterBattleText7:: ; 9d817 (27:5817)
@@ -205,8 +200,7 @@ _CeladonGymBattleText8:: ; 9d855 (27:5855)
 	done
 
 _CeladonGymEndBattleText8:: ; 9d897 (27:5897)
-	text "Oh!"
-	line "Beaten!"
+	text "Oh! Beaten!"
 	prompt
 
 _CeladonGymAfterBattleText8:: ; 9d8a4 (27:58a4)

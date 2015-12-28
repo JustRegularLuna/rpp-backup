@@ -57,7 +57,7 @@ _CeruleanGymText_5c7d3:: ; 98b90 (26:4b90)
 	done
 
 _CeruleanGymText_5c7d8:: ; 98bb0 (26:4bb0)
-	text "I can't belive"
+	text "I can't believe"
 	line "I lost!"
 
 	para "All right!"
