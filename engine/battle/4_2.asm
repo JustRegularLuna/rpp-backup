@@ -398,17 +398,7 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	ld a, [wLinkState]
 	and a
 	jr nz, .rival
-	ld hl, W_RIVALNAME
 	ld a, [W_TRAINERCLASS]
-	cp SONY1
-	jr z, .rival
-	cp SONY2
-	jr z, .rival
-	cp SONY3
-	jr z, .rival
-	ld hl, wCurTrainerName
-	cp PKMN_TRAINER
-	jr z, .rival
 	ld [wd0b5], a
 	ld a, TRAINER_NAME
 	ld [wNameListType], a

@@ -81,14 +81,9 @@ Mansion1TrainerHeader0: ; 44334 (11:4334)
 
 Mansion1Text1: ; 44341 (11:4341)
 	db $08 ; asm
-	ld hl,CustomNameMansion1
-	call SetCustomName
 	ld hl, Mansion1TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
-
-CustomNameMansion1:
-	db "FLANNERY@"
 
 Mansion1BattleText2: ; 4434b (11:434b)
 	TX_FAR _Mansion1BattleText2
