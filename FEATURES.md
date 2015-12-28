@@ -32,10 +32,12 @@ These are notable features which have been added
 * Berry Trees (working off of a step counter)
 * Option to choose (during the intro) how traded Pokémon behave
 * New trainer classes added
+* Trainers have individual names
 * Animated EXP Bar in battle
 * Caught indicator icon for Wild Pokémon
 * EXP Share functions like Gen 6 (But is NOT given at the start of the game)
 * BW/2 Repel System
+* Pack holds 30 items instead of 20
 * HM Moves usable without manually selecting them from the party menu
 * Physical/Special Split
 * Dark, Steel, and Fairy types
@@ -55,7 +57,6 @@ These are notable features which have been added
 These features are not in yet, but are planned
 
 * Battle Tower
-* Trainers have individual names
 * Move Tutors
 * Move Deleter
 * Move Relearner
@@ -63,6 +64,7 @@ These features are not in yet, but are planned
 * Special Attack/Special Defense split into two stats
 * "PokéCom" Device, basically a Pokégear or Pokénav
 * Dive areas
+* Additional item pockets in the bag
 * More
 
 
