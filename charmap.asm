@@ -233,6 +233,8 @@ charmap "'m", $E5
 charmap "?", $E6
 charmap "!", $E7
 charmap ".", $E8
+charmap "+", $EA
+charmap "&", $EB
 charmap "▶", $ED
 charmap "♂", $EF
 charmap "¥", $F0
