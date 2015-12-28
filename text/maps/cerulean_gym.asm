@@ -57,8 +57,8 @@ _CeruleanGymText_5c7d3:: ; 98b90 (26:4b90)
 	done
 
 _CeruleanGymText_5c7d8:: ; 98bb0 (26:4bb0)
-	text "I can't"
-	line "believe I lost!"
+	text "I can't belive"
+	line "I lost!"
 
 	para "All right!"
 
@@ -74,8 +74,8 @@ _CeruleanGymBattleText1:: ; 98c05 (26:4c05)
 	done
 
 _CeruleanGymEndBattleText1:: ; 98c38 (26:4c38)
-	text "You"
-	line "overwhelmed me!"
+	text "You overwhelmed"
+	line "me!"
 	prompt
 
 _CeruleanGymAfterBattleText1:: ; 98c4d (26:4c4d)
@@ -93,8 +93,7 @@ _CeruleanGymBattleText2:: ; 98c93 (26:4c93)
 	done
 
 _CeruleanGymEndBattleText2:: ; 98cb5 (26:4cb5)
-	text "That"
-	line "can't be!"
+	text "That can't be!"
 	prompt
 
 _CeruleanGymAfterBattleText2:: ; 98cc4 (26:4cc4)

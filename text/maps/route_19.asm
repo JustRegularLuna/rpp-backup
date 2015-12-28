@@ -4,8 +4,7 @@ _Route19BattleText1:: ; 918eb (24:58eb)
 	done
 
 _Route19EndBattleText1:: ; 9190c (24:590c)
-	text "All"
-	line "warmed up!"
+	text "All warmed up!"
 	prompt
 
 _Route19AfterBattleText1:: ; 9191c (24:591c)
@@ -34,8 +33,7 @@ _Route19BattleText3:: ; 9198f (24:598f)
 	done
 
 _Route19EndBattleText3:: ; 919b1 (24:59b1)
-	text "Belly"
-	line "flop!"
+	text "Belly flop!"
 	prompt
 
 _Route19AfterBattleText3:: ; 919be (24:59be)
@@ -140,8 +138,7 @@ _Route19BattleText10:: ; 91bdd (24:5bdd)
 	done
 
 _Route19EndBattleText10:: ; 91bf9 (24:5bf9)
-	text "I'm"
-	line "exhausted..."
+	text "I'm exhausted..."
 	prompt
 
 _Route19AfterBattleText10:: ; 91c0a (24:5c0a)

@@ -52,8 +52,8 @@ _RockTunnel2BattleText5:: ; 86b2f (21:6b2f)
 	done
 
 _RockTunnel2EndBattleText5:: ; 86b53 (21:6b53)
-	text "Well,"
-	line "that's that."
+	text "Well, that's that"
+	line "then."
 	prompt
 
 _RockTunnel2AfterBattleText5:: ; 86b66 (21:6b66)
@@ -70,7 +70,7 @@ _RockTunnel2BattleText6:: ; 86b91 (21:6b91)
 	done
 
 _RockTunnel2EndBattleText6:: ; 86bbc (21:6bbc)
-	text "I give!"
+	text "Ok, I'll admit!"
 	line "You're a better"
 	cont "technician!"
 	prompt
@@ -88,8 +88,7 @@ _RockTunnel2BattleText7:: ; 86c10 (21:6c10)
 	done
 
 _RockTunnel2EndBattleText7:: ; 86c3f (21:6c3f)
-	text "Oh!"
-	line "I lost!"
+	text "Oh! I lost!"
 	prompt
 
 _RockTunnel2AfterBattleText7:: ; 86c4c (21:6c4c)
@@ -104,7 +103,6 @@ _RockTunnel2BattleText8:: ; 86c77 (21:6c77)
 	done
 
 _RockTunnel2EndBattleText8:: ; 86c94 (21:6c94)
-	text "Fired"
-	line "away!"
+	text "Fired away!"
 	prompt
 

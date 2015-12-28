@@ -84,8 +84,7 @@ _SilphCo7BattleText1:: ; 846ff (21:46ff)
 	done
 
 _SilphCo7EndBattleText1:: ; 8471d (21:471d)
-	text "Lights"
-	line "out!"
+	text "Lights out!"
 	prompt
 
 _SilphCo7AfterBattleText1:: ; 8472a (21:472a)
@@ -102,8 +101,7 @@ _SilphCo7BattleText2:: ; 8475b (21:475b)
 	done
 
 _SilphCo7EndBattleText2:: ; 84786 (21:4786)
-	text "I'm"
-	line "done!"
+	text "I'm done!"
 	prompt
 
 _SilphCo7AfterBattleText2:: ; 84790 (21:4790)
@@ -139,8 +137,7 @@ _SilphCo7BattleText4:: ; 8482d (21:482d)
 	done
 
 _SilphCo7EndBattleText4:: ; 84852 (21:4852)
-	text "Fine!"
-	line "I lost!"
+	text "Fine! I lost!"
 	prompt
 
 _SilphCo7AfterBattleText4:: ; 84861 (21:4861)

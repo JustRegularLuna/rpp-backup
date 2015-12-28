@@ -87,8 +87,7 @@ _ViridianGymBattleText1:: ; 96125 (25:6125)
 	done
 
 _ViridianGymEndBattleText1:: ; 96154 (25:6154)
-	text "I"
-	line "ran out of gas!"
+	text "I ran out of gas!"
 	prompt
 
 _ViridianGymAfterBattleText1:: ; 96167 (25:6167)
@@ -151,8 +150,7 @@ _ViridianGymBattleText5:: ; 962b8 (25:62b8)
 	done
 
 _ViridianGymEndBattleText5:: ; 962dc (25:62dc)
-	text "I"
-	line "lost my grip!"
+	text "I lost my grip!"
 	prompt
 
 _ViridianGymAfterBattleText5:: ; 962ed (25:62ed)
@@ -200,8 +198,7 @@ _ViridianGymBattleText8:: ; 963bd (25:63bd)
 	done
 
 _ViridianGymEndBattleText8:: ; 96403 (25:6403)
-	text "I"
-	line "was beaten?"
+	text "I was beaten?"
 	prompt
 
 _ViridianGymAfterBattleText8:: ; 96412 (25:6412)

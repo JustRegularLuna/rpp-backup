@@ -18,8 +18,8 @@ _Mansion4BattleText2:: ; 85521 (21:5521)
 	done
 
 _Mansion4EndBattleText2:: ; 85541 (21:5541)
-	text "What"
-	line "was that for?"
+	text "What was that"
+	line "for?"
 	prompt
 
 _Mansion4AfterBattleText2:: ; 85555 (21:5555)

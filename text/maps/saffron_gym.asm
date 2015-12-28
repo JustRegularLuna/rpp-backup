@@ -17,9 +17,8 @@ _SaffronGymText_5d162:: ; a1bb4 (28:5bb4)
 	done
 
 _SaffronGymText_5d167:: ; a1c73 (28:5c73)
-	text "I'm"
-	line "shocked!"
-	cont "But, a loss is a"
+	text "I'm shocked!"
+	line "But, a loss is a"
 	cont "loss."
 
 	para "I admit I didn't"
@@ -107,8 +106,7 @@ _SaffronGymBattleText1:: ; a1f33 (28:5f33)
 	done
 
 _SaffronGymEndBattleText1:: ; a1f62 (28:5f62)
-	text "Not"
-	line "good enough!"
+	text "Not good enough!"
 	prompt
 
 _SaffronGymAfterBattleText1:: ; a1f74 (28:5f74)
@@ -128,8 +126,8 @@ _SaffronGymBattleText2:: ; a1fe0 (28:5fe0)
 	done
 
 _SaffronGymEndBattleText2:: ; a2002 (28:6002)
-	text "I never"
-	line "foresaw this!"
+	text "I never foresaw"
+	line "this!"
 	prompt
 
 _SaffronGymAfterBattleText2:: ; a2019 (28:6019)
@@ -148,8 +146,7 @@ _SaffronGymBattleText3:: ; a2042 (28:6042)
 	done
 
 _SaffronGymEndBattleText3:: ; a2091 (28:6091)
-	text "I knew"
-	line "it!"
+	text "I knew it!"
 	prompt
 
 _SaffronGymAfterBattleText3:: ; a209d (28:609d)
@@ -165,8 +162,8 @@ _SaffronGymBattleText4:: ; a20c9 (28:60c9)
 	done
 
 _SaffronGymEndBattleText4:: ; a20f1 (28:60f1)
-	text "I don't"
-	line "believe this!"
+	text "I don't believe"
+	line "this!"
 	prompt
 
 _SaffronGymAfterBattleText4:: ; a2107 (28:6107)
@@ -182,8 +179,7 @@ _SaffronGymBattleText5:: ; a213c (28:613c)
 	done
 
 _SaffronGymEndBattleText5:: ; a215e (28:615e)
-	text "I lost"
-	line "after all!"
+	text "I lost after all!"
 	prompt
 
 _SaffronGymAfterBattleText5:: ; a2171 (28:6171)
@@ -202,8 +198,8 @@ _SaffronGymBattleText6:: ; a219c (28:619c)
 	done
 
 _SaffronGymEndBattleText6:: ; a21e4 (28:61e4)
-	text "I lost"
-	line "my concentration!"
+	text "I lost my"
+	line "concentration!"
 	prompt
 
 _SaffronGymAfterBattleText6:: ; a21fe (28:61fe)

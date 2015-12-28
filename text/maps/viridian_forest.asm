@@ -47,9 +47,9 @@ _ViridianForestBattleText3:: ; 80438 (20:4438)
 	done
 
 _ViridianForestEndBattleText3:: ; 80458 (20:4458)
-	text "I"
-	line "give! You're good"
-	cont "at this!"
+	text "I give!"
+	line "You're good at"
+	cont "athis!"
 	prompt
 
 _ViridianFrstAfterBattleText3:: ; 80475 (20:4475)

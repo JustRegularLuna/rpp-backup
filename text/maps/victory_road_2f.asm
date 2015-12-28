@@ -24,8 +24,7 @@ _VictoryRoad2BattleText2:: ; 8d0e1 (23:50e1)
 	done
 
 _VictoryRoad2EndBattleText2:: ; 8d10f (23:510f)
-	text "You"
-	line "got me!"
+	text "You got me!"
 	prompt
 
 _VictoryRoad2AfterBattleText2:: ; 8d11c (23:511c)
@@ -39,8 +38,7 @@ _VictoryRoad2BattleText3:: ; 8d137 (23:5137)
 	done
 
 _VictoryRoad2EndBattleText3:: ; 8d14f (23:514f)
-	text "I got"
-	line "whipped!"
+	text "I got whipped!"
 	prompt
 
 _VictoryRoad2AfterBattleText3:: ; 8d15f (23:515f)
@@ -74,8 +72,7 @@ _VictoryRoad2BattleText5:: ; 8d214 (23:5214)
 	done
 
 _VictoryRoad2EndBattleText5:: ; 8d230 (23:5230)
-	text "Well"
-	line "done!"
+	text "Well done!"
 	prompt
 
 _VictoryRoad2AfterBattleText5:: ; 8d23c (23:523c)

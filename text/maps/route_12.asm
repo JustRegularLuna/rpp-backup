@@ -39,8 +39,8 @@ _Route12BattleText2:: ; 90183 (24:4183)
 	done
 
 _Route12EndBattleText2:: ; 901ab (24:41ab)
-	text "That"
-	line "one got away!"
+	text "That one got"
+	line "away!"
 	prompt
 
 _Route12AfterBattleText2:: ; 901bf (24:41bf)
@@ -90,8 +90,7 @@ _Route12BattleText5:: ; 902a8 (24:42a8)
 	done
 
 _Route12EndBattleText5:: ; 902c8 (24:42c8)
-	text "Too"
-	line "much!"
+	text "Too much!"
 	prompt
 
 _Route12AfterBattleText5:: ; 902d3 (24:42d3)
@@ -106,8 +105,7 @@ _Route12BattleText6:: ; 90301 (24:4301)
 	done
 
 _Route12EndBattleText6:: ; 90318 (24:4318)
-	text "It's"
-	line "not easy..."
+	text "It's not easy..."
 	prompt
 
 _Route12AfterBattleText6:: ; 90329 (24:4329)
@@ -123,8 +121,7 @@ _Route12BattleText7:: ; 90358 (24:4358)
 	done
 
 _Route12EndBattleText7:: ; 9037e (24:437e)
-	text "Lost"
-	line "it!"
+	text "Lost it!"
 	prompt
 
 _Route12AfterBattleText7:: ; 90388 (24:4388)

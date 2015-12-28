@@ -36,8 +36,7 @@ _RocketHideout1BattleText4:: ; 81fd9 (20:5fd9)
 	done
 
 _RocketHideout1EndBattleText4:: ; 81fea (20:5fea)
-	text "I"
-	line "can't do it!"
+	text "I can't do it!"
 	prompt
 
 _RocketHideout1AfterBattleTxt4:: ; 81ff9 (20:5ff9)
@@ -52,8 +51,7 @@ _RocketHideout1BattleText5:: ; 82020 (20:6020)
 	done
 
 _RocketHideout1EndBattleText5:: ; 82038 (20:6038)
-	text "This"
-	line "won't do!"
+	text "This won't do!"
 	prompt
 
 _RocketHideout1AfterBattleTxt5:: ; 82047 (20:6047)

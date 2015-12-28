@@ -4,8 +4,7 @@ _Route17BattleText1:: ; 91352 (24:5352)
 	done
 
 _Route17EndBattleText1:: ; 91375 (24:5375)
-	text "Burned"
-	line "out!"
+	text "Burned out!"
 	prompt
 
 _Route17AfterBattleText1:: ; 91382 (24:5382)
@@ -35,8 +34,7 @@ _Route17BattleText3:: ; 913f5 (24:53f5)
 	done
 
 _Route17EndBattleText3:: ; 9140e (24:540e)
-	text "Crash and"
-	line "burn!"
+	text "Crash and burn!"
 	prompt
 
 _Route17AfterBattleText3:: ; 9141f (24:541f)
@@ -68,8 +66,7 @@ ENDC
 	done
 
 _Route17EndBattleText5:: ; 9149a (24:549a)
-	text "Grounded"
-	line "out!"
+	text "Grounded out!"
 	prompt
 
 _Route17AfterBattleText5:: ; 914a9 (24:54a9)
@@ -88,8 +85,7 @@ _Route17BattleText6:: ; 914d9 (24:54d9)
 	done
 
 _Route17EndBattleText6:: ; 914f4 (24:54f4)
-	text "Why,"
-	line "you!"
+	text "Why, you!"
 	prompt
 
 _Route17AfterBattleText6:: ; 914ff (24:54ff)
@@ -146,8 +142,8 @@ _Route17BattleText10:: ; 91600 (24:5600)
 	done
 
 _Route17EndBattleText10:: ; 9161a (24:561a)
-	text "Are you"
-	line "satisfied?"
+	text "Are you satisfied"
+	line "now?"
 	prompt
 
 _Route17AfterBattleText10:: ; 9162e (24:562e)

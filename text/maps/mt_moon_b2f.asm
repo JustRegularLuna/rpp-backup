@@ -61,8 +61,7 @@ _MtMoon3BattleText3:: ; 80b3b (20:4b3b)
 	done
 
 _MtMoon3EndBattleText3:: ; 80b61 (20:4b61)
-	text "I blew"
-	line "it!"
+	text "I blew it!"
 	prompt
 
 _MtMoon3AfterBattleText3:: ; 80b6d (20:4b6d)
@@ -78,8 +77,7 @@ _MtMoon3BattleText4:: ; 80b9e (20:4b9e)
 	done
 
 _MtMoon3EndBattleText4:: ; 80bcb (20:4bcb)
-	text "So, you"
-	line "are good."
+	text "So, you are good."
 	prompt
 
 _MtMoon3AfterBattleText4:: ; 80bde (20:4bde)
@@ -95,8 +93,7 @@ _MtMoon3BattleText5:: ; 80c0e (20:4c0e)
 	done
 
 _MtMoon3EndBattleText5:: ; 80c39 (20:4c39)
-	text "I'm"
-	line "steamed!"
+	text "I'm steamed!"
 	prompt
 
 _MtMoon3AfterBattleText5:: ; 80c46 (20:4c46)

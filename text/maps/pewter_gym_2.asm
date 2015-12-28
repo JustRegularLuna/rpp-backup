@@ -57,8 +57,8 @@ _TM34NoRoomText:: ; 981ab (26:41ab)
 	done
 
 _PewterGymText_5c4bc:: ; 981c9 (26:41c9)
-	text "I took"
-	line "you for granted."
+	text "I took you for"
+	line "granted."
 
 	para "As proof of your"
 	line "victory, here's"

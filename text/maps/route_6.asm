@@ -5,8 +5,7 @@ _Route6BattleText1:: ; 8dc38 (23:5c38)
 	done
 
 _Route6EndBattleText1:: ; 8dc5e (23:5c5e)
-	text "I"
-	line "just can't win!"
+	text "I just can't win!"
 	prompt
 
 _Route6AfterBattleText1:: ; 8dc70 (23:5c70)
@@ -47,8 +46,8 @@ _Route6BattleText4:: ; 8dd30 (23:5d30)
 	done
 
 _Route6EndBattleText4:: ; 8dd4e (23:5d4e)
-	text "I"
-	line "didn't start it!"
+	text "Hey, I didn't"
+	line "start it!"
 	prompt
 
 _Route6AfterBattleText4:: ; 8dd61 (23:5d61)
@@ -63,8 +62,7 @@ _Route6BattleText5:: ; 8dd8f (23:5d8f)
 	done
 
 _Route6EndBattleText5:: ; 8dda8 (23:5da8)
-	text "Just"
-	line "didn't work!"
+	text "Just didn't work!"
 	prompt
 
 _Route6AfterBattleText5:: ; 8ddba (23:5dba)
@@ -80,8 +78,7 @@ _Route6BattleText6:: ; 8dde6 (23:5de6)
 	done
 
 _Route6EndBattleText6:: ; 8de10 (23:5e10)
-	text "You"
-	line "are too good!"
+	text "You are too good!"
 	prompt
 
 _Route6AfterBattleText6:: ; 8de23 (23:5e23)

@@ -9,13 +9,12 @@ _Route3Text1:: ; 8d779 (23:5779)
 	done
 
 _Route3BattleText1:: ; 8d7d5 (23:57d5)
-	text "Hey! I met you in"
-	line "VIRIDIAN FOREST!"
+	text "Hey! Haven't I"
+	line "seen you before?"
 	done
 
 _Route3EndBattleText1:: ; 8d7f9 (23:57f9)
-	text "You"
-	line "beat me again!"
+	text "Defeated again!"
 	prompt
 
 _Route3AfterBattleText1:: ; 8d80d (23:580d)
@@ -32,8 +31,8 @@ _Route3BattleText2:: ; 8d84c (23:584c)
 	done
 
 _Route3EndBattleText2:: ; 8d87f (23:587f)
-	text "I don't"
-	line "believe it!"
+	text "I don't believe"
+	line "it!"
 	prompt
 
 _Route3AfterBattleText2:: ; 8d893 (23:5893)
@@ -49,8 +48,7 @@ _Route3BattleText3:: ; 8d8d0 (23:58d0)
 	done
 
 _Route3EndBattleText3:: ; 8d8ee (23:58ee)
-	text "You're"
-	line "mean!"
+	text "You're mean!"
 	prompt
 
 _Route3AfterBattleText3:: ; 8d8fb (23:58fb)
@@ -65,9 +63,9 @@ _Route3BattleText4:: ; 8d924 (23:5924)
 	done
 
 _Route3EndBattleText4:: ; 8d944 (23:5944)
-	text "If I"
-	line "had new #MON,"
-	cont "I would've won!"
+	text "If I had new"
+	line "#MON, I would"
+	cont "have won!"
 	prompt
 
 _Route3AfterBattleText4:: ; 8d966 (23:5966)
@@ -99,8 +97,7 @@ _Route3BattleText6:: ; 8da08 (23:5a08)
 	done
 
 _Route3EndBattleText6:: ; 8da28 (23:5a28)
-	text "Lost!"
-	line "Lost! Lost!"
+	text "Lost! Lost! Lost!"
 	prompt
 
 _Route3AfterBattleText6:: ; 8da3b (23:5a3b)
@@ -115,8 +112,7 @@ _Route3BattleText7:: ; 8da62 (23:5a62)
 	done
 
 _Route3EndBattleText7:: ; 8da7e (23:5a7e)
-	text "Done"
-	line "like dinner!"
+	text "Done like dinner!"
 	prompt
 
 _Route3AfterBattleText7:: ; 8da91 (23:5a91)

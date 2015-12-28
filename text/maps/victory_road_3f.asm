@@ -4,8 +4,8 @@ _VictoryRoad3BattleText2:: ; 81d9b (20:5d9b)
 	done
 
 _VictoryRoad3EndBattleText2:: ; 81dbf (20:5dbf)
-	text "The"
-	line "rumors were true!"
+	text "The rumors were"
+	line "all true!"
 	prompt
 
 _VictoryRoad3AfterBattleText2:: ; 81dd6 (20:5dd6)
@@ -19,8 +19,7 @@ _VictoryRoad3BattleText3:: ; 81df9 (20:5df9)
 	done
 
 _VictoryRoad3EndBattleText3:: ; 81e1e (20:5e1e)
-	text "I'm"
-	line "furious!"
+	text "I'm furious!"
 	prompt
 
 _VictoryRoad3AfterBattleText3:: ; 81e2b (20:5e2b)
@@ -34,8 +33,8 @@ _VictoryRoad3BattleText4:: ; 81e4f (20:5e4f)
 	done
 
 _VictoryRoad3EndBattleText4:: ; 81e6f (20:5e6f)
-	text "I"
-	line "don't believe it!"
+	text "I don't believe"
+	line "it!"
 	prompt
 
 _VictoryRoad3AfterBattleText4:: ; 81e83 (20:5e83)

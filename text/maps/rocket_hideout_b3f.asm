@@ -23,8 +23,8 @@ _RocketHideout3BattleTxt:: ; 821b8 (20:61b8)
 	done
 
 _RocketHideout3EndBattleText3:: ; 821e9 (20:61e9)
-	text "What?"
-	line "I lost? No!"
+	text "What? I lost?"
+	line "No!"
 	prompt
 
 _RocketHide3AfterBattleText3:: ; 821fc (20:61fc)

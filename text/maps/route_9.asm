@@ -5,8 +5,7 @@ _Route9BattleText1:: ; 8e291 (23:6291)
 	done
 
 _Route9EndBattleText1:: ; 8e2b6 (23:62b6)
-	text "You"
-	line "deceived me!"
+	text "You deceived me!"
 	prompt
 
 _Route9AfterBattleText1:: ; 8e2c8 (23:62c8)
@@ -22,8 +21,7 @@ _Route9BattleText2:: ; 8e2ff (23:62ff)
 	done
 
 _Route9EndBattleText2:: ; 8e330 (23:6330)
-	text "Out"
-	line "like a light!"
+	text "Out like a light!"
 	prompt
 
 _Route9AfterBattleText2:: ; 8e343 (23:6343)
@@ -37,8 +35,7 @@ _Route9BattleText3:: ; 8e352 (23:6352)
 	done
 
 _Route9EndBattleText3:: ; 8e37e (23:637e)
-	text "Can't"
-	line "measure up!"
+	text "Can't measure up!"
 	prompt
 
 _Route9AfterBattleText3:: ; 8e390 (23:6390)
@@ -69,8 +66,8 @@ _Route9BattleText5:: ; 8e411 (23:6411)
 	done
 
 _Route9EndBattleText5:: ; 8e433 (23:6433)
-	text "Keep it"
-	line "coming, eh!"
+	text "Keep it coming,"
+	line "eh!"
 
 	para "Oh wait. I'm out"
 	line "of #MON!"
@@ -89,8 +86,7 @@ _Route9BattleText6:: ; 8e491 (23:6491)
 	done
 
 _Route9EndBattleText6:: ; 8e4b6 (23:64b6)
-	text "What's"
-	line "that?"
+	text "What's that?"
 	prompt
 
 _Route9AfterBattleText6:: ; 8e4c3 (23:64c3)
@@ -140,8 +136,7 @@ _Route9BattleText9:: ; 8e5d2 (23:65d2)
 	done
 
 _Route9EndBattleText9:: ; 8e5ea (23:65ea)
-	text "My"
-	line "bugs..."
+	text "My bugs..."
 	prompt
 
 _Route9AfterBattleText9:: ; 8e5f6 (23:65f6)

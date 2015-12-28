@@ -31,8 +31,8 @@ _PokemonTower6BattleText2:: ; 99b72 (26:5b72)
 	done
 
 _PokemonTower6EndBattleText2:: ; 99b82 (26:5b82)
-	text "Some-"
-	line "thing fell out!"
+	text "Something fell"
+	line "out!"
 	prompt
 
 _PokemonTower6AfterBattleText2:: ; 99b99 (26:5b99)

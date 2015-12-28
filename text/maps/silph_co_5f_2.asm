@@ -1,6 +1,5 @@
 _SilphCo5EndBattleText4:: ; 84000 (21:4000)
-	text "Oh"
-	line "goodness!"
+	text "Oh goodness!"
 	prompt
 
 _SilphCo5AfterBattleText4:: ; 8400e (21:400e)

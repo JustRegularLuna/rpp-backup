@@ -18,7 +18,7 @@ _Route20BattleText2:: ; 91cac (24:5cac)
 	done
 
 _Route20EndBattleText2:: ; 91cc9 (24:5cc9)
-	text "Quit it!"
+	text "Hey! Quit it!"
 	prompt
 
 _Route20AfterBattleText2:: ; 91cd3 (24:5cd3)
@@ -47,8 +47,7 @@ _Route20BattleText4:: ; 91d43 (24:5d43)
 	done
 
 _Route20EndBattleText4:: ; 91d5d (24:5d5d)
-	text "No"
-	line "mercy at all!"
+	text "No mercy at all!"
 	prompt
 
 _Route20AfterBattleText4:: ; 91d6f (24:5d6f)
@@ -93,8 +92,7 @@ _Route20BattleText7:: ; 91e3d (24:5e3d)
 	done
 
 _Route20EndBattleText7:: ; 91e58 (24:5e58)
-	text "Oh"
-	line "no!"
+	text "Oh no!"
 	prompt
 
 _Route20AfterBattleText7:: ; 91e60 (24:5e60)
@@ -108,8 +106,8 @@ _Route20BattleText8:: ; 91e7c (24:5e7c)
 	done
 
 _Route20EndBattleText8:: ; 91e9f (24:5e9f)
-	text "Don't"
-	line "touch my pearls!"
+	text "Don't touch my"
+	line "pearls!"
 	prompt
 
 _Route20AfterBattleText8:: ; 91eb6 (24:5eb6)
@@ -124,8 +122,7 @@ _Route20BattleText9:: ; 91ee3 (24:5ee3)
 	done
 
 _Route20EndBattleText9:: ; 91f06 (24:5f06)
-	text "I'm"
-	line "so disappointed!"
+	text "I'm disappointed!"
 	prompt
 
 _Route20AfterBattleText9:: ; 91f1b (24:5f1b)

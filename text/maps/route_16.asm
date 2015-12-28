@@ -3,8 +3,8 @@ _Route16BattleText1:: ; 91081 (24:5081)
 	done
 
 _Route16EndBattleText1:: ; 91094 (24:5094)
-	text "Don't you"
-	line "dare laugh!"
+	text "Don't you dare"
+	line "laugh!"
 	prompt
 
 _Route16AfterBattleText1:: ; 910aa (24:50aa)
@@ -19,8 +19,7 @@ _Route16BattleText2:: ; 910d7 (24:50d7)
 	done
 
 _Route16EndBattleText2:: ; 910f1 (24:50f1)
-	text "Knock-"
-	line "out!"
+	text "Knock-out!"
 	prompt
 
 _Route16AfterBattleText2:: ; 910fd (24:50fd)
@@ -34,8 +33,7 @@ _Route16BattleText3:: ; 9111e (24:511e)
 	done
 
 _Route16EndBattleText3:: ; 91140 (24:5140)
-	text "You"
-	line "little rat!"
+	text "You little rat!"
 	prompt
 
 _Route16AfterBattleText3:: ; 91151 (24:5151)
@@ -65,8 +63,7 @@ _Route16BattleText5:: ; 911d8 (24:51d8)
 	done
 
 _Route16EndBattleText5:: ; 911f5 (24:51f5)
-	text "Bad,"
-	line "bad, bad!"
+	text "Bad, bad, bad!"
 	prompt
 
 _Route16AfterBattleText5:: ; 91205 (24:5205)
@@ -80,8 +77,8 @@ _Route16BattleText6:: ; 91236 (24:5236)
 	done
 
 _Route16EndBattleText6:: ; 91245 (24:5245)
-	text "Don't make"
-	line "me mad!"
+	text "Don't make me"
+	line "angry!"
 	prompt
 
 _Route16AfterBattleText6:: ; 91258 (24:5258)

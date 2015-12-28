@@ -14,8 +14,8 @@ _Route11BattleText10:: ; 90037 (24:4037)
 	done
 
 _Route11EndBattleText10:: ; 90058 (24:4058)
-	text "Too"
-	line "much, too young!"
+	text "Too much, too"
+	line "young!"
 	prompt
 
 _Route11AfterBattleText10:: ; 9006e (24:406e)

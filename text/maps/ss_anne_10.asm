@@ -24,8 +24,8 @@ _SSAnne10BattleText2:: ; 81b33 (20:5b33)
 	done
 
 _SSAnne10EndBattleText2:: ; 81b52 (20:5b52)
-	text "Your"
-	line "spirit sank me!"
+	text "Your spirit sank"
+	line "me!"
 	prompt
 
 _SSAnne10AfterBattleText2:: ; 81b68 (20:5b68)
@@ -40,8 +40,8 @@ _SSAnne10BattleText3:: ; 81b99 (20:5b99)
 	done
 
 _SSAnne10EndBattleText3:: ; 81bb4 (20:5bb4)
-	text "OK, "
-	line "you're not bad."
+	text "OK, you're not"
+	line "too bad."
 	prompt
 
 _SSAnne10AfterBattleText3:: ; 81bc9 (20:5bc9)

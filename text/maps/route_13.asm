@@ -4,8 +4,8 @@ _Route13BattleText2:: ; 903ed (24:43ed)
 	done
 
 _Route13EndBattleText2:: ; 9040a (24:440a)
-	text "My"
-	line "bird combo lost?"
+	text "My bird combo"
+	line "lost?"
 	prompt
 
 _Route13AfterBattleText2:: ; 9041f (24:441f)
@@ -36,8 +36,7 @@ _Route13BattleText4:: ; 904a6 (24:44a6)
 	done
 
 _Route13EndBattleText4:: ; 904c6 (24:44c6)
-	text "Not"
-	line "enough!"
+	text "Not enough!"
 	prompt
 
 _Route13AfterBattleText4:: ; 904d3 (24:44d3)
@@ -69,8 +68,7 @@ _Route13BattleText6:: ; 90579 (24:4579)
 	done
 
 _Route13EndBattleText6:: ; 90599 (24:4599)
-	text "Just"
-	line "messed up!"
+	text "Just messed up!"
 	prompt
 
 _Route13AfterBattleText6:: ; 905aa (24:45aa)
@@ -85,8 +83,7 @@ _Route13BattleText7:: ; 905d0 (24:45d0)
 	done
 
 _Route13EndBattleText7:: ; 905eb (24:45eb)
-	text "The"
-	line "wind turned!"
+	text "The wind turned!"
 	prompt
 
 _Route13AfterBattleText7:: ; 905fd (24:45fd)
@@ -116,7 +113,7 @@ _Route13BattleText9:: ; 90680 (24:4680)
 	done
 
 _Route13EndBattleText9:: ; 9069e (24:469e)
-	text "It's over"
+	text "What, it's over"
 	line "already?"
 	prompt
 
@@ -147,8 +144,7 @@ _Route13BattleText11:: ; 90724 (24:4724)
 	done
 
 _Route13EndBattleText11:: ; 90741 (24:4741)
-	text "Out"
-	line "of power!"
+	text "Out of power!"
 	prompt
 
 _Route13AfterBattleText11:: ; 90750 (24:4750)

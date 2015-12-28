@@ -71,8 +71,8 @@ _Route10BattleText5:: ; 8e7e7 (23:67e7)
 	done
 
 _Route10EndBattleText5:: ; 8e80c (23:680c)
-	text "That"
-	line "cleared my head!"
+	text "That cleared my"
+	line "head!"
 	prompt
 
 _Route10AfterBattleText5:: ; 8e823 (23:6823)
@@ -87,8 +87,8 @@ _Route10BattleText6:: ; 8e844 (23:6844)
 	done
 
 _Route10EndBattleText6:: ; 8e872 (23:6872)
-	text "I'm"
-	line "not up to it!"
+	text "Guess I'm not up"
+	line "to it!"
 	prompt
 
 _Route10AfterBattleText6:: ; 8e884 (23:6884)

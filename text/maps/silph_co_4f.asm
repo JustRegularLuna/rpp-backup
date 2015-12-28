@@ -46,8 +46,7 @@ _SilphCo4BattleText4:: ; 828f5 (20:68f5)
 	done
 
 _SilphCo4EndBattleText4:: ; 82908 (20:6908)
-	text "Who"
-	line "are you?"
+	text "Who are you?"
 	prompt
 
 _SilphCo4AfterBattleText4:: ; 82916 (20:6916)

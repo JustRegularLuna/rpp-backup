@@ -35,8 +35,7 @@ _Route8BattleText3:: ; 8df5b (23:5f5b)
 	done
 
 _Route8EndBattleText3:: ; 8df7e (23:5f7e)
-	text "It's"
-	line "not logical!"
+	text "It's not logical!"
 	prompt
 
 _Route8AfterBattleText3:: ; 8df90 (23:5f90)
@@ -71,8 +70,8 @@ _Route8BattleText5:: ; 8e028 (23:6028)
 	done
 
 _Route8EndBattleText5:: ; 8e049 (23:6049)
-	text "I'll"
-	line "stay with school."
+	text "I'll stay with"
+	line "school."
 	prompt
 
 _Route8AfterBattleText5:: ; 8e060 (23:6060)
@@ -105,8 +104,8 @@ _Route8BattleText7:: ; 8e0e9 (23:60e9)
 	done
 
 _Route8EndBattleText7:: ; 8e116 (23:6116)
-	text "Look what"
-	line "you did!"
+	text "Look what you"
+	line "did!"
 	prompt
 
 _Route8AfterBattleText7:: ; 8e12a (23:612a)
@@ -122,8 +121,8 @@ _Route8BattleText8:: ; 8e162 (23:6162)
 	done
 
 _Route8EndBattleText8:: ; 8e181 (23:6181)
-	text "Missed"
-	line "the big score!"
+	text "Missed the big"
+	line "score!"
 	prompt
 
 _Route8AfterBattleText8:: ; 8e198 (23:6198)

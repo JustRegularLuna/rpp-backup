@@ -19,11 +19,10 @@ _Route21BattleText2:: ; 92006 (24:6006)
 	done
 
 _Route21EndBattleText2:: ; 9202a (24:602a)
-	text "Darn"
 IF DEF(_BLUE)
-	line "GYARADOS!"
+	text "Darn GYARADOS!"
 ELSE
-	line "MAGIKARP!"
+	text "Darn MAGIKARP!"
 ENDC
 	prompt
 
@@ -58,8 +57,7 @@ _Route21BattleText4:: ; 920a0 (24:60a0)
 	done
 
 _Route21EndBattleText4:: ; 920bf (24:60bf)
-	text "Cheap"
-	line "shot!"
+	text "Cheap shot!"
 	prompt
 
 _Route21AfterBattleText4:: ; 920cc (24:60cc)
@@ -89,8 +87,8 @@ _Route21BattleText6:: ; 9214a (24:614a)
 	done
 
 _Route21EndBattleText6:: ; 9216e (24:616e)
-	text "Pant..."
-	line "pant...pant..."
+	text "Pant...pant..."
+	line "pant..."
 	prompt
 
 _Route21AfterBattleText6:: ; 92186 (24:6186)
@@ -137,8 +135,8 @@ _Route21BattleText9:: ; 92275 (24:6275)
 	done
 
 _Route21EndBattleText9:: ; 92297 (24:6297)
-	text "That"
-	line "burned some time."
+	text "That burned some"
+	line "time."
 	prompt
 
 _Route21AfterBattleText9:: ; 922af (24:62af)

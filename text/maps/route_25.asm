@@ -5,8 +5,7 @@ _Route25BattleText1:: ; 9421e (25:421e)
 	done
 
 _Route25EndBattleText1:: ; 94245 (25:4245)
-	text "You're"
-	line "decent."
+	text "You're decent."
 	prompt
 
 _Route25AfterBattleText1:: ; 94254 (25:4254)
@@ -24,8 +23,7 @@ _Route25BattleText2:: ; 94292 (25:4292)
 	done
 
 _Route25EndBattleText2:: ; 942cf (25:42cf)
-	text "I'm"
-	line "not mad!"
+	text "I'm not mad!"
 	prompt
 
 _Route25AfterBattleText2:: ; 942dc (25:42dc)
@@ -41,8 +39,7 @@ _Route25BattleText3:: ; 94310 (25:4310)
 	done
 
 _Route25EndBattleText3:: ; 94337 (25:4337)
-	text "Aww,"
-	line "darn..."
+	text "Aww, darn..."
 	prompt
 
 _Route25AfterBattleText3:: ; 94345 (25:4345)
@@ -56,8 +53,7 @@ _Route25BattleText4:: ; 94369 (25:4369)
 	done
 
 _Route25EndBattleText4:: ; 94385 (25:4385)
-	text "I'm in"
-	line "a slump!"
+	text "I'm in a slump!"
 	prompt
 
 _Route25AfterBattleText4:: ; 9439e (25:439e)
@@ -71,8 +67,8 @@ _Route25BattleText5:: ; 943c1 (25:43c1)
 	done
 
 _Route25EndBattleText5:: ; 943dd (25:43dd)
-	text "I knew"
-	line "I'd lose too!"
+	text "I knew I'd lose"
+	line "too!"
 	prompt
 
 _Route25AfterBattleText5:: ; 943f2 (25:43f2)
@@ -89,8 +85,8 @@ _Route25BattleText6:: ; 9442a (25:442a)
 	done
 
 _Route25EndBattleText6:: ; 94455 (25:4455)
-	text "I'm"
-	line "not so jealous!"
+	text "I'm not so"
+	line "jealous!"
 	prompt
 
 _Route25AfterBattleText6:: ; 94469 (25:4469)
@@ -106,8 +102,7 @@ _Route25BattleText7:: ; 94499 (25:4499)
 	done
 
 _Route25EndBattleText7:: ; 944c6 (25:44c6)
-	text "You"
-	line "worked hard!"
+	text "You worked hard!"
 	prompt
 
 _Route25AfterBattleText7:: ; 944d8 (25:44d8)
@@ -123,8 +118,7 @@ _Route25BattleText8:: ; 944fd (25:44fd)
 	done
 
 _Route25EndBattleText8:: ; 9452a (25:452a)
-	text "You"
-	line "got me."
+	text "You got me."
 	prompt
 
 _Route25AfterBattleText8:: ; 94537 (25:4537)
@@ -140,8 +134,7 @@ _Route25BattleText9:: ; 94563 (25:4563)
 	done
 
 _Route25EndBattleText9:: ; 94590 (25:4590)
-	text "You're"
-	line "something."
+	text "You're something."
 	prompt
 
 _Route25AfterBattleText9:: ; 945a2 (25:45a2)

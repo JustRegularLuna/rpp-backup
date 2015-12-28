@@ -39,7 +39,7 @@ _RockTunnel1BattleText3:: ; 8c427 (23:4427)
 	done
 
 _RockTunnel1EndBattleText3:: ; 8c459 (23:4459)
-	text "I give!"
+	text "I give up!"
 	prompt
 
 _RockTunnel1AfterBattleText3:: ; 8c462 (23:4462)
@@ -53,8 +53,7 @@ _RockTunnel1BattleText4:: ; 8c482 (23:4482)
 	done
 
 _RockTunnel1EndBattleText4:: ; 8c49a (23:449a)
-	text "Game"
-	line "over!"
+	text "Game over!"
 	prompt
 
 _RockTunnel1AfterBattleText4:: ; 8c4a6 (23:44a6)
@@ -69,8 +68,7 @@ _RockTunnel1BattleText5:: ; 8c4c9 (23:44c9)
 	done
 
 _RockTunnel1EndBattleText5:: ; 8c4f4 (23:44f4)
-	text "It"
-	line "was too dark!"
+	text "It was too dark!"
 	prompt
 
 _RockTunnel1AfterBattleText5:: ; 8c506 (23:4506)
@@ -84,8 +82,8 @@ _RockTunnel1BattleText6:: ; 8c526 (23:4526)
 	done
 
 _RockTunnel1EndBattleText6:: ; 8c541 (23:4541)
-	text "I'm"
-	line "out of #MON!"
+	text "I'm out of"
+	line "#MON!"
 	prompt
 
 _RockTunnel1AfterBattleText6:: ; 8c552 (23:4552)
@@ -99,8 +97,7 @@ _RockTunnel1BattleText7:: ; 8c571 (23:4571)
 	done
 
 _RockTunnel1EndBattleText7:: ; 8c58d (23:458d)
-	text "You"
-	line "play hard!"
+	text "You play hard!"
 	prompt
 
 _RockTunnel1AfterBattleText7:: ; 8c59d (23:459d)

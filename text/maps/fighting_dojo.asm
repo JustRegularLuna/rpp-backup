@@ -35,7 +35,7 @@ _FightingDojoText_5ce98:: ; a18cf (28:58cf)
 	done
 
 _FightingDojoText_5ce9d:: ; a1972 (28:5972)
-	text "Ho!"
+	text "Whoa!"
 
 	para "Stay and train at"
 	line "Karate with us!"
@@ -47,8 +47,7 @@ _FightingDojoBattleText1:: ; a1999 (28:5999)
 	done
 
 _FightingDojoEndBattleText1:: ; a19b7 (28:59b7)
-	text "I give"
-	line "up!"
+	text "I give up!"
 	prompt
 
 _FightingDojoAfterBattleText1:: ; a19c3 (28:59c3)
@@ -65,8 +64,7 @@ _FightingDojoBattleText2:: ; a1a05 (28:5a05)
 	done
 
 _FightingDojoEndBattleText2:: ; a1a22 (28:5a22)
-	text "Judge!"
-	line "1 point!"
+	text "Judge! 1 point!"
 	prompt
 
 _FightingDojoAfterBattleText2:: ; a1a33 (28:5a33)

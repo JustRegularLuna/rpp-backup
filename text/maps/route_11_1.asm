@@ -19,8 +19,7 @@ _Route11BattleText2:: ; 8e944 (23:6944)
 	done
 
 _Route11EndBattleText2:: ; 8e965 (23:6965)
-	text "I had"
-	line "a chance!"
+	text "I had a chance!"
 	prompt
 
 _Route11AfterBattleText2:: ; 8e976 (23:6976)
@@ -51,8 +50,8 @@ _Route11BattleText4:: ; 8e9f6 (23:69f6)
 	done
 
 _Route11EndBattleText4:: ; 8ea1c (23:6a1c)
-	text "That"
-	line "was electric!"
+	text "That was"
+	line "electric!"
 	prompt
 
 _Route11AfterBattleText4:: ; 8ea30 (23:6a30)
@@ -67,8 +66,8 @@ _Route11BattleText5:: ; 8ea51 (23:6a51)
 	done
 
 _Route11EndBattleText5:: ; 8ea83 (23:6a83)
-	text "My"
-	line "#MON couldn't!"
+	text "My #MON"
+	line "couldn't do it!"
 	prompt
 
 _Route11AfterBattleText5:: ; 8ea95 (23:6a95)
@@ -82,8 +81,7 @@ _Route11BattleText6:: ; 8eab8 (23:6ab8)
 	done
 
 _Route11EndBattleText6:: ; 8ead5 (23:6ad5)
-	text "My"
-	line "first loss!"
+	text "My first loss!"
 	prompt
 
 _Route11AfterBattleText6:: ; 8eae5 (23:6ae5)
@@ -97,8 +95,8 @@ _Route11BattleText7:: ; 8eb03 (23:6b03)
 	done
 
 _Route11EndBattleText7:: ; 8eb1f (23:6b1f)
-	text "I saw"
-	line "this coming..."
+	text "I saw this"
+	line "coming..."
 	prompt
 
 _Route11AfterBattleText7:: ; 8eb35 (23:6b35)

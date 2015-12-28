@@ -22,8 +22,7 @@ _LoreleiBeforeBattleText:: ; 865ef (21:65ef)
 	done
 
 _LoreleiEndBattleText:: ; 866c4 (21:66c4)
-	text "How"
-	line "dare you!"
+	text "How dare you!"
 	prompt
 
 _LoreleiAfterBattleText:: ; 866d3 (21:66d3)

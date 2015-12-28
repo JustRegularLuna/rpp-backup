@@ -15,8 +15,7 @@ _SilphCo10BattleText1:: ; 84dc5 (21:4dc5)
 	done
 
 _SilphCo10EndBattleText1:: ; 84df5 (21:4df5)
-	text "I'm"
-	line "stunned!"
+	text "I'm stunned!"
 	prompt
 
 _SilphCo10AfterBattleText1:: ; 84e02 (21:4e02)
@@ -31,8 +30,8 @@ _SilphCo10BattleText2:: ; 84e35 (21:4e35)
 	done
 
 _SilphCo10EndBattleText2:: ; 84e52 (21:4e52)
-	text "No"
-	line "continues left!"
+	text "No continues"
+	line "left!"
 	prompt
 
 _SilphCo10AfterBattleText2:: ; 84e66 (21:4e66)

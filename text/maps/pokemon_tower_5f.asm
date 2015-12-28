@@ -26,8 +26,7 @@ _PokemonTower5BattleText2:: ; 999dc (26:59dc)
 	done
 
 _PokemonTower5EndBattleText2:: ; 999f9 (26:59f9)
-	text "What"
-	line "a nightmare!"
+	text "What a nightmare!"
 	prompt
 
 _PokemonTower5AfterBattleText2:: ; 99a0c (26:5a0c)

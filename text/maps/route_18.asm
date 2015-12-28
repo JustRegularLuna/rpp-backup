@@ -20,8 +20,7 @@ _Route18BattleText2:: ; 917ed (24:57ed)
 	done
 
 _Route18EndBattleText2:: ; 91816 (24:5816)
-	text "I"
-	line "had to bug you!"
+	text "I had to bug you!"
 	prompt
 
 _Route18AfterBattleText2:: ; 91829 (24:5829)

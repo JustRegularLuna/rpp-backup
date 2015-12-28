@@ -34,9 +34,8 @@ _SilphCo2BattleText1:: ; 8253e (20:653e)
 	done
 
 _SilphCo2EndBattleText1:: ; 8255a (20:655a)
-	text "How"
-	line "did you know I"
-	cont "was a ROCKET?"
+	text "How did you know"
+	line "I was a ROCKET?"
 	prompt
 
 _SilphCo2AfterBattleText1:: ; 8257c (20:657c)
@@ -51,8 +50,7 @@ _SilphCo2BattleText2:: ; 825a4 (20:65a4)
 	done
 
 _SilphCo2EndBattleText2:: ; 825c3 (20:65c3)
-	text "You're"
-	line "good."
+	text "You're good."
 	prompt
 
 _SilphCo2AfterBattleText2:: ; 825d0 (20:65d0)

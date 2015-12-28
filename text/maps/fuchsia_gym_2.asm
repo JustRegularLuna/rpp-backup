@@ -75,8 +75,7 @@ _FuchsiaGymBattleText2:: ; a0207 (28:4207)
 	done
 
 _FuchsiaGymEndBattleText2:: ; a023a (28:423a)
-	text "I'm done"
-	line "for!"
+	text "I'm done for!"
 	prompt
 
 _FuchsiaGymAfterBattleText2:: ; a0248 (28:4248)
@@ -93,8 +92,8 @@ _FuchsiaGymBattleText3:: ; a027e (28:427e)
 	done
 
 _FuchsiaGymEndBattleText3:: ; a02a8 (28:42a8)
-	text "You"
-	line "had me fooled!"
+	text "You had me"
+	line "fooled!"
 	prompt
 
 _FuchsiaGymAfterBattleText3:: ; a02bc (28:42bc)
@@ -114,7 +113,7 @@ _FuchsiaGymBattleText4:: ; a02fe (28:42fe)
 
 _FuchsiaGymEndBattleText4:: ; a033a (28:433a)
 	text "Whoa!"
-	line "He's got it!"
+	line "You've got it!"
 	prompt
 
 _FuchsiaGymAfterBattleText4:: ; a034d (28:434d)
@@ -155,8 +154,7 @@ _FuchsiaGymBattleText6:: ; a0426 (28:4426)
 	done
 
 _FuchsiaGymEndBattleText6:: ; a0470 (28:4470)
-	text "Dropped"
-	line "my balls!"
+	text "Dropped my balls!"
 	prompt
 
 _FuchsiaGymAfterBattleText6:: ; a0483 (28:4483)

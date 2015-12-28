@@ -5,8 +5,7 @@ _Route15BattleText1:: ; 90c3e (24:4c3e)
 	done
 
 _Route15EndBattleText1:: ; 90c6e (24:4c6e)
-	text "Not"
-	line "good enough!"
+	text "Not good enough!"
 	prompt
 
 _Route15AfterBattleText1:: ; 90c80 (24:4c80)
@@ -26,8 +25,7 @@ _Route15BattleText2:: ; 90cdd (24:4cdd)
 	done
 
 _Route15EndBattleText2:: ; 90d0a (24:4d0a)
-	text "No,"
-	line "wrong!"
+	text "No, wrong!"
 	prompt
 
 _Route15AfterBattleText2:: ; 90d16 (24:4d16)
@@ -59,8 +57,8 @@ _Route15BattleText4:: ; 90da7 (24:4da7)
 	done
 
 _Route15EndBattleText4:: ; 90ddc (24:4ddc)
-	text "Just"
-	line "as I thought!"
+	text "Yep! Just as I"
+	line "thought!"
 	prompt
 
 _Route15AfterBattleText4:: ; 90df0 (24:4df0)
@@ -76,8 +74,8 @@ _Route15BattleText5:: ; 90e33 (24:4e33)
 	done
 
 _Route15EndBattleText5:: ; 90e4e (24:4e4e)
-	text "You looked"
-	line "so cute too!"
+	text "You looked so"
+	line "cute, too!"
 	prompt
 
 _Route15AfterBattleText5:: ; 90e67 (24:4e67)
@@ -92,8 +90,8 @@ _Route15BattleText6:: ; 90e86 (24:4e86)
 	done
 
 _Route15EndBattleText6:: ; 90eaa (24:4eaa)
-	text "I didn't"
-	line "ask for this!"
+	text "I didn't ask for"
+	line "this!"
 	prompt
 
 _Route15AfterBattleText6:: ; 90ec1 (24:4ec1)
@@ -108,8 +106,7 @@ _Route15BattleText7:: ; 90eed (24:4eed)
 	done
 
 _Route15EndBattleText7:: ; 90f0f (24:4f0f)
-	text "Why"
-	line "not?"
+	text "Why not?"
 	prompt
 
 _Route15AfterBattleText7:: ; 90f19 (24:4f19)
@@ -126,8 +123,8 @@ _Route15BattleText8:: ; 90f59 (24:4f59)
 	done
 
 _Route15EndBattleText8:: ; 90f8c (24:4f8c)
-	text "That"
-	line "can't be true!"
+	text "That can't be"
+	line "true!"
 	prompt
 
 _Route15AfterBattleText8:: ; 90fa0 (24:4fa0)
@@ -141,8 +138,7 @@ _Route15BattleText9:: ; 90fc4 (24:4fc4)
 	done
 
 _Route15EndBattleText9:: ; 90fdf (24:4fdf)
-	text "I"
-	line "said trade!"
+	text "I said trade!"
 	prompt
 
 _Route15AfterBattleText9:: ; 90fee (24:4fee)
@@ -156,8 +152,8 @@ _Route15BattleText10:: ; 9100d (24:500d)
 	done
 
 _Route15EndBattleText10:: ; 91029 (24:5029)
-	text "I was"
-	line "too impatient!"
+	text "I was way too"
+	line "impatient!"
 	prompt
 
 _Route15AfterBattleText10:: ; 9103f (24:503f)

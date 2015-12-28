@@ -4,8 +4,8 @@ _PokemonTower4BattleText1:: ; 99869 (26:5869)
 	done
 
 _PokemonTower4EndBattleText1:: ; 9987d (26:587d)
-	text "Where"
-	line "is the GHOST?"
+	text "Where is the"
+	line "GHOST?"
 	prompt
 
 _PokemonTower4AfterBattleText1:: ; 99892 (26:5892)

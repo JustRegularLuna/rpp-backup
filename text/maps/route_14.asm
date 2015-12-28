@@ -5,8 +5,7 @@ _Route14BattleText1:: ; 9080d (24:480d)
 	done
 
 _Route14EndBattleText1:: ; 9083f (24:483f)
-	text "Not"
-	line "good enough!"
+	text "Not good enough!"
 	prompt
 
 _Route14AfterBattleText1:: ; 90851 (24:4851)
@@ -23,8 +22,7 @@ _Route14BattleText2:: ; 9088e (24:488e)
 	done
 
 _Route14EndBattleText2:: ; 908b8 (24:48b8)
-	text "Not"
-	line "ready yet!"
+	text "Not ready yet!"
 	prompt
 
 _Route14AfterBattleText2:: ; 908c8 (24:48c8)
@@ -40,8 +38,7 @@ _Route14BattleText3:: ; 908ea (24:48ea)
 	done
 
 _Route14EndBattleText3:: ; 90928 (24:4928)
-	text "Aww,"
-	line "bummer!"
+	text "Aww, bummer!"
 	prompt
 
 _Route14AfterBattleText3:: ; 90936 (24:4936)
@@ -58,8 +55,8 @@ _Route14BattleText4:: ; 90971 (24:4971)
 	done
 
 _Route14EndBattleText4:: ; 9099d (24:499d)
-	text "Shot"
-	line "down in flames!"
+	text "Shot down in"
+	line "flames!"
 	prompt
 
 _Route14AfterBattleText4:: ; 909b3 (24:49b3)
@@ -70,7 +67,7 @@ _Route14AfterBattleText4:: ; 909b3 (24:49b3)
 _Route14BattleText5:: ; 909d0 (24:49d0)
 	text "Have you heard of"
 	line "the legendary"
-	cont "#MON?"
+	cont "bird #MON?"
 	done
 
 _Route14EndBattleText5:: ; 909f7 (24:49f7)
@@ -90,8 +87,7 @@ _Route14BattleText6:: ; 90a37 (24:4a37)
 	done
 
 _Route14EndBattleText6:: ; 90a59 (24:4a59)
-	text "I"
-	line "knew it!"
+	text "I knew it!"
 	prompt
 
 _Route14AfterBattleText6:: ; 90a65 (24:4a65)
@@ -156,8 +152,7 @@ _Route14BattleText10:: ; 90bcc (24:4bcc)
 	done
 
 _Route14EndBattleText10:: ; 90be7 (24:4be7)
-	text "Blown"
-	line "away!"
+	text "Blown away!"
 	prompt
 
 _Route14AfterBattleText10:: ; 90bf4 (24:4bf4)

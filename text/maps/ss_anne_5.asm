@@ -24,7 +24,7 @@ _SSAnne5BattleText1:: ; 8100b (20:500b)
 	done
 
 _SSAnne5EndBattleText1:: ; 8102d (20:502d)
-	text "You're"
+	text "You're rather"
 	line "impressive!"
 	prompt
 
@@ -40,8 +40,8 @@ _SSAnne5BattleText2:: ; 81070 (20:5070)
 	done
 
 _SSAnne5EndBattleText2:: ; 8108e (20:508e)
-	text "I was"
-	line "just careless!"
+	text "I was just being"
+	line "careless!"
 	prompt
 
 _SSAnne5AfterBattleText2:: ; 810a4 (20:50a4)

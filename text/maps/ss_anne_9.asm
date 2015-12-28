@@ -53,9 +53,9 @@ _SSAnne9BattleText1:: ; 81926 (20:5926)
 	done
 
 _SSAnne9EndBattleText1:: ; 81956 (20:5956)
-	text "Good"
-	line "fight! Ah, I feel"
-	cont "young again!"
+	text "Good fight!"
+	line "Ah, I feel young"
+	cont "again!"
 	prompt
 
 _SSAnne9AfterBattleText1:: ; 8197b (20:597b)
@@ -69,8 +69,7 @@ _SSAnne9BattleText2:: ; 8199c (20:599c)
 	done
 
 _SSAnne9EndBattleText2:: ; 819b9 (20:59b9)
-	text "I'm"
-	line "all out!"
+	text "I'm all out!"
 	prompt
 
 _SSAnne9AfterBattleText2:: ; 819c6 (20:59c6)
@@ -88,8 +87,8 @@ _SSAnne9BattleText3:: ; 819fc (20:59fc)
 	done
 
 _SSAnne9EndBattleText3:: ; 81a29 (20:5a29)
-	text "I must"
-	line "salute you!"
+	text "I must salute"
+	line "you!"
 	prompt
 
 _SSAnne9AfterBattleText3:: ; 81a3d (20:5a3d)
@@ -103,8 +102,7 @@ _SSAnne9BattleText4:: ; 81a5d (20:5a5d)
 	done
 
 _SSAnne9EndBattleText4:: ; 81a7c (20:5a7c)
-	text "Take"
-	line "it easy!"
+	text "Take it easy!"
 	prompt
 
 _SSAnne9AfterBattleText4:: ; 81a8b (20:5a8b)
