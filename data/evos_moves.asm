@@ -2522,7 +2522,6 @@ Mon115_EvosMoves: ; 3b1e6 (e:71e6)
 ;Evolutions
 	db 0
 ;Learnset
-	db 7,
 	db 10,TAIL_WHIP
 	db 13,BITE
 	db 19,POUND
