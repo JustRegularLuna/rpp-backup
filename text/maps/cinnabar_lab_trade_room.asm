@@ -36,7 +36,7 @@ _SeenAllBirdsText::
 
 
 _ReceivedMysticTicketText::
-	text $53, " received"
+	text $52, " received"
 	line "a MYSTICTICKET!"
 	done
 
