@@ -72,7 +72,7 @@ _ReceivedTM49Text:: ; 9cd1d (27:4d1d)
 _CeladonMartRoofText_48520:: ; 9cd30 (27:4d30)
 	db $0
 	para "TM49 contains"
-	line "TRI ATTACK!@@"
+	line "DAZZLINGLEAM!@@"
 
 _CeladonMartRoofText_48526:: ; 9cd4d (27:4d4d)
 	text "You don't have"
