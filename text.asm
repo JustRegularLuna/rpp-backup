@@ -99,7 +99,7 @@ _OaksAideHiText:: ; 80143 (20:4143)
 	db $0
 	line "kinds of #MON,"
 	cont "I'm supposed to"
-	cont "give you an"
+	cont "give you this"
 	cont "@"
 	TX_RAM wcc5b
 	text "!"

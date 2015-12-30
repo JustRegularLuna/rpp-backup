@@ -1,5 +1,5 @@
 _Route2GateText_5d616:: ; 8a7fc (22:67fc)
-	text "The HM FLASH"
+	text "The TM FLASH"
 	line "lights even the"
 	cont "darkest dungeons."
 	done
