@@ -381,7 +381,7 @@ HMMoveArray: ; 21745 (8:5745)
 	db FLY
 	db SURF
 	db STRENGTH
-	db FLASH
+	db DIVE
 	db -1
 
 Func_2174b: ; 2174b (8:574b)
