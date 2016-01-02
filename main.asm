@@ -6591,7 +6591,7 @@ ShipPort_GFX:      INCBIN "gfx/tilesets/ship_port.t2.2bpp"
 ShipPort_Block:    INCBIN "gfx/blocksets/ship_port.bst"
 Interior_GFX:      INCBIN "gfx/tilesets/interior.t1.2bpp"
 Interior_Block:    INCBIN "gfx/blocksets/interior.bst"
-Plateau_GFX:       INCBIN "gfx/tilesets/plateau.t10.2bpp"
+Plateau_GFX:       INCBIN "gfx/tilesets/plateau.t6.2bpp"
 Plateau_Block:     INCBIN "gfx/blocksets/plateau.bst"
 
 INCLUDE "engine/battle/get_trainer_pic_pointers.asm"
