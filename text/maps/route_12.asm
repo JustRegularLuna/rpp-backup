@@ -69,19 +69,18 @@ ENDC
 	done
 
 _Route12BattleText4:: ; 90245 (24:4245)
-	text "Electricity is my"
+	text "Poison is my"
 	line "specialty!"
 	done
 
 _Route12EndBattleText4:: ; 90263 (24:4263)
-	text "Unplugged!"
+	text "Life goes on..."
 	prompt
 
 _Route12AfterBattleText4:: ; 9026f (24:426f)
-	text "Water conducts"
-	line "electricity, so"
-	cont "you should zap"
-	cont "sea #MON!"
+	text "I ain't lookin'"
+	line "for nothin' but"
+	cont "a good time!"
 	done
 
 _Route12BattleText5:: ; 902a8 (24:42a8)

@@ -393,7 +393,7 @@ PsychicData: ; COMPLETED
 	
 RockerData: ; COMPLETED
 	db "DEBBIE@",$FD,ROCKER_F,35,VOLTORB,ELECTRODE,0 ; LT LURGE GYM
-	db "C.C.@",52,ELECTRODE,0 ; Route 13 R 6
+	db "C.C.@",52,ARBOK,0 ; Route 13 R 6
 	
 JugglerData: ; COMPLETED
 	db "IRWIN@",46,ALAKAZAM,MR_MIME,0 ; SILPHCO 5 M

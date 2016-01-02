@@ -393,7 +393,7 @@ PsychicData:
 	
 RockerData:
 	db "DEBBIE@",$FD,ROCKER_F,20,VOLTORB,VOLTORB,VOLTORB,0
-	db "C.C.@",29,VOLTORB,ELECTRODE,0
+	db "C.C.@",29,EKANS,ARBOK,0
 	
 JugglerData:
 	db "IRWIN@",29,KADABRA,MR_MIME,0
