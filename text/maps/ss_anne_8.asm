@@ -96,13 +96,6 @@ _SSAnne8Text9:: ; 81736 (20:5736)
 
 _SSAnne8Text11:: ; 81759 (20:5759)
 	text "Hello there!"	
-	line "I'm THE DOCT-"
-	
-	para "Wait, no."
-	line "What is it they"
-	cont "call me here?"
-	
-	para "Oh, right."
 	line "I'm THE LOOKER!"
 
 	para "I'm a GLOBAL"
