@@ -17,7 +17,7 @@ Tilesets: ; c7be (3:47be)
 	tileset Cemetery_Block,    Cemetery_GFX,    Cemetery_Coll,    $12,$FF,$FF, $FF, INDOOR
 	tileset Interior_Block,    Interior_GFX,    Interior_Coll,    $FF,$FF,$FF, $FF, INDOOR
 	tileset Cavern_Block,      Cavern_GFX,      Cavern_Coll,      $FF,$FF,$FF, $FF, CAVE
-	tileset Lobby_Block,       Lobby_GFX,       Lobby_Coll,       $15,$36,$FF, $FF, INDOOR
+	tileset Lobby_Block,	Lobby_GFX,	Lobby_Coll,	21,18,255, 255, 0
 	tileset Mansion_Block,     Mansion_GFX,     Mansion_Coll,     $FF,$FF,$FF, $FF, INDOOR
 	tileset Lab_Block,         Lab_GFX,         Lab_Coll,         $FF,$FF,$FF, $FF, INDOOR
 	tileset Club_Block,        Club_GFX,        Club_Coll,        $07,$17,$FF, $FF, INDOOR

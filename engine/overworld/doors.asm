@@ -76,7 +76,7 @@ TilesetMuseumDoorTileIDs:
 ShipDoorTileIDs:
 	db 30,$00
 LobbyDoorTileIDs:
-	db 28,56,26,$00
+	db 26,56,$00
 MansionDoorTileIDs:
 	db 26,28,83,$00
 LabDoorTileIDs:

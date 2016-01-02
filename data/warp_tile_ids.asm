@@ -54,7 +54,7 @@ InteriorWarpTileIDs:
 CavernWarpTileIDs:
 	db 24,26,34,52,56,$FF
 LobbyWarpTileIDs:
-	db 26,28,56,$FF
+	db 26,56,$FF
 MansionWarpTileIDs:
 	db 26,28,83,$FF
 LabWarpTileIDs:
