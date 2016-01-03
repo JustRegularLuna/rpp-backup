@@ -83,7 +83,6 @@ These are probably only interesting to people wanting to use this as a baserom
 
 * Pokémon IDs sorted by Pokédex Number internally
 * Trainer sprite and AI no longer forced to be the same for every trainer within a class
-* Ability to give trainers within one specific class their own names (for cameos and special trainers)
 * Variable overworld sprite IDs, like Gen 2 has
 * Trainer sprites can be stored in any Rombank
 * Town Map is no longer RLE encoded, uses the more flexible Gen 2 format (a standard tilemap)
