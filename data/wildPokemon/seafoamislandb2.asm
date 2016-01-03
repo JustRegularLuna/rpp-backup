@@ -10,7 +10,7 @@ IslandMonsB2:
 	db 30,HORSEA
 	db 28,SHELLDER
 	db 30,JYNX
-	db 37,JYNX
+	db 37,SLOWKING
 
 ; Water Mons
 	db $00

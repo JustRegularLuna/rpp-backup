@@ -9,8 +9,8 @@ PlateauMons2:
 	db 42,ONIX
 	db 41,MACHOKE
 	db 40,CROBAT
-	db 40,HITMONLEE
-	db 43,HITMONCHAN
+	db 40,STEELIX
+	db 43,MAROWAK
 
 ; Water Mons
 	db $00
