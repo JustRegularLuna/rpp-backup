@@ -38,6 +38,13 @@ TrySurf:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .no2
+	
+; Are we allowed to surf here?
+	callba CheckForForcedBikeSurf ; in current Pokered, this is callba IsSurfingAllowed
+	ld hl,wd728
+	bit 1,[hl]
+	res 1,[hl]
+	jr z,.no2
 
 ; Call the Surf routine if you said yes.
 	call GetPartyMonName2
@@ -249,7 +256,6 @@ WantToCutTxt:
 	line "use CUT?@@"
 	
 WaterIsCalmTxt:
-	text "The water is calm."
-	line "Would you like to"
-	cont "SURF?@@"
+	text "Would you like to"
+	line "use SURF?@@"
 	
