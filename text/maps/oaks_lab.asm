@@ -338,7 +338,19 @@ _OaksLabText26:: ; 95664 (25:5664)
 	para "This is a great"
 	line "undertaking in"
 	cont "#MON history!"
-	done
+	
+	para "But you can't get"
+	line "detailed data on"
+	cont "#MON by just"
+	cont "seeing them."
+
+	para "You must catch"
+	line "them! Use these"
+	cont "to capture wild"
+	cont "#MON."
+
+	para $52, " got 5"
+	line "# BALLs!@@"
 
 _OaksLabText27:: ; 95741 (25:5741)
 	text $53, ": Alright"
