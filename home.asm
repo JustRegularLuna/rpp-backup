@@ -2345,7 +2345,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	xor a
 	ld [wcd50], a
 	predef EmotionBubble
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, $FF ; originally D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	xor a
 	ldh [$b4], a
@@ -2359,8 +2359,6 @@ DisplayEnemyTrainerTextAndStartBattle:: ; 324c (0:324c)
 	ld a, [wd730]
 	and $1
 	ret nz ; return if the enemy trainer hasn't finished walking to the player's sprite
-	ld a, $FF
-	ld [wJoyIgnore], a
 	callba FaceEnemyTrainer
 	xor a
 	ld [wJoyIgnore], a
