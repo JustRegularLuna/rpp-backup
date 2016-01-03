@@ -51,6 +51,6 @@ TechnicalMachines: ; 13773 (4:7773)
 	db FLASH        ; Route 2
 	db CUT          ; SS Anne
 	db FLY          ; Route 16
-	db SURF         ; Safari Zone
+	db SURF         ; Beach House below Fuchsia City
 	db STRENGTH     ; Fuchsia City
 	db DIVE         ; Currently Unused in Beta 2
