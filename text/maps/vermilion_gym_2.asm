@@ -73,13 +73,16 @@ _VermilionGymAfterBattleText1:: ; 9c1e0 (27:41e0)
 	done
 
 _VermilionGymBattleText2:: ; 9c213 (27:4213)
-	text "I'm a lightweight,"
-	line "but I'm good with"
-	cont "electricity!"
+	text "Electric Youth!"
+	
+	para "Feel the power,"
+	line "you see the"
+	cont "energy!"
 	done
 
 _VermilionGymEndBattleText2:: ; 9c244 (27:4244)
-	text "Fried!"
+	text "It's true, you"
+	line "can't fight it."
 	prompt
 
 _VermilionGymAfterBattleText2:: ; 9c24c (27:424c)

@@ -26,11 +26,21 @@ TeamMoves:
 	db 0
 
 	db LT__SURGE,$1
-    ;Raichu
+    ;Voltorb
 	db 1,1,THUNDERBOLT
-	db 1,2,MEGA_PUNCH
-	db 1,3,AGILITY
-	db 1,4,ELECTRO_BALL
+	db 1,2,TACKLE
+	db 1,3,SCREECH
+	db 1,4,SONICBOOM
+    ;Pikachu
+	db 2,1,THUNDERBOLT
+	db 2,2,THUNDER_WAVE
+	db 2,3,QUICK_ATTACK
+	db 2,4,DOUBLE_TEAM
+    ;Raichu
+	db 3,1,THUNDERBOLT
+	db 3,2,THUNDER_WAVE
+	db 3,3,QUICK_ATTACK
+	db 3,4,DOUBLE_TEAM
 	db 0
 
 	db ERIKA,$1
