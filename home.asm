@@ -3257,14 +3257,17 @@ GetName:: ; 376b (0:376b)
 ; [wPredefBank] = bank of list
 ;
 ; returns pointer to name in de
-	ld a, [wNameListType] ; added check for list type
-	cp a, ITEM_NAME    ; compare to move list
 	ld a,[wd0b5]
 	ld [wd11e],a
-	jr nz, .nonMachine  ; SHOULD skip the HM check if in move names
+	
+	ld a,[wNameListType]
+	cp ITEM_NAME
+	jr nz, .noItem
+	
 	cp HM_01        ;it's TM/HM
 	jp nc,GetMachineName
-.nonMachine            ; Return here if not an item
+	
+.noItem          ; Return here if not an item
 	ld a,[H_LOADEDROMBANK]
 	push af
 	push hl
