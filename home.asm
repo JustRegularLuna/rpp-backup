@@ -1519,12 +1519,6 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld a,[wWhichPokemon]
 	call GetPartyMonName
 .storeChosenEntry ; store the menu entry that the player chose and return
-
-	; hacky way to stop TMs crashing for now
-	ld a, $50 ; "@"
-	ld [wTileMapBackup2 - 1], a ; make sure the string at wcd6d is always terminated so it can't crash
-	; original script follows
-	
 	ld de,wcd6d
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld a,$01
@@ -3264,10 +3258,10 @@ GetName:: ; 376b (0:376b)
 ;
 ; returns pointer to name in de
 	ld a,[wNameListType]
-	cp ITEM_NAME
+	cp MOVE_NAME
 	ld a,[wd0b5]
 	ld [wd11e],a
-	jr nz, .noItem
+	jr z, .noItem
 	
 	cp HM_01        ;it's TM/HM
 	jp nc,GetMachineName
