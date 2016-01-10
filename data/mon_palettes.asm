@@ -176,7 +176,7 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_YELLOWMON ; Electivire
 	db PAL_GREYMON   ; Magnezone
 	db PAL_BROWNMON  ; Rhyperior
-	db PAL_GREENMON  ; Tangrowth
+	db PAL_BLUEMON   ; Tangrowth
 	db PAL_PINKMON   ; Lickilicky
 	db PAL_CYAN_TRAINER ; Togepi
 	db PAL_CYAN_TRAINER ; Togetic
