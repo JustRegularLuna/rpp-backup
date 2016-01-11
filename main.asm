@@ -5342,7 +5342,7 @@ EnemyHealthBarUpdated:
 	dec a
 	jr nz, .noBattle
 	push hl
-	ld a, [wEnemyMon]
+	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
 	ld hl, IndexToPokedex
 	ld b, BANK(IndexToPokedex)
