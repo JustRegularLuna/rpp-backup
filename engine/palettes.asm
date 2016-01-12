@@ -82,7 +82,7 @@ DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d) - DeterminePaletteID without st
 
 IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
 	jr nz,.skipDexNumConversion ; Check if trainer?
-	ld a,[W_TRAINERCLASS] ; Get trainer ID
+	ld a,[wTrainerClass] ; Get trainer ID
 	ld hl, TrainerPalettes
 ELSE ; Trainers are given a single palette (PAL_MEWMON)
 	REPT 8

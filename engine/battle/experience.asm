@@ -83,7 +83,7 @@ GainExperience: ; 5524f (15:524f)
 	ld a, 1
 .next
 	ld [wGainBoostedExp], a
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	dec a ; is it a trainer battle?
 	call nz, BoostExp ; if so, boost exp
 	inc hl
@@ -167,12 +167,12 @@ ENDC
 IF GEN_2_GRAPHICS
 	call KeepEXPBarFull
 ELSE
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 ENDC
 	push af
 	push hl
 	ld a, d
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ld [hl], a
 	ld bc, wPartyMon1Species - wPartyMon1Level
 	add hl, bc
@@ -231,7 +231,7 @@ ENDC
 	ld bc, 1 + NUM_STATS * 2 ; size of stats
 	call CopyData
 	pop hl
-	ld a, [W_PLAYERBATTSTATUS3]
+	ld a, [wPlayerBattleStatus3]
 	bit 3, a ; is the mon transformed?
 	jr nz, .recalcStatChanges
 ; the mon is not transformed, so update the unmodified stats
@@ -273,7 +273,7 @@ ENDC
 	predef FlagActionPredef
 	pop hl
 	pop af
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 
 .nextMon
 	ld a, [wPartyCount]

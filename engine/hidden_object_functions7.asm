@@ -38,7 +38,7 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 SafariZoneCheck: ; 1e988 (7:6988)
 	CheckEventHL EVENT_IN_SAFARI_ZONE ; if we are not in the Safari Zone,
 	jr z, SafariZoneGameStillGoing ; don't bother printing game over text
-	ld a, [W_NUMSAFARIBALLS]
+	ld a, [wNumSafariBalls]
 	and a
 	jr z, SafariZoneGameOver
 	jr SafariZoneGameStillGoing
@@ -83,7 +83,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, $5
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	SetEvent EVENT_SAFARI_GAME_OVER
 	ld a, 1
 	ld [wSafariZoneGameOver], a
@@ -97,7 +97,7 @@ PrintSafariGameOverText: ; 1e9ed (7:69ed)
 
 SafariGameOverText: ; 1e9f7 (7:69f7)
 	TX_ASM
-	ld a, [W_NUMSAFARIBALLS]
+	ld a, [wNumSafariBalls]
 	and a
 	jr z, .asm_1ea04
 	ld hl, TimesUpText
@@ -147,7 +147,7 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	ld h, [hl]
 	ld l, a
 	call PrintText
-	ld a, $1
+	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	call CinnabarGymQuiz_1ea92
 	jp TextScriptEnd
@@ -199,7 +199,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld a, [wCurrentMenuItem]
 	cp c
 	jr nz, .wrongAnswer
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	ld a, [hGymGateIndex]
 	ld [$ffe0], a
@@ -391,23 +391,23 @@ BillsHousePokemonList: ; 1ec05 (7:6c05)
 	ld hl, BillsHousePokemonListText1
 	call PrintText
 	xor a
-	ld [W_ANIMATIONID], a
+	ld [wMenuItemOffset], a ; not used
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
-	ld a, $4
+	ld a, 4
 	ld [wMaxMenuItem], a
-	ld a, $2
+	ld a, 2
 	ld [wTopMenuItemY], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemX], a
 .billsPokemonLoop
 	ld hl, wd730
 	set 6, [hl]
 	coord hl, 0, 0
-	ld b, $a
-	ld c, $9
+	ld b, 10
+	ld c, 9
 	call TextBoxBorder
 	coord hl, 2, 2
 	ld de, BillsMonListText

@@ -55,7 +55,7 @@ KeepEXPBarFull:
 	ld a, [wEXPBarKeepFullFlag]
 	set 0, a
 	ld [wEXPBarKeepFullFlag], a
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	ret
 
 IsCurrentMonBattleMon:

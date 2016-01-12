@@ -7,7 +7,7 @@ DisplayTownMap: ; 70e3e (1c:4e3e)
 	push hl
 	ld a, $1
 	ld [hJoy7], a
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	push af
 	ld b, $0
 	call DrawPlayerOrBirdSprite ; player sprite
@@ -156,7 +156,7 @@ LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	coord hl, 0, 0
 	ld de, ToText
 	call PlaceString
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 	ld hl, wFlyLocationsList
@@ -250,9 +250,9 @@ BuildFlyLocationsList: ; 71070 (1c:5070)
 	ld hl, wFlyLocationsList - 1
 	ld [hl], $ff
 	inc hl
-	ld a, [W_TOWNVISITEDFLAG]
+	ld a, [wTownVisitedFlag]
 	ld e, a
-	ld a, [W_TOWNVISITEDFLAG + 1]
+	ld a, [wTownVisitedFlag + 1]
 	ld d, a
 	ld bc, SAFFRON_CITY + 1
 .loop
@@ -405,7 +405,7 @@ DisplayWildLocations: ; 711ef (1c:51ef)
 	call PlaceString
 	jr .done
 .drawPlayerSprite
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 .done
@@ -444,8 +444,12 @@ WritePlayerOrBirdSpriteOAM: ; 7126d (1c:526d)
 
 WriteTownMapSpriteOAM: ; 71279 (1c:5279)
 	push hl
+
+; Subtract 4 from c (X coord) and 4 from b (Y coord). However, the carry from c
+; is added to b, so the net result is that only 3 is subtracted from b.
 	lb hl, -4, -4
-	add hl, bc ; subtract 4 from c (X coord) and 4 from b (Y coord)
+	add hl, bc
+
 	ld b, h
 	ld c, l
 	pop hl
@@ -469,14 +473,14 @@ WriteAsymmetricMonPartySpriteOAM: ; 71281 (1c:5281)
 	xor a
 	ld [hli], a
 	inc d
-	ld a, $8
+	ld a, 8
 	add c
 	ld c, a
 	dec e
 	jr nz, .innerLoop
 	pop bc
 	pop de
-	ld a, $8
+	ld a, 8
 	add b
 	ld b, a
 	dec d

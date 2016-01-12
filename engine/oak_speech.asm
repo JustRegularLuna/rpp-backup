@@ -1,7 +1,7 @@
 SetDefaultNames: ; 60ca (1:60ca)
 	ld a, [wLetterPrintingDelayFlags]
 	push af
-	ld a, [W_OPTIONS]
+	ld a, [wOptions]
 	push af
 	ld a, [wd732]
 	push af
@@ -16,7 +16,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	pop af
 	ld [wd732], a
 	pop af
-	ld [W_OPTIONS], a
+	ld [wOptions], a
 	pop af
 	ld [wLetterPrintingDelayFlags], a
 	ld a, [wOptionsInitialized]
@@ -27,7 +27,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, SonyText
-	ld de, W_RIVALNAME
+	ld de, wRivalName
 	ld bc, NAME_LENGTH
 	jp CopyData
 
@@ -48,7 +48,7 @@ OakSpeech: ; 6115 (1:6115)
 	ld a,1
 	ld [wItemQuantity],a
 	call AddItemToInventory  ; give one potion
-	ld a,[W_ANIMATIONID]
+	ld a,[wDefaultMap]
 	ld [wDestinationMap],a
 	call SpecialWarpIn
 	xor a
@@ -225,8 +225,8 @@ IntroDisplayPicCenteredOrUpperRight: ; 62a4 (1:62a4)
 	push bc
 	ld a,b
 	call UncompressSpriteFromDE
-	ld hl,S_SPRITEBUFFER1
-	ld de,S_SPRITEBUFFER0
+	ld hl,sSpriteBuffer1
+	ld de,sSpriteBuffer0
 	ld bc,$310
 	call CopyData
 	ld de,vFrontPic

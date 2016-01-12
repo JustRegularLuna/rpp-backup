@@ -7,7 +7,7 @@ PlayerHUDTileMap:
 
 EnemyHUDHAX:
 	ld [hl], $72
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	dec a
 	jr  nz, .notWildBattle
 	push hl

@@ -35,12 +35,12 @@ SetPal_BattleBlack:
 
 ; Set proper palettes for pokemon/trainers
 SetPal_Battle:
- 	ld a, [W_PLAYERBATTSTATUS3]
+ 	ld a, [wPlayerBattleStatus3]
 	ld hl, wBattleMonSpecies        ; player Pokemon ID
 	call DetermineBackSpritePaletteID
 	ld b, a
 
-	ld a, [W_ENEMYBATTSTATUS3]
+	ld a, [wEnemyBattleStatus3]
 	ld hl, wEnemyMonSpecies2         ; enemy Pokemon ID
 	call DeterminePaletteID
 	ld c, a

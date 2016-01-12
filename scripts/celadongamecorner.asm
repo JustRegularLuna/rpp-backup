@@ -3,11 +3,11 @@ CeladonGameCornerScript: ; 48bbd (12:4bbd)
 	call CeladonGameCornerScript_48bec
 	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGameCornerScriptPointers
-	ld a, [W_CELADONGAMECORNERCURSCRIPT]
+	ld a, [wCeladonGameCornerCurScript]
 	jp CallFunctionInTable
 
 CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
@@ -24,7 +24,7 @@ CeladonGameCornerScript_48bcf: ; 48bcf (12:4bcf)
 	ret
 
 CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
@@ -38,8 +38,8 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_CELADONGAMECORNERCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCeladonGameCornerCurScript], a
+	ld [wCurMapScript], a
 	ret
 
 CeladonGameCornerScriptPointers: ; 48c12 (12:4c12)
@@ -51,7 +51,7 @@ CeladonGameCornerScript0: ; 48c18 (12:4c18)
 	ret
 
 CeladonGameCornerScript1: ; 48c19 (12:4c19)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeladonGameCornerScript_48c07
 	ld a, $f0
@@ -63,13 +63,13 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	ld [H_SPRITEINDEX], a
 	call SetSpriteMovementBytesToFF
 	ld de, MovementData_48c5a
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $6
 	jr nz, .asm_48c43
 	ld de, MovementData_48c63
 	jr .asm_48c4d
 .asm_48c43
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $8
 	jr nz, .asm_48c4d
 	ld de, MovementData_48c63
@@ -78,7 +78,7 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $2
-	ld [W_CELADONGAMECORNERCURSCRIPT], a
+	ld [wCeladonGameCornerCurScript], a
 	ret
 
 MovementData_48c5a: ; 48c5a (12:4c5a)
@@ -109,11 +109,11 @@ CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	ld a, HS_GAME_CORNER_ROCKET
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
 	ld a, $0
-	ld [W_CELADONGAMECORNERCURSCRIPT], a
+	ld [wCeladonGameCornerCurScript], a
 	ret
 
 CeladonGameCornerTextPointers: ; 48c8a (12:4c8a)
@@ -424,7 +424,7 @@ CeladonGameCornerText11: ; 48e9d (12:4e9d)
 	ld [hJoyPressed], a
 	ld [hJoyReleased], a
 	ld a, $1
-	ld [W_CELADONGAMECORNERCURSCRIPT], a
+	ld [wCeladonGameCornerCurScript], a
 	jp TextScriptEnd
 
 CeladonGameCornerText_48ece: ; 48ece (12:4ece)

@@ -48,7 +48,7 @@ LoadTilesetPalette:
 	ld d,a
 	xor a
 	ld [rSVBK],a
-	ld a,[W_CURMAPTILESET] ; Located in wram bank 0
+	ld a,[wCurMapTileset] ; Located in wram bank 0
 	ld b,a
 	ld a,$02
 	ld [rSVBK],a
@@ -57,7 +57,7 @@ LoadTilesetPalette:
 	ld a,1
 	ld [W2_TileBasedPalettes],a
 
-	ld a,b ; Get W_CURMAPTILESET
+	ld a,b ; Get wCurMapTileset
 	push af
 	ld e,a
 	sla e
@@ -96,7 +96,7 @@ LoadTilesetPalette:
 	jr nz,.nextPalette
 
 	; Start copying palette assignments
-	pop af	; Retrieve W_CURMAPTILESET
+	pop af	; Retrieve wCurMapTileset
 	ld hl,$0000
 	cp $00
 	jr z,.doneMultiplication
@@ -138,7 +138,7 @@ LoadTilesetPalette:
 
 	xor a
 	ld [rSVBK],a
-	ld a,[W_CURMAPTILESET]
+	ld a,[wCurMapTileset]
 	ld c,a
 
 	ld a,b
@@ -163,7 +163,7 @@ LoadTownPalette:
 	xor a
 	ld [rSVBK],a
 
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	add a
 	ld c,a
 
@@ -190,7 +190,7 @@ LoadTownPalette:
 	pop hl
 	pop de
 
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld [W2_TownMapLoaded],a
 
 	pop af

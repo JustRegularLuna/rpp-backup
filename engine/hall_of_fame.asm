@@ -20,7 +20,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	ld [hTilesetType], a
-	ld [W_SPRITEFLIPPED], a
+	ld [wSpriteFlipped], a
 	ld [wLetterPrintingDelayFlags], a ; no delay
 	ld [wHoFMonOrPlayer], a ; mon
 	inc a
@@ -186,8 +186,8 @@ HoFLoadPlayerPics: ; 7033e (1c:433e)
 	ld de, RedPicFront
 	ld a, BANK(RedPicFront)
 	call UncompressSpriteFromDE
-	ld hl, S_SPRITEBUFFER1
-	ld de, S_SPRITEBUFFER0
+	ld hl, sSpriteBuffer1
+	ld de, sSpriteBuffer0
 	ld bc, $310
 	call CopyData
 	ld de, vFrontPic
@@ -236,12 +236,12 @@ HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	ld de, HoFPlayTimeText
 	call PlaceString
 	coord hl, 5, 7
-	ld de, W_PLAYTIMEHOURS + 1
+	ld de, wPlayTimeHours
 	lb bc, 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
-	ld de, W_PLAYTIMEMINUTES + 1
+	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber
 	coord hl, 1, 9

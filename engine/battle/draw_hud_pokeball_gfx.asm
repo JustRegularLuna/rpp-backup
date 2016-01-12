@@ -1,7 +1,7 @@
 DrawAllPokeballs: ; 3a849 (e:6849)
 	call LoadPartyPokeballGfx
 	call SetupOwnPartyPokeballs
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	dec a
 	ret z ; return if wild pokémon
 	jp SetupEnemyPartyPokeballs
@@ -26,7 +26,7 @@ ENDC
 	ld de, wPartyCount
 	call SetupPokeballs
 	ld a, $60
-	ld hl, W_BASECOORDX
+	ld hl, wBaseCoordX
 	ld [hli], a
 	ld [hl], a
 	ld a, 8
@@ -39,7 +39,7 @@ SetupEnemyPartyPokeballs: ; 3a887 (e:6887)
 	ld hl, wEnemyMons
 	ld de, wEnemyPartyCount
 	call SetupPokeballs
-	ld hl, W_BASECOORDX
+	ld hl, wBaseCoordX
 	ld a, $48
 	ld [hli], a
 	ld [hl], $20
@@ -102,19 +102,19 @@ WritePokeballOAMData: ; 3a8e1 (e:68e1)
 	ld de, wBuffer
 	ld c, PARTY_LENGTH
 .loop
-	ld a, [W_BASECOORDY]
+	ld a, [wBaseCoordY]
 	ld [hli], a
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	ld [hli], a
 	ld a, [de]
 	ld [hli], a
 	xor a
 	ld [hli], a
-	ld a, [W_BASECOORDX]
+	ld a, [wBaseCoordX]
 	ld b, a
 	ld a, [wHUDPokeballGfxOffsetX]
 	add b
-	ld [W_BASECOORDX], a
+	ld [wBaseCoordX], a
 	inc de
 	dec c
 	jr nz, .loop
@@ -178,7 +178,7 @@ SetupPlayerAndEnemyPokeballs: ; 3a948 (e:6948)
 	ld hl, wPartyMons
 	ld de, wPartyCount
 	call SetupPokeballs
-	ld hl, W_BASECOORDX
+	ld hl, wBaseCoordX
 	ld a, $50
 	ld [hli], a
 	ld [hl], $40
@@ -189,7 +189,7 @@ SetupPlayerAndEnemyPokeballs: ; 3a948 (e:6948)
 	ld hl, wEnemyMons
 	ld de, wEnemyPartyCount
 	call SetupPokeballs
-	ld hl, W_BASECOORDX
+	ld hl, wBaseCoordX
 	ld a, $50
 	ld [hli], a
 	ld [hl], $68

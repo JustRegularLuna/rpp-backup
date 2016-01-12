@@ -1,4 +1,4 @@
-PrintRedsNESText: ; 5db79 (17:5b79)
+PrintRedSNESText: ; 5db79 (17:5b79)
 	call EnableAutoTextBoxDrawing
 	tx_pre_jump RedBedroomSNESText
 
@@ -95,23 +95,23 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	ld hl, LinkCableHelpText1
 	call PrintText
 	xor a
-	ld [W_ANIMATIONID], a
+	ld [wMenuItemOffset], a ; not used
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld a, A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
-	ld a, $3
+	ld a, 3
 	ld [wMaxMenuItem], a
-	ld a, $2
+	ld a, 2
 	ld [wTopMenuItemY], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemX], a
 .linkHelpLoop
 	ld hl, wd730
 	set 6, [hl]
 	coord hl, 0, 0
-	ld b, $8
-	ld c, $d
+	ld b, 8
+	ld c, 13
 	call TextBoxBorder
 	coord hl, 2, 2
 	ld de, HowToLinkText
@@ -122,13 +122,13 @@ LinkCableHelp: ; 5dc29 (17:5c29)
 	bit 1, a ; pressed b
 	jr nz, .exit
 	ld a, [wCurrentMenuItem]
-	cp $3 ; pressed a on "STOP READING"
+	cp 3 ; pressed a on "STOP READING"
 	jr z, .exit
 	ld hl, wd730
 	res 6, [hl]
 	ld hl, LinkCableInfoTexts
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hli]
@@ -179,16 +179,16 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	ld hl, ViridianSchoolBlackboardText1
 	call PrintText
 	xor a
-	ld [W_ANIMATIONID], a
+	ld [wMenuItemOffset], a
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	ld a, D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
-	ld a, $2
+	ld a, 2
 	ld [wMaxMenuItem], a
-	ld a, $2
+	ld a, 2
 	ld [wTopMenuItemY], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemX], a
 .blackboardLoop
 	ld hl, wd730
@@ -210,34 +210,34 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	bit 4, a ; pressed right
 	jr z, .didNotPressRight
 	; move cursor to right column
-	ld a, $2
+	ld a, 2
 	ld [wMaxMenuItem], a
-	ld a, $2
+	ld a, 2
 	ld [wTopMenuItemY], a
-	ld a, $6
+	ld a, 6
 	ld [wTopMenuItemX], a
-	ld a, $3
-	ld [W_ANIMATIONID], a
+	ld a, 3 ; in the the right column, use an offset to prevent overlap
+	ld [wMenuItemOffset], a
 	jr .blackboardLoop
 .didNotPressRight
 	bit 5, a ; pressed left
 	jr z, .didNotPressLeftOrRight
 	; move cursor to left column
-	ld a, $2
+	ld a, 2
 	ld [wMaxMenuItem], a
-	ld a, $2
+	ld a, 2
 	ld [wTopMenuItemY], a
-	ld a, $1
+	ld a, 1
 	ld [wTopMenuItemX], a
 	xor a
-	ld [W_ANIMATIONID], a
+	ld [wMenuItemOffset], a
 	jr .blackboardLoop
 .didNotPressLeftOrRight
 	ld a, [wCurrentMenuItem]
 	ld b, a
-	ld a, [W_ANIMATIONID]
+	ld a, [wMenuItemOffset]
 	add b
-	cp $5 ; cursor is pointing to "QUIT"
+	cp 5 ; cursor is pointing to "QUIT"
 	jr z, .exitBlackboard
 	; we must have pressed a on a status condition
 	; so print the text
@@ -245,7 +245,7 @@ ViridianSchoolBlackboard: ; 5dced (17:5ced)
 	res 6, [hl]
 	ld hl, ViridianBlackboardStatusPointers
 	add a
-	ld d, $0
+	ld d, 0
 	ld e, a
 	add hl, de
 	ld a, [hli]
@@ -280,7 +280,7 @@ StatusAilmentText2: ; 5ddbb (17:5dbb)
 ViridianBlackboardStatusPointers: ; 5ddcc (17:5ddc)
 	dw ViridianBlackboardSleepText
 	dw ViridianBlackboardPoisonText
-	dw ViridianBlackbaordPrlzText
+	dw ViridianBlackboardPrlzText
 	dw ViridianBlackboardBurnText
 	dw ViridianBlackboardFrozenText
 
@@ -292,8 +292,8 @@ ViridianBlackboardPoisonText: ; 5dddb (17:5ddb)
 	TX_FAR _ViridianBlackboardPoisonText
 	db "@"
 
-ViridianBlackbaordPrlzText: ; 5dde0 (17:5de0)
-	TX_FAR _ViridianBlackbaordPrlzText
+ViridianBlackboardPrlzText: ; 5dde0 (17:5de0)
+	TX_FAR _ViridianBlackboardPrlzText
 	db "@"
 
 ViridianBlackboardBurnText: ; 5dde5 (17:5de5)
@@ -379,7 +379,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	and $f
 	ld [wSecondLockTrashCanIndex], a
 
-	tx_pre_id VermilionGymTrashSuccesText1
+	tx_pre_id VermilionGymTrashSuccessText1
 	jr .done
 
 .trySecondLock
@@ -402,10 +402,10 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 .openSecondLock
 ; Completed the trash can puzzle.
 	SetEvent EVENT_2ND_LOCK_OPENED
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 6, [hl]
 
-	tx_pre_id VermilionGymTrashSuccesText3
+	tx_pre_id VermilionGymTrashSuccessText3
 
 .done
 	jp PrintPredefTextID
@@ -434,8 +434,8 @@ GymTrashCans: ; 5de7d (17:5e7d)
 	db 2, 11, 13,  0,  0 ; 14
 ; 5dec8
 
-VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
-	TX_FAR _VermilionGymTrashSuccesText1
+VermilionGymTrashSuccessText1: ; 5dec8 (17:5ec8)
+	TX_FAR _VermilionGymTrashSuccessText1
 	TX_ASM
 	call WaitForSoundToFinish
 	ld a, SFX_SWITCH
@@ -444,8 +444,8 @@ VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	jp TextScriptEnd
 
 ; unused
-VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
-	TX_FAR _VermilionGymTrashSuccesText2
+VermilionGymTrashSuccessText2: ; 5dedb (17:5edb)
+	TX_FAR _VermilionGymTrashSuccessText2
 	db "@"
 
 ; unused
@@ -457,8 +457,8 @@ VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
-	TX_FAR _VermilionGymTrashSuccesText3
+VermilionGymTrashSuccessText3: ; 5deef (17:5eef)
+	TX_FAR _VermilionGymTrashSuccessText3
 	TX_ASM
 	call WaitForSoundToFinish
 	ld a, SFX_GO_INSIDE

@@ -111,10 +111,10 @@ ColorNonOverworldSprites:
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.playersTurn
-	ld a,[W_ENEMYMOVETYPE] ; Enemy move type
+	ld a,[wEnemyMoveType] ; Enemy move type
 	jr .gotType
 .playersTurn
-	ld a,[W_PLAYERMOVETYPE] ; Move type
+	ld a,[wPlayerMoveType] ; Move type
 .gotType
 	ld hl, TypeColorTable
 	add l
