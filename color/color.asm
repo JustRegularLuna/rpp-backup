@@ -94,68 +94,56 @@ ENDC
 
 	; Top half; enemy lifebar
 	ld hl,W2_TilesetPaletteMap
-	ld d,3
-	ld bc,20*6
-.eFillLoop
-	ld [hl],d
-	inc hl
-	dec bc
-	ld a,b
-	or c
-	jr nz,.eFillLoop
+	ld a,3
+	ld b,4
+	ld c,11
+	call FillBox
 
+IF GEN_2_GRAPHICS
 	; Bottom half; player lifebar
-	ld hl,W2_TilesetPaletteMap+6*20
-	ld d,2
-	ld bc,20*12
-.pFillLoop
-	ld [hl],d
-	inc hl
-	dec bc
-	ld a,b
-	or c
-	jr nz,.pFillLoop
+	ld hl,W2_TilesetPaletteMap+7*20+9
+	ld a,2
+	ld b,4
+	ld c,11
+	call FillBox
+
+	; Player exp bar
+	ld hl, W2_TilesetPaletteMap + 9 + 11 * 20
+	ld a, 4
+	ld b, 1
+	ld c, 11
+	call FillBox
+ENDC
+
+IF !GEN_2_GRAPHICS
+	; Bottom half; player lifebar
+	ld hl,W2_TilesetPaletteMap+7*20+9
+	ld a,2
+	ld b,5
+	ld c,11
+	call FillBox
+ENDC
 
 	; Player pokemon
 	ld hl,W2_TilesetPaletteMap+4*20
-	ld de,20-9
-	ld b,8
 	ld a,0
-.pDrawLine
+	ld b,8
 	ld c,9
-.pPalLoop
-	ld [hli],a
-	dec c
-	jr nz,.pPalLoop
-	add hl,de
-	dec b
-	jr nz,.pDrawLine
+	call FillBox
 
 	; Enemy pokemon
 	ld hl,W2_TilesetPaletteMap + 11
-	ld de,20-9
-	ld b,7
 	ld a,1
-.eDrawLine
+	ld b,7
 	ld c,9
-.ePalLoop
-	ld [hli],a
-	dec c
-	jr nz,.ePalLoop
-	add hl,de
-	dec b
-	jr nz,.eDrawLine
+	call FillBox
 
-IF GEN_2_GRAPHICS
-	; Player exp bar
-	ld hl, W2_TilesetPaletteMap + 10 + 11 * 20
-	ld b, 8
-	ld a, 4
-.expLoop
-	ld [hli], a
-	dec b
-	jr nz, .expLoop
-ENDC
+	; text box
+	ld hl,W2_TilesetPaletteMap+12*20
+	ld a,0
+	ld b,6
+	ld c,20
+	call FillBox
 
 	; Wait 2 frames before updating palettes
 	ld c,2
@@ -172,6 +160,30 @@ ENDC
 
 	;ld a,$01
 	ld [W_PALREFRESHCMD],a
+	ret
+
+; hl: starting address
+; a: pal number
+; b: number of rows
+; c: number of columns
+FillBox:
+	push af
+	ld a, SCREEN_WIDTH
+	sub c
+	ld e, a
+	ld d, 0
+	pop af
+	push bc
+.loop
+	ld [hli],a
+	dec c
+	jr nz,.loop
+	add hl,de
+	pop bc
+	dec b
+	push bc
+	jr nz,.loop
+	pop bc
 	ret
 
 ; Load town map
