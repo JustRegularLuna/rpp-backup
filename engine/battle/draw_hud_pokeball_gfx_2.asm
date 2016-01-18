@@ -11,7 +11,7 @@ EnemyHUDHAX:
 	dec a
 	jr  nz, .notWildBattle
 	push hl
-	ld a, [wEnemyMon]
+	ld a, [wEnemyMonSpecies2]
 	ld [wd11e], a
 	callab IndexToPokedex
 	ld a, [wd11e]
