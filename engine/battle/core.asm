@@ -1238,7 +1238,8 @@ HandlePlayerBlackOut: ; 3c837 (f:4837)
 	cp OAKS_LAB
 	ret z            ; starter battle in oak's lab: don't black out
 .notSony1Battle
-	ld b, SET_PAL_BATTLE_BLACK
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld c, 1
 	call RunPaletteCommand
 	ld hl, PlayerBlackedOutText2
 	ld a, [wLinkState]

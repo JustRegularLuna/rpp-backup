@@ -25,9 +25,9 @@ SetPal_BattleBlack:
 
 	; This prevents extra flickering when entering battle
 	xor a
-	;ld [rBGP],a
-	;ld [rOBP0],a
-	;ld [rOBP1],a
+	ld [rBGP],a
+	ld [rOBP0],a
+	ld [rOBP1],a
 
 	;xor a
 	ld [rSVBK],a
