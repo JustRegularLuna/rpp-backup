@@ -635,10 +635,14 @@ SetPal_PartyMenu:
 ; Evolution / Hall of Fame
 SetPal_PokemonWholeScreen:
 	ld a, c
-	and a
+	dec a
 	ld a, PAL_BLACK
-	jr nz, .loadPalette
-	ld a, [wPlayerHPBarColor]
+	jr z, .loadPalette
+	ld a, c
+	cp 2
+	ld a, PAL_MEWMON
+	jr z, .loadPalette
+	ld a, [wWholeScreenPaletteMonSpecies]
 	; Use the "BackSprite" version for the player sprite in the hall of fame.
 	call DetermineBackSpritePaletteID_NoStatusCheck
 
@@ -649,6 +653,34 @@ SetPal_PokemonWholeScreen:
 
 	ld e,0
 	callba LoadSGBPalette
+
+	ld d, PAL_MEWMON
+	ld e, 1
+	push de
+.loop
+	callba LoadSGBPalette
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop
+	pop de
+
+	ld d, PAL_MEWMON
+	ld e, 0
+	push de
+.loop_sprites
+	callba LoadSGBPalette_Sprite
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop_sprites
+	pop de
 
 	xor a
 	ld [W2_TileBasedPalettes],a

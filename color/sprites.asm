@@ -169,9 +169,6 @@ LoadAnimationTilesetPalettes:
 	ld [rSVBK],a
 
 	pop de
-	; Next lines were cut out from the caller
-	ld hl,AnimationTilesetPointers
-	add hl,de
 	reti
 
 ; Set all sprite palettes to not be colorized by "ColorNonOverworldSprites".

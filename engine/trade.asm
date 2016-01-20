@@ -223,6 +223,9 @@ Trade_Cleanup: ; 4123b (10:523b)
 	ret
 
 Trade_ShowPlayerMon: ; 41245 (10:5245)
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld c, 2
+	call RunPaletteCommand
 	ld a, %10101011
 	ld [rLCDC], a
 	ld a, $50
@@ -265,10 +268,13 @@ Trade_ShowPlayerMon: ; 41245 (10:5245)
 	ret
 
 Trade_DrawOpenEndOfLinkCable: ; 41298 (10:5298)
+	ld a, %11110000
+	ld [rOBP0], a
 	call Trade_ClearTileMap
 	ld b, vBGMap0 / $100
 	call CopyScreenTileBufferToVRAM
-	ld b, SET_PAL_GENERIC
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld c, 2
 	call RunPaletteCommand
 
 ; This function call is pointless. It just copies blank tiles to VRAM that was
@@ -380,7 +386,7 @@ Trade_AnimLeftToRight: ; 41376 (10:5376)
 	call Trade_InitGameboyTransferGfx
 	ld a, $1
 	ld [wTradedMonMovingRight], a
-	ld a, $e4
+	ld a, %11010000
 	ld [rOBP0], a
 	ld a, $54
 	ld [wBaseCoordX], a
