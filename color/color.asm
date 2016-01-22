@@ -830,6 +830,22 @@ LoadTitleMonTilesAndPalettes:
 	callba TitleScroll
 	ret
 
+ResetPalettes:
+	ld a,2
+	ld [rSVBK],a
+	dec a
+	ld [W2_TileBasedPalettes],a
+	dec a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	call FillMemory
+	ld hl, W2_BgPaletteData
+	ld bc, $80
+	call FillMemory
+	xor a
+	ld [rSVBK],a
+	ret
+
 INCLUDE "color/refreshmaps.asm"
 INCLUDE "color/loadpalettes.asm"
 INCLUDE "color/vblank.asm"
