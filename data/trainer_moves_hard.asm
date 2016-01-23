@@ -1,30 +1,20 @@
 TeamMoves: ; Created and updated on 28/06/2015 by Neodymium / Free to use and modify without crediting
 	db BROCK,$1 ; COMPLETED
-    ;Geodude
-	db 1,1,ROCK_POLISH
-	db 1,2,MUD_SLAP
-	db 1,3,ROCK_TOMB
-	db 1,4,TACKLE
-    ;Kabutops
-	db 2,1,AURORA_BEAM
-	db 2,2,WATER_GUN
-	db 2,3,ROCK_TOMB
-	db 2,4,TACKLE
-    ;Omastar
-	db 3,1,AURORA_BEAM
-	db 3,2,WATER_GUN
-	db 3,3,ROCK_TOMB
-	db 3,4,TACKLE
     ;Aerodactyl
 	db 4,1,WING_ATTACK
 	db 4,2,SAND_ATTACK
 	db 4,3,ROCK_TOMB
 	db 4,4,AGILITY
-    ;Graveler
-	db 5,1,ROCK_POLISH
-	db 5,2,MUD_SLAP
-	db 5,3,ROCK_TOMB
-	db 5,4,TAKE_DOWN
+    ;Omastar
+	db 3,1,AURORA_BEAM
+	db 3,2,WATER_GUN
+	db 3,3,ROCK_TOMB
+	db 3,4,TACKLE
+    ;Kabutops
+	db 2,1,AURORA_BEAM
+	db 2,2,WATER_GUN
+	db 2,3,ROCK_TOMB
+	db 2,4,TACKLE
 	db 0
 
 	db MISTY,$1 ; COMPLETED

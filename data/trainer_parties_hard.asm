@@ -74,7 +74,7 @@ TrainerDataPointers: ; Last Updated 28/06/2015 by Neodymium / Free to use and mo
 
 	
 BrockData:
-	db "BROCK@",$FF,14,GEODUDE,15,KABUTOPS,13,OMASTAR,12,AERODACTYL,15,GRAVELER,0 ; Additional Remark: Made sure all pokemon (except Geodude) have 40+ HP to prevent charmander from 1H-KO
+	db "BROCK@",$FF,12,AERODACTYL,13,OMASTAR,15,KABUTOPS,0 ; Additional Remark: Made sure all pokemon have 40+ HP to prevent charmander from 1H-KO
 	
 MistyData:
 	db "MISTY@",$FF,25,VAPOREON,25,POLIWRATH,25,DEWGONG,26,STARMIE,25,LAPRAS,0 ; Additional remark: made sure all pokemon have at least 81 HP. Do prevent 2 HKO from charmander.
