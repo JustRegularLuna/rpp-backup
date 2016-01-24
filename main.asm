@@ -6155,9 +6155,11 @@ AnimateEXPBar:
 	ld hl, CalcEXPBarPixelLength
 	ld b, BANK(CalcEXPBarPixelLength)
 	call Bankswitch
-	ld a, [wEXPBarPixelLength]
+	ld hl, wEXPBarPixelLength
+	ld a, [hl]
 	ld b, a
 	ld a, [H_QUOTIENT + 3]
+	ld [hl], a
 	sub b
 	jr z, .done
 	ld b, a
