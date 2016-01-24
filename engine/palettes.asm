@@ -159,12 +159,11 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	jr z, .townOrRoute
 	cp NAVEL_ROCK_OUTSIDE
 	jr z, .townOrRoute
-	cp UNKNOWN_DUNGEON_2
-	jr c, .normalDungeonOrBuilding
 	cp LORELEIS_ROOM
 	jr z, .Lorelei
 	cp BRUNOS_ROOM
 	jr z, .Bruno
+; if it wasn't a special map or tileset, fallthrough to normalDungeonOrBuilding
 .normalDungeonOrBuilding
 	ld a, [wLastMap] ; town or route that current dungeon or building is located
 .townOrRoute
