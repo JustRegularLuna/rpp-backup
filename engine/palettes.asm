@@ -146,23 +146,25 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	jr z, .caveOrBruno
 	cp FERRY
 	jr z, .townOrRoute
+	cp SAFARI
+	jr z, .townOrRoute
 	cp ICE_CAVERN
 	jr z, .icePath
 	ld a, [W_CURMAP]
 	cp REDS_HOUSE_1F
 	jr c, .townOrRoute
+	cp VIRIDIAN_FOREST
+	jr z, .caveOrBruno
 	cp INSIDE_FERRY
 	jr z, .townOrRoute
 	cp NAVEL_ROCK_OUTSIDE
 	jr z, .townOrRoute
 	cp UNKNOWN_DUNGEON_2
 	jr c, .normalDungeonOrBuilding
-	cp NAME_RATERS_HOUSE
-	jr c, .caveOrBruno
 	cp LORELEIS_ROOM
 	jr z, .Lorelei
 	cp BRUNOS_ROOM
-	jr z, .caveOrBruno
+	jr z, .Bruno
 .normalDungeonOrBuilding
 	ld a, [wLastMap] ; town or route that current dungeon or building is located
 .townOrRoute
@@ -185,6 +187,9 @@ BuildOverworldPalPacket: ; 71ec7 (1c:5ec7)
 	jr .town
 .icePath
 	ld a, PAL_CYANMON - 1
+	jr .town
+.Bruno
+	ld a, PAL_BROWNMON - 1
 	jr .town
 .Lorelei
 	xor a
