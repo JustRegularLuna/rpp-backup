@@ -60,9 +60,13 @@ NameRaterText1: ; 1da56 (7:5a56)
 	pop af
 	jr c, .asm_1daae ; 0x1da80 $2c
 	call GetPartyMonName2
+	ld a, [wExtraFlags]
+	bit 2, a
+	jr nz, .canRename
 	call NameRaterScript_1da20
 	ld hl, NameRaterText_1dad1
 	jr c, .asm_1daa8 ; 0x1da8b $1b
+.canRename
 	ld hl, NameRaterText_1dabd
 	call NameRaterScript_1da15
 	jr nz, .asm_1daae ; 0x1da93 $19
