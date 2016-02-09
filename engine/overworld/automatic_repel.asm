@@ -60,9 +60,7 @@ _DisplayRepelWoreOffText::
 	
 .saidNo
 	pop bc
-.done ; Stop the game from making you press A a twice to close the text
-	ld a, 1
-	ld [wcc47], a
+.done
 	ret
 
 RepelWoreOffText:: ; Moved out of Bank 0

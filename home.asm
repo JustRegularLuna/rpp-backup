@@ -1277,7 +1277,7 @@ PlayerBlackedOutText:: ; 2aba (0:2aba)
 
 DisplayRepelWoreOffText:: ; 2abf (0:2abf)
 	callba _DisplayRepelWoreOffText
-	jp AfterDisplayingTextID
+	jp HoldTextDisplayOpen
 
 INCLUDE "engine/menu/start_menu.asm"
 
