@@ -2407,7 +2407,7 @@ _PlayerBlackedOutText:: ; a25c5 (28:65c5)
 _RepelWoreOffText:: ; a25ef (28:65ef)
 	text "REPEL's effect"
 	line "wore off."
-	done
+	prompt
 
 _PokemartBuyingGreetingText:: ; a2608 (28:6608)
 	text "Take your time."
