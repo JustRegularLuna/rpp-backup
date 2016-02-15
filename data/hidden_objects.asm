@@ -693,7 +693,7 @@ VictoryRoad2HiddenObjects: ; 46f72 (11:6f72)
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
 Unused6FHiddenObjects: ; 46f7f (11:6f7f)
-	db $0b,$0e,MAX_ELIXER
+	db $0C,$11,MAX_ELIXER
 	dbw BANK(HiddenItems),HiddenItems
 	db $FF
 BillsHouseHiddenObjects: ; 46f86 (11:6f86)
