@@ -2863,7 +2863,7 @@ IsNextTileShoreOrWater: ; e8b8 (3:68b8)
 
 ; tilesets with water
 WaterTilesets: ; e8e0 (3:68e0)
-	db OVERWORLD,FOREST,GYM,SHIP,SHIP_PORT,CAVERN,FACILITY,PLATEAU,SAFARI,FERRY,ICE_CAVERN,$FF
+	db OVERWORLD,FOREST,GYM,SHIP,SHIP_PORT,CAVERN,FACILITY,PLATEAU,SAFARI,ICE_CAVERN,$FF,$FF
 
 ReadSuperRodData: ; e8ea (3:68ea)
 ; return e = 2 if no fish on this map
