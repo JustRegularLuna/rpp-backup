@@ -204,7 +204,7 @@ SailorData: ; COMPLETED
 	
 CamperData: 
 	db "DANIEL@",14,DIGLETT,SANDSHREW,0 ; PEWTER GYM
-	db "CRAIG@",23,POLIWAG,GOLDEEN,0 ; Route 24 l
+	db "CRAIG@",23,POLIWAG,GOLDEEN,0 ; Route 25
 	db "HARRY@",20,PRIMEAPE,MACHOKE,0 ; Nugget bridge 5
 	db "RONALD@",25,DITTO,MEOWTH,0 ; Route 6 1
 	db "MARK@",25,SPEAROW,DODUO,0 ; Route 6 5
@@ -212,6 +212,7 @@ CamperData:
 	db "NICK@",32,GROWLITHE,CHARMELEON,0 ; Route 9 3u
 	db "ROBERT@",32,RATICATE,DUGTRIO,ARBOK,SANDSLASH,0 ; Route 9 4rl
 	db "IAN@",53,NIDOKING,0 ; Route 13 R4
+	db "FLINT@",23,RATTATA,EKANS,0 ; Route 24 1
 	
 PicnickerData: ; COMPLETED
 	db "CINDY@",25,GOLDEEN,0 ; Cerulean City GYM
