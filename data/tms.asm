@@ -1,4 +1,4 @@
-TechnicalMachines: ; 13773 (4:7773)
+TechnicalMachines: ; ***NOTE: Subtract 1 from the line number to get TM number. HMs start afterwards.
 	db DYNAMICPUNCH ; Victory Road, Safari Zone
 	db DRAGON_CLAW  ; Rocket Hideout, Celadon Dept
 	db SWORDS_DANCE ; Silph Co
