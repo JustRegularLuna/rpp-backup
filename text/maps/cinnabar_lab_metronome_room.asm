@@ -1,9 +1,9 @@
 _TM35PreReceiveText:: ; a0f09 (28:4f09)
-	text "Tch-tch-tch!"
-	line "I made a cool TM!"
+	text "I'm giving out"
+	line "free TMs."
 
-	para "It can cause all"
-	line "kinds of fun!"
+	para "Here you go, take"
+	line "one!"
 	prompt
 
 _ReceivedTM35Text:: ; a0f48 (28:4f48)
@@ -13,14 +13,14 @@ _ReceivedTM35Text:: ; a0f48 (28:4f48)
 	text "!@@"
 
 _TM35ExplanationText:: ; a0f5d (28:4f5d)
-	text "Tch-tch-tch!"
-	line "That's the sound"
-	cont "of a METRONOME!"
+	text "That TM teaches a"
+	line "#MON to use"
+	cont "ANCIENTPOWER!"
 
-	para "It tweaks your"
-	line "#MON's brain"
-	cont "into using moves"
-	cont "it doesn't know!"
+	para "It was discovered"
+	line "while researching"
+	cont "fossils here in"
+	cont "the lab."
 	done
 
 _TM35NoRoomText:: ; a0fc7 (28:4fc7)
