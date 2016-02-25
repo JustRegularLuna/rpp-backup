@@ -9,7 +9,7 @@ VictoryRoad1Object: ; 0x5dab8 (size=76)
 	db $0 ; signs
 
 	db $7 ; people
-	db SPRITE_LASS, $5 + 4, $7 + 4, $ff, $d3, TRAINER | $1, COOLTRAINER_F + TRAINER_START, $5
+	db SPRITE_BRUNETTE_GIRL, $5 + 4, $7 + 4, $ff, $d3, TRAINER | $1, PKMN_TRAINER + TRAINER_START, $2
 	db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $3 + 4, $ff, $d0, TRAINER | $2, COOLTRAINER_M + TRAINER_START, $5
 	db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, ITEM | $3, TM_15
 	db SPRITE_BALL, $2 + 4, $9 + 4, $ff, $ff, ITEM | $4, RARE_CANDY

@@ -1,11 +1,15 @@
 _VictoryRoad1BattleText1:: ; 85c79 (21:5c79)
-	text "I wonder if you"
+	text "I'm training to"
+	line "be a GYM LEADER"
+	cont "like my father."
+	
+	para "I wonder if you"
 	line "are good enough"
 	cont "for me!"
 	done
 
 _VictoryRoad1EndBattleText1:: ; 85ca2 (21:5ca2)
-	text "I lost out!"
+	text "I lost!"
 	prompt
 
 _VictoryRoad1AfterBattleText1:: ; 85caf (21:5caf)
