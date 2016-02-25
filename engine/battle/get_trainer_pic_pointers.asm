@@ -84,3 +84,5 @@ TrainerPicPointers:
 	add_pic ProfOakPic
 	add_pic PiTrainerPic
 	add_pic FlanneryPic
+	add_pic JessiePic
+	add_pic JamesPic

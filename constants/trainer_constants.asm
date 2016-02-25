@@ -63,3 +63,5 @@ const_value = 1
 	const PROF_OAK
 	const PI_TRAINER
 	const FLANNERY
+	const JESSIE
+	const JAMES

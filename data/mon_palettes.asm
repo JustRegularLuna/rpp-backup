@@ -269,3 +269,5 @@ TrainerPalletes:
 	db PAL_MEWMON            ; Professor Oak
 	db PAL_BROWNMON          ; P.I.
 	db PAL_RED_TRAINER       ; Flannery
+	db PAL_RED_TRAINER       ; Jessie
+	db PAL_BLUE_TRAINER      ; James
