@@ -97,13 +97,14 @@ _SilphCo10Text_62335:: ; 85131 (21:5131)
 	done
 
 _SilphCo11BattleText1:: ; 851d6 (21:51d6)
-	text "Stop right there!"
-	line "Don't you move!"
+	text "Beat it, kid!"
+	line "This is as far"
+	cont "as you go!"
 	done
 
 _SilphCo11EndBattleText1:: ; 851f8 (21:51f8)
-	text "Don't..."
-	line "Please!"
+	text "What?! How could"
+	line "I lose?"
 	prompt
 
 _SilphCo11AfterBattleText1:: ; 85209 (21:5209)
