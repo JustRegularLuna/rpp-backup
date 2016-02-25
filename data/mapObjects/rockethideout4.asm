@@ -10,8 +10,8 @@ RocketHideout4Object: ; 0x455f1 (size=95)
 
 	db $9 ; people
 	db SPRITE_GIOVANNI, $3 + 4, $19 + 4, $ff, $d0, TRAINER | $1, GIOVANNI + TRAINER_START, $1
-	db SPRITE_ROCKET, $c + 4, $17 + 4, $ff, $d0, TRAINER | $2, ROCKET + TRAINER_START, $10
-	db SPRITE_ROCKET_F, $c + 4, $1a + 4, $ff, $d0, TRAINER | $3, ROCKET_F + TRAINER_START, $11
+	db SPRITE_JAMES, $c + 4, $17 + 4, $ff, $d0, TRAINER | $2, ROCKET + TRAINER_START, $10
+	db SPRITE_JESSIE, $c + 4, $1a + 4, $ff, $d0, TRAINER | $3, ROCKET_F + TRAINER_START, $11
 	db SPRITE_ROCKET, $2 + 4, $b + 4, $ff, $d0, TRAINER | $4, ROCKET + TRAINER_START, $12
 	db SPRITE_BALL, $c + 4, $a + 4, $ff, $ff, ITEM | $5, HP_UP
 	db SPRITE_BALL, $4 + 4, $9 + 4, $ff, $ff, ITEM | $6, TM_02

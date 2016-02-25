@@ -27,13 +27,15 @@ _RocketHideout4Text_45584:: ; 82283 (20:6283)
 	done
 
 _RocketHideout4BattleText2:: ; 82326 (20:6326)
-	text "I know you! You"
-	line "ruined our plans"
-	cont "at MT.MOON!"
+	text "E-he-he-he! Look"
+	line "at this! A twerp"
+	cont "thinking they can"
+	cont "take on the BOSS!"
 	done
 
 _RocketHideout4EndBattleText2:: ; 82354 (20:6354)
-	text "Burned again!"
+	text "I'm feeling"
+	line "dizzy..."
 	prompt
 
 _RocketHide4AfterBattleText2:: ; 82363 (20:6363)
@@ -43,13 +45,16 @@ _RocketHide4AfterBattleText2:: ; 82363 (20:6363)
 	done
 
 _RocketHideout4BattleText3:: ; 8238f (20:638f)
-	text "How can you not"
-	line "see the beauty of"
-	cont "our evil?"
+	text "Hold it right"
+	line "there, you brat!"
+	
+	para "We can't let you"
+	line "bother the BOSS!"
 	done
 
 _RocketHideout4EndBattleText3:: ; 823bc (20:63bc)
-	text "Ayaya!"
+	text "You will regret"
+	line "this!"
 	prompt
 
 _RocketHide4AfterBattleText3:: ; 823c4 (20:63c4)
