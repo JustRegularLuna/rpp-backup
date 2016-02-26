@@ -3260,10 +3260,10 @@ GetName:: ; 376b (0:376b)
 ;
 ; returns pointer to name in de
 	ld a,[wNameListType]
-	cp MOVE_NAME
+	cp ITEM_NAME
 	ld a,[wd0b5]
 	ld [wd11e],a
-	jr z, .noItem
+	jr nz, .noItem
 	
 	cp HM_01        ;it's TM/HM
 	jp nc,GetMachineName
