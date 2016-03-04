@@ -181,7 +181,7 @@ endm
 	move CUT,          DEFENSE_DOWN_SIDE_EFFECT,   100, STEEL,     75, 15 ; Iron Tail
 	move STRENGTH,     NO_ADDITIONAL_EFFECT,        90, STEEL,     90, 10 ; Meteor Mash
 	move BITE,         DEFENSE_DOWN_SIDE_EFFECT,    80, DARK,     100, 15 ; Crunch
-	move PSYCHIC_M,      FLINCH_SIDE_EFFECT1,         80, DARK,     100, 15 ; Dark Pulse
+	move PSYCHIC_M,    FLINCH_SIDE_EFFECT1,         80, DARK,     100, 15 ; Dark Pulse
 	move QUICK_ATTACK, SWIFT_EFFECT,                60, DARK,     100, 20 ; Feint Attack
 	move CUT,          NO_ADDITIONAL_EFFECT,        70, DARK,     100, 15 ; Night Slash
 	move SEISMIC_TOSS, SPECIAL_DOWN_SIDE_EFFECT,    95, FAIRY,    100, 15 ; Moonblast
