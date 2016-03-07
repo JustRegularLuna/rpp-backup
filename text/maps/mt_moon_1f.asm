@@ -1,18 +1,20 @@
 _MtMoon1BattleText2:: ; 80692 (20:4692)
-	text "WHOA! You shocked"
-	line "me! Oh, you're"
-	cont "just a kid!"
+	text "There are fossils"
+	line "all over!"
+	
+	para "I've just  been"
+	line "helping myself!"
 	done
 
 _MtMoon1EndBattleText2:: ; 806bf (20:46bf)
-	text "Wow!"
-	line "Shocked again!"
+	text "Wow! Guess I need"
+	line "some more help!"
 	prompt
 
 _MtMoon1AfterBattleText2:: ; 806d4 (20:46d4)
-	text "Kids like you"
-	line "shouldn't be"
-	cont "here!"
+	text "If you aren't"
+	line "gonna help, stay"
+	cont "out of the way!"
 	done
 
 _MtMoon1BattleText3:: ; 806f5 (20:46f5)
