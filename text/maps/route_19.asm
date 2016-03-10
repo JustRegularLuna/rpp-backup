@@ -1,25 +1,29 @@
 _Route19BattleText1:: ; 918eb (24:58eb)
-	text "Have to warm up"
-	line "before my swim!"
+	text "I learned how to"
+	line "SURF from a guy"
+	cont "in that house."
 	done
 
 _Route19EndBattleText1:: ; 9190c (24:590c)
-	text "All warmed up!"
+	text "Gnarly!"
 	prompt
 
 _Route19AfterBattleText1:: ; 9191c (24:591c)
 	text "Thanks, kid! I'm"
-	line "ready for a swim!"
+	line "ready to hit the"
+	cont "waves!"
 	done
 
 _Route19BattleText2:: ; 9193f (24:593f)
-	text "Wait! You'll have"
-	line "a heart attack!"
+	text "Hey, you looking"
+	line "to hit the waves?"
+	
+	para "I was headed to"
+	line "the BEACH HOUSE."
 	done
 
 _Route19EndBattleText2:: ; 91961 (24:5961)
-	text "Ooh!"
-	line "That's chilly!"
+	text "No chill!"
 	prompt
 
 _Route19AfterBattleText2:: ; 91975 (24:5975)
