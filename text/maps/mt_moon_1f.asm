@@ -2,7 +2,7 @@ _MtMoon1BattleText2:: ; 80692 (20:4692)
 	text "There are fossils"
 	line "all over!"
 	
-	para "I've just  been"
+	para "I've just been"
 	line "helping myself!"
 	done
 
