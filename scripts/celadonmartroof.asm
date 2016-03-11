@@ -89,7 +89,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld hl, CeladonMartRoofText_48515 ; $4515
 	call PrintText
 	call RemoveItemByIDBank12
-	ld bc, (TM_49 << 8) | 1
+	lb bc, TM_49, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM49Text
@@ -104,7 +104,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld hl, CeladonMartRoofText_48504 ; $4504
 	call PrintText
 	call RemoveItemByIDBank12
-	ld bc, (TM_48 << 8) | 1
+	lb bc, TM_48, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, CeladonMartRoofText_4850a ; $450a
@@ -119,7 +119,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	ld hl, CeladonMartRoofText_484f3 ; $44f3
 	call PrintText
 	call RemoveItemByIDBank12
-	ld bc, (TM_13 << 8) | 1
+	lb bc, TM_13, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, CeladonMartRoofText_484f9 ; $44f9

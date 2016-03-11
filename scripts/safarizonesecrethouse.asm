@@ -11,7 +11,7 @@ SafariZoneSecretHouseText1: ; 4a31c (12:631c)
 	jr nz, .already_received ; 0x4a322
 	ld hl, SafariZoneSecretHouseText_4a350
 	call PrintText
-	ld bc, (TM_15 << 8) | 1
+	lb bc, TM_15, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM15Text

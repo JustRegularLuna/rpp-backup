@@ -48,7 +48,7 @@ CeladonGymText_48963: ; 48963 (12:4963)
 	call DisplayTextID
 	ld hl, wd77c
 	set 1, [hl]
-	ld bc, (TM_21 << 8) | 1
+	lb bc, TM_21, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $a

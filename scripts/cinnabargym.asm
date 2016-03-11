@@ -140,7 +140,7 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	call DisplayTextID
 	ld hl, wd79a
 	set 1, [hl]
-	ld bc, (TM_38 << 8) | 1
+	lb bc, TM_38, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $b

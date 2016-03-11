@@ -20,7 +20,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	jr z, .asm_41190 ; 0x1d75b
 	ld hl, BikeShopText_1d81f
 	call PrintText
-	ld bc, (BICYCLE << 8) | 1
+	lb bc, BICYCLE, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, BIKE_VOUCHER

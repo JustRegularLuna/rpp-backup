@@ -53,7 +53,7 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	ld a, $5
 	ld [$ff8c], a
 	call DisplayTextID
-	ld bc, (OAKS_PARCEL << 8) + 1
+	lb bc, OAKS_PARCEL, 1
 	call GiveItem
 	ld hl, wd74e
 	set 1, [hl]

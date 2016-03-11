@@ -19,7 +19,7 @@ BeachHouseText1:
 	ld hl, BeachHouseGiveSurfText2 ; if you're a girl
 .next
 	call PrintText
-	ld bc, (HM_03 << 8) | 1
+	lb bc, HM_03, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedHM03Text

@@ -48,7 +48,7 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	call DisplayTextID
 	ld hl, wd75e
 	set 7, [hl]
-	ld bc, (TM_11 << 8) | 1
+	lb bc, TM_11, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld a, $6

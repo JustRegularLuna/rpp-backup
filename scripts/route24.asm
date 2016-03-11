@@ -155,7 +155,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	jr nz, .asm_a03f5 ; 0x514af $48
 	ld hl, Route24Text_51510
 	call PrintText
-	ld bc, (NUGGET << 8) | 1
+	lb bc, NUGGET, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, wd7ef

@@ -50,7 +50,7 @@ CeladonCityText5: ; 1999e (6:599e)
 	jr nz, .asm_7053f ; 0x199a4
 	ld hl, TM41PreText
 	call PrintText
-	ld bc, (TM_43 << 8) | 1
+	lb bc, TM_43, 1
 	call GiveItem
 	jr c, .Success
 	ld hl, TM41NoRoomText

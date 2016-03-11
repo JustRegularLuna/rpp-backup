@@ -27,7 +27,7 @@ CeladonMart3Text1: ; 4824a (12:424a)
 	jr nz, .asm_a5463 ; 0x48250
 	ld hl, TM18PreReceiveText
 	call PrintText
-	ld bc, (TM_18 << 8) | 1
+	lb bc, TM_18, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, wd778
