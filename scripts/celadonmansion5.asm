@@ -11,7 +11,7 @@ CeladonMansion5Text1: ; 1dd41 (7:5d41)
 
 CeladonMansion5Text2: ; 1dd46 (7:5d46)
 	db $08 ; asm
-	ld bc,(EEVEE << 8) | 25
+	lb bc, EEVEE, 25
 	call GivePokemon
 	jr nc, .asm_24365 ; 0x1dd4d
 	ld a, HS_CELADON_MANSION_5_GIFT

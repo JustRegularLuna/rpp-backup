@@ -44,7 +44,7 @@ MtMoonPokecenterText4: ; 492ec (12:52ec)
 	ld hl, MtMoonPokecenterText_49366
 	jr .asm_49356 ; 0x4931c
 .asm_faa09 ; 0x4931e
-	ld bc,(MAGIKARP << 8) | 5
+	lb bc, MAGIKARP, 5
 	call GivePokemon
 	jr nc, .asm_49359 ; 0x49324
 	xor a
