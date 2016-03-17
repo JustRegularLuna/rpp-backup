@@ -86,7 +86,7 @@ These are probably only interesting to people wanting to use this as a baserom
 * Variable overworld sprite IDs, like Gen 2 has
 * Trainer sprites can be stored in any Rombank
 * Town Map is no longer RLE encoded, uses the more flexible Gen 2 format (a standard tilemap)
-* Trainer custom moves are more customizable (currently using Yellow Version format)
+* Trainer custom moves are more customizable (see data/trainer_parties.asm)
 * Removed this weird unnecessary duplicate check causing some trainer class names to be listed twice
-* Fixed a bug causing new moves above a certain ID to be listed as HMs
+* Fixed an oversight causing things that weren't Items to accidentally show up with a TM/HM name 
 * More

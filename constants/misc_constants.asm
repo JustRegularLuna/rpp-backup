@@ -11,9 +11,10 @@ PC_ITEM_CAPACITY  EQU 50
 
 START_MONEY EQU $3000
 
-SPECIAL_TRAINER  EQU $FE
-SPECIAL_TRAINER2 EQU $FD
-SPECIAL_TRAINER3 EQU $FC
+SPECIAL_TRAINER  EQU $FE ; custom levels and moves for each
+SPECIAL_TRAINER2 EQU $FD ; custom levels, moves, trainer pic, and AI
+CUSTOM_PIC       EQU $FC ; custom pic, all Pokemon same level like normal trainer
+SPECIAL_LEVELS   EQU $FB ; custom levels only
 
 HOF_MON       EQU $10
 HOF_TEAM      EQU PARTY_LENGTH * HOF_MON

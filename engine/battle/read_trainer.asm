@@ -52,8 +52,10 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr z,.SpecialTrainer ; if so, check for special moves
 	cp SPECIAL_TRAINER2 ; is this an extra-special trainer?
 	jr z,.SpecialTrainer2 ; if so, read the Pic and AI numbers
-	cp SPECIAL_TRAINER3 ; is this a custom-pic-only trainer?
+	cp CUSTOM_PIC ; is this a custom-pic-only trainer?
 	jr z,.PicOnly ; if so, read the pic
+	cp SPECIAL_LEVELS ; custom levels only?
+	jr z, .SpecialLevelsOnly
 .GenericTrainer ; else, it's a generic trainer
 	ld [W_CURENEMYLVL],a
 .LoopTrainerData
@@ -83,7 +85,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 .SpecialTrainer
 ; if this code is being run:
 ; - each pokemon has a specific level
-;      (as opposed to the whole team being of the same level)
+; - each pokemon has a custom moveset
 	ld a,[hli]
 	cp $FF ; have we reached the end of the trainer data?
 	jr z,.FinishUp
@@ -97,6 +99,22 @@ ReadTrainer: ; 39c53 (e:5c53)
 	pop hl
 	call AddCustomMoves
 	jr .SpecialTrainer
+.SpecialLevelsOnly
+; if this code is being run:
+; - each pokemon has a specific level
+; - just uses default moves for each mon like a normal trainer
+	ld a,[hli]
+	cp $FF ; have we reached the end of the trainer data?
+	jr z,.FinishUp
+	ld [W_CURENEMYLVL],a
+	ld a,[hli]
+	ld [wcf91],a
+	ld a,1
+	ld [wcc49],a
+	push hl
+	call AddPartyMon
+	pop hl
+	jr .SpecialLevelsOnly
 .FinishUp ; XXX this needs documenting
 	xor a       ; clear D079-D07B
 	ld de,wd079
