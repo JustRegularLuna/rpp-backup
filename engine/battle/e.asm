@@ -832,7 +832,7 @@ CooltrainerFAI: ; 3a601 (e:6601)
 	ret nc
 	jp AISwitchIfEnoughMons
 
-LtSurgeAI: ; To stop Electro Ball on his Raichu being so broken
+
 BrockAI: ; 3a614 (e:6614)
 ; if his active monster has a status condition, use a full heal
 	ld a,[wEnemyMonStatus]
@@ -845,7 +845,7 @@ MistyAI: ; 3a61c (e:661c)
 	ret nc
 	jp AIUseXDefend
 
-;LtSurgeAI: ; 3a622 (e:6622)
+LtSurgeAI: ; 3a622 (e:6622)
 	cp $40
 	ret nc
 	jp AIUseXSpeed

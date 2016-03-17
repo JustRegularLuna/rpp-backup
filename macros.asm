@@ -598,3 +598,7 @@ add_pic: MACRO
 	db BANK(\1)
 	dw \1
 ENDM
+
+moveset: MACRO
+	db \1, \2, \3, \4
+ENDM
