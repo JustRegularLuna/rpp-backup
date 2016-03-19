@@ -80,6 +80,7 @@ SpecialEffects: ; 3c03b (f:403b)
 	db DREAM_EATER_EFFECT
 	db PAY_DAY_EFFECT
 	db SWIFT_EFFECT
+	db SUCKER_PUNCH_EFFECT
 	db TWO_TO_FIVE_ATTACKS_EFFECT
 	db $1E
 	db CHARGE_EFFECT
@@ -472,7 +473,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
     cp BULLET_PUNCH
     jr z, .PriorityMoveUsed
 	cp QUICK_ATTACK
-	jr nz, .playerDidNotUseQuickAttack
+	jr nz, .playerDidNotUsePriorityMove
 .PriorityMoveUsed
 	ld a, [wEnemySelectedMove]
 	cp EXTREMESPEED
@@ -488,7 +489,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	cp QUICK_ATTACK
 	jr z, .compareSpeed  ; if both used Quick Attack
 	jp .playerMovesFirst ; if player used Quick Attack and enemy didn't
-.playerDidNotUseQuickAttack
+.playerDidNotUsePriorityMove
 	ld a, [wEnemySelectedMove]
 	cp EXTREMESPEED
 	jr z, .enemyMovesFirst
@@ -537,6 +538,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 .enemyMovesFirst
 	ld a, $1
 	ld [H_WHOSETURN], a
+	ld [wEnemyWentFirst], a
 	callab TrainerAI
 	jr c, .AIActionUsedEnemyFirst
 	call ExecuteEnemyMove
@@ -563,6 +565,8 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	call CheckNumAttacksLeft
 	jp MainInBattleLoop
 .playerMovesFirst
+	xor a
+	ld [wEnemyWentFirst], a
 	call ExecutePlayerMove
 	ld a, [wEscapedFromBattle]
 	and a ; was Teleport, Road, or Whirlwind used to escape from battle?
@@ -5500,6 +5504,12 @@ MoveHitTest: ; 3e56b (f:656b)
 .checkForDigOrFlyStatus
 	bit Invulnerable,[hl]
 	jp nz,.moveMissed
+.suckerPunchCheck
+	ld a,[de]
+	cp a,SUCKER_PUNCH_EFFECT
+	jr nz,.swiftCheck
+	call SuckerPunchHitTest
+	jr c,.moveMissed
 .swiftCheck
 	ld a,[de]
 	cp a,SWIFT_EFFECT
@@ -7312,6 +7322,7 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw FangAttacks               ; THUNDER_FANG_EFFECT
 	 dw VoltTackleEffect          ; VOLT_TACKLE_EFFECT
 	 dw PoisonFangEffect          ; POISON_FANG_EFFECT
+	 dw $0000                     ; SUCKER_PUNCH_EFFECT
 
 SleepEffect: ; 3f1fc (f:71fc)
 	ld de, wEnemyMonStatus
@@ -8851,7 +8862,105 @@ PoisonFangEffect:
 	call FlinchSideEffect
 	call PoisonEffect
 	ret
-	
+
+SuckerPunchHitTest:
+; Sets carry flag if the move should miss. (Resets carry flag otherwise.)
+; Move fails if it didn't go first.
+	ld a, [H_WHOSETURN]
+	and a
+	ld a, [wEnemyWentFirst]
+	jr z, .playerTurn
+	and a
+	jr z, .moveMissed
+.playerTurn
+	and a
+	jr nz, .moveMissed
+.checkOpposingMove
+; Fails if the opponent is using a non-damaging move.
+	ld a, [H_WHOSETURN]
+	and a
+	jr z, .getEnemyMove
+	ld a, [wPlayerSelectedMove]
+	jr .checkIfDamagingMove
+.getEnemyMove
+	ld a, [wEnemySelectedMove]
+.checkIfDamagingMove
+	ld b, a
+	ld hl, NonDamagingMoves
+.nonDamageMoveLoop
+	ld a, [hli]
+	cp $ff  ; terminator
+	jr z, .moveHit
+	cp b
+	jr z, .moveMissed
+	jr .nonDamageMoveLoop
+.moveHit
+	and a  ; reset carry flag
+	ret
+.moveMissed
+	scf
+	ret
+
+NonDamagingMoves:
+; Used to determine if Sucker Punch will hit.
+; The list of non-damaging moves is much shorter than damaging moves, so we're saving precious space in this Bank.
+	db SWORDS_DANCE
+	db WHIRLWIND
+	db SAND_ATTACK
+	db TAIL_WHIP
+	db LEER
+	db GROWL
+	db ROAR
+	db SING
+	db SUPERSONIC
+	db DISABLE
+	db MIST
+	db LEECH_SEED
+	db GROWTH
+	db POISONPOWDER
+	db STUN_SPORE
+	db SLEEP_POWDER
+	db STRING_SHOT
+	db THUNDER_WAVE
+	db TOXIC
+	db HYPNOSIS
+	db MEDITATE
+	db AGILITY
+	db TELEPORT
+	db MIMIC
+	db SCREECH
+	db DOUBLE_TEAM
+	db RECOVER
+	db HARDEN
+	db MINIMIZE
+	db SMOKESCREEN
+	db CONFUSE_RAY
+	db WITHDRAW
+	db DEFENSE_CURL
+	db BARRIER
+	db LIGHT_SCREEN
+	db HAZE
+	db REFLECT
+	db FOCUS_ENERGY
+	db METRONOME
+	db AMNESIA
+	db KINESIS
+	db SOFTBOILED
+	db GLARE
+	db POISON_GAS
+	db LOVELY_KISS
+	db TRANSFORM
+	db SPORE
+	db FLASH
+	db SPLASH
+	db REST
+	db SHARPEN
+	db CONVERSION
+	db SUBSTITUTE
+	db MOONLIGHT
+	db BABYDOLLEYES
+	db $ff
+
 CheckForHex:
 	ld a, [H_WHOSETURN]
 	and a
