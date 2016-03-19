@@ -367,6 +367,9 @@ wNPCMovementDirections2:: ; cc97
 
 wSwitchPartyMonTempBuffer:: ; cc97
 ; temporary buffer when swapping party mon data
+wEnemyWentFirst::
+; 1 = enemy mon attacked before player mon in battle
+; 0 = player mon attacked before enemy mon in battle
 	ds 10
 
 wcca1:: ds 49
