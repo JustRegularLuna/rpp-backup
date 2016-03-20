@@ -1889,25 +1889,17 @@ SendOutMon: ; 3cc91 (f:4c91)
 	call PlayMoveAnimation
 	hlCoord 4, 11
 	predef Func_3f073
-	; is mon is shiny, flash the screen
+	; is mon is shiny, play animation
 	ld b, Bank(IsMonShiny)
 	ld hl, IsMonShiny
 	ld de, wBattleMonDVs
 	call Bankswitch
 	jr z, .playCry
-	; flash the screen
-	ld a, [rBGP]
-	push af
-	ld a,%00011011 ; 0, 1, 2, 3 (inverted colors)
-	ld [rBGP],a
-	ld c,2
-	call DelayFrames
-	xor a ; white out background
-	ld [rBGP],a
-	ld c,2
-	call DelayFrames
-	pop af
-	ld [rBGP],a ; restore initial palette
+	ld hl, wShinyMonFlag
+	res 1, [hl]
+	ld hl, PlayShinySparkleAnimation
+	ld b, Bank(PlayShinySparkleAnimation)
+	call Bankswitch
 .playCry
 	ld a, [wcf91]
 	call PlayCry

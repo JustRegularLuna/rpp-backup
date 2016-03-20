@@ -8,25 +8,18 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	cp LAVENDER_HOUSE_1
 	jp c, .pokemonTower
 .notPokemonTower
-	; flash screen if mon is shiny
+	; play animation if mon is shiny
 	ld b, Bank(IsMonShiny)
 	ld hl, IsMonShiny
 	ld de, wEnemyMonDVs
 	call Bankswitch
 	jr z, .playCry
-	; flash the screen
-	ld a, [rBGP]
-	push af
-	ld a,%00011011 ; 0, 1, 2, 3 (inverted colors)
-	ld [rBGP],a
-	ld c,2
-	call DelayFrames
-	xor a ; white out background
-	ld [rBGP],a
-	ld c,2
-	call DelayFrames
-	pop af
-	ld [rBGP],a ; restore initial palette
+	; play shiny animation
+	ld hl, wShinyMonFlag
+	set 1, [hl]
+	ld hl, PlayShinySparkleAnimation
+	ld b, Bank(PlayShinySparkleAnimation)
+	call Bankswitch
 .playCry
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry

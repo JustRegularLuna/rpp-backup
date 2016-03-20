@@ -372,6 +372,7 @@ wEnemyWentFirst::
 ; 0 = player mon attacked before enemy mon in battle
 wShinyMonFlag::
 ; Bit 0 is set if the mon should be Shiny.
+; Bit 1 is set for enemy mon animation, reset for player mon animation
 	ds 10
 
 wcca1:: ds 49
