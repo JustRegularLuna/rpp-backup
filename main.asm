@@ -6204,6 +6204,47 @@ IsCurrentMonBattleMon:
 	cp b
 	ret
 
+IsMonShiny:
+; Input: de = address in RAM for DVs
+; Reset zero flag if mon is shiny
+; Mon is shiny if Defense/Speed/Special are 10, and Attack is 2, 3, 6, 7, 10, 11, 14, or 15
+	ld h, d
+	ld l, e
+	ld a, [hli]
+	bit 5, a
+	jr z, .notShiny
+	and a, $0f
+	cp $0a
+	jr nz, .notShiny
+	ld a, [hl]
+	cp $aa
+	jr nz, .notShiny
+	; set zero flag
+	and a ; a cannot be 0, so zero flag is set with thing command
+	ret
+.notShiny
+	; reset zero flag
+	xor a
+	ret
+
+Func_7beb4_: ; 7beb4 (1e:7eb4)
+	; check if evolving mon is shiny
+	ld hl, wShinyMonFlag
+	res 0, [hl]
+	ld b, Bank(IsMonShiny)
+	ld hl, IsMonShiny
+	push de
+	ld de, wLoadedMonDVs
+	call Bankswitch
+	pop de
+	jr z, .setPAL
+	ld hl, wShinyMonFlag
+	set 0, [hl]
+.setPAL
+	ld c, d
+	ld b, $b
+	jp GoPAL_SET
+
 	
 SECTION "bank16",ROMX,BANK[$16]
 
