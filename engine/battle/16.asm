@@ -6,8 +6,28 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	cp POKEMONTOWER_3
 	jr c, .notPokemonTower
 	cp LAVENDER_HOUSE_1
-	jr c, .pokemonTower
+	jp c, .pokemonTower
 .notPokemonTower
+	; flash screen if mon is shiny
+	ld b, Bank(IsMonShiny)
+	ld hl, IsMonShiny
+	ld de, wEnemyMonDVs
+	call Bankswitch
+	jr z, .playCry
+	; flash the screen
+	ld a, [rBGP]
+	push af
+	ld a,%00011011 ; 0, 1, 2, 3 (inverted colors)
+	ld [rBGP],a
+	ld c,2
+	call DelayFrames
+	xor a ; white out background
+	ld [rBGP],a
+	ld c,2
+	call DelayFrames
+	pop af
+	ld [rBGP],a ; restore initial palette
+.playCry
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
 	ld hl, WildMonAppearedText

@@ -94,8 +94,10 @@ Func_7bde9: ; 7bde9 (1e:7de9)
 	jr .asm_7be81
 
 Func_7beb4: ; 7beb4 (1e:7eb4)
-	ld b, $b
-	jp GoPAL_SET
+	ld d, c
+	ld b, Bank(Func_7beb4_)
+	ld hl, Func_7beb4_
+	jp Bankswitch
 
 Func_7beb9: ; 7beb9 (1e:7eb9)
 	call GetMonHeader

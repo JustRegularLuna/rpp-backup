@@ -370,6 +370,8 @@ wSwitchPartyMonTempBuffer:: ; cc97
 wEnemyWentFirst::
 ; 1 = enemy mon attacked before player mon in battle
 ; 0 = player mon attacked before enemy mon in battle
+wShinyMonFlag::
+; Bit 0 is set if the mon should be Shiny.
 	ds 10
 
 wcca1:: ds 49
