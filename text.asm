@@ -235,6 +235,7 @@ INCLUDE "text/maps/seafoam_islands_b1f.asm"
 INCLUDE "text/maps/seafoam_islands_b2f.asm"
 INCLUDE "text/maps/seafoam_islands_b3f.asm"
 INCLUDE "text/maps/seafoam_islands_b4f.asm"
+INCLUDE "text/maps/move_relearner.asm"
 
 _AIBattleWithdrawText:: ; 880be (22:40be)
 	TX_RAM W_TRAINERNAME
