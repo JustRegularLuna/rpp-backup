@@ -199,7 +199,7 @@ PrintShinySymbol:
 	ret z
 	; draw the shiny symbol
 	hlCoord 0, 0
-	ld a, "!"
+	ld a, "[SHINY]"
 	ld [hl], a
 	ret
 
