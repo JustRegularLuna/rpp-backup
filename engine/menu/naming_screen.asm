@@ -480,7 +480,7 @@ PrintNamingText: ; 68f8 (1:68f8)
 	call PlaceString
 	ld hl, $1
 	add hl, bc
-	ld [hl], $c9
+	ld [hl], $7f
 	hlCoord 1, 3
 	ld de, NicknameTextString
 	jr .placeString

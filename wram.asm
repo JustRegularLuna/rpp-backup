@@ -373,6 +373,12 @@ wEnemyWentFirst::
 wShinyMonFlag::
 ; Bit 0 is set if the mon should be Shiny.
 ; Bit 1 is set for enemy mon animation, reset for player mon animation
+wRelearnableMoves::
+; List of move ids that can be re-learend (Move Relearner)
+; First byte is the number of moves in this list.
+; List is terminated with $ff
+wMoveRelearnerFlags::
+; Bit 0 is set if a move was replaced. Reset if player canceled.
 	ds 10
 
 wcca1:: ds 49
