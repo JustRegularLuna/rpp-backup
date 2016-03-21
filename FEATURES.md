@@ -50,6 +50,8 @@ These are notable features which have been added
 * Navel Rock, Faraway Island, and Southern Island from Pokémon Emerald are all included
 * Breeding at the Day-Care
 * Offline Wonder Trade (Similar to Pokémon Christmas)
+* Move Relearner
+* Shiny Pokémon
 * More
 
 
@@ -59,8 +61,6 @@ These features are not in yet, but are planned
 * Battle Tower
 * Move Tutors
 * Move Deleter
-* Move Relearner
-* Shiny Pokémon
 * Special Attack/Special Defense split into two stats
 * "PokéCom" Device, basically a Pokégear or Pokénav
 * Dive areas
