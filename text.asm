@@ -3158,6 +3158,8 @@ SECTION "Pokedex Text 2", ROMX, BANK[POKEDEX_TEXT_2]
 
 INCLUDE "text/pokedex2.asm"
 
+INCLUDE "text/item_descriptions.asm"
+
 
 SECTION "Move Names", ROMX, BANK[MOVE_NAMES]
 
