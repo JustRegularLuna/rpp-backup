@@ -354,7 +354,8 @@ StartMenu_Item: ; 13302 (4:7302)
 	xor a
 	ld [hli],a ; current menu item ID
 	inc hl
-	inc a ; a = 1
+	inc a
+	inc a ; a = 2
 	ld [hli],a ; max menu item ID
 	ld a,%00000011 ; A button, B button
 	ld [hli],a ; menu watched keys
@@ -381,8 +382,10 @@ StartMenu_Item: ; 13302 (4:7302)
 	jp ItemMenuLoop
 .notBicycle2
 	ld a,[wCurrentMenuItem]
-	and a
-	jr nz,.tossItem
+	cp a, 2
+	jr z, .tossItem
+	cp a, 1
+	jr z, .infoItem
 .useItem
 	ld [wd152],a
 	ld a,[wcf91]
@@ -438,6 +441,12 @@ StartMenu_Item: ; 13302 (4:7302)
 	ld hl,wNumBagItems
 	call TossItem
 .tossZeroItems
+	jp ItemMenuLoop
+.infoItem
+	ld a,[wcf91]
+	ld hl, DisplayItemDescription
+	ld b, Bank(DisplayItemDescription)
+	call Bankswitch
 	jp ItemMenuLoop
 
 CannotUseItemsHereText: ; 1342a (4:742a)
