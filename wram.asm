@@ -377,8 +377,10 @@ wRelearnableMoves::
 ; List of move ids that can be re-learend (Move Relearner)
 ; First byte is the number of moves in this list.
 ; List is terminated with $ff
-wMoveRelearnerFlags::
-; Bit 0 is set if a move was replaced. Reset if player canceled.
+wDeletableMoves::
+; List of move ids that can be deleted (Move Deleter)
+; First byte is the number of moves in this list.
+; List is terminated with $ff
 	ds 10
 
 wcca1:: ds 49
