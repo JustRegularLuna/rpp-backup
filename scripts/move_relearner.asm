@@ -58,6 +58,8 @@ MoveRelearnerText1:
 	ld [hl], e
 	inc hl
 	ld [hl], d
+	xor a
+	ld [wcf93], a ; don't print prices
 	call DisplayListMenuID
 	pop bc
 	jr c, .exit  ; exit if player chose cancel
