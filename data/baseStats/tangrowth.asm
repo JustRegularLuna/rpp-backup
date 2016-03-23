@@ -12,11 +12,11 @@ db 211 ; base exp yield
 INCBIN "pic/bmon/tangrowth.pic",0,1 ; 66, sprite dimensions
 dw TangrowthPicFront
 dw TangrowthPicBack
-; attacks known at lvl 0
-db CONSTRICT
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 3,6,8

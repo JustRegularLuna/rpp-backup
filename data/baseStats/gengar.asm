@@ -12,11 +12,11 @@ db 190 ; base exp yield
 INCBIN "pic/bmon/gengar.pic",0,1 ; 66, sprite dimensions
 dw GengarPicFront
 dw GengarPicBack
-; attacks known at lvl 0
-db LICK
-db CONFUSE_RAY
-db NIGHT_SHADE
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8

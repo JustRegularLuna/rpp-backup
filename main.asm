@@ -3627,18 +3627,15 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	inc de
 	ld a, [hli]       ; unused (?)
 	ld [de], a
-	ld hl, W_MONHMOVES
-	ld a, [hli]
+	; blank moves first
+	xor a
 	inc de
 	push de
 	ld [de], a
-	ld a, [hli]
 	inc de
 	ld [de], a
-	ld a, [hli]
 	inc de
 	ld [de], a
-	ld a, [hli]
 	inc de
 	ld [de], a
 	push de
@@ -7385,3 +7382,7 @@ INCLUDE "engine/splashscreens/gamescript.asm"
 INCLUDE "engine/splashscreens/mateo_presents.asm"
 INCLUDE "engine/splashscreens/version_screen.asm"
 INCLUDE "engine/splashscreens/players_in_intro.asm"
+
+SECTION "Trainer Parties", ROMX,BANK[$3B]
+INCLUDE "engine/battle/read_trainer.asm"
+

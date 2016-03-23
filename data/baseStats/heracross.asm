@@ -12,11 +12,11 @@ db 200 ; base exp yield
 INCBIN "pic/bmon/heracross.pic",0,1 ; 77, sprite dimensions
 dw HeracrossPicFront
 dw HeracrossPicBack
-; attacks known at lvl 0
-db TACKLE
-db LEER
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 3,5,6,8

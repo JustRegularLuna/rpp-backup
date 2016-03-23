@@ -12,11 +12,11 @@ db 178 ; base exp yield
 INCBIN "pic/bmon/ninetales.pic",0,1 ; 77, sprite dimensions
 dw NinetalesPicFront
 dw NinetalesPicBack
-; attacks known at lvl 0
-db EMBER
-db TAIL_WHIP
-db QUICK_ATTACK
-db ROAR
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 5,6,8

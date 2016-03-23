@@ -12,11 +12,11 @@ db 205 ; base exp yield
 INCBIN "pic/bmon/tentacruel.pic",0,1 ; 66, sprite dimensions
 dw TentacruelPicFront
 dw TentacruelPicBack
-; attacks known at lvl 0
-db ACID
-db SUPERSONIC
-db WRAP
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 3,6

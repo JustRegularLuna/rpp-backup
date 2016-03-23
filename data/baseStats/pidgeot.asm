@@ -12,11 +12,11 @@ db 172 ; base exp yield
 INCBIN "pic/bmon/pidgeot.pic",0,1 ; 77, sprite dimensions
 dw PidgeotPicFront
 dw PidgeotPicBack
-; attacks known at lvl 0
-db GUST
-db SAND_ATTACK
-db QUICK_ATTACK
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 4,6

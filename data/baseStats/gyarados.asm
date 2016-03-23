@@ -12,11 +12,11 @@ db 214 ; base exp yield
 INCBIN "pic/bmon/gyarados.pic",0,1 ; 77, sprite dimensions
 dw GyaradosPicFront
 dw GyaradosPicBack
-; attacks known at lvl 0
-db BITE
-db DRAGON_RAGE
-db LEER
-db HYDRO_PUMP
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 6,8

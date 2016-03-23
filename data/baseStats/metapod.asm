@@ -12,11 +12,11 @@ db 72 ; base exp yield
 INCBIN "pic/bmon/metapod.pic",0,1 ; 55, sprite dimensions
 dw MetapodPicFront
 dw MetapodPicBack
-; attacks known at lvl 0
-db HARDEN
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 0

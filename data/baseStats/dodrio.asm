@@ -12,11 +12,11 @@ db 158 ; base exp yield
 INCBIN "pic/bmon/dodrio.pic",0,1 ; 77, sprite dimensions
 dw DodrioPicFront
 dw DodrioPicBack
-; attacks known at lvl 0
-db PECK
-db GROWL
-db FURY_ATTACK
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 4,5,6,8

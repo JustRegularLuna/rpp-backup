@@ -12,11 +12,11 @@ db 66 ; base exp yield
 INCBIN "pic/bmon/squirtle.pic",0,1 ; 55, sprite dimensions
 dw SquirtlePicFront
 dw SquirtlePicBack
-; attacks known at lvl 0
-db TACKLE
-db TAIL_WHIP
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8

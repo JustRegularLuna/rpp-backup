@@ -12,11 +12,11 @@ db 211 ; base exp yield
 INCBIN "pic/bmon/tauros.pic",0,1 ; 77, sprite dimensions
 dw TaurosPicFront
 dw TaurosPicBack
-; attacks known at lvl 0
-db TACKLE
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8

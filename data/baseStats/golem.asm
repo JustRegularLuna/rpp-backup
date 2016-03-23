@@ -12,11 +12,11 @@ db 177 ; base exp yield
 INCBIN "pic/bmon/golem.pic",0,1 ; 66, sprite dimensions
 dw GolemPicFront
 dw GolemPicBack
-; attacks known at lvl 0
-db TACKLE
-db DEFENSE_CURL
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 1,6,8

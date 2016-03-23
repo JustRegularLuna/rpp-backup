@@ -12,11 +12,11 @@ db 147 ; base exp yield
 INCBIN "pic/bmon/misdreavus.pic",0,1 ; 55, sprite dimensions
 dw MisdreavusPicFront
 dw MisdreavusPicBack
-; attacks known at lvl 0
-db PSYWAVE
-db GROWL
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 6,8

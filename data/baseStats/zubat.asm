@@ -12,11 +12,11 @@ db 54 ; base exp yield
 INCBIN "pic/bmon/zubat.pic",0,1 ; 55, sprite dimensions
 dw ZubatPicFront
 dw ZubatPicBack
-; attacks known at lvl 0
-db LEECH_LIFE
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 3,4,6,8

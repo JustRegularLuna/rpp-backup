@@ -12,11 +12,11 @@ db 174 ; base exp yield
 INCBIN "pic/bmon/golduck.pic",0,1 ; 77, sprite dimensions
 dw GolduckPicFront
 dw GolduckPicBack
-; attacks known at lvl 0
-db SCRATCH
-db TAIL_WHIP
-db DISABLE
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 1,3,5,6,8

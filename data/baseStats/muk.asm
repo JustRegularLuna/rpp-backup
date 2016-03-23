@@ -12,11 +12,11 @@ db 157 ; base exp yield
 INCBIN "pic/bmon/muk.pic",0,1 ; 77, sprite dimensions
 dw MukPicFront
 dw MukPicBack
-; attacks known at lvl 0
-db POUND
-db DISABLE
-db POISON_GAS
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 6,8

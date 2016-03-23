@@ -12,11 +12,11 @@ db 161 ; base exp yield
 INCBIN "pic/bmon/torkoal.pic",0,1 ; 55, sprite dimensions
 dw TorkoalPicFront
 dw TorkoalPicBack
-; attacks known at lvl 0
-db EMBER
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 5,6,8

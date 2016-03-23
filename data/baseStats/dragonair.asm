@@ -12,11 +12,11 @@ db 144 ; base exp yield
 INCBIN "pic/bmon/dragonair.pic",0,1 ; 66, sprite dimensions
 dw DragonairPicFront
 dw DragonairPicBack
-; attacks known at lvl 0
-db WRAP
-db LEER
-db THUNDER_WAVE
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 6,7,8

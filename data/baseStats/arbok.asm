@@ -12,11 +12,11 @@ db 147 ; base exp yield
 INCBIN "pic/bmon/arbok.pic",0,1 ; 77, sprite dimensions
 dw ArbokPicFront
 dw ArbokPicBack
-; attacks known at lvl 0
-db WRAP
-db LEER
-db POISON_STING
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 6,8

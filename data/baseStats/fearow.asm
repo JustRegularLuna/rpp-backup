@@ -12,11 +12,11 @@ db 162 ; base exp yield
 INCBIN "pic/bmon/fearow.pic",0,1 ; 77, sprite dimensions
 dw FearowPicFront
 dw FearowPicBack
-; attacks known at lvl 0
-db PECK
-db GROWL
-db LEER
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 4,6

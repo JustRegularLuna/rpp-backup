@@ -12,11 +12,11 @@ db 80 ; base exp yield
 INCBIN "pic/bmon/psyduck.pic",0,1 ; 55, sprite dimensions
 dw PsyduckPicFront
 dw PsyduckPicBack
-; attacks known at lvl 0
-db SCRATCH
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 1,3,5,6,8

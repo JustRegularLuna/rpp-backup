@@ -12,11 +12,11 @@ db 220 ; base exp yield
 INCBIN "pic/bmon/mewtwo.pic",0,1 ; 77, sprite dimensions
 dw MewtwoPicFront
 dw MewtwoPicBack
-; attacks known at lvl 0
-db CONFUSION
-db DISABLE
-db SWIFT
-db PSYCHIC_M
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8

@@ -12,11 +12,11 @@ db 213 ; base exp yield
 INCBIN "pic/bmon/houndoom.pic",0,1 ; 77, sprite dimensions
 dw HoundoomPicFront
 dw HoundoomPicBack
-; attacks known at lvl 0
-db EMBER
-db LEER
-db ROAR
-db SMOG
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 6,8

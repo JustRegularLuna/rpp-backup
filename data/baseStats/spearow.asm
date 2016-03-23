@@ -12,11 +12,11 @@ db 58 ; base exp yield
 INCBIN "pic/bmon/spearow.pic",0,1 ; 55, sprite dimensions
 dw SpearowPicFront
 dw SpearowPicBack
-; attacks known at lvl 0
-db PECK
-db GROWL
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 4,6

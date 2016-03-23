@@ -12,11 +12,11 @@ db 204 ; base exp yield
 INCBIN "pic/bmon/rhydon.pic",0,1 ; 77, sprite dimensions
 dw RhydonPicFront
 dw RhydonPicBack
-; attacks known at lvl 0
-db HORN_ATTACK
-db STOMP
-db TAIL_WHIP
-db FURY_ATTACK
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 1,5,6,7,8

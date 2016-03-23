@@ -12,11 +12,11 @@ db 70 ; base exp yield
 INCBIN "pic/bmon/paras.pic",0,1 ; 55, sprite dimensions
 dw ParasPicFront
 dw ParasPicBack
-; attacks known at lvl 0
-db SCRATCH
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 3,6,8

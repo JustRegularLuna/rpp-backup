@@ -594,6 +594,8 @@ endc
 	db x
 ENDM
 
+m_tutor EQUS "tmlearn" ; works the same way, but renamed for clarity
+
 add_pic: MACRO
 	db BANK(\1)
 	dw \1

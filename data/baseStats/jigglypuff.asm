@@ -12,11 +12,11 @@ db 76 ; base exp yield
 INCBIN "pic/bmon/jigglypuff.pic",0,1 ; 55, sprite dimensions
 dw JigglypuffPicFront
 dw JigglypuffPicBack
-; attacks known at lvl 0
-db SING
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 4 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8

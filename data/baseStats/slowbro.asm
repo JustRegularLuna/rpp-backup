@@ -12,11 +12,11 @@ db 164 ; base exp yield
 INCBIN "pic/bmon/slowbro.pic",0,1 ; 77, sprite dimensions
 dw SlowbroPicFront
 dw SlowbroPicBack
-; attacks known at lvl 0
-db CONFUSION
-db DISABLE
-db HEADBUTT
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8

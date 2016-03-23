@@ -12,11 +12,11 @@ db 100 ; base exp yield
 INCBIN "pic/bmon/seel.pic",0,1 ; 66, sprite dimensions
 dw SeelPicFront
 dw SeelPicBack
-; attacks known at lvl 0
-db HEADBUTT
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 6,7,8

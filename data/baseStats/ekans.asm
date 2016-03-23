@@ -12,11 +12,11 @@ db 62 ; base exp yield
 INCBIN "pic/bmon/ekans.pic",0,1 ; 55, sprite dimensions
 dw EkansPicFront
 dw EkansPicBack
-; attacks known at lvl 0
-db WRAP
-db LEER
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 6,8

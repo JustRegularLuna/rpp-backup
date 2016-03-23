@@ -12,11 +12,11 @@ db 127 ; base exp yield
 INCBIN "pic/bmon/lickitung.pic",0,1 ; 77, sprite dimensions
 dw LickitungPicFront
 dw LickitungPicBack
-; attacks known at lvl 0
-db LICK
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 1,3,5,6,8

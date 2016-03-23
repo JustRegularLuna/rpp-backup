@@ -12,11 +12,11 @@ db 129 ; base exp yield
 INCBIN "pic/bmon/clefable.pic",0,1 ; 66, sprite dimensions
 dw ClefablePicFront
 dw ClefablePicBack
-; attacks known at lvl 0
-db SING
-db DOUBLESLAP
-db MINIMIZE
-db METRONOME
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 4 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8

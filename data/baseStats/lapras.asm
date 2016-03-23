@@ -12,11 +12,11 @@ db 219 ; base exp yield
 INCBIN "pic/bmon/lapras.pic",0,1 ; 77, sprite dimensions
 dw LaprasPicFront
 dw LaprasPicBack
-; attacks known at lvl 0
-db WATER_GUN
-db GROWL
-db SING
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 6,7,8

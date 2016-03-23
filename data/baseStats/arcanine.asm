@@ -12,11 +12,11 @@ db 213 ; base exp yield
 INCBIN "pic/bmon/arcanine.pic",0,1 ; 77, sprite dimensions
 dw ArcaninePicFront
 dw ArcaninePicBack
-; attacks known at lvl 0
-db GROWL
-db EMBER
-db LEER
-db TAKE_DOWN
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 6,8

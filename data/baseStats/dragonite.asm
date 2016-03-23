@@ -12,11 +12,11 @@ db 218 ; base exp yield
 INCBIN "pic/bmon/dragonite.pic",0,1 ; 77, sprite dimensions
 dw DragonitePicFront
 dw DragonitePicBack
-; attacks known at lvl 0
-db WRAP
-db LEER
-db THUNDER_WAVE
-db AGILITY
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 2,4,6,7,8

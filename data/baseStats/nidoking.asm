@@ -12,11 +12,11 @@ db 195 ; base exp yield
 INCBIN "pic/bmon/nidoking.pic",0,1 ; 77, sprite dimensions
 dw NidokingPicFront
 dw NidokingPicBack
-; attacks known at lvl 0
-db TACKLE
-db HORN_ATTACK
-db POISON_STING
-db THRASH
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 1,3,5,6,7,8

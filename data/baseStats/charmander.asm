@@ -12,11 +12,11 @@ db 65 ; base exp yield
 INCBIN "pic/bmon/charmander.pic",0,1 ; 55, sprite dimensions
 dw CharmanderPicFront
 dw CharmanderPicBack
-; attacks known at lvl 0
-db SCRATCH
-db GROWL
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 1,2,3,5,6,8

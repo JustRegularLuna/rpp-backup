@@ -12,11 +12,11 @@ db 197 ; base exp yield
 INCBIN "pic/bmon/jolteon.pic",0,1 ; 66, sprite dimensions
 dw JolteonPicFront
 dw JolteonPicBack
-; attacks known at lvl 0
-db TACKLE
-db TAIL_WHIP
-db QUICK_ATTACK
-db THUNDERSHOCK
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 5,6,8

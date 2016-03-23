@@ -12,11 +12,11 @@ db 211 ; base exp yield
 INCBIN "pic/bmon/latias.pic",0,1 ; 77, sprite dimensions
 dw LatiasPicFront
 dw LatiasPicBack
-; attacks known at lvl 0
-db ZEN_HEADBUTT
-db DRAGONBREATH
-db LUSTER_PURGE
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; include learnset directly
 	tmlearn 2,3,4,6,8

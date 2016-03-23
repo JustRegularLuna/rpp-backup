@@ -12,11 +12,11 @@ db 150 ; base exp yield
 INCBIN "pic/bmon/electrode.pic",0,1 ; 55, sprite dimensions
 dw ElectrodePicFront
 dw ElectrodePicBack
-; attacks known at lvl 0
-db TACKLE
-db SCREECH
-db SONICBOOM
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 6

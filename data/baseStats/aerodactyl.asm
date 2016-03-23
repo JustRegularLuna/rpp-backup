@@ -12,11 +12,11 @@ db 202 ; base exp yield
 INCBIN "pic/bmon/aerodactyl.pic",0,1 ; 77, sprite dimensions
 dw AerodactylPicFront
 dw AerodactylPicBack
-; attacks known at lvl 0
-db WING_ATTACK
-db AGILITY
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 2,3,4,6

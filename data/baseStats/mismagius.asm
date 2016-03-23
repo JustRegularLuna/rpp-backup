@@ -12,11 +12,11 @@ db 187 ; base exp yield
 INCBIN "pic/bmon/mismagius.pic",0,1 ; 55, sprite dimensions
 dw MismagiusPicFront
 dw MismagiusPicBack
-; attacks known at lvl 0
-db PSYWAVE
-db GROWL
-db HEX
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 6,8

@@ -12,11 +12,11 @@ db 217 ; base exp yield
 INCBIN "pic/bmon/moltres.pic",0,1 ; 77, sprite dimensions
 dw MoltresPicFront
 dw MoltresPicBack
-; attacks known at lvl 0
-db WING_ATTACK
-db FIRE_SPIN
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 4,6

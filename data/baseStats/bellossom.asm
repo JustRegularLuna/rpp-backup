@@ -12,11 +12,11 @@ db 184 ; base exp yield
 INCBIN "pic/bmon/bellossom.pic",0,1 ; 77, sprite dimensions
 dw BellossomPicFront
 dw BellossomPicBack
-; attacks known at lvl 0
-db STUN_SPORE
-db SLEEP_POWDER
-db ACID
-db PETAL_DANCE
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 6

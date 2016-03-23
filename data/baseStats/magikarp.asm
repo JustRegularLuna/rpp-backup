@@ -12,11 +12,11 @@ db 20 ; base exp yield
 INCBIN "pic/bmon/magikarp.pic",0,1 ; 66, sprite dimensions
 dw MagikarpPicFront
 dw MagikarpPicBack
-; attacks known at lvl 0
-db SPLASH
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 0

@@ -12,11 +12,11 @@ db 192 ; base exp yield
 INCBIN "pic/bmon/rapidash.pic",0,1 ; 77, sprite dimensions
 dw RapidashPicFront
 dw RapidashPicBack
-; attacks known at lvl 0
-db EMBER
-db TAIL_WHIP
-db STOMP
-db GROWL
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 5,6,7,8

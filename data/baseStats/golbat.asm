@@ -12,11 +12,11 @@ db 171 ; base exp yield
 INCBIN "pic/bmon/golbat.pic",0,1 ; 77, sprite dimensions
 dw GolbatPicFront
 dw GolbatPicBack
-; attacks known at lvl 0
-db LEECH_LIFE
-db SCREECH
-db BITE
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 3,4,6,8

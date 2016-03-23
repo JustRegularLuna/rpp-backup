@@ -12,11 +12,11 @@ db 78 ; base exp yield
 INCBIN "pic/bmon/oddish.pic",0,1 ; 55, sprite dimensions
 dw OddishPicFront
 dw OddishPicBack
-; attacks known at lvl 0
-db ABSORB
-db 0
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 3,6

@@ -12,11 +12,11 @@ db 215 ; base exp yield
 INCBIN "pic/bmon/articuno.pic",0,1 ; 77, sprite dimensions
 dw ArticunoPicFront
 dw ArticunoPicBack
-; attacks known at lvl 0
-db GUST
-db ICY_WIND
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 4,6

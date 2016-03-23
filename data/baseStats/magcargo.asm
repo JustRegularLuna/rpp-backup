@@ -12,11 +12,11 @@ db 154 ; base exp yield
 INCBIN "pic/bmon/magcargo.pic",0,1 ; 55, sprite dimensions
 dw MagcargoPicFront
 dw MagcargoPicBack
-; attacks known at lvl 0
-db SMOG
-db EMBER
-db ROCK_THROW
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 6,8

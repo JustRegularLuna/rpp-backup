@@ -12,11 +12,11 @@ db 152 ; base exp yield
 INCBIN "pic/bmon/ponyta.pic",0,1 ; 66, sprite dimensions
 dw PonytaPicFront
 dw PonytaPicBack
-; attacks known at lvl 0
-db TACKLE
-db GROWL
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 5,6,7,8

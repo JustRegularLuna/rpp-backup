@@ -12,11 +12,11 @@ db 132 ; base exp yield
 INCBIN "pic/bmon/gloom.pic",0,1 ; 66, sprite dimensions
 dw GloomPicFront
 dw GloomPicBack
-; attacks known at lvl 0
-db ABSORB
-db POISONPOWDER
-db STUN_SPORE
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 3,6

@@ -12,11 +12,11 @@ db 106 ; base exp yield
 INCBIN "pic/bmon/staryu.pic",0,1 ; 66, sprite dimensions
 dw StaryuPicFront
 dw StaryuPicBack
-; attacks known at lvl 0
-db TACKLE
-db HARDEN
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 5 ; growth rate
 ; learnset
 	tmlearn 6,8

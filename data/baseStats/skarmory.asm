@@ -12,11 +12,11 @@ db 168 ; base exp yield
 INCBIN "pic/bmon/skarmory.pic",0,1 ; 55, sprite dimensions
 dw SkarmoryPicFront
 dw SkarmoryPicBack
-; attacks known at lvl 0
-db PECK
-db LEER
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 3,4,6

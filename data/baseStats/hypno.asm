@@ -12,11 +12,11 @@ db 165 ; base exp yield
 INCBIN "pic/bmon/hypno.pic",0,1 ; 77, sprite dimensions
 dw HypnoPicFront
 dw HypnoPicBack
-; attacks known at lvl 0
-db POUND
-db HYPNOSIS
-db DISABLE
-db CONFUSION
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 0 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8

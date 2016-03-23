@@ -12,11 +12,11 @@ db 64 ; base exp yield
 INCBIN "pic/bmon/lugia.pic",0,1 ; 77, sprite dimensions
 dw LugiaPicFront
 dw LugiaPicBack
-; attacks known at lvl 0
-db WATER_GUN
-db SKY_ATTACK
-db 0
-db 0
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; include learnset directly
 	tmlearn 4,6,8

@@ -12,11 +12,11 @@ db 161 ; base exp yield
 INCBIN "pic/bmon/lanturn.pic",0,1 ; 55, sprite dimensions
 dw LanturnPicFront
 dw LanturnPicBack
-; attacks known at lvl 0
-db BUBBLE
-db SUPERSONIC
-db THUNDER_WAVE
-db ELECTRO_BALL
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 6,8

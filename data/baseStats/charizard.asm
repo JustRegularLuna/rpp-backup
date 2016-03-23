@@ -12,11 +12,11 @@ db 209 ; base exp yield
 INCBIN "pic/bmon/charizard.pic",0,1 ; 77, sprite dimensions
 dw CharizardPicFront
 dw CharizardPicBack
-; attacks known at lvl 0
-db SCRATCH
-db GROWL
-db EMBER
-db LEER
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 1,2,3,4,5,6,8

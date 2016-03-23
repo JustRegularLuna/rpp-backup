@@ -12,11 +12,11 @@ db 191 ; base exp yield
 INCBIN "pic/bmon/victreebel.pic",0,1 ; 77, sprite dimensions
 dw VictreebelPicFront
 dw VictreebelPicBack
-; attacks known at lvl 0
-db SLEEP_POWDER
-db STUN_SPORE
-db ACID
-db RAZOR_LEAF
+; move tutor compatibility flags
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
+	m_tutor 0
 db 3 ; growth rate
 ; learnset
 	tmlearn 3,6
