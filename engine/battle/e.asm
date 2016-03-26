@@ -801,54 +801,54 @@ TrainerAIPointers: ; 3a55c (e:655c)
 ; first byte, number of times (per Pokémon) it can occur
 ; next two bytes, pointer to AI subroutine for trainer class
 IF DEF(_BLUE) ; Hard Version
-	dbw 3,GenericAI ; youngster
-	dbw 3,GenericAI ; bug catcher
-	dbw 3,GenericAI ; lass
-	dbw 3,GenericAI ; sailor
-	dbw 3,GenericAI ; camper
-	dbw 3,GenericAI ; picnicker
-	dbw 3,GenericAI ; pokemaniac
-	dbw 3,GenericAI ; super nerd
-	dbw 3,GenericAI ; hiker
-	dbw 3,GenericAI ; biker
-	dbw 3,GenericAI ; burglar
-	dbw 3,GenericAI ; engineer
-	dbw 3,GenericAI ; couple
-	dbw 3,GenericAI ; fisherman
+	dbw 3,PotionAI ; youngster
+	dbw 3,FullHealAI ; bug catcher
+	dbw 3,PotionAI ; lass
+	dbw 3,SwitchOutAI ; sailor
+	dbw 3,BerryUserAI ; camper
+	dbw 3,BerryUserAI ; picnicker
+	dbw 3,SwitchOrSuperPotionAI ; pokemaniac
+	dbw 3,SwitchOutAI ; super nerd
+	dbw 3,BerryUserAI ; hiker
+	dbw 3,XDefendAI ; biker
+	dbw 3,SwitchOutAI ; burglar
+	dbw 3,GuardSpecAI ; engineer
+	dbw 3,BerryUserAI ; couple
+	dbw 3,PotionAI ; fisherman
 	dbw 3,GenericAI ; swimmer m
-	dbw 3,GenericAI ; cue ball
-	dbw 3,GenericAI ; gambler
-	dbw 3,GenericAI ; beauty
-	dbw 3,GenericAI ; psychic
-	dbw 3,GenericAI ; rocker
+	dbw 3,XAttack1AI ; cue ball
+	dbw 3,SwitchOutAI ; gambler
+	dbw 3,SuperPotion2AI ; beauty
+	dbw 3,SwitchOutAI ; psychic
+	dbw 3,SwitchOutAI ; rocker
 	dbw 3,SwitchOutAI ; juggler
-	dbw 3,GenericAI ; tamer
-	dbw 3,GenericAI ; bird keeper
+	dbw 3,XAttack1AI ; tamer
+	dbw 3,PotionAI ; bird keeper
 	dbw 2,XAttack1AI ; blackbelt
 	dbw 3,GenericAI ; rival 1
 	dbw 3,GenericAI ; swimmer f
-	dbw 1,GenericAI ; rocket f
-	dbw 3,GenericAI ; scientist
+	dbw 1,PotionAI ; rocket f
+	dbw 3,FullHealAI ; scientist
 	dbw 1,GuardSpecAI ; giovanni
-	dbw 3,GenericAI ; rocket m
+	dbw 3,PotionAI ; rocket m
 	dbw 2,XAttack2AI ; ace trainerm
 	dbw 1,SwitchOrHyperPotionAI ; ace trainerf
 	dbw 2,XDefendAI ; bruno
-	dbw 5,FullHealAI ; brock
-	dbw 1,XDefendAI ; misty
+	dbw 5,FullHealOrPotionAI ; brock
+	dbw 1,FullHealOrPotionAI ; misty
 	dbw 1,XSpeedAI ; surge
 	dbw 1,SuperPotion1AI ; erika
 	dbw 2,XAttack2AI ; koga
 	dbw 2,SuperPotion2AI ; blaine
 	dbw 1,HyperPotionAI ; sabrina
-	dbw 3,GenericAI ; gentleman
-	dbw 1,PotionAI ; rival 2
+	dbw 3,FullHealAI ; gentleman
+	dbw 1,FullHealOrPotionAI ; rival 2
 	dbw 1,FullRestoreAI ; rival 3 champion
 	dbw 2,SuperPotion2AI ; lorelei
-	dbw 3,GenericAI ; chandler
+	dbw 3,FullHealAI ; chandler
 	dbw 2,SwitchOrSuperPotionAI ; agatha
 	dbw 1,HyperPotion2AI ; lance
-	dbw 3,GenericAI ; hex maniac
+	dbw 3,PotionAI ; hex maniac
 	dbw 3,GenericAI ; trainer (usually overwritten in trainer data)
 ELSE
 	dbw 3,GenericAI ; youngster
@@ -933,13 +933,11 @@ SwitchOrHyperPotionAI: ; 3a601 (e:6601)
 	jp AISwitchIfEnoughMons
 
 FullHealOrPotionAI:
-	cp $20
+	cp $40
 	ret nc
 	ld a,[wEnemyMonStatus]
 	and a
-	jr z, .potion ; if they don't have a status condition, try using a potion instead
-	jp AIUseFullHeal
-.potion
+	jp nz, AIUseFullHeal
 	ld a,5
 	call AICheckIfHPBelowFraction
 	ret nc
@@ -993,6 +991,20 @@ PotionAI: ; 3a64c (e:664c)
 	call AICheckIfHPBelowFraction
 	ret nc
 	jp AIUsePotion
+
+BerryUserAI: ; used mainly by hikers, campers, and picnickers
+	cp $30
+	ret nc
+	ld a,[wEnemyMonStatus]
+	and a
+	jp nz, AIUseFullHeal ; actually a berry
+	ld a,5
+	call AICheckIfHPBelowFraction
+	jp c, AIUseSitrusBerry
+	ld a,$A
+	call AICheckIfHPBelowFraction
+	jp c, AIUseOranBerry
+	ret
 
 FullRestoreAI: ; 3a658 (e:6658)
 	cp $20
@@ -1060,10 +1072,22 @@ AIUseFullRestore: ; 3a6a0 (e:66a0)
 	ld [wEnemyMonHP],a
 	jr AIPrintItemUseAndUpdateHPBar
 
+AIUseOranBerry:
+; enemy trainer heals monster with Oran Berry
+	ld a,ORAN_BERRY
+	ld b,10
+	jr AIRecoverHP
+
 AIUsePotion: ; 3a6ca (e:66ca)
 ; enemy trainer heals his monster with a potion
 	ld a,POTION
 	ld b,20
+	jr AIRecoverHP
+
+AIUseSitrusBerry:
+; enemy trainer heals monster with Sitrus Berry
+	ld a,SITRUS_BERRY
+	ld b,30
 	jr AIRecoverHP
 
 AIUseSuperPotion: ; 3a6d0 (e:66d0)
