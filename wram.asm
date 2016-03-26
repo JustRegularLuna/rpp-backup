@@ -202,6 +202,7 @@ wSerialEnemyMonsPatchList:: ; c5d0
 
 	ds 80
 
+W_AIBUFFER1::
 wTempMoveID::
 wTempPic::
 wOverworldMap:: ; c6e8

@@ -5466,42 +5466,79 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ret
 
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
-; this doesn't take into account the effects that dual types can have
-; (e.g. 4x weakness / resistance, weaknesses and resistances canceling)
+; modified to take dual types into effect
 ; the result is stored in [wd11e]
-; ($05 is not very effective, $10 is neutral, $14 is super effective)
+; ($00 immune; $02 or $05 NVE; $0a neutral; $14 or $28 SE)
 ; as far is can tell, this is only used once in some AI code to help decide which move to use
 AIGetTypeEffectiveness: ; 3e449 (f:6449)
 	ld a,[W_ENEMYMOVETYPE]
 	ld d,a                 ; d = type of enemy move
 	ld hl,wBattleMonType
 	ld b,[hl]              ; b = type 1 of player's pokemon
-	inc hl
-	ld c,[hl]              ; c = type 2 of player's pokemon
-	ld a,$10
-	ld [wd11e],a           ; initialize [wd11e] to neutral effectiveness
+	ld a,10
+	ld [H_MULTIPLIER],a           ; initialize [wd11e] to neutral effectiveness
 	ld hl,TypeEffects
 .loop
 	ld a,[hli]
 	cp a,$ff
-	ret z
+	jr z, .start2
 	cp d                   ; match the type of the move
 	jr nz,.nextTypePair1
 	ld a,[hli]
 	cp b                   ; match with type 1 of pokemon
-	jr z,.done
-	cp c                   ; or match with type 2 of pokemon
-	jr z,.done
+	jr z,.match
 	jr .nextTypePair2
 .nextTypePair1
 	inc hl
 .nextTypePair2
 	inc hl
 	jr .loop
-.done
+.match
 	ld a,[hl]
-	ld [wd11e],a           ; store damage multiplier
+	ld [H_MULTIPLIER],a           ; store damage multiplier
+.start2
+    ld hl,wBattleMonType+1
+    ld a,[hl]
+    cp b
+    jr nz,.checksecondtype
+    ld a, [H_MULTIPLIER]
+    ld [wd11e], a
 	ret
+.checksecondtype
+    ld b,[hl]
+    xor a
+    ld [H_MULTIPLICAND],a
+    ld [H_MULTIPLICAND+1],a
+    ld a,10
+    ld [H_MULTIPLICAND+2],a
+    ld hl,TypeEffects
+.loop2
+    ld a,[hli]
+    cp a,$ff
+    jr z,.multandret
+    cp d ; match the type
+    jr nz, .nextTypePair3
+    ld a,[hli]
+    cp b ; match with type 2 of pokemon
+    jr z,.match2
+    jr .nextTypePair4
+.nextTypePair3
+    inc hl
+.nextTypePair4
+    inc hl
+    jr .loop2
+.match2
+    ld a,[hl]
+    ld [H_MULTIPLICAND+2],a
+.multandret
+    call Multiply
+    ld a, 10
+    ld [H_DIVISOR], a
+    ld b, 4
+    call Divide
+    ld a, [H_QUOTIENT+3]
+    ld [wd11e], a
+    ret
 
 INCLUDE "data/type_effects.asm"
 

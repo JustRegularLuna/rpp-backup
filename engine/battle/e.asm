@@ -115,7 +115,7 @@ DrawTrainerPicColumn: ; 39707 (e:5707)
 ; creates a set of moves that may be used and returns its address in hl
 ; unused slots are filled with 0, all used slots may be chosen with equal probability
 AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
-	ld a, $a
+	ld a, $14 ; for smart AI
 	ld hl, wHPBarMaxHP  ; init temporary move selection array. Only the moves with the lowest numbers are chosen in the end
 	ld [hli], a   ; move 1
 	ld [hli], a   ; move 2
@@ -221,7 +221,7 @@ AIMoveChoiceModificationFunctionPointers: ; 397a3 (e:57a3)
 	dw AIMoveChoiceModification1
 	dw AIMoveChoiceModification2
 	dw AIMoveChoiceModification3
-	dw AIMoveChoiceModification4 ; unused, does nothing
+	dw SmartAI
 
 ; discourages moves that cause no damage but only a status ailment if player's mon already has one
 AIMoveChoiceModification1: ; 397ab (e:57ab)
@@ -255,7 +255,7 @@ AIMoveChoiceModification1: ; 397ab (e:57ab)
 	pop hl
 	jr nc, .nextMove
 	ld a, [hl]
-	add $5       ; discourage move
+	add $20       ; discourage move
 	ld [hl], a
 	jr .nextMove
 
@@ -265,6 +265,283 @@ StatusAilmentMoveEffects ; 57e2
 	db POISON_EFFECT
 	db PARALYZE_EFFECT
 	db $FF
+
+SmartAI: ; originally by Dabomstew
+; damaging move priority on turn 3+
+	ld a, [wccd5] ; wAILayer2Encouragement
+	cp $2
+	jr c, .healingCheck
+	ld hl, wBuffer - 1
+	ld de, wEnemyMonMoves
+	ld b, NUM_MOVES + 1
+.damageLoop
+	dec b
+	jr z, .healingCheck
+	inc hl
+	ld a, [de]
+	and a
+	jr z, .healingCheck
+	inc de
+	call ReadMove
+	ld a, [W_ENEMYMOVEPOWER]
+	and a
+	jr z, .damageLoop
+; encourage by 2
+	dec [hl]
+	dec [hl]
+	jr .damageLoop
+; healing moves?
+.healingCheck
+	ld a, [wEnemyMonMaxHP]
+	and a
+	jr z, .noscale
+	ld b, a
+	ld a, [wEnemyMonMaxHP + 1]
+	srl b
+	rr a
+	ld b, a
+	ld a, [wEnemyMonHP]
+	ld c, a
+	ld a, [wEnemyMonHP + 1]
+	srl c
+	rr a
+	ld c, a
+	jr .realHealCheck
+.noscale
+	ld a, [wEnemyMonMaxHP + 1]
+	ld b, a
+	ld a, [wEnemyMonHP + 1]
+	ld c, a
+.realHealCheck
+	srl b
+	ld a, c
+	cp b
+	jr nc, .dreamEaterCheck
+	ld hl, HealingMoves
+	ld b, -8
+	call AlterMovePriorityArray
+.dreamEaterCheck
+	ld a, [wBattleMonStatus]
+	and SLP
+	ld a, DREAM_EATER
+	ld [W_AIBUFFER1], a
+	jr z, .debuffDreamEater
+	ld b, -1
+	jr .applyDreamEater
+.debuffDreamEater
+	ld b, 20
+.applyDreamEater
+	call AlterMovePriority
+.hexCheck ; added for Red++ to encourage Hex if opponent has a status condition
+	ld a, [wBattleMonStatus]
+	and a
+	ld a, HEX
+	ld [W_AIBUFFER1], a
+	jr z, .debuffHex
+	ld b, -1
+	jr .applyHex
+.debuffHex
+	ld b, 2
+.applyHex
+	call AlterMovePriority
+.electroBallCheck ; added for Red++ to encourage Electro Ball if enemy is faster
+	ld de, wBattleMonSpeed
+	ld hl, wEnemyMonSpeed
+	ld c, $2
+	call StringCmp ; see who is faster
+	ld a, ELECTRO_BALL
+	ld [W_AIBUFFER1], a
+	jr nc, .debuffElectroBall
+	ld b, -1 ; slightly encourage if speed matches
+	jr z, .applyElectroBall
+	ld b, -3 ; encourage more if faster
+	jr .applyElectroBall
+.debuffElectroBall
+	ld b, 3 ; discourage if player is faster
+.applyElectroBall
+	call AlterMovePriority
+.effectivenessCheck
+; encourage any damaging move with SE, slightly discrouge NVE moves
+	ld hl, wBuffer - 1
+	ld de, wEnemyMonMoves
+	ld b, NUM_MOVES + 1
+.seloop
+	dec b
+	jr z, .selfBuffCheck
+	inc hl
+	ld a, [de]
+	and a
+	jr z, .selfBuffCheck
+	inc de
+	call ReadMove
+	ld a, [W_ENEMYMOVEPOWER]
+	and a
+	jr z, .seloop
+	push hl
+	push bc
+	push de
+	callab AIGetTypeEffectiveness
+	pop de
+	pop bc
+	pop hl
+	ld a, [wd11e]
+	cp $0a
+	jr z, .seloop
+	jr c, .nvemove
+; strongly encourage SE Move
+	rept 4
+	dec [hl]
+	endr
+	cp $15
+	jr c, .seloop
+; even more strongly encourage 4x SE move
+	rept 3
+	dec [hl]
+	endr
+	jr .seloop
+.nvemove
+; slighly discourage
+	inc [hl]
+	and a
+	jr nz, .seloop
+; strongly discourage immunity
+	ld a, [hl]
+	add 50
+	ld [hl], a
+	jr .seloop
+.selfBuffCheck
+; strongly encourage self-buff or status on turn 1
+	ld a, [wccd5]
+	and a
+	ret nz
+	ld hl, MehStatusMoves
+	ld b, -3
+	call AlterMovePriorityArray
+	ld hl, LightBuffStatusMoves
+	ld b, -5
+	call AlterMovePriorityArray
+	ld hl, HeavyBuffStatusMoves
+	ld b, -6
+	call AlterMovePriorityArray
+	ret
+	
+MehStatusMoves:
+	db GROWL
+	db DISABLE
+	db MIST
+	db HARDEN
+	db WITHDRAW
+	db DEFENSE_CURL
+	db TAIL_WHIP
+	db LEER
+	db $FF
+	
+LightBuffStatusMoves:
+	db FOCUS_ENERGY
+	db GROWTH
+	db MEDITATE
+	db AGILITY
+	db MINIMIZE
+	db DOUBLE_TEAM
+	db REFLECT
+	db LIGHT_SCREEN
+	db BARRIER
+	db SUBSTITUTE
+	db POISONPOWDER
+	db STRING_SHOT
+	db SCREECH
+	db SMOKESCREEN
+	db POISON_GAS
+	db FLASH
+	db SHARPEN
+	db SAND_ATTACK
+	db $FF
+	
+HeavyBuffStatusMoves:
+	db IRON_DEFENSE
+	db SWORDS_DANCE
+	db AMNESIA
+	db SING
+	db SLEEP_POWDER
+	db HYPNOSIS
+	db LOVELY_KISS
+	db SPORE
+	db STUN_SPORE
+	db THUNDER_WAVE
+	db GLARE
+	db CONFUSE_RAY
+	db SUPERSONIC
+	db $FF
+	
+HealingMoves:
+	db REST
+	db RECOVER
+	db SOFTBOILED
+	db MOONLIGHT
+	db $FF
+	
+AlterMovePriority:
+; [W_AIBUFFER1] = move
+; b = priority change
+	ld hl, wBuffer - 1
+	ld de, wEnemyMonMoves
+	ld c, NUM_MOVES + 1
+.moveLoop
+	dec c
+	ret z
+	inc hl
+	ld a, [de]
+	and a
+	ret z
+	inc de
+	push bc
+	ld b, a
+	ld a, [W_AIBUFFER1]
+	cp b
+	pop bc
+	jr nz, .moveLoop
+	ld a, [hl]
+	add b
+	ld [hl], a
+	ret
+	
+AlterMovePriorityArray:
+; hl = move array
+; b = priority change
+	ld a, h
+	ld [W_AIBUFFER1], a
+	ld a, l
+	ld [W_AIBUFFER1 + 1], a
+	ld hl, wBuffer - 1
+	ld de, wEnemyMonMoves
+	ld c, NUM_MOVES + 1
+.moveLoop
+	dec c
+	ret z
+	inc hl
+	ld a, [de]
+	and a
+	ret z
+	inc de
+	push hl
+	push de
+	push bc
+	ld b, a
+	ld a, [W_AIBUFFER1]
+	ld h, a
+	ld a, [W_AIBUFFER1 + 1]
+	ld l, a
+	ld a, b
+	ld de, $0001
+	call IsInArray
+	pop bc
+	pop de
+	pop hl
+	jr nc, .moveLoop
+	ld a, [hl]
+	add b
+	ld [hl], a
+	ret
 
 ; slightly encourage moves with specific effects
 AIMoveChoiceModification2: ; 397e7 (e:57e7)
