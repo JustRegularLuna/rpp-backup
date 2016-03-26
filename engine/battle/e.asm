@@ -997,7 +997,7 @@ BerryUserAI: ; used mainly by hikers, campers, and picnickers
 	ret nc
 	ld a,[wEnemyMonStatus]
 	and a
-	jp nz, AIUseFullHeal ; actually a berry
+	jp nz, AIUseLumBerry
 	ld a,5
 	call AICheckIfHPBelowFraction
 	jp c, AIUseSitrusBerry
@@ -1215,6 +1215,12 @@ AIBattleWithdrawText: ; 3a781 (e:6781)
 	db "@"
 
 AIUseFullHeal: ; 3a786 (e:6786)
+	call Func_3a69b
+	call AICureStatus
+	ld a,FULL_HEAL
+	jp AIPrintItemUse
+	
+AIUseLumBerry: ; 3a786 (e:6786)
 	call Func_3a69b
 	call AICureStatus
 	ld a,LUM_BERRY
