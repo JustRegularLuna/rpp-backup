@@ -386,6 +386,7 @@ ReadMove: ; 39884 (e:5884)
 ; move choice modification methods that are applied for each trainer class
 ; 0 is sentinel value
 TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
+IF DEF(_BLUE) ; Hard Version
 	db 0      ; YOUNGSTER
 	db 1,0    ; BUG CATCHER
 	db 1,0    ; LASS
@@ -435,6 +436,57 @@ TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
 	db 1,3,0  ; LANCE
 	db 1,0    ; HEX_MANIAC
 	db 1,0    ; TRAINER
+ELSE ; Normal Version
+	db 0      ; YOUNGSTER
+	db 1,0    ; BUG CATCHER
+	db 1,0    ; LASS
+	db 1,3,0  ; SAILOR
+	db 1,0    ; JR__TRAINER_M
+	db 1,0    ; JR__TRAINER_F
+	db 1,2,3,0; POKEMANIAC
+	db 1,2,0  ; SUPER_NERD
+	db 1,0    ; HIKER
+	db 1,0    ; BIKER
+	db 1,3,0  ; BURGLAR
+	db 1,0    ; ENGINEER
+	db 1,0    ; Couple
+	db 1,3,0  ; FISHER
+	db 1,3,0  ; SWIMMER
+	db 0      ; CUE_BALL
+	db 1,0    ; GAMBLER
+	db 1,3,0  ; BEAUTY
+	db 1,2,0  ; PSYCHIC_TR
+	db 1,3,0  ; ROCKER
+	db 1,0    ; JUGGLER
+	db 1,0    ; TAMER
+	db 1,0    ; BIRD_KEEPER
+	db 1,0    ; BLACKBELT
+	db 1,0    ; SONY1
+	db 1,3,0  ; SWIMMER_F
+	db 1,2,0  ; ROCKET_F
+	db 1,2,0  ; SCIENTIST
+	db 1,3,0  ; GIOVANNI
+	db 1,0    ; ROCKET
+	db 1,3,0  ; COOLTRAINER_M
+	db 1,3,0  ; COOLTRAINER_F
+	db 1,0    ; BRUNO
+	db 1,0    ; BROCK
+	db 1,3,0  ; MISTY
+	db 1,3,0  ; LT__SURGE
+	db 1,3,0  ; ERIKA
+	db 1,3,0  ; KOGA
+	db 1,3,0  ; BLAINE
+	db 1,3,0  ; SABRINA
+	db 1,2,0  ; GENTLEMAN
+	db 1,3,0  ; SONY2
+	db 1,3,0  ; SONY3
+	db 1,2,3,0; LORELEI
+	db 1,0    ; CHANNELER
+	db 1,0    ; AGATHA
+	db 1,3,0  ; LANCE
+	db 1,0    ; HEX_MANIAC
+	db 1,0    ; TRAINER
+ENDC
 
 TrainerPicAndMoneyPointers: ; 39914 (e:5914)
 ; trainer pic pointers and base money.
@@ -748,77 +800,129 @@ TrainerAIPointers: ; 3a55c (e:655c)
 ; one entry per trainer class
 ; first byte, number of times (per Pokémon) it can occur
 ; next two bytes, pointer to AI subroutine for trainer class
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
+IF DEF(_BLUE) ; Hard Version
+	dbw 3,GenericAI ; youngster
+	dbw 3,GenericAI ; bug catcher
+	dbw 3,GenericAI ; lass
+	dbw 3,GenericAI ; sailor
+	dbw 3,GenericAI ; camper
+	dbw 3,GenericAI ; picnicker
+	dbw 3,GenericAI ; pokemaniac
+	dbw 3,GenericAI ; super nerd
+	dbw 3,GenericAI ; hiker
+	dbw 3,GenericAI ; biker
+	dbw 3,GenericAI ; burglar
+	dbw 3,GenericAI ; engineer
 	dbw 3,GenericAI ; couple
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 3,JugglerAI ; juggler
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 2,BlackbeltAI ; blackbelt
-	dbw 3,GenericAI
-	dbw 3,GenericAI
-	dbw 1,GenericAI ; chief
-	dbw 3,GenericAI
-	dbw 1,GiovanniAI ; giovanni
-	dbw 3,GenericAI
-	dbw 2,CooltrainerMAI ; cooltrainerm
-	dbw 1,CooltrainerFAI ; cooltrainerf
-	dbw 2,BrunoAI ; bruno
-	dbw 5,BrockAI ; brock
-	dbw 1,MistyAI ; misty
-	dbw 1,LtSurgeAI ; surge
-	dbw 1,ErikaAI ; erika
-	dbw 2,KogaAI ; koga
-	dbw 2,BlaineAI ; blaine
-	dbw 1,SabrinaAI ; sabrina
-	dbw 3,GenericAI
-	dbw 1,Sony2AI ; sony2
-	dbw 1,Sony3AI ; sony3
-	dbw 2,LoreleiAI ; lorelei
-	dbw 3,GenericAI
-	dbw 2,AgathaAI ; agatha
-	dbw 1,LanceAI ; lance
+	dbw 3,GenericAI ; fisherman
+	dbw 3,GenericAI ; swimmer m
+	dbw 3,GenericAI ; cue ball
+	dbw 3,GenericAI ; gambler
+	dbw 3,GenericAI ; beauty
+	dbw 3,GenericAI ; psychic
+	dbw 3,GenericAI ; rocker
+	dbw 3,SwitchOutAI ; juggler
+	dbw 3,GenericAI ; tamer
+	dbw 3,GenericAI ; bird keeper
+	dbw 2,XAttack1AI ; blackbelt
+	dbw 3,GenericAI ; rival 1
+	dbw 3,GenericAI ; swimmer f
+	dbw 1,GenericAI ; rocket f
+	dbw 3,GenericAI ; scientist
+	dbw 1,GuardSpecAI ; giovanni
+	dbw 3,GenericAI ; rocket m
+	dbw 2,XAttack2AI ; ace trainerm
+	dbw 1,SwitchOrHyperPotionAI ; ace trainerf
+	dbw 2,XDefendAI ; bruno
+	dbw 5,FullHealAI ; brock
+	dbw 1,XDefendAI ; misty
+	dbw 1,XSpeedAI ; surge
+	dbw 1,SuperPotion1AI ; erika
+	dbw 2,XAttack2AI ; koga
+	dbw 2,SuperPotion2AI ; blaine
+	dbw 1,HyperPotionAI ; sabrina
+	dbw 3,GenericAI ; gentleman
+	dbw 1,PotionAI ; rival 2
+	dbw 1,FullRestoreAI ; rival 3 champion
+	dbw 2,SuperPotion2AI ; lorelei
+	dbw 3,GenericAI ; chandler
+	dbw 2,SwitchOrSuperPotionAI ; agatha
+	dbw 1,HyperPotion2AI ; lance
 	dbw 3,GenericAI ; hex maniac
-	dbw 3,GenericAI ; tracey
+	dbw 3,GenericAI ; trainer (usually overwritten in trainer data)
+ELSE
+	dbw 3,GenericAI ; youngster
+	dbw 3,GenericAI ; bug catcher
+	dbw 3,GenericAI ; lass
+	dbw 3,GenericAI ; sailor
+	dbw 3,GenericAI ; camper
+	dbw 3,GenericAI ; picnicker
+	dbw 3,GenericAI ; pokemaniac
+	dbw 3,GenericAI ; super nerd
+	dbw 3,GenericAI ; hiker
+	dbw 3,GenericAI ; biker
+	dbw 3,GenericAI ; burglar
+	dbw 3,GenericAI ; engineer
+	dbw 3,GenericAI ; couple
+	dbw 3,GenericAI ; fisherman
+	dbw 3,GenericAI ; swimmer m
+	dbw 3,GenericAI ; cue ball
+	dbw 3,GenericAI ; gambler
+	dbw 3,GenericAI ; beauty
+	dbw 3,GenericAI ; psychic
+	dbw 3,GenericAI ; rocker
+	dbw 3,SwitchOutAI ; juggler
+	dbw 3,GenericAI ; tamer
+	dbw 3,GenericAI ; bird keeper
+	dbw 2,XAttack1AI ; blackbelt
+	dbw 3,GenericAI ; rival 1
+	dbw 3,GenericAI ; swimmer f
+	dbw 1,GenericAI ; rocket f
+	dbw 3,GenericAI ; scientist
+	dbw 1,GuardSpecAI ; giovanni
+	dbw 3,GenericAI ; rocket m
+	dbw 2,XAttack2AI ; ace trainerm
+	dbw 1,SwitchOrHyperPotionAI ; ace trainerf
+	dbw 2,XDefendAI ; bruno
+	dbw 5,FullHealAI ; brock
+	dbw 1,XDefendAI ; misty
+	dbw 1,XSpeedAI ; surge
+	dbw 1,SuperPotion1AI ; erika
+	dbw 2,XAttack2AI ; koga
+	dbw 2,SuperPotion2AI ; blaine
+	dbw 1,HyperPotionAI ; sabrina
+	dbw 3,GenericAI ; gentleman
+	dbw 1,PotionAI ; rival 2
+	dbw 1,FullRestoreAI ; rival 3 champion
+	dbw 2,SuperPotion2AI ; lorelei
+	dbw 3,GenericAI ; chandler
+	dbw 2,SwitchOrSuperPotionAI ; agatha
+	dbw 1,HyperPotion2AI ; lance
+	dbw 3,GenericAI ; hex maniac
+	dbw 3,GenericAI ; trainer (usually overwritten in trainer data)
+ENDC
 
-JugglerAI: ; 3a5e9 (e:65e9)
+SwitchOutAI: ; 3a5e9 (e:65e9)
 	cp $40
 	ret nc
 	jp AISwitchIfEnoughMons
 
-BlackbeltAI: ; 3a5ef (e:65ef)
+XAttack1AI: ; 3a5ef (e:65ef)
 	cp $20
 	ret nc
 	jp AIUseXAttack
 
-GiovanniAI: ; 3a5f5 (e:65f5)
+GuardSpecAI: ; 3a5f5 (e:65f5)
 	cp $40
 	ret nc
 	jp AIUseGuardSpec
 
-CooltrainerMAI: ; 3a5fb (e:65fb)
+XAttack2AI: ; 3a5fb (e:65fb)
 	cp $40
 	ret nc
 	jp AIUseXAttack
 
-CooltrainerFAI: ; 3a601 (e:6601)
+SwitchOrHyperPotionAI: ; 3a601 (e:6601)
 	cp $40
 	ld a,$A
 	call AICheckIfHPBelowFraction
@@ -828,25 +932,37 @@ CooltrainerFAI: ; 3a601 (e:6601)
 	ret nc
 	jp AISwitchIfEnoughMons
 
+FullHealOrPotionAI:
+	cp $20
+	ret nc
+	ld a,[wEnemyMonStatus]
+	and a
+	jr z, .potion ; if they don't have a status condition, try using a potion instead
+	jp AIUseFullHeal
+.potion
+	ld a,5
+	call AICheckIfHPBelowFraction
+	ret nc
+	jp AIUsePotion
 
-BrockAI: ; 3a614 (e:6614)
+FullHealAI: ; 3a614 (e:6614)
 ; if his active monster has a status condition, use a full heal
 	ld a,[wEnemyMonStatus]
 	and a
 	ret z
 	jp AIUseFullHeal
 
-MistyAI: ; 3a61c (e:661c)
+XDefendAI: ; 3a61c (e:661c)
 	cp $40
 	ret nc
 	jp AIUseXDefend
 
-LtSurgeAI: ; 3a622 (e:6622)
+XSpeedAI: ; 3a622 (e:6622)
 	cp $40
 	ret nc
 	jp AIUseXSpeed
 
-ErikaAI: ; 3a628 (e:6628)
+SuperPotion1AI: ; 3a628 (e:6628)
 	cp $80
 	ret nc
 	ld a,$A
@@ -854,12 +970,7 @@ ErikaAI: ; 3a628 (e:6628)
 	ret nc
 	jp AIUseSuperPotion
 
-KogaAI: ; 3a634 (e:6634)
-	cp $40
-	ret nc
-	jp AIUseXAttack
-
-BlaineAI: ; 3a63a (e:663a)
+SuperPotion2AI: ; 3a63a (e:663a)
 	cp $40
 	ret nc
 	ld a,5
@@ -867,7 +978,7 @@ BlaineAI: ; 3a63a (e:663a)
 	ret nc
 	jp AIUseSuperPotion
 
-SabrinaAI: ; 3a640 (e:6640)
+HyperPotionAI: ; 3a640 (e:6640)
 	cp $40
 	ret nc
 	ld a,$A
@@ -875,7 +986,7 @@ SabrinaAI: ; 3a640 (e:6640)
 	ret nc
 	jp AIUseHyperPotion
 
-Sony2AI: ; 3a64c (e:664c)
+PotionAI: ; 3a64c (e:664c)
 	cp $20
 	ret nc
 	ld a,5
@@ -883,7 +994,7 @@ Sony2AI: ; 3a64c (e:664c)
 	ret nc
 	jp AIUsePotion
 
-Sony3AI: ; 3a658 (e:6658)
+FullRestoreAI: ; 3a658 (e:6658)
 	cp $20
 	ret nc
 	ld a,5
@@ -891,20 +1002,7 @@ Sony3AI: ; 3a658 (e:6658)
 	ret nc
 	jp AIUseFullRestore
 
-LoreleiAI: ; 3a664 (e:6664)
-	cp $80
-	ret nc
-	ld a,5
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseSuperPotion
-
-BrunoAI: ; 3a670 (e:6670)
-	cp $40
-	ret nc
-	jp AIUseXDefend
-
-AgathaAI: ; 3a676 (e:6676)
+SwitchOrSuperPotionAI: ; 3a676 (e:6676)
 	cp $14
 	jp c,AISwitchIfEnoughMons
 	cp $80
@@ -914,7 +1012,7 @@ AgathaAI: ; 3a676 (e:6676)
 	ret nc
 	jp AIUseSuperPotion
 
-LanceAI: ; 3a687 (e:6687)
+HyperPotion2AI: ; 3a687 (e:6687)
 	cp $80
 	ret nc
 	ld a,5
