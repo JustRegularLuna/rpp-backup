@@ -5648,16 +5648,11 @@ MoveHitTest: ; 3e56b (f:656b)
 ; if the move is 100% accurate, don't miss
 	ld a, b
 	cp $FF
-	jr z, .moveHits
+	ret z
 ; else if the random number generated is greater than or equal to the scaled accuracy, the move misses
 	call BattleRandom
 	cp b
 	jr nc,.moveMissed
-	
-.moveHits
-; make sure W_MOVEMISSED is 0 if it hits
-	xor a
-	ld [W_MOVEMISSED],a
 	ret
 	
 .moveMissed
