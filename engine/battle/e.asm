@@ -742,27 +742,27 @@ ELSE ; Normal Version
 	db 1,3,0  ; SWIMMER_F
 	db 1,2,0  ; ROCKET_F
 	db 1,2,0  ; SCIENTIST
-	db 1,3,0  ; GIOVANNI
+	db 1,4,0  ; GIOVANNI
 	db 1,0    ; ROCKET
 	db 1,3,0  ; COOLTRAINER_M
 	db 1,3,0  ; COOLTRAINER_F
-	db 1,0    ; BRUNO
-	db 1,0    ; BROCK
-	db 1,3,0  ; MISTY
-	db 1,3,0  ; LT__SURGE
-	db 1,3,0  ; ERIKA
-	db 1,3,0  ; KOGA
-	db 1,3,0  ; BLAINE
-	db 1,3,0  ; SABRINA
+	db 1,4,0  ; BRUNO
+	db 1,4,0  ; BROCK
+	db 1,4,0  ; MISTY
+	db 1,4,0  ; LT__SURGE
+	db 1,4,0  ; ERIKA
+	db 1,4,0  ; KOGA
+	db 1,4,0  ; BLAINE
+	db 1,4,0  ; SABRINA
 	db 1,2,0  ; GENTLEMAN
-	db 1,3,0  ; SONY2
-	db 1,3,0  ; SONY3
-	db 1,2,3,0; LORELEI
+	db 1,4,0  ; SONY2
+	db 1,4,0  ; SONY3
+	db 1,4,0  ; LORELEI
 	db 1,0    ; CHANNELER
-	db 1,0    ; AGATHA
-	db 1,3,0  ; LANCE
+	db 1,4,0  ; AGATHA
+	db 1,4,0  ; LANCE
 	db 1,0    ; HEX_MANIAC
-	db 1,0    ; TRAINER
+	db 1,4,0  ; TRAINER
 ENDC
 
 TrainerPicAndMoneyPointers: ; 39914 (e:5914)
