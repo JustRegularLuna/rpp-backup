@@ -236,15 +236,15 @@ TrainerPalletes:
 	db PAL_CYAN_TRAINER      ; Swimmer (Female)
 	db PAL_MEWMON            ; Rocket (Female Grunt)
 	db PAL_BLUE_TRAINER      ; Scientist
-	db PAL_MEWMON            ; Giovanni
+	db PAL_BROWN_TRAINER     ; Giovanni
 	db PAL_MEWMON            ; Rocket (Male Grunt)
 	db PAL_RED_TRAINER       ; Ace Trainer (Male)
 	db PAL_RED_TRAINER       ; Ace Trainer (Female)
 	db PAL_BROWN_TRAINER     ; Bruno
-	db PAL_BROWN_TRAINER     ; Brock
+	db PAL_BLUE_TRAINER      ; Brock
 	db PAL_RED_TRAINER       ; Misty
 	db PAL_GREEN_TRAINER     ; Lt. Surge
-	db PAL_GREEN_TRAINER     ; Erika
+	db PAL_BLUE_TRAINER      ; Erika
 	db PAL_PURPLE_TRAINER    ; Koga
 	db PAL_CYAN_TRAINER      ; Blaine
 	db PAL_RED_TRAINER       ; Sabrina
