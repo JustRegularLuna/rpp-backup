@@ -223,7 +223,7 @@ TrainerPalletes:
 	db PAL_BLUE_TRAINER      ; Young Couple
 	db PAL_CYAN_TRAINER      ; Fisher
 	db PAL_BLUE_TRAINER      ; Swimmer (Male)
-	db PAL_BROWN_TRAINER     ; Cue Ball
+	db PAL_BLUE_TRAINER      ; Cue Ball
 	db PAL_BLUE_TRAINER      ; Gambler
 	db PAL_CYAN_TRAINER      ; Beauty
 	db PAL_BLUE_TRAINER      ; Psychic
@@ -240,7 +240,7 @@ TrainerPalletes:
 	db PAL_MEWMON            ; Rocket (Male Grunt)
 	db PAL_RED_TRAINER       ; Ace Trainer (Male)
 	db PAL_RED_TRAINER       ; Ace Trainer (Female)
-	db PAL_BROWN_TRAINER     ; Bruno
+	db PAL_MEWMON            ; Bruno
 	db PAL_BLUE_TRAINER      ; Brock
 	db PAL_RED_TRAINER       ; Misty
 	db PAL_GREEN_TRAINER     ; Lt. Surge
