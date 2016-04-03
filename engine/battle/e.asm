@@ -518,6 +518,7 @@ StatusOnlyMoves:
 	db POISON_GAS
 	db LOVELY_KISS
 	db SPORE
+	db SING
 	db $FF
 	
 AlterMovePriority:
