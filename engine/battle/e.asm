@@ -316,9 +316,17 @@ SmartAI: ; originally by Dabomstew
 	srl b
 	ld a, c
 	cp b
-	jr nc, .dreamEaterCheck
 	ld hl, HealingMoves
+	jr nc, .debuffHealingMoves
 	ld b, -8
+	call Random
+	ld a, [hRandomAdd]
+	cp $C0 ; 3/4 chance
+	jr nc, .dreamEaterCheck
+	jr .applyHealingChance
+.debuffHealingMoves
+	ld b, 10
+.applyHealingChance
 	call AlterMovePriorityArray
 .dreamEaterCheck
 	ld a, [wBattleMonStatus]
@@ -374,9 +382,14 @@ SmartAI: ; originally by Dabomstew
 	jr z, .selfBuffCheck
 	inc de
 	call ReadMove
-	ld a, [W_ENEMYMOVEPOWER]
-	and a
+	ld a, [W_ENEMYMOVEEFFECT]
+	cp SUPER_FANG_EFFECT
 	jr z, .seloop
+	cp SPECIAL_DAMAGE_EFFECT
+	jr z, .seloop
+	ld a, [W_ENEMYMOVEPOWER]
+	cp 10
+	jr c, .seloop
 	push hl
 	push bc
 	push de
@@ -410,10 +423,14 @@ SmartAI: ; originally by Dabomstew
 	ld [hl], a
 	jr .seloop
 .selfBuffCheck
-; strongly encourage self-buff or status on turn 1
+; 50% chance to encourage self-buff or status on turn 1/2
 	ld a, [wccd5]
-	and a
-	ret nz
+	cp $2
+	jr nc, .discourageStatusOnly
+	call Random
+	ld a, [hRandomAdd]
+	cp $80
+	jr nc, .discourageStatusOnly
 	ld hl, MehStatusMoves
 	ld b, -3
 	call AlterMovePriorityArray
@@ -422,6 +439,14 @@ SmartAI: ; originally by Dabomstew
 	call AlterMovePriorityArray
 	ld hl, HeavyBuffStatusMoves
 	ld b, -6
+	call AlterMovePriorityArray
+.discourageStatusOnly
+; if enemy already has a status affliction, don't keep trying to give them one
+	ld a, [wBattleMonStatus]
+	and a
+	ret z
+	ld hl, StatusOnlyMoves
+	ld b, 20
 	call AlterMovePriorityArray
 	ret
 	
@@ -478,6 +503,21 @@ HealingMoves:
 	db RECOVER
 	db SOFTBOILED
 	db MOONLIGHT
+	db $FF
+	
+StatusOnlyMoves:
+	db SUPERSONIC
+	db POISONPOWDER
+	db STUN_SPORE
+	db SLEEP_POWDER
+	db THUNDER_WAVE
+	db TOXIC
+	db HYPNOSIS
+	db CONFUSE_RAY
+	db GLARE
+	db POISON_GAS
+	db LOVELY_KISS
+	db SPORE
 	db $FF
 	
 AlterMovePriority:
