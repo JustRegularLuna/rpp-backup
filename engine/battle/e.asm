@@ -115,7 +115,7 @@ DrawTrainerPicColumn: ; 39707 (e:5707)
 ; creates a set of moves that may be used and returns its address in hl
 ; unused slots are filled with 0, all used slots may be chosen with equal probability
 AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
-	ld a, $14 ; for smart AI
+	ld a, $20 ; for smart AI
 	ld hl, wHPBarMaxHP  ; init temporary move selection array. Only the moves with the lowest numbers are chosen in the end
 	ld [hli], a   ; move 1
 	ld [hli], a   ; move 2
@@ -442,11 +442,12 @@ SmartAI: ; originally by Dabomstew
 	call AlterMovePriorityArray
 .discourageStatusOnly
 ; if enemy already has a status affliction, don't keep trying to give them one
+; this *should* already be part of AIMoveChoiceModification1 but it doesn't always seem to catch them
 	ld a, [wBattleMonStatus]
 	and a
 	ret z
 	ld hl, StatusOnlyMoves
-	ld b, 20
+	ld b, $20
 	call AlterMovePriorityArray
 	ret
 	
