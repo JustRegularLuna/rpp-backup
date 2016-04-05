@@ -13,7 +13,7 @@ TechnicalMachines: ; ***NOTE: Subtract 1 from the line number to get TM number. 
 	db MUDDY_WATER  ; Mt Moon
 	db ICE_BEAM     ; Celadon Dept Roof
 	db BLIZZARD     ; Pokemon Mansion
-	db HYPER_BEAM   ; Victory Road
+	db HYPER_BEAM   ; Victory Road, Beach House
 	db IRON_TAIL    ; Route 12
 	db SUBMISSION   ; Celadon Dept
 	db COUNTER      ; Celadon Dept
@@ -51,6 +51,6 @@ TechnicalMachines: ; ***NOTE: Subtract 1 from the line number to get TM number. 
 	db FLASH        ; Route 2
 	db CUT          ; SS Anne
 	db FLY          ; Route 16
-	db SURF         ; Beach House below Fuchsia City
+	db SURF         ; Safari Zone Secret House
 	db STRENGTH     ; Fuchsia City
 	db DIVE         ; Currently Unused in Beta 2

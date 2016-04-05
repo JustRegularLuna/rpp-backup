@@ -2,10 +2,8 @@ _BeachHousePikachuText::
 	text "PUKA: Pika-pi!"
 	done
 	
-_BeachHouseGirlText::
-	text "I came inside to"
-	line "get some more"
-	cont "sunscreen."
+_BeachHouseDudeText::
+	text "Placeholder text!"
 	done
 	
 _BeachHouseOldManText::
@@ -19,28 +17,22 @@ _BeachHouseGiveSurfText::
 	text "Yo! What's up,"
 	line "little dude?"
 	
-	para "So, you saw some"
-	line "people out there"
-	cont "on the waves,"
-	cont "and now you want"
-	cont "in on that?"
+	para "Want something to"
+	line "give you the"
+	cont "edge in battle?"
 	
-	para "Well you came to"
-	line "the right place!"
+	para "Check this out!"
 	prompt
 	
 _BeachHouseGiveSurfText2::
 	text "Yo! What's up,"
 	line "little dudette?"
 	
-	para "So, you saw some"
-	line "people out there"
-	cont "on the waves,"
-	cont "and now you want"
-	cont "in on that?"
+	para "Want something to"
+	line "give you the"
+	cont "edge in battle?"
 	
-	para "Well you came to"
-	line "the right place!"
+	para "Check this out!"
 	prompt
 
 _ReceivedHM03Text::
@@ -50,13 +42,14 @@ _ReceivedHM03Text::
 	text "!@@"
 
 _HM03ExplanationText::
-	text "HM03 is SURF!"
+	text "TM15 teaches"
+	line "HYPER BEAM!"
 
-	para "You and your"
-	line "#MON can get"
-	cont "out there and"
-	cont "catch the gnarly"
-	cont "waves!"
+	para "It's a powerful"
+	line "move, but your"
+	cont "#MON has to"
+	cont "recharge after"
+	cont "using it."
 	done
 
 _HM03NoRoomText::
@@ -64,5 +57,5 @@ _HM03NoRoomText::
 	
 	para "You don't have"
 	line "room for this"
-	cont "sweet HM!"
+	cont "sweet TM!"
 	done

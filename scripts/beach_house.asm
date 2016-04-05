@@ -7,10 +7,22 @@ BeachHouseTextPointers:
 	dw BeachHouseText3
 	dw BeachHouseText4
 
-BeachHouseText1:
+BeachHouseText1: ; later a move tutor 
+	TX_FAR _BeachHouseDudeText
+	db "@"
+
+BeachHouseText2: ; Pikachu
+	TX_FAR _BeachHousePikachuText
+	db $08 ; asm
+	ld a, PIKACHU
+	call PlayCry
+	call WaitForSoundToFinish
+	jp TextScriptEnd
+
+BeachHouseText3: ; give TM 15
 	db $08 ; asm
 	ld a, [wd857]
-	bit 1, a
+	bit 0, a
 	jr nz, .already_received
 	ld hl, BeachHouseGiveSurfText
 	ld a, [wPlayerGender]
@@ -19,13 +31,13 @@ BeachHouseText1:
 	ld hl, BeachHouseGiveSurfText2 ; if you're a girl
 .next
 	call PrintText
-	lb bc, HM_03, 1
+	lb bc, TM_15, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedHM03Text
 	call PrintText
 	ld hl, wd857
-	set 1, [hl]
+	set 0, [hl]
 	jr .done
 .BagFull
 	ld hl, HM03NoRoomText
@@ -55,18 +67,6 @@ HM03ExplanationText:
 
 HM03NoRoomText:
 	TX_FAR _HM03NoRoomText
-	db "@"
-
-BeachHouseText2:
-	TX_FAR _BeachHousePikachuText
-	db $08 ; asm
-	ld a, PIKACHU
-	call PlayCry
-	call WaitForSoundToFinish
-	jp TextScriptEnd
-
-BeachHouseText3:
-	TX_FAR _BeachHouseGirlText
 	db "@"
 	
 BeachHouseText4:

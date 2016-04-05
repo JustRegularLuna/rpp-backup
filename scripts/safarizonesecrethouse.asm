@@ -7,17 +7,17 @@ SafariZoneSecretHouseTextPointers: ; 4a31a (12:631a)
 SafariZoneSecretHouseText1: ; 4a31c (12:631c)
 	db $08 ; asm
 	ld a, [wd857]
-	bit 0, a
+	bit 1, a
 	jr nz, .already_received ; 0x4a322
 	ld hl, SafariZoneSecretHouseText_4a350
 	call PrintText
-	lb bc, TM_15, 1
+	lb bc, HM_03, 1
 	call GiveItem
 	jr nc, .BagFull
 	ld hl, ReceivedTM15Text
 	call PrintText
 	ld hl, wd857
-	set 0, [hl]
+	set 1, [hl]
 	jr .done ; 0x4a33d
 .BagFull
 	ld hl, TM15NoRoomText

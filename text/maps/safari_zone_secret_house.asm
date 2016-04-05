@@ -21,14 +21,16 @@ _ReceivedTM15Text:: ; 85943 (21:5943)
 	text "!@@"
 
 _TM15ExplanationText:: ; 85957 (21:5957)
-	text "TM15 teaches"
-	line "HYPER BEAM!"
+	text "HM03 is SURF!"
 
-	para "It's a powerful"
-	line "move, but your"
-	cont "#MON has to"
-	cont "recharge after"
-	cont "using it."
+	para "#MON will be"
+	line "able to ferry you"
+	cont "across water!"
+
+	para "And, this HM isn't"
+	line "disposable! You"
+	cont "can use it over"
+	cont "and over!"
 
 	para "You're super lucky"
 	line "for winning this"
