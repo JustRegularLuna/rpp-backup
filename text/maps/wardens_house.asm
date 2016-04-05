@@ -61,10 +61,10 @@ _HM04ExplanationText:: ; 9e5b6 (27:65b6)
 	cont "in SAFARI ZONE?"
 
 	para "If you do, you"
-	line "win a TM!"
+	line "win an HM!"
 
-	para "I hear it's a TM"
-	line "for HYPER BEAM."
+	para "I hear it's the"
+	line "rare SURF HM."
 	done
 
 _HM04NoRoomText:: ; 9e67a (27:667a)

@@ -51,6 +51,6 @@ TechnicalMachines: ; ***NOTE: Subtract 1 from the line number to get TM number. 
 	db FLASH        ; Route 2
 	db CUT          ; SS Anne
 	db FLY          ; Route 16
-	db SURF         ; Safari Zone Secret House
+	db SURF         ; Safari Zone Secret House ***(Still in the Beach House in v2.2)
 	db STRENGTH     ; Fuchsia City
 	db DIVE         ; Currently Unused in Beta 2
