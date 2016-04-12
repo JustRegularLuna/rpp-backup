@@ -1998,6 +1998,7 @@ wPlayerGender::
 	ds 1
 
 wExtraFlags::
+; bit 0 = Set means next Wildmon will be Shiny (Reset afterwards)
 ; bit 1 = Set means a baby is in Daycare
 ; bit 2 = Set means traded mons obey like normal mons
 ; bit 3 = Set means you've received Eon Ticket in Celadon Mansion

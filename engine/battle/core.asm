@@ -6355,6 +6355,13 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	ld a, $98
 	ld b, $88
 	jr z, .storeDVs
+; forced shiny wildmon DVs
+	ld hl, wExtraFlags
+	bit 0, [hl]
+	res 0, [hl]
+	ld a, $EA
+	ld b, $AA
+	jr nz, .storeDVs
 ; random DVs for wild mon
 	call BattleRandom
 	ld b, a
