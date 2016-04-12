@@ -157,9 +157,26 @@ AddCustomMoves:
 	jr nz, .addMoveLoop
 	ret
 
+GetTrainerMonDVs:: ; called from engine/battle/core.asm
+	ld a, [wTrainerAINumber]
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, TrainerClassDVs
+	add hl, bc
+	add hl, bc
+	ld de, wTempDVs
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
 
 IF DEF(_BLUE) ; Difficult rom
+	INCLUDE "data/trainer_dvs_hard.asm"
     INCLUDE "data/trainer_parties_hard.asm"
 ELSE ; Normal rom
+	INCLUDE "data/trainer_dvs.asm"
     INCLUDE "data/trainer_parties.asm"
 ENDC

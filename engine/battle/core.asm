@@ -6351,10 +6351,14 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	jr nz, .storeDVs
 	ld a, [W_ISINBATTLE]
 	cp $2 ; is it a trainer battle?
-; fixed DVs for trainer mon
-	ld a, $98
-	ld b, $88
-	jr z, .storeDVs
+	jr nz, .notTrainer
+; Get trainer DVs from a table
+	callba GetTrainerMonDVs
+	ld hl, wTempDVs
+	ld a, [hli]
+	ld b, [hl]
+	jr .storeDVs
+.notTrainer
 ; forced shiny wildmon DVs
 	ld hl, wExtraFlags
 	bit 0, [hl]
