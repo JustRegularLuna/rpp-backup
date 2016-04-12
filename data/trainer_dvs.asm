@@ -3,50 +3,50 @@ TrainerClassDVs:
 	;  Def  Spc
 	db $98, $88 ; YOUNGSTER
 	db $98, $88 ; BUG_CATCHER
-	db $98, $88 ; LASS
+	db $58, $88 ; LASS
 	db $98, $88 ; SAILOR
 	db $98, $88 ; CAMPER
-	db $98, $88 ; PICNICKER
+	db $6A, $A8 ; PICNICKER
 	db $98, $88 ; POKEMANIAC
 	db $98, $88 ; SUPER_NERD
-	db $98, $88 ; HIKER
-	db $98, $88 ; BIKER
+	db $A8, $88 ; HIKER
+	db $A8, $88 ; BIKER
 	db $98, $88 ; BURGLAR
 	db $98, $88 ; ENGINEER
 	db $98, $88 ; COUPLE
 	db $98, $88 ; FISHER
 	db $98, $88 ; SWIMMER
-	db $98, $88 ; CUE_BALL
+	db $A8, $88 ; CUE_BALL
 	db $98, $88 ; GAMBLER
-	db $98, $88 ; BEAUTY
+	db $69, $C8 ; BEAUTY
 	db $98, $88 ; PSYCHIC_TR
 	db $98, $88 ; ROCKER
 	db $98, $88 ; JUGGLER
 	db $98, $88 ; TAMER
 	db $98, $88 ; BIRD_KEEPER
 	db $98, $88 ; BLACKBELT
-	db $98, $88 ; SONY1
-	db $98, $88 ; SWIMMER_F
-	db $98, $88 ; ROCKET_F
+	db $9D, $DD ; SONY1
+	db $78, $88 ; SWIMMER_F
+	db $7E, $A8 ; ROCKET_F
 	db $98, $88 ; SCIENTIST
-	db $98, $88 ; GIOVANNI
-	db $98, $88 ; ROCKET
-	db $98, $88 ; COOLTRAINER_M
-	db $98, $88 ; COOLTRAINER_F
-	db $98, $88 ; BRUNO
-	db $98, $88 ; BROCK
-	db $98, $88 ; MISTY
-	db $98, $88 ; LT_SURGE
-	db $98, $88 ; ERIKA
+	db $D8, $A8 ; GIOVANNI
+	db $D8, $A8 ; ROCKET
+	db $D8, $C8 ; COOLTRAINER_M
+	db $7C, $C8 ; COOLTRAINER_F
+	db $DC, $DD ; BRUNO
+	db $9A, $77 ; BROCK
+	db $78, $88 ; MISTY
+	db $98, $AA ; LT_SURGE
+	db $78, $88 ; ERIKA
 	db $98, $88 ; KOGA
 	db $98, $88 ; BLAINE
-	db $98, $88 ; SABRINA
+	db $7D, $87 ; SABRINA
 	db $98, $88 ; GENTLEMAN
-	db $98, $88 ; SONY2
-	db $98, $88 ; SONY3
-	db $98, $88 ; LORELEI
-	db $98, $88 ; CHANNELER
-	db $98, $88 ; AGATHA
-	db $98, $88 ; LANCE
-	db $98, $88 ; HEX_MANIAC
+	db $9D, $DD ; SONY2
+	db $9D, $DD ; SONY3
+	db $7F, $DF ; LORELEI
+	db $68, $8A ; CHANNELER
+	db $7F, $DF ; AGATHA
+	db $DC, $DD ; LANCE
+	db $68, $8A ; HEX_MANIAC
 	db $98, $88 ; PKMN_TRAINER
