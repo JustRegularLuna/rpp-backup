@@ -3569,7 +3569,17 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
 	and a
 	jr nz, .copyEnemyMonData
-	call Random ; generate random IVs
+;forced shiny giftmon DVs
+	push hl
+	ld hl, wExtraFlags
+	bit 0, [hl]
+	res 0, [hl]
+	pop hl
+	ld a, $EA
+	ld b, $AA
+	jr nz,.writeFreshMonData
+;generate random DVS
+	call Random
 	ld b, a
 	call Random
 .writeFreshMonData ; f3b3
