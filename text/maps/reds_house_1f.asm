@@ -21,7 +21,7 @@ _MomWakeUpText2::
 	done
 
 _MomHealText1::
-	text "MOM: ",$52,"!"
+	text "MOM: [PLAYER]!"
 	line "You should take a"
 	cont "quick rest."
 	prompt

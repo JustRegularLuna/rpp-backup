@@ -58,7 +58,7 @@ _Lab4Text_610b3:: ; a1259 (28:5259)
 	text "So! You hurry and"
 	line "give me that!"
 
-	para $52, " handed"
+	para "[PLAYER] handed"
 	line "over @"
 	TX_RAM wcd6d
 	text "!"

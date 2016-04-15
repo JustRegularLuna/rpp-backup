@@ -14,7 +14,7 @@ _CeladonMartRoofText_484f3:: ; 9cbcc (27:4bcc)
 	line "from me!@@"
 
 _CeladonMartRoofText_484f9:: ; 9cc06 (27:4c06)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
@@ -40,7 +40,7 @@ _CeladonMartRoofText_48504:: ; 9cc5a (27:4c5a)
 	line "from me!@@"
 
 _CeladonMartRoofText_4850a:: ; 9cc91 (27:4c91)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
@@ -66,7 +66,7 @@ _CeladonMartRoofText_48515:: ; 9cce6 (27:4ce6)
 	line "from me!@@"
 
 _ReceivedTM49Text:: ; 9cd1d (27:4d1d)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "TM49!@@"
 
 _CeladonMartRoofText_48520:: ; 9cd30 (27:4d30)

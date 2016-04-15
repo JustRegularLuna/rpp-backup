@@ -4,7 +4,7 @@ _SilphCo3Text_59ff9:: ; 826b9 (20:66b9)
 	done
 
 _SilphCo3Text_59ffe:: ; 826de (20:66de)
-	text $52, "! You and"
+	text "[PLAYER]! You and"
 	line "your #MON"
 	cont "saved us!"
 	done

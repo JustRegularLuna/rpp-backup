@@ -40,7 +40,7 @@ _TM41PreText:: ; a5afd (29:5afd)
 	prompt
 
 _ReceivedTM41Text:: ; a5b5a (29:5b5a)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

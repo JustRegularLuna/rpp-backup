@@ -35,7 +35,7 @@ _SSAnneWelcomeText9:: ; a5734 (29:5734)
 	prompt
 
 _SSAnneFlashedTicketText:: ; a576c (29:576c)
-	text $52, " flashed"
+	text "[PLAYER] showed"
 	line "the S.S.TICKET!"
 
 	para "Great! Welcome to"
@@ -43,7 +43,7 @@ _SSAnneFlashedTicketText:: ; a576c (29:576c)
 	done
 
 _SSAnneNoTicketText:: ; a57a3 (29:57a3)
-	text $52, " doesn't"
+	text "[PLAYER] doesn't"
 	line "have the needed"
 	cont "S.S.TICKET."
 

@@ -36,7 +36,7 @@ _BeachHouseGiveSurfText2::
 	prompt
 
 _ReceivedHM03Text::
-	text $52, " received"
+	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

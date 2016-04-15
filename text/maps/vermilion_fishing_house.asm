@@ -16,7 +16,7 @@ _VermilionHouse2Text_560b6:: ; 9c554 (27:4554)
 	para "Take this and"
 	line "fish, young one!"
 
-	para $52, " received"
+	para "[PLAYER] received"
 	line "an @"
 	TX_RAM wcf4b
 	text "!@@"
@@ -39,7 +39,7 @@ _VermilionHouse2Text_560c0:: ; 9c601 (27:4601)
 
 _VermilionHouse2Text_560c5:: ; 9c622 (27:4622)
 	text "Hello there,"
-	line $52, "!"
+	line "[PLAYER]!"
 
 	para "How are the fish"
 	line "biting?"

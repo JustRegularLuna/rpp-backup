@@ -25,7 +25,7 @@ _BikeShopText_1d81f:: ; 98e83 (26:4e83)
 	prompt
 
 _BikeShopText_1d824:: ; 98eb2 (26:4eb2)
-	text $52, " exchanged"
+	text "[PLAYER] exchanged"
 	line "the BIKE VOUCHER"
 	cont "for a BICYCLE.@@"
 

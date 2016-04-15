@@ -1,7 +1,7 @@
 _Route19BattleText1:: ; 918eb (24:58eb)
-	text "I learned how to"
-	line "SURF from a guy"
-	cont "in that house."
+	text "The guy in that"
+	line "house taught his"
+	cont "PIKACHU to SURF!"
 	done
 
 _Route19EndBattleText1:: ; 9190c (24:590c)

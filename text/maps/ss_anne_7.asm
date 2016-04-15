@@ -3,12 +3,12 @@ _SSAnne7RubText:: ; 812dd (20:52dd)
 	line "I feel hideous..."
 	cont "Urrp! Seasick..."
 
-	para $52, " rubbed"
+	para "[PLAYER] rubbed"
 	line "the CAPTAIN's"
 	cont "back!"
 
 	para "Rub-rub..."
-	line "Rub-rub...@@"
+	line "Rub-rub-rub...@@"
 
 _ReceivingHM01Text:: ; 81347 (20:5347)
 	text "CAPTAIN: Whew!"
@@ -31,7 +31,7 @@ _ReceivingHM01Text:: ; 81347 (20:5347)
 	prompt
 
 _ReceivedHM01Text:: ; 8140d (20:540d)
-	text $52, " got"
+	text "[PLAYER] got"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

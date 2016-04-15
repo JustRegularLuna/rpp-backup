@@ -24,7 +24,7 @@ _VermilionGymText_5cb77:: ; 9c069 (27:4069)
 	done
 
 _ReceivedTM24Text:: ; 9c0e0 (27:40e0)
-	text $52, " received "
+	text "[PLAYER] received "
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

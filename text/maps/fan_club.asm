@@ -69,7 +69,7 @@ FanClubChairStoryText::
 	cont "love it!"
 
 	para "Hug it...when..."
-	cont "sleeping...warm"
+	line "sleeping...warm"
 	cont "and cuddly..."
 	cont "spectacular..."
 	cont "ravishing..."
@@ -83,7 +83,7 @@ FanClubChairStoryText::
 	prompt
 
 ReceivedBikeVoucherText::
-	text $52, " received"
+	text "[PLAYER] received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"
@@ -111,7 +111,7 @@ FanClubNoStoryText::
 	done
 
 FanClubChairFinalText::
-	text "Hello, ", $52, "!"
+	text "Hello, [PLAYER]!"
 
 	para "Did you come see"
 	line "me about my"

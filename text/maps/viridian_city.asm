@@ -83,7 +83,7 @@ _ViridianCityText_191ca:: ; a45ea (29:45ea)
 	prompt
 
 _ReceivedTM42Text:: ; a469a (29:469a)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "TM42!@@"
 
 _TM42Explanation:: ; a46ad (29:46ad)

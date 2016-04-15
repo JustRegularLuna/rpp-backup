@@ -81,7 +81,7 @@ _Museum1FText_5c28e:: ; 966b4 (25:66b4)
 	prompt
 
 _ReceivedOldAmberText:: ; 96790 (25:6790)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "OLD AMBER!@@"
 
 _Museum1FText_5c299:: ; 967a8 (25:67a8)

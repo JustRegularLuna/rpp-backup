@@ -15,7 +15,7 @@ _SecretHouseText_4a350:: ; 858a4 (21:58a4)
 	prompt
 
 _ReceivedTM15Text:: ; 85943 (21:5943)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

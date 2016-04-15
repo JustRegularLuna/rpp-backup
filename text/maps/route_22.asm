@@ -1,6 +1,6 @@
 _Route22RivalBeforeBattleText1:: ; 922cd (24:62cd)
-	text $53, ": Hey!"
-	line $52, "!"
+	text "[RIVAL]: Hey!"
+	line "[PLAYER]!"
 
 	para "You're going to"
 	line "#MON LEAGUE?"
@@ -38,7 +38,7 @@ _Route22RivalDefeatedText1:: ; 923f4 (24:63f4)
 	prompt
 
 _Route22Text_511bc:: ; 92410 (24:6410)
-	text $53, ": What?"
+	text "[RIVAL]: What?"
 	line "Why do I have 2"
 	cont "#MON?"
 
@@ -47,8 +47,8 @@ _Route22Text_511bc:: ; 92410 (24:6410)
 	prompt
 
 _Route22RivalBeforeBattleText2:: ; 92450 (24:6450)
-	text $53, ": What?"
-	line $52, "! What a"
+	text "[RIVAL]: What?"
+	line "[PLAYER]! What a"
 	cont "surprise to see"
 	cont "you here!"
 
@@ -60,7 +60,7 @@ _Route22RivalBeforeBattleText2:: ; 92450 (24:6450)
 	cont "That's cool!"
 
 	para "Then I'll whip"
-	line "you, ", $52, ", as"
+	line "you, [PLAYER], as"
 	cont "a warmup for"
 	cont "#MON LEAGUE!"
 
@@ -72,7 +72,7 @@ _Route22RivalAfterBattleText2:: ; 92506 (24:6506)
 	line "up! I'm ready for"
 	cont "#MON LEAGUE!"
 
-	para $52, ", you need"
+	para "[PLAYER], you need"
 	line "more practice!"
 
 	para "But hey, you know"
@@ -88,8 +88,8 @@ _Route22RivalDefeatedText2:: ; 92583 (24:6583)
 	prompt
 
 _Route22Text_511d0:: ; 925a0 (24:65a0)
-	text $53, ": Hahaha!"
-	line $52, "! That's"
+	text "[RIVAL]: Hahaha!"
+	line "[PLAYER]! That's"
 	cont "your best? You're"
 	cont "nowhere near as"
 	cont "good as me, pal!"

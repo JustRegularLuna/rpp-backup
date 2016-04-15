@@ -42,7 +42,7 @@ _CeladonDinerText_491a7:: ; 9e003 (27:6003)
 	prompt
 
 _ReceivedCoinCaseText:: ; 9e07a (27:607a)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"

@@ -9,7 +9,7 @@ _Route16HouseText3:: ; 8ce02 (23:4e02)
 	prompt
 
 _ReceivedHM02Text:: ; 8ce66 (23:4e66)
-	text $52, " received"
+	text "[PLAYER] received"
 	line "HM02!@@"
 
 _HM02ExplanationText:: ; 8ce79 (23:4e79)

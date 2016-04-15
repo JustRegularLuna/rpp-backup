@@ -50,7 +50,7 @@ _GameDesignerGiveTicketText::
 	done
 	
 _ReceivedEonTicketText::
-	text $52, " received"
+	text "[PLAYER] received"
 	line "the EON TICKET!"
 	done
 

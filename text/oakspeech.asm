@@ -53,7 +53,7 @@ _IntroduceRivalText::
 	prompt
 
 _OakSpeechText3::
-	text $52,"!"
+	text "[PLAYER]!"
 
 	para "Your very own"
 	line "#MON legend is"

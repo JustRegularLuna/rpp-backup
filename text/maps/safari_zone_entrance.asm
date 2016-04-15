@@ -20,7 +20,7 @@ SafariZoneEntranceText_9e747:: ; 9e747 (27:6747)
 	line "special # BALL"
 	cont "here."
 
-	para $52, " received"
+	para "[PLAYER] received"
 	line "30 SAFARI BALLs!@@"
 
 _SafariZoneEntranceText_75360:: ; 9e79f (27:679f)
