@@ -7367,6 +7367,7 @@ INCLUDE "engine/overworld/ferry_script.asm"
 INCLUDE "engine/battle/physical_special_split.asm"
 INCLUDE "scripts/move_deleter.asm"
 INCLUDE "scripts/move_relearner.asm"
+INCLUDE "scripts/move_tutor.asm"
 
 SECTION "trainer pics 2", ROMX,BANK[$39]
 
