@@ -1,5 +1,5 @@
 ; Handles Move Tutor functionality
-; Currently free, that may change
+; Costs ¥500, the same as the Move Relearner
 ; To make a person a tutor, have their Text Pointer point to a structure like this example
 
 ;ExamplePersonScript:
