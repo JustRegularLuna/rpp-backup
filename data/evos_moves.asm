@@ -266,7 +266,6 @@ Mon003_EvosMoves: ; 3b857 (e:7857)
 	db 50,PETALBLIZARD
 	db 53,SOLARBEAM
 	db 60,WOOD_HAMMER
-	db 70,FRENZY_PLANT
 	db 0
 	
 Mon004_EvosMoves: ; 3b938 (e:7938)
@@ -330,7 +329,6 @@ Mon006_EvosMoves: ; 3b97c (e:797c)
 	db 47,FLAMETHROWER
 	db 56,FIRE_SPIN
 	db 60,FLARE_BLITZ
-	db 70,BLAST_BURN
 	db 0
 	
 Mon007_EvosMoves: ; 3b949 (e:7949)
@@ -396,7 +394,6 @@ Mon009_EvosMoves: ; 3b346 (e:7346)
 	db 46,IRON_DEFENSE
 	db 53,MIST
 	db 60,HYDRO_PUMP
-	db 70,HYDRO_CANNON
 	db 0
 	
 Mon010_EvosMoves: ; 3b742 (e:7742)

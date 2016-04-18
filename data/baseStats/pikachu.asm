@@ -13,7 +13,7 @@ INCBIN "pic/bmon/pikachu.pic",0,1 ; 55, sprite dimensions
 dw PikachuPicFront
 dw PikachuPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 4
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0
@@ -25,5 +25,5 @@ db 0 ; growth rate
 	tmlearn 25,31,32
 	tmlearn 33,34,39,40
 	tmlearn 44,45
-	tmlearn 50,53,54
+	tmlearn 50,54
 db BANK(PikachuPicFront)

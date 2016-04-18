@@ -13,7 +13,7 @@ INCBIN "pic/bmon/charizard.pic",0,1 ; 77, sprite dimensions
 dw CharizardPicFront
 dw CharizardPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 2
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0
