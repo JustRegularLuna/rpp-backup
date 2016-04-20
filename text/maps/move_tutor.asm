@@ -9,8 +9,8 @@ _MoveTutorWelcomeText::
 	prompt
 	
 _TeachTutorMoveText::
-	text "Do you want me to"
-	line "teach @"
+	text "Want me to teach"
+	line "@"
 	TX_RAM wcf4b
 	db $0
 	cont "to a #MON?"
