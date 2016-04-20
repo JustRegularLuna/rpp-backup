@@ -74,9 +74,9 @@ _SSAnne8AfterBattleText4:: ; 81679 (20:5679)
 	done
 
 _SSAnne8Text5:: ; 816c7 (20:56c7)
-	text "Waiter, I would"
-	line "like a cherry pie"
-	cont "please!"
+	text "Oh, room service!"
+	line "I would like a"
+	cont "cherry pie!"
 	done
 
 _SSAnne8Text6:: ; 816f2 (20:56f2)

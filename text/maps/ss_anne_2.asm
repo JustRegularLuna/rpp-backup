@@ -27,8 +27,8 @@ _SSAnneRivalBeforeBattleText:: ; 80d9a (20:4d9a)
 	para "Different kinds"
 	line "are everywhere!"
 
-	para "Crawl around in"
-	line "grassy areas!"
+	para "Show me what"
+	line "you've caught!"
 	done
 
 _SSAnneRivalDefeatedText:: ; 80e57 (20:4e57)
@@ -55,10 +55,12 @@ _SSAnneRivalCaptainText:: ; 80eb6 (20:4eb6)
 	para "But, he was just a"
 	line "seasick, old man!"
 
-	para "But, CUT itself is"
-	line "really useful!"
+	para "At least I can"
+	line "CUT down those"
+	cont "annoying little"
+	cont "bushes now."
 
-	para "You should go see"
-	line "him! Smell ya!"
+	para "Smell ya later,"
+	line "[PLAYER]!"
 	done
 
