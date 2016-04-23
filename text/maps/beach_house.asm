@@ -3,8 +3,18 @@ _BeachHousePikachuText::
 	done
 	
 _BeachHouseDudeText::
-	text "Placeholder text!"
-	done
+	text "You know, not"
+	line "every PIKACHU"
+	cont "knows how to SURF"
+	cont "like mine."
+	
+	para "But today is your"
+	line "lucky day!"
+	
+	para "Hmm? Oh, sorry, I"
+	line "forgot to intro-"
+	cont "duce myself."
+	prompt
 	
 _BeachHouseOldManText::
 	text "Oof, I spent too"
@@ -14,19 +24,7 @@ _BeachHouseOldManText::
 	done
 
 _BeachHouseGiveSurfText::
-	text "Yo! What's up,"
-	line "little dude?"
-	
-	para "Want something to"
-	line "give you the"
-	cont "edge in battle?"
-	
-	para "Check this out!"
-	prompt
-	
-_BeachHouseGiveSurfText2::
-	text "Yo! What's up,"
-	line "little dudette?"
+	text "Yo! What's up?"
 	
 	para "Want something to"
 	line "give you the"

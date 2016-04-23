@@ -7,9 +7,13 @@ BeachHouseTextPointers:
 	dw BeachHouseText3
 	dw BeachHouseText4
 
-BeachHouseText1: ; later a move tutor 
+BeachHouseText1: ; Surfing Pikachu Tutor
 	TX_FAR _BeachHouseDudeText
-	db "@"
+	db 8 ;asm
+	ld a, 4
+	ld [wWhichTrade], a
+	callba MoveTutorScript
+	jp TextScriptEnd
 
 BeachHouseText2: ; Pikachu
 	TX_FAR _BeachHousePikachuText
@@ -25,11 +29,6 @@ BeachHouseText3: ; give TM 15
 	bit 0, a
 	jr nz, .already_received
 	ld hl, BeachHouseGiveSurfText
-	ld a, [wPlayerGender]
-	and a
-	jr z, .next
-	ld hl, BeachHouseGiveSurfText2 ; if you're a girl
-.next
 	call PrintText
 	lb bc, TM_15, 1
 	call GiveItem
@@ -51,10 +50,6 @@ BeachHouseText3: ; give TM 15
 
 BeachHouseGiveSurfText:
 	TX_FAR _BeachHouseGiveSurfText
-	db "@"
-	
-BeachHouseGiveSurfText2:
-	TX_FAR _BeachHouseGiveSurfText2
 	db "@"
 
 ReceivedHM03Text:
