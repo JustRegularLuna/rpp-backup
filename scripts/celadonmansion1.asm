@@ -8,32 +8,32 @@ CeladonMansion1TextPointers: ; 48697 (12:4697)
 	dw CeladonMansion1Text4
 	dw CeladonMansion1Text5
 
-CeladonMansion1_486a1: ; 486a1 (12:46a1)
-	call PlayCry
-	jp TextScriptEnd
-
-CeladonMansion1Text1: ; 486a7 (12:46a7)
+CeladonMansion1Text1: ; Old Lady
 	TX_FAR _CeladonMansion1Text1
-	db $08 ; asm
-	ld a, MEOWTH
-	jp CeladonMansion1_486a1
-
-CeladonMansion1Text2: ; 486b1 (12:46b1)
-	TX_FAR _CeladonMansion1Text2
 	db "@"
 
-CeladonMansion1Text3: ; 486b6 (12:46b6)
-	TX_FAR _CeladonMansion1Text3
-	db $8
-	ld a, CLEFAIRY
-	jp CeladonMansion1_486a1
+CeladonMansion1Text2: ; Frenzy Plant
+	db $08 ; asm
+	ld a, 1
+	jp CeladonMansionTutors
 
-CeladonMansion1Text4: ; 486c0 (12:46c0)
-	TX_FAR _CeladonMansion1Text4
+CeladonMansion1Text3: ; Blast Burn
 	db $8
-	ld a, NIDORAN_F
-	jp CeladonMansion1_486a1
+	ld a, 2
+	jp CeladonMansionTutors
 
-CeladonMansion1Text5: ; 486ca (12:46ca)
+CeladonMansion1Text4: ; Hydro Cannon
+	db $8
+	ld a, 3
+	jp CeladonMansionTutors
+
+CeladonMansion1Text5: ; Sign on wall
 	TX_FAR _CeladonMansion1Text5
 	db "@"
+
+CeladonMansionTutors: ; Common to all three tutors
+	ld [wWhichTrade], a
+	callba MoveTutorScript
+	jp TextScriptEnd
+	
+	ds 4 ; so we don't shift data and mess up saving in Celadon Pokecenter
