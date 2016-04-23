@@ -13,7 +13,7 @@ INCBIN "pic/bmon/primeape.pic",0,1 ; 77, sprite dimensions
 dw PrimeapePicFront
 dw PrimeapePicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 5
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0
