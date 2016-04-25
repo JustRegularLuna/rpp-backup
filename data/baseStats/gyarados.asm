@@ -13,7 +13,7 @@ INCBIN "pic/bmon/gyarados.pic",0,1 ; 77, sprite dimensions
 dw GyaradosPicFront
 dw GyaradosPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 6
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

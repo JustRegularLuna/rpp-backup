@@ -13,7 +13,7 @@ INCBIN "pic/bmon/dratini.pic",0,1 ; 55, sprite dimensions
 dw DratiniPicFront
 dw DratiniPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 6
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

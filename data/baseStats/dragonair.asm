@@ -13,7 +13,7 @@ INCBIN "pic/bmon/dragonair.pic",0,1 ; 66, sprite dimensions
 dw DragonairPicFront
 dw DragonairPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 6
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0
