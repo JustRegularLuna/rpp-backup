@@ -11,11 +11,11 @@ _CinnabarIslandText1:: ; a61e6 (29:61e6)
 	done
 
 _CinnabarIslandText2:: ; a622a (29:622a)
-	text "Scientists conduct"
-	line "experiments in"
-	cont "the burned-out"
-	cont "building."
-	done
+	db 8
+	ld a, 5
+	ld [wWhichTrade], a
+	callba MoveTutorScript
+	jp TextScriptEnd
 
 _CinnabarIslandText3:: ; a6266 (29:6266)
 	text "CINNABAR ISLAND"
