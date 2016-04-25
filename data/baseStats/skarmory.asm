@@ -7,7 +7,7 @@ db 70 ; base speed
 db 70 ; base special
 db STEEL ; species type 1
 db FLYING ; species type 2
-db 25 ; catch rate
+db 75 ; catch rate
 db 168 ; base exp yield
 INCBIN "pic/bmon/skarmory.pic",0,1 ; 55, sprite dimensions
 dw SkarmoryPicFront

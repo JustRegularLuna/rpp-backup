@@ -7,7 +7,7 @@ db 90 ; base speed
 db 125 ; base special
 db FIRE ; species type 1
 db FLYING ; species type 2
-db 3 ; catch rate
+db 45 ; catch rate
 db 217 ; base exp yield
 INCBIN "pic/bmon/moltres.pic",0,1 ; 77, sprite dimensions
 dw MoltresPicFront
