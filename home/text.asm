@@ -273,7 +273,7 @@ Char58:: ; 1a95 (0:1a95)
 Next1AA2:: ; 1aa2 (0:1aa2)
 	call ProtectedDelay3
 	call ManualTextScroll
-	ld a,$7F
+	ld a,"─"
 	Coorda 18, 17
 Char57:: ; 1aad (0:1aad)
 	pop hl
@@ -323,7 +323,7 @@ Char4B:: ; 1af8 (0:1af8)
 	push de
 	call ManualTextScroll
 	pop de
-	ld a,$7F
+	ld a,"─"
 	Coorda 18, 17
 	;fall through
 Char4C:: ; 1b0a (0:1b0a)
