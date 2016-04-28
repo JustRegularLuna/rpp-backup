@@ -49,7 +49,7 @@ UseHeadbuttOW2:: ; for calling it when not in party menu
 	call PrintText
 	ld hl, wd730
 	res 6, [hl]
-	call RedrawMapView
+	call ReloadMapData
 	jp GetHeadbuttMons
 
 UsedHeadbuttText:
@@ -89,7 +89,7 @@ GetHeadbuttMons:
 .skipCalc
 	push hl ; don't lose our place
 
-	ld a, [hRandomAdd]
+	ld a, [hRandomSub]
 	ld b, a
 	ld hl, TreeEncounterRateChances
 .determineEncounterSlot

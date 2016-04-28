@@ -118,7 +118,7 @@ TryHeadbutt:
 	call HasPartyMove
 	jr nz, .no
 	
-	; Prints the "A Pokemon might be hiding in this tree" message, whether you have Headbutt or not
+	; Prints the "A Pokemon might be hiding in this tree" message
 	call Text2_EnterTheText
 	ld hl,MightBeHiding
 	call PrintText
@@ -127,7 +127,7 @@ TryHeadbutt:
 	and a
 	jr nz, .no2
 
-	; Calls the CUT routine if they said Yes.
+	; Calls the HEADBUTT routine if they said Yes.
 	call GetPartyMonName2
 	farcall UseHeadbuttOW2
 	call Text3_DrakesDeception
