@@ -27,6 +27,9 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
 	and a
 	jr z, .notFishing
+	ld hl, FellOutOfTreeText
+	cp 2
+	jr z, .notFishing
 	ld hl, HookedMonAttackedText
 .notFishing
 	jr .wildBattle
@@ -89,6 +92,10 @@ WildMonAppearedText: ; 58e3b (16:4e3b)
 
 HookedMonAttackedText: ; 58e40 (16:4e40)
 	TX_FAR _HookedMonAttackedText
+	db "@"
+
+FellOutOfTreeText:
+	TX_FAR _FellOutOfTreeText
 	db "@"
 
 EnemyAppearedText: ; 58e45 (16:4e45)

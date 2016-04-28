@@ -3151,6 +3151,29 @@ _UsedCutText:: ; a8315 (2a:4315)
 	line "away with CUT!"
 	prompt
 
+_NothingToHeadbuttText::
+	text "There's nothing"
+	line "to HEADBUTT!"
+	prompt
+
+_UsedHeadbuttText::
+	TX_RAM wcd6d
+	text " did a"
+	line "HEADBUTT!"
+	prompt
+
+_NoHeadbuttMonText::
+	text "Nope, nothing."
+	prompt
+
+_FellOutOfTreeText::
+	text "Wild @"
+	TX_RAM wEnemyMonNick
+	db $0
+	line "fell out of the"
+	cont "tree!"
+	prompt
+
 
 SECTION "Pokedex Text", ROMX, BANK[POKEDEX_TEXT]
 

@@ -8,7 +8,8 @@ TryFieldMove:: ; predef
 	call TrySurf
 	ret z
 	call TryCut
-;	ret z
+	ret z
+	call TryHeadbutt
 	ret
 
 TrySurf:
@@ -106,6 +107,67 @@ TryCut: ; yenatch's code originally checked for the SOUL_BADGE like SURF does by
 .no
 	ld a, 1
 	and a
+	ret
+
+TryHeadbutt:
+	call IsHeadbuttTile
+	jr nc, .no
+	
+	; Makes sure you have a Pokemon with HEADBUTT.
+	ld d, HEADBUTT
+	call HasPartyMove
+	jr nz, .no
+	
+	; Prints the "A Pokemon might be hiding in this tree" message, whether you have Headbutt or not
+	call Text2_EnterTheText
+	ld hl,MightBeHiding
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .no2
+
+	; Calls the CUT routine if they said Yes.
+	call GetPartyMonName2
+	farcall UseHeadbuttOW2
+	call Text3_DrakesDeception
+
+.yes
+	xor a
+	ret
+	
+.no2
+	call Text3_DrakesDeception
+.no
+	ld a, 1
+	and a
+	ret
+
+IsHeadbuttTile:
+	ld a, [W_CURMAPTILESET]
+	and a ; OVERWORLD
+	jr z, .overworld
+	
+	cp FOREST
+	jr z, .forest
+	
+	jr .no
+	
+.forest
+	ld a, [wTileInFrontOfPlayer]
+	cp $12
+	jr z, .yes
+	jr .no
+	
+.overworld
+	ld a, [wTileInFrontOfPlayer]
+	cp $50
+	jr z, .yes
+.no
+	and a
+	ret
+.yes
+	scf
 	ret
 
 
@@ -259,4 +321,11 @@ WaterIsCalmTxt:
 	text "The water is calm."
 	line "Would you like to"
 	cont "use SURF?@@"
-	
+
+MightBeHiding:
+	text "A #MON might"
+	line "be hiding in this"
+	cont "tree."
+
+	para "Want to use"
+	line "HEADBUTT?@@"

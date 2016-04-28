@@ -1762,6 +1762,7 @@ FieldMoveNames: ; 778d (1:778d)
 	db "DIG@"
 	db "TELEPORT@"
 	db "SOFTBOILED@"
+	db "HEADBUTT@"
 
 PokemonMenuEntries: ; 77c2 (1:77c2)
 	db   "STATS"
@@ -1836,6 +1837,7 @@ FieldMoveDisplayData: ; 7823 (1:7823)
 	db DIG, $07, $0C
 	db TELEPORT, $08, $0A
 	db SOFTBOILED, $09, $08
+	db HEADBUTT, $0A, $0A
 	db $ff ; list terminator
 
 
@@ -7395,6 +7397,8 @@ INCLUDE "engine/splashscreens/gamescript.asm"
 INCLUDE "engine/splashscreens/mateo_presents.asm"
 INCLUDE "engine/splashscreens/version_screen.asm"
 INCLUDE "engine/splashscreens/players_in_intro.asm"
+
+INCLUDE "engine/overworld/headbutt.asm"
 
 SECTION "Trainer Parties", ROMX,BANK[$3B]
 INCLUDE "engine/battle/read_trainer.asm"

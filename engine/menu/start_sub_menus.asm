@@ -130,6 +130,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	dw .dig
 	dw .teleport
 	dw .softboiled
+	dw .headbutt
 .fly
 	bit 2,a ; does the player have the Thunder Badge?
 	jp z,.newBadgeRequired
@@ -273,6 +274,12 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .notHealthyEnoughText
 	TX_FAR _NotHealthyEnoughText
 	db "@"
+.headbutt
+	callba UseHeadbuttOW
+	ld a,[wcd6a]
+	and a
+	jp z,.loop
+	jp CloseTextDisplay
 .goBackToMap
 	call RestoreScreenTilesAndReloadTilePatterns
     call ReloadMapData
