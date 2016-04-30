@@ -9,7 +9,14 @@ UseHeadbuttOW::
 	and a ; OVERWORLD
 	jr z, .overworld
 	cp FOREST
+	jr z, .forest
+	cp PLATEAU
 	jr nz, .noHeadbutt
+	ld a, [wTileInFrontOfPlayer]
+	cp $17 ; tree corner
+	jr z, .useHeadbutt
+	jr .noHeadbutt
+.forest
 	ld a, [wTileInFrontOfPlayer]
 	cp $12 ; Tree corner
 	jr z, .useHeadbutt

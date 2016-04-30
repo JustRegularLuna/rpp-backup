@@ -151,6 +151,15 @@ IsHeadbuttTile:
 	cp FOREST
 	jr z, .forest
 	
+	cp PLATEAU
+	jr z, .plateau
+	
+	jr .no
+	
+.plateau
+	ld a, [wTileInFrontOfPlayer]
+	cp $17
+	jr z, .yes
 	jr .no
 	
 .forest
