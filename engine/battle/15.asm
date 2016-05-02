@@ -167,6 +167,7 @@ GainExperience: ; 5524f (15:524f)
 	callba CalcLevelFromExperience
 	pop hl
 	ld a, [hl] ; current level
+	ld [wTempLevel], a ; store current level
 	cp d
 	jp z, .nextMon ; if level didn't change, go to next mon
 	call KeepEXPBarFull
@@ -264,7 +265,22 @@ GainExperience: ; 5524f (15:524f)
 	ld [wcc49], a
 	ld a, [wd0b5]
 	ld [wd11e], a
+	
+	ld a, [W_CURENEMYLVL]
+	ld c, a
+	ld a, [wTempLevel]
+	ld b, a
+.level_loop
+	inc b
+	ld a, b
+	ld [W_CURENEMYLVL], a
+	push bc
 	predef LearnMoveFromLevelUp
+	pop bc
+	ld a, b
+	cp c
+	jr nz, .level_loop
+	
 	ld hl, wccd3
 	ld a, [wWhichPokemon]
 	ld c, a
