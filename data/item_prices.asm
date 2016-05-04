@@ -105,4 +105,4 @@ ItemPrices: ; 4608 (1:4608)
 	money 10    ; CHESTO_BERRY
 	money 10    ; CHERI_BERRY
 	money 10    ; LUM_BERRY
-	money 10    ; SWEG_BERRY
+	money 10    ; ACAI_BERRY

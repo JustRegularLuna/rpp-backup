@@ -89,8 +89,8 @@ BerryTable:
 	db PECHA_BERRY  ; Route 2, Tree 2
 	db ORAN_BERRY   ; Viridian Forest
 	db SITRUS_BERRY ; Route 7
-	db SWEG_BERRY   ; Faraway Island
-	db SWEG_BERRY   ; South Isle	
+	db ACAI_BERRY   ; Faraway Island
+	db ACAI_BERRY   ; South Isle	
 	
 BerryReset::
 ; Called to reset berry trees

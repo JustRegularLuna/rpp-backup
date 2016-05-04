@@ -512,7 +512,7 @@ UsableItems_PartyMenu: ; 13434 (4:7434)
 	db CHESTO_BERRY
 	db CHERI_BERRY
 	db LUM_BERRY
-	db SWEG_BERRY
+	db ACAI_BERRY
 	db $ff
 
 ; items which close the item menu when used

@@ -105,5 +105,5 @@ ItemNames: ; 472b (1:472b)
 	db "CHESTO BERRY@"
 	db "CHERI BERRY@"
 	db "LUM BERRY@"
-	db "SWEG BERRY@"
+	db "ACAI BERRY@"
 	db "GO HOME@"

@@ -122,7 +122,7 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw ItemUseMedicine   ; CHESTO_BERRY
 	dw ItemUseMedicine   ; CHERI_BERRY
 	dw ItemUseMedicine   ; LUM_BERRY
-	dw ItemUseVitamin    ; SWEG_BERRY
+	dw ItemUseVitamin    ; ACAI_BERRY
 
 ItemThiefBall:
 	ld a,[W_ISINBATTLE]
@@ -765,7 +765,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr z,ItemUseMedicine ; if so, force another choice
 .checkItemType
 	ld a,[wcf91]
-	cp a,SWEG_BERRY
+	cp a,ACAI_BERRY
 	jp z,.useVitamin
 	cp a,PECHA_BERRY
 	jp nc,.cureStatusAilment
@@ -1203,7 +1203,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wcf91]
 	cp a,RARE_CANDY
 	jp z,.useRareCandy
-	cp a,SWEG_BERRY
+	cp a,ACAI_BERRY
 	jp z,.useRareCandy
 	push hl
 	sub a,HP_UP
