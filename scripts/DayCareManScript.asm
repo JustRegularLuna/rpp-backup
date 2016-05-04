@@ -24,6 +24,7 @@ DayCareManScript::
     call GetBabyID ; Reads the entry from the table, and stores it in register b
     ld c, $5
     call GivePokemon
+    call SetupBabymonStats
     ld hl, wExtraFlags ; Extra flags
     res 1, [hl] ; Mark there not being a babymon at Day Care
     ret
@@ -102,7 +103,88 @@ GetBabyID: ; Read the table to determine which baby the Pokemon had
     ld a, [hl]
     ld b, a
     ret
-    
+
+SetupBabymonStats: ; Inherit stuff from the parents, currently just DVs for now
+	; Determine which 'mon this is (last in party)
+	ld a, [wPartyCount]
+	dec a
+	push af
+	ld bc, wPartyMon2 - wPartyMon1
+	push bc
+	ld hl, wPartyMon1DVs
+	call AddNTimes
+	
+	; determines which DVs come from which parents
+	call Random
+	cp $7F
+	jr nc, .parents2
+	
+	ld de, wDayCareMonDVs
+	ld a, [de]
+	ld [hli], a
+	ld de, DayCareManDittoDVs + 1
+	ld a, [de]
+	ld [hld], a
+	jr .doneCopyingDVs
+	
+.parents2 ; same as above, but copies from opposite parents
+	ld de, DayCareManDittoDVs
+	ld a, [de]
+	ld [hli], a
+	ld de, wDayCareMonDVs + 1
+	ld a, [de]
+	ld [hld], a
+	
+.doneCopyingDVs
+	; determine if we will randomly overwrite two of the copied DVs with new ones
+	call Random
+	cp $C0
+	jr nc, .skipNewDVs
+	
+	; determine which DVs to overwrite
+	call Random
+	cp $7F
+	jr c, .firstDVbyte
+	inc hl
+.firstDVbyte
+	call Random
+	ld [hl], a
+	
+.skipNewDVs
+	; recalculate stats with the new DVs
+	pop bc
+	pop af
+	ld hl, wPartyMon1Stats
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld bc, (wPartyMon1Exp + 2) - wPartyMon1Stats
+	add hl, bc
+	ld b, 0
+	call CalcStats
+	
+	; set their HP equal to their new Max HP
+	ld a, [wPartyCount]
+	dec a
+	ld bc, wPartyMon2 - wPartyMon1
+	ld hl, wPartyMon1HP
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld bc, wPartyMon1MaxHP - wPartyMon1HP
+	add hl, bc
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	
+	;@@@ Later, there will be code for passing down Egg Moves
+	ret
+
+DayCareManDittoDVs: ; placeholder until there is a second daycaremon
+	db $EA, $AA
+
 INCLUDE "data/breeding_list.asm"
 INCLUDE "data/no_breed_list.asm"
 INCLUDE "data/babymon_list.asm"
