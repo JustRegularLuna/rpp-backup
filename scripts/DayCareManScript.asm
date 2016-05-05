@@ -116,8 +116,8 @@ SetupBabymonStats: ; Inherit stuff from the parents, currently just DVs for now
 	
 	; determines which DVs come from which parents
 	call Random
-	cp $7F
-	jr nc, .parents2
+	bit 1, a
+	jr nz, .parents2
 	
 	ld de, wDayCareMonDVs
 	ld a, [de]
@@ -137,17 +137,16 @@ SetupBabymonStats: ; Inherit stuff from the parents, currently just DVs for now
 	
 .doneCopyingDVs
 	; determine if we will randomly overwrite two of the copied DVs with new ones
-	call Random
-	cp $C0
-	jr nc, .skipNewDVs
+	ld a, [hRandomAdd]
+	bit 3, a
+	jr nz, .skipNewDVs
 	
 	; determine which DVs to overwrite
-	call Random
-	cp $7F
-	jr c, .firstDVbyte
+	bit 0, a
+	jr z, .firstDVbyte
 	inc hl
 .firstDVbyte
-	call Random
+	ld a, [hRandomSub]
 	ld [hl], a
 	
 .skipNewDVs
