@@ -3541,8 +3541,18 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	push hl
 	ld a, [wcc49]
 	and $f
-	ld a, $98     ; set enemy trainer mon IVs to fixed average values
-	ld b, $88
+	push hl
+	push de
+	push bc
+	push af
+	callba GetTrainerMonDVs
+	pop af
+	pop bc
+	pop de
+	ld hl, wTempDVs
+	ld a, [hli]
+	ld b, [hl]
+	pop hl
 	jr nz, .writeFreshMonData
 	ld a, [wcf91]
 	ld [wd11e], a
