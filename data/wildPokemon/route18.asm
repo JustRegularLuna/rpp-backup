@@ -1,14 +1,14 @@
 Route18Mons:
 ; Grass Mons
 	db $19
-	db 20,SPEAROW
-	db 22,SPEAROW
-	db 25,RATICATE
+	db 25,SPEAROW
+	db 27,FEAROW
+	db 25,DODUO
 	db 24,DODUO
-	db 25,FEAROW
+	db 26,RATICATE
 	db 26,SLUGMA
-	db 28,DODUO
-	db 29,RATICATE
+	db 28,SLUGMA
+	db 29,LICKITUNG
 	db 27,MURKROW
 	db 29,MURKROW
 

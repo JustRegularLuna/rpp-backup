@@ -9,8 +9,8 @@ Route13Mons:
 	db 26,BELLSPROUT
 	db 25,DITTO
 	db 28,GLOOM
-	db 30,WEEPINBELL
-	db 31,FARFETCH_D
+	db 30,FARFETCH_D
+	db 31,BELLOSSOM
 
 ; Water Mons
 	db $03

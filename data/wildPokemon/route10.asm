@@ -1,16 +1,16 @@
 Route10Mons:
 ; Grass Mons
 	db $0F
+	db 16,VOLTORB
 	db 16,MAGNEMITE
-	db 18,RATTATA
-	db 18,MAGNEMITE
-	db 20,MAGNEMITE
-	db 17,NIDORAN_M
-	db 17,NIDORAN_F
-	db 22,SKARMORY
-	db 20,SKARMORY
-	db 16,MACHOP
+	db 17,EKANS
+	db 17,SANDSHREW
 	db 18,MACHOP
+	db 18,MACHOP
+	db 22,GLOOM
+	db 22,BELLOSSOM
+	db 16,SKARMORY
+	db 18,SKARMORY
 
 ; Water Mons
 	db $0F
