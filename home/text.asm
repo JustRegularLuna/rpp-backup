@@ -269,12 +269,12 @@ Char58:: ; 1a95 (0:1a95)
 	cp LINK_STATE_BATTLING
 	jp z,Next1AA2
 	ld a,$EE
-	Coorda 18, 17
+	Coorda 18, 16
 Next1AA2:: ; 1aa2 (0:1aa2)
 	call ProtectedDelay3
 	call ManualTextScroll
-	ld a,"─"
-	Coorda 18, 17
+	ld a," "
+	Coorda 18, 16
 Char57:: ; 1aad (0:1aad)
 	pop hl
 	ld de,Char58Text
@@ -287,7 +287,7 @@ Char58Text:: ; 1ab3 (0:1ab3)
 Char51:: ; 1ab4 (0:1ab4)
 	push de
 	ld a,$EE
-	Coorda 18, 17
+	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
 	hlCoord 1, 13
@@ -302,7 +302,7 @@ Char51:: ; 1ab4 (0:1ab4)
 Char49:: ; 1ad5 (0:1ad5)
 	push de
 	ld a,$EE
-	Coorda 18, 17
+	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
 	hlCoord 1, 10
@@ -318,13 +318,13 @@ Char49:: ; 1ad5 (0:1ad5)
 
 Char4B:: ; 1af8 (0:1af8)
 	ld a,$EE
-	Coorda 18, 17
+	Coorda 18, 16
 	call ProtectedDelay3
 	push de
 	call ManualTextScroll
 	pop de
-	ld a,"─"
-	Coorda 18, 17
+	ld a," "
+	Coorda 18, 16
 	;fall through
 Char4C:: ; 1b0a (0:1b0a)
 	push de
@@ -510,12 +510,12 @@ TextCommand06:: ; 1bcc (0:1bcc)
 	cp a,LINK_STATE_BATTLING
 	jp z,TextCommand0D
 	ld a,$ee ; down arrow
-	Coorda 18, 17 ; place down arrow in lower right corner of dialogue text box
+	Coorda 18, 16 ; place down arrow in lower right corner of dialogue text box
 	push bc
 	call ManualTextScroll ; blink arrow and wait for A or B to be pressed
 	pop bc
-	ld a,"─"
-	Coorda 18, 17 ; overwrite down arrow with textbox border bottom
+	ld a," "
+	Coorda 18, 16 ; overwrite down arrow with textbox border bottom
 	pop hl
 	jp NextTextCommand
 
@@ -523,8 +523,8 @@ TextCommand06:: ; 1bcc (0:1bcc)
 ; 07
 ; (no arguments)
 TextCommand07:: ; 1be7 (0:1be7)
-	ld a,"─" ; textbox border bottom
-	Coorda 18, 17 ; place textbox border bottom in lower right corner of dialogue text box to replace the blinking down arrow
+	ld a," " ; textbox border bottom
+	Coorda 18, 16 ; place textbox border bottom in lower right corner of dialogue text box to replace the blinking down arrow
 	call Next1B18 ; scroll up text
 	call Next1B18
 	pop hl

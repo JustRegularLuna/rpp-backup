@@ -3468,7 +3468,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	jr z, .skipAnimation
 	call TownMapSpriteBlinkingAnimation
 .skipAnimation
-	hlCoord 18, 17
+	hlCoord 18, 16
 	call HandleDownArrowBlinkTiming
 	pop hl
 	call JoypadLowSensitivity
@@ -4152,7 +4152,7 @@ HandleDownArrowBlinkTiming:: ; 3c04 (0:3c04)
 	dec a
 	ld [H_DOWNARROWBLINKCNT2],a
 	ret nz
-	ld a,"─" ; textbox border bottom
+	ld a," " ; textbox border bottom
 	ld [hl],a
 	ld a,$ff
 	ld [H_DOWNARROWBLINKCNT1],a
