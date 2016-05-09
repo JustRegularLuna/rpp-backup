@@ -7395,6 +7395,7 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw VoltTackleEffect          ; VOLT_TACKLE_EFFECT
 	 dw PoisonFangEffect          ; POISON_FANG_EFFECT
 	 dw $0000                     ; SUCKER_PUNCH_EFFECT
+	 dw GrowthEffect              ; GROWTH_EFFECT
 
 SleepEffect: ; 3f1fc (f:71fc)
 	ld de, wEnemyMonStatus
@@ -8934,6 +8935,25 @@ PoisonFangEffect:
 	call FlinchSideEffect
 	call PoisonEffect
 	ret
+
+GrowthEffect:
+	ld a, [H_WHOSETURN]
+	and a
+	jr z, .notEnemyTurn
+; Enemy's turn
+	ld a, SPECIAL_UP1_EFFECT
+	ld [W_ENEMYMOVEEFFECT], a
+	call StatModifierUpEffect
+	ld a, ATTACK_UP1_EFFECT
+	ld [W_ENEMYMOVEEFFECT], a
+	jp StatModifierUpEffect
+.notEnemyTurn
+	ld a, SPECIAL_UP1_EFFECT
+	ld [W_PLAYERMOVEEFFECT], a
+	call StatModifierUpEffect
+	ld a, ATTACK_UP1_EFFECT
+	ld [W_PLAYERMOVEEFFECT], a
+	jp StatModifierUpEffect
 
 SuckerPunchHitTest:
 ; Sets carry flag if the move should miss. (Resets carry flag otherwise.)
