@@ -2070,6 +2070,14 @@ _RoseText:: ; 947ab (25:47ab)
 	text " rose!"
 	prompt
 
+_WontRiseAnymoreText::
+	text $5A, "'s"
+	line "@"
+	TX_RAM wcf4b
+	text " won't"
+	cont "rise anymore!"
+	prompt
+
 _MonsStatsFellText:: ; 947b3 (25:47b3)
 	text $59, "'s"
 	line "@"
@@ -2081,6 +2089,14 @@ _GreatlyFellText:: ; 947be (25:47be)
 
 _FellText:: ; 947c9 (25:47c9)
 	text " fell!"
+	prompt
+
+_WontFallAnymoreText::
+	text $59, "'s"
+	line "@"
+	TX_RAM wcf4b
+	text " won't"
+	cont "drop anymore!"
 	prompt
 
 _RanFromBattleText:: ; 947d1 (25:47d1)

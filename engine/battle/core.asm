@@ -7899,7 +7899,10 @@ Func_3f520: ; 3f520 (f:7520)
 	dec [hl]
 
 PrintNothingHappenedText: ; 3f522 (f:7522)
-	ld hl, NothingHappenedText
+	ld b, c
+	inc b
+	call Func_3f688
+	ld hl, WontRiseAnymoreText
 	jp PrintText
 
 MonsStatsRoseText: ; 3f528 (f:7528)
@@ -7923,6 +7926,10 @@ GreatlyRoseText: ; 3f542 (f:7542)
 
 RoseText: ; 3f547 (f:7547)
 	TX_FAR _RoseText
+	db "@"
+
+WontRiseAnymoreText:
+	TX_FAR _WontRiseAnymoreText
 	db "@"
 
 StatModifierDownEffect: ; 3f54c (f:754c)
@@ -8095,7 +8102,10 @@ CantLowerAnymore: ; 3f650 (f:7650)
 	ld a, [de]
 	cp ATTACK_DOWN_SIDE_EFFECT
 	ret nc
-	ld hl, NothingHappenedText
+	ld b, c
+	inc b
+	call Func_3f688
+	ld hl, WontFallAnymoreText
 	jp PrintText
 
 MoveMissed: ; 3f65a (f:765a)
@@ -8127,6 +8137,10 @@ GreatlyFellText: ; 3f67e (f:767e)
 
 FellText: ; 3f683 (f:7683)
 	TX_FAR _FellText
+	db "@"
+
+WontFallAnymoreText:
+	TX_FAR _WontFallAnymoreText
 	db "@"
 
 Func_3f688: ; 3f688 (f:7688)
