@@ -8952,86 +8952,19 @@ SuckerPunchHitTest:
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .getEnemyMove
-	ld a, [wPlayerSelectedMove]
+	ld a, [W_PLAYERMOVEPOWER]
 	jr .checkIfDamagingMove
 .getEnemyMove
-	ld a, [wEnemySelectedMove]
+	ld a, [W_ENEMYMOVEPOWER]
 .checkIfDamagingMove
-	ld b, a
-	ld hl, NonDamagingMoves
-.nonDamageMoveLoop
-	ld a, [hli]
-	cp $ff  ; terminator
-	jr z, .moveHit
-	cp b
+	and a ; does the move have 0 for its power? (special damage moves have 1 so this still works)
 	jr z, .moveMissed
-	jr .nonDamageMoveLoop
 .moveHit
 	and a  ; reset carry flag
 	ret
 .moveMissed
 	scf
 	ret
-
-NonDamagingMoves:
-; Used to determine if Sucker Punch will hit.
-; The list of non-damaging moves is much shorter than damaging moves, so we're saving precious space in this Bank.
-	db SWORDS_DANCE
-	db WHIRLWIND
-	db SAND_ATTACK
-	db TAIL_WHIP
-	db LEER
-	db GROWL
-	db ROAR
-	db SING
-	db SUPERSONIC
-	db DISABLE
-	db MIST
-	db LEECH_SEED
-	db GROWTH
-	db POISONPOWDER
-	db STUN_SPORE
-	db SLEEP_POWDER
-	db STRING_SHOT
-	db THUNDER_WAVE
-	db TOXIC
-	db HYPNOSIS
-	db MEDITATE
-	db AGILITY
-	db TELEPORT
-	db MIMIC
-	db SCREECH
-	db DOUBLE_TEAM
-	db RECOVER
-	db HARDEN
-	db MINIMIZE
-	db SMOKESCREEN
-	db CONFUSE_RAY
-	db WITHDRAW
-	db DEFENSE_CURL
-	db BARRIER
-	db LIGHT_SCREEN
-	db HAZE
-	db REFLECT
-	db FOCUS_ENERGY
-	db METRONOME
-	db AMNESIA
-	db KINESIS
-	db SOFTBOILED
-	db GLARE
-	db POISON_GAS
-	db LOVELY_KISS
-	db TRANSFORM
-	db SPORE
-	db FLASH
-	db SPLASH
-	db REST
-	db SHARPEN
-	db CONVERSION
-	db SUBSTITUTE
-	db MOONLIGHT
-	db BABYDOLLEYES
-	db $ff
 
 CheckForHex:
 	ld a, [H_WHOSETURN]
