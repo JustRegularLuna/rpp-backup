@@ -7513,7 +7513,7 @@ PoisonEffect: ; 3f24f (f:724f)
 	ld hl, W_ENEMYBATTSTATUS3
 	ld de, W_ENEMYTOXICCOUNTER
 .ok
-	cp POISON_FANG_EFFECT
+	cp POISON_FANG
 	jr z, .badlyPoison
 	cp TOXIC
 	jr nz, .normalPoison ; done if move is not Toxic
