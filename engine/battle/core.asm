@@ -7513,7 +7513,7 @@ PoisonEffect: ; 3f24f (f:724f)
 	ld hl, W_ENEMYBATTSTATUS3
 	ld de, W_ENEMYTOXICCOUNTER
 .ok
-	cp POISON_FANG
+	cp BITE ; Animation ID, not Move ID. Poison Fang uses Bite's animation.
 	jr z, .badlyPoison
 	cp TOXIC
 	jr nz, .normalPoison ; done if move is not Toxic
