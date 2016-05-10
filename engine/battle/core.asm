@@ -7459,7 +7459,7 @@ PoisonEffect: ; 3f24f (f:724f)
 	ld de, W_ENEMYMOVEEFFECT
 .poisonEffect
 	call CheckTargetSubstitute
-	jr nz, .noEffect ; can't posion a substitute target
+	jp nz, .noEffect ; can't posion a substitute target
 	ld a, [hli]
 	ld b, a
 	and a
@@ -7479,6 +7479,9 @@ PoisonEffect: ; 3f24f (f:724f)
 	ld b, $34 ; ~20% chance of poisoning
 	jr z, .sideEffectTest
 	cp POISON_SIDE_EFFECT2
+	ld b, $67 ; ~40% chance of poisoning
+	jr z, .sideEffectTest
+	cp POISON_FANG_EFFECT
 	ld b, $67 ; ~40% chance of poisoning
 	jr z, .sideEffectTest
 	push hl
@@ -7510,8 +7513,11 @@ PoisonEffect: ; 3f24f (f:724f)
 	ld hl, W_ENEMYBATTSTATUS3
 	ld de, W_ENEMYTOXICCOUNTER
 .ok
+	cp POISON_FANG_EFFECT
+	jr z, .badlyPoison
 	cp TOXIC
 	jr nz, .normalPoison ; done if move is not Toxic
+.badlyPoison
 	set BadlyPoisoned, [hl] ; else set Toxic battstatus
 	xor a
 	ld [de], a
@@ -8937,18 +8943,15 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	
 FangAttacks:
 	call FlinchSideEffect
-	call FreezeBurnParalyzeEffect
-	ret
+	jp FreezeBurnParalyzeEffect
 	
 VoltTackleEffect:
 	call RecoilEffect
-	call FreezeBurnParalyzeEffect
-	ret
+	jp FreezeBurnParalyzeEffect
 	
 PoisonFangEffect:
 	call FlinchSideEffect
-	call PoisonEffect
-	ret
+	jp PoisonEffect
 
 GrowthEffect:
 	ld a, [H_WHOSETURN]
