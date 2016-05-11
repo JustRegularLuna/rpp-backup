@@ -13,7 +13,7 @@ INCBIN "pic/bmon/vileplume.pic",0,1 ; 77, sprite dimensions
 dw VileplumePicFront
 dw VileplumePicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 7
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

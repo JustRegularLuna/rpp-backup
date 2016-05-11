@@ -15,14 +15,11 @@ MtMoonSquareText1:
 	jp TextScriptEnd
 
 MtMoonSquareText2:
-	text "There is a strange"
-	line "aura in the area"
-	cont "lately."
-	
-	para "It must be from"
-	line "the meteorite."
-	done
-	db "@"
+	db 8
+	ld a, 7 ; Moonblast Tutor
+	ld [wWhichTrade], a
+	callba MoveTutorScript
+	jp TextScriptEnd
 
 MtMoonSquareText3:
 	text "My EEVEE loves it"

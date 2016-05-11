@@ -13,7 +13,7 @@ INCBIN "pic/bmon/oddish.pic",0,1 ; 55, sprite dimensions
 dw OddishPicFront
 dw OddishPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 7
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

@@ -13,7 +13,7 @@ INCBIN "pic/bmon/murkrow.pic",0,1 ; 55, sprite dimensions
 dw MurkrowPicFront
 dw MurkrowPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 7
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

@@ -5,7 +5,7 @@ MoveTutorMoves: ; A list of all moves taught by move tutors, their location as a
 	db SURF         ; Beach House
 	db GUNK_SHOT    ; Cinnabar Island
 	db DRACO_METEOR ; Indigo Plateau Lobby
-	db 0 ; placeholder
+	db MOONBLAST    ; Mt. Moon Square
 	db 0 ; placeholder
 	db 0 ; placeholder
 	db 0 ; placeholder

@@ -13,7 +13,7 @@ INCBIN "pic/bmon/bellossom.pic",0,1 ; 77, sprite dimensions
 dw BellossomPicFront
 dw BellossomPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 7
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

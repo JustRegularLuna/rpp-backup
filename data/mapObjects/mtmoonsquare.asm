@@ -10,7 +10,7 @@ MtMoonSquareObject: ; 0x49b06 (size=145)
 
 	db $3 ; people
 	db SPRITE_BERRY_TREE, $6 + 4, $16 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BUG_CATCHER, $a + 4, $6 + 4, $ff, $d3, $2 ; person
+	db SPRITE_BUG_CATCHER, $7 + 4, $7 + 4, $ff, $d3, $2 ; person
 	db SPRITE_LASS, $b + 4, $11 + 4, $ff, $d0, $3 ; person
 
 	; warp-to

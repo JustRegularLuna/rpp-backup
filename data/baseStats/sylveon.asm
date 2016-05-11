@@ -13,7 +13,7 @@ INCBIN "pic/bmon/sylveon.pic",0,1 ; 66, sprite dimensions
 dw SylveonPicFront
 dw SylveonPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 7
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0
