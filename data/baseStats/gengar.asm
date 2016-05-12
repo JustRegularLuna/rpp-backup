@@ -13,7 +13,7 @@ INCBIN "pic/bmon/gengar.pic",0,1 ; 66, sprite dimensions
 dw GengarPicFront
 dw GengarPicBack
 ; move tutor compatibility flags
-	m_tutor 7
+	m_tutor 7,8
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

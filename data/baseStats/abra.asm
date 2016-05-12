@@ -13,7 +13,7 @@ INCBIN "pic/bmon/abra.pic",0,1 ; 55, sprite dimensions
 dw AbraPicFront
 dw AbraPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 8
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

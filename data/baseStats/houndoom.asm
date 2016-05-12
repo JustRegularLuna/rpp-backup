@@ -13,7 +13,7 @@ INCBIN "pic/bmon/houndoom.pic",0,1 ; 77, sprite dimensions
 dw HoundoomPicFront
 dw HoundoomPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 8
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

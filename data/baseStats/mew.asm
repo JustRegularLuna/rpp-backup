@@ -13,7 +13,7 @@ INCBIN "pic/bmon/mew.pic",0,1 ; 55, sprite dimensions
 dw MewPicFront
 dw MewPicBack
 ; move tutor compatibility flags
-	m_tutor 5,6,7
+	m_tutor 5,6,7,8
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

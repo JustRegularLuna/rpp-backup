@@ -13,7 +13,7 @@ INCBIN "pic/bmon/butterfree.pic",0,1 ; 77, sprite dimensions
 dw ButterfreePicFront
 dw ButterfreePicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 8
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

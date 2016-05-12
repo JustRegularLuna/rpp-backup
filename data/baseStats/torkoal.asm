@@ -13,7 +13,7 @@ INCBIN "pic/bmon/torkoal.pic",0,1 ; 55, sprite dimensions
 dw TorkoalPicFront
 dw TorkoalPicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 8
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0

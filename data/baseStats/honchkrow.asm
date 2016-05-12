@@ -13,7 +13,7 @@ INCBIN "pic/bmon/honchkrow.pic",0,1 ; sprite dimensions
 dw HonchkrowPicFront
 dw HonchkrowPicBack
 ; move tutor compatibility flags
-	m_tutor 7
+	m_tutor 7,8
 	m_tutor 0
 	m_tutor 0
 	m_tutor 0
