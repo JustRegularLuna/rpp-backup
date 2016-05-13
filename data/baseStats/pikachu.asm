@@ -14,7 +14,7 @@ dw PikachuPicFront
 dw PikachuPicBack
 ; move tutor compatibility flags
 	m_tutor 4
-	m_tutor 0
+	m_tutor 9
 	m_tutor 0
 	m_tutor 0
 db 0 ; growth rate

@@ -14,7 +14,7 @@ dw MiltankPicFront
 dw MiltankPicBack
 ; move tutor compatibility flags
 	m_tutor 0
-	m_tutor 0
+	m_tutor 9
 	m_tutor 0
 	m_tutor 0
 db 3 ; growth rate

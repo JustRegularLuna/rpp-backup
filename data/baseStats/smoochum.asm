@@ -13,8 +13,8 @@ INCBIN "pic/bmon/smoochum.pic",0,1 ; 66, sprite dimensions
 dw SmoochumPicFront
 dw SmoochumPicBack
 ; move tutor compatibility flags
-	m_tutor 0
-	m_tutor 0
+	m_tutor 8
+	m_tutor 11
 	m_tutor 0
 	m_tutor 0
 db 0 ; growth rate

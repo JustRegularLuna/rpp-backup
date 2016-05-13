@@ -14,7 +14,7 @@ dw MagbyPicFront
 dw MagbyPicBack
 ; move tutor compatibility flags
 	m_tutor 0
-	m_tutor 0
+	m_tutor 9,10
 	m_tutor 0
 	m_tutor 0
 db 0 ; growth rate

@@ -7,9 +7,9 @@ MoveTutorMoves: ; A list of all moves taught by move tutors, their location as a
 	db DRACO_METEOR ; Indigo Plateau Lobby
 	db MOONBLAST    ; Mt. Moon Square
 	db HEX          ; Lavender Town
-	db 0 ; placeholder
-	db 0 ; placeholder
-	db 0 ; placeholder
+	db THUNDERPUNCH ; ???
+	db FIRE_PUNCH   ; ???
+	db ICE_PUNCH    ; ???
 	db 0 ; placeholder
 	db 0 ; placeholder
 	db 0 ; placeholder
