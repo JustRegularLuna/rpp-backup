@@ -9,7 +9,62 @@
 ;	callba MoveTutorScript
 ;	jp TextScriptEnd
 
+MoveTutorScriptSpecial::
+; This code is for the NPC who teaches Signature Moves to fully evolved starters 
+; Handles choosing Frenzy Plant, Hydro Cannon, or Blast Burn, then teaching the move
+	call SaveScreenTilesToBuffer2
+	call EnableAutoTextBoxDrawing
+	ld hl,MoveTutorWelcomeText
+	call PrintText
+
+	; display the menu to choose which move to learn
+	xor a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
+	ld a, $3
+	ld [wMenuWatchedKeys], a
+	ld a, $3
+	ld [wMaxMenuItem], a
+	ld a, $5
+	ld [wTopMenuItemY], a
+	ld a, $1
+	ld [wTopMenuItemX], a
+	ld hl, wd730
+	set 6, [hl]
+	hlCoord 0, 3
+	ld b, $8
+	ld c, $d
+	call TextBoxBorder
+	call UpdateSprites
+	hlCoord 2, 5
+	ld de, ElementalHyperbeamsText
+	call PlaceString
+	ld hl, wd730
+	res 6, [hl]
+	call HandleMenuInput
+	bit 1, a
+	jr nz, .done
+	ld a, [wCurrentMenuItem]
+	cp $3
+	jr z, .done
+
+	; convert wCurrentMenuItem to a Move Tutor ID and continue
+	inc a
+	ld [wd11e],a
+	callba TutorToMove
+	ld a,[wd11e]
+	ld [wMoveNum],a
+	call GetMoveName
+	call CopyStringToCF4B ; copy name to wcf4b
+	jr DisplayTeachTutorMoveText
+
+.done
+	ld hl,MoveTutorComeAgainText
+	jp PrintText
+
+
 MoveTutorScript::
+; This is used by all other Move Tutors, who only teach one move
 	call SaveScreenTilesToBuffer2
 	call EnableAutoTextBoxDrawing
 	ld a,[wWhichTrade] ; which move tutor is this?
@@ -23,6 +78,9 @@ MoveTutorScript::
 	pop af
 	ld hl,MoveTutorWelcomeText
 	call PrintText
+	; fallthrough
+
+DisplayTeachTutorMoveText:
 	ld hl,TeachTutorMoveText
 	call PrintText
 	hlCoord 14, 7
@@ -125,3 +183,9 @@ MonCannotLearnTutorMoveText:
 MoveTutorNotEnoughMoneyText:
 	TX_FAR _MoveTutorNotEnoughMoneyText
 	db "@"
+
+ElementalHyperbeamsText:
+	db   "FRENZY PLANT"
+	next "BLAST BURN"
+	next "HYDRO CANNON"
+	next "CANCEL@"

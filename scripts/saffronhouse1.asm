@@ -19,8 +19,9 @@ SaffronHouse1Text2: ; 1dded (7:5ded)
 	jp TextScriptEnd
 
 SaffronHouse1Text3: ; 1ddfa (7:5dfa)
-	TX_FAR _SaffronHouse1Text3
-	db "@"
+	db 8
+	callba MoveTutorScriptSpecial
+	jp TextScriptEnd
 
 SaffronHouse1Text4: ; 1ddff (7:5dff)
 	TX_FAR _SaffronHouse1Text4
