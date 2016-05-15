@@ -50,12 +50,6 @@ MoveTutorScriptSpecial::
 
 	; convert wCurrentMenuItem to a Move Tutor ID and continue
 	inc a
-	ld [wd11e],a
-	callba TutorToMove
-	ld a,[wd11e]
-	ld [wMoveNum],a
-	call GetMoveName
-	call CopyStringToCF4B ; copy name to wcf4b
 	jr DisplayTeachTutorMoveText
 
 .done
@@ -67,20 +61,18 @@ MoveTutorScript::
 ; This is used by all other Move Tutors, who only teach one move
 	call SaveScreenTilesToBuffer2
 	call EnableAutoTextBoxDrawing
+	ld hl,MoveTutorWelcomeText
+	call PrintText
 	ld a,[wWhichTrade] ; which move tutor is this?
-	push af
+	; fallthrough
+
+DisplayTeachTutorMoveText:
 	ld [wd11e],a
 	callba TutorToMove
 	ld a,[wd11e]
 	ld [wMoveNum],a
 	call GetMoveName
 	call CopyStringToCF4B ; copy name to wcf4b
-	pop af
-	ld hl,MoveTutorWelcomeText
-	call PrintText
-	; fallthrough
-
-DisplayTeachTutorMoveText:
 	ld hl,TeachTutorMoveText
 	call PrintText
 	hlCoord 14, 7
@@ -142,12 +134,16 @@ DisplayTeachTutorMoveText:
 	ld hl,MonCannotLearnTutorMoveText
 	call PrintText
 	jr .chooseMon
-	
+
 .checkIfAlreadyLearnedMove
 	callba CheckIfMoveIsKnown ; check if the pokemon already knows the move
 	jr c,.chooseMon
 	predef LearnMove ; teach move
-	; Charge 500 money
+	ld a, b
+	and a ; did you learn the move, or cancel learning?
+	jr z, .done
+
+	; Charge 500 money if you learned it
 	xor a
 	ld [wWhichTrade], a
 	ld [wTrainerFacingDirection], a
@@ -157,6 +153,7 @@ DisplayTeachTutorMoveText:
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
+
 .done
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
