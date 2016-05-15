@@ -35,7 +35,7 @@ TechnicalMachines: ; ***NOTE: Subtract 1 from the line number to get TM number. 
 	db HEADBUTT     ; Mt Moon, Celadon Dept
 	db ANCIENTPOWER ; Pokemon Lab
 	db ROCK_TOMB    ; Brock Prize
-	db FLAMETHROWER ; Celadon Dept
+	db FLAMETHROWER ; Celadon Prize Exchange
 	db FIRE_BLAST   ; Blaine Prize
 	db SWIFT        ; Route 12
 	db SKULL_BASH   ; Safari Zone
