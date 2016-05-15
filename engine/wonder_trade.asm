@@ -71,17 +71,8 @@ WonderTrade_DoTrade:
 	call YesNoChoice
 	ld a,[wCurrentMenuItem]
 	and a
-	jr nz,.tradeFailed ; If not, cancel the trade
-	
-	; Setup the variables for the Received Pokemon name and ID before the trade
-	call GetWonderTradeReceiveMon ; Come up with a Random Pokemon for them to receive
-	ld [wInGameTradeReceiveMonSpecies],a ; Store this as the ReceiveMon
-	ld de,wInGameTradeReceiveMonName ; Location to copy its name to
-	call WonderTrade_GetMonName      ; Copy the name of the Pokemon to this address
-	ld a, [wInGameTradeReceiveMonSpecies] ; Load the receivemon back into a
-	ld de, wInGameTradeMonNick  ; Location to copy its name to again
-	call WonderTrade_GetMonName ; Copy its name to be the Nickname
-	
+	jp nz,.tradeFailed ; If not, cancel the trade
+
 	; Take whatever level the Pokemon you offered was, and set it to be the level the received 'mon will be
 	ld a,[wWhichPokemon]
 	ld hl,wPartyMon1Level
@@ -89,6 +80,22 @@ WonderTrade_DoTrade:
 	call AddNTimes
 	ld a,[hl]
 	ld [W_CURENEMYLVL],a
+
+	; Setup the variables for the Received Pokemon name and ID before the trade
+.getReceiveMonLoop
+	call GetWonderTradeReceiveMon ; Come up with a Random Pokemon for them to receive
+	ld [wInGameTradeReceiveMonSpecies],a ; Store this as the ReceiveMon
+
+	call CheckValidLevel
+	and a
+	jr nz, .getReceiveMonLoop
+
+	ld de,wInGameTradeReceiveMonName ; Location to copy its name to
+	call WonderTrade_GetMonName      ; Copy the name of the Pokemon to this address
+
+	ld a, [wInGameTradeReceiveMonSpecies] ; Load the receivemon back into a
+	ld de, wInGameTradeMonNick  ; Location to copy its name to again
+	call WonderTrade_GetMonName ; Copy its name to be the Nickname
 	
 	; Connet the link cable like so
 	ld hl, WonderConnectCableText
@@ -259,15 +266,242 @@ CheckForBanned: ; Check if the player tried to trade a banned Pokemon
 	ret
 
 BannedMons: ; List of Pokemon not allowed to show up in Wonder Trade
-db ARTICUNO
-db ZAPDOS
-db MOLTRES
-db MEWTWO
-db MEW
-db LUGIA
-db LATIOS
-db LATIAS
-db $FF
+	db ARTICUNO
+	db ZAPDOS
+	db MOLTRES
+	db MEWTWO
+	db MEW
+	db LUGIA
+	db LATIOS
+	db LATIAS
+	db $FF
+
+CheckValidLevel:
+; Make sure the ReceiveMon isn't impossibly leveled
+	ld a, [W_CURENEMYLVL]
+	ld d, a
+
+	ld a, [wInGameTradeReceiveMonSpecies]
+	ld hl, MinimumPokemonLevels
+	ld b, 0
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	dec a
+	cp d
+	jr nc, .too_low
+	xor a
+.too_low
+	ret
+
+MinimumPokemonLevels: ; Offered Pokemon must be at least the level to receive this. Banned mons are 255
+	db 255 ; Missingno
+	db   1 ; Bulbasaur
+	db  16 ; Ivysaur
+	db  32 ; Venusaur
+	db   1 ; Charmander
+	db  16 ; Charmeleon
+	db  36 ; Charizard
+	db   1 ; Squirtle
+	db  16 ; Wartortle
+	db  36 ; Blastoise
+	db   1 ; Caterpie
+	db   7 ; Metapod
+	db  10 ; Butterfree
+	db   1 ; Weedle
+	db   7 ; Kakuna
+	db  10 ; Beedrill
+	db   1 ; Pidgey
+	db  18 ; Pidgeotto
+	db  36 ; Pidgeot
+	db   1 ; Rattata
+	db  20 ; Raticate
+	db   1 ; Spearow
+	db  20 ; Fearow
+	db   1 ; Ekans
+	db  22 ; Arbok
+	db   1 ; Pikachu
+	db  20 ; Raichu
+	db   1 ; Sandshrew
+	db  22 ; Sandslash
+	db   1 ; Nidoran♀
+	db  16 ; Nidorina
+	db  36 ; Nidoqueen
+	db   1 ; Nidoran♂
+	db  16 ; Nidorino
+	db  36 ; Nidoking
+	db   5 ; Clefairy
+	db  20 ; Clefable
+	db   1 ; Vulpix
+	db  20 ; Ninetales
+	db   5 ; Jigglypuff
+	db  20 ; Wigglytuff
+	db   1 ; Zubat
+	db  22 ; Golbat
+	db   1 ; Oddish
+	db  21 ; Gloom
+	db  32 ; Vileplume
+	db   1 ; Paras
+	db  24 ; Parasect
+	db   1 ; Venonat
+	db  31 ; Venomoth
+	db   1 ; Diglett
+	db  26 ; Dugtrio
+	db   1 ; Meowth
+	db  28 ; Persian
+	db   1 ; Psyduck
+	db  33 ; Golduck
+	db   1 ; Mankey
+	db  28 ; Primeape
+	db   1 ; Growlithe
+	db  20 ; Arcanine
+	db   1 ; Poliwag
+	db  25 ; Poliwhirl
+	db  36 ; Poliwrath
+	db   1 ; Abra
+	db  16 ; Kadabra
+	db  36 ; Alakazam
+	db   1 ; Machop
+	db  28 ; Machoke
+	db  46 ; Machamp
+	db   1 ; Bellsprout
+	db  21 ; Weepinbell
+	db  32 ; Victreebel
+	db   1 ; Tentacool
+	db  30 ; Tentacruel
+	db   1 ; Geodude
+	db  25 ; Graveler
+	db  45 ; Golem
+	db   1 ; Ponyta
+	db  40 ; Rapidash
+	db   1 ; Slowpoke
+	db  37 ; Slowbro
+	db   1 ; Magnemite
+	db  30 ; Magneton
+	db   1 ; Farfetch'd
+	db   1 ; Doduo
+	db  31 ; Dodrio
+	db   1 ; Seel
+	db  34 ; Dewgong
+	db   1 ; Grimer
+	db  38 ; Muk
+	db   1 ; Shellder
+	db  34 ; Cloyster
+	db   1 ; Gastly
+	db  25 ; Haunter
+	db  45 ; Gengar
+	db   1 ; Onix
+	db   1 ; Drowzee
+	db  26 ; Hypno
+	db   1 ; Krabby
+	db  28 ; Kingler
+	db   1 ; Voltorb
+	db  30 ; Electrode
+	db   1 ; Exeggcute
+	db  30 ; Exeggutor
+	db   1 ; Cubone
+	db  28 ; Marowak
+	db  20 ; Hitmonlee
+	db  20 ; Hitmonchan
+	db   1 ; Lickitung
+	db   1 ; Koffing
+	db  35 ; Weezing
+	db   1 ; Rhyhorn
+	db  42 ; Rhydon
+	db   1 ; Chansey
+	db   1 ; Tangela
+	db   1 ; Kangaskhan
+	db   1 ; Horsea
+	db  32 ; Seadra
+	db   1 ; Goldeen
+	db  33 ; Seaking
+	db   1 ; Staryu
+	db  33 ; Starmie
+	db   1 ; Mr.Mime
+	db  10 ; Scyther
+	db  20 ; Jynx
+	db  20 ; Electabuzz
+	db  20 ; Magmar
+	db  10 ; Pinsir
+	db   1 ; Tauros
+	db   1 ; Magikarp
+	db  20 ; Gyarados
+	db  20 ; Lapras
+	db   1 ; Ditto
+	db   1 ; Eevee
+	db  20 ; Vaporeon
+	db  20 ; Jolteon
+	db  20 ; Flareon
+	db   1 ; Porygon
+	db  15 ; Omanyte
+	db  40 ; Omastar
+	db  15 ; Kabuto
+	db  40 ; Kabutops
+	db  15 ; Aerodactyl
+	db  20 ; Snorlax
+	db 255 ; Articuno
+	db 255 ; Zapdos
+	db 255 ; Moltres
+	db  20 ; Dratini
+	db  30 ; Dragonair
+	db  55 ; Dragonite
+	db 255 ; Mewtwo
+	db 255 ; Mew
+	db 255 ; Lugia
+	db   1 ; Houndour
+	db  24 ; Houndoom
+	db   1 ; Murkrow
+	db  20 ; Honchkrow
+	db  10 ; Heracross
+	db  20 ; Espeon
+	db  20 ; Umbreon
+	db  20 ; Glaceon
+	db  20 ; Leafeon
+	db  20 ; Sylveon
+	db  20 ; Scizor
+	db  20 ; Steelix
+	db  22 ; Crobat
+	db  36 ; Politoed
+	db  37 ; Slowking
+	db  32 ; Bellossom
+	db  55 ; Kingdra
+	db  20 ; Blissey
+	db  20 ; Porygon 2
+	db  20 ; Porygon Z
+	db  36 ; Magmortar
+	db  36 ; Electivire
+	db  36 ; Magnezone
+	db  55 ; Rhyperior
+	db  36 ; Tangrowth
+	db  36 ; Lickilicky
+	db   1 ; Togepi
+	db  15 ; Togetic
+	db  30 ; Togekiss
+	db   1 ; Sneasel
+	db  20 ; Weavile
+	db  10 ; Skarmory
+	db   1 ; Misdreavus
+	db  20 ; Mismagius
+	db   1 ; Miltank
+	db   1 ; Chinchou
+	db  27 ; Lanturn
+	db   1 ; Slugma
+	db  38 ; Magcargo
+	db   1 ; Torkoal
+	db 255 ; Latias
+	db 255 ; Latios
+	db  20 ; Hitmontop
+	db   1 ; Tyrogue
+	db   1 ; Pichu
+	db   1 ; Cleffa
+	db   1 ; Igglybuff
+	db   1 ; Smoochum
+	db   1 ; Elekid
+	db   1 ; Magby
+	db   1 ; Mime Jr.
+	db   1 ; Happiny
+	db   1 ; Munchlax
+
 
 WonderConnectCableText:
 	TX_FAR _ConnectCableText
@@ -293,7 +527,7 @@ ComeAgainText:
 	text "Come again!@@"
 	
 CompletedWonderTradeText:
-	text $52," completed"
+	text "[PLAYER] completed"
 	line "a WONDER TRADE!@@"
 	
 BannedMonText:
