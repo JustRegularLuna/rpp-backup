@@ -5575,16 +5575,6 @@ MoveHitTest: ; 3e56b (f:656b)
 	ld a,[de]
 	cp a,SWIFT_EFFECT
 	ret z ; Swift never misses, except now it misses if you dig or fly
-	call CheckTargetSubstitute ; substitute check (note that this overwrites a)
-	jr z,.skipDrainChecks
-; this code should be fixed now
-    ld a,[de]
-	cp a,DRAIN_HP_EFFECT
-	jp z,.moveMissed
-	cp a,DREAM_EATER_EFFECT
-	jp z,.moveMissed
-; Move dig or fly status up a bit
-.skipDrainChecks
 	ld a,[H_WHOSETURN]
 	and a
 	jr nz,.enemyTurn
