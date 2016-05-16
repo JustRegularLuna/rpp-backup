@@ -1,11 +1,11 @@
 MoonMons1:
 ; Grass Mons
 	db $0A
-	db 8,ZUBAT
+	db 8,GEODUDE
 	db 7,ZUBAT
 	db 9,ZUBAT
 	db 8,GEODUDE
-	db 6,ZUBAT
+	db 6,SANDSHREW
 	db 10,SANDSHREW
 	db 10,GEODUDE
 	db 8,PARAS

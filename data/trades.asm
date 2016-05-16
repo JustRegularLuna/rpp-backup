@@ -8,7 +8,7 @@ TradeMons: ; 71b7b (1c:5b7b)
 	db POLIWAG,   SQUIRTLE,  2,"CRUSHER@@@@" ; Vermillion City - Only place (if not starter)
 	db SLOWBRO,   LICKITUNG, 0,"MARC@@@@@@@" ; Route 18 - Can find in wild
 	db ODDISH,    BULBASAUR, 1,"FIONA@@@@@@" ; Cerulean City - Only place (if not starter)
-	db HAUNTER,   MISDREAVUS,1,"DORIS@@@@@@" ; Cinnabar Island - Only place to find!
+	db HAUNTER,   MISDREAVUS,1,"DORIS@@@@@@" ; Cinnabar Island - Can find in wild
 	db VENONAT,   TANGELA,   2,"CRINKLES@@@" ; Cinnabar Island - Can find in wild
 	db GROWLITHE, HOUNDOUR,  2,"SPOT@@@@@@@" ; Cinnabar Island - Can find in wild
 

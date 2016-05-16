@@ -8,8 +8,8 @@ DungeonMons2:
 	db 60,DITTO
 	db 58,ONIX
 	db 58,LICKITUNG
-	db 60,RHYDON
-	db 58,RHYDON
+	db 58,RHYPERIOR
+	db 60,LICKILICKY
 
 ; Water Mons
 	db $00

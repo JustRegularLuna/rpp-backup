@@ -1,12 +1,12 @@
 MtMoonSquareMons:
 ; Grass Mons
 	db $0A
-	db 9,PIDGEY
+	db 9,SANDSHREW
 	db 9,GEODUDE
-	db 10,RATTATA
+	db 10,SANDSHREW
 	db 10,GEODUDE
 	db 11,SANDSHREW
-	db 10,SPEAROW
+	db 10,BUTTERFREE
 	db 12,ONIX
 	db 10,CLEFAIRY
 	db 12,CLEFAIRY

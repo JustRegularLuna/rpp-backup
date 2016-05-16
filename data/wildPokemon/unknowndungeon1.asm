@@ -5,12 +5,12 @@ DungeonMons1:
 	db 55,CROBAT
 	db 45,GRAVELER
 	db 55,ONIX
-	db 55,ARBOK
+	db 55,RHYDON
 	db 52,SANDSLASH
 	db 54,VENOMOTH
 	db 54,PARASECT
 	db 55,STEELIX
-	db 60,DITTO
+	db 60,RHYPERIOR
 
 ; Water Mons
 	db $03

@@ -8,7 +8,7 @@ MoonMonsB2:
 	db 11,SANDSHREW
 	db 10,PARAS
 	db 12,PARAS
-	db 10,CLEFAIRY
+	db 10,ONIX
 	db 12,CLEFAIRY
 	db 12,CLEFAIRY
 
