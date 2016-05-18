@@ -51,6 +51,9 @@ MoveRelearnerText1:
 .chooseMove
 	ld hl, MoveRelearnerWhichMoveText
 	call PrintText
+	xor a
+	ld [wCurrentMenuItem], a
+	ld [wLastMenuItem], a
 	ld a, MOVESLISTMENU
 	ld [wListMenuID], a
 	ld de, wRelearnableMoves
