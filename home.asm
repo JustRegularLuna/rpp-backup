@@ -1451,7 +1451,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	call PlaceMenuCursor
 	pop af
 	bit 0,a ; was the A button pressed?
-	jp z,.checkOtherKeys
+	jp z, checkOtherKeys
 .buttonAPressed
 	ld a,[wCurrentMenuItem]
 	call PlaceUnfilledArrowMenuCursor
@@ -1490,11 +1490,12 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld [wcf91],a
 	ld a,[wListMenuID]
 	and a ; is it a PC pokemon list?
-	jr z,.pokemonList
+	jr z, pokemonList
 	push hl
 	call GetItemPrice
 	pop hl
-	ld a,[wListMenuID]
+	jp DisplayListMenuIDLoop_Hack
+checkIfItemListMenu:
 	cp a,ITEMLISTMENU
 	jr nz,.skipGettingQuantity
 ; if it's an item menu
@@ -1509,8 +1510,8 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld a,ITEM_NAME
 	ld [wNameListType],a
 	call GetName
-	jr .storeChosenEntry
-.pokemonList
+	jr storeChosenEntry
+pokemonList:
 	ld hl,wPartyCount
 	ld a,[wList]
 	cp l ; is it a list of party pokemon or box pokemon?
@@ -1520,9 +1521,10 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 .getPokemonName
 	ld a,[wWhichPokemon]
 	call GetPartyMonName
-.storeChosenEntry ; store the menu entry that the player chose and return
+storeChosenEntry: ; store the menu entry that the player chose and return
 	ld de,wcd6d
 	call CopyStringToCF4B ; copy name to wcf4b
+skipStoringItemName:
 	ld a,$01
 	ld [wd12e],a
 	ld a,[wCurrentMenuItem]
@@ -1532,7 +1534,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	ld hl,wd730
 	res 6,[hl] ; turn on letter printing delay
 	jp BankswitchBack
-.checkOtherKeys ; check B, SELECT, Up, and Down keys
+checkOtherKeys: ; check B, SELECT, Up, and Down keys
 	bit 1,a ; was the B button pressed?
 	jp nz,ExitListMenu ; if so, exit the menu
 	bit 2,a ; was the select button pressed?
@@ -2611,14 +2613,11 @@ TrainerEndBattleText:: ; 33cf (0:33cf)
 	call TextCommandProcessor
 	jp TextScriptEnd
 
-; XXX unused?
-Func_33dd:: ; 33dd (0:33dd)
-	ld a, [wFlags_0xcd60]
-	bit 0, a
-	ret nz
-	call EngageMapTrainer
-	xor a
-	ret
+DisplayListMenuIDLoop_Hack:
+	ld a,[wListMenuID]
+	cp a, MOVESLISTMENU
+	jp z, skipStoringItemName
+	jp checkIfItemListMenu
 
 PlayTrainerMusic:: ; 33e8 (0:33e8)
 	ld a, [wEngagedTrainerClass]
