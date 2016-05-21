@@ -8979,12 +8979,13 @@ SuckerPunchHitTest:
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .getEnemyMove
-	ld a, [W_PLAYERMOVEPOWER]
+	ld a, [wPlayerSelectedMove]
 	jr .checkIfDamagingMove
 .getEnemyMove
-	ld a, [W_ENEMYMOVEPOWER]
+	ld a, [wEnemySelectedMove]
 .checkIfDamagingMove
-	and a ; does the move have 0 for its power? (special damage moves have 1 so this still works)
+	call PhysicalSpecialSplit
+	cp OTHER_M ; non-damaging or status move
 	jr z, .moveMissed
 .moveHit
 	and a  ; reset carry flag
