@@ -8964,6 +8964,17 @@ GrowthEffect:
 
 SuckerPunchHitTest:
 ; Sets carry flag if the move should miss. (Resets carry flag otherwise.)
+; Move fails if it didn't go first.
+	ld a, [H_WHOSETURN]
+	and a
+	ld a, [wEnemyWentFirst]
+	jr z, .playerTurn
+	and a
+	jr z, .moveMissed
+.playerTurn
+	and a
+	jr nz, .moveMissed
+.checkOpposingMove
 ; Fails if the opponent is using a non-damaging move.
 	ld a, [H_WHOSETURN]
 	and a
