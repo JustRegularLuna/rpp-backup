@@ -11,8 +11,45 @@ For a list of features, check out [**FEATURES.md**](FEATURES.md).
 
 * To see a list of all Pokémon included, look [**here**] (constants/pokemon_constants.asm).
 * To see Pokémon skill sets and evolutions, look [**here**](data/evos_moves.asm).
-* To see what the TMs teach, and where to find them, look [**here**] (data/tms.asm).
-* To see Pokémon base stats, moves known at lv 1, and which TMs they learn, look [**here**] (data/baseStats/).
+* To see what the TMs/HMs teach, and where to find them, look [**here**] (data/tms.asm).
+* To see a list of Move Tutor moves, and where to find them, look [**here**] (data/move_tutors.asm)
+* To see Pokémon base stats, which TMs and which Move Tutors they learn, look [**here**] (data/baseStats/).
+
+
+##Frequently Asked Questions
+
+###Q: How do you play this in color?
+A: In VBA, go to Options -> Gameboy and set it to "Automatic", then close and re-open the emulator for the change to take effect.
+
+###Q: Are all Pokémon available?
+A: Yes, all Pokémon included in the game are available.
+
+###Q: Which Pokémon are in Wonder Trade?
+A: Every Pokémon that isn't legendary can appear in Wonder Trade, but it varies with the level of the Pokémon you put in.
+
+###Q: How do you get Dive?
+A: Dive is not available because the functionality hasn't been added yet.
+
+###Q: Where is the Move Deleter?
+A: The house between Fuchsia City's Gym and Pokémon Center.
+
+###Q: Where is the Move Relearner?
+A: Same house as the Move Deleter.
+
+###Q: Where do I find Shiny Pokémon?
+A: There are no event shinies, but all Pokémon have the same chance to be shiny as in Gen 2. Also, breeding at the Daycare is slightly more likely, due to the Day Care Man's Ditto being shiny.
+
+###Q: Why does this move claim it wasn't super effective?
+A: That message was broken in Gen 1, and I haven't fixed it yet. Damage should still work correctly, though.
+
+###Q: Is Fairy type in this?
+A: Yes, Dark Steel and Fairy are all in, and type strengths/weaknesses match Gen 6.
+
+###Q: Can I go to Johto?
+A: There is only Kanto for now.
+
+###Q: Will you add so-and-so feature?
+A: Maybe!
 
 
 
