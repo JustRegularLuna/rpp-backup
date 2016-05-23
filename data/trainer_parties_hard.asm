@@ -916,7 +916,7 @@ BikerData: ; COMPLETED
 	db "JOEL@",54,MUK,MAGCARGO,$FF ; Route 15 5
 	db "KYLE@",52,MUK,WEEZING,$FF ; Route 16 1
 	db "BILLY@",53,DITTO,$FF ; Route 16 4b
-	db "ALEX@",52,MUK,MUK, ; Route 16 5
+	db "ALEX@",52,MUK,MUK,$FF ; Route 16 5
 	db "ISAAC@",53,WEEZING,WEEZING,$FF ; Cyclingroad 1
 	db "JACOB@",53,MUK,$FF ; Cyclingroad 2
 	db "WESLEY@",53,ELECTRODE,MAGNETON,$FF ; Cyclingroad 3
