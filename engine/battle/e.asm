@@ -1263,6 +1263,8 @@ FullHealOrPotionAI:
 	jp AIUsePotion
 
 FullHealAI: ; 3a614 (e:6614)
+	cp $40
+	ret nc
 ; if his active monster has a status condition, use a full heal
 	ld a,[wEnemyMonStatus]
 	and a
