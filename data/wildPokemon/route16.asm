@@ -1,4 +1,22 @@
 Route16Mons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $19
+	db 42,SPEAROW
+	db 42,DODUO
+	db 43,RATICATE
+	db 44,DODUO
+	db 44,GRIMER
+	db 46,DODUO
+	db 43,MURKROW
+	db 44,MURKROW
+	db 45,SLUGMA
+	db 46,SLUGMA
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $19
 	db 22,SPEAROW
@@ -14,4 +32,4 @@ Route16Mons:
 
 ; Water Mons
 	db $00
-
+ENDC

@@ -1,4 +1,32 @@
 Route6Mons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0F
+	db 18,ODDISH
+	db 18,BELLSPROUT
+	db 15,PIDGEY
+	db 20,PIDGEOTTO
+	db 17,MEOWTH
+	db 19,MEOWTH
+	db 21,MANKEY
+	db 17,MANKEY
+	db 19,ABRA
+	db 21,DROWZEE
+
+; Water Mons
+	db $03
+	db 45,PSYDUCK
+	db 45,PSYDUCK
+	db 45,GOLDUCK
+	db 45,GOLDUCK
+	db 45,SLOWPOKE
+	db 55,SLOWPOKE
+	db 55,SLOWBRO
+	db 55,SLOWBRO
+	db 55,SLOWKING
+	db 60,SLOWKING
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0F
 	db 13,ODDISH
@@ -24,5 +52,4 @@ Route6Mons:
 	db 15,SLOWPOKE
 	db 15,GOLDUCK
 	db 20,GOLDUCK
-
-
+ENDC

@@ -1,4 +1,22 @@
 TowerMons6:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0F
+	db 31,GASTLY
+	db 32,GASTLY
+	db 33,GASTLY
+	db 34,GASTLY
+	db 30,MISDREAVUS
+	db 29,MISDREAVUS
+	db 34,CUBONE
+	db 32,CUBONE
+	db 36,HAUNTER
+	db 38,HAUNTER
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0F
 	db 21,GASTLY
@@ -14,4 +32,4 @@ TowerMons6:
 
 ; Water Mons
 	db $00
-
+ENDC

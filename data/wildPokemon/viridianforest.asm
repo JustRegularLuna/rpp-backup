@@ -1,4 +1,22 @@
 ForestMons:
+IF DEF(_BLUE) ; Diffuclt Rom
+; Grass Mons
+	db $19
+	db 6,WEEDLE
+	db 6,CATERPIE
+	db 5,WEEDLE
+	db 6,CATERPIE
+	db 8,KAKUNA
+	db 8,METAPOD
+	db 8,KAKUNA
+	db 8,METAPOD
+	db 6,PIKACHU
+	db 8,PIKACHU
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $19
 	db 4,WEEDLE
@@ -14,4 +32,4 @@ ForestMons:
 
 ; Water Mons
 	db $00
-
+ENDC

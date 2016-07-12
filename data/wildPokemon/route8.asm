@@ -1,4 +1,22 @@
 Route8Mons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0F
+	db 28,ABRA
+	db 28,KADABRA
+	db 27,PIDGEOTTO
+	db 26,MANKEY
+	db 30,PERSIAN
+	db 30,PERSIAN
+	db 27,GROWLITHE
+	db 27,VULPIX
+	db 27,HOUNDOUR
+	db 28,LICKITUNG
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0F
 	db 18,ABRA
@@ -14,4 +32,4 @@ Route8Mons:
 
 ; Water Mons
 	db $00
-
+ENDC

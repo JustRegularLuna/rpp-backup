@@ -1,4 +1,22 @@
 MoonMonsB2:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0A
+	db 11,ZUBAT
+	db 11,GEODUDE
+	db 12,ZUBAT
+	db 12,GEODUDE
+	db 13,SANDSHREW
+	db 12,PARAS
+	db 14,PARAS
+	db 12,ONIX
+	db 14,CLEFAIRY
+	db 14,CLEFAIRY
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0A
 	db 9,ZUBAT
@@ -14,4 +32,4 @@ MoonMonsB2:
 
 ; Water Mons
 	db $00
-
+ENDC

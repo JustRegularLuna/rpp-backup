@@ -1,4 +1,22 @@
 MansionMons2:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0A
+	db 47,GROWLITHE
+	db 47,VULPIX
+	db 48,KOFFING
+	db 46,PONYTA
+	db 47,KOFFING
+	db 50,NINETALES
+	db 47,GRIMER
+	db 48,MUK
+	db 49,WEEZING
+	db 50,MAGMAR
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0A
 	db 32,GROWLITHE
@@ -14,4 +32,4 @@ MansionMons2:
 
 ; Water Mons
 	db $00
-
+ENDC

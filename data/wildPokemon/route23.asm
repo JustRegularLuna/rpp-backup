@@ -1,4 +1,32 @@
 Route23Mons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0A
+	db 56,EKANS
+	db 53,DITTO
+	db 56,SPEAROW
+	db 58,ARBOK
+	db 58,DITTO
+	db 58,FEAROW
+	db 51,ARBOK
+	db 53,DITTO
+	db 51,SANDSLASH
+	db 53,FEAROW
+	
+; Water Mons
+	db $05
+	db 50,GOLDUCK
+	db 55,GOLDUCK
+	db 50,GOLDUCK
+	db 50,SLOWBRO
+	db 55,SLOWBRO
+	db 50,SLOWBRO
+	db 55,GOLDUCK
+	db 55,SLOWKING
+	db 50,GOLDUCK
+	db 50,SLOWKING
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0A
 	db 26,EKANS
@@ -24,4 +52,4 @@ Route23Mons:
 	db 35,SLOWBRO
 	db 40,GOLDUCK
 	db 40,SLOWBRO
-
+ENDC

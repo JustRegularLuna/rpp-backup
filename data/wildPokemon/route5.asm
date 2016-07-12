@@ -1,4 +1,22 @@
 Route5Mons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0F
+	db 17,PIDGEY
+	db 18,ODDISH
+	db 18,BELLSPROUT
+	db 20,PIDGEOTTO
+	db 15,MEOWTH
+	db 17,MEOWTH
+	db 20,MANKEY
+	db 20,ABRA
+	db 20,BUTTERFREE
+	db 20,BEEDRILL
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0F
 	db 12,PIDGEY
@@ -14,4 +32,4 @@ Route5Mons:
 
 ; Water Mons
 	db $00
-
+ENDC

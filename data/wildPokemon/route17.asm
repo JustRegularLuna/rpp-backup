@@ -1,4 +1,22 @@
 Route17Mons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $19
+	db 46,DODUO
+	db 47,FEAROW
+	db 47,DODUO
+	db 48,GRIMER
+	db 48,PONYTA
+	db 50,RAPIDASH
+	db 49,SLUGMA
+	db 48,SLUGMA
+	db 42,MUK
+	db 42,DODRIO
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $19
 	db 26,DODUO
@@ -14,4 +32,4 @@ Route17Mons:
 
 ; Water Mons
 	db $00
-
+ENDC

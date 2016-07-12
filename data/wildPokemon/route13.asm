@@ -1,4 +1,32 @@
 Route13Mons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $14
+	db 44,GLOOM
+	db 45,WEEPINBELL
+	db 44,VENONAT
+	db 42,GLOOM
+	db 46,VENONAT
+	db 46,WEEPINBELL
+	db 45,DITTO
+	db 48,GLOOM
+	db 50,FARFETCH_D
+	db 51,BELLOSSOM
+
+; Water Mons
+	db $03
+	db 45,SLOWPOKE
+	db 45,SLOWPOKE
+	db 45,SLOWPOKE
+	db 45,HORSEA
+	db 45,HORSEA
+	db 55,SEADRA
+	db 55,SEADRA
+	db 55,SHELLDER
+	db 55,SLOWBRO
+	db 50,SLOWBRO
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $14
 	db 24,ODDISH
@@ -24,4 +52,4 @@ Route13Mons:
 	db 15,SHELLDER
 	db 15,SLOWBRO
 	db 20,SLOWBRO
-
+ENDC

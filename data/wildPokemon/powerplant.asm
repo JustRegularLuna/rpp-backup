@@ -1,4 +1,22 @@
 PowerPlantMons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0A
+	db 41,VOLTORB
+	db 41,MAGNEMITE
+	db 40,PIKACHU
+	db 44,RAICHU
+	db 43,ELECTRODE
+	db 52,MAGNETON
+	db 52,ELECTABUZZ
+	db 55,ELECTABUZZ
+	db 56,ELECTIVIRE
+	db 56,MAGNEZONE
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0A
 	db 21,VOLTORB
@@ -14,3 +32,4 @@ PowerPlantMons:
 
 ; Water Mons
 	db $00
+ENDC

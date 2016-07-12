@@ -1,4 +1,32 @@
 ZoneMonsCenter:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $1E
+	db 32,RHYHORN
+	db 35,RHYHORN
+	db 32,EXEGGCUTE
+	db 34,EXEGGCUTE
+	db 31,NIDORINO
+	db 35,NIDORINA
+	db 31,HERACROSS
+	db 30,PINSIR
+	db 33,SCYTHER
+	db 33,CHANSEY
+
+; Water Mons
+	db $03
+	db 34,PSYDUCK
+	db 36,PSYDUCK
+	db 32,SLOWPOKE
+	db 35,SLOWPOKE
+	db 33,GOLDUCK
+	db 33,SLOWBRO
+	db 34,STARMIE
+	db 35,GYARADOS
+	db 35,SLOWKING
+	db 38,DRATINI
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $1E
 	db 22,RHYHORN
@@ -24,4 +52,4 @@ ZoneMonsCenter:
 	db 25,GYARADOS
 	db 25,SLOWKING
 	db 28,DRATINI
-
+ENDC

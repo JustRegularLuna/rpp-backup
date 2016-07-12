@@ -1,4 +1,22 @@
 IslandMonsB4:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $0A
+	db 46,GOLBAT
+	db 46,ZUBAT
+	db 40,KRABBY
+	db 42,KINGLER
+	db 48,SEEL
+	db 42,SEEL
+	db 47,GOLBAT
+	db 45,ZUBAT
+	db 40,DEWGONG
+	db 44,DEWGONG
+
+; Water Mons
+	db $00
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $0A
 	db 36,GOLBAT
@@ -14,4 +32,4 @@ IslandMonsB4:
 
 ; Water Mons
 	db $00
-
+ENDC

@@ -1,4 +1,32 @@
 Route24Mons:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $19
+	db 15,ODDISH
+	db 15,BELLSPROUT
+	db 16,PIDGEY
+	db 17,ODDISH
+	db 17,BELLSPROUT
+	db 18,PIDGEY
+	db 16,VENONAT
+	db 19,MEOWTH
+	db 20,ABRA
+	db 20,ABRA
+
+; Water Mons
+	db $03
+	db 42,GOLDEEN
+	db 42,GOLDEEN
+	db 43,SEAKING
+	db 44,SEAKING
+	db 44,STARYU
+	db 45,STARYU
+	db 53,STARMIE
+	db 56,STARMIE
+	db 57,SEAKING
+	db 57,SEAKING
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $19
 	db 12,ODDISH
@@ -24,4 +52,4 @@ Route24Mons:
 	db 16,STARYU
 	db 17,SEAKING
 	db 17,SEAKING
-
+ENDC

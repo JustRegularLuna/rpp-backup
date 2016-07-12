@@ -1,4 +1,33 @@
 DungeonMonsB1:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $19
+	db 64,CROBAT
+	db 69,CROBAT
+	db 65,GRAVELER
+	db 62,RHYHORN
+	db 62,RHYDON
+	db 60,DITTO
+	db 66,CHANSEY
+	db 65,DITTO
+	db 65,LICKITUNG
+	db 65,LICKILICKY
+
+; Water Mons
+	db $03
+	db 60,SLOWBRO
+	db 65,SLOWBRO
+	db 65,CLOYSTER
+	db 65,CLOYSTER
+	db 65,CLOYSTER
+	db 62,CLOYSTER
+	db 64,DRAGONAIR
+	db 64,DRAGONAIR
+	db 65,GYARADOS
+	db 66,GYARADOS
+
+ELSE ; Normal Rom
+; Grass Mons
 	db $19
 	db 54,CROBAT
 	db 59,CROBAT
@@ -23,4 +52,4 @@ DungeonMonsB1:
 	db 54,DRAGONAIR
 	db 55,GYARADOS
 	db 60,GYARADOS
-
+ENDC

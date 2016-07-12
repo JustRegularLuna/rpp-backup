@@ -1,4 +1,32 @@
 ZoneMons1:
+IF DEF(_BLUE) ; Difficult Rom
+; Grass Mons
+	db $1E
+	db 34,NIDORINO
+	db 36,DODUO
+	db 32,PARAS
+	db 35,EXEGGCUTE
+	db 43,HERACROSS
+	db 33,EXEGGCUTE
+	db 34,PINSIR
+	db 35,PARASECT
+	db 35,KANGASKHAN
+	db 38,SCYTHER
+
+; Water Mons
+	db $03
+	db 34,PSYDUCK
+	db 36,PSYDUCK
+	db 32,SLOWPOKE
+	db 35,SLOWPOKE
+	db 43,GOLDUCK
+	db 33,SLOWBRO
+	db 34,STARMIE
+	db 35,GYARADOS
+	db 35,SLOWKING
+	db 38,DRATINI
+
+ELSE ; Normal Rom
 ; Grass Mons
 	db $1E
 	db 24,NIDORAN_M
@@ -24,4 +52,4 @@ ZoneMons1:
 	db 25,GYARADOS
 	db 25,SLOWKING
 	db 28,DRATINI
-
+ENDC
