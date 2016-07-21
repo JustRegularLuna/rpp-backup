@@ -1,4 +1,4 @@
-ShowPokedexMenu: ; 40000 (10:4000)
+ShowPokedexMenu:
 	call GBPalWhiteOut
 	call ClearScreen
 	call UpdateSprites
@@ -57,7 +57,7 @@ ShowPokedexMenu: ; 40000 (10:4000)
 ; 00: showed pokemon data or area
 ; 01: the player chose Quit
 ; 02: the pokemon has not been seen yet or the player pressed the B button
-HandlePokedexSideMenu: ; 4006d (10:406d)
+HandlePokedexSideMenu:
 	call PlaceUnfilledArrowMenuCursor
 	ld a,[wCurrentMenuItem]
 	push af
@@ -125,6 +125,7 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	call DrawTileLine ; cover up the menu cursor in the pokemon list
 	pop bc
 	ret
+
 .buttonBPressed
 	push bc
 	coord hl, 15, 10
@@ -133,16 +134,19 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 	call DrawTileLine ; cover up the menu cursor in the side menu
 	pop bc
 	jr .exitSideMenu
+
 .choseData
 	call ShowPokedexDataInternal
 	ld b,0
 	jr .exitSideMenu
+
 ; play pokemon cry
 .choseCry
 	ld a,[wd11e]
 	call GetCryData
 	call PlaySound
 	jr .handleMenuInput
+
 .choseArea
 	predef LoadTownMap_Nest ; display pokemon areas
 	ld b,0
@@ -150,12 +154,12 @@ HandlePokedexSideMenu: ; 4006d (10:406d)
 
 ; handles the list of pokemon on the left of the pokedex screen
 ; sets carry flag if player presses A, unsets carry flag if player presses B
-HandlePokedexListMenu: ; 40111 (10:4111)
+HandlePokedexListMenu:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 ; draw the horizontal line separating the seen and owned amounts from the menu
 	coord hl, 15, 8
-	ld a,$7a ; horizontal line tile
+	ld a,"─"
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
@@ -206,6 +210,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	dec c
 	jr nz,.maxSeenPokemonInnerLoop
 	jr .maxSeenPokemonLoop
+
 .storeMaxSeenPokemon
 	ld a,b
 	ld [wDexMaxSeenMon],a
@@ -267,7 +272,7 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	inc hl
 	call PlaceString
 	pop hl
-	ld bc,2 * 20
+	ld bc,2 * SCREEN_WIDTH
 	add hl,bc
 	pop de
 	pop af
@@ -342,9 +347,9 @@ HandlePokedexListMenu: ; 40111 (10:4111)
 	and a
 	ret
 
-DrawPokedexVerticalLine: ; 4028e (10:428e)
+DrawPokedexVerticalLine:
 	ld c,9 ; height of line
-	ld de,20 ; width of screen
+	ld de,SCREEN_WIDTH
 	ld a,$71 ; vertical line tile
 .loop
 	ld [hl],a
@@ -354,29 +359,26 @@ DrawPokedexVerticalLine: ; 4028e (10:428e)
 	jr nz,.loop
 	ret
 
-PokedexSeenText: ; 4029d (10:429d)
+PokedexSeenText:
 	db "SEEN@"
 
-PokedexOwnText: ; 402a2 (10:42a2)
+PokedexOwnText:
 	db "OWN@"
 
-PokedexContentsText: ; 402a6 (10:42a6)
+PokedexContentsText:
 	db "CONTENTS@"
 
-PokedexMenuItemsText: ; 402af (10:42af)
+PokedexMenuItemsText:
 	db   "DATA"
 	next "CRY"
 	next "AREA"
-IF DEF(_YELLOW)
-	next "PRNT"
-ENDC
 	next "QUIT@"
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
 ; [wd11e] = pokedex number
 ; hl = address of bit field
-IsPokemonBitSet: ; 402c2 (10:42c2)
+IsPokemonBitSet:
 	ld a,[wd11e]
 	dec a
 	ld c,a
@@ -387,14 +389,14 @@ IsPokemonBitSet: ; 402c2 (10:42c2)
 	ret
 
 ; function to display pokedex data from outside the pokedex
-ShowPokedexData: ; 402d1 (10:42d1)
+ShowPokedexData:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
 	callab LoadPokedexTilePatterns ; load pokedex tiles
 
 ; function to display pokedex data from inside the pokedex
-ShowPokedexDataInternal: ; 402e2 (10:42e2)
+ShowPokedexDataInternal:
 	ld hl,wd72c
 	set 1,[hl]
 	ld a,$33 ; 3/7 volume
@@ -412,20 +414,25 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	push af
 	xor a
 	ld [hTilesetType],a
+
 	coord hl, 0, 0
 	ld de,1
 	lb bc, $64, SCREEN_WIDTH
 	call DrawTileLine ; draw top border
+
 	coord hl, 0, 17
 	ld b, $6f
 	call DrawTileLine ; draw bottom border
+
 	coord hl, 0, 1
 	ld de,20
 	lb bc, $66, $10
 	call DrawTileLine ; draw left border
+
 	coord hl, 19, 1
 	ld b,$67
 	call DrawTileLine ; draw right border
+
 	ld a,$63 ; upper left corner tile
 	Coorda 0, 0
 	ld a,$65 ; upper right corner tile
@@ -434,15 +441,19 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	Coorda 0, 17
 	ld a,$6e ; lower right corner tile
 	Coorda 19, 17
+
 	coord hl, 0, 9
 	ld de,PokedexDataDividerLine
 	call PlaceString ; draw horizontal divider line
+
 	coord hl, 9, 6
 	ld de,HeightWeightText
 	call PlaceString
+
 	call GetMonName
 	coord hl, 9, 2
 	call PlaceString
+
 	ld hl,PokedexEntryPointers
 	ld a,[wd11e]
 	dec a
@@ -453,22 +464,26 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld a,[hli]
 	ld e,a
 	ld d,[hl] ; de = address of pokedex entry
+
 	coord hl, 9, 4
 	call PlaceString ; print species name
+
 	ld h,b
 	ld l,c
 	push de
 	ld a,[wd11e]
 	push af
 	call IndexToPokedex
+
 	coord hl, 2, 8
 	ld a, "№"
 	ld [hli],a
-	ld a,$f2
+	ld a,"⠄"
 	ld [hli],a
 	ld de,wd11e
 	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; print pokedex number
+
 	ld hl,wPokedexOwned
 	call IsPokemonBitSet
 	pop af
@@ -476,10 +491,12 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld a,[wcf91]
 	ld [wd0b5],a
 	pop de
+
 	push af
 	push bc
 	push de
 	push hl
+
 	call Delay3
 	call GBPalNormal
 	call GetMonHeader ; load pokemon picture location
@@ -487,10 +504,12 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	call LoadFlippedFrontSpriteByMonIndex ; draw pokemon picture
 	ld a,[wcf91]
 	call PlayCry ; play pokemon cry
+
 	pop hl
 	pop de
 	pop bc
 	pop af
+
 	ld a,c
 	and a
 	jp z,.waitForButtonPress ; if the pokemon has not been owned, don't print the height, weight, or description
@@ -539,7 +558,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	inc hl
 	ld a,[hli]
 	ld [hld],a ; make space for the decimal point by moving the last digit forward one tile
-	ld [hl],$f2 ; decimal point tile
+	ld [hl],"⠄" ; decimal point tile
 	pop af
 	ld [hDexWeight + 1],a ; restore original value of [hDexWeight + 1]
 	pop af
@@ -570,20 +589,21 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ld [rNR50],a
 	ret
 
-HeightWeightText: ; 40448 (10:4448)
-	db "HT  ?",$60,"??",$61,$4E,"WT   ???lb@"
+HeightWeightText:
+	db   "HT  ?",$60,"??",$61
+	next "WT   ???lb@"
 
 ; XXX does anything point to this?
-PokeText: ; 4045d (10:445d)
+PokeText:
 	db "#@"
 
 ; horizontal line that divides the pokedex text description from the rest of the data
-PokedexDataDividerLine: ; 4045f (10:445f)
+PokedexDataDividerLine:
 	db $68,$69,$6B,$69,$6B
 	db $69,$6B,$69,$6B,$6B
 	db $6B,$6B,$69,$6B,$69
 	db $6B,$69,$6B,$69,$6A
-	db $50
+	db "@"
 
 ; draws a line of tiles
 ; INPUT:
@@ -591,7 +611,7 @@ PokedexDataDividerLine: ; 4045f (10:445f)
 ; c = number of tile ID's to write
 ; de = amount to destination address after each tile (1 for horizontal, 20 for vertical)
 ; hl = destination address
-DrawTileLine: ; 40474 (10:4474)
+DrawTileLine:
 	push bc
 	push de
 .loop
@@ -605,7 +625,7 @@ DrawTileLine: ; 40474 (10:4474)
 
 INCLUDE "data/pokedex_entries.asm"
 
-PokedexToIndex: ; 40ff9 (10:4ff9)
+PokedexToIndex:
 	; converts the Pokédex number at wd11e to an index
 	push bc
 	push hl
@@ -626,7 +646,7 @@ PokedexToIndex: ; 40ff9 (10:4ff9)
 	pop bc
 	ret
 
-IndexToPokedex: ; 41010 (10:5010)
+IndexToPokedex:
 	; converts the indexédex number at wd11e to a Pokédex number
 	push bc
 	push hl

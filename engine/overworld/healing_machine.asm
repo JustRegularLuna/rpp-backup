@@ -1,6 +1,6 @@
 ; This function does the flashing pokeballs when healing pokemon
 ; HAXed to look better in color
-AnimateHealingMachine: ; 70433 (1c:4433)
+AnimateHealingMachine:
 	ld de, PokeCenterFlashingMonitorAndHealBall
 	ld hl, vChars0 + $7c0
 	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), $03 ; loads one too many tiles
@@ -66,12 +66,12 @@ AnimateHealingMachine: ; 70433 (1c:4433)
 	ld [hl], a
 	jp UpdateSprites
 
-PokeCenterFlashingMonitorAndHealBall: ; 704b7 (1c:44b7)
+PokeCenterFlashingMonitorAndHealBall:
 	INCBIN "gfx/pokecenter_ball.2bpp"
 
 ; Pokeball sprites for the pokecenter
 ; HAXed to use palette 4
-PokeCenterOAMData: ; 704d7 (1c:44d7)
+PokeCenterOAMData:
 	db $24,$34,$7C,$14 ; heal machine monitor
 	db $2B,$30,$7D,$14 ; pokeballs 1-6
 	db $2B,$38,$7D,$34
@@ -81,7 +81,7 @@ PokeCenterOAMData: ; 704d7 (1c:44d7)
 	db $35,$38,$7D,$34
 
 ; d = value to xor with palette
-FlashSprite8Times: ; 704f3 (1c:44f3)
+FlashSprite8Times:
 	ld b, 8
 .loop
 	ld a, [rOBP1]
@@ -93,7 +93,7 @@ FlashSprite8Times: ; 704f3 (1c:44f3)
 	jr nz, .loop
 	ret
 
-CopyHealingMachineOAM: ; 70503 (1c:4503)
+CopyHealingMachineOAM:
 ; copy one OAM entry and advance the pointers
 	ld a, [de]
 	inc de

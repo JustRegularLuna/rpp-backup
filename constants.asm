@@ -1,6 +1,7 @@
 GEN_2_GRAPHICS	EQU 1
 
 INCLUDE "macros.asm"
+INCLUDE "charmap.asm"
 
 INCLUDE "hram.asm"
 INCLUDE "vram.asm"
@@ -23,7 +24,6 @@ INCLUDE "constants/palette_constants.asm"
 INCLUDE "constants/evolution_constants.asm"
 INCLUDE "constants/list_constants.asm"
 INCLUDE "constants/map_constants.asm"
-INCLUDE "constants/map_dimensions.asm"
 INCLUDE "constants/connection_constants.asm"
 INCLUDE "constants/hide_show_constants.asm"
 INCLUDE "constants/credits_constants.asm"
@@ -32,4 +32,5 @@ INCLUDE "constants/tilesets.asm"
 INCLUDE "constants/starter_mons.asm"
 INCLUDE "constants/event_constants.asm"
 INCLUDE "constants/event_macros.asm"
+INCLUDE "constants/text_constants.asm"
 INCLUDE "color/wram.asm"

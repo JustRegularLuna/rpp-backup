@@ -1,4 +1,4 @@
-MonsterPalettes: ; 725c8 (1c:65c8)
+MonsterPalettes:
 IF GEN_2_GRAPHICS
 	db PAL_MEWMON    ; MISSINGNO
 	db PAL_BULBASAUR

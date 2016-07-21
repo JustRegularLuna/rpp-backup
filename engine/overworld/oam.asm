@@ -6,7 +6,7 @@ PrepareOAMData:
 	dec a
 	jr z, .updateEnabled
 
-	cp 0 - 1
+	cp -1
 	ret nz
 	ld [wUpdateSpritesEnabled], a
 	jp HideSprites
@@ -164,7 +164,7 @@ PrepareOAMData:
 	add hl, de
 	jr .clear
 
-GetSpriteScreenXY: ; 4bd1 (1:4bd1)
+GetSpriteScreenXY:
 	inc e
 	inc e
 	ld a, [de] ; c1x4

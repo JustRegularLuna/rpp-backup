@@ -1,9 +1,9 @@
-HPBarLength: ; f9dc (3:79dc)
+HPBarLength:
 	call GetPredefRegisters
 
 ; calculates bc * 48 / de, the number of pixels the HP bar has
 ; the result is always at least 1
-GetHPBarLength: ; f9df (3:79df)
+GetHPBarLength:
 	push hl
 	xor a
 	ld hl, H_MULTIPLICAND
@@ -45,7 +45,7 @@ GetHPBarLength: ; f9df (3:79df)
 	ret
 
 ; predef $48
-UpdateHPBar: ; fa1d (3:7a1d)
+UpdateHPBar:
 UpdateHPBar2:
 	push hl
 	ld hl, wHPBarOldHP
@@ -87,6 +87,7 @@ UpdateHPBar2:
 	call UpdateHPBar_CompareNewHPToOldHP
 	jr z, .animateHPBarDone
 	jr nc, .HPIncrease
+; HP decrease
 	dec bc        ; subtract 1 HP
 	ld a, c
 	ld [wHPBarNewHP], a
@@ -95,7 +96,7 @@ UpdateHPBar2:
 	call UpdateHPBar_CalcOldNewHPBarPixels
 	ld a, e
 	sub d         ; calc pixel difference
-	jr .asm_fa7e
+	jr .ok
 .HPIncrease
 	inc bc        ; add 1 HP
 	ld a, c
@@ -105,7 +106,7 @@ UpdateHPBar2:
 	call UpdateHPBar_CalcOldNewHPBarPixels
 	ld a, d
 	sub e         ; calc pixel difference
-.asm_fa7e
+.ok
 	call UpdateHPBar_PrintHPNumber
 	and a
 	jr z, .noPixelDifference
@@ -136,7 +137,7 @@ UpdateHPBar2:
 ; animates the HP bar going up or down for (a) ticks (two waiting frames each)
 ; stops prematurely if bar is filled up
 ; e: current health (in pixels) to start with
-UpdateHPBar_AnimateHPBar: ; fab1 (3:7ab1)
+UpdateHPBar_AnimateHPBar:
 	push hl
 .barAnimationLoop
 	push af
@@ -165,7 +166,7 @@ UpdateHPBar_AnimateHPBar: ; fab1 (3:7ab1)
 	ORG $03, $7ad7
 
 ; calcs HP difference between bc and de (into de)
-UpdateHPBar_CalcHPDifference: ; fad7 (3:7ad7)
+UpdateHPBar_CalcHPDifference:
 	ld a, d
 	sub b
 	jr c, .oldHPGreater
@@ -194,7 +195,7 @@ UpdateHPBar_CalcHPDifference: ; fad7 (3:7ad7)
 	ld de, $0
 	ret
 
-UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
+UpdateHPBar_PrintHPNumber:
 	push af
 	push de
 	ld a, [wHPBarType]
@@ -234,7 +235,7 @@ UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 ; calcs number of HP bar pixels for old and new HP value
 ; d: new pixels
 ; e: old pixels
-UpdateHPBar_CalcOldNewHPBarPixels: ; fb30 (3:7b30)
+UpdateHPBar_CalcOldNewHPBarPixels:
 	push hl
 	ld hl, wHPBarMaxHP
 	ld a, [hli]  ; max HP into de

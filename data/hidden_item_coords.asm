@@ -1,4 +1,4 @@
-HiddenItemCoords: ; 766b8 (1d:66b8)
+HiddenItemCoords:
 ; map ID, then coords
 	db VIRIDIAN_FOREST,$12,$01
 	db VIRIDIAN_FOREST,$2a,$10
@@ -34,7 +34,7 @@ HiddenItemCoords: ; 766b8 (1d:66b8)
 	db ROUTE_23,$5a,$08
 	db VICTORY_ROAD_2,$02,$05
 	db VICTORY_ROAD_2,$07,$1a
-	db $6f,$0b,$0e
+	db UNUSED_MAP_6F,$0b,$0e
 	db VIRIDIAN_CITY,$04,$0e
 	db ROUTE_11,$05,$30
 	db ROUTE_12,$3f,$02

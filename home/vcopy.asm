@@ -1,7 +1,7 @@
 ; this function seems to be used only once
 ; it store the address of a row and column of the VRAM background map in hl
 ; INPUT: h - row, l - column, b - high byte of background tile map address in VRAM
-GetRowColAddressBgMap:: ; 1cdd (0:1cdd)
+GetRowColAddressBgMap::
 	xor a
 	srl h
 	rr a
@@ -18,7 +18,7 @@ GetRowColAddressBgMap:: ; 1cdd (0:1cdd)
 
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
-ClearBgMap:: ; 1cf0 (0:1cf0)
+ClearBgMap::
 	ld a," "
 	jr .next
 	ld a,l
@@ -33,7 +33,6 @@ ClearBgMap:: ; 1cf0 (0:1cf0)
 	jr nz,.loop
 	ret
 
-RedrawRowOrColumn:: ; 1d01 (0:1d01)
 ; This function redraws a BG row of height 2 or a BG column of width 2.
 ; One of its main uses is redrawing the row or column that will be exposed upon
 ; scrolling the BG when the player takes a step. Redrawing only the exposed
@@ -41,6 +40,7 @@ RedrawRowOrColumn:: ; 1d01 (0:1d01)
 ; However, this function is also called repeatedly to redraw the whole screen
 ; when necessary. It is also used in trade animation and elevator code.
 ; This function has beex HAXed to call other functions, which will also refresh palettes.
+RedrawRowOrColumn::
 	ld a,[hRedrawRowOrColumnMode]
 	and a
 	ret z
@@ -64,7 +64,7 @@ SECTION "AutoBgMapTransfer", ROM0[$1d57]
 ; on when talking to sprites, battling, using menus, etc. This is because
 ; the above function, RedrawRowOrColumn, is used when walking to
 ; improve efficiency.
-AutoBgMapTransfer: ; 1d57 (0:1d57)	; HAXED function
+AutoBgMapTransfer: ; HAXED function
 	ld a,BANK(RefreshWindow)
 	ld [MBC1RomBank],a
 	call RefreshWindow
@@ -108,7 +108,7 @@ JpPoint:
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
 ; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
-VBlankCopyBgMap:: ; 1de1 (0:1de1)
+VBlankCopyBgMap::
 	ld a,[H_VBCOPYBGSRC] ; doubles as enabling byte
 	and a
 	ret z

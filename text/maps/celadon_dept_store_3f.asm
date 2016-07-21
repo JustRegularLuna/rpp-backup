@@ -8,7 +8,7 @@ _TM18PreReceiveText::
 	prompt
 
 _ReceivedTM18Text::
-	text $52, " received"
+	text "<PLAYER> received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
@@ -96,4 +96,3 @@ _CeladonMart3Text15::
 	text "Red and Blue!"
 	line "Both are #MON!"
 	done
-

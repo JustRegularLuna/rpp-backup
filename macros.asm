@@ -1,16 +1,4 @@
 
-text   EQUS "db $00," ; Start writing text.
-next   EQUS "db $4e," ; Move a line down.
-line   EQUS "db $4f," ; Start writing at the bottom line.
-para   EQUS "db $51," ; Start a new paragraph.
-cont   EQUS "db $55," ; Scroll to the next line.
-done   EQUS "db $57"  ; End a text box.
-prompt EQUS "db $58"  ; Prompt the player to end a text box (initiating some other event).
-
-page   EQUS "db $49,"     ; Start a new Pokedex page.
-dex    EQUS "db $5f, $50" ; End a Pokedex entry.
-
-
 percent EQUS "* $ff / 100"
 
 lb: MACRO ; r, hi, lo
@@ -40,6 +28,8 @@ homecall: MACRO
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 	ENDM
+
+farcall EQUS "callba"
 
 callba: MACRO
 	ld b, BANK(\1)
@@ -79,29 +69,62 @@ bcd3: MACRO
 coins equs "bcd2"
 money equs "bcd3"
 
+validateCoords: MACRO
+	if \1 >= SCREEN_WIDTH
+		fail "x coord out of range"
+	endc
+	if \2 >= SCREEN_HEIGHT
+		fail "y coord out of range"
+	endc
+	endm
+
 ;\1 = r
 ;\2 = X
 ;\3 = Y
+;\4 = which tilemap (optional)
 coord: MACRO
-	ld \1, wTileMap + 20 * \3 + \2
+	validateCoords \2, \3
+if _NARG >= 4
+	ld \1, \4 + SCREEN_WIDTH * \3 + \2
+else
+	ld \1, wTileMap + SCREEN_WIDTH * \3 + \2
+endc
 	ENDM
 
 ;\1 = X
 ;\2 = Y
+;\3 = which tilemap (optional)
 aCoord: MACRO
-	ld a, [wTileMap + 20 * \2 + \1]
+	validateCoords \1, \2
+if _NARG >= 3
+	ld a, [\3 + SCREEN_WIDTH * \2 + \1]
+else
+	ld a, [wTileMap + SCREEN_WIDTH * \2 + \1]
+endc
 	ENDM
 
 ;\1 = X
 ;\2 = Y
+;\3 = which tilemap (optional)
 Coorda: MACRO
-	ld [wTileMap + 20 * \2 + \1], a
+	validateCoords \1, \2
+if _NARG >= 3
+	ld [\3 + SCREEN_WIDTH * \2 + \1], a
+else
+	ld [wTileMap + SCREEN_WIDTH * \2 + \1], a
+endc
 	ENDM
 
 ;\1 = X
 ;\2 = Y
+;\3 = which tilemap (optional)
 dwCoord: MACRO
-	dw wTileMap + 20 * \2 + \1
+	validateCoords \1, \2
+if _NARG >= 3
+	dw \3 + SCREEN_WIDTH * \2 + \1
+else
+	dw wTileMap + SCREEN_WIDTH * \2 + \1
+endc
 	ENDM
 
 ;\1 = r
@@ -132,7 +155,7 @@ EMAP: MACRO ; emap x-coordinate,y-coordinate,textpointer
 	; nybble: y-coordinate
 	; nybble: x-coordinate
 	; word  : pointer to map name
-	db (\1 + (\2 << 4))
+	dn \2, \1
 	dw \3
 	ENDM
 
@@ -144,7 +167,7 @@ IMAP: MACRO ; imap mapid_less_than,x-coordinate,y-coordinate,textpointer
 	; nybble: x-coordinate
 	; word  : pointer to map name
 	db \1 + 1
-	db \2 + \3 << 4
+	dn \3, \2
 	dw \4
 	ENDM
 
@@ -172,12 +195,61 @@ dbw: MACRO
 	dw \2
 	ENDM
 
+dba: MACRO
+	dbw BANK(\1), \1
+	ENDM
+
+dwb: MACRO
+	dw \1
+	db \2
+	ENDM
+
+dab: MACRO
+	dwb \1, BANK(\1)
+	ENDM
+
+dbbw: MACRO
+	db \1, \2
+	dw \3
+	ENDM
+
 ; data format macros
 RGB: MACRO
 	dw (\3 << 10 | \2 << 5 | \1)
 	ENDM
 
 ; text macros
+text   EQUS "db $00," ; Start writing text.
+next   EQUS "db $4e," ; Move a line down.
+line   EQUS "db $4f," ; Start writing at the bottom line.
+para   EQUS "db $51," ; Start a new paragraph.
+cont   EQUS "db $55," ; Scroll to the next line.
+done   EQUS "db $57"  ; End a text box.
+prompt EQUS "db $58"  ; Prompt the player to end a text box (initiating some other event).
+
+page   EQUS "db $49,"     ; Start a new Pokedex page.
+dex    EQUS "db $5f, $50" ; End a Pokedex entry.
+
+TX_RAM: MACRO
+; prints text to screen
+; \1: RAM address to read from
+	db $1
+	dw \1
+	ENDM
+
+TX_BCD: MACRO
+; \1: RAM address to read from
+; \2: number of bytes + print flags
+	db $2
+	dw \1
+	db \2
+	ENDM
+
+TX_LINE    EQUS "db $05"
+TX_BLINK   EQUS "db $06"
+;TX_SCROLL EQUS "db $07"
+TX_ASM     EQUS "db $08"
+
 TX_NUM: MACRO
 ; print a big-endian decimal number.
 ; \1: address to read from
@@ -188,31 +260,49 @@ TX_NUM: MACRO
 	db \2 << 4 | \3
 	ENDM
 
+TX_DELAY              EQUS "db $0a"
+TX_SFX_ITEM_1         EQUS "db $0b"
+TX_SFX_LEVEL_UP       EQUS "db $0b"
+;TX_ELLIPSES          EQUS "db $0c"
+TX_WAIT               EQUS "db $0d"
+;TX_SFX_DEX_RATING    EQUS "db $0e"
+TX_SFX_ITEM_2         EQUS "db $10"
+TX_SFX_KEY_ITEM       EQUS "db $11"
+TX_SFX_CAUGHT_MON     EQUS "db $12"
+TX_SFX_DEX_PAGE_ADDED EQUS "db $13"
+TX_CRY_NIDORINA       EQUS "db $14"
+TX_CRY_PIDGEOT        EQUS "db $15"
+;TX_CRY_DEWGONG       EQUS "db $16"
+
 TX_FAR: MACRO
 	db $17
 	dw \1
 	db BANK(\1)
 	ENDM
 
-; text engine command $1
-TX_RAM: MACRO
-; prints text to screen
-; \1: RAM address to read from
-	db $1
-	dw \1
+TX_VENDING_MACHINE         EQUS "db $f5"
+TX_CABLE_CLUB_RECEPTIONIST EQUS "db $f6"
+TX_PRIZE_VENDOR            EQUS "db $f7"
+TX_POKECENTER_PC           EQUS "db $f9"
+TX_PLAYERS_PC              EQUS "db $fc"
+TX_BILLS_PC                EQUS "db $fd"
+
+TX_MART: MACRO
+	db $FE, _NARG
+	rept _NARG
+	db \1
+	shift
+	endr
+	db $FF
 	ENDM
 
-TX_BCD: MACRO
-	db $2
-	dw \1
-	db \2
-	ENDM
-
-TX_ASM: MACRO
-	db $08
-	ENDM
+TX_POKECENTER_NURSE        EQUS "db $ff"
 
 ; Predef macro.
+predef_const: MACRO
+	const \1PredefID
+	ENDM
+
 add_predef: MACRO
 \1Predef::
 	db BANK(\1)
@@ -233,9 +323,16 @@ predef_jump: MACRO
 	jp Predef
 	ENDM
 
+tx_pre_const: MACRO
+	const \1_id
+	ENDM
 
 add_tx_pre: MACRO
 \1_id:: dw \1
+ENDM
+
+db_tx_pre: MACRO
+	db (\1_id - TextPredefs) / 2 + 1
 ENDM
 
 tx_pre_id: MACRO
@@ -290,6 +387,10 @@ object: MACRO
 	ENDC
 ENDM
 
+StopAllMusic: macro
+	ld a, $ff
+	call PlaySound
+	endm
 
 ;1_channel	EQU $00
 ;2_channels	EQU $40
@@ -655,9 +756,9 @@ ENDM
 tmlearn: MACRO
 x = 0
 	rept _NARG
-if \1 != 0
+IF \1 != 0
 x = x | (1 << ((\1 - 1) % 8))
-endc
+ENDC
 	shift
 	endr
 	db x

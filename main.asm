@@ -181,7 +181,7 @@ WaitingText:
 	db "Waiting...!@"
 
 
-_UpdateSprites: ; 4c34 (1:4c34)
+_UpdateSprites:
 	ld h, $c1
 	inc h
 	ld a, $e    ; wSpriteStateData2 + $0e
@@ -206,7 +206,7 @@ _UpdateSprites: ; 4c34 (1:4c34)
 	cp $e               ; test for overflow (back at $0e)
 	jr nz, .spriteLoop
 	ret
-.updateCurrentSprite ; 4c54 (1:4c54)
+.updateCurrentSprite
 	cp $1
 	jp nz, UpdateNonPlayerSprite
 	jp UpdatePlayerSprite
@@ -589,7 +589,7 @@ INCLUDE "engine/overworld/movement.asm"
 
 INCLUDE "engine/cable_club.asm"
 
-LoadTrainerInfoTextBoxTiles: ; 5ae6 (1:5ae6)
+LoadTrainerInfoTextBoxTiles:
 	ld de, TrainerInfoTextBoxTileGraphics
 	ld hl, vChars2 + $760
 	lb bc, BANK(TrainerInfoTextBoxTileGraphics), (TrainerInfoTextBoxTileGraphicsEnd - TrainerInfoTextBoxTileGraphics) / $10
@@ -599,7 +599,7 @@ INCLUDE "engine/menu/main_menu.asm"
 
 INCLUDE "engine/oak_speech.asm"
 
-SpecialWarpIn: ; 62ce (1:62ce)
+SpecialWarpIn:
 	call LoadSpecialWarpData
 	predef LoadTilesetHeader
 	ld hl,wd732
@@ -630,7 +630,7 @@ SpecialWarpIn: ; 62ce (1:62ce)
 	ret
 
 ; gets the map ID, tile block map view pointer, tileset, and coordinates
-LoadSpecialWarpData: ; 62ff (1:62ff)
+LoadSpecialWarpData:
 	ld a, [wd72d]
 	cp TRADE_CENTER
 	jr nz, .notTradeCenter
@@ -758,7 +758,7 @@ INCLUDE "data/special_warps.asm"
 ; while I was debugging the program."
 ; http://www.ign.com/articles/2000/02/09/abc-news-pokamon-chat-transcript
 
-SetIshiharaTeam: ; 64ca (1:64ca)
+SetIshiharaTeam:
 	ld de, IshiharaTeam
 .loop
 	ld a, [de]
@@ -772,7 +772,7 @@ SetIshiharaTeam: ; 64ca (1:64ca)
 	call AddPartyMon
 	jr .loop
 
-IshiharaTeam: ; 64df (1:64df)
+IshiharaTeam:
 	db EXEGGUTOR,90
 	db MEW,20
 	db JOLTEON,56
@@ -780,7 +780,7 @@ IshiharaTeam: ; 64df (1:64df)
 	db ARTICUNO,57
 	db $FF
 
-EmptyFunc: ; 64ea (1:64ea)
+EmptyFunc:
 	ret
 
 INCLUDE "engine/menu/naming_screen.asm"
@@ -789,7 +789,7 @@ INCLUDE "engine/oak_speech2.asm"
 
 ; subtracts the amount the player paid from their money
 ; sets carry flag if there is enough money and unsets carry flag if not
-SubtractAmountPaidFromMoney_: ; 6b21 (1:6b21)
+SubtractAmountPaidFromMoney_:
 	ld de,wPlayerMoney
 	ld hl,hMoney ; total price of items
 	ld c,3 ; length of money in bytes
@@ -805,7 +805,7 @@ SubtractAmountPaidFromMoney_: ; 6b21 (1:6b21)
 	and a
 	ret
 
-HandleItemListSwapping: ; 6b44 (1:6b44)
+HandleItemListSwapping:
 	ld a,[wListMenuID]
 	cp a,ITEMLISTMENU
 	jp nz,DisplayListMenuIDLoop ; only rearrange item list menus
@@ -992,7 +992,7 @@ SafariZoneRestHouses:
 	db -1
 
 ; function that performs initialization for DisplayTextID
-DisplayTextIDInit: ; 7096 (1:7096)
+DisplayTextIDInit:
 	xor a
 	ld [wListMenuID],a
 	ld a,[wAutoTextBoxDrawingControl]
@@ -1071,7 +1071,7 @@ DisplayTextIDInit: ; 7096 (1:7096)
 	ret
 
 ; function that displays the start menu
-DrawStartMenu: ; 710b (1:710b)
+DrawStartMenu:
 	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
 	coord hl, 10, 0
@@ -1131,28 +1131,28 @@ DrawStartMenu: ; 710b (1:710b)
 	res 6,[hl] ; turn pauses between printing letters back on
 	ret
 
-StartMenuPokedexText: ; 718f (1:718f)
+StartMenuPokedexText:
 	db "POKéDEX@"
 
-StartMenuPokemonText: ; 7197 (1:7197)
+StartMenuPokemonText:
 	db "POKéMON@"
 
-StartMenuItemText: ; 719f (1:719f)
+StartMenuItemText:
 	db "ITEM@"
 
-StartMenuSaveText: ; 71a4 (1:71a4)
+StartMenuSaveText:
 	db "SAVE@"
 
-StartMenuResetText: ; 71a9 (1:71a9)
+StartMenuResetText:
 	db "RESET@"
 
-StartMenuExitText: ; 71af (1:71af)
+StartMenuExitText:
 	db "EXIT@"
 
-StartMenuOptionText: ; 71b4 (1:71b4)
+StartMenuOptionText:
 	db "OPTION@"
 
-PrintStartMenuItem: ; 71bb (1:71bb)
+PrintStartMenuItem:
 	push hl
 	call PlaceString
 	pop hl
@@ -1163,7 +1163,7 @@ PrintStartMenuItem: ; 71bb (1:71bb)
 INCLUDE "engine/overworld/cable_club_npc.asm"
 
 ; function to draw various text boxes
-DisplayTextBoxID_: ; 72ea (1:72ea)
+DisplayTextBoxID_:
 	ld a,[wTextBoxID]
 	cp a,TWO_OPTION_MENU
 	jp z,DisplayTwoOptionMenu
@@ -1214,7 +1214,7 @@ DisplayTextBoxID_: ; 72ea (1:72ea)
 
 ; function to search a table terminated with $ff for a byte matching c in increments of de
 ; sets carry flag if a match is found and clears carry flag if not
-SearchTextBoxTable: ; 734c (1:734c)
+SearchTextBoxTable:
 	dec de
 .loop
 	ld a,[hli]
@@ -1237,7 +1237,7 @@ SearchTextBoxTable: ; 734c (1:734c)
 ; c = width
 ; d = row of upper left corner
 ; e = column of upper left corner
-GetTextBoxIDCoords: ; 735a (1:735a)
+GetTextBoxIDCoords:
 	ld a,[hli] ; column of upper left corner
 	ld e,a
 	ld a,[hli] ; row of upper left corner
@@ -1253,7 +1253,7 @@ GetTextBoxIDCoords: ; 735a (1:735a)
 	ret
 
 ; function to load a text address and text coordinates from the TextBoxTextAndCoordTable
-GetTextBoxIDText: ; 7367 (1:7367)
+GetTextBoxIDText:
 	ld a,[hli]
 	ld e,a
 	ld a,[hli]
@@ -1273,7 +1273,7 @@ GetTextBoxIDText: ; 7367 (1:7367)
 ; e = column
 ; OUTPUT:
 ; hl = address of upper left corner of text box
-GetAddressOfScreenCoords: ; 7375 (1:7375)
+GetAddressOfScreenCoords:
 	push bc
 	coord hl, 0, 0
 	ld bc,20
@@ -1292,7 +1292,7 @@ GetAddressOfScreenCoords: ; 7375 (1:7375)
 ; Format:
 ; 00: text box ID
 ; 01-02: function address
-TextBoxFunctionTable: ; 7387 (1:7387)
+TextBoxFunctionTable:
 	dbw MONEY_BOX, DisplayMoneyBox
 	dbw BUY_SELL_QUIT_MENU, DoBuySellQuitMenu
 	dbw FIELD_MOVE_MON_MENU, DisplayFieldMoveMonMenu
@@ -1304,7 +1304,7 @@ TextBoxFunctionTable: ; 7387 (1:7387)
 ; 02: row of upper left corner
 ; 03: column of lower right corner
 ; 04: row of lower right corner
-TextBoxCoordTable: ; 7391 (1:7391)
+TextBoxCoordTable:
 	db MESSAGE_BOX,       0, 12, 19, 17
 	db $03,               0,  0, 19, 14
 	db $07,               0,  0, 11,  6
@@ -1323,7 +1323,7 @@ TextBoxCoordTable: ; 7391 (1:7391)
 ; 07: column of beginning of text
 ; 08: row of beginning of text
 ; table of window positions and corresponding text [key, start column, start row, end column, end row, text pointer [2 bytes], text column, text row]
-TextBoxTextAndCoordTable: ; 73b0 (1:73b0)
+TextBoxTextAndCoordTable:
 	db JP_MOCHIMONO_MENU_TEMPLATE
 	db 0,0,14,17   ; text box coordinates
 	dw JapaneseMochimonoText
@@ -1381,56 +1381,56 @@ TextBoxTextAndCoordTable: ; 73b0 (1:73b0)
 
 ; note that there is no terminator
 
-BuySellQuitText: ; 7413 (1:7413)
+BuySellQuitText:
 	db   "BUY"
 	next "SELL"
 	next "QUIT@@"
 
-UseTossText: ; 7422 (1:7422)
+UseTossText:
 	db   "USE"
 	next "TOSS@"
 
-JapaneseSaveMessageText: ; 742b (1:742b)
+JapaneseSaveMessageText:
 	db   "きろく"
 	next "メッセージ@"
 
-JapaneseSpeedOptionsText: ; 7435 (1:7435)
+JapaneseSpeedOptionsText:
 	db   "はやい"
 	next "おそい@"
 
-MoneyText: ; 743d (1:743d)
+MoneyText:
 	db "MONEY@"
 
-JapaneseMochimonoText: ; 7443 (1:7443)
+JapaneseMochimonoText:
 	db "もちもの@"
 
-JapaneseMainMenuText: ; 7448 (1:7448)
+JapaneseMainMenuText:
 	db   "つづきから"
 	next "さいしょから@"
 
-BattleMenuText: ; 7455 (1:7455)
+BattleMenuText:
 	db   "FIGHT ",$E1,$E2
 	next "ITEM  RUN@"
 
-SafariZoneBattleMenuText: ; 7468 (1:7468)
+SafariZoneBattleMenuText:
 	db   "BALL×       BAIT"
 	next "THROW ROCK  RUN@"
 
-SwitchStatsCancelText: ; 7489 (1:7489)
+SwitchStatsCancelText:
 	db   "SWITCH"
 	next "STATS"
 	next "CANCEL@"
 
-JapaneseAhText: ; 749d (1:749d)
+JapaneseAhText:
 	db "アッ!@"
 
-JapanesePokedexMenu: ; 74a1 (1:74a1)
+JapanesePokedexMenu:
 	db   "データをみる"
 	next "なきごえ"
 	next "ぶんぷをみる"
 	next "キャンセル@"
 
-DisplayMoneyBox: ; 74ba (1:74ba)
+DisplayMoneyBox:
 	ld hl, wd730
 	set 6, [hl]
 	ld a, MONEY_BOX_TEMPLATE
@@ -1448,10 +1448,10 @@ DisplayMoneyBox: ; 74ba (1:74ba)
 	res 6, [hl]
 	ret
 
-CurrencyString: ; 74e2 (1:74e2)
+CurrencyString:
 	db "      ¥@"
 
-DoBuySellQuitMenu: ; 74ea (1:74ea)
+DoBuySellQuitMenu:
 	ld a, [wd730]
 	set 6, a ; no printing delay
 	ld [wd730], a
@@ -1506,7 +1506,7 @@ DoBuySellQuitMenu: ; 74ea (1:74ea)
 ; b = Y of upper left corner of text region
 ; c = X of upper left corner of text region
 ; hl = address where the text box border should be drawn
-DisplayTwoOptionMenu: ; 7559 (1:7559)
+DisplayTwoOptionMenu:
 	push hl
 	ld a, [wd730]
 	set 6, a ; no printing delay
@@ -1643,7 +1643,7 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 ; they cover be fully saved/restored by the two functions below.
 ; The bottom and right edges of the menu may remain after the function returns.
 
-TwoOptionMenu_SaveScreenTiles: ; 763e (1:763e)
+TwoOptionMenu_SaveScreenTiles:
 	ld de, wBuffer
 	lb bc, 5, 6
 .loop
@@ -1661,7 +1661,7 @@ TwoOptionMenu_SaveScreenTiles: ; 763e (1:763e)
 	jr nz, .loop
 	ret
 
-TwoOptionMenu_RestoreScreenTiles: ; 7656 (1:7656)
+TwoOptionMenu_RestoreScreenTiles:
 	ld de, wBuffer
 	lb bc, 5, 6
 .loop
@@ -1685,7 +1685,7 @@ TwoOptionMenu_RestoreScreenTiles: ; 7656 (1:7656)
 ; 01: byte height
 ; 02: byte put blank line before first menu item
 ; 03: word text pointer
-TwoOptionMenuStrings: ; 7671 (1:7671)
+TwoOptionMenuStrings:
 	db 4,3,0
 	dw .YesNoMenu
 	db 6,3,0
@@ -1703,22 +1703,29 @@ TwoOptionMenuStrings: ; 7671 (1:7671)
 	db 4,3,0
 	dw .NoYesMenu
 
-.NoYesMenu ; 7699 (1:3699)
-	db "NO",$4E,"YES@"
-.YesNoMenu ; 76a0 (1:36a0)
-	db "YES",$4E,"NO@"
-.NorthWestMenu ; 76a7 (1:36a7)
-	db "NORTH",$4E,"WEST@"
-.SouthEastMenu ; 76b2 (1:36b2)
-	db "SOUTH",$4E,"EAST@"
-.NorthEastMenu ; 76bd (1:36bd)
-	db "NORTH",$4E,"EAST@"
-.TradeCancelMenu ; 76c8 (1:36c8)
-	db "TRADE",$4E,"CANCEL@"
-.HealCancelMenu ; 76d5 (1:36d5)
-	db "HEAL",$4E,"CANCEL@"
+.NoYesMenu
+	db   "NO"
+	next "YES@"
+.YesNoMenu
+	db   "YES"
+	next "NO@"
+.NorthWestMenu
+	db   "NORTH"
+	next "WEST@"
+.SouthEastMenu
+	db   "SOUTH"
+	next "EAST@"
+.NorthEastMenu
+	db   "NORTH"
+	next "EAST@"
+.TradeCancelMenu
+	db   "TRADE"
+	next "CANCEL@"
+.HealCancelMenu
+	db   "HEAL"
+	next "CANCEL@"
 
-DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
+DisplayFieldMoveMonMenu:
 	xor a
 	ld hl, wFieldMoves
 	ld [hli], a ; wFieldMoves
@@ -1838,7 +1845,7 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:76e1)
 	ld de, PokemonMenuEntries
 	jp PlaceString
 
-FieldMoveNames: ; 778d (1:778d)
+FieldMoveNames:
 	db "CUT@"
 	db "FLY@"
 	db "@"
@@ -1849,12 +1856,12 @@ FieldMoveNames: ; 778d (1:778d)
 	db "TELEPORT@"
 	db "SOFTBOILED@"
 
-PokemonMenuEntries: ; 77c2 (1:77c2)
+PokemonMenuEntries:
 	db   "STATS"
 	next "SWITCH"
 	next "CANCEL@"
 
-GetMonFieldMoves: ; 77d6 (1:77d6)
+GetMonFieldMoves:
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMon1Moves
 	ld bc, wPartyMon2 - wPartyMon1
@@ -1911,7 +1918,7 @@ GetMonFieldMoves: ; 77d6 (1:77d6)
 ; Name index = index of name in FieldMoveNames
 ; Leftmost tile = -1 + tile column in which the first letter of the move's name should be displayed
 ;                 "SOFTBOILED" is $08 because it has 4 more letters than "SURF", for example, whose value is $0C
-FieldMoveDisplayData: ; 7823 (1:7823)
+FieldMoveDisplayData:
 	db CUT, $01, $0C
 	db FLY, $02, $0C
 	db $B4, $03, $0C ; unused field move
@@ -1928,7 +1935,7 @@ INCLUDE "engine/battle/moveEffects/drain_hp_effect.asm"
 
 INCLUDE "engine/menu/players_pc.asm"
 
-_RemovePokemon: ; 7b68 (1:7b68)
+_RemovePokemon:
 	ld hl, wPartyCount
 	ld a, [wRemoveMonFromBox]
 	and a
@@ -2024,7 +2031,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 .asm_7c15
 	jp CopyDataUntil
 
-_DisplayPokedex: ; 7c18 (1:7c18)
+_DisplayPokedex:
 	ld hl, wd730
 	set 6, [hl]
 	predef ShowPokedexData
@@ -2122,7 +2129,7 @@ INCLUDE "data/map_songs.asm"
 
 INCLUDE "data/map_header_banks.asm"
 
-ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
+ClearVariablesAfterLoadingMapData:
 	ld a, SCREEN_HEIGHT_PIXELS
 	ld [hWY], a
 	ld [rWY], a
@@ -2144,7 +2151,7 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ret
 
 ; only used for setting bit 2 of wd736 upon entering a new map
-IsPlayerStandingOnWarp: ; c35f (3:435f)
+IsPlayerStandingOnWarp:
 	ld a, [wNumberOfWarps]
 	and a
 	ret z
@@ -2176,7 +2183,7 @@ IsPlayerStandingOnWarp: ; c35f (3:435f)
 	jr nz, .loop
 	ret
 
-CheckForceBikeOrSurf: ; c38b (3:438b)
+CheckForceBikeOrSurf:
 	ld hl, wd732
 	bit 5, [hl]
 	ret nz
@@ -2229,7 +2236,7 @@ CheckForceBikeOrSurf: ; c38b (3:438b)
 
 INCLUDE "data/force_bike_surf.asm"
 
-IsPlayerFacingEdgeOfMap: ; c3ff (3:43ff)
+IsPlayerFacingEdgeOfMap:
 	push hl
 	push de
 	push bc
@@ -2295,7 +2302,7 @@ IsPlayerFacingEdgeOfMap: ; c3ff (3:43ff)
 	scf
 	ret
 
-IsWarpTileInFrontOfPlayer: ; c44e (3:444e)
+IsWarpTileInFrontOfPlayer:
 	push hl
 	push de
 	push bc
@@ -2321,7 +2328,7 @@ IsWarpTileInFrontOfPlayer: ; c44e (3:444e)
 	pop hl
 	ret
 
-.warpTileListPointers: ; c477 (3:4477)
+.warpTileListPointers:
 	dw .facingDownWarpTiles
 	dw .facingUpWarpTiles
 	dw .facingLeftWarpTiles
@@ -2349,7 +2356,7 @@ IsWarpTileInFrontOfPlayer: ; c44e (3:444e)
 	and a
 	jr .done
 
-IsPlayerStandingOnDoorTileOrWarpTile: ; c49d (3:449d)
+IsPlayerStandingOnDoorTileOrWarpTile:
 	push hl
 	push de
 	push bc
@@ -2378,7 +2385,7 @@ IsPlayerStandingOnDoorTileOrWarpTile: ; c49d (3:449d)
 
 INCLUDE "data/warp_tile_ids.asm"
 
-PrintSafariZoneSteps: ; c52f (3:452f)
+PrintSafariZoneSteps:
 	ld a, [wCurMap]
 	cp SAFARI_ZONE_EAST
 	ret c
@@ -2410,16 +2417,16 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	lb bc, 1, 2
 	jp PrintNumber
 
-SafariSteps: ; c579 (3:4579)
+SafariSteps:
 	db "/500@"
 
-SafariBallText: ; c57e (3:457e)
+SafariBallText:
 	db "BALL×× @"
 
-GetTileAndCoordsInFrontOfPlayer: ; c586 (3:4586)
+GetTileAndCoordsInFrontOfPlayer:
 	call GetPredefRegisters
 
-_GetTileAndCoordsInFrontOfPlayer: ; c589 (3:4589)
+_GetTileAndCoordsInFrontOfPlayer:
 	ld a, [wYCoord]
 	ld d, a
 	ld a, [wXCoord]
@@ -2456,7 +2463,7 @@ _GetTileAndCoordsInFrontOfPlayer: ; c589 (3:4589)
 	ld [wTileInFrontOfPlayer], a
 	ret
 
-GetTileTwoStepsInFrontOfPlayer: ; c5be (3:45be)
+GetTileTwoStepsInFrontOfPlayer:
 	xor a
 	ld [$ffdb], a
 	ld hl, wYCoord
@@ -2504,9 +2511,9 @@ GetTileTwoStepsInFrontOfPlayer: ; c5be (3:45be)
 	ld [wTileInFrontOfPlayer], a
 	ret
 
-CheckForCollisionWhenPushingBoulder: ; c60b (3:460b)
+CheckForCollisionWhenPushingBoulder:
 	call GetTileTwoStepsInFrontOfPlayer
-	ld hl, wTileSetCollisionPtr
+	ld hl, wTilesetCollisionPtr
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -2530,7 +2537,7 @@ CheckForCollisionWhenPushingBoulder: ; c60b (3:460b)
 	ret
 
 ; sets a to $ff if there is a collision and $00 if there is no collision
-CheckForBoulderCollisionWithSprites: ; c636 (3:4636)
+CheckForBoulderCollisionWithSprites:
 	ld a, [wBoulderSpriteIndex]
 	dec a
 	swap a
@@ -2607,7 +2614,7 @@ CheckForBoulderCollisionWithSprites: ; c636 (3:4636)
 	xor a
 	ret
 
-ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
+ApplyOutOfBattlePoisonDamage:
 	ld a, [wd730]
 	add a
 	jp c, .noBlackOut ; no black out if joypad states are being simulated
@@ -2720,7 +2727,7 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	ld [wOutOfBattleBlackout], a
 	ret
 
-LoadTilesetHeader: ; c754 (3:4754)
+LoadTilesetHeader:
 	call GetPredefRegisters
 	push hl
 	ld d, 0
@@ -2736,7 +2743,7 @@ LoadTilesetHeader: ; c754 (3:4754)
 	ld e, a
 	ld hl, Tilesets
 	add hl, de
-	ld de, wTileSetBank
+	ld de, wTilesetBank
 	ld c, $b
 .copyTilesetHeaderLoop
 	ld a, [hli]
@@ -2781,7 +2788,7 @@ INCLUDE "data/dungeon_tilesets.asm"
 
 INCLUDE "data/tileset_headers.asm"
 
-IncrementDayCareMonExp: ; c8de (3:48de)
+IncrementDayCareMonExp:
 	ld a, [wDayCareInUse]
 	and a
 	ret z
@@ -2802,7 +2809,7 @@ IncrementDayCareMonExp: ; c8de (3:48de)
 
 INCLUDE "data/hide_show_data.asm"
 
-PrintStrengthTxt: ; cd99 (3:4d99)
+PrintStrengthTxt:
 	ld hl, wd728
 	set 0, [hl]
 	ld hl, UsedStrengthText
@@ -2810,7 +2817,7 @@ PrintStrengthTxt: ; cd99 (3:4d99)
 	ld hl, CanMoveBouldersText
 	jp PrintText
 
-UsedStrengthText: ; cdaa (3:4daa)
+UsedStrengthText:
 	TX_FAR _UsedStrengthText
 	TX_ASM
 	ld a, [wcf91]
@@ -2818,11 +2825,11 @@ UsedStrengthText: ; cdaa (3:4daa)
 	call Delay3
 	jp TextScriptEnd
 
-CanMoveBouldersText: ; cdbb (3:4dbb)
+CanMoveBouldersText:
 	TX_FAR _CanMoveBouldersText
 	db "@"
 
-IsSurfingAllowed: ; cdc0 (3:4dc0)
+IsSurfingAllowed:
 ; Returns whether surfing is allowed in bit 1 of wd728.
 ; Surfing isn't allowed on the Cycling Road or in the lowest level of the
 ; Seafoam Islands before the current has been slowed with boulders.
@@ -2849,14 +2856,14 @@ IsSurfingAllowed: ; cdc0 (3:4dc0)
 	ld hl, CyclingIsFunText
 	jp PrintText
 
-CoordsData_cdf7: ; cdf7 (3:4df7)
+CoordsData_cdf7:
 	db $0B,$07,$FF
 
-CurrentTooFastText: ; cdfa (3:4dfa)
+CurrentTooFastText:
 	TX_FAR _CurrentTooFastText
 	db "@"
 
-CyclingIsFunText: ; cdff (3:4dff)
+CyclingIsFunText:
 	TX_FAR _CyclingIsFunText
 	db "@"
 
@@ -2866,7 +2873,7 @@ CyclingIsFunText: ; cdff (3:4dff)
 ; [wcf91] = item ID
 ; [wItemQuantity] = item quantity
 ; sets carry flag if successful, unsets carry flag if unsuccessful
-AddItemToInventory_: ; ce04 (3:4e04)
+AddItemToInventory_:
 	ld a,[wItemQuantity] ; a = item quantity
 	push af
 	push bc
@@ -2959,7 +2966,7 @@ AddItemToInventory_: ; ce04 (3:4e04)
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wWhichPokemon] = index (within the inventory) of the item to remove
 ; [wItemQuantity] = quantity to remove
-RemoveItemFromInventory_: ; ce74 (3:4e74)
+RemoveItemFromInventory_:
 	push hl
 	inc hl
 	ld a,[wWhichPokemon] ; index (within the inventory) of the item being removed
@@ -3013,7 +3020,7 @@ RemoveItemFromInventory_: ; ce74 (3:4e74)
 
 ; wild pokemon data: from 4EB8 to 55C7
 
-LoadWildData: ; ceb8 (3:4eb8)
+LoadWildData:
 	ld hl,WildDataPointers
 	ld a,[wCurMap]
 
@@ -3049,7 +3056,7 @@ INCLUDE "data/wild_mons.asm"
 
 INCLUDE "engine/items/items.asm"
 
-DrawBadges: ; ea03 (3:6a03)
+DrawBadges:
 ; Draw 4x2 gym leader faces, with the faces replaced by
 ; badges if they are owned. Used in the player status screen.
 
@@ -3103,7 +3110,7 @@ DrawBadges: ; ea03 (3:6a03)
 ;	call .DrawBadgeRow
 ;	ret
 
-.DrawBadgeRow ; ea4c (3:6a4c)
+.DrawBadgeRow
 ; Draw 4 badges.
 
 	ld c, 4
@@ -3167,7 +3174,7 @@ DrawBadges: ; ea03 (3:6a03)
 .FaceBadgeTiles
 	db $20, $28, $30, $38, $40, $48, $50, $58
 
-GymLeaderFaceAndBadgeTileGraphics: ; ea9e (3:6a9e)
+GymLeaderFaceAndBadgeTileGraphics:
 IF GEN_2_GRAPHICS
 	INCBIN "gfx/gs/badges.2bpp"
 ELSE
@@ -3178,7 +3185,7 @@ ENDC
 ; and redraws the map view if necessary
 ; b = Y
 ; c = X
-ReplaceTileBlock: ; ee9e (3:6e9e)
+ReplaceTileBlock:
 	call GetPredefRegisters
 	ld hl, wOverworldMap
 	ld a, [wCurMapWidth]
@@ -3222,7 +3229,7 @@ ReplaceTileBlock: ; ee9e (3:6e9e)
 	call CompareHLWithBC
 	ret c ; return if the replaced tile block is above the map view in memory
 
-RedrawMapView: ; eedc (3:6edc)
+RedrawMapView:
 	ld a, [wIsInBattle]
 	inc a
 	ret z
@@ -3293,7 +3300,7 @@ RedrawMapView: ; eedc (3:6edc)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-CompareHLWithBC: ; ef4e (3:6f4e)
+CompareHLWithBC:
 	ld a, h
 	sub b
 	ret nz
@@ -3303,7 +3310,7 @@ CompareHLWithBC: ; ef4e (3:6f4e)
 
 INCLUDE "engine/overworld/cut.asm"
 
-MarkTownVisitedAndLoadMissableObjects: ; f113 (3:7113)
+MarkTownVisitedAndLoadMissableObjects:
 	ld a, [wCurMap]
 	cp ROUTE_1
 	jr nc, .notInTown
@@ -3322,7 +3329,7 @@ MarkTownVisitedAndLoadMissableObjects: ; f113 (3:7113)
 	ld h, [hl]
 	; fall through
 
-LoadMissableObjects: ; f132 (3:7132)
+LoadMissableObjects:
 	ld l, a
 	push hl
 	ld de, MapHS00             ; calculate difference between out pointer and the base pointer
@@ -3372,7 +3379,7 @@ LoadMissableObjects: ; f132 (3:7132)
 	ld [de], a                 ; write sentinel
 	ret
 
-InitializeMissableObjectsFlags: ; f175 (3:7175)
+InitializeMissableObjectsFlags:
 	ld hl, wMissableObjectFlags
 	ld bc, wMissableObjectFlagsEnd - wMissableObjectFlags
 	xor a
@@ -3403,7 +3410,7 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	jr .missableObjectsLoop
 
 ; tests if current sprite is a missable object that is hidden/has been removed
-IsObjectHidden: ; f1a6 (3:71a6)
+IsObjectHidden:
 	ld a, [H_CURRENTSPRITEOFFSET]
 	swap a
 	ld b, a
@@ -3430,7 +3437,7 @@ IsObjectHidden: ; f1a6 (3:71a6)
 
 ; adds missable object (items, leg. pokemon, etc.) to the map
 ; [wMissableObjectIndex]: index of the missable object to be added (global index)
-ShowObject: ; f1c8 (3:71c8)
+ShowObject:
 ShowObject2:
 	ld hl, wMissableObjectFlags
 	ld a, [wMissableObjectIndex]
@@ -3441,7 +3448,7 @@ ShowObject2:
 
 ; removes missable object (items, leg. pokemon, etc.) from the map
 ; [wMissableObjectIndex]: index of the missable object to be removed (global index)
-HideObject: ; f1d7 (3:71d7)
+HideObject:
 	ld hl, wMissableObjectFlags
 	ld a, [wMissableObjectIndex]
 	ld c, a
@@ -3519,7 +3526,7 @@ MissableObjectFlagAction:
 	ld c, a
 	ret
 
-TryPushingBoulder: ; f225 (3:7225)
+TryPushingBoulder:
 	ld a, [wd728]
 	bit 0, a ; using Strength?
 	ret z
@@ -3591,19 +3598,19 @@ TryPushingBoulder: ; f225 (3:7225)
 	set 1, [hl]
 	ret
 
-PushBoulderUpMovementData: ; f2ad (3:72ad)
+PushBoulderUpMovementData:
 	db NPC_MOVEMENT_UP,$FF
 
-PushBoulderDownMovementData: ; f2af (3:72af)
+PushBoulderDownMovementData:
 	db NPC_MOVEMENT_DOWN,$FF
 
-PushBoulderLeftMovementData: ; f2b1 (3:72b1)
+PushBoulderLeftMovementData:
 	db NPC_MOVEMENT_LEFT,$FF
 
-PushBoulderRightMovementData: ; f2b3 (3:72b3)
+PushBoulderRightMovementData:
 	db NPC_MOVEMENT_RIGHT,$FF
 
-DoBoulderDustAnimation: ; f2b5 (3:72b5)
+DoBoulderDustAnimation:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
@@ -3619,13 +3626,13 @@ DoBoulderDustAnimation: ; f2b5 (3:72b5)
 	ld a, SFX_CUT
 	jp PlaySound
 
-ResetBoulderPushFlags: ; f2dd (3:72dd)
+ResetBoulderPushFlags:
 	ld hl, wFlags_0xcd60
 	res 1, [hl]
 	res 6, [hl]
 	ret
 
-_AddPartyMon: ; f2e5 (3:72e5)
+_AddPartyMon:
 ; Adds a new mon to the player's or enemy's party.
 ; [wMonDataLocation] is used in an unusual way in this function.
 ; If the lower nybble is 0, the mon is added to the player's party, else the enemy's.
@@ -3872,10 +3879,10 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	scf
 	ret
 
-LoadMovePPs: ; f473 (3:7473)
+LoadMovePPs:
 	call GetPredefRegisters
 	; fallthrough
-AddPartyMon_WriteMovePP: ; f476 (3:7476)
+AddPartyMon_WriteMovePP:
 	ld b, NUM_MOVES
 .pploop
 	ld a, [hli]     ; read move ID
@@ -3904,7 +3911,7 @@ AddPartyMon_WriteMovePP: ; f476 (3:7476)
 
 ; adds enemy mon [wcf91] (at position [wWhichPokemon] in enemy list) to own party
 ; used in the cable club trade center
-_AddEnemyMonToPlayerParty: ; f49d (3:749d)
+_AddEnemyMonToPlayerParty:
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp PARTY_LENGTH
@@ -3965,7 +3972,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	and a
 	ret                  ; return success
 
-_MoveMon: ; f51e (3:751e)
+_MoveMon:
 	ld a, [wMoveMonType]
 	and a
 	jr z, .checkPartyMonSlots
@@ -4431,7 +4438,7 @@ DivideBCD::
 	jr nz, .asm_f7ce
 	ret
 
-DivideBCD_f7d7: ; f7d7 (3:77d7)
+DivideBCD_f7d7:
 	ld a, [$ffa4]
 	swap a
 	and $f
@@ -4456,7 +4463,7 @@ DivideBCD_f7d7: ; f7d7 (3:77d7)
 	ld [$ffa2], a
 	ret
 
-DivideBCD_f800: ; f800 (3:7800)
+DivideBCD_f800:
 	ld bc, $3
 .asm_f803
 	ld de, $ff9f
@@ -4586,7 +4593,7 @@ InitializeEmptyList:
 	ret
 
 
-GetQuantityOfItemInBag: ; f8a5 (3:78a5)
+GetQuantityOfItemInBag:
 ; In: b = item ID
 ; Out: b = how many of that item are in the bag
 	call GetPredefRegisters
@@ -4605,7 +4612,7 @@ GetQuantityOfItemInBag: ; f8a5 (3:78a5)
 	ld b, 0
 	ret
 
-FindPathToPlayer: ; f8ba (3:78ba)
+FindPathToPlayer:
 	xor a
 	ld hl, hFindPathNumSteps
 	ld [hli], a ; hFindPathNumSteps
@@ -4681,7 +4688,7 @@ FindPathToPlayer: ; f8ba (3:78ba)
 	ld [hl], $ff
 	ret
 
-CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
+CalcPositionOfPlayerRelativeToNPC:
 	xor a
 	ld [hNPCPlayerRelativePosFlags], a
 	ld a, [wSpriteStateData1 + 4] ; player's sprite screen Y position in pixels
@@ -4758,7 +4765,7 @@ CalcPositionOfPlayerRelativeToNPC: ; f929 (3:7929)
 	ld [hNPCPlayerRelativePosFlags], a
 	ret
 
-ConvertNPCMovementDirectionsToJoypadMasks: ; f9a0 (3:79a0)
+ConvertNPCMovementDirectionsToJoypadMasks:
 	ld a, [hNPCMovementDirections2Index]
 	ld [wNPCMovementDirections2Index], a
 	dec a
@@ -4779,7 +4786,7 @@ ConvertNPCMovementDirectionsToJoypadMasks: ; f9a0 (3:79a0)
 	jr nz, .loop
 	ret
 
-ConvertNPCMovementDirectionToJoypadMask: ; f9bf (3:79bf)
+ConvertNPCMovementDirectionToJoypadMask:
 	push hl
 	ld b, a
 	ld hl, NPCMovementDirectionsToJoypadMasksTable
@@ -4797,7 +4804,7 @@ ConvertNPCMovementDirectionToJoypadMask: ; f9bf (3:79bf)
 	pop hl
 	ret
 
-NPCMovementDirectionsToJoypadMasksTable: ; f9d2 (3:79d2)
+NPCMovementDirectionsToJoypadMasksTable:
 	db NPC_MOVEMENT_UP, D_UP
 	db NPC_MOVEMENT_DOWN, D_DOWN
 	db NPC_MOVEMENT_LEFT, D_LEFT
@@ -5348,12 +5355,6 @@ INCLUDE "data/mapHeaders/billshouse.asm"
 INCLUDE "scripts/billshouse.asm"
 INCLUDE "data/mapObjects/billshouse.asm"
 BillsHouseBlocks: INCBIN "maps/billshouse.blk"
-IF DEF(_OPTION_BEACH_HOUSE)
-INCLUDE "data/mapHeaders/beach_house.asm"
-INCLUDE "scripts/beach_house.asm"
-BeachHouseBlockdata: INCBIN "maps/beach_house.blk"
-INCLUDE "data/mapObjects/beach_house.asm"
-ENDC
 
 INCLUDE "engine/menu/oaks_pc.asm"
 
@@ -6150,11 +6151,7 @@ Route17Blocks: INCBIN "maps/route17.blk"
 
 INCLUDE "data/mapHeaders/route19.asm"
 INCLUDE "data/mapObjects/route19.asm"
-IF DEF(_OPTION_BEACH_HOUSE)
-Route19Blocks: INCBIN "maps/route19-yellow.blk"
-ELSE
 Route19Blocks: INCBIN "maps/route19.blk"
-ENDC
 
 INCLUDE "data/mapHeaders/route21.asm"
 INCLUDE "data/mapObjects/route21.asm"
@@ -7435,13 +7432,3 @@ MarowakPicFront:     INCBIN "pic/bmon/marowak.pic"
 MarowakPicBack:      INCBIN "pic/monback/marowakb.pic"
 ENDC
 
-
-IF DEF(_OPTION_BEACH_HOUSE)
-SECTION "bank3C",ROMX[$4314],BANK[$3C]
-
-BeachHouse_GFX:
-	INCBIN "gfx/tilesets/beachhouse.2bpp"
-
-BeachHouse_Block:
-	INCBIN "gfx/blocksets/beachhouse.bst"
-ENDC

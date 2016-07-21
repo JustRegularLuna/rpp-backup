@@ -1,7 +1,7 @@
 ; HAX: This is the super gameboy palette command handler.
 ; I hijaxed a jump table so I can reimplement all SGB colorization functions.
 ; Value of b is the "command". Jumps to function "XX" of SetPalFunctions where X is the command.
-_RunPaletteCommand: ; 71ddf (1c:5ddf)
+_RunPaletteCommand:
 	call GetPredefRegisters
 	ld a, b
 	cp $ff
@@ -43,7 +43,7 @@ WaitForVBlank:
  	ret
 
 ; Palette commands are moved to the end of the bank
-SetPalFunctions: ; 71f73 (1c:5f73)
+SetPalFunctions:
 	dw SetPal_BattleBlack
 	dw SetPal_Battle
 	dw SetPal_TownMap
@@ -63,12 +63,12 @@ SetPalFunctions: ; 71f73 (1c:5f73)
 	dw PalCmd_0f	; Name entry (partially replaces 08)
 
 ; HAXed to give trainers palettes independantly
-DeterminePaletteID: ; 71f97 (1c:5f97)
+DeterminePaletteID:
 	bit Transformed, a ; a is battle status 3
 	ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
 	ret nz
 	ld a, [hl]
-DeterminePaletteIDOutOfBattle: ; 71f9d (1c:5f9d) - DeterminePaletteID without status check
+DeterminePaletteIDOutOfBattle: ; DeterminePaletteID without status check
 	ld [wd11e], a
 	and a
 
@@ -137,13 +137,13 @@ LoopCounts_71f8f: ; 71f8f (1c:5f8f)
 
 	ORG $1c, $5fb6
 
-InitPartyMenuBlkPacket: ; 71fb6 (1c:5fb6)
+InitPartyMenuBlkPacket:
 	ld hl, BlkPacket_PartyMenu
 	ld de, wPartyMenuBlkPacket
 	ld bc, $30
 	jp CopyData
 
-UpdatePartyMenuBlkPacket: ; 71fc2 (1c:5fc2)
+UpdatePartyMenuBlkPacket:
 ; Update the blk packet with the palette of the HP bar that is
 ; specified in [wWhichPartyMenuHPBar].
 	ld hl, wPartyMenuHPBarColors
@@ -171,7 +171,7 @@ UpdatePartyMenuBlkPacket: ; 71fc2 (1c:5fc2)
 	ld [hl], e
 	ret
 
-SendSGBPacket: ; 71feb (1c:5feb)
+SendSGBPacket:
 ;check number of packets
 	ld a,[hl]
 	and a,$07
@@ -239,7 +239,7 @@ SendSGBPacket: ; 71feb (1c:5feb)
 ; This function is HAXed to always set the SGB Flag.
 ; This helps with palette flashing effects in battle.
 ; It also lets me hijack RunPaletteCommand.
-LoadSGB: ; 7202b (1c:602b)
+LoadSGB:
 	xor a
 	ld [wOnSGB], a
 	call CheckSGB
@@ -257,7 +257,7 @@ LoadSGB: ; 7202b (1c:602b)
 
 	ORG $1c, $6075
 
-PrepareSuperNintendoVRAMTransfer: ; 72075 (1c:6075)
+PrepareSuperNintendoVRAMTransfer:
 	ld hl, .packetPointers
 	ld c, 9
 .loop
@@ -286,7 +286,7 @@ PrepareSuperNintendoVRAMTransfer: ; 72075 (1c:6075)
 	dw DataSnd_725a8
 	dw DataSnd_725b8
 
-CheckSGB: ; 7209b (1c:609b)
+CheckSGB:
 ; Returns whether the game is running on an SGB in carry.
 	ld hl, MltReq2Packet
 	di
@@ -338,12 +338,12 @@ CheckSGB: ; 7209b (1c:609b)
 	scf
 	ret
 
-SendMltReq1Packet: ; 72102 (1c:6102)
+SendMltReq1Packet:
 	ld hl, MltReq1Packet
 	call SendSGBPacket
 	jp Wait7000
 
-CopyGfxToSuperNintendoVRAM: ; 7210b (1c:610b)
+CopyGfxToSuperNintendoVRAM:
 	di
 	push de
 	call DisableLCD
@@ -382,7 +382,7 @@ CopyGfxToSuperNintendoVRAM: ; 7210b (1c:610b)
 	ei
 	ret
 
-Wait7000: ; 7214a (1c:614a)
+Wait7000:
 ; Each loop takes 9 cycles so this routine actually waits 63000 cycles.
 	ld de, 7000
 .loop
@@ -397,7 +397,7 @@ Wait7000: ; 7214a (1c:614a)
 
 ; de = ptr to ATTR_BLK packet
 ; hl = ptr to PAL_SET packet
-SetPalettesAndMaps: ; 72156 (1c:6156)
+SetPalettesAndMaps:
 	ld a, [wGBC]
 	and a
 	jr z, .notGBC
@@ -412,7 +412,7 @@ SetPalettesAndMaps: ; 72156 (1c:6156)
 	pop hl
 	jp SendSGBPacket
 
-InitGBCPalettes: ; 7216d (1c:616d)
+InitGBCPalettes:
 	ld a, $80 ; index 0 with auto-increment
 	ld [rBGPI], a
 	inc hl
@@ -434,10 +434,10 @@ InitGBCPalettes: ; 7216d (1c:616d)
 	jr nz, .loop
 	ret
 
-EmptyFunc5: ; 72187 (1c:6187)
+EmptyFunc5:
 	ret
 
-CopySGBBorderTiles: ; 72188 (1c:6188)
+CopySGBBorderTiles:
 ; SGB tile data is stored in a 4BPP planar format.
 ; Each tile is 32 bytes. The first 16 bytes contain bit planes 1 and 2, while
 ; the second 16 bytes contain bit planes 3 and 4.
