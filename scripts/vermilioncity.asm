@@ -70,7 +70,7 @@ VermilionCityScript0: ; 197e6 (6:57e6)
 	ret
 
 CoordsData_19823: ; 19823 (6:5823)
-	db $1e,$12
+	db $1c,$13
 	db $ff
 
 VermilionCityScript4: ; 19826 (6:5826)
@@ -195,8 +195,8 @@ VermilionCityText3: ; 198b1 (6:58b1)
 	jp TextScriptEnd
 
 VermilionCityCoords1: ; 198ff (6:58ff)
-	db $1d,$13
-	db $1f,$13
+	db $1b,$14
+	db $1d,$14
 	db $ff
 
 SSAnneWelcomeText4: ; 19904 (6:5904)
