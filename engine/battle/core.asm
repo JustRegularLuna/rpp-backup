@@ -7383,7 +7383,7 @@ MoveEffectPointerTable: ; 3f150 (f:7150)
 	 dw FangAttacks               ; ICE_FANG_EFFECT
 	 dw FangAttacks               ; THUNDER_FANG_EFFECT
 	 dw VoltTackleEffect          ; VOLT_TACKLE_EFFECT
-	 dw PoisonFangEffect          ; POISON_FANG_EFFECT
+	 dw PoisonEffect              ; POISON_FANG_EFFECT
 	 dw $0000                     ; SUCKER_PUNCH_EFFECT
 	 dw GrowthEffect              ; GROWTH_EFFECT
 
@@ -8938,10 +8938,6 @@ FangAttacks:
 VoltTackleEffect:
 	call RecoilEffect
 	jp FreezeBurnParalyzeEffect
-	
-PoisonFangEffect:
-	call FlinchSideEffect
-	jp PoisonEffect
 
 GrowthEffect:
 	ld a, [H_WHOSETURN]
