@@ -1384,8 +1384,12 @@ _GainedText:: ; 89bc2 (22:5bc2)
 	line "@@"
 
 _WithExpAllText:: ; 89bd0 (22:5bd0)
-	text "with EXP.SHARE,"
-	cont "@@"
+	text "[PLAYER]'s other"
+        line "#MON gained"
+        cont "EXP. Points from@"
+	db $7
+        text "the EXP.SHARE!"
+        prompt
 
 _BoostedText:: ; 89be1 (22:5be1)
 	text "a boosted"
