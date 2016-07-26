@@ -21,6 +21,16 @@ GainExperience: ; 5524f (15:524f)
 	and a ; is mon's gain exp flag set?
 	pop hl
 	jp z, .nextMon ; if mon's gain exp flag not set, go to next mon
+	ld a, [wcc5b]
+	and a
+	jp z, .finishedExpAllMessage
+	xor a
+	ld [wcc5b], a
+	push hl
+	ld hl, WithExpAllText
+	call PrintText
+	pop hl
+.finishedExpAllMessage 
 	ld de, (wPartyMon1HPExp + 1) - (wPartyMon1HP + 1)
 	add hl, de
 	ld d, h
@@ -369,10 +379,6 @@ BoostExp: ; 5549f (15:549f)
 GainedText: ; 554b2 (15:54b2)
 	TX_FAR _GainedText
 	db $08 ; asm
-	ld a, [wcc5b]
-	ld hl, WithExpAllText
-	and a
-	ret nz
 	ld hl, ExpPointsText
 	ld a, [wcf4d]
 	and a
@@ -382,9 +388,7 @@ GainedText: ; 554b2 (15:54b2)
 
 WithExpAllText: ; 554cb (15:54cb)
 	TX_FAR _WithExpAllText
-	db $08 ; asm
-	ld hl, ExpPointsText
-	ret
+	db "@"
 
 BoostedText: ; 554d4 (15:54d4)
 	TX_FAR _BoostedText
