@@ -1091,6 +1091,9 @@ TrainerAI: ; 3a52e (e:652e)
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	and a
+	ret z ; They can't immediately heal if you attack first when they send them out
 	ld a,[wTrainerAINumber] ; what trainer class is this?
 	dec a
 	ld c,a
