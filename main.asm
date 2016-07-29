@@ -5351,6 +5351,10 @@ INCLUDE "engine/game_corner_slots.asm"
 
 SECTION "bankE",ROMX,BANK[$E]
 
+INCLUDE "engine/battle/unused_stat_modifiers.asm"
+INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
+INCLUDE "engine/battle/trainer_ai.asm"
+INCLUDE "engine/battle/trainer_money_pointers.asm"
 INCLUDE "engine/battle/e.asm"
 INCLUDE "engine/battle/e_2.asm"
 
