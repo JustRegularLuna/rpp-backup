@@ -762,7 +762,7 @@ IF DEF(_BLUE) ; Hard Version
 	dbw 3,GenericAI ; swimmer f
 	dbw 1,PotionAI ; rocket f
 	dbw 3,FullHealAI ; scientist
-	dbw 1,GuardSpecAI ; giovanni
+	dbw 1,HyperPotion2AI ; giovanni
 	dbw 3,PotionAI ; rocket m
 	dbw 2,XAttack2AI ; ace trainerm
 	dbw 1,SwitchOrHyperPotionAI ; ace trainerf
@@ -772,7 +772,7 @@ IF DEF(_BLUE) ; Hard Version
 	dbw 1,XSpeedAI ; surge
 	dbw 1,SuperPotion1AI ; erika
 	dbw 2,XAttack2AI ; koga
-	dbw 2,SuperPotion2AI ; blaine
+	dbw 2,HyperPotionAI ; blaine
 	dbw 1,HyperPotionAI ; sabrina
 	dbw 3,FullHealAI ; gentleman
 	dbw 1,FullHealOrPotionAI ; rival 2
@@ -812,7 +812,7 @@ ELSE
 	dbw 3,GenericAI ; swimmer f
 	dbw 1,GenericAI ; rocket f
 	dbw 3,GenericAI ; scientist
-	dbw 1,GuardSpecAI ; giovanni
+	dbw 1,HyperPotion2AI ; giovanni
 	dbw 3,GenericAI ; rocket m
 	dbw 2,XAttack2AI ; ace trainerm
 	dbw 1,SwitchOrHyperPotionAI ; ace trainerf
@@ -822,7 +822,7 @@ ELSE
 	dbw 1,XSpeedAI ; surge
 	dbw 1,SuperPotion1AI ; erika
 	dbw 2,XAttack2AI ; koga
-	dbw 2,SuperPotion2AI ; blaine
+	dbw 2,HyperPotionAI ; blaine
 	dbw 1,HyperPotionAI ; sabrina
 	dbw 3,GenericAI ; gentleman
 	dbw 1,PotionAI ; rival 2

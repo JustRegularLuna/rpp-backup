@@ -271,3 +271,4 @@ TrainerPalletes:
 	db PAL_RED_TRAINER       ; Flannery
 	db PAL_RED_TRAINER       ; Jessie
 	db PAL_BLUE_TRAINER      ; James
+	db PAL_MEWMON            ; Giovanni 2

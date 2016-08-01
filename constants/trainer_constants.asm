@@ -65,3 +65,4 @@ const_value = 1
 	const FLANNERY
 	const JESSIE
 	const JAMES
+	const GIOVANNI_2

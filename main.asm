@@ -7399,6 +7399,7 @@ PiTrainerPic::   INCBIN "pic/trainer/pi.pic"
 HexManiacPic::   INCBIN "pic/trainer/hex_maniac.pic"
 JessiePic::      INCBIN "pic/trainer/jessie.pic"
 JamesPic::       INCBIN "pic/trainer/james.pic"
+GiovanniGymPic:: INCBIN "pic/trainer/giovanni2.pic"
 
 SECTION "random stuff", ROMX,BANK[$3A]
 WindowsGraphics1:

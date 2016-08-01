@@ -8,7 +8,7 @@ ViridianGymObject: ; 0x74bde (size=105)
 	db $0 ; signs
 
 	db $b ; people
-	db SPRITE_GIOVANNI, $1 + 4, $2 + 4, $ff, $d0, TRAINER | $1, GIOVANNI + TRAINER_START, $3
+	db SPRITE_GIOVANNI, $1 + 4, $2 + 4, $ff, $d0, TRAINER | $1, BLAINE + TRAINER_START, $2 ; temp fix
 	db SPRITE_BLACK_HAIR_BOY_1, $7 + 4, $c + 4, $ff, $d0, TRAINER | $2, COOLTRAINER_M + TRAINER_START, $9
 	db SPRITE_BLACKBELT, $b + 4, $b + 4, $ff, $d1, TRAINER | $3, BLACKBELT + TRAINER_START, $6
 	db SPRITE_ROCKER, $7 + 4, $a + 4, $ff, $d0, TRAINER | $4, TAMER + TRAINER_START, $3
