@@ -1922,8 +1922,11 @@ W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
 W_GAMEPROGRESSFLAGSEND::
 
+wChainFishingStreak::
+	ds 1
+
 ; unused bytes originally allocated with game progress flags
-	ds 100
+	ds 99
 
 
 

@@ -6354,11 +6354,19 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	jr .storeDVs
 .notTrainer
 ; forced shiny wildmon DVs
+	call BattleRandom
+	ld b, a
+	sla b
+	sla b
+	sla b
+	sla b
+	ld a, $0A
+	or a, b
+	set 5, a
+	ld b, $AA
 	ld hl, wExtraFlags
 	bit 0, [hl]
 	res 0, [hl]
-	ld a, $EA
-	ld b, $AA
 	jr nz, .storeDVs
 ; random DVs for wild mon
 	call BattleRandom

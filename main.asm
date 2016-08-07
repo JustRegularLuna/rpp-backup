@@ -7417,4 +7417,4 @@ INCLUDE "engine/overworld/headbutt.asm"
 
 SECTION "Trainer Parties", ROMX,BANK[$3B]
 INCLUDE "engine/battle/read_trainer.asm"
-
+INCLUDE "engine/overworld/advance_player_sprite.asm"
