@@ -7,7 +7,7 @@ db 110 ; base speed
 db 130 ; base special
 db DRAGON ; species type 1
 db PSYCHIC  ; species type 2
-db 45 ; catch rate
+db 3 ; catch rate
 db 211 ; base exp yield
 INCBIN "pic/bmon/latios.pic",0,1 ; 77, sprite dimensions
 dw LatiosPicFront
