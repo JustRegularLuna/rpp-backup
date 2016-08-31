@@ -102,6 +102,12 @@ DeleteMove:
 	ld a, [hl]
 	dec hl
 	ld [hli], a
+	push hl
+	ld de, wPartyMon1PP - wPartyMon1Moves
+	add hl, de
+	ld a, [hld]
+	ld [hl], a ; copy move's PP
+	pop hl
 	inc hl
 	inc b
 	jr .foundMoveLoop
@@ -109,6 +115,9 @@ DeleteMove:
 	dec hl
 	xor a
 	ld [hl], a
+	ld de, wPartyMon1PP - wPartyMon1Moves
+	add hl, de
+	ld [hl], a ; clear last move's PP
 	ret
 
 PrepareDeletableMoveList:
