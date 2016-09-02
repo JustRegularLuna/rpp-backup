@@ -616,7 +616,7 @@ IF DEF(_BLUE) ; Hard Version
 	db 1,4,0  ; TAMER
 	db 1,4,0  ; BIRD_KEEPER
 	db 1,4,0  ; BLACKBELT
-	db 1,4,0  ; SONY1
+	db 1,0    ; SONY1
 	db 1,4,0  ; SWIMMER_F
 	db 1,4,0  ; ROCKET_F
 	db 1,4,0  ; SCIENTIST
