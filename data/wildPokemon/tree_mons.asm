@@ -115,16 +115,16 @@ ENDC
 
 TreeMons4:
 IF DEF(_BLUE) ; Hard Version
-	db 30, EKANS
-	db 30, EKANS
-	db 30, EKANS
-	db 30, SPEAROW
-	db 30, SPEAROW
-	db 30, SPEAROW
-	db 30, EXEGGCUTE
-	db 30, EXEGGCUTE
-	db 30, HERACROSS
-	db 30, HERACROSS
+	db 25, EKANS
+	db 25, EKANS
+	db 25, EKANS
+	db 25, SPEAROW
+	db 25, SPEAROW
+	db 25, SPEAROW
+	db 25, EXEGGCUTE
+	db 25, EXEGGCUTE
+	db 25, HERACROSS
+	db 25, HERACROSS
 ELSE ; Normal Version
 	db 15, EKANS
 	db 15, EKANS
@@ -140,16 +140,16 @@ ENDC
 
 TreeMons5:
 IF DEF(_BLUE) ; Hard Version
-	db 40, PARAS
-	db 40, PARAS
-	db 40, VENONAT
-	db 40, VENONAT
-	db 40, BEEDRILL
-	db 40, BUTTERFREE
-	db 40, MURKROW
-	db 40, MURKROW
-	db 40, HERACROSS
-	db 40, SCYTHER
+	db 35, PARAS
+	db 35, PARAS
+	db 35, VENONAT
+	db 35, VENONAT
+	db 35, BEEDRILL
+	db 35, BUTTERFREE
+	db 35, MURKROW
+	db 35, MURKROW
+	db 35, HERACROSS
+	db 35, SCYTHER
 ELSE ; Normal Version
 	db 25, PARAS
 	db 25, PARAS
