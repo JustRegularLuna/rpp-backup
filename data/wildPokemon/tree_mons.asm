@@ -39,6 +39,18 @@ TreeMonPointerTable:
 	; Any map not in this list defaults to TreeMons1
 
 TreeMons1:
+IF DEF(_BLUE) ; Hard Version
+	db 15, CATERPIE
+	db 15, CATERPIE
+	db 15, WEEDLE
+	db 15, WEEDLE
+	db 15, KAKUNA
+	db 15, METAPOD
+	db 15, PARAS
+	db 15, SPEAROW
+	db 15, BEEDRILL
+	db 15, BUTTERFREE
+ELSE ; Normal Version
 	db 10, CATERPIE
 	db 10, CATERPIE
 	db 10, WEEDLE
@@ -49,8 +61,21 @@ TreeMons1:
 	db 10, SPEAROW
 	db 10, BEEDRILL
 	db 10, BUTTERFREE
+ENDC
 
 TreeMons2:
+IF DEF(_BLUE) ; Hard Version
+	db 15, PIDGEY
+	db 15, PIDGEY
+	db 15, SPEAROW
+	db 15, SPEAROW
+	db 15, VENONAT
+	db 15, VENONAT
+	db 15, EKANS
+	db 15, EKANS
+	db 15, MURKROW
+	db 15, MURKROW
+ELSE ; Normal Version
 	db 10, PIDGEY
 	db 10, PIDGEY
 	db 10, SPEAROW
@@ -61,8 +86,21 @@ TreeMons2:
 	db 10, EKANS
 	db 10, MURKROW
 	db 10, MURKROW
+ENDC
 
 TreeMons3:
+IF DEF(_BLUE) ; Hard Version
+	db 20, VENONAT
+	db 20, VENONAT
+	db 20, PARAS
+	db 20, PARAS
+	db 20, SPEAROW
+	db 20, SPEAROW
+	db 20, EKANS
+	db 20, EKANS
+	db 20, EXEGGCUTE
+	db 20, EXEGGCUTE
+ELSE ; Normal Version
 	db 15, VENONAT
 	db 15, VENONAT
 	db 15, PARAS
@@ -73,8 +111,21 @@ TreeMons3:
 	db 15, EKANS
 	db 15, EXEGGCUTE
 	db 15, EXEGGCUTE
+ENDC
 
 TreeMons4:
+IF DEF(_BLUE) ; Hard Version
+	db 30, EKANS
+	db 30, EKANS
+	db 30, EKANS
+	db 30, SPEAROW
+	db 30, SPEAROW
+	db 30, SPEAROW
+	db 30, EXEGGCUTE
+	db 30, EXEGGCUTE
+	db 30, HERACROSS
+	db 30, HERACROSS
+ELSE ; Normal Version
 	db 15, EKANS
 	db 15, EKANS
 	db 15, EKANS
@@ -85,8 +136,21 @@ TreeMons4:
 	db 15, EXEGGCUTE
 	db 15, HERACROSS
 	db 15, HERACROSS
+ENDC
 
 TreeMons5:
+IF DEF(_BLUE) ; Hard Version
+	db 40, PARAS
+	db 40, PARAS
+	db 40, VENONAT
+	db 40, VENONAT
+	db 40, BEEDRILL
+	db 40, BUTTERFREE
+	db 40, MURKROW
+	db 40, MURKROW
+	db 40, HERACROSS
+	db 40, SCYTHER
+ELSE ; Normal Version
 	db 25, PARAS
 	db 25, PARAS
 	db 25, VENONAT
@@ -97,8 +161,21 @@ TreeMons5:
 	db 25, MURKROW
 	db 25, HERACROSS
 	db 25, SCYTHER
+ENDC
 
 TreeMons6:
+IF DEF(_BLUE) ; Hard Version
+	db 45, PARAS
+	db 45, PARAS
+	db 45, VENONAT
+	db 45, VENONAT
+	db 45, BEEDRILL
+	db 45, BUTTERFREE
+	db 45, MURKROW
+	db 45, MURKROW
+	db 45, HERACROSS
+	db 45, PINSIR
+ELSE ; Normal Version
 	db 25, PARAS
 	db 25, PARAS
 	db 25, VENONAT
@@ -109,8 +186,21 @@ TreeMons6:
 	db 25, MURKROW
 	db 25, HERACROSS
 	db 25, PINSIR
+ENDC
 
 TreeMons7:
+IF DEF(_BLUE) ; Hard Version
+	db 50, BEEDRILL
+	db 50, BUTTERFREE
+	db 50, TANGELA
+	db 50, TANGELA
+	db 50, VENONAT
+	db 51, VENOMOTH
+	db 51, EXEGGCUTE
+	db 51, EXEGGCUTE
+	db 51, ARBOK
+	db 51, HERACROSS
+ELSE ; Normal Version
 	db 30, BEEDRILL
 	db 30, BUTTERFREE
 	db 30, TANGELA
@@ -121,6 +211,7 @@ TreeMons7:
 	db 31, EXEGGCUTE
 	db 31, ARBOK
 	db 31, HERACROSS
+ENDC
 
 TreeMons8: ; unused for now
 	db 10, PIDGEY
