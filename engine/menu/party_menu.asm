@@ -148,19 +148,19 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	rl b
 	ld c,a
 	add hl,bc
-	ld de,wOverworldMap
+	ld de,wEnemyMon ; Used as a buffer since we aren't in battle
 	ld a,BANK(EvosMovesPointerTable)
 	ld bc,2
 	call FarCopyData
-	ld hl,wOverworldMap
+	ld hl,wEnemyMon
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld de,wOverworldMap
+	ld de,wEnemyMon
 	ld a,BANK(EvosMovesPointerTable)
 	ld bc,30
 	call FarCopyData
-	ld hl,wOverworldMap
+	ld hl,wEnemyMon
 	ld de,.notAbleToEvolveText
 ; loop through the pokemon's evolution entries
 .checkEvolutionsLoop

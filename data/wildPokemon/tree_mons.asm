@@ -20,8 +20,8 @@ TreeMonPointerTable:
 	dw TreeMons4  ; ROUTE_7
 	dw TreeMons4  ; ROUTE_8
 	dw TreeMons4  ; ROUTE_9
-	dw TreeMons3  ; ROUTE_10
-	dw TreeMons3  ; ROUTE_11
+	dw TreeMons4  ; ROUTE_10
+	dw TreeMons4  ; ROUTE_11
 	dw TreeMons5  ; ROUTE_12
 	dw TreeMons5  ; ROUTE_13
 	dw TreeMons5  ; ROUTE_14
