@@ -8,9 +8,9 @@ IF DEF(_BLUE) ; Difficult Rom
 	db 58,ARBOK
 	db 58,DITTO
 	db 58,FEAROW
-	db 51,ARBOK
+	db 55,ARBOK
 	db 53,DITTO
-	db 51,SANDSLASH
+	db 56,SANDSLASH
 	db 53,FEAROW
 	
 ; Water Mons

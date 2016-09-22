@@ -2,16 +2,16 @@ PlateauMons3:
 IF DEF(_BLUE) ; Difficult Rom
 ; Grass Mons
 	db $0F
-	db 50,SANDSLASH
-	db 52,RHYHORN
-	db 51,GRAVELER
-	db 59,ONIX
-	db 56,GRAVELER
-	db 51,GRAVELER
-	db 52,GOLBAT
-	db 55,MACHOKE
-	db 57,STEELIX
-	db 59,MAROWAK
+	db 60,SANDSLASH
+	db 62,RHYHORN
+	db 61,GRAVELER
+	db 69,ONIX
+	db 66,GRAVELER
+	db 61,GRAVELER
+	db 62,GOLBAT
+	db 65,MACHOKE
+	db 67,STEELIX
+	db 69,MAROWAK
 
 ; Water Mons
 	db $00
