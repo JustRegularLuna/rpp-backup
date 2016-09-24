@@ -1564,6 +1564,18 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld [$FFE1],a
 	hlCoord 15, 6
 	predef Func_3f073
+	; is mon shiny, play animation
+	ld b, Bank(IsMonShiny)
+	ld hl, IsMonShiny
+	ld de, wEnemyMonDVs
+	call Bankswitch
+	jr z, .playCry
+	ld hl, wShinyMonFlag
+	set 1, [hl]
+	ld hl, PlayShinySparkleAnimation
+	ld b, Bank(PlayShinySparkleAnimation)
+	call Bankswitch
+.playCry
 	ld a,[wEnemyMonSpecies2]
 	call PlayCry
 	call DrawEnemyHUDAndHPBar

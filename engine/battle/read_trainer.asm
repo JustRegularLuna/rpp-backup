@@ -158,6 +158,12 @@ AddCustomMoves:
 	ret
 
 GetTrainerMonDVs:: ; called from engine/battle/core.asm
+; returns trainer's DVs in wTempDVs
+	push hl
+	
+	call GetUniqueTrainerDVs
+	jr z, .done
+	
 	ld a, [wTrainerAINumber]
 	dec a
 	ld c, a
@@ -171,12 +177,68 @@ GetTrainerMonDVs:: ; called from engine/battle/core.asm
 	inc de
 	ld a, [hl]
 	ld [de], a
+.done
+	pop hl
+	ret
+
+GetUniqueTrainerDVs:
+; returns z, and unique DVs in wTempDVs if DVs are unique
+; adapted from Polished Crystal
+	ld hl, UniqueDVTrainerPokemon
+.loop
+	ld a, [hli] ; TrainerClass
+	cp -1
+	jr z, .notunique
+	ld b, a
+	ld a, [W_TRAINERCLASS]
+	cp b
+	jr nz, .inc5andloop
+	ld a, [hli] ; TrainerID
+	ld b, a
+	ld a, [W_TRAINERNO]
+	cp b
+	jr nz, .inc4andloop
+	ld a, [hli] ; PartySpecies
+	ld b, a
+	ld a, [wd0b5] ; should always be mon's species, when called from AddPartyMon or LoadEnemyMonData
+	cp b
+	jr nz, .inc3andloop
+	ld a, [hli] ; Level
+	ld b, a
+	ld a, [W_CURENEMYLVL]
+	cp b
+	jr nz, .inc2andloop
+.unique
+	ld de, wTempDVs
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	xor a
+	and a
+	ret
+.inc5andloop
+	inc hl
+.inc4andloop
+	inc hl
+.inc3andloop
+	inc hl
+.inc2andloop
+	inc hl
+	inc hl
+	jp .loop
+.notunique
+	ld a, 1
+	and a
 	ret
 
 IF DEF(_BLUE) ; Difficult rom
 	INCLUDE "data/trainer_dvs_hard.asm"
-    INCLUDE "data/trainer_parties_hard.asm"
+	INCLUDE "data/unique_trainer_dvs_hard.asm"
+	INCLUDE "data/trainer_parties_hard.asm"
 ELSE ; Normal rom
 	INCLUDE "data/trainer_dvs.asm"
-    INCLUDE "data/trainer_parties.asm"
+	INCLUDE "data/unique_trainer_dvs.asm"
+	INCLUDE "data/trainer_parties.asm"
 ENDC
