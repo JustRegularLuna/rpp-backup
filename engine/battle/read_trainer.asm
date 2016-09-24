@@ -40,11 +40,13 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr nz,.inner
 	jr .outer
 
-; if the first byte of trainer data is FF,
-; - each pokemon has a specific level
-;      (as opposed to the whole team being of the same level)
-; - if [W_LONEATTACKNO] != 0, one pokemon on the team has a special move
-; else the first byte is the level of every pokemon on the team
+; the first part of every entry is the trainer's name text, terminated by '@'
+; next byte determines trainer type
+; SPECIAL_TRAINER2 has custom sprite, custom ai choice, and team has custom levels and custom moves
+; SPECIAL_TRAINER has a team with custom levels and custom moves
+; CUSTOM_PIC has a custom sprite, all Pokemon are same level, standard moves
+; SPECIAL_LEVELS has custom levels, default moves
+; Otherwise, all Pokemon are the same level and use default moves
 .IterateTrainer
 	call SetCustomName
 	ld a,[hli]
@@ -57,6 +59,9 @@ ReadTrainer: ; 39c53 (e:5c53)
 	cp SPECIAL_LEVELS ; custom levels only?
 	jr z, .SpecialLevelsOnly
 .GenericTrainer ; else, it's a generic trainer
+; if this code is being run:
+; all Pokemon are the same level
+; Pokemon have default moves for that level
 	ld [W_CURENEMYLVL],a
 .LoopTrainerData
 	ld a,[hli]
@@ -71,12 +76,18 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr .LoopTrainerData
 	
 .PicOnly
+; if this code is being run:
+; - trainer has a unique sprite from others in that class
+; - all Pokemon are the same level, with default moves for that level like generic trainers
 	ld a,[hli] ; get pic ID
 	ld [wTrainerPicID], a
 	ld a, [hli] ; get the level for that team's Pokemon
 	jr .GenericTrainer
 	
 .SpecialTrainer2
+; if this code is being run:
+; - trainer has a unique sprite from others in that class
+; - trainer has a unique AI selection from others in that class
 	ld a, [hli] ; get pic ID
 	ld [wTrainerPicID], a
 	ld a, [hli] ; get AI ID
@@ -159,6 +170,7 @@ AddCustomMoves:
 
 GetTrainerMonDVs:: ; called from engine/battle/core.asm
 ; returns trainer's DVs in wTempDVs
+; adapted from Gen 2, since Gen 1 used the same mediocre DVs on every single trainer
 	call GetUniqueTrainerDVs
 	ret z
 	
