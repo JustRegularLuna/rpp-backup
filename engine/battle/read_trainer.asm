@@ -159,10 +159,8 @@ AddCustomMoves:
 
 GetTrainerMonDVs:: ; called from engine/battle/core.asm
 ; returns trainer's DVs in wTempDVs
-	push hl
-	
 	call GetUniqueTrainerDVs
-	jr z, .done
+	ret z
 	
 	ld a, [wTrainerAINumber]
 	dec a
@@ -177,8 +175,6 @@ GetTrainerMonDVs:: ; called from engine/battle/core.asm
 	inc de
 	ld a, [hl]
 	ld [de], a
-.done
-	pop hl
 	ret
 
 GetUniqueTrainerDVs:
