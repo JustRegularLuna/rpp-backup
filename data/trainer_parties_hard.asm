@@ -1081,6 +1081,7 @@ GentlemanData: ; COMPLETED
 	db "PRESTON@",35,RAICHU,$FF ; VERMILLION GYM
 	db "GREGORY@",48,PRIMEAPE,$FF ;                                         	UNKNOWN
 	db "HOWARD@",25,GROWLITHE,PONYTA,$FF ; SSANNE	
+	db "NATHAN@",25,HOUNDOUR,$FF ; SSANNE
 	
 ChannelerData: ; COMPLETED
 	db "AMELIA@",38,GASTLY,$FF ; PKMNTOWER

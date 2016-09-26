@@ -18,7 +18,7 @@ SSAnne9Object: ; 0x61c8d (size=188)
 	db $0 ; signs
 
 	db $d ; people
-	db SPRITE_GENTLEMAN, $2 + 4, $a + 4, $ff, $d3, TRAINER | $1, GENTLEMAN + TRAINER_START, $3
+	db SPRITE_GENTLEMAN, $2 + 4, $a + 4, $ff, $d3, TRAINER | $1, GENTLEMAN + TRAINER_START, $6
 	db SPRITE_FISHER2, $4 + 4, $d + 4, $ff, $d2, TRAINER | $2, FISHER + TRAINER_START, $1
 	db SPRITE_GENTLEMAN, $e + 4, $0 + 4, $ff, $d3, TRAINER | $3, GENTLEMAN + TRAINER_START, $5
 	db SPRITE_LASS, $b + 4, $2 + 4, $ff, $d0, TRAINER | $4, LASS + TRAINER_START, $c
