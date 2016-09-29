@@ -5199,6 +5199,8 @@ AttackSubstitute: ; 3e25e (f:625e)
 	jr z, .done
 	cp EXPLODE_EFFECT
 	jr z, .done
+	cp RECOIL_EFFECT
+	jr z, .done
 	; if it wasn't one of those, nullify the effect
 	xor a
 	ld [hl],a ; zero the effect of the attacker's move
