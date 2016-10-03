@@ -112,6 +112,9 @@ StatusScreen: ; 12953 (4:6953)
 	ld bc, $8205 ; 5
 	call PrintNumber ; ID Number
 	call PrintShinySymbol
+	ld a, [wLoadedMonSpecies]
+	ld [wGenderTemp], a
+	call PrintGenderStatusScreen
 	ld d, $0
 	call PrintStatsBox
 	call Delay3
@@ -200,6 +203,28 @@ PrintShinySymbol:
 	; draw the shiny symbol
 	hlCoord 0, 0
 	ld a, "[SHINY]"
+	ld [hl], a
+	ret
+
+PrintGenderStatusScreen: ; called on status screen
+	; get gender
+	ld de, wLoadedMonDVs
+	callba GetMonGender
+	ld a, [wGenderTemp]
+	and a
+	jr z, .noGender
+	dec a
+	jr z, .male
+	; else female
+	ld a, "♀"
+	jr .printSymbol
+.male
+	ld a, "♂"
+	jr .printSymbol
+.noGender
+	ld a, " "
+.printSymbol
+	hlCoord 17, 2
 	ld [hl], a
 	ret
 

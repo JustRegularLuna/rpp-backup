@@ -6233,22 +6233,49 @@ IsCurrentMonBattleMon:
 IsMonShiny:
 ; Input: de = address in RAM for DVs
 ; Reset zero flag if mon is shiny
-; Mon is shiny if Defense/Speed/Special are 10, and Attack is 2, 3, 6, 7, 10, 11, 14, or 15
+; 1 in 1024 wild Pokémon is shiny.
+
 	ld h, d
 	ld l, e
-	ld a, [hli]
-	bit 5, a
-	jr z, .notShiny
-	and a, $0f
-	cp $0a
-	jr nz, .notShiny
+
+; Attack must be odd (1, 3, 5, 7, 9, 11, 13, or 15) (1 in 2)
 	ld a, [hl]
-	cp $aa
-	jr nz, .notShiny
+	and 1 << 4
+	jr z, .NotShiny
+
+; Defense must be 2, 3, 7, or 11 (1 in 4)
+	ld a, [hli]
+	and $f
+	cp 2
+	jr z, .MaybeShiny1
+	cp 3
+	jr z, .MaybeShiny1
+	cp 7
+	jr z, .MaybeShiny1
+	cp 11
+	jr nz, .NotShiny
+
+; Speed must be 5 or 13 (1 in 8)
+.MaybeShiny1
+	ld a, [hl]
+	and $f << 4
+	cp 5 << 4
+	jr z, .MaybeShiny2
+	cp 13 << 4
+	jr nz, .NotShiny
+
+; Special must be 15 (1 in 16)
+.MaybeShiny2
+	ld a, [hl]
+	and $f
+	cp 15
+	jr nz, .NotShiny
+
+.Shiny
 	; set zero flag
 	and a ; a cannot be 0, so zero flag is set with thing command
 	ret
-.notShiny
+.NotShiny
 	; reset zero flag
 	xor a
 	ret
@@ -7419,3 +7446,4 @@ INCLUDE "engine/overworld/headbutt.asm"
 SECTION "Trainer Parties", ROMX,BANK[$3B]
 INCLUDE "engine/battle/read_trainer.asm"
 INCLUDE "engine/overworld/advance_player_sprite.asm"
+INCLUDE "engine/mon_gender.asm"

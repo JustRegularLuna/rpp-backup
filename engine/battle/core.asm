@@ -1981,6 +1981,9 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	hlCoord 10, 7
 	call CenterMonName
 	call PlaceString
+	ld a, [wBattleMonSpecies]
+	ld [wGenderTemp], a
+	call PrintPlayerMonGender
 	call PrintEXPBar
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
@@ -2041,6 +2044,9 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	hlCoord 1, 0
 	call CenterMonName
 	call PlaceString
+	ld a, [wEnemyMonSpecies]
+	ld [wGenderTemp], a
+	call PrintEnemyMonGender
 	hlCoord 6, 1
 	push hl
 	inc hl
@@ -6255,15 +6261,12 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 .notTrainer
 ; forced shiny wildmon DVs
 	call BattleRandom
-	ld b, a
-	sla b
-	sla b
-	sla b
-	sla b
-	ld a, $0A
-	or a, b
-	set 5, a
-	ld b, $AA
+	bit 0, a
+	ld a, ATKDEFDV_SHINY
+	jr z, .go_ahead
+	ld a, ATKDEFDV_SHINY_FEMALE
+.go_ahead
+	ld b, SPDSPCDV_SHINY
 	ld hl, wExtraFlags
 	bit 0, [hl]
 	res 0, [hl]
@@ -8988,4 +8991,48 @@ PhysicalSpecialSplit:
 	ld [wTempMoveID], a
 	callba _PhysicalSpecialSplit
 	ld a, [wTempMoveID]
+	ret
+
+PrintEnemyMonGender: ; called during battle
+	; get gender
+	ld de, wEnemyMonDVs
+	callba GetMonGender
+	ld a, [wGenderTemp]
+	and a
+	jr z, .noGender
+	dec a
+	jr z, .male
+	; else female
+	ld a, "♀"
+	jr .printSymbol
+.male
+	ld a, "♂"
+	jr .printSymbol
+.noGender
+	ld a, " "
+.printSymbol
+	hlCoord 9, 1
+	ld [hl], a
+	ret
+
+PrintPlayerMonGender: ; called during battle
+	; get gender
+	ld de, wBattleMonDVs
+	callba GetMonGender
+	ld a, [wGenderTemp]
+	and a
+	jr z, .noGender
+	dec a
+	jr z, .male
+	; else female
+	ld a, "♀"
+	jr .printSymbol
+.male
+	ld a, "♂"
+	jr .printSymbol
+.noGender
+	ld a, " "
+.printSymbol
+	hlCoord 17, 8
+	ld [hl], a
 	ret

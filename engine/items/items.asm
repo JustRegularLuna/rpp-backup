@@ -1937,15 +1937,10 @@ CheckChainFishingShiny:
 .loop
 	dec e
 	jr z, .end
-	; Generate a random IVs and see if they're shiny (1/4096 in Gen 6)
+	; Generate a random number and see if its shiny (1/256 now, since 1/1024 for normal wild)
 	call Random
 	; Check if a = $AA
 	cp a, $AA
-	jr nz, .loop
-	call Random
-	; Check if a's low nybble is $A
-	and a, $0F
-	cp $A
 	jr nz, .loop
 	; Force wild pokemon to be shiny
 	ld hl, wExtraFlags

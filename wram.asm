@@ -202,6 +202,7 @@ wSerialEnemyMonsPatchList:: ; c5d0
 
 	ds 80
 
+wGenderTemp::
 wTempLevel::
 wTempDVs::
 W_AIBUFFER1::
