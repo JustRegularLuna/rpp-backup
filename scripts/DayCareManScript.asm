@@ -182,7 +182,7 @@ SetupBabymonStats: ; Inherit stuff from the parents, currently just DVs for now
 	ret
 
 DayCareManDittoDVs: ; placeholder until there is a second daycaremon
-	db $EA, $AA
+	db ATKDEFDV_SHINY, SPDSPCDV_SHINY
 
 INCLUDE "data/breeding_list.asm"
 INCLUDE "data/no_breed_list.asm"
