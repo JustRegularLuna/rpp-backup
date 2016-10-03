@@ -1984,6 +1984,7 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	ld a, [wBattleMonSpecies]
 	ld [wGenderTemp], a
 	call PrintPlayerMonGender
+	call PrintPlayerMonShiny
 	call PrintEXPBar
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
@@ -2047,6 +2048,7 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	ld a, [wEnemyMonSpecies]
 	ld [wGenderTemp], a
 	call PrintEnemyMonGender
+	call PrintEnemyMonShiny
 	hlCoord 6, 1
 	push hl
 	inc hl
@@ -9034,5 +9036,33 @@ PrintPlayerMonGender: ; called during battle
 	ld a, " "
 .printSymbol
 	hlCoord 17, 8
+	ld [hl], a
+	ret
+
+PrintEnemyMonShiny: ; show shiny symbol beside gender symbol
+	; check if mon is shiny
+	ld de, wEnemyMonDVs
+	callba IsMonShiny
+	jr z, .notShiny
+	ld a, "[SHINY]"
+	jr .printSymbol
+.notShiny
+	ld a, " "
+.printSymbol
+	hlCoord 10, 1
+	ld [hl], a
+	ret
+
+PrintPlayerMonShiny: ; show shiny symbol beside gender symbol
+	; check if mon is shiny
+	ld de, wBattleMonDVs
+	callba IsMonShiny
+	jr z, .notShiny
+	ld a, "[SHINY]"
+	jr .printSymbol
+.notShiny
+	ld a, " "
+.printSymbol
+	hlCoord 18, 8
 	ld [hl], a
 	ret
