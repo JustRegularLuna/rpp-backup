@@ -3897,34 +3897,18 @@ MonName1Text: ; 3dafb (f:5afb)
 	and a
 	ld a, [W_PLAYERMOVENUM]
 	ld hl, wPlayerUsedMove
-	jr z, .asm_3db11
+	jr z, .playerTurn
 	ld a, [W_ENEMYMOVENUM]
 	ld hl, wEnemyUsedMove
-.asm_3db11
+.playerTurn
 	ld [hl], a
-	ld [wd11e], a
-	call Func_3db85
-	ld a, [wcced]
-	and a
-	ld hl, Used2Text
-	ret nz
-	ld a, [wd11e]
-	cp DOUBLESLAP
-	ld hl, Used2Text
-	ret c
-	ld hl, Used1Text
+	ld hl, UsedText
 	ret
 
-Used1Text: ; 3db2d (f:5b2d)
-	TX_FAR _Used1Text
-	db $08 ; asm
-	jr PrintInsteadText
-
-Used2Text: ; 3db34 (f:5b34)
-	TX_FAR _Used2Text
+UsedText: ; 3db2d (f:5b2d)
+	TX_FAR _UsedText
 	db $08 ; asm
 
-PrintInsteadText: ; 3db39 (f:5b39)
 	ld a, [wcced]
 	and a
 	jr z, PrintCF4BText
@@ -3941,83 +3925,7 @@ PrintCF4BText: ; 3db48 (f:5b48)
 
 CF4BText: ; 3db4c (f:5b4c)
 	TX_FAR _CF4BText
-	db $08 ; asm
-	ld hl, ExclamationPointPointerTable
-	ld a, [wd11e]
-	add a
-	push bc
-	ld b, $0
-	ld c, a
-	add hl, bc
-	pop bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
-
-ExclamationPointPointerTable: ; 3db62 (f:5b62)
-	dw ExclamationPoint1Text
-	dw ExclamationPoint2Text
-	dw ExclamationPoint3Text
-	dw ExclamationPoint4Text
-	dw ExclamationPoint5Text
-
-ExclamationPoint1Text: ; 3db6c (f:5b6c)
-	TX_FAR _ExclamationPoint1Text
 	db "@"
-
-ExclamationPoint2Text: ; 3db71 (f:5b71)
-	TX_FAR _ExclamationPoint2Text
-	db "@"
-
-ExclamationPoint3Text: ; 3db76 (f:5b76)
-	TX_FAR _ExclamationPoint3Text
-	db "@"
-
-ExclamationPoint4Text: ; 3db7b (f:5b7b)
-	TX_FAR _ExclamationPoint4Text
-	db "@"
-
-ExclamationPoint5Text: ; 3db80 (f:5b80)
-	TX_FAR _ExclamationPoint5Text
-	db "@"
-
-Func_3db85: ; 3db85 (f:5b85)
-	push bc
-	ld a, [wd11e] ; move number
-	ld c, a
-	ld b, $0
-	ld hl, UnknownMovesList_3dba3
-.asm_3db8f
-	ld a, [hli]
-	cp $ff
-	jr z, .asm_3db9d
-	cp c
-	jr z, .asm_3db9d
-	and a
-	jr nz, .asm_3db8f
-	inc b
-	jr .asm_3db8f
-.asm_3db9d
-	ld a, b
-	ld [wd11e], a
-	pop bc
-	ret
-
-UnknownMovesList_3dba3: ; 3dba3 (f:5ba3)
-	db SWORDS_DANCE, GROWTH
-	db $00
-	db RECOVER, BIDE, SELFDESTRUCT, AMNESIA
-	db $00
-	db MEDITATE, AGILITY, TELEPORT, MIMIC, DOUBLE_TEAM, BARRAGE
-	db $00
-	db POUND, SCRATCH, VICEGRIP, WING_ATTACK, FLY, BIND, SLAM, HORN_ATTACK, BODY_SLAM
-	db WRAP, THRASH, TAIL_WHIP, LEER, BITE, GROWL, ROAR, SING, PECK, COUNTER
-	db STRENGTH, ABSORB, STRING_SHOT, EARTHQUAKE, FISSURE, DIG, TOXIC, SCREECH, HARDEN
-	db MINIMIZE, WITHDRAW, DEFENSE_CURL, METRONOME, LICK, CLAMP, CONSTRICT, POISON_GAS
-	db LEECH_LIFE, BUBBLE, FLASH, SPLASH, ACID_ARMOR, FURY_SWIPES, REST, SHARPEN, SLASH, SUBSTITUTE
-	db $00
-	db $FF ; terminator
 
 PrintMoveFailureText: ; 3dbe2 (f:5be2)
 	ld de, W_PLAYERMOVEEFFECT
