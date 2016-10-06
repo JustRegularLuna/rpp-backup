@@ -49,4 +49,4 @@ TrainerClassDVs:
 	db $7F, $DF ; AGATHA
 	db $DC, $DD ; LANCE
 	db $78, $8A ; HEX_MANIAC
-	db $98, $88 ; PKMN_TRAINER
+	db $7D, $DD ; PKMN_TRAINER
