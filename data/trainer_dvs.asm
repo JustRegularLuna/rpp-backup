@@ -3,7 +3,7 @@ TrainerClassDVs:
 	;  Def  Spc
 	db $98, $88 ; YOUNGSTER
 	db $98, $88 ; BUG_CATCHER
-	db $58, $88 ; LASS
+	db $78, $88 ; LASS
 	db $98, $88 ; SAILOR
 	db $98, $88 ; CAMPER
 	db $6A, $A8 ; PICNICKER
@@ -18,7 +18,7 @@ TrainerClassDVs:
 	db $98, $88 ; SWIMMER
 	db $A8, $88 ; CUE_BALL
 	db $98, $88 ; GAMBLER
-	db $69, $C8 ; BEAUTY
+	db $79, $C8 ; BEAUTY
 	db $98, $88 ; PSYCHIC_TR
 	db $98, $88 ; ROCKER
 	db $98, $88 ; JUGGLER
@@ -45,8 +45,8 @@ TrainerClassDVs:
 	db $9D, $DD ; SONY2
 	db $9D, $DD ; SONY3
 	db $7F, $DF ; LORELEI
-	db $68, $8A ; CHANNELER
+	db $78, $8A ; CHANNELER
 	db $7F, $DF ; AGATHA
 	db $DC, $DD ; LANCE
-	db $68, $8A ; HEX_MANIAC
+	db $78, $8A ; HEX_MANIAC
 	db $98, $88 ; PKMN_TRAINER

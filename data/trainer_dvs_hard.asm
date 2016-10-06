@@ -6,7 +6,7 @@ TrainerClassDVs:
 	db $7F, $DF ; LASS
 	db $D8, $A8 ; SAILOR
 	db $D8, $A8 ; CAMPER
-	db $6A, $A8 ; PICNICKER
+	db $7A, $A8 ; PICNICKER
 	db $A8, $CC ; POKEMANIAC
 	db $A8, $CC ; SUPER_NERD
 	db $BC, $CC ; HIKER
@@ -18,7 +18,7 @@ TrainerClassDVs:
 	db $A8, $CC ; SWIMMER
 	db $AC, $CC ; CUE_BALL
 	db $D8, $A8 ; GAMBLER
-	db $69, $C8 ; BEAUTY
+	db $79, $C8 ; BEAUTY
 	db $7F, $DF ; PSYCHIC_TR
 	db $D8, $A8 ; ROCKER
 	db $D8, $A8 ; JUGGLER
