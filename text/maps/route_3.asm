@@ -9,37 +9,44 @@ _Route3Text1:: ; 8d779 (23:5779)
 	done
 
 _Route3BattleText1:: ; 8d7d5 (23:57d5)
-	text "Hey! Haven't I"
-	line "seen you before?"
-	done
-
-_Route3EndBattleText1:: ; 8d7f9 (23:57f9)
-	text "Defeated again!"
-	prompt
-
-_Route3AfterBattleText1:: ; 8d80d (23:580d)
-	text "There are other"
-	line "kinds of #MON"
-	cont "than those found"
-	cont "in the forest!"
-	done
-
-_Route3BattleText2:: ; 8d84c (23:584c)
 	text "Hi! I like shorts!"
 	line "They're comfy and"
 	cont "easy to wear!"
 	done
 
+_Route3EndBattleText1:: ; 8d7f9 (23:57f9)
+	text "Whew! Even that"
+	line "battle was short!"
+	prompt
+
+_Route3AfterBattleText1:: ; 8d80d (23:580d)
+	text "I should look for"
+	line "#MON outside"
+	cont "of forests."
+	done
+
+_Route3BattleText2:: ; 8d84c (23:584c)
+	text "Hey! Check out my"
+	line "RATTATA!"
+	
+	para "He's in the top"
+	line "percentage of"
+	cont "RATTATA!"
+	done
+
 _Route3EndBattleText2:: ; 8d87f (23:587f)
 	text "I don't believe"
-	line "it!"
+	line "it! I lost!"
 	prompt
 
 _Route3AfterBattleText2:: ; 8d893 (23:5893)
-	text "Are you storing"
-	line "your #MON on"
-	cont "PC? Each BOX can"
-	cont "hold 20 #MON!"
+	text "Oh well, I'm only"
+	line "visiting here"
+	cont "anyway."
+	
+	para "I'll be heading"
+	line "back to JOHTO"
+	cont "pretty soon."
 	done
 
 _Route3BattleText3:: ; 8d8d0 (23:58d0)

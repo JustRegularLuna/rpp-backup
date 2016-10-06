@@ -6,5 +6,6 @@ UniqueDVTrainerPokemon:
 	db LANCE, 1, DRAGONITE, 79, ATKDEFDV_SHINY, SPDSPCDV_SHINY
 	
 	; other
+	db YOUNGSTER, 1, RATTATA, 14, $FF, $FF
 	
 	db $FF ; end
