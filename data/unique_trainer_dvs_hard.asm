@@ -9,7 +9,7 @@ UniqueDVTrainerPokemon:
 	; other
 	db YOUNGSTER, 1, RATTATA, 14, $FF, $FF ; Joey's Top Percentage Rattata
 	db COUPLE, 1, WEEPINBELL, 25, $7F, $DF ; One of the Couple's Pokemon has Lass DVs instead of Youngster DVs
-	db POKEMANIAC, 4, PIKACHU, 36, $78, $88 ; Pokemaniac Jessy has female 'mons
-	db POKEMANIAC, 4, CUBONE, 36, $78, $88 ; Pokemaniac Jessy has female 'mons
+	db POKEMANIAC, 4, PIKACHU, 36, $7F, $DF ; Pokemaniac Jessy has female 'mons
+	db POKEMANIAC, 4, CUBONE, 36, $7F, $DF ; Pokemaniac Jessy has female 'mons
 	
 	db $FF ; end
