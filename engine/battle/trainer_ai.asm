@@ -699,9 +699,6 @@ TrainerAI: ; 3a52e (e:652e)
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
-	and a
-	ret z ; They can't immediately heal if you attack first when they send them out
 	ld a,[wTrainerAINumber] ; what trainer class is this?
 	dec a
 	ld c,a
@@ -840,20 +837,33 @@ SwitchOutAI: ; 3a5e9 (e:65e9)
 XAttack1AI: ; 3a5ef (e:65ef)
 	cp $20
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret nc
 	jp AIUseXAttack
 
 GuardSpecAI: ; 3a5f5 (e:65f5)
 	cp $40
+	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
 	ret nc
 	jp AIUseGuardSpec
 
 XAttack2AI: ; 3a5fb (e:65fb)
 	cp $40
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret nc
 	jp AIUseXAttack
 
 SwitchOrHyperPotionAI: ; 3a601 (e:6601)
 	cp $40
+	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,$A
 	call AICheckIfHPBelowFraction
 	jp c,AIUseHyperPotion
@@ -865,6 +875,9 @@ SwitchOrHyperPotionAI: ; 3a601 (e:6601)
 FullHealOrPotionAI:
 	cp $40
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,[wEnemyMonStatus]
 	and a
 	jp nz, AIUseFullHeal
@@ -876,6 +889,9 @@ FullHealOrPotionAI:
 FullHealAI: ; 3a614 (e:6614)
 	cp $40
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 ; if his active monster has a status condition, use a full heal
 	ld a,[wEnemyMonStatus]
 	and a
@@ -885,16 +901,25 @@ FullHealAI: ; 3a614 (e:6614)
 XDefendAI: ; 3a61c (e:661c)
 	cp $40
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret nc
 	jp AIUseXDefend
 
 XSpeedAI: ; 3a622 (e:6622)
 	cp $40
+	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
 	ret nc
 	jp AIUseXSpeed
 
 SuperPotion1AI: ; 3a628 (e:6628)
 	cp $80
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,$A
 	call AICheckIfHPBelowFraction
 	ret nc
@@ -903,6 +928,9 @@ SuperPotion1AI: ; 3a628 (e:6628)
 SuperPotion2AI: ; 3a63a (e:663a)
 	cp $40
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,5
 	call AICheckIfHPBelowFraction
 	ret nc
@@ -911,6 +939,9 @@ SuperPotion2AI: ; 3a63a (e:663a)
 HyperPotionAI: ; 3a640 (e:6640)
 	cp $40
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,$A
 	call AICheckIfHPBelowFraction
 	ret nc
@@ -919,6 +950,9 @@ HyperPotionAI: ; 3a640 (e:6640)
 PotionAI: ; 3a64c (e:664c)
 	cp $20
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,5
 	call AICheckIfHPBelowFraction
 	ret nc
@@ -927,6 +961,9 @@ PotionAI: ; 3a64c (e:664c)
 BerryUserAI: ; used mainly by hikers, campers, and picnickers
 	cp $30
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,[wEnemyMonStatus]
 	and a
 	jp nz, AIUseLumBerry
@@ -941,6 +978,9 @@ BerryUserAI: ; used mainly by hikers, campers, and picnickers
 FullRestoreAI: ; 3a658 (e:6658)
 	cp $20
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,5
 	call AICheckIfHPBelowFraction
 	ret nc
@@ -951,6 +991,9 @@ SwitchOrSuperPotionAI: ; 3a676 (e:6676)
 	jp c,AISwitchIfEnoughMons
 	cp $80
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,4
 	call AICheckIfHPBelowFraction
 	ret nc
@@ -959,6 +1002,9 @@ SwitchOrSuperPotionAI: ; 3a676 (e:6676)
 HyperPotion2AI: ; 3a687 (e:6687)
 	cp $80
 	ret nc
+	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	cp 2
+	ret c ; They can't heal too early
 	ld a,5
 	call AICheckIfHPBelowFraction
 	ret nc
