@@ -21,6 +21,8 @@ These are notable bugs from original Red that have been fixed
 * Fixed the bug where Item Evolutions can happen accidentally by level-up
 * Changed Struggle to be ???-Type so nothing can be immune to it
 * Player turns to face an enemy trainer, like in every game except Red and FireRed
+* Defeating a Pokémon does not negate the need for HyperBeam to recharge
+* Breaking a substitute doesn't negate HyperBeam, SelfDestruct/Explosion effects
 * More
 
 
@@ -59,7 +61,9 @@ These are notable features which have been added
 * Move Relearner
 * Move Tutors
 * Move Deleter
-* Shiny Pokémon
+* Shiny Pokémon (same chances as Polished Crystal)
+* Pokémon have genders
+* Chain-Fishing for Shinies
 * More
 
 
@@ -70,7 +74,6 @@ These features are not in yet, but are planned for the future
 * Battle Tower
 * Battle Factory
 * Held Items
-* Pokémon genders
 * Special Attack and Special Defense
 * Infinite-use TMs
 * Pack separated into pockets, with more room for items
@@ -85,22 +88,13 @@ These features are not in yet, but are planned for the future
 * More
 
 
-## POKéMON FOREVER - A bonus hack
-Previously known as Pokémon: Secrets and Rumours
-
-* Will eventually build as pokeforever.gbc (currently is identical to the normal rom)
-* Will contain all features of Red++
-* Will include "Pokégods" such as Pikablu, Mewthree, Etc.
-* Will include rumoured locations, such as Brick Town
-* Will include rumoured items and events, such as the Mist Stone and the Truck
-
-
 ## BEHIND-THE-SCENES FEATURES
 These are probably only interesting to people wanting to use this as a baserom
 
 * Pokémon IDs sorted by Pokédex Number internally
 * Trainer sprite and AI no longer forced to be the same for every trainer within a class
 * Trainer classes do not all have the same DVs
+* Trainers can have individually assigned DVs for certain Pokemon, ie Lance has a shiny Dragonite
 * New more flexible (and more readable) format for giving trainers' Pokémon custom movesets
 * Variable overworld sprite IDs, like Gen 2 has
 * Trainer sprites can be stored in any Rombank
