@@ -2660,11 +2660,14 @@ PrintStrengthTxt: ; cd99 (3:4d99)
 
 UsedStrengthText: ; cdaa (3:4daa)
 	TX_FAR _UsedStrengthText
-	db $08 ; asm
-	ld a, [wcf91]
-	call PlayCry
-	call Delay3
-	jp TextScriptEnd
+	db "@"
+; Don't play the cry for now
+; I can't make it load the right ID when used from the overworld without shifting bank 0
+;	db $08 ; asm
+;	ld a, [wcf91]
+;	call PlayCry
+;	call Delay3
+;	jp TextScriptEnd
 
 CanMoveBouldersText: ; cdbb (3:4dbb)
 	TX_FAR _CanMoveBouldersText
@@ -3587,8 +3590,8 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	bit 0, [hl]
 	res 0, [hl]
 	pop hl
-	ld a, $EA
-	ld b, $AA
+	ld a, ATKDEFDV_SHINY
+	ld b, SPDSPCDV_SHINY
 	jr nz,.writeFreshMonData
 ;generate random DVS
 	call Random
