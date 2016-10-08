@@ -202,7 +202,6 @@ wSerialEnemyMonsPatchList:: ; c5d0
 
 	ds 80
 
-wGenderTemp::
 wTempLevel::
 wTempDVs::
 W_AIBUFFER1::
@@ -385,7 +384,10 @@ wDeletableMoves::
 ; List of move ids that can be deleted (Move Deleter)
 ; First byte is the number of moves in this list.
 ; List is terminated with $ff
-	ds 10
+	ds 1
+wGenderTemp::
+; temporary buffer used when checking/displaying a Pokemon's gender
+	ds 9
 
 wcca1:: ds 49
 
