@@ -148,6 +148,10 @@ Route24TrainerHeader6: ; 51497 (14:5497)
 
 Route24Text1: ; 514a4 (14:54a4)
 	db $8
+	; make player face the rocket
+	ld a, 1
+	ld [wd528], a
+	; original script continues below
 	ld hl, wd7f0
 	res 1, [hl]
 	ld a, [wd7ef]
