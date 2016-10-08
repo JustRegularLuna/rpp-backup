@@ -35,8 +35,4 @@ ENDC
 IF DEF(_BLUE) ; Hard Rom
 	INCBIN "gfx/tilemaps/hard_screen.map"
 ENDC
-
-IF DEF(_FOREVER) ; Forever Rom
-	INCBIN "gfx/tilemaps/forever_screen.map"
-ENDC
 VersionScreenTilemapEnd:

@@ -359,18 +359,10 @@ CopyrightTextString: ; 4556 (1:4556)
 
 ; prints version text (red, blue)
 PrintGameVersionOnTitleScreen: ; 4598 (1:4598)
-IF DEF(_FOREVER)
-	hlCoord 8, 8
-ELSE
 	hlCoord 7, 8
-ENDC
 	ld de, VersionOnTitleScreenText
 	jp PlaceString
 
 ; these point to special tiles specifically loaded for that purpose and are not usual text
 VersionOnTitleScreenText: ; 45a1 (1:45a1)
-IF DEF(_FOREVER)
-	db $60,$61,$62,$63,$64,"@" ; "Forever"
-ELSE
 	db $60,$61,$62,$7F,$65,$66,$67,$68,$69,"@" ; "Red Version"
-ENDC
