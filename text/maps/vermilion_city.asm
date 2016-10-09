@@ -3,7 +3,7 @@ _VermilionCityText1:: ; a5668 (29:5668)
 	line "from all over."
 
 	para "I met someone from"
-	line "the LATIO region"
+	line "the HOENN region"
 	cont "once."
 	done
 
