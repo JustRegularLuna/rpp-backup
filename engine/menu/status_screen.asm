@@ -40,8 +40,8 @@ StatusScreen: ; 12953 (4:6953)
 	push af
 	xor a
 	ld [hTilesetType], a
-	hlCoord 19, 1
-	ld bc, $060a
+	hlCoord 19, 4
+	ld bc, $030a
 	call DrawLineBox ; Draws the box around name, HP and status
 	ld de, $fffa
 	add hl, de
