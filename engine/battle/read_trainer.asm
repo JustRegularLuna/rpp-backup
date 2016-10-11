@@ -174,7 +174,7 @@ GetTrainerMonDVs:: ; called from engine/battle/core.asm
 	call GetUniqueTrainerDVs
 	ret z
 	
-	ld a, [wTrainerAINumber]
+	ld a, [W_TRAINERCLASS]
 	dec a
 	ld c, a
 	ld b, 0
