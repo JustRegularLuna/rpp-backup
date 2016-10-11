@@ -113,10 +113,10 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Southern Island Outside
 	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Southern Island Inside
 	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; Lance
-	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
-	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
-	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
-	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ;unused
+	db MUSIC_SS_ANNE, BANK(Music_SSAnne) ; Navel Rock Ferry Dock
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Navel Rock Outside
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Navel Rock Cave
+	db MUSIC_DUNGEON3, BANK(Music_Dungeon3) ; Navel Rock Cave
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ; HallofFameRoom
 	db MUSIC_ROUTES1, BANK(Music_Routes1) ; UndergroundPathNS
 	db MUSIC_INDIGO_PLATEAU, BANK(Music_IndigoPlateau) ; Gary
