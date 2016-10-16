@@ -414,9 +414,6 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld a, [wEscapedFromBattle]
 	and a
 	ret nz ; return if pokedoll was used to escape from battle
-	ld a, [wBattleMonStatus]
-	and SLP ; Check if sleeping
-	jr nz, .selectEnemyMove ; if so, jump
 	ld a, [W_PLAYERBATTSTATUS1]
 	and (1 << StoringEnergy) | (1 << UsingTrappingMove) ; check player is using Bide or using a multi-turn attack like wrap
 	jr nz, .selectEnemyMove ; if so, jump
@@ -3501,15 +3498,18 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	call PlayMoveAnimation
 	ld hl,FastAsleepText
 	call PrintText
-	jr .sleepDone
-.WakeUp
-	ld hl,WokeUpText
-	call PrintText
+
 .sleepDone
 	xor a
 	ld [wPlayerUsedMove],a
 	ld hl,ExecutePlayerMoveDone ; player can't move this turn
 	jp .returnToHL
+
+.WakeUp
+	ld hl,WokeUpText
+	call PrintText
+	call DrawHUDsAndHPBars
+	jr .HeldInPlaceCheck
 
 .FrozenCheck
 	bit FRZ,[hl] ; frozen?
@@ -5914,15 +5914,19 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld [wcc5b], a
 	ld a,SLP_ANIM
 	call PlayMoveAnimation
-	jr .next1
-.wokeUp
-	ld hl, WokeUpText
-	call PrintText
+
 .next1
 	xor a
 	ld [wEnemyUsedMove], a
 	ld hl, ExecuteEnemyMoveDone
 	jp .enemyReturnToHL
+
+.wokeUp
+	ld hl, WokeUpText
+	call PrintText
+	call DrawHUDsAndHPBars
+	jr .checkIfTrapped
+
 .checkIfFrozen
 	bit FRZ, [hl]
 	jr z, .checkIfTrapped
