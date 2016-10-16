@@ -6,6 +6,7 @@ This list is not necessarily complete, but it gives a good list and will be upda
 These are notable bugs from original Red that have been fixed
 
 * Frozen Pokémon can thaw naturally, or if they use a move that thaws the user as part of its effect
+* Waking up does not waste your entire turn
 * Critical Hit and Focus Energy code ported from Pokémon Crystal
 * Fixed Missingno. Glitch
 * Counter can hit any Physical attack, not just any Normal or Fighting attack
@@ -47,6 +48,7 @@ These are notable features which have been added
 * Animated EXP Bar in battle
 * Caught indicator icon for Wild Pokémon
 * EXP Share functions like Gen 6 (But is NOT given at the start of the game)
+* Gain EXP from catching a Pokémon, like in Gen 6
 * BW/2 Repel System
 * Pack holds 30 items instead of 20
 * HM Moves usable without manually selecting them from the party menu
