@@ -1,6 +1,7 @@
 # Todo List
 
-This list is not necessarily a guarantee, but it contains a list of features and updates I plan to add.
+This list is not necessarily a guarantee, but it contains a list of features and updates I plan to add. 
+Things may be added to this list as I think of them, and removed if they are added or I change my mind.
 
 ## Engine updates and New Features
 * Full color, by merging in pokered-gbc
@@ -57,6 +58,9 @@ This list is not necessarily a guarantee, but it contains a list of features and
 * Recovery moves failing on certain HP values
 * Multi-hit moves deal same damage for each blow
 * Dig/Fly status not properly reset if fully paralyzed or hurt yourself due to confusion that turn
+* Make Pokéball break with zero shakes instead of "You missed the Pokémon!"
+* Stat-up too high making your stat roll over to ultra low values
+* Substitute not protecting against status
 
 
 ## Unsorted Notes
@@ -82,3 +86,5 @@ This list is not necessarily a guarantee, but it contains a list of features and
 * Consolidate Leader classes and Elite Four classes
 * Maybe change Trainer DVs back to checking AI Number, instead of Trainer Class, once those are consolidated
 * Go ahead and declare constants for all 721 Pokémon + Fossils, use Gen 3 Missingno Sprite as placeholder
+* If Natures are disabled in intro, do not display on status screens, and use a neutral nature always
+* If Abilities are disabled in intro, do not display on status screens, and use a blank ability for everyone
