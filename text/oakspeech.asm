@@ -13,7 +13,15 @@ _OakSpeechText1::
 	
 	para "It has a lot of"
 	line "new features that"
-	cont "weren't in Gen 1."
+	cont "weren't in Gen 1,"
+	cont "and fixes a lot"
+	cont "of bugs from the"
+	cont "original games."
+	
+	para "It hasn't fixed"
+	line "everything yet,"
+	cont "but it will"
+	cont "eventually."
 	prompt
 
 _OakSpeechText2A::
@@ -72,6 +80,28 @@ _BoyGirlText::
 	
 _ShouldMonsObeyText::
 	text "Should traded"
+	line "#MON behave"
+	cont "like caught"
+	cont "#MON?"
+
+	para "If you choose Yes:"
+	line "- You can rename"
+	cont "traded #MON at"
+	cont "the Name Rater."
+	
+	para "- Traded #MON"
+	line "will always obey."
+	
+	para "- Traded #MON"
+	line "will not gain"
+	cont "boosted EXP."
+	
+	para "In other words,"
+	line "they will be just"
+	cont "like #MON you"
+	cont "caught normally."
+	
+	para "So, should traded"
 	line "#MON behave"
 	cont "like caught"
 	cont "#MON?"
