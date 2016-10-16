@@ -437,13 +437,6 @@ BallAnyway:
 	jr z,.printText1
 	ld hl,ItemUseBallText05
 	call PrintText
-	; added to gain EXP on catch
-	ld a, [wWhichPokemon]
-	push af
-	callba GiveEXPToMonsThatNeedIt
-	pop af
-	ld [wWhichPokemon], a
-	;resume old routine
 	predef IndexToPokedex
 	ld a,[wd11e]
 	dec a
