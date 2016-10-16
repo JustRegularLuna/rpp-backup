@@ -69,27 +69,6 @@ These are notable features which have been added
 * More
 
 
-## PLANNED FEATURES
-These features are not in yet, but are planned for the future
-
-* Fixes for remaining Gen 1 bugs
-* Battle Tower
-* Battle Factory
-* Held Items
-* Special Attack and Special Defense
-* Infinite-use TMs
-* Pack separated into pockets, with more room for items
-* PokéGear/PokéNav Equivalent
-* Custom Pokéball types
-* New expanded post-game content
-* New additional songs for the new areas
-* Individual menu sprites for Pokémon
-* Further expanded Pokédex
-* More colour
-* Dive areas
-* More
-
-
 ## BEHIND-THE-SCENES FEATURES
 These are probably only interesting to people wanting to use this as a baserom
 
