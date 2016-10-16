@@ -37,6 +37,7 @@ Things may be added to this list as I think of them, and removed if they are add
 * More detailed tilesets, taking advantage of GBC mode
 * Possibly add Forms
 * Use IVs and EVs instead of DVs, old DVs become a mini Personality ID
+* Gain EXP on catching a Pokémon
 
 
 ## Bugfixes from Vanilla RB
@@ -88,3 +89,4 @@ Things may be added to this list as I think of them, and removed if they are add
 * Go ahead and declare constants for all 721 Pokémon + Fossils, use Gen 3 Missingno Sprite as placeholder
 * If Natures are disabled in intro, do not display on status screens, and use a neutral nature always
 * If Abilities are disabled in intro, do not display on status screens, and use a blank ability for everyone
+* EXP on catch is annoying, since a lot of variables are reused during the EXP Gain process. Will require a lot of testing.
