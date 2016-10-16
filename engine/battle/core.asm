@@ -942,7 +942,9 @@ FaintEnemyPokemon ; 0x3c567
 	xor a
 	ld [wBattleResult], a
 
+GiveEXPToMonsThatNeedIt::
     ; give EXP to mons that fought
+	xor a
 	ld [wcc5b], a
     ld a, [wPartyGainExpFlags]
     push af
