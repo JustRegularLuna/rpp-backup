@@ -1981,8 +1981,6 @@ DrawPlayerHUDAndHPBar: ; 3cd60 (f:4d60)
 	hlCoord 10, 7
 	call CenterMonName
 	call PlaceString
-	ld a, [wBattleMonSpecies]
-	ld [wGenderTemp], a
 	call PrintPlayerMonGender
 	call PrintPlayerMonShiny
 	call PrintEXPBar
@@ -2045,8 +2043,6 @@ DrawEnemyHUDAndHPBar: ; 3cdec (f:4dec)
 	hlCoord 1, 0
 	call CenterMonName
 	call PlaceString
-	ld a, [wEnemyMonSpecies]
-	ld [wGenderTemp], a
 	call PrintEnemyMonGender
 	call PrintEnemyMonShiny
 	hlCoord 6, 1
@@ -8997,29 +8993,24 @@ PhysicalSpecialSplit:
 
 PrintEnemyMonGender: ; called during battle
 	; get gender
+	ld a, [wEnemyMonSpecies]
 	ld de, wEnemyMonDVs
-	callba GetMonGender
-	ld a, [wGenderTemp]
-	and a
-	jr z, .noGender
-	dec a
-	jr z, .male
-	; else female
-	ld a, "♀"
-	jr .printSymbol
-.male
-	ld a, "♂"
-	jr .printSymbol
-.noGender
-	ld a, " "
-.printSymbol
+	call PrintGenderCommon
 	hlCoord 9, 1
 	ld [hl], a
 	ret
 
 PrintPlayerMonGender: ; called during battle
 	; get gender
+	ld a, [wBattleMonSpecies]
 	ld de, wBattleMonDVs
+	call PrintGenderCommon
+	hlCoord 17, 8
+	ld [hl], a
+	ret
+
+PrintGenderCommon: ; used by both routines
+	ld [wGenderTemp], a
 	callba GetMonGender
 	ld a, [wGenderTemp]
 	and a
@@ -9028,27 +9019,18 @@ PrintPlayerMonGender: ; called during battle
 	jr z, .male
 	; else female
 	ld a, "♀"
-	jr .printSymbol
+	ret
 .male
 	ld a, "♂"
-	jr .printSymbol
+	ret
 .noGender
 	ld a, " "
-.printSymbol
-	hlCoord 17, 8
-	ld [hl], a
 	ret
 
 PrintEnemyMonShiny: ; show shiny symbol beside gender symbol
 	; check if mon is shiny
 	ld de, wEnemyMonDVs
-	callba IsMonShiny
-	jr z, .notShiny
-	ld a, "[SHINY]"
-	jr .printSymbol
-.notShiny
-	ld a, " "
-.printSymbol
+	call PrintShinyCommon
 	hlCoord 10, 1
 	ld [hl], a
 	ret
@@ -9056,13 +9038,16 @@ PrintEnemyMonShiny: ; show shiny symbol beside gender symbol
 PrintPlayerMonShiny: ; show shiny symbol beside gender symbol
 	; check if mon is shiny
 	ld de, wBattleMonDVs
-	callba IsMonShiny
-	jr z, .notShiny
-	ld a, "[SHINY]"
-	jr .printSymbol
-.notShiny
-	ld a, " "
-.printSymbol
+	call PrintShinyCommon
 	hlCoord 18, 8
 	ld [hl], a
 	ret
+
+PrintShinyCommon: ; used by both routines
+	callba IsMonShiny
+	ld a, "[SHINY]"
+	ret nz
+	; else, it's normal
+	ld a, " "
+	ret
+	
