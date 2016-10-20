@@ -48,7 +48,6 @@ These are notable features which have been added
 * Animated EXP Bar in battle
 * Caught indicator icon for Wild Pokémon
 * EXP Share functions like Gen 6 (But is NOT given at the start of the game)
-* Gain EXP from catching a Pokémon, like in Gen 6
 * BW/2 Repel System
 * Pack holds 30 items instead of 20
 * HM Moves usable without manually selecting them from the party menu
