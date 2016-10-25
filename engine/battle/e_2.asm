@@ -42,7 +42,8 @@ HealEffect_: ; 3b9ec (e:79ec)
 	res 0, [hl]
 	ld a, [bc]
 	and a
-	ld [bc], 2 ; Number of turns from Rest
+	ld a, 2 ; Number of turns from Rest
+	ld [bc], a
 	ld hl, StartedSleepingEffect
 	jr z, .asm_3ba31
 	ld hl, FellAsleepBecameHealthyText
