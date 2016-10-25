@@ -35,8 +35,10 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	sbc a, 0      ;borrow from high byte if needed
 	pop bc
 	jr c, .notEnoughHP  ;underflow means user would be left with negative health
-                        ;bug: note since it only brances on carry, it will possibly leave user with 0HP
+
 .userHasZeroOrMoreHP
+	or d
+	jr z, .notEnoughHP ; fail if move would leave user with 0 hp
 	ldi [hl], a  ;store high byte HP
 	ld [hl], d   ;store low byte HP
 	ld h, b

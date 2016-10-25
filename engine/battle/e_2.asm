@@ -12,11 +12,13 @@ HealEffect_: ; 3b9ec (e:79ec)
 	ld b, a
 	ld a, [de]
 	cp [hl]
+	jr nz, .fine
 	inc de
 	inc hl
 	ld a, [de]
 	sbc [hl]
 	jp z, .failed
+.fine
 	ld a, b
 	cp REST
 	jr nz, .asm_3ba37
@@ -25,15 +27,22 @@ HealEffect_: ; 3b9ec (e:79ec)
 	push af
 	ld c, 50
 	call DelayFrames
-	ld hl, wBattleMonStatus
+	ld bc, wBattleMonStatus
+	ld de, W_PLAYERTOXICCOUNTER
+	ld hl, W_PLAYERBATTSTATUS3
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .asm_3ba25
-	ld hl, wEnemyMonStatus
+	ld bc, wEnemyMonStatus
+	ld de, W_ENEMYTOXICCOUNTER
+	ld hl, W_ENEMYBATTSTATUS3
 .asm_3ba25
-	ld a, [hl]
+	xor a
+	ld [de], a
+	res 0, [hl]
+	ld a, [bc]
 	and a
-	ld [hl], 2 ; Number of turns from Rest
+	ld [bc], 2 ; Number of turns from Rest
 	ld hl, StartedSleepingEffect
 	jr z, .asm_3ba31
 	ld hl, FellAsleepBecameHealthyText

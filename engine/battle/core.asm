@@ -464,7 +464,9 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	cp METRONOME ; a MIRROR MOVE check is missing, might lead to a desync in link battles when combined with multi-turn moves
+	cp METRONOME
+	jr nz, .asm_3c2dd
+	cp MIRROR_MOVE
 	jr nz, .asm_3c2dd
 	ld [wPlayerSelectedMove], a
 .asm_3c2dd
@@ -882,7 +884,8 @@ FaintEnemyPokemon ; 0x3c567
 	ld hl, W_PLAYERBATTSTATUS1
 	res AttackingMultipleTimes, [hl]
 	xor a
-	ld [wPlayerNumHits], a
+	ld [wPlayerNumHits], a ; also wPlayerBideAccumulatedDamage
+	ld [wPlayerBideAccumulatedDamage + 1], a
 	ld hl, wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli], a
 	ld [hli], a
@@ -980,11 +983,11 @@ FaintEnemyPokemon ; 0x3c567
 
 		; a = party gain flags
 	pop af
-	
+
 		; a = a XOR b = flags for mons that didn't fight
 	xor b
 	ld [wPartyGainExpFlags], a
-	
+
 	ld hl, GainExperience
 	ld b, BANK(GainExperience)
 	jp Bankswitch
@@ -1072,12 +1075,12 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	call PrintEndBattleText
 	ld hl, MoneyForWinningText
 	call PrintText
-	
+
 	xor a
 	ld [wIsTrainerBattle], a
 	ld a, 1
 	ld [wWasTrainerBattle], a
-	
+
 	ld de, wPlayerMoney + 2
 	ld hl, wd07b
 	ld c, $3
@@ -1422,6 +1425,9 @@ EnemySendOut: ; 3c90e (f:490e)
 ; don't change wPartyGainExpFlags or wPartyFoughtCurrentEnemyFlags
 EnemySendOutFirstMon: ; 3c92a (f:492a)
 	xor a
+	ld hl, W_DAMAGE
+	ld [hli], a
+	ld [hl], a
 	ld hl,wEnemyStatsToDouble ; clear enemy statuses
 	ld [hli],a
 	ld [hli],a
@@ -1874,6 +1880,9 @@ SendOutMon: ; 3cc91 (f:4c91)
 	predef LoadMonBackPic
 	xor a
 	ld [$ffe1], a
+	ld hl, W_DAMAGE
+	ld [hli], a
+	ld [hl], a
 	ld hl, wcc2d
 	ld [hli], a
 	ld [hl], a
@@ -2889,7 +2898,7 @@ AnyMoveToSelect: ; 3d3f5 (f:53f5)
 	or c
 	jr .asm_3d416
 .asm_3d421
-	and a
+	and $3f ; ignore PP ups
 	ret nz
 .asm_3d423
 	ld hl, NoMovesLeftText
@@ -3009,8 +3018,8 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	ld c, a
 	ld b, $0 ; which item in the menu is the cursor pointing to? (0-3)
 	add hl, bc ; point to the item (move) in memory
-	ld a, [hl] 
-	ld [wPlayerSelectedMove], a ; update wPlayerSelectedMove even if the move 
+	ld a, [hl]
+	ld [wPlayerSelectedMove], a ; update wPlayerSelectedMove even if the move
 	                            ; isn't actually selected (just pointed to by the cursor)
 	ld a, [wPlayerMonNumber]
 	ld [wWhichPokemon], a
@@ -3056,7 +3065,7 @@ PrintMenuItem: ; 3d4b6 (f:54b6)
 	ld de, wd11e
 	ld bc, $102
 	call PrintNumber
-	call GetCurrentMove 
+	call GetCurrentMove
 	hlCoord 2, 10
 	predef PrintMoveType
 .moveDisabled
@@ -3069,10 +3078,10 @@ DisabledText: ; 3d555 (f:5555)
 
 OtherText: ; 3d55f (f:555f)
 	db "STATUS/@"
-	
+
 PhysicalText: ; Added for PS Split
 	db "PHYSICAL/@"
-	
+
 SpecialText: ; added for PS Split
 	db "SPECIAL/@"
 
@@ -3272,13 +3281,13 @@ PlayerCanExecuteMove: ; 3d6b0 (f:56b0)
 	ld hl,ResidualEffects1
 	ld de,1
 	call IsInArray
-	jp c,JumpMoveEffect ; ResidualEffects1 moves skip damage calculation and accuracy tests 
-	                    ; unless executed as part of their exclusive effect functions 
+	jp c,JumpMoveEffect ; ResidualEffects1 moves skip damage calculation and accuracy tests
+	                    ; unless executed as part of their exclusive effect functions
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,SpecialEffectsCont
 	ld de,1
 	call IsInArray
-	call c,JumpMoveEffect ; execute the effects of SpecialEffectsCont moves (e.g. Wrap, Thrash) but don't skip anything 
+	call c,JumpMoveEffect ; execute the effects of SpecialEffectsCont moves (e.g. Wrap, Thrash) but don't skip anything
 PlayerCalcMoveDamage: ; 3d6dc (f:56dc)
 	ld a,[W_PLAYERMOVEEFFECT]
 	ld hl,SetDamageEffects
@@ -3309,7 +3318,7 @@ asm_3d705
 	and a
 	jr z,asm_3d714
 	ld a,[W_PLAYERMOVEEFFECT]
-	sub a,EXPLODE_EFFECT 
+	sub a,EXPLODE_EFFECT
 	jr z,asm_3d71e ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
 	jr asm_3d74b
 asm_3d714
@@ -3404,7 +3413,7 @@ MirrorMoveCheck
 	ld a,[wPlayerNumAttacksLeft]
 	dec a
 	ld [wPlayerNumAttacksLeft],a
-	jp nz,asm_3d714 ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints. 
+	jp nz,asm_3d714 ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints.
 	                ; damage calculation and accuracy tests only happen for the first hit
 	res AttackingMultipleTimes,[hl] ; clear attacking multiple times status when all attacks are over
 	ld hl,MultiHitText
@@ -3419,7 +3428,7 @@ MirrorMoveCheck
 	ld de,1
 	call IsInArray
 	call nc,JumpMoveEffect ; move effects not included in SpecialEffects or in either of the ResidualEffect arrays,
-	                       ; which are the effects not covered yet. Rage's effect will be executed for a second time (although it's irrelevant). 
+	                       ; which are the effects not covered yet. Rage's effect will be executed for a second time (although it's irrelevant).
 	                       ; Includes side effects that only need to be called if the target didn't faint.
 	                       ; Responsible for executing Twineedle's second effect (poison)
 	jp ExecutePlayerMoveDone
@@ -3531,7 +3540,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld [wPlayerUsedMove],a
 	ld hl,ExecutePlayerMoveDone ; player can't move this turn
 	jp .returnToHL
-	
+
 .defrostMon ; New routine to thaw Pokemon, called from FrozenCheck
 	ld hl, wBattleMonStatus
 	res FRZ, [hl]
@@ -3639,8 +3648,8 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 .MonHurtItselfOrFullyParalysed
 	ld hl,W_PLAYERBATTSTATUS1
 	ld a,[hl]
-	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)	
-	and a, (1 << AttackingMultipleTimes) | (1 << Flinched) | (1 << Invulnerable) | (1 << Confused) 
+	; clear bide, thrashing, charging up, and trapping moves such as warp (already cleared for confusion damage)
+	and a, (1 << AttackingMultipleTimes) | (1 << Flinched) | (1 << Confused)
 	ld [hl],a
 	ld a,[W_PLAYERMOVEEFFECT]
 	cp a,FLY_EFFECT
@@ -3718,7 +3727,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld hl,wPlayerNumAttacksLeft
 	dec [hl] ; did Trashing About counter hit 0?
 	ld hl,PlayerCalcMoveDamage ; skip DecrementPP
-	jp nz,.returnToHL 
+	jp nz,.returnToHL
 	push hl
 	ld hl,W_PLAYERBATTSTATUS1
 	res ThrashingAbout,[hl] ; no longer trashing about
@@ -3835,7 +3844,7 @@ PrintMoveIsDisabledText: ; 3da88 (f:5a88)
 	ld de, W_ENEMYBATTSTATUS1
 .removeChargingUp
 	ld a, [de]
-	res ChargingUp, a ; end the pokemon's 
+	res ChargingUp, a ; end the pokemon's
 	ld [de], a
 	ld a, [hl]
 	ld [wd11e], a
@@ -4269,6 +4278,7 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 ; if the enemy has used Reflect, double the enemy's defense
 	sla c
 	rl b
+	call CapBCAt1023
 .physicalAttackCritCheck
 	ld hl, wBattleMonAttack
 	ld a, [wCriticalHitOrOHKO]
@@ -4299,6 +4309,7 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 ; if the enemy has used Light Screen, double the enemy's special
 	sla c
 	rl b
+	call CapBCAt1023
 ; reflect and light screen boosts do not cap the stat at 999, so weird things will happen during stats scaling if
 ; a Pokemon with 512 or more Defense has ued Reflect, or if a Pokemon with 512 or more Special has used Light Screen
 .specialAttackCritCheck
@@ -4333,7 +4344,11 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 	rr c
 	srl b
 	rr c
-; defensive stat can actually end up as 0, leading to a division by 0 freeze during damage calculation
+	ld a, c
+	or b
+	jr nz, .next1
+	inc c
+.next1
 ; hl /= 4 (scale player's offensive stat)
 	srl h
 	rr l
@@ -4354,6 +4369,13 @@ GetDamageVarsForPlayerAttack: ; 3ddcf (f:5dcf)
 .done
 	ld a, 1
 	and a
+	ret
+
+CapBCAt1023:
+	ld a, b
+	cp 4
+	ret c
+	lb bc, 3, 255
 	ret
 
 
@@ -4385,6 +4407,7 @@ GetDamageVarsForEnemyAttack: ; 3de75 (f:5e75)
 ; if the player has used Reflect, double the player's defense
 	sla c
 	rl b
+	call CapBCAt1023
 .physicalAttackCritCheck
 	ld hl, wEnemyMonAttack
 	ld a, [wCriticalHitOrOHKO]
@@ -4415,6 +4438,7 @@ GetDamageVarsForEnemyAttack: ; 3de75 (f:5e75)
 ; if the player has used Light Screen, double the player's special
 	sla c
 	rl b
+	call CapBCAt1023
 ; reflect and light screen boosts do not cap the stat at 999, so weird things will happen during stats scaling if
 ; a Pokemon with 512 or more Defense has ued Reflect, or if a Pokemon with 512 or more Special has used Light Screen
 .specialAttackCritCheck
@@ -4701,7 +4725,7 @@ CriticalHitTest: ; 3e023 (f:6023)
 	ld a, [hld]                  ; read base power from RAM
 	and a
 	ret z                        ; do nothing if zero
-	
+
 	ld c, 0 ; Set default entry as 0
 	ld a,[de]
 	bit 2, a ; Check for Focus Energy
@@ -4746,12 +4770,12 @@ CriticalHitTest: ; 3e023 (f:6023)
 	ld a,1
 	ld [wCriticalHitOrOHKO],a ; Critical Hit Flag
 	ret
-	
+
 .Chances
 	; 6.25% 12.1% 24.6% 33.2% 49.6% 49.6% 49.6%
 	db $11,  $20,  $40,  $55,  $80,  $80,  $80
 	;   0     1     2     3     4     5     6
-	
+
 
 ; high critical hit moves
 INCLUDE "data/high_crit_moves.asm"
@@ -4800,7 +4824,7 @@ HandleCounterMove: ; 3e093 (f:6093)
 	ld a,[hli]
 	or [hl]
 	ret z ; If we made it here, Counter still misses if the last move used in battle did no damage to its target.
-	      ; W_DAMAGE is shared by both players, so Counter may strike back damage dealt by the Counter user itself 
+	      ; W_DAMAGE is shared by both players, so Counter may strike back damage dealt by the Counter user itself
 	      ; if the conditions meet, even though 99% of the times damage will come from the target.
 ; if it did damage, double it
 	ld a,[hl]
@@ -4991,11 +5015,11 @@ ApplyAttackToPlayerPokemon: ; 3e1a0 (f:61a0)
 	srl a
 	add b
 	ld b,a ; b = attacker's level * 1.5
-; loop until a random number in the range [0, b) is found
-; this differs from the range when the player attacks, which is [1, b)
-; it's possible for the enemy to do 0 damage with Psywave, but the player always does at least 1 damage
+; loop until a random number in the range [1, b) is found
 .loop
 	call BattleRandom
+	and a
+	jr z,.loop
 	cp b
 	jr nc,.loop
 	ld b,a
@@ -5547,7 +5571,7 @@ MoveHitTest: ; 3e56b (f:656b)
 	cp b
 	jr nc,.moveMissed
 	ret
-	
+
 .moveMissed
 	xor a
 	ld hl,W_DAMAGE ; zero the damage
@@ -5947,7 +5971,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	ld [wEnemyUsedMove], a
 	ld hl, ExecuteEnemyMoveDone
 	jp .enemyReturnToHL
-	
+
 .defrostMon ; New routine to thaw mon
 	ld hl, wEnemyMonStatus
 	res FRZ, [hl]
@@ -5958,7 +5982,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	xor a
 	inc a
 	ld [H_WHOSETURN],a
-	
+
 .checkIfTrapped
 	ld a, [W_PLAYERBATTSTATUS1]
 	bit UsingTrappingMove, a ; is the player using a multi-turn attack like warp
@@ -6087,8 +6111,8 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 .monHurtItselfOrFullyParalysed
 	ld hl, W_ENEMYBATTSTATUS1
 	ld a, [hl]
-	; clear bide, thrashing about, charging up, and multi-turn moves such as warp	
-	and (1 << AttackingMultipleTimes) | (1 << Flinched) | (1 << Invulnerable) | (1 << Confused)  
+	; clear bide, thrashing about, charging up, and multi-turn moves such as warp
+	and (1 << AttackingMultipleTimes) | (1 << Flinched) | (1 << Confused)
 	ld [hl], a
 	ld a, [W_ENEMYMOVEEFFECT]
 	cp FLY_EFFECT
@@ -6840,8 +6864,8 @@ BattleRandom:
 	push hl
 	push bc
 	push af
-	
-; point to seed 0 so we pick the first number the next time	
+
+; point to seed 0 so we pick the first number the next time
 	xor a
 	ld [wLinkBattleRandomNumberListIndex], a
 
@@ -6850,11 +6874,11 @@ BattleRandom:
 .loop
 	ld a, [hl]
 	ld c, a
-; multiply by 5	
+; multiply by 5
 	add a
 	add a
 	add c
-; add 1	
+; add 1
 	inc a
 	ld [hli], a
 	dec b
@@ -7315,11 +7339,8 @@ SleepEffect: ; 3f1fc (f:71fc)
 
 .sleepEffect
 	ld a, [bc]
-	bit NeedsToRecharge, a ; does the target need to recharge? (hyper beam)
 	res NeedsToRecharge, a ; target no longer needs to recharge
 	ld [bc], a
-	jr nz, .setSleepCounter ; if the target had to recharge, all hit tests will be skipped
-	                        ; including the event where the target already has another status
 	ld a, [de]
 	ld b, a
 	and $7
@@ -7727,17 +7748,17 @@ StatModifierUpEffect: ; 3f428 (f:7428)
 	add hl, bc
 	pop bc
 	xor a
-	ld [H_MULTIPLICAND], a 
+	ld [H_MULTIPLICAND], a
 	ld a, [de]
 	ld [H_MULTIPLICAND + 1], a
 	inc de
 	ld a, [de]
 	ld [H_MULTIPLICAND + 2], a
 	ld a, [hli]
-	ld [H_MULTIPLIER], a 
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld a, [hl]
-	ld [H_DIVISOR], a 
+	ld [H_DIVISOR], a
 	ld b, $4
 	call Divide
 	pop hl
@@ -7952,17 +7973,17 @@ StatModifierDownEffect: ; 3f54c (f:754c)
 	add hl, bc
 	pop bc
 	xor a
-	ld [H_MULTIPLICAND], a 
+	ld [H_MULTIPLICAND], a
 	ld a, [de]
 	ld [H_MULTIPLICAND + 1], a
 	inc de
 	ld a, [de]
 	ld [H_MULTIPLICAND + 2], a
 	ld a, [hli]
-	ld [H_MULTIPLIER], a 
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld a, [hl]
-	ld [H_DIVISOR], a 
+	ld [H_DIVISOR], a
 	ld b, $4
 	call Divide
 	pop hl
@@ -8424,8 +8445,8 @@ TrappingEffect: ; 3f917 (f:7917)
 .trappingEffect
 	bit UsingTrappingMove, [hl]
 	ret nz
-	call ClearHyperBeam ; since this effect is called before testing whether the move will hit, 
-                        ; the target won't need to recharge even if the trapping move missed 	
+	call ClearHyperBeam ; since this effect is called before testing whether the move will hit,
+                        ; the target won't need to recharge even if the trapping move missed
 	set UsingTrappingMove, [hl] ; mon is now using a trapping move
 	call BattleRandom ; 3/8 chance for 2 and 3 attacks, and 1/8 chance for 4 and 5 attacks
 	and $3
@@ -8483,7 +8504,7 @@ ConfusionSideEffectSuccess: ; 3f96f (f:796f)
 	set Confused, [hl] ; mon is now confused
 	push af
 	call BattleRandom
-	and $3 
+	and $3
 	inc a
 	inc a
 	ld [bc], a ; confusion status will last 2-5 turns
@@ -8503,7 +8524,7 @@ ConfusionEffectFailed: ; 3f9a6 (f:79a6)
 	ld c, $32
 	call DelayFrames
 	jp Func_3fb4e
-	
+
 ParalyzeEffect: ; 3f9b1 (f:79b1)
 	ld hl, ParalyzeEffect_
 	ld b, BANK(ParalyzeEffect_)
@@ -8793,12 +8814,12 @@ ParalyzedMayNotAttackText: ; 3fb74 (f:7b74)
 CheckTargetSubstitute: ; 3fb79 (f:7b79)
 	push hl
 	ld hl, W_ENEMYBATTSTATUS2
-	ld a, [H_WHOSETURN]   
+	ld a, [H_WHOSETURN]
 	and a
 	jr z, .next1
 	ld hl, W_PLAYERBATTSTATUS2
 .next1
-	bit HasSubstituteUp, [hl]         
+	bit HasSubstituteUp, [hl]
 	pop hl
 	ret
 
@@ -8847,11 +8868,11 @@ Func_3fbbc: ; 3fbbc (f:7bbc)
 	pop de
 	pop hl
 	ret
-	
+
 FangAttacks:
 	call FlinchSideEffect
 	jp FreezeBurnParalyzeEffect
-	
+
 VoltTackleEffect:
 	call RecoilEffect
 	jp FreezeBurnParalyzeEffect
@@ -9054,4 +9075,4 @@ PrintShinyCommon: ; used by both routines
 	; else, it's normal
 	ld a, " "
 	ret
-	
+
