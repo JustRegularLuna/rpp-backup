@@ -14,6 +14,9 @@ Func_410f3: ; 410f3 (10:50f3)
 	ld de, PointerIDs_41149
 
 Func_41102: ; 41102 (10:5102)
+	ld c, BANK(Music_SafariZone)
+	ld a, MUSIC_SAFARI_ZONE
+	call PlayMusic
 	ld a, [W_OPTIONS]
 	push af
 	ld a, [hSCY]
@@ -50,6 +53,7 @@ Func_41102: ; 41102 (10:5102)
 	ld [hSCY], a
 	pop af
 	ld [W_OPTIONS], a
+	call PlayDefaultMusic
 	ret
 
 ; these bytes refer to the $00th through $10th pointer of PointerTable_4115f
