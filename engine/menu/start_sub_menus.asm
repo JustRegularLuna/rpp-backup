@@ -134,6 +134,9 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .fly
 	bit 2,a ; does the player have the Thunder Badge?
 	jp z,.newBadgeRequired
+	ld a, [W_CURMAP]
+	cp MT_MOON_SQUARE
+	jr z, .canFly
 	call CheckIfInOutsideMap
 	jr z,.canFly
 	ld a,[wWhichPokemon]
@@ -205,6 +208,9 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	call GBPalWhiteOutWithDelay3
 	jp .goBackToMap
 .teleport
+	ld a, [W_CURMAP]
+	cp MT_MOON_SQUARE
+	jr z, .canTeleport
 	call CheckIfInOutsideMap
 	jr z,.canTeleport
 	ld a,[wWhichPokemon]
