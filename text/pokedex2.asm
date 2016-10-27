@@ -133,8 +133,8 @@ _RhyperiorDexEntry::
 	next "hand by tightening"
 
 	page "then expanding the"
-	next "muscles in its arms"
-	next "quickly"
+	next "muscles in its"
+	next "arms quickly"
 	dex
 	
 _TangrowthDexEntry::
