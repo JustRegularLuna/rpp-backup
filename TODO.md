@@ -51,14 +51,9 @@ Things may be added to this list as I think of them, and removed if they are add
 * Trapping moves prevent opponent doing anything
 * Whirlwind and Roar do not work in trainer battles
 * Rest does not undo stat changes from status afflictions you had, such as Burn
-* Super Effective/Not Very Effective text issues
-* Killing yourself if you use Substitute with exactly 25% HP
 * Rage issues
 * Mimic and Disable choosing moves at random
-* Bide damage issues
-* Recovery moves failing on certain HP values
 * Multi-hit moves deal same damage for each blow
-* Dig/Fly status not properly reset if fully paralyzed or hurt yourself due to confusion that turn
 * Make Pokéball break with zero shakes instead of "You missed the Pokémon!"
 * Stat-up too high making your stat roll over to ultra low values
 * Substitute not protecting against status
