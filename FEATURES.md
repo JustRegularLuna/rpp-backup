@@ -24,7 +24,7 @@ These are notable bugs from original Red that have been fixed
 * Player turns to face an enemy trainer, like in every game except Red and FireRed
 * Defeating a Pokémon does not negate the need for HyperBeam to recharge
 * Breaking a substitute doesn't negate HyperBeam, SelfDestruct/Explosion effects
-* Dual-Type Pokemon do not display an incorrect message if hit by a move that is Super Effective against one time and Not Very Effective against the other
+* Dual-Type Pokemon do not display an incorrect message if hit by a move that is Super Effective against one type and Not Very Effective against the other
 * Some Bide issues
 * Sleep moves do not ignore accuracy and other status conditions when opponent needs to recharge
 * Fixed Psywave desync glitch in link battles
