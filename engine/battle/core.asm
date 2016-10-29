@@ -5382,7 +5382,7 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 .typeImmunityDone
 	ld a, $7f
 	ld [wd05b], a
-	inc a
+	ld a, 1
 	ld [W_MOVEMISSED], a
 	pop bc
 	pop hl
