@@ -2929,19 +2929,26 @@ Func_79e6a: ; 79e6a (1e:5e6a)
 	call WaitForSoundToFinish
 	ld a, [wd05b]
 	and $7f
-	ret z
-	cp $a
-	ld a, $20
-	ld b, $30
-	ld c, (SFX_08_50 - SFX_Headers_08) / 3
-	jr z, .asm_79e8b
+	cp $7f
+	ret z ; immune
+; super effective
+	cp %00000010
+	ld d, a
 	ld a, $e0
 	ld b, $ff
 	ld c, (SFX_08_5a - SFX_Headers_08) / 3
-	jr nc, .asm_79e8b
+	jr z, .asm_79e8b
+; not very effective
+	ld a, d
+	cp %00000001
 	ld a, $50
 	ld b, $1
 	ld c, (SFX_08_51 - SFX_Headers_08) / 3
+	jr z, .asm_79e8b
+; neutral
+	ld a, $20
+	ld b, $30
+	ld c, (SFX_08_50 - SFX_Headers_08) / 3
 .asm_79e8b
 	ld [wc0f1], a
 	ld a, b

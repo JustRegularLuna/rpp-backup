@@ -3235,7 +3235,6 @@ ExecutePlayerMove: ; 3d65e (f:565e)
 	ld [W_MOVEMISSED], a
 	ld [wcced], a
 	ld [wccf4], a
-	ld a, $a
 	ld [wd05b], a
 	ld a, [wcd6a]
 	and a
@@ -3949,7 +3948,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 .playersTurn
 	ld hl, DoesntAffectMonText
 	ld a, [wd05b]
-	and $7f
+	cp $7f
 	jr z, .gotTextToPrint
 	ld hl, AttackMissedText
 	ld a, [wCriticalHitOrOHKO]
@@ -5314,22 +5313,17 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	jr .skipSameTypeAttackBonus
 .sameTypeAttackBonus
 ; if the move type matches one of the attacker's types
-	ld hl,W_DAMAGE + 1
-	ld a,[hld]
-	ld h,[hl]
-	ld l,a    ; hl = damage
-	ld b,h
-	ld c,l    ; bc = damage
-	srl b
-	rr c      ; bc = floor(0.5 * damage)
-	add hl,bc ; hl = floor(1.5 * damage)
-; store damage
-	ld a,h
-	ld [W_DAMAGE],a
-	ld a,l
-	ld [W_DAMAGE + 1],a
+; multiply by 3/2
+	ld hl, H_MULTIPLIER
+	ld [hl], 3
+	call Multiply
+	
+	ld [hl], 2
+	ld b, 4
+	call Divide
+	
 	ld hl,wd05b
-	set 7,[hl]
+	set 7,[hl] ; STAB
 .skipSameTypeAttackBonus
 	ld a,[wd11e]
 	ld b,a ; b = move type
@@ -5351,38 +5345,31 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	push hl
 	push bc
 	inc hl
-	ld a,[wd05b]
-	and a,$80
-	ld b,a
 	ld a,[hl] ; a = damage multiplier
 	ld [H_MULTIPLIER],a
-	add b
-	ld [wd05b],a
-	xor a
-	ld [H_MULTIPLICAND],a
-	ld hl,W_DAMAGE
-	ld a,[hli]
-	ld [H_MULTIPLICAND + 1],a
-	ld a,[hld]
-	ld [H_MULTIPLICAND + 2],a
+	
+; done if type immunity
+	and a
+	jr z, .typeImmunityDone
+	
+; update damage multipliers
+	cp $a
+	ld hl, wd05b
+	jr c, .nve
+	set 1, [hl]
+	jr .multiply
+.nve
+	set 0, [hl]
+; apply damage multiplier
+.multiply
 	call Multiply
+
+; divide by 10
 	ld a,10
-	ld [H_DIVISOR],a
+	ld [H_DIVISOR], a
 	ld b,$04
 	call Divide
-	ld a,[H_QUOTIENT + 2]
-	ld [hli],a
-	ld b,a
-	ld a,[H_QUOTIENT + 3]
-	ld [hl],a
-	or b ; is damage 0?
-	jr nz,.skipTypeImmunity
-.typeImmunity
-; if damage is 0, make the move miss
-; this only occurs if a move that would do 2 or 3 damage is 0.25x effective against the target
-	inc a
-	ld [W_MOVEMISSED],a
-.skipTypeImmunity
+
 	pop bc
 	pop hl
 .nextTypePair
@@ -5390,6 +5377,15 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	inc hl
 	jp .loop
 .done
+	ret
+	
+.typeImmunityDone
+	ld a, $7f
+	ld [wd05b], a
+	inc a
+	ld [W_MOVEMISSED], a
+	pop bc
+	pop hl
 	ret
 
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
@@ -5718,7 +5714,6 @@ ExecuteEnemyMove: ; 3e6bc (f:66bc)
 	xor a
 	ld [W_MOVEMISSED], a
 	ld [wccf4], a
-	ld a, $a
 	ld [wd05b], a
 	call CheckEnemyStatusConditions
 	jr nz, .enemyHasNoSpecialConditions
