@@ -143,7 +143,7 @@ _CeladonCityText17:: ; a5e3e (29:5e3e)
 
 _CeladonCityText18:: ; a5e6a (29:5e6a)
 	text "ROCKET GAME CORNER"
-	line "The Playground for"
-	cont "Everybody!"
+	line "The Playground"
+	cont "for Everybody!"
 	done
 
