@@ -3115,9 +3115,6 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	ld a, [hl]
 	and (1 << ChargingUp) | (1 << ThrashingAbout) ; using a charging move or thrash/petal dance
 	ret nz
-	ld a, [wEnemyMonStatus]
-	and SLP ; sleeping
-	ret nz
 	ld a, [W_ENEMYBATTSTATUS1]
 	and (1 << UsingTrappingMove) | (1 << StoringEnergy) ; using a trapping move like wrap or bide
 	ret nz
