@@ -7350,10 +7350,10 @@ SleepEffect: ; 3f1fc (f:71fc)
 	and a
 	jr nz, .didntAffect
 .setSleepCounter
-; set target's sleep counter to a random number between 1 and 7
+; set target's sleep counter to a random number between 2 and 7
 	call BattleRandom
 	and $7
-	jr z, .setSleepCounter
+	set 1, a ; always at least 2, since 1 is now functionally 0
 	ld [de], a
 	call Func_3fb89
 	ld hl, FellAsleepText
