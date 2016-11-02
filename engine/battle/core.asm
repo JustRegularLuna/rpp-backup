@@ -5302,6 +5302,15 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	ld a,[W_ENEMYMOVETYPE]
 	ld [wd11e],a
 .next
+; store W_DAMAGE in the multiplicand beforehand
+	xor a
+	ld [H_MULTIPLICAND], a
+	ld hl, W_DAMAGE
+	ld a, [hli]
+	ld [H_MULTIPLICAND + 1], a
+	ld a, [hl]
+	ld [H_MULTIPLICAND + 2], a
+; continue on
 	ld a,[wd11e] ; move type
 	cp b ; does the move type match type 1 of the attacker?
 	jr z,.sameTypeAttackBonus
@@ -5328,7 +5337,7 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 .loop
 	ld a,[hli] ; a = "attacking type" of the current type pair
 	cp a,$ff
-	jr z,.done
+	jr z, StoreDamage
 	cp b ; does move type match "attacking type"?
 	jr nz,.nextTypePair
 	ld a,[hl] ; a = "defending type" of the current type pair
@@ -5373,16 +5382,24 @@ AdjustDamageForMoveType: ; 3e3a5 (f:63a5)
 	inc hl
 	inc hl
 	jp .loop
-.done
-	ret
 	
 .typeImmunityDone
+	call StoreDamage
 	ld a, $7f
 	ld [wd05b], a
 	ld a, 1
 	ld [W_MOVEMISSED], a
 	pop bc
 	pop hl
+	ret
+	
+StoreDamage:
+; store the result of those multiply/divide operations back in W_DAMAGE
+	ld hl, W_DAMAGE
+	ld a, [H_QUOTIENT + 2]
+	ld [hli], a
+	ld a, [H_QUOTIENT + 3]
+	ld [hl], a
 	ret
 
 ; function to tell how effective the type of an enemy attack is on the player's current pokemon
