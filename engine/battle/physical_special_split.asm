@@ -169,7 +169,7 @@ _PhysicalSpecialSplit:: ;Determines if a move is Physical or Special
 	db OTHER_M ;REST         EQU $9C
 	db PHYSICAL;ROCK_SLIDE   EQU $9D
 	db PHYSICAL;HYPER_FANG   EQU $9E
-	db OTHER_M ;SHARPEN      EQU $9F
+	db OTHER_M ;HONE_CLAWS   EQU $9F
 	db OTHER_M ;CONVERSION   EQU $A0
 	db SPECIAL ;TRI_ATTACK   EQU $A1
 	db PHYSICAL;SUPER_FANG   EQU $A2

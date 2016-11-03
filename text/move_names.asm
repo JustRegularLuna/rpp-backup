@@ -157,7 +157,7 @@ MoveNames:: ; b0000 (2c:4000)
 	db "REST@"
 	db "ROCK SLIDE@"
 	db "HYPER FANG@"
-	db "SHARPEN@"
+	db "HONE CLAWS@"
 	db "CONVERSION@"
 	db "TRI ATTACK@"
 	db "SUPER FANG@"

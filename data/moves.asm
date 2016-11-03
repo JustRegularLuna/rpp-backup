@@ -168,7 +168,7 @@ endm
 	move REST,         HEAL_EFFECT,                  0, PSYCHIC,  100, 10
 	move ROCK_SLIDE,   FLINCH_SIDE_EFFECT1,         75, ROCK,      90, 10
 	move HYPER_FANG,   FLINCH_SIDE_EFFECT1,         80, NORMAL,    90, 15
-	move SHARPEN,      ATTACK_UP1_EFFECT,            0, NORMAL,   100, 30
+	move HONE_CLAWS,   HONE_CLAWS_EFFECT,            0, NORMAL,   100, 15
 	move CONVERSION,   CONVERSION_EFFECT,            0, NORMAL,   100, 30
 	move TRI_ATTACK,   NO_ADDITIONAL_EFFECT,        80, NORMAL,   100, 10
 	move SUPER_FANG,   SUPER_FANG_EFFECT,            1, NORMAL,    90, 10

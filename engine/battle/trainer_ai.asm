@@ -365,7 +365,7 @@ LightBuffStatusMoves:
 	db SMOKESCREEN
 	db POISON_GAS
 	db FLASH
-	db SHARPEN
+	db HONE_CLAWS
 	db SAND_ATTACK
 	db $FF
 	
