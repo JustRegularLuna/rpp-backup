@@ -19,7 +19,7 @@ For a list of features, check out [**FEATURES.md**](FEATURES.md).
 ##Frequently Asked Questions
 
 ###Q: How do you play this in color?
-A: In VBA, go to Options -> Gameboy and set it to "Automatic", then close and re-open the emulator for the change to take effect.
+A: In VBA, go to Options -> Gameboy and set it to "Automatic", then close and re-open the emulator for the change to take effect. If you're playing on a mobile emulator, chances are good that if it doesn't automatically play in color, your emulator doesn't support Super Gameboy mode, which this hack currently uses for color.
 
 ###Q: Are all Pokémon available?
 A: Yes, all Pokémon included in the game are available.
@@ -38,9 +38,6 @@ A: Same house as the Move Deleter.
 
 ###Q: Where do I find Shiny Pokémon?
 A: There are no event shinies, but all Pokémon have the same chance to be shiny as in Gen 2. Also, breeding at the Daycare is slightly more likely, due to the Day Care Man's Ditto being shiny.
-
-###Q: Why does this move claim it wasn't super effective?
-A: That message was broken in Gen 1, and I haven't fixed it yet. Damage should still work correctly, though.
 
 ###Q: Is Fairy type in this?
 A: Yes, Dark Steel and Fairy are all in, and type strengths/weaknesses match Gen 6.
