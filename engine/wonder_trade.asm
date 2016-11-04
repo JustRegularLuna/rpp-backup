@@ -414,7 +414,7 @@ MinimumPokemonLevels: ; Offered Pokemon must be within the level range
 	db  35, 100 ; Weezing
 	db   1,  41 ; Rhyhorn
 	db  42,  54 ; Rhydon
-	db   1, 100 ; Chansey
+	db  16, 100 ; Chansey
 	db   1,  35 ; Tangela
 	db   1, 100 ; Kangaskhan
 	db   1,  31 ; Horsea
@@ -423,11 +423,11 @@ MinimumPokemonLevels: ; Offered Pokemon must be within the level range
 	db  33, 100 ; Seaking
 	db   1,  32 ; Staryu
 	db  33, 100 ; Starmie
-	db   1, 100 ; Mr.Mime
+	db  16, 100 ; Mr.Mime
 	db  10, 100 ; Scyther
-	db  20, 100 ; Jynx
-	db  20,  36 ; Electabuzz
-	db  20,  36 ; Magmar
+	db  16, 100 ; Jynx
+	db  16,  36 ; Electabuzz
+	db  16,  36 ; Magmar
 	db  10, 100 ; Pinsir
 	db   1, 100 ; Tauros
 	db   1,  19 ; Magikarp
@@ -444,7 +444,7 @@ MinimumPokemonLevels: ; Offered Pokemon must be within the level range
 	db  15,  39 ; Kabuto
 	db  40, 100 ; Kabutops
 	db  15, 100 ; Aerodactyl
-	db  20, 100 ; Snorlax
+	db  16, 100 ; Snorlax
 	db 255, 255 ; Articuno
 	db 255, 255 ; Zapdos
 	db 255, 255 ; Moltres
