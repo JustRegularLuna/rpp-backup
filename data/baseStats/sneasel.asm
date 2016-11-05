@@ -14,7 +14,7 @@ dw SneaselPicFront
 dw SneaselPicBack
 ; move tutor compatibility flags
 	m_tutor 0
-	m_tutor 0
+	m_tutor 11
 	m_tutor 0
 	m_tutor 0
 db 3 ; growth rate
