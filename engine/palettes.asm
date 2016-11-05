@@ -235,7 +235,7 @@ SendPokemonPalette_WholeScreen: ; 71f17 (1c:5f17)
 	pop bc
 	ld a, c
 	and a
-	ld a, $1e
+	ld a, PAL_BLACK
 	jr nz, .asm_71f31
 	ld a, [wcf1d]
 	call DeterminePaletteIDOutOfBattle
