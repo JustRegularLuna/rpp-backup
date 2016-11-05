@@ -13,7 +13,7 @@ INCBIN "pic/bmon/weavile.pic",0,1 ; 55, sprite dimensions
 dw WeavilePicFront
 dw WeavilePicBack
 ; move tutor compatibility flags
-	m_tutor 0
+	m_tutor 7,8
 	m_tutor 11
 	m_tutor 0
 	m_tutor 0
