@@ -37,7 +37,9 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	jr c, .notEnoughHP  ;underflow means user would be left with negative health
 
 .userHasZeroOrMoreHP
+	ld e, a
 	or d
+	ld a, e
 	jr z, .notEnoughHP ; fail if move would leave user with 0 hp
 	ldi [hl], a  ;store high byte HP
 	ld [hl], d   ;store low byte HP
