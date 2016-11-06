@@ -584,7 +584,7 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	call IsNextTileShoreOrWater
 	jp c,SurfingAttemptFailed
 	ld hl,TilePairCollisionsWater
-	call CheckForTilePairCollisions
+	call CheckForTilePairCollisions2
 	jp c,SurfingAttemptFailed
 .surf
 	call .makePlayerMoveForward
