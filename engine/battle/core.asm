@@ -2549,6 +2549,8 @@ PartyMenuOrRockOrRun:
 	call LoadMonFrontSprite
 	jr .enemyMonPicReloaded
 .doEnemyMonAnimation
+	ld a, 1
+	ld [H_WHOSETURN], a
 	ld b, BANK(AnimationSubstitute) ; BANK(AnimationMinimizeMon)
 	call Bankswitch
 .enemyMonPicReloaded ; enemy mon pic has been reloaded, so return to the party menu
