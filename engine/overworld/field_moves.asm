@@ -22,6 +22,11 @@ TrySurf:
 	call IsSurfTile
 	jr nc, .no
 
+; Check to make sure you aren't on top of a cliff or something.
+	ld hl,TilePairCollisionsWater
+	call CheckForTilePairCollisions2
+	jr c, .no
+
 ; Check for a Pokemon in the party with SURF, and for the proper badge to use it.
 	ld d, SURF
 	call HasPartyMove
