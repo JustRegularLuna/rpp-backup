@@ -2045,7 +2045,7 @@ _MonsStatsRoseText:: ; 94795 (25:4795)
 	text "@@"
 
 _GreatlyRoseText:: ; 947a0 (25:47a0)
-	text $4c, "greatly@@"
+	text $4c, "sharply@@"
 
 _RoseText:: ; 947ab (25:47ab)
 	text " rose!"
@@ -2056,7 +2056,7 @@ _WontRiseAnymoreText::
 	line "@"
 	TX_RAM wcf4b
 	text " won't"
-	cont "rise anymore!"
+	cont "go any higher!"
 	prompt
 
 _MonsStatsFellText:: ; 947b3 (25:47b3)
@@ -2066,7 +2066,7 @@ _MonsStatsFellText:: ; 947b3 (25:47b3)
 	text "@@"
 
 _GreatlyFellText:: ; 947be (25:47be)
-	text $4c, "greatly@@"
+	text $4c, "harshly@@"
 
 _FellText:: ; 947c9 (25:47c9)
 	text " fell!"
@@ -2077,7 +2077,7 @@ _WontFallAnymoreText::
 	line "@"
 	TX_RAM wcf4b
 	text " won't"
-	cont "drop anymore!"
+	cont "go any lower!"
 	prompt
 
 _RanFromBattleText:: ; 947d1 (25:47d1)
