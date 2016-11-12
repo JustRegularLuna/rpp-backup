@@ -21,7 +21,7 @@ MtMoonPokecenterText3: ; 492e7 (12:52e7)
 	TX_FAR _MtMoonPokecenterText3
 	db "@"
 
-MtMoonPokecenterText4: ; 492ec (12:52ec)
+MtMoonPokecenterText4_OLD: ;;; Moved to the end of the bank to avoid shifting data! Move back later!
 	db $08 ; asm
 	ld a, [wd7c6]
 	add a
