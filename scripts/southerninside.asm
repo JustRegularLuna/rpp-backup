@@ -15,6 +15,7 @@ SouthernIslandInsideScriptPointers:
 SouthernIslandInsideTextPointers:
 	dw SouthernIslandInsideText1
 	dw SouthernIslandInsideText2
+	dw SouthernIslandObjectText
 
 SouthernIslandInsideTrainerHeaders:
 SouthernIslandInsideTrainerHeader0:
@@ -64,3 +65,10 @@ SouthernIslandInsideLatiasText:
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
+
+SouthernIslandObjectText:
+	text "All dreams are"
+	line "but another"
+	cont "reality."
+	
+	para "Never forget...@@"

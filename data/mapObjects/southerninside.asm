@@ -5,7 +5,8 @@ SouthernIslandInsideObject:
 	db $15, $c, $1, SOUTHERN_ISLAND_OUTSIDE
 	db $15, $d, $2, SOUTHERN_ISLAND_OUTSIDE
 
-	db $0 ; signs
+	db $1 ; signs
+	db $b, $d, $3 ; SouthernIslandObjectText
 
 	db $2 ; people
 	db SPRITE_BIRD, $b + 4, $c + 4, $ff, $d0, TRAINER | $1, LATIOS, 60 | OW_POKEMON

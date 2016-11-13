@@ -18,8 +18,7 @@ SouthernIslandBerryTreeText:
 	jp TextScriptEnd
 	
 SouthernIslandSignText:
-	text "The writing is"
-	line "fading as if it"
-	cont "was written long"
-	cont "ago.@@"
-	
+	text "Those whose mem-"
+	line "ories fade seek"
+	cont "to carve them in"
+	cont "their hearts...@@"
