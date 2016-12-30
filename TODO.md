@@ -7,6 +7,7 @@ Things may be added to this list as I think of them, and removed if they are add
 * Full color, by merging in pokered-gbc
 * Crystal's audio engine, by merging in the crysaudio branch
 * Real-Time Clock, with Day and Night
+* More modern Berry System, allowing you to plant and grow new ones instead of the Gen 2-like current system
 * Expand Pokédex beyond 255
 * Allow for more than one proper region, so Johto can happen
 * Proper capitalization for names
@@ -34,7 +35,7 @@ Things may be added to this list as I think of them, and removed if they are add
 * Ruins of Alph puzzles
 * Bug Catching Contest
 * More songs added
-* More detailed tilesets, taking advantage of GBC mode
+* More detailed tilesets. 256 tiles, XY Flip support (Using VRAM0 and VRAM1 for two halves of the set)
 * Possibly add Forms
 * Use IVs and EVs instead of DVs, old DVs become a mini Personality ID
 * Gain EXP on catching a Pokémon
