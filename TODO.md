@@ -57,6 +57,7 @@ Things may be added to this list as I think of them, and removed if they are add
 * Make Pokéball break with zero shakes instead of "You missed the Pokémon!"
 * Stat-up too high making your stat roll over to ultra low values
 * Substitute not protecting against status
+* Make sure badges boost the stats they claim to
 
 
 ## Unsorted Notes
