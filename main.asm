@@ -5924,7 +5924,6 @@ INCLUDE "scripts/safarizonesecrethouse.asm"
 INCLUDE "data/mapObjects/safarizonesecrethouse.asm"
 SafariZoneSecretHouseBlocks: INCBIN "maps/safarizonesecrethouse.blk"
 
-INCLUDE "scripts/magikarp_man.asm" ;;; HAX - Put this here to avoid shifting data for now, fix later!
 
 SECTION "bank13",ROMX,BANK[$13]
 

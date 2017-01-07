@@ -1493,7 +1493,6 @@ AdvancePlayerSprite:: ; 0d27 (0:0d27)
 	ld hl, AdvancePlayerSprite_
 	jp Bankswitch
 
-	ds $162  ; TODO: unused free space
 
 ; the following 6 functions are used to tell the V-blank handler to redraw
 ; the portion of the map that was newly exposed due to the player's movement
