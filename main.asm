@@ -6437,7 +6437,6 @@ INCLUDE "data/mapHeaders/route18.asm"
 INCLUDE "data/mapObjects/route18.asm"
 Route18Blocks: INCBIN "maps/route18.blk"
 
-	INCBIN "maps/unusedblocks58d7d.blk"
 
 INCLUDE "engine/battle/16.asm"
 
@@ -6659,8 +6658,6 @@ ViridianForestBlocks:    INCBIN "maps/viridianforest.blk"
 UndergroundPathNSBlocks: INCBIN "maps/undergroundpathns.blk"
 UndergroundPathWEBlocks: INCBIN "maps/undergroundpathwe.blk"
 
-	INCBIN "maps/unusedblocks60258.blk"
-
 SSAnne10Blocks:
 SSAnne9Blocks: INCBIN "maps/ssanne9.blk"
 
@@ -6693,8 +6690,6 @@ INCLUDE "data/mapHeaders/pokemontower6.asm"
 INCLUDE "scripts/pokemontower6.asm"
 INCLUDE "data/mapObjects/pokemontower6.asm"
 PokemonTower6Blocks: INCBIN "maps/pokemontower6.blk"
-
-	INCBIN "maps/unusedblocks60cef.blk"
 
 INCLUDE "data/mapHeaders/pokemontower7.asm"
 INCLUDE "scripts/pokemontower7.asm"
