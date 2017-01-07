@@ -1,6 +1,6 @@
 _CeladonPrizeRoomText1:: ; 9dee6 (27:5ee6)
 	text "I sure do fancy"
-	line "that PORYGON!"
+	line "that Porygon!"
 
 	para "But, it's hard to"
 	line "win at slots!"

@@ -1,14 +1,14 @@
 _CeruleanTrashedText_1d6ab:: ; 9875c (26:475c)
 	text "Those miserable"
-	line "ROCKETs!"
+	line "Rockets!"
 
 	para "Look what they"
 	line "did here!"
 
 	para "They stole a TM"
 	line "for teaching"
-	cont "#MON how to"
-	cont "DIG holes!"
+	cont "#mon how to"
+	cont "Dig holes!"
 
 	para "That cost me a"
 	line "bundle, it did!"
@@ -19,19 +19,19 @@ _CeruleanTrashedText_1d6b0:: ; 987e2 (26:47e2)
 	line "lost is lost!"
 
 	para "I decided to teach"
-	line "DIGLETT how to"
-	cont "DIG without a TM!"
+	line "Diglett how to"
+	cont "Dig without a TM!"
 	done
 
 _CeruleanHouseTrashedText2:: ; 98834 (26:4834)
-	text "TEAM ROCKET must"
-	line "be trying to DIG"
+	text "Team Rocket must"
+	line "be trying to Dig"
 	cont "their way into no"
 	cont "good!"
 	done
 
 _CeruleanHouseTrashedText3:: ; 9886f (26:486f)
-	text "TEAM ROCKET left"
+	text "Team Rocket left"
 	line "a way out!"
 	done
 

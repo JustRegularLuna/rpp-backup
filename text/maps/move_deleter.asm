@@ -2,18 +2,18 @@ _MoveDeleterGreetingText::
 	text "Umm..."
 
 	para "Oh, yes, I'm the"
-	line "MOVE DELETER."
+	line "Move Deleter."
 
 	para "I can make"
-	line "#MON forget"
+	line "#mon forget"
 	cont "moves."
 
 	para "Shall I make a"
-	line "#MON forget?"
+	line "#mon forget?"
 	done
 
 _MoveDeleterSaidYesText::
-	text "Which #MON"
+	text "Which #mon"
 	line "should forget a"
 	cont "move?"
 	prompt
@@ -43,7 +43,7 @@ _MoveDeleterByeText::
 	done
 
 _MoveDeleterOneMoveText::
-	text "That #MON"
+	text "That #mon"
 	line "knows only one"
 	cont "move."
 	done

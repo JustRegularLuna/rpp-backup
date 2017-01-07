@@ -5,7 +5,7 @@ _Lab4Text_75dc6:: ; a10e8 (28:50e8)
 	line "doctor!"
 
 	para "I study here rare"
-	line "#MON fossils!"
+	line "#mon fossils!"
 
 	para "You! Have you a"
 	line "fossil for me?"
@@ -45,12 +45,12 @@ _Lab4Text_610ae:: ; a11d6 (28:51d6)
 	line "@"
 	TX_RAM wcf4b
 	text ", a"
-	cont "#MON that is"
+	cont "#mon that is"
 	cont "already extinct!"
 
 	para "My Resurrection"
 	line "Machine will make"
-	cont "that #MON live"
+	cont "that #mon live"
 	cont "again!"
 	done
 

@@ -1,14 +1,14 @@
 _SaffronMartText2:: ; a23e3 (28:63e3)
-	text "MAX REPEL lasts"
-	line "longer than SUPER"
-	cont "REPEL for keeping"
-	cont "weaker #MON"
+	text "Max Repel lasts"
+	line "longer than Super"
+	cont "Repel for keeping"
+	cont "weaker #mon"
 	cont "away!"
 	done
 
 _SaffronMartText3:: ; a242a (28:642a)
-	text "REVIVE is costly,"
+	text "Revive is costly,"
 	line "but it revives"
-	cont "fainted #MON!"
+	cont "fainted #mon!"
 	done
 

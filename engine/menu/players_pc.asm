@@ -239,10 +239,10 @@ Func_7aa5: ; 7aa5 (1:7aa5)
 	jp Func_7aa5
 
 PlayersPCMenuEntries: ; 7af5 (1:7af5)
-	db   "WITHDRAW ITEM"
-	next "DEPOSIT ITEM"
-	next "TOSS ITEM"
-	next "LOG OFF@"
+	db   "Withdraw Item"
+	next "Deposit Item"
+	next "Toss Item"
+	next "Log off@"
 
 TurnedOnPC2Text: ; 7b22 (1:7b22)
 	TX_FAR _TurnedOnPC2Text

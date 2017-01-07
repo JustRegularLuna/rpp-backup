@@ -325,16 +325,16 @@ SpecialEnterMap: ; 5d5f (1:5d5f)
 	jp EnterMap
 
 ContinueText: ; 5d7e (1:5d7e)
-	db "CONTINUE", $4e
+	db "Continue", $4e
 
 NewGameText: ; 5d87 (1:5d87)
-	db "NEW GAME", $4e
-	db "OPTION@"
+	db "New Game", $4e
+	db "Options@"
 
 TradeCenterText: ; 5d97 (1:5d97)
-	db "TRADE CENTER", $4e
-	db "COLOSSEUM",    $4e
-	db "CANCEL@"
+	db "Trade Center", $4e
+	db "Colosseum",    $4e
+	db "Cancel@"
 
 ContinueGame: ; 5db5 (1:5db5)
 	xor a
@@ -417,10 +417,10 @@ Func_5e55: ; 5e55 (1:5e55)
 	jp PrintNumber
 
 SaveScreenInfoText: ; 5e6a (1:5e6a)
-	db   "PLAYER"
-	next "BADGES    "
-	next "#DEX    "
-	next "TIME@"
+	db   "Player"
+	next "Badges    "
+	next "#dex    "
+	next "Time@"
 
 DisplayOptionMenu: ; 5e8a (1:5e8a)
 	hlCoord 0, 0
@@ -575,19 +575,19 @@ DisplayOptionMenu: ; 5e8a (1:5e8a)
 	jp .eraseOldMenuCursor
 
 TextSpeedOptionText: ; 5fc0 (1:5fc0)
-	db   "TEXT SPEED"
-	next " FAST  MEDIUM SLOW@"
+	db   "Text Speed:"
+	next " Fast  Normal Slow@"
 
 BattleAnimationOptionText: ; 5fde (1:5fde)
-	db   "BATTLE ANIMATION"
-	next " ON       OFF@"
+	db   "Battle Effects:"
+	next " On       Off@"
 
 BattleStyleOptionText: ; 5ffd (1:5ffd)
-	db   "BATTLE STYLE"
-	next " SHIFT    SET@"
+	db   "Battle Style:"
+	next " Shift    Set@"
 
 OptionMenuCancelText: ; 6018 (1:6018)
-	db "CANCEL@"
+	db "Back@"
 
 ; sets the options variable according to the current placement of the menu cursors in the options menu
 SetOptionsFromCursorPositions: ; 601f (1:601f)

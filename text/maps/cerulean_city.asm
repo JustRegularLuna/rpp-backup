@@ -9,7 +9,7 @@ _CeruleanCityText_19668:: ; a4d2b (29:4d2b)
 	para "I'm doing great!"
 	line "I caught a bunch"
 	cont "of strong and"
-	cont "smart #MON!"
+	cont "smart #mon!"
 
 	para "Here, let me see"
 	line "what you caught,"
@@ -32,21 +32,21 @@ _CeruleanCityText_19677:: ; a4e07 (29:4e07)
 	text "[RIVAL]: Hey,"
 	line "guess what?"
 
-	para "I went to BILL's"
+	para "I went to Bill's"
 	line "and got him to"
 	cont "show me his rare"
-	cont "#MON!"
+	cont "#mon!"
 
 	para "That added a lot"
 	line "of pages to my"
-	cont "#DEX!"
+	cont "#dex!"
 
-	para "After all, BILL's"
+	para "After all, Bill's"
 	line "world famous as a"
-	cont "#MANIAC!"
+	cont "# Maniac!"
 
 	para "He invented the"
-	line "#MON Storage"
+	line "#mon Storage"
 	cont "System on PC!"
 
 	para "Since you're using"
@@ -115,7 +115,7 @@ _CeruleanCityText4:: ; a506e (29:506e)
 _CeruleanCityText5:: ; a50ba (29:50ba)
 	text "You're making an"
 	line "encyclopedia on"
-	cont "#MON? That"
+	cont "#mon? That"
 	cont "sounds amusing."
 	done
 
@@ -124,64 +124,64 @@ _CeruleanCityText6:: ; a50f6 (29:50f6)
 	line "were robbed."
 
 	para "It's obvious that"
-	line "TEAM ROCKET is"
+	line "Team Rocket is"
 	cont "behind this most"
 	cont "heinous crime!"
 
-	para "Even our POLICE"
-	line "FORCE has trouble"
-	cont "with the ROCKETs!"
+	para "Even our Police"
+	line "Force has trouble"
+	cont "with the Rockets!"
 	done
 
 _CeruleanCityText_19730:: ; a5188 (29:5188)
-	text "OK! SLOWBRO!"
-	line "Use SONICBOOM!"
-	cont "Come on, SLOWBRO"
+	text "OK! Slowbro!"
+	line "Use Sonic Boom!"
+	cont "Come on, Slowbro"
 	cont "pay attention!"
 	done
 
 _CeruleanCityText_19735:: ; a51c5 (29:51c5)
-	text "SLOWBRO punch!"
+	text "Slowbro, punch!"
 	line "No! You blew it"
 	cont "again!"
 	done
 
 _CeruleanCityText_1973a:: ; a51ec (29:51ec)
-	text "SLOWBRO, WITHDRAW!"
+	text "Slowbro, Withdraw!"
 	line "No! That's wrong!"
 
 	para "It's so hard to"
-	line "control #MON!"
+	line "control #mon!"
 
-	para "Your #MON's"
+	para "Your #mon's"
 	line "obedience depends"
 	cont "on your abilities"
 	cont "as a trainer!"
 	done
 
 _CeruleanCityText_1976f:: ; a526b (29:526b)
-	text "SLOWBRO took a"
+	text "Slowbro took a"
 	line "snooze..."
 	done
 
 _CeruleanCityText_19774:: ; a5285 (29:5285)
-	text "SLOWBRO is"
+	text "Slowbro is"
 	line "loafing around..."
 	done
 
 _CeruleanCityText_19779:: ; a52a3 (29:52a3)
-	text "SLOWBRO turned"
+	text "Slowbro turned"
 	line "away..."
 	done
 
 _CeruleanCityText_1977e:: ; a52bb (29:52bb)
-	text "SLOWBRO"
+	text "Slowbro"
 	line "ignored orders..."
 	done
 
 _CeruleanCityText9:: ; a52d6 (29:52d6)
 	text "I want a bright"
-	line "red BICYCLE!"
+	line "red Bicycle!"
 
 	para "I'll keep it at"
 	line "home, so it won't"
@@ -189,26 +189,27 @@ _CeruleanCityText9:: ; a52d6 (29:52d6)
 	done
 
 _CeruleanCityText10:: ; a531f (29:531f)
-	text "This is CERULEAN"
-	line "CAVE! Horribly"
-	cont "strong #MON"
+	text "This is Cerulean"
+	line "Cave! Horribly"
+	cont "strong #mon"
 	cont "live in there!"
 
-	para "The #MON LEAGUE"
-	line "champion is the"
+	para "The #mon League"
+	line "Champion is the"
 	cont "only person who"
 	cont "is allowed in!"
 	done
 
 _CeruleanCityText12:: ; a539a (29:539a)
-	text "CERULEAN CITY"
-	line "A Mysterious,"
-	cont "Blue Aura"
-	cont "Surrounds It"
+	text "Cerulean City"
+	
+	para "A mysterious,"
+	line "blue aura"
+	cont "surrounds it"
 	done
 
 _CeruleanCityText13:: ; a53ce (29:53ce)
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
 	para "Pressing B Button"
 	line "during evolution"
@@ -219,15 +220,15 @@ _CeruleanCityText13:: ; a53ce (29:53ce)
 _CeruleanCityText16:: ; a541a (29:541a)
 	text "Grass and caves"
 	line "handled easily!"
-	cont "BIKE SHOP"
+	cont "Bike Shop"
 	done
 
 _CeruleanCityText17:: ; a5445 (29:5445)
-	text "CERULEAN CITY"
-	line "#MON GYM"
-	cont "LEADER: MISTY"
+	text "Cerulean City"
+	line "#mon Gym"
+	cont "Leader: Misty"
 
-	para "The Tomboyish"
-	line "Mermaid!"
+	para "The tomboyish"
+	line "mermaid!"
 	done
 

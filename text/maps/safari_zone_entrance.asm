@@ -1,12 +1,12 @@
 _SafariZoneEntranceText1:: ; 9e6c7 (27:66c7)
 	text "Welcome to the"
-	line "SAFARI ZONE!"
+	line "Safari Zone!"
 	done
 
 SafariZoneEntranceText_9e6e4:: ; 9e6e4 (27:66e4)
 	text "For just ¥500,"
 	line "you can catch all"
-	cont "the #MON you"
+	cont "the #mon you"
 	cont "want in the park!"
 
 	para "Would you like to"
@@ -17,18 +17,18 @@ SafariZoneEntranceText_9e747:: ; 9e747 (27:6747)
 	line "please!"
 
 	para "We only use a"
-	line "special # BALL"
+	line "special # Ball"
 	cont "here."
 
 	para "[PLAYER] received"
-	line "30 SAFARI BALLs!@@"
+	line "30 Safari Balls!@@"
 
 _SafariZoneEntranceText_75360:: ; 9e79f (27:679f)
 	db $0
 	para "We'll call you on"
 	line "the PA when you"
 	cont "run out of time"
-	cont "or SAFARI BALLs!"
+	cont "or Safari Balls!"
 	done
 
 _SafariZoneEntranceText_75365:: ; 9e7e3 (27:67e3)
@@ -46,7 +46,7 @@ SafariZoneEntranceText_9e814:: ; 9e814 (27:6814)
 
 _SafariZoneEntranceText_753bb:: ; 9e825 (27:6825)
 	text "Please return any"
-	line "SAFARI BALLs you"
+	line "Safari Balls you"
 	cont "have left."
 	done
 
@@ -66,25 +66,25 @@ _SafariZoneEntranceText_753e6:: ; 9e886 (27:6886)
 	done
 
 _SafariZoneEntranceText_753eb:: ; 9e8a7 (27:68a7)
-	text "SAFARI ZONE has 4"
-	line "zones in it."
+	text "Safari Zone has 4"
+	line "areas in it."
 
-	para "Each zone has"
+	para "Each area has"
 	line "different kinds"
-	cont "of #MON. Use"
-	cont "SAFARI BALLs to"
+	cont "of #mon. Use"
+	cont "Safari Balls to"
 	cont "catch them!"
 
 	para "When you run out"
-	line "of time or SAFARI"
-	cont "BALLs, it's game"
+	line "of time or Safari"
+	cont "Balls, it's game"
 	cont "over for you!"
 
 	para "Before you go,"
 	line "open an unused"
-	cont "#MON BOX so"
+	cont "#mon Box so"
 	cont "there's room for"
-	cont "new #MON!"
+	cont "new #mon!"
 	done
 
 _SafariZoneEntranceText_753f0:: ; 9e993 (27:6993)
@@ -101,7 +101,7 @@ _SafariZoneLowCostText1::
 
 _SafariZoneLowCostText2::
 	text "But, I can't give"
-	line "you all 30 BALLs."
+	line "you all 30 Balls."
 	done
 
 _SafariZoneLowCostText3::

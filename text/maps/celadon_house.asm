@@ -5,17 +5,17 @@ _CeladonHouseText1:: ; 9e0d5 (27:60d5)
 	done
 
 _CeladonHouseText2:: ; 9e10a (27:610a)
-	text "CHIEF!"
+	text "Chief!"
 
 	para "We just shipped"
-	line "2000 #MON as"
+	line "2000 #mon as"
 	cont "slot prizes!"
 	done
 
 _CeladonHouseText3:: ; 9e13c (27:613c)
 	text "Don't touch the"
 	line "poster at the"
-	cont "GAME CORNER!"
+	cont "Game Corner!"
 
 	para "There's no secret"
 	line "switch behind it!"

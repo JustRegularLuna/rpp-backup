@@ -23,11 +23,11 @@ _Route24Text_51521:: ; 9278f (24:678f)
 _Route24Text_51526:: ; 927a8 (24:67a8)
 	text "By the way, would"
 	line "you like to join"
-	cont "TEAM ROCKET?"
+	cont "Team Rocket?"
 
 	para "We're a group"
 	line "dedicated to evil"
-	cont "using #MON!"
+	cont "using #mon!"
 
 	para "Want to join?"
 
@@ -55,7 +55,7 @@ _Route24Text_51530:: ; 928a0 (24:68a0)
 	text "With your ability,"
 	line "you could become"
 	cont "a top leader in"
-	cont "TEAM ROCKET!"
+	cont "Team Rocket!"
 	done
 
 _Route24BattleText1:: ; 928e2 (24:68e2)

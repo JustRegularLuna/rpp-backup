@@ -1,6 +1,6 @@
 _FuchsiaHouse3Text_561bd:: ; a0695 (28:4695)
-	text "I'm the FISHING"
-	line "GURU's older"
+	text "I'm the Fishing"
+	line "Guru's older"
 	cont "brother!"
 
 	para "I simply Looove"

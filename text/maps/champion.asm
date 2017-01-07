@@ -10,19 +10,19 @@ _GaryText_760f4:: ; 860e1 (21:60e1)
 	cont "me sharp!"
 
 	para "While working on"
-	line "#DEX, I looked"
+	line "#dex, I looked"
 	cont "all over for"
-	cont "powerful #MON!"
+	cont "powerful #mon!"
 
 	para "Not only that, I"
 	line "assembled teams"
 	cont "that would beat"
-	cont "any #MON type!"
+	cont "any #mon type!"
 
 	para "And now!"
 
-	para "I'm the #MON"
-	line "LEAGUE champion!"
+	para "I'm the #mon"
+	line "League Champion!"
 
 	para "[PLAYER]! Do you"
 	line "know what that"
@@ -42,7 +42,7 @@ _GaryText_760f9:: ; 8623b (21:623b)
 
 	para "After all that"
 	line "work to become"
-	cont "LEAGUE champ?"
+	cont "League Champ?"
 
 	para "My reign is over"
 	line "already?"
@@ -59,7 +59,7 @@ _GaryText_760fe:: ; 862b4 (21:62b4)
 	para "You did well to"
 	line "even reach me,"
 	cont "[RIVAL], the"
-	cont "#MON genius!"
+	cont "#mon genius!"
 
 	para "Nice try, loser!"
 	line "Hahaha!"
@@ -71,26 +71,26 @@ _GaryText_76103:: ; 8632f (21:632f)
 
 	para "I never made any"
 	line "mistakes raising"
-	cont "my #MON..."
+	cont "my #mon..."
 
 	para "Darn it! You're"
-	line "the new #MON"
-	cont "LEAGUE champion!"
+	line "the new #mon"
+	cont "League Champion!"
 
 	para "Although I don't"
 	line "like to admit it."
 	done
 
 _GaryText2:: ; 863c1 (21:63c1)
-	text "OAK: [PLAYER]!"
+	text "Oak: [PLAYER]!"
 	done
 
 _GaryText_76120:: ; 863ca (21:63ca)
-	text "OAK: So, you won!"
+	text "Oak: So, you won!"
 	line "Congratulations!"
 	cont "You're the new"
-	cont "#MON LEAGUE"
-	cont "champion!"
+	cont "#mon League"
+	cont "Champion!"
 
 	para "You've grown up so"
 	line "much since you"
@@ -104,12 +104,12 @@ _GaryText_76120:: ; 863ca (21:63ca)
 	done
 
 _GaryText_76125:: ; 86463 (21:6463)
-	text "OAK: [RIVAL]! I'm"
+	text "Oak: [RIVAL]! I'm"
 	line "disappointed!"
 
 	para "I came when I"
 	line "heard you beat"
-	cont "the ELITE FOUR!"
+	cont "the Elite Four!"
 
 	para "But, when I got"
 	line "here, you had"
@@ -121,7 +121,7 @@ _GaryText_76125:: ; 86463 (21:6463)
 
 	para "You have forgotten"
 	line "to treat your"
-	cont "#MON with"
+	cont "#mon with"
 	cont "trust and love!"
 
 	para "Without them, you"
@@ -130,7 +130,7 @@ _GaryText_76125:: ; 86463 (21:6463)
 	done
 
 _GaryText_7612a:: ; 86567 (21:6567)
-	text "OAK: [PLAYER]!"
+	text "Oak: [PLAYER]!"
 
 	para "You understand"
 	line "that your victory"
@@ -138,7 +138,7 @@ _GaryText_7612a:: ; 86567 (21:6567)
 	cont "own doing!"
 
 	para "The bond you share"
-	line "with your #MON"
+	line "with your #mon"
 	cont "is marvelous!"
 
 	para "[PLAYER]!"

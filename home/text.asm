@@ -227,13 +227,13 @@ FinishDTE:: ; 1a4b (0:1a4b)
 Char5CText:: ; 1a55 (0:1a55)
 	db "TM@"
 Char5DText:: ; 1a58 (0:1a58)
-	db "TRAINER@"
+	db "Trainer@"
 Char5BText:: ; 1a60 (0:1a60)
 	db "PC@"
 Char5EText:: ; 1a63 (0:1a63)
-	db "ROCKET@"
+	db "Rocket@"
 Char54Text:: ; 1a6a (0:1a6a)
-	db "POKé@"
+	db "Poké@"
 Char56Text:: ; 1a6f (0:1a6f)
 	db "……@"
 Char5AText:: ; 1a72 (0:1a72)

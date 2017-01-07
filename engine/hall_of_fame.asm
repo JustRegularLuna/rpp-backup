@@ -92,7 +92,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ret
 
 HallOfFameText: ; 7026b (1c:426b)
-	db "HALL OF FAME@"
+	db "Hall of Fame@"
 
 Func_70278: ; 70278 (1c:4278)
 	call ClearScreen
@@ -175,9 +175,9 @@ Func_702f0: ; 702f0 (1c:42f0)
 	jp PlayCry
 
 HoFMonInfoText: ; 70329 (1c:4329)
-	db   "LEVEL/"
-	next "TYPE1/"
-	next "TYPE2/@"
+	db   "Level"
+	next "Type 1"
+	next "Type 2@"
 
 Func_7033e: ; 7033e (1c:433e)
 	ld a, [wPlayerGender] ; New gender check
@@ -266,10 +266,10 @@ Func_703e2: ; 703e2 (1c:43e2)
 	jp DelayFrames
 
 HoFPlayTimeText: ; 703ea (1c:43ea)
-	db "PLAY TIME@"
+	db "Play Time@"
 
 HoFMoneyText: ; 703f4 (1c:43f4)
-	db "MONEY@"
+	db "Money@"
 
 DexSeenOwnedText: ; 703fa (1c:43fa)
 	TX_FAR _DexSeenOwnedText

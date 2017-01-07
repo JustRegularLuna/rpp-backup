@@ -6,16 +6,16 @@ _CeladonDinerText1:: ; 9df3f (27:5f3f)
 	done
 
 _CeladonDinerText2:: ; 9df5d (27:5f5d)
-	text "My #MON are"
+	text "My #mon are"
 	line "weak, so I often"
 	cont "have to go to the"
-	cont "DRUG STORE."
+	cont "Drug Store."
 	done
 
 _CeladonDinerText3:: ; 9df99 (27:5f99)
 	text "Psst! There's a"
 	line "basement under"
-	cont "the GAME CORNER."
+	cont "the Game Corner."
 	done
 
 _CeladonDinerText4:: ; 9dfc9 (27:5fc9)

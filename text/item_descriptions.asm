@@ -1,23 +1,23 @@
 _MasterBallDescription::
-	text "The best BALL."
+	text "The best Ball."
 	line "It never misses."
 	prompt
 
 _UltraBallDescription::
-	text "A BALL with a"
+	text "A Ball with a"
 	line "high rate of"
 	cont "success."
 	prompt
 
 _GreatBallDescription::
-	text "A BALL with a"
+	text "A Ball with a"
 	line "decent success"
 	cont "rate."
 	prompt
 
 _PokeBallDescription::
 	text "An item for"
-	line "catching #MON."
+	line "catching #mon."
 	prompt
 
 _TownMapDescription::
@@ -41,12 +41,12 @@ _SurfboardDescription::
 	prompt
 
 _SafariBallDescription::
-	text "A BALL used in"
-	line "the SAFARI ZONE."
+	text "A Ball used in"
+	line "the Safari Zone."
 	prompt
 
 _PokedexDescription::
-	text "A #MON"
+	text "A #mon"
 	line "encyclopedia."
 	prompt
 
@@ -57,13 +57,13 @@ _MoonStoneDescription::
 	cont "evening sky."
 
 	para "It allows certain"
-	line "kinds of #MON"
+	line "kinds of #mon"
 	cont "to evolve."
 	prompt
 
 _AntidoteDescription::
 	text "Cures a poisoned"
-	line "#MON."
+	line "#mon."
 	prompt
 
 _BurnHealDescription::
@@ -73,57 +73,57 @@ _BurnHealDescription::
 
 _IceHealDescription::
 	text "Thaws a frozen"
-	line "#MON."
+	line "#mon."
 	prompt
 
 _AwakeningDescription::
 	text "Wakes a sleeping"
-	line "#MON."
+	line "#mon."
 	prompt
 
 _ParalyzeHealDescription::
-	text "Cures a #MON"
+	text "Cures a #mon"
 	line "of paralysis."
 	prompt
 
 _FullRestoreDescription::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "to its full HP"
 	cont "and restores all"
 	cont "status ailments."
 	prompt
 
 _MaxPotionDescription::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "to its full HP."
 	prompt
 
 _HyperPotionDescription::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 200 HP."
 	prompt
 
 _SuperPotionDescription::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 50 HP."
 	prompt
 
 _PotionDescription::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 20 HP."
 	prompt
 
 _SafariBaitDescription::
 	text "Tasty food used"
 	line "used to lure"
-	cont "#MON in the"
-	cont "SAFARI ZONE."
+	cont "#mon in the"
+	cont "Safari Zone."
 	prompt
 
 _SafariRockDescription::
 	text "Makes catching"
-	line "#MON in the"
-	cont "SAFARI ZONE"
+	line "#mon in the"
+	cont "Safari Zone"
 	cont "easier."
 	prompt
 
@@ -137,7 +137,7 @@ _OldSeaMapDescription::
 _MysticTicketDescription::
 	text "A ticket required"
 	line "to board the ship"
-	cont "to NAVEL ROCK."
+	cont "to Navel Rock."
 	prompt
 
 _EonTicketDescription::
@@ -170,7 +170,7 @@ _EscapeRopeDescription::
 
 _RepelDescription::
 	text "Repels weak wild"
-	line "#MON for 100"
+	line "#mon for 100"
 	cont "steps."
 	prompt
 
@@ -178,13 +178,13 @@ _OldAmberDescription::
 	text "A stone"
 	line "containing the"
 	cont "genes of an"
-	cont "ancient #MON."
+	cont "ancient #mon."
 	prompt
 
 _FireStoneDescription::
 	text "A peculiar stone"
 	line "that makes"
-	cont "certain #MON"
+	cont "certain #mon"
 	cont "evolve."
 
 	para "The stone has a"
@@ -195,7 +195,7 @@ _FireStoneDescription::
 _ThunderStoneDescription::
 	text "A peculiar stone"
 	line "that makes"
-	cont "certain #MON"
+	cont "certain #mon"
 	cont "evolve."
 
 	para "It has a distinct"
@@ -206,7 +206,7 @@ _ThunderStoneDescription::
 _WaterStoneDescription::
 	text "A peculiar stone"
 	line "that makes"
-	cont "certain #MON"
+	cont "certain #mon"
 	cont "evolve."
 
 	para "It is a clear"
@@ -216,31 +216,31 @@ _WaterStoneDescription::
 _HPUpDescription::
 	text "Raises the base"
 	line "HP stat of a"
-	cont "#MON."
+	cont "#mon."
 	prompt
 
 _ProteinDescription::
 	text "Raises the base"
-	line "ATTACK stat of a"
-	cont "#MON."
+	line "Attack stat of a"
+	cont "#mon."
 	prompt
 
 _IronDescription::
 	text "Raises the base"
-	line "DEFENSE stat of a"
-	cont "#MON."
+	line "Defense stat of a"
+	cont "#mon."
 	prompt
 
 _CarbosDescription::
 	text "Raises the base"
-	line "SPEED stat of a"
-	cont "#MON."
+	line "Speed stat of a"
+	cont "#mon."
 	prompt
 
 _CalciumDescription::
 	text "Raises the base"
-	line "SPECIAL stat of a"
-	cont "#MON."
+	line "Special stat of a"
+	cont "#mon."
 	prompt
 
 _RareCandyDescription::
@@ -249,14 +249,14 @@ _RareCandyDescription::
 	cont "energy."
 
 	para "Raises the level"
-	line "of a #MON by"
+	line "of a #mon by"
 	cont "one."
 	prompt
 
 _DomeFossilDescription::
 	text "A fossil of an"
 	line "ancient, seafloor"
-	cont "dwelling #MON."
+	cont "dwelling #mon."
 
 	para "It appears to be"
 	line "part of a shell."
@@ -265,7 +265,7 @@ _DomeFossilDescription::
 _HelixFossilDescription::
 	text "A fossil of an"
 	line "ancient, seafloor"
-	cont "dwelling #MON."
+	cont "dwelling #mon."
 
 	para "It appears to be"
 	line "part of a"
@@ -279,7 +279,7 @@ _SecretKeyDescription::
 _SunStoneDescription::
 	text "A peculiar stone"
 	line "that makes"
-	cont "certain #MON"
+	cont "certain #mon"
 	cont "evolve."
 
 	para "It is as red as"
@@ -288,7 +288,7 @@ _SunStoneDescription::
 
 _BikeVoucherDescription::
 	text "Can be redeemed"
-	line "for a BICYCLE."
+	line "for a Bicycle."
 	prompt
 
 _XAccuracyDescription::
@@ -300,7 +300,7 @@ _XAccuracyDescription::
 _LeafStoneDescription::
 	text "A peculiar stone"
 	line "that makes"
-	cont "certain #MON"
+	cont "certain #mon"
 	cont "evolve."
 
 	para "It has a leaf"
@@ -316,13 +316,13 @@ _NuggetDescription::
 	line "gold."
 
 	para "Sell this at a"
-	line "MART for lots of"
+	line "Mart for lots of"
 	cont "money."
 	prompt
 
 _ThiefBallDescription::
-	text "A BALL capable of"
-	line "stealing #MON"
+	text "A Ball capable of"
+	line "stealing #mon"
 	cont "from trainers."
 	prompt
 
@@ -330,7 +330,7 @@ _PokeDollDescription::
 	text "A doll that can"
 	line "be used to escape"
 	cont "from a wild"
-	cont "#MON."
+	cont "#mon."
 	prompt
 
 _FullHealDescription::
@@ -340,13 +340,13 @@ _FullHealDescription::
 
 _ReviveDescription::
 	text "Revives a fainted"
-	line "#MON to half"
+	line "#mon to half"
 	cont "of its max HP."
 	prompt
 
 _MaxReviveDescription::
 	text "Revives a fainted"
-	line "#MON to its"
+	line "#mon to its"
 	cont "maximum HP."
 	prompt
 
@@ -358,13 +358,13 @@ _GuardSpecDescription::
 
 _SuperRepelDescription::
 	text "Repels weak wild"
-	line "#MON for 200"
+	line "#mon for 200"
 	cont "steps."
 	prompt
 
 _MaxRepelDescription::
 	text "Repels weak wild"
-	line "#MON for 250"
+	line "#mon for 250"
 	cont "steps."
 	prompt
 
@@ -376,28 +376,28 @@ _DireHitDescription::
 
 _CoinDescription::
 	text "Redeem for prizes"
-	line "at the GAME"
-	cont "CORNER."
+	line "at the Game"
+	cont "Corner."
 	prompt
 
 _FreshWaterDescription::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 50 HP."
 	prompt
 
 _SodaPopDescription::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 60 HP."
 	prompt
 
 _LemonadeDescription::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 80 HP."
 	prompt
 
 _SSTicketDescription::
 	text "A ticket to board"
-	line "the S.S. ANNE."
+	line "the S.S. Anne."
 	prompt
 
 _GoldTeethDescription::
@@ -410,25 +410,25 @@ _GoldTeethDescription::
 	prompt
 
 _XAttackDescription::
-	text "Raises ATTACK"
+	text "Raises Attack"
 	line "stat during"
 	cont "battle."
 	prompt
 
 _XDefendDescription::
-	text "Raises DEFENSE"
+	text "Raises Defense"
 	line "stat during"
 	cont "battle."
 	prompt
 
 _XSpeedDescription::
-	text "Raises SPEED"
+	text "Raises Speed"
 	line "stat during"
 	cont "battle."
 	prompt
 
 _XSpecialDescription::
-	text "Raises SPECIAL"
+	text "Raises Special"
 	line "stat during"
 	cont "battle."
 	prompt
@@ -436,12 +436,12 @@ _XSpecialDescription::
 _CoinCaseDescription::
 	text "A case that holds"
 	line "up to 9,999"
-	cont "COINs."
+	cont "Coins."
 	prompt
 
 _OaksParcelDescription::
 	text "A package for"
-	line "PROF.OAK."
+	line "Prof.Oak."
 	prompt
 
 _ItemFinderDescription::
@@ -460,21 +460,21 @@ _PokeFluteDescription::
 	text "A sweet souding"
 	line "flute that wakes"
 	cont "any sleeping"
-	cont "#MON."
+	cont "#mon."
 	prompt
 
 _LiftKeyDescription::
 	text "An elevator key"
-	line "used in TEAM"
-	cont "ROCKET's hideout."
+	line "used in Team"
+	cont "Rocket's hideout."
 
-	para "It bears the TEAM"
-	line "ROCKET logo."
+	para "It bears the Team"
+	line "Rocket logo."
 	prompt
 
 _EXPShareDescription::
-	text "Gives half EXP"
-	line "to #MON who"
+	text "Gives half Exp."
+	line "to #mon who"
 	cont "did not"
 	cont "participate in"
 	cont "battle."
@@ -485,7 +485,7 @@ _OldRodDescription::
 	line "fishing rod."
 
 	para "Use by water to"
-	line "fish for #MON."
+	line "fish for #mon."
 	prompt
 
 _GoodRodDescription::
@@ -494,7 +494,7 @@ _GoodRodDescription::
 	cont "rod."
 
 	para "Use by water to"
-	line "fish for #MON."
+	line "fish for #mon."
 	prompt
 
 _SuperRodDescription::
@@ -502,7 +502,7 @@ _SuperRodDescription::
 	line "tech fishing rod."
 
 	para "Use by water to"
-	line "fish for #MON."
+	line "fish for #mon."
 	prompt
 
 _PPUpDescription::
@@ -523,13 +523,13 @@ _MaxEtherDescription::
 _ElixerDescription::
 	text "Restores 10 PP to"
 	line "all moves of one"
-	cont "#MON."
+	cont "#mon."
 	prompt
 
 _MaxElixerDescription::
 	text "Fully restores PP"
 	line "of all moves of"
-	cont "one #MON."
+	cont "one #mon."
 	prompt
 
 _FloorB2FDescription::
@@ -604,42 +604,42 @@ _LeppaBerryDescription::
 	prompt
 
 _PechaBerryDescription::
-	text "Cures a #MON of"
+	text "Cures a #mon of"
 	line "being Poisoned."
 	prompt
 
 _RawstBerryDescription::
-	text "Cures a #MON of"
+	text "Cures a #mon of"
 	line "being Burned."
 	prompt
 
 _AspearBerryDescription::
-	text "Cures a #MON of"
+	text "Cures a #mon of"
 	line "being Frozen."
 	prompt
 
 _ChestoBerryDescription::
-	text "Wakes up a #MON"
+	text "Wakes up a #mon"
 	line "that is Asleep."
 	prompt
 
 _CheriBerryDescription::
-	text "Cures a #MON of"
+	text "Cures a #mon of"
 	line "Paralysis."
 	prompt
 
 _LumBerryDescription::
-	text "Cures #MON of"
+	text "Cures #mon of"
 	line "any negative"
 	cont "status condition."
 	prompt
 
 _SwegBerryDescription::
 	text "An extremely rare"
-	line "BERRY."
+	line "Berry."
 
 	para "It increases a"
-	line "#MON's level by"
+	line "#mon's level by"
 	cont "1 when used."
 	prompt
 
@@ -648,33 +648,33 @@ _GoHomeDescription::
 	prompt
 
 _HM01Description::
-	text "HM01 - CUT"
+	text "HM01 - Cut"
 	line "Use out of battle"
 	cont "to hack away at"
 	cont "small bushes."
 	prompt
 
 _HM02Description::
-	text "HM02 - FLY"
+	text "HM02 - Fly"
 	line "Use out of battle"
 	cont "to fly between"
 	cont "towns."
 	prompt
 
 _HM03Description::
-	text "HM03 - SURF"
+	text "HM03 - Surf"
 	line "Use out of battle"
 	cont "to move on water."
 	prompt
 
 _HM04Description::
-	text "HM04 - STRENGTH"
+	text "HM04 - Strength"
 	line "Use out of battle"
 	cont "to move boulders."
 	prompt
 
 _HM05Description::
-	text "HM05 - DIVE"
+	text "HM05 - Dive"
 	line "Use out of battle"
 	cont "to dive into deep"
 	cont "water."
@@ -682,218 +682,218 @@ _HM05Description::
 
 _TM01Description::
 	text "TM01 -"
-	line "DYNAMICPUNCH"
+	line "DynamicPunch"
 	prompt
 
 _TM02Description::
-	text "TM02 - DRAGON CLAW"
+	text "TM02 - Dragon Claw"
 	prompt
 
 _TM03Description::
 	text "TM03 -"
-	line "SWORDS DANCE"
+	line "Swords Dance"
 	prompt
 
 _TM04Description::
-	text "TM04 - STEEL WING"
+	text "TM04 - Steel Wing"
 	prompt
 
 _TM05Description::
-	text "TM05 - MEGA KICK"
+	text "TM05 - Mega Kick"
 	prompt
 
 _TM06Description::
-	text "TM06 - TOXIC"
+	text "TM06 - Toxic"
 	prompt
 
 _TM07Description::
-	text "TM07 - HORN DRILL"
+	text "TM07 - Horn Drill"
 	prompt
 
 _TM08Description::
-	text "TM08 - BODY SLAM"
+	text "TM08 - Body Slam"
 	prompt
 
 _TM09Description::
-	text "TM09 - TAKE DOWN"
+	text "TM09 - Take Down"
 	prompt
 
 _TM10Description::
 	text "TM10 - "
-	line "DOUBLE EDGE"
+	line "Double Edge"
 	prompt
 
 _TM11Description::
 	text "TM11 -"
-	line "WATER PULSE"
+	line "Water Pulse"
 	prompt
 
 _TM12Description::
 	text "TM12 -"
-	line "MUDDY WATER"
+	line "Muddy Water"
 	prompt
 
 _TM13Description::
-	text "TM13 - ICE BEAM"
+	text "TM13 - Ice Beam"
 	prompt
 
 _TM14Description::
-	text "TM14 - BLIZZARD"
+	text "TM14 - Blizzard"
 	prompt
 
 _TM15Description::
-	text "TM15 - HYPER BEAM"
+	text "TM15 - Hyper Beam"
 	prompt
 
 _TM16Description::
-	text "TM16 - IRON TAIL"
+	text "TM16 - Iron Tail"
 	prompt
 
 _TM17Description::
-	text "TM17 - SUBMISSION"
+	text "TM17 - Submission"
 	prompt
 
 _TM18Description::
-	text "TM18 - COUNTER"
+	text "TM18 - Counter"
 	prompt
 
 _TM19Description::
 	text "TM19 -"
-	line "SEISMIC TOSS"
+	line "Seismic Toss"
 	prompt
 
 _TM20Description::
-	text "TM20 - METAL CLAW"
+	text "TM20 - Metal Claw"
 	prompt
 
 _TM21Description::
-	text "TM21 - GIGA DRAIN"
+	text "TM21 - Giga Drain"
 	prompt
 
 _TM22Description::
-	text "TM22 - SOLARBEAM"
+	text "TM22 - Solar Beam"
 	prompt
 
 _TM23Description::
 	text "TM23 -"
-	line "DRAGONBREATH"
+	line "DragonBreath"
 	prompt
 
 _TM24Description::
 	text "TM24 -"
-	line "THUNDERBOLT"
+	line "Thunderbolt"
 	prompt
 
 _TM25Description::
-	text "TM25 - THUNDER"
+	text "TM25 - Thunder"
 	prompt
 
 _TM26Description::
-	text "TM26 - EARTHQUAKE"
+	text "TM26 - Earthquake"
 	prompt
 
 _TM27Description::
-	text "TM27 - FISSURE"
+	text "TM27 - Fissure"
 	prompt
 
 _TM28Description::
-	text "TM28 - DIG"
+	text "TM28 - Dig"
 	prompt
 
 _TM29Description::
-	text "TM29 - PSYCHIC"
+	text "TM29 - Psychic"
 	prompt
 
 _TM30Description::
 	text "TM30 -"
-	line "SHADOW BALL"
+	line "Shadow Ball"
 	prompt
 
 _TM31Description::
-	text "TM31 - MIMIC"
+	text "TM31 - Mimic"
 	prompt
 
 _TM32Description::
 	text "TM32 -"
-	line "DOUBLE TEAM"
+	line "Double Team"
 	prompt
 
 _TM33Description::
-	text "TM33 - REFLECT"
+	text "TM33 - Reflect"
 	prompt
 
 _TM34Description::
-	text "TM34 - HEADBUTT"
+	text "TM34 - Headbutt"
 	prompt
 
 _TM35Description::
 	text "TM35 -"
-	line "ANCIENTPOWER"
+	line "AncientPower"
 	prompt
 
 _TM36Description::
-	text "TM36 - ROCK TOMB"
+	text "TM36 - Rock Tomb"
 	prompt
 
 _TM37Description::
 	text "TM37 -"
-	line "FLAMETHROWER"
+	line "Flamethrower"
 	prompt
 
 _TM38Description::
-	text "TM38 - FIRE BLAST"
+	text "TM38 - Fire Blast"
 	prompt
 
 _TM39Description::
-	text "TM39 - SWIFT"
+	text "TM39 - Swift"
 	prompt
 
 _TM40Description::
-	text "TM40 - SKULL BASH"
+	text "TM40 - Skull Bash"
 	prompt
 
 _TM41Description::
 	text "TM41 -"
-	line "AERIAL ACE"
+	line "Aerial Ace"
 	prompt
 
 _TM42Description::
 	text "TM42 -"
-	line "DREAM EATER"
+	line "Dream Eater"
 	prompt
 
 _TM43Description::
-	text "TM43 - DARK PULSE"
+	text "TM43 - Dark Pulse"
 	prompt
 
 _TM44Description::
-	text "TM44 - REST"
+	text "TM44 - Rest"
 	prompt
 
 _TM45Description::
 	text "TM45 -"
-	line "THUNDER WAVE"
+	line "Thunder Wave"
 	prompt
 
 _TM46Description::
-	text "TM46 - PSYWAVE"
+	text "TM46 - Psywave"
 	prompt
 
 _TM47Description::
-	text "TM47 - EXPLOSION"
+	text "TM47 - Explosion"
 	prompt
 
 _TM48Description::
-	text "TM48 - ROCK SLIDE"
+	text "TM48 - Rock Slide"
 	prompt
 
 _TM49Description::
 	text "TM49 -"
-	line "DAZZLINGLEAM"
+	line "DazzlinGleam"
 	prompt
 
 _TM50Description::
-	text "TM50 - FLASH"
+	text "TM50 - Flash"
 	prompt
 
 _EmptyDescription::
@@ -901,23 +901,23 @@ _EmptyDescription::
 	done
 
 _MasterBallDescription_Mart::
-	text "The best BALL."
+	text "The best Ball."
 	line "It never misses."
 	done
 
 _UltraBallDescription_Mart::
-	text "A BALL with high"
+	text "A Ball with high"
 	line "rate of success."
 	done
 
 _GreatBallDescription_Mart::
-	text "A BALL with"
+	text "A Ball with"
 	line "decent success."
 	done
 
 _PokeBallDescription_Mart::
 	text "An item for"
-	line "catching #MON."
+	line "catching #mon."
 	done
 
 _TownMapDescription_Mart::
@@ -935,42 +935,42 @@ _SurfboardDescription_Mart::
 	done
 
 _SafariBallDescription_Mart::
-	text "A BALL used in"
-	line "the SAFARI ZONE."
+	text "A Ball used in"
+	line "the Safari Zone."
 	done
 
 _PokedexDescription_Mart::
-	text "A #MON"
+	text "A #mon"
 	line "encyclopedia."
 	done
 
 _MoonStoneDescription_Mart::
 	text "Evolves certain"
-	line "#MON."
+	line "#mon."
 	done
 
 _AntidoteDescription_Mart::
 	text "Cures a poisoned"
-	line "#MON."
+	line "#mon."
 	done
 
 _BurnHealDescription_Mart::
-	text "Cures a #MON"
+	text "Cures a #mon"
 	line "of its burn."
 	done
 
 _IceHealDescription_Mart::
 	text "Thaws a frozen"
-	line "#MON."
+	line "#mon."
 	done
 
 _AwakeningDescription_Mart::
 	text "Wakes a sleeping"
-	line "#MON."
+	line "#mon."
 	done
 
 _ParalyzeHealDescription_Mart::
-	text "Cures a #MON"
+	text "Cures a #mon"
 	line "of paralysis."
 	done
 
@@ -980,33 +980,33 @@ _FullRestoreDescription_Mart::
 	done
 
 _MaxPotionDescription_Mart::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "to its full HP."
 	done
 
 _HyperPotionDescription_Mart::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 200 HP."
 	done
 
 _SuperPotionDescription_Mart::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 50 HP."
 	done
 
 _PotionDescription_Mart::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 20 HP."
 	done
 
 _SafariBaitDescription_Mart::
-	text "Lures #MON in"
-	line "the SAFARI ZONE."
+	text "Lures #mon in"
+	line "the Safari Zone."
 	done
 
 _SafariRockDescription_Mart::
-	text "Angers #MON in"
-	line "the SAFARI ZONE."
+	text "Angers #mon in"
+	line "the Safari Zone."
 	done
 
 _OldSeaMapDescription_Mart::
@@ -1016,7 +1016,7 @@ _OldSeaMapDescription_Mart::
 
 _MysticTicketDescription_Mart::
 	text "A ticket to"
-	line "NAVEL ROCK."
+	line "Navel Rock."
 	done
 
 _EonTicketDescription_Mart::
@@ -1042,7 +1042,7 @@ _EscapeRopeDescription_Mart::
 	done
 
 _RepelDescription_Mart::
-	text "Repels #MON"
+	text "Repels #mon"
 	line "for 100 steps."
 	done
 
@@ -1053,57 +1053,57 @@ _OldAmberDescription_Mart::
 
 _FireStoneDescription_Mart::
 	text "Evolves certain"
-	line "#MON."
+	line "#mon."
 	done
 
 _ThunderStoneDescription_Mart::
 	text "Evolves certain"
-	line "#MON."
+	line "#mon."
 	done
 
 _WaterStoneDescription_Mart::
 	text "Evolves certain"
-	line "#MON."
+	line "#mon."
 	done
 
 _HPUpDescription_Mart::
 	text "Raises the HP of"
-	line "one #MON."
+	line "one #mon."
 	done
 
 _ProteinDescription_Mart::
-	text "Raises ATTACK of"
-	line "one #MON."
+	text "Raises Attack of"
+	line "one #mon."
 	done
 
 _IronDescription_Mart::
-	text "Raises DEFENSE of"
-	line "one #MON."
+	text "Raises Defense of"
+	line "one #mon."
 	done
 
 _CarbosDescription_Mart::
-	text "Raises SPEED of"
-	line "one #MON."
+	text "Raises Speed of"
+	line "one #mon."
 	done
 
 _CalciumDescription_Mart::
-	text "Raises SPECIAL of"
-	line "one #MON."
+	text "Raises Special of"
+	line "one #mon."
 	done
 
 _RareCandyDescription_Mart::
 	text "Raises level of"
-	line "#MON by 1."
+	line "#mon by 1."
 	done
 
 _DomeFossilDescription_Mart::
 	text "A fossil of a"
-	line "seafloor #MON."
+	line "seafloor #mon."
 	done
 
 _HelixFossilDescription_Mart::
 	text "A fossil of a"
-	line "seafloor #MON."
+	line "seafloor #mon."
 	done
 
 _SecretKeyDescription_Mart::
@@ -1112,12 +1112,12 @@ _SecretKeyDescription_Mart::
 
 _SunStoneDescription_Mart::
 	text "Evolves certain"
-	line "#MON."
+	line "#mon."
 	done
 
 _BikeVoucherDescription_Mart::
 	text "Can be redeemed"
-	line "for a BICYCLE."
+	line "for a Bicycle."
 	done
 
 _XAccuracyDescription_Mart::
@@ -1127,7 +1127,7 @@ _XAccuracyDescription_Mart::
 
 _LeafStoneDescription_Mart::
 	text "Evolves certain"
-	line "#MON."
+	line "#mon."
 	done
 
 _CardKeyDescription_Mart::
@@ -1140,8 +1140,8 @@ _NuggetDescription_Mart::
 	done
 
 _ThiefBallDescription_Mart::
-	text "A BALL capable of"
-	line "stealing #MON."
+	text "A Ball capable of"
+	line "stealing #mon."
 	done
 
 _PokeDollDescription_Mart::
@@ -1156,12 +1156,12 @@ _FullHealDescription_Mart::
 
 _ReviveDescription_Mart::
 	text "Revives a fainted"
-	line "#MON half HP."
+	line "#mon half HP."
 	done
 
 _MaxReviveDescription_Mart::
 	text "Revives a fainted"
-	line "#MON max HP."
+	line "#mon max HP."
 	done
 
 _GuardSpecDescription_Mart::
@@ -1170,12 +1170,12 @@ _GuardSpecDescription_Mart::
 	done
 
 _SuperRepelDescription_Mart::
-	text "Repels #MON"
+	text "Repels #mon"
 	line "for 200 steps."
 	done
 
 _MaxRepelDescription_Mart::
-	text "Repels #MON"
+	text "Repels #mon"
 	line "for 250 steps."
 	done
 
@@ -1186,27 +1186,27 @@ _DireHitDescription_Mart::
 
 _CoinDescription_Mart::
 	text "Redeem for prizes"
-	line "at GAME CORNER."
+	line "at Game Corner."
 	done
 
 _FreshWaterDescription_Mart::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 50 HP."
 	done
 
 _SodaPopDescription_Mart::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 60 HP."
 	done
 
 _LemonadeDescription_Mart::
-	text "Heals a #MON"
+	text "Heals a #mon"
 	line "by 80 HP."
 	done
 
 _SSTicketDescription_Mart::
 	text "A ticket to board"
-	line "the S.S. ANNE."
+	line "the S.S. Anne."
 	done
 
 _GoldTeethDescription_Mart::
@@ -1215,33 +1215,33 @@ _GoldTeethDescription_Mart::
 	done
 
 _XAttackDescription_Mart::
-	text "Raises ATTACK"
+	text "Raises Attack"
 	line "stat in battle."
 	done
 
 _XDefendDescription_Mart::
-	text "Raises DEFENSE"
+	text "Raises Defense"
 	line "stat in battle."
 	done
 
 _XSpeedDescription_Mart::
-	text "Raises SPEED"
+	text "Raises Speed"
 	line "stat in battle."
 	done
 
 _XSpecialDescription_Mart::
-	text "Raises SPECIAL"
+	text "Raises Special"
 	line "stat in battle."
 	done
 
 _CoinCaseDescription_Mart::
 	text "A case that holds"
-	line "9,999 COINs."
+	line "9,999 Coins."
 	done
 
 _OaksParcelDescription_Mart::
 	text "A package for"
-	line "PROF.OAK."
+	line "Prof.Oak."
 	done
 
 _ItemFinderDescription_Mart::
@@ -1256,7 +1256,7 @@ _SilphScopeDescription_Mart::
 
 _PokeFluteDescription_Mart::
 	text "Wakes sleeping"
-	line "#MON."
+	line "#mon."
 	done
 
 _LiftKeyDescription_Mart::
@@ -1264,7 +1264,7 @@ _LiftKeyDescription_Mart::
 	done
 
 _EXPShareDescription_Mart::
-	text "Shares EXP among"
+	text "Shares Exp. among"
 	line "the team."
 	done
 
@@ -1380,38 +1380,38 @@ _LeppaBerryDescription_Mart::
 	done
 
 _PechaBerryDescription_Mart::
-	text "Cures a #MON of"
+	text "Cures a #mon of"
 	line "being Poisoned."
 	done
 
 _RawstBerryDescription_Mart::
-	text "Cures a #MON of"
+	text "Cures a #mon of"
 	line "being Burned."
 	done
 
 _AspearBerryDescription_Mart::
-	text "Cures a #MON of"
+	text "Cures a #mon of"
 	line "being Frozen."
 	done
 
 _ChestoBerryDescription_Mart::
-	text "Wakes up a #MON"
+	text "Wakes up a #mon"
 	line "that is Asleep."
 	done
 
 _CheriBerryDescription_Mart::
-	text "Cures a #MON of"
+	text "Cures a #mon of"
 	line "Paralysis."
 	done
 
 _LumBerryDescription_Mart::
-	text "Cures #MON of"
+	text "Cures #mon of"
 	line "status conditions"
 	done
 
 _SwegBerryDescription_Mart::
 	text "Raises level of"
-	line "#MON by 1."
+	line "#mon by 1."
 	done
 
 _GoHomeDescription_Mart::
@@ -1419,237 +1419,237 @@ _GoHomeDescription_Mart::
 	done
 
 _HM01Description_Mart::
-	text "HM01 - CUT"
+	text "HM01 - Cut"
 	done
 
 _HM02Description_Mart::
-	text "HM02 - FLY"
+	text "HM02 - Fly"
 	done
 
 _HM03Description_Mart::
-	text "HM03 - SURF"
+	text "HM03 - Surf"
 	done
 
 _HM04Description_Mart::
-	text "HM04 - STRENGTH"
+	text "HM04 - Strength"
 	done
 
 _HM05Description_Mart::
-	text "HM05 - DIVE"
+	text "HM05 - Dive"
 	done
 
 _TM01Description_Mart::
 	text "TM01 -"
-	line "DYNAMICPUNCH"
+	line "DynamicPunch"
 	done
 
 _TM02Description_Mart::
-	text "TM02 - DRAGON CLAW"
+	text "TM02 - Dragon Claw"
 	done
 
 _TM03Description_Mart::
 	text "TM03 -"
-	line "SWORDS DANCE"
+	line "Swords Dance"
 	done
 
 _TM04Description_Mart::
-	text "TM04 - STEEL WING"
+	text "TM04 - Steel Wing"
 	done
 
 _TM05Description_Mart::
-	text "TM05 - MEGA KICK"
+	text "TM05 - Mega Kick"
 	done
 
 _TM06Description_Mart::
-	text "TM06 - TOXIC"
+	text "TM06 - Toxic"
 	done
 
 _TM07Description_Mart::
-	text "TM07 - HORN DRILL"
+	text "TM07 - Horn Drill"
 	done
 
 _TM08Description_Mart::
-	text "TM08 - BODY SLAM"
+	text "TM08 - Body Slam"
 	done
 
 _TM09Description_Mart::
-	text "TM09 - TAKE DOWN"
+	text "TM09 - Take Down"
 	done
 
 _TM10Description_Mart::
 	text "TM10 - "
-	line "DOUBLE EDGE"
+	line "Double Edge"
 	done
 
 _TM11Description_Mart::
 	text "TM11 -"
-	line "WATER PULSE"
+	line "Water Pulse"
 	done
 
 _TM12Description_Mart::
 	text "TM12 -"
-	line "MUDDY WATER"
+	line "Muddy Water"
 	done
 
 _TM13Description_Mart::
-	text "TM13 - ICE BEAM"
+	text "TM13 - Ice Beam"
 	done
 
 _TM14Description_Mart::
-	text "TM14 - BLIZZARD"
+	text "TM14 - Blizzard"
 	done
 
 _TM15Description_Mart::
-	text "TM15 - HYPER BEAM"
+	text "TM15 - Hyper Beam"
 	done
 
 _TM16Description_Mart::
-	text "TM16 - IRON TAIL"
+	text "TM16 - Iron Tail"
 	done
 
 _TM17Description_Mart::
-	text "TM17 - SUBMISSION"
+	text "TM17 - Submission"
 	done
 
 _TM18Description_Mart::
-	text "TM18 - COUNTER"
+	text "TM18 - Counter"
 	done
 
 _TM19Description_Mart::
 	text "TM19 -"
-	line "SEISMIC TOSS"
+	line "Seismic Toss"
 	done
 
 _TM20Description_Mart::
-	text "TM20 - METAL CLAW"
+	text "TM20 - Metal Claw"
 	done
 
 _TM21Description_Mart::
-	text "TM21 - GIGA DRAIN"
+	text "TM21 - Giga Drain"
 	done
 
 _TM22Description_Mart::
-	text "TM22 - SOLARBEAM"
+	text "TM22 - Solar Beam"
 	done
 
 _TM23Description_Mart::
 	text "TM23 -"
-	line "DRAGONBREATH"
+	line "DragonBreath"
 	done
 
 _TM24Description_Mart::
 	text "TM24 -"
-	line "THUNDERBOLT"
+	line "Thunderbolt"
 	done
 
 _TM25Description_Mart::
-	text "TM25 - THUNDER"
+	text "TM25 - Thunder"
 	done
 
 _TM26Description_Mart::
-	text "TM26 - EARTHQUAKE"
+	text "TM26 - Earthquake"
 	done
 
 _TM27Description_Mart::
-	text "TM27 - FISSURE"
+	text "TM27 - Fissure"
 	done
 
 _TM28Description_Mart::
-	text "TM28 - DIG"
+	text "TM28 - Dig"
 	done
 
 _TM29Description_Mart::
-	text "TM29 - PSYCHIC"
+	text "TM29 - Psychic"
 	done
 
 _TM30Description_Mart::
 	text "TM30 -"
-	line "SHADOW BALL"
+	line "Shadow Ball"
 	done
 
 _TM31Description_Mart::
-	text "TM31 - MIMIC"
+	text "TM31 - Mimic"
 	done
 
 _TM32Description_Mart::
 	text "TM32 -"
-	line "DOUBLE TEAM"
+	line "Double Team"
 	done
 
 _TM33Description_Mart::
-	text "TM33 - REFLECT"
+	text "TM33 - Reflect"
 	done
 
 _TM34Description_Mart::
-	text "TM34 - HEADBUTT"
+	text "TM34 - Headbutt"
 	done
 
 _TM35Description_Mart::
 	text "TM35 -"
-	line "ANCIENTPOWER"
+	line "AncientPower"
 	done
 
 _TM36Description_Mart::
-	text "TM36 - ROCK TOMB"
+	text "TM36 - Rock Tomb"
 	done
 
 _TM37Description_Mart::
 	text "TM37 -"
-	line "FLAMETHROWER"
+	line "Flamethrower"
 	done
 
 _TM38Description_Mart::
-	text "TM38 - FIRE BLAST"
+	text "TM38 - Fire Blast"
 	done
 
 _TM39Description_Mart::
-	text "TM39 - SWIFT"
+	text "TM39 - Swift"
 	done
 
 _TM40Description_Mart::
-	text "TM40 - SKULL BASH"
+	text "TM40 - Skull Bash"
 	done
 
 _TM41Description_Mart::
 	text "TM41 -"
-	line "AERIAL ACE"
+	line "Aerial Ace"
 	done
 
 _TM42Description_Mart::
 	text "TM42 -"
-	line "DREAM EATER"
+	line "Dream Eater"
 	done
 
 _TM43Description_Mart::
-	text "TM43 - DARK PULSE"
+	text "TM43 - Dark Pulse"
 	done
 
 _TM44Description_Mart::
-	text "TM44 - REST"
+	text "TM44 - Rest"
 	done
 
 _TM45Description_Mart::
 	text "TM45 -"
-	line "THUNDER WAVE"
+	line "Thunder Wave"
 	done
 
 _TM46Description_Mart::
-	text "TM46 - PSYWAVE"
+	text "TM46 - Psywave"
 	done
 
 _TM47Description_Mart::
-	text "TM47 - EXPLOSION"
+	text "TM47 - Explosion"
 	done
 
 _TM48Description_Mart::
-	text "TM48 - ROCK SLIDE"
+	text "TM48 - Rock Slide"
 	done
 
 _TM49Description_Mart::
 	text "TM49 -"
-	line "DAZZLINGLEAM"
+	line "DazzlinGleam"
 	done
 
 _TM50Description_Mart::
-	text "TM50 - FLASH"
+	text "TM50 - Flash"
 	done

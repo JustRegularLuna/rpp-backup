@@ -1,12 +1,12 @@
 _SilphCo5Text_1a010:: ; 82936 (20:6936)
-	text "TEAM ROCKET is"
+	text "Team Rocket is"
 	line "in an uproar over"
 	cont "some intruder."
 	cont "That's you right?"
 	done
 
 _SilphCo5Text_1a015:: ; 82978 (20:6978)
-	text "TEAM ROCKET took"
+	text "Team Rocket took"
 	line "off! You're our"
 	cont "hero! Thank you!"
 	done
@@ -23,12 +23,12 @@ _SilphCo5EndBattleText2:: ; 829cf (20:69cf)
 _SilphCo5AfterBattleText2:: ; 829d6 (20:69d6)
 	text "It's not smart"
 	line "to pick a fight"
-	cont "with TEAM ROCKET!"
+	cont "with Team Rocket!"
 	done
 
 _SilphCo5BattleText3:: ; 82a07 (20:6a07)
 	text "We study #"
-	line "BALL technology"
+	line "Ball technology"
 	cont "on this floor!"
 	done
 
@@ -40,7 +40,7 @@ _SilphCo5EndBattleText3:: ; 82a32 (20:6a32)
 _SilphCo5AfterBattleText3:: ; 82a43 (20:6a43)
 	text "We worked on the"
 	line "ultimate #"
-	cont "BALL which would"
+	cont "Ball which would"
 	cont "catch anything!"
 	done
 

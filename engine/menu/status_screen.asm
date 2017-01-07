@@ -155,19 +155,19 @@ NamePointers2: ; 12a9d (4:6a9d)
 	dw W_DAYCAREMONNAME
 
 Type1Text: ; 12aa5 (4:6aa5)
-	db "TYPE1/", $4e
+	db "Type 1", $4e
 
 Type2Text: ; 12aac (4:6aac)
-	db "TYPE2/", $4e
+	db "Type 2", $4e
 
 IDNoText: ; 12ab3 (4:6ab3)
-	db $73, "№", "/", $4e
+	db $73, "№", " ", $4e
 
 OTText: ; 12ab7 (4:6ab7)
-	db "OT/", $4e, "@"
+	db "OT ", $4e, "@"
 
 StatusText: ; 12abc (4:6abc)
-	db "STATUS/@"
+	db "Status:@"
 
 OKText: ; 12ac4 (4:6ac4)
 	db "OK@"
@@ -272,10 +272,10 @@ PrintStat
 	ret
 
 StatsText: ; 12b3a (4:6b3a)
-	db   "ATTACK"
-	next "DEFENSE"
-	next "SPEED"
-	next "SPECIAL@"
+	db   "Attack"
+	next "Defense"
+	next "Speed"
+	next "Special@"
 
 StatusScreen2: ; 12b57 (4:6b57)
 	ld a, [hTilesetType]
@@ -445,10 +445,10 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ret
 
 EXPPointsText: ; 12caf (4:6caf)
-	db "EXP POINTS", $4e
+	db "Exp.Points", $4e
 
 LevelUpText: ; 12cba (4:6cba)
-	db "LEVEL UP@"
+	db "Next@"
 
 Func_12cc3: ; 12cc3 (4:6cc3)
 	ld bc, $a

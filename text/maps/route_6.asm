@@ -37,7 +37,7 @@ _Route6EndBattleText3:: ; 8dce9 (23:5ce9)
 _Route6AfterBattleText3:: ; 8dcfd (23:5cfd)
 	text "I like bugs, so"
 	line "I'm going back to"
-	cont "VIRIDIAN FOREST."
+	cont "Viridian Forest."
 	done
 
 _Route6BattleText4:: ; 8dd30 (23:5d30)
@@ -52,7 +52,7 @@ _Route6EndBattleText4:: ; 8dd4e (23:5d4e)
 
 _Route6AfterBattleText4:: ; 8dd61 (23:5d61)
 	text "I should carry"
-	line "more #MON with"
+	line "more #mon with"
 	cont "me for safety."
 	done
 
@@ -82,14 +82,14 @@ _Route6EndBattleText6:: ; 8de10 (23:5e10)
 	prompt
 
 _Route6AfterBattleText6:: ; 8de23 (23:5e23)
-	text "Are my #MON"
+	text "Are my #mon"
 	line "weak? Or, am I"
 	cont "just bad?"
 	done
 
 _Route6Text7:: ; 8de49 (23:5e49)
-	text "UNDERGROUND PATH"
-	line "CERULEAN CITY -"
-	cont "VERMILION CITY"
+	text "Underground Path"
+	line "Cerulean City -"
+	cont "Vermilion City"
 	done
 

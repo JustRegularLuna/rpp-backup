@@ -1,5 +1,5 @@
 _CeladonCityText1:: ; a59fb (29:59fb)
-	text "I got my KOFFING"
+	text "I got my Koffing"
 	line "from my friend!"
 
 	para "We get along now,"
@@ -8,13 +8,13 @@ _CeladonCityText1:: ; a59fb (29:59fb)
 	done
 
 _CeladonCityText2:: ; a5a4b (29:5a4b)
-	text "Heheh! This GYM"
+	text "Heheh! This Gym"
 	line "is great! It's"
 	cont "full of women!"
 	done
 
 _CeladonCityText3:: ; a5a79 (29:5a79)
-	text "The GAME CORNER"
+	text "The Game Corner"
 	line "is bad for our"
 	cont "city's image!"
 	done
@@ -47,7 +47,7 @@ _ReceivedTM41Text:: ; a5b5a (29:5b5a)
 
 _TM41ExplanationText:: ; a5b6e (29:5b6e)
 	text "TM43 teaches"
-	line "DARK PULSE!"
+	line "Dark Pulse!"
 
 	para "It's kinda strong,"
 	line "so use it wisely!"
@@ -60,15 +60,15 @@ _TM41NoRoomText:: ; a5bb8 (29:5bb8)
 
 _CeladonCityText6:: ; a5bd9 (29:5bd9)
 	text "This is my trusted"
-	line "pal, SLOWKING!"
+	line "pal, Slowking!"
 
 	para "It evolved from"
-	line "SLOWPOKE when I"
-	cont "used a MOON STONE!"
+	line "Slowpoke when I"
+	cont "used a Moon Stone!"
 	done
 
 _CeladonCityText7:: ; a5c30 (29:5c30)
-	text "SLOWKING: ..."
+	text "Slowking: ..."
 	line "...Yawn?@@"
 
 _CeladonCityText8:: ; a5c49 (29:5c49)
@@ -77,73 +77,76 @@ _CeladonCityText8:: ; a5c49 (29:5c49)
 	done
 
 _CeladonCityText9:: ; a5c63 (29:5c63)
-	text "Keep out of TEAM"
-	line "ROCKET's way!"
+	text "Keep out of Team"
+	line "Rocket's way!"
 	done
 
 _CeladonCityText10:: ; a5c82 (29:5c82)
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "X ACCURACY boosts"
+	para "X Accuracy boosts"
 	line "the accuracy of"
 	cont "techniques!"
 
-	para "DIRE HIT jacks up"
+	para "Dire Hit jacks up"
 	line "the likelihood of"
 	cont "critical hits!"
 
 	para "Get your items at"
-	line "CELADON DEPT."
-	cont "STORE!"
+	line "Celadon Dept."
+	cont "Store!"
 	done
 
 _CeladonCityText11:: ; a5d18 (29:5d18)
-	text "CELADON CITY"
-	line "The City of"
-	cont "Rainbow Dreams"
+	text "Celadon City"
+	
+	para "The city of"
+	line "rainbow dreams"
 	done
 
 _CeladonCityText13:: ; a5d41 (29:5d41)
-	text "CELADON CITY"
-	line "#MON GYM"
-	cont "LEADER: ERIKA"
+	text "Celadon City"
+	line "#mon Gym"
+	cont "Leader: Erika"
 
-	para "The Nature-Loving"
-	line "Princess!"
+	para "The nature-loving"
+	line "princess!"
 	done
 
 _CeladonCityText14:: ; a5d82 (29:5d82)
-	text "CELADON MANSION"
+	text "Celadon Mansion"
 	done
 
 _CeladonCityText15:: ; a5d93 (29:5d93)
 	text "Find what you"
-	line "need at CELADON"
-	cont "DEPT. STORE!"
+	line "need at Celadon"
+	cont "Dept. Store!"
 	done
 
 _CeladonCityText16:: ; a5dbf (29:5dbf)
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "GUARD SPEC."
-	line "protects #MON"
-	cont "against SPECIAL"
+	para "Guard Spec."
+	line "protects #mon"
+	cont "against Special"
 	cont "attacks!"
 
 	para "Get your items at"
-	line "CELADON DEPT."
-	cont "STORE!"
+	line "Celadon Dept."
+	cont "Store!"
 	done
 
 _CeladonCityText17:: ; a5e3e (29:5e3e)
 	text "Coins exchanged"
 	line "for prizes!"
-	cont "PRIZE EXCHANGE"
+	
+	para "Prize Exchange"
 	done
 
 _CeladonCityText18:: ; a5e6a (29:5e6a)
-	text "ROCKET GAME CORNER"
-	line "The Playground"
-	cont "for Everybody!"
+	text "Rocket Game Corner"
+	
+	para "The playground"
+	line "for everybody!"
 	done
 

@@ -1,22 +1,22 @@
 _SSAnne7RubText:: ; 812dd (20:52dd)
-	text "CAPTAIN: Ooargh..."
+	text "Captain: Ooargh..."
 	line "I feel hideous..."
 	cont "Urrp! Seasick..."
 
 	para "[PLAYER] rubbed"
-	line "the CAPTAIN's"
+	line "the Captain's"
 	cont "back!"
 
 	para "Rub-rub..."
 	line "Rub-rub-rub...@@"
 
 _ReceivingHM01Text:: ; 81347 (20:5347)
-	text "CAPTAIN: Whew!"
+	text "Captain: Whew!"
 	line "Thank you! I"
 	cont "feel much better!"
 
 	para "You want to see"
-	line "my CUT technique?"
+	line "my Cut technique?"
 
 	para "I could show you"
 	line "if I wasn't ill..."
@@ -25,8 +25,8 @@ _ReceivingHM01Text:: ; 81347 (20:5347)
 	line "have this!"
 
 	para "Teach it to your"
-	line "#MON and you"
-	cont "can see it CUT"
+	line "#mon and you"
+	cont "can see it Cut"
 	cont "anytime!"
 	prompt
 
@@ -37,7 +37,7 @@ _ReceivedHM01Text:: ; 8140d (20:540d)
 	text "!@@"
 
 _SSAnne7Text_61932:: ; 8141c (20:541c)
-	text "CAPTAIN: Whew!"
+	text "Captain: Whew!"
 
 	para "Now that I'm not"
 	line "sick anymore, I"
@@ -57,7 +57,7 @@ _SSAnne7Text2:: ; 81480 (20:5480)
 _SSAnne7Text3:: ; 8149d (20:549d)
 	text "How to Conquer"
 	line "Seasickness..."
-	cont "The CAPTAIN's"
+	cont "The Captain's"
 	cont "reading this!"
 	done
 

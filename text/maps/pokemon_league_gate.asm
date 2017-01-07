@@ -4,7 +4,7 @@ _Route22GateText_1e704:: ; 8cfbb (23:4fbb)
 	cont "allowed through."
 
 	para "You don't have the"
-	line "BOULDERBADGE yet!@@"
+	line "BoulderBadge yet!@@"
 
 _Route22GateText_1e715:: ; 8d012 (23:5012)
 	db $0
@@ -15,6 +15,6 @@ _Route22GateText_1e715:: ; 8d012 (23:5012)
 
 _Route22GateText_1e71a:: ; 8d03e (23:503e)
 	text "Oh! That is the"
-	line "BOULDERBADGE!"
+	line "BoulderBadge!"
 	cont "Go right ahead!@@"
 

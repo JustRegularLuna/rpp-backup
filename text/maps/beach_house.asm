@@ -1,11 +1,11 @@
 _BeachHousePikachuText::
-	text "PUKA: Pika-pi!"
+	text "Puka: Pika-pi!"
 	done
 	
 _BeachHouseDudeText::
 	text "You know, not"
-	line "every PIKACHU"
-	cont "knows how to SURF"
+	line "every Pikachu"
+	cont "knows how to Surf"
 	cont "like mine."
 	
 	para "But today is your"
@@ -41,11 +41,11 @@ _ReceivedHM03Text::
 
 _HM03ExplanationText::
 	text "TM15 teaches"
-	line "HYPER BEAM!"
+	line "Hyper Beam!"
 
 	para "It's a powerful"
 	line "move, but your"
-	cont "#MON has to"
+	cont "#mon has to"
 	cont "recharge after"
 	cont "using it."
 	done

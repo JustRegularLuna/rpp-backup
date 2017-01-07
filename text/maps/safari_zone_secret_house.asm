@@ -3,7 +3,7 @@ _SecretHouseText_4a350:: ; 858a4 (21:58a4)
 
 	para "You're the first"
 	line "person to reach"
-	cont "the SECRET HOUSE!"
+	cont "the Secret House!"
 
 	para "I was getting"
 	line "worried that no"
@@ -21,9 +21,9 @@ _ReceivedTM15Text:: ; 85943 (21:5943)
 	text "!@@"
 
 _TM15ExplanationText:: ; 85957 (21:5957)
-	text "HM03 is SURF!"
+	text "HM03 is Surf!"
 
-	para "#MON will be"
+	para "#mon will be"
 	line "able to ferry you"
 	cont "across water!"
 

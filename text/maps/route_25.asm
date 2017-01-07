@@ -9,7 +9,7 @@ _Route25EndBattleText1:: ; 94245 (25:4245)
 	prompt
 
 _Route25AfterBattleText1:: ; 94254 (25:4254)
-	text "All #MON have"
+	text "All #mon have"
 	line "weaknesses. It's"
 	cont "best to raise"
 	cont "different kinds."
@@ -18,8 +18,8 @@ _Route25AfterBattleText1:: ; 94254 (25:4254)
 _Route25BattleText2:: ; 94292 (25:4292)
 	text "Dad took me to a"
 	line "great party on"
-	cont "S.S.ANNE at"
-	cont "VERMILION CITY!"
+	cont "S.S. Anne at"
+	cont "Vermilion City!"
 	done
 
 _Route25EndBattleText2:: ; 942cf (25:42cf)
@@ -27,7 +27,7 @@ _Route25EndBattleText2:: ; 942cf (25:42cf)
 	prompt
 
 _Route25AfterBattleText2:: ; 942dc (25:42dc)
-	text "On S.S.ANNE, I"
+	text "On S.S. Anne, I"
 	line "saw trainers from"
 	cont "around the world."
 	done
@@ -72,7 +72,7 @@ _Route25EndBattleText5:: ; 943dd (25:43dd)
 	prompt
 
 _Route25AfterBattleText5:: ; 943f2 (25:43f2)
-	text "If your #MON"
+	text "If your #mon"
 	line "gets confused or"
 	cont "falls asleep,"
 	cont "switch it!"
@@ -80,7 +80,7 @@ _Route25AfterBattleText5:: ; 943f2 (25:43f2)
 
 _Route25BattleText6:: ; 9442a (25:442a)
 	text "My friend has a"
-	line "cute #MON."
+	line "cute #mon."
 	cont "I'm so jealous!"
 	done
 
@@ -90,14 +90,14 @@ _Route25EndBattleText6:: ; 94455 (25:4455)
 	prompt
 
 _Route25AfterBattleText6:: ; 94469 (25:4469)
-	text "You came from MT."
-	line "MOON? May I have"
-	cont "a CLEFAIRY?"
+	text "You came from Mt."
+	line "Moon? May I have"
+	cont "a Clefairy?"
 	done
 
 _Route25BattleText7:: ; 94499 (25:4499)
 	text "I just got down"
-	line "from MT.MOON,"
+	line "from Mt. Moon,"
 	cont "but I'm ready!"
 	done
 
@@ -107,13 +107,13 @@ _Route25EndBattleText7:: ; 944c6 (25:44c6)
 
 _Route25AfterBattleText7:: ; 944d8 (25:44d8)
 	text "Drat!"
-	line "A ZUBAT bit me"
+	line "A Zubat bit me"
 	cont "back in there."
 	done
 
 _Route25BattleText8:: ; 944fd (25:44fd)
 	text "I'm off to see a"
-	line "#MON collector"
+	line "#mon collector"
 	cont "at the cape!"
 	done
 
@@ -124,12 +124,12 @@ _Route25EndBattleText8:: ; 9452a (25:452a)
 _Route25AfterBattleText8:: ; 94537 (25:4537)
 	text "The collector has"
 	line "many rare kinds"
-	cont "of #MON."
+	cont "of #mon."
 	done
 
 _Route25BattleText9:: ; 94563 (25:4563)
 	text "You're going to"
-	line "see BILL? First,"
+	line "see Bill? First,"
 	cont "let's fight!"
 	done
 
@@ -140,11 +140,12 @@ _Route25EndBattleText9:: ; 94590 (25:4590)
 _Route25AfterBattleText9:: ; 945a2 (25:45a2)
 	text "The trail below"
 	line "is a shortcut to"
-	cont "CERULEAN CITY."
+	cont "Cerulean City."
 	done
 
 _Route25Text11:: ; 945d3 (25:45d3)
-	text "SEA COTTAGE"
-	line "BILL lives here!"
+	text "Sea Cottage"
+	
+	para "Bill lives here!"
 	done
 

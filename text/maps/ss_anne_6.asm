@@ -25,7 +25,7 @@ _SSAnne6Text4:: ; 81155 (20:5155)
 
 _SSAnne6Text5:: ; 8118e (20:518e)
 	text "Did you hear about"
-	line "SNORLAX?"
+	line "Snorlax?"
 
 	para "All it does is"
 	line "eat and sleep!"
@@ -41,7 +41,7 @@ _SSAnne6Text6:: ; 811c9 (20:51c9)
 
 _SSAnne6Text_61807:: ; 81203 (20:5203)
 	text "Er-hem! Indeed I"
-	line "am le CHEF!"
+	line "am le Chef!"
 
 	para "Le main course is"
 	prompt

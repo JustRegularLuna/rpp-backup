@@ -135,9 +135,9 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	inc c
 	jp .loop
 .ableToLearnMoveText
-	db "ABLE@"
+	db "Able@"
 .notAbleToLearnMoveText
-	db "NOT ABLE@"
+	db "Not able@"
 .evolutionStoneMenu
 	push hl
 	ld hl,EvosMovesPointerTable
@@ -192,9 +192,9 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	pop hl
 	jr .printLevel
 .ableToEvolveText
-	db "ABLE@"
+	db "Able@"
 .notAbleToEvolveText
-	db "NOT ABLE@"
+	db "Not able@"
 .afterDrawingMonEntries
 	ld b,$0A
 	call GoPAL_SET

@@ -1,15 +1,15 @@
 _OakAppearsText::
-	text "OAK: Hey! Wait!"
+	text "Oak: Hey! Wait!"
 	line "Don't go out!@@"
 
 _OakWalksUpText::
-	text "OAK: Sorry I'm so"
+	text "Oak: Sorry I'm so"
 	line "slow, I don't have"
-	cont "RUNNING SHOES"
+	cont "Running Shoes"
     cont "like you do."
 
 	para "Anyway, you need"
-	line "your own #MON"
+	line "your own #mon"
 	cont "for protection."
 
 	para "Here, come with"
@@ -18,7 +18,7 @@ _OakWalksUpText::
 
 _PalletTownText2::
 	text "I'm raising"
-	line "#MON too!"
+	line "#mon too!"
 
 	para "When they get"
 	line "strong, they can"
@@ -31,19 +31,20 @@ _PalletTownText3::
 
 	para "You can now store"
 	line "and recall items"
-	cont "and #MON as"
+	cont "and #mon as"
 	cont "data via PC!"
 	done
 
 _PalletTownText4::
-	text "OAK #MON"
-	line "RESEARCH LAB"
+	text "Oak's #mon"
+	line "Research Lab"
 	done
 
 _PalletTownText5::
-	text "PALLET TOWN"
-	line "Shades of your"
-	cont "journey await!"
+	text "Pallet Town"
+	
+	para "Shades of your"
+	line "journey await!"
 	done
 
 _PalletTownText6::

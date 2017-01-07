@@ -45,5 +45,5 @@ Trade_PrintEnemyMonInfoText: ; 427a7 (10:67a7)
 Trade_MonInfoText: ; 427e5 (10:67e5)
 	db "──",$74,$F2,$4E
 	db $4E
-	db "OT/",$4E
+	db "OT:",$4E
 	db $73,"№",$F2,"@"

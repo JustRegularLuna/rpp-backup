@@ -199,27 +199,27 @@ DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	jp HandleMenuInput
 
 .namestring ; 6aa3 (1:6aa3)
-	db "NAME@"
+	db "Name@"
 
 DefaultNamesPlayer: ; 6aa8 (1:6aa8)
-	db   "NEW NAME"
-	next "RED"
-	next "ASH"
-	next "JACK"
+	db   "New Name"
+	next "Red"
+	next "Ash"
+	next "Jack"
 	db   "@"
 	
 DefaultNamesGirl:
-	db   "NEW NAME"
-	next "GREEN"
-	next "ASHLEY"
-	next "NICOLE"
+	db   "New Name"
+	next "Green"
+	next "Ashley"
+	next "Leaf"
 	db   "@"
 
 DefaultNamesRival: ; 6abe (1:6abe)
-	db   "NEW NAME"
-	next "BLUE"
-	next "GARY"
-	next "JOHN"
+	db   "New Name"
+	next "Blue"
+	next "Gary"
+	next "John"
 	db   "@"
 
 Func_6ad6: ; 6ad6 (1:6ad6)
@@ -245,11 +245,11 @@ Func_6ad6: ; 6ad6 (1:6ad6)
 	jp CopyData
 
 DefaultNamesPlayerList: ; 6af2 (1:6af2)
-	db "NEW NAME@RED@ASH@JACK@"
+	db "New Name@Red@Ash@Jack@"
 DefaultNamesRivalList: ; 6b08 (1:6b08)
-	db "NEW NAME@BLUE@GARY@JOHN@"
+	db "New NameE@Blue@Gary@John@"
 DefaultNamesGirlList:
-	db "NEW NAME@GREEN@ASHLEY@NICOLE@"
+	db "New Name@Green@Ashley@Leaf@"
 
 TextTerminator_6b20: ; 6b20 (1:6b20)
 	db "@"

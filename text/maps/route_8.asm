@@ -1,6 +1,6 @@
 _Route8BattleText1:: ; 8dea9 (23:5ea9)
 	text "You look good at"
-	line "#MON, but"
+	line "#mon, but"
 	cont "how's your chem?"
 	done
 
@@ -40,16 +40,16 @@ _Route8EndBattleText3:: ; 8df7e (23:5f7e)
 
 _Route8AfterBattleText3:: ; 8df90 (23:5f90)
 IF DEF(_BLUE)
-	text "Go with MUK"
+	text "Go with Muk"
 ELSE
-	text "Go with GRIMER"
+	text "Go with Grimer"
 ENDC
 	line "first...and..."
 	cont "...and...then..."
 	done
 
 _Route8BattleText4:: ; 8dfc0 (23:5fc0)
-	text "I like NIDORAN, so"
+	text "I like Nidoran, so"
 	line "I collect them!"
 	done
 
@@ -58,7 +58,7 @@ _Route8EndBattleText4:: ; 8dfe4 (23:5fe4)
 	prompt
 
 _Route8AfterBattleText4:: ; 8dff0 (23:5ff0)
-	text "When #MON grow"
+	text "When #mon grow"
 	line "up they get ugly!"
 	cont "They shouldn't"
 	cont "evolve!"
@@ -66,7 +66,7 @@ _Route8AfterBattleText4:: ; 8dff0 (23:5ff0)
 
 _Route8BattleText5:: ; 8e028 (23:6028)
 	text "School is fun, but"
-	line "so are #MON."
+	line "so are #mon."
 	done
 
 _Route8EndBattleText5:: ; 8e049 (23:6049)
@@ -77,7 +77,7 @@ _Route8EndBattleText5:: ; 8e049 (23:6049)
 _Route8AfterBattleText5:: ; 8e060 (23:6060)
 	text "We're stuck here"
 	line "because of the"
-	cont "gates at SAFFRON."
+	cont "gates at Saffron."
 	done
 
 _Route8BattleText6:: ; 8e092 (23:6092)
@@ -109,7 +109,7 @@ _Route8EndBattleText7:: ; 8e116 (23:6116)
 	prompt
 
 _Route8AfterBattleText7:: ; 8e12a (23:612a)
-	text "SAFFRON's gate-"
+	text "Saffron's gate-"
 	line "keeper won't let"
 	cont "us through."
 	cont "He's so mean!"
@@ -127,7 +127,7 @@ _Route8EndBattleText8:: ; 8e181 (23:6181)
 
 _Route8AfterBattleText8:: ; 8e198 (23:6198)
 	text "Gambling and"
-	line "#MON are like"
+	line "#mon are like"
 	cont "eating peanuts!"
 	cont "Just can't stop!"
 	done
@@ -135,7 +135,7 @@ _Route8AfterBattleText8:: ; 8e198 (23:6198)
 _Route8BattleText9:: ; 8e1d4 (23:61d4)
 	text "What's a cute,"
 	line "round and fluffy"
-	cont "#MON?"
+	cont "#mon?"
 	done
 
 _Route8EndBattleText9:: ; 8e1fa (23:61fa)
@@ -143,9 +143,9 @@ _Route8EndBattleText9:: ; 8e1fa (23:61fa)
 
 	para "Don't be so mean"
 IF DEF(_BLUE)
-	line "to my CLEFABLE!"
+	line "to my clefable!"
 ELSE
-	line "to my CLEFAIRY!"
+	line "to my Clefairy!"
 ENDC
 	prompt
 
@@ -155,18 +155,18 @@ IF DEF(_BLUE)
 ELSE
 	text "I heard that"
 ENDC
-	line "CLEFAIRY evolves"
+	line "Clefairy evolves"
 	cont "when it's exposed"
 IF DEF(_BLUE)
-	cont "to a MOON STONE?"
+	cont "to a Moon Stone?"
 ELSE
-	cont "to a MOON STONE."
+	cont "to a Moon Stone."
 ENDC
 	done
 
 _Route8Text10:: ; 8e262 (23:6262)
-	text "UNDERGROUND PATH"
-	line "CELADON CITY -"
-	cont "LAVENDER TOWN"
+	text "Underground Path"
+	line "Lavender Town -"
+	cont "Celadon City"
 	done
 

@@ -67,61 +67,61 @@ CreditsTextPointers: ; 742c3 (1d:42c3)
 CredVersion: ; 74343 (1d:4343)
 	db -8, "RED VERSION STAFF@"
 CredTajiri: ; 74356 (1d:4356)
-	db -6, "SATOSHI TAJIRI@"
+	db -6, "Satoshi Tajiri@"
 CredTaOota: ; 74366 (1d:4366)
-	db -6, "TAKENORI OOTA@"
+	db -6, "Takenori Oota@"
 CredMorimoto: ; 74375 (1d:4375)
-	db -7, "SHIGEKI MORIMOTO@"
+	db -7, "Shigeki Morimoto@"
 CredWatanabe: ; 74387 (1d:4387)
-	db -7, "TETSUYA WATANABE@"
+	db -7, "Tetsuya Watanabe@"
 CredMasuda: ; 74399 (1d:4399)
-	db -6, "JUNICHI MASUDA@"
+	db -6, "Junichi Masuda@"
 CredNisino: ; 743a9 (1d:43a9)
-	db -5, "KOHJI NISINO@"
+	db -5, "Kohji Nisino@"
 CredSugimori: ; 743b7 (1d:43b7)
-	db -5, "KEN SUGIMORI@"
+	db -5, "Ken Sugimori@"
 CredNishida: ; 743c5 (1d:43c5)
-	db -6, "ATSUKO NISHIDA@"
+	db -6, "Atsuko Nishida@"
 CredMiyamoto: ; 743d5 (1d:43d5)
-	db -7, "SHIGERU MIYAMOTO@"
+	db -7, "Shigeru Miyamoto@"
 CredKawaguchi: ; 743e7 (1d:43e7)
-	db -8, "TAKASHI KAWAGUCHI@"
+	db -8, "Takashi Kawaguchi@"
 CredIshihara: ; 743fa (1d:43fa)
-	db -8, "TSUNEKAZU ISHIHARA@"
+	db -8, "Tsunekazu Ishihara@"
 CredYamauchi: ; 7440e (1d:440e)
-	db -7, "HIROSHI YAMAUCHI@"
+	db -7, "Hiroshi Yamauchi@"
 CredZinnai: ; 74420 (1d:4420)
-	db -7, "HIROYUKI ZINNAI@"
+	db -7, "Hiroyuki Zinnai@"
 CredHishida: ; 74431 (1d:4431)
-	db -7, "TATSUYA HISHIDA@"
+	db -7, "Tatsuya Hishida@"
 CredSakai: ; 74442 (1d:4442)
-	db -6, "YASUHIRO SAKAI@"
+	db -6, "Yasuhiro Sakai@"
 CredYamaguchi: ; 74452 (1d:4452)
-	db -7, "WATARU YAMAGUCHI@"
+	db -7, "Wataru Yamaguchi@"
 CredYamamoto: ; 74464 (1d:4464)
-	db -8, "KAZUYUKI YAMAMOTO@"
+	db -8, "Kazuyuki Yamamoto@"
 CredTaniguchi: ; 74477 (1d:4477)
-	db -8, "RYOHSUKE TANIGUCHI@"
+	db -8, "Ryohsuke Taniguchi@"
 CredNonomura: ; 7448b (1d:448b)
-	db -8, "FUMIHIRO NONOMURA@"
+	db -8, "Fumihiro Nonomura@"
 CredFuziwara: ; 7449e (1d:449e)
-	db -7, "MOTOFUMI FUZIWARA@"
+	db -7, "Motofumi Fuziwara@"
 CredMatsusima: ; 744b1 (1d:44b1)
-	db -7, "KENJI MATSUSIMA@"
+	db -7, "Kenji Matsusima@"
 CredTomisawa: ; 744c2 (1d:44c2)
-	db -7, "AKIHITO TOMISAWA@"
+	db -7, "Akihito Tomisawa@"
 CredKawamoto: ; 744d4 (1d:44d4)
-	db -7, "HIROSHI KAWAMOTO@"
+	db -7, "Hiroshi Kawamoto@"
 CredKakei: ; 744e6 (1d:44e6)
-	db -6, "AKIYOSHI KAKEI@"
+	db -6, "Akiyoshi Kakei@"
 CredTsuchiya: ; 744f6 (1d:44f6)
-	db -7, "KAZUKI TSUCHIYA@"
+	db -7, "Kazuki Tsuchiya@"
 CredTaNakamura: ; 74507 (1d:4507)
-	db -6, "TAKEO NAKAMURA@"
+	db -6, "Takeo Nakamura@"
 CredYuda: ; 74517 (1d:4517)
-	db -6, "MASAMITSU YUDA@"
+	db -6, "Masamitsu Yuda@"
 CredMon: ; 74527 (1d:4527)
-	db -3, "#MON@"
+	db -3, "POKéMON@"
 CredDirector: ; 7452d (1d:452d)
 	db -3, "DIRECTOR@"
 CredProgrammers: ; 74537 (1d:4537)
@@ -153,41 +153,41 @@ CredProducer: ; 745e3 (1d:45e3)
 CredExecutive: ; 745ed (1d:45ed)
 	db -8, "EXECUTIVE PRODUCER@"
 CredTamada: ; 74601 (1d:4601)
-	db -6, "SOUSUKE TAMADA@"
+	db -6, "Sousuke Tamada@"
 CredSaOota: ; 74611 (1d:4611)
-	db -5, "SATOSHI OOTA@"
+	db -5, "Satoshi Oota@"
 CredYoshikawa: ; 7461f (1d:461f)
-	db -6, "RENA YOSHIKAWA@"
+	db -6, "Rena Yoshikawa@"
 CredToOota: ; 7462f (1d:462f)
-	db -6, "TOMOMICHI OOTA@"
+	db -6, "Tomomichi Oota@"
 CredUSStaff: ; 7463f (1d:463f)
 	db -7, "US VERSION STAFF@"
 CredUSCoord: ; 74651 (1d:4651)
 	db -7, "US COORDINATION@"
 CredTilden: ; 74662 (1d:4662)
-	db -5, "GAIL TILDEN@"
+	db -5, "Gail Tilden@"
 CredKawakami: ; 7466f (1d:466f)
-	db -6, "NAOKO KAWAKAMI@"
+	db -6, "Naoko Kawakami@"
 CredHiNakamura: ; 7467f (1d:467f)
-	db -6, "HIRO NAKAMURA@"
+	db -6, "Hiro Nakamura@"
 CredGiese: ; 7468e (1d:468e)
-	db -6, "WILLIAM GIESE@"
+	db -6, "William Giese@"
 CredOsborne: ; 7469d (1d:469d)
-	db -5, "SARA OSBORNE@"
+	db -5, "Sara Osborne@"
 CredTrans: ; 746ab (1d:46ab)
 	db -7, "TEXT TRANSLATION@"
 CredOgasawara: ; 746bd (1d:46bd)
-	db -6, "NOB OGASAWARA@"
+	db -6, "Nob Ogasawara@"
 CredIwata: ; 746cc (1d:46cc)
-	db -5, "SATORU IWATA@"
+	db -5, "Satoru Iwata@"
 CredIzushi: ; 746da (1d:46da)
-	db -7, "TAKEHIRO IZUSHI@"
+	db -7, "Takehiro Izushi@"
 CredHarada: ; 746eb (1d:46eb)
-	db -7, "TAKAHIRO HARADA@"
+	db -7, "Takahiro Harada@"
 CredMurakawa: ; 746fc (1d:46fc)
-	db -7, "TERUKI MURAKAWA@"
+	db -7, "Teruki Murakawa@"
 CredFukui: ; 7470d (1d:470d)
-	db -5, "KOHTA FUKUI@"
+	db -5, "Kohta Fukui"
 CredClub: ; 7471a (1d:471a)
 	db -9, "NCL SUPER MARIO CLUB@"
 CredPAAD: ; 74730 (1d:4730)

@@ -15,7 +15,7 @@ _ReceivedTM35Text:: ; a0f48 (28:4f48)
 _TM35ExplanationText:: ; a0f5d (28:4f5d)
 	text "That TM teaches a"
 	line "#MON to use"
-	cont "ANCIENTPOWER!"
+	cont "AncientPower!"
 
 	para "It was discovered"
 	line "while researching"
@@ -29,9 +29,9 @@ _TM35NoRoomText:: ; a0fc7 (28:4fc7)
 	done
 
 _Lab3Text2:: ; a0fe3 (28:4fe3)
-	text "EEVEE can evolve"
+	text "Eevee can evolve"
 	line "into 1 of 8 kinds"
-	cont "of #MON."
+	cont "of #mon."
 	done
 
 _Lab3Text3:: ; a1010 (28:5010)
@@ -41,19 +41,19 @@ _Lab3Text3:: ; a1010 (28:5010)
 	para "..."
 
 	para "The 3 legendary"
-	line "bird #MON are"
-	cont "ARTICUNO, ZAPDOS"
-	cont "and MOLTRES."
+	line "bird #mon are"
+	cont "Articuno, Zapdos"
+	cont "and Moltres."
 
 	para "Their whereabouts"
 	line "are unknown."
 
 	para "We plan to explore"
 	line "the cavern close"
-	cont "to CERULEAN."
+	cont "to Cerulean."
 
-	para "From: #MON"
-	line "RESEARCH TEAM"
+	para "From: #mon"
+	line "Research Team"
 
 	para "..."
 	done

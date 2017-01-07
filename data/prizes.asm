@@ -9,7 +9,7 @@ PrizeDifferentMenuPtrs: ; 52843 (14:6843)
 	dw PrizeMenuTMsCost
 
 NoThanksText: ; 5284f (14:684f)
-	db "NO THANKS@"
+	db "No thanks@"
 
 PrizeMenuMon1Entries: ; 52859 (14:6859)
 	db ABRA

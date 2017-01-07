@@ -6,7 +6,7 @@ _SafariZoneRestHouse3Text1:: ; 85ad9 (21:5ad9)
 
 _SafariZoneRestHouse3Text2:: ; 85b0b (21:5b0b)
 	text "I caught a"
-	line "CHANSEY!"
+	line "Chansey!"
 
 	para "That makes this"
 	line "all worthwhile!"

@@ -736,7 +736,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jp PrintText
 .emptyPartyText
 	text "You don't have"
-	line "any #MON!"
+	line "any #mon!"
 	prompt
 .notUsingSoftboiled
 	call DisplayPartyMenu
@@ -1361,11 +1361,11 @@ VitaminNoEffectText: ; df29 (3:5f29)
 	db "@"
 
 VitaminText: ; df2e (3:5f2e)
-	db "HEALTH@"
-	db "ATTACK@"
-	db "DEFENSE@"
-	db "SPEED@"
-	db "SPECIAL@"
+	db "Health@"
+	db "Attack@"
+	db "Defense@"
+	db "Speed@"
+	db "Special@"
 
 ItemUseBait: ; df52 (3:5f52)
 	ld hl,ThrewBaitText

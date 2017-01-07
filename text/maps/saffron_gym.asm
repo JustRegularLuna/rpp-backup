@@ -26,7 +26,7 @@ _SaffronGymText_5d167:: ; a1c73 (28:5c73)
 	cont "to win!"
 
 	para "You earned the"
-	line "MARSHBADGE!@@"
+	line "MarshBadge!@@"
 
 _SaffronGymText_5d16e:: ; a1cdc (28:5cdc)
 	text "Everyone has"
@@ -36,17 +36,17 @@ _SaffronGymText_5d16e:: ; a1cdc (28:5cdc)
 	done
 
 _SaffronGymText_5d173:: ; a1d16 (28:5d16)
-	text "The MARSHBADGE"
-	line "makes #MON up"
-	cont "to L70 obey you!"
+	text "The MarshBadge"
+	line "makes #mon up"
+	cont "to Lv70 obey you!"
 
-	para "Stronger #MON"
+	para "Stronger #mon"
 	line "will become wild,"
 	cont "ignoring your"
 	cont "orders in battle!"
 
 	para "Just don't raise"
-	line "your #MON too"
+	line "your #mon too"
 	cont "much!"
 
 	para "Wait, please take"
@@ -59,7 +59,7 @@ ReceivedTM46Text:: ; a1dcd (28:5dcd)
 
 _TM46ExplanationText:: ; a1de0 (28:5de0)
 	db $0
-	para "TM46 is PSYWAVE!"
+	para "TM46 is Psywave!"
 	line "It uses powerful"
 	cont "psychic waves to"
 	cont "inflict damage!"
@@ -74,13 +74,13 @@ _SaffronGymText_5d1e6:: ; a1e48 (28:5e48)
 	text "Yo! Champ in"
 	line "making!"
 
-	para "SABRINA's #MON"
+	para "Sabrina's #mon"
 	line "use psychic power"
 	cont "instead of force!"
 
-	para "Fighting #MON"
+	para "Fighting #mon"
 	line "are weak against"
-	cont "psychic #MON!"
+	cont "psychic #mon!"
 
 	para "They get creamed"
 	line "before they can"
@@ -116,7 +116,7 @@ _SaffronGymAfterBattleText1:: ; a1f74 (28:5f74)
 	cont "will wins."
 
 	para "If you wish"
-	line "to beat SABRINA,"
+	line "to beat Sabrina,"
 	cont "focus on winning!"
 	done
 
@@ -131,17 +131,17 @@ _SaffronGymEndBattleText2:: ; a2002 (28:6002)
 	prompt
 
 _SaffronGymAfterBattleText2:: ; a2019 (28:6019)
-	text "Psychic #MON"
+	text "Psychic #mon"
 	line "don't have many"
 	cont "weaknesses!"
 	done
 
 _SaffronGymBattleText3:: ; a2042 (28:6042)
-	text "#MON take on"
+	text "#mon take on"
 	line "the appearance of"
 	cont "their trainers."
 
-	para "Your #MON must"
+	para "Your #mon must"
 	line "be tough, then!"
 	done
 
@@ -152,7 +152,7 @@ _SaffronGymEndBattleText3:: ; a2091 (28:6091)
 _SaffronGymAfterBattleText3:: ; a209d (28:609d)
 	text "I must teach"
 	line "better techniques"
-	cont "to my #MON!"
+	cont "to my #mon!"
 	done
 
 _SaffronGymBattleText4:: ; a20c9 (28:60c9)
@@ -167,14 +167,14 @@ _SaffronGymEndBattleText4:: ; a20f1 (28:60f1)
 	prompt
 
 _SaffronGymAfterBattleText4:: ; a2107 (28:6107)
-	text "SABRINA just wiped"
-	line "out the KARATE"
-	cont "MASTER next door!"
+	text "Sabrina just wiped"
+	line "out the Karate"
+	cont "Master next door!"
 	done
 
 _SaffronGymBattleText5:: ; a213c (28:613c)
 	text "You and I, our"
-	line "#MON shall"
+	line "#mon shall"
 	cont "fight!"
 	done
 
@@ -189,9 +189,9 @@ _SaffronGymAfterBattleText5:: ; a2171 (28:6171)
 	done
 
 _SaffronGymBattleText6:: ; a219c (28:619c)
-	text "SABRINA is young,"
+	text "Sabrina is young,"
 	line "but she's also"
-	cont "our LEADER!"
+	cont "our Leader!"
 
 	para "You won't reach"
 	line "her easily!"
@@ -204,23 +204,23 @@ _SaffronGymEndBattleText6:: ; a21e4 (28:61e4)
 
 _SaffronGymAfterBattleText6:: ; a21fe (28:61fe)
 	text "There used to be"
-	line "2 #MON GYMs in"
-	cont "SAFFRON."
+	line "2 #mon Gyms in"
+	cont "Saffron."
 
-	para "The FIGHTING DOJO"
+	para "The Fighting Dojo"
 	line "next door lost"
-	cont "its GYM status"
+	cont "its Gym status"
 	cont "when we went and"
 	cont "creamed them!"
 	done
 
 _SaffronGymBattleText7:: ; a2277 (28:6277)
-	text "SAFFRON #MON"
-	line "GYM is famous for"
+	text "Saffron #mon"
+	line "Gym is famous for"
 	cont "its psychics!"
 
 	para "You want to see"
-	line "SABRINA!"
+	line "Sabrina!"
 	cont "I can tell!"
 	done
 

@@ -6,7 +6,7 @@ _CeladonMartRoofText_484ee:: ; 9cbb5 (27:4bb5)
 _CeladonMartRoofText_484f3:: ; 9cbcc (27:4bcc)
 	text "Yay!"
 
-	para "FRESH WATER!"
+	para "Fresh Water!"
 
 	para "Thank you!"
 
@@ -24,7 +24,7 @@ _CeladonMartRoofText_484fe:: ; 9cc1a (27:4c1a)
 	para "@"
 	TX_RAM wcf4b
 	text " contains"
-	line "ICE BEAM!"
+	line "Ice Beam!"
 
 	para "It can freeze the"
 	line "target sometimes!@@"
@@ -32,7 +32,7 @@ _CeladonMartRoofText_484fe:: ; 9cc1a (27:4c1a)
 _CeladonMartRoofText_48504:: ; 9cc5a (27:4c5a)
 	text "Yay!"
 
-	para "SODA POP!"
+	para "Soda Pop!"
 
 	para "Thank you!"
 
@@ -50,7 +50,7 @@ _CeladonMartRoofText_4850f:: ; 9cca5 (27:4ca5)
 	para "@"
 	TX_RAM wcf4b
 	text " contains"
-	line "ROCK SLIDE!"
+	line "Rock Slide!"
 
 	para "It can spook the"
 	line "target sometimes!@@"
@@ -58,7 +58,7 @@ _CeladonMartRoofText_4850f:: ; 9cca5 (27:4ca5)
 _CeladonMartRoofText_48515:: ; 9cce6 (27:4ce6)
 	text "Yay!"
 
-	para "LEMONADE!"
+	para "Lemonade!"
 
 	para "Thank you!"
 
@@ -72,7 +72,7 @@ _ReceivedTM49Text:: ; 9cd1d (27:4d1d)
 _CeladonMartRoofText_48520:: ; 9cd30 (27:4d30)
 	db $0
 	para "TM49 contains"
-	line "DAZZLINGLEAM!@@"
+	line "DazzlinGleam!@@"
 
 _CeladonMartRoofText_48526:: ; 9cd4d (27:4d4d)
 	text "You don't have"
@@ -108,8 +108,8 @@ _CeladonMartRoofText4:: ; 9ce16 (27:4e16)
 	done
 
 _CeladonMartRoofText6:: ; 9ce50 (27:4e50)
-	text "ROOFTOP SQUARE:"
-	line "VENDING MACHINES"
+	text "Rooftop Square:"
+	line "Vending Machines"
 	done
 
 _VendingMachineText1:: ; 9ce72 (27:4e72)

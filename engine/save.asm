@@ -494,21 +494,21 @@ ChooseABoxText: ; 739d4 (1c:79d4)
 	db "@"
 
 BoxNames: ; 739d9 (1c:79d9)
-	db   "BOX 1"
-	next "BOX 2"
-	next "BOX 3"
-	next "BOX 4"
-	next "BOX 5"
-	next "BOX 6"
-	next "BOX 7"
-	next "BOX 8"
-	next "BOX 9"
-	next "BOX10"
-	next "BOX11"
-	next "BOX12@"
+	db   "Box 1"
+	next "Box 2"
+	next "Box 3"
+	next "Box 4"
+	next "Box 5"
+	next "Box 6"
+	next "Box 7"
+	next "Box 8"
+	next "Box 9"
+	next "Box10"
+	next "Box11"
+	next "Box12@"
 
 BoxNoText: ; 73a21 (1c:7a21)
-	db "BOX No.@"
+	db "Box No.@"
 
 Func_73a29: ; EmptyAllSRAMBoxes
 ; marks all boxes in SRAM as empty (initialization for the first time the

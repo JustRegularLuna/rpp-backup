@@ -67,8 +67,8 @@ _Route24AfterBattleText5:: ; 94163 (25:4163)
 	done
 
 _Route24BattleText6:: ; 94186 (25:4186)
-	text "This is NUGGET"
-	line "BRIDGE! Beat us 5"
+	text "This is Nugget"
+	line "Bridge! Beat us 5"
 	cont "trainers and win"
 	cont "a fabulous prize!"
 

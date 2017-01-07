@@ -1,22 +1,22 @@
 _SafariZoneNorthText3:: ; 85646 (21:5646)
-	text "REST HOUSE"
+	text "Rest House"
 	done
 
 _SafariZoneNorthText4:: ; 85652 (21:5652)
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "The SECRET HOUSE"
+	para "The Secret House"
 	line "is still ahead!"
 	done
 
 _SafariZoneNorthText5:: ; 85681 (21:5681)
-	text "AREA 2"
+	text "Area 2 - North"
 	done
 
 _SafariZoneNorthText6:: ; 85689 (21:5689)
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
-	para "#MON hide in"
+	para "#mon hide in"
 	line "tall grass!"
 
 	para "Zigzag through"
@@ -25,10 +25,10 @@ _SafariZoneNorthText6:: ; 85689 (21:5689)
 	done
 
 _SafariZoneNorthText7:: ; 856df (21:56df)
-	text "TRAINER TIPS"
+	text "Trainer Tips"
 
 	para "Win a free HM for"
 	line "finding the"
-	cont "SECRET HOUSE!"
+	cont "Secret House!"
 	done
 

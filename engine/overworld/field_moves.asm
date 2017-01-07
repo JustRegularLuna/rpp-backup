@@ -325,21 +325,21 @@ Text3_DrakesDeception: ; Closes the text out properly to prevent glitches
 	
 CanBeCutTxt:
 	text "This tree can be"
-	line "CUT!@@"
+	line "Cut!@@"
 	
 WantToCutTxt:
 	text "Would you like to"
-	line "use CUT?@@"
+	line "use Cut?@@"
 	
 WaterIsCalmTxt:
 	text "The water is calm."
 	line "Would you like to"
-	cont "use SURF?@@"
+	cont "use Surf?@@"
 
 MightBeHiding:
-	text "A #MON might"
+	text "A #mon might"
 	line "be hiding in this"
 	cont "tree."
 
 	para "Want to use"
-	line "HEADBUTT?@@"
+	line "Headbutt?@@"

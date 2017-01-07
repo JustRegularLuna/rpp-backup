@@ -3,7 +3,7 @@ _UnknownDungeon3MewtwoText:: ; 85c72 (21:5c72)
 	text "Mew!@@"
 
 _SouthernIslandInsideLatiText:: ; added for Latios and Latias
-	text "LATI!@@"
+	text "Lati!@@"
 
 _NavelRockLugiaRoomLugiaText:: ; added for Lugia
-	text "SHAOO!@@"
+	text "Shaoo!@@"

@@ -1,5 +1,5 @@
 _Museum2FText1:: ; 96841 (25:6841)
-	text "MOON STONE?"
+	text "Moon Stone?"
 
 	para "What's so special"
 	line "about it?"
@@ -22,7 +22,7 @@ _Museum2FText3:: ; 968b1 (25:68b1)
 	done
 
 _Museum2FText4:: ; 968cf (25:68cf)
-	text "I want a PIKACHU!"
+	text "I want a Pikachu!"
 	line "It's so cute!"
 
 	para "I asked my Daddy"
@@ -30,16 +30,16 @@ _Museum2FText4:: ; 968cf (25:68cf)
 	done
 
 _Museum2FText5:: ; 96911 (25:6911)
-	text "Yeah, a PIKACHU"
+	text "Yeah, a Pikachu"
 	line "soon, I promise!"
 	done
 
 _Museum2FText6:: ; 96933 (25:6933)
 	text "Fossils from the"
-	line "HOENN region."
+	line "Hoenn region."
 	done
 
 _Museum2FText7:: ; 9694b (25:694b)
 	text "Meteorite that"
-	line "fell on MT.MOON."
+	line "fell on Mt. Moon."
 	done

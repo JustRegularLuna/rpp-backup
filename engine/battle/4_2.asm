@@ -75,13 +75,13 @@ EndOfBattle: ; 137aa (4:77aa)
 	ret
 
 YouWinText: ; 13853 (4:7853)
-	db "YOU WIN@"
+	db "You Win@"
 
 YouLoseText: ; 1385b (4:785b)
-	db "YOU LOSE@"
+	db "You Lose@"
 
 DrawText: ; 13864 (4:7864)
-	db "  DRAW@"
+	db "  Draw@"
 
 PickUpPayDayMoneyText: ; 1386b (4:786b)
 	TX_FAR _PickUpPayDayMoneyText

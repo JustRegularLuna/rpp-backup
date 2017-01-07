@@ -178,8 +178,8 @@ MonsterPalettes: ; 725c8 (1c:65c8)
 	db PAL_BROWNMON  ; Rhyperior
 	db PAL_BLUEMON   ; Tangrowth
 	db PAL_PINKMON   ; Lickilicky
-	db PAL_CYAN_TRAINER ; Togepi
-	db PAL_CYAN_TRAINER ; Togetic
+	db PAL_PINK_TRAINER ; Togepi
+	db PAL_TOGEKISS  ; Togetic
 	db PAL_TOGEKISS   ; Togekiss
 	db PAL_SNEASEL   ; Sneasel
 	db PAL_SNEASEL   ; Weavile

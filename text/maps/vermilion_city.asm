@@ -3,18 +3,18 @@ _VermilionCityText1:: ; a5668 (29:5668)
 	line "from all over."
 
 	para "I met someone from"
-	line "the HOENN region"
+	line "the Hoenn region"
 	cont "once."
 	done
 
 _VermilionCityText_198a7:: ; a56b5 (29:56b5)
 	text "Did you see S.S."
-	line "ANNE moored in"
+	line "Anne moored in"
 	cont "the harbor?"
 	done
 
 _VermilionCityText_198ac:: ; a56e2 (29:56e2)
-	text "So, S.S.ANNE has"
+	text "So, S.S. Anne has"
 	line "departed!"
 
 	para "She'll be back in"
@@ -23,12 +23,12 @@ _VermilionCityText_198ac:: ; a56e2 (29:56e2)
 
 _SSAnneWelcomeText4:: ; a571d (29:571d)
 	text "Welcome to S.S."
-	line "ANNE!"
+	line "Anne!"
 	done
 
 _SSAnneWelcomeText9:: ; a5734 (29:5734)
 	text "Welcome to S.S."
-	line "ANNE!"
+	line "Anne!"
 
 	para "Excuse me, do you"
 	line "have a ticket?"
@@ -36,16 +36,16 @@ _SSAnneWelcomeText9:: ; a5734 (29:5734)
 
 _SSAnneFlashedTicketText:: ; a576c (29:576c)
 	text "[PLAYER] showed"
-	line "the S.S.TICKET!"
+	line "the S.S. Ticket!"
 
 	para "Great! Welcome to"
-	line "S.S.ANNE!"
+	line "S.S. Anne!"
 	done
 
 _SSAnneNoTicketText:: ; a57a3 (29:57a3)
 	text "[PLAYER] doesn't"
 	line "have the needed"
-	cont "S.S.TICKET."
+	cont "S.S. Ticket."
 
 	para "Sorry!"
 
@@ -62,72 +62,74 @@ _VermilionCityText4:: ; a5805 (29:5805)
 	line "building on this"
 	cont "plot of land."
 
-	para "My #MON is"
+	para "My #mon is"
 	line "tamping the land."
 	done
 
 _VermilionCityText5:: ; a5852 (29:5852)
-	text "MACHOP: Guoh!"
+	text "Machop: Guoh!"
 	line "Gogogoh!@@"
 
 _VermilionCityText14:: ; a586b (29:586b)
 	db $0
-	para "A MACHOP is"
+	para "A Machop is"
 	line "stomping the land"
 	cont "flat."
 	done
 
 _VermilionCityText6:: ; a5891 (29:5891)
-	text "S.S.ANNE is a"
+	text "S.S. Anne is a"
 	line "famous luxury"
 	cont "cruise ship."
 
-	para "We visit VERMILION"
+	para "We visit Vermilion"
 	line "once a year."
 	done
 
 _VermilionCityText7:: ; a58db (29:58db)
-	text "VERMILION CITY"
-	line "The Port of"
-	cont "Exquisite Sunsets"
+	text "Vermilion City"
+	
+	para "The port of"
+	line "exquisite sunsets"
 	done
 
 _VermilionCityText8:: ; a5909 (29:5909)
-	text "NOTICE!"
+	text "Notice!"
 
-	para "ROUTE 12 may be"
+	para "Route 12 may be"
 	line "blocked off by a"
-	cont "sleeping #MON."
+	cont "sleeping #mon."
 
 	para "Detour through"
-	line "ROCK TUNNEL to"
-	cont "LAVENDER TOWN."
+	line "Rock Tunnel to"
+	cont "Lavender Town."
 
-	para "VERMILION POLICE"
+	para "Vermilion Police"
 	done
 
 _VermilionCityText11:: ; a5980 (29:5980)
-	text "#MON FAN CLUB"
-	line "All #MON fans"
-	cont "welcome!"
+	text "#mon Fan Club"
+	
+	para "All #mon fans"
+	line "welcome!"
 	done
 
 _VermilionCityText12:: ; a59a6 (29:59a6)
-	text "VERMILION CITY"
-	line "#MON GYM"
-	cont "LEADER: LT.SURGE"
+	text "Vermilion City"
+	line "#mon Gym"
+	cont "Leader: Lt. Surge"
 
-	para "The Lightning "
+	para "The Lightning"
 	line "American!"
 	done
 
 _VermilionCityText13:: ; a59e9 (29:59e9)
-	text "VERMILION HARBOR"
+	text "Vermilion Harbor"
 	done
 
 _FerrySailorText::
-	text "The SEAGALLOP"
-	line "FERRIES pride"
+	text "The Seagallop"
+	line "Ferries pride"
 	cont "themselves on"
 	cont "service!"
 	done

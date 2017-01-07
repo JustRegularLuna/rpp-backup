@@ -1890,7 +1890,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	jp PlaceString
 
 ListMenuCancelText:: ; 2f97 (0:2f97)
-	db "CANCEL@"
+	db "Cancel@"
 
 GetMonName:: ; 2f9e (0:2f9e)
 	push hl

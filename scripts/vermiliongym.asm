@@ -22,10 +22,10 @@ VermilionGymScript_5ca4c: ; 5ca4c (17:4a4c)
 	jp LoadGymLeaderAndCityName
 
 Gym3CityName: ; 5ca55 (17:4a55)
-	db "VERMILION CITY@"
+	db "Vermilion City@"
 
 Gym3LeaderName: ; 5ca64 (17:4a64)
-	db "LT.SURGE@"
+	db "Lt. Surge@"
 
 VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
 	ld a, [wd773]

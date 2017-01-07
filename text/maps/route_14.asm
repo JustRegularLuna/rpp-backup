@@ -1,7 +1,7 @@
 _Route14BattleText1:: ; 9080d (24:480d)
 	text "You need to use"
 	line "TMs to teach good"
-	cont "moves to #MON!"
+	cont "moves to #mon!"
 	done
 
 _Route14EndBattleText1:: ; 9083f (24:483f)
@@ -10,13 +10,13 @@ _Route14EndBattleText1:: ; 9083f (24:483f)
 
 _Route14AfterBattleText1:: ; 90851 (24:4851)
 	text "You have some HMs,"
-	line "right? #MON"
+	line "right? #mon"
 	cont "can't ever forget"
 	cont "those moves."
 	done
 
 _Route14BattleText2:: ; 9088e (24:488e)
-	text "My bird #MON"
+	text "My bird #mon"
 	line "should be ready"
 	cont "for battle."
 	done
@@ -32,7 +32,7 @@ _Route14AfterBattleText2:: ; 908c8 (24:48c8)
 
 _Route14BattleText3:: ; 908ea (24:48ea)
 	text "TMs are on sale"
-	line "in CELADON!"
+	line "in Celadon!"
 	cont "But, only a few"
 	cont "people have HMs!"
 	done
@@ -42,7 +42,7 @@ _Route14EndBattleText3:: ; 90928 (24:4928)
 	prompt
 
 _Route14AfterBattleText3:: ; 90936 (24:4936)
-	text "Teach #MON"
+	text "Teach #mon"
 	line "moves of the same"
 	cont "element type for"
 	cont "more power."
@@ -50,8 +50,8 @@ _Route14AfterBattleText3:: ; 90936 (24:4936)
 
 _Route14BattleText4:: ; 90971 (24:4971)
 	text "Have you taught"
-	line "your bird #MON"
-	cont "how to FLY?"
+	line "your bird #mon"
+	cont "how to Fly?"
 	done
 
 _Route14EndBattleText4:: ; 9099d (24:499d)
@@ -60,14 +60,14 @@ _Route14EndBattleText4:: ; 9099d (24:499d)
 	prompt
 
 _Route14AfterBattleText4:: ; 909b3 (24:49b3)
-	text "Bird #MON are"
+	text "Bird #mon are"
 	line "my true love!"
 	done
 
 _Route14BattleText5:: ; 909d0 (24:49d0)
 	text "Have you heard of"
 	line "the legendary"
-	cont "bird #MON?"
+	cont "bird #mon?"
 	done
 
 _Route14EndBattleText5:: ; 909f7 (24:49f7)
@@ -77,7 +77,7 @@ _Route14EndBattleText5:: ; 909f7 (24:49f7)
 
 _Route14AfterBattleText5:: ; 90a0a (24:4a0a)
 	text "The 3 legendary"
-	line "#MON are all"
+	line "#mon are all"
 	cont "birds of prey."
 	done
 
@@ -123,7 +123,7 @@ _Route14EndBattleText8:: ; 90b21 (24:4b21)
 	prompt
 
 _Route14AfterBattleText8:: ; 90b2e (24:4b2e)
-	text "Raising #MON"
+	text "Raising #mon"
 	line "is a drag, man."
 	done
 
@@ -139,7 +139,7 @@ _Route14EndBattleText9:: ; 90b78 (24:4b78)
 
 _Route14AfterBattleText9:: ; 90b83 (24:4b83)
 	text "It's cool you"
-	line "made your #MON"
+	line "made your #mon"
 	cont "so strong!"
 
 	para "Might is right!"
@@ -147,7 +147,7 @@ _Route14AfterBattleText9:: ; 90b83 (24:4b83)
 	done
 
 _Route14BattleText10:: ; 90bcc (24:4bcc)
-	text "#MON fight?"
+	text "#mon fight?"
 	line "Cool! Rumble!"
 	done
 
@@ -162,8 +162,8 @@ _Route14AfterBattleText10:: ; 90bf4 (24:4bf4)
 	done
 
 _Route14Text11:: ; 90c1f (24:4c1f)
-	text "ROUTE 14"
-	line "West to FUCHSIA"
-	cont "CITY"
+	text "Route 14"
+	line "West to Fuchsia"
+	cont "City"
 	done
 

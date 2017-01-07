@@ -30,7 +30,7 @@ _SSAnne5EndBattleText1:: ; 8102d (20:502d)
 
 _SSAnne5AfterBattleText1:: ; 81040 (20:5040)
 	text "How many kinds of"
-	line "#MON do you"
+	line "#mon do you"
 	cont "think there are?"
 	done
 
@@ -47,7 +47,7 @@ _SSAnne5EndBattleText2:: ; 8108e (20:508e)
 _SSAnne5AfterBattleText2:: ; 810a4 (20:50a4)
 	text "My Pa said there"
 	line "are 151 kinds of"
-	cont "#MON. I think"
+	cont "#mon. I think"
 	cont "there are more."
 	done
 

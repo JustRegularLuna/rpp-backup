@@ -355,19 +355,19 @@ DrawPokedexVerticalLine: ; 4028e (10:428e)
 	ret
 
 PokedexSeenText: ; 4029d (10:429d)
-	db "SEEN@"
+	db "Seen@"
 
 PokedexOwnText: ; 402a2 (10:42a2)
-	db "OWN@"
+	db "Own@"
 
 PokedexContentsText: ; 402a6 (10:42a6)
-	db "CONTENTS@"
+	db "Kanto Pokédex@"
 
 PokedexMenuItemsText: ; 402af (10:42af)
-	db   "DATA"
-	next "CRY"
-	next "AREA"
-	next "QUIT@"
+	db   "Info"
+	next "Cry"
+	next "Area"
+	next "Quit@"
 
 ; tests if a pokemon's bit is set in the seen or owned pokemon bit fields
 ; INPUT:
@@ -568,7 +568,7 @@ ShowPokedexDataInternal: ; 402e2 (10:42e2)
 	ret
 
 HeightWeightText: ; 40448 (10:4448)
-	db "HT  ?",$60,"??",$61,$4E,"WT   ???lb@"
+	db "Ht  ?",$60,"??",$61,$4E,"Wt   ???lb@"
 
 ; XXX does anything point to this?
 Unknown_4045D: ; 4045d (10:445d)

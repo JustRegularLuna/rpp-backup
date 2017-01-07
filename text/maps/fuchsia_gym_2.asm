@@ -1,6 +1,6 @@
 _UnnamedText_7558b:: ; a0000 (28:4000)
 	text "When afflicted by"
-	line "TOXIC, #MON"
+	line "Toxic, #mon"
 	cont "suffer more and"
 	cont "more as battle"
 	cont "progresses!"
@@ -11,13 +11,13 @@ _UnnamedText_7558b:: ; a0000 (28:4000)
 
 _UnnamedText_75590:: ; a0069 (28:4069)
 	text "Now that you have"
-	line "the SOULBADGE,"
-	cont "the DEFENSE of"
-	cont "your #MON"
+	line "the SoulBadge,"
+	cont "the Defense of"
+	cont "your #mon"
 	cont "increases!"
 
 	para "It also lets you"
-	line "SURF outside of"
+	line "Surf outside of"
 	cont "battle!"
 
 	para "Ah! Take this"
@@ -33,7 +33,7 @@ _ReceivedTM06Text:: ; a00eb (28:40eb)
 _TM06ExplanationText:: ; a00ff (28:40ff)
 	db $0
 	para "TM06 contains"
-	line "TOXIC!"
+	line "Toxic!"
 
 	para "It is a secret"
 	line "technique over"
@@ -48,7 +48,7 @@ _TM06NoRoomText:: ; a0143 (28:4143)
 _FuchsiaGymBattleText1:: ; a0160 (28:4160)
 	text "Strength isn't"
 	line "the key for"
-	cont "#MON!"
+	cont "#mon!"
 
 	para "It's strategy!"
 
@@ -71,7 +71,7 @@ _FuchsiaGymAfterBattleText1:: ; a01d8 (28:41d8)
 _FuchsiaGymBattleText2:: ; a0207 (28:4207)
 	text "I wanted to become"
 	line "a ninja, so I"
-	cont "joined this GYM!"
+	cont "joined this Gym!"
 	done
 
 _FuchsiaGymEndBattleText2:: ; a023a (28:423a)
@@ -81,7 +81,7 @@ _FuchsiaGymEndBattleText2:: ; a023a (28:423a)
 _FuchsiaGymAfterBattleText2:: ; a0248 (28:4248)
 	text "I will keep on"
 	line "training under"
-	cont "KOGA, my ninja"
+	cont "Koga, my ninja"
 	cont "master!"
 	done
 
@@ -128,7 +128,7 @@ _FuchsiaGymAfterBattleText4:: ; a034d (28:434d)
 _FuchsiaGymBattleText5:: ; a03a1 (28:43a1)
 	text "I also study the"
 	line "way of the ninja"
-	cont "with master KOGA!"
+	cont "with master Koga!"
 
 	para "Ninja have a long"
 	line "history of using"
@@ -145,7 +145,7 @@ _FuchsiaGymAfterBattleText5:: ; a0409 (28:4409)
 	done
 
 _FuchsiaGymBattleText6:: ; a0426 (28:4426)
-	text "Master KOGA comes"
+	text "Master Koga comes"
 	line "from a long line"
 	cont "of ninjas!"
 
@@ -171,11 +171,11 @@ _UnnamedText_7564e:: ; a04d2 (28:44d2)
 	text "Yo! Champ in"
 	line "making!"
 
-	para "FUCHSIA GYM is"
+	para "Fuchsia Gym is"
 	line "riddled with"
 	cont "invisible walls!"
 
-	para "KOGA might appear"
+	para "Koga might appear"
 	line "close, but he's"
 	cont "blocked off!"
 

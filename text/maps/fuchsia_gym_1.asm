@@ -1,5 +1,5 @@
 _UnnamedText_75581:: ; 9e9b1 (27:69b1)
-	text "KOGA: Fwahahaha!"
+	text "Koga: Fwahahaha!"
 
 	para "A mere child like"
 	line "you dares to"
@@ -22,6 +22,6 @@ _UnnamedText_75586:: ; 9ea66 (27:6a66)
 	cont "your worth!"
 
 	para "Here! Take the"
-	line "SOULBADGE!"
+	line "SoulBadge!"
 	prompt
 

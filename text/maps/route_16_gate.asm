@@ -1,11 +1,11 @@
 _Route16GateText_49777:: ; 8cca0 (23:4ca0)
 	text "No pedestrians"
 	line "are allowed on"
-	cont "CYCLING ROAD!"
+	cont "Cycling Road!"
 	done
 
 _Route16GateText_4977c:: ; 8cccd (23:4ccd)
-	text "CYCLING ROAD is a"
+	text "Cycling Road is a"
 	line "downhill course"
 	cont "by the sea. It's"
 	cont "a great ride."

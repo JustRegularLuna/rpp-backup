@@ -3,15 +3,15 @@ _CeruleanGymText_5c7be:: ; 989c1 (26:49c1)
 	line "face!"
 
 	para "What's your policy"
-	line "on #MON? What"
+	line "on #mon? What"
 	cont "is your approach?"
 
 	para "My policy is an"
 	line "all-out offensive"
 	cont "with water-type"
-	cont "#MON!"
+	cont "#mon!"
 
-	para "MISTY, the world-"
+	para "Misty, the world-"
 	line "famous beauty, is"
 	cont "your host!"
 
@@ -21,25 +21,25 @@ _CeruleanGymText_5c7be:: ; 989c1 (26:49c1)
 
 _CeruleanGymText_5c7c3:: ; 98a7b (26:4a7b)
 	text "TM11 teaches"
-	line "WATER PULSE!"
+	line "Water Pulse!"
 
 	para "Use it on an"
-	line "aquatic #MON!"
+	line "aquatic #mon!"
 	done
 
 _CeruleanGymText_5c7c8:: ; 98ab0 (26:4ab0)
-	text "The CASCADEBADGE"
-	line "makes all #MON"
-	cont "up to L30 obey!"
+	text "The CascadeBadge"
+	line "makes all #mon"
+	cont "up to Lv30 obey!"
 
 	para "That includes"
 	line "even outsiders!"
 
 	para "There's more, you"
-	line "can now use CUT"
+	line "can now use Cut"
 	cont "anytime!"
 
-	para "You can CUT down"
+	para "You can Cut down"
 	line "small bushes to"
 	cont "open new paths!"
 
@@ -63,14 +63,14 @@ _CeruleanGymText_5c7d8:: ; 98bb0 (26:4bb0)
 	para "All right!"
 
 	para "You can have the"
-	line "CASCADEBADGE to"
+	line "CascadeBadge to"
 	cont "show you beat me!@@"
 
 _CeruleanGymBattleText1:: ; 98c05 (26:4c05)
 	text "I'm more than good"
 	line "enough for you!"
 
-	para "MISTY can wait!"
+	para "Misty can wait!"
 	done
 
 _CeruleanGymEndBattleText1:: ; 98c38 (26:4c38)
@@ -97,7 +97,7 @@ _CeruleanGymEndBattleText2:: ; 98cb5 (26:4cb5)
 	prompt
 
 _CeruleanGymAfterBattleText2:: ; 98cc4 (26:4cc4)
-	text "MISTY is going to"
+	text "Misty is going to"
 	line "keep improving!"
 
 	para "She won't lose to"
@@ -110,20 +110,20 @@ _CeruleanGymText_5c82a:: ; 98d0a (26:4d0a)
 
 	para "Here's my advice!"
 
-	para "The LEADER, MISTY,"
+	para "The Leader, Misty,"
 	line "is a pro who uses"
-	cont "water #MON!"
+	cont "water #mon!"
 
 	para "You can drain all"
 	line "their water with"
-	cont "plant #MON!"
+	cont "plant #mon!"
 
 	para "Or, zap them with"
 	line "electricity!"
 	done
 
 _CeruleanGymText_5c82f:: ; 98db0 (26:4db0)
-	text "You beat MISTY!"
+	text "You beat Misty!"
 	line "What'd I tell ya?"
 
 	para "You and me, kid,"

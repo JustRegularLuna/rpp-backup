@@ -1,5 +1,5 @@
 _ScizorDexEntry::
-	text "This #MON's"
+	text "This #mon's"
 	next "pincers, which"
 	next "contain steel, can"
 
@@ -10,7 +10,7 @@ _ScizorDexEntry::
 	
 _SteelixDexEntry::
 	text "It is said that if"
-	next "an ONIX lives for"
+	next "an Onix lives for"
 	next "over 100 years,"
 
 	page "its composition"
@@ -29,8 +29,8 @@ _CrobatDexEntry::
     dex
 	
 _PolitoedDexEntry::
-	text "If POLIWAG and"
-	next "POLIWHIRL hear its"
+	text "If Poliwag and"
+	next "Poliwhirl hear its"
 	next "echoing cry, they"
 	
 	page "gather from far"
@@ -38,7 +38,7 @@ _PolitoedDexEntry::
 	dex
 	
 _SlowkingDexEntry::
-	text "The SHELLDER on"
+	text "The Shellder on"
 	next "its head injects a"
 	next "poison that makes"
 
@@ -63,7 +63,7 @@ _KingdraDexEntry::
 	next "underwater caves."
 	
 	page "It can create"
-	next "WHIRLPOOLS by"
+	next "Whirlpools by"
 	next "yawning"
 	dex
 	
@@ -72,13 +72,13 @@ _BlisseyDexEntry::
 	next "passionate nature."
 	next "If it sees a sick"
 
-	page "#MON, it will"
+	page "#mon, it will"
 	next "nurse the sufferer"
 	next "back to health"
 	dex
 	
 _Porygon2DexEntry::
-	text "A manmade #MON"
+	text "A manmade #mon"
 	next "that evolved from"
 	next "new technology."
 
@@ -268,7 +268,7 @@ _LanturnDexEntry::
 	dex
 
 _SlugmaDexEntry::
-    text "These #MON"
+    text "These #mon"
     next "gather together in"
     next "areas that are"
     
@@ -308,8 +308,8 @@ _LatiasDexEntry::
     dex
     
 _LatiosDexEntry::
-    text "A highly intelli"
-    next "gent #MON. By"
+    text "A highly intelli-"
+    next "gent #mon. By"
     next "folding back its"
     
     page "wings in flight,"
@@ -353,7 +353,7 @@ _CleffaDexEntry::
     next "the night sky,"
     
     page "sightings of"
-    next "CLEFFA strangely"
+    next "Cleffa strangely"
     next "increase"
     dex
     
@@ -404,7 +404,7 @@ _MimeJrDexEntry::
     
     page "foe cannot take"
     next "its eyes off this"
-    next "#MON"
+    next "#mon"
     dex
     
 _HappinyDexEntry::
@@ -414,7 +414,7 @@ _HappinyDexEntry::
     
     page "shaped rock in"
     next "imitation of"
-    next "CHANSEY"
+    next "Chansey"
     dex
     
 _MunchlaxDexEntry::

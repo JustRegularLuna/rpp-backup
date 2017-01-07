@@ -4,7 +4,7 @@ _Route3Text1:: ; 8d779 (23:5779)
 	cont "Groan..."
 
 	para "That tunnel from"
-	line "CERULEAN takes a"
+	line "Cerulean takes a"
 	cont "lot out of you!"
 	done
 
@@ -21,17 +21,17 @@ _Route3EndBattleText1:: ; 8d7f9 (23:57f9)
 
 _Route3AfterBattleText1:: ; 8d80d (23:580d)
 	text "I should look for"
-	line "#MON outside"
+	line "#mon outside"
 	cont "of forests."
 	done
 
 _Route3BattleText2:: ; 8d84c (23:584c)
 	text "Hey! Check out my"
-	line "RATTATA!"
+	line "Rattata!"
 	
 	para "He's in the top"
 	line "percentage of"
-	cont "RATTATA!"
+	cont "Rattata!"
 	done
 
 _Route3EndBattleText2:: ; 8d87f (23:587f)
@@ -45,7 +45,7 @@ _Route3AfterBattleText2:: ; 8d893 (23:5893)
 	cont "anyway."
 	
 	para "I'll be heading"
-	line "back to JOHTO"
+	line "back to Johto"
 	cont "pretty soon."
 	done
 
@@ -71,15 +71,15 @@ _Route3BattleText4:: ; 8d924 (23:5924)
 
 _Route3EndBattleText4:: ; 8d944 (23:5944)
 	text "If I had new"
-	line "#MON, I would"
+	line "#mon, I would"
 	cont "have won!"
 	prompt
 
 _Route3AfterBattleText4:: ; 8d966 (23:5966)
-	text "If a #MON BOX"
+	text "If a #mon Box"
 	line "on the PC gets"
 	cont "full, just switch"
-	cont "to another BOX!"
+	cont "to another Box!"
 	done
 
 _Route3BattleText5:: ; 8d9a6 (23:59a6)
@@ -115,7 +115,7 @@ _Route3AfterBattleText6:: ; 8da3b (23:5a3b)
 
 _Route3BattleText7:: ; 8da62 (23:5a62)
 	text "You can fight my"
-	line "new #MON!"
+	line "new #mon!"
 	done
 
 _Route3EndBattleText7:: ; 8da7e (23:5a7e)
@@ -123,7 +123,7 @@ _Route3EndBattleText7:: ; 8da7e (23:5a7e)
 	prompt
 
 _Route3AfterBattleText7:: ; 8da91 (23:5a91)
-	text "Trained #MON"
+	text "Trained #mon"
 	line "are stronger than"
 	cont "the wild ones!"
 	done
@@ -138,12 +138,13 @@ _Route3EndBattleText8:: ; 8dad8 (23:5ad8)
 	prompt
 
 _Route3AfterBattleText8:: ; 8dae3 (23:5ae3)
-	text "ROUTE 4 is at the"
-	line "foot of MT.MOON."
+	text "Route 4 is at the"
+	line "foot of Mt. Moon."
 	done
 
 _Route3Text10:: ; 8db07 (23:5b07)
-	text "ROUTE 3"
-	line "MT.MOON AHEAD"
+	text "Route 3"
+	line "Pewter City -"
+	cont "Mt. Moon"
 	done
 

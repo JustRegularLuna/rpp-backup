@@ -1,5 +1,5 @@
 _SilphCo6Text_1a24a:: ; 84176 (21:4176)
-	text "The ROCKETs came"
+	text "The Rockets came"
 	line "and took over the"
 	cont "building!"
 	done
@@ -31,27 +31,27 @@ _SilphCo6Text_1a27d:: ; 84220 (21:4220)
 	done
 
 _SilphCo6Text_1a28f:: ; 8424f (21:424f)
-	text "TEAM ROCKET is"
+	text "Team Rocket is"
 	line "trying to conquer"
 	cont "the world with"
-	cont "#MON!"
+	cont "#mon!"
 	done
 
 _SilphCo6Text_1a294:: ; 84286 (21:4286)
-	text "TEAM ROCKET ran"
+	text "Team Rocket ran"
 	line "because of you!"
 	done
 
 _SilphCo6Text_1a2a6:: ; 842a7 (21:42a7)
 	text "They must have"
-	line "targeted SILPH"
-	cont "for our #MON"
+	line "targeted Silph"
+	cont "for our #mon"
 	cont "products."
 	done
 
 _SilphCo6Text_1a2ab:: ; 842dd (21:42dd)
 	text "Come work for"
-	line "SILPH when you"
+	line "Silph when you"
 	cont "get older!"
 	done
 
@@ -76,11 +76,11 @@ _SilphCo6AfterBattleText2:: ; 84336 (21:4336)
 
 _SilphCo6BattleText3:: ; 8435e (21:435e)
 	text "That rotten"
-	line "PRESIDENT!"
+	line "President!"
 
 	para "He shouldn't have"
 	line "sent me to the"
-	cont "TIKSI BRANCH!"
+	cont "Tiksi Branch!"
 	done
 
 _SilphCo6EndBattleText3:: ; 843a4 (21:43a4)
@@ -88,14 +88,14 @@ _SilphCo6EndBattleText3:: ; 843a4 (21:43a4)
 	prompt
 
 _SilphCo6AfterBattleText3:: ; 843ac (21:43ac)
-	text "TIKSI BRANCH?"
+	text "Tiksi Branch?"
 	line "It's in Russian"
 	cont "no man's land!"
 	done
 
 _SilphCo6BattleText4:: ; 843d8 (21:43d8)
 	text "You dare betray"
-	line "TEAM ROCKET?"
+	line "Team Rocket?"
 	done
 
 _SilphCo6EndBattleText4:: ; 843f6 (21:43f6)

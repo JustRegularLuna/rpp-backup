@@ -156,10 +156,10 @@ LinkCableHelpText2: ; 5dca3 (17:5ca3)
 	db "@"
 
 HowToLinkText: ; 5dca8 (17:5ca8)
-	db   "HOW TO LINK"
-	next "COLOSSEUM"
-	next "TRADE CENTER"
-	next "STOP READING@"
+	db   "How to Link"
+	next "Colosseum"
+	next "Trade Center"
+	next "Stop reading@"
 
 LinkCableInfoTexts: ; 5dcd8 (17:5cd8)
 	dw LinkCableInfoText1
@@ -276,7 +276,7 @@ StatusAilmentText1: ; 5ddac (17:5dac)
 StatusAilmentText2: ; 5ddbb (17:5dbb)
 	db   " BRN"
 	next " FRZ"
-	next " QUIT@@"
+	next " Quit@@"
 
 ViridianBlackboardStatusPointers: ; 5ddcc (17:5ddc)
 	dw ViridianBlackboardSleepText

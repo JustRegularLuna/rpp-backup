@@ -54,13 +54,13 @@ _MtMoon1BattleText5:: ; 807a5 (20:47a5)
 	done
 
 _MtMoon1EndBattleText5:: ; 807c1 (20:47c1)
-	text "My #MON won't"
+	text "My #mon won't"
 	line "do!"
 	prompt
 
 _MtMoon1AfterBattleText5:: ; 807d3 (20:47d3)
 	text "I have to find"
-	line "stronger #MON."
+	line "stronger #mon."
 	done
 
 _MtMoon1BattleText6:: ; 807f2 (20:47f2)
@@ -92,13 +92,13 @@ _MtMoon1EndBattleText7:: ; 8088e (20:488e)
 _MtMoon1AfterBattleText7:: ; 8089b (20:489b)
 	text "I saw them! I'm"
 	line "sure they're from"
-	cont "TEAM ROCKET!"
+	cont "Team Rocket!"
 	done
 
 _MtMoon1BattleText8:: ; 808c9 (20:48c9)
 	text "Go through this"
 	line "cave to get to"
-	cont "CERULEAN CITY!"
+	cont "Cerulean City!"
 	done
 
 _MtMoon1EndBattleText8:: ; 808f8 (20:48f8)
@@ -106,13 +106,13 @@ _MtMoon1EndBattleText8:: ; 808f8 (20:48f8)
 	prompt
 
 _MtMoon1AfterBattleText8:: ; 80901 (20:4901)
-	text "ZUBAT is tough!"
+	text "Zubat is tough!"
 	line "But, it can be"
 	cont "useful if you"
 	cont "catch one."
 	done
 
 _MtMoon1Text14:: ; 8093a (20:493a)
-	text "Beware! ZUBAT is"
+	text "Beware! Zubat is"
 	line "a blood sucker!"
 	done

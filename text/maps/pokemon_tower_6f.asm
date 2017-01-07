@@ -1,7 +1,7 @@
 _PokemonTower2Text_60c1f:: ; 99ac8 (26:5ac8)
-	text "The GHOST was the"
+	text "The Ghost was the"
 	line "restless soul of"
-	cont "CUBONE's mother!"
+	cont "Cubone's mother!"
 	done
 
 _PokemonTower2Text_60c24:: ; 99afc (26:5afc)

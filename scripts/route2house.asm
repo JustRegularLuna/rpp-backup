@@ -19,4 +19,4 @@ Route2HouseText2: ; 1def9 (7:5ef9)
 	jp TextScriptEnd
 
 Trader1Name:
-	db "CALVIN@"
+	db "Calvin@"

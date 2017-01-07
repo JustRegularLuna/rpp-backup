@@ -1,17 +1,17 @@
 _Route12Text1:: ; 9009e (24:409e)
-	text "A sleeping #MON"
+	text "A sleeping #mon"
 	line "blocks the way!"
 	done
 
 _Route12Text13:: ; 900bf (24:40bf)
-	text "SNORLAX woke up!"
+	text "Snorlax woke up!"
 
 	para "It attacked in a"
 	line "grumpy rage!"
 	done
 
 _Route12Text14:: ; 900ef (24:40ef)
-	text "SNORLAX calmed"
+	text "Snorlax calmed"
 	line "down! With a big"
 	cont "yawn, it returned"
 	cont "to the mountains!"
@@ -44,14 +44,14 @@ _Route12EndBattleText2:: ; 901ab (24:41ab)
 	prompt
 
 _Route12AfterBattleText2:: ; 901bf (24:41bf)
-	text "With a better ROD,"
+	text "With a better Rod,"
 	line "I could catch"
-	cont "better #MON!"
+	cont "better #mon!"
 	done
 
 _Route12BattleText3:: ; 901ee (24:41ee)
 	text "Have you found a"
-	line "MOON STONE?"
+	line "Moon Stone?"
 	done
 
 _Route12EndBattleText3:: ; 9020c (24:420c)
@@ -64,8 +64,8 @@ IF DEF(_BLUE)
 ELSE
 	text "I could have made"
 ENDC
-	line "my #MON evolve"
-	cont "with MOON STONE!"
+	line "my #mon evolve"
+	cont "with Moon Stone!"
 	done
 
 _Route12BattleText4:: ; 90245 (24:4245)
@@ -84,8 +84,8 @@ _Route12AfterBattleText4:: ; 9026f (24:426f)
 	done
 
 _Route12BattleText5:: ; 902a8 (24:42a8)
-	text "The FISHING FOOL"
-	line "vs. #MON KID!"
+	text "The Fishing Fool"
+	line "vs. #mon Kid!"
 	done
 
 _Route12EndBattleText5:: ; 902c8 (24:42c8)
@@ -94,7 +94,7 @@ _Route12EndBattleText5:: ; 902c8 (24:42c8)
 
 _Route12AfterBattleText5:: ; 902d3 (24:42d3)
 	text "You beat me at"
-	line "#MON, but I'm"
+	line "#mon, but I'm"
 	cont "good at fishing!"
 	done
 
@@ -124,17 +124,18 @@ _Route12EndBattleText7:: ; 9037e (24:437e)
 	prompt
 
 _Route12AfterBattleText7:: ; 90388 (24:4388)
-	text "I catch MAGIKARP"
+	text "I catch Magikarp"
 	line "all the time, but"
 	cont "they're so weak!"
 	done
 
 _Route12Text11:: ; 903bc (24:43bc)
-	text "ROUTE 12 "
-	line "North to LAVENDER"
+	text "Route 12"
+	line "North to Lavender"
 	done
 
 _Route12Text12:: ; 903d9 (24:43d9)
-	text "SPORT FISHING AREA"
+	text "Silence Bridge"
+	line "Sport Fishing Area"
 	done
 

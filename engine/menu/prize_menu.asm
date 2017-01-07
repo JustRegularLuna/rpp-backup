@@ -166,7 +166,7 @@ PrintPrizePrice: ; 5287a (14:687a)
 	ret
 
 .CoinText ; 14:68A5
-	db "COIN@"
+	db "Coin@"
 
 .SixSpacesText ; 14:68AA
 	db "      @"

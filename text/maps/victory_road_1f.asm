@@ -1,6 +1,6 @@
 _VictoryRoad1BattleText1:: ; 85c79 (21:5c79)
 	text "I'm training to"
-	line "be a GYM LEADER"
+	line "be a Gym Leader"
 	cont "like my father."
 	
 	para "I wonder if you"

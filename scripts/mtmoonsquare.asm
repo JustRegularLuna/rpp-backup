@@ -22,15 +22,15 @@ MtMoonSquareText2:
 	jp TextScriptEnd
 
 MtMoonSquareText3:
-	text "My EEVEE loves it"
+	text "My Eevee loves it"
 	line "here!"
 	
 	para "Apparently, so do"
-	line "the CLEFAIRY."
+	line "the Clefairy."
 	done
 	db "@"
 	
 MtMoonSquareText4:
-	text "MT. MOON SQUARE"
+	text "Mt. Moon Square"
 	done
 	db "@"

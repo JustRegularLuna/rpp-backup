@@ -1,8 +1,8 @@
 _TalkAboutBirds::
 	text "Oh, hello. I'm"
 	line "studying the"
-	cont "LEGENDARY BIRD"
-	cont "#MON."
+	cont "Legendary Bird"
+	cont "#mon."
 	
 	para "Have you seen"
 	line "them?"
@@ -13,7 +13,7 @@ _MysticTooBadText::
 	text "Hmm, I guess not."
 	line "They don't seem"
 	cont "to be in your"
-	cont "#DEX."
+	cont "#dex."
 	
 	para "Come back and see"
 	line "me once you've"
@@ -27,29 +27,29 @@ _SeenAllBirdsText::
 	
 	para "Well, all of them"
 	line "that live here in"
-	cont "KANTO, anyway."
+	cont "Kanto, anyway."
 	
 	para "I know! I'll give"
-	line "you this MYSTIC"
-	cont "TICKET!"
+	line "you this Mystic"
+	cont "Ticket!"
 	prompt
 
 
 _ReceivedMysticTicketText::
 	text "[PLAYER] received"
-	line "a MYSTICTICKET!"
+	line "a MysticTicket!"
 	done
 
 
 _TalkAboutNavelRockText::
 	text "You can use that"
-	line "MYSTICTICKET to"
-	cont "travel to NAVEL"
-	cont "ROCK."
+	line "MysticTicket to"
+	cont "travel to Navel"
+	cont "Rock."
 	
 	para "Just visit the"
-	line "SEAGALLOP FERRY"
-	cont "in VERMILION."
+	line "Seagallop Ferry"
+	cont "in Vermilion."
 	done
 
 

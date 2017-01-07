@@ -72,8 +72,8 @@ INCLUDE "engine/battle/safari_zone.asm"
 
 INCLUDE "engine/titlescreen.asm"
 
-NintenText: db "NINTEN@"
-SonyText:   db "SONY@"
+NintenText: db "Ninten@"
+SonyText:   db "Sony@"
 
 
 LoadMonData_:
@@ -1064,25 +1064,25 @@ DrawStartMenu: ; 710b (1:710b)
 	ret
 
 StartMenuPokedexText: ; 718f (1:718f)
-	db "POKéDEX@"
+	db "Pokédex@"
 
 StartMenuPokemonText: ; 7197 (1:7197)
-	db "POKéMON@"
+	db "Pokémon@"
 
 StartMenuItemText: ; 719f (1:719f)
-	db "PACK@"
+	db "Pack@"
 
 StartMenuSaveText: ; 71a4 (1:71a4)
-	db "SAVE@"
+	db "Save@"
 
 StartMenuResetText: ; 71a9 (1:71a9)
-	db "RESET@"
+	db "Reset@"
 
 StartMenuExitText: ; 71af (1:71af)
-	db "EXIT@"
+	db "Quit@"
 
 StartMenuOptionText: ; 71b4 (1:71b4)
-	db "OPTION@"
+	db "Options@"
 
 PrintStartMenuItem: ; 71bb (1:71bb)
 	push hl
@@ -1314,14 +1314,14 @@ TextBoxTextAndCoordTable: ; 73b0 (1:73b0)
 ; note that there is no terminator
 
 BuySellQuitText: ; 7413 (1:7413)
-	db   "BUY"
-	next "SELL"
-	next "QUIT@@"
+	db   "Buy"
+	next "Sell"
+	next "Quit@@"
 
 UseTossText: ; 7422 (1:7422)
-	db   "USE"
-	next "INFO"
-	next "TOSS@"
+	db   "Use"
+	next "Info"
+	next "Toss@"
 
 JapaneseSaveMessageText: ; 742b (1:742b)
 	db   "きろく"
@@ -1332,7 +1332,7 @@ JapaneseSpeedOptionsText: ; 7435 (1:7435)
 	next "おそい@"
 
 MoneyText: ; 743d (1:743d)
-	db "MONEY@"
+	db "Money@"
 
 JapaneseMochimonoText: ; 7443 (1:7443)
 	db "もちもの@"
@@ -1342,17 +1342,17 @@ JapaneseMainMenuText: ; 7448 (1:7448)
 	next "さいしょから@"
 
 BattleMenuText: ; 7455 (1:7455)
-	db   "FIGHT ",$E1,$E2
-	next "PACK  RUN@"
+	db   "Fight ",$E1,$E2
+	next "Pack  Run@"
 
 SafariZoneBattleMenuText: ; 7468 (1:7468)
-	db   "BALL×       BAIT"
-	next "THROW ROCK  RUN@"
+	db   "Ball×       Bait"
+	next "Rock        Run@"
 
 SwitchStatsCancelText: ; 7489 (1:7489)
-	db   "SWITCH"
-	next "STATS"
-	next "CANCEL@"
+	db   "Switch"
+	next "Stats"
+	next "Cancel@"
 
 JapaneseAhText: ; 749d (1:749d)
 	db "アッ!@"
@@ -1634,19 +1634,19 @@ TwoOptionMenuStrings: ; 7671 (1:7671)
 	dw .NoYesMenu
 
 .NoYesMenu ; 7699 (1:3699)
-	db "NO",$4E,"YES@"
+	db "No",$4E,"Yes@"
 .YesNoMenu ; 76a0 (1:36a0)
-	db "YES",$4E,"NO@"
+	db "Yes",$4E,"No@"
 .BoyGirlMenu ; 76a7 (1:36a7)
-	db "BOY",$4E,"GIRL@"
+	db "Boy",$4E,"Girl@"
 .SouthEastMenu ; 76b2 (1:36b2)
-	db "SOUTH",$4E,"EAST@"
+	db "South",$4E,"East@"
 .NorthEastMenu ; 76bd (1:36bd)
-	db "NORTH",$4E,"EAST@"
+	db "North",$4E,"East@"
 .TradeCancelMenu ; 76c8 (1:36c8)
-	db "TRADE",$4E,"CANCEL@"
+	db "Trade",$4E,"Cancel@"
 .HealCancelMenu ; 76d5 (1:36d5)
-	db "HEAL",$4E,"CANCEL@"
+	db "Heal",$4E,"Cancel@"
 
 DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 	xor a
@@ -1753,21 +1753,21 @@ DisplayFieldMoveMonMenu: ; 76e1 (1:36e1)
 	jp PlaceString
 
 FieldMoveNames: ; 778d (1:778d)
-	db "CUT@"
-	db "FLY@"
-	db "DIVE@" ; Unused
-	db "SURF@"
-	db "STRENGTH@"
-	db "FLASH@"
-	db "DIG@"
-	db "TELEPORT@"
-	db "SOFTBOILED@"
-	db "HEADBUTT@"
+	db "Cut@"
+	db "Fly@"
+	db "Dive@" ; Unused
+	db "Surf@"
+	db "Strength@"
+	db "Flash@"
+	db "Dig@"
+	db "Teleport@"
+	db "Softboiled@"
+	db "Headbutt@"
 
 PokemonMenuEntries: ; 77c2 (1:77c2)
-	db   "STATS"
-	next "SWITCH"
-	next "CANCEL@"
+	db   "Stats"
+	next "Switch"
+	next "Cancel@"
 
 GetMonFieldMoves: ; 77d6 (1:77d6)
 	ld a, [wWhichPokemon]
@@ -2262,7 +2262,7 @@ SafariSteps: ; c579 (3:4579)
 	db "/500@"
 
 SafariBallText: ; c57e (3:457e)
-	db "BALL×× @"
+	db "Ball×× @"
 
 GetTileAndCoordsInFrontOfPlayer: ; c586 (3:4586)
 	call GetPredefRegisters

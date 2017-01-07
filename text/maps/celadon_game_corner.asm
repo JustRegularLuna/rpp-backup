@@ -8,8 +8,8 @@ _CeladonGameCornerText1:: ; 9d8d5 (27:58d5)
 	done
 
 _CeladonGameCornerText_48d22:: ; 9d91a (27:591a)
-	text "Welcome to ROCKET"
-	line "GAME CORNER!"
+	text "Welcome to Rocket"
+	line "Game Cornet!"
 
 	para "Do you need some"
 	line "game coins?"
@@ -35,13 +35,13 @@ _CeladonGameCornerText_48d31:: ; 9d9c5 (27:59c5)
 	done
 
 _CeladonGameCornerText_48d36:: ; 9d9e1 (27:59e1)
-	text "Oops! Your COIN"
-	line "CASE is full."
+	text "Oops! Your Coin"
+	line "Case is full."
 	done
 
 _CeladonGameCornerText_48d3b:: ; 9da00 (27:5a00)
 	text "You don't have a"
-	line "COIN CASE!"
+	line "Coin Case!"
 	done
 
 _CeladonGameCornerText3:: ; 9da1c (27:5a1c)
@@ -49,7 +49,7 @@ _CeladonGameCornerText3:: ; 9da1c (27:5a1c)
 
 	para "It's rumored that"
 	line "this place is run"
-	cont "by TEAM ROCKET."
+	cont "by Team Rocket."
 	done
 
 _CeladonGameCornerText4:: ; 9da61 (27:5a61)
@@ -89,10 +89,10 @@ _CeladonGameCornerText_48dca:: ; 9db11 (27:5b11)
 	line "things to do,"
 	cont "champ in making!"
 
-	para "CELADON GYM's"
-	line "LEADER is ERIKA!"
+	para "Celadon Gym's"
+	line "Leader is Erika!"
 	cont "She uses grass-"
-	cont "type #MON!"
+	cont "type #mon!"
 
 	para "She might appear"
 	line "docile, but don't"
@@ -101,7 +101,7 @@ _CeladonGameCornerText_48dca:: ; 9db11 (27:5b11)
 
 _CeladonGameCornerText_48dcf:: ; 9dbac (27:5bac)
 	text "They offer rare"
-	line "#MON that can"
+	line "#mon that can"
 	cont "be exchanged for"
 	cont "your coins."
 
@@ -132,7 +132,7 @@ _CeladonGameCornerText_48e31:: ; 9dc66 (27:5c66)
 _CeladonGameCornerText_48e36:: ; 9dc7f (27:5c7f)
 	text "Darn! I need more"
 	line "coins for the"
-	cont "#MON I want!"
+	cont "#mon I want!"
 	done
 
 _CeladonGameCornerText_48e88:: ; 9dcad (27:5cad)
@@ -170,7 +170,7 @@ _CeladonGameCornerText_48ed3:: ; 9dd73 (27:5d73)
 _CeladonGameCornerText_48ed8:: ; 9dd7a (27:5d7a)
 	text "Our hideout might"
 	line "be discovered! I"
-	cont "better tell BOSS!"
+	cont "better tell Boss!"
 	done
 
 _CeladonGameCornerText_48f09:: ; 9ddb0 (27:5db0)
@@ -182,6 +182,6 @@ _CeladonGameCornerText_48f09:: ; 9ddb0 (27:5db0)
 
 _CeladonGameCornerText_48f19:: ; 9dde2 (27:5de2)
 	text "Oops! Forgot the"
-	line "COIN CASE!"
+	line "Coin Case!"
 	done
 

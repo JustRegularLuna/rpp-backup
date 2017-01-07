@@ -30,9 +30,9 @@ _Mansion3AfterBattleText2:: ; 85475 (21:5475)
 
 _Mansion3Text5:: ; 854a3 (21:54a3)
 	text "Diary: Feb. 6"
-	line "MEW gave birth."
+	line "Mew gave birth."
 
 	para "We named the"
-	line "newborn MEWTWO."
+	line "newborn Mewtwo."
 	done
 

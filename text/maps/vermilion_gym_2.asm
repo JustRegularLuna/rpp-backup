@@ -7,16 +7,16 @@ _VermilionGymText_5cb72:: ; 9c000 (27:4000)
 
 	para "But, it's useless"
 	line "against ground-"
-	cont "type #MON!"
+	cont "type #mon!"
 	done
 
 _VermilionGymText_5cb77:: ; 9c069 (27:4069)
-	text "The THUNDERBADGE"
+	text "The ThunderBadge"
 	line "cranks up your"
-	cont "#MON's SPEED!"
+	cont "#mon's Speed!"
 
 	para "It also lets your"
-	line "#MON FLY any-"
+	line "#mon Fly any-"
 	cont "time, kid!"
 
 	para "You're special,"
@@ -32,10 +32,10 @@ _ReceivedTM24Text:: ; 9c0e0 (27:40e0)
 _TM24ExplanationText:: ; 9c0f5 (27:40f5)
 	db $0
 	para "TM24 contains"
-	line "THUNDERBOLT!"
+	line "Thunderbolt!"
 
 	para "Teach it to an"
-	line "electric #MON!"
+	line "electric #mon!"
 	done
 
 _TM24NoRoomText:: ; 9c130 (27:4130)
@@ -50,12 +50,12 @@ _ReceivedThunderbadgeText:: ; 9c151 (27:4151)
 	line "deal, kid!"
 
 	para "Fine then, take"
-	line "the THUNDERBADGE!"
+	line "the ThunderBadge!"
 	prompt
 
 _VermilionGymBattleText1:: ; 9c194 (27:4194)
 	text "When I was in the"
-	line "Army, LT.SURGE"
+	line "Army, Lt. Surge"
 	cont "was my strict CO!"
 	done
 
@@ -68,7 +68,7 @@ _VermilionGymAfterBattleText1:: ; 9c1e0 (27:41e0)
 	text "The door won't"
 	line "open?"
 
-	para "LT.SURGE always"
+	para "Lt. Surge always"
 	line "was cautious!"
 	done
 
@@ -88,7 +88,7 @@ _VermilionGymEndBattleText2:: ; 9c244 (27:4244)
 _VermilionGymAfterBattleText2:: ; 9c24c (27:424c)
 	text "OK, I'll talk!"
 
-	para "LT.SURGE said he"
+	para "Lt. Surge said he"
 	line "hid door switches"
 	cont "inside something!"
 	done
@@ -104,7 +104,7 @@ _VermilionGymEndBattleText3:: ; 9c2ac (27:42ac)
 	prompt
 
 _VermilionGymAfterBattleText3:: ; 9c2c0 (27:42c0)
-	text "LT.SURGE set up"
+	text "Lt. Surge set up"
 	line "double locks!"
 	cont "Here's a hint!"
 
@@ -118,21 +118,21 @@ _VermilionGymText_5cbf4:: ; 9c32b (27:432b)
 	text "Yo! Champ in"
 	line "making!"
 
-	para "LT.SURGE has a"
+	para "Lt. Surge has a"
 	line "nickname. People"
 	cont "refer to him as"
 	cont "the Lightning"
 	cont "American!"
 
 	para "He's an expert on"
-	line "electric #MON!"
+	line "electric #mon!"
 
 	para "Birds and water"
-	line "#MON are at"
+	line "#mon are at"
 	cont "risk! Beware of"
 	cont "paralysis too!"
 
-	para "LT.SURGE is very"
+	para "Lt. Surge is very"
 	line "cautious!"
 
 	para "You'll have to"

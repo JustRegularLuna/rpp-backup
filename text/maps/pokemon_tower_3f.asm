@@ -9,9 +9,9 @@ _PokemonTower3EndBattleText1:: ; 99794 (26:5794)
 	prompt
 
 _PokemonTower3AfterBattleText1:: ; 997a4 (26:57a4)
-	text "The GHOSTs can be"
+	text "The Ghosts can be"
 	line "identified by the"
-	cont "SILPH SCOPE."
+	cont "Silph Scope."
 	done
 
 _PokemonTower3BattleText2:: ; 997d6 (26:57d6)

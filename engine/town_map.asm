@@ -132,7 +132,7 @@ LoadTownMap_Nest: ; 70f60 (1c:4f60)
 	ret
 
 MonsNestText: ; 70f89 (1c:4f89)
-	db "'s NEST@"
+	db "'s nest@"
 
 LoadTownMap_Fly: ; 70f90 (1c:4f90)
 	call ClearSprites
@@ -396,7 +396,7 @@ Func_711ef: ; 711ef (1c:51ef)
 	jp CopyData
 
 AreaUnknownText: ; 7124a (1c:524a)
-	db " AREA UNKNOWN@"
+	db " Area unknown@"
 
 Func_71258: ; 71258 (1c:5258)
 	push af

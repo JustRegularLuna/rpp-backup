@@ -1,7 +1,7 @@
 _UnnamedText_5d773:: ; 8c132 (23:4132)
 	text "I want to shop at"
-	line "the dept. store"
-	cont "in CELADON but..."
+	line "the Dept. Store"
+	cont "in Celadon but..."
 
 	para "There are so many"
 	line "rough looking"
@@ -9,27 +9,27 @@ _UnnamedText_5d773:: ; 8c132 (23:4132)
 	done
 
 _UnnamedText_5d778:: ; 8c195 (23:4195)
-	text "TEAM ROCKET had a"
+	text "Team Rocket had a"
 	line "secret hideout in"
-	cont "CELADON CITY?"
+	cont "Celadon City?"
 	done
 
 _UnnamedText_5d77d:: ; 8c1c8 (23:41c8)
 	text "You're here to"
-	line "shop in CELADON?"
+	line "shop in Celadon?"
 
 	para "Just step outside"
 	line "and head west!"
 	done
 
 _UnnamedText_5d782:: ; 8c209 (23:4209)
-	text "The UNDERGROUND"
-	line "PATH goes beneath"
-	cont "SAFFRON and leads"
-	cont "to LAVENDER."
+	text "The Underground"
+	line "Path goes beneath"
+	cont "Saffron and leads"
+	cont "to Lavender."
 
 	para "If you're heading"
-	line "to CERULEAN, go"
+	line "to Cerulean, go"
 	cont "to the building"
 	cont "across the road."
 	done

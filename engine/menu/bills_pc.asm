@@ -88,12 +88,12 @@ Func_213c8:: ; 213c8 (8:53c8)
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ret
 
-SomeonesPCText:   db "SOMEONE's PC@"
-BillsPCText:      db "BILL's PC@"
+SomeonesPCText:   db "Someone's PC@"
+BillsPCText:      db "Bill's PC@"
 PlayersPCText:    db "'s PC@"
-OaksPCText:       db "PROF.OAK's PC@"
-PKMNLeaguePCText: db $4a, "LEAGUE@"
-LogOffPCText:     db "LOG OFF@"
+OaksPCText:       db "Prof. Oak's PC@"
+PKMNLeaguePCText: db $4a, "League@"
+LogOffPCText:     db "Log off@"
 
 BillsPC_:: ; 0x214c2
 	ld hl, wd730
@@ -341,15 +341,15 @@ Func_216be: ; 216be (8:56be)
 	ret
 
 BillsPCMenuText: ; 216e1 (8:56e1)
-	db   "WITHDRAW ", $4a
-	next "DEPOSIT ",  $4a
-	next "RELEASE ",  $4a
-	next "CHANGE BOX"
-	next "SEE YA!"
+	db   "Withdraw ", $4a
+	next "Deposit ",  $4a
+	next "Release ",  $4a
+	next "Change Box"
+	next "Back"
 	db "@"
 
 BoxNoPCText: ; 21713 (8:5713)
-	db "BOX No.@"
+	db "Box No.@"
 
 Func_2171b:: ; 2171b (8:571b)
 	ld hl, wPartyMon1Moves
@@ -451,11 +451,11 @@ Func_2174b: ; 2174b (8:574b)
 	call LoadGBPal
 	jr .asm_2178f
 
-DepositPCText:  db "DEPOSIT@"
-WithdrawPCText: db "WITHDRAW@"
+DepositPCText:  db "Deposit@"
+WithdrawPCText: db "Withdraw@"
 StatsCancelPCText:
-	db   "STATS"
-	next "CANCEL@"
+	db   "Stats"
+	next "Cancel@"
 
 SwitchOnText: ; 0x217e9
 	TX_FAR _SwitchOnText

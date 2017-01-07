@@ -16,7 +16,7 @@ Route18GateUpstairsText1: ; 4997e (12:597e)
 	jp TextScriptEnd
 	
 Trader5Name:
-	db "JAKE@"
+	db "Jake@"
 
 Route18GateUpstairsText2: ; 4998c (12:598c)
 	db $8

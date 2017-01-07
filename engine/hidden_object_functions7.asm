@@ -447,11 +447,11 @@ BillsHousePokemonListText1: ; 1ec7f (7:6c7f)
 	db "@"
 
 BillsMonListText: ; 1ec84 (7:6c84)
-	db   "EEVEE"
-	next "VAPOREON"
-	next "JOLTEON"
-	next "FLAREON"
-	next "CANCEL@"
+	db   "Eevee"
+	next "Vaporeon"
+	next "Jolteon"
+	next "Flareon"
+	next "Cancel@"
 
 BillsHousePokemonListText2: ; 1ecaa (7:6caa)
 	TX_FAR _BillsHousePokemonListText2

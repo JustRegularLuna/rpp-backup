@@ -2210,7 +2210,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	ld a, $2 ; select the "ITEM" menu
 	jp .upperLeftMenuItemWasNotSelected
 .oldManName
-	db "OLD MAN@"
+	db "Old Man@"
 .handleBattleMenuInput
 	ld a, [wcc2d]
 	ld [wCurrentMenuItem], a
@@ -2842,7 +2842,7 @@ MoveDisabledText: ; 3d3b3 (f:53b3)
 	db "@"
 
 WhichTechniqueString: ; 3d3b8 (f:53b8)
-	db "WHICH TECHNIQUE?@"
+	db "Which technique?@"
 
 CursorUp: ; 3d3c9 (f:53c9)
 	ld a, [wCurrentMenuItem]
@@ -3079,13 +3079,13 @@ DisabledText: ; 3d555 (f:5555)
 	db "Disabled!@"
 
 OtherText: ; 3d55f (f:555f)
-	db "STATUS/@"
+	db "Status@"
 
 PhysicalText: ; Added for PS Split
-	db "PHYSICAL/@"
+	db "Physical@"
 
 SpecialText: ; added for PS Split
-	db "SPECIAL/@"
+	db "Special@"
 
 SelectEnemyMove: ; 3d564 (f:5564)
 	ld a, [wLinkState]
@@ -7015,13 +7015,13 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 	ld hl, wEnemyMonNick  ; set name to "GHOST"
 	ld a, "G"
 	ld [hli], a
-	ld a, "H"
+	ld a, "h"
 	ld [hli], a
-	ld a, "O"
+	ld a, "o"
 	ld [hli], a
-	ld a, "S"
+	ld a, "s"
 	ld [hli], a
-	ld a, "T"
+	ld a, "t"
 	ld [hli], a
 	ld [hl], "@"
 	ld a, [wcf91]
@@ -8106,12 +8106,12 @@ Func_3f688: ; 3f688 (f:7688)
 	jp CopyData
 
 StatsTextStrings: ; 3f69f (f:769f)
-	db "ATTACK@"
-	db "DEFENSE@"
-	db "SPEED@"
-	db "SPECIAL@"
-	db "ACCURACY@"
-	db "EVADE@"
+	db "Attack@"
+	db "Defense@"
+	db "Speed@"
+	db "Special@"
+	db "Accuracy@"
+	db "Evasion@"
 
 StatModifierRatios: ; 3f6cb (f:76cb)
 ; first byte is numerator, second byte is denominator

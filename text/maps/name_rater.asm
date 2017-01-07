@@ -1,15 +1,15 @@
 _NameRaterText_1dab3:: ; 9a308 (26:6308)
 	text "Hello, hello!"
 	line "I am the official"
-	cont "NAME RATER!"
+	cont "Name Rater!"
 
 	para "Want me to rate"
 	line "the nicknames of"
-	cont "your #MON?"
+	cont "your #mon?"
 	done
 
 _NameRaterText_1dab8:: ; 9a361 (26:6361)
-	text "Which #MON"
+	text "Which #mon"
 	line "should I look at?"
 	prompt
 
@@ -32,7 +32,7 @@ _NameRaterText_1dac2:: ; 9a3e5 (26:63e5)
 	prompt
 
 _NameRaterText_1dac7:: ; 9a404 (26:6404)
-	text "OK! This #MON"
+	text "OK! This #mon"
 	line "has been renamed"
 	cont "@"
 	TX_RAM wHPBarMaxHP

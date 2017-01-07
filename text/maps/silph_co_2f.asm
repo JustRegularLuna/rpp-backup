@@ -3,7 +3,7 @@ _SilphCo2Text_59ded:: ; 82454 (20:6454)
 	line "No! Stop! Help!"
 
 	para "Oh, you're not"
-	line "with TEAM ROCKET."
+	line "with Team Rocket."
 	cont "I thought..."
 	cont "I'm sorry. Here,"
 	cont "please take this!"
@@ -17,7 +17,7 @@ _ReceivedTM36Text:: ; 824ba (20:64ba)
 
 _TM36ExplanationText:: ; 824c9 (20:64c9)
 	text "TM01 is"
-	line "DYNAMICPUNCH!"
+	line "DynamicPunch!"
 
 	para "It's powerful, so"
 	line "use it wisely."
@@ -29,19 +29,19 @@ _TM36NoRoomText:: ; 8251c (20:651c)
 	done
 
 _SilphCo2BattleText1:: ; 8253e (20:653e)
-	text "Help! I'm a SILPH"
+	text "Help! I'm a Silph"
 	line "employee."
 	done
 
 _SilphCo2EndBattleText1:: ; 8255a (20:655a)
 	text "How did you know"
-	line "I was a ROCKET?"
+	line "I was a Rocket?"
 	prompt
 
 _SilphCo2AfterBattleText1:: ; 8257c (20:657c)
 	text "I work for both"
-	line "SILPH and TEAM"
-	cont "ROCKET!"
+	line "Silph and Team"
+	cont "Rocket!"
 	done
 
 _SilphCo2BattleText2:: ; 825a4 (20:65a4)
@@ -86,8 +86,8 @@ _SilphCo2EndBattleText4:: ; 82682 (20:6682)
 	prompt
 
 _SilphCo2AfterBattleText4:: ; 8268d (20:668d)
-	text "SILPH CO. will"
+	text "Silph Co. will"
 	line "be merged with"
-	cont "TEAM ROCKET!"
+	cont "Team Rocket!"
 	done
 

@@ -8,7 +8,7 @@ _Route11EndBattleText1:: ; 8e902 (23:6902)
 	prompt
 
 _Route11AfterBattleText1:: ; 8e91b (23:691b)
-	text "#MON is life!"
+	text "#mon is life!"
 	line "And to live is to"
 	cont "gamble!"
 	done
@@ -25,7 +25,7 @@ _Route11EndBattleText2:: ; 8e965 (23:6965)
 _Route11AfterBattleText2:: ; 8e976 (23:6976)
 	text "You can't be a"
 	line "coward in the"
-	cont "world of #MON!"
+	cont "world of #mon!"
 	done
 
 _Route11BattleText3:: ; 8e9a2 (23:69a2)
@@ -66,7 +66,7 @@ _Route11BattleText5:: ; 8ea51 (23:6a51)
 	done
 
 _Route11EndBattleText5:: ; 8ea83 (23:6a83)
-	text "My #MON"
+	text "My #mon"
 	line "couldn't do it!"
 	prompt
 
@@ -112,12 +112,12 @@ _Route11BattleText8:: ; 8eb57 (23:6b57)
 _Route11EndBattleText8:: ; 8eb71 (23:6b71)
 	text "Darn!"
 	line "I need to make my"
-	cont "#MON stronger!"
+	cont "#mon stronger!"
 	prompt
 
 _Route11AfterBattleText8:: ; 8eb99 (23:6b99)
 	text "There's a fat"
-	line "#MON that"
+	line "#mon that"
 	cont "comes down from"
 	cont "the mountains."
 

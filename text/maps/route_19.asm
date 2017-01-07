@@ -1,7 +1,7 @@
 _Route19BattleText1:: ; 918eb (24:58eb)
 	text "The guy in that"
 	line "house taught his"
-	cont "PIKACHU to SURF!"
+	cont "Pikachu to Surf!"
 	done
 
 _Route19EndBattleText1:: ; 9190c (24:590c)
@@ -19,7 +19,7 @@ _Route19BattleText2:: ; 9193f (24:593f)
 	line "to hit the waves?"
 	
 	para "I was headed to"
-	line "the BEACH HOUSE."
+	line "the Beach House."
 	done
 
 _Route19EndBattleText2:: ; 91961 (24:5961)
@@ -28,7 +28,7 @@ _Route19EndBattleText2:: ; 91961 (24:5961)
 
 _Route19AfterBattleText2:: ; 91975 (24:5975)
 	text "Watch out for"
-	line "TENTACOOL!"
+	line "Tentacool!"
 	done
 
 _Route19BattleText3:: ; 9198f (24:598f)
@@ -41,7 +41,7 @@ _Route19EndBattleText3:: ; 919b1 (24:59b1)
 	prompt
 
 _Route19AfterBattleText3:: ; 919be (24:59be)
-	text "I can beat #MON"
+	text "I can beat #mon"
 	line "at swimming!"
 	done
 
@@ -61,7 +61,7 @@ _Route19AfterBattleText4:: ; 919fe (24:59fe)
 
 _Route19BattleText5:: ; 91a1a (24:5a1a)
 	text "I tried diving"
-	line "for #MON, but"
+	line "for #mon, but"
 	cont "it was a no go!"
 	done
 
@@ -71,7 +71,7 @@ _Route19EndBattleText5:: ; 91a48 (24:5a48)
 
 _Route19AfterBattleText5:: ; 91a4f (24:5a4f)
 	text "You have to fish"
-	line "for sea #MON!"
+	line "for sea #mon!"
 	done
 
 _Route19BattleText6:: ; 91a6f (24:5a6f)
@@ -103,7 +103,7 @@ _Route19EndBattleText7:: ; 91af4 (24:5af4)
 _Route19AfterBattleText7:: ; 91b01 (24:5b01)
 	text "It's still a long"
 	line "way to go to"
-	cont "SEAFOAM ISLANDS."
+	cont "Seafoam Islands."
 	done
 
 _Route19BattleText8:: ; 91b31 (24:5b31)
@@ -118,7 +118,7 @@ _Route19EndBattleText8:: ; 91b53 (24:5b53)
 _Route19AfterBattleText8:: ; 91b5d (24:5b5d)
 	text "My boy friend"
 	line "wanted to swim to"
-	cont "SEAFOAM ISLANDS."
+	cont "Seafoam Islands."
 	done
 
 _Route19BattleText9:: ; 91b8f (24:5b8f)
@@ -146,14 +146,14 @@ _Route19EndBattleText10:: ; 91bf9 (24:5bf9)
 	prompt
 
 _Route19AfterBattleText10:: ; 91c0a (24:5c0a)
-	text "LAPRAS is so big,"
+	text "Lapras is so big,"
 	line "it must keep you"
 	cont "dry on water."
 	done
 
 _Route19Text11:: ; 91c3c (24:5c3c)
-	text "SEA ROUTE 19"
-	line "FUCHSIA CITY -"
-	cont "SEAFOAM ISLANDS"
+	text "Sea Route 19"
+	line "Fuchsia City -"
+	cont "Seafoam Islands"
 	done
 

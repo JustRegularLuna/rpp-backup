@@ -1,10 +1,10 @@
 _Route18GateText_49928:: ; 8cef1 (23:4ef1)
-	text "You need a BICYCLE"
-	line "for CYCLING ROAD!"
+	text "You need a Bicycle"
+	line "for Cycling Road!"
 	done
 
 _Route18GateText_4992d:: ; 8cf17 (23:4f17)
-	text "CYCLING ROAD is"
+	text "Cycling Road is"
 	line "all uphill from"
 	cont "here."
 	done

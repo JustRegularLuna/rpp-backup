@@ -114,7 +114,7 @@ Lab4Text2: ; 75dda (1d:5dda)
 	jp TextScriptEnd
 	
 Trader9Name:
-	db "ROSS@"
+	db "Ross@"
 
 LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)
 	ld b, BANK(LoadFossilItemAndMonName)
