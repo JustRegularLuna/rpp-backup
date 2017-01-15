@@ -83,4 +83,26 @@ _ShouldMonsObeyText::
 	line "#mon behave"
 	cont "like caught"
 	cont "#mon?"
+
+	para "If you choose Yes:"
+	line "- You can rename"
+	cont "traded #MON at"
+	cont "the Name Rater."
+	
+	para "- Traded #MON"
+	line "will always obey."
+	
+	para "- Traded #MON"
+	line "will not gain"
+	cont "boosted EXP."
+	
+	para "In other words,"
+	line "they will be just"
+	cont "like #MON you"
+	cont "caught normally."
+	
+	para "So, should traded"
+	line "#MON behave"
+	cont "like caught"
+	cont "#MON?"
 	done
