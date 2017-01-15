@@ -4845,12 +4845,6 @@ INCLUDE "scripts/vermilionhouse3.asm"
 INCLUDE "data/mapObjects/vermilionhouse3.asm"
 VermilionHouse3Blocks: INCBIN "maps/vermilionhouse3.blk"
 
-INCLUDE "data/mapHeaders/indigoplateaulobby.asm"
-INCLUDE "scripts/indigoplateaulobby.asm"
-INCLUDE "data/mapObjects/indigoplateaulobby.asm"
-INCLUDE "data/martInventories/indigo_plateau.asm"
-IndigoPlateauLobbyBlocks: INCBIN "maps/indigoplateaulobby.blk"
-
 INCLUDE "data/mapHeaders/silphco4.asm"
 INCLUDE "scripts/silphco4.asm"
 INCLUDE "data/mapObjects/silphco4.asm"
@@ -7361,6 +7355,12 @@ INCLUDE "data/mapObjects/fuchsiapokecenter.asm"
 INCLUDE "data/mapHeaders/cinnabarpokecenter.asm"
 INCLUDE "scripts/cinnabarpokecenter.asm"
 INCLUDE "data/mapObjects/cinnabarpokecenter.asm"
+
+INCLUDE "data/mapHeaders/indigoplateaulobby.asm"
+INCLUDE "scripts/indigoplateaulobby.asm"
+INCLUDE "data/mapObjects/indigoplateaulobby.asm"
+INCLUDE "data/martInventories/indigo_plateau.asm"
+IndigoPlateauLobbyBlocks: INCBIN "maps/indigoplateaulobby.blk"
 
 
 SECTION "bank36",ROMX,BANK[$36]
