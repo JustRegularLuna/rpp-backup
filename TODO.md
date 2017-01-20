@@ -4,13 +4,12 @@ This list is not necessarily a guarantee, but it contains a list of features and
 Things may be added to this list as I think of them, and removed if they are added or I change my mind.
 
 ## Engine updates and New Features
-* Full color, by merging in pokered-gbc
+* Full color, by merging in pokered-gbc or porting from pokecrystal (whichever is cleaner)
 * Crystal's audio engine, by merging in the crysaudio branch
 * Real-Time Clock, with Day and Night
 * More modern Berry System, allowing you to plant and grow new ones instead of the Gen 2-like current system
 * Expand Pokédex beyond 255
 * Allow for more than one proper region, so Johto can happen
-* Proper capitalization for names
 * Individual menu sprites for all Pokémon
 * Pokégear/Pokénav equivalent
 * Rematches with Trainers and Gym Leaders, no annoying phone calls
@@ -37,7 +36,7 @@ Things may be added to this list as I think of them, and removed if they are add
 * More songs added
 * More detailed tilesets. 256 tiles, XY Flip support (Using VRAM0 and VRAM1 for two halves of the set)
 * Possibly add Forms
-* Use IVs and EVs instead of DVs, old DVs become a mini Personality ID
+* Use IVs and EVs instead of DVs and Stat EXP, old DVs become a mini Personality ID
 * Gain EXP on catching a Pokémon
 
 
