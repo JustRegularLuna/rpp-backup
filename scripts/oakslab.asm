@@ -1,5 +1,5 @@
 OaksLabScript: ; 1cb0e (7:4b0e)
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 6, a
 	call nz, OaksLabScript_1d076
 	ld a, $1
@@ -32,7 +32,7 @@ OaksLabScriptPointers: ; 1cb28 (7:4b28)
 	dw OaksLabScript18
 
 OaksLabScript0: ; 1cb4e (7:4b4e)
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 7, a
 	ret z
 	ld a, [wNPCMovementScriptFunctionNum]
@@ -106,9 +106,9 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
-	ld hl, wd747
+	ld hl, wFlags1
 	set 0, [hl]
-	ld hl, wd74b
+	ld hl, wOaksLabFlags
 	set 0, [hl]
 	ld a, $1
 	ld [H_SPRITEINDEX], a
@@ -142,7 +142,7 @@ OaksLabScript5: ; 1cbfd (7:4bfd)
 	ld a, $14
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, wd74b
+	ld hl, wOaksLabFlags
 	set 1, [hl]
 	xor a
 	ld [wJoyIgnore], a
@@ -306,7 +306,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $e
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, wd74b
+	ld hl, wOaksLabFlags
 	set 2, [hl]
 	xor a
 	ld [wJoyIgnore], a
@@ -409,7 +409,7 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	predef HealParty
-	ld hl, wd74b
+	ld hl, wOaksLabFlags
 	set 3, [hl]
 
 	ld a, $d
@@ -570,9 +570,9 @@ OaksLabScript16: ; 1cf12 (7:4f12)
 	ld a, $1b
 	ld [$ff8c], a
 	call DisplayTextID
-	ld hl, wd74b
+	ld hl, wOaksLabFlags
 	set 5, [hl]
-	ld hl, wd74e
+	ld hl, wOaksParcelFlags
 	set 0, [hl]
 	ld a, HS_LYING_OLD_MAN
 	ld [wcc4d], a
@@ -739,7 +739,7 @@ OaksLabTextPointers: ; 1d082 (7:5082)
 OaksLabText28: ; 1d0ce (7:50ce)
 OaksLabText1: ; 1d0ce (7:50ce)
 	db $08 ; asm
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 0, a
 	jr nz, .asm_1d0de ; 0x1d0d4
 	ld hl, OaksLabGaryText1
@@ -806,7 +806,7 @@ OaksLabScript_1d133: ; 1d133 (7:5133)
 	ld [wd11e], a
 	ld a, b
 	ld [wSpriteIndex], a
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 2, a
 	jp nz, OaksLabScript_1d22d
 	bit 1, a
@@ -944,7 +944,7 @@ OaksLabLastMonText: ; 1d243 (7:5243)
 OaksLabText32: ; 1d248 (7:5248)
 OaksLabText5: ; 1d248 (7:5248)
 	db $08 ; asm
-	ld a, [wd747]
+	ld a, [wFlags1]
 	bit 6, a
 	jr nz, .asm_50e81 ; 0x1d24e
 	ld hl, wPokedexOwned
@@ -953,7 +953,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld a, [wd11e]
 	cp $2
 	jr c, .asm_b28b0 ; 0x1d25d
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 5, a
 	jr z, .asm_b28b0 ; 0x1d264
 .asm_50e81 ; 0x1d266
@@ -970,7 +970,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	ld a, [wd7eb]
 	bit 5, a
 	jr nz, .asm_f1adc ; 0x1d285
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 5, a
 	jr nz, .asm_333a2 ; 0x1d28c
 	bit 3, a
@@ -1004,7 +1004,7 @@ OaksLabText5: ; 1d248 (7:5248)
 	call PrintText
 	jr .asm_0f042 ; 0x1d2ce
 .asm_f1adc ; 0x1d2d0
-	ld hl, wd74b
+	ld hl, wOaksLabFlags
 	bit 4, [hl]
 	set 4, [hl]
 	jr nz, .asm_17c30 ; 0x1d2d7

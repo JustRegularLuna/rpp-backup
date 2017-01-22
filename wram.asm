@@ -2157,59 +2157,55 @@ wCardKeyDoorX:: ; d740
 
 wd743:: ds 1
 wd744:: ds 3
-wd747:: ds 3
-wd74a:: ds 1
 
-wd74b:: ; d74b
-; bit 0: Prof. Oak has lead the player to the north end of his lab
-; bit 1: Prof. Oak has asked the player to choose a pokemon
-; bit 2: the player and the rival have received their pokemon
-; bit 3: the player has battled the rival in Oak's lab
-; bit 4: Prof. Oak has given the player 5 pokeballs
-; bit 5: received pokedex
-	ds 1
-
-wd74c:: ds 2
-wd74e:: ds 3
-wd751:: ds 1
-wd752:: ds 2
-wd754:: ds 1
-wd755:: ds 5
-wd75a:: ds 1
-wd75b:: ds 3
-wd75e:: ds 1
-wd75f:: ds 5
-wd764:: ds 1
-wd765:: ds 1
-wd766:: ds 1
-wd767:: ds 1
-wd768:: ds 1
-wd769:: ds 3
-wd76c:: ds 5
-wd771:: ds 2
-wd773:: ds 4
-wd777:: ds 1
-wd778:: ds 4
-wd77c:: ds 1
-wd77d:: ds 1
-wd77e:: ds 5
-wd783:: ds 11
-wd78e:: ds 2
-wd790:: ds 2
-wd792:: ds 4
-wd796:: ds 2
-wd798:: ds 2
-wd79a:: ds 1
-wd79b:: ds 1
-wd79c:: ds 5
-wd7a1:: ds 2
-wd7a3:: ds 12
-wd7af:: ds 2
-wd7b1:: ds 2
-wd7b3:: ds 1
-wd7b4:: ds 5
-wd7b9:: ds 4
-wd7bd:: ds 2
+; TODO: Label what these bits do in comments, to keep up with which ones are used
+; Each label is only really 1 byte, the extras are unused space in between
+; Some of these can actually be combined to save more space later, since they only use 1 or 2 bits
+; I don't really care to bother with the SET_EVENT and CHECK_EVENT macros and whatnot
+wFlags1:: ds 3
+wBluesHouseFlags:: ds 1
+wOaksLabFlags:: ds 1
+wViridianCityFlags:: ds 2
+wOaksParcelFlags:: ds 3
+wViridianGymFlags:: ds 1
+wViridianGymFlags2:: ds 2
+wPewterMuseumFlags:: ds 1
+wPewterGymFlags:: ds 5
+wCeruleanCityFlags:: ds 1
+wCeruleanCityFlags2:: ds 3
+wCeruleanGymFlags:: ds 1
+wBikeShopFlags:: ds 5
+wPokemonTower2Flags:: ds 1
+wPokemonTower3Flags:: ds 1
+wPokemonTower4Flags:: ds 1
+wPokemonTower5Flags:: ds 1
+wPokemonTower6Flags:: ds 1
+wPokemonTower7Flags:: ds 3
+wLavenderHouse1Flags:: ds 5
+wFanClubFlags:: ds 2
+wVermilionGymFlags:: ds 4
+wCeladonCityFlags:: ds 1
+wCeladonMartFlags:: ds 4
+wCeladonGymFlags:: ds 1
+wCeladonGymFlags2:: ds 1
+wCeladonGameCornerFlags:: ds 5
+wCeladonDinerFlags:: ds 11
+wFuchsiaHouse2Flags:: ds 2
+wSafariZoneFlags:: ds 2
+wFuchsiaGymFlags:: ds 4
+wCinnabarMansionFlags:: ds 2
+wCinnabarMansionTrainerFlags:: ds 2
+wCinnabarGymFlags:: ds 1
+wCinnabarGymFlags2:: ds 1
+wCinnabarGymGateFlags:: ds 5
+wCinnabarLabItemFlags:: ds 2
+wCinnabarLabFossilFlags:: ds 12
+wCopyCatFlags:: ds 2
+wFightingDojoFlags:: ds 2
+wSaffronGymFlags:: ds 1
+wSaffronGymFlags2:: ds 5
+wSilphCo1Flags:: ds 4
+wSaffronHouse2Flags:: ds 2
 wd7bf:: ds 3
 wd7c2:: ds 1
 wd7c3:: ds 2

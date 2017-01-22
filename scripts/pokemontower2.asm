@@ -17,7 +17,7 @@ PokemonTower2ScriptPointers: ; 60509 (18:4509)
 	dw PokemonTower2Script2
 
 PokemonTower2Script0: ; 6050f (18:450f)
-	ld a, [wd764]
+	ld a, [wPokemonTower2Flags]
 	bit 7, a
 	ret nz
 	ld hl, CoordsData_6055e ; $455e
@@ -29,14 +29,14 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
-	ld hl, wd764
+	ld hl, wPokemonTower2Flags
 	res 6, [hl]
 	ld a, [wWhichTrade]
 	cp $1
 	ld a, $8
 	ld b, $0
 	jr nz, .asm_60544 ; 0x60539 $9
-	ld hl, wd764
+	ld hl, wPokemonTower2Flags
 	set 6, [hl]
 	ld a, $2
 	ld b, $c
@@ -68,13 +68,13 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld [wIsTrainerBattle], a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, wd764
+	ld hl, wPokemonTower2Flags
 	set 7, [hl]
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID
 	ld de, MovementData_605b2
-	ld a, [wd764]
+	ld a, [wPokemonTower2Flags]
 	bit 6, a
 	jr nz, .asm_60589 ; 0x60584 $3
 	ld de, MovementData_605a9
@@ -118,7 +118,7 @@ PokemonTower2TextPointers: ; 605db (18:45db)
 
 PokemonTower2Text1: ; 605df (18:45df)
 	db $08 ; asm
-	ld a, [wd764]
+	ld a, [wPokemonTower2Flags]
 	bit 7, a
 	jr z, .asm_16f24 ; 0x605e5
 	ld hl, PokemonTower2Text_6063c

@@ -1444,7 +1444,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	set 6,[hl]
 	ld hl,wd72e
 	res 4,[hl]
-	ld hl,wd790
+	ld hl,wSafariZoneFlags
 	res 7,[hl] ; unset Safari Zone bit
 	xor a
 	ld [W_NUMSAFARIBALLS],a

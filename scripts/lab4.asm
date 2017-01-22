@@ -49,7 +49,7 @@ FossilsList: ; 75d68 (1d:5d68)
 
 Lab4Text1: ; 75d6c (1d:5d6c)
 	db $8
-	ld a, [wd7a3]
+	ld a, [wCinnabarLabFossilFlags]
 	bit 0, a
 	jr nz, .asm_75d96 ; 0x75d72 $22
 	ld hl, Lab4Text_75dc6
@@ -75,14 +75,14 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	call LoadFossilItemAndMonNameBank1D
 	ld hl, Lab4Text_75dd5
 	call PrintText
-	ld hl, wd7a3
+	ld hl, wCinnabarLabFossilFlags
 	set 2, [hl]
 	ld a, [W_FOSSILMON]
 	ld b, a
 	ld c, 30
 	call GivePokemon
 	jr nc, .asm_75d93 ; 0x75db9 $d8
-	ld hl, wd7a3
+	ld hl, wCinnabarLabFossilFlags
 	res 0, [hl]
 	res 1, [hl]
 	res 2, [hl]

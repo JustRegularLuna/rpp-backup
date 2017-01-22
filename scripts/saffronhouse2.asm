@@ -6,7 +6,7 @@ SaffronHouse2TextPointers: ; 1de3f (7:5e3f)
 
 SaffronHouse2Text1: ; 1de41 (7:5e41)
 	db $08 ; asm
-	ld a, [wd7bd]
+	ld a, [wSaffronHouse2Flags]
 	bit 0, a
 	jr nz, .asm_9e72b ; 0x1de47
 	ld hl, TM29PreReceiveText
@@ -16,7 +16,7 @@ SaffronHouse2Text1: ; 1de41 (7:5e41)
 	jr nc, .BagFull
 	ld hl, ReceivedTM29Text
 	call PrintText
-	ld hl, wd7bd
+	ld hl, wSaffronHouse2Flags
 	set 0, [hl]
 	jr .asm_fe4e1 ; 0x1de62
 .BagFull

@@ -64,7 +64,7 @@
 	ld a,$40
 	ld c,3
 	call SafariZoneEntranceAutoWalk
-	ld hl,wd790
+	ld hl,wSafariZoneFlags
 	set 7,[hl]
 	res 6,[hl]
 	ld a,3

@@ -54,14 +54,14 @@ Museum1FText1: ; 5c135 (17:4135)
 	cp $c
 	jp z, Museum1FScript_5c1f9
 .asm_d49e7
-	ld a, [wd754]
+	ld a, [wPewterMuseumFlags]
 	bit 0, a
 	jr nz, .asm_31a16
 	ld hl, Museum1FText_5c23d
 	call PrintText
 	jp asm_d1145
 .asm_b8709
-	ld a, [wd754]
+	ld a, [wPewterMuseumFlags]
 	bit 0, a
 	jr z, .asm_3ded4
 .asm_31a16
@@ -93,7 +93,7 @@ Museum1FText1: ; 5c135 (17:4135)
 .asm_0f3e3
 	ld hl, Museum1FText_5c224
 	call PrintText
-	ld hl, wd754
+	ld hl, wPewterMuseumFlags
 	set 0, [hl]
 	xor a
 	ld [wWhichTrade], a
@@ -190,7 +190,7 @@ Museum1FText_5c251: ; 5c251 (17:4251)
 
 Museum1FText3: ; 5c256 (17:4256)
 	db $08 ; asm
-	ld a, [wd754]
+	ld a, [wPewterMuseumFlags]
 	bit 1, a
 	jr nz, .asm_16599 ; 0x5c25c
 	ld hl, Museum1FText_5c28e
@@ -198,7 +198,7 @@ Museum1FText3: ; 5c256 (17:4256)
 	lb bc, OLD_AMBER, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, wd754
+	ld hl, wPewterMuseumFlags
 	set 1, [hl]
 	ld a, HS_OLD_AMBER
 	ld [wcc4d], a

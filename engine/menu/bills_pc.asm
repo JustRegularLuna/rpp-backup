@@ -5,7 +5,7 @@ Func_213c8:: ; 213c8 (8:53c8)
 	ld a, [wd5a2]
 	and a
 	jr nz, .asm_213f3
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 5, a
 	jr z, .asm_213ea
 	ld a, [wd5a2]
@@ -47,7 +47,7 @@ Func_213c8:: ; 213c8 (8:53c8)
 	ld h, b
 	ld de, PlayersPCText
 	call PlaceString
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 5, a
 	jr z, .asm_21462
 	hlCoord 2, 6

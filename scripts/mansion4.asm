@@ -13,7 +13,7 @@ Mansion4Script_523cf: ; 523cf (14:63cf)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd796]
+	ld a, [wCinnabarMansionFlags]
 	bit 0, a
 	jr nz, .asm_523ff
 	ld a, $e

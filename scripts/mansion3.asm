@@ -13,7 +13,7 @@ Mansion3Script_52204: ; 52204 (14:6204)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd796]
+	ld a, [wCinnabarMansionFlags]
 	bit 0, a
 	jr nz, .asm_52224
 	ld a, $e

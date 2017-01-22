@@ -38,7 +38,7 @@ StrengthsAndWeaknessesText: ; 1e983 (7:6983)
 	db "@"
 
 SafariZoneCheck: ; 1e988 (7:6988)
-	ld hl, wd790
+	ld hl, wSafariZoneFlags
 	bit 7, [hl]
 	jr z, asm_1e9ab
 	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
@@ -86,7 +86,7 @@ asm_1e9b0: ; 1e9b0 (7:69b0)
 	ld [wDestinationWarpID], a
 	ld a, $5
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
-	ld hl, wd790
+	ld hl, wSafariZoneFlags
 	set 6, [hl]
 	ld a, $1
 	ld [wSafariZoneGameOver], a
@@ -193,7 +193,7 @@ CinnabarQuizQuestionsText6: ; 1ea85 (7:6a85)
 	db "@"
 
 CinnabarGymQuiz_1ea8a: ; 1ea8a (7:6a8a)
-	ld hl, wd79c
+	ld hl, wCinnabarGymGateFlags
 	predef_jump FlagActionPredef
 
 CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
@@ -225,7 +225,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	add $2
 	ld c, a
 	ld b, $2
-	ld hl, wd79a
+	ld hl, wCinnabarGymFlags
 	predef FlagActionPredef
 	ld a, c
 	and a

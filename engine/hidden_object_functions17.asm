@@ -320,7 +320,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld [wcd5b], a
 
 ; Don't do the trash can puzzle if it's already been done.
-	ld a, [wd773]
+	ld a, [wVermilionGymFlags]
 	bit 0, a
 	jr z, .ok
 
@@ -342,7 +342,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 
 .openFirstLock
 ; Next can is trying for the second switch.
-	ld hl, wd773
+	ld hl, wVermilionGymFlags
 	set 1, [hl]
 
 	ld hl, GymTrashCans ; $5e7d
@@ -386,7 +386,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	jr z, .openSecondLock
 
 ; Reset the cans.
-	ld hl, wd773
+	ld hl, wVermilionGymFlags
 	res 1, [hl]
 	call Random
 
@@ -398,7 +398,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 
 .openSecondLock
 ; Completed the trash can puzzle.
-	ld hl, wd773
+	ld hl, wVermilionGymFlags
 	set 0, [hl]
 	ld hl, wd126
 	set 6, [hl]

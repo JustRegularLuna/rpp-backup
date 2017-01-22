@@ -170,7 +170,7 @@ PokemonTower7TrainerHeaders: ; 60e47 (18:4e47)
 PokemonTower7TrainerHeader0: ; 60e47 (18:4e47)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wd769 ; flag's byte
+	dw wPokemonTower7Flags ; flag's byte
 	dw PokemonTower7BattleText1 ; 0x4ec9 TextBeforeBattle
 	dw PokemonTower7AfterBattleText1 ; 0x4ed3 TextAfterBattle
 	dw PokemonTower7EndBattleText1 ; 0x4ece TextEndBattle
@@ -179,7 +179,7 @@ PokemonTower7TrainerHeader0: ; 60e47 (18:4e47)
 PokemonTower7TrainerHeader1: ; 60e53 (18:4e53)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wd769 ; flag's byte
+	dw wPokemonTower7Flags ; flag's byte
 	dw PokemonTower7BattleText2 ; 0x4ed8 TextBeforeBattle
 	dw PokemonTower7AfterBattleText2 ; 0x4ee2 TextAfterBattle
 	dw PokemonTower7EndBattleText2 ; 0x4edd TextEndBattle
@@ -188,7 +188,7 @@ PokemonTower7TrainerHeader1: ; 60e53 (18:4e53)
 PokemonTower7TrainerHeader2: ; 60e5f (18:4e5f)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wd769 ; flag's byte
+	dw wPokemonTower7Flags ; flag's byte
 	dw PokemonTower7BattleText3 ; 0x4ee7 TextBeforeBattle
 	dw PokemonTower7AfterBattleText3 ; 0x4ef1 TextAfterBattle
 	dw PokemonTower7EndBattleText3 ; 0x4eec TextEndBattle
@@ -220,7 +220,7 @@ PokemonTower7FujiText:
 	call PrintText
 	ld hl, wd7e0
 	set 7, [hl]
-	ld hl, wd769
+	ld hl, wPokemonTower7Flags
 	set 7, [hl]
 	ld a, HS_LAVENDER_HOUSE_1_MR_FUJI
 	ld [wcc4d], a

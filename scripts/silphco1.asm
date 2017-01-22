@@ -3,7 +3,7 @@ SilphCo1Script: ; 5d44e (17:544e)
 	ld a, [wd838]
 	bit 7, a
 	ret z
-	ld hl, wd7b9
+	ld hl, wSilphCo1Flags
 	bit 7, [hl]
 	set 7, [hl]
 	ret nz

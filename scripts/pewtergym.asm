@@ -46,7 +46,7 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld a, $4
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, wd755
+	ld hl, wPewterGymFlags
 	set 7, [hl]
 	lb bc, TM_36, 1
 	call GiveItem
@@ -54,7 +54,7 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld a, $5
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, wd755
+	ld hl, wPewterGymFlags
 	set 6, [hl]
 	jr .asm_5c408
 .BagFull
@@ -79,7 +79,7 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	res 7, [hl]
 
 	; deactivate gym trainers
-	ld hl, wd755
+	ld hl, wPewterGymFlags
 	set 2, [hl]
 
 	jp PewterGymScript_5c3bf
@@ -96,7 +96,7 @@ PewterGymTrainerHeaders: ; 5c441 (17:4441)
 PewterGymTrainerHeader0: ; 5c441 (17:4441)
 	db $2 ; flag's bit
 	db ($5 << 4) ; trainer's view range
-	dw wd755 ; flag's byte
+	dw wPewterGymFlags ; flag's byte
 	dw PewterGymBattleText1 ; 0x44d0 TextBeforeBattle
 	dw PewterGymAfterBattleText1 ; 0x44da TextAfterBattle
 	dw PewterGymEndBattleText1 ; 0x44d5 TextEndBattle
@@ -106,7 +106,7 @@ PewterGymTrainerHeader0: ; 5c441 (17:4441)
 
 PewterGymText1: ; 5c44e (17:444e)
 	db $08 ; asm
-	ld a, [wd755]
+	ld a, [wPewterGymFlags]
 	bit 7, a
 	jr z, .asm_4a735 ; 0x5c454
 	bit 6, a

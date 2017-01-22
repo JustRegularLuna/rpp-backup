@@ -46,7 +46,7 @@ CeladonGymText_48963: ; 48963 (12:4963)
 	ld a, $9
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, wd77c
+	ld hl, wCeladonGymFlags
 	set 1, [hl]
 	lb bc, TM_21, 1
 	call GiveItem
@@ -54,7 +54,7 @@ CeladonGymText_48963: ; 48963 (12:4963)
 	ld a, $a
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, wd77c
+	ld hl, wCeladonGymFlags
 	set 0, [hl]
 	jr .asm_4898c
 .BagFull
@@ -68,10 +68,10 @@ CeladonGymText_48963: ; 48963 (12:4963)
 	set 3, [hl]
 
 	; deactivate gym trainers
-	ld a, [wd77c]
+	ld a, [wCeladonGymFlags]
 	or %11111100
-	ld [wd77c], a
-	ld hl, wd77d
+	ld [wCeladonGymFlags], a
+	ld hl, wCeladonGymFlags2
 	set 0, [hl]
 
 	jp CeladonGymText_48943
@@ -93,7 +93,7 @@ CeladonGymTrainerHeaders: ; 489bc (12:49bc)
 CeladonGymTrainerHeader0: ; 489bc (12:49bc)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wd77c ; flag's byte
+	dw wCeladonGymFlags ; flag's byte
 	dw CeladonGymBattleText2 ; 0x4a8b TextBeforeBattle
 	dw CeladonGymAfterBattleText2 ; 0x4a95 TextAfterBattle
 	dw CeladonGymEndBattleText2 ; 0x4a90 TextEndBattle
@@ -102,7 +102,7 @@ CeladonGymTrainerHeader0: ; 489bc (12:49bc)
 CeladonGymTrainerHeader2: ; 489c8 (12:49c8)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wd77c ; flag's byte
+	dw wCeladonGymFlags ; flag's byte
 	dw CeladonGymBattleText3 ; 0x4aa4 TextBeforeBattle
 	dw CeladonGymAfterBattleText3 ; 0x4aae TextAfterBattle
 	dw CeladonGymEndBattleText3 ; 0x4aa9 TextEndBattle
@@ -111,7 +111,7 @@ CeladonGymTrainerHeader2: ; 489c8 (12:49c8)
 CeladonGymTrainerHeader3: ; 489d4 (12:49d4)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wd77c ; flag's byte
+	dw wCeladonGymFlags ; flag's byte
 	dw CeladonGymBattleText4 ; 0x4abd TextBeforeBattle
 	dw CeladonGymAfterBattleText4 ; 0x4ac7 TextAfterBattle
 	dw CeladonGymEndBattleText4 ; 0x4ac2 TextEndBattle
@@ -120,7 +120,7 @@ CeladonGymTrainerHeader3: ; 489d4 (12:49d4)
 CeladonGymTrainerHeader4: ; 489e0 (12:49e0)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wd77c ; flag's byte
+	dw wCeladonGymFlags ; flag's byte
 	dw CeladonGymBattleText5 ; 0x4ad6 TextBeforeBattle
 	dw CeladonGymAfterBattleText5 ; 0x4ae0 TextAfterBattle
 	dw CeladonGymEndBattleText5 ; 0x4adb TextEndBattle
@@ -129,7 +129,7 @@ CeladonGymTrainerHeader4: ; 489e0 (12:49e0)
 CeladonGymTrainerHeader5: ; 489ec (12:49ec)
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wd77c ; flag's byte
+	dw wCeladonGymFlags ; flag's byte
 	dw CeladonGymBattleText6 ; 0x4aef TextBeforeBattle
 	dw CeladonGymAfterBattleText6 ; 0x4af9 TextAfterBattle
 	dw CeladonGymEndBattleText6 ; 0x4af4 TextEndBattle
@@ -138,7 +138,7 @@ CeladonGymTrainerHeader5: ; 489ec (12:49ec)
 CeladonGymTrainerHeader6: ; 489f8 (12:49f8)
 	db $7 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wd77c ; flag's byte
+	dw wCeladonGymFlags ; flag's byte
 	dw CeladonGymBattleText7 ; 0x4b08 TextBeforeBattle
 	dw CeladonGymAfterBattleText7 ; 0x4b12 TextAfterBattle
 	dw CeladonGymEndBattleText7 ; 0x4b0d TextEndBattle
@@ -147,7 +147,7 @@ CeladonGymTrainerHeader6: ; 489f8 (12:49f8)
 CeladonGymTrainerHeader7: ; 48a04 (12:4a04)
 	db $8 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wd77c ; flag's byte
+	dw wCeladonGymFlags ; flag's byte
 	dw CeladonGymBattleText8 ; 0x4b21 TextBeforeBattle
 	dw CeladonGymAfterBattleText8 ; 0x4b2b TextAfterBattle
 	dw CeladonGymEndBattleText8 ; 0x4b26 TextEndBattle
@@ -157,7 +157,7 @@ CeladonGymTrainerHeader7: ; 48a04 (12:4a04)
 
 CeladonGymText1: ; 48a11 (12:4a11)
 	db $08 ; asm
-	ld a, [wd77c]
+	ld a, [wCeladonGymFlags]
 	bit 1, a
 	jr z, .asm_16064 ; 0x48a17
 	bit 0, a

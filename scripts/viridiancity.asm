@@ -15,13 +15,13 @@ ViridianCityScript0: ; 19005 (6:5005)
 	jp ViridianCityScript_1903d
 
 ViridianCityScript_1900b: ; 1900b (6:500b)
-	ld a, [wd74c]
+	ld a, [wViridianCityFlags]
 	bit 0, a
 	ret nz
 	ld a, [W_OBTAINEDBADGES]
 	cp %01111111
 	jr nz, .asm_1901e ; 0x19016 $6
-	ld hl, wd74c
+	ld hl, wViridianCityFlags
 	set 0, [hl]
 	ret
 .asm_1901e
@@ -42,7 +42,7 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	ret
 
 ViridianCityScript_1903d: ; 1903d (6:503d)
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 5, a
 	ret nz
 	ld a, [W_YCOORD]
@@ -154,7 +154,7 @@ ViridianCityText2: ; 19107 (6:5107)
 	cp %01111111
 	ld hl, ViridianCityText_19127
 	jr z, .asm_ae9fe ; 0x19110
-	ld a, [wd751]
+	ld a, [wViridianGymFlags]
 	bit 1, a
 	jr nz, .asm_ae9fe ; 0x19117
 	ld hl, ViridianCityText_19122
@@ -201,7 +201,7 @@ ViridianCityText_19157: ; 19157 (6:5157)
 
 ViridianCityText4: ; 1915c (6:515c)
 	db $08 ; asm
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 5, a
 	jr nz, .asm_83894 ; 0x19162
 	ld hl, ViridianCityText_19175
@@ -236,7 +236,7 @@ ViridianCityText_19191: ; 19191 (6:5191)
 
 ViridianCityText6: ; 19196 (6:5196)
 	db $08 ; asm
-	ld a, [wd74c]
+	ld a, [wViridianCityFlags]
 	bit 1, a
 	jr nz, .asm_4e5a0 ; 0x1919c
 	ld hl, ViridianCityText_191ca
@@ -246,7 +246,7 @@ ViridianCityText6: ; 19196 (6:5196)
 	jr nc, .BagFull
 	ld hl, ReceivedTM42Text
 	call PrintText
-	ld hl, wd74c
+	ld hl, wViridianCityFlags
 	set 1, [hl]
 	jr .asm_3c73c ; 0x191b7
 .BagFull

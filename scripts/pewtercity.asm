@@ -34,13 +34,13 @@ PewterCityTextPointers: ; 1938b (6:538b)
 PewterCityScript0: ; 19251 (6:5251)
 	xor a
 	ld [W_MUSEUM1FCURSCRIPT], a
-	ld hl, wd754
+	ld hl, wPewterMuseumFlags
 	res 0, [hl]
 	call PewterCityScript_1925e
 	ret
 
 PewterCityScript_1925e: ; 1925e (6:525e)
-	ld a, [wd755]
+	ld a, [wPewterGymFlags]
 	bit 7, a
 	ret nz
 	ld hl, CoordsData_19277

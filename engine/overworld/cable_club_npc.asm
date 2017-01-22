@@ -1,7 +1,7 @@
 CableClubNPC: ; 71c5 (1:71c5)
 	ld hl, CableClubNPCWelcomeText
 	call PrintText
-	ld a, [wd74b]
+	ld a, [wOaksLabFlags]
 	bit 5, a ; received pokedex?
 	jp nz, .receivedPokedex
 ; if the player hasn't received the pokedex

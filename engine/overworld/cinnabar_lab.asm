@@ -65,7 +65,7 @@ GiveFossilToCinnabarLab: ; 61006 (18:5006)
 	callba RemoveItemByID
 	ld hl, LabFossil_610b8
 	call PrintText
-	ld hl, wd7a3
+	ld hl, wCinnabarLabFossilFlags
 	set 0, [hl]
 	set 1, [hl]
 	ret

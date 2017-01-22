@@ -2,9 +2,9 @@ CinnabarIslandScript: ; 1ca19 (7:4a19)
 	call EnableAutoTextBoxDrawing
 	ld hl, wd126
 	set 5, [hl]
-	ld hl, wd796
+	ld hl, wCinnabarMansionFlags
 	res 0, [hl]
-	ld hl, wd7a3
+	ld hl, wCinnabarLabFossilFlags
 	res 1, [hl]
 	ld hl, CinnabarIslandScriptPointers
 	ld a, [W_CINNABARISLANDCURSCRIPT]

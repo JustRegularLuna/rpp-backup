@@ -22,7 +22,7 @@ CeladonMart3TextPointers: ; 48228 (12:4228)
 
 CeladonMart3Text1: ; 4824a (12:424a)
 	db $08 ; asm
-	ld a, [wd778]
+	ld a, [wCeladonMartFlags]
 	bit 7, a
 	jr nz, .asm_a5463 ; 0x48250
 	ld hl, TM18PreReceiveText
@@ -30,7 +30,7 @@ CeladonMart3Text1: ; 4824a (12:424a)
 	lb bc, TM_18, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, wd778
+	ld hl, wCeladonMartFlags
 	set 7, [hl]
 	ld hl, ReceivedTM18Text
 	jr .asm_81359 ; 0x48268

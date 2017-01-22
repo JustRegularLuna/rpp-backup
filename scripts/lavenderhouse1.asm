@@ -70,7 +70,7 @@ LavenderHouse1Text4: ; 1d90b (7:590b)
 
 LavenderHouse1Text5: ; 1d918 (7:5918)
 	db $08 ; asm
-	ld a, [wd76c]
+	ld a, [wLavenderHouse1Flags]
 	bit 0, a
 	jr nz, .asm_15ac2 ; 0x1d91e
 	ld hl, LavenderHouse1Text_1d94c
@@ -80,7 +80,7 @@ LavenderHouse1Text5: ; 1d918 (7:5918)
 	jr nc, .BagFull
 	ld hl, ReceivedFluteText
 	call PrintText
-	ld hl, wd76c
+	ld hl, wLavenderHouse1Flags
 	set 0, [hl]
 	jr .asm_da749 ; 0x1d939
 .BagFull

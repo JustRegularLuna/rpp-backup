@@ -28,7 +28,7 @@ Gym3LeaderName: ; 5ca64 (17:4a64)
 	db "Lt. Surge@"
 
 VermilionGymScript_5ca6d: ; 5ca6d (17:4a6d)
-	ld a, [wd773]
+	ld a, [wVermilionGymFlags]
 	bit 0, a
 	jr nz, .asm_5ca78
 	ld a, $24
@@ -66,7 +66,7 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld a, $6
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, wd773
+	ld hl, wVermilionGymFlags
 	set 7, [hl]
 	ld bc, (TM_24 << 8) | 1
 	call GiveItem
@@ -74,7 +74,7 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld a, $7
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
-	ld hl, wd773
+	ld hl, wVermilionGymFlags
 	set 6, [hl]
 	jr .asm_5cad3
 .BagFull
@@ -88,9 +88,9 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	set 2, [hl]
 
 	; deactivate gym trainers
-	ld a, [wd773]
+	ld a, [wVermilionGymFlags]
 	or %00011100
-	ld [wd773], a
+	ld [wVermilionGymFlags], a
 
 	jp VermilionGymScript_5ca8a
 
@@ -108,7 +108,7 @@ VermilionGymTrainerHeaders: ; 5caf8 (17:4af8)
 VermilionGymTrainerHeader0: ; 5caf8 (17:4af8)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wd773 ; flag's byte
+	dw wVermilionGymFlags ; flag's byte
 	dw VermilionGymBattleText1 ; 0x4b9a TextBeforeBattle
 	dw VermilionGymAfterBattleText1 ; 0x4ba4 TextAfterBattle
 	dw VermilionGymEndBattleText1 ; 0x4b9f TextEndBattle
@@ -117,7 +117,7 @@ VermilionGymTrainerHeader0: ; 5caf8 (17:4af8)
 VermilionGymTrainerHeader1: ; 5cb04 (17:4b04)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wd773 ; flag's byte
+	dw wVermilionGymFlags ; flag's byte
 	dw VermilionGymBattleText2 ; 0x4bb3 TextBeforeBattle
 	dw VermilionGymAfterBattleText2 ; 0x4bbd TextAfterBattle
 	dw VermilionGymEndBattleText2 ; 0x4bb8 TextEndBattle
@@ -126,7 +126,7 @@ VermilionGymTrainerHeader1: ; 5cb04 (17:4b04)
 VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wd773 ; flag's byte
+	dw wVermilionGymFlags ; flag's byte
 	dw VermilionGymBattleText3 ; 0x4bcc TextBeforeBattle
 	dw VermilionGymAfterBattleText3 ; 0x4bd6 TextAfterBattle
 	dw VermilionGymEndBattleText3 ; 0x4bd1 TextEndBattle
@@ -136,7 +136,7 @@ VermilionGymTrainerHeader2: ; 5cb10 (17:4b10)
 
 VermilionGymText1: ; 5cb1d (17:4b1d)
 	db $08 ; asm
-	ld a, [wd773]
+	ld a, [wVermilionGymFlags]
 	bit 7, a
 	jr z, .asm_7cc29 ; 0x5cb23
 	bit 6, a

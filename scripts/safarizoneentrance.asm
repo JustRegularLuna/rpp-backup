@@ -74,7 +74,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 .SafariZoneEntranceScript5
 	ld a, $4
 	ld [wd528], a
-	ld hl, wd790
+	ld hl, wSafariZoneFlags
 	bit 6, [hl]
 	res 6, [hl]
 	jr z, .asm_7527f ; 0x7525a $23
@@ -191,7 +191,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld a,$40
 	ld c,3
 	call SafariZoneEntranceAutoWalk
-	ld hl,wd790
+	ld hl,wSafariZoneFlags
 	set 7,[hl]
 	res 6,[hl]
 	ld a,3
@@ -238,7 +238,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld a, $80
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
-	ld hl, wd790
+	ld hl, wSafariZoneFlags
 	res 6, [hl]
 	res 7, [hl]
 	ld a, $0

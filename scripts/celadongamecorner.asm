@@ -28,7 +28,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wd77e]
+	ld a, [wCeladonGameCornerFlags]
 	bit 1, a
 	ret nz
 	ld a, $2a
@@ -214,7 +214,7 @@ CeladonGameCornerText4: ; 48d45 (12:4d45)
 
 CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	db $08 ; asm
-	ld a, [wd77e]
+	ld a, [wCeladonGameCornerFlags]
 	bit 2, a
 	jr nz, .asm_d0957 ; 0x48d50
 	ld hl, CeladonGameCornerText_48d9c
@@ -233,7 +233,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld hl, $ffa1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wd77e
+	ld hl, wCeladonGameCornerFlags
 	set 2, [hl]
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -273,7 +273,7 @@ CeladonGameCornerText6: ; 48db1 (12:4db1)
 
 CeladonGameCornerText7: ; 48db6 (12:4db6)
 	db $08 ; asm
-	ld a, [wd77c]
+	ld a, [wCeladonGymFlags]
 	bit 1, a
 	ld hl, CeladonGameCornerText_48dca ; $4dca
 	jr z, .asm_be3fd ; 0x48dbf
@@ -296,7 +296,7 @@ CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 
 CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	db $08 ; asm
-	ld a, [wd77e]
+	ld a, [wCeladonGameCornerFlags]
 	bit 4, a
 	jr nz, .asm_ed8bc ; 0x48ddf
 	ld hl, CeladonGameCornerText_48e26
@@ -315,7 +315,7 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ld hl, $ffa1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wd77e
+	ld hl, wCeladonGameCornerFlags
 	set 4, [hl]
 	ld hl, Received20CoinsText
 	jr .asm_0ddc2 ; 0x48e11
@@ -349,7 +349,7 @@ CeladonGameCornerText_48e36: ; 48e36 (12:4e36)
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	db $08 ; asm
-	ld a, [wd77e]
+	ld a, [wCeladonGameCornerFlags]
 	bit 3, a
 	jr nz, .asm_ff080 ; 0x48e41
 	ld hl, CeladonGameCornerText_48e88 ; $4e88
@@ -368,7 +368,7 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ld hl, $ffa1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wd77e
+	ld hl, wCeladonGameCornerFlags
 	set 3, [hl]
 	ld hl, CeladonGameCornerText_48e8d
 	jr .asm_78d65 ; 0x48e73
@@ -444,7 +444,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, wd77e
+	ld hl, wCeladonGameCornerFlags
 	set 1, [hl]
 	ld a, $43
 	ld [wd09f], a

@@ -221,7 +221,7 @@ Func_7036d: ; 7036d (1c:436d)
 	predef_jump CopyTileIDsFromList
 
 Func_70377: ; 70377 (1c:4377)
-	ld hl, wd747
+	ld hl, wFlags1
 	set 3, [hl]
 	predef DisplayDexRating
 	hlCoord 0, 4
