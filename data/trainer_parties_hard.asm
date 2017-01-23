@@ -1013,7 +1013,7 @@ BeautyData: ; COMPLETED
 	db "Mandy@",54,SEAKING,$FF ; Route 19 5R
 	db "Anna@",55,STARMIE,$FF ; Route 19 5B
 	db "Caitlyn@",55,SEADRA,$FF ; Route 19 L 2
-	db "Ariel@",24,GOLDEEN,$FF ; CERULEAN GYM 2
+	db "Colby@",24,GOLDEEN,$FF ; CERULEAN GYM 2
 	db "Callie@",55,DEWGONG,$FF ; Route 20, Trainer # 0x11
 	db "Marie@",55,SEAKING,$FF ; Route 20, Trainer # 0x12
 	

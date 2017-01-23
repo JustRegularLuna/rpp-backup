@@ -953,7 +953,7 @@ BeautyData:
 	db "Mandy@",30,GOLDEEN,SEAKING,$FF
 	db "Anna@",29,STARYU,STARYU,STARYU,$FF
 	db "Caitlyn@",30,SEADRA,HORSEA,SEADRA,$FF
-	db "Ariel@",19,GOLDEEN,$FF ; Misty's Gym, Trainer # 0x10
+	db "Colby@",19,GOLDEEN,$FF ; Misty's Gym, Trainer # 0x10
 	db "Callie@",30,TENTACOOL,HORSEA,SEEL,$FF ; Route 20, Trainer # 0x11
 	db "Marie@",31,GOLDEEN,SEAKING,$FF ; Route 20, Trainer # 0x12
 	
