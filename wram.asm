@@ -2158,54 +2158,294 @@ wCardKeyDoorX:: ; d740
 wd743:: ds 1
 wd744:: ds 3
 
+
 ; TODO: Label what these bits do in comments, to keep up with which ones are used
 ; Each label is only really 1 byte, the extras are unused space in between
 ; Some of these can actually be combined to save more space later, since they only use 1 or 2 bits
 ; I don't really care to bother with the SET_EVENT and CHECK_EVENT macros and whatnot
-wFlags1:: ds 3
-wBluesHouseFlags:: ds 1
-wOaksLabFlags:: ds 1
-wViridianCityFlags:: ds 2
-wOaksParcelFlags:: ds 3
-wViridianGymFlags:: ds 1
-wViridianGymFlags2:: ds 2
-wPewterMuseumFlags:: ds 1
-wPewterGymFlags:: ds 5
-wCeruleanCityFlags:: ds 1
-wCeruleanCityFlags2:: ds 3
-wCeruleanGymFlags:: ds 1
-wBikeShopFlags:: ds 5
-wPokemonTower2Flags:: ds 1
-wPokemonTower3Flags:: ds 1
-wPokemonTower4Flags:: ds 1
-wPokemonTower5Flags:: ds 1
-wPokemonTower6Flags:: ds 1
-wPokemonTower7Flags:: ds 3
-wLavenderHouse1Flags:: ds 5
-wFanClubFlags:: ds 2
-wVermilionGymFlags:: ds 4
-wCeladonCityFlags:: ds 1
-wCeladonMartFlags:: ds 4
-wCeladonGymFlags:: ds 1
-wCeladonGymFlags2:: ds 1
-wCeladonGameCornerFlags:: ds 5
-wCeladonDinerFlags:: ds 11
-wFuchsiaHouse2Flags:: ds 2
-wSafariZoneFlags:: ds 2
-wFuchsiaGymFlags:: ds 4
-wCinnabarMansionFlags:: ds 2
-wCinnabarMansionTrainerFlags:: ds 2
-wCinnabarGymFlags:: ds 1
-wCinnabarGymFlags2:: ds 1
-wCinnabarGymGateFlags:: ds 5
-wCinnabarLabItemFlags:: ds 2
-wCinnabarLabFossilFlags:: ds 12
-wCopyCatFlags:: ds 2
-wFightingDojoFlags:: ds 2
-wSaffronGymFlags:: ds 1
-wSaffronGymFlags2:: ds 5
-wSilphCo1Flags:: ds 4
-wSaffronHouse2Flags:: ds 2
+
+; Good candidates for grouping:
+; - Gym leader gifts
+; - Gift Pokemon
+; - Random Gift Items
+
+wFlags1:: 
+; bit 0 - Followed Oak into Lab
+; bit 3 - Hall of Fame Dex Rating
+; bit 6 - Pallet Town after getting Pokeballs
+	ds 3
+
+wBluesHouseFlags:: 
+; bit 0 - Got Town Map
+; bit 1 - Entered Blue's House
+; bit 2 - Daisy walking in kitchen
+	ds 1
+
+wOaksLabFlags:: 
+; bit 0 - Followed Oak Into Lab 2
+; bit 1 - Asked to choose mon
+; bit 2 - Got Starter
+; bit 3 - Battled Rival in Lab
+; bit 4 - Got Pokeballs From Oak
+; bit 5 - Got Pokedex
+; bit 6 - Pallet After Pokeballs 2
+; bit 7 - Oak Appeared in Pallet
+	ds 1
+
+wViridianCityFlags:: 
+; bit 0 - Viridian Gym Open
+; bit 1 - Got TM42
+	ds 2
+
+wOaksParcelFlags:: 
+; bit 0 - Oak Got Parcel
+; bit 1 - Got Oak's Parcel
+	ds 3
+
+wViridianGymFlags:: 
+; bit 0 - Got TM27
+; bit 1 - Beat Giovanni (Gym)
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+	ds 1
+
+wViridianGymFlags2:: 
+; bit 0 - Trainer Flag
+; bit 1 - Trainer Flag
+	ds 2
+
+wPewterMuseumFlags:: 
+; bit 0 - Bought museum ticket
+; bit 1 - Got Old Amber
+	ds 1
+
+wPewterGymFlags:: 
+; bit 2 - Trainer Flag
+; bit 6 - Got TM34
+; bit 7 - Beat Brock
+	ds 5
+
+wCeruleanCityFlags:: 
+; bit 0 - Beat Rival in Cerulean City
+	ds 1
+
+wCeruleanCityFlags2:: 
+; bit 7 - Beat Rocket Grunt in Cerulean City
+	ds 3
+
+wCeruleanGymFlags:: 
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 6 - Got TM11
+; bit 7 - Beat Misty
+	ds 1
+
+wBikeShopFlags:: 
+; bit 0 - Got Bicycle
+	ds 5
+
+wPokemonTower2Flags:: 
+; bit 6 - Pokemon Tower Rival On Left
+; bit 7 - Beat Rival in Pokemon Tower
+	ds 1
+
+wPokemonTower3Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+	ds 1
+
+wPokemonTower4Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+	ds 1
+
+wPokemonTower5Flags:: 
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 7 - In Purified Protected Zone
+	ds 1
+
+wPokemonTower6Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 7 - Ghost Marowak
+	ds 1
+
+wPokemonTower7Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 7 - Rescued Mr Fuji 2
+	ds 3
+
+wLavenderHouse1Flags:: 
+; bit 0 - Got Pokeflute
+	ds 5
+
+wFanClubFlags:: 
+; bit 1 - Got Bike Voucher
+; bit 6 - Brag About Seel
+; bit 7 - Brag About Pikachu
+	ds 2
+
+wVermilionGymFlags:: 
+; bit 0 - 2nd Lock Opened
+; bit 1 - 1st Lock Opened
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 6 - Got TM24
+; bit 7 - Beat Lt. Surge
+	ds 4
+
+wCeladonCityFlags:: 
+; bit 0 - Got TM41
+	ds 1
+
+wCeladonMartFlags:: 
+; bit 4 - Got TM13
+; bit 5 - Got TM48
+; bit 6 - Got TM49
+; bit 7 - Got TM18
+	ds 4
+
+wCeladonGymFlags:: 
+; bit 0 - Got TM21
+; bit 1 - Beat Erika
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+	ds 1
+
+wCeladonGymFlags2:: 
+; bit 0 - Trainer Flag
+	ds 1
+
+wCeladonGameCornerFlags:: 
+; bit 1 - Found Rocket Hideout
+; bit 2 - Got 10 Coins
+; bit 3 - Got 20 Coins
+; bit 4 - Got 20 Coins 2
+	ds 5
+
+wCeladonDinerFlags:: 
+; bit 0 - Got Coin Case
+	ds 11
+
+wFuchsiaHouse2Flags:: 
+; bit 0 - Got HM04
+; bit 1 - Gave Gold Teeth
+	ds 2
+
+wSafariZoneFlags:: 
+; bit 6 - Safari Game Over
+; bit 7 - In Safari Zone
+	ds 2
+
+wFuchsiaGymFlags:: 
+; bit 0 - Got TM06
+; bit 1 - Beat Koga
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+	ds 4
+
+wCinnabarMansionFlags:: 
+; bit 0 - Mansion Switch On
+	ds 2
+
+wCinnabarMansionTrainerFlags:: 
+; bit 1 - Trainer Flag
+	ds 2
+
+wCinnabarGymFlags:: 
+; bit 0 - Got TM38
+; bit 1 - Beat Blaine
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+	ds 1
+
+wCinnabarGymFlags2:: 
+; bit 0 - Trainer Flag
+	ds 1
+
+wCinnabarGymGateFlags:: 
+; bit 0 - (Nonexistant) Gate Flag
+; bit 1 - Gate Flag
+; bit 2 - Gate Flag
+; bit 3 - Gate Flag
+; bit 4 - Gate Flag
+; bit 5 - Gate Flag
+; bit 6 - Gate Flag
+	ds 5
+
+wCinnabarLabItemFlags:: 
+; bit 7 - Got TM35
+	ds 2
+
+wCinnabarLabFossilFlags:: 
+; bit 0 - Gave Fossil To Lab
+; bit 1 - Lab Still Reviving Fossil
+; bit 2 - Lab Handing Over Fossil Now
+	ds 12
+
+wCopyCatFlags:: 
+; bit 0 - Got TM31
+	ds 2
+
+wFightingDojoFlags:: 
+; bit 0 - Defeated Fighting Dojo
+; bit 1 - Beat karate Master
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Got Hitmonlee
+; bit 7 - Got Hitmonchan
+	ds 2
+
+wSaffronGymFlags:: 
+; bit 0 - Got TM46
+; bit 1 - Beat Sabrina
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+	ds 1
+
+wSaffronGymFlags2:: 
+; bit 0 - Trainer Flag
+	ds 5
+
+wSilphCo1Flags:: 
+; bit 7 - Silph Co Receptionist At Desk
+	ds 4
+
+wSaffronHouse2Flags:: 
+; bit 0 - Got TM29
+	ds 2
+
 wd7bf:: ds 3
 wd7c2:: ds 1
 wd7c3:: ds 2
