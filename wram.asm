@@ -2446,11 +2446,33 @@ wSaffronHouse2Flags::
 ; bit 0 - Got TM29
 	ds 2
 
-wd7bf:: ds 3
-wd7c2:: ds 1
-wd7c3:: ds 2
-wd7c5:: ds 1
-wd7c6:: ds 3
+wRoute1Flags:: 
+; bit 0 - Got Potion Sample
+	ds 3
+
+wRoute2GateFlags:: 
+; bit 0 - Got HM05
+	ds 1
+
+wRoute3Flags:: ; actually 2 bytes this time
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+; bit 0 - Trainer Flag
+; bit 1 - Trainer Flag
+	ds 2
+
+wRoute4Flags:: 
+; bit 2 - Trainer Flag
+	ds 1
+
+wMtMoonPokecenterFlags:: 
+; bit 7 - Bought Magikarp
+	ds 3
+
 wd7c9:: ds 4
 wd7cd:: ds 2
 wd7cf:: ds 2

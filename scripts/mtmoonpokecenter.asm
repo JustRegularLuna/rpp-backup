@@ -23,7 +23,7 @@ MtMoonPokecenterText3: ; 492e7 (12:52e7)
 
 MtMoonPokecenterText4:
 	db $08 ; asm
-	ld a, [wd7c6]
+	ld a, [wMtMoonPokecenterFlags]
 	add a
 	jp c, .alreadyBoughtMagikarp
 	ld hl, MtMoonPokecenterText_4935c
@@ -62,7 +62,7 @@ MtMoonPokecenterText4:
 	ld a, $13
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld hl, wd7c6
+	ld hl, wMtMoonPokecenterFlags
 	set 7, [hl]
 	jr .done
 .choseNo
