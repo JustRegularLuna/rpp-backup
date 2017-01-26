@@ -6,17 +6,17 @@ _CeruleanGymText_5c7be:: ; 989c1 (26:49c1)
 	line "on #mon? What"
 	cont "is your approach?"
 
-	para "My policy is an"
-	line "all-out offensive"
-	cont "with water-type"
-	cont "#mon!"
+	para "The saddest part"
+	line "is that it doesn't"
+	cont "matter, anyway."
 
-	para "Misty, the world-"
-	line "famous beauty, is"
-	cont "your host!"
+	para "I think you know"
+	line "what I'm saying."
 
-	para "Are you ready,"
-	line "sweetie?"
+	para "I'm Misty, the"
+	line "Gym Leader, and"
+	cont "this is as far as"
+	cont "you go!"
 	done
 
 _CeruleanGymText_5c7c3:: ; 98a7b (26:4a7b)
@@ -67,22 +67,25 @@ _CeruleanGymText_5c7d8:: ; 98bb0 (26:4bb0)
 	cont "show you beat me!@@"
 
 _CeruleanGymBattleText1:: ; 98c05 (26:4c05)
-	text "I'm more than good"
-	line "enough for you!"
+	text "You want Misty?"
+	line "Not a chance!"
 
-	para "Misty can wait!"
+	para "You'll have to go"
+	line "through me first!"
 	done
 
 _CeruleanGymEndBattleText1:: ; 98c38 (26:4c38)
-	text "You overwhelmed"
-	line "me!"
+	text "Don't stomp on my"
+	line "dreams!"
 	prompt
 
 _CeruleanGymAfterBattleText1:: ; 98c4d (26:4c4d)
-	text "You have to face"
-	line "other trainers to"
-	cont "find out how good"
-	cont "you really are."
+	text "She's my fantasy"
+	line "crush..."
+	
+	para "When will she"
+	line "realize I'm sit-"
+	cont "ting right here?"
 	done
 
 _CeruleanGymBattleText2:: ; 98c93 (26:4c93)
