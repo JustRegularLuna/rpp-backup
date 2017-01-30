@@ -1652,7 +1652,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	ld a,[W_CURMAP]
 	cp a,ROUTE_12
 	jr nz,.notRoute12
-	ld a,[wd7d8]
+	ld a,[wRoute12Flags2]
 	bit 7,a ; has the player beaten Route 12 Snorlax yet?
 	jr nz,.noSnorlaxToWakeUp
 ; if the player hasn't beaten Route 12 Snorlax
@@ -1661,7 +1661,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jr nc,.noSnorlaxToWakeUp
 	ld hl,PlayedFluteHadEffectText
 	call PrintText
-	ld hl,wd7d8
+	ld hl,wRoute12Flags2
 	set 6,[hl] ; trigger Snorlax fight (handled by map script)
 	ret
 .notRoute12

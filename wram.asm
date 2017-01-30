@@ -2160,7 +2160,7 @@ wd744:: ds 3
 
 
 ; TODO: Label what these bits do in comments, to keep up with which ones are used
-; Each label is only really 1 byte, the extras are unused space in between
+; Each label is (usually) really only 1 byte, the extras are unused space in between
 ; Some of these can actually be combined to save more space later, since they only use 1 or 2 bits
 ; I don't really care to bother with the SET_EVENT and CHECK_EVENT macros and whatnot
 
@@ -2473,17 +2473,117 @@ wMtMoonPokecenterFlags::
 ; bit 7 - Bought Magikarp
 	ds 3
 
-wd7c9:: ds 4
-wd7cd:: ds 2
-wd7cf:: ds 2
-wd7d1:: ds 1
-wd7d2:: ds 1
-wd7d3:: ds 2
-wd7d5:: ds 1
-wd7d6:: ds 1
-wd7d7:: ds 1
-wd7d8:: ds 1
-wd7d9:: ds 2
+wRoute6Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+	ds 4
+
+wRoute8Flags:: ; actually 2 bytes
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+; bit 0 - Trainer Flag
+; bit 1 - Trainer Flag
+	ds 2
+
+wRoute9Flags:: ; actually 2 bytes
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+; bit 0 - Trainer Flag
+; bit 1 - Trainer Flag
+	ds 2
+
+wRoute10Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+	ds 1
+
+wRockTunnel1Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+	ds 1
+
+wPowerPlantFlags:: ; actually 2 bytes
+; bit 1 - Voltorb Flag
+; bit 2 - Voltorb Flag
+; bit 3 - Voltorb Flag
+; bit 4 - Voltorb Flag
+; bit 5 - Voltorb Flag
+; bit 6 - Voltorb Flag
+; bit 7 - Voltorb Flag
+; bit 0 - Voltorb Flag
+; bit 1 - Beat Zapdos
+	ds 2
+
+wRoute11Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+	ds 1
+
+wRoute11Flags2:: 
+; bit 0 - Trainer Flag
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 7 - Got Itemfinder
+	ds 1
+
+wRoute12Flags:: 
+; bit 0 - Got TM39
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+	ds 1
+
+wRoute12Flags2:: 
+; bit 0 - Trainer Flag
+; bit 6 - Fight Route 12 Snorlax
+; bit 7 - Beat Route 12 Snorlax
+	ds 1
+
+wRoute13Flags:: ; actually 2 bytes
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+; bit 0 - Trainer Flag
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+	ds 2
+
 wd7db:: ds 2
 wd7dd:: ds 2
 wd7df:: ds 1
