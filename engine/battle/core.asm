@@ -1041,7 +1041,7 @@ ReplaceFaintedEnemyMon: ; 3c664 (f:4664)
 	xor a
 	ld [W_ENEMYMOVENUM], a
 	ld [wcd6a], a
-	ld [wccd5], a
+	ld [wAILayer2Encouragement], a
 	inc a ; reset Z flag
 	ret
 
@@ -5725,7 +5725,7 @@ ExecuteEnemyMove: ; 3e6bc (f:66bc)
 	cp $4
 	ret nc
 .executeEnemyMove
-	ld hl, wccd5
+	ld hl, wAILayer2Encouragement
 	inc [hl]
 	xor a
 	ld [W_MOVEMISSED], a

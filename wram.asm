@@ -401,7 +401,7 @@ wSimulatedJoypadStatesEnd:: ; ccd3
 
 wccd3:: ds 1
 wccd4:: ds 1
-wccd5:: ds 2
+wAILayer2Encouragement:: ds 2
 
 ; current HP of player and enemy substitutes
 wPlayerSubstituteHP:: ; ccd7

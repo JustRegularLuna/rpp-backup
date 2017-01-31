@@ -154,7 +154,7 @@ StatusAilmentMoveEffects ; 57e2
 
 SmartAI: ; originally by Dabomstew
 ; damaging move priority on turn 3+
-	ld a, [wccd5] ; wAILayer2Encouragement
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement
 	cp $2
 	jr c, .healingCheck
 	ld hl, wBuffer - 1
@@ -310,7 +310,7 @@ SmartAI: ; originally by Dabomstew
 	jr .seloop
 .selfBuffCheck
 ; 50% chance to encourage self-buff or status on turn 1/2
-	ld a, [wccd5]
+	ld a, [wAILayer2Encouragement]
 	cp $2
 	jr nc, .discourageStatusOnly
 	call Random
@@ -473,7 +473,7 @@ AlterMovePriorityArray:
 
 ; slightly encourage moves with specific effects
 AIMoveChoiceModification2: ; 397e7 (e:57e7)
-	ld a, [wccd5]
+	ld a, [wAILayer2Encouragement]
 	cp $1
 	ret nz
 	ld hl, wBuffer - 1  ; temp move selection array (-1 byte offest)
@@ -837,7 +837,7 @@ SwitchOutAI: ; 3a5e9 (e:65e9)
 XAttack1AI: ; 3a5ef (e:65ef)
 	cp $20
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ret nc
 	jp AIUseXAttack
@@ -845,7 +845,7 @@ XAttack1AI: ; 3a5ef (e:65ef)
 GuardSpecAI: ; 3a5f5 (e:65f5)
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ret nc
 	jp AIUseGuardSpec
@@ -853,7 +853,7 @@ GuardSpecAI: ; 3a5f5 (e:65f5)
 XAttack2AI: ; 3a5fb (e:65fb)
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ret nc
 	jp AIUseXAttack
@@ -861,7 +861,7 @@ XAttack2AI: ; 3a5fb (e:65fb)
 SwitchOrHyperPotionAI: ; 3a601 (e:6601)
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -876,7 +876,7 @@ SwitchOrHyperPotionAI: ; 3a601 (e:6601)
 FullHealOrPotionAI:
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -891,7 +891,7 @@ FullHealOrPotionAI:
 FullHealAI: ; 3a614 (e:6614)
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -904,7 +904,7 @@ FullHealAI: ; 3a614 (e:6614)
 XDefendAI: ; 3a61c (e:661c)
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ret nc
 	jp AIUseXDefend
@@ -912,7 +912,7 @@ XDefendAI: ; 3a61c (e:661c)
 XSpeedAI: ; 3a622 (e:6622)
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ret nc
 	jp AIUseXSpeed
@@ -920,7 +920,7 @@ XSpeedAI: ; 3a622 (e:6622)
 SuperPotion1AI: ; 3a628 (e:6628)
 	cp $80
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -932,7 +932,7 @@ SuperPotion1AI: ; 3a628 (e:6628)
 SuperPotion2AI: ; 3a63a (e:663a)
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -944,7 +944,7 @@ SuperPotion2AI: ; 3a63a (e:663a)
 HyperPotionAI: ; 3a640 (e:6640)
 	cp $40
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -956,7 +956,7 @@ HyperPotionAI: ; 3a640 (e:6640)
 PotionAI: ; 3a64c (e:664c)
 	cp $20
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -968,7 +968,7 @@ PotionAI: ; 3a64c (e:664c)
 BerryUserAI: ; used mainly by hikers, campers, and picnickers
 	cp $30
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -986,7 +986,7 @@ BerryUserAI: ; used mainly by hikers, campers, and picnickers
 FullRestoreAI: ; 3a658 (e:6658)
 	cp $20
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -1000,7 +1000,7 @@ SwitchOrSuperPotionAI: ; 3a676 (e:6676)
 	jp c,AISwitchIfEnoughMons
 	cp $80
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
@@ -1012,7 +1012,7 @@ SwitchOrSuperPotionAI: ; 3a676 (e:6676)
 HyperPotion2AI: ; 3a687 (e:6687)
 	cp $80
 	ret nc
-	ld a, [wccd5] ; wAILayer2Encouragement (How many turns has it been out?)
+	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
 	cp 2
 	ccf
 	ret nc ; They can't heal too early
