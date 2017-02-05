@@ -2159,16 +2159,20 @@ wd743:: ds 1
 wd744:: ds 3
 
 
-; TODO: Label what these bits do in comments, to keep up with which ones are used
-; Each label is (usually) really only 1 byte, the extras are unused space in between
-; Some of these can actually be combined to save more space later, since they only use 1 or 2 bits
-; I don't really care to bother with the SET_EVENT and CHECK_EVENT macros and whatnot
-
-; Good candidates for grouping:
-; - Gym leader gifts
-; - Gift Pokemon
-; - Random Gift Items
-
+; TODO: Replace this with:
+; wEventFlags::
+;	flag_array NUM_EVENT_FLAGS
+;
+; use in scripts by doing:
+;
+; ld de, FLAG_TO_CHECK
+; predef CheckEvent
+; etc
+; 
+; add constants/event_constants.asm to store these entries
+; add engine/event_flag_actions.asm to store the predefs
+; later, rewrite event hide/show to use these flags as well, like Gen 2
+; 
 wFlags1:: 
 ; bit 0 - Followed Oak into Lab
 ; bit 3 - Hall of Fame Dex Rating
@@ -2584,10 +2588,49 @@ wRoute13Flags:: ; actually 2 bytes
 ; bit 2 - Trainer Flag
 	ds 2
 
-wd7db:: ds 2
-wd7dd:: ds 2
-wd7df:: ds 1
-wd7e0:: ds 1
+wRoute14Flags:: ; actually 2 bytes
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+; bit 0 - Trainer Flag
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+	ds 2
+
+wRoute15Flags:: ; actually 2 bytes
+; bit 0 - Received EXP Share
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+; bit 7 - Trainer Flag
+; bit 0 - Trainer Flag
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+	ds 2
+
+wRoute16Flags:: 
+; bit 1 - Trainer Flag
+; bit 2 - Trainer Flag
+; bit 3 - Trainer Flag
+; bit 4 - Trainer Flag
+; bit 5 - Trainer Flag
+; bit 6 - Trainer Flag
+	ds 1
+
+wRoute16Flags2:: 
+; bit 0 - Fight Route 16 Snorlax
+; bit 1 - Beat Route 16 Snorlax
+; bit 6 - Got HM02
+; bit 7 - Rescued Mr. Fuji
+	ds 1
+
 wd7e1:: ds 2
 wd7e3:: ds 2
 wd7e5:: ds 2

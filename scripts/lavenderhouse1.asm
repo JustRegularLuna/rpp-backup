@@ -12,7 +12,7 @@ LavenderHouse1TextPointers: ; 1d8ac (7:58ac)
 
 LavenderHouse1Text1: ; 1d8b8 (7:58b8)
 	db $08 ; asm
-	ld a, [wd7e0]
+	ld a, [wRoute16Flags2]
 	bit 7, a
 	jr nz, .asm_72e5d ; 0x1d8be
 	ld hl, LavenderHouse1Text_1d8d1
@@ -34,7 +34,7 @@ LavenderHouse1Text_1d8d6: ; 1d8d6 (7:58d6)
 
 LavenderHouse1Text2: ; 1d8db (7:58db)
 	db $08 ; asm
-	ld a, [wd7e0]
+	ld a, [wRoute16Flags2]
 	bit 7, a
 	jr nz, .asm_06470 ; 0x1d8e1
 	ld hl, LavenderHouse1Text_1d8f4

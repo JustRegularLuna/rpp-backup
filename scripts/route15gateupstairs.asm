@@ -7,7 +7,7 @@ Route15GateUpstairsTextPointers: ; 4964d (12:564d)
 
 Route15GateUpstairsText1: ; 49651 (12:5651)
 	db $8
-	ld a, [wd7dd]
+	ld a, [wRoute15Flags]
 	bit 0, a
 	jr nz, .asm_49683 ; 0x49657 $2a
 	ld a, 50 ; pokemon needed
@@ -24,7 +24,7 @@ Route15GateUpstairsText1: ; 49651 (12:5651)
 	ld a, [$ffdb]
 	cp $1
 	jr nz, .asm_49689 ; 0x4967c $b
-	ld hl, wd7dd
+	ld hl, wRoute15Flags
 	set 0, [hl]
 .asm_49683
 	ld hl, Route15GateUpstairsText_4968c

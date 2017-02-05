@@ -218,7 +218,7 @@ PokemonTower7FujiText:
 	db 8 ; asm
 	ld hl, TowerRescueFujiText
 	call PrintText
-	ld hl, wd7e0
+	ld hl, wRoute16Flags2
 	set 7, [hl]
 	ld hl, wPokemonTower7Flags
 	set 7, [hl]

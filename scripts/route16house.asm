@@ -7,7 +7,7 @@ Route16HouseTextPointers: ; 1e5fb (7:65fb)
 
 Route16HouseText1: ; 1e5ff (7:65ff)
 	db $08 ; asm
-	ld a, [wd7e0]
+	ld a, [wRoute16Flags2]
 	bit 6, a
 	ld hl, HM02ExplanationText
 	jr nz, .asm_13616 ; 0x1e608
@@ -16,7 +16,7 @@ Route16HouseText1: ; 1e5ff (7:65ff)
 	lb bc, HM_02, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, wd7e0
+	ld hl, wRoute16Flags2
 	set 6, [hl]
 	ld hl, ReceivedHM02Text
 	jr .asm_13616 ; 0x1e620

@@ -1667,7 +1667,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 .notRoute12
 	cp a,ROUTE_16
 	jr nz,.noSnorlaxToWakeUp
-	ld a,[wd7e0]
+	ld a,[wRoute16Flags2]
 	bit 1,a ; has the player beaten Route 16 Snorlax yet?
 	jr nz,.noSnorlaxToWakeUp
 ; if the player hasn't beaten Route 16 Snorlax
@@ -1676,7 +1676,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jr nc,.noSnorlaxToWakeUp
 	ld hl,PlayedFluteHadEffectText
 	call PrintText
-	ld hl,wd7e0
+	ld hl,wRoute16Flags2
 	set 0,[hl] ; trigger Snorlax fight (handled by map script)
 	ret
 .noSnorlaxToWakeUp
