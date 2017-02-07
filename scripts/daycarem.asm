@@ -268,7 +268,7 @@ DayCareMText2: ; Day Care Man
 
 .daycareInUse
 	xor a
-	ld hl, W_DAYCAREMONNAME
+	ld hl, W_DAYCAREMON2NAME
 	call GetPartyMonName
 	ld a, $4
 	ld [wcc49], a
@@ -279,7 +279,7 @@ DayCareMText2: ; Day Care Man
 	jr c, .skipCalcExp
 	ld d, MAX_LEVEL
 	callab CalcExperience
-	ld hl, wDayCareMonExp
+	ld hl, wDayCareMon2Exp
 	ld a, [H_NUMTOPRINT]
 	ld [hli], a
 	ld a, [$ff97]
@@ -291,7 +291,7 @@ DayCareMText2: ; Day Care Man
 .skipCalcExp
 	xor a
 	ld [wTrainerEngageDistance], a
-	ld hl, wDayCareMonBoxLevel
+	ld hl, wDayCareMon2BoxLevel
 	ld a, [hl]
 	ld [wTrainerSpriteOffset], a
 	cp d
@@ -406,12 +406,12 @@ DayCareMText2: ; Day Care Man
 	ld [de], a
 	ld a, [wcf91]
 	call PlayCry
-	ld hl, DayCareGotMonBackText
+	ld hl, DayCareGotMonBackText2
 	jr .done
 
 .leaveMonInDayCare
 	ld a, [wTrainerSpriteOffset]
-	ld [wDayCareMonBoxLevel], a
+	ld [wDayCareMon2BoxLevel], a
 
 .done
 	call PrintText
