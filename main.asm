@@ -82,6 +82,7 @@ LoadMonData_:
 ;  1: enemymon
 ;  2: boxmon
 ;  3: daycaremon
+;  4: daycaremon2
 ; Return monster id at wcf91 and its data at wLoadedMon.
 ; Also load base stats at W_MONHDEXNUM for convenience.
 
@@ -89,6 +90,12 @@ LoadMonData_:
 	ld [wcf91], a
 	ld a, [wcc49]
 	cp 3
+	jr z, .GetMonHeader
+	
+	ld a, [wDayCareMon2Species]
+	ld [wcf91], a
+	ld a, [wcc49]
+	cp 4
 	jr z, .GetMonHeader
 
 	ld a, [wWhichPokemon]
@@ -114,7 +121,12 @@ LoadMonData_:
 	ld bc, wBoxMon2 - wBoxMon1
 	jr z, .getMonEntry
 
+	cp 3
 	ld hl, wDayCareMon
+	jr z, .copyMonData
+
+	; 4
+	ld hl, wDayCareMon2
 	jr .copyMonData
 
 .getMonEntry
@@ -2631,9 +2643,26 @@ INCLUDE "data/tileset_headers.asm"
 
 IncrementDayCareMonExp: ; c8de (3:48de)
 	ld a, [W_DAYCARE_IN_USE]
-	and a
-	ret z
+	bit 0, a ; does Day Care Lady have someone?
+	jr z, .dayCareMan
 	ld hl, wDayCareMonExp + 2
+	inc [hl]
+	ret nz
+	dec hl
+	inc [hl]
+	ret nz
+	dec hl
+	inc [hl]
+	ld a, [hl]
+	cp $50
+	jr c, .dayCareMan
+	ld a, $50
+	ld [hl], a
+.dayCareMan
+	ld a, [W_DAYCARE_IN_USE]
+	bit 1, a ; does Day Care Man have someone?
+	ret z
+	ld hl, wDayCareMon2Exp + 2
 	inc [hl]
 	ret nz
 	dec hl
@@ -3826,6 +3855,11 @@ Func_f51e: ; f51e (3:751e)
 	cp $3
 	ld hl, wDayCareMon
 	jr z, .asm_f575
+	cp $4
+	ld hl, wDayCareMon2
+	jr z, .asm_f575
+	cp $5
+	jr z, .checkPartyMonSlots
 	ld hl, W_NUMINBOX ; wda80
 	ld a, [hl]
 	cp MONS_PER_BOX
@@ -3848,6 +3882,10 @@ Func_f51e: ; f51e (3:751e)
 	ld a, [wcf95]
 	cp $2
 	ld a, [wDayCareMon]
+	jr z, .asm_f556
+	ld a, [wcf95]
+	cp $5
+	ld a, [wDayCareMon2]
 	jr z, .asm_f556
 	ld a, [wcf91]
 .asm_f556
@@ -3877,6 +3915,9 @@ Func_f51e: ; f51e (3:751e)
 	cp $2
 	ld hl, wDayCareMon
 	jr z, .asm_f597
+	cp $5
+	ld hl, wDayCareMon2
+	jr z, .asm_f597
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1 ; $2c
 .asm_f591
@@ -3894,6 +3935,8 @@ Func_f51e: ; f51e (3:751e)
 	jr z, .asm_f5b4
 	cp $2
 	jr z, .asm_f5b4
+	cp $5
+	jr z, .asm_f5b4
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
 	ld a, [hl]
@@ -3905,6 +3948,9 @@ Func_f51e: ; f51e (3:751e)
 	ld a, [wcf95]
 	cp $3
 	ld de, W_DAYCAREMONOT
+	jr z, .asm_f5d3
+	cp $4
+	ld de, W_DAYCAREMON2OT
 	jr z, .asm_f5d3
 	dec a
 	ld hl, wPartyMonOT ; wd273
@@ -3925,6 +3971,9 @@ Func_f51e: ; f51e (3:751e)
 	ld hl, W_DAYCAREMONOT
 	cp $2
 	jr z, .asm_f5ec
+	ld hl, W_DAYCAREMON2OT
+	cp $5
+	jr z, .asm_f5ec
 	ld hl, wPartyMonOT ; wd273
 .asm_f5e6
 	ld a, [wWhichPokemon] ; wWhichPokemon
@@ -3935,6 +3984,9 @@ Func_f51e: ; f51e (3:751e)
 	ld a, [wcf95]
 	cp $3
 	ld de, W_DAYCAREMONNAME
+	jr z, .asm_f611
+	cp $4
+	ld de, W_DAYCAREMON2NAME
 	jr z, .asm_f611
 	dec a
 	ld hl, wPartyMonNicks ; wPartyMonNicks
@@ -3955,6 +4007,9 @@ Func_f51e: ; f51e (3:751e)
 	ld hl, W_DAYCAREMONNAME
 	cp $2
 	jr z, .asm_f62a
+	ld hl, W_DAYCAREMON2NAME
+	cp $5
+	jr z, .asm_f62a
 	ld hl, wPartyMonNicks ; wPartyMonNicks
 .asm_f624
 	ld a, [wWhichPokemon] ; wWhichPokemon
@@ -3967,6 +4022,8 @@ Func_f51e: ; f51e (3:751e)
 	cp $1
 	jr z, .asm_f664
 	cp $3
+	jr z, .asm_f664
+	cp $4
 	jr z, .asm_f664
 	push hl
 	srl a

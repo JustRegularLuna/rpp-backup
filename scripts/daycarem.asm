@@ -1,29 +1,29 @@
-DayCareMScript: ; 5624f (15:624f)
+DayCareMScript:
 	jp EnableAutoTextBoxDrawing
 
-DayCareMTextPointers: ; 56252 (15:6252)
+DayCareMTextPointers:
 	dw DayCareMText1 ; Day Care Lady
-    dw DayCareMText2 ; Day Care Man
-    dw DayCareMText3 ; Ditto
+	dw DayCareMText2 ; Day Care Man
+	dw DayCareMText3 ; Day Care Helper
 
-DayCareMText1: ; 56254 (15:6254)
+DayCareMText1: ; Day Care Lady
 	db $8
 	call SaveScreenTilesToBuffer2
 	ld a, [W_DAYCARE_IN_USE]
-	and a
-	jp nz, DayCareMScript_562e1
-	ld hl, DayCareMText_5640f
+	bit 0, a
+	jp nz, .daycareInUse
+	ld hl, DayCareIntroText
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	ld hl, DayCareMText_5643b
-	jp nz, DayCareMScript_56409
+	ld hl, DayCareComeAgainText
+	jp nz, .done
 	ld a, [wPartyCount]
 	dec a
-	ld hl, DayCareMText_56445
-	jp z, DayCareMScript_56409
-	ld hl, DayCareMText_56414
+	ld hl, DayCareOnlyHaveOneMonText
+	jp z, .done
+	ld hl, DayCareWhichMonText
 	call PrintText
 	xor a
 	ld [wUpdateSpritesEnabled], a
@@ -35,20 +35,20 @@ DayCareMText1: ; 56254 (15:6254)
 	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	pop af
-	ld hl, DayCareMText_56437
-	jp c, DayCareMScript_56409
+	ld hl, DayCareAllRightThenText
+	jp c, .done
 	callab Func_2171b
-	ld hl, DayCareMText_5644a
-	jp c, DayCareMScript_56409
+	ld hl, DayCareCantAcceptMonWithHMText
+	jp c, .done
 	xor a
 	ld [wcc2b], a
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
-	ld hl, DayCareMText_56419
+	ld hl, DayCareWillLookAfterMonText
 	call PrintText
-	ld a, $1
-	ld [W_DAYCARE_IN_USE], a
+	ld hl, W_DAYCARE_IN_USE
+	set 0, [hl]
 	ld a, $3
 	ld [wcf95], a
 	call Func_3a68
@@ -57,10 +57,10 @@ DayCareMText1: ; 56254 (15:6254)
 	call RemovePokemon
 	ld a, [wcf91]
 	call PlayCry
-	ld hl, DayCareMText_5641e
-	jp DayCareMScript_56409
+	ld hl, DayCareComeSeeMeInAWhileText
+	jp .done
 
-DayCareMScript_562e1: ; 562e1 (15:62e1)
+.daycareInUse
 	xor a
 	ld hl, W_DAYCAREMONNAME
 	call GetPartyMonName
@@ -70,7 +70,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	callab CalcLevelFromExperience
 	ld a, d
 	cp MAX_LEVEL
-	jr c, .asm_56315
+	jr c, .skipCalcExp
 	ld d, MAX_LEVEL
 	callab CalcExperience
 	ld hl, wDayCareMonExp
@@ -82,7 +82,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld [hl], a
 	ld d, MAX_LEVEL
 
-.asm_56315
+.skipCalcExp
 	xor a
 	ld [wTrainerEngageDistance], a
 	ld hl, wDayCareMonBoxLevel
@@ -90,21 +90,21 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld [wTrainerSpriteOffset], a
 	cp d
 	ld [hl], d
-	ld hl, DayCareMText_56432
-	jr z, .asm_56333
+	ld hl, DayCareMonNeedsMoreTimeText
+	jr z, .next
 	ld a, [wTrainerSpriteOffset]
 	ld b, a
 	ld a, d
 	sub b
 	ld [wTrainerEngageDistance], a
-	ld hl, DayCareMText_56423
+	ld hl, DayCareMonHasGrownText
 
-.asm_56333
+.next
 	call PrintText
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
-	ld hl, DayCareMText_56440
-	jp z, .asm_56403
+	ld hl, DayCareNoRoomForMonText
+	jp z, .leaveMonInDayCare
 	ld de, wTrainerFacingDirection
 	xor a
 	ld [de], a
@@ -118,7 +118,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	inc a
 	ld b, a
 	ld c, $2
-.asm_56357
+.calcPriceLoop
 	push hl
 	push de
 	push bc
@@ -127,17 +127,17 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	pop de
 	pop hl
 	dec b
-	jr nz, .asm_56357
-	ld hl, DayCareMText_56428
+	jr nz, .calcPriceLoop
+	ld hl, DayCareOweMoneyText
 	call PrintText
 	ld a, $13
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
-	ld hl, DayCareMText_56437
+	ld hl, DayCareAllRightThenText
 	ld a, [wCurrentMenuItem]
 	and a
-	jp nz, .asm_56403
+	jp nz, .leaveMonInDayCare
 	ld hl, wTrainerFacingDirection
 	ld [$ff9f], a
 	ld a, [hli]
@@ -145,13 +145,14 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld a, [hl]
 	ld [$ffa1], a
 	call HasEnoughMoney
-	jr nc, .asm_56396
-	ld hl, DayCareMText_56454
-	jp .asm_56403
+	jr nc, .enoughMoney
+	ld hl, DayCareNotEnoughMoneyText
+	jp .leaveMonInDayCare
 
-.asm_56396
+.enoughMoney
+	ld hl, W_DAYCARE_IN_USE
+	res 0, [hl]
 	xor a
-	ld [W_DAYCARE_IN_USE], a
 	ld hl, wTrainerEngageDistance
 	ld [hli], a
 	inc hl
@@ -163,7 +164,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld a, $13
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld hl, DayCareMText_5644f
+	ld hl, DayCareHeresYourMonText
 	call PrintText
 	ld a, $2
 	ld [wcf95], a
@@ -173,7 +174,7 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld a, [wPartyCount]
 	dec a
 	push af
-	ld bc, $002c
+	ld bc, wPartyMon2 - wPartyMon1
 	push bc
 	ld hl, wPartyMon1Moves
 	call AddNTimes
@@ -184,11 +185,13 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	predef WriteMonMoves
 	pop bc
 	pop af
+
+; set mon's HP to max
 	ld hl, wPartyMon1HP
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld bc, $0021
+	ld bc, wPartyMon1MaxHP - wPartyMon1HP
 	add hl, bc
 	ld a, [hli]
 	ld [de], a
@@ -197,81 +200,290 @@ DayCareMScript_562e1: ; 562e1 (15:62e1)
 	ld [de], a
 	ld a, [wcf91]
 	call PlayCry
-	ld hl, DayCareMText_5642d
-	jr DayCareMScript_56409
+	ld hl, DayCareGotMonBackText
+	jr .done
 
-.asm_56403
+.leaveMonInDayCare
 	ld a, [wTrainerSpriteOffset]
 	ld [wDayCareMonBoxLevel], a
 
-DayCareMScript_56409: ; 56409 (15:6409)
+.done
 	call PrintText
 	jp TextScriptEnd
 
-DayCareMText_5640f: ; 5640f (15:640f)
-	TX_FAR _DayCareMText_5640f
-	db "@"
-
-DayCareMText_56414: ; 56414 (15:6414)
-	TX_FAR _DayCareMText_56414
-	db "@"
-
-DayCareMText_56419: ; 56419 (15:6419)
-	TX_FAR _DayCareMText_56419
-	db "@"
-
-DayCareMText_5641e: ; 5641e (15:641e)
-	TX_FAR _DayCareMText_5641e
-	db "@"
-
-DayCareMText_56423: ; 56423 (15:6423)
-	TX_FAR _DayCareMText_56423
-	db "@"
-
-DayCareMText_56428: ; 56428 (15:6428)
-	TX_FAR _DayCareMText_56428
-	db "@"
-
-DayCareMText_5642d: ; 5642d (15:642d)
-	TX_FAR _DayCareMText_5642d
-	db "@"
-
-DayCareMText_56432: ; 56432 (15:6432)
-	TX_FAR _DayCareMText_56432
-	db "@"
-
-DayCareMText_56437: ; 56437 (15:6437)
-	TX_FAR _DayCareMText_56437 ; 0x8c000
-DayCareMText_5643b: ; 5643b (15:643b)
-	TX_FAR _DayCareMText_5643b ; 0x8c013
-	db "@"
-
-DayCareMText_56440: ; 56440 (15:6440)
-	TX_FAR _DayCareMText_56440
-	db "@"
-
-DayCareMText_56445: ; 56445 (15:6445)
-	TX_FAR _DayCareMText_56445
-	db "@"
-
-DayCareMText_5644a: ; 5644a (15:644a)
-	TX_FAR _DayCareMText_5644a
-	db "@"
-
-DayCareMText_5644f: ; 5644f (15:644f)
-	TX_FAR _DayCareMText_5644f
-	db "@"
-
-DayCareMText_56454: ; 56454 (15:6454)
-	TX_FAR _DayCareMText_56454
-	db "@"
 
 DayCareMText2: ; Day Care Man
-    db $08
-    callba DayCareManScript
-    jp TextScriptEnd
-    
-DayCareMText3: ; Ditto
-    TX_FAR _DayCareMText3
-    db "@"
+	db $8
+	call SaveScreenTilesToBuffer2
+	ld a, [W_DAYCARE_IN_USE]
+	bit 1, a
+	jp nz, .daycareInUse
+	ld hl, DayCareIntroText
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	ld hl, DayCareComeAgainText
+	jp nz, .done
+	ld a, [wPartyCount]
+	dec a
+	ld hl, DayCareOnlyHaveOneMonText
+	jp z, .done
+	ld hl, DayCareWhichMonText
+	call PrintText
+	xor a
+	ld [wUpdateSpritesEnabled], a
+	ld [wd07d], a
+	ld [wMenuItemToSwap], a
+	call DisplayPartyMenu
+	push af
+	call GBPalWhiteOutWithDelay3
+	call RestoreScreenTilesAndReloadTilePatterns
+	call LoadGBPal
+	pop af
+	ld hl, DayCareAllRightThenText
+	jp c, .done
+	callab Func_2171b
+	ld hl, DayCareCantAcceptMonWithHMText
+	jp c, .done
+	xor a
+	ld [wcc2b], a
+	ld a, [wWhichPokemon]
+	ld hl, wPartyMonNicks
+	call GetPartyMonName
+	ld hl, DayCareWillLookAfterMonText
+	call PrintText
+	ld hl, W_DAYCARE_IN_USE
+	set 1, [hl]
+	ld a, $4
+	ld [wcf95], a
+	call Func_3a68
+	xor a
+	ld [wcf95], a
+	call RemovePokemon
+	ld a, [wcf91]
+	call PlayCry
+	ld hl, DayCareComeSeeMeInAWhileText
+	jp .done
 
+.daycareInUse
+	xor a
+	ld hl, W_DAYCAREMONNAME
+	call GetPartyMonName
+	ld a, $4
+	ld [wcc49], a
+	call LoadMonData
+	callab CalcLevelFromExperience
+	ld a, d
+	cp MAX_LEVEL
+	jr c, .skipCalcExp
+	ld d, MAX_LEVEL
+	callab CalcExperience
+	ld hl, wDayCareMonExp
+	ld a, [H_NUMTOPRINT]
+	ld [hli], a
+	ld a, [$ff97]
+	ld [hli], a
+	ld a, [$ff98]
+	ld [hl], a
+	ld d, MAX_LEVEL
+
+.skipCalcExp
+	xor a
+	ld [wTrainerEngageDistance], a
+	ld hl, wDayCareMonBoxLevel
+	ld a, [hl]
+	ld [wTrainerSpriteOffset], a
+	cp d
+	ld [hl], d
+	ld hl, DayCareMonNeedsMoreTimeText
+	jr z, .next
+	ld a, [wTrainerSpriteOffset]
+	ld b, a
+	ld a, d
+	sub b
+	ld [wTrainerEngageDistance], a
+	ld hl, DayCareMonHasGrownText
+
+.next
+	call PrintText
+	ld a, [wPartyCount]
+	cp PARTY_LENGTH
+	ld hl, DayCareNoRoomForMonText
+	jp z, .leaveMonInDayCare
+	ld de, wTrainerFacingDirection
+	xor a
+	ld [de], a
+	inc de
+	ld [de], a
+	ld hl, wTrainerScreenX
+	ld a, $1
+	ld [hli], a
+	ld [hl], $0
+	ld a, [wTrainerEngageDistance]
+	inc a
+	ld b, a
+	ld c, $2
+.calcPriceLoop
+	push hl
+	push de
+	push bc
+	predef AddBCDPredef
+	pop bc
+	pop de
+	pop hl
+	dec b
+	jr nz, .calcPriceLoop
+	ld hl, DayCareOweMoneyText
+	call PrintText
+	ld a, $13
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	call YesNoChoice
+	ld hl, DayCareAllRightThenText
+	ld a, [wCurrentMenuItem]
+	and a
+	jp nz, .leaveMonInDayCare
+	ld hl, wTrainerFacingDirection
+	ld [$ff9f], a
+	ld a, [hli]
+	ld [$ffa0], a
+	ld a, [hl]
+	ld [$ffa1], a
+	call HasEnoughMoney
+	jr nc, .enoughMoney
+	ld hl, DayCareNotEnoughMoneyText
+	jp .leaveMonInDayCare
+
+.enoughMoney
+	ld hl, W_DAYCARE_IN_USE
+	res 1, [hl]
+	xor a
+	ld hl, wTrainerEngageDistance
+	ld [hli], a
+	inc hl
+	ld de, wPlayerMoney + 2
+	ld c, $3
+	predef SubBCDPredef
+	ld a, (SFX_02_5a - SFX_Headers_02) / 3
+	call PlaySoundWaitForCurrent
+	ld a, $13
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	ld hl, DayCareHeresYourMonText
+	call PrintText
+	ld a, $5
+	ld [wcf95], a
+	call Func_3a68
+	ld a, [wDayCareMon2Species]
+	ld [wcf91], a
+	ld a, [wPartyCount]
+	dec a
+	push af
+	ld bc, wPartyMon2 - wPartyMon1
+	push bc
+	ld hl, wPartyMon1Moves
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld a, $1
+	ld [wHPBarMaxHP], a
+	predef WriteMonMoves
+	pop bc
+	pop af
+
+; set mon's HP to max
+	ld hl, wPartyMon1HP
+	call AddNTimes
+	ld d, h
+	ld e, l
+	ld bc, wPartyMon1MaxHP - wPartyMon1HP
+	add hl, bc
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld a, [wcf91]
+	call PlayCry
+	ld hl, DayCareGotMonBackText
+	jr .done
+
+.leaveMonInDayCare
+	ld a, [wTrainerSpriteOffset]
+	ld [wDayCareMonBoxLevel], a
+
+.done
+	call PrintText
+	jp TextScriptEnd
+
+
+
+DayCareMText3: ; Breeder
+	db $08
+	callba DayCareBreederScript
+	jp TextScriptEnd
+
+
+
+DayCareIntroText:
+	TX_FAR _DayCareIntroText
+	db "@"
+
+DayCareWhichMonText:
+	TX_FAR _DayCareWhichMonText
+	db "@"
+
+DayCareWillLookAfterMonText:
+	TX_FAR _DayCareWillLookAfterMonText
+	db "@"
+
+DayCareComeSeeMeInAWhileText:
+	TX_FAR _DayCareComeSeeMeInAWhileText
+	db "@"
+
+DayCareMonHasGrownText:
+	TX_FAR _DayCareMonHasGrownText
+	db "@"
+
+DayCareOweMoneyText:
+	TX_FAR _DayCareOweMoneyText
+	db "@"
+
+DayCareGotMonBackText:
+	TX_FAR _DayCareGotMonBackText
+	db "@"
+
+DayCareGotMonBackText2:
+	TX_FAR _DayCareGotMonBackText2
+	db "@"
+
+DayCareMonNeedsMoreTimeText:
+	TX_FAR _DayCareMonNeedsMoreTimeText
+	db "@"
+
+DayCareAllRightThenText:
+	TX_FAR _DayCareAllRightThenText
+DayCareComeAgainText:
+	TX_FAR _DayCareComeAgainText
+	db "@"
+
+DayCareNoRoomForMonText:
+	TX_FAR _DayCareNoRoomForMonText
+	db "@"
+
+DayCareOnlyHaveOneMonText:
+	TX_FAR _DayCareOnlyHaveOneMonText
+	db "@"
+
+DayCareCantAcceptMonWithHMText:
+	TX_FAR _DayCareCantAcceptMonWithHMText
+	db "@"
+
+DayCareHeresYourMonText:
+	TX_FAR _DayCareHeresYourMonText
+	db "@"
+
+DayCareNotEnoughMoneyText:
+	TX_FAR _DayCareNotEnoughMoneyText
+	db "@"

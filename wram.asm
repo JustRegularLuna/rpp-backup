@@ -2764,14 +2764,19 @@ wBerryStepCounter:: ; deee
 	ds 2
 
 W_DAYCARE_IN_USE:: ; da48
-; 0 if no pokemon is in the daycare
-; 1 if pokemon is in the daycare
+; bit 0 - Mon with Day Care Lady
+; bit 1 - Mon with Day Care Man
 	ds 1
 
-W_DAYCAREMONNAME:: ds 11 ; da49
-W_DAYCAREMONOT::   ds 11 ; da54
+W_DAYCAREMONNAME:: ds 11 ; Lady
+W_DAYCAREMONOT::   ds 11 ; Lady
 
-wDayCareMon:: box_struct wDayCareMon ; da5f
+wDayCareMon:: box_struct wDayCareMon ; Lady
+
+W_DAYCAREMON2NAME:: ds 11 ; Man
+W_DAYCAREMON2OT::   ds 11 ; Man
+
+wDayCareMon2:: box_struct wDayCareMon2 ; Man
 
 wMainDataEnd::
 
