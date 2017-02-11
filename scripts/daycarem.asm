@@ -9,7 +9,7 @@ DayCareMTextPointers:
 DayCareMText1: ; Day Care Lady
 	db $8
 	call SaveScreenTilesToBuffer2
-	ld a, [W_DAYCARE_IN_USE]
+	ld a, [wDayCareInUse]
 	bit 0, a
 	jp nz, .daycareInUse
 	ld hl, DayCareIntroText
@@ -47,7 +47,7 @@ DayCareMText1: ; Day Care Lady
 	call GetPartyMonName
 	ld hl, DayCareWillLookAfterMonText
 	call PrintText
-	ld hl, W_DAYCARE_IN_USE
+	ld hl, wDayCareInUse
 	set 0, [hl]
 	ld a, $3
 	ld [wcf95], a
@@ -150,7 +150,7 @@ DayCareMText1: ; Day Care Lady
 	jp .leaveMonInDayCare
 
 .enoughMoney
-	ld hl, W_DAYCARE_IN_USE
+	ld hl, wDayCareInUse
 	res 0, [hl]
 	xor a
 	ld hl, wTrainerEngageDistance
@@ -215,7 +215,7 @@ DayCareMText1: ; Day Care Lady
 DayCareMText2: ; Day Care Man
 	db $8
 	call SaveScreenTilesToBuffer2
-	ld a, [W_DAYCARE_IN_USE]
+	ld a, [wDayCareInUse]
 	bit 1, a
 	jp nz, .daycareInUse
 	ld hl, DayCareIntroText
@@ -253,7 +253,7 @@ DayCareMText2: ; Day Care Man
 	call GetPartyMonName
 	ld hl, DayCareWillLookAfterMonText
 	call PrintText
-	ld hl, W_DAYCARE_IN_USE
+	ld hl, wDayCareInUse
 	set 1, [hl]
 	ld a, $4
 	ld [wcf95], a
@@ -356,7 +356,7 @@ DayCareMText2: ; Day Care Man
 	jp .leaveMonInDayCare
 
 .enoughMoney
-	ld hl, W_DAYCARE_IN_USE
+	ld hl, wDayCareInUse
 	res 1, [hl]
 	xor a
 	ld hl, wTrainerEngageDistance

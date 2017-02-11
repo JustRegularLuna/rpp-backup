@@ -1,6 +1,6 @@
 DayCareBreederScript::
 ; Handles breeding DayCareMon with DayCareMon2
-	ld a, [W_DAYCARE_IN_USE]
+	ld a, [wDayCareInUse]
 	bit 0, a ; is a mon with Day Care Lady?
 	jp z, .NoDayCareMon
 	bit 1, a ; is a mon with Day Care Man?
@@ -11,8 +11,8 @@ DayCareBreederScript::
 	jp c, .isBaby
 	call CanBreed ; Check if it is in the No Breed List (legendaries)
 	jp c, .cannotBreed
-	ld hl, wExtraFlags ; Extra Flags
-	bit 1, [hl] ; Check to see if there is a baby
+	ld a, [wDayCareInUse]
+	bit 2, a ; Check to see if there is a baby
 	jp z, .noEggs
 	ld a, [wPartyCount]
 	cp $06
@@ -27,42 +27,36 @@ DayCareBreederScript::
 	ld c, $5
 	call GivePokemon
 	call SetupBabymonStats
-	ld hl, wExtraFlags ; Extra flags
-	res 1, [hl] ; Mark there not being a babymon at Day Care
+	ld hl, wDayCareInUse
+	res 2, [hl] ; Mark there not being a babymon at Day Care
 	ret
 	
 .NoDayCareMon ; Runs if you don't have a Pokemon in the Day Care
 	ld hl, DayCareBreederText3 ; Come back and see me later
-	call PrintText
-	ret
-	
+	jp PrintText
+
 .isBaby
 	ld hl, DayCareBreederText4 ; That Pokemon is just a baby
-	call PrintText
-	ret
-	
+	jp PrintText
+
 .cannotBreed
 	ld hl, DayCareBreederText5 ; I don't think that will breed
-	call PrintText
-	ret
-	
+	jp PrintText
+
 .noEggs
 	ld hl, DayCareBreederText6 ; They seem to be getting along ok, come back later
-	call PrintText
-	ret
-	
+	jp PrintText
+
 .partyFull
 	ld hl, DayCareBreederText7 ; You have no room for it, though
-	call PrintText
-	ret
-	
+	jp PrintText
+
 .nevermind
-	ld hl, wExtraFlags ; Extra Flags
-	res 1, [hl] ; Mark there not being a babymon at Day Care
+	ld hl, wDayCareInUse
+	res 2, [hl] ; Mark there not being a babymon at Day Care
 	ld hl, DayCareBreederText8 ; Ok, I'll give this to someone else, then
-	call PrintText
-	ret
-	
+	jp PrintText
+
 IsABabymon:
 ; is the mon with Day Care Lady a baby?
 	ld hl, BabyMonList

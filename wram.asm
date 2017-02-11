@@ -2007,7 +2007,7 @@ wPlayerGender::
 
 wExtraFlags::
 ; bit 0 = Set means next Wildmon or Giftmon will be Shiny (Reset afterwards)
-; bit 1 = Set means a baby is in Daycare
+; bit 1 = unused
 ; bit 2 = Set means traded mons obey like normal mons
 ; bit 3 = Set means you've received Eon Ticket in Celadon Mansion
 ; bit 4 = Set means you've received Mystic Ticket in Cinnabar Lab
@@ -2763,9 +2763,10 @@ W_BERRYTREEFLAGS::
 wBerryStepCounter:: ; deee
 	ds 2
 
-W_DAYCARE_IN_USE:: ; da48
+wDayCareInUse:: ; da48
 ; bit 0 - Mon with Day Care Lady
 ; bit 1 - Mon with Day Care Man
+; bit 2 - Egg waiting at Day Care
 	ds 1
 
 W_DAYCAREMONNAME:: ds 11 ; Lady

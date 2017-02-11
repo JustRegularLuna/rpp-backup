@@ -2642,7 +2642,7 @@ INCLUDE "data/dungeon_tilesets.asm"
 INCLUDE "data/tileset_headers.asm"
 
 IncrementDayCareMonExp: ; c8de (3:48de)
-	ld a, [W_DAYCARE_IN_USE]
+	ld a, [wDayCareInUse]
 	bit 0, a ; does Day Care Lady have someone?
 	jr z, .dayCareMan
 	ld hl, wDayCareMonExp + 2
@@ -2659,7 +2659,7 @@ IncrementDayCareMonExp: ; c8de (3:48de)
 	ld a, $50
 	ld [hl], a
 .dayCareMan
-	ld a, [W_DAYCARE_IN_USE]
+	ld a, [wDayCareInUse]
 	bit 1, a ; does Day Care Man have someone?
 	ret z
 	ld hl, wDayCareMon2Exp + 2
