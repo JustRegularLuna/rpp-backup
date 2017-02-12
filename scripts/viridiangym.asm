@@ -162,7 +162,7 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_749be
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	set 7, [hl]
 	ld hl, wd72a
 	set 7, [hl]

@@ -194,7 +194,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	inc a
 	ld c, a
 	ld b, $2
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	predef FlagActionPredef
 	ld a, c
 	and a

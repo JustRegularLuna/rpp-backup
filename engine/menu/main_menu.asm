@@ -125,7 +125,7 @@ Func_5bff: ; 5bff (1:5bff)
 	ld a,1
 	ld [wd358],a
 	ld a,3
-	ld [W_OPTIONS],a
+	ld [wOptions],a
 	ret
 
 LinkMenu: ; 5c0a (1:5c0a)
@@ -388,8 +388,8 @@ PrintSaveScreenText: ; 5def (1:5def)
 
 Func_5e2f: ; 5e2f (1:5e2f)
 	push hl
-	ld hl, W_OBTAINEDBADGES
-	ld b, $1
+	ld hl, wObtainedKantoBadges
+	ld b, $2
 	call CountSetBits
 	pop hl
 	ld de, wd11e
@@ -622,13 +622,13 @@ SetOptionsFromCursorPositions: ; 601f (1:601f)
 	res 6,d
 .storeOptions
 	ld a,d
-	ld [W_OPTIONS],a
+	ld [wOptions],a
 	ret
 
 ; reads the options variable and places menu cursors in the correct positions within the options menu
 SetCursorPositionsFromOptions: ; 604c (1:604c)
 	ld hl,TextSpeedOptionData + 1
-	ld a,[W_OPTIONS]
+	ld a,[wOptions]
 	ld c,a
 	and a,$3f
 	push bc

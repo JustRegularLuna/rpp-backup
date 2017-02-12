@@ -9,7 +9,7 @@ BerryTreeScript::
 	dec a
 	ld c, a ; We need this in register c
 	ld b, 2 ; We want to read this value to see if it's been taken or not
-	ld hl, W_BERRYTREEFLAGS
+	ld hl, wBerryTreeFlags
 	predef FlagActionPredef
 	ld a, c ; Let's get the result of that check
 	and a ; Make sure the flag isn't set
@@ -33,7 +33,7 @@ BerryTreeScript::
 	dec a
 	ld c, a ; We need this in c
 	ld b, 1 ; We want to set this tree's bit
-	ld hl, W_BERRYTREEFLAGS
+	ld hl, wBerryTreeFlags
 	predef FlagActionPredef
 	
 ; Show "Found (Berry Name)!" text
@@ -94,17 +94,19 @@ BerryTable:
 	
 BerryReset::
 ; Called to reset berry trees
-; Happens when the berry counter hits 0
+; Happens when the berry step counter hits 1024
 	ld a, [wBerryStepCounter + 1]
 	cp a, $4
 	ret nz
 	xor a
-	ld hl, W_BERRYTREEFLAGS
+	ld hl, wBerryTreeFlags
+	; assumption: only 2 bytes used for flags
 	ld [hli],a
 	ld [hli],a
+	; assumption: Step Counter immediately follows Berry Tree Flags
 	ld [hli],a
 	ld [hl],a
-; Added part to mark there being a baby at the Day Care
+	; Added part to mark there being a baby at the Day Care
 	ld hl, wDayCareInUse
 	bit 0, [hl] ; does the Day Care Lady have someone?
 	ret z

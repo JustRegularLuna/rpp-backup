@@ -1,7 +1,7 @@
 SetDefaultNames: ; 60ca (1:60ca)
 	ld a, [wd358]
 	push af
-	ld a, [W_OPTIONS] ; W_OPTIONS
+	ld a, [wOptions] ; wOptions
 	push af
 	ld a, [wd732]
 	push af
@@ -16,7 +16,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	pop af
 	ld [wd732], a
 	pop af
-	ld [W_OPTIONS], a ; W_OPTIONS
+	ld [wOptions], a ; wOptions
 	pop af
 	ld [wd358], a
 	ld a, [wd08a]
@@ -31,7 +31,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	ld bc, $b
 	call CopyData
 	ld hl, SonyText
-	ld de, W_RIVALNAME ; wd34a
+	ld de, wRivalName ; wd34a
 	ld bc, $b
 	jp CopyData
 

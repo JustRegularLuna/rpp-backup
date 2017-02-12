@@ -155,7 +155,7 @@ TransformEffect_: ; 3bab1 (e:7ab1)
 	ld hl, Func_79747
 	ld b, BANK(Func_79747)
 	call nz, Bankswitch
-	ld a, [W_OPTIONS]
+	ld a, [wOptions]
 	add a
 	ld hl, PlayCurrentMoveAnimation
 	ld b, BANK(PlayCurrentMoveAnimation)

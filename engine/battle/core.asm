@@ -1509,7 +1509,7 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z,.next4
-	ld a,[W_OPTIONS]
+	ld a,[wOptions]
 	bit 6,a
 	jr nz,.next4
 	ld hl, TrainerAboutToUseText
@@ -4074,7 +4074,7 @@ CheckForDisobedience: ; 3dc88 (f:5c88)
 ; it was traded
 .monIsTraded
 ; what level might disobey?
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	bit 7, [hl]
 	ld a, 101
 	jr nz, .next
@@ -6765,7 +6765,7 @@ ApplyBadgeStatBoosts: ; 3ee19 (f:6e19)
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedKantoBadges]
 	ld b, a
 	ld hl, wBattleMonAttack
 	ld c, $4

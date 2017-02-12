@@ -46,7 +46,7 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	ld h, b
 	ld l, c
 	set HasSubstituteUp, [hl] ;set bit 4 of flags, user now has substitute
-	ld a, [W_OPTIONS]         ;load options
+	ld a, [wOptions]         ;load options
 	bit 7, a                  ;battle animation is enabled?
 	ld hl, PlayCurrentMoveAnimation         ;animation enabled: 0F:7BA8
 	ld b, BANK(PlayCurrentMoveAnimation)

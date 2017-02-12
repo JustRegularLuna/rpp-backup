@@ -2950,7 +2950,7 @@ DrawBadges: ; ea03 (3:6a03)
 ; Alter these based on owned badges.
 	ld de, wcd49
 	ld hl, wTrainerFacingDirection
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedKantoBadges]
 	ld b, a
 	ld c, 8
 .CheckBadge
@@ -4476,9 +4476,9 @@ InitPlayerData2:
 	ld [wcc49], a
 
 ; Obtained badges
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	ld [hli], a
-
+	; wObtainedJohtoBadges
 	ld [hl], a
 
 ; Initialize player coins
@@ -4487,9 +4487,11 @@ InitPlayerData2:
 	ld [hl], a
 	
 ; Initialize Berry Tree flags and step counter
-	ld hl, W_BERRYTREEFLAGS
+	ld hl, wBerryTreeFlags
+	; assumption: only 2 bytes used for flags
 	ld [hli], a
 	ld [hli], a
+	; assumption: step counter immediately follows berry tree flags
 	ld [hli], a
 	ld [hl], a
 

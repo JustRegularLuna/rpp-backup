@@ -60,11 +60,11 @@ LoadDefaultNamesRival: ; 69a4 (1:69a4)
 	jr z, .asm_69c1
 	ld hl, DefaultNamesRivalList
 	call Func_6ad6
-	ld de, W_RIVALNAME ; wd34a
+	ld de, wRivalName ; wd34a
 	call Func_69ec
 	jr .asm_69e1
 .asm_69c1
-	ld hl, W_RIVALNAME ; wd34a
+	ld hl, wRivalName ; wd34a
 	ld a, $1
 	ld [wd07d], a
 	call DisplayNamingScreen

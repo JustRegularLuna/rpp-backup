@@ -278,7 +278,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	ld [W_CUROPPONENT], a
 	call ClearScreen
 	call Delay3
-	ld hl, W_OPTIONS
+	ld hl, wOptions
 	res 7, [hl]
 	predef InitOpponent
 	predef HealParty

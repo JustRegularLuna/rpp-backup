@@ -389,7 +389,7 @@ MoveAnimation: ; 78d5e (1e:4d5e)
 
 .MoveAnimation
 	; check if battle animations are disabled in the options
-	ld a,[W_OPTIONS]
+	ld a,[wOptions]
 	bit 7,a
 	jr nz,.AnimationsDisabled
 	call ShareMoveAnimations

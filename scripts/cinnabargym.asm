@@ -154,7 +154,7 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld [$ff8c], a
 	call DisplayTextID
 .asm_75880
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	set 6, [hl]
 	ld hl, wd72a
 	set 6, [hl]

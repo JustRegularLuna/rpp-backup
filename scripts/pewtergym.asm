@@ -62,7 +62,7 @@ PewterGymScript_5c3df: ; 5c3df (17:43df)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5c408
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	set 0, [hl]
 	ld hl, wd72a
 	set 0, [hl]

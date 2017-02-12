@@ -62,7 +62,7 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_754c0
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	set 4, [hl]
 	ld hl, wd72a
 	set 4, [hl]

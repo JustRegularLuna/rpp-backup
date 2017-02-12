@@ -32,7 +32,7 @@ TrySurf:
 	call HasPartyMove
 	jr nz, .no
 
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedKantoBadges]
 	bit 4, a ; SOUL_BADGE
 	jr z, .no
 	
@@ -86,7 +86,7 @@ TryCut: ; yenatch's code originally checked for the SOUL_BADGE like SURF does by
 	call HasPartyMove
 	jr nz, .no2
 
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedKantoBadges]
 	bit 1, a ; CASCADE_BADGE
 	jr z, .no2
 

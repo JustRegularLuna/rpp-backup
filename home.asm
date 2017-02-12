@@ -938,7 +938,7 @@ BoulderText:: ; 24e5 (0:24e5)
 	TX_FAR _BoulderText
 	db $08 ; asm
 	
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedKantoBadges]
 	bit 3,a ; RAINBOWBADGE
 	jr z, .done
 	
@@ -3551,7 +3551,7 @@ PrintLetterDelay:: ; 38d3 (0:38d3)
 	ld a,[wd358]
 	bit 0,a
 	jr z,.waitOneFrame
-	ld a,[W_OPTIONS]
+	ld a,[wOptions]
 	and $f
 	ld [H_FRAMECOUNTER],a
 	jr .checkButtons

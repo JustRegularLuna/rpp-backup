@@ -62,7 +62,7 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5c736
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	set 1, [hl]
 	ld hl, wd72a
 	set 1, [hl]

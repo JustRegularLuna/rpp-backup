@@ -17,14 +17,14 @@ Func_41102: ; 41102 (10:5102)
 	ld c, BANK(Music_SafariZone)
 	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
-	ld a, [W_OPTIONS]
+	ld a, [wOptions]
 	push af
 	ld a, [hSCY]
 	push af
 	ld a, [hSCX]
 	push af
 	xor a
-	ld [W_OPTIONS], a
+	ld [wOptions], a
 	ld [hSCY], a
 	ld [hSCX], a
 	push de
@@ -52,7 +52,7 @@ Func_41102: ; 41102 (10:5102)
 	pop af
 	ld [hSCY], a
 	pop af
-	ld [W_OPTIONS], a
+	ld [wOptions], a
 	call PlayDefaultMusic
 	ret
 

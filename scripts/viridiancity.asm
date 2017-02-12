@@ -18,7 +18,7 @@ ViridianCityScript_1900b: ; 1900b (6:500b)
 	ld a, [wViridianCityFlags]
 	bit 0, a
 	ret nz
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedKantoBadges]
 	cp %01111111
 	jr nz, .asm_1901e ; 0x19016 $6
 	ld hl, wViridianCityFlags
@@ -150,7 +150,7 @@ ViridianCityText1: ; 19102 (6:5102)
 
 ViridianCityText2: ; 19107 (6:5107)
 	db $08 ; asm
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedKantoBadges]
 	cp %01111111
 	ld hl, ViridianCityText_19127
 	jr z, .asm_ae9fe ; 0x19110

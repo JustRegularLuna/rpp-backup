@@ -8,7 +8,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld de, wPlayerName ; wd158
 	call CopyFixedLengthText
 	ld hl, SonyText
-	ld de, W_RIVALNAME ; wd34a
+	ld de, wRivalName ; wd34a
 	call CopyFixedLengthText
 	xor a
 	ld [hWY], a

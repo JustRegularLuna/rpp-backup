@@ -1533,10 +1533,10 @@ wBagItems:: ; d31e
 wPlayerMoney:: ; d347
 	ds 3 ; BCD
 
-W_RIVALNAME:: ; d34a
+wRivalName:: ; d34a
 	ds 11
 
-W_OPTIONS:: ; d355
+wOptions:: ; d355
 ; bit 7 = battle animation
 ; 0: On
 ; 1: Off
@@ -1549,9 +1549,10 @@ W_OPTIONS:: ; d355
 ; 5: Slow
 	ds 1
 
-W_OBTAINEDBADGES:: ; d356
+wObtainedKantoBadges:: ; d356
 	ds 1
 
+wObtainedJohtoBadges::
 	ds 1
 
 wd358:: ds 1
@@ -2823,7 +2824,7 @@ wSafariZoneGameOver:: ; da46
 W_NUMSAFARIBALLS:: ; da47
 	ds 1
 
-W_BERRYTREEFLAGS::
+wBerryTreeFlags::
 	ds 2
 wBerryStepCounter:: ; deee
 	ds 2

@@ -252,7 +252,7 @@ BuildTrainerCardPalPacket: ; 71f3b (1c:5f3b)
 	call CopyData
 	ld de, LoopCounts_71f8f
 	ld hl, wcc5d
-	ld a, [W_OBTAINEDBADGES]
+	ld a, [wObtainedKantoBadges]
 	ld c, $8
 .asm_71f52
 	srl a

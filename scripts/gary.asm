@@ -52,8 +52,6 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	call Delay3
 	xor a
 	ld [wJoyIgnore], a
-	ld hl, W_OPTIONS
-	res 7, [hl]
 	ld a, $1
 	ld [$ff8c], a
 	call DisplayTextID

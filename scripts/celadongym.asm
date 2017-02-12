@@ -62,7 +62,7 @@ CeladonGymText_48963: ; 48963 (12:4963)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_4898c
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	set 3, [hl]
 	ld hl, wd72a
 	set 3, [hl]

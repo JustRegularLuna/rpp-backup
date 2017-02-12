@@ -82,7 +82,7 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5cad3
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	set 2, [hl]
 	ld hl, wd72a
 	set 2, [hl]

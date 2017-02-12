@@ -62,7 +62,7 @@ SaffronGymText_5d068: ; 5d068 (17:5068)
 	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
 	call DisplayTextID
 .asm_5d091
-	ld hl, W_OBTAINEDBADGES
+	ld hl, wObtainedKantoBadges
 	set 5, [hl]
 	ld hl, wd72a
 	set 5, [hl]
