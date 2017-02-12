@@ -343,7 +343,7 @@ StartBattle: ; 3c11e (f:411e)
 	call SaveScreenTilesToBuffer1
 	ld a, [wWhichPokemon]
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	push bc
 	ld hl, wPartyGainExpFlags
 	predef FlagActionPredef
@@ -1142,7 +1142,7 @@ RemoveFaintedPlayerMon: ; 3c741 (f:4741)
 	ld a, [wPlayerMonNumber]
 	ld c, a
 	ld hl, wPartyGainExpFlags
-	ld b, $0
+	ld b, RESET_FLAG
 	predef FlagActionPredef ; clear gain exp flag for fainted mon
 	ld hl, W_ENEMYBATTSTATUS1
 	res 2, [hl]   ; reset "attacking multiple times" flag
@@ -1242,7 +1242,7 @@ ChooseNextMon: ; 3c7d8 (f:47d8)
 	ld [wPlayerMonNumber], a
 	ld c, a
 	ld hl, wPartyGainExpFlags
-	ld b, $1
+	ld b, SET_FLAG
 	push bc
 	predef FlagActionPredef
 	pop bc
@@ -1413,7 +1413,7 @@ EnemySendOut: ; 3c90e (f:490e)
 	ld [hl],a
 	ld a,[wPlayerMonNumber]
 	ld c,a
-	ld b,1
+	ld b,SET_FLAG
 	push bc
 	predef FlagActionPredef
 	ld hl,wPartyFoughtCurrentEnemyFlags
@@ -2586,7 +2586,7 @@ SwitchPlayerMon: ; 3d1ba (f:51ba)
 	ld a, [wWhichPokemon]
 	ld [wPlayerMonNumber], a
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	push bc
 	ld hl, wPartyGainExpFlags
 	predef FlagActionPredef
@@ -6427,7 +6427,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	ld hl, wPokedexSeen
 	predef FlagActionPredef ; mark this mon as seen in the pokedex
 	ld hl, wEnemyMonLevel

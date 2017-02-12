@@ -52,7 +52,7 @@ Route23Script0: ; 51219 (14:5219)
 	ld [$ff8c], a
 	ld a, c
 	ld [wWhichTrade], a
-	ld b, $2
+	ld b, CHECK_FLAG
 	ld hl, wd7ed
 	predef FlagActionPredef
 	ld a, c
@@ -193,7 +193,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld a, [wWhichTrade] ; wWhichTrade
 	inc a
 	ld c, a
-	ld b, $2
+	ld b, CHECK_FLAG
 	ld hl, wObtainedKantoBadges
 	predef FlagActionPredef
 	ld a, c
@@ -210,7 +210,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	call PrintText
 	ld a, [wWhichTrade] ; wWhichTrade
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	ld hl, wd7ed
 	predef FlagActionPredef
 	ld a, $2

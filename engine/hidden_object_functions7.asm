@@ -211,7 +211,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call PrintText
 	ld a, [$ffe0]
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	call CinnabarGymQuiz_1ea8a
 	jp CinnabarGymQuiz_1eb0a
 .asm_1eab8
@@ -224,7 +224,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld a, [$ffdb]
 	add $2
 	ld c, a
-	ld b, $2
+	ld b, CHECK_FLAG
 	ld hl, wCinnabarGymFlags
 	predef FlagActionPredef
 	ld a, c
@@ -242,7 +242,7 @@ CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 
 	ld a, [$ffe0]
 	ld c, a
-	ld b, $2
+	ld b, CHECK_FLAG
 	call CinnabarGymQuiz_1ea8a
 	ld a, c
 	and a
@@ -279,7 +279,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	ld a, [$ffdb]
 	ld [$ffe0], a
 	ld c, a
-	ld b, $2
+	ld b, CHECK_FLAG
 	call CinnabarGymQuiz_1ea8a
 	ld a, c
 	and a

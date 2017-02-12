@@ -8,7 +8,7 @@ BerryTreeScript::
 	ld a, [wWhichTrade] ; Which tree is this?
 	dec a
 	ld c, a ; We need this in register c
-	ld b, 2 ; We want to read this value to see if it's been taken or not
+	ld b, CHECK_FLAG
 	ld hl, wBerryTreeFlags
 	predef FlagActionPredef
 	ld a, c ; Let's get the result of that check
@@ -32,7 +32,7 @@ BerryTreeScript::
 	ld a, [wWhichTrade] ; Which tree is this?
 	dec a
 	ld c, a ; We need this in c
-	ld b, 1 ; We want to set this tree's bit
+	ld b, SET_FLAG
 	ld hl, wBerryTreeFlags
 	predef FlagActionPredef
 	

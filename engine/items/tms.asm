@@ -17,7 +17,7 @@ CanLearnTM: ; 1373e (4:773e)
 	jr .findTMloop
 .TMfoundLoop
 	pop hl
-	ld b, $2  ; read corresponding bit from TM compatibility array
+	ld b, CHECK_FLAG
 	predef_jump FlagActionPredef
 
 ; converts TM/HM number in wd11e into move number
@@ -55,7 +55,7 @@ CanLearnTutor:
 	jr .findTutorLoop
 .TutorFoundLoop
 	pop hl
-	ld b, $2  ; read corresponding bit from Tutor compatibility array
+	ld b, CHECK_FLAG
 	predef FlagActionPredef
 	ld a, c
 	ld [wTempMoveID], a ; bc is not preserved when called from another bank

@@ -441,7 +441,7 @@ BallAnyway:
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,2
+	ld b,CHECK_FLAG
 	ld hl,wPokedexOwned	;Dex_own_flags (pokemon)
 	predef FlagActionPredef
 	ld a,c
@@ -449,7 +449,7 @@ BallAnyway:
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,1
+	ld b,SET_FLAG
 	predef FlagActionPredef
 	pop af
 	and a
@@ -863,7 +863,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wcf06]
 	ld c,a
 	ld hl,wPartyFoughtCurrentEnemyFlags
-	ld b,$02
+	ld b,CHECK_FLAG
 	predef FlagActionPredef
 	ld a,c
 	and a
@@ -871,7 +871,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wcf06]
 	ld c,a
 	ld hl,wPartyGainExpFlags
-	ld b,$01
+	ld b,SET_FLAG
 	predef FlagActionPredef
 .next
 	pop bc
@@ -2700,7 +2700,7 @@ IsKeyItem_: ; e764 (3:6764)
 	dec a
 	ld c,a
 	ld hl,wHPBarMaxHP
-	ld b,$02 ; test bit
+	ld b,CHECK_FLAG
 	predef FlagActionPredef ; bitfield operation function
 	ld a,c
 	and a

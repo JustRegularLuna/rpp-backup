@@ -96,7 +96,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [wTrainerHeaderFlagBit]
 	ld [$ffdb], a
 	ld c, a
-	ld b, $2
+	ld b, CHECK_FLAG
 	ld hl, wCinnabarGymFlags
 	call CinnabarGymScript_757f1
 	ld a, c
@@ -110,13 +110,13 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [wTrainerHeaderFlagBit]
 	ld [$ffdb], a
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	ld hl, wCinnabarGymFlags
 	call CinnabarGymScript_757f1
 	ld a, [wTrainerHeaderFlagBit]
 	sub $2
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	ld hl, wCinnabarGymGateFlags
 	call CinnabarGymScript_757f1
 	call Func_3ead

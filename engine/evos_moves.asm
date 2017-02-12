@@ -5,7 +5,7 @@ TryEvolvingMon: ; 3ad0e (e:6d0e)
 	ld [hl], a
 	ld a, [wWhichPokemon]
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	call Evolution_FlagAction
 
 ; this is only called after battle
@@ -36,7 +36,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wWhichPokemon]
 	ld c, a
 	ld hl, wccd3
-	ld b, $2
+	ld b, CHECK_FLAG
 	call Evolution_FlagAction
 	ld a, c
 	and a ; is the mon's bit set?
@@ -318,7 +318,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, $1
+	ld b, SET_FLAG
 	ld hl, wPokedexOwned
 	push bc
 	call Evolution_FlagAction
