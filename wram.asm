@@ -1376,8 +1376,6 @@ W_MONHPICBANK:: ; d0d3
 
 wd0d4:: ds 3
 
-W_MONHPADDING:: ; d0d7
-
 
 W_DAMAGE:: ; d0d7
 	ds 2
