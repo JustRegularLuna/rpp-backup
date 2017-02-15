@@ -2230,13 +2230,17 @@ wd744:: ds 3
 ; use in scripts by doing:
 ;
 ; ld de, FLAG_TO_CHECK
-; predef CheckEvent
+; ld b, CHECK_FLAG
+; predef EventFlagAction
 ; etc
 ; 
 ; add constants/event_constants.asm to store these entries
 ; add engine/event_flag_actions.asm to store the predefs
 ; later, rewrite event hide/show to use these flags as well, like Gen 2
+; probably add the flag at the end of the person data, stored in yet another table like trainer/item ids
 ; 
+; rewrite map trainer code to store a flag id where it used to store the address
+;
 wFlags1:: 
 ; bit 0 - Followed Oak into Lab
 ; bit 3 - Hall of Fame Dex Rating
@@ -2263,12 +2267,12 @@ wOaksLabFlags::
 wViridianCityFlags:: 
 ; bit 0 - Viridian Gym Open
 ; bit 1 - Got TM42
-	ds 2
+	ds 1
 
 wOaksParcelFlags:: 
 ; bit 0 - Oak Got Parcel
 ; bit 1 - Got Oak's Parcel
-	ds 3
+	ds 1
 
 wViridianGymFlags:: 
 ; bit 0 - Got TM27
@@ -2284,7 +2288,7 @@ wViridianGymFlags::
 wViridianGymFlags2:: 
 ; bit 0 - Trainer Flag
 ; bit 1 - Trainer Flag
-	ds 2
+	ds 1
 
 wPewterMuseumFlags:: 
 ; bit 0 - Bought museum ticket
@@ -2295,7 +2299,7 @@ wPewterGymFlags::
 ; bit 2 - Trainer Flag
 ; bit 6 - Got TM34
 ; bit 7 - Beat Brock
-	ds 5
+	ds 1
 
 wCeruleanCityFlags:: 
 ; bit 0 - Beat Rival in Cerulean City
@@ -2303,7 +2307,7 @@ wCeruleanCityFlags::
 
 wCeruleanCityFlags2:: 
 ; bit 7 - Beat Rocket Grunt in Cerulean City
-	ds 3
+	ds 1
 
 wCeruleanGymFlags:: 
 ; bit 2 - Trainer Flag
@@ -2314,7 +2318,7 @@ wCeruleanGymFlags::
 
 wBikeShopFlags:: 
 ; bit 0 - Got Bicycle
-	ds 5
+	ds 1
 
 wPokemonTower2Flags:: 
 ; bit 6 - Pokemon Tower Rival On Left
@@ -2353,17 +2357,17 @@ wPokemonTower7Flags::
 ; bit 2 - Trainer Flag
 ; bit 3 - Trainer Flag
 ; bit 7 - Rescued Mr Fuji 2
-	ds 3
+	ds 1
 
 wLavenderHouse1Flags:: 
 ; bit 0 - Got Pokeflute
-	ds 5
+	ds 1
 
 wFanClubFlags:: 
 ; bit 1 - Got Bike Voucher
 ; bit 6 - Brag About Seel
 ; bit 7 - Brag About Pikachu
-	ds 2
+	ds 1
 
 wVermilionGymFlags:: 
 ; bit 0 - 2nd Lock Opened
@@ -2373,7 +2377,7 @@ wVermilionGymFlags::
 ; bit 4 - Trainer Flag
 ; bit 6 - Got TM24
 ; bit 7 - Beat Lt. Surge
-	ds 4
+	ds 1
 
 wCeladonCityFlags:: 
 ; bit 0 - Got TM41
@@ -2384,7 +2388,7 @@ wCeladonMartFlags::
 ; bit 5 - Got TM48
 ; bit 6 - Got TM49
 ; bit 7 - Got TM18
-	ds 4
+	ds 1
 
 wCeladonGymFlags:: 
 ; bit 0 - Got TM21
@@ -2406,21 +2410,21 @@ wCeladonGameCornerFlags::
 ; bit 2 - Got 10 Coins
 ; bit 3 - Got 20 Coins
 ; bit 4 - Got 20 Coins 2
-	ds 5
+	ds 1
 
 wCeladonDinerFlags:: 
 ; bit 0 - Got Coin Case
-	ds 11
+	ds 1
 
 wFuchsiaHouse2Flags:: 
 ; bit 0 - Got HM04
 ; bit 1 - Gave Gold Teeth
-	ds 2
+	ds 1
 
 wSafariZoneFlags:: 
 ; bit 6 - Safari Game Over
 ; bit 7 - In Safari Zone
-	ds 2
+	ds 1
 
 wFuchsiaGymFlags:: 
 ; bit 0 - Got TM06
@@ -2431,15 +2435,15 @@ wFuchsiaGymFlags::
 ; bit 5 - Trainer Flag
 ; bit 6 - Trainer Flag
 ; bit 7 - Trainer Flag
-	ds 4
+	ds 1
 
 wCinnabarMansionFlags:: 
 ; bit 0 - Mansion Switch On
-	ds 2
+	ds 1
 
 wCinnabarMansionTrainerFlags:: 
 ; bit 1 - Trainer Flag
-	ds 2
+	ds 1
 
 wCinnabarGymFlags:: 
 ; bit 0 - Got TM38
@@ -2464,21 +2468,21 @@ wCinnabarGymGateFlags::
 ; bit 4 - Gate Flag
 ; bit 5 - Gate Flag
 ; bit 6 - Gate Flag
-	ds 5
+	ds 1
 
 wCinnabarLabItemFlags:: 
 ; bit 7 - Got TM35
-	ds 2
+	ds 1
 
 wCinnabarLabFossilFlags:: 
 ; bit 0 - Gave Fossil To Lab
 ; bit 1 - Lab Still Reviving Fossil
 ; bit 2 - Lab Handing Over Fossil Now
-	ds 12
+	ds 1
 
 wCopyCatFlags:: 
 ; bit 0 - Got TM31
-	ds 2
+	ds 1
 
 wFightingDojoFlags:: 
 ; bit 0 - Defeated Fighting Dojo
@@ -2489,7 +2493,7 @@ wFightingDojoFlags::
 ; bit 5 - Trainer Flag
 ; bit 6 - Got Hitmonlee
 ; bit 7 - Got Hitmonchan
-	ds 2
+	ds 1
 
 wSaffronGymFlags:: 
 ; bit 0 - Got TM46
@@ -2504,19 +2508,19 @@ wSaffronGymFlags::
 
 wSaffronGymFlags2:: 
 ; bit 0 - Trainer Flag
-	ds 5
+	ds 1
 
 wSilphCo1Flags:: 
 ; bit 7 - Silph Co Receptionist At Desk
-	ds 4
+	ds 1
 
 wSaffronHouse2Flags:: 
 ; bit 0 - Got TM29
-	ds 2
+	ds 1
 
 wRoute1Flags:: 
 ; bit 0 - Got Potion Sample
-	ds 3
+	ds 1
 
 wRoute2GateFlags:: 
 ; bit 0 - Got HM05
@@ -2531,7 +2535,7 @@ wRoute3Flags:: ; actually 2 bytes this time
 ; bit 7 - Trainer Flag
 ; bit 0 - Trainer Flag
 ; bit 1 - Trainer Flag
-	ds 2
+	ds 1
 
 wRoute4Flags:: 
 ; bit 2 - Trainer Flag
@@ -2539,7 +2543,7 @@ wRoute4Flags::
 
 wMtMoonPokecenterFlags:: 
 ; bit 7 - Bought Magikarp
-	ds 3
+	ds 1
 
 wRoute6Flags:: 
 ; bit 1 - Trainer Flag
@@ -2549,7 +2553,7 @@ wRoute6Flags::
 ; bit 4 - Trainer Flag
 ; bit 5 - Trainer Flag
 ; bit 6 - Trainer Flag
-	ds 4
+	ds 1
 
 wRoute8Flags:: ; actually 2 bytes
 ; bit 1 - Trainer Flag
@@ -2696,32 +2700,32 @@ wRoute16Flags2::
 	ds 1
 
 wd7e1:: ds 2
-wd7e3:: ds 2
+wd7e3:: ds 1
 wd7e5:: ds 2
 wd7e7:: ds 1
 wd7e8:: ds 1
 wd7e9:: ds 2
-wd7eb:: ds 2
+wd7eb:: ds 1
 wd7ed:: ds 1
 wd7ee:: ds 1
 wd7ef:: ds 1
 wd7f0:: ds 1
 wd7f1:: ds 1
 wd7f2:: ds 1
-wd7f3:: ds 2
+wd7f3:: ds 1
 wd7f5:: ds 1
-wd7f6:: ds 9
-wd7ff:: ds 4
-wd803:: ds 2
-wd805:: ds 2
-wd807:: ds 2
-wd809:: ds 10
-wd813:: ds 2
+wd7f6:: ds 1
+wd7ff:: ds 1
+wd803:: ds 1
+wd805:: ds 1
+wd807:: ds 1
+wd809:: ds 1
+wd813:: ds 1
 wd815:: ds 1
 wd816:: ds 1
-wd817:: ds 2
-wd819:: ds 2
-wd81b:: ds 10
+wd817:: ds 1
+wd819:: ds 1
+wd81b:: ds 1
 wd825:: ds 1
 wd826:: ds 1
 wd827:: ds 1
@@ -2741,23 +2745,23 @@ wd834:: ds 1
 wd835:: ds 1
 wd836:: ds 1
 wd837:: ds 1
-wd838:: ds 15
-wd847:: ds 2
-wd849:: ds 2
-wd84b:: ds 12
-wd857:: ds 8
-wd85f:: ds 4
+wd838:: ds 1
+wd847:: ds 1
+wd849:: ds 1
+wd84b:: ds 1
+wd857:: ds 1
+wd85f:: ds 1
 wd863:: ds 1
 wd864:: ds 1
 wd865:: ds 1
 wd866:: ds 1
-wd867:: ds 2
-wd869:: ds 20
+wd867:: ds 1
+wd869:: ds 1
 wd87d:: ds 2
 wd87f:: ds 1
 wd880:: ds 1
 wd881:: ds 1
-wd882:: ds 5
+wd882:: ds 1
 
 wLinkEnemyTrainerName:: ; d887
 ; linked game's trainer name
