@@ -35,7 +35,7 @@
 .lvimrc
 
 # ignore GlitchMap files, since that shouldn't really be out and about yet
-GlitchMap/
+GlitchMap/data.js
 
 # ignore .map files in main folder
 pokered.map
