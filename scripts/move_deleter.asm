@@ -1,5 +1,5 @@
 MoveDeleterText1:
-	db 8 ; asm
+	TX_ASM
 	ld hl, MoveDeleterGreetingText
 	call PrintText
 	call YesNoChoice

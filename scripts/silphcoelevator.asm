@@ -80,7 +80,7 @@ SilphCoElevatorTextPointers: ; 45833 (11:5833)
 	dw SilphCoElevatorText1
 
 SilphCoElevatorText1: ; 45835 (11:5835)
-	db $08 ; asm
+	TX_ASM
 	call SilphCoElevatorScript_457f1
 	ld hl, SilphCoElevatorWarpMaps ; $5811
 	predef Func_1c9c6

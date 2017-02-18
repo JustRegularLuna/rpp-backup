@@ -22,7 +22,7 @@ MtMoonPokecenterText3: ; 492e7 (12:52e7)
 	db "@"
 
 MtMoonPokecenterText4:
-	db $08 ; asm
+	TX_ASM
 	ld a, [wMtMoonPokecenterFlags]
 	add a
 	jp c, .alreadyBoughtMagikarp

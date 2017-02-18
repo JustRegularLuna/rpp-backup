@@ -7,7 +7,7 @@ Lab2TextPointers: ; 75c24 (1d:5c24)
 	dw Lab2Text3
 
 Lab2Text1: ; 75c2a (1d:5c2a)
-	db $08 ;asm
+	TX_ASM
 	
 	; check if you have already received the ticket
 	ld a, [wExtraFlags]
@@ -104,7 +104,7 @@ NoRoomForMysticText:
 	db "@"
 
 Lab2Text2: ; 75c2f (1d:5c2f)
-	db $8
+	TX_ASM
 	ld hl, Trader7Name ; the old man
 	call SetCustomName
 	ld a, $7
@@ -112,7 +112,7 @@ Lab2Text2: ; 75c2f (1d:5c2f)
 	jr asm_78552 ; 0x75c35 $6
 
 Lab2Text3: ; 75c37 (1d:5c37)
-	db $8
+	TX_ASM
 	ld hl, Trader8Name ; the girl
 	call SetCustomName
 	ld a, $8

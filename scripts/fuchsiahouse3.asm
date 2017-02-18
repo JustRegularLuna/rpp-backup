@@ -5,7 +5,7 @@ FuchsiaHouse3TextPointers: ; 5617f (15:617f)
 	dw FuchsiaHouse3Text1
 
 FuchsiaHouse3Text1: ; 56181 (15:6181)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd728]
 	bit 4, a
 	jr nz, .after
@@ -51,16 +51,6 @@ FuchsiaHouse3Text_561c2: ; 561c2 (15:61c2)
 	TX_FAR _FuchsiaHouse3Text_561c2 ; 0xa06e8
 	db $0B
 	db "@"
-
-UnnamedText_561c8: ; 561c8
-	para "つり こそ"
-	line "おとこの ロマン だ!"
-
-	para "へぼいつりざおは"
-	line "コイキングしか つれ なんだが"
-	line "この いいつりざおなら"
-	line "もっと いいもんが つれるんじゃ!"
-	done
 
 FuchsiaHouse3Text_56212: ; 56212 (15:6212)
 	TX_FAR _FuchsiaHouse3Text_56212

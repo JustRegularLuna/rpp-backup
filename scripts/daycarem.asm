@@ -7,7 +7,7 @@ DayCareMTextPointers:
 	dw DayCareMText3 ; Day Care Helper
 
 DayCareMText1: ; Day Care Lady
-	db $8
+	TX_ASM
 	call SaveScreenTilesToBuffer2
 	ld a, [wDayCareInUse]
 	bit 0, a
@@ -213,7 +213,7 @@ DayCareMText1: ; Day Care Lady
 
 
 DayCareMText2: ; Day Care Man
-	db $8
+	TX_ASM
 	call SaveScreenTilesToBuffer2
 	ld a, [wDayCareInUse]
 	bit 1, a
@@ -420,7 +420,7 @@ DayCareMText2: ; Day Care Man
 
 
 DayCareMText3: ; Breeder
-	db $08
+	TX_ASM
 	callba DayCareBreederScript
 	jp TextScriptEnd
 

@@ -64,19 +64,19 @@ ViridianForestText1: ; 61167 (18:5167)
 	db "@"
 
 ViridianForestText2: ; 6116c (18:516c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianForestTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianForestText3: ; 61176 (18:5176)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianForestTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 ViridianForestText4: ; 61180 (18:5180)
-	db $08 ; asm
+	TX_ASM
 	ld hl, ViridianForestTrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -146,7 +146,7 @@ ViridianForestText14: ; 611d5 (18:51d5)
 	db "@"
 
 ViridianForestTree1:
-	db $08 ; asm
+	TX_ASM
 	ld a, 13
 	ld [wWhichTrade], a
 	callba BerryTreeScript

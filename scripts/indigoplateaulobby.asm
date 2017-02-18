@@ -34,8 +34,11 @@ IndigoPlateauLobbyText2: ; 19c8a (6:5c8a)
 	db "@"
 
 IndigoPlateauLobbyText3: ; 19c8f (6:5c8f)
-	TX_FAR _IndigoPlateauLobbyText3
-	db "@"
+	TX_ASM
+	ld a, 6
+	ld [wWhichTrade], a
+	callba MoveTutorScript
+	jp TextScriptEnd
 
 IndigoPlateauLobbyText5: ; 19c94 (6:5c94)
 	db $f6

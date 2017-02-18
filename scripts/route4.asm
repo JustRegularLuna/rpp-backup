@@ -39,7 +39,7 @@ Route4Text1: ; 5568a (15:568a)
 	db "@"
 
 Route4Text2: ; 5568f (15:568f)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Route4TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
@@ -65,14 +65,14 @@ Route4Text6: ; 556ad (15:56ad)
 	db "@"
 
 Route4Tree1:
-	db $08 ; asm
+	TX_ASM
 	ld a, 8
 	ld [wWhichTrade], a
 	callba BerryTreeScript
 	jp TextScriptEnd
 	
 Route4Tree2:
-	db $08 ; asm
+	TX_ASM
 	ld a, 9
 	ld [wWhichTrade], a
 	callba BerryTreeScript

@@ -28,14 +28,14 @@ FarawayIslandInsideTrainerHeader0:
 	db $ff
 
 FarawayIslandInsideText1:
-	db $08 ; asm
+	TX_ASM
 	ld hl, FarawayIslandInsideTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 FarawayIslandInsideMewText:
 	TX_FAR _FarawayIslandInsideMewText
-	db $8
+	TX_ASM
 	ld a, MEW
 	call PlayCry
 	call WaitForSoundToFinish

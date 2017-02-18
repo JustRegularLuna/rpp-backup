@@ -110,47 +110,47 @@ Route9TrainerHeader9: ; 5574b (15:574b)
 	db $ff
 
 Route9Text1: ; 55758 (15:5758)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader0
 	jr asm_8be3d ; 0x5575c $2e
 
 Route9Text2: ; 5575e (15:575e)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader2
 	jr asm_8be3d ; 0x55762 $28
 
 Route9Text3: ; 55764 (15:5764)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader3
 	jr asm_8be3d ; 0x55768 $22
 
 Route9Text4: ; 5576a (15:576a)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader4
 	jr asm_8be3d ; 0x5576e $1c
 
 Route9Text5: ; 55770 (15:5770)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader5
 	jr asm_8be3d ; 0x55774 $16
 
 Route9Text6: ; 55776 (15:5776)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader6
 	jr asm_8be3d ; 0x5577a $10
 
 Route9Text7: ; 5577c (15:577c)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader7
 	jr asm_8be3d ; 0x55780 $a
 
 Route9Text8: ; 55782 (15:5782)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader8
 	jr asm_8be3d ; 0x55786 $4
 
 Route9Text9: ; 55788 (15:5788)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route9TrainerHeader9
 asm_8be3d: ; 5578c (15:578c)
 	call TalkToTrainer

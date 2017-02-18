@@ -89,39 +89,39 @@ RockTunnel1TrainerHeader7: ; 4454d (11:454d)
 	db $ff
 
 RockTunnel1Text1: ; 4455a (11:455a)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader1 ; $4505
-	jr asm_0c916 ; 0x4455e $22
+	jr RockTunnel1TalkToTrainer ; 0x4455e $22
 
 RockTunnel1Text2: ; 44560 (11:4560)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader2 ; $4511
-	jr asm_0c916 ; 0x44564 $1c
+	jr RockTunnel1TalkToTrainer ; 0x44564 $1c
 
 RockTunnel1Text3: ; 44566 (11:4566)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader3 ; $451d
-	jr asm_0c916 ; 0x4456a $16
+	jr RockTunnel1TalkToTrainer ; 0x4456a $16
 
 RockTunnel1Text4: ; 4456c (11:456c)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader4 ; $4529
-	jr asm_0c916 ; 0x44570 $10
+	jr RockTunnel1TalkToTrainer ; 0x44570 $10
 
 RockTunnel1Text5: ; 44572 (11:4572)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader5 ; $4535
-	jr asm_0c916 ; 0x44576 $a
+	jr RockTunnel1TalkToTrainer ; 0x44576 $a
 
 RockTunnel1Text6: ; 44578 (11:4578)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader6 ; $4541
-	jr asm_0c916 ; 0x4457c $4
+	jr RockTunnel1TalkToTrainer ; 0x4457c $4
 
 RockTunnel1Text7: ; 4457e (11:457e)
-	db $8
+	TX_ASM
 	ld hl, RockTunnel1TrainerHeader7 ; $454d
-asm_0c916: ; 44582 (11:4582)
+RockTunnel1TalkToTrainer: ; 44582 (11:4582)
 	call TalkToTrainer
 	jp TextScriptEnd
 

@@ -30,7 +30,7 @@ BluesHouseTextPointers: ; 19b57 (6:5b57)
 	dw BluesHouseText7
 
 BluesHouseText1: ; 19b5d (6:5b5d)
-	db 8
+	TX_ASM
 	ld a,[wBluesHouseFlags]
 	bit 0,a
 	jr nz,.GotMap

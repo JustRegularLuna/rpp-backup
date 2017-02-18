@@ -40,6 +40,6 @@ InsideFerryTextPointers:
 	dw InsideFerryText1
 
 InsideFerryText1:
-	db $08 ; asm
+	TX_ASM
 	callba EventIslandsFerryScript
 	jp TextScriptEnd

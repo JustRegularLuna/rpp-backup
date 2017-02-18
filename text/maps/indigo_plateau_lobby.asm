@@ -12,10 +12,3 @@ _IndigoPlateauLobbyText1:: ; a13f0 (28:53f0)
 	cont "over again! This"
 	cont "is it! Go for it!"
 	done
-
-_IndigoPlateauLobbyText3:: ; a148b (28:548b)
-	db 8
-	ld a, 6
-	ld [wWhichTrade], a
-	callba MoveTutorScript
-	jp TextScriptEnd

@@ -39,20 +39,20 @@ SouthernIslandInsideTrainerHeader1:
 	db $ff
 
 SouthernIslandInsideText1:
-	db $08 ; asm
+	TX_ASM
 	ld hl, SouthernIslandInsideTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 	
 SouthernIslandInsideText2:
-	db $08 ; asm
+	TX_ASM
 	ld hl, SouthernIslandInsideTrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
 SouthernIslandInsideLatiosText:
 	TX_FAR _SouthernIslandInsideLatiText
-	db $8
+	TX_ASM
 	ld a, LATIOS
 	call PlayCry
 	call WaitForSoundToFinish
@@ -60,7 +60,7 @@ SouthernIslandInsideLatiosText:
 	
 SouthernIslandInsideLatiasText:
 	TX_FAR _SouthernIslandInsideLatiText
-	db $8
+	TX_ASM
 	ld a, LATIAS
 	call PlayCry
 	call WaitForSoundToFinish

@@ -120,54 +120,54 @@ Route15TrainerHeader9: ; 5984b (16:584b)
 	db $ff
 
 Route15Text1: ; 59858 (16:5858)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader0
-	jr asm_33cb7 ; 0x5985c $34
+	jr Route15TalkToTrainer ; 0x5985c $34
 
 Route15Text2: ; 5985e (16:585e)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader1
-	jr asm_33cb7 ; 0x59862 $2e
+	jr Route15TalkToTrainer ; 0x59862 $2e
 
 Route15Text3: ; 59864 (16:5864)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader2
-	jr asm_33cb7 ; 0x59868 $28
+	jr Route15TalkToTrainer ; 0x59868 $28
 
 Route15Text4: ; 5986a (16:586a)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader3
-	jr asm_33cb7 ; 0x5986e $22
+	jr Route15TalkToTrainer ; 0x5986e $22
 
 Route15Text5: ; 59870 (16:5870)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader4
-	jr asm_33cb7 ; 0x59874 $1c
+	jr Route15TalkToTrainer ; 0x59874 $1c
 
 Route15Text6: ; 59876 (16:5876)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader5
-	jr asm_33cb7 ; 0x5987a $16
+	jr Route15TalkToTrainer ; 0x5987a $16
 
 Route15Text7: ; 5987c (16:587c)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader6
-	jr asm_33cb7 ; 0x59880 $10
+	jr Route15TalkToTrainer ; 0x59880 $10
 
 Route15Text8: ; 59882 (16:5882)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader7
-	jr asm_33cb7 ; 0x59886 $a
+	jr Route15TalkToTrainer ; 0x59886 $a
 
 Route15Text9: ; 59888 (16:5888)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader8
-	jr asm_33cb7 ; 0x5988c $4
+	jr Route15TalkToTrainer ; 0x5988c $4
 
 Route15Text10: ; 5988e (16:588e)
-	db $8 ; asm
+	TX_ASM
 	ld hl, Route15TrainerHeader9
-asm_33cb7: ; 59892 (16:5892)
+Route15TalkToTrainer: ; 59892 (16:5892)
 	call TalkToTrainer
 	jp TextScriptEnd
 

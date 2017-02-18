@@ -24,7 +24,7 @@ WriterText: ; 487ad (12:47ad)
 	db "@"
 
 DirectorText: ; 487b2 (12:47b2)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wExtraFlags]
 	bit 3, a
 	jr nz, .alreadyGiven
@@ -87,7 +87,7 @@ DirectorText: ; 487b2 (12:47b2)
 GameFreakPCText1: ; 487eb (12:47eb)
 	TX_FAR _CeladonMansion3Text5
 	db $6
-	db $8
+	TX_ASM
 	callba ProgrammerComputerScreen
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -96,7 +96,7 @@ GameFreakPCText1: ; 487eb (12:47eb)
 GameFreakPCText2: ; 487f0 (12:47f0)
 	TX_FAR _CeladonMansion3Text6
 	db $6
-	db $8
+	TX_ASM
 	callba TetrisComputerScreen
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -105,7 +105,7 @@ GameFreakPCText2: ; 487f0 (12:47f0)
 GameFreakPCText3: ; 487f5 (12:47f5)
 	TX_FAR _CeladonMansion3Text7
 	db $6
-	db $8
+	TX_ASM
 	callba ScriptComputerScreen
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a

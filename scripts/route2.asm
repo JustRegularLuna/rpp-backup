@@ -18,14 +18,14 @@ Route2Text4: ; 554f3 (15:54f3)
 	db "@"
 
 Route2Tree1:
-	db $08 ; asm
+	TX_ASM
 	ld a, 2 ; Tree number
 	ld [wWhichTrade],a
 	callba BerryTreeScript
 	jp TextScriptEnd
 
 Route2Tree2:
-	db $08 ; asm
+	TX_ASM
 	ld a, 12 ; Tree number
 	ld [wWhichTrade],a
 	callba BerryTreeScript

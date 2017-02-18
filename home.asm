@@ -936,7 +936,7 @@ GroundRoseText:: ; 24e0 (0:24e0)
 
 BoulderText:: ; 24e5 (0:24e5)
 	TX_FAR _BoulderText
-	db $08 ; asm
+	TX_ASM
 	
 	ld a, [wObtainedKantoBadges]
 	bit 3,a ; RAINBOWBADGE
@@ -970,7 +970,7 @@ PokeCenterSignText:: ; 24ef (0:24ef)
 
 Predef5CText:: ; 24f4 (0:24f4)
 ; XXX better label (what does predef $5C do?)
-	db $08 ; asm
+	TX_ASM
 	predef PickupItem
 	jp TextScriptEnd
 
@@ -2607,8 +2607,7 @@ GetSavedEndBattleTextPointer:: ; 33b7 (0:33b7)
 	ret
 
 TrainerEndBattleText:: ; 33cf (0:33cf)
-	;TX_FAR _TrainerNameText
-	db $08
+	TX_ASM
 	call GetSavedEndBattleTextPointer
 	call TextCommandProcessor
 	jp TextScriptEnd

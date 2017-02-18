@@ -208,6 +208,10 @@ TX_BCD: MACRO
 	db \2
 	ENDM
 
+MART_LIST EQU $FE
+
+TX_ASM EQUS "db $08"
+
 ; Predef macro.
 add_predef: MACRO
 \1Predef::

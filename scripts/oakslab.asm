@@ -738,7 +738,7 @@ OaksLabTextPointers: ; 1d082 (7:5082)
 
 OaksLabText28: ; 1d0ce (7:50ce)
 OaksLabText1: ; 1d0ce (7:50ce)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wOaksLabFlags]
 	bit 0, a
 	jr nz, .asm_1d0de ; 0x1d0d4
@@ -771,7 +771,7 @@ OaksLabText41: ; 1d0fd (7:50fd)
 
 OaksLabText29: ; 1d102 (7:5102)
 OaksLabText2: ; 1d102 (7:5102)
-	db $8
+	TX_ASM
 	ld a, STARTER2
 	ld [wWhichTrade], a
 	ld a, $3
@@ -782,7 +782,7 @@ OaksLabText2: ; 1d102 (7:5102)
 
 OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
-	db $8
+	TX_ASM
 	ld a, STARTER3
 	ld [wWhichTrade], a
 	ld a, $4
@@ -793,7 +793,7 @@ OaksLabText3: ; 1d113 (7:5113)
 
 OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
-	db $8
+	TX_ASM
 	ld a, STARTER1
 	ld [wWhichTrade], a
 	ld a, $2
@@ -943,7 +943,7 @@ OaksLabLastMonText: ; 1d243 (7:5243)
 
 OaksLabText32: ; 1d248 (7:5248)
 OaksLabText5: ; 1d248 (7:5248)
-	db $08 ; asm
+	TX_ASM
 	ld a, [wFlags1]
 	bit 6, a
 	jr nz, .asm_50e81 ; 0x1d24e
@@ -1059,7 +1059,7 @@ OaksLabText34: ; 1d322 (7:5322)
 OaksLabText33: ; 1d322 (7:5322)
 OaksLabText7: ; 1d322 (7:5322)
 OaksLabText6: ; 1d322 (7:5322)
-	db $08 ; asm
+	TX_ASM
 	ld hl, OaksLabText_1d32c
 	call PrintText
 	jp TextScriptEnd
@@ -1075,7 +1075,7 @@ OaksLabText8: ; 1d331 (7:5331)
 
 OaksLabText36: ; 1d336 (7:5336)
 OaksLabText9: ; 1d336 (7:5336)
-	db $08 ; asm
+	TX_ASM
 	ld hl, OaksLabText_1d340
 	call PrintText
 	jp TextScriptEnd
@@ -1085,7 +1085,7 @@ OaksLabText_1d340: ; 1d340 (7:5340)
 	db "@"
 
 OaksLabText17: ; 1d345 (7:5345)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalWaitingText
 	call PrintText
 	jp TextScriptEnd
@@ -1095,7 +1095,7 @@ OaksLabRivalWaitingText: ; 1d34f (7:534f)
 	db "@"
 
 OaksLabText18: ; 1d354 (7:5354)
-	db $8
+	TX_ASM
 	ld hl, OaksLabChooseMonText
 	call PrintText
 	jp TextScriptEnd
@@ -1105,7 +1105,7 @@ OaksLabChooseMonText: ; 1d35e (7:535e)
 	db "@"
 
 OaksLabText19: ; 1d363 (7:5363)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalInterjectionText
 	call PrintText
 	jp TextScriptEnd
@@ -1115,7 +1115,7 @@ OaksLabRivalInterjectionText: ; 1d36d (7:536d)
 	db "@"
 
 OaksLabText20: ; 1d372 (7:5372)
-	db $8
+	TX_ASM
 	ld hl, OaksLabBePatientText
 	call PrintText
 	jp TextScriptEnd
@@ -1125,7 +1125,7 @@ OaksLabBePatientText: ; 1d37c (7:537c)
 	db "@"
 
 OaksLabText12: ; 1d381 (7:5381)
-	db $8
+	TX_ASM
 	ld hl, OaksLabLeavingText
 	call PrintText
 	jp TextScriptEnd
@@ -1135,7 +1135,7 @@ OaksLabLeavingText: ; 1d38b (7:538b)
 	db "@"
 
 OaksLabText13: ; 1d390 (7:5390)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalPickingMonText
 	call PrintText
 	jp TextScriptEnd
@@ -1145,7 +1145,7 @@ OaksLabRivalPickingMonText: ; 1d39a (7:539a)
 	db "@"
 
 OaksLabText14: ; 1d39f (7:539f)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalReceivedMonText
 	call PrintText
 	jp TextScriptEnd
@@ -1155,7 +1155,7 @@ OaksLabRivalReceivedMonText: ; 1d3a9 (7:53a9)
 	db $11, "@"
 
 OaksLabText15: ; 1d3af (7:53af)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalChallengeText
 	call PrintText
 	jp TextScriptEnd
@@ -1173,7 +1173,7 @@ OaksLabText_1d3c3: ; 1d3c3 (7:53c3)
 	db "@"
 
 OaksLabText16: ; 1d3c8 (7:53c8)
-	db $8
+	TX_ASM
 	ld hl, OaksLabRivalToughenUpText
 	call PrintText
 	jp TextScriptEnd
@@ -1205,7 +1205,7 @@ OaksLabText25: ; 1d3eb (7:53eb)
 OaksLabText26: ; 1d3f1 (7:53f1)
 	TX_FAR _OaksLabText26
 	db $11 ; play received item sound
-	db $08 ; asm
+	TX_ASM
 	lb bc, POKE_BALL,5
 	call GiveItem
 	jp TextScriptEnd
@@ -1218,7 +1218,7 @@ OaksLabText38: ; 1d3fb (7:53fb)
 OaksLabText37: ; 1d3fb (7:53fb)
 OaksLabText11: ; 1d3fb (7:53fb)
 OaksLabText10: ; 1d3fb (7:53fb)
-	db $08 ; asm
+	TX_ASM
 	ld hl, OaksLabText_1d405
 	call PrintText
 	jp TextScriptEnd

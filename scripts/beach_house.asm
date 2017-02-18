@@ -9,7 +9,7 @@ BeachHouseTextPointers:
 
 BeachHouseText1: ; Surfing Pikachu Tutor
 	TX_FAR _BeachHouseDudeText
-	db 8 ;asm
+	TX_ASM
 	ld a, 4
 	ld [wWhichTrade], a
 	callba MoveTutorScript
@@ -17,14 +17,14 @@ BeachHouseText1: ; Surfing Pikachu Tutor
 
 BeachHouseText2: ; Pikachu
 	TX_FAR _BeachHousePikachuText
-	db $08 ; asm
+	TX_ASM
 	ld a, PIKACHU
 	call PlayCry
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
 BeachHouseText3: ; give TM 15
-	db $08 ; asm
+	TX_ASM
 	ld a, [wd857]
 	bit 0, a
 	jr nz, .already_received

@@ -8,14 +8,14 @@ MtMoonSquareTextPointers:
 	dw MtMoonSquareText4
 
 MtMoonSquareText1:
-	db $08 ; asm
+	TX_ASM
 	ld a, 7
 	ld [wWhichTrade],a
 	callba BerryTreeScript
 	jp TextScriptEnd
 
 MtMoonSquareText2:
-	db 8
+	TX_ASM
 	ld a, 7 ; Moonblast Tutor
 	ld [wWhichTrade], a
 	callba MoveTutorScript

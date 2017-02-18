@@ -8,7 +8,7 @@ Route1TextPointers: ; 1cab2 (7:4ab2)
 	dw Route1Text3
 
 Route1Text1: ; 1cab8 (7:4ab8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, wRoute1Flags
 	bit 0, [hl]
 	set 0, [hl]
@@ -54,7 +54,7 @@ Route1Text3: ; 1cafd (7:4afd)
 	db "@"
 	
 Route1Tree1:
-	db $08 ; asm
+	TX_ASM
 	ld a, 1 ; Which berry tree
 	ld [wWhichTrade], a
 	callba BerryTreeScript

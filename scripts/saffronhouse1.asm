@@ -13,13 +13,13 @@ SaffronHouse1Text1: ; 1dde8 (7:5de8)
 
 SaffronHouse1Text2: ; 1dded (7:5ded)
 	TX_FAR _SaffronHouse1Text2
-	db $8
+	TX_ASM
 	ld a, PIDGEY
 	call PlayCry
 	jp TextScriptEnd
 
 SaffronHouse1Text3: ; 1ddfa (7:5dfa)
-	db 8
+	TX_ASM
 	callba MoveTutorScriptSpecial
 	jp TextScriptEnd
 

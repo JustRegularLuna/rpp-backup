@@ -9,7 +9,7 @@ RedsHouse1FTextPointers: ; 4816b (12:416b)
 	dw RedsHouse1FText5
 
 RedsHouse1FText1: ; 4816f (12:416f) ; 416F Mom
-	db 8
+	TX_ASM
 	ld a, [wd72e]
 	bit 3, a
 	jr nz, .heal ; if player has received a Pokémon from Oak, heal team
@@ -64,7 +64,7 @@ MomHealText2: ; 481c1 (12:41c1)
 	db "@"
 
 RedsHouse1FText2: ; 0x481c6 TV
-	db 8
+	TX_ASM
 	ld a,[wSpriteStateData1 + 9]
 	cp 4
 	ld hl,TVWrongSideText

@@ -1,5 +1,5 @@
 MoveRelearnerText1:
-	db 8 ; asm
+	TX_ASM
 ; Display the list of moves to the player.
 	ld hl, MoveRelearnerGreetingText
 	call PrintText

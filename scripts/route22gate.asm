@@ -57,7 +57,7 @@ Route22GateTextPointers: ; 1e6df (7:66df)
 	dw Route22GateText1
 
 Route22GateText1: ; 1e6e1 (7:66e1)
-	db $8
+	TX_ASM
 	ld a, [wObtainedKantoBadges]
 	bit 0, a
 	jr nz, .asm_8a809 ; 0x1e6e7 $d

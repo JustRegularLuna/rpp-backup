@@ -11,7 +11,7 @@ SouthernIslandCaptainText:
 	db "@"
 
 SouthernIslandBerryTreeText:
-	db $08 ; asm
+	TX_ASM
 	ld a, 16
 	ld [wWhichTrade],a
 	callba BerryTreeScript

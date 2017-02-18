@@ -10,7 +10,7 @@ Route7Text1: ; 48157 (12:4157)
 	db "@"
 
 Route7Tree1:
-	db $08 ; asm
+	TX_ASM
 	ld a, 14
 	ld [wWhichTrade], a
 	callba BerryTreeScript

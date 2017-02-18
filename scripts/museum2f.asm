@@ -27,7 +27,7 @@ Museum2FText4: ; 5c337 (17:4337)
 	db "@"
 
 Museum2FText5: ; 5c33c (17:433c)
-	db $08 ; asm
+	TX_ASM
 	ld hl, Trader2Name
 	call SetCustomName
 	ld a, $2

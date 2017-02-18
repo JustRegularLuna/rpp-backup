@@ -28,14 +28,14 @@ NavelRockLugiaRoomTrainerHeader0:
 	db $ff
 
 NavelRockLugiaRoomText1:
-	db $08 ; asm
+	TX_ASM
 	ld hl, NavelRockLugiaRoomTrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
 NavelRockLugiaRoomLugiaText:
 	TX_FAR _NavelRockLugiaRoomLugiaText
-	db $8
+	TX_ASM
 	ld a, LUGIA
 	call PlayCry
 	call WaitForSoundToFinish
