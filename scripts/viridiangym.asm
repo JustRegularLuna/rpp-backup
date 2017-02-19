@@ -19,7 +19,7 @@ ViridianGymScript_748d6: ; 748d6 (1d:48d6)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_VIRIDIANGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 ViridianGymScriptPointers: ; 748e1 (1d:48e1)
@@ -46,7 +46,7 @@ ViridianGymScript0: ; 748eb (1d:48eb)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $4
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 ;format:
@@ -129,7 +129,7 @@ ViridianGymScript4: ; 7496b (1d:496b)
 	ld hl, wd736
 	res 7, [hl]
 	ld a, $0
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 .asm_74980
 	ld b, BANK(LoadSpinnerArrowTiles)

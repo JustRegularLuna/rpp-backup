@@ -40,7 +40,7 @@ CeladonGameCornerScript_48c07: ; 48c07 (12:4c07)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_CELADONGAMECORNERCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CeladonGameCornerScriptPointers: ; 48c12 (12:4c12)

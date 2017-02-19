@@ -11,7 +11,7 @@ Route24Script_513c0: ; 513c0 (14:53c0)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route24ScriptPointers: ; 513cb (14:53cb)
@@ -44,7 +44,7 @@ Route24Script0: ; 513d5 (14:53d5)
 	call StartSimulatingJoypadStates
 	ld a, $4
 	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CoordsData_5140e: ; 5140e (14:540e)
@@ -57,7 +57,7 @@ Route24Script4: ; 51411 (14:5411)
 	call Delay3
 	ld a, $0
 	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route24Script3: ; 51422 (14:5422)
@@ -76,7 +76,7 @@ Route24Script3: ; 51422 (14:5422)
 	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route24TextPointers: ; 5144b (14:544b)
@@ -182,7 +182,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	ld [hJoyHeld], a
 	ld a, $3
 	ld [W_ROUTE24CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	jp TextScriptEnd
 .asm_a03f5 ; 0x514f9
 	ld hl, Route24Text_51530

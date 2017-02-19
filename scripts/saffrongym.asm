@@ -26,7 +26,7 @@ SaffronGymText_5d048: ; 5d048 (17:5048)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_SAFFRONGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 SaffronGymScriptPointers: ; 5d053 (17:5053)

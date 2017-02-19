@@ -214,7 +214,7 @@ BillsPCDeposit:
 	call PrintText
 	jp BillsPCMenu
 .asm_215bb
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	cp MONS_PER_BOX
 	jr nz, .asm_215cb
 	ld hl, BoxFullText
@@ -256,7 +256,7 @@ BillsPCDeposit:
 	jp BillsPCMenu
 
 Func_21618: ; 21618 (8:5618)
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	and a
 	jr nz, .asm_21627
 	ld hl, NoMonText
@@ -270,7 +270,7 @@ Func_21618: ; 21618 (8:5618)
 	call PrintText
 	jp Func_214e8
 .asm_21637
-	ld hl, W_NUMINBOX
+	ld hl, wNumInBox
 	call Func_216be
 	jp c, Func_214e8
 	call Func_2174b
@@ -293,14 +293,14 @@ Func_21618: ; 21618 (8:5618)
 	jp Func_214e8
 
 Func_21673: ; 21673 (8:5673)
-	ld a, [W_NUMINBOX]
+	ld a, [wNumInBox]
 	and a
 	jr nz, .asm_21682
 	ld hl, NoMonText
 	call PrintText
 	jp Func_214e8
 .asm_21682
-	ld hl, W_NUMINBOX
+	ld hl, wNumInBox
 	call Func_216be
 	jp c, Func_214e8
 	ld hl, OnceReleasedText

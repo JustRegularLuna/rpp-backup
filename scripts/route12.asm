@@ -11,7 +11,7 @@ Route12Script_59606: ; 59606 (16:5606)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_ROUTE12CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route12ScriptPointers: ; 59611 (16:5611)
@@ -41,7 +41,7 @@ Route12Script0: ; 59619 (16:5619)
 	predef HideObject
 	ld a, $3
 	ld [W_ROUTE12CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route12Script3: ; 5964c (16:564c)
@@ -61,7 +61,7 @@ Route12Script3: ; 5964c (16:564c)
 	call Delay3
 	ld a, $0
 	ld [W_ROUTE12CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route12TextPointers: ; 59675 (16:5675)

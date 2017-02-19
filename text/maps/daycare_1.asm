@@ -50,7 +50,7 @@ _DayCareOweMoneyText::
 _DayCareGotMonBackText::
 	text "[PLAYER] got"
 	line "@"
-	TX_RAM W_DAYCAREMONNAME
+	TX_RAM wDayCareMonName
 	text " back!"
 	done
 
@@ -66,7 +66,7 @@ _DayCareMonNeedsMoreTimeText::
 _DayCareGotMonBackText2::
 	text "[PLAYER] got"
 	line "@"
-	TX_RAM W_DAYCAREMON2NAME
+	TX_RAM wDayCareMon2Name
 	text " back!"
 	done
 

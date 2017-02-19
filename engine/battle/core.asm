@@ -276,7 +276,7 @@ StartBattle: ; 3c11e (f:411e)
 	ld a, [wcd6a]
 	and a ; was the item used successfully?
 	jr z, .displaySafariZoneBattleMenu ; if not, display the menu again; XXX does this ever jump?
-	ld a, [W_NUMSAFARIBALLS]
+	ld a, [wNumSafariBalls]
 	and a
 	jr nz, .notOutOfSafariBalls
 	call LoadScreenTilesFromBuffer1
@@ -2235,7 +2235,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	Coorda 13, 14
 	Coorda 13, 16
 	hlCoord 7, 14
-	ld de, W_NUMSAFARIBALLS
+	ld de, wNumSafariBalls
 	ld bc, $102
 	call PrintNumber
 	ld b, $1 ; top menu item X
@@ -2268,7 +2268,7 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	Coorda 1, 14 ; clear upper cursor position in left column
 	Coorda 1, 16 ; clear lower cursor position in left column
 	hlCoord 7, 14
-	ld de, W_NUMSAFARIBALLS
+	ld de, wNumSafariBalls
 	ld bc, $102
 	call PrintNumber
 	ld b, $d ; top menu item X

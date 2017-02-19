@@ -64,7 +64,7 @@ Route7GateScript1: ; 1e16c (7:616c)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_ROUTE7GATECURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route7GateTextPointers: ; 1e17f (7:617f)

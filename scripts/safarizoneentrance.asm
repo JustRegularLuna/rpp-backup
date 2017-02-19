@@ -86,7 +86,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [$ff8c], a
 	call DisplayTextID
 	xor a
-	ld [W_NUMSAFARIBALLS], a
+	ld [wNumSafariBalls], a
 	ld a, $80
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
@@ -183,7 +183,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld hl,.MakePaymentText
 	call PrintText
 	ld a,30
-	ld [W_NUMSAFARIBALLS],a
+	ld [wNumSafariBalls],a
 	ld a,502 / $100
 	ld [wSafariSteps],a
 	ld a, 502 % $100

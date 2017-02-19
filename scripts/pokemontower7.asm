@@ -11,7 +11,7 @@ PokemonTower7Script_60d18: ; 60d18 (18:4d18)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_POKEMONTOWER7CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower7ScriptPointers:
@@ -36,7 +36,7 @@ PokemonTower7Script2: ; 60d23 (18:4d23)
 	call PokemonTower7Script_60db6
 	ld a, $3
 	ld [W_POKEMONTOWER7CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower7Script3: ; 60d56 (18:4d56)
@@ -60,7 +60,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	ld [wda38], a
 	ld a, $0
 	ld [W_POKEMONTOWER7CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower7Script4: ; 60d86 (18:4d86)
@@ -81,7 +81,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	set 3, [hl]
 	ld a, $0
 	ld [W_POKEMONTOWER7CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower7Script_60db6: ; 60db6 (18:4db6)
@@ -233,7 +233,7 @@ PokemonTower7FujiText:
 	predef ShowObject
 	ld a, $4
 	ld [W_POKEMONTOWER7CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	jp TextScriptEnd
 
 TowerRescueFujiText:

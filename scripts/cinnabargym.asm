@@ -32,7 +32,7 @@ CinnabarGymScript_75792: ; 75792 (1d:5792)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_CINNABARGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ld [wda38], a
 	ret
 
@@ -66,7 +66,7 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 	call MoveSprite
 	ld a, $1
 	ld [W_CINNABARGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 MovementData_757d7: ; 757d7 (1d:57d7)
@@ -125,7 +125,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld [wda38], a
 	ld a, $0
 	ld [W_CINNABARGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CinnabarGymScript3: ; 7584a (1d:584a)
@@ -202,7 +202,7 @@ CinnabarGymScript_758b7: ; 758b7 (1d:58b7)
 	ld a, $3
 .asm_758d6
 	ld [W_CINNABARGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	jp TextScriptEnd
 
 CinnabarGymText1: ; 758df (1d:58df)

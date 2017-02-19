@@ -41,7 +41,7 @@ SafariZoneCheck: ; 1e988 (7:6988)
 	ld hl, wSafariZoneFlags
 	bit 7, [hl]
 	jr z, asm_1e9ab
-	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
+	ld a, [wNumSafariBalls] ; wNumSafariBalls
 	and a
 	jr z, asm_1e9b0
 	jr asm_1e9ab
@@ -100,7 +100,7 @@ PrintSafariGameOverText: ; 1e9ed (7:69ed)
 
 SafariGameOverText: ; 1e9f7 (7:69f7)
 	db $08 ; asm
-	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
+	ld a, [wNumSafariBalls] ; wNumSafariBalls
 	and a
 	jr z, .asm_1ea04
 	ld hl, TimesUpText

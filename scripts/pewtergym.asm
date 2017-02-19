@@ -26,7 +26,7 @@ PewterGymScript_5c3bf: ; 5c3bf (17:43bf)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_PEWTERGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PewterGymScriptPointers: ; 5c3ca (17:43ca)
@@ -137,7 +137,7 @@ PewterGymText1: ; 5c44e (17:444e)
 	ldh [$b4], a
 	ld a, $3
 	ld [W_PEWTERGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 .asm_e0ffb ; 0x5c49b
 	jp TextScriptEnd
 

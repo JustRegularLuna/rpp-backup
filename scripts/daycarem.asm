@@ -62,7 +62,7 @@ DayCareMText1: ; Day Care Lady
 
 .daycareInUse
 	xor a
-	ld hl, W_DAYCAREMONNAME
+	ld hl, wDayCareMonName
 	call GetPartyMonName
 	ld a, $3
 	ld [wcc49], a
@@ -268,7 +268,7 @@ DayCareMText2: ; Day Care Man
 
 .daycareInUse
 	xor a
-	ld hl, W_DAYCAREMON2NAME
+	ld hl, wDayCareMon2Name
 	call GetPartyMonName
 	ld a, $4
 	ld [wcc49], a

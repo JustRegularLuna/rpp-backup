@@ -146,13 +146,13 @@ OTPointers: ; 12a95 (4:6a95)
 	dw wPartyMonOT
 	dw wEnemyMonOT
 	dw wBoxMonOT
-	dw W_DAYCAREMONOT
+	dw wDayCareMonOT
 
 NamePointers2: ; 12a9d (4:6a9d)
 	dw wPartyMonNicks
 	dw wEnemyMonNicks
 	dw wBoxMonNicks
-	dw W_DAYCAREMONNAME
+	dw wDayCareMonName
 
 Type1Text: ; 12aa5 (4:6aa5)
 	db "Type 1", $4e

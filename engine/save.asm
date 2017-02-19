@@ -580,7 +580,7 @@ Func_73a84: ; GetMonCountsForAllBoxes
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 	ld [hl], a
 	
 	ret

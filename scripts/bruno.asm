@@ -54,7 +54,7 @@ asm_7631d: ; 7631d (1d:631d)
 	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_BRUNOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 BrunoScript0: ; 76339 (1d:6339)
@@ -84,7 +84,7 @@ BrunoScript0: ; 76339 (1d:6339)
 	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_BRUNOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CoordsData_7637a: ; 7637a (1d:637a)
@@ -102,7 +102,7 @@ BrunoScript3: ; 76383 (1d:6383)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_BRUNOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 BrunoScript2: ; 76396 (1d:6396)

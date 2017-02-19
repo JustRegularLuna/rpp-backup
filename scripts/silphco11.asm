@@ -152,7 +152,7 @@ SilphCo11Script_621c4: ; 621c4 (18:61c4)
 
 SilphCo11Script_621c8: ; 621c8 (18:61c8)
 	ld [W_SILPHCO11CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 SilphCo11ScriptPointers: ; 621cf (18:61cf)

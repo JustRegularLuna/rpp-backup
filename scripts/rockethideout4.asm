@@ -37,7 +37,7 @@ RocketHideout4Script_454a3: ; 454a3 (11:54a3)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 RocketHideout4ScriptPointers: ; 454ae (11:54ae)c
@@ -73,7 +73,7 @@ RocketHideout4Script3: ; 454b6 (11:54b6)
 	set 5, [hl]
 	ld a, $0
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 RocketHideout4TextPointers: ; 45501 (11:5501)
@@ -139,7 +139,7 @@ RocketHideout4Text1: ; 4553a (11:553a)
 	ldh [$b4], a
 	ld a, $3
 	ld [W_ROCKETHIDEOUT4CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	jr .asm_209f0 ; 0x4556f
 .asm_545571
 	ld hl, RocketHideout4Text10

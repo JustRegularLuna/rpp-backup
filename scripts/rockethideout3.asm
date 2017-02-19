@@ -30,7 +30,7 @@ RocketHideout3Script0: ; 45240 (11:5240)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 ;format:
@@ -144,7 +144,7 @@ RocketHideout3Script3 ; 452e4 (11:452e4)
 	ld hl, wd736
 	res 7, [hl]
 	ld a, $0
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 RocketHideout3TextPointers: ; 452fa (11:52fa)

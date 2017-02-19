@@ -8,7 +8,7 @@ PokemonTower2Script_604fe: ; 604fe (18:44fe)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_POKEMONTOWER2CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower2ScriptPointers: ; 60509 (18:4509)
@@ -88,7 +88,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	callba Music_RivalAlternateStart
 	ld a, $2
 	ld [W_POKEMONTOWER2CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 MovementData_605a9: ; 605a9 (18:45a9)
@@ -109,7 +109,7 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	call PlayDefaultMusic
 	ld a, $0
 	ld [W_POKEMONTOWER2CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower2TextPointers: ; 605db (18:45db)
@@ -156,7 +156,7 @@ PokemonTower2Text1: ; 605df (18:45df)
 
 	ld a, $1
 	ld [W_POKEMONTOWER2CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 .asm_41852 ; 0x6062a
 	jp TextScriptEnd
 

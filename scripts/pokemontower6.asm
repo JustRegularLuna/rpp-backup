@@ -11,7 +11,7 @@ PokemonTower6Script_60b02: ; 60b02 (18:4b02)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_POKEMONTOWER6CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower6ScriptPointers: ; 60b0d (18:4b0d)
@@ -39,7 +39,7 @@ PokemonTower6Script0: ; 60b17 (18:4b17)
 	ld [W_CURENEMYLVL], a ; W_CURENEMYLVL
 	ld a, $4
 	ld [W_POKEMONTOWER6CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CoordsData_60b45: ; 60b45 (18:4b45)
@@ -69,7 +69,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ld [wJoyIgnore], a
 	ld a, $0
 	ld [W_POKEMONTOWER6CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 .asm_60b82
 	ld a, $1
@@ -83,7 +83,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	set 7, [hl]
 	ld a, $3
 	ld [W_POKEMONTOWER6CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower6Script3: ; 60ba1 (18:4ba1)
@@ -93,7 +93,7 @@ PokemonTower6Script3: ; 60ba1 (18:4ba1)
 	call Delay3
 	xor a
 	ld [W_POKEMONTOWER6CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 PokemonTower6TextPointers: ; 60bb1 (18:4bb1)

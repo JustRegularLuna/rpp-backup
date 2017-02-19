@@ -407,12 +407,12 @@ Func_5e42: ; 5e42 (1:5e42)
 	jp PrintNumber
 
 Func_5e55: ; 5e55 (1:5e55)
-	ld de, W_PLAYTIMEHOURS + 1
+	ld de, wPlayTimeHours
 	ld bc, $103
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
-	ld de, W_PLAYTIMEMINUTES + 1
+	ld de, wPlayTimeMinutes + 1
 	ld bc, $8102
 	jp PrintNumber
 

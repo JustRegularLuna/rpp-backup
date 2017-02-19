@@ -1862,7 +1862,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	ld a, [wcf95]
 	and a
 	jr z, .asm_7b74
-	ld hl, W_NUMINBOX ; wda80
+	ld hl, wNumInBox ; wda80
 .asm_7b74
 	ld a, [hl]
 	dec a
@@ -2258,7 +2258,7 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	hlCoord 1, 3
 	ld de, SafariBallText
 	call PlaceString
-	ld a, [W_NUMSAFARIBALLS] ; W_NUMSAFARIBALLS
+	ld a, [wNumSafariBalls] ; wNumSafariBalls
 	cp $a
 	jr nc, .asm_c56d
 	hlCoord 5, 3
@@ -2266,7 +2266,7 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	ld [hl], a
 .asm_c56d
 	hlCoord 6, 3
-	ld de, W_NUMSAFARIBALLS ; W_NUMSAFARIBALLS
+	ld de, wNumSafariBalls ; wNumSafariBalls
 	ld bc, $102
 	jp PrintNumber
 
@@ -3860,7 +3860,7 @@ Func_f51e: ; f51e (3:751e)
 	jr z, .asm_f575
 	cp $5
 	jr z, .checkPartyMonSlots
-	ld hl, W_NUMINBOX ; wda80
+	ld hl, wNumInBox ; wda80
 	ld a, [hl]
 	cp MONS_PER_BOX
 	jr nz, .partyOrBoxNotFull
@@ -3899,7 +3899,7 @@ Func_f51e: ; f51e (3:751e)
 	jr nz, .skipToNewMonEntry
 	ld hl, wBoxMons
 	ld bc, wBoxMon2 - wBoxMon1 ; $21
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 .skipToNewMonEntry
 	dec a
 	call AddNTimes
@@ -3947,17 +3947,17 @@ Func_f51e: ; f51e (3:751e)
 .asm_f5b4
 	ld a, [wcf95]
 	cp $3
-	ld de, W_DAYCAREMONOT
+	ld de, wDayCareMonOT
 	jr z, .asm_f5d3
 	cp $4
-	ld de, W_DAYCAREMON2OT
+	ld de, wDayCareMon2OT
 	jr z, .asm_f5d3
 	dec a
 	ld hl, wPartyMonOT ; wd273
 	ld a, [wPartyCount] ; wPartyCount
 	jr nz, .asm_f5cd
 	ld hl, wBoxMonOT
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 .asm_f5cd
 	dec a
 	call SkipFixedLengthTextEntries
@@ -3968,10 +3968,10 @@ Func_f51e: ; f51e (3:751e)
 	ld a, [wcf95]
 	and a
 	jr z, .asm_f5e6
-	ld hl, W_DAYCAREMONOT
+	ld hl, wDayCareMonOT
 	cp $2
 	jr z, .asm_f5ec
-	ld hl, W_DAYCAREMON2OT
+	ld hl, wDayCareMon2OT
 	cp $5
 	jr z, .asm_f5ec
 	ld hl, wPartyMonOT ; wd273
@@ -3983,17 +3983,17 @@ Func_f51e: ; f51e (3:751e)
 	call CopyData
 	ld a, [wcf95]
 	cp $3
-	ld de, W_DAYCAREMONNAME
+	ld de, wDayCareMonName
 	jr z, .asm_f611
 	cp $4
-	ld de, W_DAYCAREMON2NAME
+	ld de, wDayCareMon2Name
 	jr z, .asm_f611
 	dec a
 	ld hl, wPartyMonNicks ; wPartyMonNicks
 	ld a, [wPartyCount] ; wPartyCount
 	jr nz, .asm_f60b
 	ld hl, wBoxMonNicks
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 .asm_f60b
 	dec a
 	call SkipFixedLengthTextEntries
@@ -4004,10 +4004,10 @@ Func_f51e: ; f51e (3:751e)
 	ld a, [wcf95]
 	and a
 	jr z, .asm_f624
-	ld hl, W_DAYCAREMONNAME
+	ld hl, wDayCareMonName
 	cp $2
 	jr z, .asm_f62a
-	ld hl, W_DAYCAREMON2NAME
+	ld hl, wDayCareMon2Name
 	cp $5
 	jr z, .asm_f62a
 	ld hl, wPartyMonNicks ; wPartyMonNicks
@@ -4456,7 +4456,7 @@ InitPlayerData2:
 ; Initialize the party, bag, PC, etc.
 	ld hl, wPartyCount
 	call InitializeEmptyList
-	ld hl, W_NUMINBOX
+	ld hl, wNumInBox
 	call InitializeEmptyList
 	ld hl, wNumBagItems
 	call InitializeEmptyList

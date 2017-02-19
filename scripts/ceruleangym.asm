@@ -26,7 +26,7 @@ CeruleanGymScript_5c6ed: ; 5c6ed (17:46ed)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_CERULEANGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CeruleanGymScriptPointers: ; 5c6f8 (17:46f8)

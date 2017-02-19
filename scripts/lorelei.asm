@@ -55,7 +55,7 @@ asm_761c6: ; 761c6 (1d:61c6)
 	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_LORELEICURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 LoreleiScript0: ; 761e2 (1d:61e2)
 	ld hl, CoordsData_76223
@@ -84,7 +84,7 @@ LoreleiScript0: ; 761e2 (1d:61e2)
 	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_LORELEICURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CoordsData_76223: ; 76223 (1d:6223)
@@ -102,7 +102,7 @@ LoreleiScript3: ; 7622c (1d:622c)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_LORELEICURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 LoreleiScript2: ; 7623f (1d:623f)
 	call EndTrainerBattle

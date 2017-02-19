@@ -105,7 +105,7 @@ SilphCo7Text_51c0c: ; 51c0c (14:5c0c)
 
 SilphCo7Text_51c10: ; 51c10 (14:5c10)
 	ld [W_SILPHCO7CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 SilphCo7ScriptPointers: ; 51c17 (14:5c17)

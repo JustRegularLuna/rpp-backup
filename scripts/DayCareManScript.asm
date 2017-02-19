@@ -198,11 +198,11 @@ INCLUDE "data/babymon_list.asm"
 
 DayCareBreederText1:
 	text "Your @"
-	TX_RAM W_DAYCAREMONNAME
+	TX_RAM wDayCareMonName
 	db $0
 	line "has been playing"
 	cont "with @"
-	TX_RAM W_DAYCAREMON2NAME
+	TX_RAM wDayCareMon2Name
 	text "!"
 	prompt
 	db "@"

@@ -239,12 +239,12 @@ Func_70377: ; 70377 (1c:4377)
 	ld de, HoFPlayTimeText
 	call PlaceString
 	hlCoord 5, 7
-	ld de, W_PLAYTIMEHOURS + 1
+	ld de, wPlayTimeHours
 	ld bc, $103
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
-	ld de, W_PLAYTIMEMINUTES + 1
+	ld de, wPlayTimeMinutes + 1
 	ld bc, $8102
 	call PrintNumber
 	hlCoord 1, 9

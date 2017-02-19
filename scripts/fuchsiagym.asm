@@ -27,7 +27,7 @@ FuchsiaGymScript_75477: ; 75477 (1d:5477)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_FUCHSIAGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 FuchsiaGymScriptPointers: ; 75482 (1d:5482)

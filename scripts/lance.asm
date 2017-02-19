@@ -107,7 +107,7 @@ LanceScript_5a35b: ; 5a35b (16:635b)
 	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_LANCECURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 RLEList_5a379: ; 5a379 (16:6379)
@@ -125,7 +125,7 @@ LanceScript3: ; 5a382 (16:6382)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_LANCECURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 LanceTextPointers: ; 5a395 (16:6395)

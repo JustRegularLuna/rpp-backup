@@ -11,7 +11,7 @@ FightingDojoScript_5cd70: ; 5cd70 (17:4d70)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_FIGHTINGDOJOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 FightingDojoScriptPointers: ; 5cd7b (17:4d7b)
@@ -81,7 +81,7 @@ FightingDojoScript3: ; 5cdc6 (17:4dc6)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_FIGHTINGDOJOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 FightingDojoTextPointers: ; 5ce03 (17:4e03)
@@ -154,7 +154,7 @@ FightingDojoText1: ; 5ce44 (17:4e44)
 	call InitBattleEnemyParameters
 	ld a, $3
 	ld [W_FIGHTINGDOJOCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	jr .asm_9dba4 ; 0x5ce7b
 .continue1 ; 0x5ce7d
 	ld hl, FightingDojoText_5ce9d

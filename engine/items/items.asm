@@ -143,7 +143,7 @@ BallAnyway:
 	ld a,[wPartyCount]	;is Party full?
 	cp a,PARTY_LENGTH
 	jr nz,.UseBall
-	ld a,[W_NUMINBOX]	;is Box full?
+	ld a,[wNumInBox]	;is Box full?
 	cp a,MONS_PER_BOX
 	jp z,BoxFullCannotThrowBall
 .UseBall	;$56a7
@@ -155,7 +155,7 @@ BallAnyway:
 	jr nz,.skipSafariZoneCode
 .safariZone
 	; remove a Safari Ball from inventory
-	ld hl,W_NUMSAFARIBALLS
+	ld hl,wNumSafariBalls
 	dec [hl]
 .skipSafariZoneCode	;$56b6
 	call GoPAL_SET_CF1C
@@ -1447,7 +1447,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	ld hl,wSafariZoneFlags
 	res 7,[hl] ; unset Safari Zone bit
 	xor a
-	ld [W_NUMSAFARIBALLS],a
+	ld [wNumSafariBalls],a
 	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
 	inc a
 	ld [wEscapedFromBattle],a
@@ -2716,7 +2716,7 @@ IsKeyItem_: ; e764 (3:6764)
 INCLUDE "data/key_items.asm"
 
 SendNewMonToBox: ; e7a4 (3:67a4)
-	ld de, W_NUMINBOX ; wda80
+	ld de, wNumInBox ; wda80
 	ld a, [de]
 	inc a
 	ld [de], a
@@ -2735,7 +2735,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	call GetMonHeader
 	ld hl, wBoxMonOT
 	ld bc, $b
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 	dec a
 	jr z, .asm_e7ee
 	dec a
@@ -2746,7 +2746,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 	dec a
 	ld b, a
 .asm_e7db
@@ -2767,7 +2767,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld de, wBoxMonOT
 	ld bc, $b
 	call CopyData
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 	dec a
 	jr z, .asm_e82a
 	ld hl, wBoxMonNicks
@@ -2780,7 +2780,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 	dec a
 	ld b, a
 .asm_e817
@@ -2801,7 +2801,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld a, $2
 	ld [wd07d], a
 	predef AskName
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 	dec a
 	jr z, .asm_e867
 	ld hl, wBoxMons
@@ -2814,7 +2814,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 	dec a
 	ld b, a
 .asm_e854

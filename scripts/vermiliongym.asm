@@ -46,7 +46,7 @@ VermilionGymScript_5ca8a: ; 5ca8a (17:4a8a)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_VERMILIONGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 VermilionGymScriptPointers: ; 5ca95 (17:4a95)
@@ -167,7 +167,7 @@ VermilionGymText1: ; 5cb1d (17:4b1d)
 	ldh [$b4], a
 	ld a, $3
 	ld [W_VERMILIONGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 .asm_23621 ; 0x5cb6a
 	jp TextScriptEnd
 

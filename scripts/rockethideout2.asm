@@ -30,7 +30,7 @@ RocketHideout2Script0: ; 44e42 (11:4e42)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, $3
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 ;format:
@@ -314,7 +314,7 @@ RocketHideout2Script3: ; 44fc2 (11:4fc2)
 	ld hl, wd736
 	res 7, [hl]
 	ld a, $0
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 LoadSpinnerArrowTiles: ; 44fd7 (11:4fd7)

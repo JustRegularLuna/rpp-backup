@@ -2206,12 +2206,12 @@ EndNPCMovementScript:: ; 314e (0:314e)
 EmptyFunc2:: ; 3156 (0:3156)
 	ret
 
-; stores hl in [W_TRAINERHEADERPTR]
+; stores hl in [wTrainerHeaderPtr]
 StoreTrainerHeaderPointer:: ; 3157 (0:3157)
 	ld a, h
-	ld [W_TRAINERHEADERPTR], a
+	ld [wTrainerHeaderPtr], a
 	ld a, l
-	ld [W_TRAINERHEADERPTR+1], a
+	ld [wTrainerHeaderPtr+1], a
 	ret
 
 ; executes the current map script from the function pointer array provided in hl.
@@ -2227,12 +2227,12 @@ ExecuteCurMapScriptInTable:: ; 3160 (0:3160)
 	bit 4, [hl]
 	res 4, [hl]
 	jr z, .useProvidedIndex   ; test if map script index was overridden manually
-	ld a, [W_CURMAPSCRIPT]
+	ld a, [wCurMapScript]
 .useProvidedIndex
 	pop hl
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	call CallFunctionInTable
-	ld a, [W_CURMAPSCRIPT]
+	ld a, [wCurMapScript]
 	ret
 
 LoadGymLeaderAndCityName:: ; 317f (0:317f)
@@ -2245,7 +2245,7 @@ LoadGymLeaderAndCityName:: ; 317f (0:317f)
 	ld bc, $b
 	jp CopyData     ; load gym leader name
 
-; reads specific information from trainer header (pointed to at W_TRAINERHEADERPTR)
+; reads specific information from trainer header (pointed to at wTrainerHeaderPtr)
 ; a: offset in header data
 ;    0 -> flag's bit (into wTrainerHeaderFlagBit)
 ;    2 -> flag's byte ptr (into hl)
@@ -2257,7 +2257,7 @@ ReadTrainerHeaderInfo:: ; 3193 (0:3193)
 	push af
 	ld d, $0
 	ld e, a
-	ld hl, W_TRAINERHEADERPTR
+	ld hl, wTrainerHeaderPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -2328,7 +2328,7 @@ TalkToTrainer:: ; 31cc (0:31cc)
 	ret nz
 ; if the player talked to the trainer of his own volition
 	call EngageMapTrainer
-	ld hl, W_CURMAPSCRIPT
+	ld hl, wCurMapScript
 	inc [hl]      ; increment map script index before StartTrainerBattle increments it again (next script function is usually EndTrainerBattle)
 	jp StartTrainerBattle
 
@@ -2354,7 +2354,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	xor a
 	ldh [$b4], a
 	call TrainerWalkUpToPlayer_Bank0
-	ld hl, W_CURMAPSCRIPT
+	ld hl, wCurMapScript
 	inc [hl]      ; increment map script index (next script function is usually DisplayEnemyTrainerTextAndStartBattle)
 	ret
 
@@ -2380,7 +2380,7 @@ StartTrainerBattle:: ; 325d (0:325d)
 	set 7, [hl]
 	ld hl, wd72e
 	set 1, [hl]
-	ld hl, W_CURMAPSCRIPT
+	ld hl, wCurMapScript
 	inc [hl]        ; increment map script index (next script function is usually EndTrainerBattle)
 	ret
 
@@ -2430,7 +2430,7 @@ ResetButtonPressedAndMapScript:: ; 32c1 (0:32c1)
 	ld [hJoyHeld], a
 	ld [hJoyPressed], a
 	ld [hJoyReleased], a
-	ld [W_CURMAPSCRIPT], a               ; reset battle status
+	ld [wCurMapScript], a               ; reset battle status
 	ret
 
 EndTrainerBattleWhiteout:

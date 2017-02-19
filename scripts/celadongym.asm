@@ -26,7 +26,7 @@ CeladonGymText_48943: ; 48943 (12:4943)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_CELADONGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CeladonGymScriptPointers: ; 4894e (12:494e)
@@ -186,7 +186,7 @@ CeladonGymText1: ; 48a11 (12:4a11)
 	ld [W_GYMLEADERNO], a
 	ld a, $3
 	ld [W_CELADONGYMCURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 .asm_96252 ; 0x48a5b
 	jp TextScriptEnd
 

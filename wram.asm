@@ -322,6 +322,7 @@ wMenuCursorLocation:: ; cc30
 ; the address of the menu cursor's current location within wTileMap
 	ds 2
 
+; unused?
 	ds 2
 
 wMenuJoypadPollCount:: ; cc34
@@ -342,6 +343,7 @@ wcc37:: ds 1
 wTradeCenterPointerTableIndex:: ; cc38
 	ds 1
 
+; unused?
 	ds 1
 
 wcc3a:: ds 1
@@ -367,6 +369,7 @@ wSerialExchangeNybbleReceiveData:: ; cc3e
 ; the final received nybble is stored here by Serial_ExchangeNybble
 	ds 1
 
+; unused?
 	ds 3
 
 wSerialExchangeNybbleSendData:: ; cc42
@@ -406,9 +409,10 @@ wPredefID:: ; cc4e
 wPredefRegisters:: ; cc4f
 	ds 6
 
-wTrainerHeaderFlagBit:: ; cc55
+wTrainerHeaderFlagBit:: ; probably removable once I switch to Gen 2 style event flags
 	ds 1
 
+; unused?
 	ds 1
 
 wNPCMovementScriptPointerTableNum:: ; cc57
@@ -420,6 +424,7 @@ wNPCMovementScriptBank:: ; cc58
 ; ROM bank of current NPC movement script
 	ds 1
 
+; unused?
 	ds 2
 
 wHallOfFame:: ; cc5b
@@ -492,6 +497,7 @@ wAICount:: ; ccdf
 ; number of times remaining that AI action can occur
 	ds 1
 
+; unused?
 	ds 2
 
 wEnemyMoveListIndex:: ; cce2
@@ -509,6 +515,7 @@ wSafariEscapeFactor:: ; cce8
 wSafariBaitFactor:: ; cce9
 	ds 1;
 
+; unused?
 	ds 1
 
 wcceb:: ds 1
@@ -536,8 +543,10 @@ wEnemyNumHits:: ; cd05
 
 wEnemyBideAccumulatedDamage:: ; cd05
 ; the amount of damage accumulated by the enemy while biding (2 bytes)
+	ds 2
 
-ds 10
+; unused?
+	ds 8
 
 wInGameTradeGiveMonSpecies:: ; cd0f
 
@@ -583,6 +592,7 @@ wPlayerMonAccuracyMod:: ; cd1e
 wPlayerMonEvasionMod:: ; cd1f
 	ds 1
 
+; unused?
 	ds 3
 
 wEnemyMonUnmodifiedLevel:: ; cd23
@@ -628,6 +638,7 @@ wEnemyMonEvasionMod:: ; cd33
 wInGameTradeReceiveMonSpecies::
 	ds 1
 
+; unused?
 	ds 2
 
 wNPCMovementDirections2Index:: ; cd37
@@ -652,6 +663,7 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 ; XXX is it ever not 0?
 	ds 1
 
+; unused?
 	ds 1
 
 wTradedPlayerMonSpecies:: ; cd3d
@@ -758,6 +770,7 @@ wFlags_0xcd60:: ; cd60
 ; bit 6: tried pushing against boulder once (you need to push twice before it will move)
 	ds 1
 
+; unused?
 	ds 9
 
 wcd6a:: ds 1
@@ -796,7 +809,7 @@ wcef1:: ds 12
 
 wHPBarHPDifference:: ; cefd
 	ds 1
-	ds 7
+	ds 7 ; unused?
 
 wcf05:: ds 1
 wcf06:: ds 1
@@ -838,6 +851,7 @@ wCurSpriteMovement2:: ; cf14
 ; movement byte 2 of current sprite
 	ds 1
 
+; unused?
 	ds 2
 
 wNPCMovementScriptSpriteOffset:: ; cf17
@@ -1012,6 +1026,7 @@ wBattleMon:: battle_struct wBattleMon ; d014
 W_TRAINERCLASS:: ; d031
 	ds 1
 
+; unused?
 	ds 1
 	
 wTrainerPicID::
@@ -1059,6 +1074,7 @@ W_BATTLETYPE:: ; d05a
 
 wd05b:: ds 1
 
+; probably removable with the new trainer move system, double check
 W_LONEATTACKNO:: ; d05c
 ; which entry in LoneAttacks to use
 W_GYMLEADERNO:: ; d05c
@@ -1078,11 +1094,11 @@ wCriticalHitOrOHKO:: ; d05e
 W_MOVEMISSED:: ; d05f
 	ds 1
 
-wPlayerStatsToDouble:: ; d060
+wPlayerStatsToDouble:: ; removable?
 ; always 0
 	ds 1
 
-wPlayerStatsToHalve:: ; d061
+wPlayerStatsToHalve:: ; removable?
 ; always 0
 	ds 1
 
@@ -1114,11 +1130,11 @@ W_PLAYERBATTSTATUS3:: ; d064
 ; bit 3 - tranformed
 	ds 1
 
-wEnemyStatsToDouble:: ; d065
+wEnemyStatsToDouble:: ; removable?
 ; always 0
 	ds 1
 
-wEnemyStatsToHalve:: ; d066
+wEnemyStatsToHalve:: ; removable?
 ; always 0
 	ds 1
 
@@ -1140,7 +1156,7 @@ W_PLAYERTOXICCOUNTER:: ; d06c
 	ds 1
 W_PLAYERDISABLEDMOVE:: ; d06d
 	ds 1
-
+; unused?
 	ds 1
 
 wEnemyNumAttacksLeft::
@@ -1154,7 +1170,7 @@ W_ENEMYTOXICCOUNTER:: ; d071
 	ds 1
 W_ENEMYDISABLEDMOVE:: ; d072
 	ds 1
-
+; unused?
 	ds 1
 
 wPlayerNumHits:: ; d074
@@ -1380,7 +1396,8 @@ wd0d4:: ds 3
 W_DAMAGE:: ; d0d7
 	ds 2
 
-ds 2
+; unused?
+	ds 2
 
 wRepelRemainingSteps:: ; wd0db
     ds 1
@@ -1460,6 +1477,7 @@ W_PRIZE2:: ; d13e
 W_PRIZE3:: ; d13f
 	ds 1
 
+; unused?
 	ds 1
 
 wSerialRandomNumberListBlock:: ; d141
@@ -1696,6 +1714,7 @@ wDestinationWarpID:: ; d42f
 ; if $ff, the player's coordinates are not updated when entering the map
 	ds 1
 
+; unused?
 	ds 128
 
 wd4b0:: ds 1
@@ -1720,6 +1739,10 @@ W_MAPSPRITEDATA:: ; d4e4
 W_MAPSPRITEEXTRADATA:: ; d504
 ; two bytes per sprite (trainer class/item ID, trainer set ID)
 	ds 32
+
+;wMapSpriteHideShowFlags::
+; two bytes per sprite (event flag, hidden if set)
+;	ds 32
 
 wd524:: ds 1
 wd525:: ds 1
@@ -1770,6 +1793,7 @@ wPlayerCoins:: ; d5a4
 
 W_MISSABLEOBJECTFLAGS:: ; d5a6
 ; bit array of missable objects. set = removed
+; will be removed once hide/show uses normal flags with the Gen 2 style system
 	ds 39
 
 wd5cd:: ds 1
@@ -1781,9 +1805,10 @@ W_MISSABLEOBJECTLIST:: ; d5ce
 ; terminated with $FF
 	ds 17 * 2
 
-W_GAMEPROGRESSFLAGS:: ; d5f0
-; $c8 bytes
-	ds 0
+W_GAMEPROGRESSFLAGS::
+; Remove some of these from maps that don't need a unique one
+; Use something like wGenericMapScript for those to save wram
+; Reset that one on every map change
 
 W_OAKSLABCURSCRIPT:: ; d5f0
 	ds 1
@@ -2089,6 +2114,7 @@ wWalkBikeSurfState:: ; d700
 ; $02 = surfing
 	ds 1
 
+; unused?
 	ds 10
 
 W_TOWNVISITEDFLAG:: ; d70b
@@ -2106,6 +2132,7 @@ W_FOSSILMON:: ; d710
 ; mon that will result from the item
 	ds 1
 
+; unused?
 	ds 2
 
 W_ENEMYMONORTRAINERCLASS:: ; d713
@@ -2118,6 +2145,7 @@ wPlayerJumpingYScreenCoordsIndex:: ; d714
 W_RIVALSTARTER:: ; d715
 	ds 1
 
+; unused?
 	ds 1
 
 W_PLAYERSTARTER:: ; d717
@@ -2155,6 +2183,7 @@ wd728::
 ; bit 0: using Strength outside of battle
 	ds 1
 
+; unused?
 	ds 1
 
 wd72a:: ds 2
@@ -2173,6 +2202,7 @@ wd730::
 ; bit 7: set if joypad states are being simulated in the overworld
 	ds 1
 
+; unused?
 	ds 1
 
 wd732:: ; d732
@@ -2190,7 +2220,7 @@ wd732:: ; d732
 	ds 1
 
 W_FLAGS_D733:: ; d733
-; bit 4: use variable [W_CURMAPSCRIPT] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
+; bit 4: use variable [wCurMapScript] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
 ; bit 7: used fly out of battle
 	ds 1
 
@@ -2203,10 +2233,10 @@ wd736:: ; d736
 ; bit 6: jumping down a ledge
 	ds 1
 
-wCompletedInGameTradeFlags:: ; d737
-	ds 2
-
-	ds 2
+wCompletedInGameTradeFlags::
+; space for up to 32 in-game traders
+; more than plenty for 2 regions
+	ds 4
 
 wd73b:: ds 1
 wd73c:: ds 3
@@ -2217,6 +2247,7 @@ wCardKeyDoorY:: ; d73f
 wCardKeyDoorX:: ; d740
 	ds 1
 
+; unused?
 	ds 2
 
 wd743:: ds 1
@@ -2797,33 +2828,37 @@ wEnemyMonOT::    ds 11 * PARTY_LENGTH ; d9ac
 wEnemyMonNicks:: ds 11 * PARTY_LENGTH ; d9ee
 
 
-W_TRAINERHEADERPTR:: ; da30
+wTrainerHeaderPtr:: ; da30
 	ds 2
 
+; unused?
 	ds 6
 
 wda38:: ds 1
 
-W_CURMAPSCRIPT:: ; da39
+wCurMapScript:: ; da39
 ; index of current map script, mostly used as index for function pointer array
 ; mostly copied from map-specific map script pointer and wirtten back later
 	ds 1
 
-	ds 6
+; unused?
+	ds 7
 
-W_PLAYTIMEHOURS:: ; da40
-	ds 2
-W_PLAYTIMEMINUTES:: ; da42
-	ds 2
-W_PLAYTIMESECONDS:: ; da44
+wPlayTimeHours:: ; da40
 	ds 1
-W_PLAYTIMEFRAMES:: ; da45
+wPlayTimeMaxed::
+	ds 1
+wPlayTimeMinutes:: ; da42
+	ds 1
+wPlayTimeSeconds:: ; da44
+	ds 1
+wPlayTimeFrames:: ; da45
 	ds 1
 
 wSafariZoneGameOver:: ; da46
 	ds 1
 
-W_NUMSAFARIBALLS:: ; da47
+wNumSafariBalls:: ; da47
 	ds 1
 
 wBerryTreeFlags::
@@ -2837,13 +2872,13 @@ wDayCareInUse:: ; da48
 ; bit 2 - Egg waiting at Day Care
 	ds 1
 
-W_DAYCAREMONNAME:: ds 11 ; Lady
-W_DAYCAREMONOT::   ds 11 ; Lady
+wDayCareMonName:: ds 11 ; Lady
+wDayCareMonOT::   ds 11 ; Lady
 
 wDayCareMon:: box_struct wDayCareMon ; Lady
 
-W_DAYCAREMON2NAME:: ds 11 ; Man
-W_DAYCAREMON2OT::   ds 11 ; Man
+wDayCareMon2Name:: ds 11 ; Man
+wDayCareMon2OT::   ds 11 ; Man
 
 wDayCareMon2:: box_struct wDayCareMon2 ; Man
 
@@ -2852,7 +2887,7 @@ wMainDataEnd::
 
 wBoxDataStart::
 
-W_NUMINBOX::  ds 1 ; da80
+wNumInBox::  ds 1 ; da80
 wBoxSpecies:: ds MONS_PER_BOX + 1
 
 wBoxMons::

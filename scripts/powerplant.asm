@@ -114,7 +114,7 @@ PowerPlantTrainerHeader8: ; 1e35b (7:635b)
 
 asm_234cc: ; 1e368 (7:6368)
 	call TalkToTrainer
-	ld a, [W_CURMAPSCRIPT]
+	ld a, [wCurMapScript]
 	ld [W_POWERPLANTCURSCRIPT], a
 	jp TextScriptEnd
 

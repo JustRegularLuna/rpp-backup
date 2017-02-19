@@ -54,7 +54,7 @@ asm_76474: ; 76474 (1d:6474)
 	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_AGATHACURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 AgathaScript0: ; 76490 (1d:6490)
@@ -84,7 +84,7 @@ AgathaScript0: ; 76490 (1d:6490)
 	call StartSimulatingJoypadStates
 	ld a, $3
 	ld [W_AGATHACURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 CoordsData_764d1: ; 764d1 (1d:64d1)
@@ -102,7 +102,7 @@ AgathaScript3: ; 764da (1d:64da)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_AGATHACURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 AgathaScript2: ; 764ed (1d:64ed)

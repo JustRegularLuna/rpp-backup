@@ -11,7 +11,7 @@ Route16Script_59946: ; 59946 (16:5946)
 	xor a
 	ld [wJoyIgnore], a
 	ld [W_ROUTE16CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route16ScriptPointers: ; 59951 (16:5951)
@@ -42,7 +42,7 @@ Route16Script0: ; 59959 (16:5959)
 	call UpdateSprites
 	ld a, $3
 	ld [W_ROUTE16CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route16Script3: ; 5998f (16:598f)
@@ -62,7 +62,7 @@ Route16Script3: ; 5998f (16:598f)
 	call Delay3
 	ld a, $0
 	ld [W_ROUTE16CURSCRIPT], a
-	ld [W_CURMAPSCRIPT], a
+	ld [wCurMapScript], a
 	ret
 
 Route16TextPointers: ; 599b9 (16:59b9)

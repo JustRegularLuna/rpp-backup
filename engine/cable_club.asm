@@ -58,7 +58,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	dec b
 	jr nz, .zeroPlayerDataPatchListLoop
 	ld hl, W_GRASSRATE
-	ld bc, W_TRAINERHEADERPTR - W_GRASSRATE
+	ld bc, wTrainerHeaderPtr - W_GRASSRATE
 .zeroEnemyPartyLoop
 	xor a
 	ld [hli], a
@@ -186,7 +186,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	dec c
 	jr nz, .copyEnemyNameLoop
 	ld de, wEnemyPartyCount
-	ld bc, W_TRAINERHEADERPTR - wEnemyPartyCount
+	ld bc, wTrainerHeaderPtr - wEnemyPartyCount
 .copyEnemyPartyLoop
 	ld a, [hli]
 	cp SERIAL_NO_DATA_BYTE

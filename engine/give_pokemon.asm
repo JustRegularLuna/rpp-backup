@@ -5,7 +5,7 @@ _GivePokemon: ; 4fda5 (13:7da5)
 	ld a, [wPartyCount] ; wPartyCount
 	cp PARTY_LENGTH
 	jr c, .asm_4fe01
-	ld a, [W_NUMINBOX] ; wda80
+	ld a, [wNumInBox] ; wda80
 	cp MONS_PER_BOX
 	jr nc, .asm_4fdf9
 	xor a
