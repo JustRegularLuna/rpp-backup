@@ -171,12 +171,12 @@ BallAnyway:
 	dec a
 	jr nz,.notOldManBattle
 .oldManBattle
-	ld hl,wCurTrainerName;W_GRASSRATE
+	ld hl,wCurTrainerName
 	ld de,wPlayerName
 	ld bc,11
-	call CopyData ; save the player's name in the Wild Monster data (part of the Cinnabar Island Missingno glitch)
-	jp .BallSuccess	;$578b
-.notOldManBattle	;$56e9
+	call CopyData ; restore player name
+	jp .BallSuccess
+.notOldManBattle
 	ld a,[W_CURMAP]
 	cp a,POKEMONTOWER_6
 	jr nz,.loop

@@ -2223,7 +2223,7 @@ ExecuteCurMapScriptInTable:: ; 3160 (0:3160)
 	pop hl
 	pop af
 	push hl
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	bit 4, [hl]
 	res 4, [hl]
 	jr z, .useProvidedIndex   ; test if map script index was overridden manually
@@ -2321,7 +2321,7 @@ TalkToTrainer:: ; 31cc (0:31cc)
 	call ReadTrainerHeaderInfo     ; read end battle text
 	pop de
 	call SaveEndBattleTextPointers
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 4, [hl]                    ; activate map script index override (index is set below)
 	ld hl, wFlags_0xcd60
 	bit 0, [hl]                    ; test if player is already engaging the trainer (because the trainer saw the player)
@@ -2343,7 +2343,7 @@ CheckFightingMapTrainers:: ; 3219 (0:3219)
 	ld [wTrainerHeaderFlagBit], a
 	ret
 .trainerEngaging
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 3, [hl]
 	ld [wcd4f], a
 	xor a
@@ -2408,7 +2408,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	cp POKEMONTOWER_7
 	jr z, .skipRemoveSprite ; the tower 7f scripts call EndTrainerBattle manually after
 	; wIsTrainerBattle has been unset
-	ld hl, W_MISSABLEOBJECTLIST
+	ld hl, wMissableObjectList
 	ld de, $2
 	ld a, [wSpriteIndex]
 	call IsInArray              ; search for sprite ID
@@ -2450,7 +2450,6 @@ TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
 InitBattleEnemyParameters:: ; 32d7 (0:32d7)
 	ld a, [wEngagedTrainerClass]
 	ld [W_CUROPPONENT], a ; wd059
-	ld [W_ENEMYMONORTRAINERCLASS], a
 	ld a, [wIsTrainerBattle]
 	and a
 	jr z, .noTrainer

@@ -1784,29 +1784,40 @@ wBoxItems:: ; d53b
 	ds PC_ITEM_CAPACITY * 2
 	ds 1 ; end
 
-wd5a0:: ds 2
-wd5a2:: ds 1
-wd5a3:: ds 1
+wCurrentBoxNum:: 
+	ds 1
+
+; unused 
+	ds 1
+
+wNumHoFTeams:: 
+	ds 1
+
+wd5a3:: ; removable?
+	ds 1
 
 wPlayerCoins:: ; d5a4
 	ds 2 ; BCD
 
-W_MISSABLEOBJECTFLAGS:: ; d5a6
+wMissableObjectFlags:: ; d5a6
 ; bit array of missable objects. set = removed
-; will be removed once hide/show uses normal flags with the Gen 2 style system
-	ds 39
+; TODO: will be removed once hide/show uses normal flags with the Gen 2 style system
+	flag_array $E7
 
-wd5cd:: ds 1
+wd5cd:: 
+; temp copy of c1x2 (sprite facing/anim)
+	ds 1
 
-W_MISSABLEOBJECTLIST:: ; d5ce
+wMissableObjectList:: ; d5ce
 ; each entry consists of 2 bytes
 ; * the sprite ID (depending on the current map)
-; * the missable object index (global, used for W_MISSABLEOBJECTFLAGS)
+; * the missable object index (global, used for wMissableObjectFlags)
 ; terminated with $FF
+; TODO: Remove this, make Hide/Show work off normal event flags
 	ds 17 * 2
 
-W_GAMEPROGRESSFLAGS::
-; Remove some of these from maps that don't need a unique one
+wGameProgressFlags::
+; TODO: Remove some of these from maps that don't need a unique one
 ; Use something like wGenericMapScript for those to save wram
 ; Reset that one on every map change
 
@@ -2012,7 +2023,7 @@ W_SEAFOAMISLANDS5CURSCRIPT:: ; d668
 	ds 1
 W_ROUTE18GATECURSCRIPT:: ; d669
 	ds 1
-W_GAMEPROGRESSFLAGSEND::
+wGameProgressFlagsEnd::
 
 wChainFishingStreak::
 	ds 1
@@ -2087,6 +2098,7 @@ wVarSprite6::
 
 wCurTrainerName::
 ; used to store individual trainer names
+; TODO: Same as wLinkEnemyTrainerName
 	ds 13
 
 wPlayerGender::
@@ -2095,6 +2107,7 @@ wPlayerGender::
 	ds 1
 
 wExtraFlags::
+; TODO: Move these in with Event Flags and an EngineFlags array
 ; bit 0 = Set means next Wildmon or Giftmon will be Shiny (Reset afterwards)
 ; bit 1 = unused
 ; bit 2 = Set means traded mons obey like normal mons
@@ -2117,38 +2130,43 @@ wWalkBikeSurfState:: ; d700
 ; unused?
 	ds 10
 
-W_TOWNVISITEDFLAG:: ; d70b
-	flag_array 13
+wKantoTownVisitedFlag:: ; d70b
+	ds 2
+
+;wJohtoTownVisitedFlag::
+;	ds 2
 
 wSafariSteps:: ; d70d
 ; starts at 502
 	ds 2
 
-W_FOSSILITEM:: ; d70f
+wFossilItem:: ; d70f
 ; item given to cinnabar lab
 	ds 1
 
-W_FOSSILMON:: ; d710
+wFossilMon:: ; d710
 ; mon that will result from the item
 	ds 1
 
-; unused?
-	ds 2
+; unused, wKurtApricorn?
+	ds 1
 
-W_ENEMYMONORTRAINERCLASS:: ; d713
-; trainer classes start at $c8
+; unused, wKurtBall?
+	ds 1
+
+; unused, originally wEnemyMonOrTrainerClass
 	ds 1
 
 wPlayerJumpingYScreenCoordsIndex:: ; d714
 	ds 1
 
-W_RIVALSTARTER:: ; d715
+wRivalStarter:: ; d715
 	ds 1
 
 ; unused?
 	ds 1
 
-W_PLAYERSTARTER:: ; d717
+wPlayerStarter:: ; d717
 	ds 1
 
 wBoulderSpriteIndex:: ; d718
@@ -2162,7 +2180,8 @@ wDestinationMap:: ; d71a
 ; destination map (for certain types of special warps, not ordinary walking)
 	ds 1
 
-wd71b:: ds 1
+wd71b:: ; removable?
+	ds 1
 
 wTileInFrontOfBoulderAndBoulderCollisionResult:: ; d71c
 ; used to store the tile in front of the boulder when trying to push a boulder
@@ -2177,23 +2196,64 @@ wWhichDungeonWarp:: ; d71e
 ; which dungeon warp within the source map was used
 	ds 1
 
-wd71f:: ds 9
+wd71f:: ; removable?
+	ds 1
+
+; unused
+	ds 8
 
 wd728::
 ; bit 0: using Strength outside of battle
+; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
+; bit 3: received Old Rod
+; bit 4: received Good Rod
+; bit 5: received Super Rod
+; bit 6: gave one of the Saffron guards a drink
+; bit 7: set by ItemUseCardKey, which is leftover code from a previous implementation of the Card Key
+; TODO: Move some of these into normal event flags, and others into like an EngineFlags array
 	ds 1
 
 ; unused?
 	ds 1
 
-wd72a:: ds 2
+; unused
+	ds 1
+
+; unused
+	ds 1
 
 wd72c:: ; d72c
 ; bit 0: if not set, the 3 minimum steps between random battles have passed
+; bit 1: prevent audio fade out
 	ds 1
 
-wd72d:: ds 1
-wd72e:: ds 2
+wd72d:: 
+; This variable is used for temporary flags and as the destination map when
+; warping to the Trade Center or Colosseum.
+; bit 0: sprite facing directions have been initialised in the Trade Center
+; bit 3: do scripted warp (used to warp back to Lavender Town from the top of the pokemon tower)
+; bit 4: on a dungeon warp
+; bit 5: don't make NPCs face the player when spoken to
+; Bits 6 and 7 are set by scripts when starting major battles in the storyline,
+; but they do not appear to affect anything. Bit 6 is reset after all battles
+; and bit 7 is reset after trainer battles (but it's only set before trainer
+; battles anyway).
+	ds 1
+
+wd72e::
+; bit 0: the player has received Lapras in the Silph Co. building
+; bit 1: set in various places, but doesn't appear to have an effect
+; bit 2: the player has healed pokemon at a pokemon center at least once
+; bit 3: the player has a received a pokemon from Prof. Oak
+; bit 4: disable battles
+; bit 5: set when a battle ends and when the player blacks out in the overworld due to poison
+; bit 6: using the link feature
+; bit 7: set if scripted NPC movement has been initialised
+; TODO: Move some of this into event flags, others into an EngineFlags array
+	ds 1
+
+; unused? 
+	ds 1
 
 wd730::
 ; bit 0: NPC sprite being moved by script
@@ -2219,12 +2279,22 @@ wd732:: ; d732
 ; bit 6: map destination is [wLastBlackoutMap] (usually the last used pokemon center, but could be the player's house)
 	ds 1
 
-W_FLAGS_D733:: ; d733
+wFlags_D733:: ; d733
+; bit 0: running a test battle
+; bit 1: prevent music from changing when entering new map
+; bit 2: skip the joypad check in CheckWarpsNoCollision (used for the forced warp down the waterfall in the Seafoam Islands)
+; bit 3: trainer wants to battle
 ; bit 4: use variable [wCurMapScript] instead of the provided index for next frame's map script (used to start battle when talking to trainers)
 ; bit 7: used fly out of battle
 	ds 1
 
-wd734:: ds 2
+wBeatLorelei::
+; bit 1: set when you beat Lorelei and reset in Indigo Plateau lobby
+; the game uses this to tell when Elite 4 events need to be reset
+	ds 1
+
+; unused
+	ds 1
 
 wd736:: ; d736
 ; bit 0: check if the player is standing on a door and make him walk down a step if so
@@ -2238,8 +2308,14 @@ wCompletedInGameTradeFlags::
 ; more than plenty for 2 regions
 	ds 4
 
-wd73b:: ds 1
-wd73c:: ds 3
+wWarpedFromWhichWarp:: 
+	ds 1
+
+wWarpedFromWhichMap:: 
+	ds 1
+
+; unused?
+	ds 2
 
 wCardKeyDoorY:: ; d73f
 	ds 1
@@ -2250,8 +2326,14 @@ wCardKeyDoorX:: ; d740
 ; unused?
 	ds 2
 
-wd743:: ds 1
-wd744:: ds 3
+wFirstLockTrashCanIndex::
+	ds 1
+
+wSecondLockTrashCanIndex::
+	ds 1
+
+; unused?
+	ds 2
 
 
 ; TODO: Replace this with:
@@ -2796,11 +2878,12 @@ wd882:: ds 1
 
 wLinkEnemyTrainerName:: ; d887
 ; linked game's trainer name
-
-W_GRASSRATE:: ; d887
+; TODO: Make this the same as wCurTrainerName
+wGrassRate:: ; d887
+; TODO: Don't load the whole table to RAM, just figure one out and load it like Headbutt does
 	ds 1
 
-W_GRASSMONS:: ; d888
+wGrassMons:: ; d888
 	;ds 20
 	ds 11
 ; overload grassmons
@@ -2810,11 +2893,11 @@ wSerialEnemyDataBlock::
 wEnemyPartyCount:: ds 1     ; d89c
 wEnemyPartyMons::  ds PARTY_LENGTH + 1 ; d89d
 
-W_WATERRATE:: db
-W_WATERMONS:: db
+wWaterRate:: db
+wWaterMons:: db
 
-; theoretically overload Water Rate
-	ds W_WATERRATE - @
+; overload water rate
+	ds wWaterRate - @
 
 wEnemyMons:: ; d8a4
 wEnemyMon1:: party_struct wEnemyMon1
@@ -2824,9 +2907,9 @@ wEnemyMon4:: party_struct wEnemyMon4
 wEnemyMon5:: party_struct wEnemyMon5
 wEnemyMon6:: party_struct wEnemyMon6
 
-wEnemyMonOT::    ds 11 * PARTY_LENGTH ; d9ac
-wEnemyMonNicks:: ds 11 * PARTY_LENGTH ; d9ee
-
+wEnemyMonOT::    ds 11 * PARTY_LENGTH
+wEnemyMonNicks:: ds 11 * PARTY_LENGTH
+wEnemyMonsEnd::
 
 wTrainerHeaderPtr:: ; da30
 	ds 2
@@ -2834,7 +2917,8 @@ wTrainerHeaderPtr:: ; da30
 ; unused?
 	ds 6
 
-wda38:: ds 1
+wOpponentAfterWrongAnswer::
+	ds 1
 
 wCurMapScript:: ; da39
 ; index of current map script, mostly used as index for function pointer array

@@ -96,7 +96,7 @@ SSAnne2Script1: ; 61430 (18:5430)
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle ; 0x61451 $4
 	ld a, $1

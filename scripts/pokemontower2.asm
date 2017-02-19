@@ -137,7 +137,7 @@ PokemonTower2Text1: ; 605df (18:45df)
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle ; 0x6060f
 	ld a, $4

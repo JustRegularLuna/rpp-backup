@@ -13,7 +13,7 @@ LoreleiScript_76191: ; 76191 (1d:6191)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, wd734
+	ld hl, wBeatLorelei
 	set 1, [hl]
 	ld a, [wd863]
 	bit 1, a

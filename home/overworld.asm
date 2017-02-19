@@ -340,7 +340,7 @@ OverworldLoopLessDelay::
 .battleOccurred
 	ld hl,wd72d
 	res 6,[hl]
-	ld hl,W_FLAGS_D733
+	ld hl,wFlags_D733
 	res 3,[hl]
 	ld hl,wd126
 	set 5,[hl]
@@ -440,7 +440,7 @@ CheckWarpsNoCollisionLoop:: ; 06cc (0:06cc)
 	pop hl
 	jr nc,CheckWarpsNoCollisionRetry2
 ; if the extra check passed
-	ld a,[W_FLAGS_D733]
+	ld a,[wFlags_D733]
 	bit 2,a
 	jr nz,WarpFound1
 	push de
@@ -499,9 +499,9 @@ WarpFound1:: ; 0735 (0:0735)
 WarpFound2:: ; 073c (0:073c)
 	ld a,[wNumberOfWarps]
 	sub c
-	ld [wd73b],a ; save ID of used warp
+	ld [wWarpedFromWhichWarp],a ; save ID of used warp
 	ld a,[W_CURMAP]
-	ld [wd73c],a
+	ld [wWarpedFromWhichMap],a
 	call CheckIfInOutsideMap
 	jr nz,.indoorMaps
 ; this is for handling "outside" maps that can't have the 0xFF destination map
@@ -1636,7 +1636,7 @@ JoypadOverworld:: ; 0f4d (0:0f4d)
 	ld [wSpriteStateData1 + 5],a
 	call RunMapScript
 	call Joypad
-	ld a,[W_FLAGS_D733]
+	ld a,[wFlags_D733]
 	bit 3,a ; check if a trainer wants a challenge
 	jr nz,.notForcedDownwards
 	ld a,[W_CURMAP]
@@ -2166,7 +2166,7 @@ LoadMapData:: ; 1241 (0:1241)
 	ld a,[wd732]
 	and a,1 << 4 | 1 << 3 ; fly warp or dungeon warp
 	jr nz,.restoreRomBank
-	ld a,[W_FLAGS_D733]
+	ld a,[wFlags_D733]
 	bit 1,a
 	jr nz,.restoreRomBank
 	call Func_235f ; music related

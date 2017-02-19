@@ -1057,7 +1057,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	cp SONY3 ; final battle against rival
 	jr nz, .notrival
 	ld b, MUSIC_DEFEATED_GYM_LEADER
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 1, [hl]
 .notrival
 	ld a, [wLinkState]
@@ -2185,13 +2185,9 @@ DisplayBattleMenu: ; 3ceb3 (f:4eb3)
 	jp nz, .handleBattleMenuInput ; handle menu input if it's not the old man tutorial
 ; the following happens for the old man tutorial
 	ld hl, wPlayerName
-	ld de, wCurTrainerName;W_GRASSRATE
+	ld de, wCurTrainerName
 	ld bc, $b
-	call CopyData  ; temporarily save the player name in unused space,
-	               ; which is supposed to get overwritten when entering a
-	               ; map with wild Pokémon. Due to an oversight, the data
-	               ; may not get overwritten (cinnabar) and the infamous
-	               ; Missingno. glitch can show up.
+	call CopyData  ; temporarily save the player name, so we can show Old Man instead
 	ld hl, .oldManName
 	ld de, wPlayerName
 	ld bc, $b
@@ -2721,7 +2717,7 @@ MoveSelectionMenu: ; 3d219 (f:5219)
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr z, .matchedkeyspicked
-	ld a, [W_FLAGS_D733]
+	ld a, [wFlags_D733]
 	bit 0, a
 	ld b, $c7
 	jr z, .matchedkeyspicked
@@ -2749,7 +2745,7 @@ SelectMenuItem: ; 3d2fe (f:52fe)
 	call PlaceString
 	jr .select
 .battleselect
-	ld a, [W_FLAGS_D733]
+	ld a, [wFlags_D733]
 	bit 0, a
 	jr nz, .select
 	call PrintMenuItem
@@ -6250,7 +6246,7 @@ GetCurrentMove: ; 3eabe (f:6abe)
 	jr .selected
 .player
 	ld de, W_PLAYERMOVENUM
-	ld a, [W_FLAGS_D733]
+	ld a, [wFlags_D733]
 	bit 0, a
 	ld a, [wccd9]
 	jr nz, .selected

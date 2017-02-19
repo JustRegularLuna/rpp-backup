@@ -118,11 +118,11 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	ld c, [hl]
 	ld a, [W_GRASSTILE]
 	cp c
-	ld a, [W_GRASSRATE]
+	ld a, [wGrassRate]
 	jr z, .CanEncounter
 	ld a, $14 ; in all tilesets with a water tile, this is its id
 	cp c
-	ld a, [W_WATERRATE]
+	ld a, [wWaterRate]
 	jr z, .CanEncounter
 ; even if not in grass/water, standing anywhere we can encounter pokémon
 ; so long as the map is “indoor” and has wild pokémon defined.
@@ -135,7 +135,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	jr z, .CantEncounter2
 	cp SAFARI ; Safari Zone
 	jr z, .CantEncounter2
-	ld a, [W_GRASSRATE]
+	ld a, [wGrassRate]
 .CanEncounter
 ; compare encounter chance with a random number to determine if there will be an encounter
 	ld b, a
@@ -154,13 +154,13 @@ TryDoWildEncounter: ; 13870 (4:7870)
 .gotEncounterSlot
 ; determine which wild pokémon (grass or water) can appear in the half-block we’re standing in
 	ld c, [hl]
-	ld hl, W_WATERMONS
+	ld hl, wWaterMons
 	aCoord 8, 9	
 	cp $14 ; is the bottom left tile (8,9) of the half-block we're standing in a water tile?
 	jr z, .gotWildEncounterType ; if so, it's water
 	cp $32 ; is the bottom left tile (8,9) of the half-block we're standing in a shore tile?
 	jr z, .gotWildEncounterType ; if so, it's water
-	ld hl, W_GRASSMONS
+	ld hl, wGrassMons
 ; since the bottom right tile of a "left shore" half-block is $14 but the bottom left tile is not,
 ; "left shore" half-blocks (such as the one in the east coast of Cinnabar) load grass encounters. 
 .gotWildEncounterType
@@ -394,7 +394,7 @@ StatusChangesEliminatedText: ; 13a53 (4:7a53)
 	db "@"
 
 GetTrainerName_: ; 13a58 (4:7a58)
-	ld hl, W_GRASSRATE
+	ld hl, wLinkEnemyTrainerName
 	ld a, [wLinkState]
 	and a
 	jr nz, .rival

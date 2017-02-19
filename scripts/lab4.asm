@@ -77,7 +77,7 @@ Lab4Text1: ; 75d6c (1d:5d6c)
 	call PrintText
 	ld hl, wCinnabarLabFossilFlags
 	set 2, [hl]
-	ld a, [W_FOSSILMON]
+	ld a, [wFossilMon]
 	ld b, a
 	ld c, 30
 	call GivePokemon

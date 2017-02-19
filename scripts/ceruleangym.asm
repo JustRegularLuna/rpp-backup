@@ -64,8 +64,6 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 .asm_5c736
 	ld hl, wObtainedKantoBadges
 	set 1, [hl]
-	ld hl, wd72a
-	set 1, [hl]
 
 	; deactivate gym trainers
 	ld hl, wCeruleanGymFlags

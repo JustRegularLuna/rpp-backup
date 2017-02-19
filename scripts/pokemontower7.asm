@@ -43,7 +43,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	ld a, [wd730]
 	bit 0, a
 	ret nz
-	ld hl, W_MISSABLEOBJECTLIST
+	ld hl, wMissableObjectList
 	ld a, [wSpriteIndex]
 	ld b, a
 .missableObjectsListLoop
@@ -57,8 +57,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	ld [wJoyIgnore], a
 	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
-	ld [wda38], a
-	ld a, $0
+	ld [wOpponentAfterWrongAnswer], a
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [wCurMapScript], a
 	ret

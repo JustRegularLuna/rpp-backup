@@ -7,7 +7,7 @@ IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
 	ret z
 	ld hl, wd869
 	res 7, [hl]
-	ld hl, wd734
+	ld hl, wBeatLorelei
 	bit 1, [hl]
 	res 1, [hl]
 	ret z

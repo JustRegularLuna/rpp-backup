@@ -180,7 +180,7 @@ SilphCo7Script3: ; 51c82 (14:5c82)
 	call SaveEndBattleTextPointers
 	ld a, SONY2 + TRAINER_START
 	ld [W_CUROPPONENT], a ; wd059
-	ld a, [W_RIVALSTARTER] ; wd715
+	ld a, [wRivalStarter] ; wd715
 	cp STARTER2
 	jr nz, .asm_51cb6
 	ld a, $7

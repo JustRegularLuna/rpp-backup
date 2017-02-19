@@ -16,9 +16,9 @@ InsideFerryScript: ; setup the stuff when you walk inside
 
 InsideFerry_GetLastWarp:
 	ld hl, wWarpEntries
-	ld a, [wd73b] ; last warped number
+	ld a, [wWarpedFromWhichWarp] ; last warped number
 	ld b, a
-	ld a, [wd73c] ; last warped map
+	ld a, [wWarpedFromWhichMap] ; last warped map
 	ld c, a
 	call InsideFerry_ApplyWarpData
 

@@ -116,7 +116,7 @@ OaksLabScript4: ; 1cbd2 (7:4bd2)
 	ld [$ff8d], a
 	call SetSpriteFacingDirectionAndDelay
 	call UpdateSprites
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	res 1, [hl]
 	call PlayDefaultMusic
 
@@ -192,7 +192,7 @@ OaksLabScript7: ; 1cc72 (7:4c72)
 	ret
 
 OaksLabScript8: ; 1cc80 (7:4c80)
-	ld a, [W_PLAYERSTARTER]
+	ld a, [wPlayerStarter]
 	cp STARTER1
 	jr z, .Charmander ; 0x1cc85 $6
 	cp STARTER2
@@ -294,7 +294,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	predef HideObject
 	call Delay3
 	ld a, [wWhichTrade]
-	ld [W_RIVALSTARTER], a
+	ld [wRivalStarter], a
 	ld [wcf91], a
 	ld [wd11e], a
 	call GetMonName
@@ -361,7 +361,7 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	ld [wIsTrainerBattle], a
 	ld a, SONY1 + TRAINER_START
 	ld [W_CUROPPONENT], a
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle ; 0x1cdc9 $4
 	ld a, $1
@@ -878,7 +878,7 @@ OaksLabMonChoiceMenu: ; 1d1b3 (7:51b3)
 	and a
 	jr nz, OaksLabMonChoiceEnd
 	ld a, [wcf91]
-	ld [W_PLAYERSTARTER], a
+	ld [wPlayerStarter], a
 	ld [wd11e], a
 	call GetMonName
 	ld a, [wSpriteIndex]

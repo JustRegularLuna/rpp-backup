@@ -314,7 +314,7 @@ Func_7387b: ; GetBoxSRAMLocation
 ; in: a= box num 
 ; out: b = box SRAM bank, hl = pointer to start of box
 	ld hl, PointerTable_73895 ; BoxSRAMPointerTable
-	ld a, [wd5a0] ; current box number 
+	ld a, [wCurrentBoxNum] ; current box number 
 	and $7f
 	cp $6
 	ld b, $2
@@ -346,7 +346,7 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	ld a, [wCurrentMenuItem]
 	and a
 	ret nz ; return if No was chosen
-	ld hl, wd5a0
+	ld hl, wCurrentBoxNum
 	bit 7, [hl]
 	call z, Func_73a29
 	call Func_7393f
@@ -365,7 +365,7 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call Func_7390e
 	ld a, [wCurrentMenuItem]
 	set 7, a
-	ld [wd5a0], a
+	ld [wCurrentBoxNum], a
 	call Func_7387b
 	ld de, wBoxDataStart
 	call Func_7390e
@@ -431,7 +431,7 @@ Func_7393f: ; DisplayChangeBoxMenu
 	ld [wTopMenuItemX], a ; wTopMenuItemX
 	xor a
 	ld [wcc37], a
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	ld [wCurrentMenuItem], a ; wCurrentMenuItem
 	ld [wLastMenuItem], a ; wLastMenuItem
@@ -452,7 +452,7 @@ Func_7393f: ; DisplayChangeBoxMenu
 	call PlaceString
 	ld hl, hFlags_0xFFF6
 	res 2, [hl]
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	cp 9
 	jr c, .asm_739a6
@@ -575,7 +575,7 @@ Func_73a84: ; GetMonCountsForAllBoxes
 	pop hl
 	
 ; copy the count for the current box from WRAM
-	ld a, [wd5a0] ; current box number
+	ld a, [wCurrentBoxNum] ; current box number
 	and $7f
 	ld c, a
 	ld b, $0
@@ -635,7 +635,7 @@ SAVCheckRandomID: ;$7ad1
 	ret
 
 SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	dec a
 	cp NUM_HOF_TEAMS
 	jr nc, .asm_73b28

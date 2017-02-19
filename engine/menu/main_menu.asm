@@ -109,7 +109,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld [wd52a],a
 	ld c,10
 	call DelayFrames
-	ld a,[wd5a2]
+	ld a,[wNumHoFTeams]
 	and a
 	jp z,SpecialEnterMap
 	ld a,[W_CURMAP] ; map ID

@@ -33,7 +33,7 @@ CinnabarGymScript_75792: ; 75792 (1d:5792)
 	ld [wJoyIgnore], a
 	ld [W_CINNABARGYMCURSCRIPT], a
 	ld [wCurMapScript], a
-	ld [wda38], a
+	ld [wOpponentAfterWrongAnswer], a
 	ret
 
 CinnabarGymScript_757a0: ; 757a0 (1d:57a0)
@@ -48,7 +48,7 @@ CinnabarGymScriptPointers: ; 757a6 (1d:57a6)
 	dw CinnabarGymScript3
 
 CinnabarGymScript0: ; 757ae (1d:57ae)
-	ld a, [wda38]
+	ld a, [wOpponentAfterWrongAnswer]
 	and a
 	ret z
 	ld [$ff8c], a
@@ -81,7 +81,7 @@ CinnabarGymScript1: ; 757dc (1d:57dc)
 	ret nz
 	xor a
 	ld [wJoyIgnore], a
-	ld a, [wda38]
+	ld a, [wOpponentAfterWrongAnswer]
 	ld [wTrainerHeaderFlagBit], a
 	ld [$ff8c], a
 	jp DisplayTextID
@@ -122,7 +122,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	call Func_3ead
 	xor a
 	ld [wJoyIgnore], a
-	ld [wda38], a
+	ld [wOpponentAfterWrongAnswer], a
 	ld a, $0
 	ld [W_CINNABARGYMCURSCRIPT], a
 	ld [wCurMapScript], a
@@ -155,8 +155,6 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	call DisplayTextID
 .asm_75880
 	ld hl, wObtainedKantoBadges
-	set 6, [hl]
-	ld hl, wd72a
 	set 6, [hl]
 
 	; deactivate gym trainers

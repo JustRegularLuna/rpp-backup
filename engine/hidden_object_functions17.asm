@@ -331,7 +331,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	bit 1, a
 	jr nz, .trySecondLock
 
-	ld a, [wd743]
+	ld a, [wFirstLockTrashCanIndex]
 	ld b, a
 	ld a, [wcd5b]
 	cp b
@@ -373,13 +373,13 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	add hl, de
 	ld a, [hl]
 	and $f
-	ld [wd744], a
+	ld [wSecondLockTrashCanIndex], a
 
 	ld a, $3b ; DisplayTextID $3b = VermilionGymTrashSuccesText1 (first lock opened!)
 	jr .done
 
 .trySecondLock
-	ld a, [wd744]
+	ld a, [wSecondLockTrashCanIndex]
 	ld b, a
 	ld a, [wcd5b]
 	cp b
@@ -391,7 +391,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	call Random
 
 	and $e
-	ld [wd743], a
+	ld [wFirstLockTrashCanIndex], a
 
 	ld a, $3e ; DisplayTextID $3e = VermilionGymTrashFailText (locks reset!)
 	jr .done

@@ -179,7 +179,7 @@ InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
 	ld hl, wCurTrainerName;InGameTrade_TrainerString
 	ld de, wcd4e
 	call InGameTrade_CopyData
-	ld de, W_GRASSRATE
+	ld de, wLinkEnemyTrainerName
 	call InGameTrade_CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1

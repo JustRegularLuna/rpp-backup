@@ -127,9 +127,9 @@ PrintCinnabarQuiz: ; 1ea17 (7:6a17)
 	jp PrintPredefTextID
 
 CinnabarGymQuiz: ; 1ea25 (7:6a25)
-	db $08 ; asm
+	TX_ASM
 	xor a
-	ld [wda38], a
+	ld [wOpponentAfterWrongAnswer], a
 	ld a, [wWhichTrade] ; wWhichTrade
 	push af
 	and $f
@@ -232,7 +232,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ret nz
 	ld a, [$ffdb]
 	add $2
-	ld [wda38], a
+	ld [wOpponentAfterWrongAnswer], a
 	ret
 
 CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)

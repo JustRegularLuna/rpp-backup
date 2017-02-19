@@ -14,7 +14,7 @@ PKMNLeaguePC: ; 0x7657e
 	ld [wUpdateSpritesEnabled], a
 	ld [wTrainerScreenX], a
 	ld [wcd42], a
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	ld b, a
 	cp NUM_HOF_TEAMS + 1
 	jr c, .first

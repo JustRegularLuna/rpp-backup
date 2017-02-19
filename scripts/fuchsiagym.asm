@@ -64,8 +64,6 @@ FuchsiaGymScript3_75497: ; 75497 (1d:5497)
 .asm_754c0
 	ld hl, wObtainedKantoBadges
 	set 4, [hl]
-	ld hl, wd72a
-	set 4, [hl]
 
 	; deactivate gym trainers
 	ld a, [wFuchsiaGymFlags]

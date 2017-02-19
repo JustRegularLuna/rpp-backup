@@ -25,7 +25,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	ld [wTrainerScreenY], a
 	inc a
 	ld [H_AUTOBGTRANSFERENABLED], a ; $ffba
-	ld hl, wd5a2
+	ld hl, wNumHoFTeams
 	ld a, [hl]
 	inc a
 	jr z, .asm_701eb

@@ -2,13 +2,13 @@ Func_213c8:: ; 213c8 (8:53c8)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call SaveScreenTilesToBuffer2
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	and a
 	jr nz, .asm_213f3
 	ld a, [wOaksLabFlags]
 	bit 5, a
 	jr z, .asm_213ea
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	and a
 	jr nz, .asm_213f3
 	ld hl, wTileMap
@@ -53,7 +53,7 @@ Func_213c8:: ; 213c8 (8:53c8)
 	hlCoord 2, 6
 	ld de, OaksPCText
 	call PlaceString
-	ld a, [wd5a2]
+	ld a, [wNumHoFTeams]
 	and a
 	jr z, .asm_2145a
 	ld a, $4
@@ -153,7 +153,7 @@ BillsPCMenu:
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	cp 9
 	jr c, .asm_2154f
@@ -237,7 +237,7 @@ BillsPCDeposit:
 	call RemovePokemon
 	call WaitForSoundToFinish
 	ld hl, wWhichTrade
-	ld a, [wd5a0]
+	ld a, [wCurrentBoxNum]
 	and $7f
 	cp 9
 	jr c, .asm_2160a

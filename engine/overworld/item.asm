@@ -3,7 +3,7 @@ PickupItem:
 
 	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
 	ld b, a
-	ld hl, W_MISSABLEOBJECTLIST
+	ld hl, wMissableObjectList
 .missableObjectsListLoop
 	ld a, [hli]
 	cp $ff

@@ -84,8 +84,6 @@ VermilionGymScript_5caaa: ; 5caaa (17:4aaa)
 .asm_5cad3
 	ld hl, wObtainedKantoBadges
 	set 2, [hl]
-	ld hl, wd72a
-	set 2, [hl]
 
 	; deactivate gym trainers
 	ld a, [wVermilionGymFlags]
@@ -253,7 +251,7 @@ VermilionGymAfterBattleText3: ; 5cbd6 (17:4bd6)
 
 VermilionGymText5: ; 5cbdb (17:4bdb)
 	TX_ASM
-	ld a, [wd72a]
+	ld a, [wObtainedKantoBadges]
 	bit 2, a
 	jr nz, .asm_13b67 ; 0x5cbe1
 	ld hl, VermilionGymText_5cbf4

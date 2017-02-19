@@ -66,7 +66,7 @@ GaryScript2: ; 75f6a (1d:5f6a)
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle ; 0x75f9f $4
 	ld a, $1
@@ -275,7 +275,7 @@ GaryText2: ; 76108 (1d:6108)
 
 GaryText3: ; 7610d (1d:610d)
 	TX_ASM
-	ld a, [W_PLAYERSTARTER]
+	ld a, [wPlayerStarter]
 	ld [wd11e], a
 	call GetMonName
 	ld hl, GaryText_76120

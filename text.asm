@@ -267,7 +267,7 @@ _TradeWentToText:: ; 880ef (22:40ef)
 	TX_RAM wcf4b
 	text " went"
 	line "to @"
-	TX_RAM W_GRASSRATE
+	TX_RAM wLinkEnemyTrainerName
 	text "."
 	done
 
@@ -279,7 +279,7 @@ _TradeForText:: ; 88103 (22:4103)
 	done
 
 _TradeSendsText:: ; 88112 (22:4112)
-	TX_RAM W_GRASSRATE
+	TX_RAM wLinkEnemyTrainerName
 	text " sends"
 	line "@"
 	TX_RAM wcd6d
@@ -287,7 +287,7 @@ _TradeSendsText:: ; 88112 (22:4112)
 	done
 
 _TradeWavesFarewellText:: ; 88124 (22:4124)
-	TX_RAM W_GRASSRATE
+	TX_RAM wLinkEnemyTrainerName
 	text " waves"
 	line "farewell as"
 	done
@@ -306,7 +306,7 @@ _TradeTakeCareText:: ; 88150 (22:4150)
 	done
 
 _TradeWillTradeText:: ; 8816a (22:416a)
-	TX_RAM W_GRASSRATE
+	TX_RAM wLinkEnemyTrainerName
 	text " will"
 	line "trade @"
 	TX_RAM wcd6d

@@ -22,7 +22,7 @@ Route22Script7: ; 50ed5 (14:4ed5)
 	ret
 
 Route22Script_50ed6: ; 50ed6 (14:4ed6)
-	ld a, [W_RIVALSTARTER] ; wd715
+	ld a, [wRivalStarter] ; wd715
 	ld b, a
 .asm_50eda
 	ld a, [hli]

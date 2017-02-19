@@ -164,7 +164,7 @@ WonderTrade_PrepareTradeData: ; Get the data setup for the trade
 	ld hl, WonderTrade_TrainerString
 	ld de, wcd4e
 	call WonderTrade_CopyData
-	ld de, W_GRASSRATE
+	ld de, wLinkEnemyTrainerName
 	call WonderTrade_CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1

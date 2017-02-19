@@ -64,8 +64,6 @@ CeladonGymText_48963: ; 48963 (12:4963)
 .asm_4898c
 	ld hl, wObtainedKantoBadges
 	set 3, [hl]
-	ld hl, wd72a
-	set 3, [hl]
 
 	; deactivate gym trainers
 	ld a, [wCeladonGymFlags]

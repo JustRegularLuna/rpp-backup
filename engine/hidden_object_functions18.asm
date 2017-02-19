@@ -2,30 +2,32 @@ GymStatues: ; 62419 (18:6419)
 ; if in a gym and have the corresponding badge, a = $D and jp PrintPredefTextID
 ; if in a gym and don’t have the corresponding badge, a = $C and jp PrintPredefTextID
 ; else ret
+; TODO: Update this with a second table for Johto badges
+; load BadgeFlags table based on wCurRegion, which isn't in yet
 	call EnableAutoTextBoxDrawing
-	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	ld a, [PlayerFacingDirection]
+	cp SPRITE_FACING_UP
 	ret nz
 	ld hl, .BadgeFlags
 	ld a, [W_CURMAP]
 	ld b, a
-.asm_62429
+.loop
 	ld a, [hli]
 	cp $ff
 	ret z
 	cp b
-	jr z, .asm_62433 ; 0x6242e $3
+	jr z, .match
 	inc hl
-	jr .asm_62429 ; 0x62431 $f6
-.asm_62433
+	jr .loop
+.match
 	ld b, [hl]
-	ld a, [wd72a]
+	ld a, [wObtainedKantoBadges]
 	and b
 	cp b
-	ld a, $d
-	jr z, .asm_6243f ; 0x6243b $2
-	ld a, $c
-.asm_6243f
+	tx_pre_id GymStatueText2
+	jr z, .haveBadge
+	tx_pre_id GymStatueText1
+.haveBadge
 	jp PrintPredefTextID
 
 .BadgeFlags: ; 62442 (18:6442)

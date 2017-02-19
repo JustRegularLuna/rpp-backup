@@ -138,7 +138,7 @@ CeruleanCityScript1: ; 19567 (6:5567)
 	ld [W_CUROPPONENT], a
 
 	; select which team to use during the encounter
-	ld a, [W_RIVALSTARTER]
+	ld a, [wRivalStarter]
 	cp STARTER2
 	jr nz, .NotSquirtle ; 0x19592 $4
 	ld a, $7

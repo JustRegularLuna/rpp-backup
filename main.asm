@@ -2905,11 +2905,11 @@ LoadWildData: ; ceb8 (3:4eb8)
 	ld h,[hl]
 	ld l,a       ; hl now points to wild data for current map
 	ld a,[hli]
-	ld [W_GRASSRATE],a
+	ld [wGrassRate],a
 	and a
 	jr z,.NoGrassData ; if no grass data, skip to surfing data
 	push hl
-	ld de,W_GRASSMONS ; otherwise, load grass data
+	ld de,wGrassMons ; otherwise, load grass data
 	ld bc,$0014
 	call CopyData
 	pop hl
@@ -2917,10 +2917,10 @@ LoadWildData: ; ceb8 (3:4eb8)
 	add hl,bc
 .NoGrassData
 	ld a,[hli]
-	ld [W_WATERRATE],a
+	ld [wWaterRate],a
 	and a
 	ret z        ; if no water data, we're done
-	ld de,W_WATERMONS  ; otherwise, load surfing data
+	ld de,wWaterMons  ; otherwise, load surfing data
 	ld bc,$0014
 	jp CopyData
 
@@ -3184,7 +3184,7 @@ MarkTownVisitedAndLoadMissableObjects: ; f113 (3:7113)
 	jr nc, .notInTown
 	ld c, a
 	ld b, SET_FLAG
-	ld hl, W_TOWNVISITEDFLAG   ; mark town as visited (for flying)
+	ld hl, wKantoTownVisitedFlag   ; mark town as visited (for flying)
 	predef FlagActionPredef
 .notInTown
 	ld hl, MapHSPointers
@@ -3225,7 +3225,7 @@ LoadMissableObjects: ; f132 (3:7132)
 	ld b, a
 	ld a, [H_DIVIDEND+3]
 	ld c, a                    ; store global offset in c
-	ld de, W_MISSABLEOBJECTLIST
+	ld de, wMissableObjectList
 	pop hl
 .writeMissableObjectsListLoop
 	ld a, [hli]
@@ -3248,7 +3248,7 @@ LoadMissableObjects: ; f132 (3:7132)
 	ret
 
 InitializeMissableObjectsFlags: ; f175 (3:7175)
-	ld hl, W_MISSABLEOBJECTFLAGS
+	ld hl, wMissableObjectFlags
 	ld bc, $20
 	xor a
 	call FillMemory ; clear missable objects flags
@@ -3264,7 +3264,7 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld a, [hl]
 	cp Hide
 	jr nz, .asm_f19d
-	ld hl, W_MISSABLEOBJECTFLAGS
+	ld hl, wMissableObjectFlags
 	ld a, [wd048]
 	ld c, a
 	ld b, SET_FLAG
@@ -3282,7 +3282,7 @@ IsObjectHidden: ; f1a6 (3:71a6)
 	ld a, [H_CURRENTSPRITEOFFSET]
 	swap a
 	ld b, a
-	ld hl, W_MISSABLEOBJECTLIST
+	ld hl, wMissableObjectList
 .loop
 	ld a, [hli]
 	cp $ff
@@ -3292,7 +3292,7 @@ IsObjectHidden: ; f1a6 (3:71a6)
 	jr nz, .loop
 	ld c, a
 	ld b, CHECK_FLAG
-	ld hl, W_MISSABLEOBJECTFLAGS
+	ld hl, wMissableObjectFlags
 	call MissableObjectFlagAction
 	ld a, c
 	and a
@@ -3307,7 +3307,7 @@ IsObjectHidden: ; f1a6 (3:71a6)
 ; [wcc4d]: index of the missable object to be added (global index)
 ShowObject: ; f1c8 (3:71c8)
 ShowObject2:
-	ld hl, W_MISSABLEOBJECTFLAGS
+	ld hl, wMissableObjectFlags
 	ld a, [wcc4d]
 	ld c, a
 	ld b, RESET_FLAG
@@ -3317,7 +3317,7 @@ ShowObject2:
 ; removes missable object (items, leg. pokemon, etc.) from the map
 ; [wcc4d]: index of the missable object to be removed (global index)
 HideObject: ; f1d7 (3:71d7)
-	ld hl, W_MISSABLEOBJECTFLAGS
+	ld hl, wMissableObjectFlags
 	ld a, [wcc4d]
 	ld c, a
 	ld b, SET_FLAG
@@ -4503,8 +4503,8 @@ InitPlayerData2:
 
 ; Initialize map script numbers
 	xor a
-	ld hl, W_GAMEPROGRESSFLAGS
-	ld bc, W_GAMEPROGRESSFLAGSEND - W_GAMEPROGRESSFLAGS ; originally $c8
+	ld hl, wGameProgressFlags
+	ld bc, wGameProgressFlagsEnd - wGameProgressFlags
 	call FillMemory ; clear all game progress flags
 
 	jp InitializeMissableObjectsFlags

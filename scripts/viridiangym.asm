@@ -164,8 +164,6 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 .asm_749be
 	ld hl, wObtainedKantoBadges
 	set 7, [hl]
-	ld hl, wd72a
-	set 7, [hl]
 
 	; deactivate gym trainers
 	ld a, [wViridianGymFlags]

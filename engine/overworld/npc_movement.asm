@@ -73,7 +73,7 @@ Func_1a44c: ; 1a44c (6:644c)
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a
 .asm_1a47a
-	ld hl, W_FLAGS_D733
+	ld hl, wFlags_D733
 	set 1, [hl]
 	ld a, $fc
 	ld [wJoyIgnore], a

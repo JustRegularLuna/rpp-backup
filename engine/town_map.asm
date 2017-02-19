@@ -251,9 +251,9 @@ Func_71070: ; 71070 (1c:5070)
 	ld hl, wWhichTrade ; wWhichTrade
 	ld [hl], $ff
 	inc hl
-	ld a, [W_TOWNVISITEDFLAG]
+	ld a, [wKantoTownVisitedFlag]
 	ld e, a
-	ld a, [W_TOWNVISITEDFLAG + 1]
+	ld a, [wKantoTownVisitedFlag + 1]
 	ld d, a
 	ld bc, $b
 .asm_71081
