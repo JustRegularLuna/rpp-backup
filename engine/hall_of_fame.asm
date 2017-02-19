@@ -244,7 +244,7 @@ Func_70377: ; 70377 (1c:4377)
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
-	ld de, wPlayTimeMinutes + 1
+	ld de, wPlayTimeMinutes
 	ld bc, $8102
 	call PrintNumber
 	hlCoord 1, 9

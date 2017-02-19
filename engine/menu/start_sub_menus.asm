@@ -647,7 +647,7 @@ DrawTrainerInfo: ; 1349a (4:749a)
 	call PrintNumber
 	ld [hl],$d6 ; colon tile ID
 	inc hl
-	ld de,wPlayTimeMinutes + 1 ; minutes
+	ld de,wPlayTimeMinutes ; minutes
 	ld bc,$8102
 	jp PrintNumber
 

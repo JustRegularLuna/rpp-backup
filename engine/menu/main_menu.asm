@@ -412,7 +412,7 @@ Func_5e55: ; 5e55 (1:5e55)
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
-	ld de, wPlayTimeMinutes + 1
+	ld de, wPlayTimeMinutes
 	ld bc, $8102
 	jp PrintNumber
 
