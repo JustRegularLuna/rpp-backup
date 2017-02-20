@@ -1,4 +1,4 @@
-TownMapOrder: ; 70f11 (1c:4f11)
+TownMapOrder:
 	db PALLET_TOWN
 	db ROUTE_1
 	db VIRIDIAN_CITY
@@ -46,3 +46,4 @@ TownMapOrder: ; 70f11 (1c:4f11)
 	db VICTORY_ROAD_3
 	db INDIGO_PLATEAU
 	db POWER_PLANT
+TownMapOrderEnd:

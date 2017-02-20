@@ -238,7 +238,10 @@ charmap "!", $E7
 charmap ".", $E8
 charmap "+", $EA
 charmap "&", $EB
+charmap "▷", $EC
 charmap "▶", $ED
+charmap "▲", $ED
+charmap "▼", $EE
 charmap "♂", $EF
 charmap "¥", $F0
 charmap "×", $F1

@@ -7269,7 +7269,9 @@ HappinyPicBack::    INCBIN "pic/monback/happiny.pic"
 MunchlaxPicFront::  INCBIN "pic/bmon/munchlax.pic"
 MunchlaxPicBack::   INCBIN "pic/monback/munchlax.pic"
 
-WorldMapTileGraphics:           INCBIN "gfx/town_map.2bpp"
+WorldMapTileGraphics:
+	INCBIN "gfx/town_map.2bpp"
+WorldMapTileGraphicsEnd:
 
 Mart_GFX:          INCBIN "gfx/tilesets/mart.2bpp"
 Mart_Block:        INCBIN "gfx/blocksets/mart.bst"

@@ -365,10 +365,10 @@ Func_718c3: ; 718c3 (1c:58c3)
 	pop af
 	cp $8
 	jr z, .asm_718da
-	call Func_712a6
+	call WriteSymmetricMonPartySpriteOAM
 	jr .asm_718dd
 .asm_718da
-	call Func_71281
+	call WriteAsymmetricMonPartySpriteOAM
 .asm_718dd
 	ld hl, wOAMBuffer
 	ld de, wcc5b
