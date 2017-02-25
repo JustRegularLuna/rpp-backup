@@ -4,15 +4,10 @@ MapPalettes:
 	INCLUDE "color/mappalettes.asm"
 
 	ORG $2d, $4200
-; 8 bytes per map for 8 palettes, which are taken from MapPalettes.
-MapPaletteSets:
-	INCBIN "color/mappalettesets.bin"
+	INCLUDE "color/map_palette_sets.asm"
 
 	ORG $2d, $4300
-; $60 bytes for each map. Each byte is the palette number for a tile.
-; Remaining $a0 tiles aren't part of the tileset and are set to zero.
-MapPaletteAssignments:
-	INCBIN "color/mappaletteassignments.bin"
+	INCLUDE "color/map_palette_assignments.asm"
 
 
 InitGbcMode: ; Sets double speed & clears extra memory
