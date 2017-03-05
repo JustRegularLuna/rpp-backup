@@ -7,10 +7,10 @@ UncompressSpriteData::
 	ld a, b
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
-	ld a, $a
-	ld [$0], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
 	xor a
-	ld [$4000], a
+	ld [MBC1SRamBank], a
 	call _UncompressSpriteData
 	pop af
 	ld [H_LOADEDROMBANK], a
@@ -48,8 +48,8 @@ _UncompressSpriteData::
 	ld [wSpriteWidth], a
 	call ReadNextInputBit
 	ld [wSpriteLoadFlags], a ; initialite bit1 to 0 and bit0 to the first input bit
-				  ; this will load two chunks of data to sSpriteBuffer1 and sSpriteBuffer2
-				  ; bit 0 decides in which one the first chunk is placed
+                             ; this will load two chunks of data to sSpriteBuffer1 and sSpriteBuffer2
+                             ; bit 0 decides in which one the first chunk is placed
 	; fall through
 
 ; uncompresses a chunk from the sprite input data stream (pointed to at wd0da) into sSpriteBuffer1 or sSpriteBuffer2

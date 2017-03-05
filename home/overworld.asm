@@ -8,7 +8,7 @@ EnterMap::
 	ld a, $ff
 	ld [wJoyIgnore], a
 	call LoadMapData
-	callba ClearVariablesAfterLoadingMapData
+	callba ClearVariablesOnEnterMap
 	ld hl, wd72c
 	bit 0, [hl] ; has the player already made 3 steps since the last battle?
 	jr z, .skipGivingThreeStepsOfNoRandomBattles
@@ -1244,7 +1244,7 @@ CollisionCheckOnLand::
 	call CheckTilePassable
 	jr nc,.noCollision
 .collision
-	ld a,[wChannelSoundIDs + CH4]
+	ld a,[wChannelSoundIDs + Ch4]
 	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
 	ld a,SFX_COLLISION
@@ -1948,7 +1948,7 @@ CollisionCheckOnWater::
 	jr z,.stopSurfing ; stop surfing if the tile is passable
 	jr .loop
 .collision
-	ld a,[wChannelSoundIDs + CH4]
+	ld a,[wChannelSoundIDs + Ch4]
 	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
 	ld a,SFX_COLLISION

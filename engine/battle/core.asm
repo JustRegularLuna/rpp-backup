@@ -434,13 +434,13 @@ MainInBattleLoop:
 	jr nz, .noLinkBattle
 ; link battle
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $f
+	cp LINKBATTLE_RUN
 	jp z, EnemyRan
-	cp $e
+	cp LINKBATTLE_STRUGGLE
 	jr z, .noLinkBattle
-	cp $d
+	cp LINKBATTLE_NO_ACTION
 	jr z, .noLinkBattle
-	sub $4
+	sub 4
 	jr c, .noLinkBattle
 ; the link battle enemy has switched mons
 	ld a, [wPlayerBattleStatus1]
@@ -490,8 +490,8 @@ MainInBattleLoop:
 	jr nc, .playerMovesFirst ; if player is faster
 	jr .enemyMovesFirst ; if enemy is faster
 .speedEqual ; 50/50 chance for both players
-	ld a, [$ffaa]
-	cp $2
+	ld a, [hSerialConnectionStatus]
+	cp USING_INTERNAL_CLOCK
 	jr z, .invertOutcome
 	call BattleRandom
 	cp $80
@@ -874,7 +874,7 @@ FaintEnemyPokemon:
 	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
 .sfxwait
-	ld a, [wChannelSoundIDs + CH4]
+	ld a, [wChannelSoundIDs + Ch4]
 	cp SFX_FAINT_FALL
 	jr z, .sfxwait
 	ld a, SFX_FAINT_THUD
@@ -958,7 +958,7 @@ EndLowHealthAlarm:
 ; the low health alarm and prevents it from reactivating until the next battle.
 	xor a
 	ld [wLowHealthAlarm], a ; turn off low health alarm
-	ld [wChannelSoundIDs + CH4], a
+	ld [wChannelSoundIDs + Ch4], a
 	inc a
 	ld [wLowHealthAlarmDisabled], a ; prevent it from reactivating
 	ret
@@ -992,7 +992,7 @@ ReplaceFaintedEnemyMon:
 ; link battle
 	call LinkBattleExchangeData
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $f
+	cp LINKBATTLE_RUN
 	ret z
 	call LoadScreenTilesFromBuffer1
 .notLinkBattle
@@ -1682,12 +1682,12 @@ TryRunningFromBattle:
 	call SaveScreenTilesToBuffer1
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
-	ld a, $f
+	ld a, LINKBATTLE_RUN
 	ld [wPlayerMoveListIndex], a
 	call LinkBattleExchangeData
 	call LoadScreenTilesFromBuffer1
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $f
+	cp LINKBATTLE_RUN
 	ld a, $2
 	jr z, .playSound
 	dec a
@@ -1963,7 +1963,7 @@ ENDC
 	ld [hl], $0
 	ret z
 	xor a
-	ld [wChannelSoundIDs + CH4], a
+	ld [wChannelSoundIDs + Ch4], a
 	ret
 .setLowHealthAlarm
 	ld hl, wLowHealthAlarm
@@ -3012,16 +3012,16 @@ SelectEnemyMove:
 	call LinkBattleExchangeData
 	call LoadScreenTilesFromBuffer1
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $e
+	cp LINKBATTLE_STRUGGLE
 	jp z, .linkedOpponentUsedStruggle
-	cp $d
+	cp LINKBATTLE_NO_ACTION
 	jr z, .unableToSelectMove
-	cp $4
+	cp 4
 	ret nc
 	ld [wEnemyMoveListIndex], a
 	ld c, a
 	ld hl, wEnemyMonMoves
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
 	jr .done
@@ -3100,7 +3100,7 @@ LinkBattleExchangeData:
 	ld a, $ff
 	ld [wSerialExchangeNybbleReceiveData], a
 	ld a, [wPlayerMoveListIndex]
-	cp $f ; is the player running from battle?
+	cp LINKBATTLE_RUN ; is the player running from battle?
 	jr z, .doExchange
 	ld a, [wActionResultOrTookBattleTurn]
 	and a ; is the player switching in another mon?
@@ -3108,10 +3108,10 @@ LinkBattleExchangeData:
 ; the player used a move
 	ld a, [wPlayerSelectedMove]
 	cp STRUGGLE
-	ld b, $e
+	ld b, LINKBATTLE_STRUGGLE
 	jr z, .next
-	dec b
-	inc a
+	dec b ; LINKBATTLE_NO_ACTION
+	inc a ; does move equal -1 (i.e. no action)?
 	jr z, .next
 	ld a, [wPlayerMoveListIndex]
 	jr .doExchange
@@ -4515,10 +4515,10 @@ GetEnemyMonStat:
 
 CalculateDamage:
 ; input:
-;	b: attack
-;	c: opponent defense
-;	d: base power
-;	e: level
+;   b: attack
+;   c: opponent defense
+;   d: base power
+;   e: level
 
 	ld a, [H_WHOSETURN] ; whose turn?
 	and a
@@ -5689,9 +5689,9 @@ ExecuteEnemyMove:
 	jr nz, .executeEnemyMove
 	ld b, $1
 	ld a, [wSerialExchangeNybbleReceiveData]
-	cp $e
+	cp LINKBATTLE_STRUGGLE
 	jr z, .executeEnemyMove
-	cp $4
+	cp 4
 	ret nc
 .executeEnemyMove
 	ld hl, wAILayer2Encouragement
@@ -7556,7 +7556,7 @@ FrozenText:
 
 CheckDefrost:
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
-	and a, 1 << FRZ	; are they frozen?
+	and a, 1 << FRZ ; are they frozen?
 	ret z ; return if so
 	ld a, [H_WHOSETURN]
 	and a
@@ -7565,7 +7565,7 @@ CheckDefrost:
 	ld a, [wPlayerMoveType]
 	sub a, FIRE
 	ret nz ; return if type of move used isn't fire
-	ld [wEnemyMonStatus], a	; set opponent status to 00 ["defrost" a frozen monster]
+	ld [wEnemyMonStatus], a ; set opponent status to 00 ["defrost" a frozen monster]
 	ld hl, wEnemyMon1Status
 	ld a, [wEnemyMonPartyPos]
 	ld bc, wEnemyMon2 - wEnemyMon1
@@ -7575,7 +7575,7 @@ CheckDefrost:
 	ld hl, FireDefrostedText
 	jr .common
 .opponent
-	ld a, [wEnemyMoveType]	; same as above with addresses swapped
+	ld a, [wEnemyMoveType] ; same as above with addresses swapped
 	sub a, FIRE
 	ret nz
 	ld [wBattleMonStatus], a
@@ -8091,9 +8091,8 @@ SwitchAndTeleportEffect:
 	cp c ; get a random number between 0 and c
 	jr nc, .rejectionSampleLoop1
 	srl b
-	srl b  ; b = enemy level * 4
-; bug: does not account for overflow, so levels above 63 can lead to erroneousness results
-	cp b ; is rand[0, playerLevel + enemyLevel] > enemyLevel?
+	srl b  ; b = enemyLevel / 4
+	cp b ; is rand[0, playerLevel + enemyLevel) >= (enemyLevel / 4)?
 	jr nc, .playerMoveWasSuccessful ; if so, allow teleporting
 	ld c, 50
 	call DelayFrames
