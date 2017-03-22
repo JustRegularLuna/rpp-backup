@@ -1,4 +1,8 @@
 DisplayTownMap:
+	ld a, [hTilesetType]
+	push af
+	xor a
+	ld [hTilesetType], a
 	call LoadTownMap
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
@@ -84,6 +88,8 @@ DisplayTownMap:
 	pop hl
 	pop af
 	ld [hl], a
+	pop af
+	ld [hTilesetType], a
 	ret
 .pressedUp
 	ld a, [wWhichTrade]
@@ -111,6 +117,10 @@ TownMapCursor:
 TownMapCursorEnd:
 
 LoadTownMap_Nest:
+	ld a, [hTilesetType]
+	push af
+	xor a
+	ld [hTilesetType], a
 	call LoadTownMap
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
@@ -130,12 +140,18 @@ LoadTownMap_Nest:
 	pop hl
 	pop af
 	ld [hl], a
+	pop af
+	ld [hTilesetType], a
 	ret
 
 MonsNestText:
 	db "'s nest@"
 
 LoadTownMap_Fly:
+	ld a, [hTilesetType]
+	push af
+	xor a
+	ld [hTilesetType], a
 	call ClearSprites
 	call LoadTownMap
 	call LoadPlayerSpriteGraphics
@@ -219,6 +235,8 @@ LoadTownMap_Fly:
 	pop hl
 	pop af
 	ld [hl], a
+	pop af
+	ld [hTilesetType], a
 	ret
 .pressedUp
 	deCoord 18, 0
