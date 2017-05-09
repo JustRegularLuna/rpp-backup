@@ -100,7 +100,7 @@ GainExperience: ; 5524f (15:524f)
 .noBoost
 	ld a, $0 ; Makes traded Pokemon act the same as normal ones
 .next
-	ld [wcf4d], a
+	ld [wGainBoostedExp], a
 	ld a, [W_ISINBATTLE]
 	dec a ; is it a trainer battle?
 	call nz, BoostExp ; if so, boost exp
@@ -380,7 +380,7 @@ GainedText: ; 554b2 (15:54b2)
 	TX_FAR _GainedText
 	db $08 ; asm
 	ld hl, ExpPointsText
-	ld a, [wcf4d]
+	ld a, [wGainBoostedExp]
 	and a
 	ret z
 	ld hl, BoostedText

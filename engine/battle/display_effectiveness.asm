@@ -1,5 +1,5 @@
 DisplayEffectiveness: ; 2fb7b (b:7b7b)
-	ld a, [wd05b]
+	ld a, [wDamageMultipliers]
 	and a, $7F
 	and a
 	ret z ; neutral

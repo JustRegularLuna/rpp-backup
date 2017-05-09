@@ -1853,7 +1853,7 @@ FieldMoveDisplayData: ; 7823 (1:7823)
 	db $ff ; list terminator
 
 
-INCLUDE "engine/battle/1.asm"
+INCLUDE "engine/battle/moveEffects/drain_hp_effect.asm"
 
 INCLUDE "engine/menu/players_pc.asm"
 
@@ -4784,7 +4784,7 @@ PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
 
 SECTION "Battle (bank 4)", ROMX, BANK[$4]
 
-INCLUDE "engine/battle/4.asm"
+INCLUDE "engine/overworld/is_player_just_outside_map.asm"
 INCLUDE "engine/menu/status_screen.asm"
 INCLUDE "engine/menu/party_menu.asm"
 
@@ -4796,7 +4796,12 @@ ShrinkPic2::   INCBIN "pic/trainer/shrink2.pic"
 INCLUDE "engine/turn_sprite.asm"
 INCLUDE "engine/menu/start_sub_menus.asm"
 INCLUDE "engine/items/tms.asm"
-INCLUDE "engine/battle/4_2.asm"
+INCLUDE "engine/battle/end_of_battle.asm"
+INCLUDE "engine/battle/wild_encounters.asm"
+INCLUDE "engine/battle/moveEffects/recoil_effect.asm"
+INCLUDE "engine/battle/moveEffects/conversion_effect.asm"
+INCLUDE "engine/battle/moveEffects/haze_effect.asm"
+INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/random.asm"
 
 EXPBarGraphics: INCBIN "gfx/exp_bar.h8.2bpp"
@@ -4850,7 +4855,7 @@ INCLUDE "engine/load_pokedex_tiles.asm"
 INCLUDE "engine/overworld/map_sprites.asm"
 INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/evolve_trade.asm"
-INCLUDE "engine/battle/5.asm"
+INCLUDE "engine/battle/moveEffects/substitute_effect.asm"
 INCLUDE "engine/menu/pc.asm"
 
 
@@ -5168,7 +5173,8 @@ PikachuPicBack::      INCBIN "pic/monback/pikachub.pic"
 
 
 SECTION "Battle (bank 9)", ROMX, BANK[$9]
-INCLUDE "engine/battle/9.asm"
+INCLUDE "engine/battle/print_type.asm"
+INCLUDE "engine/battle/moveEffects/focus_energy_effect.asm"
 
 
 SECTION "Pics 2", ROMX, BANK[PICS_2]
@@ -5227,7 +5233,7 @@ DiglettPicBack::      INCBIN "pic/monback/diglettb.pic"
 
 
 SECTION "Battle (bank A)", ROMX, BANK[$A]
-INCLUDE "engine/battle/a.asm"
+INCLUDE "engine/battle/moveEffects/leech_seed_effect.asm"
 
 
 SECTION "Pics 3", ROMX, BANK[PICS_3]
@@ -5283,7 +5289,7 @@ TentacruelPicBack::   INCBIN "pic/monback/tentacruelb.pic"
 
 SECTION "Battle (bank B)", ROMX, BANK[$B]
 
-INCLUDE "engine/battle/b.asm"
+INCLUDE "engine/battle/display_effectiveness.asm"
 
 TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
 BlankLeaderNames:                INCBIN "gfx/blank_leader_names.2bpp"
@@ -5291,7 +5297,8 @@ CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
 BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
 
 INCLUDE "engine/items/tmhm.asm"
-INCLUDE "engine/battle/b_2.asm"
+INCLUDE "engine/battle/scale_sprites.asm"
+INCLUDE "engine/battle/moveEffects/pay_day_effect.asm"
 INCLUDE "engine/game_corner_slots2.asm"
 
 
@@ -5349,7 +5356,8 @@ HypnoPicBack::       INCBIN "pic/monback/hypnob.pic"
 
 
 SECTION "Battle (bank C)", ROMX, BANK[$C]
-INCLUDE "engine/battle/c.asm"
+INCLUDE "engine/battle/moveEffects/mist_effect.asm"
+INCLUDE "engine/battle/moveEffects/one_hit_ko_effect.asm"
 
 
 SECTION "Pics 5", ROMX, BANK[PICS_5]
@@ -5398,7 +5406,7 @@ GhostPic::             INCBIN "pic/other/ghost.pic"
 SECTION "Battle (bank D)", ROMX, BANK[$D]
 
 INCLUDE "engine/titlescreen2.asm"
-INCLUDE "engine/battle/d.asm"
+INCLUDE "engine/battle/link_battle_versus_text.asm"
 INCLUDE "engine/slot_machine.asm"
 INCLUDE "engine/overworld/pewter_guys.asm"
 INCLUDE "engine/multiply_divide.asm"
@@ -5407,12 +5415,17 @@ INCLUDE "engine/game_corner_slots.asm"
 
 SECTION "bankE",ROMX,BANK[$E]
 
-INCLUDE "engine/battle/unused_stat_modifiers.asm"
+INCLUDE "engine/battle/unused_stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
 INCLUDE "engine/battle/trainer_money_pointers.asm"
-INCLUDE "engine/battle/e.asm"
-INCLUDE "engine/battle/e_2.asm"
+INCLUDE "text/trainer_names.asm"
+INCLUDE "engine/battle/bank_e_misc.asm"
+INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
+INCLUDE "engine/battle/moveEffects/rage_effect.asm"
+INCLUDE "engine/battle/moveEffects/heal_effect.asm"
+INCLUDE "engine/battle/moveEffects/transform_effect.asm"
+INCLUDE "engine/battle/moveEffects/reflect_light_screen_effect.asm"
 
 INCLUDE "engine/evos_moves.asm"
 
@@ -6091,7 +6104,8 @@ INCLUDE "scripts/mansion4.asm"
 INCLUDE "data/mapObjects/mansion4.asm"
 Mansion4Blocks: INCBIN "maps/mansion4.blk"
 
-INCLUDE "engine/battle/14.asm"
+INCLUDE "engine/battle/init_battle_variables.asm"
+INCLUDE "engine/battle/moveEffects/paralyze_effect.asm"
 
 INCLUDE "engine/overworld/card_key.asm"
 
@@ -6148,7 +6162,7 @@ DayCareMBlocks: INCBIN "maps/daycarem.blk"
 
 FuchsiaHouse3Blocks: INCBIN "maps/fuchsiahouse3.blk"
 
-INCLUDE "engine/battle/15.asm"
+INCLUDE "engine/battle/experience.asm"
 
 INCLUDE "scripts/route2.asm"
 INCLUDE "scripts/route3.asm"
@@ -6469,7 +6483,7 @@ INCLUDE "data/mapObjects/route18.asm"
 Route18Blocks: INCBIN "maps/route18.blk"
 
 
-INCLUDE "engine/battle/16.asm"
+INCLUDE "engine/battle/common_text.asm"
 
 INCLUDE "engine/experience.asm"
 
@@ -6798,7 +6812,7 @@ INCLUDE "engine/battle/get_trainer_pic_pointers.asm"
 
 SECTION "bank1A",ROMX,BANK[$1A]
 
-INCLUDE "engine/battle/1a.asm"
+INCLUDE "engine/battle/decrement_pp.asm"
 
 Version_GFX:       INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
 
@@ -6840,7 +6854,8 @@ INCLUDE "engine/gamefreak.asm"
 INCLUDE "engine/hall_of_fame.asm"
 INCLUDE "engine/overworld/healing_machine.asm"
 INCLUDE "engine/overworld/player_animations.asm"
-INCLUDE "engine/battle/1c.asm"
+INCLUDE "engine/battle/ghost_marowak_anim.asm"
+INCLUDE "engine/battle/battle_transitions.asm"
 INCLUDE "engine/town_map.asm"
 INCLUDE "engine/mon_party_sprites.asm"
 INCLUDE "engine/in_game_trades.asm"
