@@ -3223,7 +3223,7 @@ PlaySoundWaitForCurrent:: ; 3740 (0:3740)
 
 ; Wait for sound to finish playing
 WaitForSoundToFinish:: ; 3748 (0:3748)
-	ld a, [wd083]
+	ld a, [wLowHealthAlarm]
 	and $80
 	ret nz
 	push hl
@@ -3925,7 +3925,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ld [H_DOWNARROWBLINKCNT2],a ; blinking down arrow timing value 2
 .loop1
 	xor a
-	ld [W_SUBANIMTRANSFORM],a ; counter for pokemon shaking animation
+	ld [wPartyMonAnimCounter],a ; counter for pokemon shaking animation
 	call PlaceMenuCursor
 	call Delay3
 .loop2

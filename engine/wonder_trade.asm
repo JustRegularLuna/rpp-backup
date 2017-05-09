@@ -108,7 +108,7 @@ WonderTrade_DoTrade:
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call WonderTrade_PrepareTradeData
-	predef Func_410e2
+	predef InternalClockTradeAnim
 	pop af
 	ld [W_CURENEMYLVL],a
 	pop af

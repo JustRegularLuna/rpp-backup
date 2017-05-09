@@ -759,9 +759,17 @@ wTradedEnemyMonOTID:: ; cd59
 
 wcd5b:: ds 1
 wcd5c:: ds 1
-wcd5d:: ds 1
-wcd5e:: ds 1
-wcd5f:: ds 1
+
+wMonPartySpriteSpecies:: ; cd5d
+	ds 1
+
+wLeftGBMonSpecies:: ; cd5e
+; in the trade animation, the mon that leaves the left gameboy
+	ds 1
+
+wRightGBMonSpecies:: ; cd5f
+; in the trade animation, the mon that leaves the right gameboy
+	ds 1
 
 wFlags_0xcd60:: ; cd60
 ; bit 0: is player engaged by trainer (to avoid being engaged by multiple trainers simultaneously)
@@ -1205,7 +1213,9 @@ W_BASECOORDX:: ; d081
 W_BASECOORDY:: ; d082
 	ds 1
 
-wd083:: ds 1
+; low health alarm counter/enable
+; high bit = enable, others = timer to cycle frequencies
+wLowHealthAlarm:: ds 1 ; d083
 
 W_FBTILECOUNTER:: ; d084
 ; counts how many tiles of the current frame block have been drawn
@@ -1226,9 +1236,14 @@ W_NUMFBTILES:: ; d089
 ; number of tiles in current battle animation frame block
 	ds 1
 
+wTradedMonMovingRight:: ; d08a
+; $01 if mon is moving from left gameboy to right gameboy; $00 if vice versa
+
 wd08a:: ds 1
 
 wTownMapSpriteBlinkingCounter:: ; d08b
+
+wPartyMonAnimCounter:: ; d08b
 
 W_SUBANIMTRANSFORM:: ; d08b
 ; controls what transformations are applied to the subanimation
