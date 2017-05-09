@@ -12,7 +12,7 @@ Lab3Text1: ; 75c94 (1d:5c94)
 	TX_ASM
 	ld a, [wCinnabarLabItemFlags]
 	bit 7, a
-	jr nz, .asm_e551a ; 0x75c9a
+	jr nz, .asm_e551a
 	ld hl, TM35PreReceiveText
 	call PrintText
 	lb bc, TM_35, 1
@@ -22,15 +22,15 @@ Lab3Text1: ; 75c94 (1d:5c94)
 	call PrintText
 	ld hl, wCinnabarLabItemFlags
 	set 7, [hl]
-	jr .asm_eb896 ; 0x75cb5
+	jr .asm_eb896
 .BagFull
 	ld hl, TM35NoRoomText
 	call PrintText
-	jr .asm_eb896 ; 0x75cbd
-.asm_e551a ; 0x75cbf
+	jr .asm_eb896
+.asm_e551a
 	ld hl, TM35ExplanationText
 	call PrintText
-.asm_eb896 ; 0x75cc5
+.asm_eb896
 	jp TextScriptEnd
 
 TM35PreReceiveText: ; 75cc8 (1d:5cc8)

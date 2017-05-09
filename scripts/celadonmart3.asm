@@ -24,7 +24,7 @@ CeladonMart3Text1: ; 4824a (12:424a)
 	TX_ASM
 	ld a, [wCeladonMartFlags]
 	bit 7, a
-	jr nz, .asm_a5463 ; 0x48250
+	jr nz, .asm_a5463
 	ld hl, TM18PreReceiveText
 	call PrintText
 	lb bc, TM_18, 1
@@ -33,13 +33,13 @@ CeladonMart3Text1: ; 4824a (12:424a)
 	ld hl, wCeladonMartFlags
 	set 7, [hl]
 	ld hl, ReceivedTM18Text
-	jr .asm_81359 ; 0x48268
+	jr .asm_81359
 .BagFull
 	ld hl, TM18NoRoomText
-	jr .asm_81359 ; 0x4826d
-.asm_a5463 ; 0x4826f
+	jr .asm_81359
+.asm_a5463
 	ld hl, TM18ExplanationText
-.asm_81359 ; 0x48272
+.asm_81359
 	call PrintText
 	jp TextScriptEnd
 

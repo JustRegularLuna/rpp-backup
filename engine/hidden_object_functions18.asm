@@ -145,7 +145,7 @@ SaffronCityPokecenterBenchGuyText: ; 624e4 (18:64e4)
 	ld a, [wd838]
 	bit 7, a
 	ld hl, SaffronCityPokecenterBenchGuyText2
-	jr nz, .asm_624f2 ; 0x624ed $3
+	jr nz, .asm_624f2
 	ld hl, SaffronCityPokecenterBenchGuyText1
 .asm_624f2
 	call PrintText

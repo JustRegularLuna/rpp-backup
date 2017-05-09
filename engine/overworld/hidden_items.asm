@@ -27,7 +27,6 @@ HiddenItems: ; 76688 (1d:6688)
 INCLUDE "data/hidden_item_coords.asm"
 
 FoundHiddenItemText: ; 7675b (1d:675b)
-; XXX where is the pointer to this?
 	TX_FAR _FoundHiddenItemText
 	db $8
 	ld a, [wWhichTrade] ; item ID
@@ -41,8 +40,8 @@ FoundHiddenItemText: ; 7675b (1d:675b)
 	ld b, SET_FLAG
 	predef FlagActionPredef
 	ld a, (SFX_02_3b - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
-	call WaitForSoundToFinish ; wait for sound to finish playing
+	call PlaySoundWaitForCurrent
+	call WaitForSoundToFinish
 	jp TextScriptEnd
 .BagFull
 	call WaitForTextScrollButtonPress ; wait for button press
@@ -151,10 +150,10 @@ Func_76857: ; 76857 (1d:6857)
 	cp $ff ; end of the list?
 	ret z  ; if so, we're done here
 	cp b
-	jr nz, .asm_76877 ; 0x7686b $a
+	jr nz, .asm_76877
 	ld a, [hli]
 	cp d
-	jr nz, .asm_76878 ; 0x7686f $7
+	jr nz, .asm_76878
 	ld a, [hli]
 	cp e
 	jr nz, .loop

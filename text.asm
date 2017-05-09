@@ -1044,7 +1044,7 @@ _MoneyForWinningText:: ; 896dd (22:56dd)
 	prompt
 
 _TrainerDefeatedText:: ; 896f9 (22:56f9)
-	TX_RAM W_TRAINERNAME ; 0x89706
+	TX_RAM W_TRAINERNAME
 	text " @"
 	TX_RAM wCurTrainerName
 	db $0
@@ -1077,7 +1077,7 @@ _PlayerBlackedOutText2:: ; 89748 (22:5748)
 _LinkBattleLostText:: ; 89772 (22:5772)
 	text "[PLAYER] lost to"
 	line "@"
-	TX_RAM W_TRAINERNAME ; 0x8977e
+	TX_RAM W_TRAINERNAME
 	text "!"
 	prompt
 

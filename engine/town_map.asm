@@ -11,7 +11,7 @@ DisplayTownMap:
 	push hl
 	ld a, $1
 	ld [hJoy7], a
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP]
 	push af
 	ld b, $0
 	call DrawPlayerOrBirdSprite
@@ -27,7 +27,7 @@ DisplayTownMap:
 	lb bc, BANK(TownMapCursor), (TownMapCursorEnd - TownMapCursor) / $8
 	call CopyVideoDataDouble
 	xor a
-	ld [wWhichTrade], a ; wWhichTrade
+	ld [wWhichTrade], a
 	pop af
 	jr .enterLoop
 

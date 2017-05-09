@@ -146,7 +146,7 @@ BallAnyway:
 	ld a,[wNumInBox]	;is Box full?
 	cp a,MONS_PER_BOX
 	jp z,BoxFullCannotThrowBall
-.UseBall	;$56a7
+.UseBall
 ;ok, you can use a ball
 	xor a
 	ld [wd11c],a
@@ -157,7 +157,7 @@ BallAnyway:
 	; remove a Safari Ball from inventory
 	ld hl,wNumSafariBalls
 	dec [hl]
-.skipSafariZoneCode	;$56b6
+.skipSafariZoneCode
 	call GoPAL_SET_CF1C
 	ld a,$43
 	ld [wd11e],a
@@ -186,7 +186,7 @@ BallAnyway:
 	jp z,.next12
 ; if not fighting ghost Marowak, loop until a random number in the current
 ; pokeball's allowed range is found
-.loop	;$56fa
+.loop
 	call Random
 	ld b,a
 	; Add cheat for B + Down
@@ -197,7 +197,7 @@ BallAnyway:
 	ld hl,wcf91
 	ld a,[hl]
 	cp a,MASTER_BALL
-	jp z,.BallSuccess	;$578b
+	jp z,.BallSuccess
 	cp a,POKE_BALL
 	jr z,.checkForAilments
 	ld a,200
@@ -209,7 +209,7 @@ BallAnyway:
 	ld a,150	;get only numbers <= 150 for Ultra Ball
 	cp b
 	jr c,.loop
-.checkForAilments	;$571a
+.checkForAilments
 ; pokemon can be caught more easily with any (primary) status ailment
 ; Frozen/Asleep pokemon are relatively even easier to catch
 ; for Frozen/Asleep pokemon, any random number from 0-24 ensures a catch.
@@ -221,12 +221,12 @@ BallAnyway:
 	ld c,12
 	jr z,.notFrozenOrAsleep
 	ld c,25
-.notFrozenOrAsleep	;$5728
+.notFrozenOrAsleep
 	ld a,b
 	sub c
-	jp c,.BallSuccess	;$578b
+	jp c,.BallSuccess
 	ld b,a
-.noAilments	;$572e
+.noAilments
 	push bc		;save RANDOM number
 	xor a
 	ld [H_MULTIPLICAND],a
@@ -243,7 +243,7 @@ BallAnyway:
 	ld a,12		;any other BallFactor
 	jr nz,.next7
 	ld a,8
-.next7	;$574d
+.next7
 	ld [H_DIVISOR],a
 	ld b,4		; number of bytes in dividend
 	call Divide
@@ -262,7 +262,7 @@ BallAnyway:
 	and a
 	jr nz,.next8
 	inc a
-.next8	;$5766
+.next8
 	ld [H_DIVISOR],a
 	ld b,4
 	call Divide	; ((MaxHP * 255) / BallFactor) / (CurHP / 4)
@@ -271,7 +271,7 @@ BallAnyway:
 	jr z,.next9
 	ld a,255
 	ld [H_QUOTIENT + 3],a
-.next9	;$5776
+.next9
 	pop bc
 	ld a,[wEnemyMonCatchRate]	;enemy: Catch Rate
 	cp b
@@ -284,9 +284,9 @@ BallAnyway:
 	ld a,[H_QUOTIENT + 3]
 	cp b
 	jr c,.next10
-.BallSuccess	;$578b
+.BallSuccess
 	jr .BallSuccess2
-.next10	;$578d
+.next10
 	ld a,[H_QUOTIENT + 3]
 	ld [wd11e],a
 	xor a
@@ -307,7 +307,7 @@ BallAnyway:
 	ld b,150
 	cp a,ULTRA_BALL
 	jr z,.next11
-.next11	;$57b8
+.next11
 	ld a,b
 	ld [H_DIVISOR],a
 	ld b,4
@@ -330,11 +330,11 @@ BallAnyway:
 	ld b,5
 	jr z,.next14
 	ld b,10
-.next14	;$57e6
+.next14
 	ld a,[H_QUOTIENT + 3]
 	add b
 	ld [H_QUOTIENT + 3],a
-.next13	;$57eb
+.next13
 	ld a,[H_QUOTIENT + 3]
 	cp a,10
 	ld b,$20
@@ -346,10 +346,10 @@ BallAnyway:
 	ld b,$62
 	jr c,.next12
 	ld b,$63
-.next12	;$5801
+.next12
 	ld a,b
 	ld [wd11e],a
-.BallSuccess2	;$5805
+.BallSuccess2
 	ld c,20
 	call DelayFrames
 	ld a,TOSS_ANIM
@@ -403,14 +403,14 @@ BallAnyway:
 .faraway
 	ld [wEnemyMonSpecies2],a
 	jr .next16
-.next15	;$5871
+.next15
 	set Transformed,[hl]
 	ld hl,wcceb
 	ld a,[wEnemyMonDVs]
 	ld [hli],a
 	ld a,[wEnemyMonDVs + 1]
 	ld [hl],a
-.next16	;$587e
+.next16
 	ld a,[wcf91]
 	push af
 	ld a,[wEnemyMonSpecies2]
@@ -460,7 +460,7 @@ BallAnyway:
 	ld a,[wEnemyMonSpecies]	;caught mon_ID
 	ld [wd11e],a
 	predef ShowPokedexData
-.checkParty	;$58f4
+.checkParty
 	ld a,[wPartyCount]
 	cp a,PARTY_LENGTH		;is party full?
 	jr z,.sendToBox
@@ -469,7 +469,7 @@ BallAnyway:
 	call ClearSprites
 	call AddPartyMon	;add mon to Party
 	jr .End
-.sendToBox	;$5907
+.sendToBox
 	call ClearSprites
 	call SendNewMonToBox
 	ld hl,ItemUseBallText07
@@ -477,22 +477,22 @@ BallAnyway:
 	bit 0,a		;already met Bill?
 	jr nz,.sendToBox2
 	ld hl,ItemUseBallText08
-.sendToBox2	;$591a
+.sendToBox2
 	call PrintText
 	jr .End
-.printText1	;$591f
+.printText1
 	ld hl,ItemUseBallText05
-.printText0	;$5922
+.printText0
 	call PrintText
 	call ClearSprites
-.End	;$5928
+.End
 	ld a,[W_BATTLETYPE]
 	and a
 	ret nz
 	ld hl,wNumBagItems
 	inc a
 	ld [wcf96],a
-	jp RemoveItemFromInventory	;remove ITEM (XXX)
+	jp RemoveItemFromInventory
 ItemUseBallText00: ; d937 (3:5937)
 ;"It dodged the thrown ball!"
 ;"This pokemon can't be caught"
@@ -686,8 +686,8 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,$01
 	ld [wccd4],a
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
-	call WaitForSoundToFinish ; wait for sound to end
+	call PlaySoundWaitForCurrent
+	call WaitForSoundToFinish
 	callab TryEvolvingMon ; try to evolve pokemon
 	ld a,[wd121]
 	and a
@@ -975,7 +975,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,2 * 20
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a,(SFX_02_3d - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
+	call PlaySoundWaitForCurrent
 	ld a,[hFlags_0xFFF6]
 	set 0,a
 	ld [hFlags_0xFFF6],a
@@ -1133,7 +1133,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	cp a,FULL_HEAL
 	jr z,.playStatusAilmentCuringSound
 	ld a,(SFX_02_3d - SFX_Headers_02) / 3 ; HP healing sound
-	call PlaySoundWaitForCurrent ; play sound
+	call PlaySoundWaitForCurrent
 	ld a,[hFlags_0xFFF6]
 	set 0,a
 	ld [hFlags_0xFFF6],a
@@ -1246,7 +1246,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,10
 	call CopyData ; copy the stat's name to wcf4b
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3
-	call PlaySound ; play sound
+	call PlaySound
 	ld hl,VitaminStatRoseText
 	call PrintText
 	jp RemoveUsedItem
@@ -1788,7 +1788,7 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 	call PlaySound ; turn off music
 	ld a, (SFX_02_5e - SFX_Headers_02) / 3
 	ld c, BANK(SFX_02_5e)
-	call PlayMusic ; play music
+	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
 	ld a,[wc028]
 	cp a,$b8
@@ -1879,7 +1879,7 @@ INCLUDE "data/good_rod.asm"
 SuperRodCode: ; e283 (3:6283)
 	call FishingInit
 	jp c, ItemUseNotTime
-	call ReadSuperRodData ; 0xe8ea
+	call ReadSuperRodData
 	ld a, e
 RodResponse: ; e28d (3:628d)
 	ld [wWhichTrade], a
@@ -1971,7 +1971,7 @@ FishingInit: ; e2b4 (3:62b4)
 	ld hl,ItemUseText00
 	call PrintText
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3
-	call PlaySound ; play sound
+	call PlaySound
 	ld c,80
 	call DelayFrames
 	and a
@@ -1994,9 +1994,9 @@ ItemUseItemfinder: ; e2e1 (3:62e1)
 	ld c,4
 .loop
 	ld a,(SFX_02_4a - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
+	call PlaySoundWaitForCurrent
 	ld a,(SFX_02_5a - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
+	call PlaySoundWaitForCurrent
 	dec c
 	jr nz,.loop
 	ld hl,ItemfinderFoundItemText
@@ -2295,7 +2295,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	jr nz,.checkIfAlreadyLearnedMove
 ; if the pokemon can't learn the move
 	ld a,(SFX_02_51 - SFX_Headers_02) / 3
-	call PlaySoundWaitForCurrent ; play sound
+	call PlaySoundWaitForCurrent
 	ld hl,MonCannotLearnMachineMoveText
 	call PrintText
 	jr .chooseMon
@@ -2335,7 +2335,7 @@ PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 	ld hl,ItemUseText00
 	call PrintText
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3
-	call PlaySound ; play sound
+	call PlaySound
 	call WaitForTextScrollButtonPress ; wait for button press
 
 RemoveUsedItem: ; e571 (3:6571)
@@ -2716,7 +2716,7 @@ IsKeyItem_: ; e764 (3:6764)
 INCLUDE "data/key_items.asm"
 
 SendNewMonToBox: ; e7a4 (3:67a4)
-	ld de, wNumInBox ; wda80
+	ld de, wNumInBox
 	ld a, [de]
 	inc a
 	ld [de], a
@@ -2735,7 +2735,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	call GetMonHeader
 	ld hl, wBoxMonOT
 	ld bc, $b
-	ld a, [wNumInBox] ; wda80
+	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e7ee
 	dec a
@@ -2746,7 +2746,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [wNumInBox] ; wda80
+	ld a, [wNumInBox]
 	dec a
 	ld b, a
 .asm_e7db
@@ -2763,11 +2763,11 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e7db
 .asm_e7ee
-	ld hl, wPlayerName ; wd158
+	ld hl, wPlayerName
 	ld de, wBoxMonOT
 	ld bc, $b
 	call CopyData
-	ld a, [wNumInBox] ; wda80
+	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e82a
 	ld hl, wBoxMonNicks
@@ -2780,7 +2780,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [wNumInBox] ; wda80
+	ld a, [wNumInBox]
 	dec a
 	ld b, a
 .asm_e817
@@ -2801,7 +2801,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld a, $2
 	ld [wd07d], a
 	predef AskName
-	ld a, [wNumInBox] ; wda80
+	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e867
 	ld hl, wBoxMons
@@ -2814,7 +2814,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, h
 	ld e, l
 	pop hl
-	ld a, [wNumInBox] ; wda80
+	ld a, [wNumInBox]
 	dec a
 	ld b, a
 .asm_e854
@@ -2831,13 +2831,13 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	dec b
 	jr nz, .asm_e854
 .asm_e867
-	ld a, [wEnemyMonLevel] ; wEnemyMonLevel
+	ld a, [wEnemyMonLevel]
 	ld [wEnemyMonBoxLevel], a
 	ld hl, wEnemyMon
 	ld de, wBoxMon1
 	ld bc, $c
 	call CopyData
-	ld hl, wPlayerID ; wPlayerID
+	ld hl, wPlayerID
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -2845,11 +2845,11 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [de], a
 	inc de
 	push de
-	ld a, [W_CURENEMYLVL] ; W_CURENEMYLVL
+	ld a, [W_CURENEMYLVL]
 	ld d, a
 	callab CalcExperience
 	pop de
-	ld a, [H_NUMTOPRINT] ; $ff96 (aliases: H_MULTIPLICAND)
+	ld a, [H_NUMTOPRINT] ; (aliases: H_MULTIPLICAND)
 	ld [de], a
 	inc de
 	ld a, [$ff97]
@@ -2871,7 +2871,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	inc de
 	ld a, [hli]
 	ld [de], a
-	ld hl, wEnemyMonPP ; wcffe
+	ld hl, wEnemyMonPP
 	ld b, $4
 .asm_e8b1
 	ld a, [hli]
@@ -2924,7 +2924,7 @@ ReadSuperRodData: ; e8ea (3:68ea)
 	ld e, $2 ; $2 if no fishing groups found
 	ret
 
-.ReadFishingGroup ; 0xe8f6
+.ReadFishingGroup
 ; hl points to the fishing group entry in the index
 	inc hl ; skip map id
 
@@ -2937,7 +2937,7 @@ ReadSuperRodData: ; e8ea (3:68ea)
 	inc hl ; point to data
 	ld e, $0 ; no bite yet
 
-.RandomLoop ; 0xe90c
+.RandomLoop
 	call Random
 	srl a
 	jr nc, .potentialHook ; 50% chance of no battle

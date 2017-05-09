@@ -14,7 +14,7 @@ Route11GateUpstairsText1: ; 4945f (12:545f)
 	xor a
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
-asm_49469: ; 49469 (12:5469)
+Route11GateUpstairsScriptEnd: ; 49469 (12:5469)
 	jp TextScriptEnd
 	
 Trader0Name:
@@ -24,7 +24,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	TX_ASM
 	ld a, [wRoute11Flags2]
 	add a
-	jr c, .asm_4949b ; 0x49471 $28
+	jr c, .asm_4949b
 	ld a, 30 ; pokemon needed
 	ld [$ffdb], a
 	ld a, ITEMFINDER ; oak's aide reward
@@ -39,14 +39,14 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	predef OaksAideScript ; call oak's aide script
 	ld a, [$ffdb]
 	dec a
-	jr nz, .asm_494a1 ; 0x49494 $b
+	jr nz, .asm_494a1
 	ld hl, wRoute11Flags2
 	set 7, [hl]
 .asm_4949b
 	ld hl, Route11GateUpstairsText_494a3
 	call PrintText
 .asm_494a1
-	jr asm_49469 ; 0x494a1 $c6
+	jr Route11GateUpstairsScriptEnd
 
 Route11GateUpstairsText_494a3: ; 494a3 (12:54a3)
 	TX_FAR _Route11GateUpstairsText_494a3
@@ -76,7 +76,7 @@ BinocularsNoSnorlaxText:
 
 Route11GateUpstairsText4: ; 494ce (12:54ce)
 	TX_ASM
-	ld hl, Route11GateUpstairsText_494d5 ; $54d5
+	ld hl, Route11GateUpstairsText_494d5
 	jp Route12GateUpstairsScript_495c9
 
 Route11GateUpstairsText_494d5: ; 494d5 (12:54d5)

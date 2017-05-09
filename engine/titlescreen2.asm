@@ -74,7 +74,7 @@ _TitleScroll: ; 3726a (d:726a)
 	jr nz, .wait
 
 	ld a, h
-	ld [rSCX], a ; $ff43
+	ld [rSCX], a
 
 .wait2
 	ld a, [$ff44] ; rLY
@@ -90,7 +90,7 @@ TitleBallYTable: ; 372a0 (d:72a0)
 Func_372ac: ; 372ac (d:72ac)
 ; Animate the TitleBall if a starter just got scrolled out.
 ; Also animate it if a legendary just got scrolled out.
-	ld a, [wWhichTrade] ; wWhichTrade
+	ld a, [wWhichTrade]
 	cp BULBASAUR
 	jr z, .ok
 	cp CHARMANDER

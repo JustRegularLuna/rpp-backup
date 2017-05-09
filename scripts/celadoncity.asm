@@ -47,7 +47,7 @@ CeladonCityText5: ; 1999e (6:599e)
 	TX_ASM
 	ld a, [wCeladonCityFlags]
 	bit 0, a
-	jr nz, .asm_7053f ; 0x199a4
+	jr nz, .asm_7053f
 	ld hl, TM41PreText
 	call PrintText
 	lb bc, TM_43, 1
@@ -62,7 +62,7 @@ CeladonCityText5: ; 1999e (6:599e)
 	ld hl, wCeladonCityFlags
 	set 0, [hl]
 	jr .Done
-.asm_7053f ; 0x199c9
+.asm_7053f
 	ld hl, TM41ExplanationText
 	call PrintText
 .Done

@@ -8,7 +8,7 @@ SaffronHouse2Text1: ; 1de41 (7:5e41)
 	TX_ASM
 	ld a, [wSaffronHouse2Flags]
 	bit 0, a
-	jr nz, .asm_9e72b ; 0x1de47
+	jr nz, .asm_9e72b
 	ld hl, TM29PreReceiveText
 	call PrintText
 	lb bc, TM_29, 1
@@ -18,15 +18,15 @@ SaffronHouse2Text1: ; 1de41 (7:5e41)
 	call PrintText
 	ld hl, wSaffronHouse2Flags
 	set 0, [hl]
-	jr .asm_fe4e1 ; 0x1de62
+	jr .asm_fe4e1
 .BagFull
 	ld hl, TM29NoRoomText
 	call PrintText
-	jr .asm_fe4e1 ; 0x1de6a
-.asm_9e72b ; 0x1de6c
+	jr .asm_fe4e1
+.asm_9e72b
 	ld hl, TM29ExplanationText
 	call PrintText
-.asm_fe4e1 ; 0x1de72
+.asm_fe4e1
 	jp TextScriptEnd
 
 TM29PreReceiveText: ; 1de75 (7:5e75)

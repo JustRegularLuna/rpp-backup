@@ -17,4 +17,3 @@ SFX_1f_5d_Ch2: ; 7c475 (1f:4475)
 	unknownsfx0x20 3, 196, 1, 7
 	unknownsfx0x20 2, 196, 161, 7
 	endchannel
-; 0x7c490

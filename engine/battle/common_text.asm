@@ -1,8 +1,8 @@
 PrintBeginningBattleText: ; 58d99 (16:4d99)
-	ld a, [W_ISINBATTLE] ; W_ISINBATTLE
+	ld a, [W_ISINBATTLE]
 	dec a
 	jr nz, .trainerBattle
-	ld a, [W_CURMAP] ; W_CURMAP
+	ld a, [W_CURMAP]
 	cp POKEMONTOWER_3
 	jr c, .notPokemonTower
 	cp LAVENDER_HOUSE_1
@@ -24,7 +24,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	ld a, [wEnemyMonSpecies2]
 	call PlayCry
 	ld hl, WildMonAppearedText
-	ld a, [W_MOVEMISSED] ; W_MOVEMISSED
+	ld a, [W_MOVEMISSED]
 	and a
 	jr z, .notFishing
 	ld hl, FellOutOfTreeText
@@ -35,7 +35,7 @@ PrintBeginningBattleText: ; 58d99 (16:4d99)
 	jr .wildBattle
 .trainerBattle
 	call .playSFX
-	ld c, $14
+	ld c, 20
 	call DelayFrames
 	ld hl, TrainerWantsToFightText
 .wildBattle
