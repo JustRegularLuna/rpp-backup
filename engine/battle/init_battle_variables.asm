@@ -13,7 +13,7 @@ InitBattleVariables: ; 525af (14:65af)
 	ld [wCriticalHitOrOHKO], a
 	ld [wBattleMonSpecies], a
 	ld [wPartyGainExpFlags], a
-	ld [wPlayerMonNumber], a 
+	ld [wPlayerMonNumber], a
 	ld [wEscapedFromBattle], a
 	ld [wMapPalOffset], a
     ld a, 2 ; HP_BAR_RED
@@ -29,7 +29,7 @@ InitBattleVariables: ; 525af (14:65af)
 	jr nz, .loop
 	inc a
 	ld [wccd9], a
-	ld a, [W_CURMAP] 
+	ld a, [W_CURMAP]
 	cp SAFARI_ZONE_EAST
 	jr c, .notSafariBattle
 	cp SAFARI_ZONE_REST_HOUSE_1

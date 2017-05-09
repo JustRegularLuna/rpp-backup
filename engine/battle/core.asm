@@ -1073,7 +1073,7 @@ TrainerBattleVictory: ; 3c696 (f:4696)
 	ld c, $28
 	call DelayFrames
 	call PrintEndBattleText
-; win money	
+; win money
 	ld hl, MoneyForWinningText
 	call PrintText
 
@@ -1715,7 +1715,7 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld b, a
 	ld a, [H_QUOTIENT + 3]
 	cp b
-	jr nc, .canEscape ; if the random value was less than or equal to the quotient 
+	jr nc, .canEscape ; if the random value was less than or equal to the quotient
 	                  ; plus 30 times the number of attempts, the player can escape
 ; can't escape
 	ld a, $1
@@ -3317,7 +3317,7 @@ handleIfPlayerMoveMissed
 	and a
 	jr z,getPlayerAnimationType
 	ld a,[W_PLAYERMOVEEFFECT]
-	sub a,EXPLODE_EFFECT 
+	sub a,EXPLODE_EFFECT
 	jr z,playPlayerMoveAnimation ; don't play any animation if the move missed, unless it was EXPLODE_EFFECT
 	jr playerCheckIfFlyOrChargeEffect
 getPlayerAnimationType
@@ -3412,7 +3412,7 @@ MirrorMoveCheck
 	ld a,[wPlayerNumAttacksLeft]
 	dec a
 	ld [wPlayerNumAttacksLeft],a
-	jp nz,getPlayerAnimationType ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints. 
+	jp nz,getPlayerAnimationType ; for multi-hit moves, apply attack until PlayerNumAttacksLeft hits 0 or the enemy faints.
 	                             ; damage calculation and accuracy tests only happen for the first hit
 	res AttackingMultipleTimes,[hl] ; clear attacking multiple times status when all attacks are over
 	ld hl,MultiHitText
@@ -3748,7 +3748,7 @@ CheckPlayerStatusConditions: ; 3d854 (f:5854)
 	ld a,[wPlayerNumAttacksLeft]
 	dec a ; did multi-turn move end?
 	ld [wPlayerNumAttacksLeft],a
-	ld hl,getPlayerAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit), 
+	ld hl,getPlayerAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit),
 	                ; DecrementPP and MoveHitTest
 	jp nz,.returnToHL
 	jp .returnToHL
@@ -3905,6 +3905,11 @@ PrintMonName1Text: ; 3daf5 (f:5af5)
 	ld hl, MonName1Text
 	jp PrintText
 
+; this function wastes time calling DetermineExclamationPointTextNum
+; and choosing between Used1Text and Used2Text, even though
+; those text strings are identical and both continue at PrintInsteadText
+; this likely had to do with Japanese grammar that got translated,
+; but the functionality didn't get removed
 MonName1Text: ; 3dafb (f:5afb)
 	TX_FAR _MonName1Text
 	db $08 ; asm
@@ -3923,22 +3928,24 @@ MonName1Text: ; 3dafb (f:5afb)
 UsedText: ; 3db2d (f:5b2d)
 	TX_FAR _UsedText
 	db $08 ; asm
+	; fall through
 
 	ld a, [wMonIsDisobedient]
 	and a
-	jr z, PrintCF4BText
+	jr z, PrintMoveName
 	ld hl, InsteadText
 	ret
 
 InsteadText: ; 3db43 (f:5b43)
 	TX_FAR _InsteadText
 	db $08 ; asm
+	; fall through
 
-PrintCF4BText: ; 3db48 (f:5b48)
-	ld hl, CF4BText
+PrintMoveName: ; 3db48 (f:5b48)
+	ld hl, _PrintMoveName
 	ret
 
-CF4BText: ; 3db4c (f:5b4c)
+_PrintMoveName: ; 3db4c (f:5b4c)
 	TX_FAR _CF4BText
 	db "@"
 
@@ -3970,7 +3977,7 @@ PrintMoveFailureText: ; 3dbe2 (f:5be2)
 
 	; if you get here, the mon used jump kick or hi jump kick and missed
 	ld hl, W_DAMAGE ; since the move missed, W_DAMAGE will always contain 0 at this point.
-	                ; Thus, recoil damage will always be equal to 1 
+	                ; Thus, recoil damage will always be equal to 1
 	                ; even if it was intended to be potential damage/8.
 	ld a, [hli]
 	ld b, [hl]
@@ -5090,9 +5097,9 @@ ApplyAttackToPlayerPokemonDone
 AttackSubstitute: ; 3e25e (f:625e)
 ; Unlike the two ApplyAttackToPokemon functions, Attack Substitute is shared by player and enemy.
 ; Self-confusion damage as well as Hi-Jump Kick and Jump Kick recoil cause a momentary turn swap before being applied.
-; If the user has a Substitute up and would take damage because of that, 
+; If the user has a Substitute up and would take damage because of that,
 ; damage will be applied to the other player's Substitute.
-; Normal recoil such as from Double-Edge isn't affected by this glitch, 
+; Normal recoil such as from Double-Edge isn't affected by this glitch,
 ; because this function is never called in that case.
 
 	ld hl,SubstituteTookDamageText
@@ -5117,7 +5124,7 @@ AttackSubstitute: ; 3e25e (f:625e)
 	ld [de],a
 	ret nc
 .substituteBroke
-; If the target's Substitute breaks, W_DAMAGE isn't updated with the amount of HP 
+; If the target's Substitute breaks, W_DAMAGE isn't updated with the amount of HP
 ; the Substitute had before being attacked.
 	ld h,b
 	ld l,c
@@ -6233,7 +6240,7 @@ CheckEnemyStatusConditions: ; 3e88f (f:688f)
 	call PrintText
 	ld hl, wEnemyNumAttacksLeft
 	dec [hl] ; did multi-turn move end?
-	ld hl, GetEnemyAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit), 
+	ld hl, GetEnemyAnimationType ; if it didn't, skip damage calculation (deal damage equal to last hit),
 	                             ; DecrementPP and MoveHitTest
 	jp nz, .enemyReturnToHL
 	jp .enemyReturnToHL
@@ -7196,7 +7203,7 @@ asm_3f0d0: ; 3f0d0 (f:70d0)
 	dec b
 	jr nz, .asm_3f0de
 	ret
-	
+
 .asm_3f0ed
 	push bc
 	ld b, $0
@@ -8715,12 +8722,12 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	ld a, [H_WHOSETURN]
 	and a
 	ld hl, wBattleMonPP
-	jr nz, .enemyTurn 
+	jr nz, .enemyTurn
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	pop hl ; wEnemyMonMoves
 	jr nz, .playerTurnNotLinkBattle
-; .playerTurnLinkBattle	
+; .playerTurnLinkBattle
 	push hl
 	ld hl, wEnemyMonPP
 .enemyTurn
@@ -8745,7 +8752,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	and $7
 	inc a ; 1-8 turns disabled
 	inc c ; move 1-4 will be disabled
-	swap c 
+	swap c
 	add c ; map disabled move to high nibble of W_ENEMYDISABLEDMOVE / W_PLAYERDISABLEDMOVE
 	ld [de], a
 	call PlayCurrentMoveAnimation2
@@ -8756,7 +8763,7 @@ DisableEffect: ; 3fa8a (f:7a8a)
 	inc hl ; wEnemyDisabledMoveNumber
 .printDisableText
 	ld a, [wd11e] ; move number
-	ld [hl], a  
+	ld [hl], a
 	call GetMoveName
 	ld hl, MoveWasDisabledText
 	jp PrintText
