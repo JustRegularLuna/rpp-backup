@@ -14,10 +14,10 @@ HallOfFamePC: ; 7405c (1d:405c)
 	ld bc, $10
 	ld a, $ff
 	call FillMemory
-	ld hl, wTileMap
-	call Func_7417b
+	hlCoord 0, 0
+	call FillFourRowsWithBlack
 	hlCoord 0, 14
-	call Func_7417b
+	call FillFourRowsWithBlack
 	ld a, $c0
 	ld [rBGP], a
 	call EnableLCD
@@ -34,7 +34,7 @@ HallOfFamePC: ; 7405c (1d:405c)
 	jp Credits
 
 Func_740ba: ; 740ba (1d:40ba)
-	ld hl, DataTable_74160
+	ld hl, HoFGBPalettes
 	ld b, $4
 .asm_740bf
 	ld a, [hli]
@@ -77,7 +77,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	call Func_74164
 	call FillMiddleOfScreenWithWhite
 	ld a,$FC
-	ld [$FF47],a
+	ld [rBGP],a
 	ld bc,7
 .next
 	call Func_74140
@@ -94,7 +94,7 @@ DisplayCreditsMon: ; 740cb (1d:40cb)
 	xor a
 	ld [hWY],a
 	ld a,$C0
-	ld [$FF47],a
+	ld [rBGP],a
 	ret
 
 INCLUDE "data/credit_mons.asm"
@@ -123,14 +123,17 @@ Func_74152: ; 74152 (1d:4152)
 	jr z, .asm_7415a
 	ret
 
-DataTable_74160: ; 74160 (1d:4160)
-	db $C0,$D0,$E0,$F0
+HoFGBPalettes: ; 74160 (1d:4160)
+	db %11000000
+	db %11010000
+	db %11100000
+	db %11110000
 
 Func_74164: ; 74164 (1d:4164)
 	ld a, l
 	ld [H_AUTOBGTRANSFERDEST], a
 	ld a, h
-	ld [$ffbd], a
+	ld [H_AUTOBGTRANSFERDEST + 1], a
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	jp Delay3
@@ -145,14 +148,14 @@ Func_74171: ; 74171 (1d:4171)
 	jr nz, Func_74171
 	ret
 
-Func_7417b: ; 7417b (1d:417b)
-	ld bc, $50
+FillFourRowsWithBlack: ; 7417b (1d:417b)
+	ld bc, SCREEN_WIDTH * 4
 	ld a, $7e
 	jp FillMemory
 
 FillMiddleOfScreenWithWhite: ; 74183 (1d:4183)
 	hlCoord 0, 4
-	ld bc, $c8 ; 10 rows of 20 tiles each
+	ld bc, SCREEN_WIDTH * 10
 	ld a, $7f ; blank white tile
 	jp FillMemory
 
@@ -254,5 +257,5 @@ INCLUDE "data/credits_order.asm"
 
 INCLUDE "text/credits_text.asm"
 
-TheEndGfx: ; 7473e (1d:473e) ; 473E (473F on blue)
+TheEndGfx: ; 7473e (1d:473e) (7473f on blue)
 	INCBIN "gfx/theend.interleave.2bpp"

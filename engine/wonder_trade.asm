@@ -38,7 +38,7 @@ DoWonderTradeDialogue:: ; Called by an event to start the Wonder Trade process
 WonderTrade_DoTrade:
 	; Open a normal party menu and let the player choose a Pokemon
 	xor a
-	ld [wd07d],a
+	ld [wPartyMenuTypeOrMessageID],a
 	dec a
 	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
@@ -117,7 +117,7 @@ WonderTrade_DoTrade:
 	ld [wcf91],a
 	xor a
 	ld [wcc49],a
-	ld [wcf95],a
+	ld [wRemoveMonFromBox],a
 	call RemovePokemon
 	ld a,$80
 	ld [wcc49],a

@@ -27,7 +27,7 @@ DayCareMText1: ; Day Care Lady
 	call PrintText
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
@@ -49,11 +49,11 @@ DayCareMText1: ; Day Care Lady
 	call PrintText
 	ld hl, wDayCareInUse
 	set 0, [hl]
-	ld a, $3
-	ld [wcf95], a
-	call Func_3a68
+	ld a, PARTY_TO_DAYCARE
+	ld [wMoveMonType], a
+	call MoveMon
 	xor a
-	ld [wcf95], a
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	ld a, [wcf91]
 	call PlayCry
@@ -161,14 +161,14 @@ DayCareMText1: ; Day Care Lady
 	predef SubBCDPredef
 	ld a, (SFX_02_5a - SFX_Headers_02) / 3
 	call PlaySoundWaitForCurrent
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, DayCareHeresYourMonText
 	call PrintText
-	ld a, $2
-	ld [wcf95], a
-	call Func_3a68
+	ld a, DAYCARE_TO_PARTY
+	ld [wMoveMonType], a
+	call MoveMon
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
 	ld a, [wPartyCount]
@@ -180,7 +180,7 @@ DayCareMText1: ; Day Care Lady
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld a, $1
+	ld a, 1
 	ld [wHPBarMaxHP], a
 	predef WriteMonMoves
 	pop bc
@@ -233,7 +233,7 @@ DayCareMText2: ; Day Care Man
 	call PrintText
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
@@ -255,11 +255,11 @@ DayCareMText2: ; Day Care Man
 	call PrintText
 	ld hl, wDayCareInUse
 	set 1, [hl]
-	ld a, $4
-	ld [wcf95], a
-	call Func_3a68
+	ld a, PARTY_TO_DAYCARE_2
+	ld [wMoveMonType], a
+	call MoveMon
 	xor a
-	ld [wcf95], a
+	ld [wMoveMonType], a
 	call RemovePokemon
 	ld a, [wcf91]
 	call PlayCry
@@ -372,9 +372,9 @@ DayCareMText2: ; Day Care Man
 	call DisplayTextBoxID
 	ld hl, DayCareHeresYourMonText
 	call PrintText
-	ld a, $5
-	ld [wcf95], a
-	call Func_3a68
+	ld a, DAYCARE_TO_PARTY_2
+	ld [wMoveMonType], a
+	call MoveMon
 	ld a, [wDayCareMon2Species]
 	ld [wcf91], a
 	ld a, [wPartyCount]

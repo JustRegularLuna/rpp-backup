@@ -26,8 +26,8 @@ LoadDefaultNamesPlayer: ; 695d (1:695d)
 	jr .asm_6999 ; End of new Girl Names routine
 .asm_697a
 	ld hl, wPlayerName
-	xor a
-	ld [wd07d], a
+	xor a ; NAME_PLAYER_SCREEN
+	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	ld a, [wcf4b]
 	cp $50
@@ -65,8 +65,8 @@ LoadDefaultNamesRival: ; 69a4 (1:69a4)
 	jr .asm_69e1
 .asm_69c1
 	ld hl, wRivalName
-	ld a, $1
-	ld [wd07d], a
+	ld a, NAME_RIVAL_SCREEN
+	ld [wNamingScreenType], a
 	call DisplayNamingScreen
 	ld a, [wcf4b]
 	cp $50
@@ -86,7 +86,7 @@ HisNameIsText: ; 69e7 (1:69e7)
 
 Func_69ec: ; 69ec (1:69ec)
 	push de
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $c0b
 	call ClearScreenArea
 	ld c, 10
@@ -175,7 +175,7 @@ asm_6a19: ; 6a19 (1:6a19)
 
 DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	push de
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $a
 	ld c, $9
 	call TextBoxBorder

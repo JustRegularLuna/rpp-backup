@@ -12,14 +12,14 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp z,RedisplayStartMenu
 	xor a
 	ld [wMenuItemToSwap],a
-	ld [wd07d],a
+	ld [wPartyMenuTypeOrMessageID],a
 	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
 	jr .checkIfPokemonChosen
 .loop
 	xor a
 	ld [wMenuItemToSwap],a
-	ld [wd07d],a
+	ld [wPartyMenuTypeOrMessageID],a
 	call GoBackToPartyMenu
 .checkIfPokemonChosen
 	jr nc,.chosePokemon
@@ -90,8 +90,8 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	cp a,2 ; is there more than one pokemon in the party?
 	jp c,StartMenu_Pokemon ; if not, no switching
 	call SwitchPartyMon_Stats
-	ld a,$04 ; swap pokemon positions menu
-	ld [wd07d],a
+	ld a,SWAP_MONS_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	call GoBackToPartyMenu
 	jp .checkIfPokemonChosen
 .choseStats
@@ -328,7 +328,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	ld [hli],a
 	ld [hl],b ; store item bag pointer at wList (for DisplayListMenuID)
 	xor a
-	ld [wcf93],a
+	ld [wPrintItemPrices],a
 	ld a,ITEMLISTMENU
 	ld [wListMenuID],a
 	ld a,[wcc2c]
@@ -441,7 +441,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	jp ItemMenuLoop
 .tossItem
 	call IsKeyItem
-	ld a,[wd124]
+	ld a,[wIsKeyItem]
 	and a
 	jr nz,.skipAskingQuantity
 	ld a,[wcf91]
@@ -754,7 +754,7 @@ SwitchPartyMon: ; 13613 (4:7613)
 
 SwitchPartyMon_OAM: ; 13625 (4:7625)
 	push af
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld bc, $28
 	call AddNTimes
 	ld c, $28
@@ -788,7 +788,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ret
 .asm_13661
 	xor a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld a, [wMenuItemToSwap]
 	dec a
 	ld b, a
@@ -798,7 +798,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	jr nz, .asm_1367b
 	xor a
 	ld [wMenuItemToSwap], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ret
 .asm_1367b
 	ld a, b
@@ -886,7 +886,7 @@ SwitchPartyMon_Stats: ; 13653 (4:7653)
 	ld [wWhichTrade], a
 	xor a
 	ld [wMenuItemToSwap], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	pop de
 	pop hl
 	ret

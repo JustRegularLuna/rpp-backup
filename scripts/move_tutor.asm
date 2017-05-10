@@ -108,7 +108,7 @@ DisplayTeachTutorMoveText:
 	xor a
 	ld [wUpdateSpritesEnabled],a
 	ld a,$06 ; move tutor party menu
-	ld [wd07d],a
+	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	push af
 	ld hl,wd036

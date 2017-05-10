@@ -429,12 +429,12 @@ Func_7393f: ; DisplayChangeBoxMenu
 	ld a, $c
 	ld [wTopMenuItemX], a
 	xor a
-	ld [wcc37], a
+	ld [wMenuWatchMovingOutOfBounds], a
 	ld a, [wCurrentBoxNum]
 	and $7f
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	ld hl, wTileMap
+	hlCoord 0, 0
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder

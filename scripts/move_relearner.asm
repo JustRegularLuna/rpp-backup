@@ -25,7 +25,7 @@ MoveRelearnerText1:
 	call SaveScreenTilesToBuffer2
 	xor a
 	ld [wListScrollOffset], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wUpdateSpritesEnabled], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
@@ -62,7 +62,7 @@ MoveRelearnerText1:
 	inc hl
 	ld [hl], d
 	xor a
-	ld [wcf93], a ; don't print prices
+	ld [wPrintItemPrices], a ; don't print prices
 	call DisplayListMenuID
 	pop bc
 	jr c, .exit  ; exit if player chose cancel

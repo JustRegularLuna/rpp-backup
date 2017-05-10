@@ -329,7 +329,7 @@ OverworldLoopLessDelay::
 	and a
 	jp nz,CheckWarpsNoCollision
 	predef ApplyOutOfBattlePoisonDamage ; also increment daycare mon exp
-	ld a,[wd12d]
+	ld a,[wOutOfBattleBlackout]
 	and a
 	jp nz,HandleBlackOut ; if all pokemon fainted
 .newBattle
@@ -1465,10 +1465,10 @@ LoadCurrentMapView:: ; 0caa (0:0caa)
 	ld bc,$0002
 	add hl,bc
 .copyToVisibleAreaBuffer
-	ld de,wTileMap ; base address for the tiles that are directly transfered to VRAM during V-blank
-	ld b,$12
+	deCoord 0, 0 ; base address for the tiles that are directly transfered to VRAM during V-blank
+	ld b, SCREEN_HEIGHT
 .rowLoop2
-	ld c,$14
+	ld c, SCREEN_WIDTH
 .rowInnerLoop2
 	ld a,[hli]
 	ld [de],a
@@ -2138,7 +2138,7 @@ LoadMapData:: ; 1241 (0:1241)
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView
 ; copy current map view to VRAM
-	ld hl,wTileMap
+	hlCoord 0, 0
 	ld de,vBGMap0
 	ld b,18
 .vramCopyLoop

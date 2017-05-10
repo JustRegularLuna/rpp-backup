@@ -491,7 +491,7 @@ BallAnyway:
 	ret nz
 	ld hl,wNumBagItems
 	inc a
-	ld [wcf96],a
+	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 ItemUseBallText00: ; d937 (3:5937)
 ;"It dodged the thrown ball!"
@@ -674,8 +674,8 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,[wcf91]
 	ld [wd156],a
 	push af
-	ld a,$05 ; evolution stone party menu
-	ld [wd07d],a
+	ld a,EVO_STONE_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
@@ -696,7 +696,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld [wWhichPokemon],a
 	ld hl,wNumBagItems
 	ld a,1 ; remove 1 stone
-	ld [wcf96],a
+	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 .noEffect
 	call ItemUseNoEffect
@@ -719,8 +719,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	push af
 	ld a,[wcf91]
 	push af
-	ld a,$01
-	ld [wd07d],a ; item use party menu
+	ld a,USE_ITEM_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
 	ld a,[wd152]
@@ -784,32 +784,32 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,4
 	add hl,bc ; hl now points to status
 	ld a,[wcf91]
-	ld bc,$f008
+	ld bc, (ANTIDOTE_MSG << 8) | (1 << PSN)
 	cp a,ANTIDOTE
 	jr z,.checkMonStatus
 	cp a,PECHA_BERRY
 	jr z,.checkMonStatus
-	ld bc,$f110
+	ld bc, (BURN_HEAL_MSG << 8) | (1 << BRN)
 	cp a,BURN_HEAL
 	jr z,.checkMonStatus
 	cp a,RAWST_BERRY
 	jr z,.checkMonStatus
-	ld bc,$f220
+	ld bc, (ICE_HEAL_MSG << 8) | (1 << FRZ)
 	cp a,ICE_HEAL
 	jr z,.checkMonStatus
 	cp a,ASPEAR_BERRY
 	jr z,.checkMonStatus
-	ld bc,$f307
+	ld bc, (AWAKENING_MSG << 8) | SLP
 	cp a,AWAKENING
 	jr z,.checkMonStatus
 	cp a,CHESTO_BERRY
 	jr z,.checkMonStatus
-	ld bc,$f440
+	ld bc, (PARALYZ_HEAL_MSG << 8) | (1 << PAR)
 	cp a,PARLYZ_HEAL
 	jr z,.checkMonStatus
 	cp a,CHERI_BERRY
 	jr z,.checkMonStatus
-	ld bc,$f6ff ; Full Heal or Lum Berry
+	ld bc, (FULL_HEAL_MSG << 8) | $ff ; Full Heal or Lum Berry
 .checkMonStatus
 	ld a,[hl] ; pokemon's status
 	and c ; does the pokemon have a status ailment the item can cure?
@@ -818,7 +818,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	xor a
 	ld [hl],a ; remove the status ailment in the party data
 	ld a,b
-	ld [wd07d],a ; the message to display for the item used
+	ld [wPartyMenuTypeOrMessageID],a ; the message to display for the item used
 	ld a,[wPlayerMonNumber]
 	cp d ; is pokemon the item was used on active in battle?
 	jp nz,.doneHealing
@@ -1143,15 +1143,15 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[hFlags_0xFFF6]
 	res 0,a
 	ld [hFlags_0xFFF6],a
-	ld a,$f7 ; revived message
-	ld [wd07d],a
+	ld a,REVIVE_MSG
+	ld [wPartyMenuTypeOrMessageID],a
 	ld a,[wcf91]
 	cp a,REVIVE
 	jr z,.showHealingItemMessage
 	cp a,MAX_REVIVE
 	jr z,.showHealingItemMessage
-	ld a,$f5 ; standard HP healed message
-	ld [wd07d],a
+	ld a,POTION_MSG
+	ld [wPartyMenuTypeOrMessageID],a
 	jr .showHealingItemMessage
 .playStatusAilmentCuringSound
 	ld a,(SFX_02_3e - SFX_Headers_02) / 3 ; status ailment curing sound
@@ -1324,8 +1324,8 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[hl]
 	adc b
 	ld [hl],a
-	ld a,$f8 ; level up message
-	ld [wd07d],a
+	ld a,RARE_CANDY_MSG
+	ld [wPartyMenuTypeOrMessageID],a
 	call RedrawPartyMenu
 	pop de
 	ld a,d
@@ -2024,8 +2024,8 @@ ItemUsePPRestore: ; e31e (3:631e)
 .chooseMon
 	xor a
 	ld [wUpdateSpritesEnabled],a
-	ld a,$01 ; item use party menu
-	ld [wd07d],a
+	ld a,USE_ITEM_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	jr nc,.chooseMove
 	jp .itemNotUsed
@@ -2266,8 +2266,8 @@ ItemUseTMHM: ; e479 (3:6479)
 	call CopyData
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
-	ld a,$03 ; teach TM/HM party menu
-	ld [wd07d],a
+	ld a,TMHM_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	push af
 	ld hl,wd036
@@ -2341,7 +2341,7 @@ PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 RemoveUsedItem: ; e571 (3:6571)
 	ld hl,wNumBagItems
 	ld a,1 ; one item
-	ld [wcf96],a ; store quantity
+	ld [wItemQuantity],a
 	jp RemoveItemFromInventory
 
 ItemUseNoEffect: ; e57c (3:657c)
@@ -2612,7 +2612,7 @@ GetSelectedMoveOffset2: ; e6e9 (3:66e9)
 ; hl = address of inventory (either wNumBagItems or wNumBoxItems)
 ; [wcf91] = item ID
 ; [wWhichPokemon] = index of item within inventory
-; [wcf96] = quantity to toss
+; [wItemQuantity] = quantity to toss
 ; OUTPUT:
 ; clears carry flag if the item is tossed, sets carry flag if not
 TossItem_: ; e6f1 (3:66f1)
@@ -2623,7 +2623,7 @@ TossItem_: ; e6f1 (3:66f1)
 	jr c,.tooImportantToToss
 	push hl
 	call IsKeyItem_
-	ld a,[wd124]
+	ld a,[wIsKeyItem]
 	pop hl
 	and a
 	jr nz,.tooImportantToToss
@@ -2639,11 +2639,11 @@ TossItem_: ; e6f1 (3:66f1)
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
-	ld a,[wd12e]
-	cp a,2
+	ld a,[wMenuExitMethod]
+	cp a,CHOSE_SECOND_ITEM
 	pop hl
 	scf
-	ret z
+	ret z ; return if the player chose No
 ; if the player chose Yes
 	push hl
 	ld a,[wWhichPokemon]
@@ -2681,12 +2681,12 @@ TooImportantToTossText: ; e75f (3:675f)
 ; INPUT:
 ; [wcf91] = item ID
 ; OUTPUT:
-; [wd124] = result
+; [wIsKeyItem] = result
 ; 00: item is not key item
 ; 01: item is key item
 IsKeyItem_: ; e764 (3:6764)
 	ld a,$01
-	ld [wd124],a
+	ld [wIsKeyItem],a
 	ld a,[wcf91]
 	cp a,HM_01 ; is the item an HM or TM?
 	jr nc,.checkIfItemIsHM
@@ -2710,7 +2710,7 @@ IsKeyItem_: ; e764 (3:6764)
 	call IsItemHM
 	ret c
 	xor a
-	ld [wd124],a
+	ld [wIsKeyItem],a
 	ret
 
 INCLUDE "data/key_items.asm"
@@ -2798,8 +2798,8 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	jr nz, .asm_e817
 .asm_e82a
 	ld hl, wBoxMonNicks
-	ld a, $2
-	ld [wd07d], a
+	ld a, NAME_MON_SCREEN
+	ld [wNamingScreenType], a
 	predef AskName
 	ld a, [wNumInBox]
 	dec a
