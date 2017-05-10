@@ -1705,7 +1705,7 @@ _MonWasStoredText:: ; 0x8a159
 	TX_RAM wcf4b
 	text " was"
 	line "stored in Box @"
-	TX_RAM wWhichTrade
+	TX_RAM wBoxNumString
 	text "."
 	prompt
 

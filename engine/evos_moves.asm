@@ -55,8 +55,8 @@ Evolution_PartyMonLoop: ; loop over party mons
 	push hl
 	ld a, [wcf91]
 	push af
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	call LoadMonData
 	pop af
 	ld [wcf91], a
@@ -76,7 +76,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, b
 	cp EV_ITEM
 	jp z, .checkItemEvo
-	ld a, [wccd4]
+	ld a, [wForceEvolution]
 	and a
 	jr nz, Evolution_PartyMonLoop
 	ld a, b
@@ -307,7 +307,7 @@ Evolution_PartyMonLoop: ; loop over party mons
 	ld a, [wd0b5]
 	ld [wd11e], a
 	xor a
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 	call LearnMoveFromLevelUp
 	pop hl
 	predef SetPartyMonTypes

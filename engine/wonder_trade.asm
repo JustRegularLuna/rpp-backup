@@ -116,11 +116,11 @@ WonderTrade_DoTrade:
 	ld a,[wInGameTradeReceiveMonSpecies]
 	ld [wcf91],a
 	xor a
-	ld [wcc49],a
+	ld [wMonDataLocation],a
 	ld [wRemoveMonFromBox],a
 	call RemovePokemon
 	ld a,$80
-	ld [wcc49],a
+	ld [wMonDataLocation],a
 	call AddPartyMon
 	call WonderTrade_CopyDataToReceivedMon
 	callab EvolveTradeMon
@@ -162,7 +162,7 @@ WonderTrade_PrepareTradeData: ; Get the data setup for the trade
 	ld bc, $b
 	call WonderTrade_CopyData
 	ld hl, WonderTrade_TrainerString
-	ld de, wcd4e
+	ld de, wTradedEnemyMonOT
 	call WonderTrade_CopyData
 	ld de, wLinkEnemyTrainerName
 	call WonderTrade_CopyData

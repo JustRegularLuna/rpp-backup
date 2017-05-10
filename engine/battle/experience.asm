@@ -166,8 +166,8 @@ GainExperience: ; 5524f (15:524f)
 	call GetPartyMonName
 	ld hl, GainedText
 	call PrintText
-	xor a ; party mon data
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	call AnimateEXPBar
 	call LoadMonData
 	pop hl
@@ -263,16 +263,16 @@ GainExperience: ; 5524f (15:524f)
 .printGrewLevelText
 	ld hl, GrewLevelText
 	call PrintText
-	xor a ; party mon data
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	call AnimateEXPBarAgain
 	call LoadMonData
 	ld d, $1
 	callab PrintStatsBox
 	call WaitForTextScrollButtonPress
 	call LoadScreenTilesFromBuffer1
-	xor a
-	ld [wcc49], a
+	xor a ; PLAYER_PARTY_DATA
+	ld [wMonDataLocation], a
 	ld a, [wd0b5]
 	ld [wd11e], a
 	

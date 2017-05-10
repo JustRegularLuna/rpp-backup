@@ -4,7 +4,7 @@
 ; without that check, it will claim the Pokemon was hooked by a rod
 UseHeadbuttOW::
 	xor a
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	ld a, [W_CURMAPTILESET]
 	and a ; OVERWORLD
 	jr z, .overworld
@@ -30,9 +30,9 @@ UseHeadbuttOW::
 	jp PrintText
 
 .useHeadbutt
-	ld [wcd4d], a
+	ld [wCutTile], a
 	ld a, $1
-	ld [wcd6a], a
+	ld [wActionResultOrTookBattleTurn], a
 	ld a, [wWhichPokemon] ; wWhichPokemon
 	ld hl, wPartyMonNicks ; wPartyMonNicks
 	call GetPartyMonName

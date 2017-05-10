@@ -41,7 +41,7 @@ EndOfBattle: ; 137aa (4:77aa)
 	call PrintText
 .evolution
 	xor a
-	ld [wccd4], a
+	ld [wForceEvolution], a
 	predef EvolutionAfterBattle
 .resetVariables
 	xor a
@@ -54,7 +54,7 @@ EndOfBattle: ; 137aa (4:77aa)
 	ld [wd11f], a
 	ld [wNumRunAttempts], a
 	ld [wEscapedFromBattle], a
-	ld hl, wcc2b
+	ld hl, wPartyAndBillsPCSavedMenuItem
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a

@@ -37,11 +37,11 @@ DayCareMText1: ; Day Care Lady
 	pop af
 	ld hl, DayCareAllRightThenText
 	jp c, .done
-	callab Func_2171b
+	callab KnowsHMMove
 	ld hl, DayCareCantAcceptMonWithHMText
 	jp c, .done
 	xor a
-	ld [wcc2b], a
+	ld [wPartyAndBillsPCSavedMenuItem], a
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
@@ -64,8 +64,8 @@ DayCareMText1: ; Day Care Lady
 	xor a
 	ld hl, wDayCareMonName
 	call GetPartyMonName
-	ld a, $3
-	ld [wcc49], a
+	ld a, DAYCARE_DATA
+	ld [wMonDataLocation], a
 	call LoadMonData
 	callab CalcLevelFromExperience
 	ld a, d
@@ -243,11 +243,11 @@ DayCareMText2: ; Day Care Man
 	pop af
 	ld hl, DayCareAllRightThenText
 	jp c, .done
-	callab Func_2171b
+	callab KnowsHMMove
 	ld hl, DayCareCantAcceptMonWithHMText
 	jp c, .done
 	xor a
-	ld [wcc2b], a
+	ld [wPartyAndBillsPCSavedMenuItem], a
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
@@ -271,7 +271,7 @@ DayCareMText2: ; Day Care Man
 	ld hl, wDayCareMon2Name
 	call GetPartyMonName
 	ld a, $4
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 	call LoadMonData
 	callab CalcLevelFromExperience
 	ld a, d

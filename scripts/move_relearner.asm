@@ -57,7 +57,7 @@ MoveRelearnerText1:
 	ld a, MOVESLISTMENU
 	ld [wListMenuID], a
 	ld de, wRelearnableMoves
-	ld hl, wList
+	ld hl, wListPointer
 	ld [hl], e
 	inc hl
 	ld [hl], d
@@ -76,13 +76,13 @@ MoveRelearnerText1:
 	pop bc
 	ld a, b
 	ld [wWhichPokemon], a
-	ld a, [wd358]
+	ld a, [wLetterPrintingDelayFlags]
 	push af
 	xor a
-	ld [wd358], a
+	ld [wLetterPrintingDelayFlags], a
 	predef LearnMove
 	pop af
-	ld [wd358], a
+	ld [wLetterPrintingDelayFlags], a
 	ld a, b
 	and a
 	jr z, .exit

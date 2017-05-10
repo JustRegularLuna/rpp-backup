@@ -65,9 +65,10 @@ DrawHP_: ; 128fb (4:68fb)
 ; Predef 0x37
 StatusScreen: ; 12953 (4:6953)
 	call LoadMonData
-	ld a, [wcc49]
-	cp $2 ; 2 means we're in a PC box
+	ld a, [wMonDataLocation]
+	cp BOX_DATA
 	jr c, .DontRecalculate
+; mon is in a box or daycare
 	ld a, [wLoadedMonBoxLevel]
 	ld [wLoadedMonLevel], a
 	ld [W_CURENEMYLVL], a
@@ -160,13 +161,13 @@ StatusScreen: ; 12953 (4:6953)
 	hlCoord 11, 10
 	predef PrintMonType
 	ld hl, NamePointers2
-	call .asm_12a7e
+	call .GetStringPointer
 	ld d, h
 	ld e, l
 	hlCoord 9, 1
 	call PlaceString ; Pokémon name
 	ld hl, OTPointers
-	call .asm_12a7e
+	call .GetStringPointer
 	ld d, h
 	ld e, l
 	hlCoord 12, 16
@@ -191,17 +192,18 @@ StatusScreen: ; 12953 (4:6953)
 	pop af
 	ld [hTilesetType], a
 	ret
-.asm_12a7e ;  I don't know what this does, iterates over pointers?
-	ld a, [wcc49]
+
+.GetStringPointer
+	ld a, [wMonDataLocation]
 	add a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wcc49]
-	cp $3
+	ld a, [wMonDataLocation]
+	cp DAYCARE_DATA
 	ret z
 	ld a, [wWhichPokemon]
 	jp SkipFixedLengthTextEntries
@@ -331,7 +333,7 @@ PrintStat
 	push hl
 	call PrintNumber
 	pop hl
-	ld de, $0028
+	ld de, SCREEN_WIDTH * 2
 	add hl, de
 	ret
 
@@ -367,26 +369,26 @@ StatusScreen2: ; 12b57 (4:6b57)
 	hlCoord 2, 9
 	ld de, wMovesString
 	call PlaceString ; Print moves
-	ld a, [wcd6c]
+	ld a, [wNumMovesMinusOne]
 	inc a
 	ld c, a
 	ld a, $4
 	sub c
 	ld b, a ; Number of moves ?
 	hlCoord 11, 10
-	ld de, $0028
-	ld a, $72
-	call Func_12ccb ; Print "PP"
+	ld de, SCREEN_WIDTH * 2
+	ld a, $72 ; special P tile id
+	call StatusScreen_PrintPP ; Print "PP"
 	ld a, b
 	and a
 	jr z, .InitPP
 	ld c, a
 	ld a, "-"
-	call Func_12ccb ; Fill the rest with --
+	call StatusScreen_PrintPP ; Fill the rest with --
 .InitPP ; 12bbb
 	ld hl, wLoadedMonMoves
 	deCoord 14, 10
-	ld b, $0
+	ld b, 0
 .PrintPP ; 12bc3
 	ld a, [hli]
 	and a
@@ -407,15 +409,15 @@ StatusScreen2: ; 12b57 (4:6b57)
 	pop de
 	pop hl
 	push hl
-	ld bc, $0014
+	ld bc, wPartyMon1PP - wPartyMon1Moves - 1
 	add hl, bc
 	ld a, [hl]
 	and $3f
-	ld [wcd71], a
+	ld [wStatusScreenCurrentPP], a
 	ld h, d
 	ld l, e
 	push hl
-	ld de, wcd71
+	ld de, wStatusScreenCurrentPP
 	ld bc, $0102
 	call PrintNumber
 	ld a, "/"
@@ -424,7 +426,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld bc, $0102
 	call PrintNumber
 	pop hl
-	ld de, $0028
+	ld de, SCREEN_WIDTH * 2
 	add hl, de
 	ld d, h
 	ld e, l
@@ -462,9 +464,9 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld bc, $0307
 	call PrintNumber
 	hlCoord 9, 0
-	call Func_12cc3
+	call StatusScreen_ClearName
 	hlCoord 9, 1
-	call Func_12cc3
+	call StatusScreen_ClearName
 	ld a, [W_MONHDEXNUM]
 	ld [wd11e], a
 	call GetMonName
@@ -514,15 +516,16 @@ EXPPointsText: ; 12caf (4:6caf)
 LevelUpText: ; 12cba (4:6cba)
 	db "Next@"
 
-Func_12cc3: ; 12cc3 (4:6cc3)
-	ld bc, $a
-	ld a, $7f
+StatusScreen_ClearName: ; 12cc3 (4:6cc3)
+	ld bc, 10
+	ld a, " "
 	jp FillMemory
 
-Func_12ccb: ; 12ccb (4:6ccb)
+StatusScreen_PrintPP: ; 12ccb (4:6ccb)
+; print PP or -- c times, going down two rows each time
 	ld [hli], a
 	ld [hld], a
 	add hl, de
 	dec c
-	jr nz, Func_12ccb
+	jr nz, StatusScreen_PrintPP
 	ret

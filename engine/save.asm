@@ -314,7 +314,7 @@ Func_7387b: ; GetBoxSRAMLocation
 ; in: a= box num 
 ; out: b = box SRAM bank, hl = pointer to start of box
 	ld hl, PointerTable_73895 ; BoxSRAMPointerTable
-	ld a, [wCurrentBoxNum] ; current box number 
+	ld a, [wCurrentBoxNum]
 	and $7f
 	cp NUM_BOXES / 2
 	ld b, $2
@@ -470,7 +470,7 @@ Func_7393f: ; DisplayChangeBoxMenu
 	call Func_73a84
 	hlCoord 18, 1
 	ld de, wWhichTrade ; wBoxMonCounts
-	ld bc, $14 ; Screen Width
+	ld bc, SCREEN_WIDTH
 	ld a, $c
 .asm_739c2
 	push af
@@ -574,7 +574,7 @@ Func_73a84: ; GetMonCountsForAllBoxes
 	pop hl
 	
 ; copy the count for the current box from WRAM
-	ld a, [wCurrentBoxNum] ; current box number
+	ld a, [wCurrentBoxNum]
 	and $7f
 	ld c, a
 	ld b, $0
@@ -636,7 +636,7 @@ SAVCheckRandomID: ; 73ad1 (1c:7ad1)
 SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	ld a, [wNumHoFTeams]
 	dec a
-	cp NUM_HOF_TEAMS
+	cp HOF_TEAM_CAPACITY
 	jr nc, .asm_73b28
 	ld hl, sHallOfFame
 	ld bc, HOF_TEAM
@@ -650,10 +650,10 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 .asm_73b28
 	ld hl, sHallOfFame + HOF_TEAM
 	ld de, sHallOfFame
-	ld bc, HOF_TEAM * (NUM_HOF_TEAMS - 1)
+	ld bc, HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	call HallOfFame_Copy
 	ld hl, wcc5b
-	ld de, sHallOfFame + HOF_TEAM * (NUM_HOF_TEAMS - 1)
+	ld de, sHallOfFame + HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
 

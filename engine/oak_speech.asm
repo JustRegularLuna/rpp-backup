@@ -1,5 +1,5 @@
 SetDefaultNames: ; 60ca (1:60ca)
-	ld a, [wd358]
+	ld a, [wLetterPrintingDelayFlags]
 	push af
 	ld a, [wOptions]
 	push af
@@ -18,7 +18,7 @@ SetDefaultNames: ; 60ca (1:60ca)
 	pop af
 	ld [wOptions], a
 	pop af
-	ld [wd358], a
+	ld [wLetterPrintingDelayFlags], a
 	ld a, [wd08a]
 	and a
 	call z, Func_5bff
@@ -244,18 +244,18 @@ IntroFadePalettes: ; 6282 (1:6282)
 
 MovePicLeft: ; 6288 (1:6288)
 	ld a,119
-	ld [$FF4B],a
+	ld [rWX],a
 	call DelayFrame
 
 	ld a,$E4
 	ld [rBGP],a
 .next
 	call DelayFrame
-	ld a,[$FF4B]
+	ld a,[rWX]
 	sub 8
 	cp $FF
 	ret z
-	ld [$FF4B],a
+	ld [rWX],a
 	jr .next
 
 Predef3B: ; 62a1 (1:62a1)

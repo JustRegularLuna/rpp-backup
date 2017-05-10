@@ -69,7 +69,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr z,.FinishUp
 	ld [wcf91],a ; write species somewhere (XXX why?)
 	ld a,1
-	ld [wcc49],a
+	ld [wMonDataLocation],a
 	push hl
 	call AddPartyMon
 	pop hl
@@ -104,7 +104,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[hli]
 	ld [wcf91],a
 	ld a,1
-	ld [wcc49],a
+	ld [wMonDataLocation],a
 	push hl
 	call AddPartyMon
 	pop hl
@@ -121,7 +121,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[hli]
 	ld [wcf91],a
 	ld a,1
-	ld [wcc49],a
+	ld [wMonDataLocation],a
 	push hl
 	call AddPartyMon
 	pop hl

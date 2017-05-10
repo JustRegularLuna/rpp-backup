@@ -61,16 +61,16 @@ PlaceNextChar:: ; 1956 (0:1956)
 .PlaceText
 	cp $4E
 	jr nz,.next
-	ld bc,$0028
+	ld bc,SCREEN_WIDTH * 2
 	ld a,[hFlags_0xFFF6]
 	bit 2,a
 	jr z,.next2
-	ld bc,$14
+	ld bc,SCREEN_WIDTH
 .next2
 	pop hl
 	add hl,bc
 	push hl
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 .next
 	cp $4F
@@ -78,7 +78,7 @@ PlaceNextChar:: ; 1956 (0:1956)
 	pop hl
 	hlCoord 1, 16
 	push hl
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 .next3 ; Check against a dictionary
 	and a
@@ -123,7 +123,7 @@ PlaceNextChar:: ; 1956 (0:1956)
 	jp z,Char5A
 	ld [hli],a
 	call PrintLetterDelay
-Next19E8:: ; 19e8 (0:19e8)
+PlaceNextChar_inc:: ; 19e8 (0:19e8)
 	inc de
 	jp PlaceNextChar
 
@@ -273,7 +273,7 @@ Char58:: ; 1a95 (0:1a95)
 Next1AA2:: ; 1aa2 (0:1aa2)
 	call ProtectedDelay3
 	call ManualTextScroll
-	ld a," "
+	ld a, " "
 	Coorda 18, 16
 Char57:: ; 1aad (0:1aad)
 	pop hl
@@ -297,7 +297,7 @@ Char51:: ; 1ab4 (0:1ab4)
 	call DelayFrames
 	pop de
 	hlCoord 1, 14
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 Char49:: ; 1ad5 (0:1ad5)
 	push de
@@ -314,7 +314,7 @@ Char49:: ; 1ad5 (0:1ad5)
 	pop hl
 	hlCoord 1, 11
 	push hl
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 Char4B:: ; 1af8 (0:1af8)
 	ld a,$EE
@@ -323,7 +323,7 @@ Char4B:: ; 1af8 (0:1af8)
 	push de
 	call ManualTextScroll
 	pop de
-	ld a," "
+	ld a, " "
 	Coorda 18, 16
 	;fall through
 Char4C:: ; 1b0a (0:1b0a)
@@ -332,12 +332,12 @@ Char4C:: ; 1b0a (0:1b0a)
 	call Next1B18
 	hlCoord 1, 16
 	pop de
-	jp Next19E8
+	jp PlaceNextChar_inc
 
 Next1B18:: ; 1b18 (0:1b18)
 	hlCoord 0, 14
 	deCoord 0, 13
-	ld b,$3C
+	ld b,60
 .next
 	ld a,[hli]
 	ld [de],a
@@ -345,8 +345,8 @@ Next1B18:: ; 1b18 (0:1b18)
 	dec b
 	jr nz,.next
 	hlCoord 1, 16
-	ld a,$7F
-	ld b,$12
+	ld a, " "
+	ld b,SCREEN_WIDTH - 2
 .next2
 	ld [hli],a
 	dec b
@@ -368,13 +368,13 @@ ProtectedDelay3:: ; 1b3a (0:1b3a)
 	ret
 
 TextCommandProcessor:: ; 1b40 (0:1b40)
-	ld a,[wd358]
+	ld a,[wLetterPrintingDelayFlags]
 	push af
 	set 1,a
 	ld e,a
 	ld a,[$fff4]
 	xor e
-	ld [wd358],a
+	ld [wLetterPrintingDelayFlags],a
 	ld a,c
 	ld [wcc3a],a
 	ld a,b
@@ -385,7 +385,7 @@ NextTextCommand:: ; 1b55 (0:1b55)
 	cp a, "@" ; terminator
 	jr nz,.doTextCommand
 	pop af
-	ld [wd358],a
+	ld [wLetterPrintingDelayFlags],a
 	ret
 .doTextCommand
 	push hl
@@ -576,7 +576,7 @@ TextCommand0A:: ; 1c1d (0:1c1d)
 	push bc
 	call Joypad
 	ld a,[hJoyHeld]
-	and a,%00000011 ; A and B buttons
+	and a,A_BUTTON | B_BUTTON
 	jr nz,.skipDelay
 	ld c,30
 	call DelayFrames
@@ -654,7 +654,7 @@ TextCommand0C:: ; 1c78 (0:1c78)
 	call Joypad
 	pop de
 	ld a,[hJoyHeld] ; joypad state
-	and a,%00000011 ; is A or B button pressed?
+	and a,A_BUTTON | B_BUTTON
 	jr nz,.skipDelay ; if so, skip the delay
 	ld c,10
 	call DelayFrames

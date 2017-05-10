@@ -57,9 +57,9 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call DisplayTextBoxID ; draw money text box
 	ld hl,wNumBagItems
 	ld a,l
-	ld [wList],a
+	ld [wListPointer],a
 	ld a,h
-	ld [wList + 1],a
+	ld [wListPointer + 1],a
 	xor a
 	ld [wPrintItemPrices],a
 	ld [wCurrentMenuItem],a
@@ -136,11 +136,11 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
-	ld hl,wStringBuffer2 + 11
+	ld hl,wItemList
 	ld a,l
-	ld [wList],a
+	ld [wListPointer],a
 	ld a,h
-	ld [wList + 1],a
+	ld [wListPointer + 1],a
 	xor a
 	ld [wCurrentMenuItem],a
 	inc a
@@ -281,9 +281,9 @@ DisplayListMenuID_Mart::
 	xor a
 	ld [wMenuItemToSwap],a ; 0 means no item is currently being swapped
 	ld [wListCount],a
-	ld a,[wList]
+	ld a,[wListPointer]
 	ld l,a
-	ld a,[wList + 1]
+	ld a,[wListPointer + 1]
 	ld h,a ; hl = address of the list
 	ld a,[hl] ; the first byte is the number of entries in the list
 	ld [wListCount],a
@@ -373,9 +373,9 @@ DisplayListMenuIDLoop_Mart:: ; 2c53 (0:2c53)
 ; if it's an item menu
 	sla c ; item entries are 2 bytes long, so multiply by 2
 .skipMultiplying
-	ld a,[wList]
+	ld a,[wListPointer]
 	ld l,a
-	ld a,[wList + 1]
+	ld a,[wListPointer + 1]
 	ld h,a
 	inc hl ; hl = beginning of list entries
 	ld b,0
@@ -404,7 +404,7 @@ DisplayListMenuIDLoop_Mart:: ; 2c53 (0:2c53)
 	jr .storeChosenEntry
 .pokemonList
 	ld hl,wPartyCount
-	ld a,[wList]
+	ld a,[wListPointer]
 	cp l ; is it a list of party pokemon or box pokemon?
 	ld hl,wPartyMonNicks
 	jr z,.getPokemonName
@@ -461,7 +461,7 @@ PrintItemDescription_Mart::
 	ld a, [wListScrollOffset]
 	add c
 	ld c, a
-	ld hl, wList
+	ld hl, wListPointer
 	ld a, [hli]
 	ld e, a
 	ld a, [hl]
