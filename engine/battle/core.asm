@@ -3912,7 +3912,7 @@ PrintMonName1Text: ; 3daf5 (f:5af5)
 ; but the functionality didn't get removed
 MonName1Text: ; 3dafb (f:5afb)
 	TX_FAR _MonName1Text
-	db $08 ; asm
+	TX_ASM
 	ld a, [H_WHOSETURN]
 	and a
 	ld a, [W_PLAYERMOVENUM]
@@ -3927,7 +3927,7 @@ MonName1Text: ; 3dafb (f:5afb)
 
 UsedText: ; 3db2d (f:5b2d)
 	TX_FAR _UsedText
-	db $08 ; asm
+	TX_ASM
 	; fall through
 
 	ld a, [wMonIsDisobedient]
@@ -3938,7 +3938,7 @@ UsedText: ; 3db2d (f:5b2d)
 
 InsteadText: ; 3db43 (f:5b43)
 	TX_FAR _InsteadText
-	db $08 ; asm
+	TX_ASM
 	; fall through
 
 PrintMoveName: ; 3db48 (f:5b48)
@@ -7880,7 +7880,7 @@ PrintNothingHappenedText: ; 3f522 (f:7522)
 
 MonsStatsRoseText: ; 3f528 (f:7528)
 	TX_FAR _MonsStatsRoseText
-	db $08 ; asm
+	TX_ASM
 	ld hl, GreatlyRoseText
 	ld a, [H_WHOSETURN]
 	and a
@@ -8089,7 +8089,7 @@ MoveMissed: ; 3f65a (f:765a)
 
 MonsStatsFellText: ; 3f661 (f:7661)
 	TX_FAR _MonsStatsFellText
-	db $08 ; asm
+	TX_ASM
 	ld hl, FellText
 	ld a, [H_WHOSETURN]
 	and a
@@ -8427,7 +8427,7 @@ ChargeEffect: ; 3f88c (f:788c)
 
 ChargeMoveEffectText: ; 3f8c8 (f:78c8)
 	TX_FAR _ChargeMoveEffectText
-	db $08 ; asm
+	TX_ASM
 	ld a, [wWhichTrade]
 	cp RAZOR_WIND
 	ld hl, MadeWhirlwindText

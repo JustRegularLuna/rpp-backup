@@ -57,7 +57,7 @@ LoadSAVCheckSum: ; 73623 (1c:7623)
 .Func_73652 ; checksums matched
 	ld hl, sPlayerName
 	ld de, wPlayerName
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld hl, sMainData
 	ld de, wMainDataStart
@@ -293,10 +293,10 @@ SAVCheckSum: ; 73856 (1c:7856)
 	cpl
 	ret
 
-Func_73863: ; Calc individual box checksums
+Func_73863: ; 73863 (1c:7863)
 	ld hl, sBox1 ; sBox7
-	ld de, sBank2IndividualBoxChecksums ; sBank3IndividualBoxChecksums
-	ld b, $6 ; NUM_BOXES / 2
+	ld de, sBoxes1CheckSum2 ; sBoxes2CheckSum2
+	ld b, NUM_BOXES / 2
 .asm_7386b
 	push bc
 	push de
@@ -316,11 +316,11 @@ Func_7387b: ; GetBoxSRAMLocation
 	ld hl, PointerTable_73895 ; BoxSRAMPointerTable
 	ld a, [wCurrentBoxNum] ; current box number 
 	and $7f
-	cp $6
+	cp NUM_BOXES / 2
 	ld b, $2
 	jr c, .asm_7388c
 	inc b
-	sub $6
+	sub NUM_BOXES / 2
 .asm_7388c
 	ld e, a
 	ld d, $0
@@ -331,7 +331,7 @@ Func_7387b: ; GetBoxSRAMLocation
 	ld l, a
 	ret
 
-PointerTable_73895: ; BoxSRAMPointerTable
+PointerTable_73895: ; 73895 (1c:7895)
 	dw sBox1 ; sBox7
 	dw sBox2 ; sBox8
 	dw sBox3 ; sBox9
@@ -407,11 +407,10 @@ Func_7390e: ; CopyBoxToOrFromSRAM
 	ld [hli], a
 	dec a
 	ld [hl], a
-	
-	ld hl, sBox1
-	ld bc, sBank2AllBoxesChecksum - sBox1
+	ld hl, sBox1 ; sBox7
+	ld bc, sBoxes1CheckSum - sBox1
 	call SAVCheckSum
-	ld [sBank2AllBoxesChecksum], a ; sBank3AllBoxesChecksum
+	ld [sBoxes1CheckSum], a ; sBoxes2CheckSum
 	call Func_73863
 	xor a
 	ld [MBC1SRamBankingMode], a
@@ -528,24 +527,24 @@ Func_73a29: ; EmptyAllSRAMBoxes
 	ld [MBC1SRamEnable], a
 	ret
 
-Func_73a4b: ; EmptySRAMBoxesInBank
+Func_73a4b: ; 73a4b (1c:7a4b)
 ; marks every box in the current SRAM bank as empty
-	ld hl, sBox1
+	ld hl, sBox1 ; sBox7
 	call Func_73a7f
-	ld hl, sBox2
+	ld hl, sBox2 ; sBox8
 	call Func_73a7f
-	ld hl, sBox3
+	ld hl, sBox3 ; sBox9
 	call Func_73a7f
-	ld hl, sBox4
+	ld hl, sBox4 ; sBox10
 	call Func_73a7f
-	ld hl, sBox5
+	ld hl, sBox5 ; sBox11
 	call Func_73a7f
-	ld hl, sBox6
+	ld hl, sBox6 ; sBox12
 	call Func_73a7f
-	ld hl, sBox1
-	ld bc, sBank2AllBoxesChecksum - sBox1
+	ld hl, sBox1 ; sBox7
+	ld bc, sBoxes1CheckSum - sBox1
 	call SAVCheckSum
-	ld [sBank2AllBoxesChecksum], a
+	ld [sBoxes1CheckSum], a ; sBoxes2CheckSum
 	call Func_73863
 	ret
 
@@ -585,27 +584,27 @@ Func_73a84: ; GetMonCountsForAllBoxes
 	
 	ret
 
-Func_73ab8: ; GetMonCountsForBoxesInBank
-	ld a, [sBox1]
+Func_73ab8: ; 73ab8 (1c:7ab8)
+	ld a, [sBox1] ; sBox7
 	ld [hli], a
-	ld a, [sBox2]
+	ld a, [sBox2] ; sBox8
 	ld [hli], a
-	ld a, [sBox3]
+	ld a, [sBox3] ; sBox9
 	ld [hli], a
-	ld a, [sBox4]
+	ld a, [sBox4] ; sBox10
 	ld [hli], a
-	ld a, [sBox5]
+	ld a, [sBox5] ; sBox11
 	ld [hli], a
-	ld a, [sBox6]
+	ld a, [sBox6] ; sBox12
 	ld [hli], a
 	ret
 
 SAVCheckRandomID: ; 73ad1 (1c:7ad1)
 ;checks if Sav file is the same by checking player's name 1st letter ($a598)
 ; and the two random numbers generated at game beginning
-;(which are stored at wPlayerID)
+;(which are stored at wPlayerID)s
 	ld a,$0a
-	ld [$0000],a
+	ld [MBC1SRamEnable],a
 	ld a,$01
 	ld [MBC1SRamBankingMode],a
 	ld [MBC1SRamBank],a
@@ -613,7 +612,7 @@ SAVCheckRandomID: ; 73ad1 (1c:7ad1)
 	and a
 	jr z,.next
 	ld hl,sPlayerName
-	ld bc,sMainDataCheckSum - sPlayerName
+	ld bc, sMainDataCheckSum - sPlayerName
 	call SAVCheckSum
 	ld c,a
 	ld a,[sMainDataCheckSum]
@@ -631,7 +630,7 @@ SAVCheckRandomID: ; 73ad1 (1c:7ad1)
 .next
 	ld a,$00
 	ld [MBC1SRamBankingMode],a
-	ld [$0000],a
+	ld [MBC1SRamEnable],a
 	ret
 
 SaveHallOfFameTeams: ; 73b0d (1c:7b0d)

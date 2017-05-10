@@ -1,7 +1,6 @@
 PrintRedsNESText: ; 5db79 (17:5b79)
 	call EnableAutoTextBoxDrawing
-	ld a, $4 ; RedBedroomSNESText
-	jp PrintPredefTextID
+	tx_pre_jump RedBedroomSNESText
 
 RedBedroomSNESText: ; 5db81 (17:5b81)
 	TX_FAR _RedBedroomSNESText
@@ -9,19 +8,17 @@ RedBedroomSNESText: ; 5db81 (17:5b81)
 
 OpenRedsPC: ; 5db86 (17:5b86)
 	call EnableAutoTextBoxDrawing
-	ld a, $3
-	jp PrintPredefTextID
+	tx_pre_jump RedBedroomPCText
 
-RedBedroomPC: ; 5db8e (17:5b8e)
+RedBedroomPCText: ; 5db8e (17:5b8e)
 	db $fc ; FuncTX_ItemStoragePC
 
 Route15GateLeftBinoculars: ; 5db8f (17:5b8f)
 	ld a, [wSpriteStateData1 + 9]
-	cp $4 ; i
+	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
-	ld a, $a ; text id Route15UpstairsBinocularsText
-	call PrintPredefTextID
+	tx_pre Route15UpstairsBinocularsText
 	ld a, ARTICUNO
 	ld [wcf91], a
 	call PlayCry
@@ -36,8 +33,7 @@ AerodactylFossil: ; 5dbad (17:5bad)
 	ld [wcf91], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
-	ld a, $9
-	call PrintPredefTextID
+	tx_pre AerodactylFossilText
 	ret
 
 AerodactylFossilText: ; 5dbbe (17:5bbe)
@@ -49,8 +45,7 @@ KabutopsFossil: ; 5bdc3 (17:5bc3)
 	ld [wcf91], a
 	call DisplayMonFrontSpriteInBox
 	call EnableAutoTextBoxDrawing
-	ld a, $b
-	call PrintPredefTextID
+	tx_pre KabutopsFossilText
 	ret
 
 KabutopsFossilText: ; 5dbd4 (17:5bd4)
@@ -95,7 +90,7 @@ PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)
 	ret
 
 LinkCableHelp: ; 5dc29 (17:5c29)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, LinkCableHelpText1
 	call PrintText
@@ -179,7 +174,7 @@ LinkCableInfoText3: ; 5dce8 (17:5ce8)
 	db "@"
 
 ViridianSchoolBlackboard: ; 5dced (17:5ced)
-	db $08 ; asm
+	TX_ASM
 	call SaveScreenTilesToBuffer1
 	ld hl, ViridianSchoolBlackboardText1
 	call PrintText
@@ -307,8 +302,7 @@ ViridianBlackboardFrozenText: ; 5ddea (17:5dea)
 
 PrintTrashText: ; 5ddef (17:5def)
 	call EnableAutoTextBoxDrawing
-	ld a, $26
-	jp PrintPredefTextID
+	tx_pre_jump VermilionGymTrashText
 
 VermilionGymTrashText: ; 5ddf7 (17:5df7)
 	TX_FAR _VermilionGymTrashText
@@ -324,8 +318,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	bit 0, a
 	jr z, .ok
 
-	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
-	jp PrintPredefTextID
+	tx_pre_jump VermilionGymTrashText
 
 .ok
 	bit 1, a
@@ -337,7 +330,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	cp b
 	jr z, .openFirstLock
 
-	ld a, $26 ; DisplayTextID $26 = VermilionGymTrashText (nothing in the trash)
+	tx_pre_id VermilionGymTrashText
 	jr .done
 
 .openFirstLock
@@ -375,7 +368,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	and $f
 	ld [wSecondLockTrashCanIndex], a
 
-	ld a, $3b ; DisplayTextID $3b = VermilionGymTrashSuccesText1 (first lock opened!)
+	tx_pre_id VermilionGymTrashSuccesText1
 	jr .done
 
 .trySecondLock
@@ -393,7 +386,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	and $e
 	ld [wFirstLockTrashCanIndex], a
 
-	ld a, $3e ; DisplayTextID $3e = VermilionGymTrashFailText (locks reset!)
+	tx_pre_id VermilionGymTrashFailText
 	jr .done
 
 .openSecondLock
@@ -403,7 +396,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 	ld hl, wd126
 	set 6, [hl]
 
-	ld a, $3d ; DisplayTextID $3d = VermilionGymTrashSuccesText3 (2nd lock opened!)
+	tx_pre_id VermilionGymTrashSuccesText3
 
 .done
 	jp PrintPredefTextID
@@ -428,7 +421,7 @@ GymTrashCans: ; 5de7d (17:5e7d)
 
 VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	TX_FAR _VermilionGymTrashSuccesText1
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
@@ -442,7 +435,7 @@ VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
 
 ; unused
 VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_49 - SFX_Headers_02) / 3
 	call PlaySound
@@ -451,7 +444,7 @@ VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
 
 VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 	TX_FAR _VermilionGymTrashSuccesText3
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_57 - SFX_Headers_02) / 3
 	call PlaySound
@@ -460,7 +453,7 @@ VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 
 VermilionGymTrashFailText: ; 5df02 (17:5f02)
 	TX_FAR _VermilionGymTrashFailText
-	db $08 ; asm
+	TX_ASM
 	call WaitForSoundToFinish
 	ld a, (SFX_02_51 - SFX_Headers_02) / 3
 	call PlaySound

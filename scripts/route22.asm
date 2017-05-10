@@ -152,13 +152,13 @@ Route22Script2: ; 50fb5 (14:4fb5)
 	xor a
 	ld [wIsTrainerBattle], a
 	ld a, [wSpriteStateData1 + 9]
-	and a
-	jr nz, .asm_50fc7
-	ld a, $4
-	jr .asm_50fc9
-.asm_50fc7
-	ld a, $c
-.asm_50fc9
+	and a ; cp SPRITE_FACING_DOWN
+	jr nz, .notDown
+	ld a, SPRITE_FACING_UP
+	jr .done
+.notDown
+	ld a, SPRITE_FACING_RIGHT
+.done
 	ld [$ff8d], a
 	ld a, $1
 	ld [$ff8c], a

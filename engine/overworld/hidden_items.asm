@@ -16,19 +16,18 @@ HiddenItems: ; 76688 (1d:6688)
 	ld a, [wWhichTrade] ; item ID
 	ld [wd11e], a
 	call GetItemName
-	ld a, $24
-	jp PrintPredefTextID
-	
+	tx_pre_jump FoundHiddenItemText
+
 ; added for field move hack
 .nope
 	predef TryFieldMove
 	ret
-	
+
 INCLUDE "data/hidden_item_coords.asm"
 
 FoundHiddenItemText: ; 7675b (1d:675b)
 	TX_FAR _FoundHiddenItemText
-	db $8
+	TX_ASM
 	ld a, [wWhichTrade] ; item ID
 	ld b, a
 	ld c, 1
@@ -117,10 +116,10 @@ HiddenCoins: ; 76799 (1d:6799)
 	ld a, [wPlayerCoins + 1]
 	cp $99
 	jr nz, .RoomInCoinCase
-	ld a, $2c
+	tx_pre_id DroppedHiddenCoinsText
 	jr .done
 .RoomInCoinCase
-	ld a, $2b
+	tx_pre_id FoundHiddenCoinsText
 .done
 	jp PrintPredefTextID
 

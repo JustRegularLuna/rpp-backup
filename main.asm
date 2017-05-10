@@ -2285,7 +2285,7 @@ _GetTileAndCoordsInFrontOfPlayer: ; c589 (3:4589)
 	ld a, [W_XCOORD]
 	ld e, a
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
-	and a
+	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .notFacingDown
 ; facing down
 	aCoord 8, 11
@@ -2324,7 +2324,7 @@ GetTileTwoStepsInFrontOfPlayer: ; c5be (3:45be)
 	ld d, a
 	ld e, [hl]
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
-	and a
+	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .notFacingDown
 ; facing down
 	ld hl, $ffdb
@@ -2692,7 +2692,7 @@ UsedStrengthText: ; cdaa (3:4daa)
 	db "@"
 ; Don't play the cry for now
 ; I can't make it load the right ID when used from the overworld without shifting bank 0
-;	db $08 ; asm
+;	TX_ASM
 ;	ld a, [wcf91]
 ;	call PlayCry
 ;	call Delay3

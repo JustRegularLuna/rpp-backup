@@ -378,7 +378,7 @@ BoostExp: ; 5549f (15:549f)
 
 GainedText: ; 554b2 (15:54b2)
 	TX_FAR _GainedText
-	db $08 ; asm
+	TX_ASM
 	ld hl, ExpPointsText
 	ld a, [wGainBoostedExp]
 	and a

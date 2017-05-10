@@ -1150,7 +1150,7 @@ IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld bc,$3c40 ; Y and X position of player sprite
 	ld a,[wSpriteStateData1 + 9] ; direction the player is facing
 .checkIfPlayerFacingUp
-	cp a,$04
+	cp SPRITE_FACING_UP
 	jr nz,.checkIfPlayerFacingDown
 ; facing up
 	ld a,b
@@ -1159,7 +1159,7 @@ IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld a,$08
 	jr .doneCheckingDirection
 .checkIfPlayerFacingDown
-	cp a,$00
+	cp SPRITE_FACING_DOWN
 	jr nz,.checkIfPlayerFacingRight
 ; facing down
 	ld a,b
@@ -1168,7 +1168,7 @@ IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld a,$04
 	jr .doneCheckingDirection
 .checkIfPlayerFacingRight
-	cp a,$0c
+	cp SPRITE_FACING_RIGHT
 	jr nz,.playerFacingLeft
 ; facing right
 	ld a,c

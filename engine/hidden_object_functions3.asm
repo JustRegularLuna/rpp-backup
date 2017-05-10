@@ -40,26 +40,42 @@ PrintBookshelfText: ; fb50 (3:7b50)
 
 ; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs: ; fb8b (3:7b8b)
-	db LAB,40,64
-	db MART,54,66
-	db MART,90,66
-	db MART,92,66
-	db OAK_TS,92,64
-	db OAK_TS,94,64
-	db MANSION,50,64
-	db GATE,34,64
-	db SHIP,54,64
-	db REDS_HOUSE_1,50,64
-	db PLATEAU,48,58
-	db HOUSE,60,63
-	db HOUSE,50,64
-	db GYM,29,64
-	db POKECENTER,41,67
-	db LOBBY,22,65
+	db LAB,          40
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db MART,         54
+	db (PokemonStuffText_id   - TextPredefs) / 2 + 1
+	db MART,         90
+	db (PokemonStuffText_id   - TextPredefs) / 2 + 1
+	db MART,         92
+	db (PokemonStuffText_id   - TextPredefs) / 2 + 1
+	db OAK_TS,       92
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db OAK_TS,       94
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db MANSION,      50
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db GATE,         34
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db SHIP,         54
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db REDS_HOUSE_1, 50
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db PLATEAU,      48
+	db (IndigoPlateauStatues_id   - TextPredefs) / 2 + 1
+	db HOUSE,        60
+	db (TownMapText_id   - TextPredefs) / 2 + 1
+	db HOUSE,        50
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db GYM,          29
+	db (BookOrSculptureText_id   - TextPredefs) / 2 + 1
+	db POKECENTER,   41
+	db (WonderTradeMachineText_id   - TextPredefs) / 2 + 1
+	db LOBBY,        22
+	db (ElevatorText_id   - TextPredefs) / 2 + 1
 	db $FF
 
 IndigoPlateauStatues: ; fbbf (3:7bbf)
-	db $08 ; asm
+	TX_ASM
 	ld hl, IndigoPlateauStatuesText1
 	call PrintText
 	ld a, [W_XCOORD]
@@ -84,7 +100,7 @@ IndigoPlateauStatuesText3: ; fbe3 (3:7be3)
 	db "@"
 
 BookOrSculptureText: ; fbe8 (3:7be8)
-	db $08 ; asm
+	TX_ASM
 	ld hl, PokemonBooksText
 	ld a, [W_CURMAPTILESET]
 	cp MANSION ; Celadon Mansion tileset
@@ -112,7 +128,7 @@ ElevatorText: ; fc0d (3:7c0d)
 TownMapText: ; fc12 (3:7c12)
 	TX_FAR _TownMapText
 	db $06
-	db $08 ; asm
+	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd730

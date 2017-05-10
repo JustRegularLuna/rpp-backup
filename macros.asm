@@ -210,7 +210,9 @@ TX_BCD: MACRO
 
 MART_LIST EQU $FE
 
-TX_ASM EQUS "db $08"
+TX_ASM: MACRO
+	db $08
+	ENDM
 
 ; Predef macro.
 add_predef: MACRO
@@ -239,7 +241,7 @@ add_tx_pre: MACRO
 ENDM
 
 tx_pre_id: MACRO
-	ld a, (\1_id - TextPredefs) / 2
+	ld a, (\1_id - TextPredefs) / 2 + 1
 ENDM
 
 tx_pre: MACRO

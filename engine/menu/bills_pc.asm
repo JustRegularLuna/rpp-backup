@@ -520,8 +520,7 @@ CableClubLeftGameboy:: ; 5824 (8:5825)
 .asm_2183a
 	ld [wLinkState], a
 	call EnableAutoTextBoxDrawing
-	ld a, $22 ; JustAMomentText
-	jp PrintPredefTextID
+	tx_pre_jump JustAMomentText
 
 CableClubRightGameboy:: ; 5845 (8:5845)
 	ld a, [hSerialConnectionStatus]
@@ -538,8 +537,7 @@ CableClubRightGameboy:: ; 5845 (8:5845)
 .asm_2185a
 	ld [wLinkState], a
 	call EnableAutoTextBoxDrawing
-	ld a, $22 ; JustAMomentText
-	jp PrintPredefTextID
+	tx_pre_jump JustAMomentText
 
 JustAMomentText:: ; 21865 (8:5865)
 	TX_FAR _JustAMomentText
@@ -549,9 +547,8 @@ JustAMomentText:: ; 21865 (8:5865)
 	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
-	ld a, $23
-	jp PrintPredefTextID
+	tx_pre_jump OpenBillsPCText
 
-PredefText23:: ; 21878 (8:5878)
+OpenBillsPCText:: ; 21878 (8:5878)
 	db $FD ; FuncTX_BillsPC
 
