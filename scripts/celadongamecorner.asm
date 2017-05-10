@@ -83,10 +83,23 @@ CeladonGameCornerScript1: ; 48c19 (12:4c19)
 	ret
 
 MovementData_48c5a: ; 48c5a (12:4c5a)
-	db $00,$C0,$C0,$40,$C0,$C0,$C0,$C0,$FF
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 MovementData_48c63: ; 48c63 (12:4c63)
-	db $C0,$C0,$C0,$C0,$C0,$FF
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
 CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	ld a, [wd730]
@@ -138,31 +151,31 @@ CeladonGameCornerText2: ; 48ca9 (12:4ca9)
 	call Has9990Coins
 	jr nc, .asm_48d14
 	xor a
-	ld [$ff9f], a
-	ld [$ffa1], a
+	ld [hMoney], a
+	ld [hMoney + 2], a
 	ld a, $10
-	ld [$ffa0], a
+	ld [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .asm_48cdb
 	ld hl, CeladonGameCornerText_48d31
 	jr .asm_48d1c
 .asm_48cdb
 	xor a
-	ld [$ff9f], a
-	ld [$ffa1], a
+	ld [hMoney], a
+	ld [hMoney + 2], a
 	ld a, $10
-	ld [$ffa0], a
-	ld hl, $ffa1
+	ld [hMoney + 1], a
+	ld hl, hMoney + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
 	xor a
-	ld [$ff9f], a
-	ld [$ffa0], a
+	ld [hCoins - 1], a
+	ld [hCoins], a
 	ld a, $50
-	ld [$ffa1], a
+	ld [hCoins + 1], a
 	ld de, wPlayerCoins + 1
-	ld hl, $ffa1
+	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
 	call CeladonGameCornerScript_48f1e
@@ -225,12 +238,12 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	call Has9990Coins
 	jr nc, .asm_48d8e
 	xor a
-	ld [$ff9f], a
-	ld [$ffa0], a
+	ld [hCoins - 1], a
+	ld [hCoins], a
 	ld a, $10
-	ld [$ffa1], a
+	ld [hCoins + 1], a
 	ld de, wPlayerCoins + 1
-	ld hl, $ffa1
+	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
 	ld hl, wCeladonGameCornerFlags
@@ -307,12 +320,12 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	call Has9990Coins
 	jr nc, .asm_48e18
 	xor a
-	ld [$ff9f], a
-	ld [$ffa0], a
+	ld [hCoins - 1], a
+	ld [hCoins], a
 	ld a, $20
-	ld [$ffa1], a
+	ld [hCoins + 1], a
 	ld de, wPlayerCoins + 1
-	ld hl, $ffa1
+	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
 	ld hl, wCeladonGameCornerFlags
@@ -360,12 +373,12 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	call Has9990Coins
 	jr z, .asm_48e7a
 	xor a
-	ld [$ff9f], a
-	ld [$ffa0], a
+	ld [hCoins - 1], a
+	ld [hCoins], a
 	ld a, $20
-	ld [$ffa1], a
+	ld [hCoins + 1], a
 	ld de, wPlayerCoins + 1
-	ld hl, $ffa1
+	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
 	ld hl, wCeladonGameCornerFlags
@@ -514,7 +527,7 @@ GameCornerBlankText2: ; 48f8d (12:4f8d)
 
 Has9990Coins: ; 48f95 (12:4f95)
 	ld a, $99
-	ld [$ffa0], a
+	ld [hCoins], a
 	ld a, $90
-	ld [$ffa1], a
+	ld [hCoins + 1], a
 	jp HasEnoughCoins

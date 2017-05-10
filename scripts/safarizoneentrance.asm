@@ -33,7 +33,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
 	ret
 .asm_7520f
-	ld a, $10
+	ld a, D_RIGHT
 	ld c, $1
 	call SafariZoneEntranceAutoWalk
 	ld a, $f0
@@ -87,7 +87,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	call DisplayTextID
 	xor a
 	ld [wNumSafariBalls], a
-	ld a, $80
+	ld a, D_DOWN
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
 	ld a, $4
@@ -155,11 +155,11 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	and a
 	jp nz,.PleaseComeAgain
 	xor a
-	ld [$ff9f],a
+	ld [hMoney],a
 	ld a,$05
-	ld [$ffa0],a
+	ld [hMoney + 1],a
 	ld a,$00
-	ld [$ffa1],a
+	ld [hMoney + 2],a
 	call HasEnoughMoney
 	jr nc,.success
 	ld hl,.NotEnoughMoneyText
@@ -188,7 +188,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld [wSafariSteps],a
 	ld a, 502 % $100
 	ld [wSafariSteps + 1],a
-	ld a,$40
+	ld a,D_UP
 	ld c,3
 	call SafariZoneEntranceAutoWalk
 	ld hl,wSafariZoneFlags
@@ -202,7 +202,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld hl,.PleaseComeAgainText
 	call PrintText
 .CantPayWalkDown
-	ld a,$80
+	ld a,D_DOWN
 	ld c,1
 	call SafariZoneEntranceAutoWalk
 	ld a,4
@@ -235,7 +235,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	call PrintText
 	xor a
 	ld [wSpriteStateData1 + 9], a
-	ld a, $80
+	ld a, D_DOWN
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
 	ld hl, wSafariZoneFlags
@@ -249,7 +249,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	call PrintText
 	ld a, SPRITE_FACING_UP
 	ld [wSpriteStateData1 + 9], a
-	ld a, $40
+	ld a, D_UP
 	ld c, $1
 	call SafariZoneEntranceAutoWalk
 	ld a, $5

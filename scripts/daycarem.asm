@@ -139,11 +139,11 @@ DayCareMText1: ; Day Care Lady
 	and a
 	jp nz, .leaveMonInDayCare
 	ld hl, wTrainerFacingDirection
-	ld [$ff9f], a
+	ld [hMoney], a
 	ld a, [hli]
-	ld [$ffa0], a
+	ld [hMoney + 1], a
 	ld a, [hl]
-	ld [$ffa1], a
+	ld [hMoney + 2], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, DayCareNotEnoughMoneyText
