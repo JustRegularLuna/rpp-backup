@@ -31,12 +31,12 @@ MoveTutorScriptSpecial::
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
-	hlCoord 0, 3
+	coord hl, 0, 3
 	ld b, $8
 	ld c, $d
 	call TextBoxBorder
 	call UpdateSprites
-	hlCoord 2, 5
+	coord hl, 2, 5
 	ld de, ElementalHyperbeamsText
 	call PlaceString
 	ld hl, wd730
@@ -75,7 +75,7 @@ DisplayTeachTutorMoveText:
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl,TeachTutorMoveText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a

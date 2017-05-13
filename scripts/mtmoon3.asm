@@ -18,10 +18,10 @@ MtMoon3TextPointers: ; 49e34 (12:5e34)
 	dw MtMoon3Text3
 	dw MtMoon3Text4
 	dw MtMoon3Text5
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
+	dw PickUpItemText
 
 MtMoon3TrainerHeaders: ; 49e48 (12:5e48)
 MtMoon3TrainerHeader0:

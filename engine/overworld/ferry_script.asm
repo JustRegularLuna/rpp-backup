@@ -82,7 +82,7 @@ PrintTicketsInBag:
 	push hl
 	ld [wd11e], a
 	call GetItemName
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld a, [$ffdb]
 	ld bc, $28
 	call AddNTimes

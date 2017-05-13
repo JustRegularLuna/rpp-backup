@@ -1,9 +1,9 @@
 FarCopyData3::
 ; Copy bc bytes from a:de to hl.
-	ld [$ff8b],a
+	ld [hROMBankTemp],a
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[$ff8b]
+	ld a,[hROMBankTemp]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	push hl
@@ -23,10 +23,10 @@ FarCopyData3::
 FarCopyDataDouble::
 ; Expand bc bytes of 1bpp image data
 ; from a:hl to 2bpp data at de.
-	ld [$ff8b],a
+	ld [hROMBankTemp],a
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[$ff8b]
+	ld a,[hROMBankTemp]
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 .loop
@@ -55,7 +55,7 @@ CopyVideoData::
 	ld [H_AUTOBGTRANSFERENABLED], a
 
 	ld a, [H_LOADEDROMBANK]
-	ld [$ff8b], a
+	ld [hROMBankTemp], a
 
 	ld a, b
 	ld [H_LOADEDROMBANK], a
@@ -79,7 +79,7 @@ CopyVideoData::
 .done
 	ld [H_VBCOPYSIZE], a
 	call DelayFrame
-	ld a, [$ff8b]
+	ld a, [hROMBankTemp]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 	pop af
@@ -104,7 +104,7 @@ CopyVideoDataDouble::
 	xor a ; disable auto-transfer while copying
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, [H_LOADEDROMBANK]
-	ld [$ff8b], a
+	ld [hROMBankTemp], a
 
 	ld a, b
 	ld [H_LOADEDROMBANK], a
@@ -128,7 +128,7 @@ CopyVideoDataDouble::
 .done
 	ld [H_VBCOPYDOUBLESIZE], a
 	call DelayFrame
-	ld a, [$ff8b]
+	ld a, [hROMBankTemp]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 	pop af
@@ -169,17 +169,17 @@ CopyScreenTileBufferToVRAM::
 	ld c, 6
 
 	ld hl, $600 * 0
-	deCoord 0, 6 * 0
+	coord de, 0, 6 * 0
 	call .setup
 	call DelayFrame
 
 	ld hl, $600 * 1
-	deCoord 0, 6 * 1
+	coord de, 0, 6 * 1
 	call .setup
 	call DelayFrame
 
 	ld hl, $600 * 2
-	deCoord 0, 6 * 2
+	coord de, 0, 6 * 2
 	call .setup
 	jp DelayFrame
 
@@ -202,7 +202,7 @@ ClearScreen::
 ; for the bg map to update.
 	ld bc, 20 * 18
 	inc b
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld a, $7f
 .loop
 	ld [hli], a

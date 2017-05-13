@@ -31,7 +31,7 @@ PokemonTower2Script0: ; 6050f (18:450f)
 	call PlayMusic
 	ld hl, wPokemonTower2Flags
 	res 6, [hl]
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $1
 	ld a, $8
 	ld b, SPRITE_FACING_DOWN
@@ -43,12 +43,12 @@ PokemonTower2Script0: ; 6050f (18:450f)
 .asm_60544
 	ld [wd528], a
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, b
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
@@ -71,7 +71,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld hl, wPokemonTower2Flags
 	set 7, [hl]
 	ld a, $1
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld de, MovementData_605b2
 	ld a, [wPokemonTower2Flags]
@@ -80,7 +80,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	ld de, MovementData_605a9
 .asm_60589
 	ld a, $1
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	call MoveSprite
 	ld a, $ff
 	ld [wc0ee], a

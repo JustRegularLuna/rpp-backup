@@ -968,10 +968,10 @@ PokeCenterSignText:: ; 24ef (0:24ef)
 	TX_FAR _PokeCenterSignText
 	db "@"
 
-Predef5CText:: ; 24f4 (0:24f4)
+PickUpItemText:: ; 24f4 (0:24f4)
 ; XXX better label (what does predef $5C do?)
 	TX_ASM
-	predef PickupItem
+	predef PickUpItem
 	jp TextScriptEnd
 
 
@@ -1049,7 +1049,7 @@ Func_28cb:: ; 28cb (0:28cb)
 	jp PlaySound
 
 ; this function is used to display sign messages, sprite dialog, etc.
-; INPUT: [$ff8c] = sprite ID or text ID
+; INPUT: [hSpriteIndexOrTextID] = sprite ID or text ID
 DisplayTextID:: ; 2920 (0:2920)
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -1068,7 +1068,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	ld h,[hl]
 	ld l,a ; hl = map text pointer
 	ld d,$00
-	ld a,[$ff8c] ; text ID
+	ld a,[hSpriteIndexOrTextID] ; text ID
 	ld [wSpriteIndex],a
 	and a
 	jp z,DisplayStartMenu
@@ -1082,7 +1082,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	jp z,DisplayRepelWoreOffText
 	ld a,[W_NUMSPRITES]
 	ld e,a
-	ld a,[$ff8c] ; sprite ID
+	ld a,[hSpriteIndexOrTextID] ; sprite ID
 	cp e
 	jr z,.spriteHandling
 	jr nc,.skipSpriteHandling
@@ -1095,7 +1095,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	pop bc
 	pop de
 	ld hl,W_MAPSPRITEDATA ; NPC text entries
-	ld a,[$ff8c]
+	ld a,[hSpriteIndexOrTextID]
 	dec a
 	add a
 	add l
@@ -1234,10 +1234,12 @@ LoadItemList:: ; 2a5a (0:2a5a)
 	ret
 
 DisplayPokemonCenterDialogue:: ; 2a72 (0:2a72)
+; zeroing these doesn't appear to serve any purpose
 	xor a
 	ld [$ff8b],a
 	ld [$ff8c],a
 	ld [$ff8d],a
+
 	inc hl
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -1397,7 +1399,7 @@ DisplayListMenuID:: ; 2be6 (0:2be6)
 	call DisplayTextBoxID ; draw the menu text box
 	call UpdateSprites ; disable sprites behind the text box
 ; the code up to .skipMovingSprites appears to be useless
-	hlCoord 4, 2 ; coordinates of upper left corner of menu text box
+	coord hl, 4, 2 ; coordinates of upper left corner of menu text box
 	ld de,$090e ; height and width of menu text box
 	ld a,[wListMenuID]
 	and a ; is it a PC pokemon list?
@@ -1438,7 +1440,7 @@ DisplayListMenuIDLoop:: ; 2c53 (0:2c53)
 	call DelayFrames
 	xor a
 	ld [wCurrentMenuItem],a
-	hlCoord 5, 4
+	coord hl, 5, 4
 	ld a,l
 	ld [wMenuCursorLocation],a
 	ld a,h
@@ -1564,23 +1566,23 @@ checkOtherKeys: ; check B, SELECT, Up, and Down keys
 
 DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 ; text box dimensions/coordinates for just quantity
-	hlCoord 15, 9
+	coord hl, 15, 9
 	ld b,1 ; height
 	ld c,3 ; width
 	ld a,[wListMenuID]
 	cp a,PRICEDITEMLISTMENU
 	jr nz,.drawTextBox
 ; text box dimensions/coordinates for quantity and price
-	hlCoord 7, 9
+	coord hl, 7, 9
 	ld b,1  ; height
 	ld c,11 ; width
 .drawTextBox
 	call TextBoxBorder
-	hlCoord 16, 10
+	coord hl, 16, 10
 	ld a,[wListMenuID]
 	cp a,PRICEDITEMLISTMENU
 	jr nz,.printInitialQuantity
-	hlCoord 8, 10
+	coord hl, 8, 10
 .printInitialQuantity
 	ld de,InitialQuantityText
 	call PlaceString
@@ -1620,7 +1622,7 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld a,[wMaxItemQuantity]
 	ld [hl],a
 .handleNewQuantity
-	hlCoord 17, 10
+	coord hl, 17, 10
 	ld a,[wListMenuID]
 	cp a,PRICEDITEMLISTMENU
 	jr nz,.printQuantity
@@ -1659,13 +1661,13 @@ DisplayChooseQuantityMenu:: ; 2d57 (0:2d57)
 	ld a,[hDivideBCDQuotient + 2]
 	ld [hMoney + 2],a
 .skipHalvingPrice
-	hlCoord 12, 10
+	coord hl, 12, 10
 	ld de,SpacesBetweenQuantityAndPriceText
 	call PlaceString
 	ld de,hMoney ; total price
 	ld c,$a3
 	call PrintBCDNumber
-	hlCoord 9, 10
+	coord hl, 9, 10
 .printQuantity
 	ld de,wItemQuantity ; current quantity
 	ld bc,$8102 ; print leading zeroes, 1 byte, 2 digits
@@ -1704,7 +1706,7 @@ ExitListMenu:: ; 2e3b (0:2e3b)
 	ret
 
 PrintListMenuEntries:: ; 2e5a (0:2e5a)
-	hlCoord 5, 3
+	coord hl, 5, 3
 	ld b,$09
 	ld c,$0e
 	call ClearScreenArea
@@ -1729,7 +1731,7 @@ PrintListMenuEntries:: ; 2e5a (0:2e5a)
 	jr nc,.noCarry
 	inc d
 .noCarry
-	hlCoord 6, 4 ; coordinates of first list entry name
+	coord hl, 6, 4 ; coordinates of first list entry name
 	ld b,4 ; print 4 names
 .loop
 	ld a,b
@@ -2501,8 +2503,8 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld c, a
 	call TrainerFlagAction        ; read trainer flag
 	ld a, c
-	and a
-	jr nz, .trainerAlreadyFought
+	and a ; has the trainer already been defeated?
+	jr nz, .continue
 	push hl
 	push de
 	push hl
@@ -2521,7 +2523,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ld a, [wTrainerSpriteOffset]
 	and a
 	ret nz        ; break if the trainer is engaging
-.trainerAlreadyFought
+.continue
 	ld hl, $c
 	add hl, de
 	ld d, h
@@ -2754,7 +2756,7 @@ SetSpriteFacingDirection:: ; 34ae (0:34ae)
 	ld a, $9
 	ld [H_SPRITEDATAOFFSET], a
 	call GetPointerWithinSpriteStateData1
-	ld a, [$ff8d]
+	ld a, [hSpriteFacingDirection]
 	ld [hl], a
 	ret
 
@@ -2875,18 +2877,18 @@ DecodeRLEList:: ; 350c (0:350c)
 	inc a                        ; include sentinel in counting
 	ret
 
-; sets movement byte 1 for sprite [$FF8C] to $FE and byte 2 to [$FF8D]
+; sets movement byte 1 for sprite [H_SPRITEINDEX] to $FE and byte 2 to [hSpriteMovementByte2]
 SetSpriteMovementBytesToFE:: ; 3533 (0:3533)
 	push hl
 	call GetSpriteMovementByte1Pointer
 	ld [hl], $fe
 	call GetSpriteMovementByte2Pointer
-	ld a, [$ff8d]
+	ld a, [hSpriteMovementByte2]
 	ld [hl], a
 	pop hl
 	ret
 
-; sets both movement bytes for sprite [$FF8C] to $FF
+; sets both movement bytes for sprite [H_SPRITEINDEX] to $FF
 SetSpriteMovementBytesToFF:: ; 3541 (0:3541)
 	push hl
 	call GetSpriteMovementByte1Pointer
@@ -2896,20 +2898,20 @@ SetSpriteMovementBytesToFF:: ; 3541 (0:3541)
 	pop hl
 	ret
 
-; returns the sprite movement byte 1 pointer for sprite [$FF8C] in hl
+; returns the sprite movement byte 1 pointer for sprite [H_SPRITEINDEX] in hl
 GetSpriteMovementByte1Pointer:: ; 354e (0:354e)
 	ld h,$C2
-	ld a,[H_SPRITEINDEX] ; the sprite to move
+	ld a,[H_SPRITEINDEX]
 	swap a
 	add a,6
 	ld l,a
 	ret
 
-; returns the sprite movement byte 2 pointer for sprite [$FF8C] in hl
+; returns the sprite movement byte 2 pointer for sprite [H_SPRITEINDEX] in hl
 GetSpriteMovementByte2Pointer:: ; 3558 (0:3558)
 	push de
 	ld hl,W_MAPSPRITEDATA
-	ld a,[$FF8C] ; the sprite to move
+	ld a,[H_SPRITEINDEX]
 	dec a
 	add a
 	ld d,0
@@ -3013,7 +3015,7 @@ Func_35f4:: ; 35f4 (0:35f4)
 InitYesNoTextBoxParameters:: ; 35ff (0:35ff)
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc, $80f
 	ret
 
@@ -3021,7 +3023,7 @@ YesNoChoicePokeCenter:: ; 360a (0:360a)
 	call SaveScreenTilesToBuffer1
 	ld a, HEAL_CANCEL_MENU
 	ld [wTwoOptionMenuID], a
-	hlCoord 11, 6
+	coord hl, 11, 6
 	ld bc, $80c
 	jr DisplayYesNoChoice
 
@@ -3029,7 +3031,7 @@ Func_361a:: ; 361a (0:361a)
 	call SaveScreenTilesToBuffer1
 	ld a, WIDE_YES_NO_MENU
 	ld [wTwoOptionMenuID], a
-	hlCoord 12, 7
+	coord hl, 12, 7
 	ld bc, $080d
 DisplayYesNoChoice:: ; 3628 (0:3628)
 	ld a, TWO_OPTION_MENU
@@ -3172,7 +3174,7 @@ UncompressSpriteFromDE:: ; 36eb (0:36eb)
 
 
 SaveScreenTilesToBuffer2:: ; 36f4 (0:36f4)
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld de, wTileMapBackup2
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyData
@@ -3189,13 +3191,13 @@ LoadScreenTilesFromBuffer2DisableBGTransfer:: ; 3709 (0:3709)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, wTileMapBackup2
-	deCoord 0, 0
+	coord de, 0, 0
 	ld bc, $168
 	call CopyData
 	ret
 
 SaveScreenTilesToBuffer1:: ; 3719 (0:3719)
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld de, wTileMapBackup
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	jp CopyData
@@ -3204,7 +3206,7 @@ LoadScreenTilesFromBuffer1:: ; 3725 (0:3725)
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld hl, wTileMapBackup
-	deCoord 0, 0
+	coord de, 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	call CopyData
 	ld a, $1
@@ -3468,7 +3470,7 @@ WaitForTextScrollButtonPress:: ; 3865 (0:3865)
 	jr z, .skipAnimation
 	call TownMapSpriteBlinkingAnimation
 .skipAnimation
-	hlCoord 18, 16
+	coord hl, 18, 16
 	call HandleDownArrowBlinkTiming
 	pop hl
 	call JoypadLowSensitivity
@@ -3944,7 +3946,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	and a ; was a key pressed?
 	jr nz,.keyPressed
 	push hl
-	hlCoord 18, 11 ; coordinates of blinking down arrow in some menus
+	coord hl, 18, 11 ; coordinates of blinking down arrow in some menus
 	call HandleDownArrowBlinkTiming ; blink down arrow (if any)
 	pop hl
 	ld a,[wMenuJoypadPollCount]
@@ -4035,7 +4037,7 @@ PlaceMenuCursor:: ; 3b7c (0:3b7c)
 	ld a,[wTopMenuItemY]
 	and a ; is the y coordinate 0?
 	jr z,.adjustForXCoord
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld bc,SCREEN_WIDTH
 .topMenuItemLoop
 	add hl,bc
@@ -4205,7 +4207,7 @@ PrintText:: ; 3c49 (0:3c49)
 	call Delay3
 	pop hl
 Func_3c59:: ; 3c59 (0:3c59)
-	bcCoord 1, 14
+	coord bc, 1, 14
 	jp TextCommandProcessor
 
 

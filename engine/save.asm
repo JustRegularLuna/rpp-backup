@@ -154,10 +154,10 @@ SaveSAV: ; 7370a (1c:770a)
 	ret nz
 .save
 	call SaveSAVtoSRAM
-	hlCoord 1, 13
+	coord hl, 1, 13
 	ld bc,$0412
 	call ClearScreenArea ; clear area 4x12 starting at 13,1
-	hlCoord 1, 14
+	coord hl, 1, 14
 	ld de,NowSavingString
 	call PlaceString
 	ld c,120
@@ -175,7 +175,7 @@ NowSavingString:
 
 SaveSAVConfirm: ; 73768 (1c:7768)
 	call PrintText
-	hlCoord 0, 7
+	coord hl, 0, 7
 	ld bc,$0801
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
@@ -434,20 +434,20 @@ Func_7393f: ; DisplayChangeBoxMenu
 	and $7f
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
-	hlCoord 0, 0
+	coord hl, 0, 0
 	ld b, $2
 	ld c, $9
 	call TextBoxBorder
 	ld hl, ChooseABoxText
 	call PrintText
-	hlCoord 11, 0
+	coord hl, 11, 0
 	ld b, $c
 	ld c, $7
 	call TextBoxBorder
 	ld hl, hFlags_0xFFF6
 	set 2, [hl]
 	ld de, BoxNames
-	hlCoord 13, 1
+	coord hl, 13, 1
 	call PlaceString
 	ld hl, hFlags_0xFFF6
 	res 2, [hl]
@@ -456,7 +456,7 @@ Func_7393f: ; DisplayChangeBoxMenu
 	cp 9
 	jr c, .asm_739a6
 	sub 9
-	hlCoord 8, 2
+	coord hl, 8, 2
 	ld [hl], "1"
 	add "0"
 	jr .asm_739a8
@@ -464,11 +464,11 @@ Func_7393f: ; DisplayChangeBoxMenu
 	add "1"
 .asm_739a8
 	Coorda 9, 2
-	hlCoord 1, 2
+	coord hl, 1, 2
 	ld de, BoxNoText
 	call PlaceString
 	call Func_73a84
-	hlCoord 18, 1
+	coord hl, 18, 1
 	ld de, wWhichTrade ; wBoxMonCounts
 	ld bc, SCREEN_WIDTH
 	ld a, $c

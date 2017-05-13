@@ -597,11 +597,11 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	jp PrintText
 .tryToStopSurfing
 	xor a
-	ld [$ff8c],a
+	ld [hSpriteIndexOrTextID],a
 	ld d,16 ; talking range in pixels (normal range)
 	call IsSpriteInFrontOfPlayer2
 	res 7,[hl]
-	ld a,[$ff8c]
+	ld a,[hSpriteIndexOrTextID]
 	and a ; is there a sprite in the way?
 	jr nz,.cannotStopSurfing
 	ld hl,TilePairCollisionsWater
@@ -970,7 +970,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	sbc b
 	ld [hl],a
 	ld [wHPBarNewHP+1],a
-	hlCoord 4, 1
+	coord hl, 4, 1
 	ld a,[wWhichPokemon]
 	ld bc,2 * 20
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
@@ -2243,7 +2243,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	call PrintText
 	ld hl,TeachMachineMoveText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
@@ -2634,7 +2634,7 @@ TossItem_: ; e6f1 (3:66f1)
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl,IsItOKToTossItemText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a

@@ -38,9 +38,9 @@ SetDefaultNames: ; 60ca (1:60ca)
 OakSpeech: ; 6115 (1:6115)
 	ld a,$FF
 	call PlaySound ; stop music
-	ld a, BANK(Music_Routes2) ; bank of song
+	ld a, BANK(Music_Routes2)
 	ld c,a
-	ld a, MUSIC_ROUTES2 ; song #
+	ld a, MUSIC_ROUTES2
 	call PlayMusic
 	call ClearScreen
 	call LoadTextBoxTilePatterns
@@ -58,8 +58,8 @@ OakSpeech: ; 6115 (1:6115)
 	xor a
 	ld [hTilesetType],a
 	ld a,[wd732]
-	bit 1,a ; XXX when is bit 1 set?
-	jp nz,Func_61bc ; easter egg: skip the intro
+	bit 1,a ; possibly a debug mode bit
+	jp nz,.skipChoosingNames
 	
 	callba DisplayHackVersionScreen
 	
@@ -85,21 +85,21 @@ OakSpeech: ; 6115 (1:6115)
 	call ClearScreen ; clear the screen before resuming normal intro
 	ld de,ProfOakPic
 	ld bc, (Bank(ProfOakPic) << 8) | $00
-	call IntroPredef3B   ; displays Oak pic?
+	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,OakSpeechText1
-	call PrintText      ; prints text box
+	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld a,SYLVEON
-	ld [wd0b5],a    ; pic displayed is stored at this location
+	ld [wd0b5],a
 	ld [wcf91],a
-	call GetMonHeader      ; this is also related to the pic
-	hlCoord 6, 4     ; position on tilemap the pic is displayed
-	call LoadFlippedFrontSpriteByMonIndex      ; displays pic?
+	call GetMonHeader
+	coord hl, 6, 4
+	call LoadFlippedFrontSpriteByMonIndex
 	call MovePicLeft
 	ld hl,OakSpeechText2
-	call PrintText      ; Prints text box
+	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
@@ -110,22 +110,21 @@ OakSpeech: ; 6115 (1:6115)
 	ld de,LeafPicFront
 	ld bc,(Bank(LeafPicFront) << 8) | $00
 .NotLeaf1:
-	call IntroPredef3B      ; displays player pic?
+	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
 	ld hl,IntroducePlayerText
 	call PrintText
-	call LoadDefaultNamesPlayer ; brings up NewName/Red/etc menu
+	call ChoosePlayerName
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,Rival1Pic
 	ld bc,(Bank(Rival1Pic) << 8) | $00
-	call IntroPredef3B ; displays rival pic
+	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
 	call PrintText
-	call LoadDefaultNamesRival
-
-Func_61bc: ; 61bc (1:61bc)
+	call ChooseRivalName
+.skipChoosingNames
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
@@ -136,7 +135,7 @@ Func_61bc: ; 61bc (1:61bc)
 	ld de,LeafPicFront
 	ld bc,(Bank(LeafPicFront) << 8) | $00
 .NotLeaf2:
-	call IntroPredef3B
+	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
 	ld a,[wd72d]
 	and a
@@ -165,12 +164,12 @@ Func_61bc: ; 61bc (1:61bc)
 	call CopyVideoData
 	ld de,ShrinkPic1
 	ld bc,(BANK(ShrinkPic1) << 8) | $00
-	call IntroPredef3B
+	call IntroDisplayPicCenteredOrUpperRight
 	ld c,4
 	call DelayFrames
 	ld de,ShrinkPic2
 	ld bc,(BANK(ShrinkPic2) << 8) | $00
-	call IntroPredef3B
+	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
 	ld a,[H_LOADEDROMBANK]
 	push af
@@ -187,7 +186,7 @@ Func_61bc: ; 61bc (1:61bc)
 	ld [MBC1RomBank],a
 	ld c,20
 	call DelayFrames
-	hlCoord 6, 5
+	coord hl, 6, 5
 	ld b,7
 	ld c,7
 	call ClearScreenArea
@@ -258,10 +257,12 @@ MovePicLeft: ; 6288 (1:6288)
 	ld [rWX],a
 	jr .next
 
-Predef3B: ; 62a1 (1:62a1)
+DisplayPicCenteredOrUpperRight: ; 62a1 (1:62a1)
 	call GetPredefRegisters
-IntroPredef3B: ; 62a4 (1:62a4)
-; bank of sprite given in b
+IntroDisplayPicCenteredOrUpperRight: ; 62a4 (1:62a4)
+; b = bank
+; de = address of compressed pic
+; c: 0 = centred, non-zero = upper-right
 	push bc
 	ld a,b
 	call UncompressSpriteFromDE
@@ -274,9 +275,9 @@ IntroPredef3B: ; 62a4 (1:62a4)
 	pop bc
 	ld a,c
 	and a
-	hlCoord 15, 1
+	coord hl, 15, 1
 	jr nz,.next
-	hlCoord 6, 4
+	coord hl, 6, 4
 .next
 	xor a
 	ld [$FFE1],a
@@ -293,7 +294,7 @@ BoyGirlChoice::
 InitBoyGirlTextBoxParameters::
 	ld a, $1 ; loads the value for the unused North/West choice, that was changed to say Boy/Girl
 	ld [wTwoOptionMenuID], a
-	hlCoord 13, 7 
+	coord hl, 13, 7 
 	ld bc, $80e
 	ret
 	

@@ -84,7 +84,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	ld hl,PokemartTellSellPriceText
 	ld bc,$0e01
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
@@ -162,7 +162,7 @@ DisplayPokemartDialogue_: ; 6c20 (1:6c20)
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl,PokemartTellBuyPriceText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
@@ -523,7 +523,7 @@ HandleMenuInput_Mart:: ; 3abe (0:3abe)
 	and a ; was a key pressed?
 	jr nz,.keyPressed
 	push hl
-	hlCoord 18, 11 ; coordinates of blinking down arrow in some menus
+	coord hl, 18, 11 ; coordinates of blinking down arrow in some menus
 	call HandleDownArrowBlinkTiming ; blink down arrow (if any)
 	pop hl
 	ld a,[wMenuJoypadPollCount]

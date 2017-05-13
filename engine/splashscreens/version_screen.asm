@@ -15,7 +15,7 @@ DisplayHackVersionScreen::
 	call Delay3
 	call GBPalNormal
 ; display the version info text
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld de, VersionScreenText
 	call PlaceString
 ; wait for the player to press A
@@ -23,7 +23,7 @@ DisplayHackVersionScreen::
 ; load the tilemap for the screen again
 	call CleanPikachuScreen
 ; display the second page
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld de, VersionScreenText2
 	call PlaceString
 	; wait for the player to press A
@@ -31,7 +31,7 @@ DisplayHackVersionScreen::
 ; load the tilemap for the screen again
 	call CleanPikachuScreen
 ; display the third page
-	hlCoord 2, 6
+	coord hl, 2, 6
 	ld de, VersionScreenText3
 	call PlaceString
 	; wait for the player to press A

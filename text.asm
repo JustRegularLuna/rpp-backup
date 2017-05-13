@@ -1863,7 +1863,7 @@ _WillBeTradedText:: ; 8a677 (22:6677)
 	done
 
 _Char00Text:: ; 8a696 (22:6696)
-	TX_NUM $FF8C,1,2
+	TX_NUM hSpriteIndexOrTextID,1,2
 	text " ERROR."
 	done
 
