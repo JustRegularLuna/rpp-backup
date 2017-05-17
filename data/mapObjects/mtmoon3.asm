@@ -11,11 +11,11 @@ MtMoon3Object: ; 0x49fdb (size=102)
 	db $0 ; signs
 
 	db $9 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $c + 4, $ff, $d3, TRAINER | $1, SUPER_NERD + TRAINER_START, $2
-	db SPRITE_ROCKET_F, $10 + 4, $b + 4, $ff, $d0, TRAINER | $2, ROCKET_F + TRAINER_START, $1
-	db SPRITE_JAMES, $16 + 4, $f + 4, $ff, $d0, TRAINER | $3, ROCKET + TRAINER_START, $2
-	db SPRITE_JESSIE, $b + 4, $1d + 4, $ff, $d1, TRAINER | $4, ROCKET_F + TRAINER_START, $3
-	db SPRITE_ROCKET, $11 + 4, $1d + 4, $ff, $d2, TRAINER | $5, ROCKET + TRAINER_START, $4
+	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $c + 4, $ff, $d3, TRAINER | $1, SUPER_NERD + $C8, $2
+	db SPRITE_ROCKET_F, $10 + 4, $b + 4, $ff, $d0, TRAINER | $2, ROCKET_F + $C8, $1
+	db SPRITE_JAMES, $16 + 4, $f + 4, $ff, $d0, TRAINER | $3, ROCKET + $C8, $2
+	db SPRITE_JESSIE, $b + 4, $1d + 4, $ff, $d1, TRAINER | $4, ROCKET_F + $C8, $3
+	db SPRITE_ROCKET, $11 + 4, $1d + 4, $ff, $d2, TRAINER | $5, ROCKET + $C8, $4
 	db SPRITE_FOSSIL, $6 + 4, $c + 4, $ff, $ff, ITEM | $6, DOME_FOSSIL
 	db SPRITE_FOSSIL, $6 + 4, $d + 4, $ff, $ff, ITEM | $7, HELIX_FOSSIL
 	db SPRITE_BALL, $15 + 4, $19 + 4, $ff, $ff, ITEM | $8, HP_UP

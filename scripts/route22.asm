@@ -135,7 +135,7 @@ Route22Script1: ; 50f62 (14:4f62)
 	ld hl, Route22RivalDefeatedText1
 	ld de, Route22Text_511bc
 	call SaveEndBattleTextPointers
-	ld a, SONY1 + TRAINER_START
+	ld a, SONY1 + $c8
 	ld [W_CUROPPONENT], a
 	ld hl, StarterMons_50faf
 	call Route22Script_50ed6
@@ -296,7 +296,7 @@ Route22Script4: ; 51087 (14:5087)
 	ld hl, Route22RivalDefeatedText2
 	ld de, Route22Text_511d0
 	call SaveEndBattleTextPointers
-	ld a, SONY2 + TRAINER_START
+	ld a, SONY2 + $c8
 	ld [W_CUROPPONENT], a
 	ld hl, StarterMons_510d9
 	call Route22Script_50ed6

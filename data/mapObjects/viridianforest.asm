@@ -19,9 +19,9 @@ ViridianForestObject: ; 0x611da (size=127)
 
 	db $9 ; people
 	db SPRITE_BUG_CATCHER, $2b + 4, $10 + 4, $ff, $ff, $1 ; person
-	db SPRITE_BUG_CATCHER, $21 + 4, $1e + 4, $ff, $d2, TRAINER | $2, BUG_CATCHER + TRAINER_START, $1
-	db SPRITE_BUG_CATCHER, $13 + 4, $1e + 4, $ff, $d2, TRAINER | $3, BUG_CATCHER + TRAINER_START, $2
-	db SPRITE_BUG_CATCHER, $12 + 4, $2 + 4, $ff, $d2, TRAINER | $4, BUG_CATCHER + TRAINER_START, $3
+	db SPRITE_BUG_CATCHER, $21 + 4, $1e + 4, $ff, $d2, TRAINER | $2, BUG_CATCHER + $C8, $1
+	db SPRITE_BUG_CATCHER, $13 + 4, $1e + 4, $ff, $d2, TRAINER | $3, BUG_CATCHER + $C8, $2
+	db SPRITE_BUG_CATCHER, $12 + 4, $2 + 4, $ff, $d2, TRAINER | $4, BUG_CATCHER + $C8, $3
 	db SPRITE_BALL, $b + 4, $19 + 4, $ff, $ff, ITEM | $5, ANTIDOTE
 	db SPRITE_BALL, $1d + 4, $c + 4, $ff, $ff, ITEM | $6, POTION
 	db SPRITE_BALL, $1f + 4, $1 + 4, $ff, $ff, ITEM | $7, POKE_BALL

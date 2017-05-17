@@ -2624,11 +2624,11 @@ DisplayListMenuIDLoop_Hack:
 
 PlayTrainerMusic:: ; 33e8 (0:33e8)
 	ld a, [wEngagedTrainerClass]
-	cp TRAINER_START + SONY1
+	cp $c8 + SONY1
 	ret z
-	cp TRAINER_START + SONY2
+	cp $c8 + SONY2
 	ret z
-	cp TRAINER_START + SONY3
+	cp $c8 + SONY3
 	ret z
 	ld a, [W_GYMLEADERNO]
 	and a

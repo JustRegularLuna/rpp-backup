@@ -11,7 +11,7 @@ RocketHideout2Object: ; 0x450f7 (size=80)
 	db $0 ; signs
 
 	db $5 ; people
-	db SPRITE_ROCKET, $c + 4, $14 + 4, $ff, $d0, TRAINER | $1, ROCKET + TRAINER_START, $d
+	db SPRITE_ROCKET, $c + 4, $14 + 4, $ff, $d0, TRAINER | $1, ROCKET + $C8, $d
 	db SPRITE_BALL, $b + 4, $1 + 4, $ff, $ff, ITEM | $2, MOON_STONE
 	db SPRITE_BALL, $8 + 4, $10 + 4, $ff, $ff, ITEM | $3, NUGGET
 	db SPRITE_BALL, $c + 4, $6 + 4, $ff, $ff, ITEM | $4, TM_07

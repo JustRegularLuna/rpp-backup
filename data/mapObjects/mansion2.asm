@@ -10,7 +10,7 @@ Mansion2Object: ; 0x520d1 (size=63)
 	db $0 ; signs
 
 	db $4 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $3 + 4, $fe, $2, TRAINER | $1, BURGLAR + TRAINER_START, $7
+	db SPRITE_BLACK_HAIR_BOY_2, $11 + 4, $3 + 4, $fe, $2, TRAINER | $1, BURGLAR + $C8, $7
 	db SPRITE_BALL, $b + 4, $1c + 4, $ff, $ff, ITEM | $2, OLD_SEA_MAP
 	db SPRITE_BOOK, $2 + 4, $12 + 4, $ff, $ff, $3 ; person
 	db SPRITE_BOOK, $16 + 4, $3 + 4, $ff, $ff, $4 ; person

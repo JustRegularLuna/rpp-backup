@@ -12,8 +12,8 @@ SilphCo10Object: ; 0x5a1fb (size=95)
 	db $0 ; signs
 
 	db $6 ; people
-	db SPRITE_ROCKET, $9 + 4, $1 + 4, $ff, $d3, TRAINER | $1, ROCKET + TRAINER_START, $27
-	db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d2, TRAINER | $2, SCIENTIST + TRAINER_START, $b
+	db SPRITE_ROCKET, $9 + 4, $1 + 4, $ff, $d3, TRAINER | $1, ROCKET + $C8, $27
+	db SPRITE_OAK_AIDE, $2 + 4, $a + 4, $ff, $d2, TRAINER | $2, SCIENTIST + $C8, $b
 	db SPRITE_GIRL, $f + 4, $9 + 4, $fe, $0, $3 ; person
 	db SPRITE_BALL, $c + 4, $2 + 4, $ff, $ff, ITEM | $4, TM_26
 	db SPRITE_BALL, $e + 4, $4 + 4, $ff, $ff, ITEM | $5, RARE_CANDY

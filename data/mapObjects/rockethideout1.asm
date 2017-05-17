@@ -11,11 +11,11 @@ RocketHideout1Object: ; 0x44ce7 (size=98)
 	db $0 ; signs
 
 	db $7 ; people
-	db SPRITE_ROCKET_F, $8 + 4, $1a + 4, $ff, $d2, TRAINER | $1, ROCKET_F + TRAINER_START, $8
-	db SPRITE_ROCKET, $6 + 4, $c + 4, $ff, $d3, TRAINER | $2, ROCKET + TRAINER_START, $9
-	db SPRITE_ROCKET_F, $11 + 4, $12 + 4, $ff, $d0, TRAINER | $3, ROCKET_F + TRAINER_START, $a
-	db SPRITE_ROCKET_F, $19 + 4, $f + 4, $ff, $d3, TRAINER | $4, ROCKET_F + TRAINER_START, $b
-	db SPRITE_ROCKET, $12 + 4, $1c + 4, $ff, $d2, TRAINER | $5, ROCKET + TRAINER_START, $c
+	db SPRITE_ROCKET_F, $8 + 4, $1a + 4, $ff, $d2, TRAINER | $1, ROCKET_F + $C8, $8
+	db SPRITE_ROCKET, $6 + 4, $c + 4, $ff, $d3, TRAINER | $2, ROCKET + $C8, $9
+	db SPRITE_ROCKET_F, $11 + 4, $12 + 4, $ff, $d0, TRAINER | $3, ROCKET_F + $C8, $a
+	db SPRITE_ROCKET_F, $19 + 4, $f + 4, $ff, $d3, TRAINER | $4, ROCKET_F + $C8, $b
+	db SPRITE_ROCKET, $12 + 4, $1c + 4, $ff, $d2, TRAINER | $5, ROCKET + $C8, $c
 	db SPRITE_BALL, $e + 4, $b + 4, $ff, $ff, ITEM | $6, ESCAPE_ROPE
 	db SPRITE_BALL, $11 + 4, $9 + 4, $ff, $ff, ITEM | $7, HYPER_POTION
 
