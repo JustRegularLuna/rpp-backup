@@ -10,16 +10,16 @@ MtMoon3Object: ; 0x49fdb (size=102)
 
 	db $0 ; signs
 
-	db $9 ; people
-	db SPRITE_BLACK_HAIR_BOY_2, $8 + 4, $c + 4, $ff, $d3, TRAINER | $1, SUPER_NERD + $C8, $2
-	db SPRITE_ROCKET_F, $10 + 4, $b + 4, $ff, $d0, TRAINER | $2, ROCKET_F + $C8, $1
-	db SPRITE_JAMES, $16 + 4, $f + 4, $ff, $d0, TRAINER | $3, ROCKET + $C8, $2
-	db SPRITE_JESSIE, $b + 4, $1d + 4, $ff, $d1, TRAINER | $4, ROCKET_F + $C8, $3
-	db SPRITE_ROCKET, $11 + 4, $1d + 4, $ff, $d2, TRAINER | $5, ROCKET + $C8, $4
-	db SPRITE_FOSSIL, $6 + 4, $c + 4, $ff, $ff, ITEM | $6, DOME_FOSSIL
-	db SPRITE_FOSSIL, $6 + 4, $d + 4, $ff, $ff, ITEM | $7, HELIX_FOSSIL
-	db SPRITE_BALL, $15 + 4, $19 + 4, $ff, $ff, ITEM | $8, HP_UP
-	db SPRITE_BALL, $5 + 4, $1d + 4, $ff, $ff, ITEM | $9, TM_34
+	db $9 ; objects
+	object SPRITE_BLACK_HAIR_BOY_2, $c, $8, FACE, LEFT, $1, SUPER_NERD + $C8, $2
+	object SPRITE_ROCKET_F, $b, $10, FACE, DOWN, $2, ROCKET_F + $C8, $1
+	object SPRITE_JAMES, $f, $16, FACE, DOWN, $3, ROCKET + $C8, $2
+	object SPRITE_JESSIE, $1d, $b, FACE, UP, $4, ROCKET_F + $C8, $3
+	object SPRITE_ROCKET, $1d, $11, FACE, RIGHT, $5, ROCKET + $C8, $4
+	object SPRITE_FOSSIL, $c, $6, FACE, STAY, $6, DOME_FOSSIL
+	object SPRITE_FOSSIL, $d, $6, FACE, STAY, $7, HELIX_FOSSIL
+	object SPRITE_BALL, $19, $15, FACE, STAY, $8, HP_UP
+	object SPRITE_BALL, $1d, $5, FACE, STAY, $9, TM_34
 
 	; warp-to
 	EVENT_DISP MT_MOON_3_WIDTH, $9, $19 ; MT_MOON_2

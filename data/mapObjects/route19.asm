@@ -12,17 +12,17 @@ Route19Object: ; 0x54e9a (size=87)
 	db $d, $b, $b ; Route19Text11
 
 
-	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $8 + 4, $ff, $d2, TRAINER | 1, SWIMMER + $C8, 2
-	db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $d + 4, $ff, $d2, TRAINER | 2, SWIMMER + $C8, 3
-	db SPRITE_SWIMMER, $19 + 4, $d + 4, $ff, $d2, TRAINER | $3, SWIMMER + $C8, $4
-	db SPRITE_SWIMMER, $1b + 4, $4 + 4, $ff, $d3, TRAINER | $4, SWIMMER + $C8, $5
-	db SPRITE_SWIMMER, $1f + 4, $10 + 4, $ff, $d1, TRAINER | $5, SWIMMER + $C8, $6
-	db SPRITE_SWIMMER, $12 + 4, $9 + 4, $ff, $d0, TRAINER | $6, SWIMMER + $C8, $7
-	db SPRITE_SWIMMER_F, $2b + 4, $8 + 4, $ff, $d2, TRAINER | $7, SWIMMER_F + $C8, $c
-	db SPRITE_SWIMMER_F, $2b + 4, $b + 4, $ff, $d3, TRAINER | $8, SWIMMER_F + $C8, $d
-	db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, TRAINER | $9, SWIMMER + $C8, $8
-	db SPRITE_SWIMMER_F, $2c + 4, $a + 4, $ff, $d0, TRAINER | $a, SWIMMER_F + $C8, $e
+	db $a ; objects
+	object SPRITE_BLACK_HAIR_BOY_1, $8, $e, FACE, RIGHT, 1, SWIMMER + $C8, 2
+	object SPRITE_BLACK_HAIR_BOY_1, $d, $e, FACE, RIGHT, 2, SWIMMER + $C8, 3
+	object SPRITE_SWIMMER, $d, $19, FACE, RIGHT, $3, SWIMMER + $C8, $4
+	object SPRITE_SWIMMER, $4, $1b, FACE, LEFT, $4, SWIMMER + $C8, $5
+	object SPRITE_SWIMMER, $10, $1f, FACE, UP, $5, SWIMMER + $C8, $6
+	object SPRITE_SWIMMER, $9, $12, FACE, DOWN, $6, SWIMMER + $C8, $7
+	object SPRITE_SWIMMER_F, $8, $2b, FACE, RIGHT, $7, SWIMMER_F + $C8, $c
+	object SPRITE_SWIMMER_F, $b, $2b, FACE, LEFT, $8, SWIMMER_F + $C8, $d
+	object SPRITE_SWIMMER, $9, $2a, FACE, UP, $9, SWIMMER + $C8, $8
+	object SPRITE_SWIMMER_F, $a, $2c, FACE, DOWN, $a, SWIMMER_F + $C8, $e
 
 	; warp-to
 	EVENT_DISP ROUTE_19_WIDTH, $1, $7 ; ROUTE_19_GATE

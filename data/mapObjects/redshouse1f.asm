@@ -12,8 +12,8 @@ RedsHouse1FObject: ; 481e4 (12:41e4)
 	db $1, $0, $4 ; Stove
 	db $1, $1, $5 ; Sink
 
-	db $1 ; people
-	db SPRITE_MOM, $4 + 4, $B + 4, $FF, $D2, $1 ; Mom
+	db $1 ; objects
+	object SPRITE_MOM, $B, $4, $FF, $D2, $1 ; Mom
 
 	; warp-to
 	EVENT_DISP REDS_HOUSE_1F_WIDTH, $7, $2

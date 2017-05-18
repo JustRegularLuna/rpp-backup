@@ -7,10 +7,10 @@ FuchsiaHouse1Object: ; 0x75031 (size=38)
 
 	db $0 ; signs
 
-	db $3 ; people
-	db SPRITE_HIKER, $3 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_ERIKA, $3 + 4, $5 + 4, $ff, $d2, $2 ; person
-	db SPRITE_LITTLE_GIRL, $2 + 4, $7 + 4, $ff, $d1, $3 ; person
+	db $3 ; objects
+	object SPRITE_HIKER, $2, $3, FACE, LEFT, $1 ; person
+	object SPRITE_ERIKA, $5, $3, FACE, RIGHT, $2 ; person
+	object SPRITE_LITTLE_GIRL, $7, $2, FACE, UP, $3 ; person
 
 	; warp-to
 	EVENT_DISP FUCHSIA_HOUSE_1_WIDTH, $7, $2
