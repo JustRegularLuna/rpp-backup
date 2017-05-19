@@ -38,15 +38,15 @@ SaffronGymObject: ; 0x5d259 (size=330)
 	db $0 ; signs
 
 	db $9 ; objects
-	object SPRITE_SABRINA, $9, $8, FACE, DOWN, $1, SABRINA + $C8, $1
-	object SPRITE_MEDIUM, $a, $1, FACE, DOWN, $2, HEX_MANIAC + $C8, $1
-	object SPRITE_BUG_CATCHER, $11, $1, FACE, DOWN, $3, PSYCHIC_TR + $C8, $1
-	object SPRITE_MEDIUM, $3, $7, FACE, DOWN, $4, HEX_MANIAC + $C8, $2
-	object SPRITE_BUG_CATCHER, $11, $7, FACE, DOWN, $5, PSYCHIC_TR + $C8, $2
-	object SPRITE_MEDIUM, $3, $d, FACE, DOWN, $6, HEX_MANIAC + $C8, $3
-	object SPRITE_BUG_CATCHER, $11, $d, FACE, DOWN, $7, PSYCHIC_TR + $C8, $3
-	object SPRITE_BUG_CATCHER, $3, $1, FACE, DOWN, $8, PSYCHIC_TR + $C8, $4
-	object SPRITE_GYM_HELPER, $a, $f, FACE, DOWN, $9 ; person
+	object SPRITE_SABRINA, $9, $8, NONE, DOWN, $1, SABRINA + $C8, $1
+	object SPRITE_MEDIUM, $a, $1, NONE, DOWN, $2, HEX_MANIAC + $C8, $1
+	object SPRITE_BUG_CATCHER, $11, $1, NONE, DOWN, $3, PSYCHIC_TR + $C8, $1
+	object SPRITE_MEDIUM, $3, $7, NONE, DOWN, $4, HEX_MANIAC + $C8, $2
+	object SPRITE_BUG_CATCHER, $11, $7, NONE, DOWN, $5, PSYCHIC_TR + $C8, $2
+	object SPRITE_MEDIUM, $3, $d, NONE, DOWN, $6, HEX_MANIAC + $C8, $3
+	object SPRITE_BUG_CATCHER, $11, $d, NONE, DOWN, $7, PSYCHIC_TR + $C8, $3
+	object SPRITE_BUG_CATCHER, $3, $1, NONE, DOWN, $8, PSYCHIC_TR + $C8, $4
+	object SPRITE_GYM_HELPER, $a, $f, NONE, DOWN, $9 ; person
 
 	; warp-to
 	EVENT_DISP SAFFRON_GYM_WIDTH, $11, $8

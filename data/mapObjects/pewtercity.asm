@@ -20,13 +20,13 @@ PewterCityObject: ; 0x18577 (size=111)
 	db $17, $19, $e ; PewterCityText12
 
 	db $7 ; objects
-	object SPRITE_LASS, $8, $f, FACE, STAY, $1 ; person
-	object SPRITE_BLACK_HAIR_BOY_1, $11, $19, FACE, STAY, $2 ; person
-	object SPRITE_BLACK_HAIR_BOY_2, $1b, $11, FACE, STAY, $3 ; person
+	object SPRITE_LASS, $8, $f, NONE, NONE, $1 ; person
+	object SPRITE_BLACK_HAIR_BOY_1, $11, $19, NONE, NONE, $2 ; person
+	object SPRITE_BLACK_HAIR_BOY_2, $1b, $11, NONE, NONE, $3 ; person
 	object SPRITE_BLACK_HAIR_BOY_2, $1a, $19, WALK, $2, $4 ; person
-	object SPRITE_BUG_CATCHER, $23, $10, FACE, DOWN, $5 ; person
-	object SPRITE_BERRY_TREE, $1E, $3, FACE, STAY, $6 ; person
-	object SPRITE_BERRY_TREE, $20, $3, FACE, STAY, $7 ; person
+	object SPRITE_BUG_CATCHER, $23, $10, NONE, DOWN, $5 ; person
+	object SPRITE_BERRY_TREE, $1E, $3, NONE, NONE, $6 ; person
+	object SPRITE_BERRY_TREE, $20, $3, NONE, NONE, $7 ; person
 
 	; warp-to
 	EVENT_DISP PEWTER_CITY_WIDTH, $7, $e ; MUSEUM_1F

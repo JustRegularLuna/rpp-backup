@@ -18,15 +18,15 @@ ViridianForestObject: ; 0x611da (size=127)
 	db $1, $2, $f ; ViridianForestText14
 
 	db $9 ; objects
-	object SPRITE_BUG_CATCHER, $10, $2b, FACE, STAY, $1 ; person
-	object SPRITE_BUG_CATCHER, $1e, $21, FACE, RIGHT, $2, BUG_CATCHER + $C8, $1
-	object SPRITE_BUG_CATCHER, $1e, $13, FACE, RIGHT, $3, BUG_CATCHER + $C8, $2
-	object SPRITE_BUG_CATCHER, $2, $12, FACE, RIGHT, $4, BUG_CATCHER + $C8, $3
-	object SPRITE_BALL, $19, $b, FACE, STAY, $5, ANTIDOTE
-	object SPRITE_BALL, $c, $1d, FACE, STAY, $6, POTION
-	object SPRITE_BALL, $1, $1f, FACE, STAY, $7, POKE_BALL
-	object SPRITE_BUG_CATCHER, $1b, $28, FACE, STAY, $8 ; person
-	object SPRITE_BERRY_TREE, $1e, $4, FACE, STAY, $9
+	object SPRITE_BUG_CATCHER, $10, $2b, NONE, NONE, $1 ; person
+	object SPRITE_BUG_CATCHER, $1e, $21, NONE, LEFT, $2, BUG_CATCHER + $C8, $1
+	object SPRITE_BUG_CATCHER, $1e, $13, NONE, LEFT, $3, BUG_CATCHER + $C8, $2
+	object SPRITE_BUG_CATCHER, $2, $12, NONE, LEFT, $4, BUG_CATCHER + $C8, $3
+	object SPRITE_BALL, $19, $b, NONE, NONE, $5, ANTIDOTE
+	object SPRITE_BALL, $c, $1d, NONE, NONE, $6, POTION
+	object SPRITE_BALL, $1, $1f, NONE, NONE, $7, POKE_BALL
+	object SPRITE_BUG_CATCHER, $1b, $28, NONE, NONE, $8 ; person
+	object SPRITE_BERRY_TREE, $1e, $4, NONE, NONE, $9
 
 	; warp-to
 	EVENT_DISP VIRIDIAN_FOREST_WIDTH, $0, $1 ; VIRIDIAN_FOREST_EXIT

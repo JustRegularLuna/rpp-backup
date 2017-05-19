@@ -14,9 +14,9 @@ Mansion1Object: ; 0x443a4 (size=90)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_FLANNERY, $11, $11, FACE, RIGHT, $1, PKMN_TRAINER + $C8, $1
-	object SPRITE_BALL, $e, $3, FACE, STAY, $2, ESCAPE_ROPE
-	object SPRITE_BALL, $12, $15, FACE, STAY, $3, CARBOS
+	object SPRITE_FLANNERY, $11, $11, NONE, LEFT, $1, PKMN_TRAINER + $C8, $1
+	object SPRITE_BALL, $e, $3, NONE, NONE, $2, ESCAPE_ROPE
+	object SPRITE_BALL, $12, $15, NONE, NONE, $3, CARBOS
 
 	; warp-to
 	EVENT_DISP MANSION_1_WIDTH, $1b, $4

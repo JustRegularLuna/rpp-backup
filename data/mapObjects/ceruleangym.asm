@@ -8,10 +8,10 @@ CeruleanGymObject: ; 0x5c834 (size=50)
 	db $0 ; signs
 
 	db $4 ; objects
-	object SPRITE_MISTY, $4, $2, FACE, DOWN, $1, MISTY + $C8, $1
-	object SPRITE_BRUNETTE_GIRL, $2, $3, FACE, LEFT, $2, SWIMMER_F + $C8, $10
-	object SPRITE_SWIMMER, $8, $7, FACE, RIGHT, $3, SWIMMER + $C8, $1
-	object SPRITE_GYM_HELPER, $7, $a, FACE, DOWN, $4 ; person
+	object SPRITE_MISTY, $4, $2, NONE, DOWN, $1, MISTY + $C8, $1
+	object SPRITE_BRUNETTE_GIRL, $2, $3, NONE, RIGHT, $2, SWIMMER_F + $C8, $10
+	object SPRITE_SWIMMER, $8, $7, NONE, LEFT, $3, SWIMMER + $C8, $1
+	object SPRITE_GYM_HELPER, $7, $a, NONE, DOWN, $4 ; person
 
 	; warp-to
 	EVENT_DISP CERULEAN_GYM_WIDTH, $d, $4

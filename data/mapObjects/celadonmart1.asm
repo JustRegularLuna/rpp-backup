@@ -14,7 +14,7 @@ CeladonMart1Object: ; 0x60f9e (size=64)
 	db $1, $e, $3 ; CeladonMart1Text3
 
 	db $1 ; objects
-	object SPRITE_GREETER, $8, $3, FACE, DOWN, $1 ; person
+	object SPRITE_GREETER, $8, $3, NONE, DOWN, $1 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_MART_1_WIDTH, $7, $2

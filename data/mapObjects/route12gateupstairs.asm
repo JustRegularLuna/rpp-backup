@@ -9,7 +9,7 @@ Route12GateUpstairsObject: ; 0x495de (size=24)
 	db $2, $6, $3 ; Route12GateUpstairsText3
 
 	db $1 ; objects
-	object SPRITE_BRUNETTE_GIRL, $5, $4, FACE, RIGHT, $1 ; person
+	object SPRITE_BRUNETTE_GIRL, $5, $4, NONE, LEFT, $1 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_12_GATE_2F_WIDTH, $7, $7 ; ROUTE_12_GATE_1F

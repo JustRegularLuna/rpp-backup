@@ -12,10 +12,10 @@ CeladonMansion1Object: ; 0x486cf (size=71)
 	db $9, $4, $5 ; CeladonMansion1Text5
 
 	db $4 ; objects
-	object SPRITE_OLD_MEDIUM_WOMAN, $3, $4, FACE, UP, $1 ; person
-	object SPRITE_FOULARD_WOMAN, $0, $5, FACE, DOWN, $2 ; person
-	object SPRITE_HIKER, $1, $5, FACE, DOWN, $3 ; person
-	object SPRITE_BRUNETTE_GIRL, $2, $6, FACE, RIGHT, $4 ; person
+	object SPRITE_OLD_MEDIUM_WOMAN, $3, $4, NONE, UP, $1 ; person
+	object SPRITE_FOULARD_WOMAN, $0, $5, NONE, DOWN, $2 ; person
+	object SPRITE_HIKER, $1, $5, NONE, DOWN, $3 ; person
+	object SPRITE_BRUNETTE_GIRL, $2, $6, NONE, LEFT, $4 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_MANSION_1_WIDTH, $b, $4

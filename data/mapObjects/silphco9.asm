@@ -11,10 +11,10 @@ SilphCo9Object: ; 0x5d93f (size=74)
 	db $0 ; signs
 
 	db $4 ; objects
-	object SPRITE_NURSE, $3, $e, FACE, DOWN, $1 ; person
-	object SPRITE_ROCKET_F, $2, $4, FACE, UP, $2, ROCKET_F + $C8, $25
-	object SPRITE_OAK_AIDE, $15, $d, FACE, DOWN, $3, SCIENTIST + $C8, $a
-	object SPRITE_ROCKET_F, $d, $10, FACE, UP, $4, ROCKET_F + $C8, $26
+	object SPRITE_NURSE, $3, $e, NONE, DOWN, $1 ; person
+	object SPRITE_ROCKET_F, $2, $4, NONE, UP, $2, ROCKET_F + $C8, $25
+	object SPRITE_OAK_AIDE, $15, $d, NONE, DOWN, $3, SCIENTIST + $C8, $a
+	object SPRITE_ROCKET_F, $d, $10, NONE, UP, $4, ROCKET_F + $C8, $26
 
 	; warp-to
 	EVENT_DISP SILPH_CO_9F_WIDTH, $0, $e ; SILPH_CO_10F

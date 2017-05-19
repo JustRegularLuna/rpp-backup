@@ -11,9 +11,9 @@ Mansion2Object: ; 0x520d1 (size=63)
 
 	db $4 ; objects
 	object SPRITE_BLACK_HAIR_BOY_2, $3, $11, WALK, $2, $1, BURGLAR + $C8, $7
-	object SPRITE_BALL, $1c, $b, FACE, STAY, $2, OLD_SEA_MAP
-	object SPRITE_BOOK, $12, $2, FACE, STAY, $3 ; person
-	object SPRITE_BOOK, $3, $16, FACE, STAY, $4 ; person
+	object SPRITE_BALL, $1c, $b, NONE, NONE, $2, OLD_SEA_MAP
+	object SPRITE_BOOK, $12, $2, NONE, NONE, $3 ; person
+	object SPRITE_BOOK, $3, $16, NONE, NONE, $4 ; person
 
 	; warp-to
 	EVENT_DISP MANSION_2_WIDTH, $a, $5 ; MANSION_1

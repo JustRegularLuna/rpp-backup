@@ -10,10 +10,10 @@ Mansion3Object: ; 0x522e6 (size=64)
 
 	db $5 ; objects
 	object SPRITE_BLACK_HAIR_BOY_2, $5, $b, WALK, $2, $1, BURGLAR + $C8, $8
-	object SPRITE_OAK_AIDE, $14, $b, FACE, RIGHT, $2, SCIENTIST + $C8, $c
-	object SPRITE_BALL, $1, $10, FACE, STAY, $3, MAX_POTION
-	object SPRITE_BALL, $19, $5, FACE, STAY, $4, IRON
-	object SPRITE_BOOK, $6, $c, FACE, STAY, $5 ; person
+	object SPRITE_OAK_AIDE, $14, $b, NONE, LEFT, $2, SCIENTIST + $C8, $c
+	object SPRITE_BALL, $1, $10, NONE, NONE, $3, MAX_POTION
+	object SPRITE_BALL, $19, $5, NONE, NONE, $4, IRON
+	object SPRITE_BOOK, $6, $c, NONE, NONE, $5 ; person
 
 	; warp-to
 	EVENT_DISP MANSION_3_WIDTH, $a, $7 ; MANSION_2

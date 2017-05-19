@@ -10,7 +10,7 @@ ViridianForestEntranceObject: ; 0x5d66d (size=48)
 	db $0 ; signs
 
 	db $2 ; objects
-	object SPRITE_GIRL, $8, $4, FACE, RIGHT, $1 ; person
+	object SPRITE_GIRL, $8, $4, NONE, LEFT, $1 ; person
 	object SPRITE_BRENDAN, $2, $4, WALK, $1, $2 ; person
 
 	; warp-to

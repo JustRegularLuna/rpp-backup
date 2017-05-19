@@ -8,7 +8,7 @@ NameRaterObject: ; 0x1dad6 (size=26)
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_GENTLEMAN, $5, $3, FACE, RIGHT, $1 ; person
+	object SPRITE_GENTLEMAN, $5, $3, NONE, LEFT, $1 ; person
 
 	; warp-to
 	EVENT_DISP NAME_RATERS_HOUSE_WIDTH, $7, $2
