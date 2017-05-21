@@ -82,6 +82,9 @@ hTilePlayerStandingOn EQU $FF93
 
 hSpritePriority EQU $FF94
 
+; 2 bytes
+hSignCoordPointer EQU $FF95
+
 hNPCMovementDirections2Index EQU $FF95
 
 ; CalcPositionOfPlayerRelativeToNPC
@@ -89,6 +92,8 @@ hNPCSpriteOffset EQU $FF95
 
 ; temp value used when swapping bytes
 hSwapTemp EQU $FF95
+
+hExperience EQU $FF96 ; 3 bytes, big endian
 
 ; Multiplcation and division variables are meant
 ; to overlap for back-to-back usage. Big endian.
@@ -134,6 +139,9 @@ hNPCPlayerRelativePosPerspective EQU $FF9B
 ; 0 = target is to the east or aligned
 ; 1 = target is to the west
 hNPCPlayerRelativePosFlags EQU $FF9D
+
+; some code zeroes this for no reason when writing a coin amount
+hUnusedCoinsByte EQU $FF9F
 
 hMoney EQU $FF9F ; 3-byte BCD number
 hCoins EQU $FFA0 ; 2-byte BCD number
@@ -260,6 +268,8 @@ hDivisor2  EQU $FFE6
 hQuotient2 EQU $FFE7
 
 hSpriteVRAMSlotAndFacing EQU $FFE9
+
+hCoordsInFrontOfPlayerMatch EQU $FFEA
 
 hSpriteAnimFrameCounter EQU $FFEA
 

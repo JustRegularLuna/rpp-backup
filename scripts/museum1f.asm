@@ -96,18 +96,18 @@ Museum1FText1: ; 5c135 (17:4135)
 	ld hl, wPewterMuseumFlags
 	set 0, [hl]
 	xor a
-	ld [wMuseumPriceTemp], a
-	ld [wMuseumPriceTemp + 1], a
+	ld [wPriceTemp], a
+	ld [wPriceTemp + 1], a
 	ld a, $50
-	ld [wMuseumPriceTemp + 2], a
-	ld hl, wMuseumPriceTemp + 2
+	ld [wPriceTemp + 2], a
+	ld hl, wPriceTemp + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
 	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld a, (SFX_02_5a - SFX_Headers_02) / 3
+	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jr .asm_0b094

@@ -55,7 +55,7 @@ KabutopsFossilText: ; 5dbd4 (17:5bd4)
 DisplayMonFrontSpriteInBox: ; 5dbd9 (17:5bd9)
 ; Displays a pokemon's front sprite in a pop-up window.
 ; [wcf91] = pokemon interal id number
-	ld a, $1
+	ld a, 1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	call Delay3
 	xor a
@@ -85,7 +85,7 @@ PrintBlackboardLinkCableText: ; 5dc1a (17:5c1a)
 	call EnableAutoTextBoxDrawing
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
-	ld a, [wWhichTrade]
+	ld a, [wHiddenObjectFunctionArgument]
 	call PrintPredefTextID
 	ret
 
@@ -310,7 +310,7 @@ VermilionGymTrashText: ; 5ddf7 (17:5df7)
 
 GymTrashScript: ; 5ddfc (17:5dfc)
 	call EnableAutoTextBoxDrawing
-	ld a, [wWhichTrade]
+	ld a, [wHiddenObjectFunctionArgument]
 	ld [wcd5b], a
 
 ; Don't do the trash can puzzle if it's already been done.
@@ -423,7 +423,7 @@ VermilionGymTrashSuccesText1: ; 5dec8 (17:5ec8)
 	TX_FAR _VermilionGymTrashSuccesText1
 	TX_ASM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_49 - SFX_Headers_02) / 3
+	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -437,7 +437,7 @@ VermilionGymTrashSuccesText2: ; 5dedb (17:5edb)
 VermilionGymTrashSuccesPlaySfx: ; 5dee0 (17:5ee0)
 	TX_ASM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_49 - SFX_Headers_02) / 3
+	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -446,7 +446,7 @@ VermilionGymTrashSuccesText3: ; 5deef (17:5eef)
 	TX_FAR _VermilionGymTrashSuccesText3
 	TX_ASM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -455,7 +455,7 @@ VermilionGymTrashFailText: ; 5df02 (17:5f02)
 	TX_FAR _VermilionGymTrashFailText
 	TX_ASM
 	call WaitForSoundToFinish
-	ld a, (SFX_02_51 - SFX_Headers_02) / 3
+	ld a, SFX_DENIED
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd

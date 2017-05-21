@@ -1549,7 +1549,7 @@ DisplayTwoOptionMenu: ; 7559 (1:7559)
 	pop af
 	pop hl
 	ld [wFlags_0xcd60], a
-	ld a, (SFX_02_40 - SFX_Headers_02) / 3
+	ld a, SFX_PRESS_AB
 	call PlaySound
 	jr .pressedAButton
 .notNoYesMenu
@@ -1984,7 +1984,7 @@ _DisplayPokedex: ; 7c18 (1:7c18)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	ld hl, wPokedexSeen
 	predef FlagActionPredef
 	ld a, $1
@@ -2577,7 +2577,7 @@ ApplyOutOfBattlePoisonDamage: ; c69c (3:469c)
 	jr z, .skipPoisonEffectAndSound
 	ld b, $2
 	predef ChangeBGPalColor0_4Frames ; change BG white to dark grey for 4 frames
-	ld a, (SFX_02_43 - SFX_Headers_02) / 3
+	ld a, SFX_POISONED
 	call PlaySound
 .skipPoisonEffectAndSound
 	predef AnyPartyAlive
@@ -3201,7 +3201,7 @@ MarkTownVisitedAndLoadMissableObjects: ; f113 (3:7113)
 	cp ROUTE_1
 	jr nc, .notInTown
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	ld hl, wKantoTownVisitedFlag   ; mark town as visited (for flying)
 	predef FlagActionPredef
 .notInTown
@@ -3285,7 +3285,7 @@ InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld hl, wMissableObjectFlags
 	ld a, [wd048]
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	call MissableObjectFlagAction ; set flag iff Item is hidden
 .asm_f19d
 	ld hl, wd048
@@ -3309,7 +3309,7 @@ IsObjectHidden: ; f1a6 (3:71a6)
 	ld a, [hli]
 	jr nz, .loop
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wMissableObjectFlags
 	call MissableObjectFlagAction
 	ld a, c
@@ -3328,7 +3328,7 @@ ShowObject2:
 	ld hl, wMissableObjectFlags
 	ld a, [wcc4d]
 	ld c, a
-	ld b, RESET_FLAG
+	ld b, FLAG_RESET
 	call MissableObjectFlagAction   ; reset "removed" flag
 	jp UpdateSprites
 
@@ -3338,7 +3338,7 @@ HideObject: ; f1d7 (3:71d7)
 	ld hl, wMissableObjectFlags
 	ld a, [wcc4d]
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	call MissableObjectFlagAction   ; set "removed" flag
 	jp UpdateSprites
 
@@ -3478,7 +3478,7 @@ TryPushingBoulder: ; f225 (3:7225)
 	ld de, PushBoulderRightMovementData
 .done
 	call MoveSprite
-	ld a, (SFX_02_53 - SFX_Headers_02) / 3
+	ld a, SFX_PUSH_BOULDER
 	call PlaySound
 	ld hl, wFlags_0xcd60
 	set 1, [hl]
@@ -3509,7 +3509,7 @@ DoBoulderDustAnimation: ; f2b5 (3:72b5)
 	ld [H_SPRITEINDEX], a
 	call GetSpriteMovementByte2Pointer
 	ld [hl], $10
-	ld a, (SFX_02_56 - SFX_Headers_02) / 3
+	ld a, SFX_CUT
 	jp PlaySound
 
 ResetBoulderPushFlags: ; f2dd (3:72dd)
@@ -3618,7 +3618,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
 	call FlagAction
 	ld a, c
@@ -3626,7 +3626,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	push bc
 	call FlagAction
 	pop bc
@@ -3724,7 +3724,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	dec de
 	dec de
 	xor a
-	ld [wHPBarMaxHP], a
+	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves
 	pop de
 	ld a, [wPlayerID]  ; set trainer ID to player ID
@@ -3739,13 +3739,13 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	callab CalcExperience
 	pop de
 	inc de
-	ld a, [H_MULTIPLICAND] ; write experience
+	ld a, [hExperience] ; write experience
 	ld [de], a
 	inc de
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hExperience + 1]
 	ld [de], a
 	inc de
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hExperience + 2]
 	ld [de], a
 	xor a
 	ld b, $a
@@ -3863,7 +3863,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	ld hl, wPokedexOwned
 	push bc
 	call FlagAction ; add to owned pokemon
@@ -5473,7 +5473,7 @@ EnemyHealthBarUpdated:
 	ld a, [wd11e]
 	dec a
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wPokedexOwned
 	predef FlagActionPredef
 	ld a, c

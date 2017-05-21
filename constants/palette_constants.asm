@@ -1,73 +1,73 @@
 ; super game boy palettes
 const_value = 0
-	const PAL_ROUTE
-	const PAL_PALLET
-	const PAL_VIRIDIAN
-	const PAL_PEWTER
-	const PAL_CERULEAN
-	const PAL_LAVENDER
-	const PAL_VERMILION
-	const PAL_CELADON
-	const PAL_FUCHSIA
-	const PAL_CINNABAR
-	const PAL_INDIGO
-	const PAL_SAFFRON
-	const PAL_TOWNMAP
-	const PAL_LOGO1
-	const PAL_LOGO2
-	const PAL_0F
-	const PAL_MEWMON
-	const PAL_BLUEMON
-	const PAL_REDMON
-	const PAL_CYANMON
-	const PAL_PURPLEMON
-	const PAL_BROWNMON
-	const PAL_GREENMON
-	const PAL_PINKMON
-	const PAL_YELLOWMON
-	const PAL_GREYMON
-	const PAL_SNEASEL
-	const PAL_BELLOSSOM
-	const PAL_TOGEKISS
-	const PAL_BLUE_TRAINER
-	const PAL_RED_TRAINER
-	const PAL_CYAN_TRAINER
-	const PAL_PURPLE_TRAINER
-	const PAL_BROWN_TRAINER
-	const PAL_GREEN_TRAINER
-	const PAL_PINK_TRAINER
-	const PAL_YELLOW_TRAINER
-	const PAL_SLOTS1
-	const PAL_SLOTS2
-	const PAL_SLOTS3
-	const PAL_SLOTS4
-	const PAL_BLACK
-	const PAL_GREENBAR
-	const PAL_YELLOWBAR
-	const PAL_REDBAR
-	const PAL_BADGE
-	const PAL_CAVE
-	const PAL_GAMEFREAK
+	const PAL_ROUTE                ; $00
+	const PAL_PALLET               ; $01
+	const PAL_VIRIDIAN             ; $02
+	const PAL_PEWTER               ; $03
+	const PAL_CERULEAN             ; $04
+	const PAL_LAVENDER             ; $05
+	const PAL_VERMILION            ; $06
+	const PAL_CELADON              ; $07
+	const PAL_FUCHSIA              ; $08
+	const PAL_CINNABAR             ; $09
+	const PAL_INDIGO               ; $0A
+	const PAL_SAFFRON              ; $0B
+	const PAL_TOWNMAP              ; $0C
+	const PAL_LOGO1                ; $0D
+	const PAL_LOGO2                ; $0E
+	const PAL_0F                   ; $0F
+	const PAL_MEWMON               ; $10
+	const PAL_BLUEMON              ; $11
+	const PAL_REDMON               ; $12
+	const PAL_CYANMON              ; $13
+	const PAL_PURPLEMON            ; $14
+	const PAL_BROWNMON             ; $15
+	const PAL_GREENMON             ; $16
+	const PAL_PINKMON              ; $17
+	const PAL_YELLOWMON            ; $18
+	const PAL_GREYMON              ; $19
+	const PAL_SNEASEL              ; $1A
+	const PAL_BELLOSSOM            ; $1B
+	const PAL_TOGEKISS             ; $1C
+	const PAL_BLUE_TRAINER         ; $1D
+	const PAL_RED_TRAINER          ; $1E
+	const PAL_CYAN_TRAINER         ; $1F
+	const PAL_PURPLE_TRAINER       ; $20
+	const PAL_BROWN_TRAINER        ; $21
+	const PAL_GREEN_TRAINER        ; $22
+	const PAL_PINK_TRAINER         ; $23
+	const PAL_YELLOW_TRAINER       ; $24
+	const PAL_SLOTS1               ; $25
+	const PAL_SLOTS2               ; $26
+	const PAL_SLOTS3               ; $27
+	const PAL_SLOTS4               ; $28
+	const PAL_BLACK                ; $29
+	const PAL_GREENBAR             ; $2A
+	const PAL_YELLOWBAR            ; $2B
+	const PAL_REDBAR               ; $2C
+	const PAL_BADGE                ; $2D
+	const PAL_CAVE                 ; $2E
+	const PAL_GAMEFREAK            ; $2F
 
-	const PAL_SHINY_MEWMON
-	const PAL_SHINY_BLUEMON
-	const PAL_SHINY_REDMON
-	const PAL_SHINY_CYANMON
-	const PAL_SHINY_PURPLEMON
-	const PAL_SHINY_BROWNMON
-	const PAL_SHINY_GREENMON
-	const PAL_SHINY_PINKMON
-	const PAL_SHINY_YELLOWMON
-	const PAL_SHINY_GREYMON
-	const PAL_SHINY_SNEASEL
-	const PAL_SHINY_BELLOSSOM
-	const PAL_SHINY_TOGEKISS
+	const PAL_SHINY_MEWMON         ; $30
+	const PAL_SHINY_BLUEMON        ; $31
+	const PAL_SHINY_REDMON         ; $32
+	const PAL_SHINY_CYANMON        ; $33
+	const PAL_SHINY_PURPLEMON      ; $34
+	const PAL_SHINY_BROWNMON       ; $35
+	const PAL_SHINY_GREENMON       ; $36
+	const PAL_SHINY_PINKMON        ; $37
+	const PAL_SHINY_YELLOWMON      ; $38
+	const PAL_SHINY_GREYMON        ; $39
+	const PAL_SHINY_SNEASEL        ; $3A
+	const PAL_SHINY_BELLOSSOM      ; $3B
+	const PAL_SHINY_TOGEKISS       ; $3C
 	; trainer palettes are shared with pokemon...
-	const PAL_SHINY_BLUE_TRAINER
-	const PAL_SHINY_RED_TRAINER
-	const PAL_SHINY_CYAN_TRAINER
-	const PAL_SHINY_PURPLE_TRAINER
-	const PAL_SHINY_BROWN_TRAINER
-	const PAL_SHINY_GREEN_TRAINER
-	const PAL_SHINY_PINK_TRAINER
-	const PAL_SHINY_YELLOW_TRAINER
+	const PAL_SHINY_BLUE_TRAINER   ; $3D
+	const PAL_SHINY_RED_TRAINER    ; $3E
+	const PAL_SHINY_CYAN_TRAINER   ; $3F
+	const PAL_SHINY_PURPLE_TRAINER ; $40
+	const PAL_SHINY_BROWN_TRAINER  ; $41
+	const PAL_SHINY_GREEN_TRAINER  ; $42
+	const PAL_SHINY_PINK_TRAINER   ; $43
+	const PAL_SHINY_YELLOW_TRAINER ; $44

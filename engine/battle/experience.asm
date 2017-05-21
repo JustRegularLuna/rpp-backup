@@ -15,7 +15,7 @@ GainExperience: ; 5524f (15:524f)
 	ld hl, wPartyGainExpFlags
 	ld a, [wWhichPokemon]
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
 	and a ; is mon's gain exp flag set?
@@ -291,10 +291,10 @@ GainExperience: ; 5524f (15:524f)
 	cp c
 	jr nz, .level_loop
 	
-	ld hl, wccd3
+	ld hl, wCanEvolveFlags
 	ld a, [wWhichPokemon]
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	predef FlagActionPredef
 	pop hl
 	pop af
@@ -318,7 +318,7 @@ GainExperience: ; 5524f (15:524f)
 	ld [hl], a ; clear gain exp flags
 	ld a, [wPlayerMonNumber]
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	push bc
 	predef FlagActionPredef ; set the gain exp flag for the mon that is currently out
 	ld hl, wPartyFoughtCurrentEnemyFlags

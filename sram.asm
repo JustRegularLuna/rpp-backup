@@ -34,8 +34,8 @@ sBox3:: ds wBoxDataEnd - wBoxDataStart ; a8c4
 sBox4:: ds wBoxDataEnd - wBoxDataStart ; ad26
 sBox5:: ds wBoxDataEnd - wBoxDataStart ; b188
 sBox6:: ds wBoxDataEnd - wBoxDataStart ; b5ea
-sBoxes1CheckSum:: ds 1 ; ba4c
-sBoxes1CheckSum2:: ds 6 ; ba4d
+sBank2AllBoxesChecksum:: ds 1 ; ba4c
+sBank2IndividualBoxChecksums:: ds 6 ; ba4d
 
 
 SECTION "Saved Boxes 2", SRAM, BANK[3]
@@ -46,5 +46,5 @@ sBox9::  ds wBoxDataEnd - wBoxDataStart ; a8c4
 sBox10:: ds wBoxDataEnd - wBoxDataStart ; ad26
 sBox11:: ds wBoxDataEnd - wBoxDataStart ; b188
 sBox12:: ds wBoxDataEnd - wBoxDataStart ; b5ea
-sBoxes2CheckSum:: ds 1 ; ba4c
-sBoxes2CheckSum2:: ds 6 ; ba4d
+sBank3AllBoxesChecksum:: ds 1 ; ba4c
+sBank3IndividualBoxChecksums:: ds 6 ; ba4d

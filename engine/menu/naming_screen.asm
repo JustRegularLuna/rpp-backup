@@ -172,9 +172,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, [W_ISINBATTLE]
 	and a
 	jp z, LoadTextBoxTilePatterns
-	ld hl, LoadHudTilePatterns
-	ld b, BANK(LoadHudTilePatterns)
-	jp Bankswitch
+	jpab LoadHudTilePatterns
 
 .namingScreenButtonFunctions
 	dw .dPadReturnPoint
@@ -262,7 +260,7 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	ld a, [wHPBarNewHP]
 	ld [hli], a
 	ld [hl], $50
-	ld a, (SFX_02_40 - SFX_Headers_02) / 3
+	ld a, SFX_PRESS_AB
 	call PlaySound
 	ret
 .pressedB

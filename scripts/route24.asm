@@ -150,7 +150,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	TX_ASM
 	; make player face the rocket
 	ld a, 1
-	ld [wd528], a
+	ld [wPlayerMovingDirection], a
 	; original script continues below
 	ld hl, wd7f0
 	res 1, [hl]

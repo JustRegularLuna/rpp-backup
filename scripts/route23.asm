@@ -52,7 +52,7 @@ Route23Script0: ; 51219 (14:5219)
 	ld [hSpriteIndexOrTextID], a
 	ld a, c
 	ld [wWhichBadge], a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wd7ed
 	predef FlagActionPredef
 	ld a, c
@@ -193,7 +193,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	ld a, [wWhichBadge]
 	inc a
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wObtainedKantoBadges
 	predef FlagActionPredef
 	ld a, c
@@ -210,7 +210,7 @@ Route23Script_51346: ; 51346 (14:5346)
 	call PrintText
 	ld a, [wWhichBadge]
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	ld hl, wd7ed
 	predef FlagActionPredef
 	ld a, $2
@@ -224,7 +224,7 @@ Route23Script_51388: ; 51388 (14:5388)
 VictoryRoadGuardText1: ; 5138e (14:538e)
 	TX_FAR _VictoryRoadGuardText1
 	TX_ASM
-	ld a, (SFX_02_51 - SFX_Headers_02) / 3
+	ld a, SFX_DENIED
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	jp TextScriptEnd

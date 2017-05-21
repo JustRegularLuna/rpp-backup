@@ -71,7 +71,7 @@ Lab2Text1: ; 75c2a (1d:5c2a)
 CheckBirdSeen:
 	dec a
 	ld c,a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wPokedexSeen
 	predef FlagActionPredef
 	ld a,c

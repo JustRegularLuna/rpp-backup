@@ -68,7 +68,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	dec a
 	call PlaySound
 	ld c, BANK(SFX_02_5f)
-	ld a, (SFX_02_5f - SFX_Headers_02) / 3
+	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .asm_1e9c2
 	ld a, [wc02a]
@@ -78,7 +78,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld [H_DOWNARROWBLINKCNT2], a
 	call DisplayTextID
 	xor a
-	ld [wd528], a
+	ld [wPlayerMovingDirection], a
 	ld a, SAFARI_ZONE_ENTRANCE
 	ld [H_DOWNARROWBLINKCNT1], a
 	ld a, $3
@@ -128,7 +128,7 @@ CinnabarGymQuiz: ; 1ea25 (7:6a25)
 	TX_ASM
 	xor a
 	ld [wOpponentAfterWrongAnswer], a
-	ld a, [wWhichTrade]
+	ld a, [wHiddenObjectFunctionArgument]
 	push af
 	and $f
 	ld [$ffdb], a
@@ -209,12 +209,12 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	call PrintText
 	ld a, [$ffe0]
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	call CinnabarGymQuiz_1ea8a
 	jp CinnabarGymQuiz_1eb0a
 .asm_1eab8
 	call WaitForSoundToFinish
-	ld a, (SFX_02_51 - SFX_Headers_02) / 3
+	ld a, SFX_DENIED
 	call PlaySound
 	call WaitForSoundToFinish
 	ld hl, CinnabarGymQuizIncorrectText
@@ -222,7 +222,7 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 	ld a, [$ffdb]
 	add $2
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wCinnabarGymFlags
 	predef FlagActionPredef
 	ld a, c
@@ -236,17 +236,18 @@ CinnabarGymQuiz_1ea92: ; 1ea92 (7:6a92)
 CinnabarGymQuizCorrectText: ; 1eae3 (7:6ae3)
 	db $0b
 	TX_FAR _CinnabarGymQuizCorrectText
-	db $06,$08
+	db $06
+	TX_ASM
 
 	ld a, [$ffe0]
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	call CinnabarGymQuiz_1ea8a
 	ld a, c
 	and a
 	jp nz, TextScriptEnd
 	call WaitForSoundToFinish
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
 	jp TextScriptEnd
@@ -277,7 +278,7 @@ CinnabarGymQuiz_1eb0a: ; 1eb0a (7:6b0a)
 	ld a, [$ffdb]
 	ld [$ffe0], a
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	call CinnabarGymQuiz_1ea8a
 	ld a, c
 	and a
@@ -334,22 +335,22 @@ BillsHousePC: ; 1eb6e (7:6b6e)
 	tx_pre BillsHouseInitiatedText
 	ld c, 32
 	call DelayFrames
-	ld a, (SFX_02_3c - SFX_Headers_02) / 3
+	ld a, SFX_TINK
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 80
 	call DelayFrames
-	ld a, (SFX_02_48 - SFX_Headers_02) / 3
+	ld a, SFX_SHRINK
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 48
 	call DelayFrames
-	ld a, (SFX_02_3c - SFX_Headers_02) / 3
+	ld a, SFX_TINK
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 32
 	call DelayFrames
-	ld a, (SFX_02_3a - SFX_Headers_02) / 3
+	ld a, SFX_GET_ITEM_1
 	call PlaySound
 	call WaitForSoundToFinish
 	call PlayDefaultMusic
@@ -375,7 +376,7 @@ BillsHouseInitiatedText: ; 1ebe2 (7:6be2)
 	call PlaySound
 	ld c, 16
 	call DelayFrames
-	ld a, (SFX_02_49 - SFX_Headers_02) / 3
+	ld a, SFX_SWITCH
 	call PlaySound
 	call WaitForSoundToFinish
 	ld c, 60

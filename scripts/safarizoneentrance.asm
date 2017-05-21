@@ -26,7 +26,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [hJoyHeld], a
 	ld a, SPRITE_FACING_RIGHT
 	ld [wSpriteStateData1 + 9], a
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $1
 	jr z, .asm_7520f
 	ld a, $2
@@ -72,8 +72,8 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ret
 
 .SafariZoneEntranceScript5
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld hl, wSafariZoneFlags
 	bit 6, [hl]
 	res 6, [hl]

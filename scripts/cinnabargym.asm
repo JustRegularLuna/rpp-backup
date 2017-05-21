@@ -54,14 +54,14 @@ CinnabarGymScript0: ; 757ae (1d:57ae)
 	ld [H_SPRITEINDEX], a
 	cp $4
 	jr nz, .asm_757c3
-	ld a, $4
-	ld [wd528], a
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
 	ld de, MovementData_757d7
 	jr .asm_757cb
 .asm_757c3
 	ld de, MovementData_757da
-	ld a, $1
-	ld [wd528], a
+	ld a, PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection], a
 .asm_757cb
 	call MoveSprite
 	ld a, $1
@@ -99,27 +99,27 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld a, [wTrainerHeaderFlagBit]
 	ld [$ffdb], a
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wCinnabarGymFlags
 	call CinnabarGymScript_757f1
 	ld a, c
 	and a
 	jr nz, .asm_7581b
 	call WaitForSoundToFinish
-	ld a, (SFX_02_57 - SFX_Headers_02) / 3
+	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
 .asm_7581b
 	ld a, [wTrainerHeaderFlagBit]
 	ld [$ffdb], a
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	ld hl, wCinnabarGymFlags
 	call CinnabarGymScript_757f1
 	ld a, [wTrainerHeaderFlagBit]
 	sub $2
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	ld hl, wCinnabarGymGateFlags
 	call CinnabarGymScript_757f1
 	call Func_3ead

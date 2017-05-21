@@ -53,8 +53,20 @@ callab: MACRO
 	call Bankswitch
 	ENDM
 
+jpba: MACRO
+	ld b, BANK(\1)
+	ld hl, \1
+	jp Bankswitch
+	ENDM
+
+jpab: MACRO
+	ld hl, \1
+	ld b, BANK(\1)
+	jp Bankswitch
+	ENDM
+
 farcall EQUS "callba"
-	
+
 bcd2: MACRO
     dn ((\1) / 1000) % 10, ((\1) / 100) % 10
     dn ((\1) / 10) % 10, (\1) % 10
@@ -598,7 +610,7 @@ WEST_MAP_CONNECTION: MACRO
 	db \2_WIDTH ; map width
 	db (\3 - \4) * -2 ; y alignment
 	db (\2_WIDTH * 2) - 1 ; x alignment
-	dw wOverworldMap + 6 + (2 * \2_WIDTH) ; window (position of the upper left block after entring the map)
+	dw wOverworldMap + 6 + (2 * \2_WIDTH) ; window (position of the upper left block after entering the map)
 ENDM
 
 ;\1 (byte) = current map id

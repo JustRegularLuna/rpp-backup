@@ -19,9 +19,9 @@ SetDefaultNames: ; 60ca (1:60ca)
 	ld [wOptions], a
 	pop af
 	ld [wLetterPrintingDelayFlags], a
-	ld a, [wd08a]
+	ld a, [wOptionsInitialized]
 	and a
-	call z, Func_5bff
+	call z, InitOptions
 	ld hl, NintenText
 	ld de, wCurTrainerName
 	ld bc, $b
@@ -145,7 +145,7 @@ OakSpeech: ; 6115 (1:6115)
 .next
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,(SFX_02_48 - SFX_Headers_02) / 3
+	ld a,SFX_SHRINK
 	call PlaySound
 	pop af
 	ld [H_LOADEDROMBANK],a

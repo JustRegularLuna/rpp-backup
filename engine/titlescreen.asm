@@ -21,7 +21,7 @@ SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
 	ld [wc0ef], a
 	ld [wc0f0], a
 
-LoadTitlescreenGraphics: ; 42dd (1:42dd)
+DisplayTitleScreen: ; 42dd (1:42dd)
 	call GBPalWhiteOut
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -144,7 +144,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	ld d, a
 	cp -3
 	jr nz, .skipPlayingSound
-	ld a, (SFX_1f_62 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_CRASH
 	call PlaySound
 .skipPlayingSound
 	ld a, [hli]
@@ -178,7 +178,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	call LoadScreenTilesFromBuffer1
 	ld c, 36
 	call DelayFrames
-	ld a, (SFX_1f_63 - SFX_Headers_1f) / 3
+	ld a, SFX_INTRO_WHOOSH
 	call PlaySound
 
 ; scroll game version in from the right
@@ -249,9 +249,7 @@ LoadTitlescreenGraphics: ; 42dd (1:42dd)
 	jp MainMenu
 
 .doClearSaveDialogue
-	ld b, BANK(DoClearSaveDialogue)
-	ld hl, DoClearSaveDialogue
-	jp Bankswitch
+	jpba DoClearSaveDialogue
 
 TitleScreenPickNewMon: ; 4496 (1:4496)
 	ld a, vBGMap0 / $100

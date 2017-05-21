@@ -29,7 +29,7 @@ HallOfFamePC: ; 7405c (1d:405c)
 	ld c, 128
 	call DelayFrames
 	xor a
-	ld [wWhichTrade], a
+	ld [wUnusedCD3D], a ; not read
 	ld [wNumCreditsMonsDisplayed], a
 	jp Credits
 

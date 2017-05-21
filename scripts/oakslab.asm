@@ -178,8 +178,8 @@ OaksLabScript6: ; 1cc36 (7:4c36)
 	ld a, D_UP
 	ld [wSimulatedJoypadStatesEnd], a
 	call StartSimulatingJoypadStates
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 
 	ld a, $7
 	ld [W_OAKSLABCURSCRIPT], a
@@ -307,7 +307,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld a, $d
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld a, [wTrainerEngageDistance]
+	ld a, [wRivalStarterBallSpriteIndex]
 	cp $2
 	jr nz, .asm_1cd28
 	ld a, HS_STARTER_BALL_1
@@ -323,7 +323,7 @@ OaksLabScript9: ; 1cd00 (7:4d00)
 	ld [wcc4d], a
 	predef HideObject
 	call Delay3
-	ld a, [wWhichTrade]
+	ld a, [wRivalStarterTemp]
 	ld [wRivalStarter], a
 	ld [wcf91], a
 	ld [wd11e], a
@@ -354,8 +354,8 @@ OaksLabScript10: ; 1cd6d (7:4d6d)
 	xor a ; SPRITE_FACING_DOWN
 	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -416,8 +416,8 @@ OaksLabScript11: ; 1cdb9 (7:4db9)
 	set 7, [hl]
 	xor a
 	ld [wJoyIgnore], a
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	ld a, $c
 	ld [W_OAKSLABCURSCRIPT], a
 	ret
@@ -427,8 +427,8 @@ OaksLabScript12: ; 1ce03 (7:4e03)
 	ld [wIsTrainerBattle], a
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld a, $8
-	ld [wd528], a
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	call UpdateSprites
 	ld a, $1
 	ld [wSpriteIndex], a
@@ -810,9 +810,9 @@ OaksLabText29: ; 1d102 (7:5102)
 OaksLabText2: ; 1d102 (7:5102)
 	TX_ASM
 	ld a, STARTER2
-	ld [wWhichTrade], a
+	ld [wRivalStarterTemp], a
 	ld a, $3
-	ld [wTrainerEngageDistance], a
+	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER1
 	ld b, $2
 	jr OaksLabScript_1d133
@@ -821,9 +821,9 @@ OaksLabText30: ; 1d113 (7:5113)
 OaksLabText3: ; 1d113 (7:5113)
 	TX_ASM
 	ld a, STARTER3
-	ld [wWhichTrade], a
+	ld [wRivalStarterTemp], a
 	ld a, $4
-	ld [wTrainerEngageDistance], a
+	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER2
 	ld b, $3
 	jr OaksLabScript_1d133
@@ -832,9 +832,9 @@ OaksLabText31: ; 1d124 (7:5124)
 OaksLabText4: ; 1d124 (7:5124)
 	TX_ASM
 	ld a, STARTER1
-	ld [wWhichTrade], a
+	ld [wRivalStarterTemp], a
 	ld a, $2
-	ld [wTrainerEngageDistance], a
+	ld [wRivalStarterBallSpriteIndex], a
 	ld a, STARTER3
 	ld b, $4
 
@@ -862,13 +862,13 @@ OaksLabScript_1d157: ; 1d157 (7:5157)
 	ld a, $9
 	ld [H_SPRITEDATAOFFSET], a
 	call GetPointerWithinSpriteStateData1
-	ld [hl], $0
+	ld [hl], SPRITE_FACING_DOWN
 	ld a, $1
 	ld [H_SPRITEINDEX], a
 	ld a, $9
 	ld [H_SPRITEDATAOFFSET], a
 	call GetPointerWithinSpriteStateData1
-	ld [hl], $c
+	ld [hl], SPRITE_FACING_RIGHT
 	ld hl, wd730
 	set 6, [hl]
 	predef StarterDex  ; StarterDex

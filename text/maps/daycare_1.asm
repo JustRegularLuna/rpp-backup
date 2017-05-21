@@ -31,9 +31,7 @@ _DayCareMonHasGrownText::
 
 	para "By level, it's"
 	line "grown by @"
-
-DayCareMText_8ac67::
-	TX_NUM wTrainerEngageDistance,$1,$3
+	TX_NUM wDayCareNumLevelsGrown,$1,$3
 	text "!"
 
 	para "Aren't I great?"

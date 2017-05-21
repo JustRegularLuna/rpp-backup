@@ -1,9 +1,7 @@
 HandleMidJump::
 ; Handle the player jumping down
 ; a ledge in the overworld.
-	ld b, BANK(_HandleMidJump)
-	ld hl, _HandleMidJump
-	jp Bankswitch
+	jpba _HandleMidJump
 
 EnterMap::
 ; Load a new map.
@@ -141,52 +139,52 @@ OverworldLoopLessDelay::
 	call UpdateSprites
 	ld a,$01
 	ld [wcc4b],a
-	ld a,[wd528] ; the direction that was pressed last time
+	ld a,[wPlayerMovingDirection] ; the direction that was pressed last time
 	and a
 	jp z,OverworldLoop
 ; if a direction was pressed last time
-	ld [wd529],a ; save the last direction
+	ld [wPlayerLastStopDirection],a ; save the last direction
 	xor a
-	ld [wd528],a ; zero the direction
+	ld [wPlayerMovingDirection],a ; zero the direction
 	jp OverworldLoop
 .checkIfDownButtonIsPressed
 	ld a,[hJoyHeld] ; current joypad state
 	bit 7,a ; down button
 	jr z,.checkIfUpButtonIsPressed
-	ld a,$01
-	ld [wSpriteStateData1 + 3],a
-	ld a,$04
+	ld a,1
+	ld [wSpriteStateData1 + 3],a ; delta Y
+	ld a,PLAYER_DIR_DOWN
 	jr .handleDirectionButtonPress
 .checkIfUpButtonIsPressed
 	bit 6,a ; up button
 	jr z,.checkIfLeftButtonIsPressed
-	ld a,$ff
-	ld [wSpriteStateData1 + 3],a
-	ld a,$08
+	ld a,-1
+	ld [wSpriteStateData1 + 3],a ; delta Y
+	ld a,PLAYER_DIR_UP
 	jr .handleDirectionButtonPress
 .checkIfLeftButtonIsPressed
 	bit 5,a ; left button
 	jr z,.checkIfRightButtonIsPressed
-	ld a,$ff
-	ld [wSpriteStateData1 + 5],a
-	ld a,$02
+	ld a,-1
+	ld [wSpriteStateData1 + 5],a ; delta X
+	ld a,PLAYER_DIR_LEFT
 	jr .handleDirectionButtonPress
 .checkIfRightButtonIsPressed
 	bit 4,a ; right button
 	jr z,.noDirectionButtonsPressed
-	ld a,$01
-	ld [wSpriteStateData1 + 5],a
+	ld a,1 ; PLAYER_DIR_RIGHT
+	ld [wSpriteStateData1 + 5],a ; delta X
 .handleDirectionButtonPress
-	ld [wd52a],a ; new direction
+	ld [wPlayerDirection],a ; new direction
 	ld a,[wd730]
 	bit 7,a ; are we simulating button presses?
 	jr nz,.noDirectionChange ; ignore direction changes if we are
 	ld a,[wcc4b]
 	and a
 	jr z,.noDirectionChange
-	ld a,[wd52a] ; new direction
+	ld a,[wPlayerDirection] ; new direction
 	ld b,a
-	ld a,[wd529] ; old direction
+	ld a,[wPlayerLastStopDirection] ; old direction
 	cp b
 	jr z,.noDirectionChange
 ; the code below is strange
@@ -194,42 +192,42 @@ OverworldLoopLessDelay::
 ; also, it does a seemingly pointless loop afterwards
 	swap a ; put old direction in upper half
 	or b ; put new direction in lower half
-	cp a,$48 ; change dir from down to up
+	cp a,(PLAYER_DIR_DOWN << 4) | PLAYER_DIR_UP ; change dir from down to up
 	jr nz,.notDownToUp
-	ld a,$02
-	ld [wd528],a
+	ld a,PLAYER_DIR_LEFT
+	ld [wPlayerMovingDirection],a
 	jr .oddLoop
 .notDownToUp
-	cp a,$84 ; change dir from up to down
+	cp a,(PLAYER_DIR_UP << 4) | PLAYER_DIR_DOWN ; change dir from up to down
 	jr nz,.notUpToDown
-	ld a,$01
-	ld [wd528],a
+	ld a,PLAYER_DIR_RIGHT
+	ld [wPlayerMovingDirection],a
 	jr .oddLoop
 .notUpToDown
-	cp a,$12 ; change dir from right to left
+	cp a,(PLAYER_DIR_RIGHT << 4) | PLAYER_DIR_LEFT ; change dir from right to left
 	jr nz,.notRightToLeft
-	ld a,$04
-	ld [wd528],a
+	ld a,PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection],a
 	jr .oddLoop
 .notRightToLeft
-	cp a,$21 ; change dir from left to right
+	cp a,(PLAYER_DIR_LEFT << 4) | PLAYER_DIR_RIGHT ; change dir from left to right
 	jr nz,.oddLoop
-	ld a,$08
-	ld [wd528],a
+	ld a,PLAYER_DIR_UP
+	ld [wPlayerMovingDirection],a
 .oddLoop
 	ld hl,wFlags_0xcd60
 	set 2,[hl]
 	ld hl,wcc4b
 	dec [hl]
 	jr nz,.oddLoop
-	ld a,[wd52a]
-	ld [wd528],a
+	ld a,[wPlayerDirection]
+	ld [wPlayerMovingDirection],a
 	call NewBattle
 	jp c,.battleOccurred
 	jp OverworldLoop
 .noDirectionChange
-	ld a,[wd52a] ; current direction
-	ld [wd528],a ; save direction
+	ld a,[wPlayerDirection] ; current direction
+	ld [wPlayerMovingDirection],a ; save direction
 	call UpdateSprites
 	ld a,[wWalkBikeSurfState]
 	cp a,$02 ; surfing
@@ -383,9 +381,7 @@ NewBattle:: ; 0683 (0:0683)
 	ld a,[wd72e]
 	bit 4,a
 	jr nz,.noBattle
-	ld b, BANK(InitBattle)
-	ld hl, InitBattle
-	jp Bankswitch
+	jpba InitBattle
 .noBattle
 	and a
 	ret
@@ -598,7 +594,7 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	jp .loadNewMap
 .checkEastMap
 	ld b,a
-	ld a,[wd525] ; map width
+	ld a,[wCurrentMapWidth2] ; map width
 	cp b
 	jr nz,.checkNorthMap
 	ld a,[W_MAPCONN4PTR]
@@ -660,7 +656,7 @@ CheckMapConnections:: ; 07ba (0:07ba)
 	jp .loadNewMap
 .checkSouthMap
 	ld b,a
-	ld a,[wd524]
+	ld a,[wCurrentMapHeight2]
 	cp b
 	jr nz,.didNotEnterConnectedMap
 	ld a,[W_MAPCONN2PTR]
@@ -702,10 +698,10 @@ PlayMapChangeSound:: ; 08c9 (0:08c9)
 	aCoord 8, 8 ; upper left tile of the 4x4 square the player's sprite is standing on
 	cp a,$0b ; door tile in tileset 0
 	jr nz,.didNotGoThroughDoor
-	ld a,(SFX_02_57 - SFX_Headers_02) / 3
+	ld a,SFX_GO_INSIDE
 	jr .playSound
 .didNotGoThroughDoor
-	ld a,(SFX_02_5c - SFX_Headers_02) / 3
+	ld a,SFX_GO_OUTSIDE
 .playSound
 	call PlaySound
 	ld a,[wMapPalOffset]
@@ -813,9 +809,7 @@ HandleFlyWarpOrDungeonWarp::
 	jp SpecialEnterMap
 
 LeaveMapAnim::
-	ld b, BANK(_LeaveMapAnim)
-	ld hl, _LeaveMapAnim
-	jp Bankswitch
+	jpba _LeaveMapAnim
 
 LoadPlayerSpriteGraphics::
 ; Load sprite graphics based on whether the player is standing, biking, or surfing.
@@ -900,7 +894,7 @@ LoadTilesetTilePatternData:: ; 09e8 (0:09e8)
 LoadTileBlockMap:: ; 09fc (0:09fc)
 ; fill C6E8-CBFB with the background tile
 	ld hl,wOverworldMap
-	ld a,[wd3ad] ; background tile number
+	ld a,[wMapBackgroundTile]
 	ld d,a
 	ld bc,$0514
 .backgroundTileLoop
@@ -1093,15 +1087,15 @@ LoadEastWestConnectionsTileMap:: ; 0b02 (0:0b02)
 IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 	xor a
 	ld [hSpriteIndexOrTextID],a
-	ld a,[wd4b0] ; number of signs in the map
+	ld a,[wNumSigns]
 	and a
 	jr z,.extendRangeOverCounter
 ; if there are signs
 	predef GetTileAndCoordsInFrontOfPlayer ; get the coordinates in front of the player in de
-	ld hl,wd4b1 ; start of sign coordinates
-	ld a,[wd4b0] ; number of signs in the map
+	ld hl,wSignCoords
+	ld a,[wNumSigns]
 	ld b,a
-	ld c,$00
+	ld c,0
 .signLoop
 	inc c
 	ld a,[hli] ; sign Y
@@ -1117,8 +1111,8 @@ IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 ; found sign
 	push hl
 	push bc
-	ld hl,wd4d1 ; start of sign text ID's
-	ld b,$00
+	ld hl,wSignTextIDs
+	ld b,0
 	dec c
 	add hl,bc
 	ld a,[hl]
@@ -1133,7 +1127,7 @@ IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 .extendRangeOverCounter
 	predef GetTileAndCoordsInFrontOfPlayer ; get the tile in front of the player in c
 	ld hl,W_TILESETTALKINGOVERTILES ; list of tiles that extend talking range (counter tiles)
-	ld b,$03
+	ld b,3
 	ld d,$20 ; talking range in pixels (long range)
 .counterTilesLoop
 	ld a,[hli]
@@ -1147,7 +1141,7 @@ IsSpriteOrSignInFrontOfPlayer:: ; 0b23 (0:0b23)
 IsSpriteInFrontOfPlayer:: ; 0b6b (0:0b6b)
 	ld d,$10 ; talking range in pixels (normal range)
 IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
-	ld bc,$3c40 ; Y and X position of player sprite
+	lb bc, $3c, $40 ; Y and X position of player sprite
 	ld a,[wSpriteStateData1 + 9] ; direction the player is facing
 .checkIfPlayerFacingUp
 	cp SPRITE_FACING_UP
@@ -1156,7 +1150,7 @@ IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld a,b
 	sub d
 	ld b,a
-	ld a,$08
+	ld a,PLAYER_DIR_UP
 	jr .doneCheckingDirection
 .checkIfPlayerFacingDown
 	cp SPRITE_FACING_DOWN
@@ -1165,7 +1159,7 @@ IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld a,b
 	add d
 	ld b,a
-	ld a,$04
+	ld a,PLAYER_DIR_DOWN
 	jr .doneCheckingDirection
 .checkIfPlayerFacingRight
 	cp SPRITE_FACING_RIGHT
@@ -1174,16 +1168,16 @@ IsSpriteInFrontOfPlayer2:: ; 0b6d (0:0b6d)
 	ld a,c
 	add d
 	ld c,a
-	ld a,$01
+	ld a,PLAYER_DIR_RIGHT
 	jr .doneCheckingDirection
 .playerFacingLeft
 ; facing left
 	ld a,c
 	sub d
 	ld c,a
-	ld a,$02
+	ld a,PLAYER_DIR_LEFT
 .doneCheckingDirection
-	ld [wd52a],a
+	ld [wPlayerDirection],a
 	ld a,[W_NUMSPRITES] ; number of sprites
 	and a
 	ret z
@@ -1238,7 +1232,7 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	ld a,[wSimulatedJoypadStatesIndex]
 	and a
 	jr nz,.noCollision ; no collisions when the player's movements are being controlled by the game
-	ld a,[wd52a] ; the direction that the player is trying to go in
+	ld a,[wPlayerDirection] ; the direction that the player is trying to go in
 	ld d,a
 	ld a,[wSpriteStateData1 + 12] ; the player sprite's collision data (bit field) (set in the sprite movement code)
 	and d ; check if a sprite is in the direction the player is trying to go
@@ -1257,9 +1251,9 @@ CollisionCheckOnLand:: ; 0bd1 (0:0bd1)
 	jr nc,.noCollision
 .collision
 	ld a,[wc02a]
-	cp a,(SFX_02_5b - SFX_Headers_02) / 3 ; check if collision sound is already playing
+	cp a,SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
-	ld a,(SFX_02_5b - SFX_Headers_02) / 3
+	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
@@ -1510,7 +1504,7 @@ ScheduleNorthRowRedraw:: ; 0e91 (0:0e91)
 
 CopyToScreenEdgeTiles:: ; 0ea6 (0:0ea6)
 	ld de,wScreenEdgeTiles
-	ld c,2 * 20
+	ld c,2 * SCREEN_WIDTH
 .loop
 	ld a,[hli]
 	ld [de],a
@@ -1704,7 +1698,7 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	ld a,[wd730]
 	bit 7,a
 	jp nz,.noCollision ; return and clear carry if button presses are being simulated
-	ld a,[wd52a] ; the direction that the player is trying to go in
+	ld a,[wPlayerDirection] ; the direction that the player is trying to go in
 	ld d,a
 	ld a,[wSpriteStateData1 + 12] ; the player sprite's collision data (bit field) (set in the sprite movement code)
 	and d ; check if a sprite is in the direction the player is trying to go
@@ -1735,9 +1729,9 @@ CollisionCheckOnWater:: ; 0fb7 (0:0fb7)
 	jr .loop
 .collision
 	ld a,[wc02a]
-	cp a,(SFX_02_5b - SFX_Headers_02) / 3 ; check if collision sound is already playing
+	cp a,SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
-	ld a,(SFX_02_5b - SFX_Headers_02) / 3
+	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
 	scf
@@ -1894,17 +1888,17 @@ LoadMapHeader:: ; 107c (0:107c)
 	call CopyMapConnectionHeader
 .getObjectDataPointer
 	ld a,[hli]
-	ld [wd3a9],a
+	ld [wObjectDataPointerTemp],a
 	ld a,[hli]
-	ld [wd3aa],a
+	ld [wObjectDataPointerTemp + 1],a
 	push hl
-	ld a,[wd3a9]
+	ld a,[wObjectDataPointerTemp]
 	ld l,a
-	ld a,[wd3aa]
+	ld a,[wObjectDataPointerTemp + 1]
 	ld h,a ; hl = base of object data
-	ld de,wd3ad ; background tile ID
+	ld de,wMapBackgroundTile
 	ld a,[hli]
-	ld [de],a ; save background tile ID
+	ld [de],a
 .loadWarpData
 	ld a,[hli]
 	ld [wNumberOfWarps],a
@@ -1924,16 +1918,16 @@ LoadMapHeader:: ; 107c (0:107c)
 	jr nz,.warpLoop
 .loadSignData
 	ld a,[hli] ; number of signs
-	ld [wd4b0],a ; save the number of signs
+	ld [wNumSigns],a
 	and a ; are there any signs?
 	jr z,.loadSpriteData ; if not, skip this
 	ld c,a
-	ld de,wd4d1 ; base address of sign text IDs
+	ld de,wSignTextIDs
 	ld a,d
-	ld [$ff95],a
+	ld [hSignCoordPointer],a
 	ld a,e
-	ld [$ff96],a
-	ld de,wd4b1 ; base address of sign coordinates
+	ld [hSignCoordPointer + 1],a
+	ld de,wSignCoords
 .signLoop
 	ld a,[hli]
 	ld [de],a
@@ -1942,17 +1936,17 @@ LoadMapHeader:: ; 107c (0:107c)
 	ld [de],a
 	inc de
 	push de
-	ld a,[$ff95]
+	ld a,[hSignCoordPointer]
 	ld d,a
-	ld a,[$ff96]
+	ld a,[hSignCoordPointer + 1]
 	ld e,a
 	ld a,[hli]
 	ld [de],a
 	inc de
 	ld a,d
-	ld [$ff95],a
+	ld [hSignCoordPointer],a
 	ld a,e
-	ld [$ff96],a
+	ld [hSignCoordPointer + 1],a
 	pop de
 	dec c
 	jr nz,.signLoop
@@ -2080,10 +2074,10 @@ LoadMapHeader:: ; 107c (0:107c)
 	pop hl ; restore hl from before going to the warp/sign/sprite data (this value was saved for seemingly no purpose)
 	ld a,[W_CURMAPHEIGHT] ; map height in 4x4 tile blocks
 	add a ; double it
-	ld [wd524],a ; store map height in 2x2 tile blocks
+	ld [wCurrentMapHeight2],a ; store map height in 2x2 tile blocks
 	ld a,[W_CURMAPWIDTH] ; map width in 4x4 tile blocks
 	add a ; double it
-	ld [wd525],a ; map width in 2x2 tile blocks
+	ld [wCurrentMapWidth2],a ; map width in 2x2 tile blocks
 	ld a,[W_CURMAP]
 	ld c,a
 	ld b,$00

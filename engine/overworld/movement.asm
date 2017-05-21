@@ -25,24 +25,24 @@ UpdatePlayerSprite: ; 4e31 (1:4e31)
 	ld a, [wWalkCounter]
 	and a
 	jr nz, .moving
-	ld a, [wd528]
+	ld a, [wPlayerMovingDirection]
 ; check if down
-	bit 2, a
+	bit PLAYER_DIR_BIT_DOWN, a
 	jr z, .checkIfUp
 	xor a ; ld a, SPRITE_FACING_DOWN
 	jr .next
 .checkIfUp
-	bit 3, a
+	bit PLAYER_DIR_BIT_UP, a
 	jr z, .checkIfLeft
 	ld a, SPRITE_FACING_UP
 	jr .next
 .checkIfLeft
-	bit 1, a
+	bit PLAYER_DIR_BIT_LEFT, a
 	jr z, .checkIfRight
 	ld a, SPRITE_FACING_LEFT
 	jr .next
 .checkIfRight
-	bit 0, a
+	bit PLAYER_DIR_BIT_RIGHT, a
 	jr z, .notMoving
 	ld a, SPRITE_FACING_RIGHT
 	jr .next
@@ -213,9 +213,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 .moveDown
 	ld de, 2*SCREEN_WIDTH
 	add hl, de         ; move tile pointer two rows down
-	ld de, $100
-
-	ld bc, $400
+	lb de, 1, 0
+	lb bc, 4, SPRITE_FACING_DOWN
 	jr TryWalking
 .notDown
 	cp $80             ; $40 <= a < $80: up (or right)
@@ -226,8 +225,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 .moveUp
 	ld de, -2*SCREEN_WIDTH
 	add hl, de         ; move tile pointer two rows up
-	ld de, $ff00
-	ld bc, $804
+	lb de, -1, 0
+	lb bc, 8, SPRITE_FACING_UP
 	jr TryWalking
 .notUp
 	cp $c0             ; $80 <= a < $c0: left (or up)
@@ -238,8 +237,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 .moveLeft
 	dec hl
 	dec hl             ; move tile pointer two columns left
-	ld de, $ff
-	ld bc, $208
+	lb de, 0, -1
+	lb bc, 2, SPRITE_FACING_LEFT
 	jr TryWalking
 .notLeft              ; $c0 <= a: right (or down)
 	ld a, [wCurSpriteMovement2]
@@ -248,8 +247,8 @@ UpdateNPCSprite: ; 4ed1 (1:4ed1)
 .moveRight
 	inc hl
 	inc hl             ; move tile pointer two columns right
-	ld de, $1
-	ld bc, $10c
+	lb de, 0, 1
+	lb bc, 1, SPRITE_FACING_RIGHT
 	jr TryWalking
 
 ; changes facing direction by zeroing the movement delta and calling TryWalking
@@ -409,23 +408,23 @@ InitializeSpriteFacingDirection: ; 507f (1:507f)
 	bit 5, a
 	jr nz, notYetMoving
 	res 7, [hl]
-	ld a, [wd52a]
-	bit 3, a
+	ld a, [wPlayerDirection]
+	bit PLAYER_DIR_BIT_UP, a
 	jr z, .notFacingDown
-	ld c, $0                ; make sprite face down
+	ld c, SPRITE_FACING_DOWN
 	jr .facingDirectionDetermined
 .notFacingDown
-	bit 2, a
+	bit PLAYER_DIR_BIT_DOWN, a
 	jr z, .notFacingUp
-	ld c, $4                ; make sprite face up
+	ld c, SPRITE_FACING_UP
 	jr .facingDirectionDetermined
 .notFacingUp
-	bit 1, a
+	bit PLAYER_DIR_BIT_LEFT, a
 	jr z, .notFacingRight
-	ld c, $c                ; make sprite face right
+	ld c, SPRITE_FACING_RIGHT
 	jr .facingDirectionDetermined
 .notFacingRight
-	ld c, $8                ; make sprite face left
+	ld c, SPRITE_FACING_LEFT
 .facingDirectionDetermined
 	ld a, [H_CURRENTSPRITEOFFSET]
 	add $9

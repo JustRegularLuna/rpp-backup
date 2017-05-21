@@ -441,15 +441,15 @@ BallAnyway:
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,CHECK_FLAG
-	ld hl,wPokedexOwned	;Dex_own_flags (pokemon)
+	ld b,FLAG_TEST
+	ld hl,wPokedexOwned
 	predef FlagActionPredef
 	ld a,c
 	push af
 	ld a,[wd11e]
 	dec a
 	ld c,a
-	ld b,SET_FLAG
+	ld b,FLAG_SET
 	predef FlagActionPredef
 	pop af
 	and a
@@ -540,9 +540,7 @@ ItemUseTownMap: ; d968 (3:5968)
 	ld a,[W_ISINBATTLE]
 	and a
 	jp nz,ItemUseNotTime
-	ld b, BANK(DisplayTownMap)
-	ld hl, DisplayTownMap
-	jp Bankswitch ; display Town Map
+	jpba DisplayTownMap
 
 ItemUseBicycle: ; d977 (3:5977)
 	ld a,[W_ISINBATTLE]
@@ -634,14 +632,14 @@ ItemUseSurfboard: ; d9b4 (3:59b4)
 	jp LoadWalkingPlayerSpriteGraphics
 ; uses a simulated button press to make the player move forward
 .makePlayerMoveForward
-	ld a,[wd52a] ; direction the player is going
-	bit 3,a
+	ld a,[wPlayerDirection] ; direction the player is going
+	bit PLAYER_DIR_BIT_UP,a
 	ld b,D_UP
 	jr nz,.storeSimulatedButtonPress
-	bit 2,a
+	bit PLAYER_DIR_BIT_DOWN,a
 	ld b,D_DOWN
 	jr nz,.storeSimulatedButtonPress
-	bit 1,a
+	bit PLAYER_DIR_BIT_LEFT,a
 	ld b,D_LEFT
 	jr nz,.storeSimulatedButtonPress
 	ld b,D_RIGHT
@@ -685,7 +683,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld [wcf91],a
 	ld a,$01
 	ld [wForceEvolution],a
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	callab TryEvolvingMon ; try to evolve pokemon
@@ -863,7 +861,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wUsedItemOnWhichPokemon]
 	ld c,a
 	ld hl,wPartyFoughtCurrentEnemyFlags
-	ld b,CHECK_FLAG
+	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
 	and a
@@ -871,7 +869,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wUsedItemOnWhichPokemon]
 	ld c,a
 	ld hl,wPartyGainExpFlags
-	ld b,SET_FLAG
+	ld b,FLAG_SET
 	predef FlagActionPredef
 .next
 	pop bc
@@ -974,7 +972,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld a,[wWhichPokemon]
 	ld bc,2 * 20
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
-	ld a,(SFX_02_3d - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	ld a,[hFlags_0xFFF6]
 	set 0,a
@@ -1132,7 +1130,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	jr c,.playStatusAilmentCuringSound
 	cp a,FULL_HEAL
 	jr z,.playStatusAilmentCuringSound
-	ld a,(SFX_02_3d - SFX_Headers_02) / 3 ; HP healing sound
+	ld a,SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	ld a,[hFlags_0xFFF6]
 	set 0,a
@@ -1154,7 +1152,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wPartyMenuTypeOrMessageID],a
 	jr .showHealingItemMessage
 .playStatusAilmentCuringSound
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3 ; status ailment curing sound
+	ld a,SFX_HEAL_AILMENT
 	call PlaySoundWaitForCurrent
 .showHealingItemMessage
 	xor a
@@ -1245,7 +1243,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld de,wcf4b
 	ld bc,10
 	call CopyData ; copy the stat's name to wcf4b
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	ld hl,VitaminStatRoseText
 	call PrintText
@@ -1283,11 +1281,11 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,-19
 	add hl,bc ; hl now points to experience
 ; update experience to minimum for new level
-	ld a,[$ff96]
+	ld a,[hExperience]
 	ld [hli],a
-	ld a,[$ff97]
+	ld a,[hExperience + 1]
 	ld [hli],a
-	ld a,[$ff98]
+	ld a,[hExperience + 2]
 	ld [hl],a
 	pop hl
 	ld a,[wWhichPokemon]
@@ -1684,8 +1682,8 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jp PrintText
 .inBattle
 	xor a
-	ld [wWhichTrade],a ; initialize variable that indicates if any pokemon were woken up to zero
-	ld b,~SLP & $FF
+	ld [wWereAnyMonsAsleep],a
+	ld b,~SLP & $ff
 	ld hl,wPartyMon1Status
 	call WakeUpEntireParty
 	ld a,[W_ISINBATTLE]
@@ -1704,7 +1702,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	and b ; remove Sleep status
 	ld [hl],a
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
-	ld a,[wWhichTrade]
+	ld a,[wWereAnyMonsAsleep]
 	and a ; were any pokemon asleep before playing the flute?
 	ld hl,PlayedFluteNoEffectText
 	jp z,PrintText ; if no pokemon were asleep
@@ -1728,9 +1726,9 @@ ItemUsePokeflute: ; e140 (3:6140)
 ; INPUT:
 ; hl must point to status of first pokemon in party (player's or enemy's)
 ; b must equal ~SLP
-; [wWhichTrade] should be initialized to 0
+; [wWereAnyMonsAsleep] should be initialized to 0
 ; OUTPUT:
-; [wWhichTrade]: set to 1 if any pokemon were asleep
+; [wWereAnyMonsAsleep]: set to 1 if any pokemon were asleep
 WakeUpEntireParty: ; e1e5 (3:61e5)
 	ld de,44
 	ld c,6
@@ -1740,7 +1738,7 @@ WakeUpEntireParty: ; e1e5 (3:61e5)
 	and a,SLP ; is pokemon asleep?
 	jr z,.notAsleep
 	ld a,1
-	ld [wWhichTrade],a ; indicate that a pokemon had to be woken up
+	ld [wWereAnyMonsAsleep],a ; indicate that a pokemon had to be woken up
 .notAsleep
 	pop af
 	and b ; remove Sleep status
@@ -1779,14 +1777,14 @@ FluteWokeUpText: ; e210 (3:6210)
 PlayedFluteHadEffectText: ; e215 (3:6215)
 	TX_FAR _PlayedFluteHadEffectText
 	db $06
-	db $08
+	TX_ASM
 	ld a,[W_ISINBATTLE]
 	and a
 	jr nz,.done
 ; play out-of-battle pokeflute music
 	ld a,$ff
 	call PlaySound ; turn off music
-	ld a, (SFX_02_5e - SFX_Headers_02) / 3
+	ld a, SFX_POKEFLUE
 	ld c, BANK(SFX_02_5e)
 	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
@@ -1970,7 +1968,7 @@ FishingInit: ; e2b4 (3:62b4)
 	call ItemUseReloadOverworldData
 	ld hl,ItemUseText00
 	call PrintText
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	ld c,80
 	call DelayFrames
@@ -1993,9 +1991,9 @@ ItemUseItemfinder: ; e2e1 (3:62e1)
 	jr nc,.printText ; if no hidden items
 	ld c,4
 .loop
-	ld a,(SFX_02_4a - SFX_Headers_02) / 3
+	ld a,SFX_HEALING_MACHINE
 	call PlaySoundWaitForCurrent
-	ld a,(SFX_02_5a - SFX_Headers_02) / 3
+	ld a,SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	dec c
 	jr nz,.loop
@@ -2020,7 +2018,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld a,[wWhichPokemon]
 	push af
 	ld a,[wcf91]
-	ld [wWhichTrade],a
+	ld [wPPRestoreItem],a
 .chooseMon
 	xor a
 	ld [wUpdateSpritesEnabled],a
@@ -2030,7 +2028,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	jr nc,.chooseMove
 	jp .itemNotUsed
 .chooseMove
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ELIXER
 	jp z,.useElixir ; if Elixir or Max Elixir
 	cp a,MAX_ELIXER
@@ -2038,7 +2036,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld a,$02
 	ld [wMoveMenuType],a
 	ld hl,RaisePPWhichTechniqueText
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ETHER ; is it a PP Up?
 	jr c,.printWhichTechniqueMessage ; if so, print the raise PP message
 	ld hl,RestorePPWhichTechniqueText ; otherwise, print the restore PP message
@@ -2059,7 +2057,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	call GetMoveName
 	call CopyStringToCF4B ; copy name to wcf4b
 	pop hl
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,ETHER
 	jr nc,.useEther ; if Ether or Max Ether
 .usePPUp
@@ -2099,7 +2097,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld bc,4
 	call CopyData ; copy party data to in-battle data
 .skipUpdatingInBattleData
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	ld hl,PPRestoredText
 	call PrintText
@@ -2121,7 +2119,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	add hl,bc ; hl now points to move's PP
 	ld a,[wd11e]
 	ld b,a ; b = max PP
-	ld a,[wWhichTrade]
+	ld a,[wPPRestoreItem]
 	cp a,MAX_ETHER
 	jr z,.fullyRestorePP
 	ld a,[hl] ; move PP
@@ -2153,7 +2151,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	jr .storeNewAmount
 .useElixir
 ; decrement the item ID so that ELIXER becomes ETHER and MAX_ELIXER becomes MAX_ETHER
-	ld hl,wWhichTrade
+	ld hl,wPPRestoreItem
 	dec [hl]
 	dec [hl]
 	xor a
@@ -2294,7 +2292,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	and a ; can the pokemon learn the move?
 	jr nz,.checkIfAlreadyLearnedMove
 ; if the pokemon can't learn the move
-	ld a,(SFX_02_51 - SFX_Headers_02) / 3
+	ld a,SFX_DENIED
 	call PlaySoundWaitForCurrent
 	ld hl,MonCannotLearnMachineMoveText
 	call PrintText
@@ -2334,7 +2332,7 @@ MonCannotLearnMachineMoveText: ; e55e (3:655e)
 PrintItemUseTextAndRemoveItem: ; e563 (3:6563)
 	ld hl,ItemUseText00
 	call PrintText
-	ld a,(SFX_02_3e - SFX_Headers_02) / 3
+	ld a,SFX_HEAL_AILMENT
 	call PlaySound
 	call WaitForTextScrollButtonPress ; wait for button press
 
@@ -2700,8 +2698,8 @@ IsKeyItem_: ; e764 (3:6764)
 	dec a
 	ld c,a
 	ld hl,wHPBarMaxHP
-	ld b,CHECK_FLAG
-	predef FlagActionPredef ; bitfield operation function
+	ld b,FLAG_TEST
+	predef FlagActionPredef
 	ld a,c
 	and a
 	ret nz
@@ -2849,13 +2847,13 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld d, a
 	callab CalcExperience
 	pop de
-	ld a, [H_NUMTOPRINT] ; (aliases: H_MULTIPLICAND)
+	ld a, [hExperience]
 	ld [de], a
 	inc de
-	ld a, [$ff97]
+	ld a, [hExperience + 1]
 	ld [de], a
 	inc de
-	ld a, [$ff98]
+	ld a, [hExperience + 2]
 	ld [de], a
 	inc de
 	xor a

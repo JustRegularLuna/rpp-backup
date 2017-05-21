@@ -1,6 +1,6 @@
 InitBattleVariables: ; 525af (14:65af)
 	ld a, [hTilesetType]
-	ld [wd0d4], a
+	ld [wSavedTilesetType], a
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
 	ld [wBattleResult], a
@@ -21,7 +21,7 @@ InitBattleVariables: ; 525af (14:65af)
 	ld [hli], a ; wPlayerHPBarColor
 	ld [hl], a ; wEnemyHPBarColor
     xor a ; get this back to 0 like it was originally
-	ld hl, wccd3
+	ld hl, wCanEvolveFlags
 	ld b, $3c
 .loop
 	ld [hli], a
@@ -37,6 +37,4 @@ InitBattleVariables: ; 525af (14:65af)
 	ld a, $2 ; safari battle
 	ld [W_BATTLETYPE], a
 .notSafariBattle
-	ld hl, PlayBattleMusic
-	ld b, BANK(PlayBattleMusic)
-	jp Bankswitch
+	jpab PlayBattleMusic

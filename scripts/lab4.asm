@@ -117,6 +117,4 @@ Trader9Name:
 	db "Ross@"
 
 LoadFossilItemAndMonNameBank1D: ; 75de8 (1d:5de8)
-	ld b, BANK(LoadFossilItemAndMonName)
-	ld hl, LoadFossilItemAndMonName
-	jp Bankswitch
+	jpba LoadFossilItemAndMonName

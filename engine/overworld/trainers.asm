@@ -371,5 +371,5 @@ FaceEnemyTrainer::
 .facingRight
 	ld a, 2 ; player face left
 .done
-	ld [wd528], a ; update player facing
+	ld [wPlayerMovingDirection], a ; update player facing
 	ret

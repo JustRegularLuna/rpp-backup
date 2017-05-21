@@ -17,7 +17,7 @@ CanLearnTM: ; 1373e (4:773e)
 	jr .findTMloop
 .TMfoundLoop
 	pop hl
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	predef_jump FlagActionPredef
 
 ; converts TM/HM number in wd11e into move number
@@ -55,7 +55,7 @@ CanLearnTutor:
 	jr .findTutorLoop
 .TutorFoundLoop
 	pop hl
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
 	ld [wTempMoveID], a ; bc is not preserved when called from another bank

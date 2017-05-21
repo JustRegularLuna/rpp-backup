@@ -518,6 +518,10 @@ wNumStepsToTake:: ; cca1
 wRLEByteCount:: ; ccd2
 	ds 1
 
+wAddedToParty:: ; ccd3
+; 0 = not added
+; 1 = added
+
 wSimulatedJoypadStatesEnd:: ; ccd3
 ; this is the end of the joypad states
 ; the list starts above this address and extends downwards in memory until here
@@ -525,7 +529,13 @@ wSimulatedJoypadStatesEnd:: ; ccd3
 
 wParentMenuItem:: ; ccd3
 
-wccd3:: ds 1 ; used in battle, pokemon, PC and game corner stuff
+wCanEvolveFlags:: ; ccd3
+; 1 flag for each party member indicating whether it can evolve
+; The purpose of these flags is to track which mons levelled up during the
+; current battle at the end of the battle when evolution occurs.
+; Other methods of evolution simply set it by calling TryEvolvingMon.
+	ds 1
+
 wForceEvolution::
 wccd4:: ds 1 ; has a direct reference for simulated joypad stuff in vermillion and seafoam
 
@@ -735,9 +745,33 @@ wOverrideSimulatedJoypadStatesMask:: ; cd3b
 ; unused?
 	ds 1
 
+wHoFTeamIndex:: ; cd3d
+
+wSSAnneSmokeDriftAmount:: ; cd3d
+; multiplied by 16 to get the number of times to go right by 2 pixels
+
+wRivalStarterTemp:: ; cd3d
+
+wBoxMonCounts:: ; cd3d
+; 12 bytes
+; array of the number of mons in each box
+
+wDexMaxSeenMon:: ; cd3d
+
+wPPRestoreItem:: ; cd3d
+
+wWereAnyMonsAsleep:: ; cd3d
+
+wCanPlaySlots:: ; cd3d
+
+wNumShakes:: ; cd3d
+
+wDayCareStartLevel:: ; cd3d
+; the level of the mon at the time it entered day care
+
 wWhichBadge:: ; cd3d
 
-wMuseumPriceTemp:: ; cd3d
+wPriceTemp:: ; cd3d
 ; 3-byte BCD number
 
 wTitleMonSpecies:: ; cd3d
@@ -800,7 +834,15 @@ wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
 
 wTrainerSpriteOffset:: ; cd3d
+
+wUnusedCD3D:: ; cd3d
 	ds 1
+
+wSSAnneSmokeX:: ; cd3e
+
+wRivalStarterBallSpriteIndex:: ; cd3e
+
+wDayCareNumLevelsGrown:: ; cd3e
 
 wOptionsBattleAnimCursorX:: ; cd3e
 
@@ -833,6 +875,8 @@ wHiddenObjectFunctionRomBank:: ; cd3e
 
 wTrainerEngageDistance:: ; cd3e
 	ds 1
+
+wJigglypuffFacingDirections:: ; cd3f
 
 wOptionsBattleStyleCursorX:: ; cd3f
 
@@ -874,6 +918,10 @@ wHiddenObjectY:: ; cd40
 
 wTrainerScreenY:: ; cd40
 	ds 1
+
+wHoFTeamIndex2:: ; cd41
+
+wHiddenItemOrCoinsIndex:: ; cd41
 
 wTradedPlayerMonOT:: ; cd41
 
@@ -1064,16 +1112,32 @@ wTileMapBackup2:: ; cd81
 ; second buffer for temporarily saving and restoring current screen's tiles (e.g. if menus are drawn on top)
 	ds 20 * 18
 
+wEvoOldSpecies:: ; cee9
+
 wBuffer:: ; cee9
 ; Temporary storage area of 30 bytes.
 
 wTownMapCoords:: ; cee9
 ; lower nybble is x, upper nybble is y
 
+wLearningMovesFromDayCare:: ; cee9
+; whether WriteMonMoves is being used to make a mon learn moves from day care
+; non-zero if so
+
 wHPBarMaxHP:: ; cee9
-	ds 2
+	ds 1
+
+wEvoNewSpecies:: ; ceea
+	ds 1
+
+wEvoMonTileOffset:: ; ceeb
+
 wHPBarOldHP:: ; ceeb
-	ds 2
+	ds 1
+
+wEvoCancelled:: ; ceec
+	ds 1
+
 wHPBarNewHP:: ; ceed
 	ds 2
 wHPBarDelta:: ; ceef
@@ -1568,7 +1632,10 @@ W_SUBANIMCOUNTER:: ; d087
 ; counts the number of subentries left in the current subanimation
 	ds 1
 
-wd088:: ds 1 ; savefile checksum (if file is corrupted)
+wSaveFileStatus::
+; 1 = no save file or save file is corrupted
+; 2 = save file exists and no corruption has been detected
+	ds 1
 
 W_NUMFBTILES:: ; d089
 ; number of tiles in current battle animation frame block
@@ -1576,6 +1643,8 @@ W_NUMFBTILES:: ; d089
 
 wTradedMonMovingRight:: ; d08a
 ; $01 if mon is moving from left gameboy to right gameboy; $00 if vice versa
+
+wOptionsInitialized:: ; d08a
 
 wd08a:: ds 1 ; used with sprites and displaying the option menu on the main menu screen?
 
@@ -1749,8 +1818,11 @@ W_MONHLEARNSET:: ; d0cc
 W_MONHPICBANK:: ; d0d3
     ds 1
 
-wd0d4:: ds 3 ; temp storage for hTilesetType
+wSavedTilesetType:: ; d0d4
+; saved at the start of a battle and then written back at the end of the battle
+	ds 1
 
+	ds 2
 
 W_DAMAGE:: ; d0d7
 	ds 2
@@ -2126,9 +2198,14 @@ W_SPRITESETID:: ; d3a8
 ; sprite set ID for the current map
 	ds 1
 
-wd3a9:: ds 1 ; used when getting the object data pointer
-wd3aa:: ds 3 ; second part of the pointer
-wd3ad:: ds 1 ; used as the beginning value for copying warp data
+wObjectDataPointerTemp:: ; d3a9
+	ds 2
+
+	ds 2
+
+wMapBackgroundTile:: ; d3ad
+; the tile shown outside the boundaries of the map
+	ds 1
 
 wNumberOfWarps:: ; d3ae
 ; number of warps in current map
@@ -2145,9 +2222,17 @@ wDestinationWarpID:: ; d42f
 ; unused?
 	ds 128
 
-wd4b0:: ds 1 ; number of signs on the map
-wd4b1:: ds 32 ; starting address for sign coords
-wd4d1:: ds 16 ; starting address for sign text IDs
+wNumSigns:: ; d4b0
+; number of signs in the current map (up to 16)
+	ds 1
+
+wSignCoords:: ; d4b1
+; 2 bytes each
+; Y, X
+	ds 32
+
+wSignTextIDs:: ; d4d1
+	ds 16
 
 W_NUMSPRITES:: ; d4e1
 ; number of sprites on the current map
@@ -2172,16 +2257,35 @@ W_MAPSPRITEEXTRADATA:: ; d504
 ; two bytes per sprite (event flag, hidden if set)
 ;	ds 32
 
-wd524:: ds 1 ; map height in 2x2 metatiles, also used with checking connections
-wd525:: ds 1 ; map width in 2x2 metatiles, also used with checking connections
+wCurrentMapHeight2:: ; d524
+; map height in 2x2 meta-tiles
+	ds 1
+
+wCurrentMapWidth2:: ; d525
+; map width in 2x2 meta-tiles
+	ds 1
 
 wMapViewVRAMPointer:: ; d526
 ; the address of the upper left corner of the visible portion of the BG tile map in VRAM
 	ds 2
 
-wd528:: ds 1 ; additional storage for directions
-wd529:: ds 1 ; same case as above, but used differently
-wd52a:: ds 1 ; same case as above
+; In the comments for the player direction variables below, "moving" refers to
+; both walking and changing facing direction without taking a step.
+
+wPlayerMovingDirection:: ; d528
+; if the player is moving, the current direction
+; if the player is not moving, zero
+; map scripts write to this in order to change the player's facing direction
+	ds 1
+
+wPlayerLastStopDirection:: ; d529
+; the direction in which the player was moving before the player last stopped
+	ds 1
+
+wPlayerDirection:: ; d52a
+; if the player is moving, the current direction
+; if the player is not moving, the last the direction in which the player moved
+	ds 1
 
 W_TILESETBANK:: ; d52b
 	ds 1
@@ -2213,6 +2317,8 @@ wBoxItems:: ; d53b
 	ds 1 ; end
 
 wCurrentBoxNum:: ; d5a0
+; bits 0-6: box number
+; bit 7: whether the player has changed boxes before
 	ds 1
 
 ; unused 
@@ -2543,7 +2649,7 @@ wExtraFlags::
 
 wObtainedHiddenItemsFlags::
 	ds 14
-	
+
 wObtainedHiddenCoinsFlags::
 	ds 2
 
@@ -2769,7 +2875,7 @@ wSecondLockTrashCanIndex::
 ; use in scripts by doing:
 ;
 ; ld de, FLAG_TO_CHECK
-; ld b, CHECK_FLAG
+; ld b, FLAG_TEST
 ; predef EventFlagAction
 ; etc
 ; 

@@ -28,7 +28,7 @@ MtMoonPokecenterText4:
 	jp c, .alreadyBoughtMagikarp
 	ld hl, MtMoonPokecenterText_4935c
 	call PrintText
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
@@ -51,15 +51,15 @@ MtMoonPokecenterText4:
 	call GivePokemon
 	jr nc, .done
 	xor a
-	ld [wWhichTrade], a
-	ld [wTrainerFacingDirection], a
+	ld [wPriceTemp], a
+	ld [wPriceTemp + 2], a
 	ld a, $5
-	ld [wTrainerEngageDistance], a
-	ld hl, wTrainerFacingDirection
+	ld [wPriceTemp + 1], a
+	ld hl, wPriceTemp + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, wMtMoonPokecenterFlags

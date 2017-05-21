@@ -41,7 +41,7 @@ ViridianGymScript0: ; 748eb (1d:48eb)
 	call StartSimulatingJoypadStates
 	ld hl, wd736
 	set 7, [hl]
-	ld a, (SFX_02_52 - SFX_Headers_02) / 3
+	ld a, SFX_ARROW_TILES
 	call PlaySound
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -128,9 +128,7 @@ ViridianGymScript4: ; 7496b (1d:496b)
 	ld [wCurMapScript], a
 	ret
 .asm_74980
-	ld b, BANK(LoadSpinnerArrowTiles)
-	ld hl, LoadSpinnerArrowTiles
-	jp Bankswitch
+	jpba LoadSpinnerArrowTiles
 
 ViridianGymScript3: ; 74988 (1d:4988)
 	ld a, [W_ISINBATTLE]

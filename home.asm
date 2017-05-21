@@ -253,9 +253,7 @@ DrawHPBar:: ; 1336 (0:1336)
 ; wLoadedMon = base address of pokemon data
 ; W_MONHDEXNUM = base address of base stats
 LoadMonData:: ; 1372 (0:1372)
-	ld hl, LoadMonData_
-	ld b, BANK(LoadMonData_)
-	jp Bankswitch
+	jpab LoadMonData_
 
 
 OverwritewMoves:: ; 137a (0:137a)
@@ -1139,7 +1137,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	callab CableClubNPC
 	jr AfterDisplayingTextID
 .notSpecialCase
-	call Func_3c59 ; display the text
+	call PrintText_NoCreatingTextBox ; display the text
 	ld a,[wDoNotWaitForButtonPressAfterDisplayingText]
 	and a
 	jr nz,HoldTextDisplayOpen
@@ -1311,9 +1309,7 @@ CountSetBits:: ; 2b7f (0:2b7f)
 ; subtracts the amount the player paid from their money
 ; sets carry flag if there is enough money and unsets carry flag if not
 SubtractAmountPaidFromMoney:: ; 2b96 (0:2b96)
-	ld b,BANK(SubtractAmountPaidFromMoney_)
-	ld hl,SubtractAmountPaidFromMoney_
-	jp Bankswitch
+	jpba SubtractAmountPaidFromMoney_
 
 ; adds the amount the player sold to their money
 AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
@@ -1324,7 +1320,7 @@ AddAmountSoldToMoney:: ; 2b9e (0:2b9e)
 	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; redraw money text box
-	ld a, (SFX_02_5a - SFX_Headers_02) / 3
+	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	jp WaitForSoundToFinish
 
@@ -2075,9 +2071,7 @@ ReloadTilesetTilePatterns:: ; 3090 (0:3090)
 ChooseFlyDestination:: ; 30a9 (0:30a9)
 	ld hl,wd72e
 	res 4,[hl]
-	ld b, BANK(LoadTownMap_Fly)
-	ld hl, LoadTownMap_Fly
-	jp Bankswitch
+	jpba LoadTownMap_Fly
 
 ; causes the text box to close without waiting for a button press after displaying text
 DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
@@ -2095,9 +2089,7 @@ DisableWaitingAfterTextDisplay:: ; 30b6 (0:30b6)
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
 UseItem:: ; 30bc (0:30bc)
-	ld b,BANK(UseItem_)
-	ld hl,UseItem_
-	jp Bankswitch
+	jpba UseItem_
 
 ; confirms the item toss and then tosses the item
 ; INPUT:
@@ -2199,14 +2191,10 @@ RunNPCMovementScript:: ; 310e (0:310e)
 	dw PewterMuseumGuyMovementScriptPointerTable
 	dw PewterGymGuyMovementScriptPointerTable
 .playerStepOutFromDoor
-	ld b, BANK(PlayerStepOutFromDoor)
-	ld hl, PlayerStepOutFromDoor
-	jp Bankswitch
+	jpba PlayerStepOutFromDoor
 
 EndNPCMovementScript:: ; 314e (0:314e)
-	ld b, BANK(_EndNPCMovementScript)
-	ld hl, _EndNPCMovementScript
-	jp Bankswitch
+	jpba _EndNPCMovementScript
 
 EmptyFunc2:: ; 3156 (0:3156)
 	ret
@@ -2307,7 +2295,7 @@ TalkToTrainer:: ; 31cc (0:31cc)
 	call ReadTrainerHeaderInfo     ; read flag's byte ptr
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	call TrainerFlagAction      ; read trainer's flag
 	ld a, c
 	and a
@@ -2404,7 +2392,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	call ReadTrainerHeaderInfo
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	call TrainerFlagAction   ; flag trainer as fought
 	ld a, [wWasTrainerBattle]
 	and a
@@ -2447,9 +2435,7 @@ EndTrainerBattleWhiteout:
 	
 ; calls TrainerWalkUpToPlayer
 TrainerWalkUpToPlayer_Bank0:: ; 32cf (0:32cf)
-	ld b, BANK(TrainerWalkUpToPlayer)
-	ld hl, TrainerWalkUpToPlayer
-	jp Bankswitch
+	jpba TrainerWalkUpToPlayer
 
 ; sets opponent type and mon set/lvl based on the engaging trainer data
 InitBattleEnemyParameters:: ; 32d7 (0:32d7)
@@ -2498,7 +2484,7 @@ CheckForEngagingTrainers:: ; 3306 (0:3306)
 	ret z
 	ld a, $2
 	call ReadTrainerHeaderInfo       ; read trainer flag's byte ptr
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld a, [wTrainerHeaderFlagBit]
 	ld c, a
 	call TrainerFlagAction        ; read trainer flag
@@ -2743,9 +2729,7 @@ IsItemInBag:: ; 3493 (0:3493)
 
 DisplayPokedex:: ; 349b (0:349b)
 	ld [wd11e], a
-	ld b, BANK(_DisplayPokedex)
-	ld hl, _DisplayPokedex
-	jp Bankswitch
+	jpba _DisplayPokedex
 
 SetSpriteFacingDirectionAndDelay:: ; 34a6 (0:34a6)
 	call SetSpriteFacingDirection
@@ -2941,9 +2925,7 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	jp BankswitchBack
 
 GetTrainerName:: ; 359e (0:359e)
-	ld b, BANK(GetTrainerName_)
-	ld hl, GetTrainerName_
-	jp Bankswitch
+	jpba GetTrainerName_
 
 
 HasEnoughMoney::
@@ -3490,7 +3472,7 @@ ManualTextScroll:: ; 3898 (0:3898)
 	cp LINK_STATE_BATTLING
 	jr z, .inLinkBattle
 	call WaitForTextScrollButtonPress
-	ld a, (SFX_02_40 - SFX_Headers_02) / 3
+	ld a, SFX_PRESS_AB
 	jp PlaySound
 .inLinkBattle
 	ld c, 65
@@ -3604,9 +3586,7 @@ CopyDataUntil:: ; 3913 (0:3913)
 ; [wRemoveMonFromBox] == 0 specifies the party.
 ; [wRemoveMonFromBox] != 0 specifies the current box.
 RemovePokemon:: ; 391f (0:391f)
-	ld hl, _RemovePokemon
-	ld b, BANK(_RemovePokemon)
-	jp Bankswitch
+	jpab _RemovePokemon
 
 AddPartyMon:: ; 3927 (0:3927)
 	push hl
@@ -4016,7 +3996,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	bit 5,[hl]
 	pop hl
 	jr nz,.skipPlayingSound
-	ld a,(SFX_02_40 - SFX_Headers_02) / 3
+	ld a,SFX_PRESS_AB
 	call PlaySound
 .skipPlayingSound
 	pop af
@@ -4206,7 +4186,7 @@ PrintText:: ; 3c49 (0:3c49)
 	call UpdateSprites
 	call Delay3
 	pop hl
-Func_3c59:: ; 3c59 (0:3c59)
+PrintText_NoCreatingTextBox:: ; 3c59 (0:3c59)
 	coord bc, 1, 14
 	jp TextCommandProcessor
 
@@ -4590,9 +4570,7 @@ GivePokemon::
 	ld [W_CURENEMYLVL], a
 	xor a ; PLAYER_PARTY_DATA
 	ld [wMonDataLocation], a
-	ld b, BANK(_GivePokemon)
-	ld hl, _GivePokemon
-	jp Bankswitch
+	jpba _GivePokemon
 
 
 Random::
@@ -4613,9 +4591,7 @@ INCLUDE "home/predef.asm"
 
 
 Func_3ead:: ; 3ead (0:3ead)
-	ld b, BANK(CinnabarGymQuiz_1eb0a)
-	ld hl, CinnabarGymQuiz_1eb0a
-	jp Bankswitch
+	jpba CinnabarGymQuiz_1eb0a
 
 CheckForHiddenObjectOrBookshelfOrCardKeyDoor:: ; 3eb5 (0:3eb5)
 	ld a, [H_LOADEDROMBANK]
