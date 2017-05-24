@@ -595,7 +595,7 @@ HandleMenuInput_Mart:: ; 3abe (0:3abe)
 	bit 5,[hl]
 	pop hl
 	jr nz,.skipPlayingSound
-	ld a,(SFX_02_40 - SFX_Headers_02) / 3
+	ld a,SFX_PRESS_AB
 	call PlaySound ; play sound
 .skipPlayingSound
 	pop af

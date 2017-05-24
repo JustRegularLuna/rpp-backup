@@ -129,7 +129,7 @@ DisplayTeachTutorMoveText:
 	and a ; can the pokemon learn the move?
 	jr nz,.checkIfAlreadyLearnedMove
 ; if the pokemon can't learn the move
-	ld a,(SFX_02_51 - SFX_Headers_02) / 3
+	ld a,SFX_DENIED
 	call PlaySoundWaitForCurrent ; play sound
 	ld hl,MonCannotLearnTutorMoveText
 	call PrintText

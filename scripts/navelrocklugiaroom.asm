@@ -17,9 +17,9 @@ NavelRockLugiaRoomTextPointers:
 
 NavelRockLugiaRoomTrainerHeaders:
 NavelRockLugiaRoomTrainerHeader0:
-	db $5 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_LUGIA
 	db ($0 << 4) ; trainer's view range
-	dw wd85f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_LUGIA
 	dw NavelRockLugiaRoomLugiaText ; TextBeforeBattle
 	dw NavelRockLugiaRoomLugiaText ; TextAfterBattle
 	dw NavelRockLugiaRoomLugiaText ; TextEndBattle

@@ -14,13 +14,13 @@ _SecretHouseText_4a350:: ; 858a4 (21:58a4)
 	line "You have won!"
 	prompt
 
-_ReceivedTM15Text:: ; 85943 (21:5943)
+_ReceivedHM03Text:: ; 85943 (21:5943)
 	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
 
-_TM15ExplanationText:: ; 85957 (21:5957)
+_HM03ExplanationText:: ; 85957 (21:5957)
 	text "HM03 is Surf!"
 
 	para "#mon will be"
@@ -37,7 +37,7 @@ _TM15ExplanationText:: ; 85957 (21:5957)
 	cont "fabulous prize!"
 	done
 
-_TM15NoRoomText:: ; 85a02 (21:5a02)
+_HM03NoRoomText:: ; 85a02 (21:5a02)
 	text "You don't have"
 	line "room for this"
 	cont "fabulous prize!"

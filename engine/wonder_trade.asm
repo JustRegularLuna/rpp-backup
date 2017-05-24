@@ -8,8 +8,7 @@ DoWonderTradeDialogue:: ; Called by an event to start the Wonder Trade process
 	call ManualTextScroll
 	
 	; Check if the player has a Pokedex yet
-	ld a, [wd74b]
-	bit 5,a ; does the player have the Pokedex?
+	CheckEvent EVENT_GOT_POKEDEX ; does the player have the Pokedex?
 	jr nz, .hasPokedex ; If you do, jump to the rest of the routine
 	
 	; If the player DOES NOT have a Pokedex, say they can't trade yet

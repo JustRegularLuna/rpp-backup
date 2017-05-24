@@ -97,7 +97,7 @@ rLCDC_DEFAULT EQU %11100011
 
 	predef LoadSGB
 
-	ld a, BANK(SFX_1f_67)
+	ld a, BANK(SFX_Shooting_Star)
 	ld [wc0ef], a
 	ld [wc0f0], a
 	ld a, $9c
@@ -126,7 +126,7 @@ ClearVram:
 
 
 StopAllSounds::
-	ld a, BANK(Music2_UpdateMusic)
+	ld a, BANK(Audio1_UpdateMusic)
 	ld [wc0ef], a
 	ld [wc0f0], a
 	xor a

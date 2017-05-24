@@ -6,25 +6,23 @@ SafariZoneSecretHouseTextPointers: ; 4a31a (12:631a)
 
 SafariZoneSecretHouseText1: ; 4a31c (12:631c)
 	TX_ASM
-	ld a, [wd857]
-	bit 1, a
+	CheckEvent EVENT_GOT_HM03
 	jr nz, .already_received
 	ld hl, SafariZoneSecretHouseText_4a350
 	call PrintText
 	lb bc, HM_03, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, ReceivedTM15Text
+	ld hl, ReceivedHM03Text
 	call PrintText
-	ld hl, wd857
-	set 1, [hl]
+	SetEvent EVENT_GOT_HM03
 	jr .done
 .BagFull
-	ld hl, TM15NoRoomText
+	ld hl, HM03NoRoomText
 	call PrintText
 	jr .done
 .already_received
-	ld hl, TM15ExplanationText
+	ld hl, HM03ExplanationText
 	call PrintText
 .done
 	jp TextScriptEnd
@@ -33,14 +31,14 @@ SafariZoneSecretHouseText_4a350: ; 4a350 (12:6350)
 	TX_FAR _SecretHouseText_4a350
 	db "@"
 
-ReceivedTM15Text: ; 4a355 (12:6355)
-	TX_FAR _ReceivedTM15Text
+ReceivedHM03Text: ; 4a355 (12:6355)
+	TX_FAR _ReceivedHM03Text
 	db $0B, "@"
 
-TM15ExplanationText: ; 4a35b (12:635b)
-	TX_FAR _TM15ExplanationText
+HM03ExplanationText: ; 4a35b (12:635b)
+	TX_FAR _HM03ExplanationText
 	db "@"
 
-TM15NoRoomText: ; 4a360 (12:6360)
-	TX_FAR _TM15NoRoomText
+HM03NoRoomText: ; 4a360 (12:6360)
+	TX_FAR _HM03NoRoomText
 	db "@"
