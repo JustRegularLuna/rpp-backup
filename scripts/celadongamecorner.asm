@@ -28,7 +28,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wCeladonGameCornerFlags]
+	ld a, [wd77e]
 	bit 1, a
 	ret nz
 	ld a, $2a
@@ -227,7 +227,7 @@ CeladonGameCornerText4: ; 48d45 (12:4d45)
 
 CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	TX_ASM
-	ld a, [wCeladonGameCornerFlags]
+	ld a, [wd77e]
 	bit 2, a
 	jr nz, .asm_48d89
 	ld hl, CeladonGameCornerText_48d9c
@@ -246,7 +246,7 @@ CeladonGameCornerText5: ; 48d4a (12:4d4a)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wCeladonGameCornerFlags
+	ld hl, wd77e
 	set 2, [hl]
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -286,7 +286,7 @@ CeladonGameCornerText6: ; 48db1 (12:4db1)
 
 CeladonGameCornerText7: ; 48db6 (12:4db6)
 	TX_ASM
-	ld a, [wCeladonGymFlags]
+	ld a, [wd77c]
 	bit 1, a
 	ld hl, CeladonGameCornerText_48dca
 	jr z, .asm_48dc4
@@ -309,7 +309,7 @@ CeladonGameCornerText8: ; 48dd4 (12:4dd4)
 
 CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	TX_ASM
-	ld a, [wCeladonGameCornerFlags]
+	ld a, [wd77e]
 	bit 4, a
 	jr nz, .asm_48e13
 	ld hl, CeladonGameCornerText_48e26
@@ -328,7 +328,7 @@ CeladonGameCornerText9: ; 48dd9 (12:4dd9)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wCeladonGameCornerFlags
+	ld hl, wd77e
 	set 4, [hl]
 	ld hl, Received20CoinsText
 	jr .asm_48e20
@@ -362,7 +362,7 @@ CeladonGameCornerText_48e36: ; 48e36 (12:4e36)
 
 CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	TX_ASM
-	ld a, [wCeladonGameCornerFlags]
+	ld a, [wd77e]
 	bit 3, a
 	jr nz, .asm_48e75
 	ld hl, CeladonGameCornerText_48e88
@@ -381,7 +381,7 @@ CeladonGameCornerText10: ; 48e3b (12:4e3b)
 	ld hl, hCoins + 1
 	ld c, $2
 	predef AddBCDPredef
-	ld hl, wCeladonGameCornerFlags
+	ld hl, wd77e
 	set 3, [hl]
 	ld hl, CeladonGameCornerText_48e8d
 	jr .asm_48e82
@@ -457,7 +457,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	ld a, SFX_GO_INSIDE
 	call PlaySound
 	call WaitForSoundToFinish
-	ld hl, wCeladonGameCornerFlags
+	ld hl, wd77e
 	set 1, [hl]
 	ld a, $43
 	ld [wd09f], a

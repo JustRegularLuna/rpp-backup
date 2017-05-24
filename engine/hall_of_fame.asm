@@ -225,7 +225,7 @@ HoFLoadMonPlayerPicTileIDs: ; 7036d (1c:436d)
 	predef_jump CopyTileIDsFromList
 
 HoFDisplayPlayerStats: ; 70377 (1c:4377)
-	ld hl, wFlags1
+	ld hl, wd747
 	set 3, [hl]
 	predef DisplayDexRating
 	coord hl, 0, 4

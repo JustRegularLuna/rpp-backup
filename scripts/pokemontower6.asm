@@ -22,7 +22,7 @@ PokemonTower6ScriptPointers: ; 60b0d (18:4b0d)
 	dw PokemonTower6Script4
 
 PokemonTower6Script0: ; 60b17 (18:4b17)
-	ld a, [wPokemonTower6Flags]
+	ld a, [wd768]
 	bit 7, a
 	jp nz, CheckFightingMapTrainers
 	ld hl, CoordsData_60b45
@@ -60,7 +60,7 @@ PokemonTower6Script4: ; 60b48 (18:4b48)
 	ld a, [wBattleResult]
 	and a
 	jr nz, .asm_60b82
-	ld hl, wPokemonTower6Flags
+	ld hl, wd768
 	set 7, [hl]
 	ld a, $7
 	ld [hSpriteIndexOrTextID], a
@@ -109,7 +109,7 @@ PokemonTower6TrainerHeaders: ; 60bbf (18:4bbf)
 PokemonTower6TrainerHeader0: ; 60bbf (18:4bbf)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wPokemonTower6Flags ; flag's byte
+	dw wd768 ; flag's byte
 	dw PokemonTower6BattleText1 ; TextBeforeBattle
 	dw PokemonTower6AfterBattleText1 ; TextAfterBattle
 	dw PokemonTower6EndBattleText1 ; TextEndBattle
@@ -118,7 +118,7 @@ PokemonTower6TrainerHeader0: ; 60bbf (18:4bbf)
 PokemonTower6TrainerHeader1: ; 60bcb (18:4bcb)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wPokemonTower6Flags ; flag's byte
+	dw wd768 ; flag's byte
 	dw PokemonTower6BattleText2 ; TextBeforeBattle
 	dw PokemonTower6AfterBattleText2 ; TextAfterBattle
 	dw PokemonTower6EndBattleText2 ; TextEndBattle
@@ -127,7 +127,7 @@ PokemonTower6TrainerHeader1: ; 60bcb (18:4bcb)
 PokemonTower6TrainerHeader2: ; 60bd7 (18:4bd7)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wPokemonTower6Flags ; flag's byte
+	dw wd768 ; flag's byte
 	dw PokemonTower6BattleText3 ; TextBeforeBattle
 	dw PokemonTower6AfterBattleText3 ; TextAfterBattle
 	dw PokemonTower6EndBattleText3 ; TextEndBattle

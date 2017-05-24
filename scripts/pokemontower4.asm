@@ -24,7 +24,7 @@ PokemonTower4TrainerHeaders: ; 6081b (18:481b)
 PokemonTower4TrainerHeader0: ; 6081b (18:481b)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wPokemonTower4Flags ; flag's byte
+	dw wd766 ; flag's byte
 	dw PokemonTower4BattleText1 ; TextBeforeBattle
 	dw PokemonTower4AfterBattleText1 ; TextAfterBattle
 	dw PokemonTower4EndBattleText1 ; TextEndBattle
@@ -33,7 +33,7 @@ PokemonTower4TrainerHeader0: ; 6081b (18:481b)
 PokemonTower4TrainerHeader1: ; 60827 (18:4827)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wPokemonTower4Flags ; flag's byte
+	dw wd766 ; flag's byte
 	dw PokemonTower4BattleText2 ; TextBeforeBattle
 	dw PokemonTower4AfterBattleText2 ; TextAfterBattle
 	dw PokemonTower4EndBattleText2 ; TextEndBattle
@@ -42,7 +42,7 @@ PokemonTower4TrainerHeader1: ; 60827 (18:4827)
 PokemonTower4TrainerHeader2: ; 60833 (18:4833)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wPokemonTower4Flags ; flag's byte
+	dw wd766 ; flag's byte
 	dw PokemonTower4BattleText3 ; TextBeforeBattle
 	dw PokemonTower4AfterBattleText3 ; TextAfterBattle
 	dw PokemonTower4EndBattleText3 ; TextEndBattle

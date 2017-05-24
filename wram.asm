@@ -2868,509 +2868,106 @@ wSecondLockTrashCanIndex::
 	ds 2
 
 
-; TODO: Replace this with:
-; wEventFlags::
-;	flag_array NUM_EVENT_FLAGS
-;
-; use in scripts by doing:
-;
-; ld de, FLAG_TO_CHECK
-; ld b, FLAG_TEST
-; predef EventFlagAction
-; etc
-; 
-; add constants/event_constants.asm to store these entries
-; add engine/event_flag_actions.asm to store the predefs
-; later, rewrite event hide/show to use these flags as well, like Gen 2
-; probably add the flag at the end of the person data, stored in yet another table like trainer/item ids
-; 
-; rewrite map trainer code to store a flag id where it used to store the address
-;
-wFlags1:: 
-; bit 0 - Followed Oak into Lab
-; bit 3 - Hall of Fame Dex Rating
-; bit 6 - Pallet Town after getting Pokeballs
-	ds 3
+wd747:: ds 3
+wd74a:: ds 1
 
-wBluesHouseFlags:: 
-; bit 0 - Got Town Map
-; bit 1 - Entered Blue's House
-; bit 2 - Daisy walking in kitchen
+wd74b:: ; d74b
+; bit 0: Prof. Oak has lead the player to the north end of his lab
+; bit 1: Prof. Oak has asked the player to choose a pokemon
+; bit 2: the player and the rival have received their pokemon
+; bit 3: the player has battled the rival in Oak's lab
+; bit 4: Prof. Oak has given the player 5 pokeballs
+; bit 5: received pokedex
 	ds 1
 
-wOaksLabFlags:: 
-; bit 0 - Followed Oak Into Lab 2
-; bit 1 - Asked to choose mon
-; bit 2 - Got Starter
-; bit 3 - Battled Rival in Lab
-; bit 4 - Got Pokeballs From Oak
-; bit 5 - Got Pokedex
-; bit 6 - Pallet After Pokeballs 2
-; bit 7 - Oak Appeared in Pallet
-	ds 1
-
-wViridianCityFlags:: 
-; bit 0 - Viridian Gym Open
-; bit 1 - Got TM42
-	ds 1
-
-wOaksParcelFlags:: 
-; bit 0 - Oak Got Parcel
-; bit 1 - Got Oak's Parcel
-	ds 1
-
-wViridianGymFlags:: 
-; bit 0 - Got TM27
-; bit 1 - Beat Giovanni (Gym)
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-	ds 1
-
-wViridianGymFlags2:: 
-; bit 0 - Trainer Flag
-; bit 1 - Trainer Flag
-	ds 1
-
-wPewterMuseumFlags:: 
-; bit 0 - Bought museum ticket
-; bit 1 - Got Old Amber
-	ds 1
-
-wPewterGymFlags:: 
-; bit 2 - Trainer Flag
-; bit 6 - Got TM34
-; bit 7 - Beat Brock
-	ds 1
-
-wCeruleanCityFlags:: 
-; bit 0 - Beat Rival in Cerulean City
-	ds 1
-
-wCeruleanCityFlags2:: 
-; bit 7 - Beat Rocket Grunt in Cerulean City
-	ds 1
-
-wCeruleanGymFlags:: 
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 6 - Got TM11
-; bit 7 - Beat Misty
-	ds 1
-
-wBikeShopFlags:: 
-; bit 0 - Got Bicycle
-	ds 1
-
-wPokemonTower2Flags:: 
-; bit 6 - Pokemon Tower Rival On Left
-; bit 7 - Beat Rival in Pokemon Tower
-	ds 1
-
-wPokemonTower3Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-	ds 1
-
-wPokemonTower4Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-	ds 1
-
-wPokemonTower5Flags:: 
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 7 - In Purified Protected Zone
-	ds 1
-
-wPokemonTower6Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 7 - Ghost Marowak
-	ds 1
-
-wPokemonTower7Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 7 - Rescued Mr Fuji 2
-	ds 1
-
-wLavenderHouse1Flags:: 
-; bit 0 - Got Pokeflute
-	ds 1
-
-wFanClubFlags:: 
-; bit 1 - Got Bike Voucher
-; bit 6 - Brag About Seel
-; bit 7 - Brag About Pikachu
-	ds 1
-
-wVermilionGymFlags:: 
-; bit 0 - 2nd Lock Opened
-; bit 1 - 1st Lock Opened
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 6 - Got TM24
-; bit 7 - Beat Lt. Surge
-	ds 1
-
-wCeladonCityFlags:: 
-; bit 0 - Got TM41
-	ds 1
-
-wCeladonMartFlags:: 
-; bit 4 - Got TM13
-; bit 5 - Got TM48
-; bit 6 - Got TM49
-; bit 7 - Got TM18
-	ds 1
-
-wCeladonGymFlags:: 
-; bit 0 - Got TM21
-; bit 1 - Beat Erika
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-	ds 1
-
-wCeladonGymFlags2:: 
-; bit 0 - Trainer Flag
-	ds 1
-
-wCeladonGameCornerFlags:: 
-; bit 1 - Found Rocket Hideout
-; bit 2 - Got 10 Coins
-; bit 3 - Got 20 Coins
-; bit 4 - Got 20 Coins 2
-	ds 1
-
-wCeladonDinerFlags:: 
-; bit 0 - Got Coin Case
-	ds 1
-
-wFuchsiaHouse2Flags:: 
-; bit 0 - Got HM04
-; bit 1 - Gave Gold Teeth
-	ds 1
-
-wSafariZoneFlags:: 
-; bit 6 - Safari Game Over
-; bit 7 - In Safari Zone
-	ds 1
-
-wFuchsiaGymFlags:: 
-; bit 0 - Got TM06
-; bit 1 - Beat Koga
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-	ds 1
-
-wCinnabarMansionFlags:: 
-; bit 0 - Mansion Switch On
-	ds 1
-
-wCinnabarMansionTrainerFlags:: 
-; bit 1 - Trainer Flag
-	ds 1
-
-wCinnabarGymFlags:: 
-; bit 0 - Got TM38
-; bit 1 - Beat Blaine
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-	ds 1
-
-wCinnabarGymFlags2:: 
-; bit 0 - Trainer Flag
-	ds 1
-
-wCinnabarGymGateFlags:: 
-; bit 0 - (Nonexistant) Gate Flag
-; bit 1 - Gate Flag
-; bit 2 - Gate Flag
-; bit 3 - Gate Flag
-; bit 4 - Gate Flag
-; bit 5 - Gate Flag
-; bit 6 - Gate Flag
-	ds 1
-
-wCinnabarLabItemFlags:: 
-; bit 7 - Got TM35
-	ds 1
-
-wCinnabarLabFossilFlags:: 
-; bit 0 - Gave Fossil To Lab
-; bit 1 - Lab Still Reviving Fossil
-; bit 2 - Lab Handing Over Fossil Now
-	ds 1
-
-wCopyCatFlags:: 
-; bit 0 - Got TM31
-	ds 1
-
-wFightingDojoFlags:: 
-; bit 0 - Defeated Fighting Dojo
-; bit 1 - Beat karate Master
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Got Hitmonlee
-; bit 7 - Got Hitmonchan
-	ds 1
-
-wSaffronGymFlags:: 
-; bit 0 - Got TM46
-; bit 1 - Beat Sabrina
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-	ds 1
-
-wSaffronGymFlags2:: 
-; bit 0 - Trainer Flag
-	ds 1
-
-wSilphCo1Flags:: 
-; bit 7 - Silph Co Receptionist At Desk
-	ds 1
-
-wSaffronHouse2Flags:: 
-; bit 0 - Got TM29
-	ds 1
-
-wRoute1Flags:: 
-; bit 0 - Got Potion Sample
-	ds 1
-
-wRoute2GateFlags:: 
-; bit 0 - Got HM05
-	ds 1
-
-wRoute3Flags:: ; actually 2 bytes this time
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-; bit 0 - Trainer Flag
-; bit 1 - Trainer Flag
-	ds 1
-
-wRoute4Flags:: 
-; bit 2 - Trainer Flag
-	ds 1
-
-wMtMoonPokecenterFlags:: 
-; bit 7 - Bought Magikarp
-	ds 1
-
-wRoute6Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-	ds 1
-
-wRoute8Flags:: ; actually 2 bytes
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-; bit 0 - Trainer Flag
-; bit 1 - Trainer Flag
-	ds 2
-
-wRoute9Flags:: ; actually 2 bytes
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-; bit 0 - Trainer Flag
-; bit 1 - Trainer Flag
-	ds 2
-
-wRoute10Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-	ds 1
-
-wRockTunnel1Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-	ds 1
-
-wPowerPlantFlags:: ; actually 2 bytes
-; bit 1 - Voltorb Flag
-; bit 2 - Voltorb Flag
-; bit 3 - Voltorb Flag
-; bit 4 - Voltorb Flag
-; bit 5 - Voltorb Flag
-; bit 6 - Voltorb Flag
-; bit 7 - Voltorb Flag
-; bit 0 - Voltorb Flag
-; bit 1 - Beat Zapdos
-	ds 2
-
-wRoute11Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-	ds 1
-
-wRoute11Flags2:: 
-; bit 0 - Trainer Flag
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 7 - Got Itemfinder
-	ds 1
-
-wRoute12Flags:: 
-; bit 0 - Got TM39
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-	ds 1
-
-wRoute12Flags2:: 
-; bit 0 - Trainer Flag
-; bit 6 - Fight Route 12 Snorlax
-; bit 7 - Beat Route 12 Snorlax
-	ds 1
-
-wRoute13Flags:: ; actually 2 bytes
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-; bit 0 - Trainer Flag
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-	ds 2
-
-wRoute14Flags:: ; actually 2 bytes
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-; bit 0 - Trainer Flag
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-	ds 2
-
-wRoute15Flags:: ; actually 2 bytes
-; bit 0 - Received EXP Share
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-; bit 7 - Trainer Flag
-; bit 0 - Trainer Flag
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-	ds 2
-
-wRoute16Flags:: 
-; bit 1 - Trainer Flag
-; bit 2 - Trainer Flag
-; bit 3 - Trainer Flag
-; bit 4 - Trainer Flag
-; bit 5 - Trainer Flag
-; bit 6 - Trainer Flag
-	ds 1
-
-wRoute16Flags2:: 
-; bit 0 - Fight Route 16 Snorlax
-; bit 1 - Beat Route 16 Snorlax
-; bit 6 - Got HM02
-; bit 7 - Rescued Mr. Fuji
-	ds 1
-
+wd74c:: ds 1 ; 2
+wd74e:: ds 1 ; 3
+wd751:: ds 1
+wd752:: ds 1 ; 2
+wd754:: ds 1
+wd755:: ds 1 ; 5
+wd75a:: ds 1
+wd75b:: ds 1 ; 3
+wd75e:: ds 1
+wd75f:: ds 1 ; 5
+wd764:: ds 1
+wd765:: ds 1
+wd766:: ds 1
+wd767:: ds 1
+wd768:: ds 1
+wd769:: ds 1 ; 3
+wd76c:: ds 1 ; 5
+wd771:: ds 1 ; 2
+wd773:: ds 1 ; 4
+wd777:: ds 1
+wd778:: ds 1 ; 4
+wd77c:: ds 1
+wd77d:: ds 1
+wd77e:: ds 1 ; 5
+wd783:: ds 1 ; 11
+wd78e:: ds 1 ; 2
+wd790:: ds 1 ; 2
+wd792:: ds 1 ; 4
+wd796:: ds 1 ; 2
+wd798:: ds 1 ; 2
+wd79a:: ds 1
+wd79b:: ds 1
+wd79c:: ds 1 ; 5
+wd7a1:: ds 1 ; 2
+wd7a3:: ds 1 ; 12
+wd7af:: ds 1 ; 2
+wd7b1:: ds 1 ; 2
+wd7b3:: ds 1
+wd7b4:: ds 1 ; 5
+wd7b9:: ds 1 ; 4
+wd7bd:: ds 1 ; 2
+wd7bf:: ds 1 ; 3
+wd7c2:: ds 1
+wd7c3:: ds 1 ; 2
+wd7c5:: ds 1
+wd7c6:: ds 1 ; 3
+wd7c9:: ds 1 ; 4
+wd7cd:: ds 2
+wd7cf:: ds 2
+wd7d1:: ds 1
+wd7d2:: ds 1
+wd7d3:: ds 2
+wd7d5:: ds 1
+wd7d6:: ds 1
+wd7d7:: ds 1
+wd7d8:: ds 1
+wd7d9:: ds 2
+wd7db:: ds 2
+wd7dd:: ds 2
+wd7df:: ds 1
+wd7e0:: ds 1
 wd7e1:: ds 2
-wd7e3:: ds 1
+wd7e3:: ds 1 ; 2
 wd7e5:: ds 2
 wd7e7:: ds 1
 wd7e8:: ds 1
 wd7e9:: ds 2
-wd7eb:: ds 1
+wd7eb:: ds 1 ; 2
 wd7ed:: ds 1
 wd7ee:: ds 1
 wd7ef:: ds 1
 wd7f0:: ds 1
 wd7f1:: ds 1
 wd7f2:: ds 1
-wd7f3:: ds 1
+wd7f3:: ds 1 ; 2
 wd7f5:: ds 1
-wd7f6:: ds 1
-wd7ff:: ds 1
-wd803:: ds 1
-wd805:: ds 1
-wd807:: ds 1
-wd809:: ds 1
-wd813:: ds 1
+wd7f6:: ds 1 ; 9
+wd7ff:: ds 1 ; 4
+wd803:: ds 1 ; 2
+wd805:: ds 1 ; 2
+wd807:: ds 1 ; 2
+wd809:: ds 1 ; 10
+wd813:: ds 1 ; 2
 wd815:: ds 1
 wd816:: ds 1
-wd817:: ds 1
-wd819:: ds 1
-wd81b:: ds 1
+wd817:: ds 1 ; 2
+wd819:: ds 1 ; 2
+wd81b:: ds 1 ; 10
 wd825:: ds 1
 wd826:: ds 1
 wd827:: ds 1
@@ -3390,23 +2987,23 @@ wd834:: ds 1
 wd835:: ds 1
 wd836:: ds 1
 wd837:: ds 1
-wd838:: ds 1
-wd847:: ds 1
-wd849:: ds 1
-wd84b:: ds 1
-wd857:: ds 1
-wd85f:: ds 1
+wd838:: ds 1 ; 15
+wd847:: ds 1 ; 2
+wd849:: ds 1 ; 2
+wd84b:: ds 1 ; 12
+wd857:: ds 1 ; 8
+wd85f:: ds 1 ; 4
 wd863:: ds 1
 wd864:: ds 1
 wd865:: ds 1
 wd866:: ds 1
-wd867:: ds 1
-wd869:: ds 1
+wd867:: ds 1 ; 2
+wd869:: ds 1 ; 20
 wd87d:: ds 2
 wd87f:: ds 1
 wd880:: ds 1
 wd881:: ds 1
-wd882:: ds 1
+wd882:: ds 1 ; 5
 
 wLinkEnemyTrainerName:: ; d887
 ; linked game's trainer name

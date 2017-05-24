@@ -1442,7 +1442,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	set 6,[hl]
 	ld hl,wd72e
 	res 4,[hl]
-	ld hl,wSafariZoneFlags
+	ld hl,wd790
 	res 7,[hl] ; unset Safari Zone bit
 	xor a
 	ld [wNumSafariBalls],a
@@ -1650,7 +1650,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	ld a,[W_CURMAP]
 	cp a,ROUTE_12
 	jr nz,.notRoute12
-	ld a,[wRoute12Flags2]
+	ld a,[wd7d8]
 	bit 7,a ; has the player beaten Route 12 Snorlax yet?
 	jr nz,.noSnorlaxToWakeUp
 ; if the player hasn't beaten Route 12 Snorlax
@@ -1659,13 +1659,13 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jr nc,.noSnorlaxToWakeUp
 	ld hl,PlayedFluteHadEffectText
 	call PrintText
-	ld hl,wRoute12Flags2
+	ld hl,wd7d8
 	set 6,[hl] ; trigger Snorlax fight (handled by map script)
 	ret
 .notRoute12
 	cp a,ROUTE_16
 	jr nz,.noSnorlaxToWakeUp
-	ld a,[wRoute16Flags2]
+	ld a,[wd7e0]
 	bit 1,a ; has the player beaten Route 16 Snorlax yet?
 	jr nz,.noSnorlaxToWakeUp
 ; if the player hasn't beaten Route 16 Snorlax
@@ -1674,7 +1674,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	jr nc,.noSnorlaxToWakeUp
 	ld hl,PlayedFluteHadEffectText
 	call PrintText
-	ld hl,wRoute16Flags2
+	ld hl,wd7e0
 	set 0,[hl] ; trigger Snorlax fight (handled by map script)
 	ret
 .noSnorlaxToWakeUp

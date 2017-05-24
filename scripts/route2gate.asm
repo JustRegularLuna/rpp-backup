@@ -7,7 +7,7 @@ Route2GateTextPointers: ; 5d5d7 (17:55d7)
 
 Route2GateText1: ; 5d5db (17:55db)
 	TX_ASM
-	ld a, [wRoute2GateFlags]
+	ld a, [wd7c2]
 	bit 0, a
 	jr nz, .asm_5d60d
 	ld a, 10 ; pokemon needed
@@ -24,7 +24,7 @@ Route2GateText1: ; 5d5db (17:55db)
 	ld a, [$ffdb]
 	cp $1
 	jr nz, .asm_5d613
-	ld hl, wRoute2GateFlags
+	ld hl, wd7c2
 	set 0, [hl]
 .asm_5d60d
 	ld hl, Route2GateText_5d616

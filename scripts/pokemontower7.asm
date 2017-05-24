@@ -207,7 +207,7 @@ PokemonTower7TrainerHeaders: ; 60e47 (18:4e47)
 PokemonTower7TrainerHeader0: ; 60e47 (18:4e47)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wPokemonTower7Flags ; flag's byte
+	dw wd769 ; flag's byte
 	dw PokemonTower7BattleText1 ; TextBeforeBattle
 	dw PokemonTower7AfterBattleText1 ; TextAfterBattle
 	dw PokemonTower7EndBattleText1 ; TextEndBattle
@@ -216,7 +216,7 @@ PokemonTower7TrainerHeader0: ; 60e47 (18:4e47)
 PokemonTower7TrainerHeader1: ; 60e53 (18:4e53)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wPokemonTower7Flags ; flag's byte
+	dw wd769 ; flag's byte
 	dw PokemonTower7BattleText2 ; TextBeforeBattle
 	dw PokemonTower7AfterBattleText2 ; TextAfterBattle
 	dw PokemonTower7EndBattleText2 ; TextEndBattle
@@ -225,7 +225,7 @@ PokemonTower7TrainerHeader1: ; 60e53 (18:4e53)
 PokemonTower7TrainerHeader2: ; 60e5f (18:4e5f)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wPokemonTower7Flags ; flag's byte
+	dw wd769 ; flag's byte
 	dw PokemonTower7BattleText3 ; TextBeforeBattle
 	dw PokemonTower7AfterBattleText3 ; TextAfterBattle
 	dw PokemonTower7EndBattleText3 ; TextEndBattle
@@ -255,9 +255,9 @@ PokemonTower7FujiText:
 	TX_ASM
 	ld hl, TowerRescueFujiText
 	call PrintText
-	ld hl, wRoute16Flags2
+	ld hl, wd7e0
 	set 7, [hl]
-	ld hl, wPokemonTower7Flags
+	ld hl, wd769
 	set 7, [hl]
 	ld a, HS_LAVENDER_HOUSE_1_MR_FUJI
 	ld [wcc4d], a

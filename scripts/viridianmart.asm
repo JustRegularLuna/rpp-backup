@@ -6,7 +6,7 @@ ViridianMartScript: ; 1d46e (7:546e)
 	jp CallFunctionInTable
 
 ViridianMartScript_1d47d: ; 1d47d (7:547d)
-	ld a, [wOaksParcelFlags]
+	ld a, [wd74e]
 	bit 0, a
 	jr nz, .asm_1d489
 	ld hl, ViridianMartTextPointers
@@ -55,7 +55,7 @@ ViridianMartScript1: ; 1d4c0 (7:54c0)
 	call DisplayTextID
 	lb bc, OAKS_PARCEL, 1
 	call GiveItem
-	ld hl, wOaksParcelFlags
+	ld hl, wd74e
 	set 1, [hl]
 	ld a, $2
 	ld [W_VIRIDIANMARKETCURSCRIPT], a

@@ -22,7 +22,7 @@ Trader0Name:
 
 Route11GateUpstairsText2: ; 4946c (12:546c)
 	TX_ASM
-	ld a, [wRoute11Flags2]
+	ld a, [wd7d6]
 	add a
 	jr c, .asm_4949b
 	ld a, 30 ; pokemon needed
@@ -40,7 +40,7 @@ Route11GateUpstairsText2: ; 4946c (12:546c)
 	ld a, [$ffdb]
 	dec a
 	jr nz, .asm_494a1
-	ld hl, wRoute11Flags2
+	ld hl, wd7d6
 	set 7, [hl]
 .asm_4949b
 	ld hl, Route11GateUpstairsText_494a3
@@ -57,7 +57,7 @@ Route11GateUpstairsText3: ; 494a8 (12:54a8)
 	ld a, [wSpriteStateData1 + 9]
 	cp SPRITE_FACING_UP
 	jp nz, GateUpstairsScript_PrintIfFacingUp
-	ld a, [wRoute12Flags2]
+	ld a, [wd7d8]
 	bit 7, a ; fought snorlax?
 	ld hl, BinocularsSnorlaxText
 	jr z, .print

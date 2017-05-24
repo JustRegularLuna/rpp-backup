@@ -25,7 +25,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	jp z, CeruleanCityScript_1948c
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, wCeruleanCityFlags2
+	ld hl, wd75b
 	set 7, [hl]
 	ld a, $2
 	ld [hSpriteIndexOrTextID], a
@@ -36,7 +36,7 @@ CeruleanCityScript4: ; 194a7 (6:54a7)
 	ret
 
 CeruleanCityScript0: ; 194c8 (6:54c8)
-	ld a, [wCeruleanCityFlags2]
+	ld a, [wd75b]
 	bit 7, a
 	jr nz, .asm_194f7
 	ld hl, CeruleanCityCoords1
@@ -58,7 +58,7 @@ CeruleanCityScript0: ; 194c8 (6:54c8)
 	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 .asm_194f7
-	ld a, [wCeruleanCityFlags]
+	ld a, [wd75a]
 	bit 0, a
 	ret nz
 	ld hl, CeruleanCityCoords2
@@ -174,7 +174,7 @@ CeruleanCityScript2: ; 195b1 (6:55b1)
 	call CeruleanCityScript_1955d
 	ld a, $f0
 	ld [wJoyIgnore], a
-	ld hl, wCeruleanCityFlags
+	ld hl, wd75a
 	set 0, [hl]
 	ld a, $1
 	ld [hSpriteIndexOrTextID], a
@@ -256,7 +256,7 @@ CeruleanCityTextPointers: ; 1962d (6:562d)
 
 CeruleanCityText1: ; 1964f (6:564f)
 	TX_ASM
-	ld a, [wCeruleanCityFlags] ; rival battle flag
+	ld a, [wd75a] ; rival battle flag
 	bit 0, a
 	; do pre-battle text
 	jr z, .PreBattleText
@@ -288,7 +288,7 @@ CeruleanCityText_19677: ; 19677 (6:5677)
 
 CeruleanCityText2: ; 1967c (6:567c)
 	TX_ASM
-	ld a, [wCeruleanCityFlags2]
+	ld a, [wd75b]
 	bit 7, a
 	jr nz, .asm_4ca20
 	ld hl, CeruleanCityText_196d9

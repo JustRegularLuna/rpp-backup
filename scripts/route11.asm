@@ -30,7 +30,7 @@ Route11TrainerHeaders: ; 5947b (16:547b)
 Route11TrainerHeader0: ; 5947b (16:547b)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText1 ; TextBeforeBattle
 	dw Route11AfterBattleText1 ; TextAfterBattle
 	dw Route11EndBattleText1 ; TextEndBattle
@@ -39,7 +39,7 @@ Route11TrainerHeader0: ; 5947b (16:547b)
 Route11TrainerHeader1: ; 59487 (16:5487)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText2 ; TextBeforeBattle
 	dw Route11AfterBattleText2 ; TextAfterBattle
 	dw Route11EndBattleText2 ; TextEndBattle
@@ -48,7 +48,7 @@ Route11TrainerHeader1: ; 59487 (16:5487)
 Route11TrainerHeader2: ; 59493 (16:5493)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText3 ; TextBeforeBattle
 	dw Route11AfterBattleText3 ; TextAfterBattle
 	dw Route11EndBattleText3 ; TextEndBattle
@@ -57,7 +57,7 @@ Route11TrainerHeader2: ; 59493 (16:5493)
 Route11TrainerHeader3: ; 5949f (16:549f)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText4 ; TextBeforeBattle
 	dw Route11AfterBattleText4 ; TextAfterBattle
 	dw Route11EndBattleText4 ; TextEndBattle
@@ -66,7 +66,7 @@ Route11TrainerHeader3: ; 5949f (16:549f)
 Route11TrainerHeader4: ; 594ab (16:54ab)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText5 ; TextBeforeBattle
 	dw Route11AfterBattleText5 ; TextAfterBattle
 	dw Route11EndBattleText5 ; TextEndBattle
@@ -75,7 +75,7 @@ Route11TrainerHeader4: ; 594ab (16:54ab)
 Route11TrainerHeader5: ; 594b7 (16:54b7)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText6 ; TextBeforeBattle
 	dw Route11AfterBattleText6 ; TextAfterBattle
 	dw Route11EndBattleText6 ; TextEndBattle
@@ -84,7 +84,7 @@ Route11TrainerHeader5: ; 594b7 (16:54b7)
 Route11TrainerHeader6: ; 594c3 (16:54c3)
 	db $7 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText7 ; TextBeforeBattle
 	dw Route11AfterBattleText7 ; TextAfterBattle
 	dw Route11EndBattleText7 ; TextEndBattle
@@ -93,7 +93,7 @@ Route11TrainerHeader6: ; 594c3 (16:54c3)
 Route11TrainerHeader7: ; 594cf (16:54cf)
 	db $8 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText8 ; TextBeforeBattle
 	dw Route11AfterBattleText8 ; TextAfterBattle
 	dw Route11EndBattleText8 ; TextEndBattle
@@ -102,7 +102,7 @@ Route11TrainerHeader7: ; 594cf (16:54cf)
 Route11TrainerHeader8: ; 594db (16:54db)
 	db $9 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText9 ; TextBeforeBattle
 	dw Route11AfterBattleText9 ; TextAfterBattle
 	dw Route11EndBattleText9 ; TextEndBattle
@@ -111,7 +111,7 @@ Route11TrainerHeader8: ; 594db (16:54db)
 Route11TrainerHeader9: ; 594e7 (16:54e7)
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute11Flags ; flag's byte
+	dw wd7d5 ; flag's byte
 	dw Route11BattleText10 ; TextBeforeBattle
 	dw Route11AfterBattleText10 ; TextAfterBattle
 	dw Route11EndBattleText10 ; TextEndBattle

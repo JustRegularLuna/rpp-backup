@@ -12,7 +12,7 @@ CopycatsHouse2FTextPointers: ; 5cc74 (17:4c74)
 
 CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	TX_ASM
-	ld a, [wCopyCatFlags]
+	ld a, [wd7af]
 	bit 0, a
 	jr nz, .asm_7ccf3
 	ld a, $1
@@ -32,7 +32,7 @@ CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	ld a, POKE_DOLL
 	ld [$ffdb], a
 	callba RemoveItemByID
-	ld hl, wCopyCatFlags
+	ld hl, wd7af
 	set 0, [hl]
 	jr .asm_62ecd
 .BagFull

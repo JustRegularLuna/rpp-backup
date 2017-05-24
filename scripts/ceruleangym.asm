@@ -46,7 +46,7 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	ld a, $5
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wCeruleanGymFlags
+	ld hl, wd75e
 	set 7, [hl]
 	lb bc, TM_11, 1
 	call GiveItem
@@ -54,7 +54,7 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	ld a, $6
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wCeruleanGymFlags
+	ld hl, wd75e
 	set 6, [hl]
 	jr .asm_5c736
 .BagFull
@@ -66,7 +66,7 @@ CeruleanGymScript_5c70d: ; 5c70d (17:470d)
 	set 1, [hl]
 
 	; deactivate gym trainers
-	ld hl, wCeruleanGymFlags
+	ld hl, wd75e
 	set 2, [hl]
 	set 3, [hl]
 
@@ -85,7 +85,7 @@ CeruleanGymTrainerHeaders: ; 5c758 (17:4758)
 CeruleanGymTrainerHeader0: ; 5c758 (17:4758)
 	db $2 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wCeruleanGymFlags ; flag's byte
+	dw wd75e ; flag's byte
 	dw CeruleanGymBattleText1 ; TextBeforeBattle
 	dw CeruleanGymAfterBattleText1 ; TextAfterBattle
 	dw CeruleanGymEndBattleText1 ; TextEndBattle
@@ -94,7 +94,7 @@ CeruleanGymTrainerHeader0: ; 5c758 (17:4758)
 CeruleanGymTrainerHeader1: ; 5c764 (17:4764)
 	db $3 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wCeruleanGymFlags ; flag's byte
+	dw wd75e ; flag's byte
 	dw CeruleanGymBattleText2 ; TextBeforeBattle
 	dw CeruleanGymAfterBattleText2 ; TextAfterBattle
 	dw CeruleanGymEndBattleText2 ; TextEndBattle
@@ -104,7 +104,7 @@ CeruleanGymTrainerHeader1: ; 5c764 (17:4764)
 
 CeruleanGymText1: ; 5c771 (17:4771)
 	TX_ASM
-	ld a, [wCeruleanGymFlags]
+	ld a, [wd75e]
 	bit 7, a
 	jr z, .asm_5c78d
 	bit 6, a
@@ -201,7 +201,7 @@ CeruleanGymAfterBattleText2: ; 5c80c (17:480c)
 
 CeruleanGymText4: ; 5c811 (17:4811)
 	TX_ASM
-	ld a, [wCeruleanGymFlags]
+	ld a, [wd75e]
 	bit 7, a
 	jr nz, .asm_5c821
 	ld hl, CeruleanGymText_5c82a

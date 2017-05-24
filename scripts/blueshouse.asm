@@ -9,7 +9,7 @@ BluesHouseScriptPointers: ; 19b47 (6:5b47)
 	dw BluesHouseScript1
 
 BluesHouseScript0: ; 19b4b (6:5b4b)
-	ld hl,wBluesHouseFlags
+	ld hl,wd74a
 	set 1,[hl]
 
 	; trigger the next script
@@ -31,10 +31,10 @@ BluesHouseTextPointers: ; 19b57 (6:5b57)
 
 BluesHouseText1: ; 19b5d (6:5b5d)
 	TX_ASM
-	ld a,[wBluesHouseFlags]
+	ld a,[wd74a]
 	bit 0,a
 	jr nz,.GotMap
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 5,a
 	jr nz,.GiveMap
 	ld hl,DaisyInitialText
@@ -51,7 +51,7 @@ BluesHouseText1: ; 19b5d (6:5b5d)
 	predef HideObject ; hide table map object
 	ld hl,GotMapText
 	call PrintText
-	ld hl,wBluesHouseFlags
+	ld hl,wd74a
 	set 0,[hl]
 	jr .done
 .GotMap

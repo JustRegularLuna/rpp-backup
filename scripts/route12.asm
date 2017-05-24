@@ -21,7 +21,7 @@ Route12ScriptPointers: ; 59611 (16:5611)
 	dw Route12Script3
 
 Route12Script0: ; 59619 (16:5619)
-	ld hl, wRoute12Flags2
+	ld hl, wd7d8
 	bit 7, [hl]
 	jp nz, CheckFightingMapTrainers
 	bit 6, [hl]
@@ -56,7 +56,7 @@ Route12Script3: ; 5964c (16:564c)
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_59664
-	ld hl, wRoute12Flags2
+	ld hl, wd7d8
 	set 7, [hl]
 	call Delay3
 	ld a, $0
@@ -84,7 +84,7 @@ Route12TrainerHeaders: ; 59691 (16:5691)
 Route12TrainerHeader0: ; 59691 (16:5691)
 	db $2 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute12Flags ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText1 ; TextBeforeBattle
 	dw Route12AfterBattleText1 ; TextAfterBattle
 	dw Route12EndBattleText1 ; TextEndBattle
@@ -93,7 +93,7 @@ Route12TrainerHeader0: ; 59691 (16:5691)
 Route12TrainerHeader1: ; 5969d (16:569d)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute12Flags ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText2 ; TextBeforeBattle
 	dw Route12AfterBattleText2 ; TextAfterBattle
 	dw Route12EndBattleText2 ; TextEndBattle
@@ -102,7 +102,7 @@ Route12TrainerHeader1: ; 5969d (16:569d)
 Route12TrainerHeader2: ; 596a9 (16:56a9)
 	db $4 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute12Flags ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText3 ; TextBeforeBattle
 	dw Route12AfterBattleText3 ; TextAfterBattle
 	dw Route12EndBattleText3 ; TextEndBattle
@@ -111,7 +111,7 @@ Route12TrainerHeader2: ; 596a9 (16:56a9)
 Route12TrainerHeader3: ; 596b5 (16:56b5)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute12Flags ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText4 ; TextBeforeBattle
 	dw Route12AfterBattleText4 ; TextAfterBattle
 	dw Route12EndBattleText4 ; TextEndBattle
@@ -120,7 +120,7 @@ Route12TrainerHeader3: ; 596b5 (16:56b5)
 Route12TrainerHeader4: ; 596c1 (16:56c1)
 	db $6 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute12Flags ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText5 ; TextBeforeBattle
 	dw Route12AfterBattleText5 ; TextAfterBattle
 	dw Route12EndBattleText5 ; TextEndBattle
@@ -129,7 +129,7 @@ Route12TrainerHeader4: ; 596c1 (16:56c1)
 Route12TrainerHeader5: ; 596cd (16:56cd)
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute12Flags ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText6 ; TextBeforeBattle
 	dw Route12AfterBattleText6 ; TextAfterBattle
 	dw Route12EndBattleText6 ; TextEndBattle
@@ -138,7 +138,7 @@ Route12TrainerHeader5: ; 596cd (16:56cd)
 Route12TrainerHeader6: ; 596d9 (16:56d9)
 	db $8 ; flag's bit
 	db ($1 << 4) ; trainer's view range
-	dw wRoute12Flags ; flag's byte
+	dw wd7d7 ; flag's byte
 	dw Route12BattleText7 ; TextBeforeBattle
 	dw Route12AfterBattleText7 ; TextAfterBattle
 	dw Route12EndBattleText7 ; TextEndBattle

@@ -83,7 +83,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr z, .asm_484b6
 	cp SODA_POP
 	jr z, .asm_48492
-	ld a, [wCeladonMartFlags]
+	ld a, [wd778]
 	bit 6, a
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_48515
@@ -94,11 +94,11 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, ReceivedTM49Text
 	call PrintText
-	ld hl, wCeladonMartFlags
+	ld hl, wd778
 	set 6, [hl]
 	ret
 .asm_48492
-	ld a, [wCeladonMartFlags]
+	ld a, [wd778]
 	bit 5, a
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_48504
@@ -109,11 +109,11 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, CeladonMartRoofText_4850a
 	call PrintText
-	ld hl, wCeladonMartFlags
+	ld hl, wd778
 	set 5, [hl]
 	ret
 .asm_484b6
-	ld a, [wCeladonMartFlags]
+	ld a, [wd778]
 	bit 4, a
 	jr nz, .asm_484e0
 	ld hl, CeladonMartRoofText_484f3
@@ -124,7 +124,7 @@ CeladonMartRoofScript_4840c: ; 4840c (12:440c)
 	jr nc, .BagFull
 	ld hl, CeladonMartRoofText_484f9
 	call PrintText
-	ld hl, wCeladonMartFlags
+	ld hl, wd778
 	set 4, [hl]
 	ret
 .BagFull

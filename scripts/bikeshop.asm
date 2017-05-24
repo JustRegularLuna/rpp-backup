@@ -8,7 +8,7 @@ BikeShopTextPointers: ; 1d73f (7:573f)
 
 BikeShopText1: ; 1d745 (7:5745)
 	TX_ASM
-	ld a, [wBikeShopFlags]
+	ld a, [wd75f]
 	bit 0, a
 	jr z, .asm_260d4
 	ld hl, BikeShopText_1d82f
@@ -26,7 +26,7 @@ BikeShopText1: ; 1d745 (7:5745)
 	ld a, BIKE_VOUCHER
 	ld [$ffdb], a
 	callba RemoveItemByID
-	ld hl, wBikeShopFlags
+	ld hl, wd75f
 	set 0, [hl]
 	ld hl, BikeShopText_1d824
 	call PrintText
@@ -131,7 +131,7 @@ BikeShopText_1d843: ; 1d843 (7:5843)
 
 BikeShopText3: ; 1d848 (7:5848)
 	TX_ASM
-	ld a, [wBikeShopFlags]
+	ld a, [wd75f]
 	bit 0, a
 	ld hl, BikeShopText_1d861
 	jr nz, .asm_34d2d

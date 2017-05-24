@@ -25,7 +25,7 @@ Route6TrainerHeaders: ; 590d7 (16:50d7)
 Route6TrainerHeader0: ; 590d7 (16:50d7)
 	db $1 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw wRoute6Flags ; flag's byte
+	dw wd7c9 ; flag's byte
 	dw Route6BattleText1 ; TextBeforeBattle
 	dw Route6AfterBattleText1 ; TextAfterBattle
 	dw Route6EndBattleText1 ; TextEndBattle
@@ -34,7 +34,7 @@ Route6TrainerHeader0: ; 590d7 (16:50d7)
 Route6TrainerHeader1: ; 590e3 (16:50e3)
 	db $2 ; flag's bit
 	db ($0 << 4) ; trainer's view range
-	dw wRoute6Flags ; flag's byte
+	dw wd7c9 ; flag's byte
 	dw Route6BattleText2 ; TextBeforeBattle
 	dw Route6AfterBattleText1 ; TextAfterBattle
 	dw Route6EndBattleText2 ; TextEndBattle
@@ -43,7 +43,7 @@ Route6TrainerHeader1: ; 590e3 (16:50e3)
 Route6TrainerHeader2: ; 590ef (16:50ef)
 	db $3 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute6Flags ; flag's byte
+	dw wd7c9 ; flag's byte
 	dw Route6BattleText3 ; TextBeforeBattle
 	dw Route6AfterBattleText3 ; TextAfterBattle
 	dw Route6EndBattleText3 ; TextEndBattle
@@ -52,7 +52,7 @@ Route6TrainerHeader2: ; 590ef (16:50ef)
 Route6TrainerHeader3: ; 590fb (16:50fb)
 	db $4 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute6Flags ; flag's byte
+	dw wd7c9 ; flag's byte
 	dw Route6BattleText4 ; TextBeforeBattle
 	dw Route6AfterBattleText4 ; TextAfterBattle
 	dw Route6EndBattleText4 ; TextEndBattle
@@ -61,7 +61,7 @@ Route6TrainerHeader3: ; 590fb (16:50fb)
 Route6TrainerHeader4: ; 59107 (16:5107)
 	db $5 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute6Flags ; flag's byte
+	dw wd7c9 ; flag's byte
 	dw Route6BattleText5 ; TextBeforeBattle
 	dw Route6AfterBattleText5 ; TextAfterBattle
 	dw Route6EndBattleText5 ; TextEndBattle
@@ -70,7 +70,7 @@ Route6TrainerHeader4: ; 59107 (16:5107)
 Route6TrainerHeader5: ; 59113 (16:5113)
 	db $6 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wRoute6Flags ; flag's byte
+	dw wd7c9 ; flag's byte
 	dw Route6BattleText6 ; TextBeforeBattle
 	dw Route6AfterBattleText6 ; TextAfterBattle
 	dw Route6EndBattleText6 ; TextEndBattle

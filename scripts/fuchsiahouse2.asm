@@ -10,13 +10,13 @@ FuchsiaHouse2TextPointers: ; 750b8 (1d:50b8)
 
 FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	TX_ASM
-	ld a, [wFuchsiaHouse2Flags]
+	ld a, [wd78e]
 	bit 0, a
 	jr nz, .subtract
 	ld b,GOLD_TEETH
 	call IsItemInBag
 	jr nz, .asm_3f30f
-	ld a, [wFuchsiaHouse2Flags]
+	ld a, [wd78e]
 	bit 1, a
 	jr nz, .asm_60cba
 	ld hl, WardenGibberishText1
@@ -36,7 +36,7 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	ld a, GOLD_TEETH
 	ld [$ffdb], a
 	callba RemoveItemByID
-	ld hl, wFuchsiaHouse2Flags
+	ld hl, wd78e
 	set 1, [hl]
 .asm_60cba
 	ld hl, WardenThankYouText
@@ -46,7 +46,7 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	jr nc, .BagFull
 	ld hl, ReceivedHM04Text
 	call PrintText
-	ld hl, wFuchsiaHouse2Flags
+	ld hl, wd78e
 	set 0, [hl]
 	jr .asm_52039
 .subtract

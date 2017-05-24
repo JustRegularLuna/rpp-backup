@@ -9,7 +9,7 @@ Route1TextPointers: ; 1cab2 (7:4ab2)
 
 Route1Text1: ; 1cab8 (7:4ab8)
 	TX_ASM
-	ld hl, wRoute1Flags
+	ld hl, wd7bf
 	bit 0, [hl]
 	set 0, [hl]
 	jr nz, .asm_1cada

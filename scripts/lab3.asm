@@ -10,7 +10,7 @@ Lab3TextPointers: ; 75c8a (1d:5c8a)
 
 Lab3Text1: ; 75c94 (1d:5c94)
 	TX_ASM
-	ld a, [wCinnabarLabItemFlags]
+	ld a, [wd7a1]
 	bit 7, a
 	jr nz, .asm_e551a
 	ld hl, TM35PreReceiveText
@@ -20,7 +20,7 @@ Lab3Text1: ; 75c94 (1d:5c94)
 	jr nc, .BagFull
 	ld hl, ReceivedTM35Text
 	call PrintText
-	ld hl, wCinnabarLabItemFlags
+	ld hl, wd7a1
 	set 7, [hl]
 	jr .asm_eb896
 .BagFull

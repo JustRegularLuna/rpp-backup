@@ -1,8 +1,8 @@
 PalletTownScript: ; 18e5b (6:4e5b)
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 4,a
 	jr z,.next
-	ld hl,wFlags1
+	ld hl,wd747
 	set 6,[hl]
 .next
 	call EnableAutoTextBoxDrawing
@@ -20,7 +20,7 @@ PalletTownScriptPointers: ; 18e73 (6:4e73)
 	dw PalletTownScript6
 
 PalletTownScript0: ; 18e81 (6:4e81)
-	ld a,[wFlags1]
+	ld a,[wd747]
 	bit 0,a
 	ret nz
 	ld a,[W_YCOORD]
@@ -38,7 +38,7 @@ PalletTownScript0: ; 18e81 (6:4e81)
 	call PlayMusic
 	ld a,$FC
 	ld [wJoyIgnore],a
-	ld hl,wOaksLabFlags
+	ld hl,wd74b
 	set 7,[hl]
 
 	; trigger the next script
@@ -134,13 +134,13 @@ PalletTownScript4: ; 18f4b (6:4f4b)
 	ret
 
 PalletTownScript5: ; 18f56 (6:4f56)
-	ld a,[wBluesHouseFlags]
+	ld a,[wd74a]
 	bit 2,a
 	jr nz,.next
 	and 3
 	cp 3
 	jr nz,.next
-	ld hl,wBluesHouseFlags
+	ld hl,wd74a
 	set 2,[hl]
 	ld a,HS_DAISY_SITTING
 	ld [wcc4d],a
@@ -149,10 +149,10 @@ PalletTownScript5: ; 18f56 (6:4f56)
 	ld [wcc4d],a
 	predef_jump ShowObject
 .next
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 4,a
 	ret z
-	ld hl,wOaksLabFlags
+	ld hl,wd74b
 	set 6,[hl]
 PalletTownScript6: ; 18f87 (6:4f87)
 	ret

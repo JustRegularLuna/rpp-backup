@@ -31,7 +31,7 @@ Route13TrainerHeaders: ; 55851 (15:5851)
 Route13TrainerHeader0: ; 55851 (15:5851)
 	db $1 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText2 ; TextBeforeBattle
 	dw Route13AfterBattleText2 ; TextAfterBattle
 	dw Route13EndBattleText2 ; TextEndBattle
@@ -40,7 +40,7 @@ Route13TrainerHeader0: ; 55851 (15:5851)
 Route13TrainerHeader2: ; 5585d (15:585d)
 	db $2 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText3 ; TextBeforeBattle
 	dw Route13AfterBattleText3 ; TextAfterBattle
 	dw Route13EndBattleText3 ; TextEndBattle
@@ -49,7 +49,7 @@ Route13TrainerHeader2: ; 5585d (15:585d)
 Route13TrainerHeader3: ; 55869 (15:5869)
 	db $3 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText4 ; TextBeforeBattle
 	dw Route13AfterBattleText4 ; TextAfterBattle
 	dw Route13EndBattleText4 ; TextEndBattle
@@ -58,7 +58,7 @@ Route13TrainerHeader3: ; 55869 (15:5869)
 Route13TrainerHeader4: ; 55875 (15:5875)
 	db $4 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText5 ; TextBeforeBattle
 	dw Route13AfterBattleText5 ; TextAfterBattle
 	dw Route13EndBattleText5 ; TextEndBattle
@@ -67,7 +67,7 @@ Route13TrainerHeader4: ; 55875 (15:5875)
 Route13TrainerHeader5: ; 55881 (15:5881)
 	db $5 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText6 ; TextBeforeBattle
 	dw Route13AfterBattleText6 ; TextAfterBattle
 	dw Route13EndBattleText6 ; TextEndBattle
@@ -76,7 +76,7 @@ Route13TrainerHeader5: ; 55881 (15:5881)
 Route13TrainerHeader6: ; 5588d (15:588d)
 	db $6 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText7 ; TextBeforeBattle
 	dw Route13AfterBattleText7 ; TextAfterBattle
 	dw Route13EndBattleText7 ; TextEndBattle
@@ -85,7 +85,7 @@ Route13TrainerHeader6: ; 5588d (15:588d)
 Route13TrainerHeader7: ; 55899 (15:5899)
 	db $7 ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText8 ; TextBeforeBattle
 	dw Route13AfterBattleText8 ; TextAfterBattle
 	dw Route13EndBattleText8 ; TextEndBattle
@@ -94,7 +94,7 @@ Route13TrainerHeader7: ; 55899 (15:5899)
 Route13TrainerHeader8: ; 558a5 (15:58a5)
 	db $8 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText9 ; TextBeforeBattle
 	dw Route13AfterBattleText9 ; TextAfterBattle
 	dw Route13EndBattleText9 ; TextEndBattle
@@ -103,7 +103,7 @@ Route13TrainerHeader8: ; 558a5 (15:58a5)
 Route13TrainerHeader9: ; 558b1 (15:58b1)
 	db $9 ; flag's bit
 	db ($2 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText10 ; TextBeforeBattle
 	dw Route13AfterBattleText10 ; TextAfterBattle
 	dw Route13EndBattleText10 ; TextEndBattle
@@ -112,7 +112,7 @@ Route13TrainerHeader9: ; 558b1 (15:58b1)
 Route13TrainerHeader10: ; 558bd (15:58bd)
 	db $a ; flag's bit
 	db ($4 << 4) ; trainer's view range
-	dw wRoute13Flags ; flag's byte
+	dw wd7d9 ; flag's byte
 	dw Route13BattleText11 ; TextBeforeBattle
 	dw Route13AfterBattleText11 ; TextAfterBattle
 	dw Route13EndBattleText11 ; TextEndBattle

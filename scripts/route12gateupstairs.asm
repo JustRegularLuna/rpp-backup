@@ -8,7 +8,7 @@ Route12GateUpstairsTextPointers: ; 49563 (12:5563)
 
 Route12GateUpstairsText1: ; 49569 (12:5569)
 	TX_ASM
-	ld a, [wRoute12Flags]
+	ld a, [wd7d7]
 	rrca
 	jr c, .asm_0ad3c
 	ld hl, TM39PreReceiveText
@@ -18,7 +18,7 @@ Route12GateUpstairsText1: ; 49569 (12:5569)
 	jr nc, .BagFull
 	ld hl, ReceivedTM39Text
 	call PrintText
-	ld hl, wRoute12Flags
+	ld hl, wd7d7
 	set 0, [hl]
 	jr .asm_4ba56
 .BagFull

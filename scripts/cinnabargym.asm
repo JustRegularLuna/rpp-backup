@@ -15,7 +15,7 @@ CinnabarGymScript_75759: ; 75759 (1d:5759)
 	bit 5, [hl]
 	res 5, [hl]
 	call nz, Func_3ead
-	ld hl, wCinnabarGymFlags2
+	ld hl, wd79b
 	res 7, [hl]
 	ret
 CinnabarGymScript_75772: ; 75772 (1d:5772)
@@ -100,7 +100,7 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld [$ffdb], a
 	ld c, a
 	ld b, FLAG_TEST
-	ld hl, wCinnabarGymFlags
+	ld hl, wd79a
 	call CinnabarGymScript_757f1
 	ld a, c
 	and a
@@ -114,13 +114,13 @@ CinnabarGymScript2: ; 757f6 (1d:57f6)
 	ld [$ffdb], a
 	ld c, a
 	ld b, FLAG_SET
-	ld hl, wCinnabarGymFlags
+	ld hl, wd79a
 	call CinnabarGymScript_757f1
 	ld a, [wTrainerHeaderFlagBit]
 	sub $2
 	ld c, a
 	ld b, FLAG_SET
-	ld hl, wCinnabarGymGateFlags
+	ld hl, wd79c
 	call CinnabarGymScript_757f1
 	call Func_3ead
 	xor a
@@ -141,7 +141,7 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld a, $a
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wCinnabarGymFlags
+	ld hl, wd79a
 	set 1, [hl]
 	lb bc, TM_38, 1
 	call GiveItem
@@ -149,7 +149,7 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	ld a, $b
 	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
-	ld hl, wCinnabarGymFlags
+	ld hl, wd79a
 	set 0, [hl]
 	jr .asm_75880
 .BagFull
@@ -161,10 +161,10 @@ CinnabarGymScript3_75857: ; 75857 (1d:5857)
 	set 6, [hl]
 
 	; deactivate gym trainers
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	or %11111100
-	ld [wCinnabarGymFlags], a
-	ld hl, wCinnabarGymFlags2
+	ld [wd79a], a
+	ld hl, wd79b
 	set 0, [hl]
 
 	ld hl, wd126
@@ -208,7 +208,7 @@ CinnabarGymScript_758b7: ; 758b7 (1d:58b7)
 
 CinnabarGymText1: ; 758df (1d:58df)
 	TX_ASM
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	bit 1, a
 	jr z, .asm_d9332
 	bit 0, a
@@ -261,7 +261,7 @@ TM38NoRoomText: ; 75934 (1d:5934)
 CinnabarGymText2: ; 75939 (1d:5939)
 	TX_ASM
 	call CinnabarGymScript_757a0
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	bit 2, a
 	jr nz, .asm_46bb4
 	ld hl, CinnabarGymText_7595f
@@ -290,7 +290,7 @@ CinnabarGymText_75969: ; 75969 (1d:5969)
 CinnabarGymText3: ; 7596e (1d:596e)
 	TX_ASM
 	call CinnabarGymScript_757a0
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	bit 3, a
 	jr nz, .asm_4b406
 	ld hl, CinnabarGymText_75994
@@ -319,7 +319,7 @@ CinnabarGymText_7599e: ; 7599e (1d:599e)
 CinnabarGymText4: ; 759a3 (1d:59a3)
 	TX_ASM
 	call CinnabarGymScript_757a0
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	bit 4, a
 	jr nz, .asm_c0673
 	ld hl, CinnabarGymText_759c9
@@ -348,7 +348,7 @@ CinnabarGymText_759d3: ; 759d3 (1d:59d3)
 CinnabarGymText5: ; 759d8 (1d:59d8)
 	TX_ASM
 	call CinnabarGymScript_757a0
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	bit 5, a
 	jr nz, .asm_5cfd7
 	ld hl, CinnabarGymText_759fe
@@ -377,7 +377,7 @@ CinnabarGymText_75a08: ; 75a08 (1d:5a08)
 CinnabarGymText6: ; 75a0d (1d:5a0d)
 	TX_ASM
 	call CinnabarGymScript_757a0
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	bit 6, a
 	jr nz, .asm_776b4
 	ld hl, CinnabarGymText_75a33
@@ -406,7 +406,7 @@ CinnabarGymText_75a3d: ; 75a3d (1d:5a3d)
 CinnabarGymText7: ; 75a42 (1d:5a42)
 	TX_ASM
 	call CinnabarGymScript_757a0
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	bit 7, a
 	jr nz, .asm_2f755
 	ld hl, CinnabarGymText_75a68
@@ -435,7 +435,7 @@ CinnabarGymText_75a72: ; 75a72 (1d:5a72)
 CinnabarGymText8: ; 75a77 (1d:5a77)
 	TX_ASM
 	call CinnabarGymScript_757a0
-	ld a, [wCinnabarGymFlags2]
+	ld a, [wd79b]
 	bit 0, a
 	jr nz, .asm_d87be
 	ld hl, CinnabarGymText_75a9d
@@ -463,7 +463,7 @@ CinnabarGymText_75aa7: ; 75aa7 (1d:5aa7)
 
 CinnabarGymText9: ; 75aac (1d:5aac)
 	TX_ASM
-	ld a, [wCinnabarGymFlags]
+	ld a, [wd79a]
 	bit 1, a
 	jr nz, .asm_627d9
 	ld hl, CinnabarGymText_75ac2

@@ -23,10 +23,10 @@ DisplayDexRating: ; 44169 (11:4169)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a ; load text pointer into hl
-	ld a, [wFlags1]
+	ld a, [wd747]
 	bit 3, a
 	res 3, a
-	ld [wFlags1], a
+	ld [wd747], a
 	jr nz, .label3
 	push hl
 	ld hl, PokedexRatingText_441cc

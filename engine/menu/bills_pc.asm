@@ -5,7 +5,7 @@ DisplayPCMainMenu:: ; 213c8 (8:53c8)
 	ld a, [wNumHoFTeams]
 	and a
 	jr nz, .leaguePCAvailable
-	ld a, [wOaksLabFlags]
+	ld a, [wd74b]
 	bit 5, a ; received pokedex?
 	jr z, .noOaksPC
 	ld a, [wNumHoFTeams]
@@ -47,7 +47,7 @@ DisplayPCMainMenu:: ; 213c8 (8:53c8)
 	ld h, b
 	ld de, PlayersPCText
 	call PlaceString
-	ld a, [wOaksLabFlags]
+	ld a, [wd74b]
 	bit 5, a ; received pokedex?
 	jr z, .noOaksPC2
 	coord hl, 2, 6

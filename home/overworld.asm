@@ -315,7 +315,7 @@ OverworldLoopLessDelay::
 	ld hl,wd72c
 	res 0,[hl] ; indicate that the player has stepped thrice since the last battle
 .doneStepCounting
-	ld a,[wSafariZoneFlags]
+	ld a,[wd790]
 	bit 7,a ; in the safari zone?
 	jr z,.notSafariZone
 	callba SafariZoneCheckSteps
@@ -348,7 +348,7 @@ OverworldLoopLessDelay::
 	ld a,[W_CURMAP]
 	cp a,CINNABAR_GYM
 	jr nz,.notCinnabarGym
-	ld hl,wCinnabarGymFlags2
+	ld hl,wd79b
 	set 7,[hl]
 .notCinnabarGym
 	ld hl,wd72e

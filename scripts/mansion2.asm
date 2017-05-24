@@ -13,7 +13,7 @@ Mansion2Script_51fee: ; 51fee (14:5fee)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wCinnabarMansionFlags]
+	ld a, [wd796]
 	bit 0, a
 	jr nz, .asm_52016
 	ld a, $e
@@ -119,7 +119,7 @@ Mansion2Text5: ; 52087 (14:6087)
 	call PrintText
 	ld a, SFX_GO_INSIDE
 	call PlaySound
-	ld hl, wCinnabarMansionFlags
+	ld hl, wd796
 	bit 0, [hl]
 	set 0, [hl]
 	jr z, .asm_520bf

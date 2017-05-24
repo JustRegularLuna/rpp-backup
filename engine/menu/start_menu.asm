@@ -24,7 +24,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	and a
 	jr nz,.loop
 ; if the player pressed tried to go past the top item, wrap around to the bottom
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 	ld a,6 ; there are 7 menu items with the pokedex, so the max index is 6
 	jr nz,.wrapMenuItemId
@@ -37,7 +37,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	bit 7,a
 	jr z,.buttonPressed
 ; if the player pressed tried to go past the bottom item, wrap around to the top
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 	ld a,[wCurrentMenuItem]
 	ld c,7 ; there are 7 menu items with the pokedex
@@ -59,7 +59,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	and a,%00001010 ; was the Start button or B button pressed?
 	jp nz,CloseStartMenu
 	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 	ld a,[wCurrentMenuItem]
 	jr nz,.displayMenuItem

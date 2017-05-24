@@ -74,7 +74,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 .SafariZoneEntranceScript5
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
-	ld hl, wSafariZoneFlags
+	ld hl, wd790
 	bit 6, [hl]
 	res 6, [hl]
 	jr z, .asm_7527f
@@ -191,7 +191,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld a,D_UP
 	ld c,3
 	call SafariZoneEntranceAutoWalk
-	ld hl,wSafariZoneFlags
+	ld hl,wd790
 	set 7,[hl]
 	res 6,[hl]
 	ld a,3
@@ -238,7 +238,7 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld a, D_DOWN
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
-	ld hl, wSafariZoneFlags
+	ld hl, wd790
 	res 6, [hl]
 	res 7, [hl]
 	ld a, $0

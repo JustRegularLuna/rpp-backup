@@ -945,7 +945,7 @@ DisplayTextIDInit:: ; 7096 (1:7096)
 ; if text ID is 0 (i.e. the start menu)
 ; Note that the start menu text border is also drawn in the function directly
 ; below this, so this seems unnecessary.
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 ; start menu with pokedex
 	coord hl, 10, 0
@@ -1014,7 +1014,7 @@ DisplayTextIDInit:: ; 7096 (1:7096)
 
 ; function that displays the start menu
 DrawStartMenu: ; 710b (1:710b)
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 ; menu with pokedex
 	coord hl, 10, 0
@@ -1041,7 +1041,7 @@ DrawStartMenu: ; 710b (1:710b)
 	ld hl,wd730
 	set 6,[hl] ; no pauses between printing each letter
 	coord hl, 12, 2
-	ld a,[wOaksLabFlags]
+	ld a,[wd74b]
 	bit 5,a ; does the player have the pokedex?
 ; case for not having pokdex
 	ld a,$06

@@ -13,7 +13,7 @@ Mansion1Subscript1: ; 442c5 (11:42c5)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld a, [wCinnabarMansionFlags]
+	ld a, [wd796]
 	bit 0, a
 	jr nz, .asm_442ec
 	ld bc, $060c
@@ -71,7 +71,7 @@ Mansion1TrainerHeaders: ; 44334 (11:4334)
 Mansion1TrainerHeader0: ; 44334 (11:4334)
 	db $1 ; flag's bit
 	db ($3 << 4) ; trainer's view range
-	dw wCinnabarMansionTrainerFlags ; flag's byte
+	dw wd798 ; flag's byte
 	dw Mansion1BattleText2 ; TextBeforeBattle
 	dw Mansion1AfterBattleText2 ; TextAfterBattle
 	dw Mansion1EndBattleText2 ; TextEndBattle
@@ -113,7 +113,7 @@ Mansion1Text4: ; 4435a (11:435a)
 	call PrintText
 	ld a, SFX_GO_INSIDE
 	call PlaySound
-	ld hl, wCinnabarMansionFlags
+	ld hl, wd796
 	bit 0, [hl]
 	set 0, [hl]
 	jr z, .asm_44392

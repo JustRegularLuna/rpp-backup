@@ -1,6 +1,6 @@
 CeladonCityScript: ; 19956 (6:5956)
 	call EnableAutoTextBoxDrawing
-	ld hl, wCeladonGameCornerFlags
+	ld hl, wd77e
 	res 0, [hl]
 	res 7, [hl]
 	ld hl, wd816
@@ -45,7 +45,7 @@ CeladonCityText4: ; 19999 (6:5999)
 
 CeladonCityText5: ; 1999e (6:599e)
 	TX_ASM
-	ld a, [wCeladonCityFlags]
+	ld a, [wd777]
 	bit 0, a
 	jr nz, .asm_7053f
 	ld hl, TM41PreText
@@ -59,7 +59,7 @@ CeladonCityText5: ; 1999e (6:599e)
 .Success
 	ld hl, ReceivedTM41Text
 	call PrintText
-	ld hl, wCeladonCityFlags
+	ld hl, wd777
 	set 0, [hl]
 	jr .Done
 .asm_7053f
