@@ -134,7 +134,7 @@ MainSlotMachineLoop: ; 37395 (d:7395)
 	ld hl, OneMoreGoSlotMachineText
 	call PrintText
 	coord hl, 14, 12
-	ld bc, $0d0f
+	lb bc, 13, 15
 	xor a ; YES_NO_MENU
 	ld [wTwoOptionMenuID], a
 	ld a, TWO_OPTION_MENU
@@ -649,7 +649,7 @@ SlotMachine_PrintCreditCoins: ; 37754 (d:7754)
 SlotMachine_PrintPayoutCoins: ; 3775f (d:775f)
 	coord hl, 11, 1
 	ld de, wPayoutCoins
-	ld bc, $8204 ; 2 bytes, 4 digits, leading zeroes
+	lb bc, LEADING_ZEROES | 2, 4 ; 2 bytes, 4 digits
 	jp PrintNumber
 
 SlotMachine_PayCoinsToPlayer: ; 3776b (d:776b)

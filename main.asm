@@ -533,7 +533,7 @@ INCLUDE "engine/cable_club.asm"
 LoadTrainerInfoTextBoxTiles: ; 5ae6 (1:5ae6)
 	ld de, TrainerInfoTextBoxTileGraphics
 	ld hl, vChars2 + $760
-	ld bc, (BANK(TrainerInfoTextBoxTileGraphics) << 8) +$09
+	lb bc, BANK(TrainerInfoTextBoxTileGraphics), $09
 	jp CopyVideoData
 
 INCLUDE "engine/menu/main_menu.asm"
@@ -1379,8 +1379,8 @@ DisplayMoneyBox: ; 74ba (1:74ba)
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	coord hl, 13, 1
-	ld b, $1
-	ld c, $6
+	ld b, 1
+	ld c, 6
 	call ClearScreenArea
 	coord hl, 12, 1
 	ld de, wPlayerMoney
@@ -1913,7 +1913,7 @@ _RemovePokemon: ; 7b68 (1:7b68)
 .asm_7ba6
 	ld d, h
 	ld e, l
-	ld bc, $b
+	ld bc, 11
 	add hl, bc
 	ld bc, wPartyMonNicks
 	ld a, [wRemoveMonFromBox]
@@ -1953,12 +1953,12 @@ _RemovePokemon: ; 7b68 (1:7b68)
 	jr z, .asm_7bfa
 	ld hl, wBoxMonNicks
 .asm_7bfa
-	ld bc, $b
+	ld bc, 11
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld bc, $b
+	ld bc, 11
 	add hl, bc
 	ld bc, wPokedexOwned
 	ld a, [wRemoveMonFromBox]
@@ -2260,12 +2260,12 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	cp UNKNOWN_DUNGEON_2
 	ret nc
 	coord hl, 0, 0
-	ld b, $3
-	ld c, $7
+	ld b, 3
+	ld c, 7
 	call TextBoxBorder
 	coord hl, 1, 1
 	ld de, wSafariSteps
-	ld bc, $203
+	lb bc, 2, 3
 	call PrintNumber
 	coord hl, 4, 1
 	ld de, SafariSteps
@@ -2274,15 +2274,15 @@ PrintSafariZoneSteps: ; c52f (3:452f)
 	ld de, SafariBallText
 	call PlaceString
 	ld a, [wNumSafariBalls]
-	cp $a
+	cp 10
 	jr nc, .asm_c56d
 	coord hl, 5, 3
-	ld a, $7f
+	ld a, " "
 	ld [hl], a
 .asm_c56d
 	coord hl, 6, 3
 	ld de, wNumSafariBalls
-	ld bc, $102
+	lb bc, 1, 2
 	jp PrintNumber
 
 SafariSteps: ; c579 (3:4579)
@@ -3553,7 +3553,7 @@ _AddPartyMon: ; f2e5 (3:72e5)
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wMonDataLocation]
 	and a
@@ -3839,7 +3839,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonOT
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, $000b
+	ld bc, 11
 	call CopyData    ; write new mon's OT name (from an enemy mon)
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
@@ -3850,7 +3850,7 @@ _AddEnemyMonToPlayerParty: ; f49d (3:749d)
 	ld hl, wEnemyMonNicks
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
-	ld bc, $000b
+	ld bc, 11
 	call CopyData    ; write new mon's nickname (from an enemy mon)
 	ld a, [wcf91]
 	ld [wd11e], a
@@ -4001,7 +4001,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f5ec
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wMoveMonType]
 	cp PARTY_TO_DAYCARE
@@ -4037,7 +4037,7 @@ _MoveMon: ; f51e (3:751e)
 	ld a, [wWhichPokemon]
 	call SkipFixedLengthTextEntries
 .asm_f62a
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	pop hl
 	ld a, [wMoveMonType]

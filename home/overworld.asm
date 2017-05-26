@@ -1810,7 +1810,7 @@ LoadBikePlayerSpriteGraphics:: ; 105d (0:105d)
 LoadPlayerSpriteGraphicsCommon:: ; 1063 (0:1063)
 	push de
 	push hl
-	ld bc,(BANK(RedSprite) << 8) + $0c
+	lb bc, BANK(RedSprite), $0c
 	call CopyVideoData
 	pop hl
 	pop de
@@ -1821,7 +1821,7 @@ LoadPlayerSpriteGraphicsCommon:: ; 1063 (0:1063)
 	inc d
 .noCarry
 	set 3,h
-	ld bc,$050c
+	lb bc, BANK(RedSprite), $0c
 	jp CopyVideoData
 
 ; function to load data from the map header

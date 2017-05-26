@@ -50,12 +50,12 @@ DrawHP_: ; 128fb (4:68fb)
 .printFraction
 	add hl, bc
 	ld de, wLoadedMonHP
-	ld bc, $203
+	lb bc, 2, 3
 	call PrintNumber
 	ld a, "/"
 	ld [hli], a
 	ld de, wLoadedMonMaxHP
-	ld bc, $203
+	lb bc, 2, 3
 	call PrintNumber
 	pop hl
 	pop de
@@ -87,34 +87,34 @@ StatusScreen: ; 12953 (4:6953)
 	call LoadHpBarAndStatusTilePatterns
 	ld de, BattleHudTiles1  ; source
 	ld hl, vChars2 + $6d0 ; dest
-	ld bc, (BANK(BattleHudTiles1) << 8) + $03 ; bank bytes/8
+	lb bc, BANK(BattleHudTiles1), $03
 	call CopyVideoDataDouble ; ·│ :L and halfarrow line end
 	ld de, BattleHudTiles2
 	ld hl, vChars2 + $780
-	ld bc, (BANK(BattleHudTiles2) << 8) + $01
+	lb bc, BANK(BattleHudTiles2), $01
 	call CopyVideoDataDouble ; │
 	ld de, BattleHudTiles3
 	ld hl, vChars2 + $760
-	ld bc, (BANK(BattleHudTiles3) << 8) + $02
+	lb bc, BANK(BattleHudTiles3), $02
 	call CopyVideoDataDouble ; ─┘
 	ld de, PTile
 	ld hl, vChars2 + $720
-	ld bc,(BANK(PTile) << 8 | $01)
+	lb bc, BANK(PTile), $01
 	call CopyVideoDataDouble ; P (for PP), inline
 	ld a, [hTilesetType]
 	push af
 	xor a
 	ld [hTilesetType], a
 	coord hl, 19, 4
-	ld bc, $030a
+	lb bc, 3, 10
 	call DrawLineBox ; Draws the box around name, HP and status
-	ld de, $fffa
+	ld de, -6
 	add hl, de
 	ld [hl], $f2 ; . after No ("." is a different one)
 	dec hl
 	ld [hl], "№"
 	coord hl, 19, 9
-	ld bc, $0806
+	lb bc, 8, 6
 	call DrawLineBox ; Draws the box around types, ID No. and OT
 	coord hl, 10, 9
 	ld de, Type1Text
@@ -156,7 +156,7 @@ StatusScreen: ; 12953 (4:6953)
 	predef IndexToPokedex
 	coord hl, 3, 7
 	ld de, wd11e
-	ld bc, $8103 ; Zero-padded, 3
+	lb bc, LEADING_ZEROES | 1, 3
 	call PrintNumber ; Pokémon no.
 	coord hl, 11, 10
 	predef PrintMonType
@@ -174,7 +174,7 @@ StatusScreen: ; 12953 (4:6953)
 	call PlaceString ; OT
 	coord hl, 12, 14
 	ld de, wLoadedMonOTID
-	ld bc, $8205 ; 5
+	lb bc, LEADING_ZEROES | 2, 5
 	call PrintNumber ; ID Number
 	call PrintShinySymbol
 	ld a, [wLoadedMonSpecies]
@@ -240,7 +240,7 @@ OKText: ; 12ac4 (4:6ac4)
 
 ; Draws a line starting from hl high b and wide c
 DrawLineBox: ; 0x12ac7
-	ld de, $0014 ; New line
+	ld de, SCREEN_WIDTH ; New line
 .PrintVerticalLine
 	ld [hl], $78 ; │
 	add hl, de
@@ -321,7 +321,7 @@ PrintStatsBox: ; 12ae4 (4:6ae4)
 	pop bc
 	add hl, bc
 	ld de, wLoadedMonAttack
-	ld bc, $0203 ; three digits
+	lb bc, 2, 3
 	call PrintStat
 	ld de, wLoadedMonDefense
 	call PrintStat
@@ -418,12 +418,12 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld l, e
 	push hl
 	ld de, wStatusScreenCurrentPP
-	ld bc, $0102
+	lb bc, 1, 2
 	call PrintNumber
 	ld a, "/"
 	ld [hli], a
 	ld de, wd11e
-	ld bc, $0102
+	lb bc, 1, 2
 	call PrintNumber
 	pop hl
 	ld de, SCREEN_WIDTH * 2
@@ -456,12 +456,12 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld [wLoadedMonLevel], a
 	ld de, wLoadedMonExp
 	coord hl, 12, 4
-	ld bc, $0307
+	lb bc, 3, 7
 	call PrintNumber ; exp
 	call CalcExpToLevelUp
 	ld de, wLoadedMonExp
 	coord hl, 7, 6
-	ld bc, $0307
+	lb bc, 3, 7
 	call PrintNumber ; exp needed to level up
 	coord hl, 9, 0
 	call StatusScreen_ClearName

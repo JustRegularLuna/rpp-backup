@@ -222,13 +222,13 @@ UpdateHPBar_PrintHPNumber: ; faf5 (3:7af5)
 .next
 	add hl, de
 	push hl
-	ld a, $7f
+	ld a, " "
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	pop hl
 	ld de, wHPBarTempHP
-	ld bc, $203
+	lb bc, 2, 3
 	call PrintNumber
 	call DelayFrame
 	pop hl

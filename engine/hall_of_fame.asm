@@ -8,7 +8,7 @@ AnimateHallOfFame: ; 701a0 (1c:41a0)
 	call DisableLCD
 	ld hl,vBGMap0
 	ld bc, $800
-	ld a, $7f
+	ld a, " "
 	call FillMemory
 	call EnableLCD
 	ld hl, rLCDC
@@ -195,7 +195,7 @@ HoFLoadPlayerPics: ; 7033e (1c:433e)
 .Routine ; resume original routine
 	call UncompressSpriteFromDE
 	ld hl, S_SPRITEBUFFER1
-	ld de, $a000
+	ld de, S_SPRITEBUFFER0
 	ld bc, $310
 	call CopyData
 	ld de, vFrontPic
@@ -243,12 +243,12 @@ HoFDisplayPlayerStats: ; 70377 (1c:4377)
 	call PlaceString
 	coord hl, 5, 7
 	ld de, wPlayTimeHours
-	ld bc, $103
+	lb bc, 1, 3
 	call PrintNumber
 	ld [hl], $6d
 	inc hl
 	ld de, wPlayTimeMinutes
-	ld bc, $8102
+	lb bc, LEADING_ZEROES | 1, 2
 	call PrintNumber
 	coord hl, 1, 9
 	ld de, HoFMoneyText

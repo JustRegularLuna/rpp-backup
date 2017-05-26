@@ -450,8 +450,8 @@ WritePlayerOrBirdSpriteOAM:
 
 WriteTownMapSpriteOAM:
 	push hl
-	ld hl, $fcfc
-	add hl, bc ; subtract 4 from c (X coord) and 3 from b (Y coord)
+	lb hl, -4, -4
+	add hl, bc ; subtract 4 from c (X coord) and 4 from b (Y coord)
 	ld b, h
 	ld c, l
 	pop hl
@@ -459,7 +459,7 @@ WriteTownMapSpriteOAM:
 WriteAsymmetricMonPartySpriteOAM:
 ; Writes 4 OAM blocks for a helix mon party sprite, since it does not have
 ; a vertical line of symmetry.
-	ld de, $202
+	lb de, 2, 2
 .loop
 	push de
 	push bc

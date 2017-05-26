@@ -13,18 +13,19 @@ SilphCo11Script_62110: ; 62110 (18:6110)
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_62134
+	ld hl, SilphCo11GateCoords
 	call SilphCo11Script_62137
 	call SilphCo11Script_62163
 	CheckEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	ret nz
 	ld a, $20
 	ld [wNewTileBlockID], a
-	ld bc, $603
+	lb bc, 6, 3
 	predef_jump ReplaceTileBlock
 
-DataTable_62134: ; 62134 (18:6134)
-	db $06,$03,$FF
+SilphCo11GateCoords: ; 62134 (18:6134)
+	db $06,$03
+	db $FF
 
 SilphCo11Script_62137: ; 62137 (18:6137)
 	push hl

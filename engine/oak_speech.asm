@@ -28,11 +28,11 @@ SetDefaultNames: ; 60ca (1:60ca)
 	call CopyData
 	ld hl, NintenText
 	ld de, wPlayerName
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld hl, SonyText
 	ld de, wRivalName
-	ld bc, $b
+	ld bc, 11
 	jp CopyData
 
 OakSpeech: ; 6115 (1:6115)
@@ -84,7 +84,7 @@ OakSpeech: ; 6115 (1:6115)
 .canDisobey
 	call ClearScreen ; clear the screen before resuming normal intro
 	ld de,ProfOakPic
-	ld bc, (Bank(ProfOakPic) << 8) | $00
+	lb bc, Bank(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,OakSpeechText1
@@ -103,12 +103,12 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
-	ld bc,(Bank(RedPicFront) << 8) | $00
+	lb bc, Bank(RedPicFront), $00
 	ld a, [wPlayerGender] ; check gender
 	and a      ; check gender
 	jr z, .NotLeaf1
 	ld de,LeafPicFront
-	ld bc,(Bank(LeafPicFront) << 8) | $00
+	lb bc, Bank(LeafPicFront), $00
 .NotLeaf1:
 	call IntroDisplayPicCenteredOrUpperRight
 	call MovePicLeft
@@ -118,7 +118,7 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,Rival1Pic
-	ld bc,(Bank(Rival1Pic) << 8) | $00
+	lb bc, Bank(Rival1Pic), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call FadeInIntroPic
 	ld hl,IntroduceRivalText
@@ -128,12 +128,12 @@ OakSpeech: ; 6115 (1:6115)
 	call GBFadeOutToWhite
 	call ClearScreen
 	ld de,RedPicFront
-	ld bc,(Bank(RedPicFront) << 8) | $00
+	lb bc, Bank(RedPicFront), $00
 	ld a, [wPlayerGender] ; check gender
 	and a      ; check gender
 	jr z, .NotLeaf2
 	ld de,LeafPicFront
-	ld bc,(Bank(LeafPicFront) << 8) | $00
+	lb bc, Bank(LeafPicFront), $00
 .NotLeaf2:
 	call IntroDisplayPicCenteredOrUpperRight
 	call GBFadeInFromWhite
@@ -153,22 +153,22 @@ OakSpeech: ; 6115 (1:6115)
 	ld c,4
 	call DelayFrames
 	ld de,RedSprite
-	ld bc,(BANK(RedSprite) << 8) | $0C
+	lb bc, BANK(RedSprite), $0C
 	ld a, [wPlayerGender] ; check gender
 	and a      ; check gender
 	jr z, .NotLeaf3
 	ld de,LeafSprite
-	ld bc,(BANK(LeafSprite) << 8) | $0C
+	lb bc, BANK(LeafSprite), $0C
 .NotLeaf3:
 	ld hl,vSprites
 	call CopyVideoData
 	ld de,ShrinkPic1
-	ld bc,(BANK(ShrinkPic1) << 8) | $00
+	lb bc, BANK(ShrinkPic1), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	ld c,4
 	call DelayFrames
 	ld de,ShrinkPic2
-	ld bc,(BANK(ShrinkPic2) << 8) | $00
+	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
 	call ResetPlayerSpriteData
 	ld a,[H_LOADEDROMBANK]

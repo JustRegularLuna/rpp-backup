@@ -18,7 +18,7 @@ dw MewPicBack
 	m_tutor 0
 	m_tutor 0
 db 3 ; growth rate
-; include learnset directly
+; learnset
 	tmlearn 1,2,3,4,5,6,7,8
 	tmlearn 9,10,11,12,13,14,15,16
 	tmlearn 17,18,19,20,21,22,23,24

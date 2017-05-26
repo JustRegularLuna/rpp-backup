@@ -90,10 +90,10 @@ ItemUsePtrTable: ; d5e1 (3:55e1)
 	dw UnusableItem      ; SILPH_SCOPE
 	dw ItemUsePokeflute  ; POKE_FLUTE
 	dw UnusableItem      ; LIFT_KEY
-	dw UnusableItem      ; EXP_SHARE
-	dw OldRodCode        ; OLD_ROD
-	dw GoodRodCode       ; GOOD_ROD
-	dw SuperRodCode      ; SUPER_ROD
+	dw UnusableItem      ; EXP__ALL
+	dw ItemUseOldRod     ; OLD_ROD
+	dw ItemUseGoodRod    ; GOOD_ROD
+	dw ItemUseSuperRod   ; SUPER_ROD
 	dw ItemUsePPUp       ; PP_UP (real one)
 	dw ItemUsePPRestore  ; ETHER
 	dw ItemUsePPRestore  ; MAX_ETHER
@@ -781,32 +781,32 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld bc,4
 	add hl,bc ; hl now points to status
 	ld a,[wcf91]
-	ld bc, (ANTIDOTE_MSG << 8) | (1 << PSN)
+	lb bc, ANTIDOTE_MSG, 1 << PSN
 	cp a,ANTIDOTE
 	jr z,.checkMonStatus
 	cp a,PECHA_BERRY
 	jr z,.checkMonStatus
-	ld bc, (BURN_HEAL_MSG << 8) | (1 << BRN)
+	lb bc, BURN_HEAL_MSG, 1 << BRN
 	cp a,BURN_HEAL
 	jr z,.checkMonStatus
 	cp a,RAWST_BERRY
 	jr z,.checkMonStatus
-	ld bc, (ICE_HEAL_MSG << 8) | (1 << FRZ)
+	lb bc, ICE_HEAL_MSG, 1 << FRZ
 	cp a,ICE_HEAL
 	jr z,.checkMonStatus
 	cp a,ASPEAR_BERRY
 	jr z,.checkMonStatus
-	ld bc, (AWAKENING_MSG << 8) | SLP
+	lb bc, AWAKENING_MSG, SLP
 	cp a,AWAKENING
 	jr z,.checkMonStatus
 	cp a,CHESTO_BERRY
 	jr z,.checkMonStatus
-	ld bc, (PARALYZ_HEAL_MSG << 8) | (1 << PAR)
+	lb bc, PARALYZ_HEAL_MSG, 1 << PAR
 	cp a,PARLYZ_HEAL
 	jr z,.checkMonStatus
 	cp a,CHERI_BERRY
 	jr z,.checkMonStatus
-	ld bc, (FULL_HEAL_MSG << 8) | $ff ; Full Heal or Lum Berry
+	lb bc, FULL_HEAL_MSG, $ff ; Full Heal or Lum Berry
 .checkMonStatus
 	ld a,[hl] ; pokemon's status
 	and c ; does the pokemon have a status ailment the item can cure?
@@ -1800,7 +1800,7 @@ CoinCaseNumCoinsText: ; e247 (3:6247)
 	TX_FAR _CoinCaseNumCoinsText
 	db "@"
 
-OldRodCode: ; e24c (3:624c)
+ItemUseOldRod: ; e24c (3:624c)
 	call FishingInit
 	jp c, ItemUseNotTime
 .RandomLoop ; choose which slot
@@ -1840,7 +1840,7 @@ OldRodCode: ; e24c (3:624c)
     
 INCLUDE "data/old_rod.asm"
 
-GoodRodCode: ; e259 (3:6259)
+ItemUseGoodRod: ; e259 (3:6259)
 	call FishingInit
 	jp c,ItemUseNotTime
 .RandomLoop
@@ -1868,7 +1868,7 @@ GoodRodCode: ; e259 (3:6259)
 
 INCLUDE "data/good_rod.asm"
 
-SuperRodCode: ; e283 (3:6283)
+ItemUseSuperRod: ; e283 (3:6283)
 	call FishingInit
 	jp c, ItemUseNotTime
 	call ReadSuperRodData
@@ -2236,7 +2236,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	ld hl,TeachMachineMoveText
 	call PrintText
 	coord hl, 14, 7
-	ld bc,$080f
+	lb bc, 8, 15
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
@@ -2627,7 +2627,7 @@ TossItem_: ; e6f1 (3:66f1)
 	ld hl,IsItOKToTossItemText
 	call PrintText
 	coord hl, 14, 7
-	ld bc,$080f
+	lb bc, 8, 15
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
 	call DisplayTextBoxID ; yes/no menu
@@ -2726,14 +2726,14 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	jr nz, .asm_e7b1
 	call GetMonHeader
 	ld hl, wBoxMonOT
-	ld bc, $b
+	ld bc, 11
 	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e7ee
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, $b
+	ld bc, 11
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2744,7 +2744,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e7db
 	push bc
 	push hl
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	pop hl
 	ld d, h
@@ -2757,17 +2757,17 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e7ee
 	ld hl, wPlayerName
 	ld de, wBoxMonOT
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e82a
 	ld hl, wBoxMonNicks
-	ld bc, $b
+	ld bc, 11
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, $b
+	ld bc, 11
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2778,7 +2778,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e817
 	push bc
 	push hl
-	ld bc, $b
+	ld bc, 11
 	call CopyData
 	pop hl
 	ld d, h
