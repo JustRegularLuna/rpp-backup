@@ -50,6 +50,7 @@ battle_struct: MACRO
 \1Moves::      ds NUM_MOVES
 \1DVs::        ds 2
 \1Level::      db
+\1Stats::
 \1MaxHP::      dw
 \1Attack::     dw
 \1Defense::    dw
@@ -1858,6 +1859,11 @@ wObjectToShow:: ; d07a
 
 	ds 1
 
+wDefaultMap:: ; d07c
+; the map you will start at when the debug bit is set
+
+wMenuItemOffset:: ; d07c
+
 W_ANIMATIONID:: ; d07c
 ; ID number of the current battle animation
 	ds 1
@@ -1901,7 +1907,7 @@ W_SUBANIMCOUNTER:: ; d087
 ; counts the number of subentries left in the current subanimation
 	ds 1
 
-wSaveFileStatus::
+wSaveFileStatus:: ; d088
 ; 1 = no save file or save file is corrupted
 ; 2 = save file exists and no corruption has been detected
 	ds 1
@@ -2179,6 +2185,8 @@ wFirstMonsNotOutYet:: ; d11d
 ; message when the game searches for the first non-fainted mon in the party,
 ; which will be the first mon sent out.
 	ds 1
+
+wPokeBallCaptureCalcTemp:: ; d11e
 
 ; lower nybble: number of shakes
 ; upper nybble: number of animations to play
@@ -3136,7 +3144,7 @@ wUnusedD71F:: ; d71f
 ; unused
 	ds 8
 
-wd728::
+wd728:: ; d728
 ; bit 0: using Strength outside of battle
 ; bit 1: set by IsSurfingAllowed when surfing's allowed, but the caller resets it after checking the result
 ; bit 3: received Old Rod
@@ -3189,7 +3197,7 @@ wd72e::
 ; unused? 
 	ds 1
 
-wd730::
+wd730:: ; d730
 ; bit 0: NPC sprite being moved by script
 ; bit 5: ignore joypad input
 ; bit 6: print text with no delay between each letter
