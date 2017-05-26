@@ -36,7 +36,7 @@ Route16Script0: ; 59959 (16:5959)
 	xor a
 	ld [wIsTrainerBattle], a ; wild battle
 	ld a, HS_ROUTE_16_SNORLAX
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call UpdateSprites
 	ld a, $3

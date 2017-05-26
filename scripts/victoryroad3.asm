@@ -16,7 +16,7 @@ VictoryRoad3Script_44996: ; 44996 (11:4996)
 	CheckEventHL EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH1
 	ret z
 	ld a, $1d
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $503
 	predef_jump ReplaceTileBlock
 
@@ -44,10 +44,10 @@ VictoryRoad3Script0: ; 449b7 (11:49b7)
 	CheckAndSetEvent EVENT_VICTORY_ROAD_3_BOULDER_ON_SWITCH2
 	jr nz, .asm_449fe
 	ld a, HS_VICTORY_ROAD_3_BOULDER
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_VICTORY_ROAD_2_BOULDER
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef_jump ShowObject
 
 .coordsData_449f9: ; 449f9 (11:49f9)

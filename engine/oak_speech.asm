@@ -280,7 +280,7 @@ IntroDisplayPicCenteredOrUpperRight: ; 62a4 (1:62a4)
 	coord hl, 6, 4
 .next
 	xor a
-	ld [$FFE1],a
+	ld [hStartTileID],a
 	predef_jump CopyUncompressedPicToTilemap
 
 	

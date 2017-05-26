@@ -4,6 +4,7 @@ hSoftReset EQU $FF8A
 ; presses the reset sequence (A+B+SEL+START).
 ; Soft reset when 0 is reached.
 
+; base tile ID to which offsets are added
 hBaseTileID EQU $FF8B
 
 ; 3-byte BCD number
@@ -22,6 +23,8 @@ hPreviousTileset EQU $FF8B
 hEastWestConnectedMapWidth EQU $FF8B
 
 hSlideAmount EQU $FF8B
+
+hRLEByteValue EQU $FF8B
 
 H_SPRITEWIDTH            EQU $FF8B ; in tiles
 H_SPRITEINTERLACECOUNTER EQU $FF8B
@@ -256,10 +259,24 @@ H_VBLANKOCCURRED EQU $FFD6
 ; this is often set to 00 in order to turn off water and flower BG tile animations
 hTilesetType EQU $FFD7
 
+hMovingBGTilesCounter1 EQU $FFD8
+
 H_CURRENTSPRITEOFFSET EQU $FFDA ; multiple of $10
+
+hFossilCounter EQU $FFDB
+
+hGymGateIndex EQU $FFDB
+
+hGymTrashCanRandNumMask EQU $FFDB
+
+hItemToRemoveID    EQU $FFDB
+hItemToRemoveIndex EQU $FFDC
 
 hVendingMachineItem  EQU $FFDB
 hVendingMachinePrice EQU $FFDC ; 3-byte BCD number
+
+; the first tile ID in a sequence of tile IDs that increase by 1 each step
+hStartTileID EQU $FFE1
 
 hNewPartyLength EQU $FFE4
 

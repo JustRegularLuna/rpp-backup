@@ -51,13 +51,13 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	cp b            ; search for sprite ID in missing objects list
 	ld a, [hli]
 	jr nz, .missableObjectsListLoop
-	ld [wcc4d], a   ; remove missable object
+	ld [wMissableObjectIndex], a   ; remove missable object
 	predef HideObject
 	xor a
 	ld [wJoyIgnore], a
 	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
-	ld [wOpponentAfterWrongAnswer], a
+	ld [wUnusedDA38], a
 	ld [W_POKEMONTOWER7CURSCRIPT], a
 	ld [wCurMapScript], a
 	ret
@@ -66,7 +66,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld a, $ff
 	ld [wJoyIgnore], a
 	ld a, HS_POKEMONTOWER_7_MR_FUJI
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, SPRITE_FACING_UP
 	ld [wSpriteStateData1 + 9], a
@@ -258,13 +258,13 @@ PokemonTower7FujiText:
 	SetEvent EVENT_RESCUED_MR_FUJI
 	SetEvent EVENT_RESCUED_MR_FUJI_2
 	ld a, HS_LAVENDER_HOUSE_1_MR_FUJI
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, HS_SAFFRON_CITY_E
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, HS_SAFFRON_CITY_F
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, $4
 	ld [W_POKEMONTOWER7CURSCRIPT], a

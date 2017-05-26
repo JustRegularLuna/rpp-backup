@@ -1,3 +1,4 @@
+MonBaseStats:
 RhydonBaseStats: ; 39002 (e:5002)
 db DEX_RHYDON ; pokedex id
 db 105 ; base hp
@@ -27,3 +28,4 @@ db 5 ; growth rate
 	tmlearn 44,48
 	tmlearn 51,53,54
 db BANK(RhydonPicFront)
+MonBaseStatsEnd:

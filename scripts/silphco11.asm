@@ -19,7 +19,7 @@ SilphCo11Script_62110: ; 62110 (18:6110)
 	CheckEvent EVENT_SILPH_CO_11_UNLOCKED_DOOR
 	ret nz
 	ld a, $20
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $603
 	predef_jump ReplaceTileBlock
 
@@ -76,7 +76,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	cp $ff
 	jr z, .asm_62181
 	push hl
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	pop hl
 	jr .asm_62170
@@ -87,7 +87,7 @@ SilphCo11Script_6216d: ; 6216d (18:616d)
 	cp $ff
 	ret z
 	push hl
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	pop hl
 	jr .asm_62184

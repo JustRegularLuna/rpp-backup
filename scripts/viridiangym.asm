@@ -161,9 +161,9 @@ ViridianGymScript3_74995: ; 74995 (1d:4995)
 	SetEventRange EVENT_BEAT_VIRIDIAN_GYM_TRAINER_0, EVENT_BEAT_VIRIDIAN_GYM_TRAINER_7
 
 	ld a, HS_ROUTE_22_RIVAL_2
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
-	SetEvents EVENT_2ND_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_FIGHT
+	SetEvents EVENT_2ND_ROUTE22_RIVAL_BATTLE, EVENT_ROUTE22_RIVAL_WANTS_BATTLE
 	jp ViridianGymScript_748d6
 
 ViridianGymTextPointers: ; 749ec (1d:49ec)
@@ -273,7 +273,7 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	call PrintText
 	call GBFadeOutToBlack
 	ld a, HS_VIRIDIAN_GYM_GIOVANNI
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	call UpdateSprites
 	call Delay3

@@ -1,5 +1,9 @@
 MAX_LEVEL EQU 100
-NUM_MOVES EQU 4
+
+NUM_MOVES     EQU 4
+NUM_STATS     EQU 5
+NUM_STAT_MODS EQU 8
+NUM_DVS       EQU 2
 
 PARTY_LENGTH EQU 6
 
@@ -16,8 +20,8 @@ SPECIAL_TRAINER2 EQU $FD ; custom levels, moves, trainer pic, and AI
 CUSTOM_PIC       EQU $FC ; custom pic, all Pokemon same level like normal trainer
 SPECIAL_LEVELS   EQU $FB ; custom levels only
 
-HOF_MON       EQU $10
-HOF_TEAM      EQU PARTY_LENGTH * HOF_MON
+HOF_MON           EQU $10
+HOF_TEAM          EQU PARTY_LENGTH * HOF_MON
 HOF_TEAM_CAPACITY EQU 50
 
 A_BUTTON EQU %00000001
@@ -152,6 +156,12 @@ PLAYER_DIR_UP    EQU (1 << PLAYER_DIR_BIT_UP)
 FLAG_RESET EQU 0
 FLAG_SET   EQU 1
 FLAG_TEST  EQU 2
+
+; special text IDs
+TEXT_MON_FAINTED      EQU $d0
+TEXT_BLACKED_OUT      EQU $d1
+TEXT_REPEL_WORE_OFF   EQU $d2
+TEXT_SAFARI_GAME_OVER EQU $d3
 
 ; serial
 

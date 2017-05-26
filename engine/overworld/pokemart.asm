@@ -496,7 +496,7 @@ ExitListMenu_Mart:: ; 2e3b (0:2e3b)
 
 HandleMenuInput_Mart:: ; 3abe (0:3abe)
 	xor a
-	ld [wd09b],a
+	ld [wPartyMenuAnimMonEnabled],a
 	ld a,[H_DOWNARROWBLINKCNT1]
 	push af
 	ld a,[H_DOWNARROWBLINKCNT2]
@@ -512,7 +512,7 @@ HandleMenuInput_Mart:: ; 3abe (0:3abe)
 	call Delay3
 .loop2
 	push hl
-	ld a,[wd09b]
+	ld a,[wPartyMenuAnimMonEnabled]
 	and a ; is it a pokemon selection menu?
 	jr z,.getJoypadState
 	callba AnimatePartyMon ; shake mini sprite of selected pokemon
@@ -541,7 +541,7 @@ HandleMenuInput_Mart:: ; 3abe (0:3abe)
 	ret
 .keyPressed
 	xor a
-	ld [wcc4b],a
+	ld [wCheckFor180DegreeTurn],a
 	ld a,[hJoy5]
 	ld b,a
 	bit 6,a ; pressed Up key?

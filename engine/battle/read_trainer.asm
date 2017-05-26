@@ -128,7 +128,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	jr .SpecialLevelsOnly
 .FinishUp ; XXX this needs documenting
 	xor a       ; clear D079-D07B
-	ld de,wd079
+	ld de,wAmountMoneyWon
 	ld [de],a
 	inc de
 	ld [de],a
@@ -137,7 +137,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[W_CURENEMYLVL]
 	ld b,a
 .LastLoop
-	ld hl,wd047
+	ld hl,wTrainerBaseMoney + 1
 	ld c,2
 	push bc
 	predef AddBCDPredef

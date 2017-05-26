@@ -176,7 +176,7 @@ SlidePlayerAndEnemySilhouettesOnScreen: ; 3c04c (f:404c)
 	ld a, $1
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld a, $31
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	coord hl, 1, 5
 	predef CopyUncompressedPicToTilemap
 	xor a
@@ -238,7 +238,7 @@ StartBattle: ; 3c11e (f:411e)
 	ld [wPartyFoughtCurrentEnemyFlags], a
 	ld [wActionResultOrTookBattleTurn], a
 	inc a
-	ld [wd11d], a
+	ld [wFirstMonsNotOutYet], a
 	ld hl, wEnemyMon1HP
 	ld bc, wEnemyMon2 - wEnemyMon1 - 1
 	ld d, $3
@@ -370,7 +370,7 @@ EnemyRan: ; 3c202 (f:4202)
 	call PlaySoundWaitForCurrent
 	xor a
 	ld [H_WHOSETURN], a
-	jpab AnimationSlideEnemyMonOut
+	jpab AnimationSlideEnemyMonOff
 
 WildRanText: ; 3c229 (f:4229)
 	TX_FAR _WildRanText
@@ -392,7 +392,7 @@ MainInBattleLoop: ; 3c233 (f:4233)
 	jp z, HandleEnemyMonFainted ; if enemy mon HP is 0, jump
 	call SaveScreenTilesToBuffer1
 	xor a
-	ld [wd11d], a
+	ld [wFirstMonsNotOutYet], a
 	ld a, [W_PLAYERBATTSTATUS2]
 	and (1 << NeedsToRecharge) | (1 << UsingRage) ; check if the player is using Rage or needs to recharge
 	jr nz, .selectEnemyMove
@@ -1490,12 +1490,12 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	call LoadEnemyMonData
 	ld hl,wEnemyMonHP
 	ld a,[hli]
-	ld [wcce3],a
+	ld [wLastSwitchInEnemyMonHP],a
 	ld a,[hl]
-	ld [wcce4],a
+	ld [wLastSwitchInEnemyMonHP + 1],a
 	ld a,1
 	ld [wCurrentMenuItem],a
-	ld a,[wd11d]
+	ld a,[wFirstMonsNotOutYet]
 	dec a
 	jr z,.next4
 	ld a,[wPartyCount]
@@ -1558,8 +1558,8 @@ EnemySendOutFirstMon: ; 3c92a (f:492a)
 	call GetMonHeader
 	ld de,vFrontPic
 	call LoadMonFrontSprite
-	ld a,$CF
-	ld [$FFE1],a
+	ld a,-$31
+	ld [hStartTileID],a
 	coord hl, 15, 6
 	predef AnimateSendingOutMon
 	; is mon shiny, play animation
@@ -1622,7 +1622,7 @@ HasMonFainted: ; 3ca97 (f:4a97)
 	ld a, [hli]
 	or [hl]
 	ret nz
-	ld a, [wd11d]
+	ld a, [wFirstMonsNotOutYet]
 	and a
 	jr nz, .done
 	ld hl, NoWillText
@@ -1720,8 +1720,8 @@ TryRunningFromBattle: ; 3cab9 (f:4ab9)
 	ld hl, NoRunningText
 .printCantEscapeOrNoRunningText
 	call PrintText
-	ld a, $1
-	ld [wd11f], a
+	ld a, 1
+	ld [wForcePlayerToChooseMon], a
 	call SaveScreenTilesToBuffer1
 	and a ; reset carry
 	ret
@@ -1769,19 +1769,19 @@ GotAwayText: ; 3cba1 (f:4ba1)
 ; copies from party data to battle mon data when sending out a new player mon
 LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 	ld a, [wWhichPokemon]
-	ld bc, $2c
+	ld bc, wPartyMon2 - wPartyMon1
 	ld hl, wPartyMon1Species
 	call AddNTimes
 	ld de, wBattleMonSpecies
-	ld bc, $c
+	ld bc, wBattleMonDVs - wBattleMonSpecies
 	call CopyData
-	ld bc, $f
+	ld bc, wPartyMon1DVs - wPartyMon1OTID
 	add hl, bc
 	ld de, wBattleMonDVs
-	ld bc, $2
+	ld bc, NUM_DVS
 	call CopyData
 	ld de, wBattleMonPP
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyData
 	ld de, wBattleMonLevel
 	ld bc, $b
@@ -1797,12 +1797,12 @@ LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 	call CopyData
 	ld hl, wBattleMonLevel
 	ld de, wPlayerMonUnmodifiedLevel ; block of memory used for unmodified stats
-	ld bc, $b
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	call ApplyBurnAndParalysisPenaltiesToPlayer
 	call ApplyBadgeStatBoosts
 	ld a, $7 ; default stat modifier
-	ld b, $8
+	ld b, NUM_STAT_MODS
 	ld hl, wPlayerMonAttackMod
 .statModLoop
 	ld [hli], a
@@ -1813,19 +1813,19 @@ LoadBattleMonFromParty: ; 3cba6 (f:4ba6)
 ; copies from enemy party data to current enemy mon data when sending out a new enemy mon
 LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	ld a, [wWhichPokemon]
-	ld bc, $2c
+	ld bc, wEnemyMon2 - wEnemyMon1
 	ld hl, wEnemyMons
 	call AddNTimes
 	ld de, wEnemyMonSpecies
-	ld bc, $c
+	ld bc, wEnemyMonDVs - wEnemyMonSpecies
 	call CopyData
-	ld bc, $f
+	ld bc, wEnemyMon1DVs - wEnemyMon1OTID
 	add hl, bc
 	ld de, wEnemyMonDVs
-	ld bc, $2
+	ld bc, NUM_DVS
 	call CopyData
 	ld de, wEnemyMonPP
-	ld bc, $4
+	ld bc, NUM_MOVES
 	call CopyData
 	ld de, wEnemyMonLevel
 	ld bc, $b
@@ -1841,12 +1841,12 @@ LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	call CopyData
 	ld hl, wEnemyMonLevel
 	ld de, wEnemyMonUnmodifiedLevel ; block of memory used for unmodified stats
-	ld bc, $b
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	call ApplyBurnAndParalysisPenaltiesToEnemy
 	ld hl, W_MONHBASESTATS
 	ld de, wEnemyMonBaseStats
-	ld b, $5
+	ld b, NUM_STATS
 .copyBaseStatsLoop
 	ld a, [hli]
 	ld [de], a
@@ -1854,7 +1854,7 @@ LoadEnemyMonFromParty: ; 3cc13 (f:4c13)
 	dec b
 	jr nz, .copyBaseStatsLoop
 	ld a, $7 ; default stat modifier
-	ld b, $8
+	ld b, NUM_STAT_MODS
 	ld hl, wEnemyMonStatMods
 .statModLoop
 	ld [hli], a
@@ -1875,7 +1875,7 @@ SendOutMon: ; 3cc91 (f:4c91)
 	call DrawPlayerHUDAndHPBar
 	predef LoadMonBackPic
 	xor a
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	ld hl, W_DAMAGE
 	ld [hli], a
 	ld [hl], a
@@ -1927,23 +1927,23 @@ SendOutMon: ; 3cc91 (f:4c91)
 ; show 2 stages of the player mon getting smaller before disappearing
 AnimateRetreatingPlayerMon: ; 3ccfa (f:4cfa)
 	coord hl, 1, 5
-	ld bc, $707
+	lb bc, 7, 7
 	call ClearScreenArea
 	coord hl, 3, 7
-	ld bc, $505
+	lb bc, 5, 5
 	xor a
 	ld [wDownscaledMonSize], a
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hBaseTileID], a
 	predef CopyDownscaledMonTiles
 	ld c, 4
 	call DelayFrames
 	call .clearScreenArea
 	coord hl, 4, 9
-	ld bc, $303
-	ld a, $1
+	lb bc, 3, 3
+	ld a, 1
 	ld [wDownscaledMonSize], a
 	xor a
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld [hBaseTileID], a
 	predef CopyDownscaledMonTiles
 	call Delay3
 	call .clearScreenArea
@@ -1951,7 +1951,7 @@ AnimateRetreatingPlayerMon: ; 3ccfa (f:4cfa)
 	Coorda 5, 11
 .clearScreenArea
 	coord hl, 1, 5
-	ld bc, $707
+	lb bc, 7, 7
 	jp ClearScreenArea
 
 ; reads player's current mon's HP into wBattleMonHP
@@ -2399,7 +2399,7 @@ UseBagItem:
 	call GetItemName
 	call CopyStringToCF4B ; copy name
 	xor a
-	ld [wd152], a
+	ld [wPseudoItemID], a
 	call UseItem
 	call LoadHudTilePatterns
 	call ClearSprites
@@ -2423,7 +2423,7 @@ UseBagItem:
 	res UsingTrappingMove, [hl] ; not using multi-turn move any more
 
 .checkIfMonCaptured
-	ld a, [wd11c]
+	ld a, [wCapturedMonSpecies]
 	and a ; was the enemy mon captured with a ball?
 	jr nz, .returnAfterCapturingMon
 
@@ -2443,7 +2443,7 @@ UseBagItem:
 .returnAfterCapturingMon
 	call GBPalNormal
 	xor a
-	ld [wd11c], a
+	ld [wCapturedMonSpecies], a
 	ld a, $2
 	ld [wBattleResult], a
 	scf ; set carry
@@ -2607,8 +2607,8 @@ BattleMenu_RunWasSelected: ; 3d1fa (f:51fa)
 	ld hl, wBattleMonSpeed
 	ld de, wEnemyMonSpeed
 	call TryRunningFromBattle
-	ld a, $0
-	ld [wd11f], a
+	ld a, 0
+	ld [wForcePlayerToChooseMon], a
 	ret c
 	ld a, [wActionResultOrTookBattleTurn]
 	and a
@@ -3139,18 +3139,18 @@ SelectEnemyMove: ; 3d564 (f:5564)
 	push hl
 	call BattleRandom
 	ld b, $1
-	cp $3f ; select move 1 in [0,3e] (63/256 chance)
+	cp $3f ; select move 1, [0,3e] (63/256 chance)
 	jr c, .moveChosen
 	inc hl
 	inc b
-	cp $7f ; select move 1 in [3f,7e] (64/256 chance)
+	cp $7f ; select move 2, [3f,7e] (64/256 chance)
 	jr c, .moveChosen
 	inc hl
 	inc b
-	cp $be ; select move 1 in [7f,bd] (63/256 chance)
+	cp $be ; select move 3, [7f,bd] (63/256 chance)
 	jr c, .moveChosen
 	inc hl
-	inc b ; select move 4 in [be,ff] (66/256 chance)
+	inc b ; select move 4, [be,ff] (66/256 chance)
 .moveChosen
 	ld a, b
 	dec a
@@ -6419,7 +6419,7 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	predef LoadMovePPs
 	ld hl, W_MONHBASESTATS
 	ld de, wEnemyMonBaseStats
-	ld b, $5
+	ld b, NUM_STATS
 .copyBaseStatsLoop
 	ld a, [hli]
 	ld [de], a
@@ -6450,10 +6450,10 @@ LoadEnemyMonData: ; 3eb01 (f:6b01)
 	predef FlagActionPredef ; mark this mon as seen in the pokedex
 	ld hl, wEnemyMonLevel
 	ld de, wEnemyMonUnmodifiedLevel
-	ld bc, $b
+	ld bc, 1 + NUM_STATS * 2
 	call CopyData
 	ld a, $7 ; default stat mod
-	ld b, $8 ; number of stat mods
+	ld b, NUM_STAT_MODS ; number of stat mods
 	ld hl, wEnemyMonStatMods
 .statModLoop
 	ld [hli], a
@@ -6580,7 +6580,7 @@ LoadPlayerBackPic: ; 3ec92 (f:6c92)
 	xor a
 	ld [$0], a
 	ld a, $31
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	coord hl, 1, 5
 	predef_jump CopyUncompressedPicToTilemap
 
@@ -6692,7 +6692,7 @@ CalculateModifiedStats: ; 3ed99 (f:6d99)
 	call CalculateModifiedStat
 	inc c
 	ld a, c
-	cp 4
+	cp NUM_STATS - 1
 	jr nz, .loop
 	ret
 
@@ -6998,7 +6998,7 @@ InitBattleCommon: ; 3ef3d (f:6f3d)
 	call _LoadTrainerPic
 	xor a
 	ld [wEnemyMonSpecies2], a
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	dec a
 	ld [wAICount], a
 	coord hl, 12, 0
@@ -7054,7 +7054,7 @@ InitWildBattle: ; 3ef8b (f:6f8b)
 .spriteLoaded
 	xor a
 	ld [W_TRAINERCLASS], a
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	coord hl, 12, 0
 	predef CopyUncompressedPicToTilemap
 
@@ -7132,38 +7132,38 @@ AnimateSendingOutMon: ; 3f073 (f:7073)
 	ld h, a
 	ld a, [wPredefRegisters + 1]
 	ld l, a
-	ld a, [$ffe1]
-	ld [H_DOWNARROWBLINKCNT1], a
+	ld a, [hStartTileID]
+	ld [hBaseTileID], a
 	ld b, $4c
 	ld a, [W_ISINBATTLE]
 	and a
-	jr z, .asm_3f0bc
+	jr z, .notInBattle
 	add b
 	ld [hl], a
 	call Delay3
-	ld bc, -41
+	ld bc, -(SCREEN_WIDTH * 2 + 1)
 	add hl, bc
-	ld a, $1
+	ld a, 1
 	ld [wDownscaledMonSize], a
-	ld bc, $303
+	lb bc, 3, 3
 	predef CopyDownscaledMonTiles
 	ld c, 4
 	call DelayFrames
-	ld bc, -41
+	ld bc, -(SCREEN_WIDTH * 2 + 1)
 	add hl, bc
 	xor a
 	ld [wDownscaledMonSize], a
-	ld bc, $505
+	lb bc, 5, 5
 	predef CopyDownscaledMonTiles
 	ld c, 5
 	call DelayFrames
-	ld bc, -41
-	jr .asm_3f0bf
-.asm_3f0bc
-	ld bc, -123
-.asm_3f0bf
+	ld bc, -(SCREEN_WIDTH * 2 + 1)
+	jr .next
+.notInBattle
+	ld bc, -(SCREEN_WIDTH * 6 + 3)
+.next
 	add hl, bc
-	ld a, [H_DOWNARROWBLINKCNT1]
+	ld a, [hBaseTileID]
 	add $31
 	jr CopyUncompressedPicToHL
 
@@ -7172,52 +7172,52 @@ CopyUncompressedPicToTilemap: ; 3f0c6 (f:70c6)
 	ld h, a
 	ld a, [wPredefRegisters + 1]
 	ld l, a
-	ld a, [$ffe1]
+	ld a, [hStartTileID]
 CopyUncompressedPicToHL: ; 3f0d0 (f:70d0)
-	ld bc, $707
+	lb bc, 7, 7
 	ld de, SCREEN_WIDTH
 	push af
 	ld a, [W_SPRITEFLIPPED]
 	and a
-	jr nz, .asm_3f0ed
+	jr nz, .flipped
 	pop af
-.asm_3f0de
+.loop
 	push bc
 	push hl
-.asm_3f0e0
+.innerLoop
 	ld [hl], a
 	add hl, de
 	inc a
 	dec c
-	jr nz, .asm_3f0e0
+	jr nz, .innerLoop
 	pop hl
 	inc hl
 	pop bc
 	dec b
-	jr nz, .asm_3f0de
+	jr nz, .loop
 	ret
 
-.asm_3f0ed
+.flipped
 	push bc
-	ld b, $0
+	ld b, 0
 	dec c
 	add hl, bc
 	pop bc
 	pop af
-.asm_3f0f4
+.flippedLoop
 	push bc
 	push hl
-.asm_3f0f6
+.flippedInnerLoop
 	ld [hl], a
 	add hl, de
 	inc a
 	dec c
-	jr nz, .asm_3f0f6
+	jr nz, .flippedInnerLoop
 	pop hl
 	dec hl
 	pop bc
 	dec b
-	jr nz, .asm_3f0f4
+	jr nz, .flippedLoop
 	ret
 
 LoadMonBackPic: ; 3f103 (f:7103)

@@ -39,7 +39,7 @@ _DayCareMonHasGrownText::
 
 _DayCareOweMoneyText::
 	text "You owe me ¥@"
-	TX_BCD wcd3f, $c2
+	TX_BCD wDayCareTotalCost, $c2
 	db $0
 	line "for the return"
 	cont "of this #mon."

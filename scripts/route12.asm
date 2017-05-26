@@ -36,7 +36,7 @@ Route12Script0: ; 59619 (16:5619)
 	xor a
 	ld [wIsTrainerBattle], a ; wild battle
 	ld a, HS_ROUTE_12_SNORLAX
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $3
 	ld [W_ROUTE12CURSCRIPT], a

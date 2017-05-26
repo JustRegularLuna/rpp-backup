@@ -31,7 +31,7 @@ CeladonGameCornerScript_48bec: ; 48bec (12:4bec)
 	CheckEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ret nz
 	ld a, $2a
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $0208
 	predef_jump ReplaceTileBlock
 
@@ -107,7 +107,7 @@ CeladonGameCornerScript2: ; 48c69 (12:4c69)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, HS_GAME_CORNER_ROCKET
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld hl, wd126
 	set 5, [hl]
@@ -451,7 +451,7 @@ CeladonGameCornerText12: ; 48edd (12:4edd)
 	call WaitForSoundToFinish
 	SetEvent EVENT_FOUND_ROCKET_HIDEOUT
 	ld a, $43
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	ld bc, $0208
 	predef ReplaceTileBlock
 	jp TextScriptEnd

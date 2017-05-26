@@ -106,19 +106,19 @@ DayCareMText1: ; Day Care Lady
 	cp PARTY_LENGTH
 	ld hl, DayCareNoRoomForMonText
 	jp z, .leaveMonInDayCare
-	ld de, wcd3f
+	ld de, wDayCareTotalCost
 	xor a
 	ld [de], a
 	inc de
 	ld [de], a
-	ld hl, wTrainerScreenX
+	ld hl, wDayCarePerLevelCost
 	ld a, $1
 	ld [hli], a
 	ld [hl], $0
 	ld a, [wDayCareNumLevelsGrown]
 	inc a
 	ld b, a
-	ld c, $2
+	ld c, 2
 .calcPriceLoop
 	push hl
 	push de
@@ -131,7 +131,7 @@ DayCareMText1: ; Day Care Lady
 	jr nz, .calcPriceLoop
 	ld hl, DayCareOweMoneyText
 	call PrintText
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
@@ -139,7 +139,7 @@ DayCareMText1: ; Day Care Lady
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .leaveMonInDayCare
-	ld hl, wcd3f
+	ld hl, wDayCareTotalCost
 	ld [hMoney], a
 	ld a, [hli]
 	ld [hMoney + 1], a
@@ -313,7 +313,7 @@ DayCareMText2: ; Day Care Man
 	cp PARTY_LENGTH
 	ld hl, DayCareNoRoomForMonText
 	jp z, .leaveMonInDayCare
-	ld de, wcd3f
+	ld de, wDayCareTotalCost
 	xor a
 	ld [de], a
 	inc de
@@ -346,7 +346,7 @@ DayCareMText2: ; Day Care Man
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .leaveMonInDayCare
-	ld hl, wcd3f
+	ld hl, wDayCareTotalCost
 	ld [$ff9f], a
 	ld a, [hli]
 	ld [$ffa0], a

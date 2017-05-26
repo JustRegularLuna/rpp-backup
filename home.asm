@@ -301,7 +301,7 @@ LoadFrontSpriteByMonIndex:: ; 1389 (0:1389)
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 	xor a
-	ld [$ffe1], a
+	ld [hStartTileID], a
 	call CopyUncompressedPicToHL
 	xor a
 	ld [W_SPRITEFLIPPED], a
@@ -394,13 +394,13 @@ PartyMenuInit:: ; 1420 (0:1420)
 ; otherwise, it is 0
 .storeMaxMenuItemID
 	ld [hli], a ; max menu item ID
-	ld a, [wd11f]
+	ld a, [wForcePlayerToChooseMon]
 	and a
-	ld a, A_BUTTON + B_BUTTON
+	ld a, A_BUTTON | B_BUTTON
 	jr z, .next
 	xor a
-	ld [wd11f], a
-	inc a
+	ld [wForcePlayerToChooseMon], a
+	inc a ; a = A_BUTTON
 .next
 	ld [hli], a ; menu watched keys
 	pop af
@@ -411,12 +411,12 @@ HandlePartyMenuInput:: ; 145a (0:145a)
 	ld a,1
 	ld [wMenuWrappingEnabled],a
 	ld a,$40
-	ld [wd09b],a
-	call HandleMenuInputPokemonSelection
+	ld [wPartyMenuAnimMonEnabled],a
+	call HandleMenuInput_
 	call PlaceUnfilledArrowMenuCursor
 	ld b,a
 	xor a
-	ld [wd09b],a
+	ld [wPartyMenuAnimMonEnabled],a
 	ld a,[wCurrentMenuItem]
 	ld [wPartyAndBillsPCSavedMenuItem],a
 	ld hl,wd730
@@ -581,11 +581,11 @@ GetMonHeader:: ; 1537 (0:1537)
 	predef IndexToPokedex   ; convert pokemon ID in [wd11e] to pokedex number
 	ld a,[wd11e]
 	dec a
-	ld bc,28
+	ld bc,MonBaseStatsEnd - MonBaseStats
 	ld hl,BaseStats
 	call AddNTimes
 	ld de,W_MONHEADER
-	ld bc,28
+	ld bc,MonBaseStatsEnd - MonBaseStats
 	call CopyData
 	jr .done
 .specialID
@@ -1070,13 +1070,13 @@ DisplayTextID:: ; 2920 (0:2920)
 	ld [wSpriteIndex],a
 	and a
 	jp z,DisplayStartMenu
-	cp a,$d3
+	cp a,TEXT_SAFARI_GAME_OVER
 	jp z,DisplaySafariGameOverText
-	cp a,$d0
+	cp a,TEXT_MON_FAINTED
 	jp z,DisplayPokemonFaintedText
-	cp a,$d1
+	cp a,TEXT_BLACKED_OUT
 	jp z,DisplayPlayerBlackedOutText
-	cp a,$d2
+	cp a,TEXT_REPEL_WORE_OFF
 	jp z,DisplayRepelWoreOffText
 	ld a,[W_NUMSPRITES]
 	ld e,a
@@ -1143,7 +1143,7 @@ DisplayTextID:: ; 2920 (0:2920)
 	jr nz,HoldTextDisplayOpen
 
 AfterDisplayingTextID:: ; 29d6 (0:29d6)
-	ld a,[wcc47]
+	ld a,[wEnteringCableClub]
 	and a
 	jr nz,HoldTextDisplayOpen
 	call WaitForTextScrollButtonPress ; wait for a button press after displaying all the text
@@ -2407,7 +2407,7 @@ EndTrainerBattle:: ; 3275 (0:3275)
 	call IsInArray              ; search for sprite ID
 	inc hl
 	ld a, [hl]
-	ld [wcc4d], a               ; load corresponding missable object index and remove it
+	ld [wMissableObjectIndex], a               ; load corresponding missable object index and remove it
 	predef HideObject
 .skipRemoveSprite
 	xor a
@@ -2842,7 +2842,7 @@ DecodeRLEList:: ; 350c (0:350c)
 	ld a, [de]
 	cp $ff
 	jr z, .endOfList
-	ld [H_DOWNARROWBLINKCNT1], a ; store byte value to be written
+	ld [hRLEByteValue], a ; store byte value to be written
 	inc de
 	ld a, [de]
 	ld b, $0
@@ -2850,7 +2850,7 @@ DecodeRLEList:: ; 350c (0:350c)
 	ld a, [wRLEByteCount]
 	add c
 	ld [wRLEByteCount], a     ; update total number of written bytes
-	ld a, [H_DOWNARROWBLINKCNT1]
+	ld a, [hRLEByteValue]
 	call FillMemory              ; write a c-times to output
 	inc de
 	jr .listLoop
@@ -2916,7 +2916,7 @@ GetTrainerInformation:: ; 3566 (0:3566)
 	ld hl, TrainerPicAndMoneyPointers
 	ld bc, $3 ;originally 5
 	call AddNTimes
-	ld de, wd046
+	ld de, wTrainerBaseMoney
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -3611,7 +3611,7 @@ CalcStats:: ; 3936 (0:3936)
 	ld [de], a
 	inc de
 	ld a, c
-	cp $5
+	cp NUM_STATS
 	jr nz, .statsLoop
 	ret
 
@@ -3662,7 +3662,7 @@ CalcStat:: ; 394a (0:394a)
 	srl c
 	pop hl
 	push bc
-	ld bc, $b           ; skip to stat IV values
+	ld bc, wPartyMon1DVs - (wPartyMon1HPExp - 1) ; also wEnemyMonDVs - wEnemyMonHP
 	add hl, bc
 	pop bc
 	ld a, c
@@ -3756,7 +3756,7 @@ CalcStat:: ; 394a (0:394a)
 	call Divide             ; (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100
 	ld a, c
 	cp $1
-	ld a, $5
+	ld a, 5 ; + 5 for non-HP stat
 	jr nz, .notHPStat
 	ld a, [W_CURENEMYLVL]
 	ld b, a
@@ -3768,7 +3768,7 @@ CalcStat:: ; 394a (0:394a)
 	inc a
 	ld [H_MULTIPLICAND+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level
 .noCarry3
-	ld a, $a
+	ld a, 10 ; +10 for HP stat
 .notHPStat
 	ld b, a
 	ld a, [H_MULTIPLICAND+2]
@@ -3780,17 +3780,17 @@ CalcStat:: ; 394a (0:394a)
 	ld [H_MULTIPLICAND+1], a ; HP: (((Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4) * Level) / 100 + Level + 10
 .noCarry4
 	ld a, [H_MULTIPLICAND+1] ; check for overflow (>999)
-	cp $4
+	cp 999 / $100 + 1
 	jr nc, .overflow
-	cp $3
+	cp 999 / $100
 	jr c, .noOverflow
 	ld a, [H_MULTIPLICAND+2]
-	cp $e8
+	cp 999 % $100 + 1
 	jr c, .noOverflow
 .overflow
-	ld a, $3                 ; overflow: cap at 999
+	ld a, 999 / $100               ; overflow: cap at 999
 	ld [H_MULTIPLICAND+1], a
-	ld a, $e7
+	ld a, 999 % $100
 	ld [H_MULTIPLICAND+2], a
 .noOverflow
 	pop bc
@@ -3897,16 +3897,16 @@ WriteOAMBlock:: ; 3a97 (0:3a97)
 
 HandleMenuInput:: ; 3abe (0:3abe)
 	xor a
-	ld [wd09b],a
+	ld [wPartyMenuAnimMonEnabled],a
 
-HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
+HandleMenuInput_:: ; 3ac2 (0:3ac2)
 	ld a,[H_DOWNARROWBLINKCNT1]
 	push af
 	ld a,[H_DOWNARROWBLINKCNT2]
 	push af ; save existing values on stack
 	xor a
 	ld [H_DOWNARROWBLINKCNT1],a ; blinking down arrow timing value 1
-	ld a,$06
+	ld a,6
 	ld [H_DOWNARROWBLINKCNT2],a ; blinking down arrow timing value 2
 .loop1
 	xor a
@@ -3915,7 +3915,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	call Delay3
 .loop2
 	push hl
-	ld a,[wd09b]
+	ld a,[wPartyMenuAnimMonEnabled]
 	and a ; is it a pokemon selection menu?
 	jr z,.getJoypadState
 	callba AnimatePartyMon ; shake mini sprite of selected pokemon
@@ -3944,7 +3944,7 @@ HandleMenuInputPokemonSelection:: ; 3ac2 (0:3ac2)
 	ret
 .keyPressed
 	xor a
-	ld [wcc4b],a
+	ld [wCheckFor180DegreeTurn],a
 	ld a,[hJoy5]
 	ld b,a
 	bit 6,a ; pressed Up key?
@@ -4162,7 +4162,7 @@ HandleDownArrowBlinkTiming:: ; 3c04 (0:3c04)
 
 ; The following code either enables or disables the automatic drawing of
 ; text boxes by DisplayTextID. Both functions cause DisplayTextID to wait
-; for a button press after displaying text (unless [wcc47] is set).
+; for a button press after displaying text (unless [wEnteringCableClub] is set).
 
 EnableAutoTextBoxDrawing:: ; 3c3c (0:3c3c)
 	xor a
@@ -4631,7 +4631,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor:: ; 3eb5 (0:3eb5)
 	ret
 
 PrintPredefTextID:: ; 3ef5 (0:3ef5)
-	ld [H_DOWNARROWBLINKCNT2], a
+	ld [hSpriteIndexOrTextID], a
 	ld hl, TextPredefs
 	call SetMapTextPointer
 	ld hl, wTextPredefFlag

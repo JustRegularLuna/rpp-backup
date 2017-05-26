@@ -495,7 +495,7 @@ WriteSymmetricMonPartySpriteOAM:
 ; the X-flip OAM bit to be used so that only 2 rather than 4 tile patterns are
 ; needed.
 	xor a
-	ld [wcd5c], a
+	ld [wSymmetricSpriteOAMAttributes], a
 	lb de, 2, 2
 .loop
 	push de
@@ -507,10 +507,10 @@ WriteSymmetricMonPartySpriteOAM:
 	ld [hli], a ; X
 	ld a, [wOAMBaseTile]
 	ld [hli], a ; tile
-	ld a, [wcd5c]
+	ld a, [wSymmetricSpriteOAMAttributes]
 	ld [hli], a ; attributes
-	xor $20
-	ld [wcd5c], a
+	xor (1 << OAM_X_FLIP)
+	ld [wSymmetricSpriteOAMAttributes], a
 	inc d
 	ld a, 8
 	add c

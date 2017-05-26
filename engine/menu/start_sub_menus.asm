@@ -172,7 +172,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	jp z,.loop
 	ld a,SURFBOARD
 	ld [wcf91],a
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	call UseItem
 	ld a,[wActionResultOrTookBattleTurn]
 	and a
@@ -200,7 +200,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 .dig
 	ld a,ESCAPE_ROPE
 	ld [wcf91],a
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	call UseItem
 	ld a,[wActionResultOrTookBattleTurn]
 	and a
@@ -268,7 +268,7 @@ StartMenu_Pokemon: ; 130a9 (4:70a9)
 	push af
 	ld a,POTION
 	ld [wcf91],a
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	call UseItem
 	pop af
 	ld [wPartyAndBillsPCSavedMenuItem],a
@@ -400,7 +400,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	cp a, 1
 	jr z, .infoItem
 .useItem
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	ld a,[wcf91]
 	cp a,HM_01
 	jr nc,.useItem_partyMenu
@@ -417,7 +417,7 @@ StartMenu_Item: ; 13302 (4:7302)
 	jp ItemMenuLoop
 .useItem_closeMenu
 	xor a
-	ld [wd152],a
+	ld [wPseudoItemID],a
 	call UseItem
 	ld a,[wActionResultOrTookBattleTurn]
 	and a

@@ -149,7 +149,7 @@ BallAnyway:
 .UseBall
 ;ok, you can use a ball
 	xor a
-	ld [wd11c],a
+	ld [wCapturedMonSpecies],a
 	ld a,[W_BATTLETYPE]
 	cp a,2		;SafariBattle
 	jr nz,.skipSafariZoneCode
@@ -355,7 +355,7 @@ BallAnyway:
 	ld a,TOSS_ANIM
 	ld [W_ANIMATIONID],a
 	xor a
-	ld [$fff3],a
+	ld [H_WHOSETURN],a
 	ld [wAnimationType],a
 	ld [wDamageMultipliers],a
 	ld a,[wWhichPokemon]
@@ -429,7 +429,7 @@ BallAnyway:
 	pop af
 	ld [hl],a
 	ld a,[wEnemyMonSpecies]	;enemy
-	ld [wd11c],a
+	ld [wCapturedMonSpecies],a
 	ld [wcf91],a
 	ld [wd11e],a
 	ld a,[W_BATTLETYPE]
@@ -669,7 +669,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	ld a,[wWhichPokemon]
 	push af
 	ld a,[wcf91]
-	ld [wd156],a
+	ld [wEvoStoneItemID],a
 	push af
 	ld a,EVO_STONE_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID],a
@@ -686,7 +686,7 @@ ItemUseEvoStone: ; da5b (3:5a5b)
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	callab TryEvolvingMon ; try to evolve pokemon
-	ld a,[wd121]
+	ld a,[wEvolutionOccurred]
 	and a
 	jr z,.noEffect
 	pop af
@@ -720,7 +720,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wPartyMenuTypeOrMessageID],a
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	jr z,.notUsingSoftboiled
 ; if using softboiled
@@ -753,7 +753,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wcf91],a
 	pop af
 	ld [wWhichPokemon],a
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	jr z,.checkItemType
 ; if using softboiled
@@ -922,7 +922,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wHPBarMaxHP+1],a
 	ld a,[hl]
 	ld [wHPBarMaxHP],a ; max HP stored at wHPBarMaxHP (2 bytes, big-endian)
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	jp z,.notUsingSoftboiled2
 ; if using softboiled
@@ -1115,7 +1115,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	call ItemUseNoEffect
 	jp .done
 .doneHealing
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	jr nz,.skipRemovingItem ; no item to remove if using Softboiled
 	push hl
@@ -1172,7 +1172,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	pop af
 	pop af
 .done
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Softboiled?
 	ret nz ; if so, return
 	call GBPalWhiteOut
@@ -1448,7 +1448,7 @@ ItemUseEscapeRope: ; dfaf (3:5faf)
 	inc a
 	ld [wEscapedFromBattle],a
 	ld [wActionResultOrTookBattleTurn],a ; item used
-	ld a,[wd152]
+	ld a,[wPseudoItemID]
 	and a ; using Dig?
 	ret nz ; if so, return
 	call ItemUseReloadOverworldData
@@ -1485,7 +1485,7 @@ ItemUseXAccuracy: ; e013 (3:6013)
 ; The Card Key is handled in a different way.
 ItemUseCardKey: ; e022 (3:6022)
 	xor a
-	ld [wd71f],a
+	ld [wUnusedD71F],a
 	call GetTileAndCoordsInFrontOfPlayer
 	ld a,[GetTileAndCoordsInFrontOfPlayer] ; $4586
 	cp a,$18
@@ -1517,7 +1517,7 @@ ItemUseCardKey: ; e022 (3:6022)
 	cp e
 	jr nz,.nextEntry3
 	ld a,[hl]
-	ld [wd71f],a
+	ld [wUnusedD71F],a
 	jr .done
 .nextEntry1
 	inc hl
@@ -2565,11 +2565,11 @@ GetMaxPP: ; e677 (3:6677)
 	ld b,a ; b = normal max PP
 	pop hl
 	push bc
-	ld bc,21 ; PP offset if not player's in-battle pokemon data
+	ld bc,wPartyMon1PP - wPartyMon1Moves ; PP offset if not player's in-battle pokemon data
 	ld a,[wMonDataLocation]
 	cp a,4 ; player's in-battle pokemon?
 	jr nz,.addPPOffset
-	ld bc,17 ; PP offset if player's in-battle pokemon data
+	ld bc,wBattleMonPP - wBattleMonMoves ; PP offset if player's in-battle pokemon data
 .addPPOffset
 	add hl,bc
 	ld a,[hl] ; a = current PP
@@ -2685,13 +2685,13 @@ IsKeyItem_: ; e764 (3:6764)
 ; if the item is not an HM or TM
 	push af
 	ld hl,KeyItemBitfield
-	ld de,wHPBarMaxHP
+	ld de,wBuffer
 	ld bc,15 ; only 11 bytes are actually used
 	call CopyData
 	pop af
 	dec a
 	ld c,a
-	ld hl,wHPBarMaxHP
+	ld hl,wBuffer
 	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
@@ -2749,7 +2749,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, $fff5
+	ld bc, -$b
 	add hl, bc
 	pop bc
 	dec b
@@ -2783,7 +2783,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, $fff5
+	ld bc, -$b
 	add hl, bc
 	pop bc
 	dec b
@@ -2817,7 +2817,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, $ffdf
+	ld bc, wBoxMon1 - wBoxMon2
 	add hl, bc
 	pop bc
 	dec b
@@ -2827,7 +2827,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [wEnemyMonBoxLevel], a
 	ld hl, wEnemyMon
 	ld de, wBoxMon1
-	ld bc, $c
+	ld bc, wEnemyMonDVs - wEnemyMon
 	call CopyData
 	ld hl, wPlayerID
 	ld a, [hli]
@@ -2851,7 +2851,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld [de], a
 	inc de
 	xor a
-	ld b, $a
+	ld b, NUM_STATS * 2
 .asm_e89f
 	ld [de], a
 	inc de
@@ -2864,7 +2864,7 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	ld a, [hli]
 	ld [de], a
 	ld hl, wEnemyMonPP
-	ld b, $4
+	ld b, NUM_MOVES
 .asm_e8b1
 	ld a, [hli]
 	inc de

@@ -111,13 +111,14 @@ OverworldLoopLessDelay::
 	aCoord 8, 9
 	ld [wTilePlayerStandingOn],a ; unused?
 	call DisplayTextID ; display either the start menu or the NPC/sign text
-	ld a,[wcc47]
+	ld a,[wEnteringCableClub]
 	and a
 	jr z,.checkForOpponent
 	dec a
-	ld a,$00
-	ld [wcc47],a
+	ld a,0
+	ld [wEnteringCableClub],a
 	jr z,.changeMap
+; XXX can this code be reached?
 	predef LoadSAV
 	ld a,[W_CURMAP]
 	ld [wDestinationMap],a
@@ -137,8 +138,8 @@ OverworldLoopLessDelay::
 	ld hl,wFlags_0xcd60
 	res 2,[hl]
 	call UpdateSprites
-	ld a,$01
-	ld [wcc4b],a
+	ld a,1
+	ld [wCheckFor180DegreeTurn],a
 	ld a,[wPlayerMovingDirection] ; the direction that was pressed last time
 	and a
 	jp z,OverworldLoop
@@ -179,7 +180,7 @@ OverworldLoopLessDelay::
 	ld a,[wd730]
 	bit 7,a ; are we simulating button presses?
 	jr nz,.noDirectionChange ; ignore direction changes if we are
-	ld a,[wcc4b]
+	ld a,[wCheckFor180DegreeTurn]
 	and a
 	jr z,.noDirectionChange
 	ld a,[wPlayerDirection] ; new direction
@@ -187,39 +188,44 @@ OverworldLoopLessDelay::
 	ld a,[wPlayerLastStopDirection] ; old direction
 	cp b
 	jr z,.noDirectionChange
-; the code below is strange
-; it computes whether or not the player did a 180 degree turn, but then overwrites the result
-; also, it does a seemingly pointless loop afterwards
+; Check whether the player did a 180-degree turn.
+; It appears that this code was supposed to show the player rotate by having
+; the player's sprite face an intermediate direction before facing the opposite
+; direction (instead of doing an instantaneous about-face), but the intermediate
+; direction is only set for a short period of time. It is unlikely for it to
+; ever be visible because DelayFrame is called at the start of OverworldLoop and
+; normally not enough cycles would be executed between then and the time the
+; direction is set for V-blank to occur while the direction is still set.
 	swap a ; put old direction in upper half
 	or b ; put new direction in lower half
 	cp a,(PLAYER_DIR_DOWN << 4) | PLAYER_DIR_UP ; change dir from down to up
 	jr nz,.notDownToUp
 	ld a,PLAYER_DIR_LEFT
 	ld [wPlayerMovingDirection],a
-	jr .oddLoop
+	jr .holdIntermediateDirectionLoop
 .notDownToUp
 	cp a,(PLAYER_DIR_UP << 4) | PLAYER_DIR_DOWN ; change dir from up to down
 	jr nz,.notUpToDown
 	ld a,PLAYER_DIR_RIGHT
 	ld [wPlayerMovingDirection],a
-	jr .oddLoop
+	jr .holdIntermediateDirectionLoop
 .notUpToDown
 	cp a,(PLAYER_DIR_RIGHT << 4) | PLAYER_DIR_LEFT ; change dir from right to left
 	jr nz,.notRightToLeft
 	ld a,PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection],a
-	jr .oddLoop
+	jr .holdIntermediateDirectionLoop
 .notRightToLeft
 	cp a,(PLAYER_DIR_LEFT << 4) | PLAYER_DIR_RIGHT ; change dir from left to right
-	jr nz,.oddLoop
+	jr nz,.holdIntermediateDirectionLoop
 	ld a,PLAYER_DIR_UP
 	ld [wPlayerMovingDirection],a
-.oddLoop
+.holdIntermediateDirectionLoop
 	ld hl,wFlags_0xcd60
 	set 2,[hl]
-	ld hl,wcc4b
+	ld hl,wCheckFor180DegreeTurn
 	dec [hl]
-	jr nz,.oddLoop
+	jr nz,.holdIntermediateDirectionLoop
 	ld a,[wPlayerDirection]
 	ld [wPlayerMovingDirection],a
 	call NewBattle
@@ -502,7 +508,7 @@ WarpFound2:: ; 073c (0:073c)
 	ld a,[W_CURMAP]
 	ld [wLastMap],a
 	ld a,[W_CURMAPWIDTH]
-	ld [wd366],a
+	ld [wUnusedD366],a ; not read
 	ld a,[hWarpDestinationMap]
 	ld [W_CURMAP],a
 	cp a,ROCK_TUNNEL_1
@@ -521,7 +527,7 @@ WarpFound2:: ; 073c (0:073c)
 ; if not going back to the previous map
 	ld [W_CURMAP],a
 	callba IsPlayerStandingOnWarpPadOrHole
-	ld a,[wcd5b]
+	ld a,[wStandingOnWarpPadOrHole]
 	dec a ; is the player on a warp pad?
 	jr nz,.notWarpPad
 ; if the player is on a warp pad
@@ -1822,7 +1828,7 @@ LoadPlayerSpriteGraphicsCommon:: ; 1063 (0:1063)
 LoadMapHeader:: ; 107c (0:107c)
 	callba MarkTownVisitedAndLoadMissableObjects
 	ld a,[W_CURMAPTILESET]
-	ld [wd119],a
+	ld [wUnusedD119],a
 	ld a,[W_CURMAP]
 	call SwitchToMapRomBank
 	ld a,[W_CURMAPTILESET]
@@ -2120,7 +2126,7 @@ LoadMapData:: ; 1241 (0:1241)
 	ld [hSCY],a
 	ld [hSCX],a
 	ld [wWalkCounter],a
-	ld [wd119],a
+	ld [wUnusedD119],a
 	ld [wWalkBikeSurfStateCopy],a
 	ld [W_SPRITESETID],a
 	call LoadTextBoxTilePatterns
