@@ -21,11 +21,11 @@ GainExperience: ; 5524f (15:524f)
 	and a ; is mon's gain exp flag set?
 	pop hl
 	jp z, .nextMon ; if mon's gain exp flag not set, go to next mon
-	ld a, [wcc5b]
+	ld a, [wBoostExpByExpAll]
 	and a
 	jp z, .finishedExpAllMessage
 	xor a
-	ld [wcc5b], a
+	ld [wBoostExpByExpAll], a
 	push hl
 	ld hl, WithExpAllText
 	call PrintText
@@ -86,7 +86,7 @@ GainExperience: ; 5524f (15:524f)
 	ld b, [hl]
 	ld a, [wPlayerID + 1]
 	cp b
-	ld a, $0
+	ld a, 0
 	jr z, .next
 .tradedMon
 	push hl
@@ -95,10 +95,10 @@ GainExperience: ; 5524f (15:524f)
 	pop hl
 	jr nz, .noBoost
 	call BoostExp ; traded mon exp boost
-	ld a, $1
+	ld a, 1
 	jr .next
 .noBoost
-	ld a, $0 ; Makes traded Pokemon act the same as normal ones
+	ld a, 0 ; Makes traded Pokemon act the same as normal ones
 .next
 	ld [wGainBoostedExp], a
 	ld a, [W_ISINBATTLE]
@@ -110,12 +110,12 @@ GainExperience: ; 5524f (15:524f)
 ; add the gained exp to the party mon's exp
 	ld b, [hl]
 	ld a, [H_QUOTIENT + 3]
-	ld [wcf4c], a
+	ld [wExpAmountGained + 1], a
 	add b
 	ld [hld], a
 	ld b, [hl]
 	ld a, [H_QUOTIENT + 2]
-	ld [wcf4b], a
+	ld [wExpAmountGained], a
 	adc b
 	ld [hl], a
 	jr nc, .noCarry

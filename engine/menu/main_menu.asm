@@ -24,7 +24,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld hl,wd72e
 	res 6,[hl]
 	call ClearScreen
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadTextBoxTilePatterns
 	call LoadFontTilePatterns
 	ld hl,wd730
@@ -61,7 +61,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld [wTopMenuItemX],a
 	inc a
 	ld [wTopMenuItemY],a
-	ld a,$B
+	ld a,A_BUTTON | B_BUTTON | START
 	ld [wMenuWatchedKeys],a
 	ld a,[wSaveFileStatus]
 	ld [wMaxMenuItem],a
@@ -150,7 +150,7 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld de, CableClubOptionsText
 	call PlaceString
 	xor a
-	ld [wcd37], a
+	ld [wUnusedCD37], a
 	ld [wd72d], a
 	ld hl, wTopMenuItemY
 	ld a, $7
@@ -163,7 +163,8 @@ LinkMenu: ; 5c0a (1:5c0a)
 	ld a, $2
 	ld [hli], a
 	inc a
-	ld [hli], a
+	; ld a, A_BUTTON | B_BUTTON
+	ld [hli], a ; wMenuWatchedKeys
 	xor a
 	ld [hl], a
 .waitForInputLoop
@@ -689,7 +690,7 @@ CheckForPlayerNameInSRAM: ; 609e (1:609e)
 	ld a, $1
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamBank], a
-	ld b, $b
+	ld b, NAME_LENGTH
 	ld hl, sPlayerName
 .loop
 	ld a, [hli]

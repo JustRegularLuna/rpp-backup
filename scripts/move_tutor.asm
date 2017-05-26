@@ -102,7 +102,7 @@ DisplayTeachTutorMoveText:
 
 .chooseMon
 	ld hl,wcf4b
-	ld de,wd036
+	ld de,wTempMoveNameBuffer
 	ld bc,14
 	call CopyData
 	xor a
@@ -111,13 +111,13 @@ DisplayTeachTutorMoveText:
 	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	push af
-	ld hl,wd036
+	ld hl,wTempMoveNameBuffer
 	ld de,wcf4b
 	ld bc,14
 	call CopyData
 	pop af
 	jr nc,.checkIfAbleToLearnMove
-; if the player canceled teaching the move
+; if the player cancelled teaching the move
 	jr .done
 	
 .checkIfAbleToLearnMove

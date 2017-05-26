@@ -176,7 +176,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	jr z, .findStartOfEnemyNameLoop
 	dec hl
 	ld de, wLinkEnemyTrainerName
-	ld c, 11
+	ld c, NAME_LENGTH
 .copyEnemyNameLoop
 	ld a, [hli]
 	cp SERIAL_NO_DATA_BYTE
@@ -274,7 +274,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	jr nz, .asm_5506
 	ld a, LINK_STATE_BATTLING
 	ld [wLinkState], a
-	ld a, SONY1 + $c8
+	ld a, OPP_SONY1
 	ld [W_CUROPPONENT], a
 	call ClearScreen
 	call Delay3
@@ -698,7 +698,7 @@ TradeCenter_Trade:
 	call GetMonName
 	ld hl, wcd6d
 	ld de, wNameOfPlayerMonToBeTraded
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wTradingWhichEnemyMon]
 	ld hl, wEnemyPartyMons
@@ -756,7 +756,7 @@ TradeCenter_Trade:
 	ld hl, wPartyMonOT
 	call SkipFixedLengthTextEntries
 	ld de, wTradedPlayerMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMon1Species
 	ld a, [wTradingWhichPlayerMon]
@@ -772,7 +772,7 @@ TradeCenter_Trade:
 	ld hl, wEnemyMonOT
 	call SkipFixedLengthTextEntries
 	ld de, wTradedEnemyMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wEnemyMons
 	ld a, [wTradingWhichEnemyMon]
@@ -836,7 +836,7 @@ TradeCenter_Trade:
 	call ClearScreen
 	call LoadHpBarAndStatusTilePatterns
 	xor a
-	ld [wcc5b], a
+	ld [wUnusedCC5B], a
 	ld a, [hSerialConnectionStatus]
 	cp USING_EXTERNAL_CLOCK
 	jr z, .usingExternalClock

@@ -13,16 +13,16 @@ Route19Object: ; 0x54e9a (size=87)
 
 
 	db $a ; objects
-	object SPRITE_BLACK_HAIR_BOY_1, $8, $e, STAY, LEFT, 1, SWIMMER + $C8, 2
-	object SPRITE_BLACK_HAIR_BOY_1, $d, $e, STAY, LEFT, 2, SWIMMER + $C8, 3
-	object SPRITE_SWIMMER, $d, $19, STAY, LEFT, $3, SWIMMER + $C8, $4
-	object SPRITE_SWIMMER, $4, $1b, STAY, RIGHT, $4, SWIMMER + $C8, $5
-	object SPRITE_SWIMMER, $10, $1f, STAY, UP, $5, SWIMMER + $C8, $6
-	object SPRITE_SWIMMER, $9, $12, STAY, DOWN, $6, SWIMMER + $C8, $7
-	object SPRITE_SWIMMER_F, $8, $2b, STAY, LEFT, $7, SWIMMER_F + $C8, $c
-	object SPRITE_SWIMMER_F, $b, $2b, STAY, RIGHT, $8, SWIMMER_F + $C8, $d
-	object SPRITE_SWIMMER, $9, $2a, STAY, UP, $9, SWIMMER + $C8, $8
-	object SPRITE_SWIMMER_F, $a, $2c, STAY, DOWN, $a, SWIMMER_F + $C8, $e
+	object SPRITE_BLACK_HAIR_BOY_1, $8, $e, STAY, LEFT, 1, OPP_SWIMMER, 2
+	object SPRITE_BLACK_HAIR_BOY_1, $d, $e, STAY, LEFT, 2, OPP_SWIMMER, 3
+	object SPRITE_SWIMMER, $d, $19, STAY, LEFT, $3, OPP_SWIMMER, $4
+	object SPRITE_SWIMMER, $4, $1b, STAY, RIGHT, $4, OPP_SWIMMER, $5
+	object SPRITE_SWIMMER, $10, $1f, STAY, UP, $5, OPP_SWIMMER, $6
+	object SPRITE_SWIMMER, $9, $12, STAY, DOWN, $6, OPP_SWIMMER, $7
+	object SPRITE_SWIMMER_F, $8, $2b, STAY, LEFT, $7, OPP_SWIMMER_F, $c
+	object SPRITE_SWIMMER_F, $b, $2b, STAY, RIGHT, $8, OPP_SWIMMER_F, $d
+	object SPRITE_SWIMMER, $9, $2a, STAY, UP, $9, OPP_SWIMMER, $8
+	object SPRITE_SWIMMER_F, $a, $2c, STAY, DOWN, $a, OPP_SWIMMER_F, $e
 
 	; warp-to
 	EVENT_DISP ROUTE_19_WIDTH, $1, $7 ; ROUTE_19_GATE

@@ -1,6 +1,6 @@
-; copy text of fixed length $b (like player name, rival name, mon names, ...)
+; copy text of fixed length NAME_LENGTH (like player name, rival name, mon names, ...)
 CopyFixedLengthText: ; 42b1 (1:42b1)
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 SetDefaultNamesBeforeTitlescreen: ; 42b7 (1:42b7)
@@ -128,8 +128,8 @@ DisplayTitleScreen: ; 42dd (1:42dd)
 	call LoadScreenTilesFromBuffer2
 	ld a, vBGMap0 / $100
 	call TitleScreenCopyTileMapToVRAM
-	ld b, $6
-	call GoPAL_SET
+	ld b, SET_PAL_TITLE_SCREEN
+	call RunPaletteCommand
 	call GBPalNormal
 	ld a, %11100100
 	ld [rOBP0], a
@@ -209,7 +209,7 @@ DisplayTitleScreen: ; 42dd (1:42dd)
 	ld [wNewSoundID], a
 	call PlaySound
 	xor a
-	ld [wcc5b], a
+	ld [wUnusedCC5B], a
 
 ; Keep scrolling in new mons indefinitely until the user performs input.
 .awaitUserInterruptionLoop

@@ -46,7 +46,7 @@ AskName: ; 64eb (1:64eb)
 	ld d, h
 	ld e, l
 	ld hl, wcd6d
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 DoYouWantToNicknameText: ; 0x6557
@@ -67,13 +67,13 @@ DisplayNameRaterScreen: ; 655c (1:655c)
 	cp "@"
 	jr z, .playerCancelled
 	ld hl, wPartyMonNicks
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld e, l
 	ld d, h
 	ld hl, wBuffer
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	and a
 	ret
@@ -88,8 +88,8 @@ DisplayNamingScreen: ; 6596 (1:6596)
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld b, $8
-	call GoPAL_SET
+	ld b, SET_PAL_GENERIC
+	call RunPaletteCommand
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
 	callba LoadMonPartySpriteGfx
@@ -158,12 +158,12 @@ DisplayNamingScreen: ; 6596 (1:6596)
 .submitNickname
 	pop de
 	ld hl, wcf4b
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call ClearSprites
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call GBPalNormal
 	xor a
 	ld [W_SUBANIMTRANSFORM], a

@@ -319,8 +319,8 @@ LoadTownMap:
 	call CopyData
 
 	call EnableLCD
-	ld b, $2
-	call GoPAL_SET
+	ld b, SET_PAL_TOWN_MAP
+	call RunPaletteCommand
 	call Delay3
 	call GBPalNormal
 	xor a
@@ -344,7 +344,7 @@ ExitTownMap:
 	call LoadFontTilePatterns
     call ReloadMapData ; added
 	call UpdateSprites
-	jp GoPAL_SET_CF1C
+	jp RunDefaultPaletteCommand
 
 DrawPlayerOrBirdSprite:
 ; a = map number

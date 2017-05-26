@@ -158,7 +158,7 @@ BallAnyway:
 	ld hl,wNumSafariBalls
 	dec [hl]
 .skipSafariZoneCode
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	ld a,$43
 	ld [wd11e],a
 	call LoadScreenTilesFromBuffer1	;restore screenBuffer from Backup
@@ -173,7 +173,7 @@ BallAnyway:
 .oldManBattle
 	ld hl,wCurTrainerName
 	ld de,wPlayerName
-	ld bc,11
+	ld bc,NAME_LENGTH
 	call CopyData ; restore player name
 	jp .BallSuccess
 .notOldManBattle
@@ -405,7 +405,7 @@ BallAnyway:
 	jr .next16
 .next15
 	set Transformed,[hl]
-	ld hl,wcceb
+	ld hl,wTransformedEnemyMonOriginalDVs
 	ld a,[wEnemyMonDVs]
 	ld [hli],a
 	ld a,[wEnemyMonDVs + 1]
@@ -1176,7 +1176,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	and a ; using Softboiled?
 	ret nz ; if so, return
 	call GBPalWhiteOut
-	call z,GoPAL_SET_CF1C
+	call z,RunDefaultPaletteCommand
 	ld a,[W_ISINBATTLE]
 	and a
 	ret nz
@@ -1391,7 +1391,7 @@ ItemUseRock: ; df67 (3:5f67)
 BaitRockCommon: ; df7f (3:5f7f)
 	ld [W_ANIMATIONID],a
 	xor a
-	ld [wcc5b],a
+	ld [wAnimationType],a
 	ld [H_WHOSETURN],a
 	ld [de],a ; zero escape factor (for bait), zero bait factor (for rock)
 .randomLoop ; loop until a random number less than 5 is generated
@@ -2076,7 +2076,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	pop af
 	ld [wWhichPokemon],a
 	call GBPalWhiteOut
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	jp RemoveUsedItem
 .afterRestoringPP ; after using a (Max) Ether/Elixir
 	ld a,[wWhichPokemon]
@@ -2180,7 +2180,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	call ItemUseNoEffect
 .itemNotUsed
 	call GBPalWhiteOut
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	pop af
 	xor a
 	ld [wActionResultOrTookBattleTurn],a ; item use failed
@@ -2253,16 +2253,16 @@ ItemUseTMHM: ; e479 (3:6479)
 	push af
 .chooseMon
 	ld hl,wcf4b
-	ld de,wd036
+	ld de,wTempMoveNameBuffer
 	ld bc,14
-	call CopyData
+	call CopyData ; save the move name because DisplayPartyMenu will overwrite it
 	ld a,$ff
 	ld [wUpdateSpritesEnabled],a
 	ld a,TMHM_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	push af
-	ld hl,wd036
+	ld hl,wTempMoveNameBuffer
 	ld de,wcf4b
 	ld bc,14
 	call CopyData
@@ -2273,7 +2273,7 @@ ItemUseTMHM: ; e479 (3:6479)
 	pop af
 	call GBPalWhiteOutWithDelay3
 	call ClearSprites
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	jp LoadScreenTilesFromBuffer1 ; restore saved screen
 .checkIfAbleToLearnMove
 	predef CanLearnTM ; check if the pokemon can learn the move
@@ -2349,7 +2349,7 @@ ItemUseNotYoursToUse: ; e586 (3:6586)
 	jr ItemUseFailed
 
 ThrowBallAtTrainerMon: ; e58b (3:658b)
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call LoadScreenTilesFromBuffer1 ; restore saved screen
 	call Delay3
 	ld a,TOSS_ANIM
@@ -2721,14 +2721,14 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 	jr nz, .asm_e7b1
 	call GetMonHeader
 	ld hl, wBoxMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e7ee
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2739,12 +2739,12 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e7db
 	push bc
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, -$b
+	ld bc, -NAME_LENGTH
 	add hl, bc
 	pop bc
 	dec b
@@ -2752,17 +2752,17 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e7ee
 	ld hl, wPlayerName
 	ld de, wBoxMonOT
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wNumInBox]
 	dec a
 	jr z, .asm_e82a
 	ld hl, wBoxMonNicks
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	dec a
 	call AddNTimes
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -2773,12 +2773,12 @@ SendNewMonToBox: ; e7a4 (3:67a4)
 .asm_e817
 	push bc
 	push hl
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop hl
 	ld d, h
 	ld e, l
-	ld bc, -$b
+	ld bc, -NAME_LENGTH
 	add hl, bc
 	pop bc
 	dec b

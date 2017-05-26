@@ -57,7 +57,7 @@ LoadSAV0: ; 73623 (1c:7623)
 .checkSumsMatched
 	ld hl, sPlayerName
 	ld de, wPlayerName
-	ld bc, 11
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, sMainData
 	ld de, wMainDataStart
@@ -203,7 +203,7 @@ SaveSAVtoSRAM0: ; 7378c (1c:778c)
 	ld [MBC1SRamBank], a
 	ld hl, wPlayerName
 	ld de, sPlayerName
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wMainDataStart
 	ld de, sMainData
@@ -356,7 +356,7 @@ ChangeBox:: ; 738a1 (1c:78a1)
 	call HandleMenuInput
 	ld hl, hFlags_0xFFF6
 	res 1, [hl]
-	bit 1, a
+	bit 1, a ; pressed b
 	ret nz
 	call GetBoxSRAMLocation
 	ld e, l
@@ -644,7 +644,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	call AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, wcc5b
+	ld hl, wHallOfFame
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
 
@@ -653,7 +653,7 @@ SaveHallOfFameTeams: ; 73b0d (1c:7b0d)
 	ld de, sHallOfFame
 	ld bc, HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	call HallOfFame_Copy
-	ld hl, wcc5b
+	ld hl, wHallOfFame
 	ld de, sHallOfFame + HOF_TEAM * (HOF_TEAM_CAPACITY - 1)
 	ld bc, HOF_TEAM
 	jr HallOfFame_Copy
@@ -663,7 +663,7 @@ LoadHallOfFameTeams: ; 73b3f (1c:7b3f)
 	ld bc, HOF_TEAM
 	ld a, [wHoFTeamIndex]
 	call AddNTimes
-	ld de, wcc5b
+	ld de, wHallOfFame
 	ld bc, HOF_TEAM
 	; fallthrough
 

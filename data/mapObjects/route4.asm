@@ -13,7 +13,7 @@ Route4Object: ; 0x543b2 (size=58)
 
 	db $5 ; objects
 	object SPRITE_LASS, $9, $8, WALK, $0, $1 ; person
-	object SPRITE_LASS, $3f, $3, STAY, RIGHT, $2, LASS + $C8, $4
+	object SPRITE_LASS, $3f, $3, STAY, RIGHT, $2, OPP_LASS, $4
 	object SPRITE_BALL, $39, $3, STAY, NONE, $3, TM_04
 	object SPRITE_BERRY_TREE, $6, $4, STAY, NONE, $4
 	object SPRITE_BERRY_TREE, $29, $3, STAY, NONE, $5

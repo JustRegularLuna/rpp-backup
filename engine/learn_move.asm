@@ -4,8 +4,8 @@ LearnMove: ; 6e43 (1:6e43)
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	ld hl, wcd6d
-	ld de, wd036
-	ld bc, 11
+	ld de, wLearnMoveMonName
+	ld bc, NAME_LENGTH
 	call CopyData
 
 DontAbandonLearning: ; 6e5b (1:6e5b)
@@ -16,13 +16,13 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	ld d, h
 	ld e, l
 	ld b, NUM_MOVES
-.asm_6e6b
+.findEmptyMoveSlotLoop
 	ld a, [hl]
 	and a
-	jr z, .asm_6e8b
+	jr z, .next
 	inc hl
 	dec b
-	jr nz, .asm_6e6b
+	jr nz, .findEmptyMoveSlotLoop
 	push de
 	call TryingToLearn
 	pop de
@@ -35,7 +35,7 @@ DontAbandonLearning: ; 6e5b (1:6e5b)
 	call PrintText
 	pop de
 	pop hl
-.asm_6e8b
+.next
 	ld a, [wMoveNum]
 	ld [hl], a
 	ld bc, wPartyMon1PP - wPartyMon1Moves
@@ -86,13 +86,13 @@ AbandonLearning: ; 6eda (1:6eda)
 	jp nz, DontAbandonLearning
 	ld hl, DidNotLearnText
 	call PrintText
-	ld b, $0
+	ld b, 0
 	ret
 
 PrintLearnedMove: ; 6efe (1:6efe)
 	ld hl, LearnedMove1Text
 	call PrintText
-	ld b, $1
+	ld b, 1
 	ret
 
 TryingToLearn: ; 6f07 (1:6f07)
@@ -108,7 +108,7 @@ TryingToLearn: ; 6f07 (1:6f07)
 	ld a, [wCurrentMenuItem]
 	rra
 	ret c
-	ld bc, - NUM_MOVES
+	ld bc, -NUM_MOVES
 	add hl, bc
 	push hl
 	ld de, wMoves
@@ -116,13 +116,13 @@ TryingToLearn: ; 6f07 (1:6f07)
 	call CopyData
 	callab FormatMovesString
 	pop hl
-.asm_6f39
+.loop
 	push hl
 	ld hl, WhichMoveToForgetText
 	call PrintText
 	coord hl, 4, 7
-	ld b, $4
-	ld c, $e
+	ld b, 4
+	ld c, 14
 	call TextBoxBorder
 	coord hl, 6, 8
 	ld de, wMovesString
@@ -155,12 +155,12 @@ TryingToLearn: ; 6f07 (1:6f07)
 	call LoadScreenTilesFromBuffer1
 	pop af
 	pop hl
-	bit 1, a
-	jr nz, .asm_6fab
+	bit 1, a ; pressed b
+	jr nz, .cancel
 	push hl
 	ld a, [wCurrentMenuItem]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
 	push af
@@ -169,17 +169,17 @@ TryingToLearn: ; 6f07 (1:6f07)
 	pop bc
 	pop de
 	ld a, d
-	jr c, .asm_6fa2
+	jr c, .hm
 	pop hl
 	add hl, bc
 	and a
 	ret
-.asm_6fa2
+.hm
 	ld hl, HMCantDeleteText
 	call PrintText
 	pop hl
-	jr .asm_6f39
-.asm_6fab
+	jr .loop
+.cancel
 	scf
 	ret
 

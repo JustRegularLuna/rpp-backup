@@ -13,7 +13,7 @@ SplashScreenSetup:
 MainScreenTurnOn:	
 ; turn the screen back on
 	call EnableLCD
-	call GoPAL_SET_CF1C
+	call RunDefaultPaletteCommand
 	call Delay3
 	call GBPalNormal
 	
@@ -27,4 +27,4 @@ MainScreenTurnOn:
 	call LoadPlayerSpriteGraphics
 	call ReloadMapData
 	call UpdateSprites
-	jp GoPAL_SET_CF1C
+	jp RunDefaultPaletteCommand

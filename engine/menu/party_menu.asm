@@ -29,13 +29,13 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	cp a,SWAP_MONS_PARTY_MENU
 	jp z,.printMessage
 	call ErasePartyMenuCursors
-	callba SendBlkPacket_PartyMenu
+	callba InitPartyMenuBlkPacket
 	coord hl, 3, 0
 	ld de,wPartySpecies
 	xor a
 	ld c,a
 	ld [hPartyMonIndex],a
-	ld [wcf2d],a
+	ld [wWhichPartyMenuHPBar],a
 .loop
 	ld a,[de]
 	cp a,$FF ; reached the terminator?
@@ -98,7 +98,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld a,[hFlags_0xFFF6]
 	res 0,a
 	ld [hFlags_0xFFF6],a
-	call SetPartyMenuHealthBarColor ; color the HP bar (on SGB)
+	call SetPartyMenuHPBarColor ; color the HP bar (on SGB)
 	pop hl
 	jr .printLevel
 .moveTutorMenu
@@ -196,8 +196,8 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 .notAbleToEvolveText
 	db "Not able@"
 .afterDrawingMonEntries
-	ld b,$0A
-	call GoPAL_SET
+	ld b, SET_PAL_PARTY_MENU
+	call RunPaletteCommand
 .printMessage
 	ld hl,wd730
 	ld a,[hl]
@@ -320,15 +320,15 @@ RareCandyText: ; 12ec0 (4:6ec0)
 	db $06
 	db "@"
 
-SetPartyMenuHealthBarColor: ; 12ec7 (4:6ec7)
-	ld hl, wcf1f
-	ld a, [wcf2d]
+SetPartyMenuHPBarColor: ; 12ec7 (4:6ec7)
+	ld hl, wPartyMenuHPBarColors
+	ld a, [wWhichPartyMenuHPBar]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	call GetHealthBarColor
-	ld b, $fc
-	call GoPAL_SET
-	ld hl, wcf2d
+	ld b, UPDATE_PARTY_MENU_BLK_PACKET
+	call RunPaletteCommand
+	ld hl, wWhichPartyMenuHPBar
 	inc [hl]
 	ret
