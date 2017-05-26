@@ -8,9 +8,9 @@ CeladonHouseObject: ; 0x49227 (size=38)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_OLD_PERSON, $4, $2, NONE, DOWN, $1 ; person
+	object SPRITE_OLD_PERSON, $4, $2, STAY, DOWN, $1 ; person
 	object SPRITE_ROCKET_F, $1, $4, WALK, $0, $2 ; person
-	object SPRITE_SAILOR, $5, $6, NONE, LEFT, $3 ; person
+	object SPRITE_SAILOR, $5, $6, STAY, LEFT, $3 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_HOUSE_WIDTH, $7, $2

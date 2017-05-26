@@ -14,10 +14,10 @@ Route2Object: ; 0x54022 (size=72)
 	db $b, $b, $6 ; Route2Text4
 
 	db $4 ; objects
-	object SPRITE_BALL, $d, $36, NONE, NONE, $1, MOON_STONE
-	object SPRITE_BALL, $d, $2d, NONE, NONE, $2, HP_UP
-	object SPRITE_BERRY_TREE, $10, $10, NONE, NONE, $3 ; person
-	object SPRITE_BERRY_TREE, $8, $29, NONE, NONE, $4 ; person
+	object SPRITE_BALL, $d, $36, STAY, NONE, $1, MOON_STONE
+	object SPRITE_BALL, $d, $2d, STAY, NONE, $2, HP_UP
+	object SPRITE_BERRY_TREE, $10, $10, STAY, NONE, $3 ; person
+	object SPRITE_BERRY_TREE, $8, $29, STAY, NONE, $4 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_2_WIDTH, $9, $c ; DIGLETTS_CAVE_EXIT

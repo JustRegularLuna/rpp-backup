@@ -13,16 +13,16 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 	db $0 ; signs
 
 	db $d ; objects
-	object SPRITE_BLACKBELT, $c, $9, NONE, LEFT, $1, BLACKBELT + $C8, $9
-	object SPRITE_BLACK_HAIR_BOY_2, $15, $d, NONE, LEFT, $2, JUGGLER + $C8, $2
-	object SPRITE_BLACK_HAIR_BOY_1, $13, $8, NONE, DOWN, $3, TAMER + $C8, $5
-	object SPRITE_BLACK_HAIR_BOY_2, $4, $2, NONE, DOWN, $4, POKEMANIAC + $C8, $6
-	object SPRITE_BLACK_HAIR_BOY_2, $1a, $3, NONE, LEFT, $5, JUGGLER + $C8, $5
-	object SPRITE_BIRD, $b, $5, NONE, UP, $6, MOLTRES, 50 | OW_POKEMON
-	object SPRITE_BALL, $1b, $5, NONE, NONE, $7, TM_23
-	object SPRITE_BALL, $12, $9, NONE, NONE, $8, FULL_HEAL
-	object SPRITE_BALL, $9, $b, NONE, NONE, $9, TM_01
-	object SPRITE_BALL, $b, $0, NONE, NONE, $a, GUARD_SPEC_
+	object SPRITE_BLACKBELT, $c, $9, STAY, LEFT, $1, BLACKBELT + $C8, $9
+	object SPRITE_BLACK_HAIR_BOY_2, $15, $d, STAY, LEFT, $2, JUGGLER + $C8, $2
+	object SPRITE_BLACK_HAIR_BOY_1, $13, $8, STAY, DOWN, $3, TAMER + $C8, $5
+	object SPRITE_BLACK_HAIR_BOY_2, $4, $2, STAY, DOWN, $4, POKEMANIAC + $C8, $6
+	object SPRITE_BLACK_HAIR_BOY_2, $1a, $3, STAY, LEFT, $5, JUGGLER + $C8, $5
+	object SPRITE_BIRD, $b, $5, STAY, UP, $6, MOLTRES, 50 | OW_POKEMON
+	object SPRITE_BALL, $1b, $5, STAY, NONE, $7, TM_23
+	object SPRITE_BALL, $12, $9, STAY, NONE, $8, FULL_HEAL
+	object SPRITE_BALL, $9, $b, STAY, NONE, $9, TM_01
+	object SPRITE_BALL, $b, $0, STAY, NONE, $a, GUARD_SPEC_
 	object SPRITE_BOULDER, $4, $e, NONE, BOULDER_MOVEMENT_BYTE_2, $b ; person
 	object SPRITE_BOULDER, $5, $5, NONE, BOULDER_MOVEMENT_BYTE_2, $c ; person
 	object SPRITE_BOULDER, $17, $10, NONE, BOULDER_MOVEMENT_BYTE_2, $d ; person

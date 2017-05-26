@@ -8,9 +8,9 @@ DayCareMObject: ; 0x56459 (size=26)
 	db $0 ; signs
 
 	db $3 ; objects
-	object SPRITE_OLD_MEDIUM_WOMAN, $2, $3, NONE, RIGHT, $1 ; person
-    object SPRITE_OLD_PERSON, $5, $3, NONE, LEFT, $2 ; person
-    object SPRITE_GREETER, $6, $1, NONE, DOWN, $3 ; person
+	object SPRITE_OLD_MEDIUM_WOMAN, $2, $3, STAY, RIGHT, $1 ; person
+    object SPRITE_OLD_PERSON, $5, $3, STAY, LEFT, $2 ; person
+    object SPRITE_GREETER, $6, $1, STAY, DOWN, $3 ; person
 
 	; warp-to
 	EVENT_DISP DAYCAREM_WIDTH, $7, $2
