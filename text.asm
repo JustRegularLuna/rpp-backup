@@ -95,7 +95,7 @@ _OaksAideHiText:: ; 80143 (20:4143)
 	cont "Aide!"
 
 	para "If you caught @"
-	TX_NUM $ffdb, 1, 3
+	TX_NUM hOaksAideRequirement, 1, 3
 	db $0
 	line "kinds of #mon,"
 	cont "I'm supposed to"
@@ -107,7 +107,7 @@ _OaksAideHiText:: ; 80143 (20:4143)
 	para "So, [PLAYER]! Have"
 	line "you caught at"
 	cont "least @"
-	TX_NUM $ffdb, 1, 3
+	TX_NUM hOaksAideRequirement, 1, 3
 	text " kinds of"
 	cont "#mon?"
 	done
@@ -116,12 +116,12 @@ _OaksAideUhOhText:: ; 801e4 (20:41e4)
 	text "Let's see..."
 	line "Uh-oh! You have"
 	cont "caught only @"
-	TX_NUM $ffdd, 1, 3
+	TX_NUM hOaksAideNumMonsOwned, 1, 3
 	db $0
 	cont "kinds of #mon!"
 
 	para "You need @"
-	TX_NUM $ffdb, 1, 3
+	TX_NUM hOaksAideRequirement, 1, 3
 	text " kinds"
 	line "if you want the"
 	cont "@"
@@ -133,7 +133,7 @@ _OaksAideComeBackText:: ; 80250 (20:4250)
 	text "Oh. I see."
 
 	para "When you get @"
-	TX_NUM $ffdb, 1, 3
+	TX_NUM hOaksAideRequirement, 1, 3
 	db $0
 	line "kinds, come back"
 	cont "for @"
@@ -144,7 +144,7 @@ _OaksAideComeBackText:: ; 80250 (20:4250)
 _OaksAideHereYouGoText:: ; 8028c (20:428c)
 	text "Great! You have"
 	line "caught @"
-	TX_NUM $ffdd, 1, 3
+	TX_NUM hOaksAideNumMonsOwned, 1, 3
 	text " kinds "
 	cont "of #mon!"
 	cont "Congratulations!"

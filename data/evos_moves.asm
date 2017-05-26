@@ -3092,6 +3092,7 @@ Mon133_EvosMoves: ; 3b644 (e:7644)
 	db EV_MAP,SEAFOAM_ISLANDS_5,GLACEON ; The floor with Articuno
 	db EV_MAP,MT_MOON_SQUARE,SYLVEON ; Because that's where the meteor landed
 	db 0
+Mon133_EvosEnd:
 ;Learnset
 	db 1,TACKLE
 	db 1,GROWL

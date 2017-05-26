@@ -84,7 +84,7 @@ LoadMonData_:
 ;  3: daycaremon
 ;  4: daycaremon2
 ; Return monster id at wcf91 and its data at wLoadedMon.
-; Also load base stats at W_MONHDEXNUM for convenience.
+; Also load base stats at W_MONHEADER for convenience.
 
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
@@ -272,7 +272,7 @@ DetectCollisionBetweenSprites:
 	ld [hld], a ; zero [$c1ic] (directions in which collisions occurred)
 
 	ld a, [$ff91]
-	ld [hld], a ; [$c1ib] = adjusted X coordiate
+	ld [hld], a ; [$c1ib] = adjusted X coordinate
 	ld a, [$ff90]
 	ld [hl], a ; [$c1ia] = adjusted Y coordinate
 
@@ -533,7 +533,7 @@ INCLUDE "engine/cable_club.asm"
 LoadTrainerInfoTextBoxTiles: ; 5ae6 (1:5ae6)
 	ld de, TrainerInfoTextBoxTileGraphics
 	ld hl, vChars2 + $760
-	lb bc, BANK(TrainerInfoTextBoxTileGraphics), $09
+	lb bc, BANK(TrainerInfoTextBoxTileGraphics), (TrainerInfoTextBoxTileGraphicsEnd - TrainerInfoTextBoxTileGraphics) / $10
 	jp CopyVideoData
 
 INCLUDE "engine/menu/main_menu.asm"
@@ -2014,7 +2014,7 @@ ClearVariablesAfterLoadingMapData: ; c335 (3:4335)
 	ld [hli], a
 	ld [hl], a
 	ld hl, wWhichTrade
-	ld bc, $1e
+	ld bc, wStandingOnWarpPadOrHole - wWhichTrade
 	call FillMemory
 	ret
 
@@ -3262,7 +3262,7 @@ LoadMissableObjects: ; f132 (3:7132)
 
 InitializeMissableObjectsFlags: ; f175 (3:7175)
 	ld hl, wMissableObjectFlags
-	ld bc, $20
+	ld bc, wMissableObjectFlagsEnd - wMissableObjectFlags
 	xor a
 	call FillMemory ; clear missable objects flags
 	ld hl, MapHS00
@@ -3789,7 +3789,7 @@ AddPartyMon_WriteMovePP: ; f476 (3:7476)
 	push de
 	push bc
 	ld hl, Moves
-	ld bc, $6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
@@ -4182,7 +4182,7 @@ HealParty:
 	push bc
 
 	ld hl, Moves
-	ld bc, 6
+	ld bc, MoveEnd - Moves
 	call AddNTimes
 	ld de, wcd6d
 	ld a, BANK(Moves)
@@ -4793,17 +4793,24 @@ SECTION "Graphics", ROMX, BANK[GFX]
 
 PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.2bpp"
 FontGraphics:                   INCBIN "gfx/font.1bpp"
+FontGraphicsEnd:
 ABTiles:                        INCBIN "gfx/AB.2bpp"
 HpBarAndStatusGraphics:         INCBIN "gfx/hp_bar_and_status.2bpp"
 HpBarAndStatusGraphicsEnd:
 BattleHudTiles1:                INCBIN "gfx/battle_hud1.1bpp"
+BattleHudTiles1End:
 BattleHudTiles2:                INCBIN "gfx/battle_hud2.1bpp"
 BattleHudTiles3:                INCBIN "gfx/battle_hud3.1bpp"
+BattleHudTiles3End:
 NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
+GamefreakLogoGraphicsEnd:
 TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
+TextBoxGraphicsEnd:
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
+PokedexTileGraphicsEnd:
 PlayerCharacterTitleGraphics:   INCBIN "gfx/player_title.2bpp"
+PlayerCharacterTitleGraphicsEnd:
 
 
 SECTION "Battle (bank 4)", ROMX, BANK[$4]
@@ -5316,6 +5323,7 @@ SECTION "Battle (bank B)", ROMX, BANK[$B]
 INCLUDE "engine/battle/display_effectiveness.asm"
 
 TrainerInfoTextBoxTileGraphics:  INCBIN "gfx/trainer_info.2bpp"
+TrainerInfoTextBoxTileGraphicsEnd:
 BlankLeaderNames:                INCBIN "gfx/blank_leader_names.2bpp"
 CircleTile:                      INCBIN "gfx/circle_tile.2bpp"
 BadgeNumbersTileGraphics:        INCBIN "gfx/badge_numbers.2bpp"
@@ -6838,6 +6846,7 @@ SECTION "bank1A",ROMX,BANK[$1A]
 INCLUDE "engine/battle/decrement_pp.asm"
 
 Version_GFX:       INCBIN "gfx/red/redgreenversion.1bpp" ; 10 tiles
+Version_GFXEnd:
 
 OakTS_GFX:         INCBIN "gfx/tilesets/oakts.2bpp"
 OakTS_Block:       INCBIN "gfx/blocksets/oakts.bst"
@@ -7141,10 +7150,12 @@ SECTION "bank2F",ROMX,BANK[$2F]
 TradingAnimationGraphics:
 	INCBIN "gfx/game_boy.norepeat.2bpp"
 	INCBIN "gfx/link_cable.2bpp"
+TradingAnimationGraphicsEnd:
 
 TradingAnimationGraphics2:
 ; Pokeball traveling through the link cable.
 	INCBIN "gfx/trade2.2bpp"
+TradingAnimationGraphics2End:
 
 MissingnoPic::          INCBIN "pic/other/missingno.pic"
 

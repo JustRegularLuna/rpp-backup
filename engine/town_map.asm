@@ -304,7 +304,7 @@ LoadTownMap:
 	call DisableLCD
 	ld hl, WorldMapTileGraphics
     ld de, vChars2
-    ld bc, WorldMapTileGraphicsEnd - WorldMapTileGraphics
+	ld bc, WorldMapTileGraphicsEnd - WorldMapTileGraphics
 	ld a, BANK(WorldMapTileGraphics)
 	call FarCopyData2
 	ld hl, MonNestIcon

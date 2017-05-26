@@ -80,7 +80,7 @@ StatusScreen: ; 12953 (4:6953)
 	ld hl, wd72c
 	set 1, [hl]
 	ld a, $33
-	ld [$ff24], a ; Reduce the volume
+	ld [rNR50], a ; Reduce the volume
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
@@ -99,7 +99,7 @@ StatusScreen: ; 12953 (4:6953)
 	call CopyVideoDataDouble ; ─┘
 	ld de, PTile
 	ld hl, vChars2 + $720
-	lb bc, BANK(PTile), $01
+	lb bc, BANK(PTile), (PTileEnd - PTile) / $8
 	call CopyVideoDataDouble ; P (for PP), inline
 	ld a, [hTilesetType]
 	push af
@@ -150,7 +150,7 @@ StatusScreen: ; 12953 (4:6953)
 	call PlaceString ; "STATUS/"
 	coord hl, 14, 2
 	call PrintLevel ; Pokémon level
-	ld a, [W_MONHDEXNUM]
+	ld a, [W_MONHINDEX]
 	ld [wd11e], a
 	ld [wd0b5], a
 	predef IndexToPokedex
@@ -258,6 +258,7 @@ DrawLineBox: ; 0x12ac7
 
 PTile: ; 12adc (4:6adc) ; This is a single 1bpp "P" tile
 	INCBIN "gfx/p_tile.1bpp"
+PTileEnd:
 
 PrintShinySymbol:
 	; check if mon is shiny
@@ -422,7 +423,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call PrintNumber
 	ld a, "/"
 	ld [hli], a
-	ld de, wd11e
+	ld de, wMaxPP
 	lb bc, 1, 2
 	call PrintNumber
 	pop hl
@@ -467,7 +468,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call StatusScreen_ClearName
 	coord hl, 9, 1
 	call StatusScreen_ClearName
-	ld a, [W_MONHDEXNUM]
+	ld a, [W_MONHINDEX]
 	ld [wd11e], a
 	call GetMonName
 	coord hl, 9, 1
@@ -481,7 +482,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	ld hl, wd72c
 	res 1, [hl]
 	ld a, $77
-	ld [$ff24], a
+	ld [rNR50], a
 	call GBPalWhiteOut
 	jp ClearScreen
 

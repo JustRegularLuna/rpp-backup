@@ -348,7 +348,7 @@ BallAnyway:
 	ld b,$63
 .next12
 	ld a,b
-	ld [wd11e],a
+	ld [wPokeBallAnimData],a
 .BallSuccess2
 	ld c,20
 	call DelayFrames
@@ -367,7 +367,7 @@ BallAnyway:
 	ld [wcf91],a
 	pop af
 	ld [wWhichPokemon],a
-	ld a,[wd11e]
+	ld a,[wPokeBallAnimData]
 	cp a,$10
 	ld hl,ItemUseBallText00
 	jp z,.printText0
@@ -913,7 +913,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 .notFullHP ; if the pokemon's current HP doesn't equal its max HP
 	xor a
 	ld [wLowHealthAlarm],a ;disable low health alarm
-	ld [wc02a],a
+	ld [wChannelSoundIDs + CH4],a
 	push hl
 	push de
 	ld bc,32
@@ -969,7 +969,7 @@ ItemUseMedicine: ; dabb (3:5abb)
 	ld [wHPBarNewHP+1],a
 	coord hl, 4, 1
 	ld a,[wWhichPokemon]
-	ld bc,2 * 20
+	ld bc,2 * SCREEN_WIDTH
 	call AddNTimes ; calculate coordinates of HP bar of pokemon that used Softboiled
 	ld a,SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
@@ -1709,7 +1709,7 @@ ItemUsePokeflute: ; e140 (3:6140)
 	call WaitForSoundToFinish ; wait for sound to end
 	callba Music_PokeFluteInBattle ; play in-battle pokeflute music
 .musicWaitLoop ; wait for music to finish playing
-	ld a,[wc02c]
+	ld a,[wChannelSoundIDs + CH6]
 	and a ; music off?
 	jr nz,.musicWaitLoop
 .skipMusic
@@ -1782,8 +1782,8 @@ PlayedFluteHadEffectText: ; e215 (3:6215)
 	ld c, BANK(SFX_Pokeflute)
 	call PlayMusic
 .musicWaitLoop ; wait for music to finish playing
-	ld a,[wc028]
-	cp a,$b8
+	ld a,[wChannelSoundIDs + CH2]
+	cp a, SFX_POKEFLUE
 	jr z,.musicWaitLoop
 	call PlayDefaultMusic ; start playing normal music again
 .done
@@ -2043,7 +2043,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld [wPlayerMoveListIndex],a
 	jr nz,.chooseMon
 	ld hl,wPartyMon1Moves
-	ld bc,44
+	ld bc, wPartyMon2 - wPartyMon1
 	call GetSelectedMoveOffset
 	push hl
 	ld a,[hl]
@@ -2085,7 +2085,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 	cp b ; is the pokemon whose PP was restored active in battle?
 	jr nz,.skipUpdatingInBattleData
 	ld hl,wPartyMon1PP
-	ld bc,44
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld de,wBattleMonPP
 	ld bc,4
@@ -2107,12 +2107,12 @@ ItemUsePPRestore: ; e31e (3:631e)
 	ld [wMonDataLocation],a
 	call GetMaxPP
 	ld hl,wPartyMon1Moves
-	ld bc,44
+	ld bc, wPartyMon2 - wPartyMon1
 	call GetSelectedMoveOffset
-	ld bc,21
+	ld bc, wPartyMon1PP - wPartyMon1Moves
 	add hl,bc ; hl now points to move's PP
-	ld a,[wd11e]
-	ld b,a ; b = max PP
+	ld a,[wMaxPP]
+	ld b,a
 	ld a,[wPPRestoreItem]
 	cp a,MAX_ETHER
 	jr z,.fullyRestorePP
@@ -2157,7 +2157,7 @@ ItemUsePPRestore: ; e31e (3:631e)
 .elixirLoop
 	push bc
 	ld hl,wPartyMon1Moves
-	ld bc,44
+	ld bc, wPartyMon2 - wPartyMon1
 	call GetSelectedMoveOffset
 	ld a,[hl]
 	and a ; does the current slot have a move?
@@ -2431,20 +2431,17 @@ GotOffBicycleText: ; e5fc (3:65fc)
 ; also, when a PP Up is used, it increases the current PP by one PP Up bonus
 ; INPUT:
 ; [wWhichPokemon] = index of pokemon in party
-; [wd11e] = mode
-; 0: Pokemon Center healing
-; 1: using a PP Up
 ; [wCurrentMenuItem] = index of move (when using a PP Up)
 RestoreBonusPP: ; e606 (3:6606)
 	ld hl,wPartyMon1Moves
-	ld bc,44
+	ld bc, wPartyMon2 - wPartyMon1
 	ld a,[wWhichPokemon]
 	call AddNTimes
 	push hl
 	ld de,wNormalMaxPPList - 1
 	predef LoadMovePPs ; loads the normal max PP of each of the pokemon's moves to wNormalMaxPPList
 	pop hl
-	ld c,21
+	ld c, wPartyMon1PP - wPartyMon1Moves
 	ld b,0
 	add hl,bc ; hl now points to move 1 PP
 	ld de,wNormalMaxPPList
@@ -2455,7 +2452,7 @@ RestoreBonusPP: ; e606 (3:6606)
 	ld a,b
 	cp a,5 ; reached the end of the pokemon's moves?
 	ret z ; if so, return
-	ld a,[wd11e]
+	ld a,[wUsingPPUp]
 	dec a ; using a PP Up?
 	jr nz,.skipMenuItemIDCheck
 ; if using a PP Up, check if this is the move it's being used on
@@ -2477,8 +2474,6 @@ RestoreBonusPP: ; e606 (3:6606)
 ; INPUT:
 ; [de] = normal max PP
 ; [hl] = move PP
-; [wd11e] = max number of times to add bonus
-; set to 1 when using a PP Up, set to 255 otherwise
 AddBonusPP: ; e642 (3:6642)
 	push bc
 	ld a,[de] ; normal max PP of move
@@ -2506,9 +2501,9 @@ AddBonusPP: ; e642 (3:6642)
 .addAmount
 	add b
 	ld b,a
-	ld a,[wd11e]
-	dec a
-	jr z,.done
+	ld a,[wUsingPPUp]
+	dec a ; is the player using a PP Up right now?
+	jr z,.done ; if so, only add the bonus once
 	dec c
 	jr nz,.loop
 .done
@@ -2527,7 +2522,7 @@ AddBonusPP: ; e642 (3:6642)
 ; 04: player's in-battle pokemon
 ; [wCurrentMenuItem] = move index
 ; OUTPUT:
-; [wd11e] = max PP
+; [wMaxPP] = max PP
 GetMaxPP: ; e677 (3:6677)
 	ld a,[wMonDataLocation]
 	and a
@@ -2555,7 +2550,7 @@ GetMaxPP: ; e677 (3:6677)
 	dec a
 	push hl
 	ld hl,Moves
-	ld bc,6
+	ld bc,MoveEnd - Moves
 	call AddNTimes
 	ld de,wcd6d
 	ld a,BANK(Moves)
@@ -2580,12 +2575,12 @@ GetMaxPP: ; e677 (3:6677)
 	ld l,e
 	inc hl ; hl = wcd73
 	ld [hl],a
-	xor a
-	ld [wd11e],a ; no limit on PP Up amount
+	xor a ; add the bonus for the existing PP Up count
+	ld [wUsingPPUp],a
 	call AddBonusPP ; add bonus PP from PP Ups
 	ld a,[hl]
 	and a,%00111111 ; mask out the PP Up count
-	ld [wd11e],a ; store max PP
+	ld [wMaxPP],a ; store max PP
 	ret
 
 GetSelectedMoveOffset: ; e6e3 (3:66e3)

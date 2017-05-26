@@ -764,7 +764,7 @@ DoBallTossSpecialEffects: ; 78f3e (1e:4f3e)
 	dec b
 	jr nz,.loop
 	ld a,%00001000
-	ld [$ff10],a ; Channel 1 sweep register
+	ld [rNR10],a ; Channel 1 sweep register
 	ret
 .isTrainerBattle ; if it's a trainer battle, shorten the animation by one frame
 	ld a,[W_SUBANIMCOUNTER]
@@ -2327,19 +2327,19 @@ GetMoveSound: ; 7986f (1e:586f)
 	call GetCryData
 	ld b,a
 	pop hl
-	ld a,[wc0f1]
+	ld a,[wFrequencyModifier]
 	add [hl]
-	ld [wc0f1],a
+	ld [wFrequencyModifier],a
 	inc hl
-	ld a,[wc0f2]
+	ld a,[wTempoModifier]
 	add [hl]
-	ld [wc0f2],a
+	ld [wTempoModifier],a
 	jr .done
 .NotCryMove
 	ld a,[hli]
-	ld [wc0f1],a
+	ld [wFrequencyModifier],a
 	ld a,[hli]
-	ld [wc0f2],a
+	ld [wTempoModifier],a
 .done
 	ld a,b
 	ret
@@ -2952,7 +2952,7 @@ TossBallAnimation: ; 79e16 (1e:5e16)
 	cp a,2
 	jr z,.BlockBall ; if in trainer battle, play different animation
 .skipTrainerCheck
-	ld a,[wd11e]
+	ld a,[wPokeBallAnimData]
 	ld b,a
 
 	; upper nybble: how many animations (from PokeBallAnimations) to play
@@ -3032,8 +3032,8 @@ PlayApplyingAttackSound: ; 79e6a (1e:5e6a)
 	ld b, $30
 	ld c, SFX_DAMAGE
 .playSound
-	ld [wc0f1], a
+	ld [wFrequencyModifier], a
 	ld a, b
-	ld [wc0f2], a
+	ld [wTempoModifier], a
 	ld a, c
 	jp PlaySound
