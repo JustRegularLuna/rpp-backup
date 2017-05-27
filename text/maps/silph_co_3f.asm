@@ -42,4 +42,3 @@ _SilphCo3AfterBattleText2::
 	cont "them, they'd let"
 	cont "me study #mon!"
 	done
-

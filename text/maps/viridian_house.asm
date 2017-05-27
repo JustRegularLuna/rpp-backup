@@ -21,4 +21,3 @@ _ViridianHouseText4::
 	text "Spearow"
 	line "Name: Speary"
 	done
-

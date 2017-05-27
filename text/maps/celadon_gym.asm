@@ -210,4 +210,3 @@ _CeladonGymAfterBattleText8::
 	para "Wait 'til next"
 	line "time!"
 	done
-

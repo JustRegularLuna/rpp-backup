@@ -205,4 +205,3 @@ _CinnabarGymText_75ac7::
 	text "[PLAYER]! You beat"
 	line "that fire brand!"
 	done
-

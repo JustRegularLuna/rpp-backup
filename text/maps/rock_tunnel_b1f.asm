@@ -110,4 +110,3 @@ _RockTunnel1Text8::
 	line "Lavender Town -"
 	cont "Cerulean City"
 	done
-

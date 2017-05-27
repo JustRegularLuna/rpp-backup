@@ -92,4 +92,3 @@ _Route6Text7::
 	line "Cerulean City -"
 	cont "Vermilion City"
 	done
-

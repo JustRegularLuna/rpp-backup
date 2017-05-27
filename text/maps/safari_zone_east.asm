@@ -15,4 +15,3 @@ _SafariZoneEastText7::
 	
 	para "North: Area 2"
 	done
-

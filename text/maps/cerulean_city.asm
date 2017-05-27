@@ -231,4 +231,3 @@ _CeruleanCityText17::
 	para "The tomboyish"
 	line "mermaid!"
 	done
-

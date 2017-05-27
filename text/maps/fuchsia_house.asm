@@ -23,4 +23,3 @@ _FuchsiaHouse1Text3:: ; kid at the bookshelf
 	line "best moves for my"
 	cont "Sylveon to know."
 	done
-

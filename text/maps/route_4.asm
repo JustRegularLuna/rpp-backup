@@ -33,4 +33,3 @@ _Route4Text6::
 	line "Mt. Moon -"
 	cont "Cerulean City"
 	done
-

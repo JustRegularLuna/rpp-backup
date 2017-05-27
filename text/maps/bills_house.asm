@@ -85,4 +85,3 @@ _BillsHouseText_1e8da::
 	cont "some of my rare"
 	cont "#mon on my PC!"
 	done
-

@@ -31,4 +31,3 @@ _MansionSwitchPressedText::
 _MansionSwitchNotPressedText::
 	text "Not quite yet!"
 	done
-

@@ -68,4 +68,3 @@ _PokemonTower5Text7::
 	para "[PLAYER]'s #mon"
 	line "are fully healed!"
 	done
-

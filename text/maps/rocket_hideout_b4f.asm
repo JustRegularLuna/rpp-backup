@@ -76,4 +76,3 @@ _RocketHideout4Text_455ec::
 	text "Oh no! I dropped"
 	line "the Lift Key!"
 	done
-

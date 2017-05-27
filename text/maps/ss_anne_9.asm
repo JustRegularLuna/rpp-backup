@@ -111,4 +111,3 @@ _SSAnne9AfterBattleText4::
 	cont "the party, but I"
 	cont "was mistaken."
 	done
-

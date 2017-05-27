@@ -147,4 +147,3 @@ _Route3Text10::
 	line "Pewter City -"
 	cont "Mt. Moon"
 	done
-

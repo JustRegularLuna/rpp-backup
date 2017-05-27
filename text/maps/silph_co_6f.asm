@@ -107,4 +107,3 @@ _SilphCo6AfterBattleText4::
 	line "justice, you"
 	cont "betray evil!"
 	done
-

@@ -60,4 +60,3 @@ _VictoryRoad3AfterBattleText5::
 	line "battles, you get"
 	cont "stronger!"
 	done
-

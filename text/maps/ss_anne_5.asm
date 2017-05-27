@@ -50,4 +50,3 @@ _SSAnne5AfterBattleText2::
 	cont "#mon. I think"
 	cont "there are more."
 	done
-

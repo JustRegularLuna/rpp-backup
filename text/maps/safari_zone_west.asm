@@ -30,4 +30,3 @@ _SafariZoneWestText8::
 	
 	para "East: Center Area"
 	done
-

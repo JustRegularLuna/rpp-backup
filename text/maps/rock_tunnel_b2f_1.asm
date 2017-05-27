@@ -105,4 +105,3 @@ _RockTunnel2BattleText8::
 _RockTunnel2EndBattleText8::
 	text "Fired away!"
 	prompt
-

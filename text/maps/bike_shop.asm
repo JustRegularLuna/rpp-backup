@@ -68,4 +68,3 @@ _BikeShopText_1d861::
 	text "Wow. Your Bike is"
 	line "really cool!"
 	done
-

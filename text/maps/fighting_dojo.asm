@@ -126,4 +126,3 @@ _OtherHitmonText::
 	text "Better not get"
 	line "greedy..."
 	done
-

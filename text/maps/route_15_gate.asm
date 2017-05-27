@@ -5,4 +5,3 @@ _Route15GateText1::
 	para "Prof. Oak's Aide"
 	line "came by here."
 	done
-

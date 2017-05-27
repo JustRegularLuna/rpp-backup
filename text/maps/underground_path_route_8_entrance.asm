@@ -3,4 +3,3 @@ _UndergroundPathEntRoute8Text1::
 	line "in Celadon has a"
 	cont "great selection!"
 	done
-

@@ -26,4 +26,3 @@ _HallofFameRoomText1::
 	cont "your #mon are"
 	cont "Hall of Famers!"
 	done
-

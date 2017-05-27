@@ -151,4 +151,3 @@ _Route20Text12::
 _Route20Text11::
 	text "Seafoam Islands"
 	done
-

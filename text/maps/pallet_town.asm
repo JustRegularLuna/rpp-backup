@@ -54,4 +54,3 @@ _PalletTownText6::
 _PalletTownText7::
 	text "[RIVAL]'s house "
 	done
-

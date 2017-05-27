@@ -3,4 +3,3 @@ _UndergroundPathEntRoute7Text1::
 	line "#mon appeared"
 	cont "near Celadon City."
 	done
-

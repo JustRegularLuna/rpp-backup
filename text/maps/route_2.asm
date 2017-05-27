@@ -7,4 +7,3 @@ _Route2Text3::
 _Route2Text4::
 	text "Diglett's Cave"
 	done
-

@@ -110,4 +110,3 @@ _SSAnne10Text7::
 	line "Strength to move"
 	cont "big rocks!"
 	done
-

@@ -25,4 +25,3 @@ _SafariZoneRestHouse4Text3::
 	cont "a Vaporeon!"
 	cont "I wonder why?"
 	done
-

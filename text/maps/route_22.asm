@@ -102,4 +102,3 @@ _Route22FrontGateText::
 	text "#mon League"
 	line "Front Gate"
 	done
-

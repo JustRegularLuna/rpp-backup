@@ -29,4 +29,3 @@ _HM02NoRoomText::
 _Route16HouseText_1e652::
 	text "Fearow: Kyueen!"
 	done
-

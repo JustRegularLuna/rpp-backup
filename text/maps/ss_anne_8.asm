@@ -103,4 +103,3 @@ _SSAnne8Text11::
 	cont "On the trail of"
 	cont "Team Rocket!"
 	done
-

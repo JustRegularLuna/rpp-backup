@@ -138,4 +138,3 @@ _Route12Text12::
 	text "Silence Bridge"
 	line "Sport Fishing Area"
 	done
-

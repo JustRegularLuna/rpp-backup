@@ -56,4 +56,3 @@ _Route18Text5::
 	para "No pedestrians"
 	line "permitted!"
 	done
-

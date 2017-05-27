@@ -63,4 +63,3 @@ _SSAnneRivalCaptainText::
 	para "Smell ya later,"
 	line "[PLAYER]!"
 	done
-

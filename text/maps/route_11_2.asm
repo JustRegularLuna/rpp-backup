@@ -26,4 +26,3 @@ _Route11AfterBattleText10::
 _Route11Text11::
 	text "Diglett's Cave"
 	done
-

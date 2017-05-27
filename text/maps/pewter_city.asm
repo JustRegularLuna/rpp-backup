@@ -116,4 +116,3 @@ _PewterCityText12::
 	para "A stone gray"
 	line "city"
 	done
-

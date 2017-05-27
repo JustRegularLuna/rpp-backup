@@ -64,4 +64,3 @@ _SilphCo9AfterBattleText3::
 	line "cocky because"
 	cont "you beat me!"
 	done
-

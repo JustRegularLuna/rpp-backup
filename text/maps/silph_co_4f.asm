@@ -53,4 +53,3 @@ _SilphCo4AfterBattleText4::
 	text "I better tell the"
 	line "Boss on 11F!"
 	done
-

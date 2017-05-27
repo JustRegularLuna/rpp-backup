@@ -198,4 +198,3 @@ _Route17Text16::
 	
 	para "Slope ends here!"
 	done
-

@@ -143,4 +143,3 @@ _Route21AfterBattleText9::
 	text "Oh wait! I got a"
 	line "bite! Yeah!"
 	done
-

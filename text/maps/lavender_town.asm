@@ -64,4 +64,3 @@ _LavenderTownText9::
 	
 	para "#mon Tower"
 	done
-

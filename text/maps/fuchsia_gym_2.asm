@@ -189,4 +189,3 @@ _FuchsiaGymText_75653::
 	line "ninja can terrify"
 	cont "even now!"
 	done
-

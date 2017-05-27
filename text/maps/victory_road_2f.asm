@@ -80,4 +80,3 @@ _VictoryRoad2AfterBattleText5::
 	line "up the challenge"
 	cont "here."
 	done
-

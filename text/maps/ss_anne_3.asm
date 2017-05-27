@@ -5,4 +5,3 @@ _SSAnne3Text1::
 	para "He even teaches"
 	line "Cut to #mon!"
 	done
-

@@ -14,4 +14,3 @@ _RocketHideout2AfterBattleTxt2::
 	cont "floors. Can you"
 	cont "reach the Boss?"
 	done
-

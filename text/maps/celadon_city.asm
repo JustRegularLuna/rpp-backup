@@ -149,4 +149,3 @@ _CeladonCityText18::
 	para "The playground"
 	line "for everybody!"
 	done
-
