@@ -4,4 +4,3 @@ TowerMons2:
 	
 ; Water Mons
 	db $00
-

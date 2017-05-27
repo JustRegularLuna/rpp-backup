@@ -4,4 +4,3 @@ NoMons:
 	
 ; Water Mons
 	db $00
-
