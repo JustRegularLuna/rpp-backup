@@ -280,7 +280,7 @@ StatusAilmentText2: ; 5ddbb (17:5dbb)
 ViridianBlackboardStatusPointers: ; 5ddcc (17:5ddc)
 	dw ViridianBlackboardSleepText
 	dw ViridianBlackboardPoisonText
-	dw ViridianBlackbaordPrlzText
+	dw ViridianBlackboardPrlzText
 	dw ViridianBlackboardBurnText
 	dw ViridianBlackboardFrozenText
 
@@ -292,8 +292,8 @@ ViridianBlackboardPoisonText: ; 5dddb (17:5ddb)
 	TX_FAR _ViridianBlackboardPoisonText
 	db "@"
 
-ViridianBlackbaordPrlzText: ; 5dde0 (17:5de0)
-	TX_FAR _ViridianBlackbaordPrlzText
+ViridianBlackboardPrlzText: ; 5dde0 (17:5de0)
+	TX_FAR _ViridianBlackboardPrlzText
 	db "@"
 
 ViridianBlackboardBurnText: ; 5dde5 (17:5de5)
@@ -402,7 +402,7 @@ GymTrashScript: ; 5ddfc (17:5dfc)
 .openSecondLock
 ; Completed the trash can puzzle.
 	SetEvent EVENT_2ND_LOCK_OPENED
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 6, [hl]
 
 	tx_pre_id VermilionGymTrashSuccesText3

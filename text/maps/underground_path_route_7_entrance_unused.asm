@@ -1,4 +1,4 @@
-_UGPathRoute7EntranceUnusedText_5d773:: ; 8c132 (23:4132)
+_UGPathRoute7EntranceUnusedText_5d773::
 	text "I want to shop at"
 	line "the Dept. Store"
 	cont "in Celadon but..."
@@ -8,13 +8,13 @@ _UGPathRoute7EntranceUnusedText_5d773:: ; 8c132 (23:4132)
 	cont "people there."
 	done
 
-_UGPathRoute7EntranceUnusedText_5d778:: ; 8c195 (23:4195)
+_UGPathRoute7EntranceUnusedText_5d778::
 	text "Team Rocket had a"
 	line "secret hideout in"
 	cont "Celadon City?"
 	done
 
-_UGPathRoute7EntranceUnusedText_5d77d:: ; 8c1c8 (23:41c8)
+_UGPathRoute7EntranceUnusedText_5d77d::
 	text "You're here to"
 	line "shop in Celadon?"
 
@@ -22,7 +22,7 @@ _UGPathRoute7EntranceUnusedText_5d77d:: ; 8c1c8 (23:41c8)
 	line "and head west!"
 	done
 
-_UGPathRoute7EntranceUnusedText_5d782:: ; 8c209 (23:4209)
+_UGPathRoute7EntranceUnusedText_5d782::
 	text "The Underground"
 	line "Path goes beneath"
 	cont "Saffron and leads"

@@ -1,5 +1,5 @@
 InsideFerryScript: ; setup the stuff when you walk inside
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	push hl

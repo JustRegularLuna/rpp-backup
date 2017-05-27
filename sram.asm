@@ -1,12 +1,7 @@
 SECTION "Sprite Buffers", SRAM, BANK[0]
-; Named twice since I still have the old names most places
-S_SPRITEBUFFER0::
+
 sSpriteBuffer0:: ds SPRITEBUFFERSIZE ; a000
-
-S_SPRITEBUFFER1::
 sSpriteBuffer1:: ds SPRITEBUFFERSIZE ; a188
-
-S_SPRITEBUFFER2::
 sSpriteBuffer2:: ds SPRITEBUFFERSIZE ; a310
 
 	ds $100

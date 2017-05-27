@@ -789,15 +789,15 @@ LoadUncompressedSpriteData:: ; 1672 (0:1672)
 	ld [H_SPRITEOFFSET], a
 	xor a
 	ld [$4000], a
-	ld hl, S_SPRITEBUFFER0
+	ld hl, sSpriteBuffer0
 	call ZeroSpriteBuffer   ; zero buffer 0
-	ld de, S_SPRITEBUFFER1
-	ld hl, S_SPRITEBUFFER0
+	ld de, sSpriteBuffer1
+	ld hl, sSpriteBuffer0
 	call AlignSpriteDataCentered    ; copy and align buffer 1 to 0 (containing the MSB of the 2bpp sprite)
-	ld hl, S_SPRITEBUFFER1
+	ld hl, sSpriteBuffer1
 	call ZeroSpriteBuffer   ; zero buffer 1
-	ld de, S_SPRITEBUFFER2
-	ld hl, S_SPRITEBUFFER1
+	ld de, sSpriteBuffer2
+	ld hl, sSpriteBuffer1
 	call AlignSpriteDataCentered    ; copy and align buffer 2 to 1 (containing the LSB of the 2bpp sprite)
 	pop de
 	jp InterlaceMergeSpriteBuffers
@@ -848,9 +848,9 @@ InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	xor a
 	ld [$4000], a
 	push de
-	ld hl, S_SPRITEBUFFER2 + (SPRITEBUFFERSIZE - 1) ; destination: end of buffer 2
-	ld de, S_SPRITEBUFFER1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
-	ld bc, S_SPRITEBUFFER0 + (SPRITEBUFFERSIZE - 1) ; source 1: end of buffer 0
+	ld hl, sSpriteBuffer2 + (SPRITEBUFFERSIZE - 1) ; destination: end of buffer 2
+	ld de, sSpriteBuffer1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
+	ld bc, sSpriteBuffer0 + (SPRITEBUFFERSIZE - 1) ; source 1: end of buffer 0
 	ld a, SPRITEBUFFERSIZE/2 ; $c4
 	ld [H_SPRITEINTERLACECOUNTER], a
 .interlaceLoop
@@ -874,7 +874,7 @@ InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	and a
 	jr z, .notFlipped
 	ld bc, 2*SPRITEBUFFERSIZE
-	ld hl, S_SPRITEBUFFER1
+	ld hl, sSpriteBuffer1
 .swapLoop
 	swap [hl]    ; if flipped swap nybbles in all bytes
 	inc hl
@@ -884,7 +884,7 @@ InterlaceMergeSpriteBuffers:: ; 16ea (0:16ea)
 	jr nz, .swapLoop
 .notFlipped
 	pop hl
-	ld de, S_SPRITEBUFFER1
+	ld de, sSpriteBuffer1
 	ld c, (2*SPRITEBUFFERSIZE)/16 ; $31, number of 16 byte chunks to be copied
 	ld a, [H_LOADEDROMBANK]
 	ld b, a
@@ -2379,7 +2379,7 @@ StartTrainerBattle:: ; 325d (0:325d)
 	ret
 
 EndTrainerBattle:: ; 3275 (0:3275)
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
 	ld hl, wd72d

@@ -32,7 +32,7 @@ EnterMap::
 	ld hl, wd72d
 	res 5, [hl]
 	call UpdateSprites
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
 	set 6, [hl]
 	xor a
@@ -345,7 +345,7 @@ OverworldLoopLessDelay::
 	res 6,[hl]
 	ld hl,wFlags_D733
 	res 3,[hl]
-	ld hl,wd126
+	ld hl,wCurrentMapScriptFlags
 	set 5,[hl]
 	set 6,[hl]
 	xor a

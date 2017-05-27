@@ -1,9 +1,9 @@
 # Linux
 
-	sudo apt-get install make gcc bison git python python-setuptools
-	sudo easy_install pypng
+	sudo apt-get install make gcc bison git python python-pip
+	sudo pip install pypng
 
-	git clone git://github.com/bentley/rgbds.git
+	git clone https://github.com/bentley/rgbds
 	cd rgbds
 	sudo make install
 	cd ..
@@ -23,12 +23,12 @@ To build them individually:
 
 # Mac
 
-In the shell, run:
+In **Terminal**, run:
 
 	xcode-select --install
 	sudo easy_install pypng
 
-	git clone git://github.com/bentley/rgbds.git
+	git clone https://github.com/bentley/rgbds
 	cd rgbds
 	sudo make install
 	cd ..

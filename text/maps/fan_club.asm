@@ -125,19 +125,19 @@ FanClubBagFullText::
 	line "this!"
 	done
 
-_FanClubText6:: ; 9a948 (26:6948)
+_FanClubText6::
 	text "Our Chairman is"
 	line "very vocal about"
 	cont "#mon."
 	done
 
-_FanClubText7:: ; 9a970 (26:6970)
+_FanClubText7::
 	text "Let's all listen"
 	line "politely to other"
 	cont "trainers!"
 	done
 
-_FanClubText8:: ; 9a99d (26:699d)
+_FanClubText8::
 	text "If someone brags,"
 	line "brag right back!"
 	done

@@ -2233,7 +2233,7 @@ wIsKeyItem:: ; d124
 wTextBoxID:: ; d125
 	ds 1
 
-wd126:: ds 1 ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
+wCurrentMapScriptFlags:: ds 1 ; not exactly sure what this is used for, but it seems to be used as a multipurpose temp flag value
 
 wCurEnemyLVL:: ; d127
 	ds 1
@@ -2429,7 +2429,7 @@ wOptions:: ; d355
 	ds 1
 
 wObtainedKantoBadges:: ; d356
-	ds 1
+	flag_array 8
 
 wObtainedJohtoBadges::
 	ds 1
@@ -3303,10 +3303,10 @@ wSerialEnemyDataBlock:: ; d893
 wEnemyPartyCount:: ds 1     ; d89c
 wEnemyPartyMons::  ds PARTY_LENGTH + 1 ; d89d
 
-wWaterRate:: db
-wWaterMons:: db
+; Overload enemy party data
+wWaterRate:: db ; d8a4
+wWaterMons:: db ; d8a5
 
-; overload water rate
 	ds wWaterRate - @
 
 wEnemyMons:: ; d8a4
@@ -3343,11 +3343,11 @@ wCurMapScript:: ; da39
 ; unused?
 	ds 7
 
-wPlayTimeHours:: ; da40
+wPlayTimeHours:: ; da41
 	ds 1
-wPlayTimeMaxed::
+wPlayTimeMaxed:: ; da42
 	ds 1
-wPlayTimeMinutes:: ; da42
+wPlayTimeMinutes:: ; da43
 	ds 1
 wPlayTimeSeconds:: ; da44
 	ds 1

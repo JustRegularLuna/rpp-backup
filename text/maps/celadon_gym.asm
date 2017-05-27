@@ -1,4 +1,4 @@
-_CeladonGymText_48a5e:: ; 9d28f (27:528f)
+_CeladonGymText_48a5e::
 	text "Hello. Lovely"
 	line "weather isn't it?"
 	cont "It's so pleasant."
@@ -25,7 +25,7 @@ _CeladonGymText_48a5e:: ; 9d28f (27:528f)
 	line "shall not lose."
 	done
 
-_CeladonGymText_48a63:: ; 9d3c2 (27:53c2)
+_CeladonGymText_48a63::
 	text "Oh!"
 	line "I concede defeat."
 
@@ -36,7 +36,7 @@ _CeladonGymText_48a63:: ; 9d3c2 (27:53c2)
 	line "the RainbowBadge."
 	prompt
 
-_CeladonGymText_48a68:: ; 9d418 (27:5418)
+_CeladonGymText_48a68::
 	text "You are cataloging"
 	line "#mon? I must"
 	cont "say I'm impressed."
@@ -47,7 +47,7 @@ _CeladonGymText_48a68:: ; 9d418 (27:5418)
 	cont "unattractive."
 	done
 
-_CeladonGymText9:: ; 9d481 (27:5481)
+_CeladonGymText9::
 	text "The RainbowBadge"
 	line "will make #mon"
 	cont "up to Lv50 obey."
@@ -61,13 +61,13 @@ _CeladonGymText9:: ; 9d481 (27:5481)
 	line "this with you."
 	done
 
-_ReceivedTM21Text:: ; 9d50c (27:550c)
+_ReceivedTM21Text::
 	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
 
-_TM21ExplanationText:: ; 9d520 (27:5520)
+_TM21ExplanationText::
 	db $0
 	para "TM21 contains"
 	line "Giga Drain."
@@ -78,38 +78,38 @@ _TM21ExplanationText:: ; 9d520 (27:5520)
 	cont "your #mon!"
 	done
 
-_TM21NoRoomText:: ; 9d576 (27:5576)
+_TM21NoRoomText::
 	text "You should make"
 	line "room for this."
 	done
 
-_CeladonGymBattleText2:: ; 9d596 (27:5596)
+_CeladonGymBattleText2::
 	text "Hey!"
 
 	para "What are you"
 	line "doing in here?"
 	done
 
-_CeladonGymEndBattleText2:: ; 9d5b9 (27:55b9)
+_CeladonGymEndBattleText2::
 	text "You're too rough!"
 	prompt
 
-_CeladonGymAfterBattleText2:: ; 9d5cb (27:55cb)
+_CeladonGymAfterBattleText2::
 	text "Ugg!"
 	line "I hope Erika"
 	cont "wipes you out!"
 	done
 
-_CeladonGymBattleText3:: ; 9d5f0 (27:55f0)
+_CeladonGymBattleText3::
 	text "I was getting"
 	line "bored."
 	done
 
-_CeladonGymEndBattleText3:: ; 9d606 (27:5606)
+_CeladonGymEndBattleText3::
 	text "My makeup!"
 	prompt
 
-_CeladonGymAfterBattleText3:: ; 9d612 (27:5612)
+_CeladonGymAfterBattleText3::
 	text "Grass-type #mon"
 	line "are tough against"
 	cont "the water-type!"
@@ -119,22 +119,22 @@ _CeladonGymAfterBattleText3:: ; 9d612 (27:5612)
 	cont "ground #mon!"
 	done
 
-_CeladonGymBattleText4:: ; 9d675 (27:5675)
+_CeladonGymBattleText4::
 	text "Someone has been"
 	line "spying on us!"
 	done
 
-_CeladonGymEndBattleText4:: ; 9d691 (27:5691)
+_CeladonGymEndBattleText4::
 	text "I'm in shock!"
 	prompt
 
-_CeladonGymAfterBattleText4:: ; 9d69f (27:569f)
+_CeladonGymAfterBattleText4::
 	text "Oh, you weren't"
 	line "peeping? We get a"
 	cont "lot of gawkers!"
 	done
 
-_CeladonGymBattleText5:: ; 9d6d1 (27:56d1)
+_CeladonGymBattleText5::
 	text "Look at my grass"
 	line "#mon!"
 
@@ -142,11 +142,11 @@ _CeladonGymBattleText5:: ; 9d6d1 (27:56d1)
 	line "to raise!"
 	done
 
-_CeladonGymEndBattleText5:: ; 9d702 (27:5702)
+_CeladonGymEndBattleText5::
 	text "No!"
 	prompt
 
-_CeladonGymAfterBattleText5:: ; 9d707 (27:5707)
+_CeladonGymAfterBattleText5::
 	text "We only use grass-"
 	line "type #mon at"
 	cont "our Gym!"
@@ -156,41 +156,41 @@ _CeladonGymAfterBattleText5:: ; 9d707 (27:5707)
 	cont "arrangements!"
 	done
 
-_CeladonGymBattleText6:: ; 9d762 (27:5762)
+_CeladonGymBattleText6::
 	text "Don't bring any"
 	line "bugs or fire"
 	cont "#mon in here!"
 	done
 
-_CeladonGymEndBattleText6:: ; 9d78d (27:578d)
+_CeladonGymEndBattleText6::
 	text "Oh! You!"
 	prompt
 
-_CeladonGymAfterBattleText6:: ; 9d797 (27:5797)
+_CeladonGymAfterBattleText6::
 	text "Our Leader, Erika,"
 	line "might be quiet,"
 	cont "but she's also"
 	cont "very skilled!"
 	done
 
-_CeladonGymBattleText7:: ; 9d7d7 (27:57d7)
+_CeladonGymBattleText7::
 	text "Pleased to meet"
 	line "you. My hobby is"
 	cont "#mon training."
 	done
 
-_CeladonGymEndBattleText7:: ; 9d808 (27:5808)
+_CeladonGymEndBattleText7::
 	text "Oh! Splendid!"
 	prompt
 
-_CeladonGymAfterBattleText7:: ; 9d817 (27:5817)
+_CeladonGymAfterBattleText7::
 	text "I have a blind"
 	line "date coming up."
 	cont "I have to learn"
 	cont "to be polite."
 	done
 
-_CeladonGymBattleText8:: ; 9d855 (27:5855)
+_CeladonGymBattleText8::
 	text "Welcome to"
 	line "Celadon Gym!"
 
@@ -199,11 +199,11 @@ _CeladonGymBattleText8:: ; 9d855 (27:5855)
 	cont "girl power!"
 	done
 
-_CeladonGymEndBattleText8:: ; 9d897 (27:5897)
+_CeladonGymEndBattleText8::
 	text "Oh! Beaten!"
 	prompt
 
-_CeladonGymAfterBattleText8:: ; 9d8a4 (27:58a4)
+_CeladonGymAfterBattleText8::
 	text "I didn't bring my"
 	line "best #mon!"
 

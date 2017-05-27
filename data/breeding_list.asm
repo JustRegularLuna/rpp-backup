@@ -82,7 +82,7 @@ db SLOWPOKE   ; Slowpoke
 db SLOWPOKE   ; Slowbro
 db MAGNEMITE  ; Magnemite
 db MAGNEMITE  ; Magneton
-db FARFETCH_D ; Farfetch'd
+db FARFETCHD  ; Farfetch'd
 db DODUO      ; Doduo
 db DODUO      ; Dodrio
 db SEEL       ; Seel

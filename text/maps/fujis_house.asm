@@ -1,16 +1,16 @@
-_LavenderHouse1Text_1d8d1:: ; 99e8d (26:5e8d)
+_LavenderHouse1Text_1d8d1::
 	text "That's odd, Mr.Fuji"
 	line "isn't here."
 	cont "Where'd he go?"
 	done
 
-_LavenderHouse1Text_1d8d6:: ; 99eba (26:5eba)
+_LavenderHouse1Text_1d8d6::
 	text "Mr.Fuji had been"
 	line "praying alone for"
 	cont "Cubone's mother."
 	done
 
-_LavenderHouse1Text_1d8f4:: ; 99eee (26:5eee)
+_LavenderHouse1Text_1d8f4::
 	text "This is really"
 	line "Mr. Fuji's house."
 
@@ -21,19 +21,19 @@ _LavenderHouse1Text_1d8f4:: ; 99eee (26:5eee)
 	cont "orphaned #mon!"
 	done
 
-_LavenderHouse1Text_1d8f9:: ; 99f4b (26:5f4b)
+_LavenderHouse1Text_1d8f9::
 	text "It's so warm!"
 	line "#mon are so"
 	cont "nice to hug!"
 	done
 
-_LavenderHouse1Text3:: ; 99f72 (26:5f72)
+_LavenderHouse1Text3::
 	text "Psyduck: Gwappa!@@"
 
-_LavenderHouse1Text4:: ; 99f85 (26:5f85)
+_LavenderHouse1Text4::
 	text "Nidorino: Gaoo!@@"
 
-_LavenderHouse1Text_1d94c:: ; 99f97 (26:5f97)
+_LavenderHouse1Text_1d94c::
 	text "Mr.Fuji: [PLAYER]."
 
 	para "Your #dex quest"
@@ -45,13 +45,13 @@ _LavenderHouse1Text_1d94c:: ; 99f97 (26:5f97)
 	line "help your quest."
 	prompt
 
-_ReceivedFluteText:: ; 99ffb (26:5ffb)
+_ReceivedFluteText::
 	text "[PLAYER] received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"
 
-_FluteExplanationText:: ; 9a011 (26:6011)
+_FluteExplanationText::
 	db $0
 	para "Upon hearing #"
 	line "Flute, sleeping"
@@ -62,17 +62,17 @@ _FluteExplanationText:: ; 9a011 (26:6011)
 	line "sleeping #mon."
 	done
 
-_FluteNoRoomText:: ; 9a069 (26:6069)
+_FluteNoRoomText::
 	text "You must make"
 	line "room for this!"
 	done
 
-_MrFujiAfterFluteText:: ; 9a087 (26:6087)
+_MrFujiAfterFluteText::
 	text "Mr.Fuji: Has my"
 	line "Flute helped you?"
 	done
 
-_LavenderHouse1Text6:: ; 9a0aa (26:60aa)
+_LavenderHouse1Text6::
 	text "#mon Monthly"
 	line "Grand Prize"
 	cont "Drawing!"

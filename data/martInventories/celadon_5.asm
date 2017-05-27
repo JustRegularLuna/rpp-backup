@@ -3,7 +3,7 @@ CeladonMart5Text3:: ; 2496 (0:2496)
 	db MART_LIST
 	db 7
 	db X_ACCURACY
-	db GUARD_SPEC_
+	db GUARD_SPEC
 	db DIRE_HIT
 	db X_ATTACK
 	db X_DEFEND

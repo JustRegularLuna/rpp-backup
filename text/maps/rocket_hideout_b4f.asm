@@ -1,15 +1,15 @@
-_RocketHideout4Text_4557a:: ; 8223e (20:623e)
+_RocketHideout4Text_4557a::
 	text "So! I must say, I"
 	line "am impressed you"
 	cont "got here!"
 	done
 
-_RocketHideout4Text_4557f:: ; 8226c (20:626c)
+_RocketHideout4Text_4557f::
 	text "WHAT!"
 	line "This cannot be!"
 	prompt
 
-_RocketHideout4Text_45584:: ; 82283 (20:6283)
+_RocketHideout4Text_45584::
 	text "I see that you"
 	line "raise #mon"
 	cont "with utmost care."
@@ -26,25 +26,25 @@ _RocketHideout4Text_45584:: ; 82283 (20:6283)
 	line "again..."
 	done
 
-_RocketHideout4BattleText2:: ; 82326 (20:6326)
+_RocketHideout4BattleText2::
 	text "E-he-he-he! Look"
 	line "at this! A twerp"
 	cont "thinking they can"
 	cont "take on the Boss!"
 	done
 
-_RocketHideout4EndBattleText2:: ; 82354 (20:6354)
+_RocketHideout4EndBattleText2::
 	text "I'm feeling"
 	line "dizzy..."
 	prompt
 
-_RocketHide4AfterBattleText2:: ; 82363 (20:6363)
+_RocketHide4AfterBattleText2::
 	text "Do you have"
 	line "something against"
 	cont "Team Rocket?"
 	done
 
-_RocketHideout4BattleText3:: ; 8238f (20:638f)
+_RocketHideout4BattleText3::
 	text "Hold it right"
 	line "there, you brat!"
 	
@@ -52,27 +52,27 @@ _RocketHideout4BattleText3:: ; 8238f (20:638f)
 	line "bother the Boss!"
 	done
 
-_RocketHideout4EndBattleText3:: ; 823bc (20:63bc)
+_RocketHideout4EndBattleText3::
 	text "You will regret"
 	line "this!"
 	prompt
 
-_RocketHide4AfterBattleText3:: ; 823c4 (20:63c4)
+_RocketHide4AfterBattleText3::
 	text "Boss! I'm sorry I"
 	line "failed you!"
 	done
 
-_RocketHideout4BattleText4:: ; 823e2 (20:63e2)
+_RocketHideout4BattleText4::
 	text "The elevator"
 	line "doesn't work? Who"
 	cont "has the Lift Key?"
 	done
 
-_RocketHideout4EndBattleText4:: ; 82413 (20:6413)
+_RocketHideout4EndBattleText4::
 	text "No!"
 	prompt
 
-_RocketHideout4Text_455ec:: ; 82418 (20:6418)
+_RocketHideout4Text_455ec::
 	text "Oh no! I dropped"
 	line "the Lift Key!"
 	done

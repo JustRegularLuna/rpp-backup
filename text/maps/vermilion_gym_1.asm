@@ -1,4 +1,4 @@
-_VermilionGymText_5cb6d:: ; 9aaa5 (26:6aa5)
+_VermilionGymText_5cb6d::
 	text "Ten-hut! Welcome"
 	line "to Vermilion Gym!"
 

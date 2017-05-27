@@ -1,4 +1,4 @@
-_TM35PreReceiveText:: ; a0f09 (28:4f09)
+_TM35PreReceiveText::
 	text "I'm giving out"
 	line "free TMs."
 
@@ -6,13 +6,13 @@ _TM35PreReceiveText:: ; a0f09 (28:4f09)
 	line "one!"
 	prompt
 
-_ReceivedTM35Text:: ; a0f48 (28:4f48)
+_ReceivedTM35Text::
 	text "[PLAYER] received "
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
 
-_TM35ExplanationText:: ; a0f5d (28:4f5d)
+_TM35ExplanationText::
 	text "That TM teaches a"
 	line "#MON to use"
 	cont "AncientPower!"
@@ -23,18 +23,18 @@ _TM35ExplanationText:: ; a0f5d (28:4f5d)
 	cont "the lab."
 	done
 
-_TM35NoRoomText:: ; a0fc7 (28:4fc7)
+_TM35NoRoomText::
 	text "Your pack is"
 	line "crammed full!"
 	done
 
-_Lab3Text2:: ; a0fe3 (28:4fe3)
+_Lab3Text2::
 	text "Eevee can evolve"
 	line "into 1 of 8 kinds"
 	cont "of #mon."
 	done
 
-_Lab3Text3:: ; a1010 (28:5010)
+_Lab3Text3::
 	text "There's an e-mail"
 	line "message!"
 
@@ -58,7 +58,7 @@ _Lab3Text3:: ; a1010 (28:5010)
 	para "..."
 	done
 
-_Lab3Text5:: ; a10d8 (28:50d8)
+_Lab3Text5::
 	text "An amber pipe!"
 	done
 

@@ -90,7 +90,7 @@ MainMenu: ; 5af2 (1:5af2)
 	jp .mainMenuLoop
 .choseContinue
 	call DisplayContinueGameInfo
-	ld hl,wd126
+	ld hl,wCurrentMapScriptFlags
 	set 5,[hl]
 .inputLoop
 	xor a

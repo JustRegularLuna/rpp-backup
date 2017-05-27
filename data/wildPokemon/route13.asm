@@ -10,7 +10,7 @@ IF DEF(_BLUE) ; Difficult Rom
 	db 46,WEEPINBELL
 	db 45,DITTO
 	db 48,GLOOM
-	db 50,FARFETCH_D
+	db 50,FARFETCHD
 	db 51,BELLOSSOM
 
 ; Water Mons
@@ -37,7 +37,7 @@ ELSE ; Normal Rom
 	db 26,BELLSPROUT
 	db 25,DITTO
 	db 28,GLOOM
-	db 30,FARFETCH_D
+	db 30,FARFETCHD
 	db 31,BELLOSSOM
 
 ; Water Mons

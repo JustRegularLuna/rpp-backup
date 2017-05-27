@@ -82,7 +82,7 @@ const_value = 1
 	const SLOWBRO     ; 80
 	const MAGNEMITE   ; 81
 	const MAGNETON    ; 82
-	const FARFETCH_D  ; 83
+	const FARFETCHD   ; 83
 	const DODUO       ; 84
 	const DODRIO      ; 85
 	const SEEL        ; 86

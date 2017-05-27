@@ -170,7 +170,7 @@ DoIslandMenu:
 	push bc
 	
 ; Mark for it to do the shake animation
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 7, [hl]
 	
 ; Announce that we are leaving

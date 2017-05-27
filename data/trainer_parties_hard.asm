@@ -1049,16 +1049,16 @@ BirdKeeperData: ; COMPLETED
 	db "Rod@",53,PIDGEOT,$FF ; Route 13 R 2
 	db "Abe@",53,FEAROW,PIDGEOTTO,PIDGEOT,FEAROW,HONCHKROW,$FF  ;             UNKNOWN
 	db "Bob@",52,PIDGEOT,FEAROW,$FF ; Route 13 LB
-	db "Hank@",53,FARFETCH_D,$FF ; Route 14 1R
+	db "Hank@",53,FARFETCHD,$FF ; Route 14 1R
 	db "Bret@",54,FEAROW,$FF ; Route 15 8
-	db "Roy@",54,PIDGEOT,FARFETCH_D,DODRIO,$FF ; Route 15 2
+	db "Roy@",54,PIDGEOT,FARFETCHD,DODRIO,$FF ; Route 15 2
 	db "Toby@",53,DODRIO,DODRIO,$FF ; Route 15 3
 	db "Chad@",54,FEAROW,$FF ; Route 18 L
 	db "Mike@",54,DODRIO,$FF ; Route 18 B
 	db "Kyle@",53,FEAROW,FEAROW,$FF ; Route 18 M
 	db "Willy@",55,FEAROW,FEAROW,PIDGEOT,$FF ; Route 19 After seafoam
 	db "Jeff@",39,PIDGEOTTO,PIDGEOTTO,PIDGEY,PIDGEOTTO,$FF ;             UNKNOWN 
-	db "Troy@",52,FARFETCH_D,FEAROW,$FF ;                                UNKNOWN
+	db "Troy@",52,FARFETCHD,FEAROW,$FF ;                                UNKNOWN
 	db "Kevin@",52,DODRIO,PIDGEOT,$FF ;                        UNKNOWN / somewhere on route 13
 	db "Jim@",52,MURKROW,FEAROW,$FF ; Route 13 LB
 	db "Eric@",53,PIDGEOT,FEAROW,$FF ; Route 14 4R
