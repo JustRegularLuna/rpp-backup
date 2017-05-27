@@ -22,7 +22,7 @@ IndigoPlateauLobbyTextPointers:
 	dw IndigoTradeNurseText
 
 IndigoHealNurseText:
-	db $ff
+	TX_POKECENTER_NURSE
 
 IndigoPlateauLobbyText2:
 	TX_FAR _IndigoPlateauLobbyText2
@@ -36,4 +36,4 @@ IndigoPlateauLobbyText3: ; 19c8f (6:5c8f)
 	jp TextScriptEnd
 
 IndigoTradeNurseText:
-	db $f6
+	TX_CABLE_CLUB_RECEPTIONIST
