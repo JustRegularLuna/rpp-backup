@@ -41,6 +41,8 @@ homecall: MACRO
 	ld [MBC1RomBank], a
 	ENDM
 
+farcall EQUS "callba"
+
 callba: MACRO
 	ld b, BANK(\1)
 	ld hl, \1
@@ -64,8 +66,6 @@ jpab: MACRO
 	ld b, BANK(\1)
 	jp Bankswitch
 	ENDM
-
-farcall EQUS "callba"
 
 bcd2: MACRO
 	dn ((\1) / 1000) % 10, ((\1) / 100) % 10
@@ -216,6 +216,15 @@ TX_ASM: MACRO
 	db $08
 	ENDM
 
+TX_MART: MACRO
+	db $FE, _NARG
+	rept _NARG
+	db \1
+	shift
+	endr
+	db $FF
+	ENDM
+
 ; Predef macro.
 add_predef: MACRO
 \1Predef::
@@ -255,6 +264,11 @@ tx_pre_jump: MACRO
 	tx_pre_id \1
 	jp PrintPredefTextID
 ENDM
+
+sound0x0A: macro
+	db $11
+endm
+
 
 WALK EQU $FE
 STAY EQU $FF

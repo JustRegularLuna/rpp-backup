@@ -1,5 +1,5 @@
 ; Celadon Dept. Store 2F (1)
-CeladonMart2Text1:: ; 2476 (0:2476)
+CeladonMart2Clerk1Text:: ; 2476 (0:2476)
 	db MART_LIST
 	db 9
 	db GREAT_BALL
@@ -14,7 +14,7 @@ CeladonMart2Text1:: ; 2476 (0:2476)
 	db $FF
 
 ; Celadon Dept. Store 2F (2)
-CeladonMart2Text2:: ; 2482 (0:2482)
+CeladonMart2Clerk2Text:: ; 2482 (0:2482)
 	db MART_LIST
 	db 9
 	db TM_32

@@ -1,4 +1,4 @@
-SaffronMartText1:: ; 24c3 (0:24c3)
+SaffronCashierText:: ; 24c3 (0:24c3)
 	db MART_LIST
 	db 6
 	db GREAT_BALL

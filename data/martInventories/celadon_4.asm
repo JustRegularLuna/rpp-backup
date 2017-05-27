@@ -1,5 +1,5 @@
 ; Celadon Dept. Store 4F
-CeladonMart4Text1:: ; 248e (0:248e)
+CeladonMart4ClerkText:: ; 248e (0:248e)
 	db MART_LIST
 	db 7
 	db POKE_DOLL

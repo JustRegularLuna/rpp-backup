@@ -1,4 +1,4 @@
-FuchsiaMartText1:: ; 24a8 (0:24a8)
+FuchsiaCashierText:: ; 24a8 (0:24a8)
 	db MART_LIST
 	db 6
 	db ULTRA_BALL

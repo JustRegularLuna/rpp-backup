@@ -10,4 +10,3 @@ _CeladonPokecenterText3::
 	line "Cycling Road from"
 	cont "Fuchsia!"
 	done
-

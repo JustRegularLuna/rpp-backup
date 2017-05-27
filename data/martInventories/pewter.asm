@@ -1,4 +1,4 @@
-PewterMartText1:: ; 2449 (0:2449)
+PewterCashierText:: ; 2449 (0:2449)
 	db MART_LIST
 	db 7
 	db POKE_BALL
