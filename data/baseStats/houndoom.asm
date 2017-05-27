@@ -1,4 +1,4 @@
-HoundoomBaseStats: ; 38a36 (e:4a36)
+HoundoomBaseStats:
 db DEX_HOUNDOOM ; pokedex id
 db 75 ; base hp
 db 90 ; base attack

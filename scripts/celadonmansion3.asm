@@ -1,7 +1,7 @@
-CeladonMansion3Script: ; 48790 (12:4790)
+CeladonMansion3Script:
 	jp EnableAutoTextBoxDrawing
 
-CeladonMansion3TextPointers: ; 48793 (12:4793)
+CeladonMansion3TextPointers:
 	dw ProgrammerText
 	dw GraphicArtistText
 	dw WriterText
@@ -11,19 +11,19 @@ CeladonMansion3TextPointers: ; 48793 (12:4793)
 	dw GameFreakPCText3
 	dw GameFreakSignText
 
-ProgrammerText: ; 487a3 (12:47a3)
+ProgrammerText:
 	TX_FAR _ProgrammerText
 	db "@"
 
-GraphicArtistText: ; 487a8 (12:47a8)
+GraphicArtistText:
 	TX_FAR _GraphicArtistText
 	db "@"
 
-WriterText: ; 487ad (12:47ad)
+WriterText:
 	TX_FAR _WriterText
 	db "@"
 
-DirectorText: ; 487b2 (12:47b2)
+DirectorText:
 	TX_ASM
 	ld a, [wExtraFlags]
 	bit 3, a
@@ -63,7 +63,7 @@ DirectorText: ; 487b2 (12:47b2)
 	call PrintText
 	jp TextScriptEnd
 	
-.GameDesigner ; 487d0 (12:47d0)
+.GameDesigner
 	TX_FAR _GameDesignerText
 	db "@"
 	
@@ -84,7 +84,7 @@ DirectorText: ; 487b2 (12:47b2)
 	db $0B
 	db "@"
 
-GameFreakPCText1: ; 487eb (12:47eb)
+GameFreakPCText1:
 	TX_FAR _CeladonMansion3Text5
 	db $6
 	TX_ASM
@@ -93,7 +93,7 @@ GameFreakPCText1: ; 487eb (12:47eb)
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd
 
-GameFreakPCText2: ; 487f0 (12:47f0)
+GameFreakPCText2:
 	TX_FAR _CeladonMansion3Text6
 	db $6
 	TX_ASM
@@ -102,7 +102,7 @@ GameFreakPCText2: ; 487f0 (12:47f0)
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd
 
-GameFreakPCText3: ; 487f5 (12:47f5)
+GameFreakPCText3:
 	TX_FAR _CeladonMansion3Text7
 	db $6
 	TX_ASM
@@ -111,6 +111,6 @@ GameFreakPCText3: ; 487f5 (12:47f5)
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	jp TextScriptEnd
 
-GameFreakSignText: ; 487fa (12:47fa)
+GameFreakSignText:
 	TX_FAR _CeladonMansion3Text8
 	db "@"

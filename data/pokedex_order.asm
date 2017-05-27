@@ -1,4 +1,4 @@
-PokedexOrder: ; 41024 (10:5024)
+PokedexOrder:
 db DEX_BULBASAUR
 db DEX_IVYSAUR
 db DEX_VENUSAUR

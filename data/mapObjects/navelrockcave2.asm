@@ -1,4 +1,4 @@
-NavelRockCave2Object: ; 0x51a4d (size=68)
+NavelRockCave2Object:
 	db $19 ; border block
 
 	db $b ; warps

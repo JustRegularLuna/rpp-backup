@@ -1,4 +1,4 @@
-UmbreonBaseStats: ; 3926a (e:526a)
+UmbreonBaseStats:
 db DEX_UMBREON ; pokedex id
 db 95 ; base hp
 db 65 ; base attack

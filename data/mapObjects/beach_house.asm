@@ -1,4 +1,4 @@
-BeachHouseObject: ; 0x1df07 (size=32)
+BeachHouseObject:
 	db $a ; border block
 
 	db $2 ; warps

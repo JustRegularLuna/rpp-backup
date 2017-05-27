@@ -1,4 +1,4 @@
-MagnezoneBaseStats: ; 38cba (e:4cba)
+MagnezoneBaseStats:
 db DEX_MAGNEZONE ; pokedex id
 db 70 ; base hp
 db 70 ; base attack

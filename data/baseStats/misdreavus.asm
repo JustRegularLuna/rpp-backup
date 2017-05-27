@@ -1,4 +1,4 @@
-MisdreavusBaseStats: ; 38aa6 (e:4aa6)
+MisdreavusBaseStats:
 db DEX_MISDREAVUS ; pokedex id
 db 60 ; base hp
 db 60 ; base attack

@@ -1,4 +1,4 @@
-ScizorBaseStats: ; 39136 (e:5136)
+ScizorBaseStats:
 db DEX_SCIZOR ; pokedex id
 db 70 ; base hp
 db 130 ; base attack

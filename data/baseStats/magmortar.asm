@@ -1,4 +1,4 @@
-MagmortarBaseStats: ; 3918a (e:518a)
+MagmortarBaseStats:
 db DEX_MAGMORTAR ; pokedex id
 db 75 ; base hp
 db 95 ; base attack

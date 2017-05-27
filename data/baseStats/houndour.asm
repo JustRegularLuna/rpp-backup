@@ -1,4 +1,4 @@
-HoundourBaseStats: ; 38a1a (e:4a1a)
+HoundourBaseStats:
 db DEX_HOUNDOUR ; pokedex id
 db 45 ; base hp
 db 60 ; base attack

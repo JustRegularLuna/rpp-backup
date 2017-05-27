@@ -1,5 +1,5 @@
 ; returns whether the player is standing on a door tile in carry
-IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
+IsPlayerStandingOnDoorTile:
 	push de
 	ld hl, DoorTileIDPointers
 	ld a, [wCurMapTileset]
@@ -25,7 +25,7 @@ IsPlayerStandingOnDoorTile: ; 1a609 (6:6609)
 	and a
 	ret
 
-DoorTileIDPointers: ; 1a62c (6:662c)
+DoorTileIDPointers:
 	dbw OVERWORLD,    OverworldDoorTileIDs
 	dbw FOREST,       ForestDoorTileIDs
 	dbw SAFARI,       ForestDoorTileIDs

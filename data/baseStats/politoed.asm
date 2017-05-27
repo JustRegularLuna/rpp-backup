@@ -1,4 +1,4 @@
-PolitoedBaseStats: ; 38a8a (e:4a8a)
+PolitoedBaseStats:
 db DEX_POLITOED ; pokedex id
 db 90 ; base hp
 db 75 ; base attack

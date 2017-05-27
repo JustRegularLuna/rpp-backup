@@ -1,4 +1,4 @@
-Lab1_h: ; 0x75b80 to 0x75b8c (12 bytes) (id=167)
+Lab1_h:
 	db MUSEUM
 	db CINNABAR_LAB_1_HEIGHT, CINNABAR_LAB_1_WIDTH
 	dw Lab1Blocks, Lab1TextPointers, Lab1Script

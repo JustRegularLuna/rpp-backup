@@ -1,4 +1,4 @@
-TrainerPicAndMoneyPointers: ; 39914 (e:5914)
+TrainerPicAndMoneyPointers:
 ; only deals with money now, pic pointers have moved to "get_trainer_pic_pointers.asm"
 ; money received after battle = base money × level of highest-level enemy mon
 ;	dw YoungsterPic

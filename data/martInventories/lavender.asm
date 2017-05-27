@@ -1,4 +1,4 @@
-LavenderCashierText:: ; 246a (0:246a)
+LavenderCashierText::
 	db MART_LIST
 	db 9
 	db GREAT_BALL

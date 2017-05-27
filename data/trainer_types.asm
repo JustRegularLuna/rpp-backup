@@ -1,4 +1,4 @@
-FemaleTrainerList:: ; 3434 (0:3434)
+FemaleTrainerList::
 	db OPP_LASS
 	db OPP_JR_TRAINER_F
 	db OPP_BEAUTY
@@ -7,7 +7,7 @@ FemaleTrainerList:: ; 3434 (0:3434)
     db OPP_HEX_MANIAC
 	db $FF
 
-EvilTrainerList:: ; 3439 (0:3439)
+EvilTrainerList::
 	db OPP_GAMBLER
 	db OPP_ROCKER
 	db OPP_JUGGLER

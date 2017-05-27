@@ -1,4 +1,4 @@
-CrobatBaseStats: ; 3885a (e:485a)
+CrobatBaseStats:
 db DEX_CROBAT ; pokedex id
 db 85 ; base hp
 db 90 ; base attack

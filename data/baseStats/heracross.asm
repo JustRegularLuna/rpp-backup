@@ -1,4 +1,4 @@
-HeracrossBaseStats: ; 391a6 (e:51a6)
+HeracrossBaseStats:
 db DEX_HERACROSS ; pokedex id
 db 80 ; base hp
 db 125 ; base attack

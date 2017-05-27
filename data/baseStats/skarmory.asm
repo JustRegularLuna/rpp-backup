@@ -1,4 +1,4 @@
-SkarmoryBaseStats: ; 38aa6 (e:4aa6)
+SkarmoryBaseStats:
 db DEX_SKARMORY ; pokedex id
 db 65 ; base hp
 db 80 ; base attack

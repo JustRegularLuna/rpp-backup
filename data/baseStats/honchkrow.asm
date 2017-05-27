@@ -1,4 +1,4 @@
-HonchkrowBaseStats: ; 3860e (e:460e)
+HonchkrowBaseStats:
 db DEX_HONCHKROW ; pokedex id
 db 100 ; base hp
 db 125 ; base attack

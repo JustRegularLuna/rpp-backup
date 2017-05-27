@@ -1,4 +1,4 @@
-TogepiBaseStats: ; 38582 (e:4582)
+TogepiBaseStats:
 db DEX_TOGEPI ; pokedex id
 db 35 ; base hp
 db 20 ; base attack

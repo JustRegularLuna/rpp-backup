@@ -1,4 +1,4 @@
-TorkoalBaseStats: ; 384da (e:44da)
+TorkoalBaseStats:
 db DEX_TORKOAL ; pokedex id
 db 70 ; base hp
 db 85 ; base attack

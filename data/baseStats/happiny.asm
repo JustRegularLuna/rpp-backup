@@ -1,4 +1,4 @@
-HappinyBaseStats: ; 3901e (e:501e)
+HappinyBaseStats:
 db DEX_HAPPINY ; pokedex id
 db 100 ; base hp
 db 5 ; base attack

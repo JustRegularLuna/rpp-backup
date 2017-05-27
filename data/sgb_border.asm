@@ -1,4 +1,4 @@
-BorderPalettes: ; 72788 (1c:6788)
+BorderPalettes:
 	INCBIN "gfx/red/sgbborder.map"
 
 	ds $100
@@ -24,5 +24,5 @@ BorderPalettes: ; 72788 (1c:6788)
 
 	ds $18
 
-SGBBorderGraphics: ; 72fe8 (1c:6fe8)
+SGBBorderGraphics:
 	INCBIN "gfx/red/sgbborder.2bpp"

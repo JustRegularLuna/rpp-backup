@@ -1,4 +1,4 @@
-MagcargoBaseStats: ; 384da (e:44da)
+MagcargoBaseStats:
 db DEX_MAGCARGO ; pokedex id
 db 50 ; base hp
 db 50 ; base attack

@@ -1,4 +1,4 @@
-GoodRodMons: ; e27f (3:627f)
+GoodRodMons:
 	db 10,GOLDEEN
     db 15,GOLDEEN
     db 20,GOLDEEN

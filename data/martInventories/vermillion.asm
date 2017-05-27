@@ -1,4 +1,4 @@
-VermilionCashierText:: ; 2461 (0:2461)
+VermilionCashierText::
 	db MART_LIST
 	db 6
 	db POKE_BALL

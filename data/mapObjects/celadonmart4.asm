@@ -1,4 +1,4 @@
-CeladonMart4Object: ; 0x48370 (size=49)
+CeladonMart4Object:
 	db $0 ; border block
 
 	db $3 ; warps

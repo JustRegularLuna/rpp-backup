@@ -1,4 +1,4 @@
-ElekidBaseStats: ; 3916e (e:516e)
+ElekidBaseStats:
 db DEX_ELEKID ; pokedex id
 db 45 ; base hp
 db 63 ; base attack

@@ -1,4 +1,4 @@
-SmoochumBaseStats: ; 39152 (e:5152)
+SmoochumBaseStats:
 db DEX_SMOOCHUM ; pokedex id
 db 45 ; base hp
 db 30 ; base attack

@@ -28,7 +28,7 @@ IndigoPlateauLobbyText2:
 	TX_FAR _IndigoPlateauLobbyText2
 	db "@"
 
-IndigoPlateauLobbyText3: ; 19c8f (6:5c8f)
+IndigoPlateauLobbyText3:
 	TX_ASM
 	ld a, 6
 	ld [wWhichTrade], a

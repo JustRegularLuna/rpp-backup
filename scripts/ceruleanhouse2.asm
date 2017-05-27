@@ -1,14 +1,14 @@
-CeruleanHouse2Script: ; 74e09 (1d:4e09)
+CeruleanHouse2Script:
 	ld a, $1
 	ld [wAutoTextBoxDrawingControl], a
 	dec a
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ret
 
-CeruleanHouse2TextPointers: ; 74e13 (1d:4e13)
+CeruleanHouse2TextPointers:
 	dw CeruleanHouse2Text1
 
-CeruleanHouse2Text1: ; 74e15 (1d:4e15)
+CeruleanHouse2Text1:
 	TX_ASM
 	ld hl, CeruleanHouse2Text_74e77
 	call PrintText
@@ -51,18 +51,18 @@ CeruleanHouse2Text1: ; 74e15 (1d:4e15)
 	call PrintText
 	jp TextScriptEnd
 
-BerryItemList: ; 74e6d (1d:4e6d)
+BerryItemList:
 	db 10,ORAN_BERRY,SITRUS_BERRY,LEPPA_BERRY,PECHA_BERRY,RAWST_BERRY,ASPEAR_BERRY,CHESTO_BERRY,CHERI_BERRY,LUM_BERRY,ACAI_BERRY,$FF
 
-CeruleanHouse2Text_74e77: ; 74e77 (1d:4e77)
+CeruleanHouse2Text_74e77:
 	TX_FAR _CeruleanHouse2Text_74e77
 	db "@"
 
-CeruleanHouse2Text_74e7c: ; 74e7c (1d:4e7c)
+CeruleanHouse2Text_74e7c:
 	TX_FAR _CeruleanHouse2Text_74e7c
 	db "@"
 
-CeruleanHouse2Text_74e81: ; 74e81 (1d:4e81)
+CeruleanHouse2Text_74e81:
 	TX_FAR _CeruleanHouse2Text_74e81
 	db "@"
 

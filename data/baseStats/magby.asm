@@ -1,4 +1,4 @@
-MagbyBaseStats: ; 3918a (e:518a)
+MagbyBaseStats:
 db DEX_MAGBY ; pokedex id
 db 45 ; base hp
 db 75 ; base attack

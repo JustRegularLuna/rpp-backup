@@ -1,4 +1,4 @@
-Lab4Object: ; 0x75df0 (size=32)
+Lab4Object:
 	db $0 ; border block
 
 	db $2 ; warps

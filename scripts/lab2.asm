@@ -1,12 +1,12 @@
-Lab2Script: ; 75c21 (1d:5c21)
+Lab2Script:
 	jp EnableAutoTextBoxDrawing
 
-Lab2TextPointers: ; 75c24 (1d:5c24)
+Lab2TextPointers:
 	dw Lab2Text1
 	dw Lab2Text2
 	dw Lab2Text3
 
-Lab2Text1: ; 75c2a (1d:5c2a)
+Lab2Text1:
 	TX_ASM
 	
 	; check if you have already received the ticket
@@ -103,7 +103,7 @@ NoRoomForMysticText:
 	TX_FAR _NoMoreRoomForMysticText
 	db "@"
 
-Lab2Text2: ; 75c2f (1d:5c2f)
+Lab2Text2:
 	TX_ASM
 	ld hl, Trader7Name ; the old man
 	call SetCustomName
@@ -111,13 +111,13 @@ Lab2Text2: ; 75c2f (1d:5c2f)
 	ld [wWhichTrade], a
 	jr Lab2DoTrade
 
-Lab2Text3: ; 75c37 (1d:5c37)
+Lab2Text3:
 	TX_ASM
 	ld hl, Trader8Name ; the girl
 	call SetCustomName
 	ld a, $8
 	ld [wWhichTrade], a
-Lab2DoTrade: ; 75c3d (1d:5c3d)
+Lab2DoTrade:
 	predef DoInGameTradeDialogue
 	jp TextScriptEnd
 

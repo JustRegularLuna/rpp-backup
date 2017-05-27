@@ -1,19 +1,19 @@
-LavenderHouse2Script: ; 1d9ae (7:59ae)
+LavenderHouse2Script:
 	call EnableAutoTextBoxDrawing
 	ret
 
-LavenderHouse2TextPointers: ; 1d9b2 (7:59b2)
+LavenderHouse2TextPointers:
 	dw LavenderHouse2Text1
 	dw LavenderHouse2Text2
 
-LavenderHouse2Text1: ; 1d9b6 (7:59b6)
+LavenderHouse2Text1:
 	TX_FAR _LavenderHouse2Text1
 	TX_ASM
 	ld a, CUBONE
 	call PlayCry
 	jp TextScriptEnd
 
-LavenderHouse2Text2: ; 1d9c3 (7:59c3)
+LavenderHouse2Text2:
 	TX_ASM
 	ld a, 8
 	ld [wWhichTrade], a

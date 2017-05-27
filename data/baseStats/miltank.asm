@@ -1,4 +1,4 @@
-MiltankBaseStats: ; 38aa6 (e:4aa6)
+MiltankBaseStats:
 db DEX_MILTANK ; pokedex id
 db 95 ; base hp
 db 80 ; base attack

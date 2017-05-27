@@ -1,6 +1,6 @@
 ; creates a set of moves that may be used and returns its address in hl
 ; unused slots are filled with 0, all used slots may be chosen with equal probability
-AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
+AIEnemyTrainerChooseMoves:
 	ld a, $20 ; for smart AI
 	ld hl, wBuffer  ; init temporary move selection array. Only the moves with the lowest numbers are chosen in the end
 	ld [hli], a   ; move 1
@@ -103,14 +103,14 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	ld hl, wEnemyMonMoves    ; use original move set
 	ret
 
-AIMoveChoiceModificationFunctionPointers: ; 397a3 (e:57a3)
+AIMoveChoiceModificationFunctionPointers:
 	dw AIMoveChoiceModification1
 	dw AIMoveChoiceModification2
 	dw AIMoveChoiceModification3
 	dw SmartAI
 
 ; discourages moves that cause no damage but only a status ailment if player's mon already has one
-AIMoveChoiceModification1: ; 397ab (e:57ab)
+AIMoveChoiceModification1:
 	ld a, [wBattleMonStatus]
 	and a
 	ret z ; return if no status ailment on player's mon
@@ -145,7 +145,7 @@ AIMoveChoiceModification1: ; 397ab (e:57ab)
 	ld [hl], a
 	jr .nextMove
 
-StatusAilmentMoveEffects: ; 57e2
+StatusAilmentMoveEffects:
 	db $01 ; unused sleep effect
 	db SLEEP_EFFECT
 	db POISON_EFFECT
@@ -474,7 +474,7 @@ AlterMovePriorityArray:
 ; slightly encourage moves with specific effects.
 ; in particular, stat-modifying moves and other move effects
 ; that fall in-bewteen
-AIMoveChoiceModification2: ; 397e7 (e:57e7)
+AIMoveChoiceModification2:
 	ld a, [wAILayer2Encouragement]
 	cp $1
 	ret nz
@@ -507,7 +507,7 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 ; encourages moves that are effective against the player's mon (even if non-damaging).
 ; discourage damaging moves that are ineffective or not very effective against the player's mon,
 ; unless there's no damaging move that deals at least neutral damage
-AIMoveChoiceModification3: ; 39817 (e:5817)
+AIMoveChoiceModification3:
 	ld hl, wBuffer - 1 ; temp move selection array (-1 byte offset)
 	ld de, wEnemyMonMoves ; enemy moves
 	ld b, NUM_MOVES + 1
@@ -574,10 +574,10 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	jr z, .nextMove
 	inc [hl] ; sligthly discourage this move
 	jr .nextMove
-AIMoveChoiceModification4: ; 39883 (e:5883)
+AIMoveChoiceModification4:
 	ret
 
-ReadMove: ; 39884 (e:5884)
+ReadMove:
 	push hl
 	push de
 	push bc
@@ -591,7 +591,7 @@ ReadMove: ; 39884 (e:5884)
 
 ; move choice modification methods that are applied for each trainer class
 ; 0 is sentinel value
-TrainerClassMoveChoiceModifications: ; 3989b (e:589b)
+TrainerClassMoveChoiceModifications:
 IF DEF(_BLUE) ; Hard Version
 	db 1,4,0  ; YOUNGSTER
 	db 1,4,0  ; BUG CATCHER
@@ -694,7 +694,7 @@ ELSE ; Normal Version
 	db 1,4,0  ; TRAINER
 ENDC
 
-TrainerAI: ; 3a52e (e:652e)
+TrainerAI:
 	and a
 	ld a,[wIsInBattle]
 	dec a
@@ -726,7 +726,7 @@ TrainerAI: ; 3a52e (e:652e)
 	call Random
 	jp [hl]
 
-TrainerAIPointers: ; 3a55c (e:655c)
+TrainerAIPointers:
 ; one entry per trainer class
 ; first byte, number of times (per Pokémon) it can occur
 ; next two bytes, pointer to AI subroutine for trainer class
@@ -832,12 +832,12 @@ ELSE
 	dbw 3,GenericAI ; trainer (usually overwritten in trainer data)
 ENDC
 
-SwitchOutAI: ; 3a5e9 (e:65e9)
+SwitchOutAI:
 	cp $40
 	ret nc
 	jp AISwitchIfEnoughMons
 
-XAttack1AI: ; 3a5ef (e:65ef)
+XAttack1AI:
 	cp $20
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -845,7 +845,7 @@ XAttack1AI: ; 3a5ef (e:65ef)
 	ret nc
 	jp AIUseXAttack
 
-GuardSpecAI: ; 3a5f5 (e:65f5)
+GuardSpecAI:
 	cp $40
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -853,7 +853,7 @@ GuardSpecAI: ; 3a5f5 (e:65f5)
 	ret nc
 	jp AIUseGuardSpec
 
-XAttack2AI: ; 3a5fb (e:65fb)
+XAttack2AI:
 	cp $40
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -861,7 +861,7 @@ XAttack2AI: ; 3a5fb (e:65fb)
 	ret nc
 	jp AIUseXAttack
 
-SwitchOrHyperPotionAI: ; 3a601 (e:6601)
+SwitchOrHyperPotionAI:
 	cp $40
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -891,7 +891,7 @@ FullHealOrPotionAI:
 	ret nc
 	jp AIUsePotion
 
-FullHealAI: ; 3a614 (e:6614)
+FullHealAI:
 	cp $40
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -904,7 +904,7 @@ FullHealAI: ; 3a614 (e:6614)
 	ret z
 	jp AIUseFullHeal
 
-XDefendAI: ; 3a61c (e:661c)
+XDefendAI:
 	cp $40
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -912,7 +912,7 @@ XDefendAI: ; 3a61c (e:661c)
 	ret nc
 	jp AIUseXDefend
 
-XSpeedAI: ; 3a622 (e:6622)
+XSpeedAI:
 	cp $40
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -920,7 +920,7 @@ XSpeedAI: ; 3a622 (e:6622)
 	ret nc
 	jp AIUseXSpeed
 
-SuperPotion1AI: ; 3a628 (e:6628)
+SuperPotion1AI:
 	cp $80
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -932,7 +932,7 @@ SuperPotion1AI: ; 3a628 (e:6628)
 	ret nc
 	jp AIUseSuperPotion
 
-SuperPotion2AI: ; 3a63a (e:663a)
+SuperPotion2AI:
 	cp $40
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -944,7 +944,7 @@ SuperPotion2AI: ; 3a63a (e:663a)
 	ret nc
 	jp AIUseSuperPotion
 
-HyperPotionAI: ; 3a640 (e:6640)
+HyperPotionAI:
 	cp $40
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -956,7 +956,7 @@ HyperPotionAI: ; 3a640 (e:6640)
 	ret nc
 	jp AIUseHyperPotion
 
-PotionAI: ; 3a64c (e:664c)
+PotionAI:
 	cp $20
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -986,7 +986,7 @@ BerryUserAI: ; used mainly by hikers, campers, and picnickers
 	jp c, AIUseOranBerry
 	ret
 
-FullRestoreAI: ; 3a658 (e:6658)
+FullRestoreAI:
 	cp $20
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -998,7 +998,7 @@ FullRestoreAI: ; 3a658 (e:6658)
 	ret nc
 	jp AIUseFullRestore
 
-SwitchOrSuperPotionAI: ; 3a676 (e:6676)
+SwitchOrSuperPotionAI:
 	cp $14
 	jp c,AISwitchIfEnoughMons
 	cp $80
@@ -1012,7 +1012,7 @@ SwitchOrSuperPotionAI: ; 3a676 (e:6676)
 	ret nc
 	jp AIUseSuperPotion
 
-HyperPotion2AI: ; 3a687 (e:6687)
+HyperPotion2AI:
 	cp $80
 	ret nc
 	ld a, [wAILayer2Encouragement] ; wAILayer2Encouragement (How many turns has it been out?)
@@ -1024,23 +1024,23 @@ HyperPotion2AI: ; 3a687 (e:6687)
 	ret nc
 	jp AIUseHyperPotion
 
-GenericAI: ; 3a693 (e:6693)
+GenericAI:
 	and a ; clear carry
 	ret
 
 ; end of individual trainer AI routines
 
-DecrementAICount: ; 3a695 (e:6695)
+DecrementAICount:
 	ld hl,wAICount
 	dec [hl]
 	scf
 	ret
 
-AIPlayRestoringSFX: ; 3a69b (e:669b)
+AIPlayRestoringSFX:
 	ld a,SFX_HEAL_AILMENT
 	jp PlaySoundWaitForCurrent
 
-AIUseFullRestore: ; 3a6a0 (e:66a0)
+AIUseFullRestore:
 	call AICureStatus
 	ld a,FULL_RESTORE
 	ld [wAIItem],a
@@ -1070,7 +1070,7 @@ AIUseOranBerry:
 	ld b,10
 	jr AIRecoverHP
 
-AIUsePotion: ; 3a6ca (e:66ca)
+AIUsePotion:
 ; enemy trainer heals his monster with a potion
 	ld a,POTION
 	ld b,20
@@ -1082,19 +1082,19 @@ AIUseSitrusBerry:
 	ld b,30
 	jr AIRecoverHP
 
-AIUseSuperPotion: ; 3a6d0 (e:66d0)
+AIUseSuperPotion:
 ; enemy trainer heals his monster with a super potion
 	ld a,SUPER_POTION
 	ld b,50
 	jr AIRecoverHP
 
-AIUseHyperPotion: ; 3a6d6 (e:66d6)
+AIUseHyperPotion:
 ; enemy trainer heals his monster with a hyper potion
 	ld a,HYPER_POTION
 	ld b,200
 	; fallthrough
 
-AIRecoverHP: ; 3a6da (e:66da)
+AIRecoverHP:
 ; heal b HP and print "trainer used $(a) on pokemon!"
 	ld [wAIItem],a
 	ld hl,wEnemyMonHP + 1
@@ -1135,7 +1135,7 @@ AIRecoverHP: ; 3a6da (e:66da)
 	ld [wHPBarNewHP+1],a
 	; fallthrough
 
-AIPrintItemUseAndUpdateHPBar: ; 3a718 (e:6718)
+AIPrintItemUseAndUpdateHPBar:
 	call AIPrintItemUse_
 	coord hl, 2, 2
 	xor a
@@ -1143,7 +1143,7 @@ AIPrintItemUseAndUpdateHPBar: ; 3a718 (e:6718)
 	predef UpdateHPBar2
 	jp DecrementAICount
 
-AISwitchIfEnoughMons: ; 3a72a (e:672a)
+AISwitchIfEnoughMons:
 ; enemy trainer switches if there are 3 or more unfainted mons in party
 	ld a,[wEnemyPartyCount]
 	ld c,a
@@ -1173,7 +1173,7 @@ AISwitchIfEnoughMons: ; 3a72a (e:672a)
 	and a
 	ret
 
-SwitchEnemyMon: ; 3a74b (e:674b)
+SwitchEnemyMon:
 
 ; prepare to withdraw the active monster: copy hp, number, and status to roster
 
@@ -1204,23 +1204,23 @@ SwitchEnemyMon: ; 3a74b (e:674b)
 	scf
 	ret
 
-AIBattleWithdrawText: ; 3a781 (e:6781)
+AIBattleWithdrawText:
 	TX_FAR _AIBattleWithdrawText
 	db "@"
 
-AIUseFullHeal: ; 3a786 (e:6786)
+AIUseFullHeal:
 	call AIPlayRestoringSFX
 	call AICureStatus
 	ld a,FULL_HEAL
 	jp AIPrintItemUse
 	
-AIUseLumBerry: ; 3a786 (e:6786)
+AIUseLumBerry:
 	call AIPlayRestoringSFX
 	call AICureStatus
 	ld a,LUM_BERRY
 	jp AIPrintItemUse
 
-AICureStatus: ; 3a791 (e:6791)
+AICureStatus:
 ; cures the status of enemy's active pokemon
 	ld a,[wEnemyMonPartyPos]
 	ld hl,wEnemyMon1Status
@@ -1233,28 +1233,28 @@ AICureStatus: ; 3a791 (e:6791)
 	res 0,[hl]
 	ret
 
-AIUseXAccuracy: ; 0x3a7a8 unused
+AIUseXAccuracy: ; unused
 	call AIPlayRestoringSFX
 	ld hl,wEnemyBattleStatus2
 	set 0,[hl]
 	ld a,X_ACCURACY
 	jp AIPrintItemUse
 
-AIUseGuardSpec: ; 3a7b5 (e:67b5)
+AIUseGuardSpec:
 	call AIPlayRestoringSFX
 	ld hl,wEnemyBattleStatus2
 	set 1,[hl]
 	ld a,GUARD_SPEC
 	jp AIPrintItemUse
 
-AIUseDireHit: ; 0x3a7c2 unused
+AIUseDireHit: ; unused
 	call AIPlayRestoringSFX
 	ld hl,wEnemyBattleStatus2
 	set 2,[hl]
 	ld a,DIRE_HIT
 	jp AIPrintItemUse
 
-AICheckIfHPBelowFraction: ; 3a7cf (e:67cf)
+AICheckIfHPBelowFraction:
 ; return carry if enemy trainer's current HP is below 1 / a of the maximum
 	ld [H_DIVISOR],a
 	ld hl,wEnemyMonMaxHP
@@ -1280,27 +1280,27 @@ AICheckIfHPBelowFraction: ; 3a7cf (e:67cf)
 	sub c
 	ret
 
-AIUseXAttack: ; 3a7f2 (e:67f2)
+AIUseXAttack:
 	ld b,$A
 	ld a,X_ATTACK
 	jr AIIncreaseStat
 
-AIUseXDefend: ; 3a7f8 (e:67f8)
+AIUseXDefend:
 	ld b,$B
 	ld a,X_DEFEND
 	jr AIIncreaseStat
 
-AIUseXSpeed: ; 3a7fe (e:67fe)
+AIUseXSpeed:
 	ld b,$C
 	ld a,X_SPEED
 	jr AIIncreaseStat
 
-AIUseXSpecial: ; 3a804 (e:6804)
+AIUseXSpecial:
 	ld b,$D
 	ld a,X_SPECIAL
 	; fallthrough
 
-AIIncreaseStat: ; 3a808 (e:6808)
+AIIncreaseStat:
 	ld [wAIItem],a
 	push bc
 	call AIPrintItemUse_
@@ -1322,12 +1322,12 @@ AIIncreaseStat: ; 3a808 (e:6808)
 	ld [hl],a
 	jp DecrementAICount
 
-AIPrintItemUse: ; 3a82c (e:682c)
+AIPrintItemUse:
 	ld [wAIItem],a
 	call AIPrintItemUse_
 	jp DecrementAICount
 
-AIPrintItemUse_: ; 3a835 (e:6835)
+AIPrintItemUse_:
 ; print "x used [wAIItem] on z!"
 	ld a,[wAIItem]
 	ld [wd11e],a
@@ -1335,6 +1335,6 @@ AIPrintItemUse_: ; 3a835 (e:6835)
 	ld hl, AIBattleUseItemText
 	jp PrintText
 
-AIBattleUseItemText: ; 3a844 (e:6844)
+AIBattleUseItemText:
 	TX_FAR _AIBattleUseItemText
 	db "@"

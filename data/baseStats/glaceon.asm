@@ -1,4 +1,4 @@
-GlaceonBaseStats: ; 3926a (e:526a)
+GlaceonBaseStats:
 db DEX_GLACEON ; pokedex id
 db 65 ; base hp
 db 60 ; base attack

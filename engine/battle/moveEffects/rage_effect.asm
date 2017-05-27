@@ -1,5 +1,5 @@
 ; this function raises the attack modifier of a pokemon using Rage when that pokemon is attacked
-HandleBuildingRage_: ; 3e2b6 (f:62b6)
+HandleBuildingRage_:
 ; values for the player turn
 	ld hl,wEnemyBattleStatus2
 	ld de,wEnemyMonStatMods
@@ -41,6 +41,6 @@ HandleBuildingRage_: ; 3e2b6 (f:62b6)
 	ld [H_WHOSETURN],a
 	ret
 
-BuildingRageText: ; 3e2f8 (f:62f8)
+BuildingRageText:
 	TX_FAR _BuildingRageText
 	db "@"

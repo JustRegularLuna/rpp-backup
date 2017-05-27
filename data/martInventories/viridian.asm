@@ -1,4 +1,4 @@
-ViridianCashierText:: ; 2442 (0:2442)
+ViridianCashierText::
 	db MART_LIST
 	db 5
 	db POKE_BALL

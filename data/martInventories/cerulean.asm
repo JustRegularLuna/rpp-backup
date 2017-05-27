@@ -1,4 +1,4 @@
-CeruleanCashierText:: ; 2453 (0:2453)
+CeruleanCashierText::
 	db MART_LIST
 	db 7
 	db POKE_BALL

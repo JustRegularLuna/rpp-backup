@@ -1,4 +1,4 @@
-ChoosePlayerName: ; 695d (1:695d)
+ChoosePlayerName:
 	call OakSpeechSlidePicRight
 	ld a, [wPlayerGender]   ; Added gender check
 	and a        ; Added gender check
@@ -47,11 +47,11 @@ ChoosePlayerName: ; 695d (1:695d)
 	ld hl, YourNameIsText
 	jp PrintText
 
-YourNameIsText: ; 699f (1:699f)
+YourNameIsText:
 	TX_FAR _YourNameIsText
 	db "@"
 
-ChooseRivalName: ; 69a4 (1:69a4)
+ChooseRivalName:
 	call OakSpeechSlidePicRight
 	ld de, DefaultNamesRival
 	call DisplayIntroNameTextBox
@@ -80,11 +80,11 @@ ChooseRivalName: ; 69a4 (1:69a4)
 	ld hl, HisNameIsText
 	jp PrintText
 
-HisNameIsText: ; 69e7 (1:69e7)
+HisNameIsText:
 	TX_FAR _HisNameIsText
 	db "@"
 
-OakSpeechSlidePicLeft: ; 69ec (1:69ec)
+OakSpeechSlidePicLeft:
 	push de
 	coord hl, 0, 0
 	lb bc, 12, 11
@@ -101,12 +101,12 @@ OakSpeechSlidePicLeft: ; 69ec (1:69ec)
 	ld a, $ff
 	jr OakSpeechSlidePicCommon
 
-OakSpeechSlidePicRight: ; 6a12 (1:6a12)
+OakSpeechSlidePicRight:
 	coord hl, 5, 4
 	lb de, 6, 6 * SCREEN_WIDTH + 5
 	xor a
 
-OakSpeechSlidePicCommon: ; 6a19 (1:6a19)
+OakSpeechSlidePicCommon:
 	push hl
 	push de
 	push bc
@@ -179,7 +179,7 @@ OakSpeechSlidePicCommon: ; 6a19 (1:6a19)
 	pop hl
 	ret
 
-DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
+DisplayIntroNameTextBox:
 	push de
 	coord hl, 0, 0
 	ld b, $a
@@ -204,10 +204,10 @@ DisplayIntroNameTextBox: ; 6a6c (1:6a6c)
 	ld [wMaxMenuItem], a
 	jp HandleMenuInput
 
-.namestring ; 6aa3 (1:6aa3)
+.namestring
 	db "Name@"
 
-DefaultNamesPlayer: ; 6aa8 (1:6aa8)
+DefaultNamesPlayer:
 	db   "New Name"
 	next "Red"
 	next "Ash"
@@ -221,14 +221,14 @@ DefaultNamesGirl:
 	next "Leaf"
 	db   "@"
 
-DefaultNamesRival: ; 6abe (1:6abe)
+DefaultNamesRival:
 	db   "New Name"
 	next "Blue"
 	next "Gary"
 	next "John"
 	db   "@"
 
-GetDefaultName: ; 6ad6 (1:6ad6)
+GetDefaultName:
 ; a = name index
 ; hl = name list
 	ld b, a
@@ -252,12 +252,12 @@ GetDefaultName: ; 6ad6 (1:6ad6)
 	ld bc, $14
 	jp CopyData
 
-DefaultNamesPlayerList: ; 6af2 (1:6af2)
+DefaultNamesPlayerList:
 	db "New Name@"
 	db "Red@"
 	db "Ash@"
 	db "Jack@"
-DefaultNamesRivalList: ; 6b08 (1:6b08)
+DefaultNamesRivalList:
 	db "New NameE@"
 	db "Blue@"
 	db "Gary@"
@@ -268,5 +268,5 @@ DefaultNamesGirlList:
 	db "Ashley@"
 	db "Leaf@"
 
-TextTerminator_6b20: ; 6b20 (1:6b20)
+TextTerminator_6b20:
 	db "@"
