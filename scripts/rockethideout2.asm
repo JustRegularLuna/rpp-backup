@@ -2,9 +2,9 @@ RocketHideout2Script: ; 44e27 (11:4e27)
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout2TrainerHeaders
 	ld de, RocketHideout2ScriptPointers
-	ld a, [W_ROCKETHIDEOUT2CURSCRIPT]
+	ld a, [wRocketHideout2CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROCKETHIDEOUT2CURSCRIPT], a
+	ld [wRocketHideout2CurScript], a
 	ret
 
 RocketHideout2ScriptPointers: ; 44e3a (11:4e3a)
@@ -14,9 +14,9 @@ RocketHideout2ScriptPointers: ; 44e3a (11:4e3a)
 	dw RocketHideout2Script3
 
 RocketHideout2Script0: ; 44e42 (11:4e42)
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	ld b, a
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld c, a
 	ld hl, RocketHideout2ArrowTilePlayerMovement
 	call DecodeArrowMovementRLE
@@ -323,7 +323,7 @@ LoadSpinnerArrowTiles: ; 44fd7 (11:4fd7)
 	add hl, bc
 	ld a, [hl]
 	ld [wSpriteStateData1 + 2], a
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	cp FACILITY
 	ld hl, FacilitySpinnerArrows
 	jr z, .asm_44ff6

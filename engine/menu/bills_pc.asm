@@ -512,7 +512,7 @@ CableClubLeftGameboy:: ; 5824 (8:5825)
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_RIGHT
 	ret nz
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp TRADE_CENTER
 	ld a, LINK_STATE_START_TRADE
 	jr z, .next
@@ -529,7 +529,7 @@ CableClubRightGameboy:: ; 5845 (8:5845)
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_LEFT
 	ret nz
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp TRADE_CENTER
 	ld a, LINK_STATE_START_TRADE
 	jr z, .next

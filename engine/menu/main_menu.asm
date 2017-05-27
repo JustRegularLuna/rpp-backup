@@ -114,7 +114,7 @@ MainMenu: ; 5af2 (1:5af2)
 	ld a,[wNumHoFTeams]
 	and a
 	jp z,SpecialEnterMap
-	ld a,[W_CURMAP] ; map ID
+	ld a,[wCurMap] ; map ID
 	cp a,HALL_OF_FAME
 	jp nz,SpecialEnterMap
 	xor a

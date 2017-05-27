@@ -71,7 +71,7 @@ StatusScreen: ; 12953 (4:6953)
 ; mon is in a box or daycare
 	ld a, [wLoadedMonBoxLevel]
 	ld [wLoadedMonLevel], a
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ld hl, wLoadedMonHPExp - 1
 	ld de, wLoadedMonStats
 	ld b, $1
@@ -150,7 +150,7 @@ StatusScreen: ; 12953 (4:6953)
 	call PlaceString ; "STATUS/"
 	coord hl, 14, 2
 	call PrintLevel ; Pokémon level
-	ld a, [W_MONHINDEX]
+	ld a, [wMonHIndex]
 	ld [wd11e], a
 	ld [wd0b5], a
 	predef IndexToPokedex
@@ -468,7 +468,7 @@ StatusScreen2: ; 12b57 (4:6b57)
 	call StatusScreen_ClearName
 	coord hl, 9, 1
 	call StatusScreen_ClearName
-	ld a, [W_MONHINDEX]
+	ld a, [wMonHIndex]
 	ld [wd11e], a
 	call GetMonName
 	coord hl, 9, 1

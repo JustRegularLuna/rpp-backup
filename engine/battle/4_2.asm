@@ -72,13 +72,13 @@ ConversionEffect_: ; 139a3 (4:79a3)
 	ld de, wBattleMonType1
 	ld a, [H_WHOSETURN]
 	and a
-	ld a, [W_ENEMYBATTSTATUS1]
+	ld a, [wEnemyBattleStatus1]
 	jr z, .asm_139b8
 	push hl
 	ld h, d
 	ld l, e
 	pop de
-	ld a, [W_PLAYERBATTSTATUS1]
+	ld a, [wPlayerBattleStatus1]
 .asm_139b8
 	bit Invulnerable, a ; is mon immune to typical attacks (dig/fly)
 	jr nz, PrintButItFailedText
@@ -137,9 +137,9 @@ HazeEffect_: ; 139da (4:79da)
 	ld hl, wccee
 	ld [hli], a
 	ld [hl], a
-	ld hl, W_PLAYERBATTSTATUS1
+	ld hl, wPlayerBattleStatus1
 	call CureStatuses
-	ld hl, W_ENEMYBATTSTATUS1
+	ld hl, wEnemyBattleStatus1
 	call CureStatuses
 	ld hl, PlayCurrentMoveAnimation
 	call CallBankF

@@ -16,7 +16,7 @@ PickUpItem:
 	ld a, [hl]
 	ld [$ffdb], a
 
-	ld hl, W_MAPSPRITEEXTRADATA
+	ld hl, wMapSpriteExtraData
 	ld a, [hSpriteIndexOrTextID]
 	dec a
 	add a

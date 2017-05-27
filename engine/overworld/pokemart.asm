@@ -319,7 +319,7 @@ DisplayListMenuIDLoop_Mart:: ; 2c53 (0:2c53)
 	ld a,1
 	ld [H_AUTOBGTRANSFERENABLED],a ; enable transfer
 	call Delay3
-	ld a,[W_BATTLETYPE]
+	ld a,[wBattleType]
 	and a ; is it the Old Man battle?
 	jr z,.notOldManBattle
 .oldManBattle
@@ -507,7 +507,7 @@ HandleMenuInput_Mart:: ; 3abe (0:3abe)
 	ld [H_DOWNARROWBLINKCNT2],a ; blinking down arrow timing value 2
 .loop1
 	xor a
-	ld [W_SUBANIMTRANSFORM],a ; counter for pokemon shaking animation
+	ld [wSubAnimTransform],a ; counter for pokemon shaking animation
 	call PlaceMenuCursor
 	call Delay3
 .loop2

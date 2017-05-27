@@ -27,7 +27,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 ; is the bottom right tile (9,9) of the half-block we're standing in a grass/water tile?
 	coord hl, 9, 9
 	ld c, [hl]
-	ld a, [W_GRASSTILE]
+	ld a, [wGrassTile]
 	cp c
 	ld a, [wGrassRate]
 	jr z, .CanEncounter
@@ -38,10 +38,10 @@ TryDoWildEncounter: ; 13870 (4:7870)
 ; even if not in grass/water, standing anywhere we can encounter pokemon
 ; so long as the map is "indoor" and has wild pokemon defined.
 ; ...as long as it's not Viridian Forest or Safari Zone.
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp REDS_HOUSE_1F ; is this an indoor map?
 	jr c, .CantEncounter2
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	cp FOREST ; Viridian Forest
 	jr z, .CantEncounter2
 	cp SAFARI ; Safari Zone
@@ -78,7 +78,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	ld b, 0
 	add hl, bc
 	ld a, [hli]
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ld a, [hl]
 	ld [wcf91], a
 	ld [wEnemyMonSpecies2], a
@@ -89,7 +89,7 @@ TryDoWildEncounter: ; 13870 (4:7870)
 	jr z, .willEncounter
 	ld a, [wPartyMon1Level]
 	ld b, a
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	cp b
 	jr c, .CantEncounter2 ; repel prevents encounters if the leading party mon's level is higher than the wild mon
 	jr .willEncounter

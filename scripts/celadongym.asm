@@ -6,9 +6,9 @@ CeladonGymScript: ; 4890a (12:490a)
 	call EnableAutoTextBoxDrawing
 	ld hl, CeladonGymTrainerHeaders
 	ld de, CeladonGymScriptPointers
-	ld a, [W_CELADONGYMCURSCRIPT]
+	ld a, [wCeladonGymCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_CELADONGYMCURSCRIPT], a
+	ld [wCeladonGymCurScript], a
 	ret
 
 CeladonGymScript_48927: ; 48927 (12:4927)
@@ -25,7 +25,7 @@ Gym4LeaderName: ; 4893d (12:493d)
 CeladonGymText_48943: ; 48943 (12:4943)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_CELADONGYMCURSCRIPT], a
+	ld [wCeladonGymCurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -36,7 +36,7 @@ CeladonGymScriptPointers: ; 4894e (12:494e)
 	dw CeladonGymScript3
 
 CeladonGymScript3: ; 48956 (12:4956)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, CeladonGymText_48943
 	ld a, $f0
@@ -155,11 +155,11 @@ CeladonGymText1: ; 48a11 (12:4a11)
 	jr nz, .asm_48a25
 	call z, CeladonGymText_48963
 	call DisableWaitingAfterTextDisplay
-	jr .asm_96252
+	jr .asm_48a5b
 .asm_48a25
 	ld hl, CeladonGymText_48a68
 	call PrintText
-	jr .asm_96252
+	jr .asm_48a5b
 .asm_48a2d
 	ld hl, CeladonGymText_48a5e
 	call PrintText
@@ -174,11 +174,11 @@ CeladonGymText1: ; 48a11 (12:4a11)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $4
-	ld [W_GYMLEADERNO], a
+	ld [wGymLeaderNo], a
 	ld a, $3
-	ld [W_CELADONGYMCURSCRIPT], a
+	ld [wCeladonGymCurScript], a
 	ld [wCurMapScript], a
-.asm_96252
+.asm_48a5b
 	jp TextScriptEnd
 
 CeladonGymText_48a5e: ; 48a5e (12:4a5e)

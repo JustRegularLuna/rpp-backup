@@ -1,16 +1,16 @@
 ; this function raises the attack modifier of a pokemon using Rage when that pokemon is attacked
 HandleBuildingRage_: ; 3e2b6 (f:62b6)
 ; values for the player turn
-	ld hl,W_ENEMYBATTSTATUS2
+	ld hl,wEnemyBattleStatus2
 	ld de,wEnemyMonStatMods
-	ld bc,W_ENEMYMOVENUM
+	ld bc,wEnemyMoveNum
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.next
 ; values for the enemy turn
-	ld hl,W_PLAYERBATTSTATUS2
+	ld hl,wPlayerBattleStatus2
 	ld de,wPlayerMonStatMods
-	ld bc,W_PLAYERMOVENUM
+	ld bc,wPlayerMoveNum
 .next
 	bit UsingRage,[hl] ; is the pokemon being attacked under the effect of Rage?
 	ret z ; return if not

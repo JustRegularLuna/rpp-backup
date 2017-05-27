@@ -83,7 +83,7 @@ SafariZoneGameOver: ; 1e9b0 (7:69b0)
 	ld a, $3
 	ld [wDestinationWarpID], a
 	ld a, $5
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	SetEvent EVENT_SAFARI_GAME_OVER
 	ld a, 1
 	ld [wSafariZoneGameOver], a

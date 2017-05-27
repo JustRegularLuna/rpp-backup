@@ -36,7 +36,7 @@ _CardKeyFailText:: ; 80029 (20:4029)
 	done
 
 _TrainerNameText:: ; 80045 (20:4045)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text ": @@"
 
 _NoNibbleText:: ; 8004d (20:404d)
@@ -240,7 +240,7 @@ INCLUDE "text/maps/move_deleter.asm"
 INCLUDE "text/maps/move_tutor.asm"
 
 _AIBattleWithdrawText:: ; 880be (22:40be)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " @"
 	TX_RAM wCurTrainerName
 	db $0
@@ -251,7 +251,7 @@ _AIBattleWithdrawText:: ; 880be (22:40be)
 	prompt
 
 _AIBattleUseItemText:: ; 880d5 (22:40d5)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " @"
 	TX_RAM wCurTrainerName
 	db $0
@@ -1044,7 +1044,7 @@ _MoneyForWinningText:: ; 896dd (22:56dd)
 	prompt
 
 _TrainerDefeatedText:: ; 896f9 (22:56f9)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " @"
 	TX_RAM wCurTrainerName
 	db $0
@@ -1077,12 +1077,12 @@ _PlayerBlackedOutText2:: ; 89748 (22:5748)
 _LinkBattleLostText:: ; 89772 (22:5772)
 	text "[PLAYER] lost to"
 	line "@"
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text "!"
 	prompt
 
 _TrainerAboutToUseText:: ; 89784 (22:5784)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " @"
 	TX_RAM wCurTrainerName
 	db $0
@@ -1096,7 +1096,7 @@ _TrainerAboutToUseText:: ; 89784 (22:5784)
 	done
 
 _TrainerSentOutText:: ; 897b4 (22:57b4)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " @"
 	TX_RAM wCurTrainerName
 	db $0
@@ -1380,7 +1380,7 @@ _GrewLevelText:: ; 89c01 (22:5c01)
 	TX_RAM wcd6d
 	text " grew"
 	line "to level @"
-	TX_NUM W_CURENEMYLVL, 1, 3
+	TX_NUM wCurEnemyLVL, 1, 3
 	text "!@@"
 
 _WildMonAppearedText:: ; 89c1d (22:5c1d)
@@ -1405,7 +1405,7 @@ _EnemyAppearedText:: ; 89c4f (22:5c4f)
 	prompt
 
 _TrainerWantsToFightText:: ; 89c5e (22:5c5e)
-	TX_RAM W_TRAINERNAME
+	TX_RAM wTrainerName
 	text " @"
 	TX_RAM wCurTrainerName
 	db $0
@@ -1579,7 +1579,7 @@ _RareCandyText:: ; 89ee2 (22:5ee2)
 	TX_RAM wcd6d
 	text " grew"
 	line "to level @"
-	TX_NUM W_CURENEMYLVL, $1,$3
+	TX_NUM wCurEnemyLVL, $1,$3
 	text "!@@"
 
 _TurnedOnPC1Text:: ; 89efe (22:5efe)

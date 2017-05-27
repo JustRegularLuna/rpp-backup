@@ -2,15 +2,15 @@ PokemonTower7Script: ; 60d05 (18:4d05)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower7TrainerHeaders
 	ld de, PokemonTower7ScriptPointers
-	ld a, [W_POKEMONTOWER7CURSCRIPT]
+	ld a, [wPokemonTower7CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_POKEMONTOWER7CURSCRIPT], a
+	ld [wPokemonTower7CurScript], a
 	ret
 
 PokemonTower7Script_60d18: ; 60d18 (18:4d18)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_POKEMONTOWER7CURSCRIPT], a
+	ld [wPokemonTower7CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -24,7 +24,7 @@ PokemonTower7ScriptPointers:
 PokemonTower7Script2: ; 60d23 (18:4d23)
 	ld hl, wFlags_0xcd60
 	res 0, [hl]
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PokemonTower7Script_60d18
 	call EndTrainerBattle
@@ -35,7 +35,7 @@ PokemonTower7Script2: ; 60d23 (18:4d23)
 	call DisplayTextID
 	call PokemonTower7Script_60db6
 	ld a, $3
-	ld [W_POKEMONTOWER7CURSCRIPT], a
+	ld [wPokemonTower7CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -58,7 +58,7 @@ PokemonTower7Script3: ; 60d56 (18:4d56)
 	ld [wSpriteIndex], a
 	ld [wTrainerHeaderFlagBit], a
 	ld [wUnusedDA38], a
-	ld [W_POKEMONTOWER7CURSCRIPT], a
+	ld [wPokemonTower7CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -79,7 +79,7 @@ PokemonTower7Script4: ; 60d86 (18:4d86)
 	ld hl, wd72d
 	set 3, [hl]
 	ld a, $0
-	ld [W_POKEMONTOWER7CURSCRIPT], a
+	ld [wPokemonTower7CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -91,9 +91,9 @@ PokemonTower7Script_60db6: ; 60db6 (18:4db6)
 	ld d, $0
 	ld e, a
 	add hl, de
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	ld b, a
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld c, a
 .asm_60dcb
 	ld a, [hli]
@@ -267,7 +267,7 @@ PokemonTower7FujiText:
 	ld [wMissableObjectIndex], a
 	predef ShowObject
 	ld a, $4
-	ld [W_POKEMONTOWER7CURSCRIPT], a
+	ld [wPokemonTower7CurScript], a
 	ld [wCurMapScript], a
 	jp TextScriptEnd
 

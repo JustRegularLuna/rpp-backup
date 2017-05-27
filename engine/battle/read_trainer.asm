@@ -15,7 +15,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [hl],a
 
 ; get the pointer to trainer data for this class
-	ld a, [W_TRAINERCLASS]
+	ld a, [wTrainerClass]
 	dec a
 	add a,a
 	ld hl,TrainerDataPointers
@@ -25,7 +25,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
-	ld a,[W_TRAINERNO]
+	ld a,[wTrainerNo]
 	ld b,a
 ; At this point b contains the trainer number,
 ; and hl points to the trainer class.
@@ -62,7 +62,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 ; if this code is being run:
 ; all Pokemon are the same level
 ; Pokemon have default moves for that level
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 .LoopTrainerData
 	ld a,[hli]
 	cp $FF ; have we reached the end of the trainer data?
@@ -100,7 +100,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[hli]
 	cp $FF ; have we reached the end of the trainer data?
 	jr z,.FinishUp
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	ld a,[hli]
 	ld [wcf91],a
 	ld a,1
@@ -117,7 +117,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld a,[hli]
 	cp $FF ; have we reached the end of the trainer data?
 	jr z,.FinishUp
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	ld a,[hli]
 	ld [wcf91],a
 	ld a,1
@@ -134,7 +134,7 @@ ReadTrainer: ; 39c53 (e:5c53)
 	ld [de],a
 	inc de
 	ld [de],a
-	ld a,[W_CURENEMYLVL]
+	ld a,[wCurEnemyLVL]
 	ld b,a
 .LastLoop
 	ld hl,wTrainerBaseMoney + 1
@@ -174,7 +174,7 @@ GetTrainerMonDVs:: ; called from engine/battle/core.asm
 	call GetUniqueTrainerDVs
 	ret z
 	
-	ld a, [W_TRAINERCLASS]
+	ld a, [wTrainerClass]
 	dec a
 	ld c, a
 	ld b, 0
@@ -198,12 +198,12 @@ GetUniqueTrainerDVs:
 	cp -1
 	jr z, .notunique
 	ld b, a
-	ld a, [W_TRAINERCLASS]
+	ld a, [wTrainerClass]
 	cp b
 	jr nz, .inc5andloop
 	ld a, [hli] ; TrainerID
 	ld b, a
-	ld a, [W_TRAINERNO]
+	ld a, [wTrainerNo]
 	cp b
 	jr nz, .inc4andloop
 	ld a, [hli] ; PartySpecies
@@ -213,7 +213,7 @@ GetUniqueTrainerDVs:
 	jr nz, .inc3andloop
 	ld a, [hli] ; Level
 	ld b, a
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	cp b
 	jr nz, .inc2andloop
 .unique

@@ -3,7 +3,7 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	ld a, [wLinkState]
 	and a
 	jr nz, .rival
-	ld a, [W_TRAINERCLASS]
+	ld a, [wTrainerClass]
 	ld [wd0b5], a
 	ld a, TRAINER_NAME
 	ld [wNameListType], a
@@ -12,6 +12,6 @@ GetTrainerName_: ; 13a58 (4:7a58)
 	call GetName
 	ld hl, wcd6d
 .rival
-	ld de, W_TRAINERNAME
+	ld de, wTrainerName
 	ld bc, $d
 	jp CopyData

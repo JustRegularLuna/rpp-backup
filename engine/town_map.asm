@@ -11,7 +11,7 @@ DisplayTownMap:
 	push hl
 	ld a, $1
 	ld [hJoy7], a
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	push af
 	ld b, $0
 	call DrawPlayerOrBirdSprite ; player sprite
@@ -173,7 +173,7 @@ LoadTownMap_Fly:
 	coord hl, 0, 0
 	ld de, ToText
 	call PlaceString
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 	ld hl, wFlyLocationsList
@@ -411,7 +411,7 @@ DisplayWildLocations:
 	call PlaceString
 	jr .done
 .drawPlayerSprite
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
 .done

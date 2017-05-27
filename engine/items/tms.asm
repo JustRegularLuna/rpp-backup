@@ -3,7 +3,7 @@ CanLearnTM: ; 1373e (4:773e)
 	ld a, [wcf91]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld hl, W_MONHLEARNSET
+	ld hl, wMonHLearnset
 	push hl
 	ld a, [wMoveNum]
 	ld b, a
@@ -41,7 +41,7 @@ CanLearnTutor:
 	ld a, [wcf91]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld hl, W_MONHMOVES
+	ld hl, wMonHMoves
 	push hl
 	ld a, [wMoveNum]
 	ld b, a

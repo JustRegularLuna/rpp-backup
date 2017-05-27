@@ -44,7 +44,7 @@ SetPal_Battle: ; 71e06 (1c:5e06)
 	ld hl, wShinyMonFlag
 	set 0, [hl]
 .getPALID
-	ld a, [W_PLAYERBATTSTATUS3]
+	ld a, [wPlayerBattleStatus3]
 	ld hl, wBattleMonSpecies
 	call DeterminePaletteIDBack
 	ld b, a
@@ -63,7 +63,7 @@ SetPal_Battle: ; 71e06 (1c:5e06)
 	ld hl, wShinyMonFlag
 	set 0, [hl]
 .getPALID2
-	ld a, [W_ENEMYBATTSTATUS3]
+	ld a, [wEnemyBattleStatus3]
 	ld hl, wEnemyMonSpecies2
 	call DeterminePaletteID
 	pop bc
@@ -169,7 +169,7 @@ SetPal_Overworld: ; 71ec7 (1c:5ec7)
 	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	cp CEMETERY
 	jr z, .PokemonTowerOrAgatha
 	cp CAVERN
@@ -180,7 +180,7 @@ SetPal_Overworld: ; 71ec7 (1c:5ec7)
 	jr z, .townOrRoute
 	cp ICE_CAVERN
 	jr z, .icePath
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp REDS_HOUSE_1F
 	jr c, .townOrRoute
 	cp VIRIDIAN_FOREST

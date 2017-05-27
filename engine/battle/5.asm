@@ -3,13 +3,13 @@ SubstituteEffectHandler: ; 17dad (5:7dad)
 	call DelayFrames
 	ld hl, wBattleMonMaxHP
 	ld de, wPlayerSubstituteHP
-	ld bc, W_PLAYERBATTSTATUS2
+	ld bc, wPlayerBattleStatus2
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .notEnemy
 	ld hl, wEnemyMonMaxHP
 	ld de, wEnemySubstituteHP
-	ld bc, W_ENEMYBATTSTATUS2
+	ld bc, wEnemyBattleStatus2
 .notEnemy
 	ld a, [bc]                    ;load flags
 	bit HasSubstituteUp, a        ;user already has substitute?

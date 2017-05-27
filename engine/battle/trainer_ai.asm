@@ -7,7 +7,7 @@ AIEnemyTrainerChooseMoves: ; 39719 (e:5719)
 	ld [hli], a   ; move 2
 	ld [hli], a   ; move 3
 	ld [hl], a    ; move 4
-	ld a, [W_ENEMYDISABLEDMOVE] ; forbid disabled move (if any)
+	ld a, [wEnemyDisabledMove] ; forbid disabled move (if any)
 	swap a
 	and $f
 	jr z, .noMoveDisabled
@@ -126,10 +126,10 @@ AIMoveChoiceModification1: ; 397ab (e:57ab)
 	ret z ; no more moves in move set
 	inc de
 	call ReadMove
-	ld a, [W_ENEMYMOVEPOWER]
+	ld a, [wEnemyMovePower]
 	and a
 	jr nz, .nextMove
-	ld a, [W_ENEMYMOVEEFFECT]
+	ld a, [wEnemyMoveEffect]
 	push hl
 	push de
 	push bc
@@ -169,7 +169,7 @@ SmartAI: ; originally by Dabomstew
 	jr z, .healingCheck
 	inc de
 	call ReadMove
-	ld a, [W_ENEMYMOVEPOWER]
+	ld a, [wEnemyMovePower]
 	and a
 	jr z, .damageLoop
 ; encourage by 2
@@ -218,7 +218,7 @@ SmartAI: ; originally by Dabomstew
 	ld a, [wBattleMonStatus]
 	and SLP
 	ld a, DREAM_EATER
-	ld [W_AIBUFFER1], a
+	ld [wAIBuffer1], a
 	jr z, .debuffDreamEater
 	ld b, -1
 	jr .applyDreamEater
@@ -230,7 +230,7 @@ SmartAI: ; originally by Dabomstew
 	ld a, [wBattleMonStatus]
 	and a
 	ld a, HEX
-	ld [W_AIBUFFER1], a
+	ld [wAIBuffer1], a
 	jr z, .debuffHex
 	ld b, -1
 	jr .applyHex
@@ -244,7 +244,7 @@ SmartAI: ; originally by Dabomstew
 	ld c, $2
 	call StringCmp ; see who is faster
 	ld a, ELECTRO_BALL
-	ld [W_AIBUFFER1], a
+	ld [wAIBuffer1], a
 	jr nc, .debuffElectroBall
 	ld b, -1 ; slightly encourage if speed matches
 	jr z, .applyElectroBall
@@ -268,12 +268,12 @@ SmartAI: ; originally by Dabomstew
 	jr z, .selfBuffCheck
 	inc de
 	call ReadMove
-	ld a, [W_ENEMYMOVEEFFECT]
+	ld a, [wEnemyMoveEffect]
 	cp SUPER_FANG_EFFECT
 	jr z, .seloop
 	cp SPECIAL_DAMAGE_EFFECT
 	jr z, .seloop
-	ld a, [W_ENEMYMOVEPOWER]
+	ld a, [wEnemyMovePower]
 	cp 10
 	jr c, .seloop
 	push hl
@@ -409,7 +409,7 @@ StatusOnlyMoves:
 	db $FF
 	
 AlterMovePriority:
-; [W_AIBUFFER1] = move
+; [wAIBuffer1] = move
 ; b = priority change
 	ld hl, wBuffer - 1
 	ld de, wEnemyMonMoves
@@ -424,7 +424,7 @@ AlterMovePriority:
 	inc de
 	push bc
 	ld b, a
-	ld a, [W_AIBUFFER1]
+	ld a, [wAIBuffer1]
 	cp b
 	pop bc
 	jr nz, .moveLoop
@@ -437,9 +437,9 @@ AlterMovePriorityArray:
 ; hl = move array
 ; b = priority change
 	ld a, h
-	ld [W_AIBUFFER1], a
+	ld [wAIBuffer1], a
 	ld a, l
-	ld [W_AIBUFFER1 + 1], a
+	ld [wAIBuffer1 + 1], a
 	ld hl, wBuffer - 1
 	ld de, wEnemyMonMoves
 	ld c, NUM_MOVES + 1
@@ -455,9 +455,9 @@ AlterMovePriorityArray:
 	push de
 	push bc
 	ld b, a
-	ld a, [W_AIBUFFER1]
+	ld a, [wAIBuffer1]
 	ld h, a
-	ld a, [W_AIBUFFER1 + 1]
+	ld a, [wAIBuffer1 + 1]
 	ld l, a
 	ld a, b
 	ld de, $0001
@@ -490,7 +490,7 @@ AIMoveChoiceModification2: ; 397e7 (e:57e7)
 	ret z ; no more moves in move set
 	inc de
 	call ReadMove
-	ld a, [W_ENEMYMOVEEFFECT]
+	ld a, [wEnemyMoveEffect]
 	cp ATTACK_UP1_EFFECT
 	jr c, .nextMove
 	cp BIDE_EFFECT
@@ -537,7 +537,7 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	push hl
 	push de
 	push bc
-	ld a, [W_ENEMYMOVETYPE]
+	ld a, [wEnemyMoveType]
 	ld d, a
 	ld hl, wEnemyMonMoves  ; enemy moves
 	ld b, NUM_MOVES + 1
@@ -549,17 +549,17 @@ AIMoveChoiceModification3: ; 39817 (e:5817)
 	and a
 	jr z, .done
 	call ReadMove
-	ld a, [W_ENEMYMOVEEFFECT]
+	ld a, [wEnemyMoveEffect]
 	cp SUPER_FANG_EFFECT
 	jr z, .betterMoveFound ; Super Fang is considered to be a better move
 	cp SPECIAL_DAMAGE_EFFECT
 	jr z, .betterMoveFound ; any special damage moves are considered to be better moves
 	cp FLY_EFFECT
 	jr z, .betterMoveFound ; Fly is considered to be a better move
-	ld a, [W_ENEMYMOVETYPE]
+	ld a, [wEnemyMoveType]
 	cp d
 	jr z, .loopMoves
-	ld a, [W_ENEMYMOVEPOWER]
+	ld a, [wEnemyMovePower]
 	and a
 	jr nz, .betterMoveFound ; damaging moves of a different type are considered to be better moves
 	jr .loopMoves
@@ -696,7 +696,7 @@ ENDC
 
 TrainerAI: ; 3a52e (e:652e)
 	and a
-	ld a,[W_ISINBATTLE]
+	ld a,[wIsInBattle]
 	dec a
 	ret z ; if not a trainer, we're done here
 	ld a,[wLinkState]
@@ -1229,27 +1229,27 @@ AICureStatus: ; 3a791 (e:6791)
 	xor a
 	ld [hl],a ; clear status in enemy team roster
 	ld [wEnemyMonStatus],a ; clear status of active enemy
-	ld hl,W_ENEMYBATTSTATUS3
+	ld hl,wEnemyBattleStatus3
 	res 0,[hl]
 	ret
 
 AIUseXAccuracy: ; 0x3a7a8 unused
 	call AIPlayRestoringSFX
-	ld hl,W_ENEMYBATTSTATUS2
+	ld hl,wEnemyBattleStatus2
 	set 0,[hl]
 	ld a,X_ACCURACY
 	jp AIPrintItemUse
 
 AIUseGuardSpec: ; 3a7b5 (e:67b5)
 	call AIPlayRestoringSFX
-	ld hl,W_ENEMYBATTSTATUS2
+	ld hl,wEnemyBattleStatus2
 	set 1,[hl]
 	ld a,GUARD_SPEC_
 	jp AIPrintItemUse
 
 AIUseDireHit: ; 0x3a7c2 unused
 	call AIPlayRestoringSFX
-	ld hl,W_ENEMYBATTSTATUS2
+	ld hl,wEnemyBattleStatus2
 	set 2,[hl]
 	ld a,DIRE_HIT
 	jp AIPrintItemUse
@@ -1305,7 +1305,7 @@ AIIncreaseStat: ; 3a808 (e:6808)
 	push bc
 	call AIPrintItemUse_
 	pop bc
-	ld hl,W_ENEMYMOVEEFFECT
+	ld hl,wEnemyMoveEffect
 	ld a,[hld]
 	push af
 	ld a,[hl]

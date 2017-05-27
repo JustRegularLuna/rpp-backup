@@ -1,11 +1,11 @@
 ; Handles functionality for Headbutt outside of battle
 ; Headbutt Pokemon tables are stored in data/wildPokemon/tree_mons.asm
-; engine/battle/16.asm needs to include the check for W_MOVEMISSED being 2 for _FellOutOfTreeText
+; engine/battle/16.asm needs to include the check for wMoveMissed being 2 for _FellOutOfTreeText
 ; without that check, it will claim the Pokemon was hooked by a rod
 UseHeadbuttOW::
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	and a ; OVERWORLD
 	jr z, .overworld
 	cp FOREST
@@ -78,7 +78,7 @@ GetHeadbuttMons:
 	jp PrintText
 
 .getHeadbuttMon
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp REDS_HOUSE_1F
 	ld hl, TreeMons1 ; If it isn't in the table, it loads the first list
 	jr nc, .skipCalc
@@ -112,11 +112,11 @@ GetHeadbuttMons:
 	ld b, 0
 	add hl, bc
 	ld a, 2
-	ld [W_MOVEMISSED], a ; fell out of tree text at start of battle
+	ld [wMoveMissed], a ; fell out of tree text at start of battle
 	ld a, [hli]
-	ld [W_CURENEMYLVL], a
+	ld [wCurEnemyLVL], a
 	ld a, [hl]
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	xor a
 	ld [wIsTrainerBattle], a ; make sure this doesn't try to be a glitch trainer
 	ret

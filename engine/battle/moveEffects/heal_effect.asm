@@ -3,11 +3,11 @@ HealEffect_: ; 3b9ec (e:79ec)
 	and a
 	ld de, wBattleMonHP
 	ld hl, wBattleMonMaxHP
-	ld a, [W_PLAYERMOVENUM]
+	ld a, [wPlayerMoveNum]
 	jr z, .healEffect
 	ld de, wEnemyMonHP
 	ld hl, wEnemyMonMaxHP
-	ld a, [W_ENEMYMOVENUM]
+	ld a, [wEnemyMoveNum]
 .healEffect
 	ld b, a
 	ld a, [de]
@@ -28,14 +28,14 @@ HealEffect_: ; 3b9ec (e:79ec)
 	ld c, 50
 	call DelayFrames
 	ld bc, wBattleMonStatus
-	ld de, W_PLAYERTOXICCOUNTER
-	ld hl, W_PLAYERBATTSTATUS3
+	ld de, wPlayerToxicCounter
+	ld hl, wPlayerBattleStatus3
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .restEffect
 	ld bc, wEnemyMonStatus
-	ld de, W_ENEMYTOXICCOUNTER
-	ld hl, W_ENEMYBATTSTATUS3
+	ld de, wEnemyToxicCounter
+	ld hl, wEnemyBattleStatus3
 .restEffect
 	xor a
 	ld [de], a

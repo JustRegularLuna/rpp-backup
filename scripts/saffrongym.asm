@@ -6,9 +6,9 @@ SaffronGymScript: ; 5d00d (17:500d)
 	call EnableAutoTextBoxDrawing
 	ld hl, SaffronGymTrainerHeader0
 	ld de, SaffronGymScriptPointers
-	ld a, [W_SAFFRONGYMCURSCRIPT]
+	ld a, [wSaffronGymCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_SAFFRONGYMCURSCRIPT], a
+	ld [wSaffronGymCurScript], a
 	ret
 
 .extra
@@ -25,7 +25,7 @@ Gym6LeaderName: ; 5d040 (17:5040)
 SaffronGymText_5d048: ; 5d048 (17:5048)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_SAFFRONGYMCURSCRIPT], a
+	ld [wSaffronGymCurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -36,7 +36,7 @@ SaffronGymScriptPointers: ; 5d053 (17:5053)
 	dw SaffronGymScript3
 
 SaffronGymScript3: ; 5d05b (17:505b)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, SaffronGymText_5d048
 	ld a, $f0
@@ -175,9 +175,9 @@ SaffronGymText1: ; 5d118 (17:5118)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $6
-	ld [W_GYMLEADERNO], a
+	ld [wGymLeaderNo], a
 	ld a, $3
-	ld [W_SAFFRONGYMCURSCRIPT], a
+	ld [wSaffronGymCurScript], a
 .asm_5d15f
 	jp TextScriptEnd
 

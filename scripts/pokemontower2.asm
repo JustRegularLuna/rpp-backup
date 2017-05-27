@@ -1,13 +1,13 @@
 PokemonTower2Script: ; 604f2 (18:44f2)
 	call EnableAutoTextBoxDrawing
 	ld hl, PokemonTower2ScriptPointers
-	ld a, [W_POKEMONTOWER2CURSCRIPT]
+	ld a, [wPokemonTower2CurScript]
 	jp CallFunctionInTable
 
 PokemonTower2Script_604fe: ; 604fe (18:44fe)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_POKEMONTOWER2CURSCRIPT], a
+	ld [wPokemonTower2CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -59,7 +59,7 @@ CoordsData_6055e: ; 6055e (18:455e)
 	db $0F ; isn't this supposed to end in $ff?
 
 PokemonTower2Script1: ; 60563 (18:4563)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PokemonTower2Script_604fe
 	xor a
@@ -83,7 +83,7 @@ PokemonTower2Script1: ; 60563 (18:4563)
 	call PlaySound
 	callba Music_RivalAlternateStart
 	ld a, $2
-	ld [W_POKEMONTOWER2CURSCRIPT], a
+	ld [wPokemonTower2CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -120,7 +120,7 @@ PokemonTower2Script2: ; 605bb (18:45bb)
 	ld [wJoyIgnore], a
 	call PlayDefaultMusic
 	ld a, $0
-	ld [W_POKEMONTOWER2CURSCRIPT], a
+	ld [wPokemonTower2CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -145,7 +145,7 @@ PokemonTower2Text1: ; 605df (18:45df)
 	ld de, PokemonTower2Text_60637
 	call SaveEndBattleTextPointers
 	ld a, OPP_SONY2
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
@@ -161,12 +161,12 @@ PokemonTower2Text1: ; 605df (18:45df)
 .Charmander
 	ld a, $6
 .done
-	ld [W_TRAINERNO], a
+	ld [wTrainerNo], a
 	ld a, 1
 	ld [wIsTrainerBattle], a
 
 	ld a, $1
-	ld [W_POKEMONTOWER2CURSCRIPT], a
+	ld [wPokemonTower2CurScript], a
 	ld [wCurMapScript], a
 .asm_41852
 	jp TextScriptEnd

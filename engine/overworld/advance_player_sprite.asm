@@ -10,12 +10,12 @@ AdvancePlayerSprite_::
 	dec [hl]
 	jr nz,.afterUpdateMapCoords
 ; if it's the end of the animation, update the player's map coordinates
-	ld a,[W_YCOORD]
+	ld a,[wYCoord]
 	add b
-	ld [W_YCOORD],a
-	ld a,[W_XCOORD]
+	ld [wYCoord],a
+	ld a,[wXCoord]
 	add c
-	ld [W_XCOORD],a
+	ld [wXCoord],a
 .afterUpdateMapCoords
 	ld a,[wWalkCounter] ; walking animation counter
 	cp a,$07
@@ -82,7 +82,7 @@ AdvancePlayerSprite_::
 	and a
 	jr z,.pointlessJump ; mistake?
 .pointlessJump
-	ld hl,W_XBLOCKCOORD
+	ld hl,wXBlockCoord
 	ld a,[hl]
 	add c
 	ld [hl],a
@@ -108,7 +108,7 @@ AdvancePlayerSprite_::
 	call MoveTileBlockMapPointerWest
 	jr .updateMapView
 .adjustYCoordWithinBlock
-	ld hl,W_YBLOCKCOORD
+	ld hl,wYBlockCoord
 	ld a,[hl]
 	add b
 	ld [hl],a
@@ -120,7 +120,7 @@ AdvancePlayerSprite_::
 	ld hl,wYOffsetSinceLastSpecialWarp
 	inc [hl]
 	ld de,wCurrentTileBlockMapViewPointer
-	ld a,[W_CURMAPWIDTH]
+	ld a,[wCurMapWidth]
 	call MoveTileBlockMapPointerSouth
 	jr .updateMapView
 .checkForMoveToNorthBlock
@@ -132,7 +132,7 @@ AdvancePlayerSprite_::
 	ld hl,wYOffsetSinceLastSpecialWarp
 	dec [hl]
 	ld de,wCurrentTileBlockMapViewPointer
-	ld a,[W_CURMAPWIDTH]
+	ld a,[wCurMapWidth]
 	call MoveTileBlockMapPointerNorth
 .updateMapView
 	call LoadCurrentMapView
@@ -176,7 +176,7 @@ AdvancePlayerSprite_::
 ; shift all the sprites in the direction opposite of the player's motion
 ; so that the player appears to move relative to them
 	ld hl,wSpriteStateData1 + $14
-	ld a,[W_NUMSPRITES] ; number of sprites
+	ld a,[wNumSprites] ; number of sprites
 	and a ; are there any sprites?
 	jr z,.done
 	ld e,a

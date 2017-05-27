@@ -2,15 +2,15 @@ Route24Script: ; 513ad (14:53ad)
 	call EnableAutoTextBoxDrawing
 	ld hl, Route24TrainerHeaders
 	ld de, Route24ScriptPointers
-	ld a, [W_ROUTE24CURSCRIPT]
+	ld a, [wRoute24CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE24CURSCRIPT], a
+	ld [wRoute24CurScript], a
 	ret
 
 Route24Script_513c0: ; 513c0 (14:53c0)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_ROUTE24CURSCRIPT], a
+	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -40,7 +40,7 @@ Route24Script0: ; 513d5 (14:53d5)
 	ld [wSimulatedJoypadStatesIndex], a
 	call StartSimulatingJoypadStates
 	ld a, $4
-	ld [W_ROUTE24CURSCRIPT], a
+	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -53,12 +53,12 @@ Route24Script4: ; 51411 (14:5411)
 	ret nz
 	call Delay3
 	ld a, $0
-	ld [W_ROUTE24CURSCRIPT], a
+	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	ret
 
 Route24Script3: ; 51422 (14:5422)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route24Script_513c0
 	call UpdateSprites
@@ -71,7 +71,7 @@ Route24Script3: ; 51422 (14:5422)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_ROUTE24CURSCRIPT], a
+	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -174,7 +174,7 @@ Route24Text1: ; 514a4 (14:54a4)
 	xor a
 	ld [hJoyHeld], a
 	ld a, $3
-	ld [W_ROUTE24CURSCRIPT], a
+	ld [wRoute24CurScript], a
 	ld [wCurMapScript], a
 	jp TextScriptEnd
 .asm_514f9

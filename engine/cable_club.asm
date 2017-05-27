@@ -275,7 +275,7 @@ CableClub_DoBattleOrTradeAgain: ; 5345
 	ld a, LINK_STATE_BATTLING
 	ld [wLinkState], a
 	ld a, OPP_SONY1
-	ld [W_CUROPPONENT], a
+	ld [wCurOpponent], a
 	call ClearScreen
 	call Delay3
 	ld hl, wOptions
@@ -900,16 +900,16 @@ CableClub_Run: ; 5a5f (1:5a5f)
 	call CableClub_DoBattleOrTrade
 	ld hl, Club_GFX
 	ld a, h
-	ld [W_TILESETGFXPTR + 1], a
+	ld [wTileSetGFXPtr + 1], a
 	ld a, l
-	ld [W_TILESETGFXPTR], a
+	ld [wTileSetGFXPtr], a
 	ld a, Bank(Club_GFX)
-	ld [W_TILESETBANK], a
+	ld [wTileSetBank], a
 	ld hl, Club_Coll
 	ld a, h
-	ld [W_TILESETCOLLISIONPTR + 1], a
+	ld [wTileSetCollisionPtr + 1], a
 	ld a, l
-	ld [W_TILESETCOLLISIONPTR], a
+	ld [wTileSetCollisionPtr], a
 	xor a
 	ld [wLinkEnemyTrainerName], a
 	inc a ; LINK_STATE_IN_CABLE_CLUB

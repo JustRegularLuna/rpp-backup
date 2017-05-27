@@ -78,7 +78,7 @@ WonderTrade_DoTrade:
 	ld bc,$002c
 	call AddNTimes
 	ld a,[hl]
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 
 	; Setup the variables for the Received Pokemon name and ID before the trade
 .getReceiveMonLoop
@@ -103,13 +103,13 @@ WonderTrade_DoTrade:
 	; Do the actual trade stuff
 	ld a,[wWhichPokemon]
 	push af
-	ld a,[W_CURENEMYLVL]
+	ld a,[wCurEnemyLVL]
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call WonderTrade_PrepareTradeData
 	predef InternalClockTradeAnim
 	pop af
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	pop af
 	ld [wWhichPokemon],a
 	ld a,[wInGameTradeReceiveMonSpecies]
@@ -277,7 +277,7 @@ BannedMons: ; List of Pokemon not allowed to show up in Wonder Trade
 
 CheckValidLevel:
 ; Make sure the ReceiveMon isn't impossibly leveled
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	ld d, a
 
 	ld a, [wInGameTradeReceiveMonSpecies]

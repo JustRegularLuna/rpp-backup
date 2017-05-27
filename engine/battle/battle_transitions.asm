@@ -105,7 +105,7 @@ GetBattleTransitionID_CompareLevels: ; 709ef (1c:49ef)
 	ld a, [hl]
 	add $3
 	ld e, a
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	sub e
 	jr nc, .highLevelEnemy
 	res 1, c
@@ -122,7 +122,7 @@ GetBattleTransitionID_CompareLevels: ; 709ef (1c:49ef)
 ; MANSION_1, SEAFOAM_ISLANDS_[2-5], POWER_PLANT, DIGLETTS_CAVE
 ; and SILPH_CO_[9-11]F as dungeon maps
 GetBattleTransitionID_IsDungeonMap: ; 70a19 (1c:4a19)
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld e, a
 	ld hl, DungeonMaps1
 .loop1
@@ -151,7 +151,7 @@ GetBattleTransitionID_IsDungeonMap: ; 70a19 (1c:4a19)
 	res 2, c
 	ret
 
-; GetBattleTransitionID_IsDungeonMap checks if W_CURMAP
+; GetBattleTransitionID_IsDungeonMap checks if wCurMap
 ; is equal to one of these maps
 DungeonMaps1: ; 70a3f (1c:4a3f)
 	db VIRIDIAN_FOREST
@@ -160,7 +160,7 @@ DungeonMaps1: ; 70a3f (1c:4a3f)
 	db ROCK_TUNNEL_2
 	db $FF
 
-; GetBattleTransitionID_IsDungeonMap checks if W_CURMAP
+; GetBattleTransitionID_IsDungeonMap checks if wCurMap
 ; is in between or equal to each pair of maps
 DungeonMaps2: ; 70a44 (1c:4a44)
 	; all MT_MOON maps

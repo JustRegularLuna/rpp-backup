@@ -5,9 +5,9 @@ ViridianGymScript: ; 748a3 (1d:48a3)
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianGymTrainerHeaders
 	ld de, ViridianGymScriptPointers
-	ld a, [W_VIRIDIANGYMCURSCRIPT]
+	ld a, [wViridianGymCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_VIRIDIANGYMCURSCRIPT], a
+	ld [wViridianGymCurScript], a
 	ret
 
 Gym8CityName: ; 748bf (1d:48bf)
@@ -18,7 +18,7 @@ Gym8LeaderName: ; 748cd (1d:48cd)
 ViridianGymScript_748d6: ; 748d6 (1d:48d6)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_VIRIDIANGYMCURSCRIPT], a
+	ld [wViridianGymCurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -30,9 +30,9 @@ ViridianGymScriptPointers: ; 748e1 (1d:48e1)
 	dw ViridianGymScript4
 
 ViridianGymScript0: ; 748eb (1d:48eb)
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	ld b, a
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld c, a
 	ld hl, ViridianGymArrowTilePlayerMovement
 	call DecodeArrowMovementRLE
@@ -131,7 +131,7 @@ ViridianGymScript4: ; 7496b (1d:496b)
 	jpba LoadSpinnerArrowTiles
 
 ViridianGymScript3: ; 74988 (1d:4988)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, ViridianGymScript_748d6
 	ld a, $f0
@@ -293,9 +293,9 @@ ViridianGymText1: ; 74a69 (1d:4a69)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $8
-	ld [W_GYMLEADERNO], a
+	ld [wGymLeaderNo], a
 	ld a, $3
-	ld [W_VIRIDIANGYMCURSCRIPT], a
+	ld [wViridianGymCurScript], a
 .asm_6dff7
 	jp TextScriptEnd
 

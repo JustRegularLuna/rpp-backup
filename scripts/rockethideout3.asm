@@ -2,9 +2,9 @@ RocketHideout3Script: ; 45225 (11:5225)
 	call EnableAutoTextBoxDrawing
 	ld hl, RocketHideout3TrainerHeaders
 	ld de, RocketHideout3ScriptPointers
-	ld a, [W_ROCKETHIDEOUT3CURSCRIPT]
+	ld a, [wRocketHideout3CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROCKETHIDEOUT3CURSCRIPT], a
+	ld [wRocketHideout3CurScript], a
 	ret
 
 RocketHideout3ScriptPointers: ; 45238 (11:5238)
@@ -14,9 +14,9 @@ RocketHideout3ScriptPointers: ; 45238 (11:5238)
 	dw RocketHideout3Script3
 
 RocketHideout3Script0: ; 45240 (11:5240)
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	ld b, a
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld c, a
 	ld hl, RocketHideout3ArrowTilePlayerMovement
 	call DecodeArrowMovementRLE

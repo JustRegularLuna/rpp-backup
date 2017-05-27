@@ -6,9 +6,9 @@ PewterGymScript: ; 5c387 (17:4387)
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterGymTrainerHeaders
 	ld de, PewterGymScriptPointers
-	ld a, [W_PEWTERGYMCURSCRIPT]
+	ld a, [wPewterGymCurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_PEWTERGYMCURSCRIPT], a
+	ld [wPewterGymCurScript], a
 	ret
 
 PewterGymScript_5c3a4: ; 5c3a4 (17:43a4)
@@ -25,7 +25,7 @@ Gym1LeaderName: ; 5c3b9 (17:43b9)
 PewterGymScript_5c3bf: ; 5c3bf (17:43bf)
 	xor a
 	ld [wJoyIgnore], a
-	ld [W_PEWTERGYMCURSCRIPT], a
+	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a
 	ret
 
@@ -36,7 +36,7 @@ PewterGymScriptPointers: ; 5c3ca (17:43ca)
 	dw PewterGymScript3
 
 PewterGymScript3: ; 5c3d2 (17:43d2)
-	ld a, [W_ISINBATTLE]
+	ld a, [wIsInBattle]
 	cp $ff
 	jp z, PewterGymScript_5c3bf
 	ld a, $f0
@@ -124,11 +124,11 @@ PewterGymText1: ; 5c44e (17:444e)
 	call EngageMapTrainer
 	call InitBattleEnemyParameters
 	ld a, $1
-	ld [W_GYMLEADERNO], a
+	ld [wGymLeaderNo], a
 	xor a
 	ld [hJoyHeld], a
 	ld a, $3
-	ld [W_PEWTERGYMCURSCRIPT], a
+	ld [wPewterGymCurScript], a
 	ld [wCurMapScript], a
 .asm_5c49b
 	jp TextScriptEnd
