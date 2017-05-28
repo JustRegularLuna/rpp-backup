@@ -13,8 +13,6 @@ NUM_BOXES    EQU 12
 BAG_ITEM_CAPACITY EQU 30
 PC_ITEM_CAPACITY  EQU 50
 
-START_MONEY EQU $3000
-
 SPECIAL_TRAINER  EQU $FE ; custom levels and moves for each
 SPECIAL_TRAINER2 EQU $FD ; custom levels, moves, trainer pic, and AI
 CUSTOM_PIC       EQU $FC ; custom pic, all Pokemon same level like normal trainer
