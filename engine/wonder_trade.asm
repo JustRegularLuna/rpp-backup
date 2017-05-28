@@ -532,7 +532,7 @@ ComeAgainText:
 	text "Come again!@@"
 	
 CompletedWonderTradeText:
-	text "[PLAYER] completed"
+	text "<PLAYER> completed"
 	line "a Wonder Trade!@@"
 	
 BannedMonText:

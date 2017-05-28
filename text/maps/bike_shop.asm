@@ -25,7 +25,7 @@ _BikeShopText_1d81f::
 	prompt
 
 _BikeShopText_1d824::
-	text "[PLAYER] exchanged"
+	text "<PLAYER> exchanged"
 	line "the Bike Voucher"
 	cont "for a Bicycle.@@"
 

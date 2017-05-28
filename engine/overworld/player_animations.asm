@@ -397,7 +397,7 @@ FishingAnim:
 .BoySpriteLoad
 	ld de, RedSprite
 	ld hl, vNPCSprites
-	lb bc, BANK(RedSprite), $0c
+	lb bc, BANK(RedSprite), $c
 .KeepLoadingSpriteStuff
 	call CopyVideoData
 	ld a, [wPlayerGender] ; added gender check

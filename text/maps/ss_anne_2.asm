@@ -9,13 +9,13 @@ _SSAnne2Text1::
 	done
 
 _SSAnneRivalBeforeBattleText::
-	text "[RIVAL]: Bonjour!"
-	line "[PLAYER]!"
+	text "<RIVAL>: Bonjour!"
+	line "<PLAYER>!"
 
 	para "Imagine seeing"
 	line "you here!"
 
-	para "[PLAYER], were you"
+	para "<PLAYER>, were you"
 	line "really invited?"
 
 	para "So how's your"
@@ -40,7 +40,7 @@ _SSAnneRivalDefeatedText::
 	prompt
 
 _SSAnneRivalWonText::
-	text "[PLAYER]! What are"
+	text "<PLAYER>! What are"
 	line "you, seasick?"
 
 	para "You should shape"
@@ -48,7 +48,7 @@ _SSAnneRivalWonText::
 	prompt
 
 _SSAnneRivalCaptainText::
-	text "[RIVAL]: I heard"
+	text "<RIVAL>: I heard"
 	line "there was a Cut"
 	cont "master on board."
 
@@ -61,5 +61,5 @@ _SSAnneRivalCaptainText::
 	cont "bushes now."
 
 	para "Smell ya later,"
-	line "[PLAYER]!"
+	line "<PLAYER>!"
 	done

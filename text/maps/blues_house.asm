@@ -1,6 +1,6 @@
 _DaisyInitialText::
-	text "Hi [PLAYER]!"
-	line "[RIVAL] is out at"
+	text "Hi <PLAYER>!"
+	line "<RIVAL> is out at"
 	cont "Grandpa's lab."
 	done
 
@@ -12,7 +12,7 @@ _DaisyOfferMapText::
 	prompt
 
 _GotMapText::
-	text "[PLAYER] got a"
+	text "<PLAYER> got a"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

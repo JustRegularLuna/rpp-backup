@@ -20,7 +20,7 @@ _SilphCoPresidentText::
 	prompt
 
 _ReceivedSilphCoMasterBallText::
-	text "[PLAYER] got a"
+	text "<PLAYER> got a"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
@@ -58,7 +58,7 @@ _SilphCo11Text2::
 	done
 
 _SilphCo11Text3::
-	text "Ah, [PLAYER]!"
+	text "Ah, <PLAYER>!"
 	line "So we meet again!"
 
 	para "The President and"
@@ -87,7 +87,7 @@ _SilphCo10Text_62335::
 	para "But, Team Rocket"
 	line "will never fall!"
 
-	para "[PLAYER]! Never"
+	para "<PLAYER>! Never"
 	line "forget that all"
 	cont "#mon exist"
 	cont "for Team Rocket!"

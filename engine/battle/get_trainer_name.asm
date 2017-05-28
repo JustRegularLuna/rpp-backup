@@ -2,7 +2,7 @@ GetTrainerName_:
 	ld hl, wLinkEnemyTrainerName
 	ld a, [wLinkState]
 	and a
-	jr nz, .rival
+	jr nz, .foundName
 	ld a, [wTrainerClass]
 	ld [wd0b5], a
 	ld a, TRAINER_NAME
@@ -11,7 +11,7 @@ GetTrainerName_:
 	ld [wPredefBank], a
 	call GetName
 	ld hl, wcd6d
-.rival
+.foundName
 	ld de, wTrainerName
 	ld bc, $d
 	jp CopyData

@@ -59,7 +59,7 @@ OverworldLoopLessDelay::
 	res 3,[hl]
 	jp nz,WarpFound2
 	ld a,[wd732]
-	and a,1 << 4 | 1 << 3 ; fly warp or dungeon warp
+	and 1 << 4 | 1 << 3 ; fly warp or dungeon warp
 	jp nz,HandleFlyWarpOrDungeonWarp
 	ld a,[wCurOpponent]
 	and a
@@ -138,7 +138,7 @@ OverworldLoopLessDelay::
 	ld hl,wFlags_0xcd60
 	res 2,[hl]
 	call UpdateSprites
-	ld a,1
+	ld a, 1
 	ld [wCheckFor180DegreeTurn],a
 	ld a,[wPlayerMovingDirection] ; the direction that was pressed last time
 	and a
@@ -148,6 +148,7 @@ OverworldLoopLessDelay::
 	xor a
 	ld [wPlayerMovingDirection],a ; zero the direction
 	jp OverworldLoop
+
 .checkIfDownButtonIsPressed
 	ld a,[hJoyHeld] ; current joypad state
 	bit 7,a ; down button
@@ -156,6 +157,7 @@ OverworldLoopLessDelay::
 	ld [wSpriteStateData1 + 3],a ; delta Y
 	ld a,PLAYER_DIR_DOWN
 	jr .handleDirectionButtonPress
+
 .checkIfUpButtonIsPressed
 	bit 6,a ; up button
 	jr z,.checkIfLeftButtonIsPressed
@@ -163,6 +165,7 @@ OverworldLoopLessDelay::
 	ld [wSpriteStateData1 + 3],a ; delta Y
 	ld a,PLAYER_DIR_UP
 	jr .handleDirectionButtonPress
+
 .checkIfLeftButtonIsPressed
 	bit 5,a ; left button
 	jr z,.checkIfRightButtonIsPressed
@@ -170,11 +173,14 @@ OverworldLoopLessDelay::
 	ld [wSpriteStateData1 + 5],a ; delta X
 	ld a,PLAYER_DIR_LEFT
 	jr .handleDirectionButtonPress
+
 .checkIfRightButtonIsPressed
 	bit 4,a ; right button
 	jr z,.noDirectionButtonsPressed
-	ld a,1 ; PLAYER_DIR_RIGHT
+	ld a, 1
 	ld [wSpriteStateData1 + 5],a ; delta X
+
+
 .handleDirectionButtonPress
 	ld [wPlayerDirection],a ; new direction
 	ld a,[wd730]
@@ -231,12 +237,13 @@ OverworldLoopLessDelay::
 	call NewBattle
 	jp c,.battleOccurred
 	jp OverworldLoop
+
 .noDirectionChange
 	ld a,[wPlayerDirection] ; current direction
 	ld [wPlayerMovingDirection],a ; save direction
 	call UpdateSprites
 	ld a,[wWalkBikeSurfState]
-	cp a,$02 ; surfing
+	cp $02 ; surfing
 	jr z,.surfing
 ; not surfing
 	call CollisionCheckOnLand
@@ -253,20 +260,24 @@ OverworldLoopLessDelay::
 	pop hl
 	jp c,CheckWarpsCollision
 	jp OverworldLoop
+
 .surfing
 	call CollisionCheckOnWater
 	jp c,OverworldLoop
+
 .noCollision
 	ld a,$08
 	ld [wWalkCounter],a
 	jr .moveAhead2
+
 .moveAhead
 	ld a,[wd736]
 	bit 7,a
 	jr z,.noSpinning
-	callba LoadSpinnerArrowTiles ; spin while moving
+	callba LoadSpinnerArrowTiles
 .noSpinning
 	call UpdateSprites
+
 .moveAhead2
 	ld hl,wFlags_0xcd60
 	res 2,[hl]
@@ -276,9 +287,9 @@ OverworldLoopLessDelay::
 	ld a,[wd736]
 	bit 6,a ; jumping a ledge?
 	jr nz,.normalPlayerSpriteAdvancement
-	call BikeSpeedup ; if riding a bike and not jumping a ledge
-	call BikeSpeedup ; added
-	call BikeSpeedup ; added
+	call DoBikeSpeedup ; if riding a bike and not jumping a ledge
+	call DoBikeSpeedup ; added
+	call DoBikeSpeedup ; added
 	jr .notRunning
 .normalPlayerSpriteAdvancement
 	; Make you surf at bike speed
@@ -290,7 +301,7 @@ OverworldLoopLessDelay::
 	and B_BUTTON ; Are you holding B?
 	jr z, .notRunning ; If you aren't holding B, skip ahead to step normally.
 .surfFaster
-	call BikeSpeedup ; Make you go faster if you were holding B
+	call DoBikeSpeedup ; Make you go faster if you were holding B
 .notRunning ; Normal code resumes here
 	call AdvancePlayerSprite
 	ld a,[wWalkCounter]
@@ -351,14 +362,14 @@ OverworldLoopLessDelay::
 	xor a
 	ld [hJoyHeld],a
 	ld a,[wCurMap]
-	cp a,CINNABAR_GYM
+	cp CINNABAR_GYM
 	jr nz,.notCinnabarGym
 	SetEvent EVENT_2A7
 .notCinnabarGym
 	ld hl,wd72e
 	set 5,[hl]
 	ld a,[wCurMap]
-	cp a,OAKS_LAB
+	cp OAKS_LAB
 	jp z,.noFaintCheck ; no blacking out if the player lost to the rival in Oak's lab
 	callab AnyPartyAlive
 	ld a,d
@@ -391,15 +402,15 @@ NewBattle::
 	ret
 
 ; function to make bikes twice as fast as walking
-BikeSpeedup::
+DoBikeSpeedup::
 	ld a,[wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a,[wCurMap]
-	cp a,ROUTE_17 ; Cycling Road
+	cp ROUTE_17 ; Cycling Road
 	jr nz,.goFaster
 	ld a,[hJoyHeld]
-	and a,D_UP | D_LEFT | D_RIGHT
+	and D_UP | D_LEFT | D_RIGHT
 	ret nz
 .goFaster
 	jp AdvancePlayerSprite
@@ -449,7 +460,7 @@ CheckWarpsNoCollisionLoop::
 	pop bc
 	pop de
 	ld a,[hJoyHeld]
-	and a,D_DOWN | D_UP | D_LEFT | D_RIGHT
+	and D_DOWN | D_UP | D_LEFT | D_RIGHT
 	jr z,CheckWarpsNoCollisionRetry2 ; if directional buttons aren't being pressed, do not pass through the warp
 	jr WarpFound1
 
@@ -511,7 +522,7 @@ WarpFound2::
 	ld [wUnusedD366],a ; not read
 	ld a,[hWarpDestinationMap]
 	ld [wCurMap],a
-	cp a,ROCK_TUNNEL_1
+	cp ROCK_TUNNEL_1
 	jr nz,.notRockTunnel
 	ld a,$06
 	ld [wMapPalOffset],a
@@ -519,10 +530,12 @@ WarpFound2::
 .notRockTunnel
 	call PlayMapChangeSound
 	jr .done
-; for maps that can have the 0xFF destination map, which means to return to the outside map; not all these maps are necessarily indoors, though
+
+; for maps that can have the 0xFF destination map, which means to return to the outside map
+; not all these maps are necessarily indoors, though
 .indoorMaps
 	ld a,[hWarpDestinationMap] ; destination map
-	cp a,$ff
+	cp $ff
 	jr z,.goBackOutside
 ; if not going back to the previous map
 	ld [wCurMap],a
@@ -563,7 +576,7 @@ ContinueCheckWarpsNoCollisionLoop::
 CheckMapConnections::
 .checkWestMap
 	ld a,[wXCoord]
-	cp a,$ff
+	cp $ff
 	jr nz,.checkEastMap
 	ld a,[wMapConn3Ptr]
 	ld [wCurMap],a
@@ -583,7 +596,7 @@ CheckMapConnections::
 	jr z,.savePointer1
 .pointerAdjustmentLoop1
 	ld a,[wWestConnectedMapWidth] ; width of connected map
-	add a,MAP_BORDER * 2
+	add MAP_BORDER * 2
 	ld e,a
 	ld d,0
 	ld b,0
@@ -596,6 +609,7 @@ CheckMapConnections::
 	ld a,h
 	ld [wCurrentTileBlockMapViewPointer + 1],a
 	jp .loadNewMap
+
 .checkEastMap
 	ld b,a
 	ld a,[wCurrentMapWidth2] ; map width
@@ -619,7 +633,7 @@ CheckMapConnections::
 	jr z,.savePointer2
 .pointerAdjustmentLoop2
 	ld a,[wEastConnectedMapWidth]
-	add a,MAP_BORDER * 2
+	add MAP_BORDER * 2
 	ld e,a
 	ld d,0
 	ld b,0
@@ -632,9 +646,10 @@ CheckMapConnections::
 	ld a,h
 	ld [wCurrentTileBlockMapViewPointer + 1],a
 	jp .loadNewMap
+
 .checkNorthMap
 	ld a,[wYCoord]
-	cp a,$ff
+	cp $ff
 	jr nz,.checkSouthMap
 	ld a,[wMapConn1Ptr]
 	ld [wCurMap],a
@@ -658,6 +673,7 @@ CheckMapConnections::
 	ld a,h
 	ld [wCurrentTileBlockMapViewPointer + 1],a
 	jp .loadNewMap
+
 .checkSouthMap
 	ld b,a
 	ld a,[wCurrentMapHeight2]
@@ -694,13 +710,14 @@ CheckMapConnections::
 	callba InitMapSprites
 	call LoadTileBlockMap
 	jp OverworldLoopLessDelay
+
 .didNotEnterConnectedMap
 	jp OverworldLoop
 
 ; function to play a sound when changing maps
 PlayMapChangeSound::
 	aCoord 8, 8 ; upper left tile of the 4x4 square the player's sprite is standing on
-	cp a,$0b ; door tile in tileset 0
+	cp $0b ; door tile in tileset 0
 	jr nz,.didNotGoThroughDoor
 	ld a,SFX_GO_INSIDE
 	jr .playSound
@@ -884,13 +901,13 @@ INCLUDE "data/bike_riding_tilesets.asm"
 
 ; load the tile pattern data of the current tileset into VRAM
 LoadTilesetTilePatternData::
-	ld a,[wTileSetGFXPtr]
+	ld a,[wTilesetGfxPtr]
 	ld l,a
-	ld a,[wTileSetGFXPtr + 1]
+	ld a,[wTilesetGfxPtr + 1]
 	ld h,a
 	ld de,vTileset
 	ld bc,$600
-	ld a,[wTileSetBank]
+	ld a,[wTilesetBank]
 	jp FarCopyData2
 
 ; this loads the current maps complete tile map (which references blocks, not individual tiles) to C6E8
@@ -913,7 +930,7 @@ LoadTileBlockMap::
 	ld hl,wOverworldMap
 	ld a,[wCurMapWidth]
 	ld [hMapWidth],a
-	add a,MAP_BORDER * 2 ; east and west
+	add MAP_BORDER * 2 ; east and west
 	ld [hMapStride],a ; map width + border
 	ld b,0
 	ld c,a
@@ -951,7 +968,7 @@ LoadTileBlockMap::
 	jr nz,.rowLoop
 .northConnection
 	ld a,[wMapConn1Ptr]
-	cp a,$ff
+	cp $ff
 	jr z,.southConnection
 	call SwitchToMapRomBank
 	ld a,[wNorthConnectionStripSrc]
@@ -969,7 +986,7 @@ LoadTileBlockMap::
 	call LoadNorthSouthConnectionsTileMap
 .southConnection
 	ld a,[wMapConn2Ptr]
-	cp a,$ff
+	cp $ff
 	jr z,.westConnection
 	call SwitchToMapRomBank
 	ld a,[wSouthConnectionStripSrc]
@@ -987,7 +1004,7 @@ LoadTileBlockMap::
 	call LoadNorthSouthConnectionsTileMap
 .westConnection
 	ld a,[wMapConn3Ptr]
-	cp a,$ff
+	cp $ff
 	jr z,.eastConnection
 	call SwitchToMapRomBank
 	ld a,[wWestConnectionStripSrc]
@@ -1005,7 +1022,7 @@ LoadTileBlockMap::
 	call LoadEastWestConnectionsTileMap
 .eastConnection
 	ld a,[wMapConn4Ptr]
-	cp a,$ff
+	cp $ff
 	jr z,.done
 	call SwitchToMapRomBank
 	ld a,[wEastConnectionStripSrc]
@@ -1046,7 +1063,7 @@ LoadNorthSouthConnectionsTileMap::
 	inc h
 .noCarry1
 	ld a,[wCurMapWidth]
-	add a,MAP_BORDER * 2
+	add MAP_BORDER * 2
 	add e
 	ld e,a
 	jr nc,.noCarry2
@@ -1075,7 +1092,7 @@ LoadEastWestConnectionsTileMap::
 	inc h
 .noCarry1
 	ld a,[wCurMapWidth]
-	add a,MAP_BORDER * 2
+	add MAP_BORDER * 2
 	add e
 	ld e,a
 	jr nc,.noCarry2
@@ -1130,7 +1147,7 @@ IsSpriteOrSignInFrontOfPlayer::
 ; check if the player is front of a counter in a pokemon center, pokemart, etc. and if so, extend the range at which he can talk to the NPC
 .extendRangeOverCounter
 	predef GetTileAndCoordsInFrontOfPlayer ; get the tile in front of the player in c
-	ld hl,wTileSetTalkingOverTiles ; list of tiles that extend talking range (counter tiles)
+	ld hl,wTilesetTalkingOverTiles ; list of tiles that extend talking range (counter tiles)
 	ld b,3
 	ld d,$20 ; talking range in pixels (long range)
 .counterTilesLoop
@@ -1156,6 +1173,7 @@ IsSpriteInFrontOfPlayer2::
 	ld b,a
 	ld a,PLAYER_DIR_UP
 	jr .doneCheckingDirection
+
 .checkIfPlayerFacingDown
 	cp SPRITE_FACING_DOWN
 	jr nz,.checkIfPlayerFacingRight
@@ -1165,6 +1183,7 @@ IsSpriteInFrontOfPlayer2::
 	ld b,a
 	ld a,PLAYER_DIR_DOWN
 	jr .doneCheckingDirection
+
 .checkIfPlayerFacingRight
 	cp SPRITE_FACING_RIGHT
 	jr nz,.playerFacingLeft
@@ -1174,6 +1193,7 @@ IsSpriteInFrontOfPlayer2::
 	ld c,a
 	ld a,PLAYER_DIR_RIGHT
 	jr .doneCheckingDirection
+
 .playerFacingLeft
 ; facing left
 	ld a,c
@@ -1255,7 +1275,7 @@ CollisionCheckOnLand::
 	jr nc,.noCollision
 .collision
 	ld a,[wChannelSoundIDs + CH4]
-	cp a,SFX_COLLISION ; check if collision sound is already playing
+	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
 	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
@@ -1272,7 +1292,7 @@ CheckTilePassable::
 	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player
 	ld a,[wTileInFrontOfPlayer] ; tile in front of player
 	ld c,a
-	ld hl,wTileSetCollisionPtr ; pointer to list of passable tiles
+	ld hl,wTilesetCollisionPtr ; pointer to list of passable tiles
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a ; hl now points to passable tiles
@@ -1317,7 +1337,7 @@ CheckForTilePairCollisions::
 	ld a,[wCurMapTileset] ; tileset number
 	ld b,a
 	ld a,[hli]
-	cp a,$ff
+	cp $ff
 	jr z,.noMatch
 	cp b
 	jr z,.tilesetMatches
@@ -1399,7 +1419,7 @@ TilePairCollisionsWater::
 LoadCurrentMapView::
 	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,[wTileSetBank] ; tile data ROM bank
+	ld a,[wTilesetBank] ; tile data ROM bank
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a ; switch to ROM bank that contains tile data
 	ld a,[wCurrentTileBlockMapViewPointer] ; address of upper left corner of current map view
@@ -1432,7 +1452,7 @@ LoadCurrentMapView::
 ; update tile block map pointer to next row's address
 	pop de
 	ld a,[wCurMapWidth]
-	add a,MAP_BORDER * 2
+	add MAP_BORDER * 2
 	add e
 	ld e,a
 	jr nc,.noCarry
@@ -1527,8 +1547,8 @@ ScheduleSouthRowRedraw::
 	ld bc,$0200
 	add hl,bc
 	ld a,h
-	and a,$03
-	or a,$98
+	and $03
+	or $98
 	ld [hRedrawRowOrColumnDest + 1],a
 	ld a,l
 	ld [hRedrawRowOrColumnDest],a
@@ -1541,11 +1561,11 @@ ScheduleEastColumnRedraw::
 	call ScheduleColumnRedrawHelper
 	ld a,[wMapViewVRAMPointer]
 	ld c,a
-	and a,$e0
+	and $e0
 	ld b,a
 	ld a,c
-	add a,18
-	and a,$1f
+	add 18
+	and $1f
 	or b
 	ld [hRedrawRowOrColumnDest],a
 	ld a,[wMapViewVRAMPointer + 1]
@@ -1589,17 +1609,17 @@ ScheduleWestColumnRedraw::
 ; Input: c = tile block ID, hl = destination address
 DrawTileBlock::
 	push hl
-	ld a,[wTileSetBlocksPtr] ; pointer to tiles
+	ld a,[wTilesetBlocksPtr] ; pointer to tiles
 	ld l,a
-	ld a,[wTileSetBlocksPtr + 1]
+	ld a,[wTilesetBlocksPtr + 1]
 	ld h,a
 	ld a,c
 	swap a
 	ld b,a
-	and a,$f0
+	and $f0
 	ld c,a
 	ld a,b
-	and a,$0f
+	and $0f
 	ld b,a ; bc = tile block ID * 0x10
 	add hl,bc
 	ld d,h
@@ -1638,10 +1658,10 @@ JoypadOverworld::
 	bit 3,a ; check if a trainer wants a challenge
 	jr nz,.notForcedDownwards
 	ld a,[wCurMap]
-	cp a,ROUTE_17 ; Cycling Road
+	cp ROUTE_17 ; Cycling Road
 	jr nz,.notForcedDownwards
 	ld a,[hJoyHeld]
-	and a,D_DOWN | D_UP | D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON
+	and D_DOWN | D_UP | D_LEFT | D_RIGHT | B_BUTTON | A_BUTTON
 	jr nz,.notForcedDownwards
 	ld a,D_DOWN
 	ld [hJoyHeld],a ; on the cycling road, if there isn't a trainer and the player isn't pressing buttons, simulate a down press
@@ -1673,6 +1693,7 @@ JoypadOverworld::
 	ld [hJoyPressed],a
 	ld [hJoyReleased],a
 	ret
+
 ; if done simulating button presses
 .doneSimulating
 	xor a
@@ -1683,7 +1704,7 @@ JoypadOverworld::
 	ld [hJoyHeld],a
 	ld hl,wd736
 	ld a,[hl]
-	and a,$f8
+	and $f8
 	ld [hl],a
 	ld hl,wd730
 	res 7,[hl]
@@ -1720,7 +1741,7 @@ CollisionCheckOnWater::
 	jr z,.noCollision ; keep surfing
 ; check if the [land] tile in front of the player is passable
 .checkIfNextTileIsPassable
-	ld hl,wTileSetCollisionPtr ; pointer to list of passable tiles
+	ld hl,wTilesetCollisionPtr ; pointer to list of passable tiles
 	ld a,[hli]
 	ld h,[hl]
 	ld l,a
@@ -1733,7 +1754,7 @@ CollisionCheckOnWater::
 	jr .loop
 .collision
 	ld a,[wChannelSoundIDs + CH4]
-	cp a,SFX_COLLISION ; check if collision sound is already playing
+	cp SFX_COLLISION ; check if collision sound is already playing
 	jr z,.setCarry
 	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
@@ -2201,7 +2222,7 @@ IgnoreInputForHalfSecond:
 	ld [wIgnoreInputCounter], a
 	ld hl, wd730
 	ld a, [hl]
-	or $26
+	or %00100110
 	ld [hl], a ; set ignore input bit
 	ret
 

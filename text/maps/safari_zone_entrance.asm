@@ -20,7 +20,7 @@ SafariZoneEntranceText_9e747::
 	line "special # Ball"
 	cont "here."
 
-	para "[PLAYER] received"
+	para "<PLAYER> received"
 	line "30 Safari Balls!@@"
 
 _SafariZoneEntranceText_75360::

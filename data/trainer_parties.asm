@@ -314,19 +314,19 @@ LanceData:
 	
 Green1Data:
 	; Oak's Lab
-	db "[RIVAL]@",5,SQUIRTLE,$FF
-	db "[RIVAL]@",5,BULBASAUR,$FF
-	db "[RIVAL]@",5,CHARMANDER,$FF
+	db "<RIVAL>@",5,SQUIRTLE,$FF
+	db "<RIVAL>@",5,BULBASAUR,$FF
+	db "<RIVAL>@",5,CHARMANDER,$FF
 	
 	
 	; Beside Viridian
-	db "[RIVAL]@",SPECIAL_LEVELS,9,PIDGEY,8,SQUIRTLE,$FF
-	db "[RIVAL]@",SPECIAL_LEVELS,9,PIDGEY,8,BULBASAUR,$FF
-	db "[RIVAL]@",SPECIAL_LEVELS,9,PIDGEY,8,CHARMANDER,$FF
+	db "<RIVAL>@",SPECIAL_LEVELS,9,PIDGEY,8,SQUIRTLE,$FF
+	db "<RIVAL>@",SPECIAL_LEVELS,9,PIDGEY,8,BULBASAUR,$FF
+	db "<RIVAL>@",SPECIAL_LEVELS,9,PIDGEY,8,CHARMANDER,$FF
 	
 	
 	; Cerulean
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 18,PIDGEOTTO
@@ -344,7 +344,7 @@ Green1Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 18,PIDGEOTTO
@@ -362,7 +362,7 @@ Green1Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 18,PIDGEOTTO
@@ -382,7 +382,7 @@ Green1Data:
 	
 Green2Data:
 	; SS Anne
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 19,PIDGEOTTO
@@ -400,7 +400,7 @@ Green2Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 19,PIDGEOTTO
@@ -418,7 +418,7 @@ Green2Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 19,PIDGEOTTO
@@ -438,7 +438,7 @@ Green2Data:
 	
 	; Pokemon Tower
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 25,PIDGEOTTO
@@ -459,7 +459,7 @@ Green2Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 25,PIDGEOTTO
@@ -480,7 +480,7 @@ Green2Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 25,PIDGEOTTO
@@ -503,7 +503,7 @@ Green2Data:
 	
 	; Silph Co
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 37,PIDGEOT
@@ -524,7 +524,7 @@ Green2Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 37,PIDGEOT
@@ -545,7 +545,7 @@ Green2Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 37,PIDGEOT
@@ -568,7 +568,7 @@ Green2Data:
 	
 	; Before Pokemon Leage
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 47,PIDGEOT
@@ -592,7 +592,7 @@ Green2Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 47,PIDGEOT
@@ -616,7 +616,7 @@ Green2Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 47,PIDGEOT
@@ -642,7 +642,7 @@ Green2Data:
 	
 Green3Data:
 	; Champion
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 61,PIDGEOT
@@ -666,7 +666,7 @@ Green3Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 61,PIDGEOT
@@ -690,7 +690,7 @@ Green3Data:
 	
 	
 	
-	db "[RIVAL]@"
+	db "<RIVAL>@"
 	db SPECIAL_TRAINER
 	
 	db 61,PIDGEOT

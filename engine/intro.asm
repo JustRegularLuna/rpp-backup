@@ -308,7 +308,7 @@ PlayShootingStar:
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	call RunPaletteCommand
 	callba LoadMateoPresentsScreen
-	ld a, $e4
+	ld a, %11100100
 	ld [rBGP], a
 	ld c, 180
 	call DelayFrames

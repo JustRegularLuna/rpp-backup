@@ -25,7 +25,7 @@ _TM34PreReceiveText::
 	done
 
 _ReceivedTM34Text::
-	text "[PLAYER] received"
+	text "<PLAYER> received"
 	line "TM36!@@"
 
 _TM34ExplanationText::
@@ -64,7 +64,7 @@ _PewterGymText_5c4bc::
 	line "victory, here's"
 	cont "the BoulderBadge!"
 
-	para "[PLAYER] received"
+	para "<PLAYER> received"
 	line "the BoulderBadge!@@"
 
 _PewterGymText_5c4c1::

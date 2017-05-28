@@ -34,7 +34,7 @@ _LavenderHouse1Text4::
 	text "Nidorino: Gaoo!@@"
 
 _LavenderHouse1Text_1d94c::
-	text "Mr.Fuji: [PLAYER]."
+	text "Mr.Fuji: <PLAYER>."
 
 	para "Your #dex quest"
 	line "may fail without"
@@ -46,7 +46,7 @@ _LavenderHouse1Text_1d94c::
 	prompt
 
 _ReceivedFluteText::
-	text "[PLAYER] received"
+	text "<PLAYER> received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"

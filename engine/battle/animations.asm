@@ -378,29 +378,29 @@ MoveAnimation:
 	call SetAnimationPalette
 	ld a,[wAnimationID]
 	and a
-	jr z,.AnimationFinished
+	jr z, .animationFinished
 
 	; if throwing a Poké Ball, skip the regular animation code
 	cp a,TOSS_ANIM
-	jr nz,.MoveAnimation
-	ld de,.AnimationFinished
+	jr nz, .moveAnimation
+	ld de, .animationFinished
 	push de
 	jp TossBallAnimation
 
-.MoveAnimation
+.moveAnimation
 	; check if battle animations are disabled in the options
 	ld a,[wOptions]
 	bit 7,a
-	jr nz,.AnimationsDisabled
+	jr nz, .animationsDisabled
 	call ShareMoveAnimations
 	call PlayAnimation
 	jr .next4
-.AnimationsDisabled
+.animationsDisabled
 	ld c,30
 	call DelayFrames
 .next4
 	call PlayApplyingAttackAnimation ; shake the screen or flash the pic in and out (to show damage)
-.AnimationFinished
+.animationFinished
 	call WaitForSoundToFinish
 	xor a
 	ld [wSubAnimSubEntryAddr],a
@@ -426,13 +426,13 @@ ShareMoveAnimations:
 
 	cp a,AMNESIA
 	ld b,CONF_ANIM
-	jr z,.Replace
+	jr z, .replaceAnim
 
 	cp a,REST
 	ld b,SLP_ANIM
 	ret nz
 
-.Replace
+.replaceAnim
 	ld a,b
 	ld [wAnimationID],a
 	ret
@@ -1840,13 +1840,13 @@ AnimationMinimizeMon:
 	ld hl, wTempPic
 	push hl
 	xor a
-	ld bc, $310
+	ld bc, 7 * 7 * $10
 	call FillMemory
 	pop hl
 	ld de, $194
 	add hl, de
 	ld de, MinimizedMonSprite
-	ld c, $5
+	ld c, MinimizedMonSpriteEnd - MinimizedMonSprite
 .loop
 	ld a, [de]
 	ld [hli], a
@@ -1860,6 +1860,7 @@ AnimationMinimizeMon:
 
 MinimizedMonSprite:
 	INCBIN "gfx/minimized_mon_sprite.1bpp"
+MinimizedMonSpriteEnd:
 
 AnimationSlideMonDownAndHide:
 ; Slides the mon's sprite down and disappears. Used in Acid Armor.
@@ -2303,7 +2304,6 @@ GetMoveSoundB:
 	ld b, a
 	ret
 
-; get the sound of the (move id - 1) in a
 GetMoveSound:
 	ld hl,MoveSoundTable
 	ld e,a
@@ -2358,6 +2358,7 @@ IsCryMove:
 	ret
 
 MoveSoundTable:
+	; ID, pitch mod, tempo mod
 	db SFX_POUND,             $00,$80 ; POUND
 	db SFX_BATTLE_0C,         $10,$80 ; KARATE_CHOP
 	db SFX_DOUBLESLAP,        $00,$80 ; DOUBLESLAP

@@ -61,7 +61,7 @@ _IntroduceRivalText::
 	prompt
 
 _OakSpeechText3::
-	text "[PLAYER]!"
+	text "<PLAYER>!"
 
 	para "Your very own"
 	line "#mon legend is"
