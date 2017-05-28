@@ -1,3 +1,3 @@
-BikeRidingTilesets:: ; 09e2 (0:09e2)
+BikeRidingTilesets::
 	db OVERWORLD,FOREST,UNDERGROUND,SHIP_PORT,CAVERN,SAFARI,FERRY,ICE_CAVERN,$FF
 ; Added Safari Zone to end

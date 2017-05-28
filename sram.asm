@@ -1,23 +1,18 @@
 SECTION "Sprite Buffers", SRAM, BANK[0]
-; Named twice since I still have the old names most places
-S_SPRITEBUFFER0::
+
 sSpriteBuffer0:: ds SPRITEBUFFERSIZE ; a000
-
-S_SPRITEBUFFER1::
 sSpriteBuffer1:: ds SPRITEBUFFERSIZE ; a188
-
-S_SPRITEBUFFER2::
 sSpriteBuffer2:: ds SPRITEBUFFERSIZE ; a310
 
 	ds $100
 
-sHallOfFame:: ds HOF_TEAM * NUM_HOF_TEAMS ; a598
+sHallOfFame:: ds HOF_TEAM * HOF_TEAM_CAPACITY ; a598
 
 
 SECTION "Save Data", SRAM, BANK[1]
 	ds $598 ; Possibly just filler data?
 
-sPlayerName::  ds $b ; a598 (NAME_LENGTH)
+sPlayerName::  ds NAME_LENGTH ; a598
 sMainData::    ds wMainDataEnd   - wMainDataStart ; a5a3
 sSpriteData::  ds wSpriteDataEnd - wSpriteDataStart ; ad2c
 sPartyData::   ds wPartyDataEnd  - wPartyDataStart ; af2c

@@ -1,4 +1,4 @@
-_CeruleanPokecenterText1:: ; 988e5 (26:48e5)
+_CeruleanPokecenterText2::
 	text "That Bill!"
 
 	para "I heard that"
@@ -7,7 +7,7 @@ _CeruleanPokecenterText1:: ; 988e5 (26:48e5)
 	cont "rare #mon!"
 	done
 
-_CeruleanPokecenterText3:: ; 9892a (26:492a)
+_CeruleanPokecenterText3::
 	text "Have you heard"
 	line "about Bill?"
 
@@ -22,4 +22,3 @@ _CeruleanPokecenterText3:: ; 9892a (26:492a)
 	line "to boast about"
 	cont "their #mon?"
 	done
-

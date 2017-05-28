@@ -51,20 +51,20 @@ DATA_SND: MACRO
 	db \3 ; length (1-11)
 ENDM
 
-BlkPacket_WholeScreen: ; 7219e (1c:619e)
+BlkPacket_WholeScreen:
 	ATTR_BLK 1
 	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,17
 	ds 8
 
 	db $03,$00,$00,$13,$11,$00,$00
 
-BlkPacket_Battle: ; 721b5 (1c:61b5)
+BlkPacket_Battle:
 	ATTR_BLK 5
-	ATTR_BLK_DATA %111, 2,2,0, 00,12, 19,17
-	ATTR_BLK_DATA %011, 1,1,0, 01,00, 10,03
-	ATTR_BLK_DATA %011, 0,0,0, 10,07, 19,10
-	ATTR_BLK_DATA %011, 2,2,0, 00,04, 08,11
-	ATTR_BLK_DATA %011, 3,3,0, 11,00, 19,06
+	ATTR_BLK_DATA %111, 2,2,0, 00,12, 19,17 ; message box: pal 2
+	ATTR_BLK_DATA %011, 1,1,0, 01,00, 10,03 ; enemy HP bar: pal 1
+	ATTR_BLK_DATA %011, 0,0,0, 10,07, 19,10 ; player HP bar: pal 0
+	ATTR_BLK_DATA %011, 2,2,0, 00,04, 08,11 ; player mon: pal 2
+	ATTR_BLK_DATA %011, 3,3,0, 11,00, 19,06 ; enemy mon : pal 3
 
 	db $03,$00,$00,$13,$0b,$00
 	db $03,$00,$0c,$13,$11,$02
@@ -74,9 +74,9 @@ BlkPacket_Battle: ; 721b5 (1c:61b5)
 	db $03,$0b,$00,$13,$07,$03
 	db $00
 
-BlkPacket_StatusScreen: ; 721fa (1c:61fa)
+BlkPacket_StatusScreen:
 	ATTR_BLK 1
-	ATTR_BLK_DATA %111, 1,1,0, 01,00, 07,06
+	ATTR_BLK_DATA %111, 1,1,0, 01,00, 07,06 ; mon: pal 1, HP bar: pal 0
 	ds 8
 
 	db $02,$00,$00,$11,$00,$03
@@ -84,9 +84,9 @@ BlkPacket_StatusScreen: ; 721fa (1c:61fa)
 	db $01,$07,$13,$11,$00,$03
 	db $08,$00,$13,$06,$00,$00
 
-BlkPacket_Pokedex: ; 72222 (1c:6222)
+BlkPacket_Pokedex:
 	ATTR_BLK 1
-	ATTR_BLK_DATA %111, 1,1,0, 01,01, 08,08
+	ATTR_BLK_DATA %111, 1,1,0, 01,01, 08,08 ; mon: pal 1, everything else: pal 0
 	ds 8
 
 	db $02,$00,$00,$11,$00,$01
@@ -95,13 +95,13 @@ BlkPacket_Pokedex: ; 72222 (1c:6222)
 	db $09,$08,$11,$00,$03,$09
 	db $01,$13,$11,$00,$00
 
-BlkPacket_Slots: ; 7224f (1c:624f)
+BlkPacket_Slots:
 	ATTR_BLK 5
-	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,11
-	ATTR_BLK_DATA %011, 2,2,0, 00,04, 19,09
-	ATTR_BLK_DATA %010, 3,3,0, 00,06, 19,07
-	ATTR_BLK_DATA %011, 0,0,0, 04,04, 15,09
-	ATTR_BLK_DATA %011, 0,0,0, 00,12, 19,17
+	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,11 ; "3" rows and top of screen: pal 1
+	ATTR_BLK_DATA %011, 2,2,0, 00,04, 19,09 ; "2" rows: pal 2
+	ATTR_BLK_DATA %010, 3,3,0, 00,06, 19,07 ; "1" row: pal 3
+	ATTR_BLK_DATA %011, 0,0,0, 04,04, 15,09 ; slot reels: pal 0
+	ATTR_BLK_DATA %011, 0,0,0, 00,12, 19,17 ; message box: pal 0
 
 	db $03,$00,$00,$13,$0b,$01
 	db $03,$00,$04,$13,$09,$02
@@ -110,11 +110,11 @@ BlkPacket_Slots: ; 7224f (1c:624f)
 	db $03,$00,$0c,$13,$11,$00
 	db $00
 
-BlkPacket_Titlescreen: ; 7228e (1c:628e)
+BlkPacket_Titlescreen:
 	ATTR_BLK 3
-	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,07
-	ATTR_BLK_DATA %010, 1,1,0, 00,08, 19,09
-	ATTR_BLK_DATA %011, 2,2,0, 00,10, 19,17
+	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,07 ; pokemon logo: pal 0
+	ATTR_BLK_DATA %010, 1,1,0, 00,08, 19,09 ; version text: pal 1
+	ATTR_BLK_DATA %011, 2,2,0, 00,10, 19,17 ; player, mon, copyright text: pal 2
 	ds 12
 
 	db $03,$00,$00,$13,$07,$00
@@ -122,11 +122,11 @@ BlkPacket_Titlescreen: ; 7228e (1c:628e)
 	db $03,$00,$0a,$13,$11,$02
 	db $00
 
-BlkPacket_NidorinoIntro: ; 722c1 (1c:62c1)
+BlkPacket_NidorinoIntro:
 	ATTR_BLK 3
-	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,03
-	ATTR_BLK_DATA %011, 0,0,0, 00,04, 19,13
-	ATTR_BLK_DATA %011, 1,1,0, 00,14, 19,17
+	ATTR_BLK_DATA %011, 1,1,0, 00,00, 19,03 ; upper black bar: pal 1
+	ATTR_BLK_DATA %011, 0,0,0, 00,04, 19,13 ; letterbox: pal 0
+	ATTR_BLK_DATA %011, 1,1,0, 00,14, 19,17 ; lower black bar: pal 1
 	ds 12
 
 	db $03,$00,$00,$13,$03,$01
@@ -134,15 +134,15 @@ BlkPacket_NidorinoIntro: ; 722c1 (1c:62c1)
 	db $03,$00,$0e,$13,$11,$01
 	db $00
 
-BlkPacket_PartyMenu: ; 722f4 (1c:62f4)
+BlkPacket_PartyMenu:
 	ATTR_BLK 7
-	ATTR_BLK_DATA %110, 0,0,1, 01,00, 02,12
-	ATTR_BLK_DATA %010, 0,0,0, 05,01, 11,01
-	ATTR_BLK_DATA %010, 0,0,0, 05,03, 11,03
-	ATTR_BLK_DATA %010, 0,0,0, 05,05, 11,05
-	ATTR_BLK_DATA %010, 0,0,0, 05,07, 11,07
-	ATTR_BLK_DATA %010, 0,0,0, 05,09, 11,09
-	ATTR_BLK_DATA %010, 0,0,0, 05,11, 11,11
+	ATTR_BLK_DATA %110, 0,0,1, 01,00, 02,12 ; mon sprites: pal 0, everything else: pal 1
+	ATTR_BLK_DATA %010, 0,0,0, 05,01, 11,01 ; HP bar 0: pal set dynamically
+	ATTR_BLK_DATA %010, 0,0,0, 05,03, 11,03 ; HP bar 1: pal set dynamically
+	ATTR_BLK_DATA %010, 0,0,0, 05,05, 11,05 ; HP bar 2: pal set dynamically
+	ATTR_BLK_DATA %010, 0,0,0, 05,07, 11,07 ; HP bar 3: pal set dynamically
+	ATTR_BLK_DATA %010, 0,0,0, 05,09, 11,09 ; HP bar 4: pal set dynamically
+	ATTR_BLK_DATA %010, 0,0,0, 05,11, 11,11 ; HP bar 5: pal set dynamically
 	ds 4
 
 	db $02,$00,$00,$11,$01,$03
@@ -156,18 +156,18 @@ BlkPacket_PartyMenu: ; 722f4 (1c:62f4)
 	db $0c,$08,$12,$09,$00,$03
 	db $0c,$0a,$12,$0b,$00,$00
 
-BlkPacket_TrainerCard: ; 72360 (1c:6360)
+BlkPacket_TrainerCard:
 	ATTR_BLK 10
-	ATTR_BLK_DATA %010, 0,0,0, 03,12, 04,13
-	ATTR_BLK_DATA %010, 1,1,0, 07,12, 08,13
-	ATTR_BLK_DATA %010, 3,3,0, 11,12, 12,13
-	ATTR_BLK_DATA %010, 2,2,0, 16,11, 17,12
-	ATTR_BLK_DATA %010, 1,1,0, 14,13, 15,14
-	ATTR_BLK_DATA %010, 3,3,0, 16,13, 17,14
-	ATTR_BLK_DATA %010, 2,2,0, 03,15, 04,16
-	ATTR_BLK_DATA %010, 3,3,0, 07,15, 08,16
-	ATTR_BLK_DATA %010, 2,2,0, 11,15, 12,16
-	ATTR_BLK_DATA %010, 1,1,0, 15,15, 16,16
+	ATTR_BLK_DATA %010, 0,0,0, 03,12, 04,13 ; Boulder Badge
+	ATTR_BLK_DATA %010, 1,1,0, 07,12, 08,13 ; Cascade Badge
+	ATTR_BLK_DATA %010, 3,3,0, 11,12, 12,13 ; Thunder Badge
+	ATTR_BLK_DATA %010, 2,2,0, 16,11, 17,12 ; Rainbow Badge
+	ATTR_BLK_DATA %010, 1,1,0, 14,13, 15,14 ; Rainbow Badge
+	ATTR_BLK_DATA %010, 3,3,0, 16,13, 17,14 ; Rainbow Badge
+	ATTR_BLK_DATA %010, 2,2,0, 03,15, 04,16 ; Soul Badge
+	ATTR_BLK_DATA %010, 3,3,0, 07,15, 08,16 ; Marsh Badge
+	ATTR_BLK_DATA %010, 2,2,0, 11,15, 12,16 ; Volcano Badge
+	ATTR_BLK_DATA %010, 1,1,0, 15,15, 16,16 ; Earth Badge
 	ds 2
 
 	db $03,$03,$0c,$04,$0d,$00
@@ -182,11 +182,11 @@ BlkPacket_TrainerCard: ; 72360 (1c:6360)
 	db $03,$0f,$0f,$10,$10,$01
 	db $00
 
-BlkPacket_GameFreakIntro: ; 723dd (1c:63dd)
+BlkPacket_GameFreakIntro:
 	ATTR_BLK 3
-	ATTR_BLK_DATA %111, 1,1,0, 05,11, 07,13
-	ATTR_BLK_DATA %010, 2,2,0, 08,11, 09,13
-	ATTR_BLK_DATA %011, 3,3,0, 12,11, 14,13
+	ATTR_BLK_DATA %111, 1,1,0, 05,11, 07,13 ; falling stars (left): pal 1, GameFreak logo: pal 0
+	ATTR_BLK_DATA %010, 2,2,0, 08,11, 09,13 ; falling stars (middle): pal 2
+	ATTR_BLK_DATA %011, 3,3,0, 12,11, 14,13 ; falling stars (right): pal 3
 	ds 12
 
 	db $03,$00,$00,$13,$0a,$00

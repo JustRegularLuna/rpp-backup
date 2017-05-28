@@ -8,8 +8,7 @@ DoWonderTradeDialogue:: ; Called by an event to start the Wonder Trade process
 	call ManualTextScroll
 	
 	; Check if the player has a Pokedex yet
-	ld a, [wOaksLabFlags]
-	bit 5,a ; does the player have the Pokedex?
+	CheckEvent EVENT_GOT_POKEDEX ; does the player have the Pokedex?
 	jr nz, .hasPokedex ; If you do, jump to the rest of the routine
 	
 	; If the player DOES NOT have a Pokedex, say they can't trade yet
@@ -38,7 +37,7 @@ DoWonderTradeDialogue:: ; Called by an event to start the Wonder Trade process
 WonderTrade_DoTrade:
 	; Open a normal party menu and let the player choose a Pokemon
 	xor a
-	ld [wd07d],a
+	ld [wPartyMenuTypeOrMessageID],a
 	dec a
 	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
@@ -79,7 +78,7 @@ WonderTrade_DoTrade:
 	ld bc,$002c
 	call AddNTimes
 	ld a,[hl]
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 
 	; Setup the variables for the Received Pokemon name and ID before the trade
 .getReceiveMonLoop
@@ -104,23 +103,23 @@ WonderTrade_DoTrade:
 	; Do the actual trade stuff
 	ld a,[wWhichPokemon]
 	push af
-	ld a,[W_CURENEMYLVL]
+	ld a,[wCurEnemyLVL]
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call WonderTrade_PrepareTradeData
-	predef Func_410e2
+	predef InternalClockTradeAnim
 	pop af
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	pop af
 	ld [wWhichPokemon],a
 	ld a,[wInGameTradeReceiveMonSpecies]
 	ld [wcf91],a
 	xor a
-	ld [wcc49],a
-	ld [wcf95],a
+	ld [wMonDataLocation],a
+	ld [wRemoveMonFromBox],a
 	call RemovePokemon
 	ld a,$80
-	ld [wcc49],a
+	ld [wMonDataLocation],a
 	call AddPartyMon
 	call WonderTrade_CopyDataToReceivedMon
 	callab EvolveTradeMon
@@ -162,7 +161,7 @@ WonderTrade_PrepareTradeData: ; Get the data setup for the trade
 	ld bc, $b
 	call WonderTrade_CopyData
 	ld hl, WonderTrade_TrainerString
-	ld de, wcd4e
+	ld de, wTradedEnemyMonOT
 	call WonderTrade_CopyData
 	ld de, wLinkEnemyTrainerName
 	call WonderTrade_CopyData
@@ -278,7 +277,7 @@ BannedMons: ; List of Pokemon not allowed to show up in Wonder Trade
 
 CheckValidLevel:
 ; Make sure the ReceiveMon isn't impossibly leveled
-	ld a, [W_CURENEMYLVL]
+	ld a, [wCurEnemyLVL]
 	ld d, a
 
 	ld a, [wInGameTradeReceiveMonSpecies]

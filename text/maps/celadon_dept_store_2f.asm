@@ -1,4 +1,4 @@
-_CeladonMart2Text3:: ; 9c76b (27:476b)
+_CeladonMart2Text3::
 	text "Super Repel keeps"
 	line "weak #mon at"
 	cont "bay..."
@@ -7,17 +7,16 @@ _CeladonMart2Text3:: ; 9c76b (27:476b)
 	line "powerful Repel!"
 	done
 
-_CeladonMart2Text4:: ; 9c7b2 (27:47b2)
+_CeladonMart2Text4::
 	text "For long outings,"
 	line "you should buy"
 	cont "Revive."
 	done
 
-_CeladonMart2Text5:: ; 9c7dc (27:47dc)
+_CeladonMart2Text5::
 	text "Top Grade Items"
 	line "for Trainers!"
 
 	para "2F: Trainer's"
 	line "    Market"
 	done
-

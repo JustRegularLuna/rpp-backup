@@ -1,4 +1,4 @@
-BlisseyBaseStats: ; 3901e (e:501e)
+BlisseyBaseStats:
 db DEX_BLISSEY ; pokedex id
 db 255 ; base hp
 db 10 ; base attack

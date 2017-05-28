@@ -1,4 +1,4 @@
-_PewterGymText_5c49e:: ; 9697a (25:697a)
+_PewterGymText_5c49e::
 	text "I'm Brock!"
 	line "I'm Pewter's Gym"
 	cont "Leader!"
@@ -16,4 +16,3 @@ _PewterGymText_5c49e:: ; 9697a (25:697a)
 	cont "Fine then! Show"
 	cont "me your best!"
 	done
-

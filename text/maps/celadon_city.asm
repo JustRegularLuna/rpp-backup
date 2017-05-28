@@ -1,4 +1,4 @@
-_CeladonCityText1:: ; a59fb (29:59fb)
+_CeladonCityText1::
 	text "I got my Koffing"
 	line "from my friend!"
 
@@ -7,19 +7,19 @@ _CeladonCityText1:: ; a59fb (29:59fb)
 	cont "very nice to it!"
 	done
 
-_CeladonCityText2:: ; a5a4b (29:5a4b)
+_CeladonCityText2::
 	text "Heheh! This Gym"
 	line "is great! It's"
 	cont "full of women!"
 	done
 
-_CeladonCityText3:: ; a5a79 (29:5a79)
+_CeladonCityText3::
 	text "The Game Corner"
 	line "is bad for our"
 	cont "city's image!"
 	done
 
-_CeladonCityText4:: ; a5aa6 (29:5aa6)
+_CeladonCityText4::
 	text "Moan! I blew it"
 	line "all at the slots!"
 
@@ -28,7 +28,7 @@ _CeladonCityText4:: ; a5aa6 (29:5aa6)
 	cont "coins for prizes!"
 	done
 
-_TM41PreText:: ; a5afd (29:5afd)
+_TM41PreText::
 	text "Hello, there!"
 
 	para "I've seen you,"
@@ -39,13 +39,13 @@ _TM41PreText:: ; a5afd (29:5afd)
 	line "dropping by!"
 	prompt
 
-_ReceivedTM41Text:: ; a5b5a (29:5b5a)
+_ReceivedTM41Text::
 	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
 
-_TM41ExplanationText:: ; a5b6e (29:5b6e)
+_TM41ExplanationText::
 	text "TM43 teaches"
 	line "Dark Pulse!"
 
@@ -53,12 +53,12 @@ _TM41ExplanationText:: ; a5b6e (29:5b6e)
 	line "so use it wisely!"
 	done
 
-_TM41NoRoomText:: ; a5bb8 (29:5bb8)
+_TM41NoRoomText::
 	text "Oh, your pack is"
 	line "full of items!"
 	done
 
-_CeladonCityText6:: ; a5bd9 (29:5bd9)
+_CeladonCityText6::
 	text "This is my trusted"
 	line "pal, Slowking!"
 
@@ -67,21 +67,21 @@ _CeladonCityText6:: ; a5bd9 (29:5bd9)
 	cont "used a Moon Stone!"
 	done
 
-_CeladonCityText7:: ; a5c30 (29:5c30)
+_CeladonCityText7::
 	text "Slowking: ..."
 	line "...Yawn?@@"
 
-_CeladonCityText8:: ; a5c49 (29:5c49)
+_CeladonCityText8::
 	text "What are you"
 	line "staring at?"
 	done
 
-_CeladonCityText9:: ; a5c63 (29:5c63)
+_CeladonCityText9::
 	text "Keep out of Team"
 	line "Rocket's way!"
 	done
 
-_CeladonCityText10:: ; a5c82 (29:5c82)
+_CeladonCityText10::
 	text "Trainer Tips"
 
 	para "X Accuracy boosts"
@@ -97,14 +97,14 @@ _CeladonCityText10:: ; a5c82 (29:5c82)
 	cont "Store!"
 	done
 
-_CeladonCityText11:: ; a5d18 (29:5d18)
+_CeladonCityText11::
 	text "Celadon City"
 	
 	para "The city of"
 	line "rainbow dreams"
 	done
 
-_CeladonCityText13:: ; a5d41 (29:5d41)
+_CeladonCityText13::
 	text "Celadon City"
 	line "#mon Gym"
 	cont "Leader: Erika"
@@ -113,17 +113,17 @@ _CeladonCityText13:: ; a5d41 (29:5d41)
 	line "princess!"
 	done
 
-_CeladonCityText14:: ; a5d82 (29:5d82)
+_CeladonCityText14::
 	text "Celadon Mansion"
 	done
 
-_CeladonCityText15:: ; a5d93 (29:5d93)
+_CeladonCityText15::
 	text "Find what you"
 	line "need at Celadon"
 	cont "Dept. Store!"
 	done
 
-_CeladonCityText16:: ; a5dbf (29:5dbf)
+_CeladonCityText16::
 	text "Trainer Tips"
 
 	para "Guard Spec."
@@ -136,17 +136,16 @@ _CeladonCityText16:: ; a5dbf (29:5dbf)
 	cont "Store!"
 	done
 
-_CeladonCityText17:: ; a5e3e (29:5e3e)
+_CeladonCityText17::
 	text "Coins exchanged"
 	line "for prizes!"
 	
 	para "Prize Exchange"
 	done
 
-_CeladonCityText18:: ; a5e6a (29:5e6a)
+_CeladonCityText18::
 	text "Rocket Game Corner"
 	
 	para "The playground"
 	line "for everybody!"
 	done
-

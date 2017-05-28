@@ -1,4 +1,4 @@
-DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
+DoInGameTradeDialogue:
 ; trigger the trade offer/action specified by wWhichTrade
 	call SaveScreenTilesToBuffer2
 	ld hl,TradeMons
@@ -17,12 +17,12 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	ld a,[hli]
 	push af
 	ld de,wInGameTradeMonNick
-	ld bc,$000b
+	ld bc, NAME_LENGTH
 	call CopyData
 	pop af
 	ld l,a
-	ld h,$0
-	ld de,InGameTradeTextPointers ; $5d64
+	ld h,0
+	ld de,InGameTradeTextPointers
 	add hl,hl
 	add hl,de
 	ld a,[hli]
@@ -38,7 +38,7 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
 	ld c,a
-	ld b,CHECK_FLAG
+	ld b,FLAG_TEST
 	predef FlagActionPredef
 	ld a,c
 	and a
@@ -75,20 +75,20 @@ DoInGameTradeDialogue: ; 71ad9 (1c:5ad9)
 	jp PrintText
 
 ; copies name of species a to hl
-InGameTrade_GetMonName: ; 71b6a (1c:5b6a)
+InGameTrade_GetMonName:
 	push de
 	ld [wd11e],a
 	call GetMonName
 	ld hl,wcd6d
 	pop de
-	ld bc,$b
+	ld bc, NAME_LENGTH
 	jp CopyData
 
 INCLUDE "data/trades.asm"
 
-InGameTrade_DoTrade: ; 71c07 (1c:5c07)
-	xor a
-	ld [wd07d],a
+InGameTrade_DoTrade:
+	xor a ; NORMAL_PARTY_MENU
+	ld [wPartyMenuTypeOrMessageID],a
 	dec a
 	ld [wUpdateSpritesEnabled],a
 	call DisplayPartyMenu
@@ -105,36 +105,36 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	jr nz,.tradeFailed ; jump if the selected mon's species is not the required one
 	ld a,[wWhichPokemon]
 	ld hl,wPartyMon1Level
-	ld bc,$002c
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 	ld a,[hl]
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	ld hl,wCompletedInGameTradeFlags
 	ld a,[wWhichTrade]
 	ld c,a
-	ld b,SET_FLAG
+	ld b,FLAG_SET
 	predef FlagActionPredef
 	ld hl, ConnectCableText
 	call PrintText
 	ld a,[wWhichPokemon]
 	push af
-	ld a,[W_CURENEMYLVL]
+	ld a,[wCurEnemyLVL]
 	push af
 	call LoadHpBarAndStatusTilePatterns
 	call InGameTrade_PrepareTradeData
-	predef Func_410e2
+	predef InternalClockTradeAnim
 	pop af
-	ld [W_CURENEMYLVL],a
+	ld [wCurEnemyLVL],a
 	pop af
 	ld [wWhichPokemon],a
 	ld a,[wInGameTradeReceiveMonSpecies]
 	ld [wcf91],a
 	xor a
-	ld [wcc49],a
-	ld [wcf95],a
+	ld [wMonDataLocation],a ; not used
+	ld [wRemoveMonFromBox],a
 	call RemovePokemon
-	ld a,$80
-	ld [wcc49],a
+	ld a,$80 ; prevent the player from naming the mon
+	ld [wMonDataLocation],a
 	call AddPartyMon
 	call InGameTrade_CopyDataToReceivedMon
 	callab EvolveTradeMon
@@ -150,7 +150,7 @@ InGameTrade_DoTrade: ; 71c07 (1c:5c07)
 	ld [wInGameTradeTextPointerTableIndex],a
 	ret
 
-InGameTrade_RestoreScreen: ; 71ca2 (1c:5ca2)
+InGameTrade_RestoreScreen:
 	call GBPalWhiteOutWithDelay3
 	call RestoreScreenTilesAndReloadTilePatterns
 	call ReloadTilesetTilePatterns
@@ -159,25 +159,23 @@ InGameTrade_RestoreScreen: ; 71ca2 (1c:5ca2)
 	call LoadGBPal
 	ld c, 10
 	call DelayFrames
-	ld b, BANK(LoadWildData)
-	ld hl, LoadWildData
-	jp Bankswitch
+	jpba LoadWildData
 
-InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
+InGameTrade_PrepareTradeData:
 	ld hl, wTradedPlayerMonSpecies
 	ld a, [wInGameTradeGiveMonSpecies]
 	ld [hli], a ; wTradedPlayerMonSpecies
 	ld a, [wInGameTradeReceiveMonSpecies]
 	ld [hl], a ; wTradedEnemyMonSpecies
 	ld hl, wPartyMonOT
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	ld a, [wWhichPokemon]
 	call AddNTimes
 	ld de, wTradedPlayerMonOT
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call InGameTrade_CopyData
 	ld hl, wCurTrainerName;InGameTrade_TrainerString
-	ld de, wcd4e
+	ld de, wTradedEnemyMonOT
 	call InGameTrade_CopyData
 	ld de, wLinkEnemyTrainerName
 	call InGameTrade_CopyData
@@ -193,7 +191,7 @@ InGameTrade_PrepareTradeData: ; 71cc1 (1c:5cc1)
 	ld de, wTradedEnemyMonOTID
 	jp CopyData
 
-InGameTrade_CopyData: ; 71d11 (1c:5d11)
+InGameTrade_CopyData:
 	push hl
 	push bc
 	call CopyData
@@ -201,18 +199,18 @@ InGameTrade_CopyData: ; 71d11 (1c:5d11)
 	pop hl
 	ret
 
-InGameTrade_CopyDataToReceivedMon: ; 71d19 (1c:5d19)
+InGameTrade_CopyDataToReceivedMon:
 	ld hl, wPartyMonNicks
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wInGameTradeMonNick
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMonOT
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call InGameTrade_GetReceivedMonPointer
 	ld hl, wCurTrainerName;InGameTrade_TrainerString
-	ld bc, $b
+	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1
@@ -223,7 +221,7 @@ InGameTrade_CopyDataToReceivedMon: ; 71d19 (1c:5d19)
 
 ; the received mon's index is (partyCount - 1),
 ; so this adds bc to hl (partyCount - 1) times and moves the result to de
-InGameTrade_GetReceivedMonPointer: ; 71d4f (1c:5d4f)
+InGameTrade_GetReceivedMonPointer:
 	ld a, [wPartyCount]
 	dec a
 	call AddNTimes
@@ -231,100 +229,102 @@ InGameTrade_GetReceivedMonPointer: ; 71d4f (1c:5d4f)
 	ld d, h
 	ret
 
-;InGameTrade_TrainerString: ; 71d59 (1c:5d59)
+;InGameTrade_TrainerString:
 	; "TRAINER@@@@@@@@@@"
 ;	db $5d, "@@@@@@@@@@"
 
-InGameTradeTextPointers: ; 71d64 (1c:5d64)
+InGameTradeTextPointers:
 	dw TradeTextPointers1
 	dw TradeTextPointers2
 	dw TradeTextPointers3
 
-TradeTextPointers1: ; 71d6a (1c:5d6a)
+TradeTextPointers1:
 	dw WannaTrade1Text
 	dw NoTrade1Text
 	dw WrongMon1Text
 	dw Thanks1Text
 	dw AfterTrade1Text
 
-TradeTextPointers2: ; 71d74 (1c:5d74)
+TradeTextPointers2:
 	dw WannaTrade2Text
 	dw NoTrade2Text
 	dw WrongMon2Text
 	dw Thanks2Text
 	dw AfterTrade2Text
 
-TradeTextPointers3: ; 71d7e (1c:5d7e)
+TradeTextPointers3:
 	dw WannaTrade3Text
 	dw NoTrade3Text
 	dw WrongMon3Text
 	dw Thanks3Text
 	dw AfterTrade3Text
 
-ConnectCableText: ; 71d88 (1c:5d88)
+ConnectCableText:
 	TX_FAR _ConnectCableText
 	db "@"
 
-TradedForText: ; 71d8d (1c:5d8d)
+TradedForText:
 	TX_FAR _TradedForText
-	db $11, $a, "@"
+	TX_SFX_KEY_ITEM
+	TX_DELAY
+	db "@"
 
-WannaTrade1Text: ; 71d94 (1c:5d94)
+WannaTrade1Text:
 	TX_FAR _WannaTrade1Text
 	db "@"
 
-NoTrade1Text: ; 71d99 (1c:5d99)
+NoTrade1Text:
 	TX_FAR _NoTrade1Text
 	db "@"
 
-WrongMon1Text: ; 71d9e (1c:5d9e)
+WrongMon1Text:
 	TX_FAR _WrongMon1Text
 	db "@"
 
-Thanks1Text: ; 71da3 (1c:5da3)
+Thanks1Text:
 	TX_FAR _Thanks1Text
 	db "@"
 
-AfterTrade1Text: ; 71da8 (1c:5da8)
+AfterTrade1Text:
 	TX_FAR _AfterTrade1Text
 	db "@"
 
-WannaTrade2Text: ; 71dad (1c:5dad)
+WannaTrade2Text:
 	TX_FAR _WannaTrade2Text
 	db "@"
 
-NoTrade2Text: ; 71db2 (1c:5db2)
+NoTrade2Text:
 	TX_FAR _NoTrade2Text
 	db "@"
 
-WrongMon2Text: ; 71db7 (1c:5db7)
+WrongMon2Text:
 	TX_FAR _WrongMon2Text
 	db "@"
 
-Thanks2Text: ; 71dbc (1c:5dbc)
+Thanks2Text:
 	TX_FAR _Thanks2Text
 	db "@"
 
-AfterTrade2Text: ; 71dc1 (1c:5dc1)
+AfterTrade2Text:
 	TX_FAR _AfterTrade2Text
 	db "@"
 
-WannaTrade3Text: ; 71dc6 (1c:5dc6)
+WannaTrade3Text:
 	TX_FAR _WannaTrade3Text
 	db "@"
 
-NoTrade3Text: ; 71dcb (1c:5dcb)
+NoTrade3Text:
 	TX_FAR _NoTrade3Text
 	db "@"
 
-WrongMon3Text: ; 71dd0 (1c:5dd0)
+WrongMon3Text:
 	TX_FAR _WrongMon3Text
 	db "@"
 
-Thanks3Text: ; 71dd5 (1c:5dd5)
+Thanks3Text:
 	TX_FAR _Thanks3Text
 	db "@"
 
-AfterTrade3Text: ; 71dda (1c:5dda)
+AfterTrade3Text:
 	TX_FAR _AfterTrade3Text
 	db "@"

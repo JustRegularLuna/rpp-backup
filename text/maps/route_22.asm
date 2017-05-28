@@ -1,4 +1,4 @@
-_Route22RivalBeforeBattleText1:: ; 922cd (24:62cd)
+_Route22RivalBeforeBattleText1::
 	text "[RIVAL]: Hey!"
 	line "[PLAYER]!"
 
@@ -17,7 +17,7 @@ _Route22RivalBeforeBattleText1:: ; 922cd (24:62cd)
 	cont "get any stronger?"
 	done
 
-_Route22RivalAfterBattleText1:: ; 9236f (24:636f)
+_Route22RivalAfterBattleText1::
 	text "I heard #mon"
 	line "League has many"
 	cont "tough trainers!"
@@ -31,13 +31,13 @@ _Route22RivalAfterBattleText1:: ; 9236f (24:636f)
 	cont "a move on!"
 	done
 
-_Route22RivalDefeatedText1:: ; 923f4 (24:63f4)
+_Route22RivalDefeatedText1::
 	text "Awww!"
 	line "You just lucked"
 	cont "out!"
 	prompt
 
-_Route22Text_511bc:: ; 92410 (24:6410)
+_Route22Text_511bc::
 	text "[RIVAL]: What?"
 	line "Why do I have 2"
 	cont "#mon?"
@@ -46,7 +46,7 @@ _Route22Text_511bc:: ; 92410 (24:6410)
 	cont "some more too!"
 	prompt
 
-_Route22RivalBeforeBattleText2:: ; 92450 (24:6450)
+_Route22RivalBeforeBattleText2::
 	text "[RIVAL]: What?"
 	line "[PLAYER]! What a"
 	cont "surprise to see"
@@ -67,7 +67,7 @@ _Route22RivalBeforeBattleText2:: ; 92450 (24:6450)
 	para "Come on!"
 	done
 
-_Route22RivalAfterBattleText2:: ; 92506 (24:6506)
+_Route22RivalAfterBattleText2::
 	text "That loosened me"
 	line "up! I'm ready for"
 	cont "#mon League!"
@@ -80,14 +80,14 @@ _Route22RivalAfterBattleText2:: ; 92506 (24:6506)
 	cont "here. Smell ya!"
 	done
 
-_Route22RivalDefeatedText2:: ; 92583 (24:6583)
+_Route22RivalDefeatedText2::
 	text "What!?"
 
 	para "I was just"
 	line "careless!"
 	prompt
 
-_Route22Text_511d0:: ; 925a0 (24:65a0)
+_Route22Text_511d0::
 	text "[RIVAL]: Hahaha!"
 	line "[PLAYER]! That's"
 	cont "your best? You're"
@@ -98,8 +98,7 @@ _Route22Text_511d0:: ; 925a0 (24:65a0)
 	line "more! You loser!"
 	prompt
 
-_Route22FrontGateText:: ; 92606 (24:6606)
+_Route22FrontGateText::
 	text "#mon League"
 	line "Front Gate"
 	done
-

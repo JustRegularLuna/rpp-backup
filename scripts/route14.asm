@@ -1,18 +1,18 @@
-Route14Script: ; 559d3 (15:59d3)
+Route14Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, Route14TrainerHeaders
+	ld hl, Route14TrainerHeader0
 	ld de, Route14ScriptPointers
-	ld a, [W_ROUTE14CURSCRIPT]
+	ld a, [wRoute14CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROUTE14CURSCRIPT], a
+	ld [wRoute14CurScript], a
 	ret
 
-Route14ScriptPointers: ; 559e6 (15:59e6)
+Route14ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-Route14TextPointers: ; 559ec (15:59ec)
+Route14TextPointers:
 	dw Route14Text1
 	dw Route14Text2
 	dw Route14Text3
@@ -25,279 +25,278 @@ Route14TextPointers: ; 559ec (15:59ec)
 	dw Route14Text10
 	dw Route14Text11
 
-Route14TrainerHeaders: ; 55a02 (15:5a02)
-Route14TrainerHeader0: ; 55a02 (15:5a02)
-	db $1 ; flag's bit
+Route14TrainerHeader0:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText1 ; 0x5a85 TextBeforeBattle
-	dw Route14AfterBattleText1 ; 0x5a8f TextAfterBattle
-	dw Route14EndBattleText1 ; 0x5a8a TextEndBattle
-	dw Route14EndBattleText1 ; 0x5a8a TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_0
+	dw Route14BattleText1 ; TextBeforeBattle
+	dw Route14AfterBattleText1 ; TextAfterBattle
+	dw Route14EndBattleText1 ; TextEndBattle
+	dw Route14EndBattleText1 ; TextEndBattle
 
-Route14TrainerHeader1: ; 55a0e (15:5a0e)
-	db $2 ; flag's bit
+Route14TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_1
 	db ($2 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText2 ; 0x5a9e TextBeforeBattle
-	dw Route14AfterBattleText2 ; 0x5aa8 TextAfterBattle
-	dw Route14EndBattleText2 ; 0x5aa3 TextEndBattle
-	dw Route14EndBattleText2 ; 0x5aa3 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_1
+	dw Route14BattleText2 ; TextBeforeBattle
+	dw Route14AfterBattleText2 ; TextAfterBattle
+	dw Route14EndBattleText2 ; TextEndBattle
+	dw Route14EndBattleText2 ; TextEndBattle
 
-Route14TrainerHeader2: ; 55a1a (15:5a1a)
-	db $3 ; flag's bit
+Route14TrainerHeader2:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText3 ; 0x5ab7 TextBeforeBattle
-	dw Route14AfterBattleText3 ; 0x5ac1 TextAfterBattle
-	dw Route14EndBattleText3 ; 0x5abc TextEndBattle
-	dw Route14EndBattleText3 ; 0x5abc TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_2
+	dw Route14BattleText3 ; TextBeforeBattle
+	dw Route14AfterBattleText3 ; TextAfterBattle
+	dw Route14EndBattleText3 ; TextEndBattle
+	dw Route14EndBattleText3 ; TextEndBattle
 
-Route14TrainerHeader3: ; 55a26 (15:5a26)
-	db $4 ; flag's bit
+Route14TrainerHeader3:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_3
 	db ($3 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText4 ; 0x5ad0 TextBeforeBattle
-	dw Route14AfterBattleText4 ; 0x5ada TextAfterBattle
-	dw Route14EndBattleText4 ; 0x5ad5 TextEndBattle
-	dw Route14EndBattleText4 ; 0x5ad5 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_3
+	dw Route14BattleText4 ; TextBeforeBattle
+	dw Route14AfterBattleText4 ; TextAfterBattle
+	dw Route14EndBattleText4 ; TextEndBattle
+	dw Route14EndBattleText4 ; TextEndBattle
 
-Route14TrainerHeader4: ; 55a32 (15:5a32)
-	db $5 ; flag's bit
+Route14TrainerHeader4:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_4
 	db ($3 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText5 ; 0x5ae9 TextBeforeBattle
-	dw Route14AfterBattleText5 ; 0x5af3 TextAfterBattle
-	dw Route14EndBattleText5 ; 0x5aee TextEndBattle
-	dw Route14EndBattleText5 ; 0x5aee TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_4
+	dw Route14BattleText5 ; TextBeforeBattle
+	dw Route14AfterBattleText5 ; TextAfterBattle
+	dw Route14EndBattleText5 ; TextEndBattle
+	dw Route14EndBattleText5 ; TextEndBattle
 
-Route14TrainerHeader5: ; 55a3e (15:5a3e)
-	db $6 ; flag's bit
+Route14TrainerHeader5:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_5
 	db ($4 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText6 ; 0x5b02 TextBeforeBattle
-	dw Route14AfterBattleText6 ; 0x5b0c TextAfterBattle
-	dw Route14EndBattleText6 ; 0x5b07 TextEndBattle
-	dw Route14EndBattleText6 ; 0x5b07 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_5
+	dw Route14BattleText6 ; TextBeforeBattle
+	dw Route14AfterBattleText6 ; TextAfterBattle
+	dw Route14EndBattleText6 ; TextEndBattle
+	dw Route14EndBattleText6 ; TextEndBattle
 
-Route14TrainerHeader6: ; 55a4a (15:5a4a)
-	db $7 ; flag's bit
+Route14TrainerHeader6:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_6
 	db ($4 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText7 ; 0x5b1b TextBeforeBattle
-	dw Route14AfterBattleText7 ; 0x5b25 TextAfterBattle
-	dw Route14EndBattleText7 ; 0x5b20 TextEndBattle
-	dw Route14EndBattleText7 ; 0x5b20 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_6
+	dw Route14BattleText7 ; TextBeforeBattle
+	dw Route14AfterBattleText7 ; TextAfterBattle
+	dw Route14EndBattleText7 ; TextEndBattle
+	dw Route14EndBattleText7 ; TextEndBattle
 
-Route14TrainerHeader7: ; 55a56 (15:5a56)
-	db $8 ; flag's bit
+Route14TrainerHeader7:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_7, 1
 	db ($4 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText8 ; 0x5b34 TextBeforeBattle
-	dw Route14AfterBattleText8 ; 0x5b3e TextAfterBattle
-	dw Route14EndBattleText8 ; 0x5b39 TextEndBattle
-	dw Route14EndBattleText8 ; 0x5b39 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_7, 1
+	dw Route14BattleText8 ; TextBeforeBattle
+	dw Route14AfterBattleText8 ; TextAfterBattle
+	dw Route14EndBattleText8 ; TextEndBattle
+	dw Route14EndBattleText8 ; TextEndBattle
 
-Route14TrainerHeader8: ; 55a62 (15:5a62)
-	db $9 ; flag's bit
+Route14TrainerHeader8:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_8, 1
 	db ($3 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText9 ; 0x5b4d TextBeforeBattle
-	dw Route14AfterBattleText9 ; 0x5b57 TextAfterBattle
-	dw Route14EndBattleText9 ; 0x5b52 TextEndBattle
-	dw Route14EndBattleText9 ; 0x5b52 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_8, 1
+	dw Route14BattleText9 ; TextBeforeBattle
+	dw Route14AfterBattleText9 ; TextAfterBattle
+	dw Route14EndBattleText9 ; TextEndBattle
+	dw Route14EndBattleText9 ; TextEndBattle
 
-Route14TrainerHeader9: ; 55a6e (15:5a6e)
-	db $a ; flag's bit
+Route14TrainerHeader9:
+	dbEventFlagBit EVENT_BEAT_ROUTE_14_TRAINER_9, 1
 	db ($4 << 4) ; trainer's view range
-	dw wRoute14Flags ; flag's byte
-	dw Route14BattleText10 ; 0x5b66 TextBeforeBattle
-	dw Route14AfterBattleText10 ; 0x5b70 TextAfterBattle
-	dw Route14EndBattleText10 ; 0x5b6b TextEndBattle
-	dw Route14EndBattleText10 ; 0x5b6b TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROUTE_14_TRAINER_9, 1
+	dw Route14BattleText10 ; TextBeforeBattle
+	dw Route14AfterBattleText10 ; TextAfterBattle
+	dw Route14EndBattleText10 ; TextEndBattle
+	dw Route14EndBattleText10 ; TextEndBattle
 
 	db $ff
 
-Route14Text1: ; 55a7b (15:5a7b)
+Route14Text1:
 	TX_ASM
 	ld hl, Route14TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText1: ; 55a85 (15:5a85)
+Route14BattleText1:
 	TX_FAR _Route14BattleText1
 	db "@"
 
-Route14EndBattleText1: ; 55a8a (15:5a8a)
+Route14EndBattleText1:
 	TX_FAR _Route14EndBattleText1
 	db "@"
 
-Route14AfterBattleText1: ; 55a8f (15:5a8f)
+Route14AfterBattleText1:
 	TX_FAR _Route14AfterBattleText1
 	db "@"
 
-Route14Text2: ; 55a94 (15:5a94)
+Route14Text2:
 	TX_ASM
 	ld hl, Route14TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText2: ; 55a9e (15:5a9e)
+Route14BattleText2:
 	TX_FAR _Route14BattleText2
 	db "@"
 
-Route14EndBattleText2: ; 55aa3 (15:5aa3)
+Route14EndBattleText2:
 	TX_FAR _Route14EndBattleText2
 	db "@"
 
-Route14AfterBattleText2: ; 55aa8 (15:5aa8)
+Route14AfterBattleText2:
 	TX_FAR _Route14AfterBattleText2
 	db "@"
 
-Route14Text3: ; 55aad (15:5aad)
+Route14Text3:
 	TX_ASM
 	ld hl, Route14TrainerHeader2
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText3: ; 55ab7 (15:5ab7)
+Route14BattleText3:
 	TX_FAR _Route14BattleText3
 	db "@"
 
-Route14EndBattleText3: ; 55abc (15:5abc)
+Route14EndBattleText3:
 	TX_FAR _Route14EndBattleText3
 	db "@"
 
-Route14AfterBattleText3: ; 55ac1 (15:5ac1)
+Route14AfterBattleText3:
 	TX_FAR _Route14AfterBattleText3
 	db "@"
 
-Route14Text4: ; 55ac6 (15:5ac6)
+Route14Text4:
 	TX_ASM
 	ld hl, Route14TrainerHeader3
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText4: ; 55ad0 (15:5ad0)
+Route14BattleText4:
 	TX_FAR _Route14BattleText4
 	db "@"
 
-Route14EndBattleText4: ; 55ad5 (15:5ad5)
+Route14EndBattleText4:
 	TX_FAR _Route14EndBattleText4
 	db "@"
 
-Route14AfterBattleText4: ; 55ada (15:5ada)
+Route14AfterBattleText4:
 	TX_FAR _Route14AfterBattleText4
 	db "@"
 
-Route14Text5: ; 55adf (15:5adf)
+Route14Text5:
 	TX_ASM
 	ld hl, Route14TrainerHeader4
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText5: ; 55ae9 (15:5ae9)
+Route14BattleText5:
 	TX_FAR _Route14BattleText5
 	db "@"
 
-Route14EndBattleText5: ; 55aee (15:5aee)
+Route14EndBattleText5:
 	TX_FAR _Route14EndBattleText5
 	db "@"
 
-Route14AfterBattleText5: ; 55af3 (15:5af3)
+Route14AfterBattleText5:
 	TX_FAR _Route14AfterBattleText5
 	db "@"
 
-Route14Text6: ; 55af8 (15:5af8)
+Route14Text6:
 	TX_ASM
 	ld hl, Route14TrainerHeader5
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText6: ; 55b02 (15:5b02)
+Route14BattleText6:
 	TX_FAR _Route14BattleText6
 	db "@"
 
-Route14EndBattleText6: ; 55b07 (15:5b07)
+Route14EndBattleText6:
 	TX_FAR _Route14EndBattleText6
 	db "@"
 
-Route14AfterBattleText6: ; 55b0c (15:5b0c)
+Route14AfterBattleText6:
 	TX_FAR _Route14AfterBattleText6
 	db "@"
 
-Route14Text7: ; 55b11 (15:5b11)
+Route14Text7:
 	TX_ASM
 	ld hl, Route14TrainerHeader6
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText7: ; 55b1b (15:5b1b)
+Route14BattleText7:
 	TX_FAR _Route14BattleText7
 	db "@"
 
-Route14EndBattleText7: ; 55b20 (15:5b20)
+Route14EndBattleText7:
 	TX_FAR _Route14EndBattleText7
 	db "@"
 
-Route14AfterBattleText7: ; 55b25 (15:5b25)
+Route14AfterBattleText7:
 	TX_FAR _Route14AfterBattleText7
 	db "@"
 
-Route14Text8: ; 55b2a (15:5b2a)
+Route14Text8:
 	TX_ASM
 	ld hl, Route14TrainerHeader7
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText8: ; 55b34 (15:5b34)
+Route14BattleText8:
 	TX_FAR _Route14BattleText8
 	db "@"
 
-Route14EndBattleText8: ; 55b39 (15:5b39)
+Route14EndBattleText8:
 	TX_FAR _Route14EndBattleText8
 	db "@"
 
-Route14AfterBattleText8: ; 55b3e (15:5b3e)
+Route14AfterBattleText8:
 	TX_FAR _Route14AfterBattleText8
 	db "@"
 
-Route14Text9: ; 55b43 (15:5b43)
+Route14Text9:
 	TX_ASM
 	ld hl, Route14TrainerHeader8
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText9: ; 55b4d (15:5b4d)
+Route14BattleText9:
 	TX_FAR _Route14BattleText9
 	db "@"
 
-Route14EndBattleText9: ; 55b52 (15:5b52)
+Route14EndBattleText9:
 	TX_FAR _Route14EndBattleText9
 	db "@"
 
-Route14AfterBattleText9: ; 55b57 (15:5b57)
+Route14AfterBattleText9:
 	TX_FAR _Route14AfterBattleText9
 	db "@"
 
-Route14Text10: ; 55b5c (15:5b5c)
+Route14Text10:
 	TX_ASM
 	ld hl, Route14TrainerHeader9
 	call TalkToTrainer
 	jp TextScriptEnd
 
-Route14BattleText10: ; 55b66 (15:5b66)
+Route14BattleText10:
 	TX_FAR _Route14BattleText10
 	db "@"
 
-Route14EndBattleText10: ; 55b6b (15:5b6b)
+Route14EndBattleText10:
 	TX_FAR _Route14EndBattleText10
 	db "@"
 
-Route14AfterBattleText10: ; 55b70 (15:5b70)
+Route14AfterBattleText10:
 	TX_FAR _Route14AfterBattleText10
 	db "@"
 
-Route14Text11: ; 55b75 (15:5b75)
+Route14Text11:
 	TX_FAR _Route14Text11
 	db "@"

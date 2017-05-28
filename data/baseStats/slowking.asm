@@ -1,4 +1,4 @@
-SlowkingBaseStats: ; 38c82 (e:4c82)
+SlowkingBaseStats:
 db DEX_SLOWKING ; pokedex id
 db 95 ; base hp
 db 75 ; base attack

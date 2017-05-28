@@ -1,33 +1,31 @@
-CinnabarIslandScript: ; 1ca19 (7:4a19)
+CinnabarIslandScript:
 	call EnableAutoTextBoxDrawing
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
-	ld hl, wCinnabarMansionFlags
-	res 0, [hl]
-	ld hl, wCinnabarLabFossilFlags
-	res 1, [hl]
+	ResetEvent EVENT_MANSION_SWITCH_ON
+	ResetEvent EVENT_LAB_STILL_REVIVING_FOSSIL
 	ld hl, CinnabarIslandScriptPointers
-	ld a, [W_CINNABARISLANDCURSCRIPT]
+	ld a, [wCinnabarIslandCurScript]
 	jp CallFunctionInTable
 
-CinnabarIslandScriptPointers: ; 1ca34 (7:4a34)
+CinnabarIslandScriptPointers:
 	dw CinnabarIslandScript0
 	dw CinnabarIslandScript1
 
-CinnabarIslandScript0: ; 1ca38 (7:4a38)
+CinnabarIslandScript0:
 	ld b, SECRET_KEY
 	call IsItemInBag
 	ret nz
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp $4
 	ret nz
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp $12
 	ret nz
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	ld a, $8
-	ld [wd528], a
-	ld a, $8
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [hJoyHeld], a
@@ -40,19 +38,19 @@ CinnabarIslandScript0: ; 1ca38 (7:4a38)
 	ld [wSpriteStateData1 + 9], a
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [W_CINNABARISLANDCURSCRIPT], a
+	ld [wCinnabarIslandCurScript], a
 	ret
 
-CinnabarIslandScript1: ; 1ca73 (7:4a73)
+CinnabarIslandScript1:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	ret nz
 	call Delay3
 	ld a, $0
-	ld [W_CINNABARISLANDCURSCRIPT], a
+	ld [wCinnabarIslandCurScript], a
 	ret
 
-CinnabarIslandTextPointers: ; 1ca81 (7:4a81)
+CinnabarIslandTextPointers:
 	dw CinnabarIslandText1
 	dw CinnabarIslandText2
 	dw CinnabarIslandText3
@@ -62,26 +60,26 @@ CinnabarIslandTextPointers: ; 1ca81 (7:4a81)
 	dw CinnabarIslandText7
 	dw CinnabarIslandText8
 
-CinnabarIslandText8: ; 1ca91 (7:4a91)
+CinnabarIslandText8:
 	TX_FAR _CinnabarIslandText8
 	db "@"
 
-CinnabarIslandText1: ; 1ca96 (7:4a96)
+CinnabarIslandText1:
 	TX_FAR _CinnabarIslandText1
 	db "@"
 
-CinnabarIslandText2: ; 1ca9b (7:4a9b)
+CinnabarIslandText2:
 	TX_FAR _CinnabarIslandText2
 	db "@"
 
-CinnabarIslandText3: ; 1caa0 (7:4aa0)
+CinnabarIslandText3:
 	TX_FAR _CinnabarIslandText3
 	db "@"
 
-CinnabarIslandText6: ; 1caa5 (7:4aa5)
+CinnabarIslandText6:
 	TX_FAR _CinnabarIslandText6
 	db "@"
 
-CinnabarIslandText7: ; 1caaa (7:4aaa)
+CinnabarIslandText7:
 	TX_FAR _CinnabarIslandText7
 	db "@"

@@ -1,44 +1,39 @@
-IndigoPlateauLobbyScript: ; 19c5b (6:5c5b)
+IndigoPlateauLobbyScript:
 	call Serial_TryEstablishingExternallyClockedConnection
 	call EnableAutoTextBoxDrawing
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	bit 6, [hl]
 	res 6, [hl]
 	ret z
-	ld hl, wd869
-	res 7, [hl]
+	ResetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
 	ld hl, wBeatLorelei
 	bit 1, [hl]
 	res 1, [hl]
 	ret z
-	ld hl, wd863
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
+	; Elite 4 events
+	ResetEventRange ELITE4_EVENTS_START, EVENT_LANCES_ROOM_LOCK_DOOR
 	ret
 
-IndigoPlateauLobbyTextPointers: ; 19c7f (6:5c7f)
-	dw IndigoPlateauLobbyText1
+IndigoPlateauLobbyTextPointers:
+	dw IndigoHealNurseText
 	dw IndigoPlateauLobbyText2
 	dw IndigoPlateauLobbyText3
-	dw IndigoPlateauLobbyText4
-	dw IndigoPlateauLobbyText5
+	dw IndigoCashierText
+	dw IndigoTradeNurseText
 
-IndigoPlateauLobbyText1: ; 19c89 (6:5c89)
-	db $ff
+IndigoHealNurseText:
+	TX_POKECENTER_NURSE
 
-IndigoPlateauLobbyText2: ; 19c8a (6:5c8a)
-	TX_FAR _IndigoPlateauLobbyText1
+IndigoPlateauLobbyText2:
+	TX_FAR _IndigoPlateauLobbyText2
 	db "@"
 
-IndigoPlateauLobbyText3: ; 19c8f (6:5c8f)
+IndigoPlateauLobbyText3:
 	TX_ASM
 	ld a, 6
 	ld [wWhichTrade], a
 	callba MoveTutorScript
 	jp TextScriptEnd
 
-IndigoPlateauLobbyText5: ; 19c94 (6:5c94)
-	db $f6
+IndigoTradeNurseText:
+	TX_CABLE_CLUB_RECEPTIONIST

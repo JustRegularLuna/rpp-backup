@@ -1,16 +1,16 @@
-_Mansion1BattleText2:: ; a07a8 (28:47a8)
+_Mansion1BattleText2::
 	text "I wanted to do"
 	line "some exploring,"
 	cont "but I got lost!"
 	done
 
-_Mansion1EndBattleText2:: ; a07d5 (28:47d5)
+_Mansion1EndBattleText2::
 	text "Hey!"
     line "You're tougher"
     cont "than I thought!"
 	prompt
 
-_Mansion1AfterBattleText2:: ; a07dc (28:47dc)
+_Mansion1AfterBattleText2::
 	text "If we were back"
 	line "home in Hoenn,"
 	cont "you'd have earned"
@@ -18,17 +18,16 @@ _Mansion1AfterBattleText2:: ; a07dc (28:47dc)
     cont "that!"
 	done
 
-_MansionSwitchText:: ; a080a (28:480a)
+_MansionSwitchText::
 	text "A secret switch!"
 
 	para "Press it?"
 	done
 
-_MansionSwitchPressedText:: ; a0826 (28:4826)
+_MansionSwitchPressedText::
 	text "Who wouldn't?"
 	prompt
 
-_MansionSwitchNotPressedText:: ; a0834 (28:4834)
+_MansionSwitchNotPressedText::
 	text "Not quite yet!"
 	done
-

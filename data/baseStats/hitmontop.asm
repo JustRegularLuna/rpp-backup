@@ -1,4 +1,4 @@
-HitmontopBaseStats: ; 38f5a (e:4f5a)
+HitmontopBaseStats:
 db DEX_HITMONTOP ; pokedex id
 db 50 ; base hp
 db 95 ; base attack

@@ -1,42 +1,41 @@
-UnknownDungeon3Script: ; 45ef0 (11:5ef0)
+UnknownDungeon3Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, UnknownDungeon3TrainerHeaders
-	ld de, UnknownDungeon3ScriptPointers
-	ld a, [W_UNKNOWNDUNGEON3CURSCRIPT]
+	ld hl, MewtwoTrainerHeader
+	ld de, .ScriptPointers
+	ld a, [wUnknownDungeon3CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_UNKNOWNDUNGEON3CURSCRIPT], a
+	ld [wUnknownDungeon3CurScript], a
 	ret
 
-UnknownDungeon3ScriptPointers: ; 45f03 (11:5f03)
+.ScriptPointers
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-UnknownDungeon3TextPointers: ; 45f09 (11:5f09)
-	dw UnknownDungeon3Text1
-	dw Predef5CText
-	dw Predef5CText
+UnknownDungeon3TextPointers:
+	dw MewtwoText
+	dw PickUpItemText
+	dw PickUpItemText
 
-UnknownDungeon3TrainerHeaders: ; 45f0f (11:5f0f)
-UnknownDungeon3TrainerHeader0: ; 45f0f (11:5f0f)
-	db $1 ; flag's bit
+MewtwoTrainerHeader:
+	dbEventFlagBit EVENT_BEAT_MEWTWO
 	db ($0 << 4) ; trainer's view range
-	dw wd85f ; flag's byte
-	dw UnknownDungeon3MewtwoText ; 0x5f26 TextBeforeBattle
-	dw UnknownDungeon3MewtwoText ; 0x5f26 TextAfterBattle
-	dw UnknownDungeon3MewtwoText ; 0x5f26 TextEndBattle
-	dw UnknownDungeon3MewtwoText ; 0x5f26 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_MEWTWO
+	dw MewtwoBattleText ; TextBeforeBattle
+	dw MewtwoBattleText ; TextAfterBattle
+	dw MewtwoBattleText ; TextEndBattle
+	dw MewtwoBattleText ; TextEndBattle
 
 	db $ff
 
-UnknownDungeon3Text1: ; 45f1c (11:5f1c)
+MewtwoText:
 	TX_ASM
-	ld hl, UnknownDungeon3TrainerHeader0
+	ld hl, MewtwoTrainerHeader
 	call TalkToTrainer
 	jp TextScriptEnd
 
-UnknownDungeon3MewtwoText: ; 45f26 (11:5f26)
-	TX_FAR _UnknownDungeon3MewtwoText
+MewtwoBattleText:
+	TX_FAR _MewtwoBattleText
 	TX_ASM
 	ld a, MEWTWO
 	call PlayCry

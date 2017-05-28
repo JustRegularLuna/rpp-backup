@@ -1,12 +1,12 @@
-_ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
+_ScrollTrainerPicAfterBattle:
 ; Load the enemy trainer's pic and scrolls it into
 ; the screen from the right.
 	xor a
 	ld [wEnemyMonSpecies2], a
-	ld b, $1
-	call GoPAL_SET
+	ld b, SET_PAL_BATTLE
+	call RunPaletteCommand
 	callab _LoadTrainerPic
-	hlCoord 19, 0
+	coord hl, 19, 0
 	ld c, $0
 .scrollLoop
 	inc c
@@ -32,7 +32,7 @@ _ScrollTrainerPicAfterBattle: ; 396d3 (e:56d3)
 	jr .scrollLoop
 
 ; write one 7-tile column of the trainer pic to the tilemap
-DrawTrainerPicColumn: ; 39707 (e:5707)
+DrawTrainerPicColumn:
 	push hl
 	push de
 	push bc

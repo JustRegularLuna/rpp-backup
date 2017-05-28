@@ -33,13 +33,13 @@ _BeachHouseGiveSurfText::
 	para "Check this out!"
 	prompt
 
-_ReceivedHM03Text::
+_ReceivedTM15Text::
 	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
 
-_HM03ExplanationText::
+_TM15ExplanationText::
 	text "TM15 teaches"
 	line "Hyper Beam!"
 
@@ -50,7 +50,7 @@ _HM03ExplanationText::
 	cont "using it."
 	done
 
-_HM03NoRoomText::
+_TM15NoRoomText::
 	text "Whoa, hold up!"
 	
 	para "You don't have"

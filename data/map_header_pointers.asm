@@ -1,5 +1,5 @@
 ; see also MapHeaderBanks
-MapHeaderPointers:: ; 01ae (0:01ae)
+MapHeaderPointers::
 	dw PalletTown_h
 	dw ViridianCity_h
 	dw PewterCity_h
@@ -239,8 +239,8 @@ MapHeaderPointers:: ; 01ae (0:01ae)
 	dw SilphCoElevator_h
 	dw SilphCo2_h ; unused
 	dw NavelRockLugiaRoom_h ; originally unused
-	dw BattleCenterM_h
-	dw TradeCenterM_h
+	dw TradeCenter_h
+	dw Colosseum_h
 	dw SilphCo2_h ; unused
 	dw SilphCo2_h ; unused
 	dw SilphCo2_h ; unused

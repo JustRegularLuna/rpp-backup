@@ -1,4 +1,4 @@
-SafariZoneEntranceObject: ; 0x753f5 (size=48)
+SafariZoneEntranceObject:
 	db $a ; border block
 
 	db $4 ; warps
@@ -9,9 +9,9 @@ SafariZoneEntranceObject: ; 0x753f5 (size=48)
 
 	db $0 ; signs
 
-	db $2 ; people
-	db SPRITE_WHITE_PLAYER, $2 + 4, $6 + 4, $ff, $d2, $1 ; person
-	db SPRITE_WHITE_PLAYER, $3 + 4, $1 + 4, $ff, $d3, $2 ; person
+	db $2 ; objects
+	object SPRITE_WHITE_PLAYER, $6, $2, STAY, LEFT, $1 ; person
+	object SPRITE_WHITE_PLAYER, $1, $3, STAY, RIGHT, $2 ; person
 
 	; warp-to
 	EVENT_DISP SAFARI_ZONE_ENTRANCE_WIDTH, $5, $3

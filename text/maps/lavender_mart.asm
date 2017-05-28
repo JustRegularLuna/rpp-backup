@@ -1,4 +1,4 @@
-_LavenderMartText2:: ; 9a104 (26:6104)
+_LavenderMartText2::
 	text "I'm searching for"
 	line "items that raise"
 	cont "the abilities of"
@@ -14,13 +14,13 @@ _LavenderMartText2:: ; 9a104 (26:6104)
 	line "I can get them?"
 	done
 
-_LavenderMart_5c953:: ; 9a1b4 (26:61b4)
+_LavenderMartReviveText::
 	text "You know Revive?"
 	line "It revives any"
 	cont "fainted #mon!"
 	done
 
-_LavenderMart_5c958:: ; 9a1e3 (26:61e3)
+_LavenderMartNuggetText::
 	text "I found a Nugget"
 	line "in the mountains."
 
@@ -28,4 +28,3 @@ _LavenderMart_5c958:: ; 9a1e3 (26:61e3)
 	line "useless, but it"
 	cont "sold for ¥5000!"
 	done
-

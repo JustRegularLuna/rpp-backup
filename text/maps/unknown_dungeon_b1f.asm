@@ -1,5 +1,5 @@
 _FarawayIslandInsideMewText:: ; reused for Mew
-_UnknownDungeon3MewtwoText:: ; 85c72 (21:5c72)
+_MewtwoBattleText::
 	text "Mew!@@"
 
 _SouthernIslandInsideLatiText:: ; added for Latios and Latias

@@ -14,4 +14,3 @@ Route22Mons:
 
 ; Water Mons
 	db $00
-

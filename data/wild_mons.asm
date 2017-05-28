@@ -1,4 +1,4 @@
-WildDataPointers: ; ceeb (3:4eeb)
+WildDataPointers:
 	dw NoMons      ; PALLET_TOWN
 	dw NoMons      ; VIRIDIAN_CITY
 	dw NoMons      ; PEWTER_CITY
@@ -253,12 +253,12 @@ WildDataPointers: ; ceeb (3:4eeb)
 ; first part:  pokemon found in grass
 ; second part: pokemon found while surfing
 ; each part goes as follows:
-	; if first byte == 00, then
-		; no wild pokemon on this map
-	; if first byte != 00, then
-		; first byte is encounter rate
-		; followed by 20 bytes:
-		; level, species (ten times)
+    ; if first byte == 00, then
+        ; no wild pokemon on this map
+    ; if first byte != 00, then
+        ; first byte is encounter rate
+        ; followed by 20 bytes:
+        ; level, species (ten times)
 
 INCLUDE "data/wildPokemon/nomons.asm"
 INCLUDE "data/wildPokemon/route1.asm"

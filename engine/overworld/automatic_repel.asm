@@ -36,7 +36,7 @@ _DisplayRepelWoreOffText::
 	pop bc ; get the item ID back so we can put it where it needs to be
 	ld a,b
 	ld [wcf91], a
-	ld [wd152], a
+	ld [wPseudoItemID], a
 	
 	; get ready to find which item slot the repel is in, so we don't remove the wrong item
 	ld hl, wBagItems

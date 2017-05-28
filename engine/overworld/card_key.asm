@@ -1,6 +1,6 @@
-PrintCardKeyText: ; 52673 (14:6673)
+PrintCardKeyText:
 	ld hl, SilphCoMapList
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	ld b, a
 .silphCoMapListLoop
 	ld a, [hli]
@@ -15,7 +15,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	cp $24
 	jr z, .cardKeyDoorInFrontOfPlayer
 	ld b, a
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp SILPH_CO_11F
 	ret nz
 	ld a, b
@@ -27,8 +27,8 @@ PrintCardKeyText: ; 52673 (14:6673)
 	jr z, .noCardKey
 	call GetCoordsInFrontOfPlayer
 	push de
-	ld a, $1
-	ld [H_DOWNARROWBLINKCNT2], a
+	tx_pre_id CardKeySuccessText
+	ld [hSpriteIndexOrTextID], a
 	call PrintPredefTextID
 	pop de
 	srl d
@@ -39,7 +39,7 @@ PrintCardKeyText: ; 52673 (14:6673)
 	ld a, e
 	ld c, a
 	ld [wCardKeyDoorX], a
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp SILPH_CO_11F
 	jr nz, .notSilphCo11F
 	ld a, $3
@@ -47,18 +47,18 @@ PrintCardKeyText: ; 52673 (14:6673)
 .notSilphCo11F
 	ld a, $e
 .replaceCardKeyDoorTileBlock
-	ld [wd09f], a
+	ld [wNewTileBlockID], a
 	predef ReplaceTileBlock
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 5, [hl]
-	ld a, (SFX_1f_57 - SFX_Headers_1f) / 3
+	ld a, SFX_GO_INSIDE
 	jp PlaySound
 .noCardKey
-	ld a, $2
-	ld [H_DOWNARROWBLINKCNT2], a
+	tx_pre_id CardKeyFailText
+	ld [hSpriteIndexOrTextID], a
 	jp PrintPredefTextID
 
-SilphCoMapList: ; 526e3 (14:66e3)
+SilphCoMapList:
 	db SILPH_CO_2F
 	db SILPH_CO_3F
 	db SILPH_CO_4F
@@ -71,22 +71,22 @@ SilphCoMapList: ; 526e3 (14:66e3)
 	db SILPH_CO_11F
 	db $FF
 
-CardKeySuccessText: ; 526ee (14:66ee)
+CardKeySuccessText:
 	TX_FAR _CardKeySuccessText1
-	db $0b
+	TX_SFX_ITEM_1
 	TX_FAR _CardKeySuccessText2
 	db "@"
 
-CardKeyFailText: ; 526f8 (14:66f8)
+CardKeyFailText:
 	TX_FAR _CardKeyFailText
 	db "@"
 
 ; d = Y
 ; e = X
-GetCoordsInFrontOfPlayer: ; 526fd (14:66fd)
-	ld a, [W_YCOORD]
+GetCoordsInFrontOfPlayer:
+	ld a, [wYCoord]
 	ld d, a
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld e, a
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	and a

@@ -1,4 +1,4 @@
-VictoryRoad2Object: ; 0x51915 (size=154)
+VictoryRoad2Object:
 	db $7d ; border block
 
 	db $7 ; warps
@@ -12,20 +12,20 @@ VictoryRoad2Object: ; 0x51915 (size=154)
 
 	db $0 ; signs
 
-	db $d ; people
-	db SPRITE_BLACKBELT, $9 + 4, $c + 4, $ff, $d2, TRAINER | $1, BLACKBELT + TRAINER_START, $9
-	db SPRITE_BLACK_HAIR_BOY_2, $d + 4, $15 + 4, $ff, $d2, TRAINER | $2, JUGGLER + TRAINER_START, $2
-	db SPRITE_BLACK_HAIR_BOY_1, $8 + 4, $13 + 4, $ff, $d0, TRAINER | $3, TAMER + TRAINER_START, $5
-	db SPRITE_BLACK_HAIR_BOY_2, $2 + 4, $4 + 4, $ff, $d0, TRAINER | $4, POKEMANIAC + TRAINER_START, $6
-	db SPRITE_BLACK_HAIR_BOY_2, $3 + 4, $1a + 4, $ff, $d2, TRAINER | $5, JUGGLER + TRAINER_START, $5
-	db SPRITE_BIRD, $5 + 4, $b + 4, $ff, $d1, TRAINER | $6, MOLTRES, 50 | OW_POKEMON
-	db SPRITE_BALL, $5 + 4, $1b + 4, $ff, $ff, ITEM | $7, TM_23
-	db SPRITE_BALL, $9 + 4, $12 + 4, $ff, $ff, ITEM | $8, FULL_HEAL
-	db SPRITE_BALL, $b + 4, $9 + 4, $ff, $ff, ITEM | $9, TM_01
-	db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, ITEM | $a, GUARD_SPEC_
-	db SPRITE_BOULDER, $e + 4, $4 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $b ; person
-	db SPRITE_BOULDER, $5 + 4, $5 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $c ; person
-	db SPRITE_BOULDER, $10 + 4, $17 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $d ; person
+	db $d ; objects
+	object SPRITE_BLACKBELT, $c, $9, STAY, LEFT, $1, OPP_BLACKBELT, $9
+	object SPRITE_BLACK_HAIR_BOY_2, $15, $d, STAY, LEFT, $2, OPP_JUGGLER, $2
+	object SPRITE_BLACK_HAIR_BOY_1, $13, $8, STAY, DOWN, $3, OPP_TAMER, $5
+	object SPRITE_BLACK_HAIR_BOY_2, $4, $2, STAY, DOWN, $4, OPP_POKEMANIAC, $6
+	object SPRITE_BLACK_HAIR_BOY_2, $1a, $3, STAY, LEFT, $5, OPP_JUGGLER, $5
+	object SPRITE_BIRD, $b, $5, STAY, UP, $6, MOLTRES, 50 | OW_POKEMON
+	object SPRITE_BALL, $1b, $5, STAY, NONE, $7, TM_23
+	object SPRITE_BALL, $12, $9, STAY, NONE, $8, FULL_HEAL
+	object SPRITE_BALL, $9, $b, STAY, NONE, $9, TM_01
+	object SPRITE_BALL, $b, $0, STAY, NONE, $a, GUARD_SPEC
+	object SPRITE_BOULDER, $4, $e, NONE, BOULDER_MOVEMENT_BYTE_2, $b ; person
+	object SPRITE_BOULDER, $5, $5, NONE, BOULDER_MOVEMENT_BYTE_2, $c ; person
+	object SPRITE_BOULDER, $17, $10, NONE, BOULDER_MOVEMENT_BYTE_2, $d ; person
 
 	; warp-to
 	EVENT_DISP VICTORY_ROAD_2_WIDTH, $8, $0 ; VICTORY_ROAD_1

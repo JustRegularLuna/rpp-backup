@@ -1,4 +1,4 @@
-Route12GateUpstairsObject: ; 0x495de (size=24)
+Route12GateUpstairsObject:
 	db $a ; border block
 
 	db $1 ; warps
@@ -8,8 +8,8 @@ Route12GateUpstairsObject: ; 0x495de (size=24)
 	db $2, $1, $2 ; Route12GateUpstairsText2
 	db $2, $6, $3 ; Route12GateUpstairsText3
 
-	db $1 ; people
-	db SPRITE_BRUNETTE_GIRL, $4 + 4, $5 + 4, $ff, $d2, $1 ; person
+	db $1 ; objects
+	object SPRITE_BRUNETTE_GIRL, $5, $4, STAY, LEFT, $1 ; person
 
 	; warp-to
 	EVENT_DISP ROUTE_12_GATE_2F_WIDTH, $7, $7 ; ROUTE_12_GATE_1F

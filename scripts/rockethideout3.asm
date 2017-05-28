@@ -1,22 +1,22 @@
-RocketHideout3Script: ; 45225 (11:5225)
+RocketHideout3Script:
 	call EnableAutoTextBoxDrawing
-	ld hl, RocketHideout3TrainerHeaders
+	ld hl, RocketHideout3TrainerHeader0
 	ld de, RocketHideout3ScriptPointers
-	ld a, [W_ROCKETHIDEOUT3CURSCRIPT]
+	ld a, [wRocketHideout3CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_ROCKETHIDEOUT3CURSCRIPT], a
+	ld [wRocketHideout3CurScript], a
 	ret
 
-RocketHideout3ScriptPointers: ; 45238 (11:5238)
+RocketHideout3ScriptPointers:
 	dw RocketHideout3Script0
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 	dw RocketHideout3Script3
 
-RocketHideout3Script0: ; 45240 (11:5240)
-	ld a, [W_YCOORD]
+RocketHideout3Script0:
+	ld a, [wYCoord]
 	ld b, a
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	ld c, a
 	ld hl, RocketHideout3ArrowTilePlayerMovement
 	call DecodeArrowMovementRLE
@@ -25,7 +25,7 @@ RocketHideout3Script0: ; 45240 (11:5240)
 	ld hl, wd736
 	set 7, [hl]
 	call StartSimulatingJoypadStates
-	ld a, (SFX_02_52 - SFX_Headers_02) / 3
+	ld a, SFX_ARROW_TILES
 	call PlaySound
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -36,7 +36,7 @@ RocketHideout3Script0: ; 45240 (11:5240)
 ;format:
 ;db y,x
 ;dw pointer to movement
-RocketHideout3ArrowTilePlayerMovement: ; 4526b (11:526b)
+RocketHideout3ArrowTilePlayerMovement:
 	db $d,$a
 	dw RocketHideout3ArrowMovement6
 	db $13,$a
@@ -72,70 +72,66 @@ RocketHideout3ArrowTilePlayerMovement: ; 4526b (11:526b)
 	db $FF
 
 ;format: direction, count
-;right:	$10
-;left:	$20
-;up:	$40
-;down:	$80
 ;each list is read starting from the $FF and working backwards
-RocketHideout3ArrowMovement1: ; 452ac (11:52ac)
-	db $10,$04
-	db $40,$04
-	db $10,$04
+RocketHideout3ArrowMovement1:
+	db D_RIGHT,$04
+	db D_UP,$04
+	db D_RIGHT,$04
 	db $FF
 
-RocketHideout3ArrowMovement2: ; 452b3 (11:52b3)
-	db $80,$04
-	db $10,$04
+RocketHideout3ArrowMovement2:
+	db D_DOWN,$04
+	db D_RIGHT,$04
 	db $FF
 
-RocketHideout3ArrowMovement3: ; 452b8 (11:52b8)
-	db $20,$02
+RocketHideout3ArrowMovement3:
+	db D_LEFT,$02
 	db $FF
 
-RocketHideout3ArrowMovement4: ; 452bb (11:52bb)
-	db $10,$04
-	db $40,$02
-	db $10,$02
+RocketHideout3ArrowMovement4:
+	db D_RIGHT,$04
+	db D_UP,$02
+	db D_RIGHT,$02
 	db $FF
 
-RocketHideout3ArrowMovement5: ; 452c2 (11:52c2)
-	db $10,$04
-	db $40,$02
-	db $10,$02
-	db $40,$03
+RocketHideout3ArrowMovement5:
+	db D_RIGHT,$04
+	db D_UP,$02
+	db D_RIGHT,$02
+	db D_UP,$03
 	db $FF
 
-RocketHideout3ArrowMovement6: ; 452cb (11:52cb)
-	db $10,$04
+RocketHideout3ArrowMovement6:
+	db D_RIGHT,$04
 	db $FF
 
-RocketHideout3ArrowMovement7: ; 452ce (11:52ce)
-	db $10,$02
+RocketHideout3ArrowMovement7:
+	db D_RIGHT,$02
 	db $FF
 
-RocketHideout3ArrowMovement8: ; 452d1 (11:52d1)
-	db $10,$04
-	db $40,$02
+RocketHideout3ArrowMovement8:
+	db D_RIGHT,$04
+	db D_UP,$02
 	db $FF
 
-RocketHideout3ArrowMovement9: ; 452d6 (11:52d6)
-	db $10,$04
-	db $40,$04
+RocketHideout3ArrowMovement9:
+	db D_RIGHT,$04
+	db D_UP,$04
 	db $FF
 
-RocketHideout3ArrowMovement10: ; 452db (11:52db)
-	db $80,$04
+RocketHideout3ArrowMovement10:
+	db D_DOWN,$04
 	db $FF
 
-RocketHideout3ArrowMovement11: ; 452de (11:52de)
-	db $40,$02
+RocketHideout3ArrowMovement11:
+	db D_UP,$02
 	db $FF
 
-RocketHideout3ArrowMovement12: ; 452e1 (11:52e1)
-	db $40,$01
+RocketHideout3ArrowMovement12:
+	db D_UP,$01
 	db $FF
 
-RocketHideout3Script3 ; 452e4 (11:452e4)
+RocketHideout3Script3:
 	ld a, [wSimulatedJoypadStatesIndex]
 	and a
 	jp nz, LoadSpinnerArrowTiles
@@ -147,65 +143,64 @@ RocketHideout3Script3 ; 452e4 (11:452e4)
 	ld [wCurMapScript], a
 	ret
 
-RocketHideout3TextPointers: ; 452fa (11:52fa)
+RocketHideout3TextPointers:
 	dw RocketHideout3Text1
 	dw RocketHideout3Text2
-	dw Predef5CText
-	dw Predef5CText
+	dw PickUpItemText
+	dw PickUpItemText
 
-RocketHideout3TrainerHeaders: ; 45302 (11:5302)
-RocketHideout3TrainerHeader0: ; 45302 (11:5302)
-	db $1 ; flag's bit
+RocketHideout3TrainerHeader0:
+	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd819 ; flag's byte
-	dw RocketHideout3BattleText2 ; 0x5325 TextBeforeBattle
-	dw RocketHideout3AfterBattleTxt2 ; 0x532f TextAfterBattle
-	dw RocketHideout3EndBattleText2 ; 0x532a TextEndBattle
-	dw RocketHideout3EndBattleText2 ; 0x532a TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_0
+	dw RocketHideout3BattleText2 ; TextBeforeBattle
+	dw RocketHideout3AfterBattleTxt2 ; TextAfterBattle
+	dw RocketHideout3EndBattleText2 ; TextEndBattle
+	dw RocketHideout3EndBattleText2 ; TextEndBattle
 
-RocketHideout3TrainerHeader2: ; 4530e (11:530e)
-	db $2 ; flag's bit
+RocketHideout3TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dw wd819 ; flag's byte
-	dw RocketHideout3BattleTxt ; 0x533e TextBeforeBattle
-	dw RocketHideout3AfterBattleText3 ; 0x5348 TextAfterBattle
-	dw RocketHideout3EndBattleText3 ; 0x5343 TextEndBattle
-	dw RocketHideout3EndBattleText3 ; 0x5343 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_ROCKET_HIDEOUT_3_TRAINER_1
+	dw RocketHideout3BattleTxt ; TextBeforeBattle
+	dw RocketHideout3AfterBattleText3 ; TextAfterBattle
+	dw RocketHideout3EndBattleText3 ; TextEndBattle
+	dw RocketHideout3EndBattleText3 ; TextEndBattle
 
 	db $ff
 
-RocketHideout3Text1: ; 4531b (11:531b)
+RocketHideout3Text1:
 	TX_ASM
 	ld hl, RocketHideout3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-RocketHideout3BattleText2: ; 45325 (11:5325)
+RocketHideout3BattleText2:
 	TX_FAR _RocketHideout3BattleText2
 	db "@"
 
-RocketHideout3EndBattleText2: ; 4532a (11:532a)
+RocketHideout3EndBattleText2:
 	TX_FAR _RocketHideout3EndBattleText2
 	db "@"
 
-RocketHideout3AfterBattleTxt2: ; 4532f (11:532f)
+RocketHideout3AfterBattleTxt2:
 	TX_FAR _RocketHideout3AfterBattleTxt2
 	db "@"
 
-RocketHideout3Text2: ; 45334 (11:5334)
+RocketHideout3Text2:
 	TX_ASM
-	ld hl, RocketHideout3TrainerHeader2
+	ld hl, RocketHideout3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-RocketHideout3BattleTxt: ; 4533e (11:533e)
+RocketHideout3BattleTxt:
 	TX_FAR _RocketHideout3BattleTxt
 	db "@"
 
-RocketHideout3EndBattleText3: ; 45343 (11:5343)
+RocketHideout3EndBattleText3:
 	TX_FAR _RocketHideout3EndBattleText3
 	db "@"
 
-RocketHideout3AfterBattleText3: ; 45348 (11:5348)
+RocketHideout3AfterBattleText3:
 	TX_FAR _RocketHide3AfterBattleText3
 	db "@"

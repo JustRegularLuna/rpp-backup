@@ -1,5 +1,4 @@
-_CinnabarPokecenterText2:: ; a12de (28:52de)
-_CinnabarPokecenterText1:: ; a12de (28:52de)
+_CinnabarPokecenterText2::
 	text "You can cancel"
 	line "evolution."
 
@@ -9,7 +8,7 @@ _CinnabarPokecenterText1:: ; a12de (28:52de)
 	cont "it the way it is."
 	done
 
-_CinnabarPokecenterText3:: ; a133e (28:533e)
+_CinnabarPokecenterText3::
 	text "Do you have any"
 	line "friends?"
 
@@ -20,4 +19,3 @@ _CinnabarPokecenterText3:: ; a133e (28:533e)
 	para "I think it's"
 	line "worth a try!"
 	done
-

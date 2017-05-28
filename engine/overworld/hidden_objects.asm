@@ -1,4 +1,4 @@
-Func_46981: ; 46981 (11:6981)
+IsPlayerOnDungeonWarp:
 	xor a
 	ld [wWhichDungeonWarp], a
 	ld a, [wd72d]
@@ -6,7 +6,7 @@ Func_46981: ; 46981 (11:6981)
 	ret nz
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	ld [wWhichDungeonWarp], a
 	ld hl, wd72d
 	set 4, [hl]
@@ -15,7 +15,7 @@ Func_46981: ; 46981 (11:6981)
 	ret
 
 ; if a hidden object was found, stores $00 in [$ffee], else stores $ff
-CheckForHiddenObject: ; 469a0 (11:69a0)
+CheckForHiddenObject:
 	ld hl, $ffeb
 	xor a
 	ld [hli], a
@@ -29,7 +29,7 @@ CheckForHiddenObject: ; 469a0 (11:69a0)
 	ld b, a
 	cp $ff
 	jr z, .noMatch
-	ld a, [W_CURMAP]
+	ld a, [wCurMap]
 	cp b
 	jr z, .foundMatchingMap
 	inc de
@@ -58,7 +58,7 @@ CheckForHiddenObject: ; 469a0 (11:69a0)
 	ld [wHiddenObjectX], a
 	ld c, a
 	call CheckIfCoordsInFrontOfPlayerMatch
-	ld a, [$ffea]
+	ld a, [hCoordsInFrontOfPlayerMatch]
 	and a
 	jr z, .foundMatchingObject
 	inc hl
@@ -85,8 +85,8 @@ CheckForHiddenObject: ; 469a0 (11:69a0)
 	ret
 
 ; checks if the coordinates in front of the player's sprite match Y in b and X in c
-; [$ffea] = $00 if they match, $ff if they don't match
-CheckIfCoordsInFrontOfPlayerMatch: ; 46a01 (11:6a01)
+; [hCoordsInFrontOfPlayerMatch] = $00 if they match, $ff if they don't match
+CheckIfCoordsInFrontOfPlayerMatch:
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_UP
 	jr z, .facingUp
@@ -95,30 +95,30 @@ CheckIfCoordsInFrontOfPlayerMatch: ; 46a01 (11:6a01)
 	cp SPRITE_FACING_RIGHT
 	jr z, .facingRight
 ; facing down
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	inc a
 	jr .upDownCommon
 .facingUp
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	dec a
 .upDownCommon
 	cp b
 	jr nz, .didNotMatch
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	cp c
 	jr nz, .didNotMatch
 	jr .matched
 .facingLeft
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	dec a
 	jr .leftRightCommon
 .facingRight
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	inc a
 .leftRightCommon
 	cp c
 	jr nz, .didNotMatch
-	ld a, [W_YCOORD]
+	ld a, [wYCoord]
 	cp b
 	jr nz, .didNotMatch
 .matched
@@ -127,7 +127,7 @@ CheckIfCoordsInFrontOfPlayerMatch: ; 46a01 (11:6a01)
 .didNotMatch
 	ld a, $ff
 .done
-	ld [$ffea], a
+	ld [hCoordsInFrontOfPlayerMatch], a
 	ret
 
 INCLUDE "data/hidden_objects.asm"

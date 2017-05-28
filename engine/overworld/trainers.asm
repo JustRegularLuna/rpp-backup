@@ -1,42 +1,42 @@
-_GetSpritePosition1: ; 567f9 (15:67f9)
-	ld hl, wSpriteStateData1
-	ld de, $4
-	ld a, [wSpriteIndex]
-	ld [H_SPRITEINDEX], a
-	call GetSpriteDataPointer
-	ld a, [hli]
-	ld [$ffeb], a
-	inc hl
-	ld a, [hl]
-	ld [$ffec], a
-	ld de, $fe
-	add hl, de
-	ld a, [hli]
-	ld [$ffed], a
-	ld a, [hl]
-	ld [$ffee], a
-	ret
-
-_GetSpritePosition2: ; 56819 (15:6819)
+_GetSpritePosition1:
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	call GetSpriteDataPointer
 	ld a, [hli] ; c1x4 (screen Y pos)
-	ld [wd130], a
+	ld [$ffeb], a
 	inc hl
 	ld a, [hl] ; c1x6 (screen X pos)
-	ld [wd131], a
-	ld de, $104 - $6
+	ld [$ffec], a
+	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
 	ld a, [hli] ; c2x4 (map Y pos)
-	ld [wd132], a
+	ld [$ffed], a
 	ld a, [hl] ; c2x5 (map X pos)
-	ld [wd133], a
+	ld [$ffee], a
 	ret
 
-_SetSpritePosition1: ; 5683d (15:683d)
+_GetSpritePosition2:
+	ld hl, wSpriteStateData1
+	ld de, $4
+	ld a, [wSpriteIndex]
+	ld [H_SPRITEINDEX], a
+	call GetSpriteDataPointer
+	ld a, [hli] ; c1x4 (screen Y pos)
+	ld [wSavedSpriteScreenY], a
+	inc hl
+	ld a, [hl] ; c1x6 (screen X pos)
+	ld [wSavedSpriteScreenX], a
+	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
+	add hl, de
+	ld a, [hli] ; c2x4 (map Y pos)
+	ld [wSavedSpriteMapY], a
+	ld a, [hl] ; c2x5 (map X pos)
+	ld [wSavedSpriteMapX], a
+	ret
+
+_SetSpritePosition1:
 	ld hl, wSpriteStateData1
 	ld de, $4
 	ld a, [wSpriteIndex]
@@ -47,7 +47,7 @@ _SetSpritePosition1: ; 5683d (15:683d)
 	inc hl
 	ld a, [$ffec] ; c1x6 (screen X pos)
 	ld [hl], a
-	ld de, $104 - $6
+	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
 	ld a, [$ffed] ; c2x4 (map Y pos)
 	ld [hli], a
@@ -55,36 +55,36 @@ _SetSpritePosition1: ; 5683d (15:683d)
 	ld [hl], a
 	ret
 
-_SetSpritePosition2: ; 5685d (15:685d)
+_SetSpritePosition2:
 	ld hl, wSpriteStateData1
-	ld de, $0004
+	ld de, 4
 	ld a, [wSpriteIndex]
 	ld [H_SPRITEINDEX], a
 	call GetSpriteDataPointer
-	ld a, [wd130]
-	ld [hli], a
+	ld a, [wSavedSpriteScreenY]
+	ld [hli], a ; c1x4 (screen Y pos)
 	inc hl
-	ld a, [wd131]
-	ld [hl], a
-	ld de, $00fe
+	ld a, [wSavedSpriteScreenX]
+	ld [hl], a ; c1x6 (screen X pos)
+	ld de, (wSpriteStateData2 + $4) - (wSpriteStateData1 + $6)
 	add hl, de
-	ld a, [wd132]
-	ld [hli], a
-	ld a, [wd133]
-	ld [hl], a
+	ld a, [wSavedSpriteMapY]
+	ld [hli], a ; c2x4 (map Y pos)
+	ld a, [wSavedSpriteMapX]
+	ld [hl], a ; c2x5 (map X pos)
 	ret
 
-TrainerWalkUpToPlayer: ; 56881 (15:6881)
+TrainerWalkUpToPlayer:
 	ld a, [wSpriteIndex]
 	swap a
-	ld [wTrainerSpriteOffset], a ; wWhichTrade
+	ld [wTrainerSpriteOffset], a
 	call ReadTrainerScreenPosition
 	ld a, [wTrainerFacingDirection]
-	and a
+	and a ; SPRITE_FACING_DOWN
 	jr z, .facingDown
-	cp $4
+	cp SPRITE_FACING_UP
 	jr z, .facingUp
-	cp $8
+	cp SPRITE_FACING_LEFT
 	jr z, .facingLeft
 	jr .facingRight
 .facingDown
@@ -148,8 +148,8 @@ TrainerWalkUpToPlayer: ; 56881 (15:6881)
 	jp MoveSprite_
 
 ; input: de = offset within sprite entry
-; output: de = pointer to sprite data
-GetSpriteDataPointer: ; 56903 (15:6903)
+; output: hl = pointer to sprite data
+GetSpriteDataPointer:
 	push de
 	add hl, de
 	ld a, [H_SPRITEINDEX]
@@ -161,10 +161,10 @@ GetSpriteDataPointer: ; 56903 (15:6903)
 	ret
 
 ; tests if this trainer is in the right position to engage the player and do so if she is.
-TrainerEngage: ; 5690f (15:690f)
+TrainerEngage:
 	push hl
 	push de
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $2
 	ld d, $0
 	ld e, a
@@ -175,7 +175,7 @@ TrainerEngage: ; 5690f (15:690f)
 	jr nz, .spriteOnScreen ; test if sprite is on screen
 	jp .noEngage
 .spriteOnScreen
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $9
 	ld d, $0
 	ld e, a
@@ -218,57 +218,57 @@ TrainerEngage: ; 5690f (15:690f)
 	jp .noEngage
 .engage
 	call CheckPlayerIsInFrontOfSprite
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	and a
 	jr z, .noEngage
 	ld hl, wFlags_0xcd60
 	set 0, [hl]
 	call EngageMapTrainer
 	ld a, $ff
-.noEngage: ; 56988 (15:6988)
-	ld [wTrainerSpriteOffset], a ; wWhichTrade
+.noEngage
+	ld [wTrainerSpriteOffset], a
 	pop de
 	pop hl
 	ret
 
 ; reads trainer's Y position to wTrainerScreenY and X position to wTrainerScreenX
-ReadTrainerScreenPosition: ; 5698e (15:698e)
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+ReadTrainerScreenPosition:
+	ld a, [wTrainerSpriteOffset]
 	add $4
 	ld d, $0
 	ld e, a
 	ld hl, wSpriteStateData1
 	add hl, de
-	ld a, [hl]
+	ld a, [hl] ; c1x4 (sprite Y pos)
 	ld [wTrainerScreenY], a
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $6
 	ld d, $0
 	ld e, a
 	ld hl, wSpriteStateData1
 	add hl, de
-	ld a, [hl]
+	ld a, [hl] ; c1x6 (sprite X pos)
 	ld [wTrainerScreenX], a
 	ret
 
 ; checks if the sprite is properly lined up with the player with respect to the direction it's looking. Also checks the distance between player and sprite
 ; note that this does not necessarily mean the sprite is seeing the player, he could be behind it's back
 ; a: distance player to sprite
-CheckSpriteCanSeePlayer: ; 569af (15:69af)
+CheckSpriteCanSeePlayer:
 	ld b, a
-	ld a, [wTrainerEngageDistance]  ; sprite line of sight (engage distance)
+	ld a, [wTrainerEngageDistance] ; how far the trainer can see
 	cp b
 	jr nc, .checkIfLinedUp
 	jr .notInLine         ; player too far away
 .checkIfLinedUp
 	ld a, [wTrainerFacingDirection]         ; sprite facing direction
-	cp $0                 ; down
+	cp SPRITE_FACING_DOWN
 	jr z, .checkXCoord
-	cp $4                 ; up
+	cp SPRITE_FACING_UP
 	jr z, .checkXCoord
-	cp $8                 ; left
+	cp SPRITE_FACING_LEFT
 	jr z, .checkYCoord
-	cp $c                 ; right
+	cp SPRITE_FACING_RIGHT
 	jr z, .checkYCoord
 	jr .notInLine
 .checkXCoord
@@ -290,11 +290,11 @@ CheckSpriteCanSeePlayer: ; 569af (15:69af)
 	ret
 
 ; tests if the player is in front of the sprite (rather than behind it)
-CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
-	ld a, [W_CURMAP] ; W_CURMAP
+CheckPlayerIsInFrontOfSprite:
+	ld a, [wCurMap]
 	cp POWER_PLANT
-	jp z, .engage       ; XXX not sure why bypass this for power plant (maybe to get voltorb fake items to work?)
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	jp z, .engage       ; bypass this for power plant to get voltorb fake items to work
+	ld a, [wTrainerSpriteOffset]
 	add $4
 	ld d, $0
 	ld e, a
@@ -306,7 +306,7 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 	ld a, $c
 .notOnTopmostTile
 	ld [wTrainerScreenY], a
-	ld a, [wTrainerSpriteOffset] ; wWhichTrade
+	ld a, [wTrainerSpriteOffset]
 	add $6
 	ld d, $0
 	ld e, a
@@ -315,21 +315,21 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 	ld a, [hl]          ; c1x6 (sprite screen X pos)
 	ld [wTrainerScreenX], a
 	ld a, [wTrainerFacingDirection]       ; facing direction
-	cp $0
+	cp SPRITE_FACING_DOWN
 	jr nz, .notFacingDown
 	ld a, [wTrainerScreenY]       ; sprite screen Y pos
 	cp $3c
 	jr c, .engage       ; sprite above player
 	jr .noEngage        ; sprite below player
 .notFacingDown
-	cp $4
+	cp SPRITE_FACING_UP
 	jr nz, .notFacingUp
 	ld a, [wTrainerScreenY]       ; sprite screen Y pos
 	cp $3c
 	jr nc, .engage      ; sprite below player
 	jr .noEngage        ; sprite above player
 .notFacingUp
-	cp $8
+	cp SPRITE_FACING_LEFT
 	jr nz, .notFacingLeft
 	ld a, [wTrainerScreenX]       ; sprite screen X pos
 	cp $40
@@ -345,7 +345,7 @@ CheckPlayerIsInFrontOfSprite: ; 569e3 (15:69e3)
 .noEngage
 	xor a
 .done
-	ld [wTrainerSpriteOffset], a ; wWhichTrade
+	ld [wTrainerSpriteOffset], a
 	ret
 
 ; Makes Player turn to face enemy trainer
@@ -371,5 +371,5 @@ FaceEnemyTrainer::
 .facingRight
 	ld a, 2 ; player face left
 .done
-	ld [wd528], a ; update player facing
+	ld [wPlayerMovingDirection], a ; update player facing
 	ret

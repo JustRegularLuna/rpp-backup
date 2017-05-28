@@ -1,18 +1,17 @@
-Lab3Script: ; 75c87 (1d:5c87)
+Lab3Script:
 	jp EnableAutoTextBoxDrawing
 
-Lab3TextPointers: ; 75c8a (1d:5c8a)
+Lab3TextPointers:
 	dw Lab3Text1
 	dw Lab3Text2
 	dw Lab3Text3
 	dw Lab3Text4
 	dw Lab3Text5
 
-Lab3Text1: ; 75c94 (1d:5c94)
+Lab3Text1:
 	TX_ASM
-	ld a, [wCinnabarLabItemFlags]
-	bit 7, a
-	jr nz, .asm_e551a ; 0x75c9a
+	CheckEvent EVENT_GOT_TM35
+	jr nz, .asm_e551a
 	ld hl, TM35PreReceiveText
 	call PrintText
 	lb bc, TM_35, 1
@@ -20,44 +19,44 @@ Lab3Text1: ; 75c94 (1d:5c94)
 	jr nc, .BagFull
 	ld hl, ReceivedTM35Text
 	call PrintText
-	ld hl, wCinnabarLabItemFlags
-	set 7, [hl]
-	jr .asm_eb896 ; 0x75cb5
+	SetEvent EVENT_GOT_TM35
+	jr .asm_eb896
 .BagFull
 	ld hl, TM35NoRoomText
 	call PrintText
-	jr .asm_eb896 ; 0x75cbd
-.asm_e551a ; 0x75cbf
+	jr .asm_eb896
+.asm_e551a
 	ld hl, TM35ExplanationText
 	call PrintText
-.asm_eb896 ; 0x75cc5
+.asm_eb896
 	jp TextScriptEnd
 
-TM35PreReceiveText: ; 75cc8 (1d:5cc8)
+TM35PreReceiveText:
 	TX_FAR _TM35PreReceiveText
 	db "@"
 
-ReceivedTM35Text: ; 75ccd (1d:5ccd)
+ReceivedTM35Text:
 	TX_FAR _ReceivedTM35Text
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
-TM35ExplanationText: ; 75cd3 (1d:5cd3)
+TM35ExplanationText:
 	TX_FAR _TM35ExplanationText
 	db "@"
 
-TM35NoRoomText: ; 75cd8 (1d:5cd8)
+TM35NoRoomText:
 	TX_FAR _TM35NoRoomText
 	db "@"
 
-Lab3Text2: ; 75cdd (1d:5cdd)
+Lab3Text2:
 	TX_FAR _Lab3Text2
 	db "@"
 
-Lab3Text4: ; 75ce2 (1d:5ce2)
-Lab3Text3: ; 75ce2 (1d:5ce2)
+Lab3Text4:
+Lab3Text3:
 	TX_FAR _Lab3Text3
 	db "@"
 
-Lab3Text5: ; 75ce7 (1d:5ce7)
+Lab3Text5:
 	TX_FAR _Lab3Text5
 	db "@"

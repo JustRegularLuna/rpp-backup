@@ -1,47 +1,46 @@
-MtMoonPokecenterScript: ; 492cf (12:52cf)
+MtMoonPokecenterScript:
 	call Serial_TryEstablishingExternallyClockedConnection
 	jp EnableAutoTextBoxDrawing
 
-MtMoonPokecenterTextPointers: ; 492d5 (12:52d5)
-	dw MtMoonPokecenterText1
+MtMoonPokecenterTextPointers:
+	dw MtMoonHealNurseText
 	dw MtMoonPokecenterText2
 	dw MtMoonPokecenterText3
-	dw MtMoonPokecenterText4
+	dw MagikarpSalesmanText
 	dw MtMoonPokecenterText5
-	dw MtMoonPokecenterText6
+	dw MtMoonTradeNurseText
 
-MtMoonPokecenterText1: ; 492e1 (12:52e1)
+MtMoonHealNurseText:
 	db $ff
 
-MtMoonPokecenterText2: ; 492e2 (12:52e2)
+MtMoonPokecenterText2:
 	TX_FAR _MtMoonPokecenterText1
 	db "@"
 
-MtMoonPokecenterText3: ; 492e7 (12:52e7)
+MtMoonPokecenterText3:
 	TX_FAR _MtMoonPokecenterText3
 	db "@"
 
-MtMoonPokecenterText4:
+MagikarpSalesmanText:
 	TX_ASM
-	ld a, [wMtMoonPokecenterFlags]
-	add a
+	CheckEvent EVENT_BOUGHT_MAGIKARP, 1
 	jp c, .alreadyBoughtMagikarp
-	ld hl, MtMoonPokecenterText_4935c
+	ld hl, .Text1
 	call PrintText
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .choseNo
-	ldh [$9f], a
-	ldh [$a1], a
+	ld [hMoney], a
+	ld [hMoney + 2], a
 	ld a, $5
-	ldh [$a0], a
+	ld [hMoney + 1], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
-	ld hl, MtMoonPokecenterText_49366
+	ld hl, .NoMoneyText
 	jr .printText
 .enoughMoney
 	; this Magikarp is shiny
@@ -51,25 +50,24 @@ MtMoonPokecenterText4:
 	call GivePokemon
 	jr nc, .done
 	xor a
-	ld [wWhichTrade], a
-	ld [wTrainerFacingDirection], a
+	ld [wPriceTemp], a
+	ld [wPriceTemp + 2], a
 	ld a, $5
-	ld [wTrainerEngageDistance], a
-	ld hl, wTrainerFacingDirection
+	ld [wPriceTemp + 1], a
+	ld hl, wPriceTemp + 2
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld hl, wMtMoonPokecenterFlags
-	set 7, [hl]
+	SetEvent EVENT_BOUGHT_MAGIKARP
 	jr .done
 .choseNo
-	ld hl, MtMoonPokecenterText_49361
+	ld hl, .RefuseText
 	jr .printText
 .alreadyBoughtMagikarp
-	ld hl, MtMoonPokecenterText_4936b
+	ld hl, .Text2
 .printText
 	call PrintText
 .done
@@ -78,25 +76,25 @@ MtMoonPokecenterText4:
 	res 0, [hl]
 	jp TextScriptEnd
 
-MtMoonPokecenterText_4935c: ; 4935c (12:535c)
-	TX_FAR _MtMoonPokecenterText_4935c
+.Text1
+	TX_FAR _MagikarpSalesmanText1
 	db "@"
 
-MtMoonPokecenterText_49361: ; 49361 (12:5361)
-	TX_FAR _MtMoonPokecenterText_49361
+.RefuseText
+	TX_FAR _MagikarpSalesmanNoText
 	db "@"
 
-MtMoonPokecenterText_49366: ; 49366 (12:5366)
-	TX_FAR _MtMoonPokecenterText_49366
+.NoMoneyText
+	TX_FAR _MagikarpSalesmanNoMoneyText
 	db "@"
 
-MtMoonPokecenterText_4936b: ; 4936b (12:536b)
-	TX_FAR _MtMoonPokecenterText_4936b
+.Text2
+	TX_FAR _MagikarpSalesmanText2
 	db "@"
 
-MtMoonPokecenterText5: ; 49370 (12:5370)
+MtMoonPokecenterText5:
 	TX_FAR _MtMoonPokecenterText5
 	db "@"
 
-MtMoonPokecenterText6: ; 49375 (12:5375)
+MtMoonTradeNurseText:
 	db $f6

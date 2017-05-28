@@ -1,8 +1,8 @@
-_SafariZoneEastText5:: ; 855e0 (21:55e0)
+_SafariZoneEastText5::
 	text "Rest House"
 	done
 
-_SafariZoneEastText6:: ; 855ec (21:55ec)
+_SafariZoneEastText6::
 	text "Trainer Tips"
 
 	para "The remaining time"
@@ -10,9 +10,8 @@ _SafariZoneEastText6:: ; 855ec (21:55ec)
 	cont "while you walk!"
 	done
 
-_SafariZoneEastText7:: ; 8562b (21:562b)
+_SafariZoneEastText7::
 	text "Area 1 - East"
 	
 	para "North: Area 2"
 	done
-

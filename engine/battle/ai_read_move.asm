@@ -3,6 +3,6 @@ _ReadMove:: ; moved into same bank as actual move data
 	ld hl,Moves
 	ld bc,6
 	call AddNTimes
-	ld de,W_ENEMYMOVENUM
+	ld de,wEnemyMoveNum
 	call CopyData
 	ret

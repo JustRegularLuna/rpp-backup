@@ -1,4 +1,4 @@
-CeladonMansion1Object: ; 0x486cf (size=71)
+CeladonMansion1Object:
 	db $f ; border block
 
 	db $5 ; warps
@@ -11,11 +11,11 @@ CeladonMansion1Object: ; 0x486cf (size=71)
 	db $1 ; signs
 	db $9, $4, $5 ; CeladonMansion1Text5
 
-	db $4 ; people
-	db SPRITE_OLD_MEDIUM_WOMAN, $4 + 4, $3 + 4, $ff, $d1, $1 ; person
-	db SPRITE_FOULARD_WOMAN, $5 + 4, $0 + 4, $ff, $d0, $2 ; person
-	db SPRITE_HIKER, $5 + 4, $1 + 4, $ff, $d0, $3 ; person
-	db SPRITE_BRUNETTE_GIRL, $6 + 4, $2 + 4, $ff, $d2, $4 ; person
+	db $4 ; objects
+	object SPRITE_OLD_MEDIUM_WOMAN, $3, $4, STAY, UP, $1 ; person
+	object SPRITE_FOULARD_WOMAN, $0, $5, STAY, DOWN, $2 ; person
+	object SPRITE_HIKER, $1, $5, STAY, DOWN, $3 ; person
+	object SPRITE_BRUNETTE_GIRL, $2, $6, STAY, LEFT, $4 ; person
 
 	; warp-to
 	EVENT_DISP CELADON_MANSION_1_WIDTH, $b, $4

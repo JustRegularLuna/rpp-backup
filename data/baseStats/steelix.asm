@@ -1,4 +1,4 @@
-SteelixBaseStats: ; 38e26 (e:4e26)
+SteelixBaseStats:
 db DEX_STEELIX ; pokedex id
 db 75 ; base hp
 db 85 ; base attack

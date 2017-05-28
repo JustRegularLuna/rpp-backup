@@ -1,4 +1,4 @@
-_SSAnne2Text1:: ; 80d34 (20:4d34)
+_SSAnne2Text1::
 	text "This ship, she is"
 	line "a luxury liner"
 	cont "for trainers!"
@@ -8,7 +8,7 @@ _SSAnne2Text1:: ; 80d34 (20:4d34)
 	cont "invited trainers!"
 	done
 
-_SSAnneRivalBeforeBattleText:: ; 80d9a (20:4d9a)
+_SSAnneRivalBeforeBattleText::
 	text "[RIVAL]: Bonjour!"
 	line "[PLAYER]!"
 
@@ -31,7 +31,7 @@ _SSAnneRivalBeforeBattleText:: ; 80d9a (20:4d9a)
 	line "you've caught!"
 	done
 
-_SSAnneRivalDefeatedText:: ; 80e57 (20:4e57)
+_SSAnneRivalDefeatedText::
 	text "Humph!"
 
 	para "At least you're"
@@ -39,7 +39,7 @@ _SSAnneRivalDefeatedText:: ; 80e57 (20:4e57)
 	cont "#mon!"
 	prompt
 
-_SSAnneRivalWonText:: ; 80e81 (20:4e81)
+_SSAnneRivalWonText::
 	text "[PLAYER]! What are"
 	line "you, seasick?"
 
@@ -47,7 +47,7 @@ _SSAnneRivalWonText:: ; 80e81 (20:4e81)
 	line "up, pal!"
 	prompt
 
-_SSAnneRivalCaptainText:: ; 80eb6 (20:4eb6)
+_SSAnneRivalCaptainText::
 	text "[RIVAL]: I heard"
 	line "there was a Cut"
 	cont "master on board."
@@ -63,4 +63,3 @@ _SSAnneRivalCaptainText:: ; 80eb6 (20:4eb6)
 	para "Smell ya later,"
 	line "[PLAYER]!"
 	done
-

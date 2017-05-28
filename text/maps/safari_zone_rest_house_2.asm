@@ -1,4 +1,4 @@
-_SafariZoneRestHouse2Text1:: ; 85a2f (21:5a2f)
+_SafariZoneRestHouse2Text1::
 	text "Tossing Rocks at"
 	line "#mon might"
 	cont "make them run,"
@@ -6,15 +6,14 @@ _SafariZoneRestHouse2Text1:: ; 85a2f (21:5a2f)
 	cont "easier to catch."
 	done
 
-_SafariZoneRestHouse2Text2:: ; 85a7a (21:5a7a)
+_SafariZoneRestHouse2Text2::
 	text "Using Bait will"
 	line "make #mon"
 	cont "easier to catch."
 	done
 
-_SafariZoneRestHouse2Text3:: ; 85aa6 (21:5aa6)
+_SafariZoneRestHouse2Text3::
 	text "I hiked a lot, but"
 	line "I didn't see any"
 	cont "#mon I wanted."
 	done
-

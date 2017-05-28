@@ -1,6 +1,5 @@
-_Route5Text1:: ; 8dc07 (23:5c07)
+_Route5Text1::
 	text "Underground Path"
 	line "Cerulean City -"
 	cont "Vermilion City"
 	done
-

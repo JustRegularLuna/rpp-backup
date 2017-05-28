@@ -1,4 +1,4 @@
-MtMoonShopObject: ; 0x49b06 (size=145)
+MtMoonShopObject:
 	db $0A ; border block
 
 	db $2 ; warps

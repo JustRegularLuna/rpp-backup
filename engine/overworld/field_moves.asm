@@ -38,7 +38,7 @@ TrySurf:
 	
 ; Are we allowed to surf here?
 	call Text2_EnterTheText
-	callba CheckForForcedBikeSurf ; in current Pokered, this is callba IsSurfingAllowed
+	callba IsSurfingAllowed ; in current Pokered, this is callba IsSurfingAllowed
 	ld hl,wd728
 	bit 1,[hl]
 	res 1,[hl]
@@ -56,7 +56,7 @@ TrySurf:
 	call GetPartyMonName2
 	ld a, SURFBOARD
 	ld [wcf91], a
-	ld [wd152], a
+	ld [wPseudoItemID], a
 	call UseItem
 	call Text3_DrakesDeception
 
@@ -149,7 +149,7 @@ TryHeadbutt:
 	ret
 
 IsHeadbuttTile:
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	and a ; OVERWORLD
 	jr z, .overworld
 	
@@ -186,13 +186,13 @@ IsHeadbuttTile:
 
 
 IsSurfTile:
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	ld hl, WaterTilesets2
 	ld de,1
 	call IsInArray
 	jr nc, .no
 
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	cp SHIP_PORT
 	ld a, [wTileInFrontOfPlayer]
 	jr z, .ok
@@ -227,7 +227,7 @@ WaterTilesets2: ; Renamed from what Yenatch called it, since that had overlap er
 	db -1
 
 IsCutTile:
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	and a ; OVERWORLD
 	jr z, .overworld
 

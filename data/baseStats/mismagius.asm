@@ -1,4 +1,4 @@
-MismagiusBaseStats: ; 38aa6 (e:4aa6)
+MismagiusBaseStats:
 db DEX_MISMAGIUS ; pokedex id
 db 60 ; base hp
 db 60 ; base attack

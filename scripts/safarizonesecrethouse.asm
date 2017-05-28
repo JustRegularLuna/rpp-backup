@@ -1,46 +1,45 @@
-SafariZoneSecretHouseScript: ; 4a317 (12:6317)
+SafariZoneSecretHouseScript:
 	jp EnableAutoTextBoxDrawing
 
-SafariZoneSecretHouseTextPointers: ; 4a31a (12:631a)
+SafariZoneSecretHouseTextPointers:
 	dw SafariZoneSecretHouseText1
 
-SafariZoneSecretHouseText1: ; 4a31c (12:631c)
+SafariZoneSecretHouseText1:
 	TX_ASM
-	ld a, [wd857]
-	bit 1, a
-	jr nz, .already_received ; 0x4a322
+	CheckEvent EVENT_GOT_HM03
+	jr nz, .already_received
 	ld hl, SafariZoneSecretHouseText_4a350
 	call PrintText
 	lb bc, HM_03, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, ReceivedTM15Text
+	ld hl, ReceivedHM03Text
 	call PrintText
-	ld hl, wd857
-	set 1, [hl]
-	jr .done ; 0x4a33d
+	SetEvent EVENT_GOT_HM03
+	jr .done
 .BagFull
-	ld hl, TM15NoRoomText
+	ld hl, HM03NoRoomText
 	call PrintText
-	jr .done ; 0x4a345
-.already_received ; 0x4a347
-	ld hl, TM15ExplanationText
+	jr .done
+.already_received
+	ld hl, HM03ExplanationText
 	call PrintText
-.done ; 0x4a34d
+.done
 	jp TextScriptEnd
 
-SafariZoneSecretHouseText_4a350: ; 4a350 (12:6350)
+SafariZoneSecretHouseText_4a350:
 	TX_FAR _SecretHouseText_4a350
 	db "@"
 
-ReceivedTM15Text: ; 4a355 (12:6355)
-	TX_FAR _ReceivedTM15Text
-	db $0B, "@"
-
-TM15ExplanationText: ; 4a35b (12:635b)
-	TX_FAR _TM15ExplanationText
+ReceivedHM03Text:
+	TX_FAR _ReceivedHM03Text
+	TX_SFX_ITEM_1
 	db "@"
 
-TM15NoRoomText: ; 4a360 (12:6360)
-	TX_FAR _TM15NoRoomText
+HM03ExplanationText:
+	TX_FAR _HM03ExplanationText
+	db "@"
+
+HM03NoRoomText:
+	TX_FAR _HM03NoRoomText
 	db "@"

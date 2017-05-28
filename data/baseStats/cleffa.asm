@@ -1,4 +1,4 @@
-CleffaBaseStats: ; 38796 (e:4796)
+CleffaBaseStats:
 db DEX_CLEFFA ; pokedex id
 db 50 ; base hp
 db 25 ; base attack

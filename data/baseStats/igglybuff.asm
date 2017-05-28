@@ -1,4 +1,4 @@
-IgglybuffBaseStats: ; 38806 (e:4806)
+IgglybuffBaseStats:
 db DEX_IGGLYBUFF ; pokedex id
 db 90 ; base hp
 db 30 ; base attack

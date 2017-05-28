@@ -1,4 +1,4 @@
-TogeticBaseStats: ; 38582 (e:4582)
+TogeticBaseStats:
 db DEX_TOGETIC ; pokedex id
 db 55 ; base hp
 db 40 ; base attack

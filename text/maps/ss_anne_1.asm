@@ -1,4 +1,4 @@
-_SSAnne1Text1:: ; 80c70 (20:4c70)
+_SSAnne1Text1::
 	text "Bonjour!"
 	line "I am le waiter on"
 	cont "this ship!"
@@ -11,7 +11,7 @@ _SSAnne1Text1:: ; 80c70 (20:4c70)
 	line "silent type!"
 	done
 
-_SSAnne1Text2:: ; 80ce6 (20:4ce6)
+_SSAnne1Text2::
 	text "The passengers"
 	line "are restless!"
 
@@ -19,4 +19,3 @@ _SSAnne1Text2:: ; 80ce6 (20:4ce6)
 	line "challenged by the"
 	cont "more bored ones!"
 	done
-

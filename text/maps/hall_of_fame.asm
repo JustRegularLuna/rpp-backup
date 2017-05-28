@@ -1,4 +1,4 @@
-_HallofFameRoomText1:: ; 85fb5 (21:5fb5)
+_HallofFameRoomText1::
 	text "Oak: Er-hem!"
 	line "Congratulations,"
 	cont "[PLAYER]!"
@@ -26,4 +26,3 @@ _HallofFameRoomText1:: ; 85fb5 (21:5fb5)
 	cont "your #mon are"
 	cont "Hall of Famers!"
 	done
-

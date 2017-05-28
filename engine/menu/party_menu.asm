@@ -1,4 +1,4 @@
-; [wd07d] = menu type / message ID
+; [wPartyMenuTypeOrMessageID] = menu type / message ID
 ; if less than $F0, it is a menu type
 ; menu types:
 ; 00: normal pokemon menu (e.g. Start menu)
@@ -17,25 +17,25 @@
 ; f6: health returned
 ; f7: revitalized
 ; f8: leveled up
-DrawPartyMenu_: ; 12cd2 (4:6cd2)
+DrawPartyMenu_:
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED],a
 	call ClearScreen
-	call UpdateSprites ; move sprites
-	callba Func_71791 ; load pokemon icon graphics
+	call UpdateSprites
+	callba LoadMonPartySpriteGfxWithLCDDisabled ; load pokemon icon graphics
 
-RedrawPartyMenu_: ; 12ce3 (4:6ce3)
-	ld a,[wd07d]
-	cp a,$04
+RedrawPartyMenu_:
+	ld a,[wPartyMenuTypeOrMessageID]
+	cp a,SWAP_MONS_PARTY_MENU
 	jp z,.printMessage
 	call ErasePartyMenuCursors
-	callba SendBlkPacket_PartyMenu ; loads some data to wcf2e
-	hlCoord 3, 0
+	callba InitPartyMenuBlkPacket
+	coord hl, 3, 0
 	ld de,wPartySpecies
 	xor a
 	ld c,a
-	ld [$FF8C],a ; loop counter
-	ld [wcf2d],a
+	ld [hPartyMonIndex],a
+	ld [wWhichPartyMenuHPBar],a
 .loop
 	ld a,[de]
 	cp a,$FF ; reached the terminator?
@@ -49,11 +49,11 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
-	callba Func_71868 ; place the appropriate pokemon icon
-	ld a,[$FF8C] ; loop counter
+	callba WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
+	ld a,[hPartyMonIndex]
 	ld [wWhichPokemon],a
 	inc a
-	ld [$FF8C],a
+	ld [hPartyMonIndex],a
 	call LoadMonData
 	pop hl
 	push hl
@@ -70,15 +70,15 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	dec hl
 	dec hl
 	dec hl
-	ld a,$EC ; unfilled right arrow menu cursor
+	ld a,"▷" ; unfilled right arrow menu cursor
 	ld [hli],a ; place the cursor
 	inc hl
 	inc hl
 .skipUnfilledRightArrow
-	ld a,[wd07d] ; menu type
-	cp a,$03
+	ld a,[wPartyMenuTypeOrMessageID] ; menu type
+	cp a,TMHM_PARTY_MENU
 	jr z,.teachMoveMenu
-	cp a,$05
+	cp a,EVO_STONE_PARTY_MENU
 	jr z,.evolutionStoneMenu
 	cp a,$06
 	jr z,.moveTutorMenu
@@ -89,7 +89,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	call PrintStatusCondition
 	pop hl
 	push hl
-	ld bc,20 + 1 ; down 1 row and right 1 column
+	ld bc,SCREEN_WIDTH + 1 ; down 1 row and right 1 column
 	ld a,[hFlags_0xFFF6]
 	set 0,a
 	ld [hFlags_0xFFF6],a
@@ -98,7 +98,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld a,[hFlags_0xFFF6]
 	res 0,a
 	ld [hFlags_0xFFF6],a
-	call SetPartyMenuHealthBarColor ; color the HP bar (on SGB)
+	call SetPartyMenuHPBarColor ; color the HP bar (on SGB)
 	pop hl
 	jr .printLevel
 .moveTutorMenu
@@ -158,7 +158,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld l,a
 	ld de,wEnemyMon
 	ld a,BANK(EvosMovesPointerTable)
-	ld bc,30
+	ld bc,Mon133_EvosEnd - Mon133_EvosMoves
 	call FarCopyData
 	ld hl,wEnemyMon
 	ld de,.notAbleToEvolveText
@@ -175,7 +175,7 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	dec hl
 	dec hl
 	ld b,[hl]
-	ld a,[wd156] ; evolution stone item ID
+	ld a,[wEvoStoneItemID] ; the stone the player used
 	inc hl
 	inc hl
 	inc hl
@@ -196,15 +196,15 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 .notAbleToEvolveText
 	db "Not able@"
 .afterDrawingMonEntries
-	ld b,$0A
-	call GoPAL_SET
+	ld b, SET_PAL_PARTY_MENU
+	call RunPaletteCommand
 .printMessage
 	ld hl,wd730
 	ld a,[hl]
 	push af
 	push hl
 	set 6,[hl] ; turn off letter printing delay
-	ld a,[wd07d] ; message ID
+	ld a,[wPartyMenuTypeOrMessageID] ; message ID
 	cp a,$F0
 	jr nc,.printItemUseMessage
 	add a
@@ -235,14 +235,14 @@ RedrawPartyMenu_: ; 12ce3 (4:6ce3)
 	ld h,[hl]
 	ld l,a
 	push hl
-	ld a,[wcf06]
+	ld a,[wUsedItemOnWhichPokemon]
 	ld hl,wPartyMonNicks
 	call GetPartyMonName
 	pop hl
 	call PrintText
 	jr .done
 
-PartyMenuItemUseMessagePointers: ; 12e61 (4:6e61)
+PartyMenuItemUseMessagePointers:
 	dw AntidoteText
 	dw BurnHealText
 	dw IceHealText
@@ -253,7 +253,7 @@ PartyMenuItemUseMessagePointers: ; 12e61 (4:6e61)
 	dw ReviveText
 	dw RareCandyText
 
-PartyMenuMessagePointers: ; 12e73 (4:6e73)
+PartyMenuMessagePointers:
 	dw PartyMenuNormalText
 	dw PartyMenuItemUseText
 	dw PartyMenuBattleText
@@ -262,73 +262,73 @@ PartyMenuMessagePointers: ; 12e73 (4:6e73)
 	dw PartyMenuItemUseText
 	dw PartyMenuUseTMText
 
-PartyMenuNormalText: ; 12e7f (4:6e7f)
+PartyMenuNormalText:
 	TX_FAR _PartyMenuNormalText
 	db "@"
 
-PartyMenuItemUseText: ; 12e84 (4:6e84)
+PartyMenuItemUseText:
 	TX_FAR _PartyMenuItemUseText
 	db "@"
 
-PartyMenuBattleText: ; 12e89 (4:6e89)
+PartyMenuBattleText:
 	TX_FAR _PartyMenuBattleText
 	db "@"
 
-PartyMenuUseTMText: ; 12e8e (4:6e8e)
+PartyMenuUseTMText:
 	TX_FAR _PartyMenuUseTMText
 	db "@"
 
-PartyMenuSwapMonText: ; 12e93 (4:6e93)
+PartyMenuSwapMonText:
 	TX_FAR _PartyMenuSwapMonText
 	db "@"
 
-PotionText: ; 12e98 (4:6e98)
+PotionText:
 	TX_FAR _PotionText
 	db "@"
 
-AntidoteText: ; 12e9d (4:6e9d)
+AntidoteText:
 	TX_FAR _AntidoteText
 	db "@"
 
-ParlyzHealText: ; 12ea2 (4:6ea2)
+ParlyzHealText:
 	TX_FAR _ParlyzHealText
 	db "@"
 
-BurnHealText: ; 12ea7 (4:6ea7)
+BurnHealText:
 	TX_FAR _BurnHealText
 	db "@"
 
-IceHealText: ; 12eac (4:6eac)
+IceHealText:
 	TX_FAR _IceHealText
 	db "@"
 
-AwakeningText: ; 12eb1 (4:6eb1)
+AwakeningText:
 	TX_FAR _AwakeningText
 	db "@"
 
-FullHealText: ; 12eb6 (4:6eb6)
+FullHealText:
 	TX_FAR _FullHealText
 	db "@"
 
-ReviveText: ; 12ebb (4:6ebb)
+ReviveText:
 	TX_FAR _ReviveText
 	db "@"
 
-RareCandyText: ; 12ec0 (4:6ec0)
+RareCandyText:
 	TX_FAR _RareCandyText
-	db $0B
-	db $06
+	TX_SFX_ITEM_1 ; probably supposed to play SFX_LEVEL_UP but the wrong music bank is loaded
+	TX_BLINK
 	db "@"
 
-SetPartyMenuHealthBarColor: ; 12ec7 (4:6ec7)
-	ld hl, wcf1f
-	ld a, [wcf2d]
+SetPartyMenuHPBarColor:
+	ld hl, wPartyMenuHPBarColors
+	ld a, [wWhichPartyMenuHPBar]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	call GetHealthBarColor
-	ld b, $fc
-	call GoPAL_SET
-	ld hl, wcf2d
+	ld b, UPDATE_PARTY_MENU_BLK_PACKET
+	call RunPaletteCommand
+	ld hl, wWhichPartyMenuHPBar
 	inc [hl]
 	ret

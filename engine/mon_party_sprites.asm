@@ -1,23 +1,23 @@
-AnimatePartyMon_ForceSpeed1: ; 716f7 (1c:56f7)
+AnimatePartyMon_ForceSpeed1:
 	xor a
-	ld [wCurrentMenuItem], a ; wCurrentMenuItem
+	ld [wCurrentMenuItem], a
 	ld b, a
 	inc a
 	jr GetAnimationSpeed
 
-; wcf1f contains the party mon's health bar colors
+; wPartyMenuHPBarColors contains the party mon's health bar colors
 ; 0: green
 ; 1: yellow
 ; 2: red
-AnimatePartyMon: ; 716ff (1c:56ff)
-	ld hl, wcf1f
+AnimatePartyMon:
+	ld hl, wPartyMenuHPBarColors
 	ld a, [wCurrentMenuItem]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
 
-GetAnimationSpeed: ; 7170a (1c:570a)
+GetAnimationSpeed:
 	ld c, a
 	ld hl, PartyMonSpeeds
 	add hl, bc
@@ -27,7 +27,7 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	ld c, a
 	add a
 	ld b, a
-	ld a, [W_SUBANIMTRANSFORM] ; W_SUBANIMTRANSFORM
+	ld a, [wAnimCounter]
 	and a
 	jr z, .resetSprites
 	cp c
@@ -35,14 +35,14 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 .incTimer
 	inc a
 	cp b
-	jr nz, .resetTimer
-	xor a
-.resetTimer
-	ld [W_SUBANIMTRANSFORM], a ; W_SUBANIMTRANSFORM
+	jr nz, .skipResetTimer
+	xor a ; reset timer
+.skipResetTimer
+	ld [wAnimCounter], a
 	jp DelayFrame
 .resetSprites
 	push bc
-	ld hl, wcc5b
+	ld hl, wMonPartySpritesSavedOAM
 	ld de, wOAMBuffer
 	ld bc, $60
 	call CopyData
@@ -81,16 +81,24 @@ GetAnimationSpeed: ; 7170a (1c:570a)
 	ld a, c
 	jr .incTimer
 
-PartyMonSpeeds: ; 71769 (1c:5769)
-	db $05,$10,$20
+; Party mon animations cycle between 2 frames.
+; The members of the PartyMonSpeeds array specify the number of V-blanks
+; that each frame lasts for green HP, yellow HP, and red HP in order.
+; On the naming screen, the yellow HP speed is always used.
+PartyMonSpeeds:
+	db 5, 16, 32
 
-Func_7176c: ; 7176c (1c:576c)
-	ld hl, MonPartySpritePointers ; $57c0
+LoadMonPartySpriteGfx:
+; Load mon party sprite tile patterns into VRAM during V-blank.
+	ld hl, MonPartySpritePointers
 	ld a, $1c
 
-Func_71771: ; 71771 (1c:5771)
+LoadAnimSpriteGfx:
+; Load animated sprite tile patterns into VRAM during V-blank. hl is the address
+; of an array of structures that contain arguments for CopyVideoData and a is
+; the number of structures in the array.
 	ld bc, $0
-.asm_71774
+.loop
 	push af
 	push bc
 	push hl
@@ -114,15 +122,17 @@ Func_71771: ; 71771 (1c:5771)
 	ld c, a
 	pop af
 	dec a
-	jr nz, .asm_71774
+	jr nz, .loop
 	ret
 
-Func_71791: ; 71791 (1c:5791)
+LoadMonPartySpriteGfxWithLCDDisabled:
+; Load mon party sprite tile patterns into VRAM immediately by disabling the
+; LCD.
 	call DisableLCD
-	ld hl, MonPartySpritePointers ; $57c0
+	ld hl, MonPartySpritePointers
 	ld a, $1c
 	ld bc, $0
-.asm_7179c
+.loop
 	push af
 	push bc
 	push hl
@@ -149,10 +159,10 @@ Func_71791: ; 71791 (1c:5791)
 	ld c, a
 	pop af
 	dec a
-	jr nz, .asm_7179c
+	jr nz, .loop
 	jp EnableLCD
 
-MonPartySpritePointers: ; 717c0 (1c:57c0)
+MonPartySpritePointers:
 	dw SlowbroSprite + $c0
 	db $40 / $10 ; 40 bytes
 	db BANK(SlowbroSprite)
@@ -293,51 +303,58 @@ MonPartySpritePointers: ; 717c0 (1c:57c0)
 	db BANK(MonPartySprites)
 	dw vSprites + $780
 
-Func_71868: ; 71868 (1c:5868)
+WriteMonPartySpriteOAMByPartyIndex:
+; Write OAM blocks for the party mon in [hPartyMonIndex].
 	push hl
 	push de
 	push bc
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [hPartyMonIndex]
 	ld hl, wPartySpecies
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld a, [hl]
 	call GetPartyMonSpriteID
-	ld [wcd5b], a
-	call Func_718c3
+	ld [wOAMBaseTile], a
+	call WriteMonPartySpriteOAM
 	pop bc
 	pop de
 	pop hl
 	ret
 
-Func_71882: ; 71882 (1c:5882)
+WriteMonPartySpriteOAMBySpecies:
+; Write OAM blocks for the party sprite of the species in
+; [wMonPartySpriteSpecies].
 	xor a
-	ld [H_DOWNARROWBLINKCNT2], a ; $ff8c
-	ld a, [wcd5d]
+	ld [hPartyMonIndex], a
+	ld a, [wMonPartySpriteSpecies]
 	call GetPartyMonSpriteID
-	ld [wcd5b], a
-	jr Func_718c3
+	ld [wOAMBaseTile], a
+	jr WriteMonPartySpriteOAM
 
-Func_71890: ; 71890 (1c:5890)
+UnusedPartyMonSpriteFunction:
+; This function is unused and doesn't appear to do anything useful. It looks
+; like it may have been intended to load the tile patterns and OAM data for
+; the mon party sprite associated with the species in [wcf91].
+; However, its calculations are off and it loads garbage data.
 	ld a, [wcf91]
 	call GetPartyMonSpriteID
 	push af
 	ld hl, vSprites
-	call Func_718ac
+	call .LoadTilePatterns
 	pop af
 	add $54
 	ld hl, vSprites + $40
-	call Func_718ac
+	call .LoadTilePatterns
 	xor a
-	ld [wcd5d], a
-	jr Func_71882
+	ld [wMonPartySpriteSpecies], a
+	jr WriteMonPartySpriteOAMBySpecies
 
-Func_718ac: ; 718ac (1c:58ac)
+.LoadTilePatterns
 	push hl
 	add a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, MonPartySpritePointers
 	add hl, bc
 	add hl, bc
@@ -353,29 +370,33 @@ Func_718ac: ; 718ac (1c:58ac)
 	pop hl
 	jp CopyVideoData
 
-Func_718c3: ; 718c3 (1c:58c3)
+WriteMonPartySpriteOAM:
+; Write the OAM blocks for the first animation frame into the OAM buffer and
+; make a copy at wMonPartySpritesSavedOAM.
 	push af
 	ld c, $10
 	ld h, wOAMBuffer / $100
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [hPartyMonIndex]
 	swap a
 	ld l, a
 	add $10
 	ld b, a
 	pop af
-	cp $8
-	jr z, .asm_718da
+	cp SPRITE_HELIX << 2
+	jr z, .helix
 	call WriteSymmetricMonPartySpriteOAM
-	jr .asm_718dd
-.asm_718da
+	jr .makeCopy
+.helix
 	call WriteAsymmetricMonPartySpriteOAM
-.asm_718dd
+; Make a copy of the OAM buffer with the first animation frame written so that
+; we can flip back to it from the second frame by copying it back.
+.makeCopy
 	ld hl, wOAMBuffer
-	ld de, wcc5b
+	ld de, wMonPartySpritesSavedOAM
 	ld bc, $60
 	jp CopyData
 
-GetPartyMonSpriteID: ; 718e9 (1c:58e9)
+GetPartyMonSpriteID:
 	ld [wd11e], a
 	predef IndexToPokedex
 	ld a, [wd11e]
@@ -384,13 +405,13 @@ GetPartyMonSpriteID: ; 718e9 (1c:58e9)
 	srl a
 	ld hl, MonPartyData
 	ld e, a
-	ld d, $0
+	ld d, 0
 	add hl, de
 	ld a, [hl]
 	bit 0, c
-	jr nz, .asm_71906
-	swap a
-.asm_71906
+	jr nz, .skipSwap
+	swap a ; use lower nybble if pokedex num is even
+.skipSwap
 	and $f0
 	srl a
 	srl a
@@ -398,5 +419,5 @@ GetPartyMonSpriteID: ; 718e9 (1c:58e9)
 
 INCLUDE "data/mon_party_sprites.asm"
 
-MonPartySprites: ; 71959 (1c:5959)
+MonPartySprites:
 	INCBIN "gfx/mon_ow_sprites.2bpp"

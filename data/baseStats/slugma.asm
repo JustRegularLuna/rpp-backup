@@ -1,4 +1,4 @@
-SlugmaBaseStats: ; 384da (e:44da)
+SlugmaBaseStats:
 db DEX_SLUGMA ; pokedex id
 db 40 ; base hp
 db 40 ; base attack

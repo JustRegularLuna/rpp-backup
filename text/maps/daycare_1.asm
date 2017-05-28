@@ -31,9 +31,7 @@ _DayCareMonHasGrownText::
 
 	para "By level, it's"
 	line "grown by @"
-
-DayCareMText_8ac67::
-	TX_NUM wTrainerEngageDistance,$1,$3
+	TX_NUM wDayCareNumLevelsGrown,$1,$3
 	text "!"
 
 	para "Aren't I great?"
@@ -41,7 +39,7 @@ DayCareMText_8ac67::
 
 _DayCareOweMoneyText::
 	text "You owe me ¥@"
-	TX_BCD wcd3f, $c2
+	TX_BCD wDayCareTotalCost, $c2
 	db $0
 	line "for the return"
 	cont "of this #mon."

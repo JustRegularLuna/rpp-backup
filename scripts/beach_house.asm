@@ -25,25 +25,23 @@ BeachHouseText2: ; Pikachu
 
 BeachHouseText3: ; give TM 15
 	TX_ASM
-	ld a, [wd857]
-	bit 0, a
+	CheckEvent EVENT_GOT_TM15
 	jr nz, .already_received
 	ld hl, BeachHouseGiveSurfText
 	call PrintText
 	lb bc, TM_15, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, ReceivedHM03Text
+	ld hl, ReceivedTM15Text
 	call PrintText
-	ld hl, wd857
-	set 0, [hl]
+	SetEvent EVENT_GOT_TM15
 	jr .done
 .BagFull
-	ld hl, HM03NoRoomText
+	ld hl, TM15NoRoomText
 	call PrintText
 	jr .done
 .already_received
-	ld hl, HM03ExplanationText
+	ld hl, TM15ExplanationText
 	call PrintText
 .done
 	jp TextScriptEnd
@@ -52,16 +50,16 @@ BeachHouseGiveSurfText:
 	TX_FAR _BeachHouseGiveSurfText
 	db "@"
 
-ReceivedHM03Text:
-	TX_FAR _ReceivedHM03Text
+ReceivedTM15Text:
+	TX_FAR _ReceivedTM15Text
 	db $0B, "@"
 
-HM03ExplanationText:
-	TX_FAR _HM03ExplanationText
+TM15ExplanationText:
+	TX_FAR _TM15ExplanationText
 	db "@"
 
-HM03NoRoomText:
-	TX_FAR _HM03NoRoomText
+TM15NoRoomText:
+	TX_FAR _TM15NoRoomText
 	db "@"
 	
 BeachHouseText4:

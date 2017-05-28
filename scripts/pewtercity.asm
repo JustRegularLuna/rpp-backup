@@ -1,10 +1,10 @@
-PewterCityScript: ; 19237 (6:5237)
+PewterCityScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, PewterCityScriptPointers
-	ld a, [W_PEWTERCITYCURSCRIPT]
+	ld a, [wPewterCityCurScript]
 	jp CallFunctionInTable
 
-PewterCityScriptPointers: ; 19243 (6:5243)
+PewterCityScriptPointers:
 	dw PewterCityScript0
 	dw PewterCityScript1
 	dw PewterCityScript2
@@ -13,7 +13,7 @@ PewterCityScriptPointers: ; 19243 (6:5243)
 	dw PewterCityScript5
 	dw PewterCityScript6
 
-PewterCityTextPointers: ; 1938b (6:538b)
+PewterCityTextPointers:
 	dw PewterCityText1
 	dw PewterCityText2
 	dw PewterCityText3
@@ -31,17 +31,15 @@ PewterCityTextPointers: ; 1938b (6:538b)
 	dw PewterCityText13
 	dw PewterCityText14
    
-PewterCityScript0: ; 19251 (6:5251)
+PewterCityScript0:
 	xor a
-	ld [W_MUSEUM1FCURSCRIPT], a
-	ld hl, wPewterMuseumFlags
-	res 0, [hl]
+	ld [wMuseum1fCurScript], a
+	ResetEvent EVENT_BOUGHT_MUSEUM_TICKET
 	call PewterCityScript_1925e
 	ret
 
-PewterCityScript_1925e: ; 1925e (6:525e)
-	ld a, [wPewterGymFlags]
-	bit 7, a
+PewterCityScript_1925e:
+	CheckEvent EVENT_BEAT_BROCK
 	ret nz
 	ld hl, CoordsData_19277
 	call ArePlayerCoordsInArray
@@ -49,33 +47,33 @@ PewterCityScript_1925e: ; 1925e (6:525e)
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $5
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	jp DisplayTextID
 
-CoordsData_19277: ; 19277 (6:5277)
+CoordsData_19277:
 	db $11,$23
 	db $11,$24
 	db $12,$25
 	db $13,$25
 	db $ff
 
-PewterCityScript1: ; 19280 (6:5280)
+PewterCityScript1:
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, $3
 	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_UP
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, ($3 << 4) | SPRITE_FACING_UP
-	ld [$ff8d], a
+	ld [hSpriteImageIndex], a
 	call SetSpriteImageIndexAfterSettingFacingDirection
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $f
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
 	ld [$ffeb], a
@@ -89,57 +87,61 @@ PewterCityScript1: ; 19280 (6:5280)
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $3
-	ld [$ff8c], a
-	ld de, MovementData_PewterMuseumGuyExit ; $52ce
+	ld [H_SPRITEINDEX], a
+	ld de, MovementData_PewterMuseumGuyExit
 	call MoveSprite
 	ld a, $2
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
-MovementData_PewterMuseumGuyExit: ; 192ce (6:52ce)
-	db $00,$00,$00,$00,$FF
+MovementData_PewterMuseumGuyExit:
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db NPC_MOVEMENT_DOWN
+	db $FF
 
-PewterCityScript2: ; 192d3 (6:52d3)
+PewterCityScript2:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, HS_MUSEUM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $3
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
-PewterCityScript3: ; 192e9 (6:52e9)
+PewterCityScript3:
 	ld a, $3
 	ld [wSpriteIndex], a
 	call SetSpritePosition2
 	ld a, HS_MUSEUM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
-PewterCityScript4: ; 19305 (6:5305)
+PewterCityScript4:
 	ld a, [wNPCMovementScriptPointerTableNum]
 	and a
 	ret nz
 	ld a, $5
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld a, SPRITE_FACING_LEFT
-	ld [$ff8d], a
+	ld [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
 	ld a, ($1 << 4) | SPRITE_FACING_LEFT
-	ld [$ff8d], a
+	ld [hSpriteImageIndex], a
 	call SetSpriteImageIndexAfterSettingFacingDirection
 	call PlayDefaultMusic
 	ld hl, wFlags_0xcd60
 	set 4, [hl]
 	ld a, $10
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $3c
 	ld [$ffeb], a
@@ -153,168 +155,171 @@ PewterCityScript4: ; 19305 (6:5305)
 	ld [wSpriteIndex], a
 	call SetSpritePosition1
 	ld a, $5
-	ld [$ff8c], a
+	ld [H_SPRITEINDEX], a
 	ld de, MovementData_PewterGymGuyExit
 	call MoveSprite
 	ld a, $5
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
-MovementData_PewterGymGuyExit: ; 19353 (6:5353)
-	db $C0,$C0,$C0,$C0,$C0,$FF
+MovementData_PewterGymGuyExit:
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_RIGHT
+	db $FF
 
-PewterCityScript5: ; 19359 (6:5359)
+PewterCityScript5:
 	ld a, [wd730]
 	bit 0, a
 	ret nz
 	ld a, HS_GYM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, $6
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
-PewterCityScript6: ; 1936f (6:536f)
+PewterCityScript6:
 	ld a, $5
 	ld [wSpriteIndex], a
 	call SetSpritePosition2
 	ld a, HS_GYM_GUY
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef ShowObject
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	ret
 
-PewterCityText1: ; 193a7 (6:53a7)
+PewterCityText1:
 	TX_FAR _PewterCityText1
 	db "@"
 
-PewterCityText2: ; 193ac (6:53ac)
+PewterCityText2:
 	TX_FAR _PewterCityText2
 	db "@"
 
-PewterCityText3: ; 193b1 (6:53b1)
+PewterCityText3:
 	TX_ASM
 	ld hl, PewterCityText_193f1
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
-	jr nz, .asm_f46a9 ; 0x193bf
+	jr nz, .asm_193c9
 	ld hl, PewterCityText_193f6
 	call PrintText
-	jr .asm_ac429 ; 0x193c7
-.asm_f46a9 ; 0x193c9
+	jr .asm_193ee
+.asm_193c9
 	ld hl, PewterCityText_193fb
 	call PrintText
 	xor a
-	ldh [$b3], a
-	ldh [$b4], a
+	ld [hJoyPressed], a
+	ld [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $2
 	ld [wNPCMovementScriptPointerTableNum], a
-	ldh a, [$b8]
+	ld a, [H_LOADEDROMBANK]
 	ld [wNPCMovementScriptBank], a
 	ld a, $3
 	ld [wSpriteIndex], a
 	call GetSpritePosition2
 	ld a, $1
-	ld [W_PEWTERCITYCURSCRIPT], a
-.asm_ac429 ; 0x193ee
+	ld [wPewterCityCurScript], a
+.asm_193ee
 	jp TextScriptEnd
 
-PewterCityText_193f1: ; 193f1 (6:53f1)
+PewterCityText_193f1:
 	TX_FAR _PewterCityText_193f1
 	db "@"
 
-PewterCityText_193f6: ; 193f6 (6:53f6)
+PewterCityText_193f6:
 	TX_FAR _PewterCityText_193f6
 	db "@"
 
-PewterCityText_193fb: ; 193fb (6:53fb)
+PewterCityText_193fb:
 	TX_FAR _PewterCityText_193fb
 	db "@"
 
-PewterCityText13: ; 19400 (6:5400)
+PewterCityText13:
 	TX_FAR _PewterCityText13
 	db "@"
 
-PewterCityText4: ; 19405 (6:5405)
+PewterCityText4:
 	TX_ASM
 	ld hl, PewterCityText_19427
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	cp $0
-	jr nz, .asm_e4603
+	jr nz, .asm_1941e
 	ld hl, PewterCityText_1942c
 	call PrintText
-	jr .asm_e4604 ; 0x1941c $6
-.asm_e4603
+	jr .asm_19424
+.asm_1941e
 	ld hl, PewterCityText_19431
 	call PrintText
-.asm_e4604 ; 0x19424
+.asm_19424
 	jp TextScriptEnd
 
-PewterCityText_19427: ; 19427 (6:5427)
+PewterCityText_19427:
 	TX_FAR _PewterCityText_19427
 	db "@"
 
-PewterCityText_1942c: ; 1942c (6:542c)
+PewterCityText_1942c:
 	TX_FAR _PewterCityText_1942c
 	db "@"
 
-PewterCityText_19431: ; 19431 (6:5431)
+PewterCityText_19431:
 	TX_FAR _PewterCityText_19431
 	db "@"
 
-PewterCityText5: ; 19436 (6:5436)
+PewterCityText5:
 	TX_ASM
 	ld hl, PewterCityText_1945d
 	call PrintText
 	xor a
-	ldh [$b4], a
+	ld [hJoyHeld], a
 	ld [wNPCMovementScriptFunctionNum], a
 	ld a, $3
 	ld [wNPCMovementScriptPointerTableNum], a
-	ldh a, [$b8]
+	ld a, [H_LOADEDROMBANK]
 	ld [wNPCMovementScriptBank], a
 	ld a, $5
 	ld [wSpriteIndex], a
 	call GetSpritePosition2
 	ld a, $4
-	ld [W_PEWTERCITYCURSCRIPT], a
+	ld [wPewterCityCurScript], a
 	jp TextScriptEnd
 
-PewterCityText_1945d: ; 1945d (6:545d)
+PewterCityText_1945d:
 	TX_FAR _PewterCityText_1945d
 	db "@"
 
-PewterCityText14: ; 19462 (6:5462)
-
-PewterCityText_19462: ; 19462 (6:5462)
-	TX_FAR _PewterCityText_19462
+PewterCityText14:
+	TX_FAR _PewterCityText14
 	db "@"
 
-PewterCityText6: ; 19467 (6:5467)
+PewterCityText6:
 	TX_FAR _PewterCityText6
 	db "@"
 
-PewterCityText7: ; 1946c (6:546c)
+PewterCityText7:
 	TX_FAR _PewterCityText7
 	db "@"
 
-PewterCityText10: ; 19471 (6:5471)
+PewterCityText10:
 	TX_FAR _PewterCityText10
 	db "@"
 
-PewterCityText11: ; 19476 (6:5476)
+PewterCityText11:
 	TX_FAR _PewterCityText11
 	db "@"
 
-PewterCityText12: ; 1947b (6:547b)
+PewterCityText12:
 	TX_FAR _PewterCityText12
 	db "@"
 

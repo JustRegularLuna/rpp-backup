@@ -1,5 +1,5 @@
 ; calculates the level a mon should be based on its current exp
-CalcLevelFromExperience: ; 58f43 (16:4f43)
+CalcLevelFromExperience:
 	ld a, [wLoadedMonSpecies]
 	ld [wd0b5], a
 	call GetMonHeader
@@ -10,15 +10,15 @@ CalcLevelFromExperience: ; 58f43 (16:4f43)
 	push hl
 	ld hl, wLoadedMonExp + 2 ; current exp
 ; compare exp needed for level d with current exp
-	ld a, [H_MULTIPLICAND + 2]
+	ld a, [hExperience + 2]
 	ld c, a
 	ld a, [hld]
 	sub c
-	ld a, [H_MULTIPLICAND + 1]
+	ld a, [hExperience + 1]
 	ld c, a
 	ld a, [hld]
 	sbc c
-	ld a, [H_MULTIPLICAND]
+	ld a, [hExperience]
 	ld c, a
 	ld a, [hl]
 	sbc c
@@ -28,118 +28,122 @@ CalcLevelFromExperience: ; 58f43 (16:4f43)
 	ret
 
 ; calculates the amount of experience needed for level d
-CalcExperience: ; 58f6a (16:4f6a)
-	ld a, [W_MONHGROWTHRATE]
+CalcExperience:
+	ld a, [wMonHGrowthRate]
 	add a
 	add a
 	ld c, a
-	ld b, $0
+	ld b, 0
 	ld hl, GrowthRateTable
 	add hl, bc
 	call CalcDSquared
 	ld a, d
-	ld [H_MULTIPLIER], a ; $ff99
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld a, [hl]
 	and $f0
 	swap a
-	ld [H_MULTIPLIER], a ; $ff99
+	ld [H_MULTIPLIER], a
 	call Multiply
 	ld a, [hli]
 	and $f
-	ld [H_DIVISOR], a ; $ff99
+	ld [H_DIVISOR], a
 	ld b, $4
 	call Divide
-	ld a, [H_MULTIPLICAND] ; $ff96 (aliases: H_NUMTOPRINT)
+	ld a, [H_QUOTIENT + 1]
 	push af
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [H_QUOTIENT + 2]
 	push af
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [H_QUOTIENT + 3]
 	push af
 	call CalcDSquared
 	ld a, [hl]
 	and $7f
-	ld [H_MULTIPLIER], a ; $ff99
+	ld [H_MULTIPLIER], a
 	call Multiply
-	ld a, [H_MULTIPLICAND] ; $ff96 (aliases: H_NUMTOPRINT)
+	ld a, [H_PRODUCT + 1]
 	push af
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [H_PRODUCT + 2]
 	push af
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [H_PRODUCT + 3]
 	push af
 	ld a, [hli]
 	push af
 	xor a
-	ld [H_MULTIPLICAND], a ; $ff96
-	ld [H_MULTIPLICAND+1], a
+	ld [H_MULTIPLICAND], a
+	ld [H_MULTIPLICAND + 1], a
 	ld a, d
-	ld [H_MULTIPLICAND+2], a
+	ld [H_MULTIPLICAND + 2], a
 	ld a, [hli]
 	ld [H_MULTIPLIER], a
 	call Multiply
 	ld b, [hl]
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [H_PRODUCT + 3]
 	sub b
-	ld [H_MULTIPLICAND+2], a
+	ld [H_PRODUCT + 3], a
 	ld b, $0
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [H_PRODUCT + 2]
 	sbc b
-	ld [H_MULTIPLICAND+1], a
-	ld a, [H_MULTIPLICAND] ; $ff96
+	ld [H_PRODUCT + 2], a
+	ld a, [H_PRODUCT + 1]
 	sbc b
-	ld [H_MULTIPLICAND], a ; $ff96
+	ld [H_PRODUCT + 1], a
+; The difference of the linear term and the constant term consists of 3 bytes
+; starting at H_PRODUCT + 1. Below, hExperience (an alias of that address) will
+; be used instead for the further work of adding or subtracting the squared
+; term and adding the cubed term.
 	pop af
 	and $80
 	jr nz, .subtractSquaredTerm ; check sign
 	pop bc
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hExperience + 2]
 	add b
-	ld [H_MULTIPLICAND+2], a
+	ld [hExperience + 2], a
 	pop bc
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hExperience + 1]
 	adc b
-	ld [H_MULTIPLICAND+1], a
+	ld [hExperience + 1], a
 	pop bc
-	ld a, [H_MULTIPLICAND]
+	ld a, [hExperience]
 	adc b
-	ld [H_MULTIPLICAND], a
+	ld [hExperience], a
 	jr .addCubedTerm
 .subtractSquaredTerm
 	pop bc
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hExperience + 2]
 	sub b
-	ld [H_MULTIPLICAND+2], a
+	ld [hExperience + 2], a
 	pop bc
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hExperience + 1]
 	sbc b
-	ld [H_MULTIPLICAND+1], a
+	ld [hExperience + 1], a
 	pop bc
-	ld a, [H_MULTIPLICAND]
+	ld a, [hExperience]
 	sbc b
-	ld [H_MULTIPLICAND], a
+	ld [hExperience], a
 .addCubedTerm
 	pop bc
-	ld a, [H_MULTIPLICAND+2]
+	ld a, [hExperience + 2]
 	add b
-	ld [H_MULTIPLICAND+2], a
+	ld [hExperience + 2], a
 	pop bc
-	ld a, [H_MULTIPLICAND+1]
+	ld a, [hExperience + 1]
 	adc b
-	ld [H_MULTIPLICAND+1], a
+	ld [hExperience + 1], a
 	pop bc
-	ld a, [H_MULTIPLICAND]
+	ld a, [hExperience]
 	adc b
-	ld [H_MULTIPLICAND], a
+	ld [hExperience], a
 	ret
 
 ; calculates d*d
-CalcDSquared: ; 59010 (16:5010)
+CalcDSquared:
 	xor a
-	ld [H_MULTIPLICAND], a ; $ff96 (aliases: H_NUMTOPRINT)
-	ld [H_MULTIPLICAND+1], a
+	ld [H_MULTIPLICAND], a
+	ld [H_MULTIPLICAND + 1], a
 	ld a, d
-	ld [H_MULTIPLICAND+2], a
-	ld [H_MULTIPLIER], a ; $ff99 (aliases: H_DIVISOR, H_REMAINDER, H_POWEROFTEN)
+	ld [H_MULTIPLICAND + 2], a
+	ld [H_MULTIPLIER], a
 	jp Multiply
 
 ; each entry has the following scheme:
@@ -147,7 +151,7 @@ CalcDSquared: ; 59010 (16:5010)
 ; resulting in
 ;  (a*n^3)/b + sign*c*n^2 + d*n - e
 ; where sign = -1 <=> S=1
-GrowthRateTable: ; 5901d (16:501d)
+GrowthRateTable:
 	db $11,$00,$00,$00 ; medium fast      n^3
 	db $34,$0A,$00,$1E ; (unused?)    3/4 n^3 + 10 n^2         - 30
 	db $34,$14,$00,$46 ; (unused?)    3/4 n^3 + 20 n^2         - 70

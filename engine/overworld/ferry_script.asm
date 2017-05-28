@@ -5,7 +5,7 @@ EventIslandsFerryScript::
 	ld hl, WelcomeToSeagallopText
 	call PrintText	
 	call GetFerryTickets
-	ld a, [wcd37] ; wFilteredBagItemsCount
+	ld a, [wFilteredBagItemsCount]
 	and a
 	jr z, .noTicket
 	call DoIslandMenu
@@ -20,8 +20,8 @@ EventIslandsFerryScript::
 GetFerryTickets:
 ; generate a list in wram of all Event Items the player has
 	xor a
-	ld [wcd37], a ; wFilteredBagItemsCount
-	ld de, wcc5b  ; wFilteredBagItems
+	ld [wFilteredBagItemsCount], a
+	ld de, wFilteredBagItems
 	ld hl, TicketList
 .loop
 	ld a, [hli]
@@ -31,7 +31,7 @@ GetFerryTickets:
 	push de
 	ld [wd11e], a
 	ld b, a
-	predef IsItemInBag_
+	predef GetQuantityOfItemInBag
 	pop de
 	pop hl
 	ld a, b
@@ -43,12 +43,12 @@ GetFerryTickets:
 	ld [de], a
 	inc de
 	push hl
-	ld hl, wcd37 ; wFilteredBagItemsCount
+	ld hl, wFilteredBagItemsCount
 	inc [hl]
 	pop hl
 	jr .loop
 .done
-	ld hl, wcd37 ; wFilteredBagItemsCount
+	ld hl, wFilteredBagItemsCount
 	ld a, [hl]
 	and a
 	jr z, .endList ; if no items are in the pack, don't add "Go Home" option
@@ -72,7 +72,7 @@ TicketList:
 
 PrintTicketsInBag:
 ; Print the list of names inside the menu box we drew
-	ld hl, wcc5b
+	ld hl, wFilteredBagItems
 	xor a
 	ld [$ffdb], a
 .loop
@@ -82,7 +82,7 @@ PrintTicketsInBag:
 	push hl
 	ld [wd11e], a
 	call GetItemName
-	hlCoord 2, 2
+	coord hl, 2, 2
 	ld a, [$ffdb]
 	ld bc, $28
 	call AddNTimes
@@ -102,14 +102,14 @@ DoIslandMenu:
 	ld [wCurrentMenuItem], a
 	ld a, $3 ; A_BUTTON | B_BUTTON
 	ld [wMenuWatchedKeys], a
-	ld a, [wcd37] ; wFilteredBagItemsCount
+	ld a, [wFilteredBagItemsCount]
 	dec a
 	ld [wMaxMenuItem], a
 	ld a, 2
 	ld [wTopMenuItemY], a
 	ld a, 1
 	ld [wTopMenuItemX], a
-	ld a, [wcd37] ; wFilteredBagItemsCount
+	ld a, [wFilteredBagItemsCount]
 	dec a
 	ld bc, 2
 	ld hl, 3
@@ -126,7 +126,7 @@ DoIslandMenu:
 	call HandleMenuInput
 	bit 1, a ; Pressed B?
 	jr nz, .cancelledChoosingTicket
-	ld hl, wcc5b ; wFilteredBagItems
+	ld hl, wFilteredBagItems
 	ld a, [wCurrentMenuItem]
 	ld d, 0
 	ld e, a
@@ -170,7 +170,7 @@ DoIslandMenu:
 	push bc
 	
 ; Mark for it to do the shake animation
-	ld hl, wd126
+	ld hl, wCurrentMapScriptFlags
 	set 7, [hl]
 	
 ; Announce that we are leaving

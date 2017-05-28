@@ -1,4 +1,4 @@
-WeavileBaseStats: ; 38aa6 (e:4aa6)
+WeavileBaseStats:
 db DEX_WEAVILE ; pokedex id
 db 70 ; base hp
 db 120 ; base attack

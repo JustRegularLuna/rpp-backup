@@ -1,4 +1,4 @@
-Route19Object: ; 0x54e9a (size=87)
+Route19Object:
 	db $43 ; border block
 
 	db $4 ; warps
@@ -12,17 +12,17 @@ Route19Object: ; 0x54e9a (size=87)
 	db $d, $b, $b ; Route19Text11
 
 
-	db $a ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $8 + 4, $ff, $d2, TRAINER | 1, SWIMMER + TRAINER_START, 2
-	db SPRITE_BLACK_HAIR_BOY_1, $e + 4, $d + 4, $ff, $d2, TRAINER | 2, SWIMMER + TRAINER_START, 3
-	db SPRITE_SWIMMER, $19 + 4, $d + 4, $ff, $d2, TRAINER | $3, SWIMMER + TRAINER_START, $4
-	db SPRITE_SWIMMER, $1b + 4, $4 + 4, $ff, $d3, TRAINER | $4, SWIMMER + TRAINER_START, $5
-	db SPRITE_SWIMMER, $1f + 4, $10 + 4, $ff, $d1, TRAINER | $5, SWIMMER + TRAINER_START, $6
-	db SPRITE_SWIMMER, $12 + 4, $9 + 4, $ff, $d0, TRAINER | $6, SWIMMER + TRAINER_START, $7
-	db SPRITE_SWIMMER_F, $2b + 4, $8 + 4, $ff, $d2, TRAINER | $7, SWIMMER_F + TRAINER_START, $c
-	db SPRITE_SWIMMER_F, $2b + 4, $b + 4, $ff, $d3, TRAINER | $8, SWIMMER_F + TRAINER_START, $d
-	db SPRITE_SWIMMER, $2a + 4, $9 + 4, $ff, $d1, TRAINER | $9, SWIMMER + TRAINER_START, $8
-	db SPRITE_SWIMMER_F, $2c + 4, $a + 4, $ff, $d0, TRAINER | $a, SWIMMER_F + TRAINER_START, $e
+	db $a ; objects
+	object SPRITE_BLACK_HAIR_BOY_1, $8, $e, STAY, LEFT, 1, OPP_SWIMMER, 2
+	object SPRITE_BLACK_HAIR_BOY_1, $d, $e, STAY, LEFT, 2, OPP_SWIMMER, 3
+	object SPRITE_SWIMMER, $d, $19, STAY, LEFT, $3, OPP_SWIMMER, $4
+	object SPRITE_SWIMMER, $4, $1b, STAY, RIGHT, $4, OPP_SWIMMER, $5
+	object SPRITE_SWIMMER, $10, $1f, STAY, UP, $5, OPP_SWIMMER, $6
+	object SPRITE_SWIMMER, $9, $12, STAY, DOWN, $6, OPP_SWIMMER, $7
+	object SPRITE_SWIMMER_F, $8, $2b, STAY, LEFT, $7, OPP_SWIMMER_F, $c
+	object SPRITE_SWIMMER_F, $b, $2b, STAY, RIGHT, $8, OPP_SWIMMER_F, $d
+	object SPRITE_SWIMMER, $9, $2a, STAY, UP, $9, OPP_SWIMMER, $8
+	object SPRITE_SWIMMER_F, $a, $2c, STAY, DOWN, $a, OPP_SWIMMER_F, $e
 
 	; warp-to
 	EVENT_DISP ROUTE_19_WIDTH, $1, $7 ; ROUTE_19_GATE

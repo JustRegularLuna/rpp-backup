@@ -1,7 +1,7 @@
 ; Give special AI values their own constants to avoid confusion on special trainers
 AI_FULL_HEAL              EQU BROCK
 AI_X_DEFEND               EQU MISTY
-AI_X_SPEED                EQU LT__SURGE
+AI_X_SPEED                EQU LT_SURGE
 AI_X_ATTACK               EQU KOGA
 AI_POTION                 EQU SONY2
 AI_SUPER_POTION           EQU ERIKA

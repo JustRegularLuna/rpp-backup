@@ -1,4 +1,4 @@
-RocketHideout4Object: ; 0x455f1 (size=95)
+RocketHideout4Object:
 	db $2e ; border block
 
 	db $3 ; warps
@@ -8,16 +8,16 @@ RocketHideout4Object: ; 0x455f1 (size=95)
 
 	db $0 ; signs
 
-	db $9 ; people
-	db SPRITE_GIOVANNI, $3 + 4, $19 + 4, $ff, $d0, TRAINER | $1, GIOVANNI + TRAINER_START, $1
-	db SPRITE_JAMES, $c + 4, $17 + 4, $ff, $d0, TRAINER | $2, ROCKET + TRAINER_START, $10
-	db SPRITE_JESSIE, $c + 4, $1a + 4, $ff, $d0, TRAINER | $3, ROCKET_F + TRAINER_START, $11
-	db SPRITE_ROCKET, $2 + 4, $b + 4, $ff, $d0, TRAINER | $4, ROCKET + TRAINER_START, $12
-	db SPRITE_BALL, $c + 4, $a + 4, $ff, $ff, ITEM | $5, HP_UP
-	db SPRITE_BALL, $4 + 4, $9 + 4, $ff, $ff, ITEM | $6, TM_02
-	db SPRITE_BALL, $14 + 4, $c + 4, $ff, $ff, ITEM | $7, IRON
-	db SPRITE_BALL, $2 + 4, $19 + 4, $ff, $ff, ITEM | $8, SILPH_SCOPE
-	db SPRITE_BALL, $2 + 4, $a + 4, $ff, $ff, ITEM | $9, LIFT_KEY
+	db $9 ; objects
+	object SPRITE_GIOVANNI, $19, $3, STAY, DOWN, $1, OPP_GIOVANNI, $1
+	object SPRITE_JAMES, $17, $c, STAY, DOWN, $2, OPP_ROCKET, $10
+	object SPRITE_JESSIE, $1a, $c, STAY, DOWN, $3, OPP_ROCKET_F, $11
+	object SPRITE_ROCKET, $b, $2, STAY, DOWN, $4, OPP_ROCKET, $12
+	object SPRITE_BALL, $a, $c, STAY, NONE, $5, HP_UP
+	object SPRITE_BALL, $9, $4, STAY, NONE, $6, TM_02
+	object SPRITE_BALL, $c, $14, STAY, NONE, $7, IRON
+	object SPRITE_BALL, $19, $2, STAY, NONE, $8, SILPH_SCOPE
+	object SPRITE_BALL, $a, $2, STAY, NONE, $9, LIFT_KEY
 
 	; warp-to
 	EVENT_DISP ROCKET_HIDEOUT_4_WIDTH, $a, $13 ; ROCKET_HIDEOUT_3

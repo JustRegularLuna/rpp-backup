@@ -1,4 +1,4 @@
-_FuchsiaMeetingRoomText1:: ; a05a1 (28:45a1)
+_FuchsiaMeetingRoomText1::
 	text "We nicknamed the"
 	line "Warden Slowpoke."
 
@@ -6,7 +6,7 @@ _FuchsiaMeetingRoomText1:: ; a05a1 (28:45a1)
 	line "both look vacant!"
 	done
 
-_FuchsiaMeetingRoomText2:: ; a05e6 (28:45e6)
+_FuchsiaMeetingRoomText2::
 	text "Slowpoke is very"
 	line "knowledgeable"
 	cont "about #mon!"
@@ -16,7 +16,7 @@ _FuchsiaMeetingRoomText2:: ; a05e6 (28:45e6)
 	cont "extinct #mon!"
 	done
 
-_FuchsiaMeetingRoomText3:: ; a0642 (28:4642)
+_FuchsiaMeetingRoomText3::
 	text "Slowpoke came in,"
 	line "but I couldn't"
 	cont "understand him."
@@ -24,4 +24,3 @@ _FuchsiaMeetingRoomText3:: ; a0642 (28:4642)
 	para "I think he's got"
 	line "a speech problem!"
 	done
-

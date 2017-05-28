@@ -1,4 +1,4 @@
-EspeonBaseStats: ; 3926a (e:526a)
+EspeonBaseStats:
 db DEX_ESPEON ; pokedex id
 db 65 ; base hp
 db 65 ; base attack

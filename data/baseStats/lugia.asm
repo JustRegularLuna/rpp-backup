@@ -1,4 +1,4 @@
-LugiaBaseStats: ; 425b (1:425b)
+LugiaBaseStats:
 db DEX_LUGIA ; pokedex id
 db 106 ; base hp
 db 90 ; base attack

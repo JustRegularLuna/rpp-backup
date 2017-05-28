@@ -1,4 +1,4 @@
-_MtMoon3BattleText1:: ; 809cc (20:49cc)
+_MtMoon3BattleText1::
 	text "Hmm? Fossils?"
 	line "Oh no, those"
 	cont "aren't mine."
@@ -7,13 +7,13 @@ _MtMoon3BattleText1:: ; 809cc (20:49cc)
 	line "find Old Amber."
 	done
 
-_MtMoon3EndBattleText1:: ; 80a01 (20:4a01)
+_MtMoon3EndBattleText1::
 	text "Oh!"
 	line "You made a fossil"
 	cont "out of me!"
 	prompt
 
-_MtMoon3AfterBattleText1:: ; 80a11 (20:4a11)
+_MtMoon3AfterBattleText1::
 	text "The Dome Fossil"
 	line "is Kabuto, and"
 	cont "the Helix Fossil"
@@ -28,7 +28,7 @@ _MtMoon3AfterBattleText1:: ; 80a11 (20:4a11)
 	cont "Amber!"
 	done
 
-_MtMoon3BattleText2:: ; 80ab3 (20:4ab3)
+_MtMoon3BattleText2::
 	text "It's none of your"
 	line "business what we"
 	cont "want with the"
@@ -40,12 +40,12 @@ _MtMoon3BattleText2:: ; 80ab3 (20:4ab3)
 	cont "this operation."
 	done
 
-_MtMoon3EndBattleText2:: ; 80af6 (20:4af6)
+_MtMoon3EndBattleText2::
 	text "Urgh!"
 	line "Now I'm mad!"
 	prompt
 
-_MtMoon3AfterBattleText2:: ; 80b09 (20:4b09)
+_MtMoon3AfterBattleText2::
 	text "This isn't the"
 	line "end, it's only"
 	cont "the beginning."
@@ -54,7 +54,7 @@ _MtMoon3AfterBattleText2:: ; 80b09 (20:4b09)
 	line "see!"
 	done
 
-_MtMoon3BattleText3:: ; 80b3b (20:4b3b)
+_MtMoon3BattleText3::
 	text "E-he-he-he! What"
 	line "do we have here?"
 	
@@ -63,41 +63,41 @@ _MtMoon3BattleText3:: ; 80b3b (20:4b3b)
 	cont "in the way!"
 	done
 
-_MtMoon3EndBattleText3:: ; 80b61 (20:4b61)
+_MtMoon3EndBattleText3::
 	text "I blew it!"
 	prompt
 
-_MtMoon3AfterBattleText3:: ; 80b6d (20:4b6d)
+_MtMoon3AfterBattleText3::
 	text "Darn it all! My"
 	line "partner wouldn't"
 	cont "stand for this!"
 	done
 
-_MtMoon3BattleText4:: ; 80b9e (20:4b9e)
+_MtMoon3BattleText4::
 	text "Prepare for"
 	line "trouble!"
 	done
 
-_MtMoon3EndBattleText4:: ; 80bcb (20:4bcb)
+_MtMoon3EndBattleText4::
 	text "So, you are good."
 	prompt
 
-_MtMoon3AfterBattleText4:: ; 80bde (20:4bde)
+_MtMoon3AfterBattleText4::
 	text "Get lost, you"
 	line "little brat!"
 	done
 
-_MtMoon3BattleText5:: ; 80c0e (20:4c0e)
+_MtMoon3BattleText5::
 	text "Little kids"
 	line "should leave"
 	cont "grown-ups alone!"
 	done
 
-_MtMoon3EndBattleText5:: ; 80c39 (20:4c39)
+_MtMoon3EndBattleText5::
 	text "I'm steamed!"
 	prompt
 
-_MtMoon3AfterBattleText5:: ; 80c46 (20:4c46)
+_MtMoon3AfterBattleText5::
 	text "#mon lived"
 	line "here long before"
 	cont "people came."

@@ -1,4 +1,4 @@
-MurkrowBaseStats: ; 3860e (e:460e)
+MurkrowBaseStats:
 db DEX_MURKROW ; pokedex id
 db 60 ; base hp
 db 85 ; base attack

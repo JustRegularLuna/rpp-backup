@@ -1,4 +1,4 @@
-_IndigoPlateauLobbyText1:: ; a13f0 (28:53f0)
+_IndigoPlateauLobbyText2::
 	text "Yo! Champ in"
 	line "making!"
 

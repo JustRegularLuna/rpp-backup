@@ -1,4 +1,4 @@
-_DiglettsCaveRoute2Text1:: ; 8a6a7 (22:66a7)
+_DiglettsCaveRoute2Text1::
 	text "I went to Rock"
 	line "Tunnel, but it's"
 	cont "dark and scary."
@@ -7,4 +7,3 @@ _DiglettsCaveRoute2Text1:: ; 8a6a7 (22:66a7)
 	line "Flash could light"
 	cont "it up..."
 	done
-

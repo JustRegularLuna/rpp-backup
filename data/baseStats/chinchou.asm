@@ -1,4 +1,4 @@
-ChinchouBaseStats: ; 38aa6 (e:4aa6)
+ChinchouBaseStats:
 db DEX_CHINCHOU ; pokedex id
 db 75 ; base hp
 db 38 ; base attack

@@ -1,4 +1,4 @@
-SaffronGymObject: ; 0x5d259 (size=330)
+SaffronGymObject:
 	db $2e ; border block
 
 	db $20 ; warps
@@ -37,16 +37,16 @@ SaffronGymObject: ; 0x5d259 (size=330)
 
 	db $0 ; signs
 
-	db $9 ; people
-	db SPRITE_SABRINA, $8 + 4, $9 + 4, $ff, $d0, TRAINER | $1, SABRINA + TRAINER_START, $1
-	db SPRITE_MEDIUM, $1 + 4, $a + 4, $ff, $d0, TRAINER | $2, HEX_MANIAC + TRAINER_START, $1
-	db SPRITE_BUG_CATCHER, $1 + 4, $11 + 4, $ff, $d0, TRAINER | $3, PSYCHIC_TR + TRAINER_START, $1
-	db SPRITE_MEDIUM, $7 + 4, $3 + 4, $ff, $d0, TRAINER | $4, HEX_MANIAC + TRAINER_START, $2
-	db SPRITE_BUG_CATCHER, $7 + 4, $11 + 4, $ff, $d0, TRAINER | $5, PSYCHIC_TR + TRAINER_START, $2
-	db SPRITE_MEDIUM, $d + 4, $3 + 4, $ff, $d0, TRAINER | $6, HEX_MANIAC + TRAINER_START, $3
-	db SPRITE_BUG_CATCHER, $d + 4, $11 + 4, $ff, $d0, TRAINER | $7, PSYCHIC_TR + TRAINER_START, $3
-	db SPRITE_BUG_CATCHER, $1 + 4, $3 + 4, $ff, $d0, TRAINER | $8, PSYCHIC_TR + TRAINER_START, $4
-	db SPRITE_GYM_HELPER, $f + 4, $a + 4, $ff, $d0, $9 ; person
+	db $9 ; objects
+	object SPRITE_SABRINA, $9, $8, STAY, DOWN, $1, OPP_SABRINA, $1
+	object SPRITE_MEDIUM, $a, $1, STAY, DOWN, $2, OPP_HEX_MANIAC, $1
+	object SPRITE_BUG_CATCHER, $11, $1, STAY, DOWN, $3, OPP_PSYCHIC_TR, $1
+	object SPRITE_MEDIUM, $3, $7, STAY, DOWN, $4, OPP_HEX_MANIAC, $2
+	object SPRITE_BUG_CATCHER, $11, $7, STAY, DOWN, $5, OPP_PSYCHIC_TR, $2
+	object SPRITE_MEDIUM, $3, $d, STAY, DOWN, $6, OPP_HEX_MANIAC, $3
+	object SPRITE_BUG_CATCHER, $11, $d, STAY, DOWN, $7, OPP_PSYCHIC_TR, $3
+	object SPRITE_BUG_CATCHER, $3, $1, STAY, DOWN, $8, OPP_PSYCHIC_TR, $4
+	object SPRITE_GYM_HELPER, $a, $f, STAY, DOWN, $9 ; person
 
 	; warp-to
 	EVENT_DISP SAFFRON_GYM_WIDTH, $11, $8

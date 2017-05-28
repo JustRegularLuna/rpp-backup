@@ -1,4 +1,4 @@
-TradeMons: ; 71b7b (1c:5b7b)
+TradeMons:
 ; givemonster, getmonster, textstring, nickname (11 bytes), 14 bytes total
 
 	db NIDORINO,  NIDORINA,  0,"Terry@@@@@@" ; Route 11 - Can find in wild

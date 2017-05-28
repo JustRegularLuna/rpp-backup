@@ -1,4 +1,4 @@
-MimeJrBaseStats: ; 3911a (e:511a)
+MimeJrBaseStats:
 db DEX_MIME_JR ; pokedex id
 db 20 ; base hp
 db 25 ; base attack

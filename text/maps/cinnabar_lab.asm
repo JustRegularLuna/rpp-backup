@@ -1,4 +1,4 @@
-_Lab1Text1:: ; a0df7 (28:4df7)
+_Lab1Text1::
 	text "We study #mon"
 	line "extensively here."
 
@@ -7,24 +7,23 @@ _Lab1Text1:: ; a0df7 (28:4df7)
 	cont "for examination."
 	done
 
-_Lab1Text2:: ; a0e49 (28:4e49)
+_Lab1Text2::
 	text "A photo of the"
 	line "Lab's founder,"
 	cont "Dr. Fuji!"
 	done
 
-_Lab1Text3:: ; a0e70 (28:4e70)
+_Lab1Text3::
 	text "#mon Lab"
 	line "Meeting Room"
 	done
 
-_Lab1Text4:: ; a0e87 (28:4e87)
+_Lab1Text4::
 	text "#mon Lab"
 	line "R&D Room"
 	done
 
-_Lab1Text5:: ; a0e9e (28:4e9e)
+_Lab1Text5::
 	text "#mon Lab"
 	line "Testing Room"
 	done
-

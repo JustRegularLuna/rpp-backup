@@ -8,7 +8,7 @@ BerryTreeScript::
 	ld a, [wWhichTrade] ; Which tree is this?
 	dec a
 	ld c, a ; We need this in register c
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	ld hl, wBerryTreeFlags
 	predef FlagActionPredef
 	ld a, c ; Let's get the result of that check
@@ -32,7 +32,7 @@ BerryTreeScript::
 	ld a, [wWhichTrade] ; Which tree is this?
 	dec a
 	ld c, a ; We need this in c
-	ld b, SET_FLAG
+	ld b, FLAG_SET
 	ld hl, wBerryTreeFlags
 	predef FlagActionPredef
 	

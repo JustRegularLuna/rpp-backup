@@ -31,12 +31,12 @@ MoveTutorScriptSpecial::
 	ld [wTopMenuItemX], a
 	ld hl, wd730
 	set 6, [hl]
-	hlCoord 0, 3
+	coord hl, 0, 3
 	ld b, $8
 	ld c, $d
 	call TextBoxBorder
 	call UpdateSprites
-	hlCoord 2, 5
+	coord hl, 2, 5
 	ld de, ElementalHyperbeamsText
 	call PlaceString
 	ld hl, wd730
@@ -75,7 +75,7 @@ DisplayTeachTutorMoveText:
 	call CopyStringToCF4B ; copy name to wcf4b
 	ld hl,TeachTutorMoveText
 	call PrintText
-	hlCoord 14, 7
+	coord hl, 14, 7
 	ld bc,$080f
 	ld a,TWO_OPTION_MENU
 	ld [wTextBoxID],a
@@ -102,22 +102,22 @@ DisplayTeachTutorMoveText:
 
 .chooseMon
 	ld hl,wcf4b
-	ld de,wd036
+	ld de,wTempMoveNameBuffer
 	ld bc,14
 	call CopyData
 	xor a
 	ld [wUpdateSpritesEnabled],a
 	ld a,$06 ; move tutor party menu
-	ld [wd07d],a
+	ld [wPartyMenuTypeOrMessageID],a
 	call DisplayPartyMenu
 	push af
-	ld hl,wd036
+	ld hl,wTempMoveNameBuffer
 	ld de,wcf4b
 	ld bc,14
 	call CopyData
 	pop af
 	jr nc,.checkIfAbleToLearnMove
-; if the player canceled teaching the move
+; if the player cancelled teaching the move
 	jr .done
 	
 .checkIfAbleToLearnMove
@@ -129,7 +129,7 @@ DisplayTeachTutorMoveText:
 	and a ; can the pokemon learn the move?
 	jr nz,.checkIfAlreadyLearnedMove
 ; if the pokemon can't learn the move
-	ld a,(SFX_02_51 - SFX_Headers_02) / 3
+	ld a,SFX_DENIED
 	call PlaySoundWaitForCurrent ; play sound
 	ld hl,MonCannotLearnTutorMoveText
 	call PrintText

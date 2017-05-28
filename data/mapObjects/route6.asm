@@ -1,4 +1,4 @@
-Route6Object: ; 0x58022 (size=87)
+Route6Object:
 	db $f ; border block
 
 	db $4 ; warps
@@ -10,13 +10,13 @@ Route6Object: ; 0x58022 (size=87)
 	db $1 ; signs
 	db $f, $13, $7 ; Route6Text7
 
-	db $6 ; people
-	db SPRITE_BLACK_HAIR_BOY_1, $15 + 4, $a + 4, $ff, $d3, TRAINER | $1, COUPLE + TRAINER_START, $1
-	db SPRITE_LASS, $15 + 4, $b + 4, $ff, $d2, TRAINER | $1, COUPLE + TRAINER_START, $1
-	db SPRITE_BUG_CATCHER, $f + 4, $0 + 4, $ff, $d3, TRAINER | $3, BUG_CATCHER + TRAINER_START, $a
-	db SPRITE_BLACK_HAIR_BOY_1, $1f + 4, $b + 4, $ff, $d2, TRAINER | $4, JR__TRAINER_M + TRAINER_START, $5
-	db SPRITE_LASS, $1e + 4, $b + 4, $ff, $d2, TRAINER | $5, JR__TRAINER_F + TRAINER_START, $3
-	db SPRITE_BUG_CATCHER, $1a + 4, $13 + 4, $ff, $d2, TRAINER | $6, BUG_CATCHER + TRAINER_START, $b
+	db $6 ; objects
+	object SPRITE_BLACK_HAIR_BOY_1, $a, $15, STAY, RIGHT, $1, OPP_COUPLE, $1
+	object SPRITE_LASS, $b, $15, STAY, LEFT, $1, OPP_COUPLE, $1
+	object SPRITE_BUG_CATCHER, $0, $f, STAY, RIGHT, $3, OPP_BUG_CATCHER, $a
+	object SPRITE_BLACK_HAIR_BOY_1, $b, $1f, STAY, LEFT, $4, OPP_JR_TRAINER_M, $5
+	object SPRITE_LASS, $b, $1e, STAY, LEFT, $5, OPP_JR_TRAINER_F, $3
+	object SPRITE_BUG_CATCHER, $13, $1a, STAY, LEFT, $6, OPP_BUG_CATCHER, $b
 
 	; warp-to
 	EVENT_DISP ROUTE_6_WIDTH, $1, $9 ; ROUTE_6_GATE

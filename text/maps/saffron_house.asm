@@ -1,4 +1,4 @@
-_SaffronHouse1Text1:: ; a2305 (28:6305)
+_SaffronHouse1Text1::
 	text "Thank you for"
 	line "writing. I hope"
 	cont "to see you soon!"
@@ -7,16 +7,16 @@ _SaffronHouse1Text1:: ; a2305 (28:6305)
 	line "at my letter!"
 	done
 
-_SaffronHouse1Text2:: ; a2352 (28:6352)
+_SaffronHouse1Text2::
 	text "Pidgey: Kurukkoo!@@"
 
-_SaffronHouse1Text3:: ; a2366 (28:6366)
+_SaffronHouse1Text3::
 	text "The Copycat is"
 	line "cute! I'm getting"
 	cont "her a # Doll!"
 	done
 
-_SaffronHouse1Text4:: ; a2395 (28:6395)
+_SaffronHouse1Text4::
 	text "I was given a PP"
 	line "Up as a gift."
 
@@ -24,4 +24,3 @@ _SaffronHouse1Text4:: ; a2395 (28:6395)
 	line "increasing the PP"
 	cont "of techniques!"
 	done
-

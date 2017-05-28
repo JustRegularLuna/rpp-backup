@@ -1,4 +1,4 @@
-Route7Object: ; 0x48022 (size=47)
+Route7Object:
 	db $f ; border block
 
 	db $5 ; warps
@@ -11,8 +11,8 @@ Route7Object: ; 0x48022 (size=47)
 	db $1 ; signs
 	db $d, $3, $2 ; Route7Text1
 
-	db $1 ; people
-	db SPRITE_BERRY_TREE, $5 + 4, $F + 4, $ff, $ff, $1
+	db $1 ; objects
+	object SPRITE_BERRY_TREE, $F, $5, STAY, NONE, $1
 
 	; warp-to
 	EVENT_DISP ROUTE_7_WIDTH, $9, $12 ; ROUTE_7_GATE

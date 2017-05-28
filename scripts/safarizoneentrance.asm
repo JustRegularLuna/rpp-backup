@@ -1,10 +1,10 @@
-SafariZoneEntranceScript: ; 751cd (1d:51cd)
+SafariZoneEntranceScript:
 	call EnableAutoTextBoxDrawing
 	ld hl, SafariZoneEntranceScriptPointers
-	ld a, [W_SAFARIZONEENTRANCECURSCRIPT]
+	ld a, [wSafariZoneEntranceCurScript]
 	jp CallFunctionInTable
 
-SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
+SafariZoneEntranceScriptPointers:
 	dw .SafariZoneEntranceScript0
 	dw .SafariZoneEntranceScript1
 	dw .SafariZoneEntranceScript2
@@ -18,31 +18,31 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	call ArePlayerCoordsInArray
 	ret nc
 	ld a, $3
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
 	xor a
 	ld [hJoyHeld], a
-	ld a, $c
+	ld a, SPRITE_FACING_RIGHT
 	ld [wSpriteStateData1 + 9], a
-	ld a, [wWhichTrade]
+	ld a, [wCoordIndex]
 	cp $1
-	jr z, .asm_7520f ; 0x75207 $6
+	jr z, .asm_7520f
 	ld a, $2
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 .asm_7520f
-	ld a, $10
+	ld a, D_RIGHT
 	ld c, $1
 	call SafariZoneEntranceAutoWalk
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $1
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 
-.CoordsData_75221: ; 75221 (1d:5221)
+.CoordsData_75221:
 	db $02,$03
 	db $02,$04
 	db $FF
@@ -56,7 +56,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ld [wJoyIgnore], a
 	call UpdateSprites
 	ld a, $4
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	ld a, $ff
 	ld [wJoyIgnore], a
@@ -68,34 +68,32 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $5
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 
 .SafariZoneEntranceScript5
-	ld a, $4
-	ld [wd528], a
-	ld hl, wSafariZoneFlags
-	bit 6, [hl]
-	res 6, [hl]
-	jr z, .asm_7527f ; 0x7525a $23
-	res 7, [hl]
+	ld a, PLAYER_DIR_DOWN
+	ld [wPlayerMovingDirection], a
+	CheckAndResetEvent EVENT_SAFARI_GAME_OVER
+	jr z, .asm_7527f
+	ResetEventReuseHL EVENT_IN_SAFARI_ZONE
 	call UpdateSprites
 	ld a, $f0
 	ld [wJoyIgnore], a
 	ld a, $6
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 	xor a
 	ld [wNumSafariBalls], a
-	ld a, $80
+	ld a, D_DOWN
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
 	ld a, $4
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
-	jr .asm_75286 ; 0x7527d $7
+	ld [wSafariZoneEntranceCurScript], a
+	jr .asm_75286
 .asm_7527f
 	ld a, $5
-	ld [$ff8c], a
+	ld [hSpriteIndexOrTextID], a
 	call DisplayTextID
 .asm_75286
 	ret
@@ -106,7 +104,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	xor a
 	ld [wJoyIgnore], a
 	ld a, $0
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 
 .SafariZoneEntranceScript6
@@ -114,7 +112,7 @@ SafariZoneEntranceScriptPointers: ; 751d9 (1d:51d9)
 	ret nz
 	call Delay3
 	ld a, [wcf0d]
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	ret
 
 SafariZoneEntranceAutoWalk:
@@ -132,7 +130,7 @@ SafariZoneEntranceScript_752b4:
 	and a
 	ret
 
-SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
+SafariZoneEntranceTextPointers:
 	dw .SafariZoneEntranceText1
 	dw .SafariZoneEntranceText2
 	dw .SafariZoneEntranceText1
@@ -145,9 +143,9 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	db "@"
 
 .SafariZoneEntranceText4
-	TX_FAR SafariZoneEntranceText_9e6e4 ; 0x9e6e4
+	TX_FAR SafariZoneEntranceText_9e6e4
 	TX_ASM
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	call YesNoChoice
@@ -155,11 +153,11 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	and a
 	jp nz,.PleaseComeAgain
 	xor a
-	ld [$ff9f],a
+	ld [hMoney],a
 	ld a,$05
-	ld [$ffa0],a
+	ld [hMoney + 1],a
 	ld a,$00
-	ld [$ffa1],a
+	ld [hMoney + 2],a
 	call HasEnoughMoney
 	jr nc,.success
 	ld hl,.NotEnoughMoneyText
@@ -168,16 +166,16 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 
 .success
 	xor a
-	ld [wSubtrahend],a
+	ld [wPriceTemp],a
 	ld a,$05
-	ld [wSubtrahend+1],a
+	ld [wPriceTemp + 1],a
 	ld a,$00
-	ld [wSubtrahend+2],a
-	ld hl,wTrainerFacingDirection
+	ld [wPriceTemp + 2],a
+	ld hl,wPriceTemp + 2
 	ld de,wPlayerMoney + 2
 	ld c,3
 	predef SubBCDPredef
-	ld a,$13
+	ld a,MONEY_BOX
 	ld [wTextBoxID],a
 	call DisplayTextBoxID
 	ld hl,.MakePaymentText
@@ -188,31 +186,30 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	ld [wSafariSteps],a
 	ld a, 502 % $100
 	ld [wSafariSteps + 1],a
-	ld a,$40
+	ld a,D_UP
 	ld c,3
 	call SafariZoneEntranceAutoWalk
-	ld hl,wSafariZoneFlags
-	set 7,[hl]
-	res 6,[hl]
+	SetEvent EVENT_IN_SAFARI_ZONE
+	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
 	ld a,3
-	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
+	ld [wSafariZoneEntranceCurScript],a
 	jr .done
 
 .PleaseComeAgain
 	ld hl,.PleaseComeAgainText
 	call PrintText
 .CantPayWalkDown
-	ld a,$80
+	ld a,D_DOWN
 	ld c,1
 	call SafariZoneEntranceAutoWalk
 	ld a,4
-	ld [W_SAFARIZONEENTRANCECURSCRIPT],a
+	ld [wSafariZoneEntranceCurScript],a
 .done
 	jp TextScriptEnd
 
 .MakePaymentText
 	TX_FAR SafariZoneEntranceText_9e747
-	db $b
+	TX_SFX_ITEM_1
 	TX_FAR _SafariZoneEntranceText_75360
 	db "@"
 
@@ -225,38 +222,36 @@ SafariZoneEntranceTextPointers: ; 752b9 (1d:52b9)
 	db "@"
 
 .SafariZoneEntranceText5
-	TX_FAR SafariZoneEntranceText_9e814 ; 0x9e814
+	TX_FAR SafariZoneEntranceText_9e814
 	TX_ASM
 	call YesNoChoice
 	ld a,[wCurrentMenuItem]
 	and a
-	jr nz, .asm_7539c ; 0x7537b $1f
+	jr nz, .asm_7539c
 	ld hl, .SafariZoneEntranceText_753bb
 	call PrintText
 	xor a
 	ld [wSpriteStateData1 + 9], a
-	ld a, $80
+	ld a, D_DOWN
 	ld c, $3
 	call SafariZoneEntranceAutoWalk
-	ld hl, wSafariZoneFlags
-	res 6, [hl]
-	res 7, [hl]
+	ResetEvents EVENT_SAFARI_GAME_OVER, EVENT_IN_SAFARI_ZONE
 	ld a, $0
 	ld [wcf0d], a
-	jr .asm_753b3 ; 0x7539a $17
+	jr .asm_753b3
 .asm_7539c
 	ld hl, .SafariZoneEntranceText_753c0
 	call PrintText
-	ld a, $4
+	ld a, SPRITE_FACING_UP
 	ld [wSpriteStateData1 + 9], a
-	ld a, $40
+	ld a, D_UP
 	ld c, $1
 	call SafariZoneEntranceAutoWalk
 	ld a, $5
 	ld [wcf0d], a
 .asm_753b3
 	ld a, $6
-	ld [W_SAFARIZONEENTRANCECURSCRIPT], a
+	ld [wSafariZoneEntranceCurScript], a
 	jp TextScriptEnd
 
 .SafariZoneEntranceText_753bb

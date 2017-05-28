@@ -1,4 +1,4 @@
-LanturnBaseStats: ; 38aa6 (e:4aa6)
+LanturnBaseStats:
 db DEX_LANTURN ; pokedex id
 db 125 ; base hp
 db 58 ; base attack

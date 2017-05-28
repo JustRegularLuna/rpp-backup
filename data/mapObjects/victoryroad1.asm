@@ -1,4 +1,4 @@
-VictoryRoad1Object: ; 0x5dab8 (size=76)
+VictoryRoad1Object:
 	db $7d ; border block
 
 	db $3 ; warps
@@ -8,14 +8,14 @@ VictoryRoad1Object: ; 0x5dab8 (size=76)
 
 	db $0 ; signs
 
-	db $7 ; people
-	db SPRITE_BRUNETTE_GIRL, $5 + 4, $7 + 4, $ff, $d3, TRAINER | $1, PKMN_TRAINER + TRAINER_START, $2
-	db SPRITE_BLACK_HAIR_BOY_1, $2 + 4, $3 + 4, $ff, $d0, TRAINER | $2, COOLTRAINER_M + TRAINER_START, $5
-	db SPRITE_BALL, $0 + 4, $b + 4, $ff, $ff, ITEM | $3, TM_15
-	db SPRITE_BALL, $2 + 4, $9 + 4, $ff, $ff, ITEM | $4, RARE_CANDY
-	db SPRITE_BOULDER, $f + 4, $5 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $5 ; person
-	db SPRITE_BOULDER, $2 + 4, $e + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $6 ; person
-	db SPRITE_BOULDER, $a + 4, $2 + 4, $ff, BOULDER_MOVEMENT_BYTE_2, $7 ; person
+	db $7 ; objects
+	object SPRITE_BRUNETTE_GIRL, $7, $5, STAY, RIGHT, $1, OPP_PKMN_TRAINER, $2
+	object SPRITE_BLACK_HAIR_BOY_1, $3, $2, STAY, DOWN, $2, OPP_COOLTRAINER_M, $5
+	object SPRITE_BALL, $b, $0, STAY, NONE, $3, TM_15
+	object SPRITE_BALL, $9, $2, STAY, NONE, $4, RARE_CANDY
+	object SPRITE_BOULDER, $5, $f, NONE, BOULDER_MOVEMENT_BYTE_2, $5 ; person
+	object SPRITE_BOULDER, $e, $2, NONE, BOULDER_MOVEMENT_BYTE_2, $6 ; person
+	object SPRITE_BOULDER, $2, $a, NONE, BOULDER_MOVEMENT_BYTE_2, $7 ; person
 
 	; warp-to
 	EVENT_DISP VICTORY_ROAD_1_WIDTH, $11, $8

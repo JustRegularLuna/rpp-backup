@@ -1,4 +1,4 @@
-_UnnamedText_75581:: ; 9e9b1 (27:69b1)
+_KogaBeforeBattleText::
 	text "Koga: Fwahahaha!"
 
 	para "A mere child like"
@@ -16,7 +16,7 @@ _UnnamedText_75581:: ; 9e9b1 (27:69b1)
 	cont "techniques!"
 	done
 
-_UnnamedText_75586:: ; 9ea66 (27:6a66)
+_KogaAfterBattleText::
 	text "Humph!"
 	line "You have proven"
 	cont "your worth!"
@@ -24,4 +24,3 @@ _UnnamedText_75586:: ; 9ea66 (27:6a66)
 	para "Here! Take the"
 	line "SoulBadge!"
 	prompt
-

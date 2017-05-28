@@ -1,4 +1,4 @@
-Route19GateObject: ; 0x1dffb (size=42)
+Route19GateObject:
 	db $a ; border block
 
 	db $4 ; warps

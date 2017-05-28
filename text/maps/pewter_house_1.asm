@@ -1,7 +1,7 @@
-_PewterHouse1Text1:: ; 984ce (26:44ce)
+_PewterHouse1Text1::
 	text "Nidoran: Bowbow!@@"
 
-_PewterHouse1Text2:: ; 984e1 (26:44e1)
+_PewterHouse1Text2::
 	text "Here you go,"
 	line "Nidoran!"
 	
@@ -10,7 +10,7 @@ _PewterHouse1Text2:: ; 984e1 (26:44e1)
 	cont "you!"
 	done
 
-_PewterHouse1Text3:: ; 984ef (26:44ef)
+_PewterHouse1Text3::
 	text "My son doesn't"
 	line "agree with me on"
 	cont "how to pronounce"

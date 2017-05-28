@@ -1,4 +1,4 @@
-MapSongBanks: ; c04d (3:404d)
+MapSongBanks:
 	db MUSIC_PALLET_TOWN, BANK(Music_PalletTown) ;PALLET_TOWN
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; VIRIDIAN_CITY
 	db MUSIC_CITIES1, BANK(Music_Cities1) ; PEWTER_CITY
@@ -238,8 +238,8 @@ MapSongBanks: ; c04d (3:404d)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo) ; SilphCoElevator
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
-	db MUSIC_CELADON, BANK(Music_Celadon) ; BattleCenterM
-	db MUSIC_CELADON, BANK(Music_Celadon) ; TradeCenterM
+	db MUSIC_CELADON, BANK(Music_Celadon) ; TradeCenter
+	db MUSIC_CELADON, BANK(Music_Celadon) ; Colosseum
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)
 	db MUSIC_SILPH_CO, BANK(Music_SilphCo)

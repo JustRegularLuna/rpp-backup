@@ -1,44 +1,41 @@
-FuchsiaHouse2Script: ; 750b5 (1d:50b5)
+FuchsiaHouse2Script:
 	jp EnableAutoTextBoxDrawing
 
-FuchsiaHouse2TextPointers: ; 750b8 (1d:50b8)
+FuchsiaHouse2TextPointers:
 	dw FuchsiaHouse2Text1
-	dw Predef5CText
+	dw PickUpItemText
 	dw BoulderText
 	dw FuchsiaHouse2Text4
 	dw FuchsiaHouse2Text5
 
-FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
+FuchsiaHouse2Text1:
 	TX_ASM
-	ld a, [wFuchsiaHouse2Flags]
-	bit 0, a
-	jr nz, .subtract ; 0x750c8
+	CheckEvent EVENT_GOT_HM04
+	jr nz, .subtract
 	ld b,GOLD_TEETH
 	call IsItemInBag
-	jr nz, .asm_3f30f ; 0x750cf
-	ld a, [wFuchsiaHouse2Flags]
-	bit 1, a
-	jr nz, .asm_60cba ; 0x750d6
+	jr nz, .asm_3f30f
+	CheckEvent EVENT_GAVE_GOLD_TEETH
+	jr nz, .asm_60cba
 	ld hl, WardenGibberishText1
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	ld hl, WardenGibberishText3
-	jr nz, .asm_61238 ; 0x750e8
+	jr nz, .asm_61238
 	ld hl, WardenGibberishText2
-.asm_61238 ; 0x750ed
+.asm_61238
 	call PrintText
-	jr .asm_52039 ; 0x750f0
-.asm_3f30f ; 0x750f2
+	jr .asm_52039
+.asm_3f30f
 	ld hl, WardenTeethText1
 	call PrintText
 	ld a, GOLD_TEETH
-	ldh [$db], a
+	ld [$ffdb], a
 	callba RemoveItemByID
-	ld hl, wFuchsiaHouse2Flags
-	set 1, [hl]
-.asm_60cba ; 0x75109
+	SetEvent EVENT_GAVE_GOLD_TEETH
+.asm_60cba
 	ld hl, WardenThankYouText
 	call PrintText
 	lb bc, HM_04, 1
@@ -46,71 +43,71 @@ FuchsiaHouse2Text1: ; 750c2 (1d:50c2)
 	jr nc, .BagFull
 	ld hl, ReceivedHM04Text
 	call PrintText
-	ld hl, wFuchsiaHouse2Flags
-	set 0, [hl]
-	jr .asm_52039 ; 0x75122
-.subtract ; 0x75124
+	SetEvent EVENT_GOT_HM04
+	jr .asm_52039
+.subtract
 	ld hl, HM04ExplanationText
 	call PrintText
-	jr .asm_52039 ; 0x7512a
+	jr .asm_52039
 .BagFull
 	ld hl, HM04NoRoomText
 	call PrintText
-.asm_52039 ; 0x75132
+.asm_52039
 	jp TextScriptEnd
 
-WardenGibberishText1: ; 75135 (1d:5135)
+WardenGibberishText1:
 	TX_FAR _WardenGibberishText1
 	db "@"
 
-WardenGibberishText2: ; 7513a (1d:513a)
+WardenGibberishText2:
 	TX_FAR _WardenGibberishText2
 	db "@"
 
-WardenGibberishText3: ; 7513f (1d:513f)
+WardenGibberishText3:
 	TX_FAR _WardenGibberishText3
 	db "@"
 
-WardenTeethText1: ; 75144 (1d:5144)
+WardenTeethText1:
 	TX_FAR _WardenTeethText1
-	db $0b
+	TX_SFX_ITEM_1
 
-WardenTeethText2: ; 75149 (1d:5149)
+WardenTeethText2:
 	TX_FAR _WardenTeethText2
 	db "@"
 
-WardenThankYouText: ; 7514e (1d:514e)
+WardenThankYouText:
 	TX_FAR _WardenThankYouText
 	db "@"
 
-ReceivedHM04Text: ; 75153 (1d:5153)
+ReceivedHM04Text:
 	TX_FAR _ReceivedHM04Text
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
-HM04ExplanationText: ; 75159 (1d:5159)
+HM04ExplanationText:
 	TX_FAR _HM04ExplanationText
 	db "@"
 
-HM04NoRoomText: ; 7515e (1d:515e)
+HM04NoRoomText:
 	TX_FAR _HM04NoRoomText
 	db "@"
 
-FuchsiaHouse2Text5: ; 75163 (1d:5163)
-FuchsiaHouse2Text4: ; 75163 (1d:5163)
+FuchsiaHouse2Text5:
+FuchsiaHouse2Text4:
 	TX_ASM
-	ldh a, [$8c]
+	ld a, [H_SPRITEINDEX]
 	cp $4
 	ld hl, FuchsiaHouse2Text_7517b
-	jr nz, .asm_4c9a2 ; 0x7516b
+	jr nz, .asm_4c9a2
 	ld hl, FuchsiaHouse2Text_75176
-.asm_4c9a2 ; 0x75170
+.asm_4c9a2
 	call PrintText
 	jp TextScriptEnd
 
-FuchsiaHouse2Text_75176: ; 75176 (1d:5176)
+FuchsiaHouse2Text_75176:
 	TX_FAR _FuchsiaHouse2Text_75176
 	db "@"
 
-FuchsiaHouse2Text_7517b: ; 7517b (1d:517b)
+FuchsiaHouse2Text_7517b:
 	TX_FAR _FuchsiaHouse2Text_7517b
 	db "@"

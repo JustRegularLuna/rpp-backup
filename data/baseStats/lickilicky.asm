@@ -1,4 +1,4 @@
-LickilickyBaseStats: ; 38f92 (e:4f92)
+LickilickyBaseStats:
 db DEX_LICKILICKY ; pokedex id
 db 110 ; base hp
 db 85 ; base attack

@@ -1,9 +1,9 @@
 ; tests if mon [wcf91] can learn move [wMoveNum]
-CanLearnTM: ; 1373e (4:773e)
+CanLearnTM:
 	ld a, [wcf91]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld hl, W_MONHLEARNSET
+	ld hl, wMonHLearnset
 	push hl
 	ld a, [wMoveNum]
 	ld b, a
@@ -17,12 +17,12 @@ CanLearnTM: ; 1373e (4:773e)
 	jr .findTMloop
 .TMfoundLoop
 	pop hl
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	predef_jump FlagActionPredef
 
 ; converts TM/HM number in wd11e into move number
 ; HMs start at 51
-TMToMove: ; 13763 (4:7763)
+TMToMove:
 	ld a, [wd11e]
 	dec a
 	ld hl, TechnicalMachines
@@ -41,7 +41,7 @@ CanLearnTutor:
 	ld a, [wcf91]
 	ld [wd0b5], a
 	call GetMonHeader
-	ld hl, W_MONHMOVES
+	ld hl, wMonHMoves
 	push hl
 	ld a, [wMoveNum]
 	ld b, a
@@ -55,7 +55,7 @@ CanLearnTutor:
 	jr .findTutorLoop
 .TutorFoundLoop
 	pop hl
-	ld b, CHECK_FLAG
+	ld b, FLAG_TEST
 	predef FlagActionPredef
 	ld a, c
 	ld [wTempMoveID], a ; bc is not preserved when called from another bank

@@ -1,4 +1,4 @@
-TogekissBaseStats: ; 38582 (e:4582)
+TogekissBaseStats:
 db DEX_TOGEKISS ; pokedex id
 db 85 ; base hp
 db 50 ; base attack

@@ -1,4 +1,4 @@
-MunchlaxBaseStats: ; 39366 (e:5366)
+MunchlaxBaseStats:
 db DEX_MUNCHLAX ; pokedex id
 db 135 ; base hp
 db 85 ; base attack

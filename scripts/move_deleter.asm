@@ -12,7 +12,7 @@ MoveDeleterText1:
 	call SaveScreenTilesToBuffer2
 	xor a
 	ld [wListScrollOffset], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wUpdateSpritesEnabled], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
@@ -44,12 +44,12 @@ MoveDeleterText1:
 	ld a, MOVESLISTMENU
 	ld [wListMenuID], a
 	ld de, wRelearnableMoves
-	ld hl, wList
+	ld hl, wListPointer
 	ld [hl], e
 	inc hl
 	ld [hl], d
 	xor a
-	ld [wcf93], a ; don't print prices
+	ld [wPrintItemPrices], a ; don't print prices
 	call DisplayListMenuID
 	pop bc
 	jr c, .exit  ; exit if player chose cancel

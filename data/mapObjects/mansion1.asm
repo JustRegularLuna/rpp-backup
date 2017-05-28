@@ -1,4 +1,4 @@
-Mansion1Object: ; 0x443a4 (size=90)
+Mansion1Object:
 	db $2e ; border block
 
 	db $8 ; warps
@@ -13,10 +13,10 @@ Mansion1Object: ; 0x443a4 (size=90)
 
 	db $0 ; signs
 
-	db $3 ; people
-	db SPRITE_FLANNERY, $11 + 4, $11 + 4, $ff, $d2, TRAINER | $1, PKMN_TRAINER + TRAINER_START, $1
-	db SPRITE_BALL, $3 + 4, $e + 4, $ff, $ff, ITEM | $2, ESCAPE_ROPE
-	db SPRITE_BALL, $15 + 4, $12 + 4, $ff, $ff, ITEM | $3, CARBOS
+	db $3 ; objects
+	object SPRITE_FLANNERY, $11, $11, STAY, LEFT, $1, OPP_PKMN_TRAINER, $1
+	object SPRITE_BALL, $e, $3, STAY, NONE, $2, ESCAPE_ROPE
+	object SPRITE_BALL, $12, $15, STAY, NONE, $3, CARBOS
 
 	; warp-to
 	EVENT_DISP MANSION_1_WIDTH, $1b, $4

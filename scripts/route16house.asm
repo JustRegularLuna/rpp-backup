@@ -1,48 +1,47 @@
-Route16HouseScript: ; 1e5f8 (7:65f8)
+Route16HouseScript:
 	jp EnableAutoTextBoxDrawing
 
-Route16HouseTextPointers: ; 1e5fb (7:65fb)
+Route16HouseTextPointers:
 	dw Route16HouseText1
 	dw Route16HouseText2
 
-Route16HouseText1: ; 1e5ff (7:65ff)
+Route16HouseText1:
 	TX_ASM
-	ld a, [wRoute16Flags2]
-	bit 6, a
+	CheckEvent EVENT_GOT_HM02
 	ld hl, HM02ExplanationText
-	jr nz, .asm_13616 ; 0x1e608
+	jr nz, .asm_13616
 	ld hl, Route16HouseText3
 	call PrintText
 	lb bc, HM_02, 1
 	call GiveItem
 	jr nc, .BagFull
-	ld hl, wRoute16Flags2
-	set 6, [hl]
+	SetEvent EVENT_GOT_HM02
 	ld hl, ReceivedHM02Text
-	jr .asm_13616 ; 0x1e620
+	jr .asm_13616
 .BagFull
 	ld hl, HM02NoRoomText
-.asm_13616 ; 0x1e625
+.asm_13616
 	call PrintText
 	jp TextScriptEnd
 
-Route16HouseText3: ; 1e62b (7:662b)
+Route16HouseText3:
 	TX_FAR _Route16HouseText3
 	db "@"
 
-ReceivedHM02Text: ; 1e630 (7:6630)
+ReceivedHM02Text:
 	TX_FAR _ReceivedHM02Text
-	db $11, "@"
+	TX_SFX_KEY_ITEM
+	db "@"
 
-HM02ExplanationText: ; 1e636 (7:6636)
+HM02ExplanationText:
 	TX_FAR _HM02ExplanationText
 	db "@"
 
-HM02NoRoomText: ; 1e63b (7:663b)
+HM02NoRoomText:
 	TX_FAR _HM02NoRoomText
 	db "@"
 
-Route16HouseText2: ; 1e640 (7:6640)
+Route16HouseText2:
 	TX_ASM
 	ld hl, Route16HouseText_1e652
 	call PrintText
@@ -51,6 +50,6 @@ Route16HouseText2: ; 1e640 (7:6640)
 	call WaitForSoundToFinish
 	jp TextScriptEnd
 
-Route16HouseText_1e652: ; 1e652 (7:6652)
+Route16HouseText_1e652:
 	TX_FAR _Route16HouseText_1e652
 	db "@"

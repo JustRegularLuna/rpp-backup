@@ -1,4 +1,4 @@
-KingdraBaseStats: ; 3908e (e:508e)
+KingdraBaseStats:
 db DEX_KINGDRA ; pokedex id
 db 75 ; base hp
 db 95 ; base attack

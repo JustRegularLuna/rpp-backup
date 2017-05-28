@@ -1,4 +1,4 @@
-DiglettsCaveObject: ; 0x61f72 (size=20)
+DiglettsCaveObject:
 	db $19 ; border block
 
 	db $2 ; warps
@@ -7,7 +7,7 @@ DiglettsCaveObject: ; 0x61f72 (size=20)
 
 	db $0 ; signs
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP DIGLETTS_CAVE_WIDTH, $5, $5 ; DIGLETTS_CAVE_EXIT

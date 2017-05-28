@@ -1,4 +1,4 @@
-BeachHouseObject: ; 0x1df07 (size=32)
+BeachHouseObject:
 	db $a ; border block
 
 	db $2 ; warps
@@ -7,11 +7,11 @@ BeachHouseObject: ; 0x1df07 (size=32)
 
 	db $0 ; signs
 
-	db $4 ; people
-	db SPRITE_FISHER, $4 + 4, $2 + 4, $ff, $d3, $1 ; person
-	db SPRITE_SURF_PIKACHU, $3 + 4, $2 + 4, $ff, $d3, $2 ; person
-	db SPRITE_BRUNETTE_GIRL, $5 + 4, $9 + 4, $ff, $d1, $3 ; person
-	db SPRITE_LYING_OLD_MAN, $7 + 4, $a + 4, $ff, $ff, $4 ; person
+	db $4 ; objects
+	object SPRITE_FISHER, $2, $4, STAY, RIGHT, $1 ; person
+	object SPRITE_SURF_PIKACHU, $2, $3, STAY, RIGHT, $2 ; person
+	object SPRITE_BRUNETTE_GIRL, $9, $5, STAY, UP, $3 ; person
+	object SPRITE_LYING_OLD_MAN, $a, $7, STAY, NONE, $4 ; person
 
 	; warp-to
 	EVENT_DISP BEACH_HOUSE_WIDTH, $7, $2

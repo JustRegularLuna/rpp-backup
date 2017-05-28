@@ -1,4 +1,4 @@
-PorygonZBaseStats: ; 392be (e:52be)
+PorygonZBaseStats:
 db DEX_PORYGONZ ; pokedex id
 db 85 ; base hp
 db 80 ; base attack

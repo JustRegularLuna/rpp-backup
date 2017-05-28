@@ -1,7 +1,7 @@
-PickupItem:
+PickUpItem:
 	call EnableAutoTextBoxDrawing
 
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld a, [hSpriteIndexOrTextID]
 	ld b, a
 	ld hl, wMissableObjectList
 .missableObjectsListLoop
@@ -16,8 +16,8 @@ PickupItem:
 	ld a, [hl]
 	ld [$ffdb], a
 
-	ld hl, W_MAPSPRITEEXTRADATA
-	ld a, [H_DOWNARROWBLINKCNT2] ; $ff8c
+	ld hl, wMapSpriteExtraData
+	ld a, [hSpriteIndexOrTextID]
 	dec a
 	add a
 	ld d, 0
@@ -30,7 +30,7 @@ PickupItem:
 	jr nc, .BagFull
 
 	ld a, [$ffdb]
-	ld [wcc4d], a
+	ld [wMissableObjectIndex], a
 	predef HideObject
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -44,7 +44,7 @@ PickupItem:
 	
 FoundItemText:
 	TX_FAR _FoundItemText
-	db $0B
+	TX_SFX_ITEM_1
 	db "@"
 
 NoMoreRoomForItemText:

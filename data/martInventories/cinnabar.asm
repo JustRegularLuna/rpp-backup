@@ -1,4 +1,4 @@
-CinnabarMartText1:: ; 24b9 (0:24b9)
+CinnabarCashierText::
 	db MART_LIST
 	db 7
 	db ULTRA_BALL

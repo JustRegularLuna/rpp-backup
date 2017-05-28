@@ -1,10 +1,10 @@
 # Linux
 
-	sudo apt-get install make gcc bison git python python-setuptools
-	sudo easy_install pypng
+	sudo apt-get install make gcc bison git python
 
-	git clone git://github.com/bentley/rgbds.git
+	git clone https://github.com/rednex/rgbds
 	cd rgbds
+	git checkout v0.2.5
 	sudo make install
 	cd ..
 
@@ -23,13 +23,13 @@ To build them individually:
 
 # Mac
 
-In the shell, run:
+In **Terminal**, run:
 
 	xcode-select --install
-	sudo easy_install pypng
 
-	git clone git://github.com/bentley/rgbds.git
+	git clone https://github.com/rednex/rgbds
 	cd rgbds
+	git checkout v0.2.5
 	sudo make install
 	cd ..
 
@@ -50,16 +50,12 @@ Original instructions are below:
 
 To build on Windows, use [**Cygwin**](http://cygwin.com/install.html). Use the default settings.
 
-Then get the most recent version of [**rgbds**](https://github.com/bentley/rgbds/releases/).
-Extract the archive and put `rgbasm.exe`, `rgblink.exe` and `rgbfix.exe` in `C:\cygwin\usr\local\bin`.
+In the installer, select the following packages: `make` `git` `python` `gettext`
+
+Then get [**rgbds 0.2.5**](https://github.com/bentley/rgbds/releases/tag/v0.2.5).
+Extract the archive and put `rgbasm.exe`, `rgblink.exe`, `rgbfix.exe` and `rgbgfx.exe` in `C:\cygwin\usr\local\bin`.  If your Cygwin installation directory differs, ensure the `bin` directory is present in the PATH variable.
 
 In the **Cygwin terminal**:
-
-	install $(lynx -source rawgit.com/transcode-open/apt-cyg/master/apt-cyg) /bin
-	apt-cyg install make git python gettext
-
-	lynx -source bootstrap.pypa.io/get-pip.py | python
-	pip install pypng
 
 	git clone --recursive https://github.com/TheFakeMateo/RedPlusPlus.git
 	cd RedPlusPlus

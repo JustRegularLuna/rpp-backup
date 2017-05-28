@@ -8,7 +8,7 @@
 ; fields, respectively, within loops. The X is the loop index.
 ; If there is an inner loop, Y is the inner loop index, i.e. $C1Y* and $C2Y*
 ; denote fields of the sprite slots interated over in the inner loop.
-InitMapSprites: ; 1785b (5:785b)
+InitMapSprites:
 	call InitOutsideMapSprites
 	ret c ; return if the map is an outside map (already handled by above call)
 ; if the map is an inside map (i.e. mapID >= $25)
@@ -29,17 +29,17 @@ InitMapSprites: ; 1785b (5:785b)
 ; This is used for both inside and outside maps, since it is called by
 ; InitOutsideMapSprites.
 ; Loads tile pattern data for sprites into VRAM.
-LoadMapSpriteTilePatterns: ; 17871 (5:7871)
-	ld a,[W_NUMSPRITES]
+LoadMapSpriteTilePatterns:
+	ld a,[wNumSprites]
 	and a ; are there any sprites?
 	jr nz,.spritesExist
 	ret
 .spritesExist
-	ld c,a ; c = [W_NUMSPRITES]
+	ld c,a ; c = [wNumSprites]
 	ld b,$10 ; number of sprite slots
 	ld hl,wSpriteStateData2 + $0d
 	xor a
-	ld [$ff8e],a ; 4-tile sprite counter
+	ld [hFourTileSpriteCount],a
 .copyPictureIDLoop ; loop to copy picture ID from $C2XD to $C2XE
 	ld a,[hli] ; $C2XD (sprite picture ID)
 	ld [hld],a ; $C2XE
@@ -103,14 +103,14 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	cp a,SPRITE_BALL ; is it a 4-tile sprite?
 	jr c,.notFourTileSprite
 	pop af
-	ld a,[$ff8e] ; 4-tile sprite counter
+	ld a,[hFourTileSpriteCount]
 	add a,11
 	jr .storeVRAMSlot
 .notFourTileSprite
 	pop af
 .storeVRAMSlot
 	ld [hl],a ; store VRAM slot at $C2XE
-	ld [$ff8d],a ; used to determine if it's 4-tile sprite later
+	ld [hVRAMSlot],a ; used to determine if it's 4-tile sprite later
 	ld a,b ; a = current sprite picture ID
 	dec a
 	add a
@@ -133,7 +133,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	push bc
 	ld hl,vNPCSprites ; VRAM base address
 	ld bc,$c0 ; number of bytes per VRAM slot
-	ld a,[$ff8d]
+	ld a,[hVRAMSlot]
 	cp a,11 ; is it a 4-tile sprite?
 	jr nc,.fourTileSpriteVRAMAddr
 	ld d,a
@@ -147,13 +147,13 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 	jr .loadStillTilePattern
 .fourTileSpriteVRAMAddr
 	ld hl,vSprites + $7c0 ; address for second 4-tile sprite
-	ld a,[$ff8e] ; 4-tile sprite counter
-	and a ; is it the first 4-tile sprite?
+	ld a,[hFourTileSpriteCount]
+	and a
 	jr nz,.loadStillTilePattern
 ; if it's the first 4-tile sprite
 	ld hl,vSprites + $780 ; address for first 4-tile sprite
 	inc a
-	ld [$ff8e],a ; 4-tile sprite counter
+	ld [hFourTileSpriteCount],a
 .loadStillTilePattern
 	pop bc
 	pop de
@@ -173,7 +173,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 .skipFirstLoad
 	pop de
 	pop hl
-	ld a,[$ff8d]
+	ld a,[hVRAMSlot]
 	cp a,11 ; is it a 4-tile sprite?
 	jr nc,.skipSecondLoad ; if so, there is no second block
 	push de
@@ -241,7 +241,7 @@ LoadMapSpriteTilePatterns: ; 17871 (5:7871)
 ; de = pointer to sprite sheet
 ; bc = length in bytes
 ; a = ROM bank
-ReadSpriteSheetData: ; 17971 (5:7971)
+ReadSpriteSheetData:
 	ld a,[hli]
 	ld e,a
 	ld a,[hli]
@@ -255,8 +255,8 @@ ReadSpriteSheetData: ; 17971 (5:7971)
 
 ; Loads sprite set for outside maps (cities and routes) and sets VRAM slots.
 ; sets carry if the map is a city or route, unsets carry if not
-InitOutsideMapSprites: ; 1797b (5:797b)
-	ld a,[W_CURMAP]
+InitOutsideMapSprites:
+	ld a,[wCurMap]
 	cp a,REDS_HOUSE_1F ; is the map a city or a route (map ID less than $25)?
 	ret nc ; if not, return
 	ld hl,MapSpriteSets
@@ -272,12 +272,12 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	ld a,[wFontLoaded]
 	bit 0,a ; reloading upper half of tile patterns after displaying text?
 	jr nz,.loadSpriteSet ; if so, forcibly reload the sprite set
-	ld a,[W_SPRITESETID]
+	ld a,[wSpriteSetID]
 	cp b ; has the sprite set ID changed?
 	jr z,.skipLoadingSpriteSet ; if not, don't load it again
 .loadSpriteSet
 	ld a,b
-	ld [W_SPRITESETID],a
+	ld [wSpriteSetID],a
 	dec a
 	ld b,a
 	sla a
@@ -296,7 +296,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	ld hl,wSpriteStateData2 + $0d
 	ld a,SPRITE_RED
 	ld [hl],a
-	ld bc,W_SPRITESET
+	ld bc,wSpriteSet
 ; Load the sprite set into RAM.
 ; This loop also fills $C2XD (sprite picture ID) where X is from $0 to $A
 ; with picture ID's. This is done so that LoadMapSpriteTilePatterns will
@@ -322,13 +322,13 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	ld [hl],a ; $C2XD (sprite picture ID)
 	dec b
 	jr nz,.zeroRemainingSlotsLoop
-	ld a,[W_NUMSPRITES]
+	ld a,[wNumSprites]
 	push af ; save number of sprites
 	ld a,11 ; 11 sprites in sprite set
-	ld [W_NUMSPRITES],a
+	ld [wNumSprites],a
 	call LoadMapSpriteTilePatterns
 	pop af
-	ld [W_NUMSPRITES],a ; restore number of sprites
+	ld [wNumSprites],a ; restore number of sprites
 	ld hl,wSpriteStateData2 + $1e
 	ld b,$0f
 ; The VRAM tile pattern slots that LoadMapSpriteTilePatterns set are in the
@@ -357,7 +357,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 	and a ; is the sprite slot used?
 	jr z,.skipGettingPictureIndex ; if the sprite slot is not used
 	ld b,a ; b = picture ID
-	ld de,W_SPRITESET
+	ld de,wSpriteSet
 ; Loop to find the index of the sprite's picture ID within the sprite set.
 .getPictureIndexLoop
 	inc c
@@ -385,7 +385,7 @@ InitOutsideMapSprites: ; 1797b (5:797b)
 
 ; Chooses the correct sprite set ID depending on the player's position within
 ; the map for maps with two sprite sets.
-GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
+GetSplitMapSpriteSetID:
 ;	cp a,$f8
 ;	jr z,.route20
 ;	commented out because $f8 is Route 19 now, and a normal divide
@@ -405,10 +405,10 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 	ld b,a
 	jr z,.eastWestDivide
 .northSouthDivide
-	ld a,[W_YCOORD]
+	ld a,[wYCoord]
 	jr .compareCoord
 .eastWestDivide
-	ld a,[W_XCOORD]
+	ld a,[wXCoord]
 .compareCoord
 	cp b
 	jr c,.loadSpriteSetID
@@ -421,7 +421,7 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 ; Route 20 is a special case because the two map sections have a more complex
 ; shape instead of the map simply being split horizontally or vertically.
 ;.route20
-;	ld hl,W_XCOORD
+;	ld hl,wXCoord
 ;	ld a,[hl]
 ;	cp a,$2b
 ;	ld a,$01
@@ -436,7 +436,7 @@ GetSplitMapSpriteSetID: ; 17a1a (5:7a1a)
 ;	jr nc,.next
 ;	ld b,$0d
 ;.next
-;	ld a,[W_YCOORD]
+;	ld a,[wYCoord]
 ;	cp b
 ;	ld a,$0a
 ;	ret c

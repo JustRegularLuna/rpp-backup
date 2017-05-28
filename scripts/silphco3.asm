@@ -1,137 +1,136 @@
-SilphCo3Script: ; 59f5b (16:5f5b)
+SilphCo3Script:
 	call SilphCo3Script_59f71
 	call EnableAutoTextBoxDrawing
-	ld hl, SilphCo3TrainerHeaders
+	ld hl, SilphCo3TrainerHeader0
 	ld de, SilphCo3ScriptPointers
-	ld a, [W_SILPHCO3CURSCRIPT]
+	ld a, [wSilphCo3CurScript]
 	call ExecuteCurMapScriptInTable
-	ld [W_SILPHCO3CURSCRIPT], a
+	ld [wSilphCo3CurScript], a
 	ret
 
-SilphCo3Script_59f71: ; 59f71 (16:5f71)
-	ld hl, wd126
+SilphCo3Script_59f71:
+	ld hl, wCurrentMapScriptFlags
 	bit 5, [hl]
 	res 5, [hl]
 	ret z
-	ld hl, DataTable_59fa8 ; $5fa8
+	ld hl, SilphCo3GateCoords
 	call SilphCo2Script_59d43
 	call SilphCo3Script_59fad
-	ld a, [wd828]
-	bit 0, a
+	CheckEvent EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	jr nz, .asm_59f98
 	push af
 	ld a, $5f
-	ld [wd09f], a
-	ld bc, $404
+	ld [wNewTileBlockID], a
+	lb bc, 4, 4
 	predef ReplaceTileBlock
 	pop af
 .asm_59f98
-	bit 1, a
+	CheckEventAfterBranchReuseA EVENT_SILPH_CO_3_UNLOCKED_DOOR2, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ret nz
 	ld a, $5f
-	ld [wd09f], a
-	ld bc, $408
+	ld [wNewTileBlockID], a
+	lb bc, 4, 8
 	predef_jump ReplaceTileBlock
 
-DataTable_59fa8: ; 59fa8 (16:5fa8)
-	db $04,$04,$04,$08,$FF
+SilphCo3GateCoords:
+	db $04,$04
+	db $04,$08
+	db $FF
 
-SilphCo3Script_59fad: ; 59fad (16:5fad)
-	ld hl, wd828
+SilphCo3Script_59fad:
+	EventFlagAddress hl, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ld a, [$ffe0]
 	and a
 	ret z
 	cp $1
-	jr nz, .asm_59fbb
-	set 0, [hl]
+	jr nz, .next
+	SetEventReuseHL EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ret
-.asm_59fbb
-	set 1, [hl]
+.next
+	SetEventAfterBranchReuseHL EVENT_SILPH_CO_3_UNLOCKED_DOOR2, EVENT_SILPH_CO_3_UNLOCKED_DOOR1
 	ret
 
-SilphCo3ScriptPointers: ; 59fbe (16:5fbe)
+SilphCo3ScriptPointers:
 	dw CheckFightingMapTrainers
 	dw DisplayEnemyTrainerTextAndStartBattle
 	dw EndTrainerBattle
 
-SilphCo3TextPointers: ; 59fc4 (16:5fc4)
+SilphCo3TextPointers:
 	dw SilphCo3Text1
 	dw SilphCo3Text2
 	dw SilphCo3Text3
-	dw Predef5CText
+	dw PickUpItemText
 
-SilphCo3TrainerHeaders: ; 59fcc (16:5fcc)
-SilphCo3TrainerHeader0: ; 59fcc (16:5fcc)
-	db $2 ; flag's bit
+SilphCo3TrainerHeader0:
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_3F_TRAINER_0
 	db ($2 << 4) ; trainer's view range
-	dw wd827 ; flag's byte
-	dw SilphCo3BattleText1 ; 0x600d TextBeforeBattle
-	dw SilphCo3AfterBattleText1 ; 0x6017 TextAfterBattle
-	dw SilphCo3EndBattleText1 ; 0x6012 TextEndBattle
-	dw SilphCo3EndBattleText1 ; 0x6012 TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_3F_TRAINER_0
+	dw SilphCo3BattleText1 ; TextBeforeBattle
+	dw SilphCo3AfterBattleText1 ; TextAfterBattle
+	dw SilphCo3EndBattleText1 ; TextEndBattle
+	dw SilphCo3EndBattleText1 ; TextEndBattle
 
-SilphCo3TrainerHeader1: ; 59fd8 (16:5fd8)
-	db $3 ; flag's bit
+SilphCo3TrainerHeader1:
+	dbEventFlagBit EVENT_BEAT_SILPH_CO_3F_TRAINER_1
 	db ($3 << 4) ; trainer's view range
-	dw wd827 ; flag's byte
-	dw SilphCo3BattleText2 ; 0x6026 TextBeforeBattle
-	dw SilphCo3AfterBattleText2 ; 0x6030 TextAfterBattle
-	dw SilphCo3EndBattleText2 ; 0x602b TextEndBattle
-	dw SilphCo3EndBattleText2 ; 0x602b TextEndBattle
+	dwEventFlagAddress EVENT_BEAT_SILPH_CO_3F_TRAINER_1
+	dw SilphCo3BattleText2 ; TextBeforeBattle
+	dw SilphCo3AfterBattleText2 ; TextAfterBattle
+	dw SilphCo3EndBattleText2 ; TextEndBattle
+	dw SilphCo3EndBattleText2 ; TextEndBattle
 
 	db $ff
 
-SilphCo3Text1: ; 59fe5 (16:5fe5)
+SilphCo3Text1:
 	TX_ASM
-	ld a, [wd838]
-	bit 7, a
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
 	ld hl, SilphCo3Text_59ffe
-	jr nz, asm_8c56f ; 0x59fee
+	jr nz, .asm_59fee
 	ld hl, SilphCo3Text_59ff9
-asm_8c56f ; 0x59ff3
+.asm_59fee
 	call PrintText
 	jp TextScriptEnd
 
-SilphCo3Text_59ff9: ; 59ff9 (16:5ff9)
+SilphCo3Text_59ff9:
 	TX_FAR _SilphCo3Text_59ff9
 	db "@"
 
-SilphCo3Text_59ffe: ; 59ffe (16:5ffe)
+SilphCo3Text_59ffe:
 	TX_FAR _SilphCo3Text_59ffe
 	db "@"
 
-SilphCo3Text2: ; 5a003 (16:6003)
+SilphCo3Text2:
 	TX_ASM
 	ld hl, SilphCo3TrainerHeader0
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo3BattleText1: ; 5a00d (16:600d)
+SilphCo3BattleText1:
 	TX_FAR _SilphCo3BattleText1
 	db "@"
 
-SilphCo3EndBattleText1: ; 5a012 (16:6012)
+SilphCo3EndBattleText1:
 	TX_FAR _SilphCo3EndBattleText1
 	db "@"
 
-SilphCo3AfterBattleText1: ; 5a017 (16:6017)
+SilphCo3AfterBattleText1:
 	TX_FAR _SilphCo3AfterBattleText1
 	db "@"
 
-SilphCo3Text3: ; 5a01c (16:601c)
+SilphCo3Text3:
 	TX_ASM
 	ld hl, SilphCo3TrainerHeader1
 	call TalkToTrainer
 	jp TextScriptEnd
 
-SilphCo3BattleText2: ; 5a026 (16:6026)
+SilphCo3BattleText2:
 	TX_FAR _SilphCo3BattleText2
 	db "@"
 
-SilphCo3EndBattleText2: ; 5a02b (16:602b)
+SilphCo3EndBattleText2:
 	TX_FAR _SilphCo3EndBattleText2
 	db "@"
 
-SilphCo3AfterBattleText2: ; 5a030 (16:6030)
+SilphCo3AfterBattleText2:
 	TX_FAR _SilphCo3AfterBattleText2
 	db "@"

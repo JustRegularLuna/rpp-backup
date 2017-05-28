@@ -1,10 +1,9 @@
-FanClubScript: ; 59b70 (16:5b70)
+FanClubScript:
 	jp EnableAutoTextBoxDrawing
 
 FanClubBikeInBag:
 ; check if any bike paraphernalia in bag
-	ld a, [wFanClubFlags]
-	bit 1, a ; got bike voucher?
+	CheckEvent EVENT_GOT_BIKE_VOUCHER
 	ret nz
 	ld b, BICYCLE
 	call IsItemInBag
@@ -12,7 +11,7 @@ FanClubBikeInBag:
 	ld b, BIKE_VOUCHER
 	jp IsItemInBag
 
-FanClubTextPointers: ; 59b84 (16:5b84)
+FanClubTextPointers:
 	dw FanClubText1
 	dw FanClubText2
 	dw FanClubText3
@@ -25,19 +24,16 @@ FanClubTextPointers: ; 59b84 (16:5b84)
 FanClubText1:
 ; pikachu fan
 	TX_ASM
-	ld a, [wFanClubFlags]
-	bit 7, a
+	CheckEvent EVENT_PIKACHU_FAN_BOAST
 	jr nz, .mineisbetter
 	ld hl, .normaltext
 	call PrintText
-	ld hl, wFanClubFlags
-	set 6, [hl]
+	SetEvent EVENT_SEEL_FAN_BOAST
 	jr .done
 .mineisbetter
 	ld hl, .bettertext
 	call PrintText
-	ld hl, wFanClubFlags
-	res 7, [hl]
+	ResetEvent EVENT_PIKACHU_FAN_BOAST
 .done
 	jp TextScriptEnd
 
@@ -52,19 +48,16 @@ FanClubText1:
 FanClubText2:
 ; seel fan
 	TX_ASM
-	ld a, [wFanClubFlags]
-	bit 6, a
+	CheckEvent EVENT_SEEL_FAN_BOAST
 	jr nz, .mineisbetter
 	ld hl, .normaltext
 	call PrintText
-	ld hl, wFanClubFlags
-	set 7, [hl]
+	SetEvent EVENT_PIKACHU_FAN_BOAST
 	jr .done
 .mineisbetter
 	ld hl, .bettertext
 	call PrintText
-	ld hl, wFanClubFlags
-	res 6, [hl]
+	ResetEvent EVENT_SEEL_FAN_BOAST
 .done
 	jp TextScriptEnd
 
@@ -125,8 +118,7 @@ FanClubText5:
 	jr nc, .BagFull
 	ld hl, .receivedvouchertext
 	call PrintText
-	ld hl, wFanClubFlags
-	set 1, [hl]
+	SetEvent EVENT_GOT_BIKE_VOUCHER
 	jr .done
 .BagFull
 	ld hl, .bagfulltext
@@ -152,7 +144,7 @@ FanClubText5:
 
 .receivedvouchertext
 	TX_FAR ReceivedBikeVoucherText
-	db $11
+	TX_SFX_KEY_ITEM
 	TX_FAR ExplainBikeVoucherText
 	db "@"
 
@@ -168,14 +160,14 @@ FanClubText5:
 	TX_FAR FanClubBagFullText
 	db "@"
 
-FanClubText6: ; 59c88 (16:5c88)
+FanClubText6:
 	TX_FAR _FanClubText6
 	db "@"
 
-FanClubText7: ; 59c8d (16:5c8d)
+FanClubText7:
 	TX_FAR _FanClubText7
 	db "@"
 
-FanClubText8: ; 59c92 (16:5c92)
+FanClubText8:
 	TX_FAR _FanClubText8
 	db "@"

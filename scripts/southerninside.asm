@@ -19,18 +19,18 @@ SouthernIslandInsideTextPointers:
 
 SouthernIslandInsideTrainerHeaders:
 SouthernIslandInsideTrainerHeader0:
-	db $3 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SOUTHERN_INSIDE_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd85f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SOUTHERN_INSIDE_TRAINER_0
 	dw SouthernIslandInsideLatiosText ; TextBeforeBattle
 	dw SouthernIslandInsideLatiosText ; TextAfterBattle
 	dw SouthernIslandInsideLatiosText ; TextEndBattle
 	dw SouthernIslandInsideLatiosText ; TextEndBattle
 
 SouthernIslandInsideTrainerHeader1:
-	db $4 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_SOUTHERN_INSIDE_TRAINER_1
 	db ($0 << 4) ; trainer's view range
-	dw wd85f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_SOUTHERN_INSIDE_TRAINER_1
 	dw SouthernIslandInsideLatiasText ; TextBeforeBattle
 	dw SouthernIslandInsideLatiasText ; TextAfterBattle
 	dw SouthernIslandInsideLatiasText ; TextEndBattle

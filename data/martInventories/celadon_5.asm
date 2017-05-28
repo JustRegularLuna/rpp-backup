@@ -1,9 +1,9 @@
 ; Celadon Dept. Store 5F (1)
-CeladonMart5Text3:: ; 2496 (0:2496)
+CeladonMart5Clerk1Text::
 	db MART_LIST
 	db 7
 	db X_ACCURACY
-	db GUARD_SPEC_
+	db GUARD_SPEC
 	db DIRE_HIT
 	db X_ATTACK
 	db X_DEFEND
@@ -12,7 +12,7 @@ CeladonMart5Text3:: ; 2496 (0:2496)
 	db $FF
 
 ; Celadon Dept. Store 5F (2)
-CeladonMart5Text4:: ; 24a0 (0:24a0)
+CeladonMart5Clerk2Text::
 	db MART_LIST
 	db 5
 	db HP_UP

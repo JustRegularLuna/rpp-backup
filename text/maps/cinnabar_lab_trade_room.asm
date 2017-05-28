@@ -62,4 +62,3 @@ _NoMoreRoomForMysticText::
 	line "me when you have"
 	cont "room."
 	done
-

@@ -1,4 +1,4 @@
-_CeladonMansion5Text1:: ; 9d1ba (27:51ba)
+_CeladonMansion5Text1::
 	text "I know everything"
 	line "about the world"
 	cont "of #mon in"
@@ -8,4 +8,3 @@ _CeladonMansion5Text1:: ; 9d1ba (27:51ba)
 	line "your friends and"
 	cont "trade #mon!"
 	done
-

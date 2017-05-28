@@ -1,4 +1,4 @@
-BellossomBaseStats: ; 388ae (e:48ae)
+BellossomBaseStats:
 db DEX_BELLOSSOM ; pokedex id
 db 75 ; base hp
 db 80 ; base attack

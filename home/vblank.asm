@@ -6,14 +6,14 @@ VBlank::
 	push hl
 
 	ld a, [H_LOADEDROMBANK]
-	ld [wd122], a
+	ld [wVBlankSavedROMBank], a
 
 	ld a, [hSCX]
 	ld [rSCX], a
 	ld a, [hSCY]
 	ld [rSCY], a
 
-	ld a, [wd0a0]
+	ld a, [wDisableVBlankWYUpdate]
 	and a
 	jr nz, .ok
 	ld a, [hWY]
@@ -22,12 +22,12 @@ VBlank::
 
 	call AutoBgMapTransfer
 	call VBlankCopyBgMap
-	call RedrawExposedScreenEdge
+	call RedrawRowOrColumn
 	call VBlankCopy
 	call VBlankCopyDouble
 	call UpdateMovingBgTiles
 	call $ff80 ; hOAMDMA
-	ld a, Bank(PrepareOAMData)
+	ld a, BANK(PrepareOAMData)
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 	call PrepareOAMData
@@ -38,47 +38,47 @@ VBlank::
 
 	ld a, [H_VBLANKOCCURRED]
 	and a
-	jr z, .vblanked
+	jr z, .skipZeroing
 	xor a
 	ld [H_VBLANKOCCURRED], a
-.vblanked
 
+.skipZeroing
 	ld a, [H_FRAMECOUNTER]
 	and a
-	jr z, .decced
+	jr z, .skipDec
 	dec a
 	ld [H_FRAMECOUNTER], a
-.decced
 
-	call Func_28cb
+.skipDec
+	call FadeOutAudio
 
-	ld a, [wc0ef] ; music ROM bank
+	ld a, [wAudioROMBank] ; music ROM bank
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 
-	cp BANK(Music2_UpdateMusic)
-	jr nz, .notbank2
-.bank2
-	call Music2_UpdateMusic
+	cp BANK(Audio1_UpdateMusic)
+	jr nz, .checkForAudio2
+.audio1
+	call Audio1_UpdateMusic
 	jr .afterMusic
-.notbank2
-	cp BANK(Music8_UpdateMusic)
-	jr nz, .bank1F
-.bank8
-	call Func_2136e
-	call Music8_UpdateMusic
+.checkForAudio2
+	cp BANK(Audio2_UpdateMusic)
+	jr nz, .audio3
+.audio2
+	call Music_DoLowHealthAlarm
+	call Audio2_UpdateMusic
 	jr .afterMusic
-.bank1F
-	call Music1f_UpdateMusic
+.audio3
+	call Audio3_UpdateMusic
 .afterMusic
 
 	callba TrackPlayTime ; keep track of time played
 
-	ld a, [$fff9]
+	ld a, [hDisableJoypadPolling]
 	and a
 	call z, ReadJoypad
 
-	ld a, [wd122]
+	ld a, [wVBlankSavedROMBank]
 	ld [H_LOADEDROMBANK], a
 	ld [MBC1RomBank], a
 

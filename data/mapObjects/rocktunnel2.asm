@@ -1,4 +1,4 @@
-RockTunnel2Object: ; 0x4613d (size=100)
+RockTunnel2Object:
 	db $3 ; border block
 
 	db $4 ; warps
@@ -9,15 +9,15 @@ RockTunnel2Object: ; 0x4613d (size=100)
 
 	db $0 ; signs
 
-	db $8 ; people
-	db SPRITE_LASS, $d + 4, $b + 4, $ff, $d0, TRAINER | $1, JR__TRAINER_F + TRAINER_START, $9
-	db SPRITE_HIKER, $a + 4, $6 + 4, $ff, $d0, TRAINER | $2, HIKER + TRAINER_START, $9
-	db SPRITE_BLACK_HAIR_BOY_2, $5 + 4, $3 + 4, $ff, $d0, TRAINER | $3, POKEMANIAC + TRAINER_START, $3
-	db SPRITE_LASS, $15 + 4, $14 + 4, $ff, $d3, TRAINER | $4, POKEMANIAC + TRAINER_START, $4
-	db SPRITE_HIKER, $a + 4, $1e + 4, $ff, $d0, TRAINER | $5, HIKER + TRAINER_START, $a
-	db SPRITE_LASS, $1c + 4, $e + 4, $ff, $d3, TRAINER | $6, JR__TRAINER_F + TRAINER_START, $a
-	db SPRITE_HIKER, $5 + 4, $21 + 4, $ff, $d3, TRAINER | $7, HIKER + TRAINER_START, $b
-	db SPRITE_BLACK_HAIR_BOY_2, $1e + 4, $1a + 4, $ff, $d0, TRAINER | $8, POKEMANIAC + TRAINER_START, $5
+	db $8 ; objects
+	object SPRITE_LASS, $b, $d, STAY, DOWN, $1, OPP_JR_TRAINER_F, $9
+	object SPRITE_HIKER, $6, $a, STAY, DOWN, $2, OPP_HIKER, $9
+	object SPRITE_BLACK_HAIR_BOY_2, $3, $5, STAY, DOWN, $3, OPP_POKEMANIAC, $3
+	object SPRITE_LASS, $14, $15, STAY, RIGHT, $4, OPP_POKEMANIAC, $4
+	object SPRITE_HIKER, $1e, $a, STAY, DOWN, $5, OPP_HIKER, $a
+	object SPRITE_LASS, $e, $1c, STAY, RIGHT, $6, OPP_JR_TRAINER_F, $a
+	object SPRITE_HIKER, $21, $5, STAY, RIGHT, $7, OPP_HIKER, $b
+	object SPRITE_BLACK_HAIR_BOY_2, $1a, $1e, STAY, DOWN, $8, OPP_POKEMANIAC, $5
 
 	; warp-to
 	EVENT_DISP ROCK_TUNNEL_2_WIDTH, $19, $21 ; ROCK_TUNNEL_1

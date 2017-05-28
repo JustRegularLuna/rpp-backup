@@ -1,4 +1,4 @@
-CryData: ; 39446 (e:5446)
+CryData:
 ;$BaseCry, $Pitch, $Length
 db $0F, $80, $01; Bulbasaur
 db $0F, $20, $80; Ivysaur

@@ -1,4 +1,4 @@
-SylveonBaseStats: ; 3926a (e:526a)
+SylveonBaseStats:
 db DEX_SYLVEON ; pokedex id
 db 95 ; base hp
 db 65 ; base attack

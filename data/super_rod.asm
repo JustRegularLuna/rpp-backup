@@ -1,6 +1,6 @@
 ; super rod data
 ; format: map, pointer to fishing group
-SuperRodData: ; e919 (3:6919)
+SuperRodData:
 	dbw PALLET_TOWN, FishingGroup1
 	dbw VIRIDIAN_CITY, FishingGroup1
 	dbw CERULEAN_CITY, FishingGroup3
@@ -38,68 +38,68 @@ SuperRodData: ; e919 (3:6919)
 
 ; fishing groups
 ; number of monsters, followed by level/monster pairs
-FishingGroup1: ; e97d (3:697d)
+FishingGroup1:
 	db 4
 	db 25,GYARADOS
 	db 25,KINGLER
 	db 25,CLOYSTER
 	db 25,LANTURN
 
-FishingGroup2: ; e982 (3:6982)
+FishingGroup2:
 	db 3
 	db 25,PSYDUCK
 	db 25,SEAKING
 	db 25,KINGLER
 
-FishingGroup3: ; e987 (3:6987)
+FishingGroup3:
 	db 4
 	db 25,SEADRA
 	db 25,KINGLER
 	db 25,SLOWBRO
 	db 25,GYARADOS
 
-FishingGroup4: ; e98e (3:698e)
+FishingGroup4:
 	db 4
 	db 25,SEADRA
 	db 25,KINGLER
 	db 25,STARMIE
 	db 25,POLIWHIRL
 
-FishingGroup5: ; e993 (3:6993)
+FishingGroup5:
 	db 3
 	db 25,PSYDUCK
 	db 25,SLOWPOKE
 	db 25,GRIMER
 
-FishingGroup6: ; e998 (3:6998)
+FishingGroup6:
 	db 4
 	db 25,DRATINI
 	db 25,KINGLER
 	db 25,GOLDUCK
 	db 25,SLOWKING
 
-FishingGroup7: ; e9a1 (3:69a1)
+FishingGroup7:
 	db 4
 	db 25,TENTACRUEL
 	db 25,KINGLER
 	db 25,SEAKING
 	db 25,GYARADOS
 
-FishingGroup8: ; e9aa (3:69aa)
+FishingGroup8:
 	db 4
 	db 25,STARMIE
 	db 25,SEADRA
 	db 25,CLOYSTER
 	db 25,SEAKING
 
-FishingGroup9: ; e9b3 (3:69b3)
+FishingGroup9:
 	db 4
 	db 23,SLOWBRO
 	db 23,SEAKING
 	db 23,KINGLER
 	db 23,SEADRA
 
-FishingGroup10: ; e9bc (3:69bc)
+FishingGroup10:
 	db 4
 	db 23,SEAKING
 	db 25,KINGLER

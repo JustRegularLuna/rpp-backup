@@ -1,7 +1,7 @@
-CopycatsHouse2FScript: ; 5cc71 (17:4c71)
+CopycatsHouse2FScript:
 	jp EnableAutoTextBoxDrawing
 
-CopycatsHouse2FTextPointers: ; 5cc74 (17:4c74)
+CopycatsHouse2FTextPointers:
 	dw CopycatsHouse2FText1
 	dw CopycatsHouse2FText2
 	dw CopycatsHouse2FText3
@@ -10,18 +10,17 @@ CopycatsHouse2FTextPointers: ; 5cc74 (17:4c74)
 	dw CopycatsHouse2FText6
 	dw CopycatsHouse2FText7
 
-CopycatsHouse2FText1: ; 5cc82 (17:4c82)
+CopycatsHouse2FText1:
 	TX_ASM
-	ld a, [wCopyCatFlags]
-	bit 0, a
-	jr nz, .asm_7ccf3 ; 0x5cc88
+	CheckEvent EVENT_GOT_TM31
+	jr nz, .asm_7ccf3
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, CopycatsHouse2FText_5ccd4
 	call PrintText
 	ld b, POKE_DOLL
 	call IsItemInBag
-	jr z, .asm_62ecd ; 0x5cc9a
+	jr z, .asm_62ecd
 	ld hl, TM31PreReceiveText
 	call PrintText
 	lb bc, TM_31, 1
@@ -30,73 +29,74 @@ CopycatsHouse2FText1: ; 5cc82 (17:4c82)
 	ld hl, ReceivedTM31Text
 	call PrintText
 	ld a, POKE_DOLL
-	ldh [$db], a
+	ld [$ffdb], a
 	callba RemoveItemByID
-	ld hl, wCopyCatFlags
-	set 0, [hl]
-	jr .asm_62ecd ; 0x5ccc1
+	SetEvent EVENT_GOT_TM31
+	jr .asm_62ecd
 .BagFull
 	ld hl, TM31NoRoomText
 	call PrintText
-	jr .asm_62ecd ; 0x5ccc9
-.asm_7ccf3 ; 0x5cccb
+	jr .asm_62ecd
+.asm_7ccf3
 	ld hl, TM31ExplanationText2
 	call PrintText
-.asm_62ecd ; 0x5ccd1
+.asm_62ecd
 	jp TextScriptEnd
 
-CopycatsHouse2FText_5ccd4: ; 5ccd4 (17:4cd4)
+CopycatsHouse2FText_5ccd4:
 	TX_FAR _CopycatsHouse2FText_5ccd4
 	db "@"
 
-TM31PreReceiveText: ; 5ccd9 (17:4cd9)
+TM31PreReceiveText:
 	TX_FAR _TM31PreReceiveText
 	db "@"
 
-ReceivedTM31Text: ; 5ccde (17:4cde)
+ReceivedTM31Text:
 	TX_FAR _ReceivedTM31Text
-	db $0B
-TM31ExplanationText1: ; 5cce3 (17:4ce3)
+	TX_SFX_ITEM_1
+TM31ExplanationText1:
 	TX_FAR _TM31ExplanationText1
-	db $d, "@"
+	TX_WAIT
+	db "@"
 
-TM31ExplanationText2: ; 5cce9 (17:4ce9)
+TM31ExplanationText2:
 	TX_FAR _TM31ExplanationText2
 	db "@"
 
-TM31NoRoomText: ; 5ccee (17:4cee)
+TM31NoRoomText:
 	TX_FAR _TM31NoRoomText
-	db $d, "@"
+	TX_WAIT
+	db "@"
 
-CopycatsHouse2FText2: ; 5ccf4 (17:4cf4)
+CopycatsHouse2FText2:
 	TX_FAR _CopycatsHouse2FText2
 	db "@"
 
-CopycatsHouse2FText5: ; 5ccf9 (17:4cf9)
-CopycatsHouse2FText4: ; 5ccf9 (17:4cf9)
-CopycatsHouse2FText3: ; 5ccf9 (17:4cf9)
+CopycatsHouse2FText5:
+CopycatsHouse2FText4:
+CopycatsHouse2FText3:
 	TX_FAR _CopycatsHouse2FText3
 	db "@"
 
-CopycatsHouse2FText6: ; 5ccfe (17:4cfe)
+CopycatsHouse2FText6:
 	TX_FAR _CopycatsHouse2FText6
 	db "@"
 
-CopycatsHouse2FText7: ; 5cd03 (17:4d03)
+CopycatsHouse2FText7:
 	TX_ASM
 	ld a, [wSpriteStateData1 + 9]
-	cp $4
+	cp SPRITE_FACING_UP
 	ld hl, CopycatsHouse2FText_5cd1c
-	jr nz, .asm_399a4 ; 0x5cd0c
+	jr nz, .notUp
 	ld hl, CopycatsHouse2FText_5cd17
-.asm_399a4 ; 0x5cd11
+.notUp
 	call PrintText
 	jp TextScriptEnd
 
-CopycatsHouse2FText_5cd17: ; 5cd17 (17:4d17)
+CopycatsHouse2FText_5cd17:
 	TX_FAR _CopycatsHouse2FText_5cd17
 	db "@"
 
-CopycatsHouse2FText_5cd1c: ; 5cd1c (17:4d1c)
+CopycatsHouse2FText_5cd1c:
 	TX_FAR _CopycatsHouse2FText_5cd1c
 	db "@"

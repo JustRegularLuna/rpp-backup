@@ -17,9 +17,9 @@ FarawayIslandInsideTextPointers:
 
 FarawayIslandInsideTrainerHeaders:
 FarawayIslandInsideTrainerHeader0:
-	db $2 ; flag's bit
+	dbEventFlagBit EVENT_BEAT_FARAWAY_INSIDE_TRAINER_0
 	db ($0 << 4) ; trainer's view range
-	dw wd85f ; flag's byte
+	dwEventFlagAddress EVENT_BEAT_FARAWAY_INSIDE_TRAINER_0
 	dw FarawayIslandInsideMewText ; TextBeforeBattle
 	dw FarawayIslandInsideMewText ; TextAfterBattle
 	dw FarawayIslandInsideMewText ; TextEndBattle

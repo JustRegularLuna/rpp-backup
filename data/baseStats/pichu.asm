@@ -1,4 +1,4 @@
-PichuBaseStats: ; 3867e (e:467e)
+PichuBaseStats:
 db DEX_PICHU ; pokedex id
 db 20 ; base hp
 db 40 ; base attack

@@ -27,7 +27,7 @@ DayCareMText1: ; Day Care Lady
 	call PrintText
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
@@ -37,11 +37,11 @@ DayCareMText1: ; Day Care Lady
 	pop af
 	ld hl, DayCareAllRightThenText
 	jp c, .done
-	callab Func_2171b
+	callab KnowsHMMove
 	ld hl, DayCareCantAcceptMonWithHMText
 	jp c, .done
 	xor a
-	ld [wcc2b], a
+	ld [wPartyAndBillsPCSavedMenuItem], a
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
@@ -49,11 +49,11 @@ DayCareMText1: ; Day Care Lady
 	call PrintText
 	ld hl, wDayCareInUse
 	set 0, [hl]
-	ld a, $3
-	ld [wcf95], a
-	call Func_3a68
+	ld a, PARTY_TO_DAYCARE
+	ld [wMoveMonType], a
+	call MoveMon
 	xor a
-	ld [wcf95], a
+	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	ld a, [wcf91]
 	call PlayCry
@@ -64,39 +64,40 @@ DayCareMText1: ; Day Care Lady
 	xor a
 	ld hl, wDayCareMonName
 	call GetPartyMonName
-	ld a, $3
-	ld [wcc49], a
+	ld a, DAYCARE_DATA
+	ld [wMonDataLocation], a
 	call LoadMonData
 	callab CalcLevelFromExperience
 	ld a, d
 	cp MAX_LEVEL
 	jr c, .skipCalcExp
+
 	ld d, MAX_LEVEL
 	callab CalcExperience
 	ld hl, wDayCareMonExp
-	ld a, [H_NUMTOPRINT]
+	ld a, [hExperience]
 	ld [hli], a
-	ld a, [$ff97]
+	ld a, [hExperience + 1]
 	ld [hli], a
-	ld a, [$ff98]
+	ld a, [hExperience + 2]
 	ld [hl], a
 	ld d, MAX_LEVEL
 
 .skipCalcExp
 	xor a
-	ld [wTrainerEngageDistance], a
+	ld [wDayCareNumLevelsGrown], a
 	ld hl, wDayCareMonBoxLevel
 	ld a, [hl]
-	ld [wTrainerSpriteOffset], a
+	ld [wDayCareStartLevel], a
 	cp d
 	ld [hl], d
 	ld hl, DayCareMonNeedsMoreTimeText
 	jr z, .next
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wDayCareStartLevel]
 	ld b, a
 	ld a, d
 	sub b
-	ld [wTrainerEngageDistance], a
+	ld [wDayCareNumLevelsGrown], a
 	ld hl, DayCareMonHasGrownText
 
 .next
@@ -105,19 +106,19 @@ DayCareMText1: ; Day Care Lady
 	cp PARTY_LENGTH
 	ld hl, DayCareNoRoomForMonText
 	jp z, .leaveMonInDayCare
-	ld de, wTrainerFacingDirection
+	ld de, wDayCareTotalCost
 	xor a
 	ld [de], a
 	inc de
 	ld [de], a
-	ld hl, wTrainerScreenX
+	ld hl, wDayCarePerLevelCost
 	ld a, $1
 	ld [hli], a
 	ld [hl], $0
-	ld a, [wTrainerEngageDistance]
+	ld a, [wDayCareNumLevelsGrown]
 	inc a
 	ld b, a
-	ld c, $2
+	ld c, 2
 .calcPriceLoop
 	push hl
 	push de
@@ -130,7 +131,7 @@ DayCareMText1: ; Day Care Lady
 	jr nz, .calcPriceLoop
 	ld hl, DayCareOweMoneyText
 	call PrintText
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
@@ -138,12 +139,12 @@ DayCareMText1: ; Day Care Lady
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .leaveMonInDayCare
-	ld hl, wTrainerFacingDirection
-	ld [$ff9f], a
+	ld hl, wDayCareTotalCost
+	ld [hMoney], a
 	ld a, [hli]
-	ld [$ffa0], a
+	ld [hMoney + 1], a
 	ld a, [hl]
-	ld [$ffa1], a
+	ld [hMoney + 2], a
 	call HasEnoughMoney
 	jr nc, .enoughMoney
 	ld hl, DayCareNotEnoughMoneyText
@@ -153,22 +154,22 @@ DayCareMText1: ; Day Care Lady
 	ld hl, wDayCareInUse
 	res 0, [hl]
 	xor a
-	ld hl, wTrainerEngageDistance
+	ld hl, wDayCareNumLevelsGrown
 	ld [hli], a
 	inc hl
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	ld a, (SFX_02_5a - SFX_Headers_02) / 3
+	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
-	ld a, $13
+	ld a, MONEY_BOX
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, DayCareHeresYourMonText
 	call PrintText
-	ld a, $2
-	ld [wcf95], a
-	call Func_3a68
+	ld a, DAYCARE_TO_PARTY
+	ld [wMoveMonType], a
+	call MoveMon
 	ld a, [wDayCareMonSpecies]
 	ld [wcf91], a
 	ld a, [wPartyCount]
@@ -180,8 +181,8 @@ DayCareMText1: ; Day Care Lady
 	call AddNTimes
 	ld d, h
 	ld e, l
-	ld a, $1
-	ld [wHPBarMaxHP], a
+	ld a, 1
+	ld [wLearningMovesFromDayCare], a
 	predef WriteMonMoves
 	pop bc
 	pop af
@@ -198,13 +199,14 @@ DayCareMText1: ; Day Care Lady
 	inc de
 	ld a, [hl]
 	ld [de], a
+
 	ld a, [wcf91]
 	call PlayCry
 	ld hl, DayCareGotMonBackText
 	jr .done
 
 .leaveMonInDayCare
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wDayCareStartLevel]
 	ld [wDayCareMonBoxLevel], a
 
 .done
@@ -233,7 +235,7 @@ DayCareMText2: ; Day Care Man
 	call PrintText
 	xor a
 	ld [wUpdateSpritesEnabled], a
-	ld [wd07d], a
+	ld [wPartyMenuTypeOrMessageID], a
 	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
@@ -243,11 +245,11 @@ DayCareMText2: ; Day Care Man
 	pop af
 	ld hl, DayCareAllRightThenText
 	jp c, .done
-	callab Func_2171b
+	callab KnowsHMMove
 	ld hl, DayCareCantAcceptMonWithHMText
 	jp c, .done
 	xor a
-	ld [wcc2b], a
+	ld [wPartyAndBillsPCSavedMenuItem], a
 	ld a, [wWhichPokemon]
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
@@ -255,11 +257,11 @@ DayCareMText2: ; Day Care Man
 	call PrintText
 	ld hl, wDayCareInUse
 	set 1, [hl]
-	ld a, $4
-	ld [wcf95], a
-	call Func_3a68
+	ld a, PARTY_TO_DAYCARE_2
+	ld [wMoveMonType], a
+	call MoveMon
 	xor a
-	ld [wcf95], a
+	ld [wMoveMonType], a
 	call RemovePokemon
 	ld a, [wcf91]
 	call PlayCry
@@ -271,7 +273,7 @@ DayCareMText2: ; Day Care Man
 	ld hl, wDayCareMon2Name
 	call GetPartyMonName
 	ld a, $4
-	ld [wcc49], a
+	ld [wMonDataLocation], a
 	call LoadMonData
 	callab CalcLevelFromExperience
 	ld a, d
@@ -290,19 +292,19 @@ DayCareMText2: ; Day Care Man
 
 .skipCalcExp
 	xor a
-	ld [wTrainerEngageDistance], a
+	ld [wDayCareNumLevelsGrown], a
 	ld hl, wDayCareMon2BoxLevel
 	ld a, [hl]
-	ld [wTrainerSpriteOffset], a
+	ld [wDayCareStartLevel], a
 	cp d
 	ld [hl], d
 	ld hl, DayCareMonNeedsMoreTimeText
 	jr z, .next
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wDayCareStartLevel]
 	ld b, a
 	ld a, d
 	sub b
-	ld [wTrainerEngageDistance], a
+	ld [wDayCareNumLevelsGrown], a
 	ld hl, DayCareMonHasGrownText
 
 .next
@@ -311,7 +313,7 @@ DayCareMText2: ; Day Care Man
 	cp PARTY_LENGTH
 	ld hl, DayCareNoRoomForMonText
 	jp z, .leaveMonInDayCare
-	ld de, wTrainerFacingDirection
+	ld de, wDayCareTotalCost
 	xor a
 	ld [de], a
 	inc de
@@ -320,7 +322,7 @@ DayCareMText2: ; Day Care Man
 	ld a, $1
 	ld [hli], a
 	ld [hl], $0
-	ld a, [wTrainerEngageDistance]
+	ld a, [wDayCareNumLevelsGrown]
 	inc a
 	ld b, a
 	ld c, $2
@@ -344,7 +346,7 @@ DayCareMText2: ; Day Care Man
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .leaveMonInDayCare
-	ld hl, wTrainerFacingDirection
+	ld hl, wDayCareTotalCost
 	ld [$ff9f], a
 	ld a, [hli]
 	ld [$ffa0], a
@@ -359,22 +361,22 @@ DayCareMText2: ; Day Care Man
 	ld hl, wDayCareInUse
 	res 1, [hl]
 	xor a
-	ld hl, wTrainerEngageDistance
+	ld hl, wDayCareNumLevelsGrown
 	ld [hli], a
 	inc hl
 	ld de, wPlayerMoney + 2
 	ld c, $3
 	predef SubBCDPredef
-	ld a, (SFX_02_5a - SFX_Headers_02) / 3
+	ld a, SFX_PURCHASE
 	call PlaySoundWaitForCurrent
 	ld a, $13
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	ld hl, DayCareHeresYourMonText
 	call PrintText
-	ld a, $5
-	ld [wcf95], a
-	call Func_3a68
+	ld a, DAYCARE_TO_PARTY_2
+	ld [wMoveMonType], a
+	call MoveMon
 	ld a, [wDayCareMon2Species]
 	ld [wcf91], a
 	ld a, [wPartyCount]
@@ -410,7 +412,7 @@ DayCareMText2: ; Day Care Man
 	jr .done
 
 .leaveMonInDayCare
-	ld a, [wTrainerSpriteOffset]
+	ld a, [wDayCareStartLevel]
 	ld [wDayCareMon2BoxLevel], a
 
 .done

@@ -1,4 +1,4 @@
-TangrowthBaseStats: ; 3903a (e:503a)
+TangrowthBaseStats:
 db DEX_TANGROWTH ; pokedex id
 db 100 ; base hp
 db 100 ; base attack

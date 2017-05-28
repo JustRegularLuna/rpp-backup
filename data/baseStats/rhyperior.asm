@@ -1,4 +1,4 @@
-RhyperiorBaseStats: ; 39002 (e:5002)
+RhyperiorBaseStats:
 db DEX_RHYPERIOR ; pokedex id
 db 115 ; base hp
 db 140 ; base attack

@@ -1,34 +1,34 @@
-_CinnabarIslandText8:: ; a61cf (29:61cf)
+_CinnabarIslandText8::
 	text "The door is"
 	line "locked..."
 	done
 
-_CinnabarIslandText1:: ; a61e6 (29:61e6)
+_CinnabarIslandText1::
 	text "Cinnabar Gym's"
 	line "Blaine is an odd"
 	cont "man who has lived"
 	cont "here for decades."
 	done
 
-_CinnabarIslandText2:: ; a622a (29:622a)
+_CinnabarIslandText2::
 	db 8
 	ld a, 5
 	ld [wWhichTrade], a
 	callba MoveTutorScript
 	jp TextScriptEnd
 
-_CinnabarIslandText3:: ; a6266 (29:6266)
+_CinnabarIslandText3::
 	text "Cinnabar Island"
 	
 	para "The fiery town of"
 	line "burning desire"
 	done
 
-_CinnabarIslandText6:: ; a6298 (29:6298)
+_CinnabarIslandText6::
 	text "#mon Lab"
 	done
 
-_CinnabarIslandText7:: ; a62a2 (29:62a2)
+_CinnabarIslandText7::
 	text "Cinnabar Island"
 	line "#mon Gym"
 	cont "Leader: Blaine"
@@ -36,4 +36,3 @@ _CinnabarIslandText7:: ; a62a2 (29:62a2)
 	para "The hot-headed"
 	line "quiz master!"
 	done
-

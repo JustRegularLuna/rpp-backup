@@ -1,4 +1,4 @@
-IndigoPlateauObject: ; 0x50936 (size=20)
+IndigoPlateauObject:
 	db $e ; border block
 
 	db $2 ; warps
@@ -7,7 +7,7 @@ IndigoPlateauObject: ; 0x50936 (size=20)
 
 	db $0 ; signs
 
-	db $0 ; people
+	db $0 ; objects
 
 	; warp-to
 	EVENT_DISP INDIGO_PLATEAU_WIDTH, $5, $9 ; INDIGO_PLATEAU_LOBBY

@@ -1,10 +1,10 @@
 ; prints text for bookshelves in buildings without sign events
-PrintBookshelfText: ; fb50 (3:7b50)
+PrintBookshelfText:
 	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
 	cp SPRITE_FACING_UP
 	jr nz, .noMatch
 ; facing up
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	ld b, a
 	aCoord 8, 7
 	ld c, a
@@ -34,85 +34,99 @@ PrintBookshelfText: ; fb50 (3:7b50)
 .noMatch
 	ld a, $ff
 	ld [$ffdb], a
-	ld b, BANK(PrintCardKeyText)
-	ld hl, PrintCardKeyText
-	jp Bankswitch
+	jpba PrintCardKeyText
 
 ; format: db tileset id, bookshelf tile id, text id
-BookshelfTileIDs: ; fb8b (3:7b8b)
-	db LAB,40,64
-	db MART,54,66
-	db MART,90,66
-	db MART,92,66
-	db OAK_TS,92,64
-	db OAK_TS,94,64
-	db MANSION,50,64
-	db GATE,34,64
-	db SHIP,54,64
-	db REDS_HOUSE_1,50,64
-	db PLATEAU,48,58
-	db HOUSE,60,63
-	db HOUSE,50,64
-	db GYM,29,64
-	db POKECENTER,41,67
-	db LOBBY,22,65
+BookshelfTileIDs:
+	db LAB,          40
+	db_tx_pre BookOrSculptureText
+	db MART,         54
+	db_tx_pre PokemonStuffText
+	db MART,         90
+	db_tx_pre PokemonStuffText
+	db MART,         92
+	db_tx_pre PokemonStuffText
+	db OAK_TS,       92
+	db_tx_pre BookOrSculptureText
+	db OAK_TS,       94
+	db_tx_pre BookOrSculptureText
+	db MANSION,      50
+	db_tx_pre BookOrSculptureText
+	db GATE,         34
+	db_tx_pre BookOrSculptureText
+	db SHIP,         54
+	db_tx_pre BookOrSculptureText
+	db REDS_HOUSE_1, 50
+	db_tx_pre BookOrSculptureText
+	db PLATEAU,      48
+	db_tx_pre IndigoPlateauStatues
+	db HOUSE,        60
+	db_tx_pre TownMapText
+	db HOUSE,        50
+	db_tx_pre BookOrSculptureText
+	db GYM,          29
+	db_tx_pre BookOrSculptureText
+	db POKECENTER,   41
+	db_tx_pre WonderTradeMachineText
+	db LOBBY,        22
+	db_tx_pre ElevatorText
 	db $FF
 
-IndigoPlateauStatues: ; fbbf (3:7bbf)
-	db $08 ; asm
+IndigoPlateauStatues:
+	TX_ASM
 	ld hl, IndigoPlateauStatuesText1
 	call PrintText
-	ld a, [W_XCOORD]
+	ld a, [wXCoord]
 	bit 0, a
 	ld hl, IndigoPlateauStatuesText2
-	jr nz, .asm_fbd3
+	jr nz, .ok
 	ld hl, IndigoPlateauStatuesText3
-.asm_fbd3
+.ok
 	call PrintText
 	jp TextScriptEnd
 
-IndigoPlateauStatuesText1: ; fbd9 (3:7bd9)
+IndigoPlateauStatuesText1:
 	TX_FAR _IndigoPlateauStatuesText1
 	db "@"
 
-IndigoPlateauStatuesText2: ; fbde (3:7bde)
+IndigoPlateauStatuesText2:
 	TX_FAR _IndigoPlateauStatuesText2
 	db "@"
 
-IndigoPlateauStatuesText3: ; fbe3 (3:7be3)
+IndigoPlateauStatuesText3:
 	TX_FAR _IndigoPlateauStatuesText3
 	db "@"
 
-BookOrSculptureText: ; fbe8 (3:7be8)
-	db $08 ; asm
+BookOrSculptureText:
+	TX_ASM
 	ld hl, PokemonBooksText
-	ld a, [W_CURMAPTILESET]
+	ld a, [wCurMapTileset]
 	cp MANSION ; Celadon Mansion tileset
-	jr nz, .asm_fbfd
-	ld a, [wTileMap + $80]
+	jr nz, .ok
+	aCoord 8, 6
 	cp $38
-	jr nz, .asm_fbfd
+	jr nz, .ok
 	ld hl, DiglettSculptureText
-.asm_fbfd
+.ok
 	call PrintText
 	jp TextScriptEnd
 
-PokemonBooksText: ; fc03 (3:7c03)
+PokemonBooksText:
 	TX_FAR _PokemonBooksText
 	db "@"
 
-DiglettSculptureText: ; fc08 (3:7c08)
+DiglettSculptureText:
 	TX_FAR _DiglettSculptureText
 	db "@"
 
-ElevatorText: ; fc0d (3:7c0d)
+ElevatorText:
 	TX_FAR _ElevatorText
 	db "@"
 
-TownMapText: ; fc12 (3:7c12)
+TownMapText:
 	TX_FAR _TownMapText
-	db $06
-	db $08 ; asm
+	TX_BLINK
+	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
 	ld hl, wd730
@@ -132,7 +146,7 @@ TownMapText: ; fc12 (3:7c12)
 	push af
 	jp CloseTextDisplay
 
-PokemonStuffText: ; fc45 (3:7c45)
+PokemonStuffText:
 	TX_FAR _PokemonStuffText
 	db "@"
 

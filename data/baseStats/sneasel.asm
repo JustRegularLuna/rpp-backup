@@ -1,4 +1,4 @@
-SneaselBaseStats: ; 38aa6 (e:4aa6)
+SneaselBaseStats:
 db DEX_SNEASEL ; pokedex id
 db 55 ; base hp
 db 95 ; base attack

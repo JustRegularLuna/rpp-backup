@@ -1,4 +1,4 @@
-WarpTileIDPointers: ; c4cc (3:44cc)
+WarpTileIDPointers:
 	dw OverworldWarpTileIDs
 	dw RedsHouse1WarpTileIDs
 	dw MartWarpTileIDs

@@ -1,16 +1,16 @@
-DisplayStartMenu:: ; 2acd (0:2acd)
-	ld a,$04 ; hardcoded Bank, not sure what's it refers to
+DisplayStartMenu::
+	ld a,BANK(StartMenu_Pokedex)
 	ld [H_LOADEDROMBANK],a
-	ld [$2000],a ; ROM bank 4
+	ld [MBC1RomBank],a
 	ld a,[wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy],a
-	ld a, (SFX_02_3f - SFX_Headers_02) / 3 ; Start menu sound
+	ld a, SFX_START_MENU
 	call PlaySound
 
-RedisplayStartMenu:: ; 2adf (0:2adf)
+RedisplayStartMenu::
 	callba DrawStartMenu
 	callba PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
-	call UpdateSprites ; move sprites
+	call UpdateSprites
 .loop
 	call HandleMenuInput
 	ld b,a
@@ -24,8 +24,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	and a
 	jr nz,.loop
 ; if the player pressed tried to go past the top item, wrap around to the bottom
-	ld a,[wOaksLabFlags]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	ld a,6 ; there are 7 menu items with the pokedex, so the max index is 6
 	jr nz,.wrapMenuItemId
 	dec a ; there are only 6 menu items without the pokedex
@@ -37,8 +36,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	bit 7,a
 	jr z,.buttonPressed
 ; if the player pressed tried to go past the bottom item, wrap around to the top
-	ld a,[wOaksLabFlags]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	ld a,[wCurrentMenuItem]
 	ld c,7 ; there are 7 menu items with the pokedex
 	jr nz,.checkIfPastBottom
@@ -54,13 +52,12 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 .buttonPressed ; A, B, or Start button pressed
 	call PlaceUnfilledArrowMenuCursor
 	ld a,[wCurrentMenuItem]
-	ld [wcc2d],a ; save current menu item ID
+	ld [wBattleAndStartSavedMenuItem],a ; save current menu selection
 	ld a,b
 	and a,%00001010 ; was the Start button or B button pressed?
 	jp nz,CloseStartMenu
 	call SaveScreenTilesToBuffer2 ; copy background from wTileMap to wTileMapBackup2
-	ld a,[wOaksLabFlags]
-	bit 5,a ; does the player have the pokedex?
+	CheckEvent EVENT_GOT_POKEDEX
 	ld a,[wCurrentMenuItem]
 	jr nz,.displayMenuItem
 	inc a ; adjust position to account for missing pokedex menu item
@@ -79,7 +76,7 @@ RedisplayStartMenu:: ; 2adf (0:2adf)
 	jp z,StartMenu_Option
 
 ; EXIT falls through to here
-CloseStartMenu:: ; 2b70 (0:2b70)
+CloseStartMenu::
 	call Joypad
 	ld a,[hJoyPressed]
 	bit 0,a ; was A button newly pressed?

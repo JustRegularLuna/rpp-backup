@@ -1,4 +1,4 @@
-ElectivireBaseStats: ; 3916e (e:516e)
+ElectivireBaseStats:
 db DEX_ELECTIVIRE ; pokedex id
 db 75 ; base hp
 db 123 ; base attack

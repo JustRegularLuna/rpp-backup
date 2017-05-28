@@ -1,4 +1,4 @@
-_ViridianCityText1:: ; a43cc (29:43cc)
+_ViridianCityText1::
 	text "Those # Balls"
 	line "at your waist!"
 	cont "You have #mon!"
@@ -9,7 +9,7 @@ _ViridianCityText1:: ; a43cc (29:43cc)
 	cont "time, anywhere!"
 	done
 
-_ViridianCityText_19122:: ; a4437 (29:4437)
+_ViridianCityText_19122::
 	text "This #mon Gym"
 	line "is always closed."
 
@@ -17,23 +17,23 @@ _ViridianCityText_19122:: ; a4437 (29:4437)
 	line "Leader is?"
 	done
 
-_ViridianCityText_19127:: ; a4474 (29:4474)
+_ViridianCityText_19127::
 	text "Viridian Gym's"
 	line "Leader returned!"
 	done
 
-_ViridianCityText_1914d:: ; a4494 (29:4494)
+_ViridianCityText_1914d::
 	text "You want to know"
 	line "about the 2 kinds"
 	cont "of caterpillar"
 	cont "#mon?"
 	done
 
-_ViridianCityText_19152:: ; a44cd (29:44cd)
+_ViridianCityText_19152::
 	text "Oh, OK then!"
 	done
 
-_ViridianCityText_19157:: ; a44db (29:44db)
+_ViridianCityText_19157::
 	text "Caterpie has no"
 	line "poison, but"
 	cont "Weedle does."
@@ -42,14 +42,14 @@ _ViridianCityText_19157:: ; a44db (29:44db)
 	line "Poison Sting!"
 	done
 
-_ViridianCityText_19175:: ; a4525 (29:4525)
+_ViridianCityText_19175::
 	text "Oh Grandpa! Don't"
 	line "be so mean!"
 	cont "He hasn't had his"
 	cont "coffee yet."
 	done
 
-_ViridianCityText_1917a:: ; a4560 (29:4560)
+_ViridianCityText_1917a::
 	text "When I go shop in"
 	line "Pewter City, I"
 	cont "have to take the"
@@ -57,7 +57,7 @@ _ViridianCityText_1917a:: ; a4560 (29:4560)
 	cont "Viridian Forest."
 	done
 
-_ViridianCityText_19191:: ; a45b5 (29:45b5)
+_ViridianCityText_19191::
 	text "You can't go"
 	line "through here!"
 
@@ -65,7 +65,7 @@ _ViridianCityText_19191:: ; a45b5 (29:45b5)
 	line "property!"
 	done
 
-_ViridianCityText_191ca:: ; a45ea (29:45ea)
+_ViridianCityText_191ca::
 	text "Yawn!"
 	line "I must have dozed"
 	cont "off in the sun."
@@ -82,22 +82,22 @@ _ViridianCityText_191ca:: ; a45ea (29:45ea)
 	cont "have this TM."
 	prompt
 
-_ReceivedTM42Text:: ; a469a (29:469a)
+_ReceivedTM42Text::
 	text "[PLAYER] received"
 	line "TM42!@@"
 
-_TM42Explanation:: ; a46ad (29:46ad)
+_TM42Explanation::
 	text "TM42 contains"
 	line "Dream Eater..."
 	cont "...Snore..."
 	done
 
-_TM42NoRoomText:: ; a46d7 (29:46d7)
+_TM42NoRoomText::
 	text "You have too much"
 	line "stuff already."
 	done
 
-_ViridianCityText_1920a:: ; a46f9 (29:46f9)
+_ViridianCityText_1920a::
 	text "Ahh, I've had my"
 	line "coffee now and I"
 	cont "feel great!"
@@ -109,7 +109,7 @@ _ViridianCityText_1920a:: ; a46f9 (29:46f9)
 	line "hurry?"
 	done
 
-_ViridianCityText_1920f:: ; a4754 (29:4754)
+_ViridianCityText_1920f::
 	text "I see you're using"
 	line "a #dex."
 
@@ -126,25 +126,25 @@ _ViridianCityText_1920f:: ; a4754 (29:4754)
 	line "how to then."
 	done
 
-_ViridianCityText_19214:: ; a47e6 (29:47e6)
+_ViridianCityText_19214::
 	text "Time is money..."
 	line "Go along then."
 	done
 
-_ViridianCityText_19219:: ; a4807 (29:4807)
+_ViridianCityText_19219::
 	text "First, you need"
 	line "to weaken the"
 	cont "target #mon."
 	done
 
-_ViridianCityText8:: ; a4833 (29:4833)
+_ViridianCityText8::
 	text "Viridian City"
 	
 	para "The eternally"
 	line "green paradise"
 	done
 
-_ViridianCityText9:: ; a4860 (29:4860)
+_ViridianCityText9::
 	text "Trainer Tips"
 
 	para "Catch #mon"
@@ -156,7 +156,7 @@ _ViridianCityText9:: ; a4860 (29:4860)
 	cont "to fight!"
 	done
 
-_ViridianCityText10:: ; a48c3 (29:48c3)
+_ViridianCityText10::
 	text "Trainer Tips"
 
 	para "The battle moves"
@@ -170,13 +170,12 @@ _ViridianCityText10:: ; a48c3 (29:48c3)
 	cont "#mon Center!"
 	done
 
-_ViridianCityText13:: ; a4949 (29:4949)
+_ViridianCityText13::
 	text "Viridian City"
 	line "#mon Gym"
 	done
 
-_ViridianCityText14:: ; a4961 (29:4961)
+_ViridianCityText14::
 	text "The Gym's doors"
 	line "are locked..."
 	done
-

@@ -1,4 +1,4 @@
-LeafeonBaseStats: ; 3926a (e:526a)
+LeafeonBaseStats:
 db DEX_LEAFEON ; pokedex id
 db 65 ; base hp
 db 110 ; base attack

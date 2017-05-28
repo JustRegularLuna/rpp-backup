@@ -1,4 +1,4 @@
-BluesHouse_h: ; 0x19b2f id=39
+BluesHouse_h:
 	db REDS_HOUSE_1
 	db BLUES_HOUSE_HEIGHT, BLUES_HOUSE_WIDTH
 	dw BluesHouseBlocks, BluesHouseTextPointers, BluesHouseScript

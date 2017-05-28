@@ -1,4 +1,4 @@
-IndigoPlateauLobbyText4:: ; 24cc (0:24cc)
+IndigoCashierText::
 	db MART_LIST
 	db 7
 	db ULTRA_BALL
