@@ -15,7 +15,7 @@ _SecretHouseText_4a350::
 	prompt
 
 _ReceivedHM03Text::
-	text "<PLAYER> received"
+	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

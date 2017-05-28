@@ -16,7 +16,7 @@ _Route12HouseText_564c5::
 	para "Take this and"
 	line "fish, young one!"
 
-	para "<PLAYER> received"
+	para "[PLAYER] received"
 	line "a @"
 	TX_RAM wcf4b
 	text "!@@"
@@ -39,7 +39,7 @@ _Route12HouseText_564cf::
 
 _Route12HouseText_564d4::
 	text "Hello there,"
-	line "<PLAYER>!"
+	line "[PLAYER]!"
 
 	para "Use the Super Rod"
 	line "in any water!"

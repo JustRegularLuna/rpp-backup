@@ -1,6 +1,6 @@
 _LanceBeforeBattleText::
 	text "Ah! I heard about"
-	line "you, <PLAYER>!"
+	line "you, [PLAYER]!"
 
 	para "I lead the Elite"
 	line "Four! You can"
@@ -24,7 +24,7 @@ _LanceBeforeBattleText::
 
 	para "Your League"
 	line "challenge ends"
-	cont "with me, <PLAYER>!"
+	cont "with me, [PLAYER]!"
 	done
 
 _LanceEndBattleText::
@@ -39,7 +39,7 @@ _LanceAfterBattleText::
 	text "I still can't"
 	line "believe my"
 	cont "dragons lost to"
-	cont "you, <PLAYER>!"
+	cont "you, [PLAYER]!"
 
 	para "You are now the"
 	line "#mon League"
@@ -54,7 +54,7 @@ _LanceAfterBattleText::
 	line "another trainer!"
 	cont "His name is..."
 
-	para "<RIVAL>!"
+	para "[RIVAL]!"
 	line "He beat the Elite"
 	cont "Four before you!"
 

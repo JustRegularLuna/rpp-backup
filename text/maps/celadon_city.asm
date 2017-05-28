@@ -40,7 +40,7 @@ _TM41PreText::
 	prompt
 
 _ReceivedTM41Text::
-	text "<PLAYER> received"
+	text "[PLAYER] received"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"

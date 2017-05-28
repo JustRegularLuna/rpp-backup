@@ -1,6 +1,6 @@
 _PokemonTower2Text_6062d::
-	text "<RIVAL>: Hey,"
-	line "<PLAYER>! What"
+	text "[RIVAL]: Hey,"
+	line "[PLAYER]! What"
 	cont "brings you here?"
 	cont "Your #mon"
 	cont "don't look dead!"
@@ -19,7 +19,7 @@ _PokemonTower2Text_60632::
 	prompt
 
 _PokemonTower2Text_60637::
-	text "<RIVAL>: Well,"
+	text "[RIVAL]: Well,"
 	line "look at all your"
 	cont "wimpy #mon!"
 

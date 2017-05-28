@@ -80,7 +80,7 @@ _PokeCenterSignText::
 	done
 
 _FoundItemText::
-	text "<PLAYER> found"
+	text "[PLAYER] found"
 	line "@"
 	TX_RAM wcf4b
 	text "!@@"
@@ -105,7 +105,7 @@ _OaksAideHiText::
 	TX_RAM wOaksAideRewardItemName
 	text "!"
 
-	para "So, <PLAYER>! Have"
+	para "So, [PLAYER]! Have"
 	line "you caught at"
 	cont "least @"
 	TX_NUM hOaksAideRequirement, 1, 3
@@ -154,7 +154,7 @@ _OaksAideHereYouGoText::
 	prompt
 
 _OaksAideGotItemText::
-	text "<PLAYER> got the"
+	text "[PLAYER] got the"
 	line "@"
 	TX_RAM wOaksAideRewardItemName
 	text "!@@"
@@ -266,7 +266,7 @@ _TradeWentToText::
 	done
 
 _TradeForText::
-	text "For <PLAYER>'s"
+	text "For [PLAYER]'s"
 	line "@"
 	TX_RAM wcf4b
 	text ","
@@ -308,7 +308,7 @@ _TradeWillTradeText::
 	done
 
 _TradeforText::
-	text "for <PLAYER>'s"
+	text "for [PLAYER]'s"
 	line "@"
 	TX_RAM wcf4b
 	text "."
@@ -378,7 +378,7 @@ _GymStatueText1::
 	text ""
 
 	para "Winning trainers:"
-	line "<RIVAL>"
+	line "[RIVAL]"
 	done
 
 _GymStatueText2::
@@ -390,8 +390,8 @@ _GymStatueText2::
 	text ""
 
 	para "Winning trainers:"
-	line "<RIVAL>"
-	cont "<PLAYER>"
+	line "[RIVAL]"
+	cont "[PLAYER]"
 	done
 
 _ViridianCityPokecenterGuyText::
@@ -574,7 +574,7 @@ _BillsHouseMonitorText::
 	done
 
 _BillsHouseInitiatedText::
-	text "<PLAYER> initiated"
+	text "[PLAYER] initiated"
 	line "Teleporter's Cell"
 	cont "Separator!@@"
 
@@ -748,7 +748,7 @@ _IndigoPlateauHQText::
 	done
 
 _RedBedroomSNESText::
-	text "<PLAYER> is"
+	text "[PLAYER] is"
 	line "playing the SNES!"
 	cont "...Okay!"
 	cont "It's time to go!"
@@ -919,25 +919,25 @@ _VermilionGymTrashFailText::
 	cont "locks were reset!@@"
 
 _FoundHiddenItemText::
-	text "<PLAYER> found"
+	text "[PLAYER] found"
 	line "@"
 	TX_RAM wcd6d
 	text "!@@"
 
 _HiddenItemBagFullText::
-	text "But, <PLAYER> has"
+	text "But, [PLAYER] has"
 	line "no more room for"
 	cont "other items!"
 	done
 
 _FoundHiddenCoinsText::
-	text "<PLAYER> found"
+	text "[PLAYER] found"
 	line "@"
 	TX_BCD hCoins, 2 | LEADING_ZEROES | LEFT_ALIGN
 	text " coins!@@"
 
 _FoundHiddenCoins2Text::
-	text "<PLAYER> found"
+	text "[PLAYER] found"
 	line "@"
 	TX_BCD hCoins, 2 | LEADING_ZEROES | LEFT_ALIGN
 	text " coins!@@"
@@ -1009,18 +1009,18 @@ _EnemyRanText::
 	prompt
 
 _HurtByPoisonText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "hurt by poison!"
 	prompt
 
 _HurtByBurnText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "hurt by the burn!"
 	prompt
 
 _HurtByLeechSeedText::
 	text "Leech Seed saps"
-	line "<USER>!"
+	line "[USER]!"
 	prompt
 
 _EnemyMonFaintedText::
@@ -1031,7 +1031,7 @@ _EnemyMonFaintedText::
 	prompt
 
 _MoneyForWinningText::
-	text "<PLAYER> got ¥@"
+	text "[PLAYER] got ¥@"
 	TX_BCD wAmountMoneyWon, 3 | LEADING_ZEROES | LEFT_ALIGN
 	text ""
 	line "for winning!"
@@ -1056,20 +1056,20 @@ _UseNextMonText::
 	done
 
 _Sony1WinText::
-	text "<RIVAL>: Yeah! Am"
+	text "[RIVAL]: Yeah! Am"
 	line "I great or what?"
 	prompt
 
 _PlayerBlackedOutText2::
-	text "<PLAYER> is out of"
+	text "[PLAYER] is out of"
 	line "useable #mon!"
 
-	para "<PLAYER> blacked"
+	para "[PLAYER] blacked"
 	line "out!"
 	prompt
 
 _LinkBattleLostText::
-	text "<PLAYER> lost to"
+	text "[PLAYER] lost to"
 	line "@"
 	TX_RAM wTrainerName
 	text "!"
@@ -1085,7 +1085,7 @@ _TrainerAboutToUseText::
 	TX_RAM wEnemyMonNick
 	text "!"
 
-	para "Will <PLAYER>"
+	para "Will [PLAYER]"
 	line "change #mon?"
 	done
 
@@ -1165,42 +1165,42 @@ _GetOutText::
 	prompt
 
 _FastAsleepText::
-	text "<USER>"
+	text "[USER]"
 	line "is fast asleep!"
 	prompt
 
 _WokeUpText::
-	text "<USER>"
+	text "[USER]"
 	line "woke up!"
 	prompt
 
 _IsFrozenText::
-	text "<USER>"
+	text "[USER]"
 	line "is frozen solid!"
 	prompt
 
 _FullyParalyzedText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "fully paralyzed!"
 	prompt
 
 _FlinchedText::
-	text "<USER>"
+	text "[USER]"
 	line "flinched!"
 	prompt
 
 _MustRechargeText::
-	text "<USER>"
+	text "[USER]"
 	line "must recharge!"
 	prompt
 
 _DisabledNoMoreText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "disabled no more!"
 	prompt
 
 _IsConfusedText::
-	text "<USER>"
+	text "[USER]"
 	line "is confused!"
 	prompt
 
@@ -1210,37 +1210,37 @@ _HurtItselfText::
 	prompt
 
 _ConfusedNoMoreText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "confused no more!"
 	prompt
 
 _SavingEnergyText::
-	text "<USER>"
+	text "[USER]"
 	line "is saving energy!"
 	prompt
 
 _UnleashedEnergyText::
-	text "<USER>"
+	text "[USER]"
 	line "unleashed energy!"
 	prompt
 
 _ThrashingAboutText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "thrashing about!"
 	done
 
 _AttackContinuesText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "attack continues!"
 	done
 
 _CantMoveText::
-	text "<USER>"
+	text "[USER]"
 	line "can't move!"
 	prompt
 
 _MoveIsDisabledText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "@"
 	TX_RAM wcd6d
 	text " is"
@@ -1248,7 +1248,7 @@ _MoveIsDisabledText::
 	prompt
 
 _MonName1Text::
-	text "<USER>@@"
+	text "[USER]@@"
 
 _UsedText::
 	text ""
@@ -1264,24 +1264,24 @@ _CF4BText::
 	done
 
 _AttackMissedText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "attack missed!"
 	prompt
 
 _KeptGoingAndCrashedText::
-	text "<USER>"
+	text "[USER]"
 	line "kept going and"
 	cont "crashed!"
 	prompt
 
 _UnaffectedText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "unaffected!"
 	prompt
 
 _DoesntAffectMonText::
 	text "It doesn't affect"
-	line "<TARGET>!"
+	line "[TARGET]!"
 	prompt
 
 _CriticalHitText::
@@ -1325,16 +1325,16 @@ _IgnoredOrdersText::
 _SubstituteTookDamageText::
 	text "The Substitute"
 	line "took damage for"
-	cont "<TARGET>!"
+	cont "[TARGET]!"
 	prompt
 
 _SubstituteBrokeText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "Substitute broke!"
 	prompt
 
 _BuildingRageText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "Rage is building!"
 	prompt
 
@@ -1355,7 +1355,7 @@ _GainedText::
 	line "@@"
 
 _WithExpAllText::
-	text "<PLAYER>'s other"
+	text "[PLAYER]'s other"
 	line "#mon gained"
 	cont "Exp. Points from@"
 	db $7
@@ -1480,7 +1480,7 @@ _SafariZoneAngryText::
 
 ; money related
 _PickUpPayDayMoneyText::
-	text "<PLAYER> picked up"
+	text "[PLAYER] picked up"
 	line "¥@"
 	TX_BCD wTotalPayDayMoney, 3 | LEADING_ZEROES | LEFT_ALIGN
 	text "!"
@@ -1578,7 +1578,7 @@ _RareCandyText::
 	text "!@@"
 
 _TurnedOnPC1Text::
-	text "<PLAYER> turned on"
+	text "[PLAYER] turned on"
 	line "the PC."
 	prompt
 
@@ -1606,7 +1606,7 @@ _AccessedMyPCText::
 	prompt
 
 _TurnedOnPC2Text::
-	text "<PLAYER> turned on"
+	text "[PLAYER] turned on"
 	line "the PC."
 	prompt
 
@@ -1839,13 +1839,13 @@ _DoYouWantToNicknameText::
 
 _YourNameIsText::
 	text "Right! So your"
-	line "name is <PLAYER>!"
+	line "name is [PLAYER]!"
 	prompt
 
 _HisNameIsText::
 	text "That's right! I"
 	line "remember now! His"
-	cont "name is <RIVAL>!"
+	cont "name is [RIVAL]!"
 	prompt
 
 _WillBeTradedText::
@@ -1949,7 +1949,7 @@ _WouldYouLikeToSaveText::
 	done
 
 _GameSavedText::
-	text "<PLAYER> saved"
+	text "[PLAYER] saved"
 	line "the game!"
 	done
 
@@ -1969,7 +1969,7 @@ _WhenYouChangeBoxText::
 
 _ChooseABoxText::
 	text "Choose a"
-	line "<pkmn> Box.@@"
+	line "[pkmn] Box.@@"
 
 _EvolvedText::
 	TX_RAM wcf4b
@@ -1998,42 +1998,42 @@ _IsEvolvingText::
 	done
 
 _FellAsleepText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "fell asleep!"
 	prompt
 
 _AlreadyAsleepText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "already asleep!"
 	prompt
 
 _PoisonedText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "was poisoned!"
 	prompt
 
 _BadlyPoisonedText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "badly poisoned!"
 	prompt
 
 _BurnedText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "was burned!"
 	prompt
 
 _FrozenText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "was frozen solid!"
 	prompt
 
 _FireDefrostedText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "was defrosted!"
 	prompt
 
 _MonsStatsRoseText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "@"
 	TX_RAM wcf4b
 	text "@@"
@@ -2046,7 +2046,7 @@ _RoseText::
 	prompt
 
 _WontRiseAnymoreText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "@"
 	TX_RAM wcf4b
 	text " won't"
@@ -2054,7 +2054,7 @@ _WontRiseAnymoreText::
 	prompt
 
 _MonsStatsFellText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "@"
 	TX_RAM wcf4b
 	text "@@"
@@ -2067,7 +2067,7 @@ _FellText::
 	prompt
 
 _WontFallAnymoreText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "@"
 	TX_RAM wcf4b
 	text " won't"
@@ -2075,22 +2075,22 @@ _WontFallAnymoreText::
 	prompt
 
 _RanFromBattleText::
-	text "<USER>"
+	text "[USER]"
 	line "ran from battle!"
 	prompt
 
 _RanAwayScaredText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "ran away scared!"
 	prompt
 
 _WasBlownAwayText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "was blown away!"
 	prompt
 
 _ChargeMoveEffectText::
-	text "<USER>@@"
+	text "[USER]@@"
 
 _MadeWhirlwindText::
 	text ""
@@ -2123,12 +2123,12 @@ _DugAHoleText::
 	prompt
 
 _BecameConfusedText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "became confused!"
 	prompt
 
 _MimicLearnedMoveText::
-	text "<USER>"
+	text "[USER]"
 	line "learned"
 	cont "@"
 	TX_RAM wcd6d
@@ -2136,7 +2136,7 @@ _MimicLearnedMoveText::
 	prompt
 
 _MoveWasDisabledText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "@"
 	TX_RAM wcd6d
 	text " was"
@@ -2157,16 +2157,16 @@ _ButItFailedText::
 
 _DidntAffectText::
 	text "It didn't affect"
-	line "<TARGET>!"
+	line "[TARGET]!"
 	prompt
 
 _IsUnaffectedText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "is unaffected!"
 	prompt
 
 _ParalyzedMayNotAttackText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "paralyzed! It may"
 	cont "not attack!"
 	prompt
@@ -2177,7 +2177,7 @@ _SubstituteText::
 	prompt
 
 _HasSubstituteText::
-	text "<USER>"
+	text "[USER]"
 	line "has a Substitute!"
 	prompt
 
@@ -2192,28 +2192,28 @@ _CoinsScatteredText::
 	prompt
 
 _GettingPumpedText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "getting pumped!"
 	prompt
 
 _WasSeededText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "was seeded!"
 	prompt
 
 _EvadedAttackText::
-	text "<TARGET>"
+	text "[TARGET]"
 	line "evaded attack!"
 	prompt
 
 _HitWithRecoilText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "hit with recoil!"
 	prompt
 
 _ConvertedTypeText::
 	text "Converted type to"
-	line "<TARGET>'s!"
+	line "[TARGET]'s!"
 	prompt
 
 _StatusChangesEliminatedText::
@@ -2222,23 +2222,23 @@ _StatusChangesEliminatedText::
 	prompt
 
 _StartedSleepingEffect::
-	text "<USER>"
+	text "[USER]"
 	line "started sleeping!"
 	done
 
 _FellAsleepBecameHealthyText::
-	text "<USER>"
+	text "[USER]"
 	line "fell asleep and"
 	cont "became healthy!"
 	done
 
 _RegainedHealthText::
-	text "<USER>"
+	text "[USER]"
 	line "regained health!"
 	prompt
 
 _TransformedText::
-	text "<USER>"
+	text "[USER]"
 	line "transformed into"
 	cont "@"
 	TX_RAM wcd6d
@@ -2246,28 +2246,28 @@ _TransformedText::
 	prompt
 
 _LightScreenProtectedText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "protected against"
 	cont "special attacks!"
 	prompt
 
 _ReflectGainedArmorText::
-	text "<USER>"
+	text "[USER]"
 	line "gained armor!"
 	prompt
 
 _ShroudedInMistText::
-	text "<USER>'s"
+	text "[USER]'s"
 	line "shrouded in mist!"
 	prompt
 
 _SuckedHealthText::
 	text "Sucked health from"
-	line "<TARGET>!"
+	line "[TARGET]!"
 	prompt
 
 _DreamWasEatenText::
-	text "<TARGET>'s"
+	text "[TARGET]'s"
 	line "dream was eaten!"
 	prompt
 
@@ -2392,10 +2392,10 @@ _PokemonFaintedText::
 	done
 
 _PlayerBlackedOutText::
-	text "<PLAYER> is out of"
+	text "[PLAYER] is out of"
 	line "useable #mon!"
 
-	para "<PLAYER> blacked"
+	para "[PLAYER] blacked"
 	line "out!"
 	prompt
 
@@ -2675,7 +2675,7 @@ _CannotGetOffHereText::
 	prompt
 
 _GotMonText::
-	text "<PLAYER> got"
+	text "[PLAYER] got"
 	line "@"
 	TX_RAM wcd6d
 	text "!@@"
@@ -2772,7 +2772,7 @@ _ItemUseBallText06::
 	text "!@@"
 
 _SurfingGotOnText::
-	text "<PLAYER> got on"
+	text "[PLAYER] got on"
 	line "@"
 	TX_RAM wcd6d
 	text "!"
@@ -2797,12 +2797,12 @@ _VitaminNoEffectText::
 	prompt
 
 _ThrewBaitText::
-	text "<PLAYER> threw"
+	text "[PLAYER] threw"
 	line "some Bait."
 	done
 
 _ThrewRockText::
-	text "<PLAYER> threw a"
+	text "[PLAYER] threw a"
 	line "Rock."
 	done
 
@@ -2820,7 +2820,7 @@ _FluteWokeUpText::
 	prompt
 
 _PlayedFluteHadEffectText::
-	text "<PLAYER> played the"
+	text "[PLAYER] played the"
 	line "# Flute.@@"
 
 _CoinCaseNumCoinsText::
@@ -2902,7 +2902,7 @@ _MonCannotLearnMachineMoveText::
 	prompt
 
 _ItemUseNotTimeText::
-	text "Oak: <PLAYER>!"
+	text "Oak: [PLAYER]!"
 	line "This isn't the"
 	cont "time to use that! "
 	prompt
@@ -2948,7 +2948,7 @@ _BoxFullCannotThrowBallText::
 SECTION "Text 11", ROMX, BANK[TEXT_11]
 
 _ItemUseText001::
-	text "<PLAYER> used@@"
+	text "[PLAYER] used@@"
 
 _ItemUseText002::
 	TX_RAM wcf4b
@@ -2956,7 +2956,7 @@ _ItemUseText002::
 	done
 
 _GotOnBicycleText1::
-	text "<PLAYER> got on the@@"
+	text "[PLAYER] got on the@@"
 
 _GotOnBicycleText2::
 	TX_RAM wcf4b
@@ -2964,7 +2964,7 @@ _GotOnBicycleText2::
 	prompt
 
 _GotOffBicycleText1::
-	text "<PLAYER> got off@@"
+	text "[PLAYER] got off@@"
 
 _GotOffBicycleText2::
 	text "the @"
@@ -3005,7 +3005,7 @@ _ConnectCableText::
 	prompt
 
 _TradedForText::
-	text "<PLAYER> traded"
+	text "[PLAYER] traded"
 	line "@"
 	TX_RAM wInGameTradeGiveMonName
 	text " for"

@@ -35,7 +35,7 @@ _SSAnneWelcomeText9::
 	prompt
 
 _SSAnneFlashedTicketText::
-	text "<PLAYER> showed"
+	text "[PLAYER] showed"
 	line "the S.S. Ticket!"
 
 	para "Great! Welcome to"
@@ -43,7 +43,7 @@ _SSAnneFlashedTicketText::
 	done
 
 _SSAnneNoTicketText::
-	text "<PLAYER> doesn't"
+	text "[PLAYER] doesn't"
 	line "have the needed"
 	cont "S.S. Ticket."
 

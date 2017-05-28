@@ -83,7 +83,7 @@ _ViridianCityText_191ca::
 	prompt
 
 _ReceivedTM42Text::
-	text "<PLAYER> received"
+	text "[PLAYER] received"
 	line "TM42!@@"
 
 _TM42Explanation::

@@ -1,20 +1,20 @@
 _OaksLabGaryText1::
-	text "<RIVAL>: Yo"
-	line "<PLAYER>! Gramps"
+	text "[RIVAL]: Yo"
+	line "[PLAYER]! Gramps"
 	cont "isn't around!"
 	done
 
 _OaksLabText40::
-	text "<RIVAL>: Heh, I"
+	text "[RIVAL]: Heh, I"
 	line "don't need to be"
 	cont "greedy like you!"
 
 	para "Go ahead and"
-	line "choose, <PLAYER>!"
+	line "choose, [PLAYER]!"
 	done
 
 _OaksLabText41::
-	text "<RIVAL>: My"
+	text "[RIVAL]: My"
 	line "#mon looks a"
 	cont "lot stronger."
 	done
@@ -49,7 +49,7 @@ _OaksLabMonEnergeticText::
 	prompt
 
 _OaksLabReceivedMonText::
-	text "<PLAYER> received"
+	text "[PLAYER] received"
 	line "a @"
 	TX_RAM wcd6d
 	text "!@@"
@@ -61,7 +61,7 @@ _OaksLabLastMonText::
 	done
 
 _OaksLabText_1d2f0::
-	text "Oak: Now, <PLAYER>,"
+	text "Oak: Now, [PLAYER],"
 	line "which #mon do"
 	cont "you want?"
 	done
@@ -74,14 +74,14 @@ _OaksLabText_1d2f5::
 	done
 
 _OaksLabText_1d2fa::
-	text "Oak: <PLAYER>,"
+	text "Oak: [PLAYER],"
 	line "raise your young"
 	cont "#mon by making"
 	cont "it fight!"
 	done
 
 _OaksLabDeliverParcelText1::
-	text "Oak: Oh, <PLAYER>!"
+	text "Oak: Oh, [PLAYER]!"
 
 	para "How is my old"
 	line "#mon?"
@@ -96,7 +96,7 @@ _OaksLabDeliverParcelText1::
 	para "What? You have"
 	line "something for me?"
 
-	para "<PLAYER> delivered"
+	para "[PLAYER] delivered"
 	line "Oak's Parcel.@@"
 
 _OaksLabDeliverParcelText2::
@@ -105,7 +105,7 @@ _OaksLabDeliverParcelText2::
 	line "custom # Balls"
 	cont "I ordered from"
 	cont "Kurt in Johto!"
-	cont "Thanks, <PLAYER>!"
+	cont "Thanks, [PLAYER]!"
 
 	para "By the way, I must"
 	line "ask you to do"
@@ -115,7 +115,7 @@ _OaksLabDeliverParcelText2::
 _OaksLabAroundWorldText::
 	text "#mon around the"
 	line "world wait for"
-	cont "you, <PLAYER>!"
+	cont "you, [PLAYER]!"
 	done
 
 _OaksLabGivePokeballsText1::
@@ -129,7 +129,7 @@ _OaksLabGivePokeballsText1::
 	cont "to capture wild"
 	cont "#mon."
 
-	para "<PLAYER> got 5"
+	para "[PLAYER] got 5"
 	line "# Balls!@@"
 
 _OaksLabGivePokeballsText2::
@@ -187,20 +187,20 @@ _OaksLabText_1d340::
 	done
 
 _OaksLabRivalWaitingText::
-	text "<RIVAL>: Gramps!"
+	text "[RIVAL]: Gramps!"
 	line "I'm fed up with"
 	cont "waiting!"
 	done
 
 _OaksLabChooseMonText::
-	text "Oak: <RIVAL>?"
+	text "Oak: [RIVAL]?"
 	line "Let me think..."
 
 	para "Oh, that's right,"
 	line "I told you to"
 	cont "come! Just wait!"
 
-	para "Here, <PLAYER>!"
+	para "Here, [PLAYER]!"
 
 	para "There are 3"
 	line "#mon here!"
@@ -221,14 +221,14 @@ _OaksLabChooseMonText::
 	done
 
 _OaksLabRivalInterjectionText::
-	text "<RIVAL>: Hey!"
+	text "[RIVAL]: Hey!"
 	line "Gramps! What"
 	cont "about me?"
 	done
 
 _OaksLabBePatientText::
 	text "Oak: Be patient!"
-	line "<RIVAL>, you can"
+	line "[RIVAL], you can"
 	cont "have one too!"
 	done
 
@@ -238,19 +238,19 @@ _OaksLabLeavingText::
 	done
 
 _OaksLabRivalPickingMonText::
-	text "<RIVAL>: I'll take"
+	text "[RIVAL]: I'll take"
 	line "this one, then!"
 	done
 
 _OaksLabRivalReceivedMonText::
-	text "<RIVAL> received"
+	text "[RIVAL] received"
 	line "a @"
 	TX_RAM wcd6d
 	text "!@@"
 
 _OaksLabRivalChallengeText::
-	text "<RIVAL>: Wait"
-	line "<PLAYER>!"
+	text "[RIVAL]: Wait"
+	line "[PLAYER]!"
 	cont "Let's check out"
 	cont "our #mon!"
 
@@ -266,26 +266,26 @@ _OaksLabText_1d3be::
 	prompt
 
 _OaksLabText_1d3c3::
-	text "<RIVAL>: Yeah! Am"
+	text "[RIVAL]: Yeah! Am"
 	line "I great or what?"
 	prompt
 
 _OaksLabRivalToughenUpText::
-	text "<RIVAL>: Okay!"
+	text "[RIVAL]: Okay!"
 	line "I'll make my"
 	cont "#mon fight to"
 	cont "toughen it up!"
 
-	para "<PLAYER>! Gramps!"
+	para "[PLAYER]! Gramps!"
 	line "Smell you later!"
 	done
 
 _OaksLabText21::
-	text "<RIVAL>: Gramps!"
+	text "[RIVAL]: Gramps!"
 	done
 
 _OaksLabText22::
-	text "<RIVAL>: What did"
+	text "[RIVAL]: What did"
 	line "you call me for?"
 	done
 
@@ -310,11 +310,11 @@ _OaksLabText24::
 	done
 
 _OaksLabText25::
-	text "Oak: <PLAYER> and"
-	line "<RIVAL>! Take"
+	text "Oak: [PLAYER] and"
+	line "[RIVAL]! Take"
 	cont "these with you!"
 
-	para "<PLAYER> got"
+	para "[PLAYER] got"
 	line "#dex from Oak!@@"
 
 _OaksLabText26::
@@ -349,15 +349,15 @@ _OaksLabText26::
 	cont "to capture wild"
 	cont "#mon."
 
-	para "<PLAYER> got 5"
+	para "[PLAYER] got 5"
 	line "# Balls!@@"
 
 _OaksLabText27::
-	text "<RIVAL>: Alright"
+	text "[RIVAL]: Alright"
 	line "Gramps! Leave it"
 	cont "all to me!"
 
-	para "<PLAYER>, I hate to"
+	para "[PLAYER], I hate to"
 	line "say it, but I"
 	cont "don't need you!"
 
@@ -367,7 +367,7 @@ _OaksLabText27::
 
 	para "I'll tell her not"
 	line "to lend you one,"
-	cont "<PLAYER>! Hahaha!"
+	cont "[PLAYER]! Hahaha!"
 	done
 
 _OaksLabText_1d405::

@@ -48,7 +48,7 @@ _CeruleanGymText_5c7c8::
 	done
 
 _ReceivedTM11Text::
-	text "<PLAYER> received"
+	text "[PLAYER] received"
 	line "TM11!@@"
 
 _CeruleanGymText_5c7d3::

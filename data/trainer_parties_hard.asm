@@ -362,19 +362,19 @@ LanceData:
 	
 Green1Data:
 	; Oak's Lab
-	db "<RIVAL>@",5,SQUIRTLE,$FF
-	db "<RIVAL>@",5,BULBASAUR,$FF
-	db "<RIVAL>@",5,CHARMANDER,$FF
+	db "[RIVAL]@",5,SQUIRTLE,$FF
+	db "[RIVAL]@",5,BULBASAUR,$FF
+	db "[RIVAL]@",5,CHARMANDER,$FF
 	
 	
 	; Beside Viridian
-	db "<RIVAL>@",SPECIAL_LEVELS,10,EEVEE,9,RATTATA,9,PIDGEY,11,SQUIRTLE,$FF
-	db "<RIVAL>@",SPECIAL_LEVELS,10,EEVEE,9,RATTATA,9,PIDGEY,11,BULBASAUR,$FF
-	db "<RIVAL>@",SPECIAL_LEVELS,10,EEVEE,9,RATTATA,9,PIDGEY,11,CHARMANDER,$FF
+	db "[RIVAL]@",SPECIAL_LEVELS,10,EEVEE,9,RATTATA,9,PIDGEY,11,SQUIRTLE,$FF
+	db "[RIVAL]@",SPECIAL_LEVELS,10,EEVEE,9,RATTATA,9,PIDGEY,11,BULBASAUR,$FF
+	db "[RIVAL]@",SPECIAL_LEVELS,10,EEVEE,9,RATTATA,9,PIDGEY,11,CHARMANDER,$FF
 	
 	
 	; Cerulean City
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 21,VAPOREON
@@ -395,7 +395,7 @@ Green1Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 21,JOLTEON
@@ -416,7 +416,7 @@ Green1Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 21,FLAREON
@@ -437,7 +437,7 @@ Green1Data:
 	
 Green2Data:
 	; SS ANNE
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 33,VAPOREON
@@ -458,7 +458,7 @@ Green2Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 33,JOLTEON
@@ -479,7 +479,7 @@ Green2Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 33,FLAREON
@@ -502,7 +502,7 @@ Green2Data:
 	
 	
 	; Pokemon Tower
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 45,VAPOREON
@@ -523,7 +523,7 @@ Green2Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 45,JOLTEON
@@ -544,7 +544,7 @@ Green2Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 45,FLAREON
@@ -566,7 +566,7 @@ Green2Data:
 	
 	
 	; Silph Co
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 52,VAPOREON
@@ -587,7 +587,7 @@ Green2Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 52,JOLTEON
@@ -608,7 +608,7 @@ Green2Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 52,FLAREON
@@ -630,7 +630,7 @@ Green2Data:
 	
 	
 	; Before Elite Four
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 70,VAPOREON
@@ -654,7 +654,7 @@ Green2Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 70,JOLTEON
@@ -678,7 +678,7 @@ Green2Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 70,FLAREON
@@ -702,7 +702,7 @@ Green2Data:
 	
 Green3Data:
 	; Champion
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 80,PIDGEOT
@@ -726,7 +726,7 @@ Green3Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 80,PIDGEOT
@@ -750,7 +750,7 @@ Green3Data:
 	
 	
 	
-	db "<RIVAL>@"
+	db "[RIVAL]@"
 	db SPECIAL_TRAINER
 	
 	db 80,PIDGEOT
