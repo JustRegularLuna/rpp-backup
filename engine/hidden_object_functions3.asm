@@ -125,7 +125,7 @@ ElevatorText:
 
 TownMapText:
 	TX_FAR _TownMapText
-	db $06
+	TX_BLINK
 	TX_ASM
 	ld a, $1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a

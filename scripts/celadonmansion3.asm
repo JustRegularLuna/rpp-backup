@@ -86,7 +86,7 @@ DirectorText:
 
 GameFreakPCText1:
 	TX_FAR _CeladonMansion3Text5
-	db $6
+	TX_BLINK
 	TX_ASM
 	callba ProgrammerComputerScreen
 	ld a, $1

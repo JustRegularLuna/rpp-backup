@@ -49,7 +49,7 @@ FuchsiaHouse3Text_561bd:
 
 FuchsiaHouse3Text_561c2:
 	TX_FAR _FuchsiaHouse3Text_561c2
-	db $0B
+	TX_SFX_ITEM_1
 	db "@"
 
 FuchsiaHouse3Text_56212:

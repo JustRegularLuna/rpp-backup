@@ -11,7 +11,7 @@ TextBoxBorder::
 	ld [hl], a
 	pop hl
 
-	ld de, 20
+	ld de, SCREEN_WIDTH
 	add hl, de
 
 	; middle rows
@@ -24,7 +24,7 @@ TextBoxBorder::
 	ld [hl], "│"
 	pop hl
 
-	ld de, 20
+	ld de, SCREEN_WIDTH
 	add hl, de
 	dec b
 	jr nz, .next
@@ -257,7 +257,7 @@ Char58:: ; prompt
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING
 	jp z, .ok
-	ld a, $EE
+	ld a, "▼"
 	Coorda 18, 16
 .ok
 	call ProtectedDelay3
@@ -275,7 +275,7 @@ Char58Text::
 
 Char51:: ; para
 	push de
-	ld a, $EE
+	ld a, "▼"
 	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
@@ -290,7 +290,7 @@ Char51:: ; para
 
 Char49::
 	push de
-	ld a,$EE
+	ld a,"▼"
 	Coorda 18, 16
 	call ProtectedDelay3
 	call ManualTextScroll
@@ -306,7 +306,7 @@ Char49::
 	jp PlaceNextChar_inc
 
 Char4B::
-	ld a,$EE
+	ld a,"▼"
 	Coorda 18, 16
 	call ProtectedDelay3
 	push de
@@ -323,23 +323,27 @@ Char4C::
 	pop de
 	jp PlaceNextChar_inc
 
+; move both rows of text in the normal text box up one row
+; always called twice in a row
+; first time, copy the two rows of text to the "in between" rows that are usually emtpy
+; second time, copy the bottom row of text into the top row of text
 ScrollTextUpOneLine::
-	coord hl, 0, 14
-	coord de, 0, 13
-	ld b,60
-.next
+	coord hl, 0, 14 ; top row of text
+	coord de, 0, 13 ; empty line above text
+	ld b, SCREEN_WIDTH * 3
+.copyText
 	ld a,[hli]
 	ld [de],a
 	inc de
 	dec b
-	jr nz,.next
+	jr nz,.copyText
 	coord hl, 1, 16
 	ld a, " "
 	ld b,SCREEN_WIDTH - 2
-.next2
+.clearText
 	ld [hli],a
 	dec b
-	jr nz,.next2
+	jr nz,.clearText
 
 	; wait five frames
 	ld b,5
@@ -498,7 +502,7 @@ TextCommand06::
 	ld a,[wLinkState]
 	cp a,LINK_STATE_BATTLING
 	jp z,TextCommand0D
-	ld a,$ee ; down arrow
+	ld a,"▼"
 	Coorda 18, 16 ; place down arrow in lower right corner of dialogue text box
 	push bc
 	call ManualTextScroll ; blink arrow and wait for A or B to be pressed
@@ -615,10 +619,10 @@ TextCommand0B::
 
 ; format: text command ID, sound ID or cry ID
 TextCommandSounds::
-	db $0B, SFX_GET_ITEM_1
+	db $0B, SFX_GET_ITEM_1 ; actually plays SFX_LEVEL_UP when the battle music engine is loaded
 	db $12, SFX_CAUGHT_MON
-	db $0E, SFX_POKEDEX_RATING
-	db $0F, SFX_GET_ITEM_1
+	db $0E, SFX_POKEDEX_RATING ; unused?
+	db $0F, SFX_GET_ITEM_1 ; unused?
 	db $10, SFX_GET_ITEM_2
 	db $11, SFX_GET_KEY_ITEM
 	db $13, SFX_DEX_PAGE_ADDED
@@ -637,7 +641,7 @@ TextCommand0C::
 	ld h,b
 	ld l,c
 .loop
-	ld a,$75 ; ellipsis
+	ld a,"…"
 	ld [hli],a
 	push de
 	call Joypad

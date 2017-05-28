@@ -909,7 +909,7 @@ FaintEnemyPokemon:
 	ld a, SFX_FAINT_FALL
 	call PlaySoundWaitForCurrent
 .sfxwait
-	ld a, [wChannelSoundIDs + CH4]
+	ld a, [wChannelSoundIDs + Ch4]
 	cp SFX_FAINT_FALL
 	jr z, .sfxwait
 	ld a, SFX_FAINT_THUD
@@ -997,7 +997,7 @@ EndLowHealthAlarm:
 ; the low health alarm and prevents it from reactivating until the next battle.
 	xor a
 	ld [wLowHealthAlarm], a ; turn off low health alarm
-	ld [wChannelSoundIDs + CH4], a
+	ld [wChannelSoundIDs + Ch4], a
 	inc a
 	ld [wLowHealthAlarmDisabled], a ; prevent it from reactivating
 	ret
@@ -2036,7 +2036,7 @@ DrawPlayerHUDAndHPBar:
 	ld [hl], $0
 	ret z
 	xor a
-	ld [wChannelSoundIDs + CH4], a
+	ld [wChannelSoundIDs + Ch4], a
 	ret
 .setLowHealthAlarm
 	ld hl, wLowHealthAlarm
@@ -2209,7 +2209,7 @@ DisplayBattleMenu:
 	ld [hl], "▶"
 	ld c, 50
 	call DelayFrames
-	ld [hl], $ec
+	ld [hl], "▷"
 	ld a, $2 ; select the "ITEM" menu
 	jp .upperLeftMenuItemWasNotSelected
 .oldManName
@@ -2765,7 +2765,7 @@ SelectMenuItem:
 	dec a
 	ld bc, SCREEN_WIDTH
 	call AddNTimes
-	ld [hl], $ec
+	ld [hl], "▷"
 .select
 	ld hl, hFlags_0xFFF6
 	set 1, [hl]
@@ -4559,10 +4559,10 @@ GetEnemyMonStat:
 
 CalculateDamage:
 ; input:
-;	b: attack
-;	c: opponent defense
-;	d: base power
-;	e: level
+;   b: attack
+;   c: opponent defense
+;   d: base power
+;   e: level
 
 	ld a, [H_WHOSETURN] ; whose turn?
 	and a
@@ -7673,7 +7673,7 @@ FrozenText:
 
 CheckDefrost:
 ; any fire-type move that has a chance inflict burn (all but Fire Spin) will defrost a frozen target
-	and a, 1 << FRZ	; are they frozen?
+	and a, 1 << FRZ ; are they frozen?
 	ret z ; return if so
 	ld a, [H_WHOSETURN]
 	and a
@@ -7682,7 +7682,7 @@ CheckDefrost:
 	ld a, [wPlayerMoveType]
 	sub a, FIRE
 	ret nz ; return if type of move used isn't fire
-	ld [wEnemyMonStatus], a	; set opponent status to 00 ["defrost" a frozen monster]
+	ld [wEnemyMonStatus], a ; set opponent status to 00 ["defrost" a frozen monster]
 	ld hl, wEnemyMon1Status
 	ld a, [wEnemyMonPartyPos]
 	ld bc, wEnemyMon2 - wEnemyMon1
@@ -7692,7 +7692,7 @@ CheckDefrost:
 	ld hl, FireDefrostedText
 	jr .common
 .opponent
-	ld a, [wEnemyMoveType]	; same as above with addresses swapped
+	ld a, [wEnemyMoveType] ; same as above with addresses swapped
 	sub a, FIRE
 	ret nz
 	ld [wBattleMonStatus], a
@@ -7893,7 +7893,7 @@ MonsStatsRoseText:
 	ret
 
 GreatlyRoseText:
-	db $0a
+	TX_DELAY
 	TX_FAR _GreatlyRoseText
 ; fallthrough
 RoseText:
@@ -8105,7 +8105,7 @@ MonsStatsFellText:
 	ret
 
 GreatlyFellText:
-	db $0a
+	TX_DELAY
 	TX_FAR _GreatlyFellText
 ; fallthrough
 FellText:

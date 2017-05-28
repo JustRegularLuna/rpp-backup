@@ -1646,19 +1646,26 @@ TwoOptionMenuStrings:
 	dw .NoYesMenu
 
 .NoYesMenu
-	db "No",$4E,"Yes@"
+	db   "No"
+	next "Yes@"
 .YesNoMenu
-	db "Yes",$4E,"No@"
+	db   "Yes"
+	next "No@"
 .BoyGirlMenu
-	db "Boy",$4E,"Girl@"
+	db   "Boy"
+	next "Girl@"
 .SouthEastMenu
-	db "South",$4E,"East@"
+	db   "South"
+	next "East@"
 .NorthEastMenu
-	db "North",$4E,"East@"
+	db   "North"
+	next "East@"
 .TradeCancelMenu
-	db "Trade",$4E,"Cancel@"
+	db   "Trade"
+	next "Cancel@"
 .HealCancelMenu
-	db "Heal",$4E,"Cancel@"
+	db   "Heal"
+	next "Cancel@"
 
 DisplayFieldMoveMonMenu:
 	xor a

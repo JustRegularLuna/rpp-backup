@@ -23,7 +23,6 @@ MtMoon3TextPointers:
 	dw PickUpItemText
 	dw PickUpItemText
 
-MtMoon3TrainerHeaders:
 MtMoon3TrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_MT_MOON_EXIT_SUPER_NERD
 	db ($2 << 4) ; trainer's view range
@@ -43,27 +42,27 @@ MtMoon3TrainerHeader1:
 	dw MtMoon3EndBattleText2 ; TextEndBattle
 
 MtMoon3TrainerHeader2:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_2
+	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_1
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_2
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_1
 	dw MtMoon3BattleText3 ; TextBeforeBattle
 	dw MtMoon3AfterBattleText3 ; TextAfterBattle
 	dw MtMoon3EndBattleText3 ; TextEndBattle
 	dw MtMoon3EndBattleText3 ; TextEndBattle
 
 MtMoon3TrainerHeader3:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_3
+	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_2
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_3
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_2
 	dw MtMoon3BattleText4 ; TextBeforeBattle
 	dw MtMoon3AfterBattleText4 ; TextAfterBattle
 	dw MtMoon3EndBattleText4 ; TextEndBattle
 	dw MtMoon3EndBattleText4 ; TextEndBattle
 
 MtMoon3TrainerHeader4:
-	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_4
+	dbEventFlagBit EVENT_BEAT_MT_MOON_3_TRAINER_3
 	db ($4 << 4) ; trainer's view range
-	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_4
+	dwEventFlagAddress EVENT_BEAT_MT_MOON_3_TRAINER_3
 	dw MtMoon3BattleText5 ; TextBeforeBattle
 	dw MtMoon3AfterBattleText5 ; TextAfterBattle
 	dw MtMoon3EndBattleText5 ; TextEndBattle

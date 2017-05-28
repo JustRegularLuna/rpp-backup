@@ -162,7 +162,7 @@ INCLUDE "audio/sfx/ball_poof.asm"
 INCLUDE "audio/sfx/faint_thud.asm"
 INCLUDE "audio/sfx/run.asm"
 INCLUDE "audio/sfx/dex_page_added.asm"
-INCLUDE "audio/sfx/pokeflute_ch3.asm"
+INCLUDE "audio/sfx/pokeflute_ch6.asm"
 INCLUDE "audio/sfx/peck.asm"
 INCLUDE "audio/sfx/faint_fall.asm"
 INCLUDE "audio/sfx/battle_09.asm"
@@ -478,7 +478,7 @@ Music_DoLowHealthAlarm::
 
 .asm_2138a
 	ld a, $86
-	ld [wChannelSoundIDs + CH4], a ;disable sound channel?
+	ld [wChannelSoundIDs + Ch4], a ;disable sound channel?
 	ld a, [wLowHealthAlarm]
 	and $7f ;decrement alarm timer.
 	dec a
@@ -492,7 +492,7 @@ Music_DoLowHealthAlarm::
 .disableAlarm
 	xor a
 	ld [wLowHealthAlarm], a  ;disable alarm
-	ld [wChannelSoundIDs + CH4], a  ;re-enable sound channel?
+	ld [wChannelSoundIDs + Ch4], a  ;re-enable sound channel?
 	ld de, .toneDataSilence
 	jr .playTone
 
@@ -543,12 +543,12 @@ Music_PokeFluteInBattle::
 	ld a, SFX_CAUGHT_MON
 	call PlaySoundWaitForCurrent
 	; then immediately overwrtie the channel pointers
-	ld hl, wChannelCommandPointers + CH4 * 2
-	ld de, SFX_08_PokeFlute_Ch1
+	ld hl, wChannelCommandPointers + Ch4 * 2
+	ld de, SFX_08_PokeFlute_Ch4
 	call Audio2_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch2
+	ld de, SFX_08_PokeFlute_Ch5
 	call Audio2_OverwriteChannelPointer
-	ld de, SFX_08_PokeFlute_Ch3
+	ld de, SFX_08_PokeFlute_Ch6
 
 Audio2_OverwriteChannelPointer:
 	ld a, e
@@ -633,7 +633,7 @@ INCLUDE "audio/music/pokecenter.asm"
 
 SECTION "Music 2", ROMX, BANK[AUDIO_2]
 
-INCLUDE "audio/sfx/pokeflute_ch1_ch2.asm"
+INCLUDE "audio/sfx/pokeflute_ch4_ch5.asm"
 INCLUDE "audio/sfx/unused2_2.asm"
 INCLUDE "audio/music/gymleaderbattle.asm"
 INCLUDE "audio/music/trainerbattle.asm"

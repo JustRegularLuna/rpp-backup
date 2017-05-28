@@ -73,7 +73,7 @@ SilphCoMapList:
 
 CardKeySuccessText:
 	TX_FAR _CardKeySuccessText1
-	TX_SFX_ITEM
+	TX_SFX_ITEM_1
 	TX_FAR _CardKeySuccessText2
 	db "@"
 

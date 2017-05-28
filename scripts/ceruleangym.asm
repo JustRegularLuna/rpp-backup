@@ -4,7 +4,7 @@ CeruleanGymScript:
 	res 6, [hl]
 	call nz, CeruleanGymScript_5c6d0
 	call EnableAutoTextBoxDrawing
-	ld hl, CeruleanGymTrainerHeaders
+	ld hl, CeruleanGymTrainerHeader0
 	ld de, CeruleanGymScriptPointers
 	ld a, [wCeruleanGymCurScript]
 	call ExecuteCurMapScriptInTable
@@ -77,7 +77,6 @@ CeruleanGymTextPointers:
 	dw CeruleanGymText6
 	dw CeruleanGymText7
 
-CeruleanGymTrainerHeaders:
 CeruleanGymTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_CERULEAN_GYM_TRAINER_0
 	db ($3 << 4) ; trainer's view range
@@ -146,9 +145,9 @@ CeruleanGymText5:
 	db "@"
 
 CeruleanGymText6:
-ReceivedTM11Text:
 	TX_FAR _ReceivedTM11Text
-	db $0B, "@"
+	TX_SFX_ITEM_1
+	db "@"
 
 CeruleanGymText7:
 	TX_FAR _CeruleanGymText_5c7d3
@@ -156,7 +155,9 @@ CeruleanGymText7:
 
 CeruleanGymText_5c7d8:
 	TX_FAR _CeruleanGymText_5c7d8
-	db $11, $6, "@"
+	TX_SFX_KEY_ITEM ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
+	TX_BLINK
+	db "@"
 
 CeruleanGymText2:
 	TX_ASM

@@ -82,7 +82,6 @@ SaffronGymTextPointers:
 	dw SaffronGymText11
 	dw SaffronGymText12
 
-SaffronGymTrainerHeaders:
 SaffronGymTrainerHeader0:
 	dbEventFlagBit EVENT_BEAT_SAFFRON_GYM_TRAINER_0
 	db ($3 << 4) ; trainer's view range
@@ -187,8 +186,8 @@ SaffronGymText_5d162:
 
 SaffronGymText_5d167:
 	TX_FAR _SaffronGymText_5d167
-	db $11 ; play same sound as red giving oak parcel
-	db $6 ; wait for keypress
+	TX_SFX_KEY_ITEM ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
+	TX_BLINK
 	db "@"
 
 SaffronGymText_5d16e:
@@ -201,7 +200,7 @@ SaffronGymText10:
 
 SaffronGymText11:
 	TX_FAR ReceivedTM46Text
-	db $b
+	TX_SFX_ITEM_1
 	TX_FAR _TM46ExplanationText
 	db "@"
 

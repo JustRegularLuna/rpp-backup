@@ -71,7 +71,7 @@ SafariZoneGameOver:
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic
 .waitForMusicToPlay
-	ld a, [wChannelSoundIDs + CH4]
+	ld a, [wChannelSoundIDs + Ch4]
 	cp SFX_SAFARI_ZONE_PA
 	jr nz, .waitForMusicToPlay
 	ld a, TEXT_SAFARI_GAME_OVER
@@ -235,9 +235,9 @@ CinnabarGymQuiz_1ea92:
 	ret
 
 CinnabarGymQuizCorrectText:
-	db $0b
+	TX_SFX_ITEM_1
 	TX_FAR _CinnabarGymQuizCorrectText
-	db $06
+	TX_BLINK
 	TX_ASM
 
 	ld a, [$ffe0]
@@ -372,7 +372,7 @@ BillsHouseMonitorText:
 
 BillsHouseInitiatedText:
 	TX_FAR _BillsHouseInitiatedText
-	db $06
+	TX_BLINK
 	TX_ASM
 	ld a, $ff
 	ld [wNewSoundID], a

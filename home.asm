@@ -717,7 +717,7 @@ UncompressMonSprite::
 ; define (by index number) the bank that a pokemon's image is in
 ; index = Mew, bank 1
 ; index = Kabutops fossil, bank $B
-;	index < $1F, bank 9
+; index < $1F, bank 9
 ; $1F ≤ index < $4A, bank $A
 ; $4A ≤ index < $74, bank $B
 ; $74 ≤ index < $99, bank $C
@@ -1880,7 +1880,7 @@ PrintListMenuEntries::
 	jp nz,.loop
 	ld bc,-8
 	add hl,bc
-	ld a,$ee ; down arrow
+	ld a,"▼"
 	ld [hl],a
 	ret
 .printCancelMenuItem
@@ -3212,7 +3212,7 @@ WaitForSoundToFinish::
 	ret nz
 	push hl
 .waitLoop
-	ld hl, wChannelSoundIDs + CH4
+	ld hl, wChannelSoundIDs + Ch4
 	xor a
 	or [hl]
 	inc hl
@@ -4119,7 +4119,7 @@ EraseMenuCursor::
 HandleDownArrowBlinkTiming::
 	ld a,[hl]
 	ld b,a
-	ld a,$ee ; down arrow
+	ld a,"▼"
 	cp b
 	jr nz,.downArrowOff
 .downArrowOn
@@ -4153,7 +4153,7 @@ HandleDownArrowBlinkTiming::
 	ret nz
 	ld a,$06
 	ld [H_DOWNARROWBLINKCNT2],a
-	ld a,$ee ; down arrow
+	ld a,"▼"
 	ld [hl],a
 	ret
 
@@ -4408,7 +4408,6 @@ endm
 
 
 CallFunctionInTable::
-JumpTable::
 ; Call function a in jumptable hl.
 ; de is not preserved.
 	push hl
