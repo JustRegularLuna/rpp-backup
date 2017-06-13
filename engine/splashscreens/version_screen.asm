@@ -55,22 +55,22 @@ VersionScreenTilemap:
 VersionScreenTilemapEnd:
 
 VersionScreenText:
-	db "Welcome to Red++", $4E
-	db "You are playing", $4E
+	db   "Welcome to Red++"
+	next "You are playing"
 IF DEF(_BLUE) ; Hard Rom
-	db "The Hard Patch", $4E
+	next "The Hard Patch"
 ELSE ; Normal Rom
-	db "The Normal Patch", $4E
+	next "The Normal Patch"
 ENDC
-	db "Version 2.4.1@"
+	next "Version 2.4.1@"
 
 VersionScreenText2:
-	db "Readme and FAQ", $4E
-	db "are found at:", $4E
-	db "www.github.com/", $4E
-	db "TheFakeMateo/", $4E
-	db "RedPlusPlus@"
+	db   "Readme and FAQ"
+	next "are found at:"
+	next "www.github.com/"
+	next "TheFakeMateo/"
+	next "RedPlusPlus@"
 
 VersionScreenText3:
-	db "Have fun!", $4E
-	db "  - Mateo, 2016@"
+	db   "Have fun!"
+	next "  - Mateo, 2016@"
