@@ -2134,7 +2134,7 @@ DisableWaitingAfterTextDisplay::
 ; [wcf91] = item ID
 ; OUTPUT:
 ; [wActionResultOrTookBattleTurn] = success
-; 00: unsucessful
+; 00: unsuccessful
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
 UseItem::
@@ -2579,7 +2579,7 @@ EngageMapTrainer::
 	ld a, [hli]    ; load trainer class
 	ld [wEngagedTrainerClass], a
 	ld a, [hl]     ; load trainer mon set
-	ld [wEnemyMonAttackMod], a
+	ld [wEngagedTrainerSet], a
 	jp PlayTrainerMusic
 
 PrintEndBattleText::
@@ -3440,7 +3440,7 @@ CopyString::
 ; this function is used when lower button sensitivity is wanted (e.g. menus)
 ; OUTPUT: [hJoy5] = pressed buttons in usual format
 ; there are two flags that control its functionality, [hJoy6] and [hJoy7]
-; there are esentially three modes of operation
+; there are essentially three modes of operation
 ; 1. Get newly pressed buttons only
 ;    ([hJoy7] == 0, [hJoy6] == any)
 ;    Just copies [hJoyPressed] to [hJoy5].
@@ -3788,7 +3788,7 @@ CalcStat::
 	ld a, b
 	add e
 	jr nc, .noCarry2
-	inc d                     ; da = (Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4
+	inc d                     ; de = (Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4
 .noCarry2
 	ld [H_MULTIPLICAND+2], a
 	ld a, d
