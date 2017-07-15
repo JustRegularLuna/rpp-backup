@@ -1,16 +1,15 @@
 SECTION "rst 00", ROM0 [$00]
-	rst $38
-RefreshMapColorsScrolling:
+_LoadMapVramAndColors:
+	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,$2f
-	jp CallToBank
+	ld a,BANK(LoadMapVramAndColors)
+	ld [$2000],a
+	call LoadMapVramAndColors
+	pop af
+	ld [$2000],a
+	ret
 
-SECTION "rst 08", ROM0 [$08]
-	rst $38
-_RefreshMapColors:
-	push af
-	ld a,BANK(RefreshMapColors)
-	jp CallToBank
+;SECTION "rst 08", ROM0 [$08]
 
 ; HAX: rst10 is used for the vblank hook
 SECTION "rst 10", ROM0 [$10]
@@ -146,7 +145,7 @@ CallToBank: ; $00f1
 	pop af
 	push af
 	call $6000
-	ld a,[$ff00+$b8]
+	ld a,[H_LOADEDROMBANK]
 	ld [$2000],a
 	pop af
 	ret

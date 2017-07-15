@@ -2343,23 +2343,8 @@ LoadMapData::
 	call _LoadTilesetPatternsAndPalettes	; HAX
 	call LoadCurrentMapView
 ; copy current map view to VRAM
-	coord hl, 0, 0
-	ld de,vBGMap0
-	ld b,18
-.vramCopyLoop
-	ld c,20
-.vramCopyInnerLoop
-	call _RefreshMapColors ; HAX
-	dec c
-	jr nz,.vramCopyInnerLoop
-	ld a,32 - 20
-	add e
-	ld e,a
-	jr nc,.noCarry
-	inc d
-.noCarry
-	dec b
-	jr nz,.vramCopyLoop
+	call _LoadMapVramAndColors ; HAX
+label::
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a
 	call EnableLCD
@@ -2379,6 +2364,11 @@ LoadMapData::
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	ret
+
+; HAX: Padding to prevent data shifting
+rept $17
+	nop
+endr
 
 ; function to switch to the ROM bank that a map is stored in
 ; Input: a = map number
