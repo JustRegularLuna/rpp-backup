@@ -45,9 +45,9 @@ ColorOverworldSprites:
 	and $f8
 	ld b,a
 
-	ld a,[$ff8f]
+	ld a,[hSpriteOffset2]
 	ld e,a
-	ld d,$c1
+	ld d,wSpriteStateData1>>8
 	ld a,[de]		; Load A with picture ID
 	dec a
 
@@ -64,7 +64,7 @@ ColorOverworldSprites:
 	jr nz,.norandomColor
 
 	; This is a (somewhat) random but consistent color
-	ld a,[$ff8f]
+	ld a,[hSpriteOffset2]
 	swap a
 	and 3
 

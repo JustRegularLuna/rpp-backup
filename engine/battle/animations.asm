@@ -2703,7 +2703,9 @@ AnimationLeavesFalling:
 	ld a, [rOBP0]
 	push af
 	ld a, [wAnimPalette]
-	ld [rOBP0], a
+;	ld [rOBP0], a ; HAX
+	nop
+	nop
 	ld d, $37 ; leaf tile
 	ld a, 3 ; number of leaves
 	ld [wNumFallingObjects], a
