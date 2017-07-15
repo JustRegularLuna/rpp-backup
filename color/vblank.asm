@@ -4,7 +4,7 @@
 GbcPrepareVBlank:
 	ld a,2
 	ld [rSVBK],a
-	call RefreshWindowPalettes
+	call RefreshWindowPalettesPreVBlank
 	call RefreshPalettesPreVBlank
 	xor a
 	ld [rSVBK],a
@@ -137,7 +137,7 @@ RefreshPalettesPreVBlank:
 
 
 ; Draw window palettes; this is done before vblank so it can be efficiently DMA'd.
-RefreshWindowPalettes:
+RefreshWindowPalettesPreVBlank:
 	ld a,[H_AUTOBGTRANSFERENABLED]
 	and a
 	ret z
@@ -175,6 +175,7 @@ RefreshWindowPalettes:
 	and a
 	jr nz,.tileBasedPalettes
 
+; TODO: delete this?
 .staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
 	ld a,[W2_LastAutoCopyDest]
 	ld b,a
@@ -232,7 +233,7 @@ RefreshWindowPalettes:
 	pop de
 .drawRow
 	push bc
-	ld b,$d2
+	ld b,W2_TilesetPaletteMap>>8
 REPT 20
 	ld a,[hli]
 	ld c,a

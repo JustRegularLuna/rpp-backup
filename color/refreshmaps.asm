@@ -177,8 +177,12 @@ ENDR
 	ret
 
 
-; Not sure why this is needed
-RefreshWindowInitial:
+; Replaces the "TransferBgRows" function. Called when menus first appear on top of bg
+; layer. (called 3 times to fully draw it)
+; b = # rows to copy
+; hl = destination
+; sp = source (need to restore sp after this)
+WindowTransferBgRowsAndColors:
 label_011:
 	ld a,$02
 	ld [rSVBK],a
@@ -227,7 +231,7 @@ label_017:
 	jr nz,label_015
 	xor a
 	ld [$ff4f],a
-	ld [$ff70],a
+	ld [rSVBK],a
 	ld a,$0c
 	add l
 	ld l,a
