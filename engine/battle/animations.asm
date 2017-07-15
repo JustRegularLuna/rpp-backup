@@ -181,8 +181,6 @@ PlayAnimation:
 	jr z,.AnimationOver
 	cp a,$C0 ; is this subanimation or a special effect?
 	jr c,.playSubanimation
-;	jp StartAnimationHook ; HAX
-;	nop
 .doSpecialEffect
 	ld c,a
 	ld de,SpecialEffectPointers

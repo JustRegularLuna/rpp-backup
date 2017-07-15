@@ -114,6 +114,7 @@ ELSE
 ENDC
 	call DrawLineBox ; Draws the box around name, HP and status
 	coord hl, 2, 7
+	nop
 	ld [hl], "⠄" ; . after No ("." is a different one)
 	dec hl
 	ld [hl], "№"
@@ -128,16 +129,7 @@ ENDC
 	ld hl, wStatusScreenHPBarColor
 	call GetHealthBarColor
 	ld b, SET_PAL_STATUS_SCREEN
-	call RunPaletteCommand
-IF GEN_2_GRAPHICS	
-	coord de, 18, 5
-	ld a, [wLoadedMonLevel]
-	ld [wBattleMonLevel], a
-	push af
-	callba PrintEXPBar
-	pop af
-	ld [wLoadedMonLevel], a
-ENDC	
+	call StatusScreenHook ; HAX: Draws EXP bar if GEN_2_GRAPHICS is set
 	coord hl, 16, 6
 	ld de, wLoadedMonStatus
 	call PrintStatusCondition
@@ -325,9 +317,9 @@ StatusScreen2:
 	lb bc, 5, 10
 	call ClearScreenArea ; Clear under name
 IF GEN_2_GRAPHICS
-	coord hl, 19, 1
-	lb bc, 6, 10
-	call DrawLineBox ; Draws the box around name, HP and status
+	call StatusScreen2Hook
+	nop
+	nop
 ELSE
 	coord hl, 19, 3
 	ld [hl], $78

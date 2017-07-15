@@ -411,7 +411,15 @@ INCLUDE "engine/overworld/is_player_just_outside_map.asm"
 INCLUDE "engine/menu/status_screen.asm"
 INCLUDE "engine/menu/party_menu.asm"
 
+IF GEN_2_GRAPHICS
 RedPicFront:: INCBIN "pic/gstrainer/red.pic"
+rept 11 ; Padding
+	db 0
+endr
+ELSE
+RedPicFront:: INCBIN "pic/trainer/red.pic"
+ENDC
+
 ShrinkPic1::  INCBIN "pic/trainer/shrink1.pic"
 ShrinkPic2::  INCBIN "pic/trainer/shrink2.pic"
 
@@ -425,6 +433,30 @@ INCLUDE "engine/battle/moveEffects/conversion_effect.asm"
 INCLUDE "engine/battle/moveEffects/haze_effect.asm"
 INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/random.asm"
+
+
+; Hooks for drawing exp bars in status_screen.asm
+
+StatusScreenHook:
+	; b = SET_PAL_STATUS_SCREEN
+	call RunPaletteCommand
+IF GEN_2_GRAPHICS
+	coord de, 18, 5
+	ld a, [wLoadedMonLevel]
+	ld [wBattleMonLevel], a
+	push af
+	callba PrintEXPBar
+	pop af
+	ld [wLoadedMonLevel], a
+ENDC
+	ret
+
+; Only called when GEN_2_GRAPHICS is set
+StatusScreen2Hook:
+	coord hl, 19, 1
+	lb bc, 6, 10
+	jp DrawLineBox ; Draws the box around name, HP and status
+
 
 IF GEN_2_GRAPHICS
 EXPBarGraphics:  INCBIN "gfx/gs/exp_bar.2bpp"
@@ -825,8 +857,6 @@ BeedrillPicFront:   INCBIN "pic/bmon/beedrill.pic"
 BeedrillPicBack:    INCBIN "pic/monback/beedrillb.pic"
 ENDC
 
-	ORG $09, $7d6b
-
 
 SECTION "Battle (bank 9)", ROMX, BANK[$9]
 INCLUDE "engine/battle/print_type.asm"
@@ -879,8 +909,6 @@ GastlyPicBack:      INCBIN "pic/monback/gastlyb.pic"
 VileplumePicFront:  INCBIN "pic/bmon/vileplume.pic"
 VileplumePicBack:   INCBIN "pic/monback/vileplumeb.pic"
 ENDC
-
-	ORG $0a, $7ea9
 
 
 SECTION "Battle (bank A)", ROMX, BANK[$A]

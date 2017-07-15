@@ -1916,8 +1916,7 @@ DrawPlayerHUDAndHPBar:
 	coord hl, 10, 7
 IF GEN_2_GRAPHICS
 	call PlaceString
-	coord de, 17, 11
-	call PrintEXPBar
+	call PrintEXPBarAt1711
 ELSE
 	call CenterMonName
 	call PlaceString
@@ -7139,7 +7138,7 @@ LoadMonBackPic:
 	call ClearScreenArea
 	ld hl,  wMonHBackSprite - wMonHeader
 	call UncompressMonSprite
-	ld a, $3
+	predef_id ScaleSpriteByTwo
 
 	IF GEN_2_GRAPHICS
 		call LoadMonBackSpriteHook
@@ -8762,6 +8761,10 @@ PlayBattleAnimationGotID:
 	pop hl
 	ret
 
+
+; Following are hooks for pokered_color. This is the end of the bank so it won't cause
+; data shifting.
+
 LoadMonBackSpriteHook: ; HAX
 	ld a,$66
 	ld de,vBackPic
@@ -8769,6 +8772,8 @@ LoadMonBackSpriteHook: ; HAX
 	jp LoadUncompressedSpriteData
 
 IF GEN_2_GRAPHICS
+PrintEXPBarAt1711
+	coord de, 17, 11
 PrintEXPBar:
 	push de
 	call CalcEXPBarPixelLength
