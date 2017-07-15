@@ -338,28 +338,23 @@ LoadAnimationTileset:
 	ld e,a
 	ld d,0
 
-	ld a, [wIsInBattle]
-	and a
-	jr z, .inTrade ; don't load attack sprite palettes during trades
 	; HAX: Load corresponding palettes as well
-	ld b, BANK(LoadAnimationTilesetPalettes)
-	ld hl, LoadAnimationTilesetPalettes
-	rst $18
+	call _LoadAnimationTilesetPalettes
 
-.inTrade
 	ld hl,AnimationTilesetPointers
 	add hl,de
 	ld a,[hli]
 	ld [wTempTilesetNumTiles],a ; number of tiles
-	push af
+	ld c,a
 	ld a,[hli]
 	ld e,a
 	ld d,[hl] ; de = address of tileset
 	ld hl,vSprites + $310
 	ld b, BANK(AnimationTileset1) ; ROM bank
-	pop af ; a = [wTempTilesetNumTiles]
-	ld c,a ; number of tiles
 	jp CopyVideoData ; load tileset
+
+	; Padding to prevent data shifting
+	nop
 
 AnimationTilesetPointers:
 	db 79 ; number of tiles
