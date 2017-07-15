@@ -2339,17 +2339,17 @@ LoadMapData::
 	call LoadMapHeader
 	callba InitMapSprites ; load tile pattern data for sprites
 	call LoadTileBlockMap
-	;call LoadTilesetTilePatternData
-	call _LoadTilesetPatternsAndPalettes	; HAX
+	call LoadTilesetTilePatternData
 	call LoadCurrentMapView
-; copy current map view to VRAM
+
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand ; HAX: this function call was moved to be above _LoadMapVramAndColors
+; copy current map view + corresponding palettes to VRAM
 	call _LoadMapVramAndColors ; HAX
-label::
+
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a
 	call EnableLCD
-	ld b, SET_PAL_OVERWORLD
-	call RunPaletteCommand
 	call LoadPlayerSpriteGraphics
 	ld a,[wd732]
 	and a,1 << 4 | 1 << 3 ; fly warp or dungeon warp

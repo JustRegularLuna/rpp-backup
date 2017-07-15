@@ -1,16 +1,10 @@
 SECTION "bank2D",ROMX,BANK[$2D]
 
-MapPalettes:
-	INCLUDE "color/mappalettes.asm"
+INCLUDE "color/mappalettes.asm"
+INCLUDE "color/map_palette_sets.asm"
+INCLUDE "color/map_palette_assignments.asm"
+INCLUDE "color/roofpalettes.asm"
 
-	ORG $2d, $4200
-	INCLUDE "color/map_palette_sets.asm"
-
-	ORG $2d, $4300
-	INCLUDE "color/map_palette_assignments.asm"
-
-
-	ORG $2d, $6000
 ; Load colors for new map and tile placement
 LoadTilesetPalette:
 	push bc
@@ -105,6 +99,7 @@ LoadTilesetPalette:
 	ld a, 3
 	ld [W2_TilesetPaletteMap + $78], a
 
+	; Retrieve former wram bank
 	pop af
 	ld b,a
 
@@ -127,7 +122,6 @@ LoadTilesetPalette:
 	pop bc
 	ret
 
-	ORG $2d, $6200
 ; Towns have different roof colors while using the same tileset
 LoadTownPalette:
 	ld a,[rSVBK]
@@ -168,7 +162,3 @@ LoadTownPalette:
 	pop af
 	ld [rSVBK],a ; Restore wram bank
 	ret
-
-
-	ORG $2d, $7000
-	INCLUDE "color/roofpalettes.asm"

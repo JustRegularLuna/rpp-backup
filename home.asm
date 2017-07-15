@@ -1,4 +1,3 @@
-; HAX: rst vectors taken over to indirectly call color-related functions
 SECTION "rst 00", ROM0 [$00]
 _LoadMapVramAndColors:
 	ld a,[H_LOADEDROMBANK]
@@ -124,11 +123,6 @@ loop3:
 
 _InitGbcMode:
 	jpab InitGbcMode
-
-; Called on initial loading of a map
-_LoadTilesetPatternsAndPalettes:
-	CALL_INDIRECT LoadTilesetPalette ; Call custom code (palettes)
-	jp LoadTilesetTilePatternData    ; Call original game code (tilemap)
 
 
 ; Called once for each sprite. This needs to preserve variables, so it can't use

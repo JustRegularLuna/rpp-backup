@@ -1,7 +1,3 @@
-; Bank 2c is being used for something at the beginning of the bank. The rest is free.
-
-	ORG $2c, $6000
-
 ; Called when a map is loaded. Loads tilemap and tile attributes.
 LoadMapVramAndColors:
 	ld a,$02
@@ -43,8 +39,6 @@ LoadMapVramAndColors:
 	ld [rSVBK],a
 	ret
 
-
-SECTION "bank2F",ROMX,BANK[$2F]
 
 
 ; Refresh 1/3 of the window each frame
@@ -388,7 +382,7 @@ REPT 18
 	ld a,31
 	add e
 	ld e,a
-jr nc,.noCarry\@
+	jr nc,.noCarry\@
 	inc d
 .noCarry\@
 ; the following 4 lines wrap us from bottom to top if necessary

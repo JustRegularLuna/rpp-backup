@@ -144,9 +144,13 @@ ENDC
 	ld c,20
 	call FillBox
 
-	; Wait 2 frames before updating palettes
+	; Wait 2 frames before updating palettes (if LCD is on)
+	ld a,[rLCDC]
+	and rLCDC_ENABLE_MASK
+	jr z,.doneDelay
 	ld c,2
 	call DelayFrames
+.doneDelay
 
 	; Restore sprite palettes used by pokeballs
 	CALL_INDIRECT LoadOverworldSpritePalettes
@@ -530,8 +534,7 @@ SetPal_Generic:
 	ld [rSVBK],a
 	ret
 
-; uses PalPacket_Empty to build a packet based on the current map
-; Loading a map
+; Loading a map. Called when first loading, and when transitioning between maps.
 SetPal_Overworld:
 	ld a,2
 	ld [rSVBK],a
@@ -557,9 +560,13 @@ SetPal_Overworld:
 
 	CALL_INDIRECT LoadTilesetPalette
 
-	; Wait 2 frames before updating palettes
+	; Wait 2 frames before updating palettes (if LCD is on)
+	ld a,[rLCDC]
+	and rLCDC_ENABLE_MASK
+	jr z,.doneDelay
 	ld c,2
 	call DelayFrames
+.doneDelay:
 
 	ld a,2
 	ld [rSVBK],a
@@ -835,8 +842,10 @@ LoadTitleMonTilesAndPalettes:
 	ret
 
 INCLUDE "color/init.asm"
+SECTION "bank2F",ROMX,BANK[$2F]
 INCLUDE "color/refreshmaps.asm"
 INCLUDE "color/loadpalettes.asm"
+
 INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
 INCLUDE "color/badgepalettemap.asm" ; This ends up in whatever bank was used last
