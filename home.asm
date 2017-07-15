@@ -23,10 +23,6 @@ SECTION "rst 18", ROM0 [$18]
 	jp Bankswitch
 
 SECTION "rst 20", ROM0 [$20]
-_ColorOverworldSprites:
-	push af
-	ld a,BANK(ColorOverworldSprites)
-	jp CallToBank
 
 SECTION "rst 28", ROM0 [$28]
 	rst $38
@@ -111,43 +107,48 @@ INCLUDE "home/copy.asm"
 
 SECTION "ColorizationHome",HOME[$be]
 
-_InitGbcMode:
-	ld b,BANK(InitGbcMode)
-	ld hl,InitGbcMode
-	rst $18 ; Bankswitch
-	ret
-
 InitializeColor:
 	cp $11
 	jr nz,IsNotGBC
 	call _InitGbcMode
 	jp Start
 .IsNotGBC
+	; Wants to call $30:$6000?
 	ld a,$30
 	ld [$2000],a
+loop3:
 	jr loop3
 
-_LoadTilesetPatternsAndPalettes: ; $00e1
-	push af
-	ld a, BANK(LoadTilesetPalette)
-loop3
-	ld [$2000],a
-	call asm00f5
-	pop af
-	call LoadTilesetTilePatternData
-	ret
 
-CallToBank:
-	ld [$2000],a
-	pop af
-asm00f5:
+; Indirect function callers for color code
+
+_InitGbcMode:
+	jpab InitGbcMode
+
+; Called on initial loading of a map
+_LoadTilesetPatternsAndPalettes:
+	CALL_INDIRECT LoadTilesetPalette ; Call custom code (palettes)
+	jp LoadTilesetTilePatternData    ; Call original game code (tilemap)
+
+
+; Called once for each sprite. This needs to preserve variables, so it can't use
+; BankSwitch.
+; Interrupts should be disabled when calling this since it doesn't properly update the
+; "H_LOADEDROMBANK" variable...
+_ColorOverworldSprite:
 	push af
-	call $6000
+	ld a,BANK(ColorOverworldSprite)
+	ld [MBC1RomBank],a
+	pop af
+	call ColorOverworldSprite
+	push af
 	ld a,[H_LOADEDROMBANK]
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	pop af
 	ret
 
+
+; Soft reset code (clears memory then goes to normal code)
 SoftReset:
 	ld b,BANK(ClearGbcMemory)
 	ld hl,ClearGbcMemory
@@ -4822,6 +4823,9 @@ DelayFrameHook:
 	ld [rSVBK],a
 	push bc ; Save wram bank
 
+	; The "PrepareOamData" used to be run during vblank, so just to be safe, let's
+	; disable interrupts. Also, the "ColorNonOverworldSprites" function needs
+	; interrupts disabled.
 	di
 	CALL_INDIRECT PrepareOAMData
 	jr z, .spritesDrawn

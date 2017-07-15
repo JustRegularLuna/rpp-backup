@@ -36,9 +36,10 @@ LoadPaletteData:
 	ld [W2_LastOBP0],a
 	ret
 
-; Set overworld sprite colors
+; Set an overworld sprite's colors
 ; On entering, A contains the flags (without a color palette) and de is the destination.
-ColorOverworldSprites:
+; This is called in the middle of a loop in engine/overworld/oam.asm, once per sprite.
+ColorOverworldSprite:
 	push af
 	push bc
 	push de
@@ -187,10 +188,6 @@ ClearSpritePaletteMap:
 	jr nz,.loop
 	ret
 
-
-	ORG $2e, $6000
-
-	jp ColorOverworldSprites
 
 SpritePaletteAssignments: ; Characters on the overworld
 	; 0x01: SPRITE_RED
