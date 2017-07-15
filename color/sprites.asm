@@ -16,7 +16,7 @@ PAL_BLUE	EQU 1
 PAL_GREEN	EQU 2
 PAL_BROWN	EQU 3
 
-LoadSpritePalettes:
+LoadOverworldSpritePalettes:
 	ld hl,SpritePalettes
 	jr LoadPaletteData
 
@@ -79,8 +79,8 @@ ColorOverworldSprites:
 	pop af
 	ret
 
-; Currently this just colorizes attack sprites but it can be
-; used in other non-overworld scenarios.
+; This is called whenever [wUpdateSpritesEnabled] != 1 (overworld sprites not enabled?).
+; Colorizes: attack sprites, party menu, perhaps more?
 ColorNonOverworldSprites:
 	ld a,2
 	ld [rSVBK],a
@@ -137,6 +137,7 @@ ColorNonOverworldSprites:
 	ld [rSVBK],a
 	ret
 
+; Called when starting a battle
 LoadAnimationTilesetPalettes:
 	di
 	push de
@@ -165,11 +166,15 @@ LoadAnimationTilesetPalettes:
 	dec b
 	jr nz,.copyLoop
 
+	ld a,1
+	ld [W2_ForceOBPUpdate],a
+
 	xor a
 	ld [rSVBK],a
 
 	pop de
 	reti
+
 
 ; Set all sprite palettes to not be colorized by "ColorNonOverworldSprites".
 ; ASSUMES THAT WRAM BANK 2 IS LOADED.
@@ -416,12 +421,12 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	db 0 ; NORMAL EQU $00
 	db 0 ; FIGHTING EQU $01
 	db 0 ; FLYING EQU $02
-	db 0 ; POISON EQU $03
-	db 0 ; GROUND EQU $04
-	db 0 ; ROCK EQU $05
+	db 7 ; POISON EQU $03
+	db 3 ; GROUND EQU $04
+	db 3 ; ROCK EQU $05
 	db 0
 	db 0 ; BUG EQU $07
-	db 0 ; GHOST EQU $08
+	db 7 ; GHOST EQU $08
 	db 0
 	db 0
 	db 0
@@ -435,10 +440,10 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	db 0
 	db 2 ; FIRE EQU $14
 	db 1 ; WATER EQU $15
-	db 0 ; GRASS EQU $16
-	db 0 ; ELECTRIC EQU $17
-	db 0 ; PSYCHIC EQU $18
-	db 0 ; ICE EQU $19
+	db 5 ; GRASS EQU $16
+	db 4 ; ELECTRIC EQU $17
+	db 7 ; PSYCHIC EQU $18
+	db 6 ; ICE EQU $19
 	db 1 ; DRAGON EQU $1A
 
 INCLUDE "color/spritepalettes.asm"

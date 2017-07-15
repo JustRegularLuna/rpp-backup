@@ -4,8 +4,8 @@ SECTION "bank1C_extension",ROMX,BANK[$1C]
 ; Set all palettes to black at beginning of battle
 SetPal_BattleBlack:
 	; Code $ff sometimes calls this (by accident?)
-	inc b
-	ret z
+;	inc b
+;	ret z
 
 	ld a,$02
 	ld [rSVBK],a
@@ -25,9 +25,10 @@ SetPal_BattleBlack:
 	jr nz,.palLoop
 
 	ld a,1
-	ld [W2_ForcePaletteUpdate],a
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
 
-	;xor a
+	xor a
 	ld [rSVBK],a
 	ret
 
@@ -88,7 +89,7 @@ ENDC
 	xor a
 	ld [W2_TileBasedPalettes],a	; Use a direct color map instead of assigning colors to tiles
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 
 	; Top half; enemy lifebar
 	ld hl,W2_TilesetPaletteMap
@@ -147,13 +148,13 @@ ENDC
 	ld c,2
 	call DelayFrames
 
-	; Restore sprite palettes which may have been set to black
-	CALL_INDIRECT LoadSpritePalettes
+	; Restore sprite palettes used by pokeballs
+	CALL_INDIRECT LoadOverworldSpritePalettes
 
 	ld a,1
 	ld [W2_UseOBP1],a
-	ld [W2_LastBGP],a
-	ld [W2_LastOBP0],a	; Palettes must be redrawn
+	ld [W2_ForceBGPUpdate],a ; Palettes must be redrawn
+	ld [W2_ForceOBPUpdate],a
 	ld [rSVBK],a
 
 	ld a,SET_PAL_BATTLE
@@ -252,7 +253,7 @@ ENDC
 	xor a
 	ld [W2_TileBasedPalettes],a
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 
 	; Set everything to the lifebar palette
 	ld hl,W2_TilesetPaletteMap
@@ -344,7 +345,7 @@ ENDC
 	CALL_INDIRECT ClearSpritePaletteMap
 
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 	xor a
 	ld [W2_TileBasedPalettes],a
 
@@ -380,7 +381,7 @@ SetPal_Slots:
 	call FarCopyData
 
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 
 	xor a
 	ld [W2_TileBasedPalettes],a
@@ -458,7 +459,7 @@ ENDC
 	call FillMemory
 
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
  	xor a
 	ld [W2_TileBasedPalettes],a
 
@@ -518,7 +519,7 @@ SetPal_Generic:
 	call FillMemory
 
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 	xor a
 	ld [W2_TileBasedPalettes],a
 
@@ -542,7 +543,7 @@ SetPal_Overworld:
 	ld a,1
 	ld [W2_UseOBP1],a ; Pokecenter uses OBP1 when healing pokemons
 
-	CALL_INDIRECT LoadSpritePalettes
+	CALL_INDIRECT LoadOverworldSpritePalettes
 	; Make exclamation mark bubble black & white
 	ld a, 5
 	ld hl, W2_SpritePaletteMap + $f8
@@ -580,7 +581,7 @@ SetPal_PartyMenu:
 	ld a,2
 	ld [rSVBK],a
 
-	CALL_INDIRECT LoadSpritePalettes
+	CALL_INDIRECT LoadOverworldSpritePalettes
 
 	ld d,PAL_GREENBAR	; Filler for palette 0 (technically, green)
 	ld e,0
@@ -619,7 +620,7 @@ SetPal_PartyMenu:
 	CALL_INDIRECT ClearSpritePaletteMap
 
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 	xor a
 	ld [W2_TileBasedPalettes],a
 
@@ -694,7 +695,7 @@ SetPal_PokemonWholeScreen:
 	inc a ; ld a,1
 	ld [W2_LastBGP],a ; Refresh palettes
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 
 	xor a
 	ld [rSVBK],a
@@ -791,7 +792,7 @@ PalCmd_0e:
 	xor a
 	ld [W2_TileBasedPalettes],a
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 
 	ld bc,20*18
 	ld hl,W2_TilesetPaletteMap
@@ -814,7 +815,7 @@ PalCmd_0f:
 	ld a,2
 	ld [rSVBK],a
 
-	CALL_INDIRECT LoadSpritePalettes
+	CALL_INDIRECT LoadOverworldSpritePalettes
 
 	CALL_INDIRECT ClearSpritePaletteMap
 

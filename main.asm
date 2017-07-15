@@ -262,7 +262,7 @@ UpdateHPBar_Palettes:
 	call FillMemory
 
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 	jr .done
 
 .inBattle

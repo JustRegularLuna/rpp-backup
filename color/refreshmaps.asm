@@ -128,9 +128,9 @@ ENDR
 	ld b,h
 	ld c,l
 
-	ld a,[$ffbf]
+	ld a,[H_SPTEMP]
 	ld h,a
-	ld a,[$ffc0]
+	ld a,[H_SPTEMP+1]
 	ld l,a
 	ld sp,hl
 
@@ -150,14 +150,15 @@ ENDR
 	and a
 	jr nz,.continue
 
-	ld a,[W2_StaticPaletteModified]
+	ld a,[W2_StaticPaletteMapChanged_vbl]
 	and a
 	jr z, .palettesDone
 	xor a
-	ld [W2_StaticPaletteModified],a
+	ld [W2_StaticPaletteMapChanged_vbl],a
 
 .continue
 
+	; DMA from W2_ScreenPalettesBuffer to hl (window attribute map)
 	ld c,$51
 	ld a, W2_ScreenPalettesBuffer>>8
 	ld [$ff00+c],a
@@ -241,9 +242,9 @@ label_017:
 label_018:
 	dec b
 	jr nz,label_011
-	ld a,[$ffbf]
+	ld a,[H_SPTEMP]
 	ld h,a
-	ld a,[$ffc0]
+	ld a,[H_SPTEMP+1]
 	ld l,a
 	ld sp,hl
 	ret

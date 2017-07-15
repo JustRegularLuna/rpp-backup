@@ -6,15 +6,15 @@ GbcPrepareVBlank:
 	ld a,2
 	ld [rSVBK],a
 	call RefreshWindowPalettes
-	call RefreshPaletteData
+	call RefreshPalettesPreVBlank
 	xor a
 	ld [rSVBK],a
 	ret
 
 ; Refresh palettes based on BGP and OBP registers
 ; Assumes wram bank 2 is loaded
-RefreshPaletteData:
-	ld a,[W2_ForcePaletteUpdate]
+RefreshPalettesPreVBlank:
+	ld a,[W2_ForceBGPUpdate]
 	or a
 	jr nz,.updatebgp
 
@@ -62,7 +62,7 @@ RefreshPaletteData:
 	jr z,.doNextBgPal
 
 .checkSprPalettes
-	ld a,[W2_ForcePaletteUpdate]
+	ld a,[W2_ForceOBPUpdate]
 	or a
 	jr nz,.updateobjp
 	ld a,[rOBP0]
@@ -132,7 +132,8 @@ RefreshPaletteData:
 	ld a,[rOBP1]
 	ld [W2_LastOBP1],a
 	xor a
-	ld [W2_ForcePaletteUpdate],a
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
 	ret
 
 
@@ -183,17 +184,17 @@ RefreshWindowPalettes:
 	jr z,.noDestChange
 	ld [W2_LastAutoCopyDest],a
 	ld a,3
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 .noDestChange
 
-	ld a,[W2_StaticPaletteChanged]
+	ld a,[W2_StaticPaletteMapChanged]
 	and a
 	jp z, .palettesDone
 
-	ld [W2_StaticPaletteModified],a ; Only this will signal vblank to refresh the window palettes
+	ld [W2_StaticPaletteMapChanged_vbl],a ; Only this will signal vblank to refresh the window palettes
 
 	dec a
-	ld [W2_StaticPaletteChanged],a
+	ld [W2_StaticPaletteMapChanged],a
 
 	push hl
 	ld h,d
@@ -273,19 +274,18 @@ GbcVBlankHook:
 	; If we've passed line $95, there's probably not enough time to update palettes.
 	; Leave it for next frame.
 	; This is causing issues with VBA.
-	ld a,[$ff44]
+	ld a,[rLY]
 	cp $96
 	jr nc,.end
 	cp $90
 	jr c,.end
-	call RefreshPalettes
+	call RefreshPalettesVBlank
 
 .end
 	ret
 
-	; If necessary, copy palettes which were generated in the
-	; pre-vblank routines
-RefreshPalettes:
+; If necessary, copy palettes which were generated in the pre-vblank routines
+RefreshPalettesVBlank:
 	ld a,2
 	ld [rSVBK],a
 
@@ -329,25 +329,9 @@ RefreshPalettes:
 	ret
 
 
-GetPaletteNumber:
-	push af
-	ld a,c
-	xor 3
-	ld c,a
-	jr nz,.startLoop
-	pop af
-	ret
-.startLoop
-	pop af
-.loop
-	rlca
-	rlca
-	dec c
-	jr nz,.loop
-	ret
-
 ; Sets a palette color from palette #b to the index of last 2 bits of a.
 ; hl points to a buffer to store the palettes at.
+; Used in pre-vblank routines.
 SetColor:
 	push de
 	and 3
