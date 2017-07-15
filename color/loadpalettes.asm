@@ -10,29 +10,6 @@ MapPalettes:
 	INCLUDE "color/map_palette_assignments.asm"
 
 
-InitGbcMode: ; Sets double speed & clears extra memory
-	ld a,$01
-	; Set double speed mode
-	ld [$ff4d],a
-	stop
-
-	; Clear memory
-	ld d,7
-.clearBank
-	ld a,d
-	ld [rSVBK],a
-	xor a
-	ld hl, W2_BgPaletteData
-	ld bc, $1000
-	call FillMemory
-	dec d
-	jr nz,.clearBank
-
-	xor a
-	ld [rSVBK],a
-	jp LoadBank1
-
-
 	ORG $2d, $6000
 ; Load colors for new map and tile placement
 LoadTilesetPalette:

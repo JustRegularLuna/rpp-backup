@@ -1,3 +1,4 @@
+; HAX: rst vectors taken over to indirectly call color-related functions
 SECTION "rst 00", ROM0 [$00]
 _LoadMapVramAndColors:
 	ld a,[H_LOADEDROMBANK]
@@ -22,7 +23,11 @@ SECTION "rst 18", ROM0 [$18]
 	jp Bankswitch
 
 SECTION "rst 20", ROM0 [$20]
-	rst $38
+_ColorOverworldSprites:
+	push af
+	ld a,BANK(ColorOverworldSprites)
+	jp CallToBank
+
 SECTION "rst 28", ROM0 [$28]
 	rst $38
 SECTION "rst 30", ROM0 [$30]
@@ -104,45 +109,38 @@ HideSprites::
 INCLUDE "home/copy.asm"
 
 
-SECTION "Initialization",HOME[$c0]
+SECTION "ColorizationHome",HOME[$be]
 
-IsGBC:
-	ld hl,Start
-	push hl ; hijack ret
-	ld a,BANK(InitGbcMode)
-	ld [$2000],a
-	jp InitGbcMode
-
-LoadBank1:
-	xor a
-	ld [$2000],a
+_InitGbcMode:
+	ld b,BANK(InitGbcMode)
+	ld hl,InitGbcMode
+	rst $18 ; Bankswitch
 	ret
 
-Initialize:
+InitializeColor:
 	cp $11
-	jr z,IsGBC
+	jr nz,IsNotGBC
+	call _InitGbcMode
+	jp Start
 .IsNotGBC
 	ld a,$30
 	ld [$2000],a
 	jr loop3
-_ColorOverworldSprites: ; $00dc
-	push af
-	ld a,BANK(ColorOverworldSprites)
-	jr CallToBank
+
 _LoadTilesetPatternsAndPalettes: ; $00e1
 	push af
 	ld a, BANK(LoadTilesetPalette)
 loop3
 	ld [$2000],a
-	call $00f5
+	call asm00f5
 	pop af
 	call LoadTilesetTilePatternData
 	ret
-	nop
-	nop
-CallToBank: ; $00f1
+
+CallToBank:
 	ld [$2000],a
 	pop af
+asm00f5:
 	push af
 	call $6000
 	ld a,[H_LOADEDROMBANK]
@@ -150,9 +148,15 @@ CallToBank: ; $00f1
 	pop af
 	ret
 
+SoftReset:
+	ld b,BANK(ClearGbcMemory)
+	ld hl,ClearGbcMemory
+	rst $18 ; Bankswitch
+	jp SoftReset_orig
+
 
 SECTION "Entry", ROM0 [$100]
-	jp Initialize
+	jp InitializeColor
 
 
 SECTION "Header", ROM0 [$104]
@@ -168,7 +172,6 @@ SECTION "Main", ROM0
 
 Start::
 	cp GBC
-Start_2:
 	jr z, .gbc
 	xor a
 	jr .ok

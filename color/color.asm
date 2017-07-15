@@ -1,3 +1,4 @@
+; Extending bank 1C, same bank as palettes.asm (for "SetPal" functions)
 SECTION "bank1C_extension",ROMX,BANK[$1C]
 
 ; Set all palettes to black at beginning of battle
@@ -158,8 +159,8 @@ ENDC
 	ld [W2_LastOBP0],a	; Palettes must be redrawn
 	ld [rSVBK],a
 
-	;ld a,$01
-	ld [W_PALREFRESHCMD],a
+	ld a,SET_PAL_BATTLE
+	ld [wDefaultPaletteCommand],a
 	ret
 
 ; hl: starting address
@@ -471,8 +472,8 @@ ENDC
 	ld [rSVBK],a
 
 	; Execute custom command 0e after titlescreen to clear colors.
-	ld a,$e
-	ld [W_PALREFRESHCMD],a
+	ld a,SET_PAL_OAK_INTRO
+	ld [wDefaultPaletteCommand],a
 	ret
 
 ; Called during the intro
@@ -573,8 +574,8 @@ SetPal_Overworld:
 	;xor a
 	ld [rSVBK],a
 
-	ld a,9
-	ld [W_PALREFRESHCMD],a
+	ld a,SET_PAL_OVERWORLD
+	ld [wDefaultPaletteCommand],a
 	ret
 
 ; Open pokemon menu
@@ -830,22 +831,7 @@ LoadTitleMonTilesAndPalettes:
 	callba TitleScroll
 	ret
 
-ResetPalettes:
-	ld a,2
-	ld [rSVBK],a
-	dec a
-	ld [W2_TileBasedPalettes],a
-	dec a
-	ld hl, W2_TilesetPaletteMap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call FillMemory
-	ld hl, W2_BgPaletteData
-	ld bc, $80
-	call FillMemory
-	xor a
-	ld [rSVBK],a
-	ret
-
+INCLUDE "color/init.asm"
 INCLUDE "color/refreshmaps.asm"
 INCLUDE "color/loadpalettes.asm"
 INCLUDE "color/vblank.asm"

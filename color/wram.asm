@@ -1,5 +1,3 @@
-W_PALREFRESHCMD EQU $CF1C
-
 W2_BgPaletteData  EQU $d000
 W2_SprPaletteData EQU $d040
 
