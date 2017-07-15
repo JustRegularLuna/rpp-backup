@@ -127,18 +127,24 @@ _InitGbcMode:
 
 ; Called once for each sprite. This needs to preserve variables, so it can't use
 ; BankSwitch.
-; Interrupts should be disabled when calling this since it doesn't properly update the
-; "H_LOADEDROMBANK" variable...
 _ColorOverworldSprite:
-	push af
-	ld a,BANK(ColorOverworldSprite)
-	ld [MBC1RomBank],a
-	pop af
-	call ColorOverworldSprite
-	push af
+	ld [H_SPTEMP],a ; Borrow this as memory not in use right now
+
 	ld a,[H_LOADEDROMBANK]
+	push af
+
+	ld a,BANK(ColorOverworldSprite)
+	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
+
+	ld a,[H_SPTEMP]
+	call ColorOverworldSprite
+
+	ld [H_SPTEMP],a
 	pop af
+	ld [H_LOADEDROMBANK],a
+	ld [MBC1RomBank],a
+	ld a,[H_SPTEMP]
 	ret
 
 
@@ -4817,15 +4823,12 @@ DelayFrameHook:
 	ld [rSVBK],a
 	push bc ; Save wram bank
 
-	; The "PrepareOamData" used to be run during vblank, so just to be safe, let's
-	; disable interrupts. Also, the "ColorNonOverworldSprites" function needs
-	; interrupts disabled.
-	di
+	; Calling "PrepareOAMData" here instead of at vblank to prevent sprite wobbliness
 	CALL_INDIRECT PrepareOAMData
 	jr z, .spritesDrawn
+
 	CALL_INDIRECT ColorNonOverworldSprites
 .spritesDrawn
-	ei
 
 	pop af
 	ld [rSVBK],a ; Restore wram bank

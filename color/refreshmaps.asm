@@ -324,7 +324,7 @@ DrawMapRow:
 	ret
 
 .drawHalfPalette
-	ld b, $d2
+	ld b, W2_TilesetPaletteMap>>8
 REPT 10
 	ld a,[hli]
 	ld c,a
@@ -388,7 +388,7 @@ jr nc,.noCarry
 	ld e,a
 	ld a,[hRedrawRowOrColumnDest + 1]
 	ld d,a
-	ld b,$d2
+	ld b, W2_TilesetPaletteMap>>8
 REPT 18
 	ld a,[hli]
 	ld c,a
