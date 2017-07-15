@@ -42,7 +42,7 @@ startPaletteTransfer:
 	ret
 
 IF GEN_2_GRAPHICS
-	INCLUDE "color/gen2_palettes.asm"
+	INCLUDE "color/data/gen2_palettes.asm"
 ELSE
 	INCLUDE "data/super_palettes.asm"
 ENDC

@@ -1,7 +1,7 @@
-INCLUDE "color/mappalettes.asm"
-INCLUDE "color/map_palette_sets.asm"
-INCLUDE "color/map_palette_assignments.asm"
-INCLUDE "color/roofpalettes.asm"
+INCLUDE "color/data/mappalettes.asm"
+INCLUDE "color/data/map_palette_sets.asm"
+INCLUDE "color/data/map_palette_assignments.asm"
+INCLUDE "color/data/roofpalettes.asm"
 
 ; Load colors for new map and tile placement
 LoadTilesetPalette:

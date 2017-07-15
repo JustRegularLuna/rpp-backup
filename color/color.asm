@@ -295,7 +295,7 @@ IF GEN_2_GRAPHICS
 	ld [hli], a
 	dec b
 	jr nz, .expLoop
-ENDC	
+ENDC
 
 	xor a
 	ld [rSVBK],a
@@ -851,5 +851,5 @@ INCLUDE "color/loadpalettes.asm"
 
 INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
-INCLUDE "color/badgepalettemap.asm"
-INCLUDE "color/super_palettes.asm"
+INCLUDE "color/data/badgepalettemap.asm"
+INCLUDE "color/data/super_palettes.asm"

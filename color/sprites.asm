@@ -407,10 +407,10 @@ SpritePaletteAssignments: ; Characters on the overworld
 
 
 AnimationTileset1Palettes:
-	INCBIN "color/animtileset1palettes.bin"
+	INCBIN "color/data/animtileset1palettes.bin"
 
 AnimationTileset2Palettes:
-	INCBIN "color/animtileset2palettes.bin"
+	INCBIN "color/data/animtileset2palettes.bin"
 
 TypeColorTable: ; Used for a select few sprites to be colorized based on attack type
 	db 0 ; NORMAL EQU $00
@@ -441,4 +441,4 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	db 6 ; ICE EQU $19
 	db 1 ; DRAGON EQU $1A
 
-INCLUDE "color/spritepalettes.asm"
+INCLUDE "color/data/spritepalettes.asm"

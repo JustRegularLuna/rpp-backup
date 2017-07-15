@@ -94,8 +94,9 @@ AttackSpritePalettes:
 	RGB 12,0,13
 	RGB 0,0,0
 
+; Not related to sprites, move this somewhere else?
 SlotPaletteMap:
-	INCBIN "color/slotpalettemap.bin"
+	INCBIN "color/data/slotpalettemap.bin"
 
 SlotSpritePaletteMap:
 	; Seven
