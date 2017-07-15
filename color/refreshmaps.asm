@@ -47,6 +47,16 @@ RefreshWindow:
 	and a
 	ret z
 
+	ld a,2
+	ld [rSVBK],a
+
+	; Check that the pre-vblank functions have run already (if not, let it catch up)
+	ld hl,W2_UpdatedWindowPortion
+	ld a,[hl]
+	and a
+	jp z,.palettesDone
+	ld [hl],0
+
 	ld hl,[sp + 0]
 	ld a,h
 	ld [H_SPTEMP],a
@@ -137,22 +147,6 @@ ENDR
 
 	ld a,1
 	ld [rVBK],a
-	inc a
-	ld [rSVBK],a
-
-	; Skip palette update if the pre-vblank routine updated a different portion of
-	; the window... I guess this can happen due to lag? If this is omitted, there's
-	; corruption when scrolling throw the item menu.
-	ld a,[W2_PreVBlankWindowPortion]
-	inc a
-	cp $03
-	jr nz,.checkPortion
-	xor a
-.checkPortion
-	ld b,a
-	ld a,[H_AUTOBGTRANSFERPORTION]
-	cp b
-	jr nz,.palettesDone
 
 	; Always update if using tile-based palettes
 	ld a,[W2_TileBasedPalettes]

@@ -36,8 +36,9 @@ W2_LastAutoCopyDest            EQU $d787
 W2_ForceBGPUpdate              EQU $d788
 W2_ForceOBPUpdate              EQU $d789
 
-; The value of H_AUTOBGTRANSFERPORTION that the pre-vblank routine operated with
-W2_PreVBlankWindowPortion      EQU $d78a
+; Set to 0 when vblank has updated W2_PreVBlankWindowPortion. Used to make sure that the
+; pre-vblank routines are in sync with the vblank routines.
+W2_UpdatedWindowPortion        EQU $d78a
 
 ; In bank 1, the stack starts at $dfff. So, that's also the stack here when bank 2 is
 ; loaded. Don't use anything too close to there.

@@ -148,8 +148,14 @@ RefreshWindowPalettesPreVBlank:
 	ld [rSVBK],a
 	push bc ; Push last wram bank
 
+	; Check that vblank has updated the window from last frame (if not, let it catch up)
+	ld hl, W2_UpdatedWindowPortion
+	ld a,[hl]
+	and a
+	jp nz,.palettesDone
+	ld [hl],1
+
 	ld a,[H_AUTOBGTRANSFERPORTION]
-	ld [W2_PreVBlankWindowPortion],a
 	and a
 	jr z,.firstThird
 	dec a
