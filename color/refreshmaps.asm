@@ -26,36 +26,6 @@ RefreshMapColors:
 	inc e
 	ret
 
-; Refresh moving tiles
-	ORG $2c, $7000
-label_2c_l000:
-	push hl
-	ld hl,rSTAT
-label_2c_l001:
-	bit 1,[hl]
-	jr nz,label_2c_l001
-	pop hl
-	ld a,[hl]
-	rlca
-	ld [hli],a
-	dec c
-	jr nz,label_2c_l000
-	jp $1ee9
-
-	ORG $2c, $7080
-label_2c_l002:
-	push hl
-	ld hl,rSTAT
-label_2c_l003:
-	bit 1,[hl]
-	jr nz,label_2c_l003
-	pop hl
-	ld a,[hl]
-	rrca
-	ld [hli],a
-	dec c
-	jr nz,label_2c_l002
-	jp $1ee9
 
 SECTION "bank2F",ROMX,BANK[$2F]
 
