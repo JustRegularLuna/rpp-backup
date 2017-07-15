@@ -142,7 +142,14 @@ RefreshWindowPalettesPreVBlank:
 	and a
 	ret z
 
+	ld a,[rSVBK]
+	ld b,a
+	ld a,$02
+	ld [rSVBK],a
+	push bc ; Push last wram bank
+
 	ld a,[H_AUTOBGTRANSFERPORTION]
+	ld [W2_PreVBlankWindowPortion],a
 	and a
 	jr z,.firstThird
 	dec a
@@ -161,12 +168,6 @@ RefreshWindowPalettesPreVBlank:
 
 ; BEGIN loading palettes
 
-	ld a,[rSVBK]
-	ld b,a
-	ld a,$02
-	ld [rSVBK],a
-	push bc ; Push last wram bank
-
 	ld hl, W2_ScreenPalettesBuffer
 
 	ld b,6
@@ -175,8 +176,8 @@ RefreshWindowPalettesPreVBlank:
 	and a
 	jr nz,.tileBasedPalettes
 
-; TODO: delete this?
 .staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
+	; If the window transfer destination changed, we'll need to rewrite everything
 	ld a,[W2_LastAutoCopyDest]
 	ld b,a
 	ld a,[H_AUTOBGTRANSFERDEST+1]

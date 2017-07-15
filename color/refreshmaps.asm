@@ -133,17 +133,33 @@ ENDR
 	ld bc, -$c0
 	add hl,bc
 
-; BEGIN loading palettes
+; BEGIN loading palette maps
 
 	ld a,1
 	ld [rVBK],a
 	inc a
 	ld [rSVBK],a
 
+	; Skip palette update if the pre-vblank routine updated a different portion of
+	; the window... I guess this can happen due to lag? If this is omitted, there's
+	; corruption when scrolling throw the item menu.
+	ld a,[W2_PreVBlankWindowPortion]
+	inc a
+	cp $03
+	jr nz,.checkPortion
+	xor a
+.checkPortion
+	ld b,a
+	ld a,[H_AUTOBGTRANSFERPORTION]
+	cp b
+	jr nz,.palettesDone
+
+	; Always update if using tile-based palettes
 	ld a,[W2_TileBasedPalettes]
 	and a
 	jr nz,.continue
 
+	; If using static palettes, we can check whether that's been updated
 	ld a,[W2_StaticPaletteMapChanged_vbl]
 	and a
 	jr z, .palettesDone
