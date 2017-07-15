@@ -32,5 +32,7 @@ W2_StaticPaletteModified       EQU $d786
 
 W2_LastAutoCopyDest            EQU $d787
 
+W2_ForcePaletteUpdate          EQU $d788
+
 ; In bank 1, the stack starts at $dfff. So, that's also the stack here when bank 2 is
 ; loaded. Don't use anything too close to there.

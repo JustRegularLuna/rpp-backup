@@ -1,4 +1,6 @@
 SECTION "bank30",ROMX,BANK[$30]
+
+; Note: after calling this, you may need to set W2_ForcePaletteUpdate to nonzero.
 LoadSGBPalette:
 	ld a,e
 	ld l,d

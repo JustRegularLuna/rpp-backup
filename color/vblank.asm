@@ -14,12 +14,17 @@ GbcPrepareVBlank:
 ; Refresh palettes based on BGP and OBP registers
 ; Assumes wram bank 2 is loaded
 RefreshPaletteData:
+	ld a,[W2_ForcePaletteUpdate]
+	or a
+	jr nz,.updatebgp
+
 	ld a,[rBGP]
 	ld b,a
 	ld a,[W2_LastBGP]
 	cp b
 	jr z,.checkSprPalettes
 
+.updatebgp:
 	ld a,1
 	ld [W2_BgPaletteDataModified],a
 
@@ -57,18 +62,21 @@ RefreshPaletteData:
 	jr z,.doNextBgPal
 
 .checkSprPalettes
+	ld a,[W2_ForcePaletteUpdate]
+	or a
+	jr nz,.updateobjp
 	ld a,[rOBP0]
 	ld b,a
 	ld a,[W2_LastOBP0]
 	cp b
-	jr nz,.continue
+	jr nz,.updateobjp
 	ld a,[rOBP1]
 	ld b,a
 	ld a,[W2_LastOBP1]
 	cp b
 	jr z,.end
-.continue
 
+.updateobjp
 	ld a,1
 	ld [W2_SprPaletteDataModified],a
 
@@ -123,6 +131,8 @@ RefreshPaletteData:
 	ld [W2_LastOBP0],a
 	ld a,[rOBP1]
 	ld [W2_LastOBP1],a
+	xor a
+	ld [W2_ForcePaletteUpdate],a
 	ret
 
 
@@ -132,7 +142,7 @@ RefreshWindowPalettes:
 	and a
 	ret z
 
-	ld a,[$ffbb]
+	ld a,[H_AUTOBGTRANSFERPORTION]
 	and a
 	jr z,.firstThird
 	dec a
@@ -168,7 +178,7 @@ RefreshWindowPalettes:
 .staticMapPalettes:	; Palettes are loaded from a 20x18 grid of palettes
 	ld a,[W2_LastAutoCopyDest]
 	ld b,a
-	ld a,[$ffbd]
+	ld a,[H_AUTOBGTRANSFERDEST+1]
 	cp b
 	jr z,.noDestChange
 	ld [W2_LastAutoCopyDest],a
@@ -337,7 +347,7 @@ GetPaletteNumber:
 	ret
 
 ; Sets a palette color from palette #b to the index of last 2 bits of a.
-; hl points to the data register (BGPD or OBPD)
+; hl points to a buffer to store the palettes at.
 SetColor:
 	push de
 	and 3

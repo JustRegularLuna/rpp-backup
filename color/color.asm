@@ -24,11 +24,8 @@ SetPal_BattleBlack:
 	inc a
 	jr nz,.palLoop
 
-	; This prevents extra flickering when entering battle
-	xor a
-	ld [rBGP],a
-	ld [rOBP0],a
-	ld [rOBP1],a
+	ld a,1
+	ld [W2_ForcePaletteUpdate],a
 
 	;xor a
 	ld [rSVBK],a
@@ -634,6 +631,11 @@ SetPal_PartyMenu:
 ; used when a Pokemon is the only thing on the screen
 ; such as evolution, trading and the Hall of Fame
 ; Evolution / Hall of Fame
+;
+; Takes parameter 'c' from 0-2.
+; 0: calculate palette
+; 1: make palettes black
+; 2: use PAL_MEWMON
 SetPal_PokemonWholeScreen:
 	ld a, c
 	dec a
