@@ -1,4 +1,3 @@
-SECTION "bank2E",ROMX,BANK[$2E]
 ; Handles sprite attributes
 
 ATK_PAL_GREY    EQU 0

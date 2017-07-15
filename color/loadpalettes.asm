@@ -1,5 +1,3 @@
-SECTION "bank2D",ROMX,BANK[$2D]
-
 INCLUDE "color/mappalettes.asm"
 INCLUDE "color/map_palette_sets.asm"
 INCLUDE "color/map_palette_assignments.asm"
@@ -25,11 +23,15 @@ LoadTilesetPalette:
 
 	ld a,b ; Get wCurMapTileset
 	push af
+	ld d,0
 	ld e,a
 	sla e
 	sla e
 	sla e
-	ld d, MapPaletteSets>>8	; de points to map palette indices
+	ld hl, MapPaletteSets
+	add hl,de
+	ld d,h
+	ld e,l
 	ld hl,W2_BgPaletteData ; palette data to be copied to wram at hl
 	ld b,$08
 .nextPalette

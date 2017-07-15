@@ -1,4 +1,4 @@
-; Extending bank 1C, same bank as palettes.asm (for "SetPal" functions)
+; Extending bank 1C, same bank as engine/palettes.asm (for "SetPal" functions)
 SECTION "bank1C_extension",ROMX,BANK[$1C]
 
 ; Set all palettes to black at beginning of battle
@@ -838,15 +838,18 @@ LoadTitleMonTilesAndPalettes:
 	ld b,SET_PAL_TITLE_SCREEN
 	call RunPaletteCommand
 	pop de
-	callba TitleScroll
+	callba TitleScroll ; removed from caller to make space for hook
 	ret
 
+
+; Everything else goes in bank $2C (unused by original game)
+SECTION "bank2C",ROMX,BANK[$2C]
+
 INCLUDE "color/init.asm"
-SECTION "bank2F",ROMX,BANK[$2F]
 INCLUDE "color/refreshmaps.asm"
 INCLUDE "color/loadpalettes.asm"
 
 INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
-INCLUDE "color/badgepalettemap.asm" ; This ends up in whatever bank was used last
+INCLUDE "color/badgepalettemap.asm"
 INCLUDE "color/super_palettes.asm"

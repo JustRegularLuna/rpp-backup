@@ -1,4 +1,3 @@
-SECTION "VBlank Stuff",ROMX,BANK[$2D]
 
 ; Prepare stuff to be done during vblank
 ; This is called from the lcd interrupt, at line $70
