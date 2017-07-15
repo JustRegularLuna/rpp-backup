@@ -139,7 +139,6 @@ ColorNonOverworldSprites:
 
 ; Called when starting a battle
 LoadAnimationTilesetPalettes:
-	di
 	push de
 	ld a,[wWhichBattleAnimTileset] ; Animation tileset
 	ld c,a
@@ -173,7 +172,7 @@ LoadAnimationTilesetPalettes:
 	ld [rSVBK],a
 
 	pop de
-	reti
+	ret
 
 
 ; Set all sprite palettes to not be colorized by "ColorNonOverworldSprites".

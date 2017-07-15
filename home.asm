@@ -40,7 +40,7 @@ SECTION "vblank", ROM0 [$40]
 	push hl
 	ld hl, VBlank
 	jp InterruptWrapper
-SECTION "lcdc",   ROM0 [$48]
+SECTION "hblank",   ROM0 [$48] ; HAX: interrupt wasn't used in original game
 	push hl
 	ld hl, _GbcPrepareVBlank
 	jp InterruptWrapper
