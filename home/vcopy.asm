@@ -55,10 +55,8 @@ RedrawRowOrColumn::
 	CALL_INDIRECT DrawMapRow
 	ret
 
-SECTION "AutoBgMapTransfer", ROM0[$1d57]
-
 ; This function automatically transfers tile number data from the tile map at
-; C3A0 to VRAM during V-blank. Note that it only transfers one third of the
+; wTileMap to VRAM during V-blank. Note that it only transfers one third of the
 ; background per V-blank. It cycles through which third it draws.
 ; This transfer is turned off when walking around the map, but is turned
 ; on when talking to sprites, battling, using menus, etc. This is because
