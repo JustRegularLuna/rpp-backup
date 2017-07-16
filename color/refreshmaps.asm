@@ -259,7 +259,13 @@ label_018:
 
 
 DrawMapRow:
-	ld hl,wRedrawRowOrColumnSrcTiles
+	ld a,2
+	ld [rSVBK],a
+
+	ld a,1
+	ld [W2_DrewRowOrColumn],a
+
+	ld hl,wRedrawRowOrColumnSrcTiles ; This is wram bank 0
 	ld a,[hRedrawRowOrColumnDest]
 	ld e,a
 	ld a,[hRedrawRowOrColumnDest + 1]
@@ -273,8 +279,6 @@ DrawMapRow:
 	call .drawHalf ; draw lower half
 
 	; Start drawing palettes
-	ld a,2
-	ld [rSVBK],a
 	ld a,1
 	ld [rVBK],a
 	ld hl,wRedrawRowOrColumnSrcTiles
@@ -343,6 +347,12 @@ ENDR
 
 
 DrawMapColumn:
+	ld a,2
+	ld [rSVBK],a
+
+	ld a,1
+	ld [W2_DrewRowOrColumn],a
+
 	; Draw tiles
 	ld hl,wRedrawRowOrColumnSrcTiles
 	ld a,[hRedrawRowOrColumnDest]
@@ -372,8 +382,6 @@ jr nc,.noCarry
 
 ; =======================
 	; Draw palettes
-	ld a,2
-	ld [rSVBK],a
 	ld a,1
 	ld [rVBK],a
 

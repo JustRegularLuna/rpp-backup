@@ -265,6 +265,7 @@ ENDR
 	ret
 
 
+; This is the last vblank-timing-sensitive thing that's called
 GbcVBlankHook:
 	call UpdateMovingBgTiles ; Removed from caller to make space
 
@@ -281,10 +282,19 @@ GbcVBlankHook:
 	ld a,2
 	ld [rSVBK],a
 
+	; Don't try to refresh palette if a row or column was drawn this frame.
+	; This isn't really necessary, but it prevents a 1-frame artifact that occurs when
+	; transitioning between screens, where all sprites are white.
+	ld hl,W2_DrewRowOrColumn
+	ld a,[hl]
+	and a
+	jr nz,.end
+
 	call RefreshPalettesVBlank
 
 .end
 	xor a
+	ld [W2_DrewRowOrColumn],a
 	ld [rSVBK],a
 	ret
 
