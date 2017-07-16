@@ -278,38 +278,37 @@ GbcVBlankHook:
 	or $40
 	ld [rSTAT],a
 
-	; If we've passed line $95, there's probably not enough time to update palettes.
-	; Leave it for next frame.
-	; This is causing issues with VBA.
-	ld a,[rLY]
-	cp $96
-	jr nc,.end
-	cp $90
-	jr c,.end
+	ld a,2
+	ld [rSVBK],a
+
 	call RefreshPalettesVBlank
 
 .end
+	xor a
+	ld [rSVBK],a
 	ret
 
-; If necessary, copy palettes which were generated in the pre-vblank routines
+; If necessary, copy palettes which were generated in the pre-vblank routines.
+; It takes ~1024 cycles (1.1 scanlines) to write 8 palettes.
+; So for each operation, it checks that it's not further than line $97. It'll have lines
+; $98 and $00 to work with.
 RefreshPalettesVBlank:
-	ld a,2
-	ld [rSVBK],a
 
 .checkBgPalettes
 	ld a,[W2_BgPaletteDataModified]
 	and a
 	jr z, .checkSpritePalettes
+
+	; Check there's enough time in vblank
+	call .checkScanline
+	jr nc,.end
+
 	ld a,$80
 	ld [rBGPI],a
 	ld c, rBGPD&$ff
 	ld hl, W2_BgPaletteDataBuffer
-	ld b,8*8
-.loop
-	ld a,[hli]
-	ld [$ff00+c],a
-	dec b
-	jr nz,.loop
+	call .load8
+
 	xor a
 	ld [W2_BgPaletteDataModified],a
 
@@ -317,24 +316,41 @@ RefreshPalettesVBlank:
 	ld a,[W2_SprPaletteDataModified]
 	and a
 	jr z, .end
+
+	; Check there's enough time in vblank
+	call .checkScanline
+	jr nc,.end
+
 	ld a,$80
 	ld [rOBPI],a
 	ld c, rOBPD&$ff
 	ld hl, W2_SprPaletteDataBuffer
-	ld b,8*8
-.loop2
-	ld a,[hli]
-	ld [$ff00+c],a
-	dec b
-	jr nz,.loop2
+	call .load8
+
 	xor a
 	ld [W2_SprPaletteDataModified],a
 
 .end
-	xor a
-	ld [rSVBK],a
 	ret
 
+; Loads 8 palettes. Parameters:
+; c = data register (ie. rBGPD)
+; hl = source
+.load8:
+rept 64
+	ld a,[hli]
+	ld [$ff00+c],a
+endr
+	ret
+
+; Sets carry flag if there's enough time to load another 8 palettes
+.checkScanline
+	ld a,[rLY]
+	cp $97
+	ret nc
+	cp $90
+	ccf
+	ret
 
 ; Sets a palette color from palette #b to the index of last 2 bits of a.
 ; hl points to a buffer to store the palettes at.
