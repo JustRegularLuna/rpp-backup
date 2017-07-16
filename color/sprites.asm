@@ -80,7 +80,13 @@ ColorOverworldSprite:
 	ret
 
 ; This is called whenever [wUpdateSpritesEnabled] != 1 (overworld sprites not enabled?).
-; Colorizes: attack sprites, party menu, perhaps more?
+;
+; This sometimes does occur on the overworld, such as when exclamation marks appear, and
+; when trees are being cut or boulders are being moved. Though, when in the overworld,
+; W2_SpritePaletteMap is all blanked out (set to 9) except for the exclamation mark tile,
+; so this function usually won't do anything.
+;
+; This colorizes: attack sprites, party menu, exclamation mark, perhaps more?
 ColorNonOverworldSprites:
 	ld a,2
 	ld [rSVBK],a
@@ -101,7 +107,7 @@ ColorNonOverworldSprites:
 	ld a,[de]
 	cp 8 ; if 8, colorize based on attack type
 	jr z,.getAttackType
-	cp 9 ; if 9, do not colorize
+	cp 9 ; if 9, do not colorize (use whatever palette it's set to already)
 	jr nz,.setPalette
 	xor a
 	jr .setPalette

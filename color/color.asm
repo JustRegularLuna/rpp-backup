@@ -443,6 +443,8 @@ ENDC
 	ld e,0
 	callba LoadSGBPalette_Sprite
 
+	; Start drawing the palette map
+
 	; Pokemon logo
 	ld hl,W2_TilesetPaletteMap
 	ld a,1
@@ -461,6 +463,7 @@ ENDC
 	ld a,2
 	call FillMemory
 
+	; Set the text at the bottom to grey
 	ld hl, W2_TilesetPaletteMap + 17*20
 	ld bc, 20
 	ld a,3
@@ -476,6 +479,27 @@ ENDC
 
 	;ld a,1
 	ld [rSVBK],a
+
+	; This fixes the text at the bottom being the wrong color for a second or so.
+	; It's a real hack, but the game's using two vram maps at once, and the color code
+	; will only update one of them.
+	; I'm not sure why this didn't used to be a problem...
+	di
+	ld a,1
+	ld [rVBK],a
+.vblankWait
+	ld a,[rLY]
+	cp $90
+	jr nz,.vblankWait
+
+	ld hl, $9c00 + 9*32
+	ld bc,20
+	ld a,3
+	call FillMemory
+
+	xor a
+	ld [rVBK],a
+	ei
 
 	; Execute custom command 0e after titlescreen to clear colors.
 	ld a,SET_PAL_OAK_INTRO
@@ -545,20 +569,22 @@ SetPal_Overworld:
 	dec a ; ld a,1
 	ld [W2_TileBasedPalettes],a
 
+	; Clear sprite palette map, except for exclamation marks above people's heads
 	CALL_INDIRECT ClearSpritePaletteMap
-
-	; Pokecenter uses OBP1 when healing pokemons; also cut animation
-	ld a,1
-	ld [W2_UseOBP1],a
-
-	CALL_INDIRECT LoadOverworldSpritePalettes
-	; Make exclamation mark bubble black & white
+	; Make exclamation mark bubble black & white. (Note: it's possible that other
+	; sprites may use these tiles for different purposes...)
 	ld a, 5
 	ld hl, W2_SpritePaletteMap + $f8
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
+
+	; Pokecenter uses OBP1 when healing pokemons; also cut animation
+	ld a,1
+	ld [W2_UseOBP1],a
+
+	CALL_INDIRECT LoadOverworldSpritePalettes
 
 	xor a
 	ld [rSVBK],a

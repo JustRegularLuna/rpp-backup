@@ -1,4 +1,5 @@
 ; Called when a map is loaded. Loads tilemap and tile attributes.
+; LCD is disabled, so we have free reign over vram.
 LoadMapVramAndColors:
 	ld a,$02
 	ld [rSVBK],a

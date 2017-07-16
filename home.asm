@@ -4788,6 +4788,11 @@ GBFadeOut_Custom:
 	ld b,$04
 	jp GBFadeIncCommon
 
+
+; Note: this saves rSVBK before calling an interrupt. It would also make sense to save
+; rVBK. However, doing that would break the code that fixes the ss anne's palettes on
+; departure. Instead, just be careful not to set the vram bank to 1 while interrupts are
+; enabled...? (Or better yet do the ss anne fix properly...)
 InterruptWrapper:
 	push af
 	push bc
