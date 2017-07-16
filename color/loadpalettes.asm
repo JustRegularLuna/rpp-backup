@@ -101,6 +101,46 @@ LoadTilesetPalette:
 	ld a, 3
 	ld [W2_TilesetPaletteMap + $78], a
 
+	; Switch to wram bank 1 just to read wCurMap
+	xor a
+	ld [rSVBK],a
+	ld a,[wCurMap]
+	ld b,a
+	ld a,2
+	ld [rSVBK],a
+
+	; Check for celadon mart roof (make the "outside" blue)
+	ld a,b
+	cp $7e
+	jr nz,.notCeladonRoof
+	ld a,BLUE
+	ld hl,W2_TilesetPaletteMap + $4b
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+.notCeladonRoof
+	; Check for celadon 3rd floor (fix miscoloration on counter)
+	ld a,b
+	cp $7c
+	jr nz,.notCeladon3rd
+	ld hl,W2_TilesetPaletteMap + $37
+	ld [hl],BROWN
+.notCeladon3rd
+	; Check for celadon 1st floor (change bench color from blue to yellow)
+	ld a,b
+	cp $7a
+	jr nz,.notCeladon1st
+	ld hl,W2_TilesetPaletteMap + $07
+	ld a,YELLOW
+	ld [hli],a
+	ld [hli],a
+	ld l,$17
+	ld [hli],a
+	ld [hli],a
+.notCeladon1st
+
 	; Retrieve former wram bank
 	pop af
 	ld b,a
