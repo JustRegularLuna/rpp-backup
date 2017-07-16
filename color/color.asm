@@ -547,8 +547,9 @@ SetPal_Overworld:
 
 	CALL_INDIRECT ClearSpritePaletteMap
 
+	; Pokecenter uses OBP1 when healing pokemons; also cut animation
 	ld a,1
-	ld [W2_UseOBP1],a ; Pokecenter uses OBP1 when healing pokemons
+	ld [W2_UseOBP1],a
 
 	CALL_INDIRECT LoadOverworldSpritePalettes
 	; Make exclamation mark bubble black & white
@@ -856,6 +857,7 @@ INCLUDE "color/loadpalettes.asm"
 INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
 INCLUDE "color/ssanne.asm"
+INCLUDE "color/boulder.asm"
 
 INCLUDE "color/data/badgepalettemap.asm"
 INCLUDE "color/data/super_palettes.asm"
