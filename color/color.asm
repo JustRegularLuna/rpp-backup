@@ -156,8 +156,11 @@ ENDC
 	; Restore sprite palettes used by pokeballs
 	CALL_INDIRECT LoadOverworldSpritePalettes
 
-	ld a,1
+	; Do battles use obp1? Probably better to leave this unset
+	xor a
 	ld [W2_UseOBP1],a
+
+	ld a,1
 	ld [W2_ForceBGPUpdate],a ; Palettes must be redrawn
 	ld [W2_ForceOBPUpdate],a
 	ld [rSVBK],a
@@ -574,10 +577,10 @@ SetPal_Overworld:
 
 	; Signal to refresh palettes
 	ld a,1
-	ld [W2_LastBGP],a
-	ld [W2_LastOBP0],a
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
 
-	;xor a
+	xor a
 	ld [rSVBK],a
 
 	ld a,SET_PAL_OVERWORLD
