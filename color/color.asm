@@ -900,3 +900,9 @@ INCLUDE "color/boulder.asm"
 INCLUDE "color/super_palettes.asm"
 
 INCLUDE "color/data/badgepalettemap.asm"
+
+INCLUDE "color/dmg.asm"
+
+; Copy of sound engine used by dmg-mode to play jingle
+SECTION "bank31",ROMX,BANK[$31]
+INCBIN "color/data/bank31.bin",$0000,$c8000-$c4000
