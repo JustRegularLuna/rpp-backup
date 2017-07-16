@@ -852,5 +852,7 @@ INCLUDE "color/loadpalettes.asm"
 
 INCLUDE "color/vblank.asm"
 INCLUDE "color/sprites.asm"
+INCLUDE "color/ssanne.asm"
+
 INCLUDE "color/data/badgepalettemap.asm"
 INCLUDE "color/data/super_palettes.asm"
