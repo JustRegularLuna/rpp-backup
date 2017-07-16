@@ -365,7 +365,7 @@ SetColor:
 	add a
 	add a
 	add d
-	ld d,$d0
+	ld d,W2_BgPaletteData>>8
 	ld e,a		; de points to W2_BgPaletteData (or SprPaletteData)
 
 	ld a,[de]

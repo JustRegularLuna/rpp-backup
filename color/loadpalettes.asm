@@ -88,16 +88,16 @@ LoadTilesetPalette:
 	dec b
 	jr nz,.copyLoop
 
-	; Set the remaining values to zero
+	; Set the remaining values to 7 for text
 	ld b,$a0
-	xor a
+	ld a,7
 .fillLoop
 	ld [hli],a
 	dec b
 	jr nz,.fillLoop
 
 	; Exception:
-	; Tile $78, which is either a pokeball, or an unused japanese character.
+	; Tile $78, which is either a pokeball (in the PC), or an unused japanese character.
 	ld a, 3
 	ld [W2_TilesetPaletteMap + $78], a
 
