@@ -472,7 +472,7 @@ ENDC
 	ld [W2_TileBasedPalettes],a
 
 	ld a,1
-	ld [W2_LastBGP],a	; Palettes must be redrawn
+	ld [W2_ForceBGPUpdate],a	; Palettes must be redrawn
 
 	;ld a,1
 	ld [rSVBK],a
@@ -500,8 +500,8 @@ ENDC
 	callba LoadSGBPalette
 
 	ld a,1
-	ld [W2_LastOBP0],a
-	ld [W2_LastBGP],a	; Palettes must be redrawn
+	ld [W2_ForceOBPUpdate],a
+	ld [W2_ForceBGPUpdate],a	; Palettes must be redrawn
 
 	xor a
 	ld [rSVBK],a
@@ -532,7 +532,7 @@ SetPal_Generic:
 	ld [W2_TileBasedPalettes],a
 
 	ld a,1
-	ld [W2_LastBGP],a
+	ld [W2_ForceBGPUpdate],a
 
 	;xor a
 	ld [rSVBK],a
@@ -705,7 +705,7 @@ SetPal_PokemonWholeScreen:
 	call FillMemory
 
 	inc a ; ld a,1
-	ld [W2_LastBGP],a ; Refresh palettes
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
 	ld a,3
 	ld [W2_StaticPaletteMapChanged],a
 
@@ -791,7 +791,7 @@ SetPal_TrainerCard:
 	call DelayFrames
 
 	ld a,1
-	ld [W2_LastBGP],a ; Signal to update palettes
+	ld [W2_ForceBGPUpdate],a ; Signal to update palettes
 	ld [rSVBK],a
 	ret
 

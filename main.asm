@@ -280,7 +280,7 @@ UpdateHPBar_Palettes:
 
 .done
 	ld a,1
-	ld [W2_LastBGP],a
+	ld [W2_ForceBGPUpdate],a
 
 	xor a
 	ld [rSVBK],a
