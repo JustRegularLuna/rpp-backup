@@ -20,6 +20,8 @@ W2_TownMapLoaded               EQU $d700
 W2_TileBasedPalettes           EQU $d701
 W2_StaticPaletteMapChanged     EQU $d702 ; Set to a number >=3 if palette map is modified, since the window is drawn in thirds. Only for when TileBasedPalettes == 0.
 W2_UseOBP1                     EQU $d703 ; If set, sprite palettes 4-7 use OBP1 instead of OBP0
+
+; These are like W2_BgPaletteData/SprPaletteData, but they account for BGP/OBP0/OBP1.
 W2_BgPaletteDataBuffer         EQU $d704
 W2_SprPaletteDataBuffer        EQU $d744
 
@@ -42,6 +44,10 @@ W2_UpdatedWindowPortion        EQU $d78a
 
 ; Set if a row or column was drawn during the current vblank.
 W2_DrewRowOrColumn             EQU $d78b
+
+; Palette of the current pokemon (remembered here so pokemon have correct palette when
+; transformed)
+W2_BattleMonPalette            EQU $d78c
 
 ; In bank 1, the stack starts at $dfff. So, that's also the stack here when bank 2 is
 ; loaded. Don't use anything too close to there.

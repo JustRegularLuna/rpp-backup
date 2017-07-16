@@ -63,12 +63,8 @@ SetPalFunctions:
 	dw PalCmd_0f	; Name entry (partially replaces 08)
 
 ; HAXed to give trainers palettes independantly
+; Also skips the "transform" check, caller does that instead
 DeterminePaletteID:
-	bit Transformed, a ; a is battle status 3
-	ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
-	ret nz
-	ld a, [hl]
-DeterminePaletteIDOutOfBattle: ; DeterminePaletteID without status check
 	ld [wd11e], a
 	and a
 
@@ -98,12 +94,7 @@ ENDC
 	ret
 	
 
-DetermineBackSpritePaletteID: ; DeterminePaletteID with a special check for the player sprite
-	bit 3, a                 ; bit 3 of battle status 3 (unused?)
-	ld a, PAL_GREYMON
-	ret nz
-	ld a, [hl]
-DetermineBackSpritePaletteID_NoStatusCheck:
+DetermineBackSpritePaletteID:
 	ld [wd11e], a
 	and a
 

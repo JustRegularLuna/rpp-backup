@@ -3,10 +3,6 @@ SECTION "bank1C_extension",ROMX,BANK[$1C]
 
 ; Set all palettes to black at beginning of battle
 SetPal_BattleBlack:
-	; Code $ff sometimes calls this (by accident?)
-;	inc b
-;	ret z
-
 	ld a,$02
 	ld [rSVBK],a
 
@@ -35,17 +31,34 @@ SetPal_BattleBlack:
 ; Set proper palettes for pokemon/trainers
 SetPal_Battle:
  	ld a, [wPlayerBattleStatus3]
-	ld hl, wBattleMonSpecies        ; player Pokemon ID
+	bit Transformed,a
+	jr z,.getBattleMonPal
+
+	; If transformed, don't trust the "DetermineBackSpritePaletteID" function.
+	ld a,$02
+	ld [rSVBK],a
+	ld a,[W2_BattleMonPalette]
+	ld b,a
+	xor a
+	ld [rSVBK],a
+	jr .getEnemyMonPal
+
+.getBattleMonPal
+	ld a, [wBattleMonSpecies]        ; player Pokemon ID
 	call DetermineBackSpritePaletteID
 	ld b, a
 
-	ld a, [wEnemyBattleStatus3]
-	ld hl, wEnemyMonSpecies2         ; enemy Pokemon ID
+.getEnemyMonPal
+	ld a, [wEnemyMonSpecies2]         ; enemy Pokemon ID (without transform effect?)
 	call DeterminePaletteID
 	ld c, a
 
 	ld a,$02
 	ld [rSVBK],a
+
+	; Save the player mon's palette in case it transforms later
+	ld a,b
+	ld [W2_BattleMonPalette],a
 
 	; Player palette
 	push bc
@@ -229,7 +242,7 @@ SetPal_StatusScreen:
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
 .pokemon
-	call DeterminePaletteIDOutOfBattle ; DeterminePaletteID without status check
+	call DeterminePaletteID
 	ld b,a
 
 	ld a,2
@@ -308,7 +321,7 @@ ENDC
 ; Show pokedex data
 SetPal_Pokedex:
 	ld a, [wcf91]
-	call DeterminePaletteIDOutOfBattle	; Call DeterminePaletteID without status check
+	call DeterminePaletteID
 	ld d,a
 	ld e,0
 
@@ -414,7 +427,7 @@ SetPal_Slots:
 ; Titlescreen with cycling pokemon
 SetPal_TitleScreen:
 	ld a,[wWhichTrade] ; Get the pokemon on the screen
-	call DeterminePaletteIDOutOfBattle
+	call DeterminePaletteID
 	ld d,a
 	ld e,0
 
@@ -686,7 +699,7 @@ SetPal_PokemonWholeScreen:
 	jr z, .loadPalette
 	ld a, [wWholeScreenPaletteMonSpecies]
 	; Use the "BackSprite" version for the player sprite in the hall of fame.
-	call DetermineBackSpritePaletteID_NoStatusCheck
+	call DetermineBackSpritePaletteID
 
 .loadPalette
 	ld d,a
