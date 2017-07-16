@@ -86,11 +86,6 @@ ENDC
 
 	; Now set the tilemap
 
-	xor a
-	ld [W2_TileBasedPalettes],a	; Use a direct color map instead of assigning colors to tiles
-	ld a,3
-	ld [W2_StaticPaletteMapChanged],a
-
 	; Top half; enemy lifebar
 	ld hl,W2_TilesetPaletteMap
 	ld a,3
@@ -144,11 +139,17 @@ ENDC
 	ld c,20
 	call FillBox
 
-	; Wait 2 frames before updating palettes (if LCD is on)
+	xor a
+	ld [W2_TileBasedPalettes],a	; Use a direct color map instead of assigning colors to tiles
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	; Wait 3 frames before updating palettes (if LCD is on) to allow tilemap updates
+	; to apply. Prevents garbage from showing for a split second sometimes...
 	ld a,[rLCDC]
 	and rLCDC_ENABLE_MASK
 	jr z,.doneDelay
-	ld c,2
+	ld c,3
 	call DelayFrames
 .doneDelay
 
