@@ -114,6 +114,17 @@ ColorNonOverworldSprites:
 
 .getAttackType
 	push hl
+
+	; If the absorb animation is playing, it's always green. (Needed for leech seed)
+	xor a
+	ld [rSVBK],a
+	ld a,[wAnimationID]
+	cp ABSORB
+	ld a,2
+	ld [rSVBK],a
+	ld a,GRASS
+	jr z,.gotType
+
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.playersTurn
