@@ -55,13 +55,13 @@ SpritePalettes: ; Taken from pokemon GSC.
 AttackSpritePalettes:
 	; GREY
 	RGB 31,31,31
-	RGB 20,20,20
-	RGB 10,10,10
+	RGB 25,25,25
+	RGB 13,13,13
 	RGB 0,0,0
 	; BLUE
 	RGB 31,31,31
-	RGB 5,4,31
-	RGB 1,1,18
+	RGB 8,12,31
+	RGB 1,4,31
 	RGB 0,0,0
 	; RED
 	RGB 31,31,31
