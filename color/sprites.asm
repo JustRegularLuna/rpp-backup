@@ -115,14 +115,24 @@ ColorNonOverworldSprites:
 .getAttackType
 	push hl
 
-	; If the absorb animation is playing, it's always green. (Needed for leech seed)
+	; Load animation (move) being used
 	xor a
 	ld [rSVBK],a
 	ld a,[wAnimationID]
-	cp ABSORB
+	ld b,a
 	ld a,2
 	ld [rSVBK],a
+
+	; If the absorb animation is playing, it's always green. (Needed for leech seed)
+	ld a,b
+	cp ABSORB
 	ld a,GRASS
+	jr z,.gotType
+
+	; Make stun spore yellow despite being a grass move
+	ld a,b
+	cp STUN_SPORE
+	ld a,ELECTRIC
 	jr z,.gotType
 
 	ld a,[H_WHOSETURN]
