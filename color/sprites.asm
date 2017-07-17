@@ -229,7 +229,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x05: SPRITE_SLOWBRO
-	db 4
+	db SPR_PAL_ORANGE
 
 	; 0x06: SPRITE_LASS
 	db 4
@@ -286,7 +286,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db SPR_PAL_BLUE
 
 	; 0x18: SPRITE_ROCKET
-	db 4
+	db SPR_PAL_BROWN
 
 	; 0x19: SPRITE_MEDIUM
 	db 4
@@ -400,7 +400,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db SPR_PAL_ORANGE
 
 	; 0x3e: SPRITE_OMANYTE
-	db 4
+	db SPR_PAL_ORANGE
 
 	; 0x3f: SPRITE_BOULDER
 	db SPR_PAL_BROWN
@@ -430,7 +430,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x48: SPRITE_LYING_OLD_MAN
-	db 4
+	db SPR_PAL_BROWN
 
 
 AnimationTileset1Palettes:
