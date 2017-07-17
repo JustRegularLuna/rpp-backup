@@ -685,9 +685,9 @@ SetPal_PartyMenu:
 ; Evolution / Hall of Fame
 ;
 ; Takes parameter 'c' from 0-2.
-; 0: calculate palette
+; 0: calculate palette based on loaded pokemon
 ; 1: make palettes black
-; 2: use PAL_MEWMON
+; 2: use PAL_MEWMON (used for trades?)
 SetPal_PokemonWholeScreen:
 	ld a, c
 	dec a
