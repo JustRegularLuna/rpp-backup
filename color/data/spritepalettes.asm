@@ -96,18 +96,31 @@ AttackSpritePalettes:
 
 ; Not related to sprites, move this somewhere else?
 SlotPaletteMap:
-	INCBIN "color/data/slotpalettemap.bin"
+IF DEF(_RED)
+	INCBIN "color/data/slotpalettemap_red.bin"
+ELSE
+	INCBIN "color/data/slotpalettemap_blue.bin"
+ENDC
 
 SlotSpritePaletteMap:
 	; Seven
 	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
+
 	; Bar
 	db ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE
+
 	; Cherry
 	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
-	; Fish
+
+	; Fish (red), Jigglypuff (blue)
 	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
-	; Penguin/Bird/SomethingOrOther
+
+	; Penguin/Bird/Something (red), Dugtrio (blue)
+	IF DEF(_RED)
 	db ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE
+	ELSE ; _BLUE
+	db ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN
+	ENDC
+
 	; Rat
 	db ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN
