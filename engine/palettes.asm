@@ -78,6 +78,14 @@ DeterminePaletteID:
 
 IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
 	jr nz,.skipDexNumConversion ; Check if trainer?
+
+	; In link battle, don't rely in wTrainerClass (for some reason it's set to
+	; OPP_GARY, so ignore it)
+	ld a,[wLinkState]
+	cp LINK_STATE_BATTLING
+	ld a, PAL_HERO
+	ret z
+
 	ld a,[wTrainerClass] ; Get trainer ID
 	ld hl, TrainerPalettes
 ELSE ; Trainers are given a single palette (PAL_MEWMON)

@@ -70,11 +70,11 @@ tradefunc: MACRO
 ; Trade_SwapNames to swap the player and enemy names for some functions.
 
 InternalClockTradeFuncSequence:
-	tradefunc LoadTradingGFXAndMonNames
+	tradefunc LoadTradingGFXAndMonNames_ColorHook
 	tradefunc Trade_ShowPlayerMon
 	tradefunc Trade_DrawOpenEndOfLinkCable
 	tradefunc Trade_AnimateBallEnteringLinkCable
-	tradefunc Trade_AnimLeftToRight
+	tradefunc Trade_AnimLeftToRight_ColorHook
 	tradefunc Trade_Delay100
 	tradefunc Trade_ShowClearedWindow
 	tradefunc PrintTradeWentToText
@@ -89,12 +89,12 @@ InternalClockTradeFuncSequence:
 	db $FF
 
 ExternalClockTradeFuncSequence:
-	tradefunc LoadTradingGFXAndMonNames
+	tradefunc LoadTradingGFXAndMonNames_ColorHook
 	tradefunc Trade_ShowClearedWindow
 	tradefunc PrintTradeWillTradeText
 	tradefunc PrintTradeFarewellText
 	tradefunc Trade_SwapNames
-	tradefunc Trade_AnimLeftToRight
+	tradefunc Trade_AnimLeftToRight_ColorHook
 	tradefunc Trade_SwapNames
 	tradefunc Trade_ShowClearedWindow
 	tradefunc Trade_DrawOpenEndOfLinkCable
@@ -113,12 +113,12 @@ ExternalClockTradeFuncSequence:
 	db $FF
 
 TradeFuncPointerTable:
-	addtradefunc LoadTradingGFXAndMonNames
+	addtradefunc LoadTradingGFXAndMonNames_ColorHook
 	addtradefunc Trade_ShowPlayerMon
 	addtradefunc Trade_DrawOpenEndOfLinkCable
 	addtradefunc Trade_AnimateBallEnteringLinkCable
 	addtradefunc Trade_ShowEnemyMon
-	addtradefunc Trade_AnimLeftToRight
+	addtradefunc Trade_AnimLeftToRight_ColorHook
 	addtradefunc Trade_AnimRightToLeft
 	addtradefunc Trade_Delay100
 	addtradefunc Trade_ShowClearedWindow

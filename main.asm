@@ -86,6 +86,9 @@ INCLUDE "engine/remove_pokemon.asm"
 
 INCLUDE "engine/display_pokedex.asm"
 
+
+; Hooks for color hack
+INCLUDE "color/cable_club.asm"
 ; HAX functions for oak intro
 
 GetNidorinoPalID:
@@ -1002,6 +1005,8 @@ INCLUDE "engine/trade.asm"
 INCLUDE "engine/intro.asm"
 INCLUDE "engine/trade2.asm"
 
+; Hooks for color hack
+INCLUDE "color/trade.asm"
 
 SECTION "bank11",ROMX,BANK[$11]
 

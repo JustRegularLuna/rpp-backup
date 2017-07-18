@@ -13,7 +13,8 @@ CableClub_DoBattleOrTrade:
 	ld b, 2
 	ld c, 12
 	call CableClub_TextBoxBorder
-	coord hl, 4, 10
+	call CableClub_DoBattleOrTrade_ColorHook
+	;coord hl, 4, 10
 	ld de, PleaseWaitString
 	call PlaceString
 	ld hl, wPlayerNumHits
@@ -630,7 +631,7 @@ TradeCenter_DisplayStats:
 	jp TradeCenter_DrawCancelBox
 
 TradeCenter_DrawPartyLists:
-	coord hl, 0, 0
+	call TradeCenter_DrawPartyLists_ColorHook
 	ld b, 6
 	ld c, 18
 	call CableClub_TextBoxBorder
