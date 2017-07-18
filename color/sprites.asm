@@ -8,6 +8,8 @@ ATK_PAL_YELLOW  EQU 4
 ATK_PAL_GREEN   EQU 5
 ATK_PAL_ICE	EQU 6
 ATK_PAL_PURPLE	EQU 7
+; 8: color based on attack type
+; 9: don't change color palette (assume it's already set properly from elsewhere)
 
 
 SPR_PAL_ORANGE	EQU 0
@@ -93,23 +95,19 @@ ColorNonOverworldSprites:
 
 	ld hl, wOAMBuffer
 	ld b, 40
-	ld d, W2_SpritePaletteMap>>8
-.nextSprite
-	ld a,[hli] ; y-coord
-	and a
-	jr z,.end
 
+.spriteLoop
+	inc hl
 	inc hl
 	ld a,[hli] ; tile
 	ld e, a
-	ld a,[hl] ; flags
-	ld c,a
+	ld d, W2_SpritePaletteMap>>8
 	ld a,[de]
 	cp 8 ; if 8, colorize based on attack type
 	jr z,.getAttackType
 	cp 9 ; if 9, do not colorize (use whatever palette it's set to already)
-	jr nz,.setPalette
-	xor a
+	jr z,.nextSprite
+	; Otherwise, use the value as-is
 	jr .setPalette
 
 .getAttackType
@@ -119,18 +117,18 @@ ColorNonOverworldSprites:
 	xor a
 	ld [rSVBK],a
 	ld a,[wAnimationID]
-	ld b,a
+	ld d,a
 	ld a,2
 	ld [rSVBK],a
 
 	; If the absorb animation is playing, it's always green. (Needed for leech seed)
-	ld a,b
+	ld a,d
 	cp ABSORB
 	ld a,GRASS
 	jr z,.gotType
 
 	; Make stun spore yellow despite being a grass move
-	ld a,b
+	ld a,d
 	cp STUN_SPORE
 	ld a,ELECTRIC
 	jr z,.gotType
@@ -153,11 +151,16 @@ ColorNonOverworldSprites:
 	pop hl
 
 .setPalette
+	ld c,a
+	ld a,$f8
+	and [hl]
 	or c
-	ld [hli],a
+	ld [hl],a
 
+.nextSprite
+	inc hl
 	dec b
-	jr nz, .nextSprite
+	jr nz, .spriteLoop
 
 .end
 	xor a
