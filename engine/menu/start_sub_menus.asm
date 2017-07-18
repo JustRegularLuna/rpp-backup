@@ -687,7 +687,7 @@ TrainerInfo_DrawVerticalLine:
 StartMenu_SaveReset:
 	ld a,[wd72e]
 	bit 6,a ; is the player using the link feature?
-	jp nz,Init
+	jp nz,SoftReset
 	predef SaveSAV ; save the game
 	call LoadScreenTilesFromBuffer2 ; restore saved screen
 	jp HoldTextDisplayOpen
