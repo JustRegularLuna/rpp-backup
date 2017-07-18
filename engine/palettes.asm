@@ -75,10 +75,9 @@ DeterminePaletteID:
 	ld a, [wd11e]
 	ld hl, MonsterPalettes
 	and a
-
-IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
 	jr nz,.skipDexNumConversion ; Check if trainer?
 
+IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
 	; In link battle, don't rely in wTrainerClass (for some reason it's set to
 	; OPP_GARY, so ignore it)
 	ld a,[wLinkState]
@@ -88,10 +87,16 @@ IF GEN_2_GRAPHICS ; Trainers are given individualized palettes
 
 	ld a,[wTrainerClass] ; Get trainer ID
 	ld hl, TrainerPalettes
-ELSE ; Trainers are given a single palette (PAL_MEWMON)
-	REPT 8
-	nop
-	ENDR
+ELSE
+	; Trainers are given a single palette (PAL_MEWMON)
+	; However, check specifically for the player's sprite in linked battle
+	ld e,a
+	ld a,[wLinkState]
+	cp LINK_STATE_BATTLING
+	ld a, PAL_REDMON
+	ret z
+
+	ld a,e
 ENDC
 
 .skipDexNumConversion
