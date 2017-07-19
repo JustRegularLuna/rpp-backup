@@ -1,3 +1,6 @@
+; Most of the functions here are called during vblank, maybe they belong in vblank.asm...
+
+
 ; Called when a map is loaded. Loads tilemap and tile attributes.
 ; LCD is disabled, so we have free reign over vram.
 LoadMapVramAndColors:
@@ -42,7 +45,7 @@ LoadMapVramAndColors:
 
 
 
-; Refresh 1/3 of the window each frame
+; Refresh 1/3 of the window each frame. Called during vblank.
 RefreshWindow:
 	ld a,[H_AUTOBGTRANSFERENABLED]
 	and a

@@ -20,6 +20,7 @@ INCLUDE "data/facing.asm"
 
 INCLUDE "engine/black_out.asm"
 
+; Mew sprites removed from here
 	ORG $01, $425b
 
 INCLUDE "data/baseStats/mew.asm"
@@ -89,73 +90,9 @@ INCLUDE "engine/display_pokedex.asm"
 
 ; Hooks for color hack
 INCLUDE "color/cable_club.asm"
-; HAX functions for oak intro
-
-GetNidorinoPalID:
-	call ClearScreen
+INCLUDE "color/oak_intro.asm"
 IF GEN_2_GRAPHICS
-	ld a, PAL_NIDORINO
-ELSE
-	ld a, PAL_PURPLEMON
-ENDC
-	jr GotPalID
-
-GetRedPalID:
-	call ClearScreen
-IF GEN_2_GRAPHICS
-	ld a, PAL_HERO
-ELSE
-	ld a, PAL_REDMON
-ENDC
-	jr GotPalID
-
-GetRivalPalID:
-	call ClearScreen
-IF GEN_2_GRAPHICS
-	ld a, PAL_GARY1
-ELSE
-	ld a, PAL_MEWMON
-ENDC
-	jr GotPalID
-
-GotPalID:
-	ld e,0
-	ld d,a
-
-	ld a,2
-	ld [rSVBK],a
-	CALL_INDIRECT LoadSGBPalette
-	xor a
-	ld [rSVBK],a
-	ret
-
-IF GEN_2_GRAPHICS
-LoadHPBarAndEXPBar:
-	ld de,HpBarAndStatusGraphics
-	ld hl,vChars2 + $620
-	ld bc,(BANK(HpBarAndStatusGraphics) << 8 | $1e)
-	call GoodCopyVideoData
-	ld de,EXPBarGraphics
-	ld hl,vChars1 + $400
-	ld bc,(BANK(EXPBarGraphics) << 8 | $9)
-GoodCopyVideoData:
-	ld a,[rLCDC]
-	bit 7,a ; is the LCD enabled?
-	jp nz, CopyVideoData ; if LCD is on, transfer during V-blank
-	ld a, b
-	push hl
-	push de
-	ld h, 0
-	ld l, c
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld b, h
-	ld c, l
-	pop hl
-	pop de
-	jp FarCopyData2 ; if LCD is off, transfer all at once
+INCLUDE "color/load_hp_and_exp_bar.asm"
 ENDC
 
 
@@ -200,136 +137,7 @@ INCLUDE "engine/pathfinding.asm"
 INCLUDE "engine/hp_bar.asm"
 INCLUDE "engine/hidden_object_functions3.asm"
 
-; compares old HP and new HP and sets c and z flags accordingly
-; HAX: this function also updates HP color.
-UpdateHPBar_CompareNewHPToOldHP: ; fad1 (3:7ad1)
-	push bc
-	push de
-	push hl
-	call UpdateHPBar_Palettes
-	pop hl
-	pop de
-	pop bc
-	ld a, d
-	sub b
-	ret nz
-	ld a, e
-	sub c
-	ret
-
-UpdateHPBar_Palettes:
-	; Store variables to be retrieved after the Bankswitch function.
-	; Using Predef causes glitches, because this is called FROM a predef.
-	ld a, [wLoadedMonMaxHP]
-	ld d, a
-	ld a, [wLoadedMonMaxHP + 1]
-	ld e, a
-
-	ld hl,wPredefRegisters + 2
-	ld a,d
-	ld [hli],a
-	ld a,e
-	ld [hli],a
-
-	; ld wPredefRegisters + 4,bc
-	ld a,b
-	ld [hli],a
-	ld [hl],c
-
-	; Convert hp into another format (??)
-	CALL_INDIRECT HPBarLength
-
-	; Pass this other hp format to Func_3df9 which determines HP bar color
-	ld hl, wPlayerHPBarColor
-	call GetHealthBarColor
-
-	ld a,2
-	ld [rSVBK],a
-
-	; wListMenuID = 0 for enemy hp bar, 1 for player hp bar, 2 for pokemon menu.
-	ld a,[wListMenuID]
-	ld c,a
-
-	cp 2
-	jr nz,.inBattle
-
-.inMenu
-	ld hl, W2_TilesetPaletteMap
-	ld bc, SCREEN_WIDTH*2 ; 2 rows for each pokemon in the menu
-	ld a, [wLastMenuItem]
-	call AddNTimes
-
-	ld bc, SCREEN_WIDTH*2
-	ld a, [wPlayerHPBarColor] ; Palette # was stored to here
-	inc a
-	call FillMemory
-
-	ld a,3
-	ld [W2_StaticPaletteMapChanged],a
-	jr .done
-
-.inBattle
-	ld a,[wPlayerHPBarColor] ; Palette # was stored to here
-	add PAL_GREENBAR
-	ld d,a
-
-	ld a,c
-	and a ; Check: enemy or player
-	ld e,2
-	jr nz,.loadPalette
-	inc e
-.loadPalette
-	CALL_INDIRECT LoadSGBPalette
-
-.done
-	ld a,1
-	ld [W2_ForceBGPUpdate],a
-
-	xor a
-	ld [rSVBK],a
-	ret
-
-UpdateHPBar_Hook:
-	push bc
-	push de
-	push hl
-
-	ld a,[wListMenuID]
-	cp 2
-	jr nz,.inBattle
-	
-	; In the pokemon menu
-	ld a, [wCurrentMenuItem]
-	ld bc, wPartyMon2 - wPartyMon1
-	ld hl, wPartyMon1
-	call AddNTimes
-	ld bc, wPartyMon1Level - wPartyMon1
-	add hl,bc
-	jr .gotPokemon
-
-.inBattle
-	and a
-	jr nz,.playerPokemon
-.enemyPokemon
-	ld hl, wEnemyMonLevel
-	jr .gotPokemon
-.playerPokemon
-	ld hl, wBattleMonLevel ; $d022
-;	jr .gotPokemon
-
-	; Load pokemon data
-.gotPokemon
-	ld de, wLoadedMonLevel
-	ld bc, $b
-	call CopyData
-
-.gotData
-	pop hl
-	pop de
-	pop bc
-	; Animate the hp bar
-	jp UpdateHPBar
-
+INCLUDE "color/update_hp_bar.asm"
 
 SECTION "NPC Sprites 1", ROMX, BANK[NPC_SPRITES_1]
 
@@ -437,29 +245,7 @@ INCLUDE "engine/battle/moveEffects/haze_effect.asm"
 INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/random.asm"
 
-
-; Hooks for drawing exp bars in status_screen.asm
-
-StatusScreenHook:
-	; b = SET_PAL_STATUS_SCREEN
-	call RunPaletteCommand
-IF GEN_2_GRAPHICS
-	coord de, 18, 5
-	ld a, [wLoadedMonLevel]
-	ld [wBattleMonLevel], a
-	push af
-	callba PrintEXPBar
-	pop af
-	ld [wLoadedMonLevel], a
-ENDC
-	ret
-
-; Only called when GEN_2_GRAPHICS is set
-StatusScreen2Hook:
-	coord hl, 19, 1
-	lb bc, 6, 10
-	jp DrawLineBox ; Draws the box around name, HP and status
-
+INCLUDE "color/status_screen.asm"
 
 IF GEN_2_GRAPHICS
 EXPBarGraphics:  INCBIN "gfx/gs/exp_bar.2bpp"
@@ -2089,6 +1875,8 @@ BlackTile:
 	ENDR
 BlackTileEnd:
 
+INCLUDE "color/color.asm"
+
 
 SECTION "bank1D",ROMX,BANK[$1D]
 
@@ -2243,44 +2031,7 @@ INCLUDE "engine/overworld/elevator.asm"
 
 INCLUDE "engine/items/tm_prices.asm"
 
-
-; Hooks for engine/battle/animations.asm
-
-_LoadAnimationTilesetPalettes:
-	ld a, [wIsInBattle]
-	and a
-	jr z, .inTrade ; don't load attack sprite palettes during trades
-
-	ld b, BANK(LoadAnimationTilesetPalettes)
-	ld hl, LoadAnimationTilesetPalettes
-	rst $18
-.inTrade:
-	ret
-
-; Actually this doesn't do everything needed to spriteify
-; It copies the tiles and the palette of the player pokemon.
-SpriteifyPlayerPokemon:
-	ld de,vBackPic
-	ld hl,vSprites
-	ld bc,7*7
-	call CopyVideoData
-
-	ld a,2
-	ld [rSVBK],a
-	ld hl, W2_BgPaletteData
-	ld de, W2_SprPaletteData
-	ld bc, 8
-	call CopyData
-
-	ld a,1
-	ld [W2_LastOBP0],a
-
-	xor a
-	ld [rSVBK],a
-	ret
-
-; HAX
-INCLUDE "color/color.asm"
+INCLUDE "color/animations.asm"
 
 ; Inserted pokemon images go here
 
