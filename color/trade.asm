@@ -10,7 +10,7 @@ LoadTradingGFXAndMonNames_ColorHook
 	jp LoadTradingGFXAndMonNames
 
 ; Replaces function calls to "Trade_AnimLeftToRight" in engine/trade.asm.
-; This is needed due to the pokemon's palette overwr
+; This is needed due to the pokemon's palette overwriting palette 0.
 Trade_AnimLeftToRight_ColorHook:
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
 	ld c, 2
