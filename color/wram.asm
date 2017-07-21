@@ -49,5 +49,8 @@ W2_DrewRowOrColumn             EQU $d78b
 ; transformed)
 W2_BattleMonPalette            EQU $d78c
 
+; Used by "WindowTransferBgRowsAndColors" function. Analagous to H_VBCOPYBGNUMROWS.
+W2_VBCOPYBGNUMROWS             EQU $d78d
+
 ; In bank 1, the stack starts at $dfff. So, that's also the stack here when bank 2 is
 ; loaded. Don't use anything too close to there.

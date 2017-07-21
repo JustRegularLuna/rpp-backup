@@ -26,10 +26,10 @@ VBlank::
 	call VBlankCopy
 	call VBlankCopyDouble
 	;call UpdateMovingBgTiles
-	rst $10 ; HAX: VBlank hook
-	nop
-	nop
 	call $ff80 ; OAM DMA
+	rst $10 ; HAX: VBlank hook (loads palettes)
+	nop
+	nop
 	; HAX: don't update sprites here. They're updated elsewhere to prevent wobbliness.
 	;ld a, Bank(PrepareOAMData)
 	nop
