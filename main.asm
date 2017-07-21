@@ -647,7 +647,7 @@ BeedrillPicBack:    INCBIN "pic/monback/beedrillb.pic"
 ENDC
 
 
-SECTION "Battle (bank 9)", ROMX, BANK[$9]
+SECTION "Battle (bank 9)", ROMX[$7d6b], BANK[$9]
 INCLUDE "engine/battle/print_type.asm"
 INCLUDE "engine/battle/save_trainer_name.asm"
 INCLUDE "engine/battle/moveEffects/focus_energy_effect.asm"
@@ -700,7 +700,7 @@ VileplumePicBack:   INCBIN "pic/monback/vileplumeb.pic"
 ENDC
 
 
-SECTION "Battle (bank A)", ROMX, BANK[$A]
+SECTION "Battle (bank A)", ROMX[$7ea9], BANK[$A]
 INCLUDE "engine/battle/moveEffects/leech_seed_effect.asm"
 
 
@@ -728,10 +728,8 @@ SECTION "Pics 4", ROMX, BANK[PICS_4]
 
 ; Removed 'mon sprites from here
 
-	ORG $0c, $7f2b
 
-
-SECTION "Battle (bank C)", ROMX, BANK[$C]
+SECTION "Battle (bank C)", ROMX[$7f2b], BANK[$C]
 INCLUDE "engine/battle/moveEffects/mist_effect.asm"
 INCLUDE "engine/battle/moveEffects/one_hit_ko_effect.asm"
 
