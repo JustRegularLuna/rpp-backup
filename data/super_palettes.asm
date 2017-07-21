@@ -3,7 +3,7 @@
 
 SuperPalettes:
 ; 0x00: PAL_TOWNMAP2 (second palette used on the town map)
-	RGB 25,15,0
+	RGB 25,18,0
 	RGB 15,8,0
 	RGB 0,0,0
 	RGB 0,0,0
