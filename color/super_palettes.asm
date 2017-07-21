@@ -1,6 +1,11 @@
 ; Note: after calling this, you may need to set W2_ForceBGPUpdate/ForceOBPUpdate to nonzero.
 ; d = palette to load (see constants/palette_constants.), e = palette index
 LoadSGBPalette:
+	ld a,[rSVBK]
+	push af
+	ld a,2
+	ld [rSVBK],a
+
 	ld a,e
 	ld l,d
 	ld h,0
@@ -14,8 +19,12 @@ LoadSGBPalette:
 	jr startPaletteTransfer
 
 LoadSGBPalette_Sprite:
-	ld a,e
+	ld a,[rSVBK]
+	push af
+	ld a,2
+	ld [rSVBK],a
 
+	ld a,e
 	ld l,d
 	ld h,0
 	add hl
@@ -40,6 +49,9 @@ startPaletteTransfer:
 	inc de
 	dec b
 	jr nz,.palLoop
+
+	pop af
+	ld [rSVBK],a
 	ret
 
 INCLUDE "data/super_palettes.asm"

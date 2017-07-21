@@ -25,6 +25,11 @@ LoadAttackSpritePalettes:
 	ld hl,AttackSpritePalettes
 
 LoadPaletteData:
+	ld a,[rSVBK]
+	push af
+	ld a,2
+	ld [rSVBK],a
+
 	ld de,W2_SprPaletteData
 	ld b,$40
 .sprCopyLoop
@@ -34,7 +39,10 @@ LoadPaletteData:
 	dec b
 	jr nz,.sprCopyLoop
 	ld a,1
-	ld [W2_LastOBP0],a
+	ld [W2_ForceOBPUpdate],a
+
+	pop af
+	ld [rSVBK],a
 	ret
 
 ; Set an overworld sprite's colors
@@ -228,8 +236,12 @@ LoadAnimationTilesetPalettes:
 
 
 ; Set all sprite palettes to not be colorized by "ColorNonOverworldSprites".
-; ASSUMES THAT WRAM BANK 2 IS LOADED.
 ClearSpritePaletteMap:
+	ld a,[rSVBK]
+	push af
+	ld a,2
+	ld [rSVBK],a
+
 	ld hl, W2_SpritePaletteMap
 	ld b,$0 ; $100
 	ld a,9
@@ -237,6 +249,9 @@ ClearSpritePaletteMap:
 	ld [hli],a
 	dec b
 	jr nz,.loop
+
+	pop af
+	ld [rSVBK],a
 	ret
 
 
