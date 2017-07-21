@@ -41,15 +41,24 @@ LoadCableClubTextPaletteAndMap:
 	ret
 
 LoadCableClubTextPalette:
-	; Load red or blue color in palette 7
+	; Load red or blue color in all palettes (only palette 7 is important, but loading
+	; all palettes prevents minor artifacts)
 IF DEF(_RED)
 	ld d, PAL_REDMON
 ENDC
 IF DEF(_BLUE)
 	ld d, PAL_BLUEMON
 ENDC
-	ld e,7
+	ld e,0
+.loop:
+	push de
 	callba LoadSGBPalette
+	pop de
+	inc e
+	ld a,e
+	cp 8
+	jr nz,.loop
+
 	ld a,1
 	ld [W2_ForceBGPUpdate],a
 	ret

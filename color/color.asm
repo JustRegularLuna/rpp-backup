@@ -687,7 +687,7 @@ SetPal_PartyMenu:
 ; Takes parameter 'c' from 0-2.
 ; 0: calculate palette based on loaded pokemon
 ; 1: make palettes black
-; 2: use PAL_MEWMON (used for trades?)
+; 2: previously used during trades, now unused.
 SetPal_PokemonWholeScreen:
 	ld a, c
 	dec a

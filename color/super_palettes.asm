@@ -1,4 +1,5 @@
 ; Note: after calling this, you may need to set W2_ForceBGPUpdate/ForceOBPUpdate to nonzero.
+; d = palette to load (see constants/palette_constants.), e = palette index
 LoadSGBPalette:
 	ld a,e
 	ld l,d

@@ -170,7 +170,7 @@ ColorNonOverworldSprites:
 ; Called when starting a battle
 LoadAnimationTilesetPalettes:
 	push de
-	ld a,[wWhichBattleAnimTileset] ; Animation tileset
+	ld a,[wWhichBattleAnimTileset] ; Animation tileset (0-2)
 	ld c,a
 	ld a,2
 	ld [rSVBK],a
@@ -180,11 +180,14 @@ LoadAnimationTilesetPalettes:
 
 	call LoadAttackSpritePalettes
 
+	; Indices 0 and 2 both refer to "AnimationTileset1", just different amounts of it.
+	; 0 is in-battle, 2 is during a trade.
+	; Index 1 refers to "AnimationTileset2".
 	ld a,c
-	and a
-	ld hl, AnimationTileset1Palettes
-	jr z,.gotPalette
+	cp 1
 	ld hl, AnimationTileset2Palettes
+	jr z,.gotPalette
+	ld hl, AnimationTileset1Palettes
 .gotPalette
 	ld de, W2_SpritePaletteMap
 	ld b, $80
@@ -195,6 +198,25 @@ LoadAnimationTilesetPalettes:
 	dec b
 	jr nz,.copyLoop
 
+	; If in a trade, some of the tiles near the end are different. Override some tiles
+	; for the link cable, and replace the "purple" palette to match the exact color of
+	; the link cable.
+	ld a,c
+	cp 2
+	jr nz,.done
+
+	; Replace ATK_PAL_PURPLE with PAL_MEWMON
+	ld d, PAL_MEWMON
+	ld e, ATK_PAL_PURPLE
+	call LoadSGBPalette_Sprite
+
+	; Set the link cable sprite tiles
+	ld a, ATK_PAL_PURPLE
+	ld hl, W2_SpritePaletteMap+$7e
+	ld [hli],a
+	ld [hli],a
+
+.done
 	ld a,1
 	ld [W2_ForceOBPUpdate],a
 

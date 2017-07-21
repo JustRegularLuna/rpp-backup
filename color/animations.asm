@@ -1,14 +1,9 @@
 ; Hooks for engine/battle/animations.asm
 
 _LoadAnimationTilesetPalettes:
-	ld a, [wIsInBattle]
-	and a
-	jr z, .inTrade ; don't load attack sprite palettes during trades
-
 	ld b, BANK(LoadAnimationTilesetPalettes)
 	ld hl, LoadAnimationTilesetPalettes
 	rst $18
-.inTrade:
 	ret
 
 ; Actually this doesn't do everything needed to spriteify
