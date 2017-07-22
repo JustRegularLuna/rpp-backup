@@ -647,13 +647,13 @@ SetPal_PartyMenu:
 	ld e,3
 	callba LoadSGBPalette
 
-	; Palettes were written to a SGB packet. Extract them.
-	ld b,9		; there are only 6 pokemon but iterate 9 times to fill the whole screen
-	ld hl,wPartyMenuBlkPacket + 9
+	ld b,9 ; there are only 6 pokemon but iterate 9 times to fill the whole screen
+	ld hl,wPartyMenuHPBarColors
 	ld de,W2_TilesetPaletteMap
 .loop
-	ld a,[hl]
+	ld a,[hli]
 	and 3
+	inc a
 
 	ld c,40
 .loop2
@@ -662,9 +662,6 @@ SetPal_PartyMenu:
 	dec c
 	jr nz,.loop2
 
-	ld a,6
-	add l
-	ld l,a
 	dec b
 	jr nz,.loop
 
@@ -674,8 +671,6 @@ SetPal_PartyMenu:
 	ld [W2_StaticPaletteMapChanged],a
 	xor a
 	ld [W2_TileBasedPalettes],a
-
-	;xor a
 	ld [rSVBK],a
 	ret
 
@@ -836,14 +831,9 @@ SetPal_TrainerCard:
 
 
 ; Clear colors after titlescreen
-PalCmd_0e:
+SetPal_OakIntro:
 	ld a,2
 	ld [rSVBK],a
-
-	xor a
-	ld [W2_TileBasedPalettes],a
-	ld a,3
-	ld [W2_StaticPaletteMapChanged],a
 
 	ld bc,20*18
 	ld hl,W2_TilesetPaletteMap
@@ -857,12 +847,17 @@ PalCmd_0e:
 	jr nz,.palLoop
 
 	xor a
+	ld [W2_TileBasedPalettes],a
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
 	ld [rSVBK],a
 	ret
 
 ; Name entry
 ; Deals with sprites for the pokemon naming screen
-PalCmd_0f:
+SetPal_NameEntry:
 	ld a,2
 	ld [rSVBK],a
 
