@@ -5,12 +5,13 @@ StatusScreenHook:
 	call RunPaletteCommand
 IF GEN_2_GRAPHICS
 	coord de, 18, 5
+	ld a, [wBattleMonLevel]
+	push af
 	ld a, [wLoadedMonLevel]
 	ld [wBattleMonLevel], a
-	push af
 	callba PrintEXPBar
 	pop af
-	ld [wLoadedMonLevel], a
+	ld [wBattleMonLevel], a
 ENDC
 	ret
 

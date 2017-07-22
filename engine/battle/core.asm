@@ -8822,7 +8822,7 @@ CalcEXPBarPixelLength:
 	; get the base exp needed for the current level
 	ld a, [wPlayerBattleStatus3]
 	ld hl, wBattleMonSpecies
-	bit 3, a
+	bit 3, a ; Check if transformed
 	jr z, .skip
 	ld hl, wPartyMon1
 	call BattleMonPartyAttr
