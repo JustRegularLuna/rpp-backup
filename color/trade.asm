@@ -1,7 +1,3 @@
-; Trade animation colorization is extremely basic. Aside from the pokemon being shown,
-; everything's just one palette.
-
-
 ; Called whenever the link cable appears. Loads PAL_MEWMON on all bg palettes.
 Trade_LoadCablePalettes:
 	; Load PAL_MEWMON to all background palettes
@@ -64,3 +60,11 @@ Trade_InitGameboyTransferGfx_ColorHook
 	ld [rSVBK],a
 
 	jp Trade_InitGameboyTransferGfx
+
+
+; Called at start of trade sequence. This prevents some minor graphical garbage from
+; showing up.
+LoadTradingGFXAndMonNames_ColorHook:
+	call LoadTradingGFXAndMonNames
+	call Trade_LoadCablePalettes
+	jp DelayFrame

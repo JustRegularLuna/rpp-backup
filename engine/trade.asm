@@ -70,7 +70,7 @@ tradefunc: MACRO
 ; Trade_SwapNames to swap the player and enemy names for some functions.
 
 InternalClockTradeFuncSequence:
-	tradefunc LoadTradingGFXAndMonNames
+	tradefunc LoadTradingGFXAndMonNames_ColorHook
 	tradefunc Trade_ShowPlayerMon
 	tradefunc Trade_DrawOpenEndOfLinkCable
 	tradefunc Trade_AnimateBallEnteringLinkCable
@@ -89,7 +89,7 @@ InternalClockTradeFuncSequence:
 	db $FF
 
 ExternalClockTradeFuncSequence:
-	tradefunc LoadTradingGFXAndMonNames
+	tradefunc LoadTradingGFXAndMonNames_ColorHook
 	tradefunc Trade_ShowClearedWindow
 	tradefunc PrintTradeWillTradeText
 	tradefunc PrintTradeFarewellText
@@ -113,7 +113,7 @@ ExternalClockTradeFuncSequence:
 	db $FF
 
 TradeFuncPointerTable:
-	addtradefunc LoadTradingGFXAndMonNames
+	addtradefunc LoadTradingGFXAndMonNames_ColorHook
 	addtradefunc Trade_ShowPlayerMon
 	addtradefunc Trade_DrawOpenEndOfLinkCable
 	addtradefunc Trade_AnimateBallEnteringLinkCable
