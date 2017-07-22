@@ -157,19 +157,9 @@ ENDC
 	ld a,3
 	ld [W2_StaticPaletteMapChanged],a
 
-	; Wait 3 frames before updating palettes (if LCD is on) to allow tilemap updates
-	; to apply. Prevents garbage from showing for a split second sometimes...
-	ld a,[rLCDC]
-	and rLCDC_ENABLE_MASK
-	jr z,.doneDelay
-	ld c,3
-	call DelayFrames
-.doneDelay
-
 	; Restore sprite palettes used by pokeballs
 	CALL_INDIRECT LoadOverworldSpritePalettes
 
-	; Do battles use obp1? Probably better to leave this unset
 	xor a
 	ld [W2_UseOBP1],a
 
@@ -180,6 +170,16 @@ ENDC
 
 	ld a,SET_PAL_BATTLE
 	ld [wDefaultPaletteCommand],a
+
+	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
+	; from showing for a split second sometimes...
+	ld a,[rLCDC]
+	and rLCDC_ENABLE_MASK
+	jr z,.doneDelay
+	ld c,3
+	call DelayFrames
+.doneDelay
+
 	ret
 
 ; hl: starting address
