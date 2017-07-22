@@ -389,7 +389,7 @@ Wait7000:
 	jr nz, .loop
 	ret
 
-SendSGBPackets
+SendSGBPackets:
 	ld a, [wGBC]
 	and a
 	jr z, .notGBC
@@ -465,4 +465,5 @@ INCLUDE "data/sgb_packets.asm"
 
 INCLUDE "data/mon_palettes.asm"
 
-INCLUDE "data/sgb_border.asm"
+; SGB border not needed in color hack
+;INCLUDE "data/sgb_border.asm"

@@ -1865,6 +1865,9 @@ INCLUDE "engine/town_map.asm"
 INCLUDE "engine/mon_party_sprites.asm"
 INCLUDE "engine/in_game_trades.asm"
 INCLUDE "engine/palettes.asm"
+
+	ORG $1c, $75e8
+
 INCLUDE "engine/save.asm"
  
 BlackTile:
