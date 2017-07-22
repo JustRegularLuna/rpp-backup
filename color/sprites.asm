@@ -141,9 +141,13 @@ ColorNonOverworldSprites:
 	ld a,GRASS
 	jr z,.gotType
 
-	; Make stun spore yellow despite being a grass move
+	; Make stun spore and solarbeam yellow, despite being grass moves
 	ld a,d
 	cp STUN_SPORE
+	ld a,ELECTRIC
+	jr z,.gotType
+	ld a,d
+	cp SOLARBEAM
 	ld a,ELECTRIC
 	jr z,.gotType
 
