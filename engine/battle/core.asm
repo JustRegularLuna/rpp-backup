@@ -768,7 +768,7 @@ UpdateCurMonHPBar:
 .playersTurn
 	push bc
 	ld [wHPBarType], a
-	predef UpdateHPBar_Hook
+	predef UpdateHPBar2
 	pop bc
 	ret
 
@@ -4946,7 +4946,7 @@ ApplyDamageToEnemyPokemon:
 	coord hl, 2, 2
 	xor a
 	ld [wHPBarType],a
-	predef UpdateHPBar_Hook
+	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToEnemyPokemonDone:
 	jp DrawHUDsAndHPBars
 
@@ -5064,7 +5064,7 @@ ApplyDamageToPlayerPokemon:
 	coord hl, 10, 9
 	ld a,$01
 	ld [wHPBarType],a
-	predef UpdateHPBar_Hook
+	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToPlayerPokemonDone:
 	jp DrawHUDsAndHPBars
 

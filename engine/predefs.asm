@@ -124,7 +124,7 @@ PredefPointers::
 	add_predef _RunPaletteCommand
 	add_predef StarterDex
 	add_predef _AddPartyMon
-	add_predef UpdateHPBar_Hook
+	add_predef UpdateHPBar2
 	add_predef DrawEnemyHUDAndHPBar
 	add_predef LoadTownMap_Nest
 	add_predef PrintMonType

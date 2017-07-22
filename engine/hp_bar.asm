@@ -143,7 +143,7 @@ UpdateHPBar_AnimateHPBar:
 	push af
 	push de
 	ld d, $6
-	call DrawHPBar
+	call DrawHPBarWithColor ; HAX: call changed to update color as well
 	ld c, 2
 	call DelayFrames
 	pop de
@@ -162,8 +162,14 @@ UpdateHPBar_AnimateHPBar:
 	pop hl
 	ret
 
-; Removed UpdateHPBar_CompareNewHPToOldHP from here
-	ORG $03, $7ad7
+; compares old HP and new HP and sets c and z flags accordingly
+UpdateHPBar_CompareNewHPToOldHP:
+	ld a, d
+	sub b
+	ret nz
+	ld a, e
+	sub c
+	ret
 
 ; calcs HP difference between bc and de (into de)
 UpdateHPBar_CalcHPDifference:

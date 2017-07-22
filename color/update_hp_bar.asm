@@ -1,66 +1,54 @@
-; Functions relating to updating the HP bar color
-
-; compares old HP and new HP and sets c and z flags accordingly
-; HAX: this function also updates HP color.
-UpdateHPBar_CompareNewHPToOldHP:
+; Called from "UpdateHPBar_AnimateHPBar" in "engine/hp_bar.asm" when healthbars are
+; moving. Applies to battles and the party screen, probably won't work on status screen.
+;
+; d: length of bar (tiles)
+; e: # pixels to fill
+; hl: where to draw
+DrawHPBarWithColor
+	call DrawHPBar
 	push bc
 	push de
 	push hl
-	call UpdateHPBar_Palettes
-	pop hl
-	pop de
-	pop bc
-	ld a, d
-	sub b
-	ret nz
-	ld a, e
-	sub c
-	ret
 
-UpdateHPBar_Palettes:
-	; Store variables to be retrieved after the Bankswitch function.
-	; Using Predef causes glitches, because this is called FROM a predef.
-	ld a, [wLoadedMonMaxHP]
-	ld d, a
-	ld a, [wLoadedMonMaxHP + 1]
-	ld e, a
-
-	ld hl,wPredefRegisters + 2
-	ld a,d
-	ld [hli],a
-	ld a,e
-	ld [hli],a
-
-	; ld wPredefRegisters + 4,bc
-	ld a,b
-	ld [hli],a
-	ld [hl],c
-
-	; Convert hp into another format (??)
-	CALL_INDIRECT HPBarLength
-
-	; Pass this other hp format to Func_3df9 which determines HP bar color
+	; Set hl to point to appropriate color var
+	ld a, [wHPBarType]
+	or a
+	ld hl, wEnemyHPBarColor
+	jr z,.gotHPBarColorVar
+	dec a
 	ld hl, wPlayerHPBarColor
-	call GetHealthBarColor
+	jr z,.gotHPBarColorVar
+
+	; Party menu
+	ld hl, wPartyMenuHPBarColors
+	ld b, 0
+	ld a, [wCurrentMenuItem]
+	ld c, a
+	add hl, bc
+
+.gotHPBarColorVar
+	call GetHealthBarColor ; Reads value of 'e' (bar length) to determine color
 
 	ld a,2
 	ld [rSVBK],a
 
-	; wListMenuID = 0 for enemy hp bar, 1 for player hp bar, 2 for pokemon menu.
-	ld a,[wListMenuID]
+	; wHPBarType = 0 for enemy hp bar, 1 for player hp bar, 2 for pokemon menu.
+	ld a,[wHPBarType]
 	ld c,a
 
 	cp 2
 	jr nz,.inBattle
 
 .inMenu
+	ld a, [hl]
+	push af
 	ld hl, W2_TilesetPaletteMap
 	ld bc, SCREEN_WIDTH*2 ; 2 rows for each pokemon in the menu
-	ld a, [wLastMenuItem]
+	ld a, [wCurrentMenuItem]
 	call AddNTimes
 
 	ld bc, SCREEN_WIDTH*2
-	ld a, [wPlayerHPBarColor] ; Palette # was stored to here
+	pop af ; Get palette #
 	inc a
 	call FillMemory
 
@@ -69,7 +57,7 @@ UpdateHPBar_Palettes:
 	jr .done
 
 .inBattle
-	ld a,[wPlayerHPBarColor] ; Palette # was stored to here
+	ld a,[hl] ; Palette # was stored to here
 	add PAL_GREENBAR
 	ld d,a
 
@@ -87,45 +75,8 @@ UpdateHPBar_Palettes:
 
 	xor a
 	ld [rSVBK],a
-	ret
 
-UpdateHPBar_Hook:
-	push bc
-	push de
-	push hl
-
-	ld a,[wListMenuID]
-	cp 2
-	jr nz,.inBattle
-	
-	; In the pokemon menu
-	ld a, [wCurrentMenuItem]
-	ld bc, wPartyMon2 - wPartyMon1
-	ld hl, wPartyMon1
-	call AddNTimes
-	ld bc, wPartyMon1Level - wPartyMon1
-	add hl,bc
-	jr .gotPokemon
-
-.inBattle
-	and a
-	jr nz,.playerPokemon
-.enemyPokemon
-	ld hl, wEnemyMonLevel
-	jr .gotPokemon
-.playerPokemon
-	ld hl, wBattleMonLevel ; $d022
-;	jr .gotPokemon
-
-	; Load pokemon data
-.gotPokemon
-	ld de, wLoadedMonLevel
-	ld bc, $b
-	call CopyData
-
-.gotData
 	pop hl
 	pop de
 	pop bc
-	; Animate the hp bar
-	jp UpdateHPBar
+	ret
