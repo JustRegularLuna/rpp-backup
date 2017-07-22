@@ -115,7 +115,13 @@ ColorNonOverworldSprites:
 	jr z,.getAttackType
 	cp 9 ; if 9, do not colorize (use whatever palette it's set to already)
 	jr z,.nextSprite
-	; Otherwise, use the value as-is
+	cp 10 ; if 10 (used in game freak intro), color based on sprite number
+	jr z, .gameFreakIntro
+	jr .setPalette ; Otherwise, use the value as-is
+
+.gameFreakIntro: ; The stars under the logo all get different colors
+	ld a,b
+	and 3
 	jr .setPalette
 
 .getAttackType
