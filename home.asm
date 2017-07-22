@@ -4565,7 +4565,7 @@ GetHealthBarColor::
 ; Return at hl the palette of
 ; an HP bar e pixels long.
 	ld a, e
-	cp 27
+	cp 24 ; HAX: changed to match crystal (yellow should mean <1/2 health)
 	ld d, 0 ; green
 	jr nc, .gotColor
 	cp 10
