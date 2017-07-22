@@ -4779,12 +4779,6 @@ const_value = 1
 	add_tx_pre ElevatorText                         ; 41
 	add_tx_pre PokemonStuffText                     ; 42
 
-; Fade out from map screen
-GBFadeOut_Custom:
-	ld hl,FadePal5
-	ld b,$04
-	jp GBFadeIncCommon
-
 
 ; Note: this saves rSVBK before calling an interrupt. It would also make sense to save
 ; rVBK. However, doing that would break the code that fixes the ss anne's palettes on
