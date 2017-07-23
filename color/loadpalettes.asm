@@ -170,7 +170,17 @@ LoadTownPalette:
 	xor a
 	ld [rSVBK],a
 
-	ld a, [wCurMap]
+	; Get the current map.
+	ld a,[wCurMap]
+	ld c,a
+	cp ROUTE_6 ; Route 6 has 2 rows in saffron city; check if player is there or not.
+	jr nz, .notRoute6
+	ld a,[wYCoord]
+	cp 2
+	jr nc, .notRoute6
+	ld c,SAFFRON_CITY
+.notRoute6
+	ld a,c
 	add a
 	ld c,a
 
