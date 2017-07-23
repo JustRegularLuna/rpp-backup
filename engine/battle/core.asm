@@ -147,8 +147,7 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	;call Delay3
 	nop
 	nop
-	nop
-	xor a
+	ld a,1 ; HAX: don't disable bg transfer. Makes the battle transition smoother.
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld b, $70
 	ld c, $90
