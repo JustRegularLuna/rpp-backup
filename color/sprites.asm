@@ -96,7 +96,7 @@ ColorOverworldSprite:
 ; W2_SpritePaletteMap is all blanked out (set to 9) except for the exclamation mark tile,
 ; so this function usually won't do anything.
 ;
-; This colorizes: attack sprites, party menu, exclamation mark, perhaps more?
+; This colorizes: attack sprites, party menu, exclamation mark, trades, perhaps more?
 ColorNonOverworldSprites:
 	ld a,2
 	ld [rSVBK],a
@@ -151,6 +151,12 @@ ColorNonOverworldSprites:
 	ld a,ELECTRIC
 	jr z,.gotType
 
+	; Make tri-attack yellow, despite being a normal move
+	ld a,d
+	cp TRI_ATTACK
+	ld a,ELECTRIC
+	jr z,.gotType
+
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.playersTurn
@@ -185,7 +191,8 @@ ColorNonOverworldSprites:
 	ld [rSVBK],a
 	ret
 
-; Called when starting a battle
+; Called whenever an animation plays in-battle. There are two animation tilesets, each
+; with its own palette.
 LoadAnimationTilesetPalettes:
 	push de
 	ld a,[wWhichBattleAnimTileset] ; Animation tileset (0-2)
