@@ -497,7 +497,7 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	db 3 ; GROUND EQU $04
 	db 3 ; ROCK EQU $05
 	db 0
-	db 0 ; BUG EQU $07
+	db 5 ; BUG EQU $07
 	db 7 ; GHOST EQU $08
 	db 0
 	db 0
