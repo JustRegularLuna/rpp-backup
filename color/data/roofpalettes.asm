@@ -62,8 +62,8 @@ VermilionRoof:
 	RGB 24,17,0
 
 CeladonRoof:
-	RGB 0,12,30
-	RGB 0,12,18
+	RGB 15,26,19
+	RGB 3,20,11
 
 FuchsiaRoof:
 	RGB 31,3,10
