@@ -854,6 +854,7 @@ SetPal_TrainerCard:
 	ld d,PAL_YELLOWMON
 	ld e,3
 	callba LoadSGBPalette
+
 	; Red's palette
 	IF GEN_2_GRAPHICS
 		ld d, PAL_HERO
@@ -863,17 +864,26 @@ SetPal_TrainerCard:
 	ld e,4
 	callba LoadSGBPalette
 
+	; Palette for border tiles
+IF DEF(_BLUE)
+	ld d, PAL_BLUEMON
+ELSE ; _RED
+	ld d, PAL_REDMON
+ENDC
+	ld e,5
+	callba LoadSGBPalette
+
 	; Load palette map
 	ld hl, BadgePalettes
 	ld a, BANK(BadgePalettes)
 	ld de, W2_TilesetPaletteMap
 	ld bc, $60
 	call FarCopyData
-	; Zero the rest
+	; Set everything else to be red or blue (depending on game)
 	push de
 	pop hl
 	ld bc, $a0
-	xor a
+	ld a,5
 	call FillMemory
 
 
