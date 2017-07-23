@@ -1919,7 +1919,7 @@ DrawPlayerHUDAndHPBar:
 	ld de, wBattleMonNick
 	coord hl, 10, 7
 IF GEN_2_GRAPHICS
-	call CenterMonNameAndPlaceString
+	call PlaceString ; Note: "CenterMonName" not called to be consistent with gen 2
 	call PrintEXPBarAt1711
 ELSE
 	call CenterMonName
@@ -8768,9 +8768,6 @@ PlayBattleAnimationGotID:
 ; cause data shifting.
 
 IF GEN_2_GRAPHICS
-CenterMonNameAndPlaceString:
-	call CenterMonName
-	jp PlaceString
 
 LoadMonBackSpriteHook:
 	ld a,$66
