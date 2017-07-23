@@ -1919,7 +1919,7 @@ DrawPlayerHUDAndHPBar:
 	ld de, wBattleMonNick
 	coord hl, 10, 7
 IF GEN_2_GRAPHICS
-	call PlaceString
+	call CenterMonNameAndPlaceString
 	call PrintEXPBarAt1711
 ELSE
 	call CenterMonName
@@ -8764,10 +8764,14 @@ PlayBattleAnimationGotID:
 	ret
 
 
-; Following are hooks for pokered_color. This is the end of the bank so it won't cause
-; data shifting.
+; HAX: Following are hooks for pokered_color. This is the end of the bank so it won't
+; cause data shifting.
 
-LoadMonBackSpriteHook: ; HAX
+CenterMonNameAndPlaceString:
+	call CenterMonName
+	jp PlaceString
+
+LoadMonBackSpriteHook:
 	ld a,$66
 	ld de,vBackPic
 	ld c,a
