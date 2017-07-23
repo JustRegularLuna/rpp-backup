@@ -8767,6 +8767,7 @@ PlayBattleAnimationGotID:
 ; HAX: Following are hooks for pokered_color. This is the end of the bank so it won't
 ; cause data shifting.
 
+IF GEN_2_GRAPHICS
 CenterMonNameAndPlaceString:
 	call CenterMonName
 	jp PlaceString
@@ -8777,7 +8778,6 @@ LoadMonBackSpriteHook:
 	ld c,a
 	jp LoadUncompressedSpriteData
 
-IF GEN_2_GRAPHICS
 PrintEXPBarAt1711
 	coord de, 17, 11
 PrintEXPBar:
