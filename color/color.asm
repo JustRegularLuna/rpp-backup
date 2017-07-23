@@ -28,8 +28,56 @@ SetPal_BattleBlack:
 	ld [rSVBK],a
 	ret
 
-; Set proper palettes for pokemon/trainers
+
+; This is almost identical to SetPal_Battle, but it's specifically called after the player
+; and enemy scroll in, not at other times. The only difference is the timing of when it
+; requests a palette update.
+SetPal_BattleAfterBlack:
+	call SetPal_Battle_Common
+
+	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
+	; from appearing on player/enemy silhouettes.
+	ld a,[rLCDC]
+	and rLCDC_ENABLE_MASK
+	jr z,.doneDelay
+	ld c,3
+	call DelayFrames
+.doneDelay
+
+	; Update palettes (AFTER frame delay, so the tilemap is updated after player/enemy
+	; scroll in)
+	ld a,2
+	ld [rSVBK],a
+	ld a,1
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
+	ld [rSVBK],a
+	ret
+
+; Set proper palettes for pokemon/trainers. Called a lot during battle, like when the
+; active pokemon changes.
 SetPal_Battle:
+	call SetPal_Battle_Common
+
+	; Update palettes (BEFORE frame delay, so lifebars get updated snappily)
+	ld a,2
+	ld [rSVBK],a
+	ld a,1
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
+	ld [rSVBK],a
+
+	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
+	; from appearing after closing pokemon menu.
+	ld a,[rLCDC]
+	and rLCDC_ENABLE_MASK
+	jr z,.doneDelay
+	ld c,3
+	call DelayFrames
+.doneDelay
+	ret
+
+SetPal_Battle_Common:
  	ld a, [wPlayerBattleStatus3]
 	bit Transformed,a
 	jr z,.getBattleMonPal
@@ -163,22 +211,11 @@ ENDC
 	xor a
 	ld [W2_UseOBP1],a
 
-	ld a,1
-	ld [W2_ForceBGPUpdate],a ; Palettes must be redrawn
-	ld [W2_ForceOBPUpdate],a
+	xor a
 	ld [rSVBK],a
 
 	ld a,SET_PAL_BATTLE
 	ld [wDefaultPaletteCommand],a
-
-	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
-	; from showing for a split second sometimes...
-	ld a,[rLCDC]
-	and rLCDC_ENABLE_MASK
-	jr z,.doneDelay
-	ld c,3
-	call DelayFrames
-.doneDelay
 
 	ret
 

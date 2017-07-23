@@ -54,8 +54,9 @@ SetPalFunctions:
 	dw SetPal_GameFreakIntro
 	dw SetPal_TrainerCard
 	; Past here are codes which didn't previously exist.
-	dw SetPal_OakIntro	; Set prof oak's color
-	dw SetPal_NameEntry	; Name entry (partially replaces 08)
+	dw SetPal_OakIntro	   ; Set prof oak's color
+	dw SetPal_NameEntry	   ; Name entry (partially replaces 08)
+	dw SetPal_BattleAfterBlack ; Like SetPal_Battle but specifically for clearing the black palettes
 
 ; HAXed to give trainers palettes independantly
 ; Also skips the "transform" check, caller does that instead
