@@ -110,7 +110,7 @@ LoadTilesetPalette:
 
 	; Check for celadon mart roof (make the "outside" blue)
 	ld a,b
-	cp $7e
+	cp CELADON_MART_ROOF
 	jr nz,.notCeladonRoof
 	ld a,BLUE
 	ld hl,W2_TilesetPaletteMap + $4b
@@ -122,14 +122,14 @@ LoadTilesetPalette:
 .notCeladonRoof
 	; Check for celadon 3rd floor (fix miscoloration on counter)
 	ld a,b
-	cp $7c
+	cp CELADON_MART_3
 	jr nz,.notCeladon3rd
 	ld hl,W2_TilesetPaletteMap + $37
 	ld [hl],BROWN
 .notCeladon3rd
 	; Check for celadon 1st floor (change bench color from blue to yellow)
 	ld a,b
-	cp $7a
+	cp CELADON_MART_1
 	jr nz,.notCeladon1st
 	ld hl,W2_TilesetPaletteMap + $07
 	ld a,YELLOW
