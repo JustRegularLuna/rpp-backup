@@ -262,7 +262,10 @@ endr
 	ld a,[H_SPTEMP+1]
 	ld l,a
 	ld sp,hl
-	ret
+
+	; Restore ROM bank (we obviously can't do that here, so jump to bank 0)
+	ld a,[H_LOADEDROMBANK]
+	jp SetRomBank
 
 
 ; Called when scrolling the screen vertically (at vblank)
