@@ -1,4 +1,4 @@
-INCLUDE "color/data/mappalettes.asm"
+INCLUDE "color/data/map_palettes.asm"
 INCLUDE "color/data/map_palette_sets.asm"
 INCLUDE "color/data/map_palette_assignments.asm"
 INCLUDE "color/data/roofpalettes.asm"

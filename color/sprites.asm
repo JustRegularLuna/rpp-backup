@@ -19,12 +19,12 @@ SPR_PAL_BROWN	EQU 3
 
 LoadOverworldSpritePalettes:
 	ld hl,SpritePalettes
-	jr LoadPaletteData
+	jr LoadSpritePaletteData
 
 LoadAttackSpritePalettes:
 	ld hl,AttackSpritePalettes
 
-LoadPaletteData:
+LoadSpritePaletteData:
 	ld a,[rSVBK]
 	ld b,a
 	ld a,2

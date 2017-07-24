@@ -581,8 +581,7 @@ ENDC
 	ld [rSVBK],a
 	ret
 
-; used mostly for menus and the Oak intro
-; Pokedex screen
+; used mostly for menus and the Oak intro, pokedex screen
 SetPal_Generic:
 	ld a,2
 	ld [rSVBK],a
@@ -790,8 +789,8 @@ SetPal_GameFreakIntro:
 	ld a,$02
 	ld [rSVBK],a
 
-	; Load default palettes
-	ld hl,MapPalettes
+	; Load "INTRO_GRAY" palette from map_palettes.asm
+	ld hl, MapPalettes + INTRO_GRAY*4
 	ld a, BANK(MapPalettes)
 	ld de,W2_BgPaletteData
 	ld bc, $08
@@ -856,11 +855,11 @@ SetPal_TrainerCard:
 	callba LoadSGBPalette
 
 	; Red's palette
-	IF GEN_2_GRAPHICS
-		ld d, PAL_HERO
-	ELSE
-		ld d, PAL_REDMON
-	ENDC
+IF GEN_2_GRAPHICS
+	ld d, PAL_HERO
+ELSE
+	ld d, PAL_REDMON
+ENDC
 	ld e,4
 	callba LoadSGBPalette
 

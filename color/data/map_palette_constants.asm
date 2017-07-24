@@ -1,5 +1,5 @@
-; Palettes 22 - 3F are apparently unused, completely black palette entries
-const_value = 1
+const_value = 0
+	const INTRO_GRAY        ; 00: used only when booting up the game
 	const OUTDOOR_GRAY      ; 01
 	const OUTDOOR_RED       ; 02
 	const OUTDOOR_GREEN     ; 03
@@ -34,6 +34,8 @@ const_value = 1
 	const FOREST_ROCKS      ; 20
 	const FOREST_TREES      ; 21
 	const ALT_TEXTBOX_PAL   ; 22: used in areas with skeleton pokemon
+
+	; These are unused
 	const MAP_PALETTE_23    ; 23
 	const MAP_PALETTE_24    ; 24
 	const MAP_PALETTE_25    ; 25

@@ -1,5 +1,5 @@
 ; $60 bytes for each tileset. Each byte is the palette number for a tile.
-; Remaining $a0 tiles aren't part of the tileset and are set to zero.
+; Remaining $a0 tiles aren't part of the tileset and are set to 7 (text palette).
 ; Refer to MapPaletteSets for clarification on specific colors
 ; Each row of entries corresponds to a row of tiles on the tileset image
 MapPaletteAssignments:

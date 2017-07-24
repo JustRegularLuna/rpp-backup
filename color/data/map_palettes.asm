@@ -1,10 +1,8 @@
 ; Palettes to be used by various maps.
-; Each byte in mappalettesets.bin refers to one of these palettes.
-
-; Viridian forest sand candidate: RGB 31,31,19
+; Each byte in map_palette_sets.asm refers to one of these palettes.
 
 MapPalettes:
-; 0x00
+; 0x00: GAMEFREAK_GRAY
 	RGB 31,31,31
 	RGB 21,21,21
 	RGB 12,12,12
