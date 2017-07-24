@@ -12,7 +12,7 @@ LoadTilesetPalette:
 	ld d,a
 	xor a
 	ld [rSVBK],a
-	ld a,[wCurMapTileset] ; Located in wram bank 0
+	ld a,[wCurMapTileset] ; Located in wram bank 1
 	ld b,a
 	ld a,$02
 	ld [rSVBK],a
