@@ -26,9 +26,10 @@ LoadAttackSpritePalettes:
 
 LoadPaletteData:
 	ld a,[rSVBK]
-	push af
+	ld b,a
 	ld a,2
 	ld [rSVBK],a
+	push bc
 
 	ld de,W2_SprPaletteData
 	ld b,$40
@@ -255,9 +256,10 @@ LoadAnimationTilesetPalettes:
 ; Set all sprite palettes to not be colorized by "ColorNonOverworldSprites".
 ClearSpritePaletteMap:
 	ld a,[rSVBK]
-	push af
+	ld b,a
 	ld a,2
 	ld [rSVBK],a
+	push bc
 
 	ld hl, W2_SpritePaletteMap
 	ld b,$0 ; $100

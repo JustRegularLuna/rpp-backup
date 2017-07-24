@@ -2,9 +2,10 @@
 ; d = palette to load (see constants/palette_constants.), e = palette index
 LoadSGBPalette:
 	ld a,[rSVBK]
-	push af
+	ld b,a
 	ld a,2
 	ld [rSVBK],a
+	push bc
 
 	ld a,e
 	ld l,d
@@ -20,9 +21,10 @@ LoadSGBPalette:
 
 LoadSGBPalette_Sprite:
 	ld a,[rSVBK]
-	push af
+	ld b,a
 	ld a,2
 	ld [rSVBK],a
+	push bc
 
 	ld a,e
 	ld l,d
