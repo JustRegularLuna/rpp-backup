@@ -7,6 +7,21 @@
 ; suitable.
 LoadPartyPokeballGfx:
 	CALL_INDIRECT LoadOverworldSpritePalettes
+
+	ld a,2
+	ld [rSVBK],a
+
+	; Set the palette the pokeball sprite uses
+	ld hl,W2_SpritePaletteMap+$31
+	xor a ; SPR_PAL_ORANGE
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+
+	xor a
+	ld [rSVBK],a
+
 	jp LoadPartyPokeballGfx_orig
 
 
