@@ -465,7 +465,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db SPR_PAL_BROWN
 
 	; 0x40: SPRITE_PAPER_SHEET
-	db SPR_PAL_ORANGE
+	db SPR_PAL_BROWN
 
 	; 0x41: SPRITE_BOOK_MAP_DEX
 	db SPR_PAL_ORANGE
