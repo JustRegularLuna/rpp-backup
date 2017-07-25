@@ -773,7 +773,7 @@ INCLUDE "engine/battle/moveEffects/heal_effect.asm"
 INCLUDE "engine/battle/moveEffects/transform_effect.asm"
 INCLUDE "engine/battle/moveEffects/reflect_light_screen_effect.asm"
 IF GEN_2_GRAPHICS
-INCLUDE "engine/battle/draw_hud_pokeball_gfx_2.asm"
+INCLUDE "color/draw_hud_pokeball_gfx.asm"
 ENDC
 
 
@@ -1404,7 +1404,7 @@ INCLUDE "engine/menu/diploma.asm"
 INCLUDE "engine/overworld/trainers.asm"
 
 IF GEN_2_GRAPHICS
-INCLUDE "engine/battle/exp_bar.asm"
+INCLUDE "color/exp_bar.asm"
 ENDC
 
 
