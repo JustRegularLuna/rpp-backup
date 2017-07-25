@@ -772,9 +772,8 @@ INCLUDE "engine/evos_moves.asm"
 INCLUDE "engine/battle/moveEffects/heal_effect.asm"
 INCLUDE "engine/battle/moveEffects/transform_effect.asm"
 INCLUDE "engine/battle/moveEffects/reflect_light_screen_effect.asm"
-IF GEN_2_GRAPHICS
+
 INCLUDE "color/draw_hud_pokeball_gfx.asm"
-ENDC
 
 
 SECTION "bankF",ROMX,BANK[$F]
