@@ -396,7 +396,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x29: SPRITE_NURSE
-	db SPR_PAL_BLUE
+	db SPR_PAL_ORANGE
 
 	; 0x2a: SPRITE_CABLE_CLUB_WOMAN
 	db SPR_PAL_GREEN
