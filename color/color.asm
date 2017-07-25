@@ -205,12 +205,6 @@ ENDC
 	ld a,3
 	ld [W2_StaticPaletteMapChanged],a
 
-	; Restore sprite palettes used by pokeballs
-	CALL_INDIRECT LoadOverworldSpritePalettes
-
-	xor a
-	ld [W2_UseOBP1],a
-
 	xor a
 	ld [rSVBK],a
 

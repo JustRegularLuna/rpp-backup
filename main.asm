@@ -1876,6 +1876,7 @@ BlackTile:
 	ENDR
 BlackTileEnd:
 
+INCLUDE "color/ghost_marowak_anim.asm"
 INCLUDE "color/color.asm"
 
 

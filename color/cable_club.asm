@@ -83,7 +83,9 @@ PrintWaitingText:
 	jpab PrintWaitingText_orig
 
 
-; Called by above functions, loads colors for pokeballs at battle start and end.
+; Called by above functions, loads sprite palette map for pokeballs at battle start and
+; end. Don't need to load the palettes themselves since that's handled in
+; color/draw_hud_pokeball_gfx.asm.
 LoadLinkBattlePokeballColors:
 	ld a,2
 	ld [rSVBK],a
@@ -95,9 +97,6 @@ LoadLinkBattlePokeballColors:
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a
-
-	; Load the overworld sprite palettes for pokeball coloring
-	callab LoadOverworldSpritePalettes
 
 	xor a
 	ld [rSVBK],a

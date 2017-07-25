@@ -1,3 +1,17 @@
+; Hooks for engine/battle/draw_hud_pokeball_gfx.asm
+
+
+; Called whenever the pokeball graphics for listing your party are loaded.
+; Also need to load the palettes for them.
+; Note: this uses overworld palette 0, but palette 2 of the attack palettes would also be
+; suitable.
+LoadPartyPokeballGfx:
+	CALL_INDIRECT LoadOverworldSpritePalettes
+	jp LoadPartyPokeballGfx_orig
+
+
+IF GEN_2_GRAPHICS
+
 PlayerHUDHAX:
 	ld hl, PlayerHUDTileMap
 	jp PlayerHUDUpdateDone
@@ -30,3 +44,5 @@ EnemyHUDHAX:
 .notWildBattle
 	ld de, $0001
 	jp EnemyHUDUpdateDone
+
+ENDC
