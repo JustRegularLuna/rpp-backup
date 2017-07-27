@@ -1,4 +1,4 @@
-; Hook for color/ghost_marowak_anim.asm
+; Hook for engine/battle/ghost_marowak_anim.asm
 
 CopyMonPicFromBGToSpriteVRAM:
 	; Copy enemy palette to sprite palette 4
