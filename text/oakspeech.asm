@@ -1,51 +1,46 @@
 _OakSpeechText1::
-	text "Hello! Welcome to"
-	line "this updated Red"
-	cont "Version!"
+	text "Hello there!"
+	line "Welcome to the"
+	cont "world of #mon!"
 
-	para "You've probably"
-	line "heard of me, I'm"
-	cont "Prof. Oak."
-	
-	para "This hack was"
-	line "created by"
-	cont "Romhacker Mateo."
-	
-	para "It has a lot of"
-	line "new features that"
-	cont "weren't in Gen 1,"
-	cont "and fixes a lot"
-	cont "of bugs from the"
-	cont "original games."
-	
-	para "It hasn't fixed"
-	line "everything yet,"
-	cont "but it will"
-	cont "eventually."
+	para "My name is Oak!"
+	line "People call me"
+	cont "the #mon Prof!"
 	prompt
 
 _OakSpeechText2A::
-	text "As you can see,"
-	line "there are several"
-	cont "new #mon, too.@@"
+	text "This world is"
+	line "inhabited by"
+	cont "creatures called"
+	cont "#mon!@@"
 
 _OakSpeechText2B::
-	text $51,"Most are new"
-	line "evolved forms,"
-	cont "others are just"
-	cont "there for fun."
-	
-	para "Where do you find"
-	line "them?"
+	text $51,"People and #mon"
+	line "live together by"
 
-	para "I guess you'll"
-	line "have to play and"
-	cont "find out!"
+	para "supporting each"
+	line "other."
+
+	para "Some people play"
+	line "with #mon,"
+	cont "some battle with"
+	cont "them."
+
+	para "But we don't know"
+	line "everything about"
+	cont "#mon yet."
+
+	para "There are still"
+	line "many mysteries to"
+	cont "solve."
+
+	para "That's why I study"
+	line "#mon daily."
 	prompt
 
 _IntroducePlayerText::
-	text "But first, what's"
-	line "your name?"
+	text "Now tell me, what"
+	line "is your name?"
 	prompt
 
 _IntroduceRivalText::
