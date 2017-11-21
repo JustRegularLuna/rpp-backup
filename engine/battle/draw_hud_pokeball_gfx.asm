@@ -17,7 +17,7 @@ LoadPartyPokeballGfx:
 	jp CopyVideoData
 
 SetupOwnPartyPokeballs:
-	call PlacePlayerHUDTiles
+	call PlayerHUDHAX
 	ld hl, wPartyMon1
 	ld de, wPartyCount
 	call SetupPokeballs
@@ -118,6 +118,7 @@ WritePokeballOAMData:
 
 PlacePlayerHUDTiles:
 	ld hl, PlayerBattleHUDGraphicsTiles
+PlayerHUDUpdateDone:
 	ld de, wHUDGraphicsTiles
 	ld bc, $3
 	call CopyData
@@ -137,9 +138,7 @@ PlaceEnemyHUDTiles:
 	ld bc, $3
 	call CopyData
 	coord hl, 1, 2
-	ld de, $1
-	jp EnemyHealthBarUpdated
-	jr PlaceHUDTiles
+	jp EnemyHUDHAX
 
 EnemyBattleHUDGraphicsTiles:
 ; The tile numbers for specific parts of the battle display for the enemy
@@ -150,6 +149,7 @@ EnemyBattleHUDGraphicsTiles:
 PlaceHUDTiles:
 	ld [hl], $73
 HealthBarUpdateDone:
+;EnemyHUDUpdateDone:
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	ld a, [wHUDGraphicsTiles + 1] ; leftmost tile

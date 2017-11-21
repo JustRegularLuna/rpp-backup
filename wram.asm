@@ -2134,10 +2134,10 @@ wMonHGrowthRate:: ; d0cb
 
 wMonHLearnset:: ; d0cc
 ; bit field
-    flag_array 50 + 5
+	flag_array 50 + 5
 
 wMonHPicBank:: ; d0d3
-    ds 1
+	ds 1
 
 wSavedTilesetType:: ; d0d4
 ; saved at the start of a battle and then written back at the end of the battle
@@ -3398,11 +3398,10 @@ wBoxMonNicksEnd:: ; dee2
 
 wBoxDataEnd::
 
-
-wEXPBarPixelLength:: ds 1
-wEXPBarBaseEXP:: ds 3
-wEXPBarCurEXP:: ds 3
-wEXPBarNeededEXP:: ds 3
+wEXPBarPixelLength::  ds 1
+wEXPBarBaseEXP::      ds 3
+wEXPBarCurEXP::       ds 3
+wEXPBarNeededEXP::    ds 3
 wEXPBarKeepFullFlag:: ds 1
 
 

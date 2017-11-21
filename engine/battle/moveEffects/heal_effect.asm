@@ -105,7 +105,7 @@ HealEffect_:
 	xor a
 .updateHPBar
 	ld [wHPBarType], a
-	predef UpdateHPBar2
+	predef UpdateHPBar_Hook
 	ld hl, DrawHUDsAndHPBars
 	call BankswitchEtoF
 	ld hl, RegainedHealthText

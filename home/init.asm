@@ -1,6 +1,7 @@
 SoftReset::
 	call StopAllSounds
 	call GBPalWhiteOut
+	callba ResetPalettes
 	ld c, 32
 	call DelayFrames
 	; fallthrough

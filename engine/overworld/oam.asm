@@ -129,9 +129,7 @@ PrepareOAMData:
 	ld a, [hSpritePriority]
 	or [hl]
 .skipPriority
-	inc hl
-	ld [de], a
-	inc e
+	call _ColorOverworldSprites	; HAX
 	bit 0, a ; OAMFLAG_ENDOFDATA
 	jr z, .tileLoop
 

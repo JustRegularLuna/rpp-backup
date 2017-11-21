@@ -1,3 +1,6 @@
+; HAX: This is the super gameboy palette command handler.
+; I hijaxed a jump table so I can reimplement all SGB colorization functions.
+; Value of b is the "command". Jumps to function "XX" of SetPalFunctions where X is the command.
 _RunPaletteCommand:
 	call GetPredefRegisters
 	ld a, b
@@ -15,276 +18,31 @@ _RunPaletteCommand:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, SendSGBPackets
+
+	;ld de, SetPalettesAndMaps ; $6156
+
+	ld de,PalCmdRet
 	push de
-	jp [hl]
 
-SetPal_BattleBlack:
-	ld hl, PalPacket_Black
-	ld de, BlkPacket_Battle
+	;di
+ 	jp [hl]
+
+PalCmdRet:
+	;ei
 	ret
 
-; uses PalPacket_Empty to build a packet based on mon IDs and health color
-SetPal_Battle:
-	ld hl, PalPacket_Empty
-	ld de, wPalPacket
-	ld bc, $10
-	call CopyData
-	ld hl, wShinyMonFlag
-	res 0, [hl]
-	ld a, [wBattleMonSpecies]
-	and a
-	jr z, .getPALID
-	; is mon shiny?
-	ld b, BANK(IsMonShiny)
-	ld hl, IsMonShiny
-	ld de, wBattleMonDVs
-	call Bankswitch
-	jr z, .getPALID
-	ld hl, wShinyMonFlag
-	set 0, [hl]
-.getPALID
-	ld a, [wPlayerBattleStatus3]
-	ld hl, wBattleMonSpecies
-	call DeterminePaletteIDBack
-	ld b, a
-	push bc
-	ld hl, wShinyMonFlag
-	res 0, [hl]
-	ld a, [wEnemyMonSpecies2]
-	and a
-	jr z, .getPALID2
-	; is mon shiny?
-	ld b, BANK(IsMonShiny)
-	ld hl, IsMonShiny
-	ld de, wEnemyMonDVs
-	call Bankswitch
-	jr z, .getPALID2
-	ld hl, wShinyMonFlag
-	set 0, [hl]
-.getPALID2
-	ld a, [wEnemyBattleStatus3]
-	ld hl, wEnemyMonSpecies2
-	call DeterminePaletteID
-	pop bc
-	ld c, a
-	ld hl, wPalPacket + 1
-	ld a, [wPlayerHPBarColor]
-	add PAL_GREENBAR
-	ld [hli], a
-	inc hl
-	ld a, [wEnemyHPBarColor]
-	add PAL_GREENBAR
-	ld [hli], a
-	inc hl
-	ld a, b
-	ld [hli], a
-	inc hl
-	ld a, c
-	ld [hl], a
-	ld hl, wPalPacket
-	ld de, BlkPacket_Battle
-	ld a, SET_PAL_BATTLE
-	ld [wDefaultPaletteCommand], a
-	ret
 
-SetPal_TownMap:
-	ld hl, PalPacket_TownMap
-	ld de, BlkPacket_WholeScreen
-	ret
+; HAX: Custom functions squeezed in here
+; Before, PalCmd functions were here
 
-; uses PalPacket_Empty to build a packet based the mon ID
-SetPal_StatusScreen:
-	ld hl, PalPacket_Empty
-	ld de, wPalPacket
-	ld bc, $10
-	call CopyData
-	ld a, [wcf91]
-	cp NUM_POKEMON + 1
-	jr c, .pokemon
-	ld a, $1 ; not pokemon
-.pokemon
-	call DeterminePaletteIDOutOfBattle
-	push af
-	ld hl, wPalPacket + 1
-	ld a, [wStatusScreenHPBarColor]
-	add PAL_GREENBAR
-	ld [hli], a
-	inc hl
-	pop af
-	ld [hl], a
-	ld hl, wPalPacket
-	ld de, BlkPacket_StatusScreen
-	ret
-
-SetPal_PartyMenu:
-	ld hl, PalPacket_PartyMenu
-	ld de, wPartyMenuBlkPacket
-	ret
-
-SetPal_Pokedex:
-	ld hl, PalPacket_Pokedex
-	ld de, wPalPacket
-	ld bc, $10
-	call CopyData
-	ld a, [wcf91]
-	call DeterminePaletteIDOutOfBattle
-	ld hl, wPalPacket + 3
-	ld [hl], a
-	ld hl, wPalPacket
-	ld de, BlkPacket_Pokedex
-	ret
-
-SetPal_Slots:
-	ld hl, PalPacket_Slots
-	ld de, BlkPacket_Slots
-	ret
-
-SetPal_TitleScreen:
-	ld hl, PalPacket_Titlescreen
-	ld de, BlkPacket_Titlescreen
-	ret
-
-; used mostly for menus and the Oak intro
-SetPal_Generic:
-	ld hl, PalPacket_Generic
-	ld de, BlkPacket_WholeScreen
-	ret
-
-SetPal_NidorinoIntro:
-	ld hl, PalPacket_NidorinoIntro
-	ld de, BlkPacket_NidorinoIntro
-	ret
-
-SetPal_GameFreakIntro:
-	ld hl, PalPacket_GameFreakIntro
-	ld de, BlkPacket_GameFreakIntro
-	ld a, SET_PAL_GENERIC
-	ld [wDefaultPaletteCommand], a
-	ret
-
-; uses PalPacket_Empty to build a packet based on the current map
-SetPal_Overworld:
-	ld hl, PalPacket_Empty
-	ld de, wPalPacket
-	ld bc, $10
-	call CopyData
-	ld a, [wCurMapTileset]
-	cp CEMETERY
-	jr z, .PokemonTowerOrAgatha
-	cp CAVERN
-	jr z, .caveOrBruno
-	cp FERRY
-	jr z, .townOrRoute
-	cp SAFARI
-	jr z, .townOrRoute
-	cp ICE_CAVERN
-	jr z, .icePath
-	ld a, [wCurMap]
-	cp REDS_HOUSE_1F
-	jr c, .townOrRoute
-	cp VIRIDIAN_FOREST
-	jr z, .caveOrBruno
-	cp INSIDE_FERRY
-	jr z, .townOrRoute
-	cp NAVEL_ROCK_OUTSIDE
-	jr z, .townOrRoute
-	cp LORELEIS_ROOM
-	jr z, .Lorelei
-	cp BRUNOS_ROOM
-	jr z, .Bruno
-; if it wasn't a special map or tileset, fallthrough to normalDungeonOrBuilding
-.normalDungeonOrBuilding
-	ld a, [wLastMap] ; town or route that current dungeon or building is located
-.townOrRoute
-	cp SAFFRON_CITY + 1
-	jr c, .town
-	ld a, PAL_ROUTE - 1
-.town
-	inc a ; a town's palette ID is its map ID + 1
-	ld hl, wPalPacket + 1
-	ld [hld], a
-	ld de, BlkPacket_WholeScreen
-	ld a, SET_PAL_OVERWORLD
-	ld [wDefaultPaletteCommand], a
-	ret
-.PokemonTowerOrAgatha
-	ld a, PAL_GREYMON - 1
-	jr .town
-.caveOrBruno
-	ld a, PAL_CAVE - 1
-	jr .town
-.icePath
-	ld a, PAL_CYANMON - 1
-	jr .town
-.Bruno
-	ld a, PAL_BROWNMON - 1
-	jr .town
-.Lorelei
-	xor a
-	jr .town
-
-; used when a Pokemon is the only thing on the screen
-; such as evolution, trading and the Hall of Fame
-SetPal_PokemonWholeScreen:
-	push bc
-	ld hl, PalPacket_Empty
-	ld de, wPalPacket
-	ld bc, $10
-	call CopyData
-	pop bc
-	ld a, c
-	and a
-	ld a, PAL_BLACK
-	jr nz, .next
-	ld a, [wWholeScreenPaletteMonSpecies]
-	call DeterminePaletteIDOutOfBattle
-.next
-	ld [wPalPacket + 1], a
-	ld hl, wPalPacket
-	ld de, BlkPacket_WholeScreen
-	ret
-
-SetPal_TrainerCard:
-	ld hl, BlkPacket_TrainerCard
-	ld de, wTrainerCardBlkPacket
-	ld bc, $40
-	call CopyData
-	ld de, BadgeBlkDataLengths
-	ld hl, wTrainerCardBlkPacket + 2
-	ld a, [wObtainedKantoBadges]
-	ld c, 8
-.badgeLoop
-	srl a
-	push af
-	jr c, .haveBadge
-; The player doens't have the badge, so zero the badge's blk data.
-	push bc
-	ld a, [de]
-	ld c, a
-	xor a
-.zeroBadgeDataLoop
-	ld [hli], a
-	dec c
-	jr nz, .zeroBadgeDataLoop
-	pop bc
-	jr .nextBadge
-.haveBadge
-; The player does have the badge, so skip past the badge's blk data.
-	ld a, [de]
-.skipBadgeDataLoop
-	inc hl
+WaitForVBlank:
+	ld a,[rSTAT]
+	and a,3
 	dec a
-	jr nz, .skipBadgeDataLoop
-.nextBadge
-	pop af
-	inc de
-	dec c
-	jr nz, .badgeLoop
-	ld hl, PalPacket_TrainerCard
-	ld de, wTrainerCardBlkPacket
-	ret
+	jr nz,WaitForVBlank
+ 	ret
 
+; Palette commands are moved to the end of the bank
 SetPalFunctions:
 	dw SetPal_BattleBlack
 	dw SetPal_Battle
@@ -300,48 +58,42 @@ SetPalFunctions:
 	dw SetPal_PokemonWholeScreen
 	dw SetPal_GameFreakIntro
 	dw SetPal_TrainerCard
+	; Past here are codes which didn't previously exist.
+	dw PalCmd_0e	; Set prof oak's color
+	dw PalCmd_0f	; Name entry (partially replaces 08)
 
-; The length of the blk data of each badge on the Trainer Card.
-; The Rainbow Badge has 3 entries because of its many colors.
-BadgeBlkDataLengths:
-	db 6     ; Boulder Badge
-	db 6     ; Cascade Badge
-	db 6     ; Thunder Badge
-	db 6 * 3 ; Rainbow Badge
-	db 6     ; Soul Badge
-	db 6     ; Marsh Badge
-	db 6     ; Volcano Badge
-	db 6     ; Earth Badge
-
+; HAXed to give trainers palettes independantly
 DeterminePaletteID:
 	bit Transformed, a ; a is battle status 3
 	ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
 	ret nz
 	ld a, [hl]
-DeterminePaletteIDOutOfBattle:
+DeterminePaletteIDOutOfBattle: ; DeterminePaletteID without status check
 	ld [wd11e], a
 	and a
 	jr nz, GetMonPalette
 	ld a, [wTrainerPicID]
 	ld hl, TrainerPalletes
 	jr GetPaletteID
+
 DeterminePaletteIDBack:
-	bit 3, a
+	bit Transformed, a
 	jr z, .skip
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Species
 	ld a, [wPlayerMonNumber]
-	ld bc, $2C
+	ld bc, wPartyMon2 - wPartyMon1
 	call AddNTimes
 .skip
 	ld a, [hl]
 	ld [wd11e],a
 	and a
-	ld a, PAL_MEWMON
+	ld a, PAL_MEWMON ; PAL_HERO ?
 	ret z
 GetMonPalette:
 	push bc
-	predef IndexToPokedex
+	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
 	pop bc
+
 	ld a, [wd11e]
 	ld hl, MonsterPalettes
 	ld e, a
@@ -370,6 +122,14 @@ GetPaletteID:
 	add hl, de
 	ld a, [hl]
 	ret
+
+
+	;ORG $1c, $5f8f
+; each byte is the number of loops to make in .asm_71f5b for each badge
+LoopCounts_71f8f: ; 71f8f (1c:5f8f)
+	db $06,$06,$06,$12,$06,$06,$06,$06
+
+	;ORG $1c, $5fb6
 
 InitPartyMenuBlkPacket:
 	ld hl, BlkPacket_PartyMenu
@@ -470,56 +230,24 @@ SendSGBPacket:
 ; else send 16 more bytes
 	jr .loop2
 
+; This function is HAXed to always set the SGB Flag.
+; This helps with palette flashing effects in battle.
+; It also lets me hijack RunPaletteCommand.
 LoadSGB:
 	xor a
 	ld [wOnSGB], a
 	call CheckSGB
-	ret nc
-	ld a, 1
+	;ret nc
+	nop
+	ld a, $1
 	ld [wOnSGB], a
 	ld a, [wGBC]
 	and a
-	jr z, .notGBC
+	;jr z, .asm_7203f
+	nop
+	nop
 	ret
-.notGBC
-	di
-	call PrepareSuperNintendoVRAMTransfer
-	ei
-	ld a, 1
-	ld [wCopyingSGBTileData], a
-	ld de, ChrTrnPacket
-	ld hl, SGBBorderGraphics
-	call CopyGfxToSuperNintendoVRAM
-	xor a
-	ld [wCopyingSGBTileData], a
-	ld de, PctTrnPacket
-	ld hl, BorderPalettes
-	call CopyGfxToSuperNintendoVRAM
-	xor a
-	ld [wCopyingSGBTileData], a
-	ld de, PalTrnPacket
-	ld hl, SuperPalettes
-	call CopyGfxToSuperNintendoVRAM
-	call ClearVram
-	ld hl, MaskEnCancelPacket
-	jp SendSGBPacket
-
-PrepareSuperNintendoVRAMTransfer:
-	ld hl, .packetPointers
-	ld c, 9
-.loop
-	push bc
-	ld a, [hli]
-	push hl
-	ld h, [hl]
-	ld l, a
-	call SendSGBPacket
-	pop hl
-	inc hl
-	pop bc
-	dec c
-	jr nz, .loop
-	ret
+	; Deleted the end of this function which loads the SGB border and stuff
 
 .packetPointers
 ; Only the first packet is needed.
@@ -590,45 +318,6 @@ SendMltReq1Packet:
 	call SendSGBPacket
 	jp Wait7000
 
-CopyGfxToSuperNintendoVRAM:
-	di
-	push de
-	call DisableLCD
-	ld a, $e4
-	ld [rBGP], a
-	ld de, vChars1
-	ld a, [wCopyingSGBTileData]
-	and a
-	jr z, .notCopyingTileData
-	call CopySGBBorderTiles
-	jr .next
-.notCopyingTileData
-	ld bc, $1000
-	call CopyData
-.next
-	ld hl, vBGMap0
-	ld de, $c
-	ld a, $80
-	ld c, $d
-.loop
-	ld b, $14
-.innerLoop
-	ld [hli], a
-	inc a
-	dec b
-	jr nz, .innerLoop
-	add hl, de
-	dec c
-	jr nz, .loop
-	ld a, $e3
-	ld [rLCDC], a
-	pop hl
-	call SendSGBPacket
-	xor a
-	ld [rBGP], a
-	ei
-	ret
-
 Wait7000:
 ; Each loop takes 9 cycles so this routine actually waits 63000 cycles.
 	ld de, 7000
@@ -642,82 +331,8 @@ Wait7000:
 	jr nz, .loop
 	ret
 
-SendSGBPackets:
-	ld a, [wGBC]
-	and a
-	jr z, .notGBC
-	push de
-	call InitGBCPalettes
-	pop hl
-	call EmptyFunc5
-	ret
-.notGBC
-	push de
-	call SendSGBPacket
-	pop hl
-	jp SendSGBPacket
-
-InitGBCPalettes:
-	ld a, $80 ; index 0 with auto-increment
-	ld [rBGPI], a
-	inc hl
-	ld c, $20
-.loop
-	ld a, [hli]
-	inc hl
-	add a
-	add a
-	add a
-	ld de, SuperPalettes
-	add e
-	jr nc, .noCarry
-	inc d
-.noCarry
-	ld a, [de]
-	ld [rBGPD], a
-	dec c
-	jr nz, .loop
-	ret
-
-EmptyFunc5:
-	ret
-
-CopySGBBorderTiles:
-; SGB tile data is stored in a 4BPP planar format.
-; Each tile is 32 bytes. The first 16 bytes contain bit planes 1 and 2, while
-; the second 16 bytes contain bit planes 3 and 4.
-; This function converts 2BPP planar data into this format by mapping
-; 2BPP colors 0-3 to 4BPP colors 0-3. 4BPP colors 4-15 are not used.
-	ld b, 128
-
-.tileLoop
-
-; Copy bit planes 1 and 2 of the tile data.
-	ld c, 16
-.copyLoop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .copyLoop
-
-; Zero bit planes 3 and 4.
-	ld c, 16
-	xor a
-.zeroLoop
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .zeroLoop
-
-	dec b
-	jr nz, .tileLoop
-	ret
-
 INCLUDE "data/sgb_packets.asm"
 
 INCLUDE "data/mon_palettes.asm"
 
-INCLUDE "data/super_palettes.asm"
-
-INCLUDE "data/sgb_border.asm"
+;INCLUDE "data/sgb_border.asm"

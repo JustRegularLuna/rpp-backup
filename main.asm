@@ -83,11 +83,65 @@ INCLUDE "engine/remove_pokemon.asm"
 
 INCLUDE "engine/display_pokedex.asm"
 
+; HAX functions for oak intro
+
+GetNidorinoPalID:
+	call ClearScreen
+	ld a, PAL_MEWMON ; PAL_PURPLEMON ; PAL_NIDORINO
+	jr GotPalID
+
+GetRedPalID:
+	call ClearScreen
+	ld a, PAL_MEWMON ; PAL_HERO
+	jr GotPalID
+
+GetRivalPalID:
+	call ClearScreen
+	ld a, PAL_MEWMON ; PAL_GARY1
+	jr GotPalID
+
+GotPalID:
+	ld e,0
+	ld d,a
+
+	ld a,2
+	ld [rSVBK],a
+	CALL_INDIRECT LoadSGBPalette
+	xor a
+	ld [rSVBK],a
+	ret
+
+LoadHPBarAndEXPBar:
+	ld de,HpBarAndStatusGraphics
+	ld hl,vChars2 + $620
+	ld bc,(BANK(HpBarAndStatusGraphics) << 8 | $1e)
+	call GoodCopyVideoData
+	ld de,EXPBarGraphics
+	ld hl,vChars1 + $400
+	ld bc,(BANK(EXPBarGraphics) << 8 | $9)
+GoodCopyVideoData:
+	ld a,[rLCDC]
+	bit 7,a ; is the LCD enabled?
+	jp nz, CopyVideoData ; if LCD is on, transfer during V-blank
+	ld a, b
+	push hl
+	push de
+	ld h, 0
+	ld l, c
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld b, h
+	ld c, l
+	pop hl
+	pop de
+	jp FarCopyData2 ; if LCD is off, transfer all at once
+
+
 SECTION "bank3",ROMX,BANK[$3]
 
 INCLUDE "engine/joypad.asm"
-
-INCLUDE "data/map_songs.asm"
 
 INCLUDE "data/map_header_banks.asm"
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -123,6 +177,8 @@ INCLUDE "engine/get_bag_item_quantity.asm"
 INCLUDE "engine/pathfinding.asm"
 INCLUDE "engine/hp_bar.asm"
 INCLUDE "engine/hidden_object_functions3.asm"
+INCLUDE "engine/hp_bar2.asm"
+
 
 SECTION "NPC Sprites 1", ROMX, BANK[NPC_SPRITES_1]
 RocketSprite:          INCBIN "gfx/sprites/rocket.2bpp"
@@ -155,12 +211,12 @@ PokemonLogoGraphics:            INCBIN "gfx/pokemon_logo.2bpp"
 FontGraphics:                   INCBIN "gfx/font.1bpp"
 FontGraphicsEnd:
 ABTiles:                        INCBIN "gfx/AB.2bpp"
-HpBarAndStatusGraphics:         INCBIN "gfx/hp_bar_and_status.2bpp"
+HpBarAndStatusGraphics:  INCBIN "gfx/hp_bar_and_status.2bpp"
 HpBarAndStatusGraphicsEnd:
-BattleHudTiles1:                INCBIN "gfx/battle_hud1.1bpp"
+BattleHudTiles1:         INCBIN "gfx/battle_hud1.1bpp"
 BattleHudTiles1End:
-BattleHudTiles2:                INCBIN "gfx/battle_hud2.1bpp"
-BattleHudTiles3:                INCBIN "gfx/battle_hud3.1bpp"
+BattleHudTiles2:         INCBIN "gfx/battle_hud2.1bpp"
+BattleHudTiles3:         INCBIN "gfx/battle_hud3.1bpp"
 BattleHudTiles3End:
 NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
@@ -195,7 +251,7 @@ INCLUDE "engine/battle/moveEffects/haze_effect.asm"
 INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/random.asm"
 
-EXPBarGraphics: INCBIN "gfx/exp_bar.h8.2bpp"
+EXPBarGraphics: INCBIN "gfx/exp_bar.2bpp"
 ShinySparkleGraphics: INCBIN "gfx/shiny_sparkle.2bpp"
 EXPBarShinySparkleGraphicsEnd:
 
@@ -248,6 +304,8 @@ INCLUDE "engine/overworld/emotion_bubbles.asm"
 INCLUDE "engine/evolve_trade.asm"
 INCLUDE "engine/battle/moveEffects/substitute_effect.asm"
 INCLUDE "engine/menu/pc.asm"
+
+INCLUDE "data/map_songs.asm" ; moved from bank 3
 
 
 SECTION "bank6",ROMX,BANK[$6]
@@ -818,232 +876,14 @@ INCLUDE "engine/battle/moveEffects/rage_effect.asm"
 INCLUDE "engine/battle/moveEffects/heal_effect.asm"
 INCLUDE "engine/battle/moveEffects/transform_effect.asm"
 INCLUDE "engine/battle/moveEffects/reflect_light_screen_effect.asm"
+INCLUDE "engine/battle/draw_hud_pokeball_gfx_2.asm"
 
 INCLUDE "engine/evos_moves.asm"
-
-
-EnemyHealthBarUpdated:
-	ld [hl], $72
-	ld a, [wIsInBattle]
-	dec a
-	jr nz, .noBattle
-	push hl
-	ld a, [wEnemyMonSpecies2]
-	ld [wd11e], a
-	ld hl, IndexToPokedex
-	ld b, BANK(IndexToPokedex)
-	call Bankswitch
-	ld a, [wd11e]
-	dec a
-	ld c, a
-	ld b, FLAG_TEST
-	ld hl, wPokedexOwned
-	predef FlagActionPredef
-	ld a, c
-	and a
-	jr z, .notOwned
-	coord hl, 1, 1
-	ld [hl], $E9
-.notOwned
-	pop hl
-.noBattle
-	ld de, $0001
-	jp HealthBarUpdateDone
 
 
 SECTION "bankF",ROMX,BANK[$F]
 
 INCLUDE "engine/battle/core.asm"
-
-LoadBackSpriteUnzoomed:
-	ld a, $66
-	ld de, vBackPic
-	push de
-	jp LoadUncompressedBackSprite
-	
-PrintEXPBar:
-	call CalcEXPBarPixelLength
-	ld a, [H_QUOTIENT + 3] ; pixel length
-	ld [wEXPBarPixelLength], a
-	ld b, a
-	ld c, $08
-	ld d, $08
-	coord hl, 17, 11
-.loop
-	ld a, b
-	sub c
-	jr nc, .skip
-	ld c, b
-	jr .loop
-.skip
-	ld b, a
-	ld a, $c0
-	add c
-.loop2
-	ld [hld], a
-	dec d
-	ret z
-	ld a, b
-	and a
-	jr nz, .loop
-	ld a, $c0
-	jr .loop2
-
-CalcEXPBarPixelLength:
-	ld hl, wEXPBarKeepFullFlag
-	bit 0, [hl]
-	jr z, .start
-	res 0, [hl]
-	ld a, $40
-	ld [H_QUOTIENT + 3], a
-	ret
-
-.start
-	; get the base exp needed for the current level
-	ld a, [wPlayerBattleStatus3]
-	ld hl, wBattleMonSpecies
-	bit 3, a
-	jr z, .skip
-	ld hl, wPartyMon1
-	call BattleMonPartyAttr
-.skip
-	ld a, [hl]
-	ld [wd0b5], a
-	call GetMonHeader
-	ld a, [wBattleMonLevel]
-	ld d, a
-	ld hl, CalcExperience
-	ld b, BANK(CalcExperience)
-	call Bankswitch
-	ld hl, H_MULTIPLICAND
-	ld de, wEXPBarBaseEXP
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	
-	; get the exp needed to gain a level
-	ld a, [wBattleMonLevel]
-	ld d, a
-	inc d
-	ld hl, CalcExperience
-	ld b, BANK(CalcExperience)
-	call Bankswitch
-	
-	; get the address of the active Pokemon's current experience
-	ld hl, wPartyMon1Exp
-	call BattleMonPartyAttr
-	
-	; current exp - base exp
-	ld b, h
-	ld c, l
-	ld hl, wEXPBarBaseEXP
-	ld de, wEXPBarCurEXP
-	call SubThreeByteNum
-	
-	; exp needed - base exp
-	ld bc, H_MULTIPLICAND
-	ld hl, wEXPBarBaseEXP
-	ld de, wEXPBarNeededEXP
-	call SubThreeByteNum
-	
-	; make the divisor an 8-bit number
-	ld hl, wEXPBarNeededEXP
-	ld de, wEXPBarCurEXP + 1
-	ld a, [hli]
-	and a
-	jr z, .twoBytes
-	ld a, [hli]
-	ld [hld], a
-	dec hl
-	ld a, [hli]
-	ld [hld], a
-	ld a, [de]
-	inc de
-	ld [de], a
-	dec de
-	dec de
-	ld a, [de]
-	inc de
-	ld [de], a
-	dec de
-	xor a
-	ld [hli], a
-	ld [de], a
-	inc de
-.twoBytes
-	ld a, [hl]
-	and a
-	jr z, .oneByte
-	srl a
-	ld [hli], a
-	ld a, [hl]
-	rr a
-	ld [hld], a
-	ld a, [de]
-	srl a
-	ld [de], a
-	inc de
-	ld a, [de]
-	rr a
-	ld [de], a
-	dec de
-	jr .twoBytes
-.oneByte
-
-	; current exp * (8 tiles * 8 pixels)
-	ld hl, H_MULTIPLICAND
-	ld de, wEXPBarCurEXP
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	ld [hl], a
-	ld a, $40
-	ld [H_MULTIPLIER], a
-	call Multiply
-	
-	; product / needed exp = pixel length
-	ld a, [wEXPBarNeededEXP + 2]
-	ld [H_DIVISOR], a
-	ld b, $04
-	jp Divide
-	
-; calculates the three byte number starting at [bc]
-; minus the three byte number starting at [hl]
-; and stores it into the three bytes starting at [de]
-; assumes that [hl] is smaller than [bc]
-SubThreeByteNum:
-	call .subByte
-	call .subByte
-.subByte
-	ld a, [bc]
-	inc bc
-	sub [hl]
-	inc hl
-	ld [de], a
-	jr nc, .noCarry
-	dec de
-	ld a, [de]
-	dec a
-	ld [de], a
-	inc de
-.noCarry
-	inc de
-	ret
-
-; return the address of the BattleMon's party struct attribute in hl
-BattleMonPartyAttr:
-	ld a, [wPlayerMonNumber]
-	ld bc, wPartyMon2 - wPartyMon1
-	jp AddNTimes
 
 	
 SECTION "bank10",ROMX,BANK[$10]
@@ -1598,77 +1438,6 @@ INCLUDE "engine/menu/diploma.asm"
 
 INCLUDE "engine/overworld/trainers.asm"
 
-AnimateEXPBarAgain:
-	call LoadMonData
-	call IsCurrentMonBattleMon
-	ret nz
-	xor a
-	ld [wEXPBarPixelLength], a
-	coord hl, 17, 11
-	ld a, $c0
-	ld c, $08
-.loop
-	ld [hld], a
-	dec c
-	jr nz, .loop
-AnimateEXPBar:
-	call LoadMonData
-	call IsCurrentMonBattleMon
-	ret nz
-	ld a, SFX_HEAL_HP
-	call PlaySoundWaitForCurrent
-	ld hl, CalcEXPBarPixelLength
-	ld b, BANK(CalcEXPBarPixelLength)
-	call Bankswitch
-	ld hl, wEXPBarPixelLength
-	ld a, [hl]
-	ld b, a
-	ld a, [H_QUOTIENT + 3]
-	ld [hl], a
-	sub b
-	jr z, .done
-	ld b, a
-	ld c, $08
-	coord hl, 17, 11
-.loop1
-	ld a, [hl]
-	cp $c8
-	jr nz, .loop2
-	dec hl
-	dec c
-	jr z, .done
-	jr .loop1
-.loop2
-	inc a
-	ld [hl], a
-	call DelayFrame
-	dec b
-	jr z, .done
-	jr .loop1
-.done
-	ld bc, $08
-	coord hl, 10, 11
-	ld de, wTileMapBackup + 10 + 11 * 20
-	call CopyData
-	ld c, $20
-	jp DelayFrames
-
-KeepEXPBarFull:
-	call IsCurrentMonBattleMon
-	ret nz
-	ld a, [wEXPBarKeepFullFlag]
-	set 0, a
-	ld [wEXPBarKeepFullFlag], a
-	ld a, [wCurEnemyLVL]
-	ret
-
-IsCurrentMonBattleMon:
-	ld a, [wPlayerMonNumber]
-	ld b, a
-	ld a, [wWhichPokemon]
-	cp b
-	ret
-
 IsMonShiny:
 ; Input: de = address in RAM for DVs
 ; Reset zero flag if mon is shiny
@@ -1838,7 +1607,9 @@ EnemyShinySparkleCoordsEnd:
 
 INCLUDE "engine/menu/item_descriptions.asm"
 
-	
+INCLUDE "engine/battle/exp_bar.asm"
+
+
 SECTION "bank16",ROMX,BANK[$16]
 
 INCLUDE "data/mapHeaders/route6.asm"
@@ -2253,6 +2024,12 @@ INCLUDE "engine/mon_party_sprites.asm"
 INCLUDE "engine/in_game_trades.asm"
 INCLUDE "engine/palettes.asm"
 INCLUDE "engine/save.asm"
+ 
+BlackTile:
+	REPT 16
+	db $ff
+	ENDR
+BlackTileEnd:
 
 
 SECTION "bank1D",ROMX,BANK[$1D]
@@ -2377,6 +2154,11 @@ INCLUDE "engine/menu/league_pc.asm"
 
 INCLUDE "engine/overworld/hidden_items.asm"
 
+RedFishingTilesFront: INCBIN "gfx/red_fishing_tile_front.2bpp"
+RedFishingTilesBack:  INCBIN "gfx/red_fishing_tile_back.2bpp"
+RedFishingTilesSide:  INCBIN "gfx/red_fishing_tile_side.2bpp"
+RedFishingRodTiles:   INCBIN "gfx/red_fishingrod_tiles.2bpp"
+
 
 SECTION "bank1E",ROMX,BANK[$1E]
 
@@ -2386,11 +2168,6 @@ INCLUDE "engine/overworld/cut2.asm"
 
 INCLUDE "engine/overworld/ssanne.asm"
 
-RedFishingTilesFront: INCBIN "gfx/red_fishing_tile_front.2bpp"
-RedFishingTilesBack:  INCBIN "gfx/red_fishing_tile_back.2bpp"
-RedFishingTilesSide:  INCBIN "gfx/red_fishing_tile_side.2bpp"
-RedFishingRodTiles:   INCBIN "gfx/red_fishingrod_tiles.2bpp"
-
 INCLUDE "data/animations.asm"
 
 INCLUDE "engine/evolution.asm"
@@ -2398,6 +2175,32 @@ INCLUDE "engine/evolution.asm"
 INCLUDE "engine/overworld/elevator.asm"
 
 INCLUDE "engine/items/tm_prices.asm"
+
+; Actually this doesn't do everything needed to spriteify
+; It copies the tiles and the palette of the player pokemon.
+SpriteifyPlayerPokemon:
+	ld de,vBackPic
+	ld hl,vSprites
+	ld bc,7*7
+	call CopyVideoData
+
+	ld a,2
+	ld [rSVBK],a
+	ld hl, W2_BgPaletteData
+	ld de, W2_SprPaletteData
+	ld bc, 8
+	call CopyData
+
+	ld a,1
+	ld [W2_LastOBP0],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+; HAX
+INCLUDE "color/color.asm"
+
 
 SECTION "bank2D",ROMX,BANK[$2D]
 

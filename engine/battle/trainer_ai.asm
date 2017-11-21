@@ -1140,7 +1140,7 @@ AIPrintItemUseAndUpdateHPBar:
 	coord hl, 2, 2
 	xor a
 	ld [wHPBarType],a
-	predef UpdateHPBar2
+	predef UpdateHPBar_Hook
 	jp DecrementAICount
 
 AISwitchIfEnoughMons:

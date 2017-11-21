@@ -98,7 +98,9 @@ SpecialEffectsCont:
 	db -1
 
 SlidePlayerAndEnemySilhouettesOnScreen:
-	call LoadPlayerBackPic
+	; HAX: I switched stuff around with InitBattle_Common. Call 3ec92, THEN RunPaletteCommand with b=0.
+	; This prevents flickering when entering battle.
+	call RunPaletteCommand
 	ld a, MESSAGE_BOX ; the usual text box at the bottom of the screen
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -811,7 +813,7 @@ UpdateCurMonHPBar:
 .playersTurn
 	push bc
 	ld [wHPBarType], a
-	predef UpdateHPBar2
+	predef UpdateHPBar_Hook
 	pop bc
 	ret
 
@@ -1287,7 +1289,8 @@ HandlePlayerBlackOut:
 	cp OAKS_LAB
 	ret z            ; starter battle in oak's lab: don't black out
 .notSony1Battle
-	ld b, SET_PAL_BATTLE_BLACK
+	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+	ld c, 1
 	call RunPaletteCommand
 	ld hl, PlayerBlackedOutText2
 	ld a, [wLinkState]
@@ -1994,7 +1997,8 @@ DrawPlayerHUDAndHPBar:
 	call PlaceString
 	call PrintPlayerMonGender
 	call PrintPlayerMonShiny
-	call PrintEXPBar
+	coord de, 17, 11
+	callab PrintEXPBar
 	ld hl, wBattleMonSpecies
 	ld de, wLoadedMon
 	ld bc, wBattleMonDVs - wBattleMonSpecies
@@ -4977,7 +4981,7 @@ ApplyDamageToEnemyPokemon:
 	coord hl, 2, 2
 	xor a
 	ld [wHPBarType],a
-	predef UpdateHPBar2 ; animate the HP bar shortening
+	predef UpdateHPBar_Hook
 ApplyAttackToEnemyPokemonDone:
 	jp DrawHUDsAndHPBars
 
@@ -5095,7 +5099,7 @@ ApplyDamageToPlayerPokemon:
 	coord hl, 10, 9
 	ld a,$01
 	ld [wHPBarType],a
-	predef UpdateHPBar2 ; animate the HP bar shortening
+	predef UpdateHPBar_Hook
 ApplyAttackToPlayerPokemonDone:
 	jp DrawHUDsAndHPBars
 
@@ -7068,8 +7072,10 @@ InitWildBattle:
 
 ; common code that executes after init battle code specific to trainer or wild battles
 _InitBattleCommon:
+	; HAX: I switched stuff around with SlidePlayerAndEnemySilhouettesOnScreen. Call LoadPlayerBackPic, THEN RunPaletteCommand with b=0.
+	; This prevents flickering when entering battle.
+	call LoadPlayerBackPic
 	ld b, SET_PAL_BATTLE_BLACK
-	call RunPaletteCommand
 	call SlidePlayerAndEnemySilhouettesOnScreen
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a
@@ -9119,3 +9125,8 @@ PrintShinyCommon: ; used by both routines
 	ld a, " "
 	ret
 
+LoadBackSpriteUnzoomed: ; HAX
+	ld a,$66
+	ld de,vBackPic
+	ld c,a
+	jp LoadUncompressedSpriteData

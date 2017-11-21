@@ -62,7 +62,7 @@ RecoilEffect_:
 	xor a
 .updateHPBar
 	ld [wHPBarType], a
-	predef UpdateHPBar2
+	predef UpdateHPBar_Hook
 	ld hl, HitWithRecoilText
 	jp PrintText
 HitWithRecoilText:

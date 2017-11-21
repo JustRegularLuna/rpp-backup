@@ -181,6 +181,8 @@ PlayAnimation:
 	jr z,.AnimationOver
 	cp a,$C0 ; is this subanimation or a special effect?
 	jr c,.playSubanimation
+;	jp StartAnimationHook ; HAX
+;	nop
 .doSpecialEffect
 	ld c,a
 	ld de,SpecialEffectPointers
@@ -244,7 +246,9 @@ PlayAnimation:
 	ld a,[rOBP0]
 	push af
 	ld a,[wAnimPalette]
-	ld [rOBP0],a
+;	ld [rOBP0],a	; HAX
+	nop
+	nop
 	call LoadAnimationTileset
 	call LoadSubanimation
 	call PlaySubanimation
@@ -327,23 +331,35 @@ GetSubanimationTransform2:
 	ret
 
 ; loads tile patterns for battle animations
+; I HAXed with this function by shaving off a few bytes in order to
+; call a function to load sprite palettes.
 LoadAnimationTileset:
 	ld a,[wWhichBattleAnimTileset]
 	add a
 	add a
-	ld hl,AnimationTilesetPointers
 	ld e,a
 	ld d,0
+
+	ld a, [wIsInBattle]
+	and a
+	jr z, .inTrade ; don't load attack sprite palettes during trades
+	; HAX: Load corresponding palettes as well
+	ld b, BANK(LoadAnimationTilesetPalettes)
+	ld hl, LoadAnimationTilesetPalettes
+	rst $18
+
+.inTrade
+	ld hl,AnimationTilesetPointers
 	add hl,de
 	ld a,[hli]
 	ld [wTempTilesetNumTiles],a ; number of tiles
+	push af
 	ld a,[hli]
 	ld e,a
-	ld a,[hl]
-	ld d,a ; de = address of tileset
+	ld d,[hl] ; de = address of tileset
 	ld hl,vSprites + $310
 	ld b, BANK(AnimationTileset1) ; ROM bank
-	ld a,[wTempTilesetNumTiles]
+	pop af ; a = [wTempTilesetNumTiles]
 	ld c,a ; number of tiles
 	jp CopyVideoData ; load tileset
 
@@ -529,9 +545,13 @@ SetAnimationPalette:
 	ld b, $f0
 .next
 	ld a, b
-	ld [rOBP0], a
+	;ld [rOBP0], a ; HAX: don't mess with these palettes in-battle
+	nop
+	nop
 	ld a, $6c
-	ld [rOBP1], a
+	;ld [rOBP1], a ; HAX
+	nop
+	nop
 	ret
 .notSGB
 	ld a, $e4
@@ -2837,12 +2857,10 @@ FallingObjects_InitialMovementData:
 
 AnimationShakeEnemyHUD:
 ; Shakes the enemy HUD.
-
-; Make a copy of the back pic's tile patterns in sprite tile pattern VRAM.
-	ld de, vBackPic
-	ld hl, vSprites
-	ld bc, 7 * 7
-	call CopyVideoData
+	call SpriteifyPlayerPokemon
+	REPT 9
+	nop
+	ENDR
 
 	xor a
 	ld [hSCX], a
