@@ -37,7 +37,7 @@ A: The house between Fuchsia City's Gym and Pokémon Center.
 A: Same house as the Move Deleter.
 
 ### Q: Where do I find Shiny Pokémon?
-A: There are no event shinies, but all Pokémon have the same chance to be shiny as in Gen 2. Also, breeding at the Daycare is slightly more likely, due to the Day Care Man's Ditto being shiny.
+A: The only "Event Shiny" for now is the Magikarp you buy in the Mt. Moon Pokécenter, but all other Pokémon have the same chance to be shiny as in [**Polished Crystal**][polished]. Also, breeding at the Daycare is slightly more likely, due to the Day Care Man's Ditto being shiny.
 
 ### Q: Is Fairy type in this?
 A: Yes, Dark Steel and Fairy are all in, and type strengths/weaknesses match Gen 6.
@@ -62,6 +62,7 @@ It is advisable to check the main Pokered repository as well for more info.
 * Disassembly of [**Pokémon Crystal**][pokecrystal]
 * irc: **irc.freenode.net** [**#pret**][irc]
 
+[polished]: http://github.com/roukaour/polishedcrystal
 [pokered]: http://github.com/pret/pokered
 [pokecrystal]: https://github.com/kanzure/pokecrystal
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret

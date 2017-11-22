@@ -63,8 +63,8 @@ _FridgeText::
 	text "Let's see what's"
 	line "in the fridge..."
 	
-	para "Mountain Dew and"
-	line "Cherry Coke!"
+	para "Fresh Water and"
+	line "tasty Lemonade!"
 	done
 	
 _StoveText::

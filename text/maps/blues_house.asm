@@ -38,21 +38,12 @@ _BluesHouseText2::
 _BluesHouseText3::
 	text "A map of the"
 	line "Kanto region!"
-	
-	para "I hope she gives"
-	line "it to me..."
 	done
 
 _BluesTVText::
-	text "There's a show on"
-	line "TV."
+	text "It's a nature show!"
 	
-	para "A man in a brown"
-	line "pinstripe suit is"
-	cont "running toward a"
-	cont "blue Police Box."
-	
-	para "I'd better get"
-	line "going too."
+	para "It's all about"
+	line "different types"
+	cont "of #mon."
 	done
-	
