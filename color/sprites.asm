@@ -6,14 +6,16 @@ ATK_PAL_RED     EQU 2
 ATK_PAL_BROWN   EQU 3
 ATK_PAL_YELLOW  EQU 4
 ATK_PAL_GREEN   EQU 5
-ATK_PAL_ICE		EQU 6
+ATK_PAL_ICE	EQU 6
 ATK_PAL_PURPLE	EQU 7
+; 8: color based on attack type
+; 9: don't change color palette (assume it's already set properly from elsewhere)
 
 
-PAL_ORANGE	EQU 0
-PAL_BLUE	EQU 1
-PAL_GREEN	EQU 2
-PAL_BROWN	EQU 3
+SPR_PAL_ORANGE	EQU 0
+SPR_PAL_BLUE	EQU 1
+SPR_PAL_GREEN	EQU 2
+SPR_PAL_BROWN	EQU 3
 
 LoadOverworldSpritePalettes:
 	ld hl,SpritePalettes
@@ -93,27 +95,44 @@ ColorNonOverworldSprites:
 
 	ld hl, wOAMBuffer
 	ld b, 40
-	ld d, W2_SpritePaletteMap>>8
-.nextSprite
-	ld a,[hli] ; y-coord
-	and a
-	jr z,.end
 
+.spriteLoop
+	inc hl
 	inc hl
 	ld a,[hli] ; tile
 	ld e, a
-	ld a,[hl] ; flags
-	ld c,a
+	ld d, W2_SpritePaletteMap>>8
 	ld a,[de]
 	cp 8 ; if 8, colorize based on attack type
 	jr z,.getAttackType
 	cp 9 ; if 9, do not colorize (use whatever palette it's set to already)
-	jr nz,.setPalette
-	xor a
+	jr z,.nextSprite
+	; Otherwise, use the value as-is
 	jr .setPalette
 
 .getAttackType
 	push hl
+
+	; Load animation (move) being used
+	xor a
+	ld [rSVBK],a
+	ld a,[wAnimationID]
+	ld d,a
+	ld a,2
+	ld [rSVBK],a
+
+	; If the absorb animation is playing, it's always green. (Needed for leech seed)
+	ld a,d
+	cp ABSORB
+	ld a,GRASS
+	jr z,.gotType
+
+	; Make stun spore yellow despite being a grass move
+	ld a,d
+	cp STUN_SPORE
+	ld a,ELECTRIC
+	jr z,.gotType
+
 	ld a,[H_WHOSETURN]
 	and a
 	jr z,.playersTurn
@@ -132,11 +151,16 @@ ColorNonOverworldSprites:
 	pop hl
 
 .setPalette
+	ld c,a
+	ld a,$f8
+	and [hl]
 	or c
-	ld [hli],a
+	ld [hl],a
 
+.nextSprite
+	inc hl
 	dec b
-	jr nz, .nextSprite
+	jr nz, .spriteLoop
 
 .end
 	xor a
@@ -196,19 +220,19 @@ ClearSpritePaletteMap:
 
 SpritePaletteAssignments: ; Characters on the overworld
 	; 0x01: SPRITE_RED
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x02: SPRITE_BLUE
-	db PAL_BLUE
+	db SPR_PAL_BLUE
 
 	; 0x03: SPRITE_OAK
-	db PAL_BROWN
+	db SPR_PAL_BROWN
 
 	; 0x04: SPRITE_BUG_CATCHER
 	db 4
 
 	; 0x05: SPRITE_SLOWBRO
-	db 4
+	db SPR_PAL_ORANGE
 
 	; 0x06: SPRITE_LASS
 	db 4
@@ -220,7 +244,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x09: SPRITE_BIRD
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x0a: SPRITE_FAT_BALD_GUY
 	db 4
@@ -241,10 +265,10 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x10: SPRITE_GENTLEMAN
-	db PAL_BLUE
+	db SPR_PAL_BLUE
 
 	; 0x11: SPRITE_DAISY
-	db PAL_BLUE
+	db SPR_PAL_BLUE
 
 	; 0x12: SPRITE_BIKER
 	db 4
@@ -259,13 +283,13 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x16: SPRITE_MR_FUJI
-	db PAL_GREEN
+	db SPR_PAL_GREEN
 
 	; 0x17: SPRITE_GIOVANNI
-	db PAL_BLUE
+	db SPR_PAL_BLUE
 
 	; 0x18: SPRITE_ROCKET
-	db 4
+	db SPR_PAL_BROWN
 
 	; 0x19: SPRITE_MEDIUM
 	db 4
@@ -283,13 +307,13 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x1e: SPRITE_LANCE
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x1f: SPRITE_OAK_SCIENTIST_AIDE
-	db PAL_BROWN
+	db SPR_PAL_BROWN
 
 	; 0x20: SPRITE_OAK_AIDE
-	db PAL_BROWN
+	db SPR_PAL_BROWN
 
 	; 0x21: SPRITE_ROCKER ($20)
 	db 4
@@ -316,10 +340,10 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x29: SPRITE_NURSE
-	db PAL_BLUE
+	db SPR_PAL_BLUE
 
 	; 0x2a: SPRITE_CABLE_CLUB_WOMAN
-	db PAL_GREEN
+	db SPR_PAL_GREEN
 
 	; 0x2b: SPRITE_MR_MASTERBALL
 	db 4
@@ -361,46 +385,46 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x38: SPRITE_CLEFAIRY
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x39: SPRITE_AGATHA
-	db PAL_BLUE
+	db SPR_PAL_BLUE
 
 	; 0x3a: SPRITE_BRUNO
-	db PAL_BROWN
+	db SPR_PAL_BROWN
 
 	; 0x3b: SPRITE_LORELEI
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x3c: SPRITE_SEEL
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x3d: SPRITE_BALL
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x3e: SPRITE_OMANYTE
-	db 4
+	db SPR_PAL_ORANGE
 
 	; 0x3f: SPRITE_BOULDER
-	db PAL_BROWN
+	db SPR_PAL_BROWN
 
 	; 0x40: SPRITE_PAPER_SHEET
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x41: SPRITE_BOOK_MAP_DEX
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x42: SPRITE_CLIPBOARD
-	db PAL_BROWN
+	db SPR_PAL_BROWN
 
 	; 0x43: SPRITE_SNORLAX
-	db PAL_ORANGE
+	db SPR_PAL_ORANGE
 
 	; 0x44: SPRITE_OLD_AMBER_COPY
-	db PAL_BROWN
+	db SPR_PAL_BROWN
 
 	; 0x45: SPRITE_OLD_AMBER
-	db PAL_BROWN
+	db SPR_PAL_BROWN
 
 	; 0x46: SPRITE_LYING_OLD_MAN_UNUSED_1
 	db 4
@@ -409,7 +433,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db 4
 
 	; 0x48: SPRITE_LYING_OLD_MAN
-	db 4
+	db SPR_PAL_BROWN
 
 
 AnimationTileset1Palettes:

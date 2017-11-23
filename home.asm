@@ -108,15 +108,12 @@ SECTION "ColorizationHome",HOME[$be]
 
 InitializeColor:
 	cp $11
-	jr nz,IsNotGBC
+	jr nz,.IsNotGBC
 	call _InitGbcMode
 	jp Start
+
 .IsNotGBC
-	; Wants to call $30:$6000?
-	ld a,$30
-	ld [$2000],a
-loop3:
-	jr loop3
+	jpab RunDmgError
 
 
 ; Indirect function callers for color code

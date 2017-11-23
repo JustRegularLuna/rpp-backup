@@ -206,7 +206,7 @@ MonsterPalettes:
 	db PAL_PINKMON   ; Happiny
 	db PAL_MEWMON    ; Munchlax
 	
-TrainerPalletes:
+TrainerPalettes:
 	db PAL_GREYMON           ; UNUSED
 	db PAL_BLUE_TRAINER      ; Youngster
 	db PAL_GREEN_TRAINER     ; Bug Catcher

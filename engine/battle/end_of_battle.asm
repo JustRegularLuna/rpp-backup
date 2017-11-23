@@ -10,7 +10,7 @@ EndOfBattle:
 	ld a, [wEnemyMonStatus]
 	ld [hl], a
 	call ClearScreen
-	callab DisplayLinkBattleVersusTextBox
+	callab EndOfBattle_ColorHook
 	ld a, [wBattleResult]
 	cp $1
 	ld de, YouWinText

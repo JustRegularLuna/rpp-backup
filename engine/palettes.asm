@@ -63,28 +63,25 @@ SetPalFunctions:
 	dw PalCmd_0f	; Name entry (partially replaces 08)
 
 ; HAXed to give trainers palettes independantly
+; Also skips the "transform" check, caller does that instead
 DeterminePaletteID:
-	bit Transformed, a ; a is battle status 3
-	ld a, PAL_GREYMON  ; if the mon has used Transform, use Ditto's palette
-	ret nz
-	ld a, [hl]
-DeterminePaletteIDOutOfBattle: ; DeterminePaletteID without status check
 	ld [wd11e], a
 	and a
 	jr nz, GetMonPalette
+	
+	; Trainers are given individualized palettes
+	; In link battle, don't rely in wTrainerClass (for some reason it's set to
+	; OPP_GARY, so ignore it)
+	ld a,[wLinkState]
+	cp LINK_STATE_BATTLING
+	ld a, PAL_MEWMON ; PAL_HERO
+	ret z
+	
 	ld a, [wTrainerPicID]
-	ld hl, TrainerPalletes
+	ld hl, TrainerPalettes
 	jr GetPaletteID
 
 DeterminePaletteIDBack:
-	bit Transformed, a
-	jr z, .skip
-	ld hl, wPartyMon1Species
-	ld a, [wPlayerMonNumber]
-	ld bc, wPartyMon2 - wPartyMon1
-	call AddNTimes
-.skip
-	ld a, [hl]
 	ld [wd11e],a
 	and a
 	ld a, PAL_MEWMON ; PAL_HERO ?

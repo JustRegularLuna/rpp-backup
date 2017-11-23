@@ -55,13 +55,13 @@ SpritePalettes: ; Taken from pokemon GSC.
 AttackSpritePalettes:
 	; GREY
 	RGB 31,31,31
-	RGB 20,20,20
-	RGB 10,10,10
+	RGB 25,25,25
+	RGB 13,13,13
 	RGB 0,0,0
 	; BLUE
 	RGB 31,31,31
-	RGB 5,4,31
-	RGB 1,1,18
+	RGB 8,12,31
+	RGB 1,4,31
 	RGB 0,0,0
 	; RED
 	RGB 31,31,31
@@ -96,18 +96,31 @@ AttackSpritePalettes:
 
 ; Not related to sprites, move this somewhere else?
 SlotPaletteMap:
-	INCBIN "color/data/slotpalettemap.bin"
+IF DEF(_RED)
+	INCBIN "color/data/slotpalettemap_red.bin"
+ELSE
+	INCBIN "color/data/slotpalettemap_blue.bin"
+ENDC
 
 SlotSpritePaletteMap:
 	; Seven
 	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
+
 	; Bar
 	db ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE
+
 	; Cherry
 	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
-	; Fish
+
+	; Fish (red), Jigglypuff (blue)
 	db ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED,ATK_PAL_RED
-	; Penguin/Bird/SomethingOrOther
+
+	; Penguin/Bird/Something (red), Dugtrio (blue)
+	IF DEF(_RED)
 	db ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE,ATK_PAL_BLUE
+	ELSE ; _BLUE
+	db ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN
+	ENDC
+
 	; Rat
 	db ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN,ATK_PAL_BROWN

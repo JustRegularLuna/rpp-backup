@@ -3,10 +3,6 @@ SECTION "bank1C_extension",ROMX,BANK[$1C]
 
 ; Set all palettes to black at beginning of battle
 SetPal_BattleBlack:
-	; Code $ff sometimes calls this (by accident?)
-;	inc b
-;	ret z
-
 	ld a,$02
 	ld [rSVBK],a
 
@@ -49,10 +45,24 @@ SetPal_Battle:
 	set 0, [hl]
 .getPALID
 	ld a, [wPlayerBattleStatus3]
-	ld hl, wBattleMonSpecies        ; player Pokemon ID
+	bit Transformed,a
+	jr z,.getBattleMonPal
+
+	; If transformed, don't trust the "DeterminePaletteIDBack" function.
+	ld a,$02
+	ld [rSVBK],a
+	ld a,[W2_BattleMonPalette]
+	ld b,a
+	xor a
+	ld [rSVBK],a
+	jr .getEnemyMonPal
+
+.getBattleMonPal
+	ld a, [wBattleMonSpecies]        ; player Pokemon ID
 	call DeterminePaletteIDBack
 	ld b, a
 
+.getEnemyMonPal
 	push bc
 	ld hl, wShinyMonFlag
 	res 0, [hl]
@@ -68,14 +78,18 @@ SetPal_Battle:
 	ld hl, wShinyMonFlag
 	set 0, [hl]
 .getPALID2
-	ld a, [wEnemyBattleStatus3]
-	ld hl, wEnemyMonSpecies2         ; enemy Pokemon ID
+
+	ld a, [wEnemyMonSpecies2]         ; enemy Pokemon ID (without transform effect?)
 	call DeterminePaletteID
 	pop bc
 	ld c, a
 
 	ld a,$02
 	ld [rSVBK],a
+
+	; Save the player mon's palette in case it transforms later
+	ld a,b
+	ld [W2_BattleMonPalette],a
 
 	; Player palette
 	push bc
@@ -243,7 +257,7 @@ SetPal_StatusScreen:
 	jr c, .pokemon
 	ld a, $1 ; not pokemon
 .pokemon
-	call DeterminePaletteIDOutOfBattle ; DeterminePaletteID without status check
+	call DeterminePaletteID
 	ld b,a
 
 	ld a,2
@@ -318,7 +332,7 @@ SetPal_StatusScreen:
 ; Show pokedex data
 SetPal_Pokedex:
 	ld a, [wcf91]
-	call DeterminePaletteIDOutOfBattle	; Call DeterminePaletteID without status check
+	call DeterminePaletteID
 	ld d,a
 	ld e,0
 
@@ -424,7 +438,7 @@ SetPal_Slots:
 ; Titlescreen with cycling pokemon
 SetPal_TitleScreen:
 	ld a,[wWhichTrade] ; Get the pokemon on the screen
-	call DeterminePaletteIDOutOfBattle
+	call DeterminePaletteID
 	ld d,a
 	ld e,0
 
@@ -674,9 +688,9 @@ SetPal_PartyMenu:
 ; Evolution / Hall of Fame
 ;
 ; Takes parameter 'c' from 0-2.
-; 0: calculate palette
+; 0: calculate palette based on loaded pokemon
 ; 1: make palettes black
-; 2: use PAL_MEWMON
+; 2: use PAL_MEWMON (used for trades?)
 SetPal_PokemonWholeScreen:
 	ld a, c
 	dec a
@@ -688,7 +702,7 @@ SetPal_PokemonWholeScreen:
 	jr z, .loadPalette
 	ld a, [wWholeScreenPaletteMonSpecies]
 	; Use the "BackSprite" version for the player sprite in the hall of fame.
-	call DeterminePaletteIDOutOfBattle ; XXX double check player in HoF
+	call DeterminePaletteIDBack ; XXX double check player in HoF
 
 .loadPalette
 	ld d,a
@@ -885,3 +899,11 @@ INCLUDE "color/boulder.asm"
 INCLUDE "color/super_palettes.asm"
 
 INCLUDE "color/data/badgepalettemap.asm"
+
+
+DMG_SOUND_ENGINE EQU $3C
+INCLUDE "color/dmg.asm"
+
+; Copy of sound engine used by dmg-mode to play jingle
+SECTION "DMG Sound Engine",ROMX,BANK[DMG_SOUND_ENGINE]
+INCBIN "color/data/bank31.bin",$0000,$c8000-$c4000

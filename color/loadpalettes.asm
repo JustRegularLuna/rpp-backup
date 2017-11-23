@@ -96,10 +96,9 @@ LoadTilesetPalette:
 	dec b
 	jr nz,.fillLoop
 
-	; Exception:
-	; Tile $78, which is either a pokeball (in the PC), or an unused japanese character.
-	ld a, 3
-	ld [W2_TilesetPaletteMap + $78], a
+	; There used to be special-case code for tile $78 here (pokeball in pc), but now
+	; it uses palette 7 as well. Those areas still need to load the variant of the
+	; textbox palette (PC_POKEBALL_PAL).
 
 	; Switch to wram bank 1 just to read wCurMap
 	xor a
