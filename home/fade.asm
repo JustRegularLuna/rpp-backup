@@ -62,12 +62,14 @@ GBFadeDecCommon:
 	jr nz, GBFadeDecCommon
 	ret
 
+; HAX: some of these palettes have been modified, mostly to make BGP/OBP0/OBP1 consistent
+; with each other.
 FadePal1:: db %11111111, %11111111, %11111111
-FadePal2:: db %11111110, %11111110, %11111000
-FadePal3:: db %11111001, %11100100, %11100100
-FadePal4:: db %11100100, %11010000, %11100000
+FadePal2:: db %11111110, %11111110, %11111110 ; This is used in dark areas
+FadePal3:: db %11111001, %11111001, %11111001
+FadePal4:: db %11100100, %11100100, %11100100 ; This is the "standard" palette
 ;                rBGP      rOBP0      rOBP1
-FadePal5:: db %11100100, %11010000, %11100000
-FadePal6:: db %10010000, %10000000, %10010000
+FadePal5:: db %11100100, %11100100, %11100100
+FadePal6:: db %10010000, %10010000, %10010000
 FadePal7:: db %01000000, %01000000, %01000000
 FadePal8:: db %00000000, %00000000, %00000000

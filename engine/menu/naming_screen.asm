@@ -88,8 +88,11 @@ DisplayNamingScreen:
 	call GBPalWhiteOutWithDelay3
 	call ClearScreen
 	call UpdateSprites
-	ld b, SET_PAL_GENERIC
+
+	; HAX: Use command $0f instead of $08
+	ld b, SET_PAL_NAMING_SCREEN
 	call RunPaletteCommand
+
 	call LoadHpBarAndStatusTilePatterns
 	call LoadEDTile
 	callba LoadMonPartySpriteGfx
@@ -409,7 +412,7 @@ PrintNicknameAndUnderscores:
 	call EraseMenuCursor
 	ld a, $11 ; "ED" x coord
 	ld [wTopMenuItemX], a
-	ld a, $5 ; "ED" y corrd
+	ld a, $5 ; "ED" y coord
 	ld [wCurrentMenuItem], a
 	ld a, [wNamingScreenType]
 	cp NAME_MON_SCREEN

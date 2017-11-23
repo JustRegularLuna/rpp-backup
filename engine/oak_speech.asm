@@ -57,9 +57,11 @@ OakSpeech:
 	call SpecialWarpIn
 	xor a
 	ld [hTilesetType],a
-	ld a,[wd732]
-	bit 1,a ; possibly a debug mode bit
-	jp nz,.skipChoosingNames
+	ld a, PAL_MEWMON ; PAL_OAK
+	call GotPalID ; HAX
+	;ld a,[wd732]
+	;bit 1,a ; possibly a debug mode bit
+	;jp nz,.skipChoosingNames
 	
 	callba DisplayHackVersionScreen
 	
@@ -90,7 +92,8 @@ OakSpeech:
 	ld hl,OakSpeechText1
 	call PrintText
 	call GBFadeOutToWhite
-	call ClearScreen
+	;call ClearScreen
+	call GetNidorinoPalID ; HAX
 	ld a,SYLVEON
 	ld [wd0b5],a
 	ld [wcf91],a
@@ -101,7 +104,7 @@ OakSpeech:
 	ld hl,OakSpeechText2
 	call PrintText
 	call GBFadeOutToWhite
-	call ClearScreen
+	call GetRedPalID ; HAX
 	ld de,RedPicFront
 	lb bc, Bank(RedPicFront), $00
 	ld a, [wPlayerGender] ; check gender
@@ -116,7 +119,7 @@ OakSpeech:
 	call PrintText
 	call ChoosePlayerName
 	call GBFadeOutToWhite
-	call ClearScreen
+	call GetRivalPalID ; HAX
 	ld de,Rival1Pic
 	lb bc, Bank(Rival1Pic), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -126,7 +129,7 @@ OakSpeech:
 	call ChooseRivalName
 .skipChoosingNames
 	call GBFadeOutToWhite
-	call ClearScreen
+	call GetRedPalID ; HAX
 	ld de,RedPicFront
 	lb bc, Bank(RedPicFront), $00
 	ld a, [wPlayerGender] ; check gender

@@ -25,12 +25,26 @@ VBlank::
 	call RedrawRowOrColumn
 	call VBlankCopy
 	call VBlankCopyDouble
-	call UpdateMovingBgTiles
-	call $ff80 ; hOAMDMA
-	ld a, BANK(PrepareOAMData)
-	ld [H_LOADEDROMBANK], a
-	ld [MBC1RomBank], a
-	call PrepareOAMData
+	;call UpdateMovingBgTiles
+	call $ff80 ; OAM DMA
+	rst $10 ; HAX: VBlank hook (loads palettes)
+	nop
+	nop
+	; HAX: don't update sprites here. They're updated elsewhere to prevent wobbliness.
+	;ld a, Bank(PrepareOAMData)
+	nop
+	nop
+	;ld [H_LOADEDROMBANK], a
+	nop
+	nop
+	;ld [MBC1RomBank], a
+	nop
+	nop
+	nop
+	;call PrepareOAMData ; update OAM buffer with current sprite data
+	nop
+	nop
+	nop
 
 	; VBlank-sensitive operations end.
 
@@ -86,7 +100,7 @@ VBlank::
 	pop de
 	pop bc
 	pop af
-	reti
+	ret
 
 
 DelayFrame::
@@ -95,11 +109,13 @@ DelayFrame::
 
 NOT_VBLANKED EQU 1
 
-	ld a, NOT_VBLANKED
-	ld [H_VBLANKOCCURRED], a
+	call DelayFrameHook ; HAX
+	nop
+	;ld a,1
+	;ld [H_VBLANKOCCURRED],a
 .halt
 	halt
 	ld a, [H_VBLANKOCCURRED]
 	and a
-	jr nz, .halt
+	jr nz,.halt
 	ret

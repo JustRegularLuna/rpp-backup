@@ -274,7 +274,8 @@ TitleScreenPickNewMon:
 	ld a, $90
 	ld [hWY], a
 	ld d, 1 ; scroll out
-	callba TitleScroll
+	; HAX; palette must be refreshed
+	callba LoadTitleMonTilesAndPalettes
 	ret
 
 TitleScreenScrollInMon:

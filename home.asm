@@ -1,31 +1,51 @@
-
-; The rst vectors are unused.
 SECTION "rst 00", ROM0 [$00]
-	rst $38
-SECTION "rst 08", ROM0 [$08]
-	rst $38
-SECTION "rst 10", ROM0 [$10]
-	rst $38
-SECTION "rst 18", ROM0 [$18]
-	rst $38
-SECTION "rst 20", ROM0 [$20]
-	rst $38
-SECTION "rst 28", ROM0 [$28]
-	rst $38
-SECTION "rst 30", ROM0 [$30]
-	rst $38
-SECTION "rst 38", ROM0 [$38]
-	rst $38
+_LoadMapVramAndColors:
+	ld a,[H_LOADEDROMBANK]
+	push af
+	ld a,BANK(LoadMapVramAndColors)
+	ld [$2000],a
+	call LoadMapVramAndColors
+	pop af
+	ld [$2000],a
+	ret
 
-; Hardware interrupts
+;SECTION "rst 08", ROM0 [$08]
+
+; HAX: rst10 is used for the vblank hook
+SECTION "rst 10", ROM0 [$10]
+	ld b, BANK(GbcVBlankHook)
+	ld hl, GbcVBlankHook
+	jp Bankswitch
+
+; HAX: rst18 can be used for "Bankswitch"
+SECTION "rst 18", ROM0 [$18]
+	jp Bankswitch
+
+; memory for rst vectors $20-$38 used by color hack
+
+SetRomBank:
+	ld [H_LOADEDROMBANK], a
+	ld [MBC1RomBank], a
+	ret
+
+
+; interrupts
 SECTION "vblank", ROM0 [$40]
-	jp VBlank
-SECTION "hblank", ROM0 [$48]
-	rst $38
+	push hl
+	ld hl, VBlank
+	jp InterruptWrapper
+SECTION "hblank",   ROM0 [$48] ; HAX: interrupt wasn't used in original game
+	push hl
+	ld hl, _GbcPrepareVBlank
+	jp InterruptWrapper
 SECTION "timer",  ROM0 [$50]
-	jp Timer
+	push hl
+	ld hl, Timer
+	jp InterruptWrapper
 SECTION "serial", ROM0 [$58]
-	jp Serial
+	push hl
+	ld hl, Serial
+	jp InterruptWrapper
 SECTION "joypad", ROM0 [$60]
 	reti
 
@@ -83,11 +103,55 @@ HideSprites::
 INCLUDE "home/copy.asm"
 
 
+SECTION "ColorizationHome",HOME[$be]
+
+InitializeColor:
+	cp $11
+	jr nz,.IsNotGBC
+	call _InitGbcMode
+	jp Start
+
+.IsNotGBC
+	jpab RunDmgError
+
+
+; Indirect function callers for color code
+
+_InitGbcMode:
+	jpab InitGbcMode
+
+
+; Called once for each sprite. This needs to preserve variables, so it can't use
+; BankSwitch.
+_ColorOverworldSprite:
+	ld [hColorHackTmp],a ; Need to preserve value of 'a'
+
+	ld a,[H_LOADEDROMBANK]
+	push af
+
+	ld a,BANK(ColorOverworldSprite)
+	call SetRomBank
+
+	ld a,[hColorHackTmp]
+	call ColorOverworldSprite
+
+	ld [hColorHackTmp],a
+	pop af
+	call SetRomBank
+	ld a,[hColorHackTmp]
+	ret
+
+
+; Soft reset code (clears memory then goes to normal code)
+SoftReset:
+	ld b,BANK(ClearGbcMemory)
+	ld hl,ClearGbcMemory
+	rst $18 ; Bankswitch
+	jp SoftReset_orig
+
 
 SECTION "Entry", ROM0 [$100]
-
-	nop
-	jp Start
+	jp InitializeColor
 
 
 SECTION "Header", ROM0 [$104]
@@ -714,28 +778,23 @@ UncompressMonSprite::
 	ld [wSpriteInputPtr],a    ; fetch sprite input pointer
 	ld a,[hl]
 	ld [wSpriteInputPtr+1],a
-; define (by index number) the bank that a pokemon's image is in
-; index = Mew, bank 1
-; index = Kabutops fossil, bank $B
-; index < $1F, bank 9
-; $1F ≤ index < $4A, bank $A
-; $4A ≤ index < $74, bank $B
-; $74 ≤ index < $99, bank $C
-; $99 ≤ index,       bank $D
-	ld a,[wcf91] ; XXX name for this ram location
+
+	; HAX: code from Danny-E33's hack
+	; Each pokemon's picture bank is defined with an unused byte in its stats.
+	ld a, [wcf91] ; get Pokémon ID
+	ld b, BANK(FossilKabutopsPic)
 	cp FOSSIL_KABUTOPS
 	jr z,.RecallBank
 	cp FOSSIL_AERODACTYL
 	jr z,.RecallBank
 	cp MON_GHOST
 	jr z,.RecallBank
-	ld a,[wMonHPicBank]
+	ld a, [wMonHPicBank] ; Get bank from base stats
 	jr .GotBank
 .RecallBank
-	ld a,BANK(FossilKabutopsPic)
+	ld a,b
 .GotBank
 	jp UncompressSpriteData
-
 
 ; de: destination location
 LoadMonFrontSprite::
@@ -2081,7 +2140,7 @@ DisableWaitingAfterTextDisplay::
 ; [wcf91] = item ID
 ; OUTPUT:
 ; [wActionResultOrTookBattleTurn] = success
-; 00: unsucessful
+; 00: unsuccessful
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
 UseItem::
@@ -3118,15 +3177,10 @@ LoadTextBoxTilePatterns::
 	lb bc, BANK(TextBoxGraphics), (TextBoxGraphicsEnd - TextBoxGraphics) / $10
 	jp CopyVideoData ; if LCD is on, transfer during V-blank
 
-LoadHpBarAndStatusTilePatterns::	
-	ld de,HpBarAndStatusGraphics
-	ld hl,vChars2 + $620
-	lb bc,BANK(HpBarAndStatusGraphics), (HpBarAndStatusGraphicsEnd - HpBarAndStatusGraphics) / $10
-	call GoodCopyVideoData
-	ld de,EXPBarGraphics
-	ld hl,vChars1 + $400
-	lb bc,BANK(EXPBarGraphics), (EXPBarShinySparkleGraphicsEnd - EXPBarGraphics) / $10
-	jp GoodCopyVideoData
+; copies HP bar and status display tile patterns into VRAM
+LoadHpBarAndStatusTilePatterns::
+	callba LoadHPBarAndEXPBar
+	ret
 
 
 FillMemory::
@@ -3382,7 +3436,7 @@ CopyString::
 ; this function is used when lower button sensitivity is wanted (e.g. menus)
 ; OUTPUT: [hJoy5] = pressed buttons in usual format
 ; there are two flags that control its functionality, [hJoy6] and [hJoy7]
-; there are esentially three modes of operation
+; there are essentially three modes of operation
 ; 1. Get newly pressed buttons only
 ;    ([hJoy7] == 0, [hJoy6] == any)
 ;    Just copies [hJoyPressed] to [hJoy5].
@@ -3730,7 +3784,7 @@ CalcStat::
 	ld a, b
 	add e
 	jr nc, .noCarry2
-	inc d                     ; da = (Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4
+	inc d                     ; de = (Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4
 .noCarry2
 	ld [H_MULTIPLICAND+2], a
 	ld a, d
@@ -4481,7 +4535,8 @@ GBPalNormal::
 ; Reset BGP and OBP0.
 	ld a, %11100100 ; 3210
 	ld [rBGP], a
-	ld a, %11010000 ; 3100
+;	ld a,%11010000
+	ld a,%11100100	; HAX
 	ld [rOBP0], a
 	ret
 
@@ -4506,7 +4561,7 @@ GetHealthBarColor::
 ; Return at hl the palette of
 ; an HP bar e pixels long.
 	ld a, e
-	cp 27
+	cp 24 ; HAX: changed to match crystal (yellow should mean <1/2 health)
 	ld d, 0 ; green
 	jr nc, .gotColor
 	cp 10
@@ -4720,25 +4775,6 @@ const_value = 1
 	add_tx_pre ElevatorText                         ; 41
 	add_tx_pre PokemonStuffText                     ; 42
 	add_tx_pre WonderTradeMachineText               ; 43
-
-GoodCopyVideoData:
-	ld a,[rLCDC]
-	bit 7,a ; is the LCD enabled?
-	jp nz, CopyVideoData ; if LCD is on, transfer during V-blank
-	ld a, b
-	push hl
-	push de
-	ld h, 0
-	ld l, c
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld b, h
-	ld c, l
-	pop hl
-	pop de
-	jp FarCopyData2 ; if LCD is off, transfer all at once
 	
 SetCustomName:
 ; INPUTS: hl = pointer to name
@@ -4751,3 +4787,90 @@ SetCustomName:
 	cp "@"
 	ret z
 	jr .loop
+
+
+; Note: this saves rSVBK before calling an interrupt. It would also make sense to save
+; rVBK. However, doing that would break the code that fixes the ss anne's palettes on
+; departure. Instead, just be careful not to set the vram bank to 1 while interrupts are
+; enabled...? (Or better yet do the ss anne fix properly...)
+InterruptWrapper:
+	push af
+	push bc
+	push de
+	ld a,[rSVBK]
+	ld b,a
+
+	ld a,[H_LOADEDROMBANK]
+	ld c,a
+
+	; Change ROM bank if an interrupt occurred in the middle of DelayFrameHook
+	ld a,[hDelayFrameHookBank]
+	and a
+	jr z, .notInDelayFrame
+	; Change rom bank
+	dec a
+	call SetRomBank
+.notInDelayFrame
+
+	xor a
+	ld [rSVBK],a
+	ld de,.ret
+	push de
+	jp [hl]
+.ret
+	ld a,b
+	ld [rSVBK],a
+	ld a,c
+	call SetRomBank
+	pop de
+	pop bc
+	pop af
+	pop hl
+	reti
+
+; Whenever DelayFrame is called, update the sprites.
+; This is done here instead of at vblank to prevent sprite wobbliness when scrolling.
+; In some situations, DelayFrame is not called every frame, and this could be problematic.
+; But I think when sprites are being animated or moved around, it is always called.
+DelayFrameHook:
+	push bc
+	push de
+	push hl
+
+	ld a, [rSVBK]
+	ld b, a
+	xor a
+	ld [rSVBK], a
+	push bc ; Save wram bank
+
+	; Save the current rom bank to a variable. This is important because the game does
+	; not expect the "DelayFrame" function to change the rom bank. If an interrupt
+	; occurs in the middle of this hook, the interrupt wrapper will know to restore
+	; the rom bank.
+	; An alternative solution would be to use "di/ei", but that was the cause of
+	; graphical corruption in the pokemart when getting oak's parcel.
+	ld a, [H_LOADEDROMBANK]
+	inc a
+	ld [hDelayFrameHookBank], a
+
+	; Calling "PrepareOAMData" here instead of at vblank to prevent sprite wobbliness
+	CALL_INDIRECT PrepareOAMData
+	jr z, .spritesDrawn
+
+	CALL_INDIRECT ColorNonOverworldSprites
+.spritesDrawn
+
+	; Clear hDelayFrameHookBank. (No need to reload the bank; that's done
+	; automatically by CALL_INDIRECT.)
+	xor a
+	ld [hDelayFrameHookBank], a
+
+	pop af
+	ld [rSVBK],a ; Restore wram bank
+
+	ld a,1
+	ld [H_VBLANKOCCURRED],a
+	pop hl
+	pop de
+	pop bc
+	ret

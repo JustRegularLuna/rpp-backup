@@ -12,12 +12,15 @@ SET_PAL_PARTY_MENU           EQU $0A
 SET_PAL_POKEMON_WHOLE_SCREEN EQU $0B
 SET_PAL_GAME_FREAK_INTRO     EQU $0C
 SET_PAL_TRAINER_CARD         EQU $0D
+SET_PAL_OAK_INTRO            EQU $0E
+SET_PAL_NAMING_SCREEN        EQU $0F
+SET_PAL_BATTLE_AFTER_BLACK   EQU $10
 UPDATE_PARTY_MENU_BLK_PACKET EQU $FC
 
 ; super game boy palettes
 const_value = 0
-	const PAL_ROUTE                ; $00
-	const PAL_PALLET               ; $01
+	const PAL_TOWNMAP2             ; $00
+	const PAL_SLOTS5               ; $01
 	const PAL_VIRIDIAN             ; $02
 	const PAL_PEWTER               ; $03
 	const PAL_CERULEAN             ; $04
@@ -31,7 +34,7 @@ const_value = 0
 	const PAL_TOWNMAP              ; $0C
 	const PAL_LOGO1                ; $0D
 	const PAL_LOGO2                ; $0E
-	const PAL_0F                   ; $0F
+	const PAL_EXP                  ; $0F
 	const PAL_MEWMON               ; $10
 	const PAL_BLUEMON              ; $11
 	const PAL_REDMON               ; $12

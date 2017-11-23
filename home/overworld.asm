@@ -728,7 +728,7 @@ PlayMapChangeSound::
 	ld a,[wMapPalOffset]
 	and a
 	ret nz
-	jp GBFadeOutToBlack
+	jp GBFadeOutToWhite ; HAX: Fade to white instead of black. Looks nicer IMO.
 
 CheckIfInOutsideMap::
 ; If the player is in an outside map (a town or route), set the z flag
@@ -2156,31 +2156,15 @@ LoadMapData::
 	call LoadTileBlockMap
 	call LoadTilesetTilePatternData
 	call LoadCurrentMapView
-; copy current map view to VRAM
-	coord hl, 0, 0
-	ld de,vBGMap0
-	ld b,18
-.vramCopyLoop
-	ld c,20
-.vramCopyInnerLoop
-	ld a,[hli]
-	ld [de],a
-	inc e
-	dec c
-	jr nz,.vramCopyInnerLoop
-	ld a,32 - 20
-	add e
-	ld e,a
-	jr nc,.noCarry
-	inc d
-.noCarry
-	dec b
-	jr nz,.vramCopyLoop
+
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand ; HAX: this function call was moved to be above _LoadMapVramAndColors
+; copy current map view + corresponding palettes to VRAM
+	call _LoadMapVramAndColors ; HAX
+
 	ld a,$01
 	ld [wUpdateSpritesEnabled],a
 	call EnableLCD
-	ld b, SET_PAL_OVERWORLD
-	call RunPaletteCommand
 	call LoadPlayerSpriteGraphics
 	ld a,[wd732]
 	and a,1 << 4 | 1 << 3 ; fly warp or dungeon warp
@@ -2195,6 +2179,11 @@ LoadMapData::
 	ld [H_LOADEDROMBANK],a
 	ld [MBC1RomBank],a
 	ret
+
+; HAX: Padding to prevent data shifting
+rept $17
+	nop
+endr
 
 ; function to switch to the ROM bank that a map is stored in
 ; Input: a = map number

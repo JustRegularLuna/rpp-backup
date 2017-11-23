@@ -189,24 +189,24 @@ MonsterPalettes:
 	db PAL_SNEASEL   ; Miltank
 	db PAL_BLUE_TRAINER ; Chinchou
 	db PAL_BLUE_TRAINER ; Lanturn
-    db PAL_REDMON    ; Slugma
-    db PAL_REDMON    ; Magcargo
-    db PAL_REDMON    ; Torkoal
-    db PAL_REDMON    ; Latias
-    db PAL_BLUEMON   ; Latios
-    db PAL_BROWNMON  ; Hitmontop
-    db PAL_BROWNMON  ; Tyrogue
-    db PAL_YELLOWMON ; Pichu
-    db PAL_PINKMON   ; Cleffa
-    db PAL_PINKMON   ; Igglybuff
-    db PAL_PURPLE_TRAINER ; Smoochum
-    db PAL_YELLOWMON ; Elekid
-    db PAL_REDMON    ; Magby
-    db PAL_PURPLEMON ; Mime Jr
-    db PAL_PINKMON   ; Happiny
-    db PAL_MEWMON    ; Munchlax
+	db PAL_REDMON    ; Slugma
+	db PAL_REDMON    ; Magcargo
+	db PAL_REDMON    ; Torkoal
+	db PAL_REDMON    ; Latias
+	db PAL_BLUEMON   ; Latios
+	db PAL_BROWNMON  ; Hitmontop
+	db PAL_BROWNMON  ; Tyrogue
+	db PAL_YELLOWMON ; Pichu
+	db PAL_PINKMON   ; Cleffa
+	db PAL_PINKMON   ; Igglybuff
+	db PAL_PURPLE_TRAINER ; Smoochum
+	db PAL_YELLOWMON ; Elekid
+	db PAL_REDMON    ; Magby
+	db PAL_PURPLEMON ; Mime Jr
+	db PAL_PINKMON   ; Happiny
+	db PAL_MEWMON    ; Munchlax
 	
-TrainerPalletes:
+TrainerPalettes:
 	db PAL_GREYMON           ; UNUSED
 	db PAL_BLUE_TRAINER      ; Youngster
 	db PAL_GREEN_TRAINER     ; Bug Catcher
