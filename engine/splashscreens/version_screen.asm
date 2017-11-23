@@ -3,6 +3,10 @@ DisplayHackVersionScreen::
 ; Start by clearing and turning off the screen
 	call ClearScreen
 	call DisableLCD
+; load screen palettes
+	ld b, SET_PAL_VERSION_SCREEN
+	call RunPaletteCommand
+	
 ; load the graphics for the screen
 	ld hl, VersionScreenTiles
 	ld de, vChars2

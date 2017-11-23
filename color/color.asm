@@ -131,6 +131,12 @@ SetPal_Battle_Common:
 	call DeterminePaletteID
 	pop bc
 	ld c, a
+	
+	; Save both IDs
+	ld a, [wBattleMonSpecies]
+	ld d, a
+	ld a, [wEnemyMonSpecies2]
+	ld e, a
 
 	ld a,$02
 	ld [rSVBK],a
@@ -138,20 +144,36 @@ SetPal_Battle_Common:
 	; Save the player mon's palette in case it transforms later
 	ld a,b
 	ld [W2_BattleMonPalette],a
+	ld a, e
+	push af
+	ld a, d
 
 	; Player palette
 	push bc
 	ld d,b
 	ld e,0
-	callba LoadSGBPalette
+	and a
+	jr z, .loadTrainerPal
+	callba LoadPokemonPalette
+	jr .loadEnemyPal
+.loadTrainerPal
+	callba LoadTrainerPalette
 
 	; Enemy palette
+.loadEnemyPal
 	pop bc
+	pop af
 	ld d,c
 	ld e,1
-	callba LoadSGBPalette
+	and a
+	jr z, .loadTrainerPal2
+	callba LoadPokemonPalette
+	jr .loadLifebarPal
+.loadTrainerPal2
+	callba LoadTrainerPalette
 
 	; Player lifebar
+.loadLifebarPal
 	ld a, [wPlayerHPBarColor]
 	add PAL_GREENBAR
 	ld d,a
@@ -311,7 +333,7 @@ SetPal_StatusScreen:
 	pop af
 	ld d,a
 	ld e,0
-	callba LoadSGBPalette
+	callba LoadPokemonPalette
 
 
 	; Set palette map
@@ -370,7 +392,7 @@ SetPal_Pokedex:
 	ld a,2
 	ld [rSVBK],a
 
-	callba LoadSGBPalette
+	callba LoadPokemonPalette
 
 	ld d,PAL_REDMON
 	ld e,1
@@ -472,7 +494,7 @@ SetPal_TitleScreen:
 	ld a,2
 	ld [rSVBK],a
 
-	callba LoadSGBPalette
+	callba LoadPokemonPalette
 
 	ld d,PAL_LOGO2	; Title logo
 	ld e,1
@@ -486,9 +508,9 @@ SetPal_TitleScreen:
 	ld e,3
 	callba LoadSGBPalette
 
-	ld d, PAL_MEWMON ; PAL_HERO
+	ld d, PAL_PROF_OAK
 	ld e,0
-	callba LoadSGBPalette_Sprite
+	callba LoadTrainerPalette_Sprite
 
 	; Start drawing the palette map
 
@@ -558,9 +580,9 @@ SetPal_NidorinoIntro:
 	ld a,2
 	ld [rSVBK],a
 
-	ld d, PAL_PURPLEMON ; PAL_NIDORINO
+	ld d, PAL_NIDORINO
 	ld e,0
-	callba LoadSGBPalette_Sprite
+	callba LoadPokemonPalette_Sprite
 
 	ld d, PAL_PURPLEMON
 	ld e,0
@@ -731,7 +753,7 @@ SetPal_PokemonWholeScreen:
 	ld [rSVBK],a
 
 	ld e,0
-	callba LoadSGBPalette
+	callba LoadPokemonPalette
 
 	ld d, PAL_MEWMON
 	ld e, 1
@@ -848,9 +870,9 @@ SetPal_TrainerCard:
 	callba LoadSGBPalette
 
 	; Red's palette
-	ld d, PAL_MEWMON ; PAL_HERO
+	ld d, PAL_HERO
 	ld e,4
-	callba LoadSGBPalette
+	callba LoadTrainerPalette
 
 	; Palette for border tiles
 	ld d, PAL_REDMON
@@ -915,6 +937,251 @@ SetPal_NameEntry:
 	CALL_INDIRECT LoadOverworldSpritePalettes
 
 	CALL_INDIRECT ClearSpritePaletteMap
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+; Set the whole screen to one palette
+; like SetPal_PokemonWholeScreen but 
+; [wWholeScreenPaletteMonSpecies] is palette id
+; from SuperPalettes instead of mon id
+SetPal_WholeScreen:
+	ld a, [wWholeScreenPaletteMonSpecies]
+
+	ld d,a
+	ld a,2
+	ld [rSVBK],a
+
+	ld e,0
+	callba LoadSGBPalette
+
+	ld d, PAL_MEWMON
+	ld e, 1
+	push de
+.loop
+	callba LoadSGBPalette
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop
+	pop de
+
+	ld d, PAL_MEWMON
+	ld e, 0
+	push de
+.loop_sprites
+	callba LoadSGBPalette_Sprite
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop_sprites
+	pop de
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+
+	inc a ; ld a,1
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+; Set the whole screen to one trainer palette
+; like SetPal_PokemonWholeScreen but 
+; [wWholeScreenPaletteMonSpecies] is trainer id
+; instead of mon id
+SetPal_TrainerWholeScreen:
+	ld a, [wTrainerPicID]
+	push af
+	ld a, [wWholeScreenPaletteMonSpecies]
+	ld [wTrainerPicID], a
+	xor a	
+	call DeterminePaletteID
+	ld [wWholeScreenPaletteMonSpecies], a
+	pop af
+	ld [wTrainerPicID], a
+	ld a, [wWholeScreenPaletteMonSpecies]
+
+	ld d,a
+	ld a,2
+	ld [rSVBK],a
+
+	ld e,0
+	callba LoadTrainerPalette
+
+	ld d, PAL_MEWMON
+	ld e, 1
+	push de
+.loop
+	callba LoadSGBPalette
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop
+	pop de
+
+	ld d, PAL_MEWMON
+	ld e, 0
+	push de
+.loop_sprites
+	callba LoadSGBPalette_Sprite
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop_sprites
+	pop de
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+
+	inc a ; ld a,1
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+SetPal_VersionScreen:
+	ld a,2
+	ld [rSVBK],a
+
+	ld d,PAL_CYANMON
+	ld e,0
+	callba LoadSGBPalette
+
+	ld d, PAL_PIKACHU
+	ld e, 1
+	callba LoadPokemonPalette
+
+	ld d, PAL_MEWMON
+	ld e, 2
+	push de
+.loop
+	callba LoadSGBPalette
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop
+	pop de
+
+	ld d, PAL_MEWMON
+	ld e, 0
+	push de
+.loop_sprites
+	callba LoadSGBPalette_Sprite
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop_sprites
+	pop de
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+	
+	ld hl,W2_TilesetPaletteMap+12*20+1
+	ld a,1
+	ld b,4
+	ld c,4
+	call FillBox
+
+	inc a ; ld a,1
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+SetPal_GenderSelect:
+	ld a,2
+	ld [rSVBK],a
+
+	ld d,PAL_PLAYER_M
+	ld e,0
+	callba LoadTrainerPalette
+
+	ld d, PAL_PLAYER_F
+	ld e, 1
+	callba LoadTrainerPalette
+
+	ld d, PAL_MEWMON
+	ld e, 2
+	push de
+.loop
+	callba LoadSGBPalette
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop
+	pop de
+
+	ld d, PAL_MEWMON
+	ld e, 0
+	push de
+.loop_sprites
+	callba LoadSGBPalette_Sprite
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop_sprites
+	pop de
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+	
+	ld hl,W2_TilesetPaletteMap+2*20+7
+	ld a,1
+	ld b,10
+	ld c,5
+	call FillBox
+
+	inc a ; ld a,1
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
 
 	xor a
 	ld [rSVBK],a

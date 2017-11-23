@@ -19,6 +19,44 @@ LoadSGBPalette:
 	ld de,W2_BgPaletteData
 	jr startPaletteTransfer
 
+LoadPokemonPalette:
+	ld a,[rSVBK]
+	ld b,a
+	ld a,2
+	ld [rSVBK],a
+	push bc
+
+	ld a,e
+	ld l,d
+	ld h,0
+	add hl
+	add hl
+	add hl
+	ld de,PokemonPaletteTable
+	add hl,de
+
+	ld de,W2_BgPaletteData
+	jr startPaletteTransfer
+
+LoadTrainerPalette:
+	ld a,[rSVBK]
+	ld b,a
+	ld a,2
+	ld [rSVBK],a
+	push bc
+
+	ld a,e
+	ld l,d
+	ld h,0
+	add hl
+	add hl
+	add hl
+	ld de,TrainerPaletteTable
+	add hl,de
+
+	ld de,W2_BgPaletteData
+	jr startPaletteTransfer
+
 LoadSGBPalette_Sprite:
 	ld a,[rSVBK]
 	ld b,a
@@ -36,6 +74,45 @@ LoadSGBPalette_Sprite:
 	add hl,de
 
 	ld de,W2_BgPaletteData + $40
+	jr startPaletteTransfer
+
+LoadPokemonPalette_Sprite:
+	ld a,[rSVBK]
+	ld b,a
+	ld a,2
+	ld [rSVBK],a
+	push bc
+
+	ld a,e
+	ld l,d
+	ld h,0
+	add hl
+	add hl
+	add hl
+	ld de,PokemonPaletteTable
+	add hl,de
+
+	ld de,W2_BgPaletteData + $40
+	jr startPaletteTransfer
+
+LoadTrainerPalette_Sprite:
+	ld a,[rSVBK]
+	ld b,a
+	ld a,2
+	ld [rSVBK],a
+	push bc
+
+	ld a,e
+	ld l,d
+	ld h,0
+	add hl
+	add hl
+	add hl
+	ld de,TrainerPaletteTable
+	add hl,de
+
+	ld de,W2_BgPaletteData + $40
+	;jr startPaletteTransfer
 
 startPaletteTransfer:
 	add a

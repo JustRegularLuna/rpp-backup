@@ -57,15 +57,19 @@ OakSpeech:
 	call SpecialWarpIn
 	xor a
 	ld [hTilesetType],a
-	ld a, PAL_MEWMON ; PAL_OAK
-	call GotPalID ; HAX
+	;ld a, PAL_PROF_OAK
+	;call GotIntroTrainerPalID ; HAX
 	;ld a,[wd732]
 	;bit 1,a ; possibly a debug mode bit
 	;jp nz,.skipChoosingNames
 	
 	callba DisplayHackVersionScreen
 	
+	call GBFadeOutToWhite
+	ld b, SET_PAL_GENDER_SELECT
+	call RunPaletteCommand
 	callba ShowPlayerLargePics
+	call FadeInIntroPic
 	
 	ld hl,BoyGirlText  ; added to the same file as the other oak text
 	call PrintText     ; show this text
@@ -73,8 +77,14 @@ OakSpeech:
 	ld a, [wCurrentMenuItem]
 	ld [wPlayerGender], a ; store player's gender. 00 for boy, 01 for girl
 	
+	call GBFadeOutToWhite
 	call ClearScreen ; to erase the large player images after choosing gender
+	ld a, PAL_MEWMON
+	ld [wWholeScreenPaletteMonSpecies], a
+	ld b, SET_PAL_WHOLE_SCREEN
+	call RunPaletteCommand
 	
+	call GBPalNormal
 	ld hl,ShouldMonsObeyText
 	call PrintText
 	call YesNoChoice
@@ -85,6 +95,7 @@ OakSpeech:
 	set 2,[hl]
 .canDisobey
 	call ClearScreen ; clear the screen before resuming normal intro
+	call GetOakPalID
 	ld de,ProfOakPic
 	lb bc, Bank(ProfOakPic), $00
 	call IntroDisplayPicCenteredOrUpperRight
@@ -93,7 +104,7 @@ OakSpeech:
 	call PrintText
 	call GBFadeOutToWhite
 	;call ClearScreen
-	call GetNidorinoPalID ; HAX
+	call GetSylveonPalID ; HAX
 	ld a,SYLVEON
 	ld [wd0b5],a
 	ld [wcf91],a

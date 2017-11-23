@@ -1,27 +1,42 @@
 ; Helper functions for oak intro
 
-GetNidorinoPalID:
+GetOakPalID:
+	ld a, PAL_PROF_OAK
+	jr GotIntroTrainerPalID
+
+GetSylveonPalID:
 	call ClearScreen
-	ld a, PAL_MEWMON ; PAL_PURPLEMON ; PAL_NIDORINO
-	jr GotPalID
+	ld a, PAL_SYLVEON
+	jr GotIntroMonPalID
 
 GetRedPalID:
 	call ClearScreen
-	ld a, PAL_MEWMON ; PAL_HERO
-	jr GotPalID
+	ld a, PAL_HERO
+	jr GotIntroTrainerPalID
 
 GetRivalPalID:
 	call ClearScreen
-	ld a, PAL_MEWMON ; PAL_GARY1
-	jr GotPalID
+	ld a, PAL_GARY1
+	jr GotIntroTrainerPalID
 
-GotPalID:
+GotIntroMonPalID:
 	ld e,0
 	ld d,a
 
 	ld a,2
 	ld [rSVBK],a
-	CALL_INDIRECT LoadSGBPalette
+	CALL_INDIRECT LoadPokemonPalette
+	xor a
+	ld [rSVBK],a
+	ret
+
+GotIntroTrainerPalID:
+	ld e,0
+	ld d,a
+
+	ld a,2
+	ld [rSVBK],a
+	CALL_INDIRECT LoadTrainerPalette
 	xor a
 	ld [rSVBK],a
 	ret
