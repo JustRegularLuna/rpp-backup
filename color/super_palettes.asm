@@ -1,6 +1,4 @@
-SECTION "bank3F",ROMX,BANK[$3F]
-
-; Note: after calling this, you may need to set W2_ForcePaletteUpdate to nonzero.
+; Note: after calling this, you may need to set W2_ForceBGPUpdate/ForceOBPUpdate to nonzero.
 LoadSGBPalette:
 	ld a,e
 	ld l,d

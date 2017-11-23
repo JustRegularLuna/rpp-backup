@@ -3,6 +3,7 @@
 
 ; Viridian forest sand candidate: RGB 31,31,19
 
+MapPalettes:
 ; 0x00
 	RGB 31,31,31
 	RGB 21,21,21

@@ -1,16 +1,8 @@
-SECTION "bank3C",ROMX,BANK[$3C]
+INCLUDE "color/data/mappalettes.asm"
+INCLUDE "color/data/map_palette_sets.asm"
+INCLUDE "color/data/map_palette_assignments.asm"
+INCLUDE "color/data/roofpalettes.asm"
 
-MapPalettes:
-	INCLUDE "color/mappalettes.asm"
-
-	ORG $3c, $4200
-	INCLUDE "color/map_palette_sets.asm"
-
-	ORG $3c, $4300
-	INCLUDE "color/map_palette_assignments.asm"
-
-
-	ORG $3c, $6000
 ; Load colors for new map and tile placement
 LoadTilesetPalette:
 	push bc
@@ -31,11 +23,15 @@ LoadTilesetPalette:
 
 	ld a,b ; Get wCurMapTileset
 	push af
+	ld d,0
 	ld e,a
 	sla e
 	sla e
 	sla e
-	ld d, MapPaletteSets>>8	; de points to map palette indices
+	ld hl, MapPaletteSets
+	add hl,de
+	ld d,h
+	ld e,l
 	ld hl,W2_BgPaletteData ; palette data to be copied to wram at hl
 	ld b,$08
 .nextPalette
@@ -92,19 +88,60 @@ LoadTilesetPalette:
 	dec b
 	jr nz,.copyLoop
 
-	; Set the remaining values to zero
+	; Set the remaining values to 7 for text
 	ld b,$a0
-	xor a
+	ld a,7
 .fillLoop
 	ld [hli],a
 	dec b
 	jr nz,.fillLoop
 
 	; Exception:
-	; Tile $78, which is either a pokeball, or an unused japanese character.
+	; Tile $78, which is either a pokeball (in the PC), or an unused japanese character.
 	ld a, 3
 	ld [W2_TilesetPaletteMap + $78], a
 
+	; Switch to wram bank 1 just to read wCurMap
+	xor a
+	ld [rSVBK],a
+	ld a,[wCurMap]
+	ld b,a
+	ld a,2
+	ld [rSVBK],a
+
+	; Check for celadon mart roof (make the "outside" blue)
+	ld a,b
+	cp $7e
+	jr nz,.notCeladonRoof
+	ld a,BLUE
+	ld hl,W2_TilesetPaletteMap + $4b
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+	ld [hli],a
+.notCeladonRoof
+	; Check for celadon 3rd floor (fix miscoloration on counter)
+	ld a,b
+	cp $7c
+	jr nz,.notCeladon3rd
+	ld hl,W2_TilesetPaletteMap + $37
+	ld [hl],BROWN
+.notCeladon3rd
+	; Check for celadon 1st floor (change bench color from blue to yellow)
+	ld a,b
+	cp $7a
+	jr nz,.notCeladon1st
+	ld hl,W2_TilesetPaletteMap + $07
+	ld a,YELLOW
+	ld [hli],a
+	ld [hli],a
+	ld l,$17
+	ld [hli],a
+	ld [hli],a
+.notCeladon1st
+
+	; Retrieve former wram bank
 	pop af
 	ld b,a
 
@@ -127,7 +164,6 @@ LoadTilesetPalette:
 	pop bc
 	ret
 
-	ORG $3c, $6200
 ; Towns have different roof colors while using the same tileset
 LoadTownPalette:
 	ld a,[rSVBK]
@@ -168,7 +204,3 @@ LoadTownPalette:
 	pop af
 	ld [rSVBK],a ; Restore wram bank
 	ret
-
-
-	ORG $3c, $7000
-	INCLUDE "color/roofpalettes.asm"

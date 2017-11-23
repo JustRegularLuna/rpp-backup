@@ -155,10 +155,10 @@ VermilionDock_EmitSmokePuff:
 	ret
 
 VermilionDockOAMBlock:
-	db $fc, $10
-	db $fd, $10
-	db $fe, $10
-	db $ff, $10
+	db $fc, $13
+	db $fd, $13
+	db $fe, $13
+	db $ff, $13
 
 VermilionDock_1dc7c:
 	ld h, d
@@ -180,14 +180,13 @@ VermilionDock_1dc7c:
 
 VermilionDock_EraseSSAnne:
 ; Fill the area the S.S. Anne occupies in BG map 0 with water tiles.
-	ld hl, wVermilionDockTileMapBuffer
-	ld bc, (5 * BG_MAP_WIDTH) + SCREEN_WIDTH
-	ld a, $14 ; water tile
-	call FillMemory
-	ld hl, vBGMap0 + 10 * BG_MAP_WIDTH
-	ld de, wVermilionDockTileMapBuffer
-	ld bc, (6 * BG_MAP_WIDTH) / 16
-	call CopyVideoData
+; HAX: call another function to do this (also updates palettes).
+	CALL_INDIRECT EraseSSAnneWithColor
+
+; Padding to prevent data shifting
+rept 17
+	nop
+endr
 
 ; Replace the blocks of the lower half of the ship with water blocks. This
 ; leaves the upper half alone, but that doesn't matter because replacing any of

@@ -70,21 +70,6 @@ AutoBgMapTransfer: ; HAXED function
 	ld [MBC1RomBank],a
 	ret
 
-; More HAX functions
-
-_RefreshWindowInitial: ; 1d65
-	ld a,BANK(RefreshWindowInitial)
-	ld [$2000],a
-	jp RefreshWindowInitial
-
-HaxFunc3: ; 1d6d
-	ld a,[H_LOADEDROMBANK]
-	ld [$2000],a
-	ret
-
-; HAX: This function is reimplemented.
-;TransferBgRows:: ; 1d9e (0:1d9e)
-; unrolled loop and using pop for speed
 
 ; HAX: Squeeze this little function in here
 _GbcPrepareVBlank:
@@ -99,10 +84,15 @@ _GbcPrepareVBlank:
 	pop af
 	reti
 
-;SECTION "JpPoint", ROM0[$1dde]
+; Prevent data shifting
+;SECTION "JpPoint", ROM0[$1dd9]
 
-JpPoint:
-	jp _RefreshWindowInitial	; HAX
+; HAX: This function is reimplemented elsewhere.
+; Note: doesn't restore the bank after. Should be fine since it's called from vblank
+TransferBgRows::
+	ld a,BANK(WindowTransferBgRowsAndColors)
+	ld [$2000],a
+	jp WindowTransferBgRowsAndColors
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.
 ; If H_VBCOPYBGSRC is XX00, the transfer is disabled.
@@ -128,7 +118,7 @@ VBlankCopyBgMap::
 	ld b,a
 	xor a
 	ld [H_VBCOPYBGSRC],a ; disable transfer so it doesn't continue next V-blank
-	jr JpPoint	; HAX
+	jr TransferBgRows
 
 
 VBlankCopyDouble::

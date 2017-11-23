@@ -1,4 +1,3 @@
-SECTION "bank3D",ROMX,BANK[$3D]
 ; Handles sprite attributes
 
 ATK_PAL_GREY    EQU 0
@@ -16,7 +15,7 @@ PAL_BLUE	EQU 1
 PAL_GREEN	EQU 2
 PAL_BROWN	EQU 3
 
-LoadSpritePalettes:
+LoadOverworldSpritePalettes:
 	ld hl,SpritePalettes
 	jr LoadPaletteData
 
@@ -36,18 +35,19 @@ LoadPaletteData:
 	ld [W2_LastOBP0],a
 	ret
 
-; Set overworld sprite colors
+; Set an overworld sprite's colors
 ; On entering, A contains the flags (without a color palette) and de is the destination.
-ColorOverworldSprites:
+; This is called in the middle of a loop in engine/overworld/oam.asm, once per sprite.
+ColorOverworldSprite:
 	push af
 	push bc
 	push de
 	and $f8
 	ld b,a
 
-	ld a,[$ff8f]
+	ld a,[hSpriteOffset2]
 	ld e,a
-	ld d,$c1
+	ld d,wSpriteStateData1>>8
 	ld a,[de]		; Load A with picture ID
 	dec a
 
@@ -64,7 +64,7 @@ ColorOverworldSprites:
 	jr nz,.norandomColor
 
 	; This is a (somewhat) random but consistent color
-	ld a,[$ff8f]
+	ld a,[hSpriteOffset2]
 	swap a
 	and 3
 
@@ -79,8 +79,14 @@ ColorOverworldSprites:
 	pop af
 	ret
 
-; Currently this just colorizes attack sprites but it can be
-; used in other non-overworld scenarios.
+; This is called whenever [wUpdateSpritesEnabled] != 1 (overworld sprites not enabled?).
+;
+; This sometimes does occur on the overworld, such as when exclamation marks appear, and
+; when trees are being cut or boulders are being moved. Though, when in the overworld,
+; W2_SpritePaletteMap is all blanked out (set to 9) except for the exclamation mark tile,
+; so this function usually won't do anything.
+;
+; This colorizes: attack sprites, party menu, exclamation mark, perhaps more?
 ColorNonOverworldSprites:
 	ld a,2
 	ld [rSVBK],a
@@ -101,7 +107,7 @@ ColorNonOverworldSprites:
 	ld a,[de]
 	cp 8 ; if 8, colorize based on attack type
 	jr z,.getAttackType
-	cp 9 ; if 9, do not colorize
+	cp 9 ; if 9, do not colorize (use whatever palette it's set to already)
 	jr nz,.setPalette
 	xor a
 	jr .setPalette
@@ -137,8 +143,8 @@ ColorNonOverworldSprites:
 	ld [rSVBK],a
 	ret
 
+; Called when starting a battle
 LoadAnimationTilesetPalettes:
-	di
 	push de
 	ld a,[wWhichBattleAnimTileset] ; Animation tileset
 	ld c,a
@@ -165,11 +171,15 @@ LoadAnimationTilesetPalettes:
 	dec b
 	jr nz,.copyLoop
 
+	ld a,1
+	ld [W2_ForceOBPUpdate],a
+
 	xor a
 	ld [rSVBK],a
 
 	pop de
-	reti
+	ret
+
 
 ; Set all sprite palettes to not be colorized by "ColorNonOverworldSprites".
 ; ASSUMES THAT WRAM BANK 2 IS LOADED.
@@ -183,10 +193,6 @@ ClearSpritePaletteMap:
 	jr nz,.loop
 	ret
 
-
-	ORG $3d, $6000
-
-	jp ColorOverworldSprites
 
 SpritePaletteAssignments: ; Characters on the overworld
 	; 0x01: SPRITE_RED
@@ -385,7 +391,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_ORANGE
 
 	; 0x42: SPRITE_CLIPBOARD
-	db PAL_ORANGE
+	db PAL_BROWN
 
 	; 0x43: SPRITE_SNORLAX
 	db PAL_ORANGE
@@ -407,21 +413,21 @@ SpritePaletteAssignments: ; Characters on the overworld
 
 
 AnimationTileset1Palettes:
-	INCBIN "color/animtileset1palettes.bin"
+	INCBIN "color/data/animtileset1palettes.bin"
 
 AnimationTileset2Palettes:
-	INCBIN "color/animtileset2palettes.bin"
+	INCBIN "color/data/animtileset2palettes.bin"
 
 TypeColorTable: ; Used for a select few sprites to be colorized based on attack type
 	db 0 ; NORMAL EQU $00
 	db 0 ; FIGHTING EQU $01
 	db 0 ; FLYING EQU $02
-	db 0 ; POISON EQU $03
-	db 0 ; GROUND EQU $04
-	db 0 ; ROCK EQU $05
+	db 7 ; POISON EQU $03
+	db 3 ; GROUND EQU $04
+	db 3 ; ROCK EQU $05
 	db 0
 	db 0 ; BUG EQU $07
-	db 0 ; GHOST EQU $08
+	db 7 ; GHOST EQU $08
 	db 0
 	db 0
 	db 0
@@ -435,10 +441,10 @@ TypeColorTable: ; Used for a select few sprites to be colorized based on attack 
 	db 0
 	db 2 ; FIRE EQU $14
 	db 1 ; WATER EQU $15
-	db 0 ; GRASS EQU $16
-	db 0 ; ELECTRIC EQU $17
-	db 0 ; PSYCHIC EQU $18
-	db 0 ; ICE EQU $19
+	db 5 ; GRASS EQU $16
+	db 4 ; ELECTRIC EQU $17
+	db 7 ; PSYCHIC EQU $18
+	db 6 ; ICE EQU $19
 	db 1 ; DRAGON EQU $1A
 
-INCLUDE "color/spritepalettes.asm"
+INCLUDE "color/data/spritepalettes.asm"

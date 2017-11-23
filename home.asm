@@ -1,4 +1,3 @@
-; HAX: rst vectors taken over to indirectly call color-related functions
 SECTION "rst 00", ROM0 [$00]
 _LoadMapVramAndColors:
 	ld a,[H_LOADEDROMBANK]
@@ -23,10 +22,6 @@ SECTION "rst 18", ROM0 [$18]
 	jp Bankswitch
 
 SECTION "rst 20", ROM0 [$20]
-_ColorOverworldSprites:
-	push af
-	ld a,BANK(ColorOverworldSprites)
-	jp CallToBank
 
 SECTION "rst 28", ROM0 [$28]
 	rst $38
@@ -40,7 +35,7 @@ SECTION "vblank", ROM0 [$40]
 	push hl
 	ld hl, VBlank
 	jp InterruptWrapper
-SECTION "lcdc",   ROM0 [$48]
+SECTION "hblank",   ROM0 [$48] ; HAX: interrupt wasn't used in original game
 	push hl
 	ld hl, _GbcPrepareVBlank
 	jp InterruptWrapper
@@ -111,43 +106,49 @@ INCLUDE "home/copy.asm"
 
 SECTION "ColorizationHome",HOME[$be]
 
-_InitGbcMode:
-	ld b,BANK(InitGbcMode)
-	ld hl,InitGbcMode
-	rst $18 ; Bankswitch
-	ret
-
 InitializeColor:
 	cp $11
 	jr nz,IsNotGBC
 	call _InitGbcMode
 	jp Start
 .IsNotGBC
+	; Wants to call $30:$6000?
 	ld a,$30
 	ld [$2000],a
+loop3:
 	jr loop3
 
-_LoadTilesetPatternsAndPalettes: ; $00e1
-	push af
-	ld a, BANK(LoadTilesetPalette)
-loop3
-	ld [$2000],a
-	call asm00f5
-	pop af
-	call LoadTilesetTilePatternData
-	ret
 
-CallToBank:
-	ld [$2000],a
-	pop af
-asm00f5:
-	push af
-	call $6000
+; Indirect function callers for color code
+
+_InitGbcMode:
+	jpab InitGbcMode
+
+
+; Called once for each sprite. This needs to preserve variables, so it can't use
+; BankSwitch.
+_ColorOverworldSprite:
+	ld [H_SPTEMP],a ; Borrow this as memory not in use right now
+
 	ld a,[H_LOADEDROMBANK]
-	ld [$2000],a
+	push af
+
+	ld a,BANK(ColorOverworldSprite)
+	ld [H_LOADEDROMBANK],a
+	ld [MBC1RomBank],a
+
+	ld a,[H_SPTEMP]
+	call ColorOverworldSprite
+
+	ld [H_SPTEMP],a
 	pop af
+	ld [H_LOADEDROMBANK],a
+	ld [MBC1RomBank],a
+	ld a,[H_SPTEMP]
 	ret
 
+
+; Soft reset code (clears memory then goes to normal code)
 SoftReset:
 	ld b,BANK(ClearGbcMemory)
 	ld hl,ClearGbcMemory
@@ -4799,6 +4800,11 @@ GBFadeOut_Custom:
 	ld b,$04
 	jp GBFadeIncCommon
 
+
+; Note: this saves rSVBK before calling an interrupt. It would also make sense to save
+; rVBK. However, doing that would break the code that fixes the ss anne's palettes on
+; departure. Instead, just be careful not to set the vram bank to 1 while interrupts are
+; enabled...? (Or better yet do the ss anne fix properly...)
 InterruptWrapper:
 	push af
 	push bc
@@ -4834,12 +4840,12 @@ DelayFrameHook:
 	ld [rSVBK],a
 	push bc ; Save wram bank
 
-	di
+	; Calling "PrepareOAMData" here instead of at vblank to prevent sprite wobbliness
 	CALL_INDIRECT PrepareOAMData
 	jr z, .spritesDrawn
+
 	CALL_INDIRECT ColorNonOverworldSprites
 .spritesDrawn
-	ei
 
 	pop af
 	ld [rSVBK],a ; Restore wram bank

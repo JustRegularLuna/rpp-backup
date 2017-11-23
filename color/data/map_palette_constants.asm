@@ -73,4 +73,4 @@ const_value = 0
 	const YELLOW    ; 04
 	const BROWN     ; 05
 	const ROOF      ; 06
-	const TEXT      ; 07 ***Gen 2 Text Palette, not actually used for Text here
+	const TEXT      ; 07

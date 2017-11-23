@@ -100,7 +100,7 @@ VBlank::
 	pop de
 	pop bc
 	pop af
-	reti
+	ret
 
 
 DelayFrame::

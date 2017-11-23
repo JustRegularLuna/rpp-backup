@@ -14,11 +14,11 @@ W2_TilesetPaletteMap	EQU $d200
 W2_SpritePaletteMap		EQU $d400
 
 ; Palette calculations for wTileMap are stored here before vblank.
-W2_ScreenPalettesBuffer	EQU $d500 ; 32x6 bytes (DMA-able), $d500-$d5c0
+W2_ScreenPalettesBuffer        EQU $d500 ; 32x6 bytes (DMA-able), $d500-$d5c0
 
 W2_TownMapLoaded               EQU $d700
 W2_TileBasedPalettes           EQU $d701
-W2_StaticPaletteChanged        EQU $d702 ; Set to a number >=3 if palette map is modified, since the window is drawn in thirds. Only for when TileBasedPalettes == 0.
+W2_StaticPaletteMapChanged     EQU $d702 ; Set to a number >=3 if palette map is modified, since the window is drawn in thirds. Only for when TileBasedPalettes == 0.
 W2_UseOBP1                     EQU $d703 ; If set, sprite palettes 4-7 use OBP1 instead of OBP0
 W2_BgPaletteDataBuffer         EQU $d704
 W2_SprPaletteDataBuffer        EQU $d744
@@ -26,13 +26,22 @@ W2_SprPaletteDataBuffer        EQU $d744
 W2_BgPaletteDataModified       EQU $d784
 W2_SprPaletteDataModified      EQU $d785
 
-; Analagous to StaticPaletteChanged, but only used between Pre-vblank and
+; Analagous to StaticPaletteMapChanged, but only used between Pre-vblank and
 ; actual-vblank routines.
-W2_StaticPaletteModified       EQU $d786
+W2_StaticPaletteMapChanged_vbl EQU $d786
 
+; Former value of [H_AUTOBGTRANSFERDEST+1]. Should be $98 or $9c.
 W2_LastAutoCopyDest            EQU $d787
 
-W2_ForcePaletteUpdate          EQU $d788
+W2_ForceBGPUpdate              EQU $d788
+W2_ForceOBPUpdate              EQU $d789
+
+; Set to 0 when vblank has updated W2_PreVBlankWindowPortion. Used to make sure that the
+; pre-vblank routines are in sync with the vblank routines.
+W2_UpdatedWindowPortion        EQU $d78a
+
+; Set if a row or column was drawn during the current vblank.
+W2_DrewRowOrColumn             EQU $d78b
 
 ; In bank 1, the stack starts at $dfff. So, that's also the stack here when bank 2 is
 ; loaded. Don't use anything too close to there.
