@@ -728,7 +728,7 @@ PlayMapChangeSound::
 	ld a,[wMapPalOffset]
 	and a
 	ret nz
-	jp GBFadeOut_Custom ; HAX: Fade to white instead of black. Looks nicer IMO.
+	jp GBFadeOutToWhite ; HAX: Fade to white instead of black. Looks nicer IMO.
 
 CheckIfInOutsideMap::
 ; If the player is in an outside map (a town or route), set the z flag

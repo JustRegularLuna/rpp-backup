@@ -19,21 +19,16 @@ _RunPaletteCommand:
 	ld h, [hl]
 	ld l, a
 
-	;ld de, SetPalettesAndMaps ; $6156
-
-	ld de,PalCmdRet
+	ld de,SetPalRet
 	push de
-
-	;di
  	jp [hl]
 
-PalCmdRet:
-	;ei
+SetPalRet:
 	ret
 
 
 ; HAX: Custom functions squeezed in here
-; Before, PalCmd functions were here
+; Before, SetPal functions were here
 
 WaitForVBlank:
 	ld a,[rSTAT]
@@ -42,7 +37,7 @@ WaitForVBlank:
 	jr nz,WaitForVBlank
  	ret
 
-; Palette commands are moved to the end of the bank
+; Palette commands are moved to the end of the bank (in color/color.asm)
 SetPalFunctions:
 	dw SetPal_BattleBlack
 	dw SetPal_Battle
@@ -59,8 +54,9 @@ SetPalFunctions:
 	dw SetPal_GameFreakIntro
 	dw SetPal_TrainerCard
 	; Past here are codes which didn't previously exist.
-	dw PalCmd_0e	; Set prof oak's color
-	dw PalCmd_0f	; Name entry (partially replaces 08)
+	dw SetPal_OakIntro	   ; Set prof oak's color
+	dw SetPal_NameEntry	   ; Name entry (partially replaces 08)
+	dw SetPal_BattleAfterBlack ; Like SetPal_Battle but specifically for clearing the black palettes
 
 ; HAXed to give trainers palettes independantly
 ; Also skips the "transform" check, caller does that instead
@@ -120,11 +116,6 @@ GetPaletteID:
 	ld a, [hl]
 	ret
 
-
-	;ORG $1c, $5f8f
-; each byte is the number of loops to make in .asm_71f5b for each badge
-LoopCounts_71f8f: ; 71f8f (1c:5f8f)
-	db $06,$06,$06,$12,$06,$06,$06,$06
 
 	;ORG $1c, $5fb6
 
@@ -332,4 +323,5 @@ INCLUDE "data/sgb_packets.asm"
 
 INCLUDE "data/mon_palettes.asm"
 
+; SGB border not needed in color hack
 ;INCLUDE "data/sgb_border.asm"

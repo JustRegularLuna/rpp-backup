@@ -13,7 +13,6 @@ TradeCenter_DrawPartyLists_ColorHook:
 ; Called when the "PLEASE WAIT" text shows up on starting a trade or battle.
 CableClub_DoBattleOrTrade_ColorHook:
 	call LoadCableClubTextPaletteAndMap
-	call LoadLinkBattlePokeballColors
 
 	; Opcode removed for hook
 	coord hl, 4, 10
@@ -41,26 +40,27 @@ LoadCableClubTextPaletteAndMap:
 	ret
 
 LoadCableClubTextPalette:
-	; Load red or blue color in palette 7
-IF DEF(_RED)
+	; Load red or blue color in all palettes (only palette 7 is important, but loading
+	; all palettes prevents minor artifacts)
+;IF DEF(_RED)
 	ld d, PAL_REDMON
-ENDC
-IF DEF(_BLUE)
-	ld d, PAL_BLUEMON
-ENDC
-	ld e,7
+;ENDC
+;IF DEF(_BLUE)
+;	ld d, PAL_BLUEMON
+;ENDC
+	ld e,0
+.loop:
+	push de
 	callba LoadSGBPalette
+	pop de
+	inc e
+	ld a,e
+	cp 8
+	jr nz,.loop
+
 	ld a,1
 	ld [W2_ForceBGPUpdate],a
 	ret
-
-
-; Called after a link battle, loads palettes for the pokeballs.
-EndOfBattle_ColorHook:
-	call LoadLinkBattlePokeballColors
-
-	; Opcode removed for hook
-	jpab DisplayLinkBattleVersusTextBox
 
 
 ; Called whenever the "Waiting..." text appears
@@ -72,24 +72,3 @@ PrintWaitingText:
 	call LoadCableClubTextPaletteAndMap
 .end
 	jpab PrintWaitingText_orig
-
-
-; Called by above functions, loads colors for pokeballs at battle start and end.
-LoadLinkBattlePokeballColors:
-	ld a,2
-	ld [rSVBK],a
-
-	; Set the palette the pokeball sprite uses
-	ld hl,W2_SpritePaletteMap+$31
-	xor a ; SPR_PAL_ORANGE
-	ld [hli],a
-	ld [hli],a
-	ld [hli],a
-	ld [hli],a
-
-	; Load the overworld sprite palettes for pokeball coloring
-	callab LoadOverworldSpritePalettes
-
-	xor a
-	ld [rSVBK],a
-	ret

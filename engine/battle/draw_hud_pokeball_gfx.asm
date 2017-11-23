@@ -10,7 +10,7 @@ DrawEnemyPokeballs:
 	call LoadPartyPokeballGfx
 	jp SetupEnemyPartyPokeballs
 
-LoadPartyPokeballGfx:
+LoadPartyPokeballGfx_orig: ; Name changed so color hack can hijack this
 	ld de, PokeballTileGraphics
 	ld hl, vSprites + $310
 	lb bc, BANK(PokeballTileGraphics), (PokeballTileGraphicsEnd - PokeballTileGraphics) / $10

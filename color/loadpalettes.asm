@@ -1,4 +1,4 @@
-INCLUDE "color/data/mappalettes.asm"
+INCLUDE "color/data/map_palettes.asm"
 INCLUDE "color/data/map_palette_sets.asm"
 INCLUDE "color/data/map_palette_assignments.asm"
 INCLUDE "color/data/roofpalettes.asm"
@@ -12,7 +12,7 @@ LoadTilesetPalette:
 	ld d,a
 	xor a
 	ld [rSVBK],a
-	ld a,[wCurMapTileset] ; Located in wram bank 0
+	ld a,[wCurMapTileset] ; Located in wram bank 1
 	ld b,a
 	ld a,$02
 	ld [rSVBK],a
@@ -110,7 +110,7 @@ LoadTilesetPalette:
 
 	; Check for celadon mart roof (make the "outside" blue)
 	ld a,b
-	cp $7e
+	cp CELADON_MART_ROOF
 	jr nz,.notCeladonRoof
 	ld a,BLUE
 	ld hl,W2_TilesetPaletteMap + $4b
@@ -122,14 +122,14 @@ LoadTilesetPalette:
 .notCeladonRoof
 	; Check for celadon 3rd floor (fix miscoloration on counter)
 	ld a,b
-	cp $7c
+	cp CELADON_MART_3
 	jr nz,.notCeladon3rd
 	ld hl,W2_TilesetPaletteMap + $37
 	ld [hl],BROWN
 .notCeladon3rd
 	; Check for celadon 1st floor (change bench color from blue to yellow)
 	ld a,b
-	cp $7a
+	cp CELADON_MART_1
 	jr nz,.notCeladon1st
 	ld hl,W2_TilesetPaletteMap + $07
 	ld a,YELLOW
@@ -170,7 +170,17 @@ LoadTownPalette:
 	xor a
 	ld [rSVBK],a
 
-	ld a, [wCurMap]
+	; Get the current map.
+	ld a,[wCurMap]
+	ld c,a
+	cp ROUTE_6 ; Route 6 has 2 rows in saffron city; check if player is there or not.
+	jr nz, .notRoute6
+	ld a,[wYCoord]
+	cp 2
+	jr nc, .notRoute6
+	ld c,SAFFRON_CITY
+.notRoute6
+	ld a,c
 	add a
 	ld c,a
 

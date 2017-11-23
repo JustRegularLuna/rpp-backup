@@ -21,14 +21,13 @@ SECTION "rst 10", ROM0 [$10]
 SECTION "rst 18", ROM0 [$18]
 	jp Bankswitch
 
-SECTION "rst 20", ROM0 [$20]
+; memory for rst vectors $20-$38 used by color hack
 
-SECTION "rst 28", ROM0 [$28]
-	rst $38
-SECTION "rst 30", ROM0 [$30]
-	rst $38
-SECTION "rst 38", ROM0 [$38]
-	rst $38
+SetRomBank:
+	ld [H_LOADEDROMBANK], a
+	ld [MBC1RomBank], a
+	ret
+
 
 ; interrupts
 SECTION "vblank", ROM0 [$40]
@@ -125,23 +124,21 @@ _InitGbcMode:
 ; Called once for each sprite. This needs to preserve variables, so it can't use
 ; BankSwitch.
 _ColorOverworldSprite:
-	ld [H_SPTEMP],a ; Borrow this as memory not in use right now
+	ld [hColorHackTmp],a ; Need to preserve value of 'a'
 
 	ld a,[H_LOADEDROMBANK]
 	push af
 
 	ld a,BANK(ColorOverworldSprite)
-	ld [H_LOADEDROMBANK],a
-	ld [MBC1RomBank],a
+	call SetRomBank
 
-	ld a,[H_SPTEMP]
+	ld a,[hColorHackTmp]
 	call ColorOverworldSprite
 
-	ld [H_SPTEMP],a
+	ld [hColorHackTmp],a
 	pop af
-	ld [H_LOADEDROMBANK],a
-	ld [MBC1RomBank],a
-	ld a,[H_SPTEMP]
+	call SetRomBank
+	ld a,[hColorHackTmp]
 	ret
 
 
@@ -4564,7 +4561,7 @@ GetHealthBarColor::
 ; Return at hl the palette of
 ; an HP bar e pixels long.
 	ld a, e
-	cp 27
+	cp 24 ; HAX: changed to match crystal (yellow should mean <1/2 health)
 	ld d, 0 ; green
 	jr nc, .gotColor
 	cp 10
@@ -4791,12 +4788,6 @@ SetCustomName:
 	ret z
 	jr .loop
 
-; Fade out from map screen
-GBFadeOut_Custom:
-	ld hl,FadePal5
-	ld b,$04
-	jp GBFadeIncCommon
-
 
 ; Note: this saves rSVBK before calling an interrupt. It would also make sense to save
 ; rVBK. However, doing that would break the code that fixes the ss anne's palettes on
@@ -4808,6 +4799,19 @@ InterruptWrapper:
 	push de
 	ld a,[rSVBK]
 	ld b,a
+
+	ld a,[H_LOADEDROMBANK]
+	ld c,a
+
+	; Change ROM bank if an interrupt occurred in the middle of DelayFrameHook
+	ld a,[hDelayFrameHookBank]
+	and a
+	jr z, .notInDelayFrame
+	; Change rom bank
+	dec a
+	call SetRomBank
+.notInDelayFrame
+
 	xor a
 	ld [rSVBK],a
 	ld de,.ret
@@ -4816,6 +4820,8 @@ InterruptWrapper:
 .ret
 	ld a,b
 	ld [rSVBK],a
+	ld a,c
+	call SetRomBank
 	pop de
 	pop bc
 	pop af
@@ -4832,10 +4838,20 @@ DelayFrameHook:
 	push hl
 
 	ld a, [rSVBK]
-	ld b,a
+	ld b, a
 	xor a
-	ld [rSVBK],a
+	ld [rSVBK], a
 	push bc ; Save wram bank
+
+	; Save the current rom bank to a variable. This is important because the game does
+	; not expect the "DelayFrame" function to change the rom bank. If an interrupt
+	; occurs in the middle of this hook, the interrupt wrapper will know to restore
+	; the rom bank.
+	; An alternative solution would be to use "di/ei", but that was the cause of
+	; graphical corruption in the pokemart when getting oak's parcel.
+	ld a, [H_LOADEDROMBANK]
+	inc a
+	ld [hDelayFrameHookBank], a
 
 	; Calling "PrepareOAMData" here instead of at vblank to prevent sprite wobbliness
 	CALL_INDIRECT PrepareOAMData
@@ -4844,8 +4860,14 @@ DelayFrameHook:
 	CALL_INDIRECT ColorNonOverworldSprites
 .spritesDrawn
 
+	; Clear hDelayFrameHookBank. (No need to reload the bank; that's done
+	; automatically by CALL_INDIRECT.)
+	xor a
+	ld [hDelayFrameHookBank], a
+
 	pop af
 	ld [rSVBK],a ; Restore wram bank
+
 	ld a,1
 	ld [H_VBLANKOCCURRED],a
 	pop hl

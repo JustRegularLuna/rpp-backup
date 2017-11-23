@@ -1,3 +1,6 @@
+; Most of the functions here are called during vblank, maybe they belong in vblank.asm...
+
+
 ; Called when a map is loaded. Loads tilemap and tile attributes.
 ; LCD is disabled, so we have free reign over vram.
 LoadMapVramAndColors:
@@ -42,7 +45,7 @@ LoadMapVramAndColors:
 
 
 
-; Refresh 1/3 of the window each frame
+; Refresh 1/3 of the window each frame. Called during vblank.
 RefreshWindow:
 	ld a,[H_AUTOBGTRANSFERENABLED]
 	and a
@@ -194,71 +197,78 @@ ENDR
 ; hl = destination
 ; sp = source (need to restore sp after this)
 WindowTransferBgRowsAndColors:
-label_011:
+	; Store # of rows to ocpy
 	ld a,$02
 	ld [rSVBK],a
-	ld c,$0a
-label_012:
+	ld a,b
+	ld [W2_VBCOPYBGNUMROWS],a
+	xor a
+	ld [rSVBK],a
+
+.nextRow
+	ld c,l
+; Copy tilemap
+rept 20 / 2 - 1
 	pop de
-label_013:
-	ld a,[rSTAT]
-	bit 1,a
-	jr nz,label_013
 	ld [hl],e
 	inc l
 	ld [hl],d
 	inc l
-	dec c
-	jr nz,label_012
-	ld c,$14
-label_014:
-	dec l
-	dec c
-	jr nz,label_014
-	add sp,-$14
+endr
+	pop de
+	ld [hl],e
+	inc l
+	ld [hl],d
+
+	; Go back to start of row to do palettes
+	ld l,c
+	add sp,-20
 	ld a,$01
-	ld [$ff4f],a
-	ld c,$0a
-label_015:
-	pop de
-	ld d,$d2
-label_016:
-	ld a,[$ff41]
-	bit 1,a
-	jr nz,label_016
-	ld a,[de]
-	ldi [hl],a
-	add sp,-$02
-	pop de
-	ld e,d
-	ld d,$d2
-label_017:
-	ld a,[$ff41]
-	bit 1,a
-	jr nz,label_017
-	ld a,[de]
-	ldi [hl],a
-	dec c
-	jr nz,label_015
-	xor a
-	ld [$ff4f],a
+	ld [rVBK],a
+	ld a,$02
 	ld [rSVBK],a
+
+	ld d, W2_TilesetPaletteMap>>8
+rept 20 / 2
+	pop bc
+	ld e,c
+	ld a,[de]
+	ld [hli],a
+	ld e,b
+	ld a,[de]
+	ld [hli],a
+endr
+
+	; Advance through "unused" tiles
 	ld a,$0c
 	add l
 	ld l,a
-	jr nc,label_018
+	jr nc,.noCarry
 	inc h
-label_018:
-	dec b
-	jr nz,label_011
+.noCarry
+	ld a,[W2_VBCOPYBGNUMROWS]
+	dec a
+	ld [W2_VBCOPYBGNUMROWS],a
+
+	ld a,$00 ; Don't xor so we don't change the flags
+	ld [rVBK],a
+	ld [rSVBK],a
+
+	; Jump if W2_VBCOPYBGNUMROWS is nonzero
+	jp nz,.nextRow
+
 	ld a,[H_SPTEMP]
 	ld h,a
 	ld a,[H_SPTEMP+1]
 	ld l,a
 	ld sp,hl
-	ret
+
+	; Restore ROM bank (we obviously can't do that here, so jump to bank 0)
+	ld a,[H_LOADEDROMBANK]
+	jp SetRomBank
 
 
+; Called when scrolling the screen vertically (at vblank)
 DrawMapRow:
 	ld a,2
 	ld [rSVBK],a
@@ -347,6 +357,7 @@ ENDR
 	ret
 
 
+; Called when scrolling the screen horizontally (at vblank)
 DrawMapColumn:
 	ld a,2
 	ld [rSVBK],a
@@ -370,7 +381,7 @@ DrawMapColumn:
 	ld a,31
 	add e
 	ld e,a
-jr nc,.noCarry
+	jr nc,.noCarry
 	inc d
 .noCarry
 ; the following 4 lines wrap us from bottom to top if necessary

@@ -88,10 +88,11 @@ _GbcPrepareVBlank:
 ;SECTION "JpPoint", ROM0[$1dd9]
 
 ; HAX: This function is reimplemented elsewhere.
-; Note: doesn't restore the bank after. Should be fine since it's called from vblank
+; Note: this doesn't update "H_LOADEDROMBANK", but no interrupts will occur at this time,
+; so it's fine.
 TransferBgRows::
 	ld a,BANK(WindowTransferBgRowsAndColors)
-	ld [$2000],a
+	ld [MBC1RomBank],a
 	jp WindowTransferBgRowsAndColors
 
 ; Copies [H_VBCOPYBGNUMROWS] rows from H_VBCOPYBGSRC to H_VBCOPYBGDEST.

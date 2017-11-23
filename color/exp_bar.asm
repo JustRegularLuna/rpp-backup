@@ -15,6 +15,9 @@ AnimateEXPBar:
 	call LoadMonData
 	call IsCurrentMonBattleMon
 	ret nz
+	ld a, [wBattleMonLevel]
+	cp 100
+	ret z
 	ld a, SFX_HEAL_HP
 	call PlaySoundWaitForCurrent
 	call CalcEXPBarPixelLength
@@ -116,7 +119,7 @@ CalcEXPBarPixelLength:
 	; get the base exp needed for the current level
 	ld a, [wPlayerBattleStatus3]
 	ld hl, wBattleMonSpecies
-	bit 3, a
+	bit Transformed, a ; Check if transformed
 	jr z, .skip
 	ld hl, wPartyMon1
 	call BattleMonPartyAttr

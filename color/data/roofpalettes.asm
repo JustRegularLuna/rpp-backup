@@ -16,7 +16,7 @@ RoofPalettes:
 	dw PewterRoof    ; ROUTE_3
 	dw PewterRoof    ; ROUTE_4
 	dw SaffronRoof   ; ROUTE_5
-	dw SaffronRoof   ; ROUTE_6
+	dw VermilionRoof ; ROUTE_6 (hardcoded to use SaffronRoof for top 2 rows)
 	dw SaffronRoof   ; ROUTE_7
 	dw SaffronRoof   ; ROUTE_8
 	dw LavenderRoof  ; ROUTE_9
@@ -58,16 +58,16 @@ LavenderRoof:
 	RGB 19,9,24
 
 VermilionRoof:
-	RGB 29,21,0
-	RGB 24,17,0
+	RGB 29,8,0
+	RGB 22,8,0
 
 CeladonRoof:
-	RGB 0,12,30
-	RGB 0,12,18
+	RGB 15,26,19
+	RGB 3,20,11
 
 FuchsiaRoof:
-	RGB 31,3,10
-	RGB 25,3,10
+	RGB 31,3,18
+	RGB 25,3,12
 
 CinnabarRoof:
 	RGB 29,0,0

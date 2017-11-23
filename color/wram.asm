@@ -42,12 +42,15 @@ W2_ForceOBPUpdate              EQU $d789
 ; pre-vblank routines are in sync with the vblank routines.
 W2_UpdatedWindowPortion        EQU $d78a
 
-; Set if a row or column was drawn during the current vblank.
+; Set if a row or column on the map was drawn during the current vblank.
 W2_DrewRowOrColumn             EQU $d78b
 
 ; Palette of the current pokemon (remembered here so pokemon have correct palette when
 ; transformed)
 W2_BattleMonPalette            EQU $d78c
+
+; Used by "WindowTransferBgRowsAndColors" function. Analagous to H_VBCOPYBGNUMROWS.
+W2_VBCOPYBGNUMROWS             EQU $d78d
 
 ; In bank 1, the stack starts at $dfff. So, that's also the stack here when bank 2 is
 ; loaded. Don't use anything too close to there.

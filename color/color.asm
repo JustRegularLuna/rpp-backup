@@ -28,8 +28,56 @@ SetPal_BattleBlack:
 	ld [rSVBK],a
 	ret
 
-; Set proper palettes for pokemon/trainers
+
+; This is almost identical to SetPal_Battle, but it's specifically called after the player
+; and enemy scroll in, not at other times. The only difference is the timing of when it
+; requests a palette update.
+SetPal_BattleAfterBlack:
+	call SetPal_Battle_Common
+
+	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
+	; from appearing on player/enemy silhouettes.
+	ld a,[rLCDC]
+	and rLCDC_ENABLE_MASK
+	jr z,.doneDelay
+	ld c,3
+	call DelayFrames
+.doneDelay
+
+	; Update palettes (AFTER frame delay, so the tilemap is updated after player/enemy
+	; scroll in)
+	ld a,2
+	ld [rSVBK],a
+	ld a,1
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
+	ld [rSVBK],a
+	ret
+
+; Set proper palettes for pokemon/trainers. Called a lot during battle, like when the
+; active pokemon changes.
 SetPal_Battle:
+	call SetPal_Battle_Common
+
+	; Update palettes (BEFORE frame delay, so lifebars get updated snappily)
+	ld a,2
+	ld [rSVBK],a
+	ld a,1
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
+	ld [rSVBK],a
+
+	; Wait 3 frames (if LCD is on) to allow tilemap updates to apply. Prevents garbage
+	; from appearing after closing pokemon menu.
+	ld a,[rLCDC]
+	and rLCDC_ENABLE_MASK
+	jr z,.doneDelay
+	ld c,3
+	call DelayFrames
+.doneDelay
+	ret
+
+SetPal_Battle_Common:
 	ld hl, wShinyMonFlag
 	res 0, [hl]
 	ld a, [wBattleMonSpecies]
@@ -44,7 +92,7 @@ SetPal_Battle:
 	ld hl, wShinyMonFlag
 	set 0, [hl]
 .getPALID
-	ld a, [wPlayerBattleStatus3]
+ 	ld a, [wPlayerBattleStatus3]
 	bit Transformed,a
 	jr z,.getBattleMonPal
 
@@ -172,29 +220,12 @@ SetPal_Battle:
 	ld a,3
 	ld [W2_StaticPaletteMapChanged],a
 
-	; Wait 3 frames before updating palettes (if LCD is on) to allow tilemap updates
-	; to apply. Prevents garbage from showing for a split second sometimes...
-	ld a,[rLCDC]
-	and rLCDC_ENABLE_MASK
-	jr z,.doneDelay
-	ld c,3
-	call DelayFrames
-.doneDelay
-
-	; Restore sprite palettes used by pokeballs
-	CALL_INDIRECT LoadOverworldSpritePalettes
-
-	; Do battles use obp1? Probably better to leave this unset
 	xor a
-	ld [W2_UseOBP1],a
-
-	ld a,1
-	ld [W2_ForceBGPUpdate],a ; Palettes must be redrawn
-	ld [W2_ForceOBPUpdate],a
 	ld [rSVBK],a
 
 	ld a,SET_PAL_BATTLE
 	ld [wDefaultPaletteCommand],a
+
 	ret
 
 ; hl: starting address
@@ -341,11 +372,7 @@ SetPal_Pokedex:
 
 	callba LoadSGBPalette
 
-IF DEF(_BLUE)
-	ld d,PAL_BLUEMON
-ELSE
 	ld d,PAL_REDMON
-ENDC
 	ld e,1
 	callba LoadSGBPalette
 
@@ -547,8 +574,7 @@ SetPal_NidorinoIntro:
 	ld [rSVBK],a
 	ret
 
-; used mostly for menus and the Oak intro
-; Pokedex screen
+; used mostly for menus and the Oak intro, pokedex screen
 SetPal_Generic:
 	ld a,2
 	ld [rSVBK],a
@@ -650,13 +676,13 @@ SetPal_PartyMenu:
 	ld e,3
 	callba LoadSGBPalette
 
-	; Palettes were written to a SGB packet. Extract them.
-	ld b,9		; there are only 6 pokemon but iterate 9 times to fill the whole screen
-	ld hl,wPartyMenuBlkPacket + 9
+	ld b,9 ; there are only 6 pokemon but iterate 9 times to fill the whole screen
+	ld hl,wPartyMenuHPBarColors
 	ld de,W2_TilesetPaletteMap
 .loop
-	ld a,[hl]
+	ld a,[hli]
 	and 3
+	inc a
 
 	ld c,40
 .loop2
@@ -665,9 +691,6 @@ SetPal_PartyMenu:
 	dec c
 	jr nz,.loop2
 
-	ld a,6
-	add l
-	ld l,a
 	dec b
 	jr nz,.loop
 
@@ -677,8 +700,6 @@ SetPal_PartyMenu:
 	ld [W2_StaticPaletteMapChanged],a
 	xor a
 	ld [W2_TileBasedPalettes],a
-
-	;xor a
 	ld [rSVBK],a
 	ret
 
@@ -690,7 +711,7 @@ SetPal_PartyMenu:
 ; Takes parameter 'c' from 0-2.
 ; 0: calculate palette based on loaded pokemon
 ; 1: make palettes black
-; 2: use PAL_MEWMON (used for trades?)
+; 2: previously used during trades, now unused.
 SetPal_PokemonWholeScreen:
 	ld a, c
 	dec a
@@ -761,13 +782,14 @@ SetPal_GameFreakIntro:
 	ld a,$02
 	ld [rSVBK],a
 
-	; Load default palettes
-	ld hl,MapPalettes
+	; Load "INTRO_GRAY" palette from map_palettes.asm
+	ld hl, MapPalettes + INTRO_GRAY*4
 	ld a, BANK(MapPalettes)
 	ld de,W2_BgPaletteData
 	ld bc, $08
 	call FarCopyData
 
+	; Palette 0 used by logo; palettes 0-3 used by sparkles
 	ld d, PAL_GAMEFREAK
 	ld e,0
 	callba LoadSGBPalette_Sprite
@@ -776,13 +798,32 @@ SetPal_GameFreakIntro:
 	ld e,1
 	callba LoadSGBPalette_Sprite
 
-	ld d, PAL_VIRIDIAN
+	ld d, PAL_GREENMON
 	ld e,2
 	callba LoadSGBPalette_Sprite
 
 	ld d, PAL_BLUEMON
 	ld e,3
 	callba LoadSGBPalette_Sprite
+
+	; Palette 4 used by shooting star
+	ld d, PAL_YELLOWMON
+	ld e,4
+	callba LoadSGBPalette_Sprite
+
+	; Set the star to use palette 4
+	ld a, 4
+	ld hl, W2_SpritePaletteMap+$a0
+	ld [hli], a
+	ld [hli], a
+	; Set the sparkles underneath the logo to all use different palettes (0-3)
+	ld [hl], 10
+
+	; Everything else will use palette 0 by default
+
+	; Use OBP1 just for the shooting star
+	ld a, 1
+	ld [W2_UseOBP1], a
 
 	xor a
 	ld [rSVBK],a
@@ -805,9 +846,15 @@ SetPal_TrainerCard:
 	ld d,PAL_YELLOWMON
 	ld e,3
 	callba LoadSGBPalette
+
 	; Red's palette
 	ld d, PAL_MEWMON ; PAL_HERO
 	ld e,4
+	callba LoadSGBPalette
+
+	; Palette for border tiles
+	ld d, PAL_REDMON
+	ld e,5
 	callba LoadSGBPalette
 
 	; Load palette map
@@ -816,11 +863,11 @@ SetPal_TrainerCard:
 	ld de, W2_TilesetPaletteMap
 	ld bc, $60
 	call FarCopyData
-	; Zero the rest
+	; Set everything else to be red or blue (depending on game)
 	push de
 	pop hl
 	ld bc, $a0
-	xor a
+	ld a,5
 	call FillMemory
 
 
@@ -835,14 +882,9 @@ SetPal_TrainerCard:
 
 
 ; Clear colors after titlescreen
-PalCmd_0e:
+SetPal_OakIntro:
 	ld a,2
 	ld [rSVBK],a
-
-	xor a
-	ld [W2_TileBasedPalettes],a
-	ld a,3
-	ld [W2_StaticPaletteMapChanged],a
 
 	ld bc,20*18
 	ld hl,W2_TilesetPaletteMap
@@ -856,12 +898,17 @@ PalCmd_0e:
 	jr nz,.palLoop
 
 	xor a
+	ld [W2_TileBasedPalettes],a
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
 	ld [rSVBK],a
 	ret
 
 ; Name entry
 ; Deals with sprites for the pokemon naming screen
-PalCmd_0f:
+SetPal_NameEntry:
 	ld a,2
 	ld [rSVBK],a
 

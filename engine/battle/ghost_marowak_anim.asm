@@ -49,7 +49,7 @@ MarowakAnim:
 	jp ClearSprites
 
 ; copies a mon pic's  from background VRAM to sprite VRAM and sets up OAM
-CopyMonPicFromBGToSpriteVRAM:
+CopyMonPicFromBGToSpriteVRAM_orig: ; Name changed so color hack can hijack this
 	ld de, vFrontPic
 	ld hl, vSprites
 	ld bc, 7 * 7
@@ -74,7 +74,7 @@ CopyMonPicFromBGToSpriteVRAM:
 	ld [hli], a
 	ld a, d
 	ld [hli], a
-	ld a, $10 ; use OBP1
+	ld a, $14 ; HAX: use palette 4
 	ld [hli], a
 	inc d
 	dec c

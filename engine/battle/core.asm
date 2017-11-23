@@ -98,9 +98,7 @@ SpecialEffectsCont:
 	db -1
 
 SlidePlayerAndEnemySilhouettesOnScreen:
-	; HAX: I switched stuff around with InitBattle_Common. Call 3ec92, THEN RunPaletteCommand with b=0.
-	; This prevents flickering when entering battle.
-	call RunPaletteCommand
+	call LoadPlayerBackPic
 	ld a, MESSAGE_BOX ; the usual text box at the bottom of the screen
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
@@ -139,7 +137,6 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 .noCarry
 	dec b
 	jr nz, .copyRowLoop
-	call EnableLCD
 	ld a, $90
 	ld [hWY], a
 	ld [rWY], a
@@ -148,18 +145,26 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 	ld [hSCY], a
 	dec a
 	ld [wUpdateSpritesEnabled], a
-	call Delay3
-	xor a
+	;call Delay3
+	nop
+	nop
+	ld a,1 ; HAX: don't disable bg transfer. Makes the battle transition smoother.
 	ld [H_AUTOBGTRANSFERENABLED], a
 	ld b, $70
 	ld c, $90
 	ld a, c
 	ld [hSCX], a
-	call DelayFrame
+	;call DelayFrame
+	nop
+	nop
+	nop
 	ld a, %11100100 ; inverted palette for silhouette effect
 	ld [rBGP], a
 	ld [rOBP0], a
 	ld [rOBP1], a
+	; HAX: LCD is enabled far later than in vanilla game. This prevents flickering
+	; when entering battle. Also had to remove "delay" calls above.
+	call EnableLCD
 .slideSilhouettesLoop ; slide silhouettes of the player's pic and the enemy's pic onto the screen
 	ld h, b
 	ld l, $40
@@ -199,9 +204,9 @@ SlidePlayerAndEnemySilhouettesOnScreen:
 .shiny
 	set 0, [hl]
 .setPAL
-	ld b, SET_PAL_BATTLE
-	call RunPaletteCommand
 	call HideSprites
+	ld b, SET_PAL_BATTLE_AFTER_BLACK
+	call RunPaletteCommand
 	jpab PrintBeginningBattleText
 
 ; when a battle is starting, silhouettes of the player's pic and the enemy's pic are slid onto the screen
@@ -813,7 +818,7 @@ UpdateCurMonHPBar:
 .playersTurn
 	push bc
 	ld [wHPBarType], a
-	predef UpdateHPBar_Hook
+	predef UpdateHPBar2
 	pop bc
 	ret
 
@@ -4980,7 +4985,7 @@ ApplyDamageToEnemyPokemon:
 	coord hl, 2, 2
 	xor a
 	ld [wHPBarType],a
-	predef UpdateHPBar_Hook
+	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToEnemyPokemonDone:
 	jp DrawHUDsAndHPBars
 
@@ -5098,7 +5103,7 @@ ApplyDamageToPlayerPokemon:
 	coord hl, 10, 9
 	ld a,$01
 	ld [wHPBarType],a
-	predef UpdateHPBar_Hook
+	predef UpdateHPBar2 ; animate the HP bar shortening
 ApplyAttackToPlayerPokemonDone:
 	jp DrawHUDsAndHPBars
 
@@ -7071,10 +7076,8 @@ InitWildBattle:
 
 ; common code that executes after init battle code specific to trainer or wild battles
 _InitBattleCommon:
-	; HAX: I switched stuff around with SlidePlayerAndEnemySilhouettesOnScreen. Call LoadPlayerBackPic, THEN RunPaletteCommand with b=0.
-	; This prevents flickering when entering battle.
-	call LoadPlayerBackPic
 	ld b, SET_PAL_BATTLE_BLACK
+	call RunPaletteCommand
 	call SlidePlayerAndEnemySilhouettesOnScreen
 	xor a
 	ld [H_AUTOBGTRANSFERENABLED], a

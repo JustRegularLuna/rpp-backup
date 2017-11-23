@@ -1,5 +1,4 @@
 ; 8 bytes per tileset for 8 palettes, which are taken from MapPalettes.
-; CRYS_TEXTBOX was the textbox color from Gen 2, but is only a placeholder here
 MapPaletteSets:
 ; OVERWORLD
 	db OUTDOOR_GRAY
@@ -169,7 +168,7 @@ MapPaletteSets:
 	db INDOOR_YELLOW
 	db INDOOR_BROWN
 	db INDOOR_LIGHT_BLUE
-	db CRYS_TEXTBOX
+	db PC_POKEBALL_PAL
 
 ; CAVERN
 	db CAVE_GRAY
@@ -199,7 +198,7 @@ MapPaletteSets:
 	db INDOOR_YELLOW
 	db INDOOR_BROWN
 	db INDOOR_LIGHT_BLUE
-	db CRYS_TEXTBOX
+	db PC_POKEBALL_PAL
 
 ; LAB
 	db INDOOR_GRAY
