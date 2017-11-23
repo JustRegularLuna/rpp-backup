@@ -181,8 +181,6 @@ PlayAnimation:
 	jr z,.AnimationOver
 	cp a,$C0 ; is this subanimation or a special effect?
 	jr c,.playSubanimation
-;	jp StartAnimationHook ; HAX
-;	nop
 .doSpecialEffect
 	ld c,a
 	ld de,SpecialEffectPointers
@@ -844,7 +842,7 @@ DoRockSlideSpecialEffects:
 	cp a,1
 	jp z,AnimationFlashScreen ; if it's the end of the subanimation, flash the screen
 	ret
-; if the subaninmation counter is between 8 and 11, shake the screen horizontally and vertically
+; if the subanimation counter is between 8 and 11, shake the screen horizontally and vertically
 .shakeScreen
 	ld b,1
 	predef PredefShakeScreenHorizontally ; shake horizontally
@@ -1531,7 +1529,7 @@ AnimationShowMonPic:
 	jp Delay3
 
 AnimationShowEnemyMonPic:
-; Shows the emenmy mon's front sprite. Used in animations like Seismic Toss
+; Shows the enemy mon's front sprite. Used in animations like Seismic Toss
 ; to make the mon's sprite reappear after disappears offscreen.
 	ld hl, AnimationShowMonPic
 	jp CallWithTurnFlipped

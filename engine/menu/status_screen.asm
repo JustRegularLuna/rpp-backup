@@ -109,6 +109,7 @@ StatusScreen:
 	lb bc, 2, 8
 	call DrawLineBox ; Draws the box around name, HP and status
 	coord hl, 2, 7
+	nop
 	ld [hl], "⠄" ; . after No ("." is a different one)
 	dec hl
 	ld [hl], "№"

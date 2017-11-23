@@ -1,7 +1,6 @@
-SoftReset::
+SoftReset_orig:: ; HAX: "SoftReset" label moved elsewhere (calls this after)
 	call StopAllSounds
 	call GBPalWhiteOut
-	callba ResetPalettes
 	ld c, 32
 	call DelayFrames
 	; fallthrough

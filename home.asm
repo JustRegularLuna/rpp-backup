@@ -1,16 +1,16 @@
+; HAX: rst vectors taken over to indirectly call color-related functions
 SECTION "rst 00", ROM0 [$00]
-	rst $38
-RefreshMapColorsScrolling:
+_LoadMapVramAndColors:
+	ld a,[H_LOADEDROMBANK]
 	push af
-	ld a,$2f
-	jp CallToBank
+	ld a,BANK(LoadMapVramAndColors)
+	ld [$2000],a
+	call LoadMapVramAndColors
+	pop af
+	ld [$2000],a
+	ret
 
-SECTION "rst 08", ROM0 [$08]
-	rst $38
-_RefreshMapColors:
-	push af
-	ld a,BANK(RefreshMapColors)
-	jp CallToBank
+;SECTION "rst 08", ROM0 [$08]
 
 ; HAX: rst10 is used for the vblank hook
 SECTION "rst 10", ROM0 [$10]
@@ -23,7 +23,11 @@ SECTION "rst 18", ROM0 [$18]
 	jp Bankswitch
 
 SECTION "rst 20", ROM0 [$20]
-	rst $38
+_ColorOverworldSprites:
+	push af
+	ld a,BANK(ColorOverworldSprites)
+	jp CallToBank
+
 SECTION "rst 28", ROM0 [$28]
 	rst $38
 SECTION "rst 30", ROM0 [$30]
@@ -105,56 +109,54 @@ HideSprites::
 INCLUDE "home/copy.asm"
 
 
-SECTION "Initialization",HOME[$c0]
+SECTION "ColorizationHome",HOME[$be]
 
-IsGBC:
-	ld hl,Start
-	push hl ; hijack ret
-	ld a,BANK(InitGbcMode)
-	ld [$2000],a
-	jp InitGbcMode
-
-LoadBank1:
-	xor a
-	ld [$2000],a
+_InitGbcMode:
+	ld b,BANK(InitGbcMode)
+	ld hl,InitGbcMode
+	rst $18 ; Bankswitch
 	ret
 
-Initialize:
+InitializeColor:
 	cp $11
-	jr z,IsGBC
+	jr nz,IsNotGBC
+	call _InitGbcMode
+	jp Start
 .IsNotGBC
 	ld a,$30
 	ld [$2000],a
 	jr loop3
-_ColorOverworldSprites: ; $00dc
-	push af
-	ld a,BANK(ColorOverworldSprites)
-	jr CallToBank
+
 _LoadTilesetPatternsAndPalettes: ; $00e1
 	push af
 	ld a, BANK(LoadTilesetPalette)
 loop3
 	ld [$2000],a
-	call CallToBank_2
+	call asm00f5
 	pop af
 	call LoadTilesetTilePatternData
 	ret
-	nop
-	nop
-CallToBank: ; $00f1
+
+CallToBank:
 	ld [$2000],a
 	pop af
-CallToBank_2:
+asm00f5:
 	push af
 	call $6000
-	ld a,[$ff00+$b8]
+	ld a,[H_LOADEDROMBANK]
 	ld [$2000],a
 	pop af
 	ret
 
+SoftReset:
+	ld b,BANK(ClearGbcMemory)
+	ld hl,ClearGbcMemory
+	rst $18 ; Bankswitch
+	jp SoftReset_orig
+
 
 SECTION "Entry", ROM0 [$100]
-	jp Initialize
+	jp InitializeColor
 
 
 SECTION "Header", ROM0 [$104]
@@ -170,7 +172,6 @@ SECTION "Main", ROM0
 
 Start::
 	cp GBC
-Start_2:
 	jr z, .gbc
 	xor a
 	jr .ok
@@ -2144,7 +2145,7 @@ DisableWaitingAfterTextDisplay::
 ; [wcf91] = item ID
 ; OUTPUT:
 ; [wActionResultOrTookBattleTurn] = success
-; 00: unsucessful
+; 00: unsuccessful
 ; 01: successful
 ; 02: not able to be used right now, no extra menu displayed (only certain items use this)
 UseItem::
@@ -3440,7 +3441,7 @@ CopyString::
 ; this function is used when lower button sensitivity is wanted (e.g. menus)
 ; OUTPUT: [hJoy5] = pressed buttons in usual format
 ; there are two flags that control its functionality, [hJoy6] and [hJoy7]
-; there are esentially three modes of operation
+; there are essentially three modes of operation
 ; 1. Get newly pressed buttons only
 ;    ([hJoy7] == 0, [hJoy6] == any)
 ;    Just copies [hJoyPressed] to [hJoy5].
@@ -3788,7 +3789,7 @@ CalcStat::
 	ld a, b
 	add e
 	jr nc, .noCarry2
-	inc d                     ; da = (Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4
+	inc d                     ; de = (Base + IV) * 2 + ceil(Sqrt(stat exp)) / 4
 .noCarry2
 	ld [H_MULTIPLICAND+2], a
 	ld a, d

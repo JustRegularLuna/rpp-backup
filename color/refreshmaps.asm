@@ -2,60 +2,47 @@
 
 	ORG $2c, $6000
 
-; Call this when a map is loaded.
-RefreshMapColors:
+; Called when a map is loaded. Loads tilemap and tile attributes.
+LoadMapVramAndColors:
 	ld a,$02
 	ld [rSVBK],a
+
+	coord hl, 0, 0
+	ld de,vBGMap0
+	ld b,18
+.vramCopyLoop
+	ld c,20
+.vramCopyInnerLoop
 	ld a,$01
 	ld [rVBK],a
 	ld a,[hl]
 	push hl
-	ld h,$d2
+	ld h,W2_TilesetPaletteMap>>8
 	ld l,a
 	ld a,[hl]
 	ld [de],a
 	pop hl
 	xor a
 	ld [rVBK],a
-	ld [rSVBK],a
 	ld a,[hli]
-	add sp,$04
-	push af
-	add sp,-$02
 	ld [de],a
 	inc e
+
+	dec c
+	jr nz,.vramCopyInnerLoop
+	ld a,32 - 20
+	add e
+	ld e,a
+	jr nc,.noCarry
+	inc d
+.noCarry
+	dec b
+	jr nz,.vramCopyLoop
+
+	xor a
+	ld [rSVBK],a
 	ret
 
-; Refresh moving tiles
-	ORG $2c, $7000
-label_2c_l000:
-	push hl
-	ld hl,rSTAT
-label_2c_l001:
-	bit 1,[hl]
-	jr nz,label_2c_l001
-	pop hl
-	ld a,[hl]
-	rlca
-	ld [hli],a
-	dec c
-	jr nz,label_2c_l000
-	jp UpdateMovingBgTilesHAX
-
-	ORG $2c, $7080
-label_2c_l002:
-	push hl
-	ld hl,rSTAT
-label_2c_l003:
-	bit 1,[hl]
-	jr nz,label_2c_l003
-	pop hl
-	ld a,[hl]
-	rrca
-	ld [hli],a
-	dec c
-	jr nz,label_2c_l002
-	jp UpdateMovingBgTilesHAX
 
 SECTION "bank3E",ROMX,BANK[$3E]
 
@@ -261,56 +248,6 @@ label_018:
 	ld sp,hl
 	ret
 
-
-	ORG $3e, $6000
-; Refresh map when scrolling
-; I don't think this is ever called anymore?
-
-	ld a,$02
-	ld [rSVBK],a
-	ld a,$01
-	ld [rVBK],a
-	ld a,[hl]
-	push hl
-	ld h,$d2
-	ld l,a
-	ld a,[hl]
-
-	ld [de],a
-	pop hl
-	xor a
-	ld [$ff4f],a
-	ld a,[hli]
-
-	ld [de],a
-	inc de
-	ld a,$01
-	ld [$ff4f],a
-	ld a,[hl]
-	push hl
-	ld h,$d2
-	ld l,a
-	ld a,[hl]
-	ld hl,$ff41
-label_021:
-	bit 1,[hl]
-	jr nz,label_021
-	ld [de],a
-	pop hl
-	xor a
-	ld [rVBK],a
-	ld [rSVBK],a
-	ld a,[hli]
-	add sp,$04
-	push af
-	add sp,-$02
-	push hl
-	ld hl,$ff41
-label_022:
-	bit 1,[hl]
-	jr nz,label_022
-	pop hl
-	ret
 
 DrawMapRow:
 	ld hl,wRedrawRowOrColumnSrcTiles
