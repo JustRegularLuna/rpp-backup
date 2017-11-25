@@ -61,6 +61,7 @@ SetPalFunctions:
 	dw SetPal_TrainerWholeScreen
 	dw SetPal_VersionScreen
 	dw SetPal_GenderSelect
+	dw SetPal_WindowsScreen
 
 ; HAXed to give trainers palettes independantly
 ; Also skips the "transform" check, caller does that instead

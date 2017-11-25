@@ -337,9 +337,9 @@ SetPal_StatusScreen:
 	ld d,a
 	ld e,1
 	callba LoadSGBPalette
-	
+
 	ld d, PAL_EXP
-	ld e,4	
+	ld e,4
 	callba LoadSGBPalette
 
 	; Load pokemon palette
@@ -388,7 +388,7 @@ SetPal_StatusScreen:
 	add hl,de
 	dec b
 	jr nz,.drawRow
-	
+
 	; Player exp bar
 	ld hl, W2_TilesetPaletteMap + 11 + 5 * SCREEN_WIDTH
 	ld b, 8
@@ -905,7 +905,7 @@ SetPal_TrainerCard:
 	ld a,2
 	ld [rSVBK],a
 	push bc
-	
+
 	ld d,PAL_MEWMON
 	ld e,0
 	callba LoadSGBPalette
@@ -1001,7 +1001,7 @@ SetPal_NameEntry:
 	ret
 
 ; Set the whole screen to one palette
-; like SetPal_PokemonWholeScreen but 
+; like SetPal_PokemonWholeScreen but
 ; [wWholeScreenPaletteMonSpecies] is palette id
 ; from SuperPalettes instead of mon id
 SetPal_WholeScreen:
@@ -1058,7 +1058,7 @@ SetPal_WholeScreen:
 	ret
 
 ; Set the whole screen to one trainer palette
-; like SetPal_PokemonWholeScreen but 
+; like SetPal_PokemonWholeScreen but
 ; [wWholeScreenPaletteMonSpecies] is trainer id
 ; instead of mon id
 SetPal_TrainerWholeScreen:
@@ -1066,7 +1066,7 @@ SetPal_TrainerWholeScreen:
 	push af
 	ld a, [wWholeScreenPaletteMonSpecies]
 	ld [wTrainerPicID], a
-	xor a	
+	xor a
 	call DeterminePaletteID
 	ld [wWholeScreenPaletteMonSpecies], a
 	pop af
@@ -1140,14 +1140,14 @@ SetPal_VersionScreen:
 	ld hl, W2_TilesetPaletteMap
 	ld bc, 20*18
 	call FillMemory
-	
+
 	ld hl,W2_TilesetPaletteMap+12*20+1
 	ld a,1
 	ld b,4
 	ld c,4
 	call FillBox
 
-	inc a ; ld a,1
+	ld a,1
 	ld [W2_ForceBGPUpdate],a ; Refresh palettes
 	ld a,3
 	ld [W2_StaticPaletteMapChanged],a
@@ -1173,14 +1173,14 @@ SetPal_GenderSelect:
 	ld hl, W2_TilesetPaletteMap
 	ld bc, 20*18
 	call FillMemory
-	
+
 	ld hl,W2_TilesetPaletteMap+2*20+7
 	ld a,1
 	ld b,10
 	ld c,5
 	call FillBox
 
-	inc a ; ld a,1
+	ld a,1
 	ld [W2_ForceBGPUpdate],a ; Refresh palettes
 	ld a,3
 	ld [W2_StaticPaletteMapChanged],a
@@ -1188,6 +1188,68 @@ SetPal_GenderSelect:
 	xor a
 	ld [rSVBK],a
 	ret
+
+SetPal_WindowsScreen:
+	ld a,2
+	ld [rSVBK],a
+
+	ld bc, $60
+	ld hl, WindowsScreenTilesetPaletteMap
+	ld de, W2_TilesetPaletteMap
+	call CopyData
+
+	call .fillWhites
+	call .fillBlacks
+	;ld a, 0
+	;ld hl, W2_TilesetPaletteMap + $80
+	;ld bc, $60
+	;call FillMemory
+
+	; Signal to refresh palettes
+	ld a,1
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+.fillWhites
+	ld hl, W2_BgPaletteData
+	ld b, 8
+	ld de, 7
+.whiteLoop
+	ld a, $ff
+	ld [hli], a
+	ld a, $7f
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .whiteLoop
+	ret
+
+.fillBlacks
+	ld hl, W2_BgPaletteData + 6
+	ld b, 8
+	ld de, 7
+	xor a
+.blackLoop
+	ld [hli], a
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .blackLoop
+	ret
+
+WindowsScreenTilesetPaletteMap:
+	db $02,$02,$02,$02,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$05
+	db $02,$02,$02,$02,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$02,$05
+	db $03,$03,$03,$03,$03,$00,$00,$00,$05,$05,$05,$00,$04,$00,$03,$05
+	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	db $03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$00,$00,$00
+	db $03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$00,$00,$00
 
 
 ; Code for the pokemon in the titlescreen.
