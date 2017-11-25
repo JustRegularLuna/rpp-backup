@@ -14,7 +14,7 @@ LoadShinyPokemonPalette:
 
 LoadTrainerPalette:
 	ld hl, TrainerPaletteTable
-	jr LoadPalette
+	;jr LoadPalette
 
 LoadPalette:
 	ld a,[rSVBK]
@@ -50,7 +50,7 @@ LoadShinyPokemonPalette_Sprite:
 
 LoadTrainerPalette_Sprite:
 	ld hl, TrainerPaletteTable
-	jr LoadPalette_Sprite
+	;jr LoadPalette_Sprite
 
 LoadPalette_Sprite:
 	ld a,[rSVBK]
@@ -70,7 +70,7 @@ LoadPalette_Sprite:
 	add hl,de
 
 	ld de,W2_BgPaletteData + $40
-	jr startPaletteTransfer
+	;jr startPaletteTransfer
 
 startPaletteTransfer:
 	add a

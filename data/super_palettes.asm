@@ -3226,7 +3226,7 @@ TrainerPaletteTable:
 	RGB 21,15,23
 	RGB 0,0,0
 
-; PAL_PLAYER_M copy of PAL_HERO
+; PAL_PLAYER_M
 	RGB 31, 31, 31
 	RGB 28, 18, 17
 	RGB 22, 07, 08
@@ -3273,9 +3273,3 @@ TrainerPaletteTable:
 	RGB 30,22,17
 	RGB 16,14,19
 	RGB 0,0,0
-
-; PAL_HERO consider entirely replacing with PAL_PLAYER_M and PAL_PLAYER_F
-	RGB 31, 31, 31
-	RGB 28, 18, 17
-	RGB 22, 07, 08
-	RGB 00, 00, 00

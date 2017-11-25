@@ -11,7 +11,14 @@ GetSylveonPalID:
 
 GetRedPalID:
 	call ClearScreen
-	ld a, PAL_HERO
+	ld a, [wPlayerGender]
+	and a
+	jr z, .male
+	ld a, PAL_PLAYER_F
+	jr .female
+.male
+	ld a, PAL_PLAYER_M
+.female
 	jr GotIntroTrainerPalID
 
 GetRivalPalID:

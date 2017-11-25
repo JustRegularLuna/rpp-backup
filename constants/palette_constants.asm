@@ -373,5 +373,3 @@ const_value = 0
 	const PAL_JESSIE
 	const PAL_JAMES
 	const PAL_GIOVANNI_2
-	
-	const PAL_HERO

@@ -881,8 +881,12 @@ SetPal_GameFreakIntro:
 
 ; Trainer card
 SetPal_TrainerCard:
+	ld a, [wPlayerGender]
+	ld b, a
+
 	ld a,2
 	ld [rSVBK],a
+	push bc
 	
 	ld d,PAL_MEWMON
 	ld e,0
@@ -898,7 +902,15 @@ SetPal_TrainerCard:
 	callba LoadSGBPalette
 
 	; Red's palette
-	ld d, PAL_HERO
+	pop bc
+	ld a, b
+	and a
+	jr z, .male
+	ld d, PAL_PLAYER_F
+	jr .female
+.male
+	ld d, PAL_PLAYER_M
+.female
 	ld e,4
 	callba LoadTrainerPalette
 

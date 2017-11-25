@@ -74,7 +74,7 @@ DeterminePaletteID:
 	; OPP_GARY, so ignore it)
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING
-	ld a, PAL_HERO
+	ld a, PAL_PLAYER_M
 	ret z
 	
 	ld a, [wTrainerPicID]
@@ -84,8 +84,16 @@ DeterminePaletteID:
 DeterminePaletteIDBack:
 	ld [wd11e],a
 	and a
-	ld a, PAL_HERO
-	ret z
+	jr nz, GetMonPalette
+	ld a, [wPlayerGender]
+	and a
+	jr z, .male
+	ld a, PAL_PLAYER_F
+	ret
+.male
+	ld a, PAL_PLAYER_M
+	ret
+
 GetMonPalette:
 	push bc
 	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
