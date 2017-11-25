@@ -790,34 +790,33 @@ SetPal_GameFreakIntro:
 	ld bc, $08
 	call FarCopyData
 
-	; Palette 0 used by logo; palettes 0-3 used by sparkles
+	; Palette 0 used by logo; palettes 4-7 used by sparkles
 	ld d, PAL_GAMEFREAK
 	ld e,0
 	callba LoadSGBPalette_Sprite
 
 	ld d, PAL_REDMON
-	ld e,1
-	callba LoadSGBPalette_Sprite
-
-	ld d, PAL_GREENMON
-	ld e,2
-	callba LoadSGBPalette_Sprite
-
-	ld d, PAL_BLUEMON
-	ld e,3
-	callba LoadSGBPalette_Sprite
-
-	; Palette 4 used by shooting star
-	ld d, PAL_YELLOWMON
 	ld e,4
 	callba LoadSGBPalette_Sprite
 
-	; Set the star to use palette 4
-	ld a, 4
+	ld d, PAL_BLUEMON
+	ld e,5
+	callba LoadSGBPalette_Sprite
+
+	ld d, PAL_GAMEFREAK
+	ld e,6
+	callba LoadSGBPalette_Sprite
+
+	ld d, PAL_VIRIDIAN ; PAL_GREENMON
+	ld e,7
+	callba LoadSGBPalette_Sprite
+
+	; Set the star to use palette 6
+	ld a, 6
 	ld hl, W2_SpritePaletteMap+$a0
 	ld [hli], a
 	ld [hli], a
-	; Set the sparkles underneath the logo to all use different palettes (0-3)
+	; Set the sparkles underneath the logo to all use different palettes (4-7)
 	ld [hl], 10
 
 	; Everything else will use palette 0 by default
