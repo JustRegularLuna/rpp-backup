@@ -97,20 +97,6 @@ GetMonPalette:
 	ld d, $00
 	add hl, de
 	ld a, [hl]
-	push bc
-	ld d, a
-	ld a, e
-	and a
-	ld a, d
-	jr z, .done
-	ld b, a
-	ld a, [wShinyMonFlag]
-	bit 0, a ; is mon supposed to be shiny?
-	ld a, b
-	jr z, .done
-	add (PAL_SHINY_MEWMON - PAL_MEWMON)
-.done
-	pop bc
 	ret
 
 GetPaletteID:
@@ -120,8 +106,6 @@ GetPaletteID:
 	ld a, [hl]
 	ret
 
-
-	;ORG $1c, $5fb6
 
 InitPartyMenuBlkPacket:
 	ld hl, BlkPacket_PartyMenu

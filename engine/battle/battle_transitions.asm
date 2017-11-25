@@ -198,8 +198,6 @@ LoadBattleTransitionTile:
 	jp CopyVideoData
 
 
-	;ORG $1c, $4a69
-
 BattleTransition_BlackScreen:
 	ld a, $ff
 	ld [rBGP], a
