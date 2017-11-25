@@ -425,8 +425,8 @@ SuperPalettes:
 PokemonPaletteTable:
 
 ; PAL_BULBASAUR
-	RGB 12, 31, 11
-	RGB 31, 10, 06
+	RGB 15, 24, 21
+	RGB 15, 20, 11
 
 ; PAL_IVYSAUR
 	RGB 12, 31, 11
