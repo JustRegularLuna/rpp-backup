@@ -760,14 +760,23 @@ SetPal_PokemonWholeScreen:
 	ld a, c
 	dec a
 	ld a, PAL_BLACK
-	jr z, .loadPalette
+	jr z, .loadSGBPalette
 	ld a, c
 	cp 2
 	ld a, PAL_MEWMON
-	jr z, .loadPalette
+	jr z, .loadSGBPalette
 	ld a, [wWholeScreenPaletteMonSpecies]
 	; Use the "BackSprite" version for the player sprite in the hall of fame.
 	call DeterminePaletteIDBack ; XXX double check player in HoF
+	jr .loadPalette
+
+.loadSGBPalette
+	ld d,a
+	ld a,2
+	ld [rSVBK],a
+	ld e,0
+	callba LoadSGBPalette
+	jr .afterMon
 
 .loadPalette
 	ld d,a
