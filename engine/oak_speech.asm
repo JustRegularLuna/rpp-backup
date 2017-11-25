@@ -184,6 +184,7 @@ OakSpeech:
 	ld de,ShrinkPic2
 	lb bc, BANK(ShrinkPic2), $00
 	call IntroDisplayPicCenteredOrUpperRight
+	callba LoadOverworldSpritePalettes
 	call ResetPlayerSpriteData
 	ld a,[H_LOADEDROMBANK]
 	push af
