@@ -532,6 +532,10 @@ SetPal_TitleScreen:
 	ld e,0
 	callba LoadTrainerPalette_Sprite
 
+	ld d, PAL_REDBAR
+	ld e, 1
+	callba LoadSGBPalette_Sprite
+
 	; Start drawing the palette map
 
 	; Pokemon logo
@@ -557,6 +561,11 @@ SetPal_TitleScreen:
 	ld bc, 20
 	ld a,3
 	call FillMemory
+
+	; Set the Pokeball to red
+	ld a, 1
+	ld hl, W2_SpritePaletteMap + $0a
+	ld [hli],a
 
 	ld a,3
 	ld [W2_StaticPaletteMapChanged],a
