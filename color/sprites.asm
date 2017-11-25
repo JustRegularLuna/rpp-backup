@@ -123,6 +123,7 @@ ColorNonOverworldSprites:
 .gameFreakIntro: ; The stars under the logo all get different colors
 	ld a,b
 	and 3
+	add 4
 	jr .setPalette
 
 .getAttackType

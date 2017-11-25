@@ -103,15 +103,45 @@ SetPal_Battle_Common:
 	ld b,a
 	xor a
 	ld [rSVBK],a
-	jr .getEnemyMonPal
+	jr .loadPlayerPal
 
 .getBattleMonPal
 	ld a, [wBattleMonSpecies]        ; player Pokemon ID
 	call DeterminePaletteIDBack
+	ld d, a
+
+.loadPlayerPal
+	; Save ID
+	ld a, [wBattleMonSpecies]
 	ld b, a
 
+	ld a,$02
+	ld [rSVBK],a
+
+	; Save the player mon's palette in case it transforms later
+	ld a,d
+	ld [W2_BattleMonPalette],a
+
+	; Player palette
+	ld a,b
+	ld e,0
+	and a
+	jr z, .loadTrainerPal
+	ld a, [wShinyMonFlag]
+	bit 0, a
+	jr z, .notShiny
+	callba LoadShinyPokemonPalette
+	jr .getEnemyMonPal
+.notShiny
+	callba LoadPokemonPalette
+	jr .getEnemyMonPal
+.loadTrainerPal
+	callba LoadTrainerPalette
+
 .getEnemyMonPal
-	push bc
+	xor a
+	ld [rSVBK],a
+
 	ld hl, wShinyMonFlag
 	res 0, [hl]
 	ld a, [wEnemyMonSpecies2]
@@ -129,29 +159,33 @@ SetPal_Battle_Common:
 
 	ld a, [wEnemyMonSpecies2]         ; enemy Pokemon ID (without transform effect?)
 	call DeterminePaletteID
-	pop bc
-	ld c, a
+	ld d, a
+
+	; Save ID
+	ld a, [wEnemyMonSpecies2]
+	ld b, a
 
 	ld a,$02
 	ld [rSVBK],a
 
-	; Save the player mon's palette in case it transforms later
-	ld a,b
-	ld [W2_BattleMonPalette],a
-
-	; Player palette
-	push bc
-	ld d,b
-	ld e,0
-	callba LoadSGBPalette
-
 	; Enemy palette
-	pop bc
-	ld d,c
+	ld a,b
 	ld e,1
-	callba LoadSGBPalette
+	and a
+	jr z, .loadTrainerPal2
+	ld a, [wShinyMonFlag]
+	bit 0, a
+	jr z, .notShiny2
+	callba LoadShinyPokemonPalette
+	jr .loadLifebarPal
+.notShiny2
+	callba LoadPokemonPalette
+	jr .loadLifebarPal
+.loadTrainerPal2
+	callba LoadTrainerPalette
 
 	; Player lifebar
+.loadLifebarPal
 	ld a, [wPlayerHPBarColor]
 	add PAL_GREENBAR
 	ld d,a
@@ -282,6 +316,7 @@ SetPal_TownMap:
 	ret
 
 ; Status screen
+; [wShinyMonFlag] must be appropriately set before this is called
 SetPal_StatusScreen:
 	ld a, [wcf91]
 	cp NUM_POKEMON + 1
@@ -302,16 +337,23 @@ SetPal_StatusScreen:
 	ld d,a
 	ld e,1
 	callba LoadSGBPalette
-	
+
 	ld d, PAL_EXP
-	ld e,4	
+	ld e,4
 	callba LoadSGBPalette
 
 	; Load pokemon palette
 	pop af
 	ld d,a
 	ld e,0
-	callba LoadSGBPalette
+	ld a, [wShinyMonFlag]
+	bit 0, a
+	jr z, .notShiny
+	callba LoadShinyPokemonPalette
+	jr .afterMon
+.notShiny
+	callba LoadPokemonPalette
+.afterMon
 
 
 	; Set palette map
@@ -346,7 +388,7 @@ SetPal_StatusScreen:
 	add hl,de
 	dec b
 	jr nz,.drawRow
-	
+
 	; Player exp bar
 	ld hl, W2_TilesetPaletteMap + 11 + 5 * SCREEN_WIDTH
 	ld b, 8
@@ -370,7 +412,7 @@ SetPal_Pokedex:
 	ld a,2
 	ld [rSVBK],a
 
-	callba LoadSGBPalette
+	callba LoadPokemonPalette
 
 	ld d,PAL_REDMON
 	ld e,1
@@ -472,7 +514,7 @@ SetPal_TitleScreen:
 	ld a,2
 	ld [rSVBK],a
 
-	callba LoadSGBPalette
+	callba LoadPokemonPalette
 
 	ld d,PAL_LOGO2	; Title logo
 	ld e,1
@@ -486,8 +528,12 @@ SetPal_TitleScreen:
 	ld e,3
 	callba LoadSGBPalette
 
-	ld d, PAL_MEWMON ; PAL_HERO
+	ld d, PAL_PROF_OAK
 	ld e,0
+	callba LoadTrainerPalette_Sprite
+
+	ld d, PAL_REDBAR
+	ld e, 1
 	callba LoadSGBPalette_Sprite
 
 	; Start drawing the palette map
@@ -515,6 +561,11 @@ SetPal_TitleScreen:
 	ld bc, 20
 	ld a,3
 	call FillMemory
+
+	; Set the Pokeball to red
+	ld a, 1
+	ld hl, W2_SpritePaletteMap + $0a
+	ld [hli],a
 
 	ld a,3
 	ld [W2_StaticPaletteMapChanged],a
@@ -558,9 +609,9 @@ SetPal_NidorinoIntro:
 	ld a,2
 	ld [rSVBK],a
 
-	ld d, PAL_PURPLEMON ; PAL_NIDORINO
+	ld d, PAL_NIDORINO
 	ld e,0
-	callba LoadSGBPalette_Sprite
+	callba LoadPokemonPalette_Sprite
 
 	ld d, PAL_PURPLEMON
 	ld e,0
@@ -712,18 +763,29 @@ SetPal_PartyMenu:
 ; 0: calculate palette based on loaded pokemon
 ; 1: make palettes black
 ; 2: previously used during trades, now unused.
+;
+; [wShinyMonFlag] must be appropriately set before this is called
 SetPal_PokemonWholeScreen:
 	ld a, c
 	dec a
 	ld a, PAL_BLACK
-	jr z, .loadPalette
+	jr z, .loadSGBPalette
 	ld a, c
 	cp 2
 	ld a, PAL_MEWMON
-	jr z, .loadPalette
+	jr z, .loadSGBPalette
 	ld a, [wWholeScreenPaletteMonSpecies]
 	; Use the "BackSprite" version for the player sprite in the hall of fame.
 	call DeterminePaletteIDBack ; XXX double check player in HoF
+	jr .loadPalette
+
+.loadSGBPalette
+	ld d,a
+	ld a,2
+	ld [rSVBK],a
+	ld e,0
+	callba LoadSGBPalette
+	jr .afterMon
 
 .loadPalette
 	ld d,a
@@ -731,7 +793,14 @@ SetPal_PokemonWholeScreen:
 	ld [rSVBK],a
 
 	ld e,0
-	callba LoadSGBPalette
+	ld a, [wShinyMonFlag]
+	bit 0, a
+	jr z, .notShiny
+	callba LoadShinyPokemonPalette
+	jr .afterMon
+.notShiny
+	callba LoadPokemonPalette
+.afterMon
 
 	ld d, PAL_MEWMON
 	ld e, 1
@@ -789,34 +858,33 @@ SetPal_GameFreakIntro:
 	ld bc, $08
 	call FarCopyData
 
-	; Palette 0 used by logo; palettes 0-3 used by sparkles
+	; Palette 0 used by logo; palettes 4-7 used by sparkles
 	ld d, PAL_GAMEFREAK
 	ld e,0
 	callba LoadSGBPalette_Sprite
 
 	ld d, PAL_REDMON
-	ld e,1
-	callba LoadSGBPalette_Sprite
-
-	ld d, PAL_GREENMON
-	ld e,2
-	callba LoadSGBPalette_Sprite
-
-	ld d, PAL_BLUEMON
-	ld e,3
-	callba LoadSGBPalette_Sprite
-
-	; Palette 4 used by shooting star
-	ld d, PAL_YELLOWMON
 	ld e,4
 	callba LoadSGBPalette_Sprite
 
-	; Set the star to use palette 4
-	ld a, 4
+	ld d, PAL_BLUEMON
+	ld e,5
+	callba LoadSGBPalette_Sprite
+
+	ld d, PAL_GAMEFREAK
+	ld e,6
+	callba LoadSGBPalette_Sprite
+
+	ld d, PAL_VIRIDIAN ; PAL_GREENMON
+	ld e,7
+	callba LoadSGBPalette_Sprite
+
+	; Set the star to use palette 6
+	ld a, 6
 	ld hl, W2_SpritePaletteMap+$a0
 	ld [hli], a
 	ld [hli], a
-	; Set the sparkles underneath the logo to all use different palettes (0-3)
+	; Set the sparkles underneath the logo to all use different palettes (4-7)
 	ld [hl], 10
 
 	; Everything else will use palette 0 by default
@@ -831,9 +899,13 @@ SetPal_GameFreakIntro:
 
 ; Trainer card
 SetPal_TrainerCard:
+	ld a, [wPlayerGender]
+	ld b, a
+
 	ld a,2
 	ld [rSVBK],a
-	
+	push bc
+
 	ld d,PAL_MEWMON
 	ld e,0
 	callba LoadSGBPalette
@@ -848,9 +920,17 @@ SetPal_TrainerCard:
 	callba LoadSGBPalette
 
 	; Red's palette
-	ld d, PAL_MEWMON ; PAL_HERO
+	pop bc
+	ld a, b
+	and a
+	jr z, .male
+	ld d, PAL_PLAYER_F
+	jr .female
+.male
+	ld d, PAL_PLAYER_M
+.female
 	ld e,4
-	callba LoadSGBPalette
+	callba LoadTrainerPalette
 
 	; Palette for border tiles
 	ld d, PAL_REDMON
@@ -919,6 +999,257 @@ SetPal_NameEntry:
 	xor a
 	ld [rSVBK],a
 	ret
+
+; Set the whole screen to one palette
+; like SetPal_PokemonWholeScreen but
+; [wWholeScreenPaletteMonSpecies] is palette id
+; from SuperPalettes instead of mon id
+SetPal_WholeScreen:
+	ld a, [wWholeScreenPaletteMonSpecies]
+
+	ld d,a
+	ld a,2
+	ld [rSVBK],a
+
+	ld e,0
+	callba LoadSGBPalette
+
+	ld d, PAL_MEWMON
+	ld e, 1
+	push de
+.loop
+	callba LoadSGBPalette
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop
+	pop de
+
+	ld d, PAL_MEWMON
+	ld e, 0
+	push de
+.loop_sprites
+	callba LoadSGBPalette_Sprite
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop_sprites
+	pop de
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+
+	inc a ; ld a,1
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+; Set the whole screen to one trainer palette
+; like SetPal_PokemonWholeScreen but
+; [wWholeScreenPaletteMonSpecies] is trainer id
+; instead of mon id
+SetPal_TrainerWholeScreen:
+	ld a, [wTrainerPicID]
+	push af
+	ld a, [wWholeScreenPaletteMonSpecies]
+	ld [wTrainerPicID], a
+	xor a
+	call DeterminePaletteID
+	ld [wWholeScreenPaletteMonSpecies], a
+	pop af
+	ld [wTrainerPicID], a
+	ld a, [wWholeScreenPaletteMonSpecies]
+
+	ld d,a
+	ld a,2
+	ld [rSVBK],a
+
+	ld e,0
+	callba LoadTrainerPalette
+
+	ld d, PAL_MEWMON
+	ld e, 1
+	push de
+.loop
+	callba LoadSGBPalette
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop
+	pop de
+
+	ld d, PAL_MEWMON
+	ld e, 0
+	push de
+.loop_sprites
+	callba LoadSGBPalette_Sprite
+	pop de
+	ld a, e
+	inc a
+	ld e, a
+	push de
+	cp 8
+	jr nz, .loop_sprites
+	pop de
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+
+	inc a ; ld a,1
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+SetPal_VersionScreen:
+	ld a,2
+	ld [rSVBK],a
+
+	ld d,PAL_CYANMON
+	ld e,0
+	callba LoadSGBPalette
+
+	ld d, PAL_PIKACHU
+	ld e, 1
+	callba LoadPokemonPalette
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+
+	ld hl,W2_TilesetPaletteMap+12*20+1
+	ld a,1
+	ld b,4
+	ld c,4
+	call FillBox
+
+	ld a,1
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+SetPal_GenderSelect:
+	ld a,2
+	ld [rSVBK],a
+
+	ld d,PAL_PLAYER_M
+	ld e,0
+	callba LoadTrainerPalette
+
+	ld d, PAL_PLAYER_F
+	ld e, 1
+	callba LoadTrainerPalette
+
+	xor a
+	ld [W2_TileBasedPalettes],a
+	ld hl, W2_TilesetPaletteMap
+	ld bc, 20*18
+	call FillMemory
+
+	ld hl,W2_TilesetPaletteMap+2*20+7
+	ld a,1
+	ld b,10
+	ld c,5
+	call FillBox
+
+	ld a,1
+	ld [W2_ForceBGPUpdate],a ; Refresh palettes
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+SetPal_WindowsScreen:
+	ld a,2
+	ld [rSVBK],a
+
+	ld bc, $60
+	ld hl, WindowsScreenTilesetPaletteMap
+	ld de, W2_TilesetPaletteMap
+	call CopyData
+
+	call .fillWhites
+	call .fillBlacks
+	;ld a, 0
+	;ld hl, W2_TilesetPaletteMap + $80
+	;ld bc, $60
+	;call FillMemory
+
+	; Signal to refresh palettes
+	ld a,1
+	ld [W2_ForceBGPUpdate],a
+	ld [W2_ForceOBPUpdate],a
+	ld a,3
+	ld [W2_StaticPaletteMapChanged],a
+
+	xor a
+	ld [rSVBK],a
+	ret
+
+.fillWhites
+	ld hl, W2_BgPaletteData
+	ld b, 8
+	ld de, 7
+.whiteLoop
+	ld a, $ff
+	ld [hli], a
+	ld a, $7f
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .whiteLoop
+	ret
+
+.fillBlacks
+	ld hl, W2_BgPaletteData + 6
+	ld b, 8
+	ld de, 7
+	xor a
+.blackLoop
+	ld [hli], a
+	ld [hl], a
+	add hl, de
+	dec b
+	jr nz, .blackLoop
+	ret
+
+WindowsScreenTilesetPaletteMap:
+	db $02,$02,$02,$02,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$05
+	db $02,$02,$02,$02,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$02,$05
+	db $03,$03,$03,$03,$03,$00,$00,$00,$05,$05,$05,$00,$04,$00,$03,$05
+	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
+	db $03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$00,$00,$00
+	db $03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$00,$00,$00
 
 
 ; Code for the pokemon in the titlescreen.

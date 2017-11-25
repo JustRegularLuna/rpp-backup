@@ -13,7 +13,8 @@ SplashScreenSetup:
 MainScreenTurnOn:	
 ; turn the screen back on
 	call EnableLCD
-	call RunDefaultPaletteCommand
+	ld b, SET_PAL_WINDOWS_SCREEN
+	call RunPaletteCommand
 	call Delay3
 	call GBPalNormal
 	

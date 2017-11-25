@@ -57,6 +57,11 @@ SetPalFunctions:
 	dw SetPal_OakIntro	   ; Set prof oak's color
 	dw SetPal_NameEntry	   ; Name entry (partially replaces 08)
 	dw SetPal_BattleAfterBlack ; Like SetPal_Battle but specifically for clearing the black palettes
+	dw SetPal_WholeScreen
+	dw SetPal_TrainerWholeScreen
+	dw SetPal_VersionScreen
+	dw SetPal_GenderSelect
+	dw SetPal_WindowsScreen
 
 ; HAXed to give trainers palettes independantly
 ; Also skips the "transform" check, caller does that instead
@@ -70,7 +75,7 @@ DeterminePaletteID:
 	; OPP_GARY, so ignore it)
 	ld a,[wLinkState]
 	cp LINK_STATE_BATTLING
-	ld a, PAL_MEWMON ; PAL_HERO
+	ld a, PAL_PLAYER_M
 	ret z
 	
 	ld a, [wTrainerPicID]
@@ -80,8 +85,16 @@ DeterminePaletteID:
 DeterminePaletteIDBack:
 	ld [wd11e],a
 	and a
-	ld a, PAL_MEWMON ; PAL_HERO ?
-	ret z
+	jr nz, GetMonPalette
+	ld a, [wPlayerGender]
+	and a
+	jr z, .male
+	ld a, PAL_PLAYER_F
+	ret
+.male
+	ld a, PAL_PLAYER_M
+	ret
+
 GetMonPalette:
 	push bc
 	predef IndexToPokedex ; turn Pokemon ID number into Pokedex number
@@ -93,20 +106,6 @@ GetMonPalette:
 	ld d, $00
 	add hl, de
 	ld a, [hl]
-	push bc
-	ld d, a
-	ld a, e
-	and a
-	ld a, d
-	jr z, .done
-	ld b, a
-	ld a, [wShinyMonFlag]
-	bit 0, a ; is mon supposed to be shiny?
-	ld a, b
-	jr z, .done
-	add (PAL_SHINY_MEWMON - PAL_MEWMON)
-.done
-	pop bc
 	ret
 
 GetPaletteID:
@@ -116,8 +115,6 @@ GetPaletteID:
 	ld a, [hl]
 	ret
 
-
-	;ORG $1c, $5fb6
 
 InitPartyMenuBlkPacket:
 	ld hl, BlkPacket_PartyMenu
