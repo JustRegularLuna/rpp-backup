@@ -78,7 +78,14 @@ AnimateHallOfFame:
 	call AddNTimes
 	ld [hl], $ff
 	call SaveHallOfFameTeams
-	xor a
+	ld a, [wPlayerGender]
+	and a
+	jr z, .male
+	ld a, PLAYER_F
+	jr .female
+.male
+	ld a, PLAYER_M
+.female
 	ld [wHoFMonSpecies], a
 	inc a
 	ld [wHoFMonOrPlayer], a ; player
@@ -117,7 +124,14 @@ HoFShowMonOrPlayer:
 	call LoadFrontSpriteByMonIndex
 	predef LoadMonBackPic
 .next1
+	ld a, [wHoFMonOrPlayer]
+	and a
+	jr z, .mon
+	ld b, SET_PAL_TRAINER_WHOLE_SCREEN
+	jr .player
+.mon
 	ld b, SET_PAL_POKEMON_WHOLE_SCREEN
+.player
 	ld c, 0
 	call RunPaletteCommand
 	ld a, %11100100
