@@ -474,6 +474,9 @@ SetPal_Slots:
 	ld d, PAL_SLOTS5
 	ld e, 4
 	callba LoadSGBPalette
+	ld d, PAL_SLOTS6
+	ld e, 5
+	callba LoadSGBPalette
 
 	ld hl, SlotPaletteMap
 	ld a, BANK(SlotPaletteMap)
