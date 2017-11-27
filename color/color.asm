@@ -474,6 +474,9 @@ SetPal_Slots:
 	ld d, PAL_SLOTS5
 	ld e, 4
 	callba LoadSGBPalette
+	ld d, PAL_SLOTS6
+	ld e, 5
+	callba LoadSGBPalette
 
 	ld hl, SlotPaletteMap
 	ld a, BANK(SlotPaletteMap)
@@ -1244,12 +1247,12 @@ SetPal_WindowsScreen:
 	ret
 
 WindowsScreenTilesetPaletteMap:
-	db $02,$02,$02,$02,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$05
-	db $02,$02,$02,$02,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$02,$05
-	db $03,$03,$03,$03,$03,$00,$00,$00,$05,$05,$05,$00,$04,$00,$03,$05
-	db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	db $03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$00,$00,$00
-	db $03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$03,$00,$00,$00,$00
+	db GREEN, GREEN, GREEN, GREEN, BLUE, BLUE, BLUE, BLUE, BLUE,  BLUE,  BLUE,  BLUE, BLUE,   BLUE, GRAY,  BROWN
+	db GREEN, GREEN, GREEN, GREEN, BLUE, BLUE, BLUE, BLUE, BLUE,  BLUE,  BLUE,  BLUE, BLUE,   BLUE, GREEN, BROWN
+	db BLUE,  BLUE,  BLUE,  BLUE,  BLUE, GRAY, GRAY, GRAY, BROWN, BROWN, BROWN, GRAY, YELLOW, GRAY, BLUE,  BROWN
+	db GRAY,  GRAY,  GRAY,  GRAY,  GRAY, GRAY, GRAY, GRAY, GRAY,  GRAY,  GRAY,  GRAY, GRAY,   GRAY, GRAY,  GRAY
+	db BLUE,  BLUE,  BLUE,  BLUE,  BLUE, BLUE, BLUE, BLUE, BLUE,  BLUE,  BLUE,  BLUE, GRAY,   GRAY, GRAY,  GRAY
+	db BLUE,  BLUE,  BLUE,  BLUE,  BLUE, BLUE, BLUE, BLUE, BLUE,  BLUE,  BLUE,  BLUE, GRAY,   GRAY, GRAY,  GRAY
 
 
 ; Code for the pokemon in the titlescreen.
