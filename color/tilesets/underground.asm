@@ -1,0 +1,6 @@
+	db GRAY,   RED,    GRAY,   BROWN,  BROWN,  BROWN,  BROWN,  BROWN,  BROWN,  BROWN,  BROWN,  RED,    RED,    GRAY,   GRAY,   GRAY
+	db GRAY,   GRAY,   GRAY,   BROWN,  BROWN,  RED,    GRAY,   GRAY,   RED,    GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY
+	db GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY
+	db GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY
+	db GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY
+	db GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY,   GRAY
