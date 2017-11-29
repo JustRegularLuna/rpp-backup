@@ -66,7 +66,7 @@ IF DEF(_BLUE) ; Hard Rom
 ELSE ; Normal Rom
 	next "The Normal Patch"
 ENDC
-	next "Version 2.4.1@"
+	next "v3.x.x dev@"
 
 VersionScreenText2:
 	db   "Readme and FAQ"

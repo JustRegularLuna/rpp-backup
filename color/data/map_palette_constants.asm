@@ -76,3 +76,14 @@ const_value = 0
 	const PAL_BG_BROWN     ; 05
 	const PAL_BG_ROOF      ; 06
 	const PAL_BG_TEXT      ; 07
+
+; Used when you want a tile to display above the Player and NPCs
+const_value SET $80
+	const PAL_BG_PRIORITY_GRAY   ; 80
+	const PAL_BG_PRIORITY_RED    ; 81
+	const PAL_BG_PRIORITY_GREEN  ; 82
+	const PAL_BG_PRIORITY_WATER  ; 83
+	const PAL_BG_PRIORITY_YELLOW ; 84
+	const PAL_BG_PRIORITY_BROWN  ; 85
+	const PAL_BG_PRIORITY_ROOF   ; 86
+	const PAL_BG_PRIORITY_TEXT   ; 87
