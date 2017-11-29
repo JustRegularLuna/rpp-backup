@@ -229,3 +229,12 @@ ENDM
 moveset: MACRO
 	db \1, \2, \3, \4
 ENDM
+
+tilepal: MACRO
+; vram bank, pals
+x = \1 << 3
+rept _NARG +- 1
+	db (x | PAL_BG_\2)
+	shift
+endr
+endm

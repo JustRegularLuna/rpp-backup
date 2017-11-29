@@ -68,11 +68,11 @@ const_value = 0
 
 ; Named to make tileset palette assignments consistent with Pokecrystal
 const_value = 0
-	const GRAY      ; 00
-	const RED       ; 01
-	const GREEN     ; 02
-	const BLUE      ; 03
-	const YELLOW    ; 04
-	const BROWN     ; 05
-	const ROOF      ; 06
-	const TEXT      ; 07
+	const PAL_BG_GRAY      ; 00
+	const PAL_BG_RED       ; 01
+	const PAL_BG_GREEN     ; 02
+	const PAL_BG_WATER     ; 03
+	const PAL_BG_YELLOW    ; 04
+	const PAL_BG_BROWN     ; 05
+	const PAL_BG_ROOF      ; 06
+	const PAL_BG_TEXT      ; 07

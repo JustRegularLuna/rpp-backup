@@ -25,7 +25,7 @@ LoadCableClubTextPaletteAndMap:
 	call LoadCableClubTextPalette
 
 	; Set everything to use palette 7
-	ld a,TEXT ; palette 7
+	ld a,PAL_BG_TEXT ; palette 7
 	ld hl,W2_TilesetPaletteMap
 	ld bc,$100
 	call FillMemory
