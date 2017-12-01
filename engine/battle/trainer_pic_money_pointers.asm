@@ -1,143 +1,149 @@
 TrainerPicAndMoneyPointers:
-; trainer pic pointers and base money.
+; only deals with money now, pic pointers have moved to "get_trainer_pic_pointers.asm"
 ; money received after battle = base money × level of highest-level enemy mon
-	dw YoungsterPic
+;	dw YoungsterPic
 	money 1500
 
-	dw BugCatcherPic
+;	dw BugCatcherPic
 	money 1000
 
-	dw LassPic
+;	dw LassPic
 	money 1500
 
-	dw SailorPic
+;	dw SailorPic
 	money 3000
 
-	dw JrTrainerMPic
+;	dw JrTrainerMPic
 	money 2000
 
-	dw JrTrainerFPic
+;	dw JrTrainerFPic
 	money 2000
 
-	dw PokemaniacPic
+;	dw PokemaniacPic
 	money 5000
 
-	dw SuperNerdPic
+;	dw SuperNerdPic
 	money 2500
 
-	dw HikerPic
+;	dw HikerPic
 	money 3500
 
-	dw BikerPic
+;	dw BikerPic
 	money 2000
 
-	dw BurglarPic
+;	dw BurglarPic
 	money 9000
 
-	dw EngineerPic
+;	dw EngineerPic
 	money 5000
 
-	dw JugglerPic
+;	dw YoungCouplePic
 	money 3500
 
-	dw FisherPic
+;	dw FisherPic
 	money 3500
 
-	dw SwimmerPic
+;	dw SwimmerPic
 	money 500
 
-	dw CueBallPic
+;	dw CueBallPic
 	money 2500
 
-	dw GamblerPic
+;	dw GamblerPic
 	money 7000
 
-	dw BeautyPic
+;	dw BeautyPic
 	money 7000
 
-	dw PsychicPic
+;	dw PsychicPic
 	money 1000
 
-	dw RockerPic
+;	dw RockerPic
 	money 2500
 
-	dw JugglerPic
+;	dw JugglerPic
 	money 3500
 
-	dw TamerPic
+;	dw TamerPic
 	money 4000
 
-	dw BirdKeeperPic
+;	dw BirdKeeperPic
 	money 2500
 
-	dw BlackbeltPic
+;	dw BlackbeltPic
 	money 2500
 
-	dw Rival1Pic
+;	dw Rival1Pic
 	money 3500
 
-	dw ProfOakPic
-	money 9900
+;	dw SwimmerFPic
+	money 500
 
-	dw ChiefPic
+;	dw RocketFPic
 	money 3000
 
-	dw ScientistPic
+;	dw ScientistPic
 	money 5000
 
-	dw GiovanniPic
+;	dw GiovanniPic
 	money 9900
 
-	dw RocketPic
+;	dw RocketPic
 	money 3000
 
-	dw CooltrainerMPic
+;	dw CooltrainerMPic
 	money 3500
 
-	dw CooltrainerFPic
+;	dw CooltrainerFPic
 	money 3500
 
-	dw BrunoPic
+;	dw BrunoPic
 	money 9900
 
-	dw BrockPic
+;	dw BrockPic
 	money 9900
 
-	dw MistyPic
+;	dw MistyPic
 	money 9900
 
-	dw LtSurgePic
+;	dw LtSurgePic
 	money 9900
 
-	dw ErikaPic
+;	dw ErikaPic
 	money 9900
 
-	dw KogaPic
+;	dw KogaPic
 	money 9900
 
-	dw BlainePic
+;	dw BlainePic
 	money 9900
 
-	dw SabrinaPic
+;	dw SabrinaPic
 	money 9900
 
-	dw GentlemanPic
+;	dw GentlemanPic
 	money 7000
 
-	dw Rival2Pic
+;	dw Rival2Pic
 	money 6500
 
-	dw Rival3Pic
+;	dw Rival3Pic
 	money 9900
 
-	dw LoreleiPic
+;	dw LoreleiPic
 	money 9900
 
-	dw ChannelerPic
+;	dw ChannelerPic
 	money 3000
 
-	dw AgathaPic
+;	dw AgathaPic
 	money 9900
 
-	dw LancePic
+;	dw LancePic
 	money 9900
+
+;	dw HexManiacPic
+	money 5000
+
+;	dw TrainerPic
+	money 5000
