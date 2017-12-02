@@ -61,7 +61,7 @@ RefreshWindow:
 	jp z,.palettesDone
 	ld [hl],0
 
-	ld hl,[sp + 0]
+	ld hl,sp + 0
 	ld a,h
 	ld [H_SPTEMP],a
 	ld a,l

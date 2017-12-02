@@ -3256,7 +3256,7 @@ ExecutePlayerMove:
 	jp z, ExecutePlayerMoveDone
 	call CheckPlayerStatusConditions
 	jr nz, .playerHasNoSpecialCondition
-	jp [hl]
+	jp hl
 .playerHasNoSpecialCondition
 	call GetCurrentMove
 	ld hl, wPlayerBattleStatus1
@@ -5765,7 +5765,7 @@ ExecuteEnemyMove:
 	ld [wDamageMultipliers], a
 	call CheckEnemyStatusConditions
 	jr nz, .enemyHasNoSpecialConditions
-	jp [hl]
+	jp hl
 .enemyHasNoSpecialConditions
 	ld hl, wEnemyBattleStatus1
 	bit ChargingUp, [hl] ; is the enemy charging up for attack?
@@ -7276,7 +7276,7 @@ _JumpMoveEffect:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl] ; jump to special effect handler
+	jp hl ; jump to special effect handler
 
 MoveEffectPointerTable:
 	 dw SleepEffect               ; unused effect

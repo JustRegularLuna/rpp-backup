@@ -101,7 +101,7 @@ VBlankCopyBgMap::
 	ld a,[H_VBCOPYBGSRC] ; doubles as enabling byte
 	and a
 	ret z
-	ld hl,[sp + 0]
+	ld hl,sp + 0
 	ld a,h
 	ld [H_SPTEMP],a
 	ld a,l
@@ -134,7 +134,7 @@ VBlankCopyDouble::
 	and a
 	ret z
 
-	ld hl, [sp + 0]
+	ld hl, sp + 0
 	ld a, h
 	ld [H_SPTEMP], a
 	ld a, l
@@ -186,7 +186,7 @@ VBlankCopyDouble::
 	ld a, h
 	ld [H_VBCOPYDOUBLEDEST + 1], a
 
-	ld hl, [sp + 0]
+	ld hl, sp + 0
 	ld a, l
 	ld [H_VBCOPYDOUBLESRC], a
 	ld a, h
@@ -212,7 +212,7 @@ VBlankCopy::
 	and a
 	ret z
 
-	ld hl, [sp + 0]
+	ld hl, sp + 0
 	ld a, h
 	ld [H_SPTEMP], a
 	ld a, l
@@ -256,7 +256,7 @@ VBlankCopy::
 	ld a, h
 	ld [H_VBCOPYDEST + 1], a
 
-	ld hl, [sp + 0]
+	ld hl, sp + 0
 	ld a, l
 	ld [H_VBCOPYSRC], a
 	ld a, h
