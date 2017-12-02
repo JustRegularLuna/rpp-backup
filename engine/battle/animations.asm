@@ -200,7 +200,7 @@ PlayAnimation:
 	push hl
 	push de
 	call GetMoveSound
-	call PlaySound
+	call nc, AnimPlaySFX
 	pop de
 	pop hl
 .skipPlayingSound
@@ -256,6 +256,15 @@ PlayAnimation:
 	pop hl
 	jr .animationLoop
 .AnimationOver
+	ret
+
+AnimPlaySFX:
+	push de
+	ld e, a
+	xor a
+	ld d, a
+	call PlaySFX
+	pop de
 	ret
 
 LoadSubanimation:
@@ -559,7 +568,7 @@ PlaySubanimation:
 	cp a,$FF
 	jr z,.skipPlayingSound
 	call GetMoveSound
-	call PlaySound
+	call nc, AnimPlaySFX
 .skipPlayingSound
 	ld hl,wOAMBuffer ; base address of OAM buffer
 	ld a,l
@@ -2336,18 +2345,28 @@ GetMoveSound:
 .next
 	ld a,[wEnemyMonSpecies]
 .Continue
-	push hl
-	call GetCryData
-	ld b,a
-	pop hl
-	ld a,[wFrequencyModifier]
-	add [hl]
-	ld [wFrequencyModifier],a
-	inc hl
-	ld a,[wTempoModifier]
-	add [hl]
-	ld [wTempoModifier],a
-	jr .done
+	push af
+	ld a, 1
+	ld [wSFXDontWait], a
+	pop af
+	call PlayCry
+	xor a
+	ld [wSFXDontWait], a
+	ld a, b
+	scf
+	ret
+	;push hl
+	;call GetCryData
+	;ld b,a
+	;pop hl
+	;ld a,[wFrequencyModifier]
+	;add [hl]
+	;ld [wFrequencyModifier],a
+	;inc hl
+	;ld a,[wTempoModifier]
+	;add [hl]
+	;ld [wTempoModifier],a
+	;jr .done
 .NotCryMove
 	ld a,[hli]
 	ld [wFrequencyModifier],a
@@ -3023,7 +3042,7 @@ PlayApplyingAttackSound:
 ; play a different sound depending if move is not very effective, neutral, or super-effective
 ; don't play any sound at all if move is ineffective
 	call WaitForSoundToFinish
-	ld a, [wDamageMultipliers]
+	ld a, [wDamageMultipliers] ; effectiveness
 	and $7f
 	cp $7f
 	ret z ; immune
@@ -3032,22 +3051,25 @@ PlayApplyingAttackSound:
 	ld d, a
 	ld a, $e0
 	ld b, $ff
-	ld c, SFX_SUPER_EFFECTIVE
+	ld c, GSSFX_SUPER_EFFECTIVE ; SFX_SUPER_EFFECTIVE
 	jr z, .playSound
 ; not very effective
 	ld a, d
 	cp %00000001
 	ld a, $50
 	ld b, $1
-	ld c, SFX_NOT_VERY_EFFECTIVE
+	ld c, GSSFX_NOT_VERY_EFFECTIVE ; SFX_NOT_VERY_EFFECTIVE
 	jr z, .playSound
 ; neutral
 	ld a, $20
 	ld b, $30
-	ld c, SFX_DAMAGE
+	ld c, GSSFX_DAMAGE ; SFX_DAMAGE
 .playSound
 	ld [wFrequencyModifier], a
 	ld a, b
 	ld [wTempoModifier], a
 	ld a, c
-	jp PlaySound
+	jp PlaySound 
+
+
+

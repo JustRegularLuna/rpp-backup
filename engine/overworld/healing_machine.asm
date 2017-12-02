@@ -1,6 +1,9 @@
 ; This function does the flashing pokeballs when healing pokemon
 ; HAXed to look better in color
 AnimateHealingMachine:
+	xor a
+	call PlayMusic
+
 	ld de, PokeCenterFlashingMonitorAndHealBall
 	ld hl, vChars0 + $7c0
 	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), $03 ; loads one too many tiles
@@ -19,15 +22,17 @@ AnimateHealingMachine:
 	ld hl, wOAMBuffer + $84
 	ld de, PokeCenterOAMData
 	call CopyHealingMachineOAM
-	ld a, 4
-	ld [wAudioFadeOutControl], a
-	ld a, $ff
-	ld [wNewSoundID], a
-	call PlaySound
-.waitLoop
-	ld a, [wAudioFadeOutControl]
-	and a ; is fade-out finished?
-	jr nz, .waitLoop ; if not, check again
+
+;	ld a, 4
+;	ld [wAudioFadeOutControl], a
+;	ld a, $ff
+;	ld [wNewSoundID], a
+;	call PlaySound
+;.waitLoop
+;	ld a, [wAudioFadeOutControl]
+;	and a ; is fade-out finished?
+;	jr nz, .waitLoop ; if not, check again
+
 	ld a, [wPartyCount]
 	ld b, a
 .partyLoop
@@ -39,24 +44,25 @@ AnimateHealingMachine:
 	dec b
 	jr nz, .partyLoop
 	ld a, [wAudioROMBank]
-	cp BANK(Audio3_UpdateMusic)
+	cp $1f ; 0 ; BANK(Audio3_UpdateMusic) XXXXX
 	ld [wAudioSavedROMBank], a
 	jr nz, .next
 	ld a, $ff
 	ld [wNewSoundID], a
 	call PlaySound
-	ld a, BANK(Music_PkmnHealed)
+	ld a, 0 ; BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .next
 	ld a, MUSIC_PKMN_HEALED
 	ld [wNewSoundID], a
-	call PlaySound
+	call PlayMusic
 	ld d, %01110100
 	call FlashSprite8Times
 .waitLoop2
-	ld a, [wChannelSoundIDs]
-	cp MUSIC_PKMN_HEALED ; is the healed music still playing?
-	jr z, .waitLoop2 ; if so, check gain
+	ld a, [Channel1MusicID]
+	and a
+	jr nz, .waitLoop2
+
 	ld c, 32
 	call DelayFrames
 	pop af
@@ -64,6 +70,8 @@ AnimateHealingMachine:
 	pop hl
 	pop af
 	ld [hl], a
+	
+	
 	jp UpdateSprites
 
 PokeCenterFlashingMonitorAndHealBall:
