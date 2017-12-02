@@ -801,15 +801,28 @@ HandleBlackOut::
 	jp SpecialEnterMap
 
 StopMusic::
-	ld [wAudioFadeOutControl], a
-	ld a, $ff
-	ld [wNewSoundID], a
-	call PlaySound
-.wait
-	ld a, [wAudioFadeOutControl]
-	and a
-	jr nz, .wait
-	jp StopAllSounds
+    xor a
+	ld [MusicFadeID], a
+	ld a, 1
+	ld [MusicFade], a
+.wait0
+    ld a, [MusicFadeCount]
+    and a
+    jr z, .wait0
+.wait1
+    ld a, [MusicFadeCount]
+    and a
+    jr nz, .wait1
+    ret
+;	ld [wAudioFadeOutControl], a
+;	ld a, $ff
+;	ld [wNewSoundID], a
+;	call PlaySound
+;.wait
+;	ld a, [wAudioFadeOutControl]
+;	and a
+;	jr nz, .wait
+;	jp StopAllSounds
 
 HandleFlyWarpOrDungeonWarp::
 	call UpdateSprites
@@ -1274,9 +1287,15 @@ CollisionCheckOnLand::
 	call CheckTilePassable
 	jr nc,.noCollision
 .collision
-	ld a,[wChannelSoundIDs + Ch4]
-	cp SFX_COLLISION ; check if collision sound is already playing
-	jr z,.setCarry
+	;ld a,[wChannelSoundIDs + Ch4]
+	;cp SFX_COLLISION ; check if collision sound is already playing
+	; curSFX is not cleared for some reason.
+	
+    ; ch5 on?
+    ld hl, Channel5 + Channel1Flags - Channel1
+    bit 0, [hl]
+    
+	jr nz,.setCarry
 	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
 .setCarry
@@ -1800,7 +1819,7 @@ RunMapScript::
 	ld l,a
 	ld de,.return
 	push de
-	jp [hl] ; jump to script
+	jp hl ; jump to script
 .return
 	ret
 

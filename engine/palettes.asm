@@ -21,7 +21,7 @@ _RunPaletteCommand:
 
 	ld de,SetPalRet
 	push de
- 	jp [hl]
+ 	jp hl
 
 SetPalRet:
 	ret

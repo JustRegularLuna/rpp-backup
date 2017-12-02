@@ -819,7 +819,7 @@ SECTION "bankE",ROMX,BANK[$E]
 INCLUDE "engine/battle/unused_stats_functions.asm"
 INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
-INCLUDE "engine/battle/trainer_money_pointers.asm"
+INCLUDE "engine/battle/trainer_pic_money_pointers.asm"
 INCLUDE "text/trainer_names.asm"
 INCLUDE "engine/battle/bank_e_misc.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
@@ -2644,6 +2644,6 @@ INCLUDE "engine/splashscreens/players_in_intro.asm"
 INCLUDE "engine/overworld/headbutt.asm"
 
 SECTION "Trainer Parties", ROMX,BANK[$3B]
-INCLUDE "engine/battle/read_trainer.asm"
+INCLUDE "engine/battle/read_trainer_party.asm"
 INCLUDE "engine/overworld/advance_player_sprite.asm"
 INCLUDE "engine/mon_gender.asm"

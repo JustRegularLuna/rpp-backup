@@ -1,10 +1,10 @@
 # Linux
 
-	sudo apt-get install make gcc bison git python
+	sudo apt-get install make git python
 
+	sudo apt-get install byacc flex pkg-config libpng-dev
 	git clone https://github.com/rednex/rgbds
 	cd rgbds
-	git checkout v0.2.5
 	sudo make install
 	cd ..
 
@@ -23,15 +23,12 @@ To build them individually:
 
 # Mac
 
-In **Terminal**, run:
+Get [**Homebrew**](http://brew.sh/).
+
+Then in **Terminal**, run:
 
 	xcode-select --install
-
-	git clone https://github.com/rednex/rgbds
-	cd rgbds
-	git checkout v0.2.5
-	sudo make install
-	cd ..
+	brew install rgbds
 
 	git clone --recursive git://github.com/TheFakeMateo/RedPlusPlus.git
 	cd RedPlusPlus
@@ -48,12 +45,15 @@ Just use this project's url instead of the vanilla Pokered url.
 
 Original instructions are below:
 
-To build on Windows, use [**Cygwin**](http://cygwin.com/install.html). Use the default settings.
+To build on Windows, use [**Cygwin**](http://cygwin.com/install.html) (64-bit). Use the default settings.
 
-In the installer, select the following packages: `make` `git` `python` `gettext`
+In the installer, select the following packages:
+- `make`
+- `git`
+- `python`
 
-Then get [**rgbds 0.2.5**](https://github.com/bentley/rgbds/releases/tag/v0.2.5).
-Extract the archive and put `rgbasm.exe`, `rgblink.exe`, `rgbfix.exe` and `rgbgfx.exe` in `C:\cygwin\usr\local\bin`.  If your Cygwin installation directory differs, ensure the `bin` directory is present in the PATH variable.
+Then download [**rgbds**](https://github.com/bentley/rgbds/releases).
+Extract the archive. Inside should be `rgbasm.exe`, `rgblink.exe`, `rgbfix.exe`, `rgbgfx.exe` and some `.dll` files. Put each file in `C:\cygwin64\usr\local\bin\`. If your Cygwin installation directory differs, ensure the `bin` directory is present in the PATH variable.
 
 In the **Cygwin terminal**:
 

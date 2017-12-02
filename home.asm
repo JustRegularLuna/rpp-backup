@@ -103,7 +103,7 @@ HideSprites::
 INCLUDE "home/copy.asm"
 
 
-SECTION "ColorizationHome",HOME[$be]
+SECTION "ColorizationHome",ROM0[$be]
 
 InitializeColor:
 	cp $11
@@ -372,12 +372,7 @@ LoadFrontSpriteByMonIndex::
 	ld [MBC1RomBank], a
 	ret
 
-
-PlayCry::
-; Play monster a's cry.
-	call GetCryData
-	call PlaySound
-	jp WaitForSoundToFinish
+; PlayCry
 
 GetCryData::
 ; Load cry data for monster a.
@@ -2680,7 +2675,7 @@ PlayTrainerMusic::
 	ld [wAudioFadeOutControl], a
 	ld a, $ff
 	call PlaySound
-	ld a, BANK(Music_MeetEvilTrainer)
+	ld a, 0 ; BANK(Music_MeetEvilTrainer)
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, [wEngagedTrainerClass]
@@ -2708,7 +2703,7 @@ PlayTrainerMusic::
 	ld a, MUSIC_MEET_MALE_TRAINER
 .PlaySound
 	ld [wNewSoundID], a
-	jp PlaySound
+	jp PlayMusic
 
 INCLUDE "data/trainer_types.asm"
 
@@ -3029,7 +3024,7 @@ Bankswitch::
 	ld [MBC1RomBank],a
 	ld bc,.Return
 	push bc
-	jp [hl]
+	jp hl
 .Return
 	pop bc
 	ld a,b
@@ -3261,21 +3256,65 @@ PlaySoundWaitForCurrent::
 
 ; Wait for sound to finish playing
 WaitForSoundToFinish::
-	ld a, [wLowHealthAlarm]
-	and $80
+WaitSFX::
+; infinite loop until sfx is done playing
+	ld a, [Danger]
+	and a
+	ret nz
+	ld a, [wSFXDontWait]
+	and a
 	ret nz
 	push hl
-.waitLoop
-	ld hl, wChannelSoundIDs + Ch4
-	xor a
-	or [hl]
-	inc hl
-	or [hl]
-	inc hl
-	inc hl
-	or [hl]
-	jr nz, .waitLoop
+
+.loop
+	; ch5 on?
+	ld hl, Channel5 + Channel1Flags - Channel1
+	bit 0, [hl]
+	jr nz, .loop
+	; ch6 on?
+	ld hl, Channel6 + Channel1Flags - Channel1
+	bit 0, [hl]
+	jr nz, .loop
+	; ch7 on?
+	ld hl, Channel7 + Channel1Flags - Channel1
+	bit 0, [hl]
+	jr nz, .loop
+	; ch8 on?
+	ld hl, Channel8 + Channel1Flags - Channel1
+	bit 0, [hl]
+	jr nz, .loop
+
 	pop hl
+	ret
+
+WaitForSongToFinish::
+.loop
+	call IsSongPlaying
+	jr c, .loop
+	ret
+
+IsSongPlaying::
+	; ch1 on?
+	ld hl, Channel1 + Channel1Flags - Channel1
+	bit 0, [hl]
+	jr nz, .playing
+	; ch2 on?
+	ld hl, Channel2 + Channel1Flags - Channel1
+	bit 0, [hl]
+	jr nz, .playing
+	; ch3 on?
+	ld hl, Channel3 + Channel1Flags - Channel1
+	bit 0, [hl]
+	jr nz, .playing
+	; ch4 on?
+	ld hl, Channel4 + Channel1Flags - Channel1
+	bit 0, [hl]
+	jr z, .notPlaying
+.playing
+	scf
+	ret
+.notPlaying
+	xor a
 	ret
 
 NamePointers::
@@ -4476,7 +4515,7 @@ CallFunctionInTable::
 	ld l, a
 	ld de, .returnAddress
 	push de
-	jp [hl]
+	jp hl
 .returnAddress
 	pop bc
 	pop de
@@ -4660,7 +4699,7 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ld [H_LOADEDROMBANK], a
 	ld de, .returnAddress
 	push de
-	jp [hl]
+	jp hl
 .returnAddress
 	xor a
 	jr .done
@@ -4816,7 +4855,7 @@ InterruptWrapper:
 	ld [rSVBK],a
 	ld de,.ret
 	push de
-	jp [hl]
+	jp hl
 .ret
 	ld a,b
 	ld [rSVBK],a

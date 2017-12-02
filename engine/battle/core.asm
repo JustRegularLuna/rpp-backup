@@ -1003,7 +1003,7 @@ EndLowHealthAlarm:
 ; This function is called when the player has the won the battle. It turns off
 ; the low health alarm and prevents it from reactivating until the next battle.
 	xor a
-	ld [wLowHealthAlarm], a ; turn off low health alarm
+	ld [wDanger], a ; turn off low health alarm
 	ld [wChannelSoundIDs + Ch4], a
 	inc a
 	ld [wLowHealthAlarmDisabled], a ; prevent it from reactivating
@@ -1105,7 +1105,7 @@ PlayBattleVictoryMusic:
 	ld a, $ff
 	ld [wNewSoundID], a
 	call PlaySoundWaitForCurrent
-	ld c, BANK(Music_DefeatedTrainer)
+	ld c, 0 ; BANK(Music_DefeatedTrainer)
 	pop af
 	call PlayMusic
 	jp Delay3
@@ -1152,11 +1152,11 @@ RemoveFaintedPlayerMon:
 	predef FlagActionPredef ; clear gain exp flag for fainted mon
 	ld hl, wEnemyBattleStatus1
 	res 2, [hl]   ; reset "attacking multiple times" flag
-	ld a, [wLowHealthAlarm]
+	ld a, [wDanger]
 	bit 7, a      ; skip sound flag (red bar (?))
 	jr z, .skipWaitForSound
 	ld a, $ff
-	ld [wLowHealthAlarm], a ;disable low health alarm
+	ld [wDanger], a ;disable low health alarm
 	call WaitForSoundToFinish
 .skipWaitForSound
 ; a is 0, so this zeroes the enemy's accumulated damage.
@@ -2039,7 +2039,7 @@ DrawPlayerHUDAndHPBar:
 	cp HP_BAR_RED
 	jr z, .setLowHealthAlarm
 .fainted
-	ld hl, wLowHealthAlarm
+	ld hl, wDanger
 	bit 7, [hl] ;low health alarm enabled?
 	ld [hl], $0
 	ret z
@@ -2047,7 +2047,7 @@ DrawPlayerHUDAndHPBar:
 	ld [wChannelSoundIDs + Ch4], a
 	ret
 .setLowHealthAlarm
-	ld hl, wLowHealthAlarm
+	ld hl, wDanger
 	set 7, [hl] ;enable low health alarm
 	ret
 
@@ -3256,7 +3256,7 @@ ExecutePlayerMove:
 	jp z, ExecutePlayerMoveDone
 	call CheckPlayerStatusConditions
 	jr nz, .playerHasNoSpecialCondition
-	jp [hl]
+	jp hl
 .playerHasNoSpecialCondition
 	call GetCurrentMove
 	ld hl, wPlayerBattleStatus1
@@ -5765,7 +5765,7 @@ ExecuteEnemyMove:
 	ld [wDamageMultipliers], a
 	call CheckEnemyStatusConditions
 	jr nz, .enemyHasNoSpecialConditions
-	jp [hl]
+	jp hl
 .enemyHasNoSpecialConditions
 	ld hl, wEnemyBattleStatus1
 	bit ChargingUp, [hl] ; is the enemy charging up for attack?
@@ -7276,7 +7276,7 @@ _JumpMoveEffect:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jp [hl] ; jump to special effect handler
+	jp hl ; jump to special effect handler
 
 MoveEffectPointerTable:
 	 dw SleepEffect               ; unused effect

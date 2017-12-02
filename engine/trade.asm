@@ -18,7 +18,7 @@ ExternalClockTradeAnim:
 	ld de, ExternalClockTradeFuncSequence
 
 TradeAnimCommon:
-	ld c, BANK(Music_SafariZone)
+	ld c, 0 ; BANK(Music_SafariZone)
 	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
 	ld a, [wOptions]
@@ -49,7 +49,7 @@ TradeAnimCommon:
 	ld l, a
 	ld de, .loop
 	push de
-	jp [hl] ; call trade func, which will return to the top of the loop
+	jp hl ; call trade func, which will return to the top of the loop
 .done
 	pop af
 	ld [hSCX], a
