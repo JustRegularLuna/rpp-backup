@@ -146,7 +146,7 @@ TextBoxCoordTable:
 	db $07,               0,  0, 11,  6
 	db LIST_MENU_BOX,     4,  2, 19, 12
 	db $10,               7,  0, 19, 17
-	db MON_SPRITE_POPUP,  6,  4, 14, 13
+	db MON_SPRITE_POPUP,  6,  4, 14, 12
 	db $ff ; terminator
 
 ; Format:

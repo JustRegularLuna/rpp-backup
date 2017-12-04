@@ -1,51 +1,48 @@
 SpritePalettes: ; Taken from pokemon GSC.
-; Palette 4 is used for flashing pokeballs in the pokecenter.
-; Palette 5 is used for exclamation mark bubbles.
-; Palettes 6-7 aren't used, I don't know what they were used for in GSC? Trees maybe?
 
-; 0
+; PAL_OW_RED
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 31,7,1
 	RGB 0,0,0
 
-; 1
+; PAL_OW_BLUE
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 10,9,31
 	RGB 0,0,0
 
-; 2
+; PAL_OW_GREEN
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 7,23,3
 	RGB 0,0,0
 
-; 3
+; PAL_OW_BROWN
 	RGB 27,31,27
 	RGB 31,19,10
 	RGB 15,10,3
 	RGB 0,0,0
 
-; 4
+; PAL_OW_PURPLE
 	RGB 27,31,27
 	RGB 31,19,10
-	RGB 30,10,6
+	RGB 18,4,18
 	RGB 0,0,0
 
-; 5
+; PAL_OW_EMOJI
 	RGB 31,31,31
 	RGB 31,31,31
 	RGB 13,13,13
 	RGB 0,0,0
 
-; 6
+; PAL_OW_TREE
 	RGB 22,31,10
 	RGB 12,25,1
 	RGB 5,14,0
 	RGB 7,7,7
 
-; 7
+; PAL_OW_ROCK
 	RGB 27,31,27
 	RGB 24,18,7
 	RGB 20,15,3

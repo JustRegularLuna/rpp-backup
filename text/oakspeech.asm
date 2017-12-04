@@ -55,6 +55,11 @@ _IntroduceRivalText::
 	line "his name again?"
 	prompt
 
+_IntroduceRivalText2::
+	text "...Erm, what is"
+	line "his name again?"
+	prompt
+
 _OakSpeechText3::
 	text "[PLAYER]!"
 
@@ -78,26 +83,12 @@ _ShouldMonsObeyText::
 	line "#mon behave"
 	cont "like caught"
 	cont "#mon?"
+	done
 
-	para "If you choose Yes:"
-	line "- You can rename"
-	cont "traded #mon at"
-	cont "the Name Rater."
-	
-	para "- Traded #mon"
-	line "will always obey."
-	
-	para "- Traded #mon"
-	line "will not gain"
-	cont "boosted EXP."
-	
-	para "In other words,"
-	line "they will be just"
-	cont "like #mon you"
-	cont "caught normally."
-	
-	para "So, should traded"
-	line "#mon behave"
-	cont "like caught"
-	cont "#mon?"
+_YourNameIsText2::
+	text "Is it [PLAYER]?"
+	done
+
+_HisNameIsText2::
+	text "Was it [RIVAL]?"
 	done

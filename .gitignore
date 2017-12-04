@@ -40,3 +40,6 @@ GlitchMap/data.js
 # ignore .map files in main folder
 pokered.map
 pokeblue.map
+
+# ignore local rgbds
+rgbds/*

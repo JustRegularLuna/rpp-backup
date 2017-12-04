@@ -2580,6 +2580,8 @@ Museum_GFX:          INCBIN "gfx/tilesets/museum.2bpp"
 Museum_Block:        INCBIN "gfx/blocksets/museum.bst"
 
 Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
+Safari_Block:      INCBIN "gfx/blocksets/safari.bst"
+
 Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
 Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
 

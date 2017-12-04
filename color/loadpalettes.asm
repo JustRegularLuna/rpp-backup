@@ -88,9 +88,9 @@ LoadTilesetPalette:
 	dec b
 	jr nz,.copyLoop
 
-	; Set the remaining values to 7 for text
+	; Set the remaining values to CRYS_TEXTBOX for text
 	ld b,$a0
-	ld a,7
+	ld a,7;CRYS_TEXTBOX
 .fillLoop
 	ld [hli],a
 	dec b

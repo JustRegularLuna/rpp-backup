@@ -1,3 +1,6 @@
+ReChoosePlayerName:
+	ld hl,IntroducePlayerText
+	call PrintText
 ChoosePlayerName:
 	call OakSpeechSlidePicRight
 	ld a, [wPlayerGender]   ; Added gender check
@@ -31,7 +34,17 @@ ChoosePlayerName:
 	call DisplayNamingScreen
 	ld a, [wcf4b]
 	cp "@"
-	jr z, .customName
+	jr nz, .notBlankName
+	ld hl, RedDefaultName
+	ld a, [wPlayerGender]
+	and a
+	jr z, .okGo
+	ld hl, LeafDefaultName
+.okGo
+	ld de, wPlayerName
+	ld bc, NAME_LENGTH
+	call CopyData
+.notBlankName
 	call ClearScreen
 	call Delay3
 	ld de, RedPicFront
@@ -44,6 +57,12 @@ ChoosePlayerName:
 .AreBoy3
 	call IntroDisplayPicCenteredOrUpperRight
 .done
+	ld hl, YourNameIsText2
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jp nz, ReChoosePlayerName
 	ld hl, YourNameIsText
 	jp PrintText
 
@@ -51,6 +70,13 @@ YourNameIsText:
 	TX_FAR _YourNameIsText
 	db "@"
 
+YourNameIsText2:
+	TX_FAR _YourNameIsText2
+	db "@"
+
+ReChooseRivalName:
+	ld hl,IntroduceRivalText2
+	call PrintText
 ChooseRivalName:
 	call OakSpeechSlidePicRight
 	ld de, DefaultNamesRival
@@ -70,18 +96,37 @@ ChooseRivalName:
 	call DisplayNamingScreen
 	ld a, [wcf4b]
 	cp "@"
-	jr z, .customName
+	jr nz, .notBlankName
+	ld hl, RivalDefaultName
+	ld de, wRivalName
+	ld bc, NAME_LENGTH
+	call CopyData
+.notBlankName
 	call ClearScreen
 	call Delay3
 	ld de, Rival1Pic
 	ld b, $13
 	call IntroDisplayPicCenteredOrUpperRight
 .done
+	ld hl, HisNameIsText2
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jp nz, ReChooseRivalName
 	ld hl, HisNameIsText
 	jp PrintText
 
+IntroduceRivalText2:
+	TX_FAR _IntroduceRivalText2
+	db "@"
+
 HisNameIsText:
 	TX_FAR _HisNameIsText
+	db "@"
+
+HisNameIsText2:
+	TX_FAR _HisNameIsText2
 	db "@"
 
 OakSpeechSlidePicLeft:
@@ -254,16 +299,21 @@ GetDefaultName:
 
 DefaultNamesPlayerList:
 	db "New Name@"
+RedDefaultName:
 	db "Red@"
 	db "Ash@"
 	db "Jack@"
+
 DefaultNamesRivalList:
-	db "New NameE@"
+	db "New Name@"
+RivalDefaultName:
 	db "Blue@"
 	db "Gary@"
 	db "John@"
+
 DefaultNamesGirlList:
 	db "New Name@"
+LeafDefaultName:
 	db "Green@"
 	db "Ashley@"
 	db "Leaf@"

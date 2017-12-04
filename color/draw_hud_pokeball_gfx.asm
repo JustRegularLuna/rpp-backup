@@ -13,7 +13,7 @@ LoadPartyPokeballGfx:
 
 	; Set the palette the pokeball sprite uses
 	ld hl,W2_SpritePaletteMap+$31
-	xor a ; SPR_PAL_ORANGE
+	xor a ; PAL_OW_RED
 	ld [hli],a
 	ld [hli],a
 	ld [hli],a

@@ -6,6 +6,7 @@ Mart_Coll::         INCBIN  "gfx/tilesets/mart.tilecoll"
 Pokecenter_Coll::   INCBIN  "gfx/tilesets/pokecenter.tilecoll"
 OakTS_Coll::        INCBIN  "gfx/tilesets/oakts.tilecoll"
 Gym_Coll::          INCBIN  "gfx/tilesets/gym.tilecoll"
+Safari_Coll::
 Forest_Coll::       INCBIN  "gfx/tilesets/forest.tilecoll"
 House_Coll::        INCBIN  "gfx/tilesets/house.tilecoll"
 ForestGate_Coll::   INCBIN  "gfx/tilesets/forest_gate.tilecoll"
