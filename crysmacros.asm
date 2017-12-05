@@ -1,11 +1,5 @@
 ; rgbds macros
 
-
-
-
-
-
-
 note: MACRO
 	db \1 << 4 + (\2 - 1)
 	ENDM
@@ -44,4 +38,3 @@ notetype1: MACRO
 notetype2: MACRO
 	db $f8, \1
 	ENDM
-
