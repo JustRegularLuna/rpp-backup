@@ -18,9 +18,11 @@ ExternalClockTradeAnim:
 	ld de, ExternalClockTradeFuncSequence
 
 TradeAnimCommon:
+	push de
 	ld c, 0 ; BANK(Music_SafariZone)
 	ld a, MUSIC_SAFARI_ZONE
 	call PlayMusic
+	pop de
 	ld a, [wOptions]
 	push af
 	ld a, [hSCY]
