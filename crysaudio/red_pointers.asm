@@ -50,3 +50,4 @@ tbp: MACRO
 	tbp Music_MeetMaleTrainer
 	tbp Music_MtMoonSquare
 	tbp Music_AbandonedShip
+	tbp Music_LakeOfRage

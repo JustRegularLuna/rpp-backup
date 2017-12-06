@@ -94,6 +94,7 @@ const_value = 1
 	
 	const MUSIC_MT_MOON_SQUARE
 	const MUSIC_ABANDONED_SHIP
+	const MUSIC_LAKE_OF_RAGE
 
 
 const_value = 1
