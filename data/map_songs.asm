@@ -104,19 +104,19 @@ MapSongBanks:
 	db MUSIC_SS_ANNE, 0 ; SSAnne8
 	db MUSIC_SS_ANNE, 0 ; SSAnne9
 	db MUSIC_SS_ANNE, 0 ; SSAnne10
-	db MUSIC_ROUTES3, 0 ; MT_MOON_SQUARE
-	db MUSIC_ROUTES3, 0 ; MT_MOON_SHOP
+	db MUSIC_MT_MOON_SQUARE, 0 ; MT_MOON_SQUARE
+	db MUSIC_MT_MOON_SQUARE, 0 ; MT_MOON_SHOP
 	db MUSIC_SS_ANNE, 0 ; VermilionFerryDock
 	db MUSIC_DUNGEON3, 0 ; VictoryRoad1
-	db MUSIC_DUNGEON3, 0 ; Faraway Island Outside
-	db MUSIC_DUNGEON3, 0 ; Faraway Island Inside
-	db MUSIC_DUNGEON3, 0 ; Southern Island Outside
-	db MUSIC_DUNGEON3, 0 ; Southern Island Inside
+	db MUSIC_ABANDONED_SHIP, 0 ; Faraway Island Outside
+	db MUSIC_ABANDONED_SHIP, 0 ; Faraway Island Inside
+	db MUSIC_ABANDONED_SHIP, 0 ; Southern Island Outside
+	db MUSIC_ABANDONED_SHIP, 0 ; Southern Island Inside
 	db MUSIC_INDIGO_PLATEAU, 0 ; Lance
 	db MUSIC_SS_ANNE, 0 ; Navel Rock Ferry Dock
-	db MUSIC_DUNGEON3, 0 ; Navel Rock Outside
-	db MUSIC_DUNGEON3, 0 ; Navel Rock Cave
-	db MUSIC_DUNGEON3, 0 ; Navel Rock Cave
+	db MUSIC_ABANDONED_SHIP, 0 ; Navel Rock Outside
+	db MUSIC_ABANDONED_SHIP, 0 ; Navel Rock Cave
+	db MUSIC_ABANDONED_SHIP, 0 ; Navel Rock Cave
 	db MUSIC_PALLET_TOWN, 0 ; HallofFameRoom
 	db MUSIC_ROUTES1, 0 ; UndergroundPathNS
 	db MUSIC_INDIGO_PLATEAU, 0 ; Gary

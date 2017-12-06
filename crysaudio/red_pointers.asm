@@ -48,3 +48,5 @@ tbp: MACRO
 	tbp Music_MeetEvilTrainer
 	tbp Music_MeetFemaleTrainer
 	tbp Music_MeetMaleTrainer
+	tbp Music_MtMoonSquare
+	tbp Music_AbandonedShip

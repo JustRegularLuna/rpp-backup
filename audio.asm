@@ -562,6 +562,7 @@ SECTION "Extra Songs 1", ROMX
 	inc_section "crysaudio/music/credits.asm"
 	inc_section "crysaudio/music/clair.asm"
 	inc_section "crysaudio/music/mobileadapter.asm"
+	inc_section "crysaudio/music/RSE/abandonedship.asm"
 
 SECTION "Extra Songs 2", ROMX
 

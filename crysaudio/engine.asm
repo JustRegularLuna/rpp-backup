@@ -2524,7 +2524,7 @@ _PlayMusic:: ; e8b30
 
 	ld hl, SongTranspositions
 	add hl, de
-	ld a, [hl]
+	xor a ;ld a, [hl] ; XXX Currently unused
 	ld [wTranspositionInterval], a
 
 	ld a, [GBPrinter]

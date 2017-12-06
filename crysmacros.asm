@@ -38,3 +38,8 @@ notetype1: MACRO
 notetype2: MACRO
 	db $f8, \1
 	ENDM
+
+musicheader: macro
+	; number of tracks, track idx, address
+	dbw ((\1 - 1) << 6) + (\2 - 1), \3
+	endm

@@ -91,6 +91,9 @@ const_value = 1
 	const MUSIC_MEET_EVIL_TRAINER
 	const MUSIC_MEET_FEMALE_TRAINER
 	const MUSIC_MEET_MALE_TRAINER
+	
+	const MUSIC_MT_MOON_SQUARE
+	const MUSIC_ABANDONED_SHIP
 
 
 const_value = 1
