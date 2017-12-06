@@ -115,8 +115,8 @@ MapSongBanks:
 	db MUSIC_INDIGO_PLATEAU, 0 ; Lance
 	db MUSIC_SS_ANNE, 0 ; Navel Rock Ferry Dock
 	db MUSIC_ABANDONED_SHIP, 0 ; Navel Rock Outside
-	db MUSIC_ABANDONED_SHIP, 0 ; Navel Rock Cave
-	db MUSIC_ABANDONED_SHIP, 0 ; Navel Rock Cave
+	db MUSIC_DUNGEON3, 0 ; Navel Rock Cave
+	db MUSIC_DUNGEON3, 0 ; Navel Rock Cave
 	db MUSIC_PALLET_TOWN, 0 ; HallofFameRoom
 	db MUSIC_ROUTES1, 0 ; UndergroundPathNS
 	db MUSIC_INDIGO_PLATEAU, 0 ; Gary
