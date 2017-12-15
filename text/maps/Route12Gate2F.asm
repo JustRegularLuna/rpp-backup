@@ -9,7 +9,7 @@ _TM39PreReceiveText::
 	prompt
 
 _ReceivedTM39Text::
-	text "<PLAYER> received"
+	text "[PLAYER] received"
 	line "TM39!@@"
 
 _TM39ExplanationText::
