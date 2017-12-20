@@ -44,10 +44,10 @@ ENDM
 ; external map entry macro
 EMAP: MACRO ; emap x-coordinate,y-coordinate,textpointer
 ; the appearance of towns and routes in the town map, indexed by map id
-	; nybble: y-coordinate
-	; nybble: x-coordinate
+	; byte  : y-coordinate
+	; byte  : x-coordinate
 	; word  : pointer to map name
-	dn \2, \1
+	db \2, \1
 	dw \3
 ENDM
 
@@ -55,11 +55,11 @@ ENDM
 IMAP: MACRO ; imap mapid_less_than,x-coordinate,y-coordinate,textpointer
 ; the appearance of buildings and dungeons in the town map
 	; byte  : maximum map id subject to this rule
-	; nybble: y-coordinate
-	; nybble: x-coordinate
+	; byte  : y-coordinate
+	; byte  : x-coordinate
 	; word  : pointer to map name
 	db \1
-	dn \3, \2
+	db \3, \2
 	dw \4
 ENDM
 

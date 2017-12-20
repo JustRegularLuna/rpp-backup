@@ -291,29 +291,39 @@ SetPal_TownMap:
 	ld a,2
 	ld [rSVBK],a
 
-	ld d, PAL_TOWNMAP
-	ld e,0
-	callba LoadSGBPalette
-
-	ld d, PAL_TOWNMAP2
-	ld e,1
-	callba LoadSGBPalette
+	; Load all town map pals at once
+	ld hl, TownMapPals
+	ld de, W2_BgPaletteData
+	ld bc, TownMapPalsEnd - TownMapPals
+	call CopyData
 
 	ld a,1
 	ld [W2_TileBasedPalettes],a
 
-	ld hl,W2_TilesetPaletteMap
-	ld bc, $100
-	xor a
-	call FillMemory
+	ld de, TownMapPalAssignments
+	ld hl, W2_TilesetPaletteMap
+	ld b, $60
+.copyLoop
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec b
+	jr nz, .copyLoop
 
-	; Give tile $65 a different color
-	ld hl,W2_TilesetPaletteMap + $65
-	ld [hl], 1
+	; Set the remaining tiles (the font) to pal 0
+	ld b, $a0
+	xor a
+.fillLoop
+	ld [hli], a
+	dec b
+	jr nz, .fillLoop
 
 	xor a
 	ld [rSVBK],a
 	ret
+
+INCLUDE "color/town_map_pals.asm"
+INCLUDE "color/town_map_pal_assignments.asm"
 
 ; Status screen
 ; [wShinyMonFlag] must be appropriately set before this is called

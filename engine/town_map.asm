@@ -15,6 +15,9 @@ DisplayTownMap:
 	push af
 	ld b, $0
 	call DrawPlayerOrBirdSprite ; player sprite
+	coord hl, 0, 0
+	ld a, $3f ; up/down arrow tile
+	ld [hl], a
 	coord hl, 1, 0
 	ld de, wcd6d
 	call PlaceString
@@ -32,8 +35,8 @@ DisplayTownMap:
 	jr .enterLoop
 
 .townMapLoop
-	coord hl, 0, 0
-	lb bc, 1, 20
+	coord hl, 1, 0
+	lb bc, 1, 19
 	call ClearScreenArea
 	ld hl, TownMapOrder
 	ld a, [wWhichTownMapLocation]
@@ -43,9 +46,7 @@ DisplayTownMap:
 	ld a, [hl]
 
 .enterLoop:
-	ld de, wTownMapCoords
 	call LoadTownMapEntry
-	ld a, [de]
 	push hl
 	call TownMapCoordsToOAMCoords
 	ld a, $4
@@ -353,9 +354,7 @@ DrawPlayerOrBirdSprite:
 	ld a, b
 	ld [wOAMBaseTile], a
 	pop af
-	ld de, wTownMapCoords
 	call LoadTownMapEntry
-	ld a, [de]
 	push hl
 	call TownMapCoordsToOAMCoords
 	call WritePlayerOrBirdSpriteOAM
@@ -376,7 +375,7 @@ DisplayWildLocations:
 	callba FindWildLocationsOfMon
 	call ZeroOutDuplicatesInList
 	ld hl, wOAMBuffer
-	ld de, wTownMapCoords
+	ld de, wBuffer
 .loop
 	ld a, [de]
 	cp $ff
@@ -385,10 +384,11 @@ DisplayWildLocations:
 	jr z, .nextEntry
 	push hl
 	call LoadTownMapEntry
+	lb hl, -5, -4
+	add hl, bc
+	ld b, h
+	ld c, l
 	pop hl
-	ld a, [de]
-	cp $19 ; Cerulean Cave's coordinates
-	jr z, .nextEntry ; skip Cerulean Cave
 	call TownMapCoordsToOAMCoords
 	ld a, $4 ; nest icon tile no.
 	ld [hli], a
@@ -424,20 +424,11 @@ AreaUnknownText:
 	db " Area unknown@"
 
 TownMapCoordsToOAMCoords:
-; in: lower nybble of a = x, upper nybble of a = y
-; out: b and [hl] = (y * 8) + 24, c and [hl+1] = (x * 8) + 24
-	push af
-	and $f0
-	srl a
-	add 24
-	ld b, a
+; in: b = y, c = x
+; out: [hl] = y, [hl + 1] = x
+	ld a, b
 	ld [hli], a
-	pop af
-	and $f
-	swap a
-	srl a
-	add 24
-	ld c, a
+	ld a, c
 	ld [hli], a
 	ret
 
@@ -451,9 +442,8 @@ WritePlayerOrBirdSpriteOAM:
 WriteTownMapSpriteOAM:
 	push hl
 
-; Subtract 4 from c (X coord) and 4 from b (Y coord). However, the carry from c
-; is added to b, so the net result is that only 3 is subtracted from b.
-	lb hl, -4, -4
+; Adjust the coords so the sprite is lined up properly
+	lb hl, -9, -8
 	add hl, bc
 
 	ld b, h
@@ -560,10 +550,10 @@ ZeroOutDuplicatesInList:
 
 LoadTownMapEntry:
 ; in: a = map number
-; out: lower nybble of [de] = x, upper nybble of [de] = y, hl = address of name
+; out: b = y, c = x, hl = address of name
 	cp REDS_HOUSE_1F
 	jr c, .external
-	ld bc, 4
+	ld bc, 5
 	ld hl, InternalMapEntries
 .loop
 	cp [hl]
@@ -581,9 +571,12 @@ LoadTownMapEntry:
 	add hl, bc
 	add hl, bc
 	add hl, bc
+	add hl, bc
 .readEntry
 	ld a, [hli]
-	ld [de], a
+	ld b, a
+	ld a, [hli]
+	ld c, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

@@ -58,11 +58,11 @@ Route17Name:
 Route18Name:
 	db "Route 18@"
 Route19Name:
-	db "Sea Route 19@"
+	db "Route 19@"
 Route20Name:
-	db "Sea Route 20@"
+	db "Route 20@"
 Route21Name:
-	db "Sea Route 21@"
+	db "Route 21@"
 Route22Name:
 	db "Route 22@"
 Route23Name:
@@ -75,6 +75,8 @@ ViridianForestName:
 	db "Viridian Forest@"
 MountMoonName:
 	db "Mt. Moon@"
+MountMoonSquareName:
+	db "Mt. Moon Square@"
 RockTunnelName:
 	db "Rock Tunnel@"
 SeaCottageName:
