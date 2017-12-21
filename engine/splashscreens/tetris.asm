@@ -15,5 +15,5 @@ TetrisComputerScreen::
 	jp MainScreenTurnOn
 
 TetrisTilemap:
-	INCBIN "gfx/tilemaps/tetris.map"
+	INCBIN "gfx/tilemaps/tetris.kmp"
 TetrisTilemapEnd:

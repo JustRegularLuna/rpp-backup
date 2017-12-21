@@ -55,7 +55,7 @@ VersionScreenTiles:
 VersionScreenTilesEnd:
 
 VersionScreenTilemap:
-	INCBIN "gfx/tilemaps/blank_text_screen.map"
+	INCBIN "gfx/tilemaps/blank_text_screen.kmp"
 VersionScreenTilemapEnd:
 
 VersionScreenText:

@@ -331,8 +331,9 @@ LoadTownMap:
 	ret
 
 UncompressedMap: ; Uses the Gen 2 format
-    INCBIN "gfx/tilemaps/town_map.map"
+    INCBIN "gfx/tilemaps/kanto_map.kmp"
 UncompressedMapEnd:
+; TODO: Add the map for Johto and Shamouti later
 
 ExitTownMap:
 ; clear town map graphics data and load usual graphics data
