@@ -592,7 +592,7 @@ ReadMove:
 ; move choice modification methods that are applied for each trainer class
 ; 0 is sentinel value
 TrainerClassMoveChoiceModifications:
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	db 1,4,0  ; YOUNGSTER
 	db 1,4,0  ; BUG CATCHER
 	db 1,4,0  ; LASS
@@ -730,7 +730,7 @@ TrainerAIPointers:
 ; one entry per trainer class
 ; first byte, number of times (per Pokémon) it can occur
 ; next two bytes, pointer to AI subroutine for trainer class
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	dbw 3,PotionAI ; youngster
 	dbw 3,FullHealAI ; bug catcher
 	dbw 3,PotionAI ; lass

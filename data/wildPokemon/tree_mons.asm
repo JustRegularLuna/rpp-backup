@@ -39,7 +39,7 @@ TreeMonPointerTable:
 	; Any map not in this list defaults to TreeMons1
 
 TreeMons1:
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	db 15, CATERPIE
 	db 15, CATERPIE
 	db 15, WEEDLE
@@ -64,7 +64,7 @@ ELSE ; Normal Version
 ENDC
 
 TreeMons2:
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	db 15, PIDGEY
 	db 15, PIDGEY
 	db 15, SPEAROW
@@ -89,7 +89,7 @@ ELSE ; Normal Version
 ENDC
 
 TreeMons3:
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	db 20, VENONAT
 	db 20, VENONAT
 	db 20, PARAS
@@ -114,7 +114,7 @@ ELSE ; Normal Version
 ENDC
 
 TreeMons4:
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	db 25, EKANS
 	db 25, EKANS
 	db 25, EKANS
@@ -139,7 +139,7 @@ ELSE ; Normal Version
 ENDC
 
 TreeMons5:
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	db 35, PARAS
 	db 35, PARAS
 	db 35, VENONAT
@@ -164,7 +164,7 @@ ELSE ; Normal Version
 ENDC
 
 TreeMons6:
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	db 45, PARAS
 	db 45, PARAS
 	db 45, VENONAT
@@ -189,7 +189,7 @@ ELSE ; Normal Version
 ENDC
 
 TreeMons7:
-IF DEF(_BLUE) ; Hard Version
+IF DEF(_HARD) ; Hard Version
 	db 55, BEEDRILL
 	db 53, BUTTERFREE
 	db 52, TANGELA

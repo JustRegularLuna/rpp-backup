@@ -1,5 +1,5 @@
 Route13Mons:
-IF DEF(_BLUE) ; Difficult Rom
+IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $14
 	db 44,GLOOM

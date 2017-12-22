@@ -1,5 +1,5 @@
 TowerMons6:
-IF DEF(_BLUE) ; Difficult Rom
+IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $0F
 	db 31,GASTLY

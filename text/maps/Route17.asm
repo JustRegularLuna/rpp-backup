@@ -57,7 +57,7 @@ _Route17AfterBattleText4::
 	done
 
 _Route17BattleText5::
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	text "Let Electrode"
 ELSE
 	text "Let Voltorb"
@@ -70,7 +70,7 @@ _Route17EndBattleText5::
 	prompt
 
 _Route17AfterBattleText5::
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	text "I found Electrode"
 ELSE
 	text "I got my Voltorb"

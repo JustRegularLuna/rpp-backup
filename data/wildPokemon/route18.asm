@@ -1,5 +1,5 @@
 Route18Mons:
-IF DEF(_BLUE) ; Difficult Rom
+IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $19
 	db 45,SPEAROW

@@ -19,7 +19,7 @@ _Route21BattleText2::
 	done
 
 _Route21EndBattleText2::
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	text "Darn Gyarados!"
 ELSE
 	text "Darn Magikarp!"
@@ -27,7 +27,7 @@ ENDC
 	prompt
 
 _Route21AfterBattleText2::
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	text "Gyarados isn't as"
 	line "tough as you"
 	cont "might think."

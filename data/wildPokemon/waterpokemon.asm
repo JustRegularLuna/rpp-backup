@@ -1,5 +1,5 @@
 WaterMons:
-IF DEF(_BLUE) ; Difficult Rom
+IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $00
 

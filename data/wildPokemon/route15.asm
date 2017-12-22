@@ -1,5 +1,5 @@
 Route15Mons:
-IF DEF(_BLUE) ; Difficult Rom
+IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $0F
 	db 45,GLOOM

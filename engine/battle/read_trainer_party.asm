@@ -243,7 +243,7 @@ GetUniqueTrainerDVs:
 	and a
 	ret
 
-IF DEF(_BLUE) ; Difficult rom
+IF DEF(_HARD) ; Difficult rom
 	INCLUDE "data/trainer_dvs_hard.asm"
 	INCLUDE "data/unique_trainer_dvs_hard.asm"
 	INCLUDE "data/trainer_parties_hard.asm"

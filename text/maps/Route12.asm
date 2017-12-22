@@ -59,7 +59,7 @@ _Route12EndBattleText3::
 	prompt
 
 _Route12AfterBattleText3::
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	text "I had to make"
 ELSE
 	text "I could have made"

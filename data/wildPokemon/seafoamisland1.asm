@@ -1,5 +1,5 @@
 IslandMons1:
-IF DEF(_BLUE) ; Difficult Rom
+IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $0F
 	db 40,SEEL

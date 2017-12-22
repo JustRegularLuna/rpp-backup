@@ -1,5 +1,5 @@
 Route2Mons:
-IF DEF(_BLUE) ; Difficult rom
+IF DEF(_HARD) ; Difficult rom
 ; Grass Mons
 	db $19
 	db 4,RATTATA

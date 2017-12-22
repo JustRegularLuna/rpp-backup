@@ -1,5 +1,5 @@
 ForestMons:
-IF DEF(_BLUE) ; Diffuclt Rom
+IF DEF(_HARD) ; Diffuclt Rom
 ; Grass Mons
 	db $19
 	db 6,WEEDLE

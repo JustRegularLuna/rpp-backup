@@ -1,5 +1,5 @@
 MansionMons2:
-IF DEF(_BLUE) ; Difficult Rom
+IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $0A
 	db 47,GROWLITHE

@@ -39,7 +39,7 @@ _Route8EndBattleText3::
 	prompt
 
 _Route8AfterBattleText3::
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	text "Go with Muk"
 ELSE
 	text "Go with Grimer"
@@ -142,7 +142,7 @@ _Route8EndBattleText9::
 	text "Stop!"
 
 	para "Don't be so mean"
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	line "to my clefable!"
 ELSE
 	line "to my Clefairy!"
@@ -150,14 +150,14 @@ ENDC
 	prompt
 
 _Route8AfterBattleText9::
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	text "Did you know"
 ELSE
 	text "I heard that"
 ENDC
 	line "Clefairy evolves"
 	cont "when it's exposed"
-IF DEF(_BLUE)
+IF DEF(_HARD)
 	cont "to a Moon Stone?"
 ELSE
 	cont "to a Moon Stone."

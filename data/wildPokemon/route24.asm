@@ -1,5 +1,5 @@
 Route24Mons:
-IF DEF(_BLUE) ; Difficult Rom
+IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $19
 	db 15,ODDISH
