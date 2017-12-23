@@ -12,9 +12,9 @@ HealEffect_:
 	ld b, a
 	ld a, [de]
 	cp [hl]
-	jr nz, .fine
 	inc de
 	inc hl
+	jr nz, .fine
 	ld a, [de]
 	sbc [hl]
 	jp z, .failed ; no effect if user's HP is already at its maximum
