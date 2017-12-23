@@ -110,7 +110,7 @@ ThunderBadgeText:
 	db "ThunderBadge@"
 
 CascadeBadgeText:
-	db "CadcadeBadge@"
+	db "CascadeBadge@"
 
 Route23Script_512d8:
 	ld a, $1
