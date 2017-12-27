@@ -1,3 +1,5 @@
+; *** This file is not used in Red++
+; *** Instead of a list, any valid Pokemon ID can show up at random
 TitleMons:
 ; mons on the title screen are randomly chosen from here
 IF DEF(_RED)
