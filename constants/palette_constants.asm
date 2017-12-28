@@ -50,54 +50,17 @@ const_value = 0
 	const PAL_PINKMON              ; $17
 	const PAL_YELLOWMON            ; $18
 	const PAL_GREYMON              ; $19
-
-	const PAL_SLOTS1               ; $25
-	const PAL_SLOTS2               ; $26
-	const PAL_SLOTS3               ; $27
-	const PAL_SLOTS4               ; $28
-	const PAL_BLACK                ; $29
-	const PAL_GREENBAR             ; $2A
-	const PAL_YELLOWBAR            ; $2B
-	const PAL_REDBAR               ; $2C
-	const PAL_BADGE                ; $2D
-	const PAL_CAVE                 ; $2E
-	const PAL_GAMEFREAK            ; $2F
-
-	; no longer used, copied into mon pals and trainer pals
-;	const PAL_SNEASEL_OLD          ; $1A
-;	const PAL_BELLOSSOM_OLD        ; $1B
-;	const PAL_TOGEKISS_OLD         ; $1C
-;	const PAL_BLUE_TRAINER         ; $1D
-;	const PAL_RED_TRAINER          ; $1E
-;	const PAL_CYAN_TRAINER         ; $1F
-;	const PAL_PURPLE_TRAINER       ; $20
-;	const PAL_BROWN_TRAINER        ; $21
-;	const PAL_GREEN_TRAINER        ; $22
-;	const PAL_PINK_TRAINER         ; $23
-;	const PAL_YELLOW_TRAINER       ; $24
-
-;	const PAL_SHINY_MEWMON         ; $30
-;	const PAL_SHINY_BLUEMON        ; $31
-;	const PAL_SHINY_REDMON         ; $32
-;	const PAL_SHINY_CYANMON        ; $33
-;	const PAL_SHINY_PURPLEMON      ; $34
-;	const PAL_SHINY_BROWNMON       ; $35
-;	const PAL_SHINY_GREENMON       ; $36
-;	const PAL_SHINY_PINKMON        ; $37
-;	const PAL_SHINY_YELLOWMON      ; $38
-;	const PAL_SHINY_GREYMON        ; $39
-;	const PAL_SHINY_SNEASEL_OLD    ; $3A
-;	const PAL_SHINY_BELLOSSOM_OLD  ; $3B
-;	const PAL_SHINY_TOGEKISS_OLD   ; $3C
-	; trainer palettes are shared with pokemon...
-;	const PAL_SHINY_BLUE_TRAINER   ; $3D
-;	const PAL_SHINY_RED_TRAINER    ; $3E
-;	const PAL_SHINY_CYAN_TRAINER   ; $3F
-;	const PAL_SHINY_PURPLE_TRAINER ; $40
-;	const PAL_SHINY_BROWN_TRAINER  ; $41
-;	const PAL_SHINY_GREEN_TRAINER  ; $42
-;	const PAL_SHINY_PINK_TRAINER   ; $43
-;	const PAL_SHINY_YELLOW_TRAINER ; $44
+	const PAL_SLOTS1               ; $1A
+	const PAL_SLOTS2               ; $1B
+	const PAL_SLOTS3               ; $1C
+	const PAL_SLOTS4               ; $1D
+	const PAL_BLACK                ; $1E
+	const PAL_GREENBAR             ; $1F
+	const PAL_YELLOWBAR            ; $20
+	const PAL_REDBAR               ; $21
+	const PAL_BADGE                ; $22
+	const PAL_CAVE                 ; $23
+	const PAL_GAMEFREAK            ; $24
 
 
 const_value = 0
