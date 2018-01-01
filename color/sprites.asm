@@ -518,6 +518,9 @@ SpritePaletteAssignments: ; Characters on the overworld
 
 	; 0x4f: SPRITE_SILVER
 	db PAL_OW_RED
+	
+	; SPRITE_BILL
+	db PAL_OW_RED
 
 	; 0x50: SPRITE_BALL
 	db PAL_OW_RED

@@ -94,6 +94,7 @@ const_value = 1
 	const SPRITE_HIRO                      ; $4d
 	const SPRITE_KRIS                      ; $4e
 	const SPRITE_SILVER                    ; $4f
+	const SPRITE_BILL
 ; Sprites after this are only 1 frame
 	const SPRITE_BALL                      ; $50
 	const SPRITE_OMANYTE                   ; $51

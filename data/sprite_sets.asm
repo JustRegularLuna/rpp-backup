@@ -589,6 +589,11 @@ SpriteSheetPointerTable:
 	dw SilverSprite
 	db $c0 ; byte count
 	db BANK(SilverSprite)
+
+	; SPRITE_BILL
+	dw BillSprite
+	db $c0 ; byte count
+	db BANK(BillSprite)
 	
 
 ;	

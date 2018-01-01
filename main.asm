@@ -2311,6 +2311,7 @@ JamesSprite:           INCBIN "gfx/sprites/james.2bpp"
 HiroSprite:            INCBIN "gfx/sprites/hiro.2bpp"
 KrisSprite:            INCBIN "gfx/sprites/kris.2bpp"
 SilverSprite:          INCBIN "gfx/sprites/silver.2bpp"
+BillSprite:            INCBIN "gfx/sprites/bill.2bpp"
 
 
 
