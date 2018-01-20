@@ -143,7 +143,7 @@ _Route8EndBattleText9::
 
 	para "Don't be so mean"
 IF DEF(_HARD)
-	line "to my clefable!"
+	line "to my Clefable!"
 ELSE
 	line "to my Clefairy!"
 ENDC
