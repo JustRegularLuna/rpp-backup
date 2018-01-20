@@ -19,7 +19,7 @@ For a list of features, check out [**FEATURES.md**](FEATURES.md).
 ## Frequently Asked Questions
 
 ### Q: How do you play this in color?
-A: If you build the current copy yourself, it is already in Full Colour. For the current stable ,release, however: In VBA, go to Options -> Gameboy and set it to "Automatic", then close and re-open the emulator for the change to take effect. If you're playing on a mobile emulator, chances are good that if it doesn't automatically play in color, your emulator doesn't support Super Gameboy mode, which this hack currently uses for color.
+A: If you build the current copy yourself, it is already in Full Color. For the current stable release (v2.4.2), however: In VBA, go to Options -> Gameboy and set it to "Automatic", then close and re-open the emulator for the change to take effect. If you're playing on a mobile emulator, chances are good that if it doesn't automatically play in color, your emulator doesn't support Super Gameboy mode, which this hack currently uses for color.
 
 ### Q: Are all Pokémon available?
 A: Yes, all 205 Pokémon that are included in the game are available without needing to trade with another person or abusing Wonder Trade.
