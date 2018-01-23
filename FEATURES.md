@@ -45,7 +45,9 @@ These are notable features which have been added
 * Running Shoes (2x faster than walking)
 * Faster Surfing(2x faster than walking)
 * Faster Bicycle(4x faster than walking)
+* Full Color
 * Updated graphics
+* Replaced audio engine with Pokémon Crystal's
 * Physical/Special Split
 * Dark, Steel, and Fairy types
 * Several new Pokémon (NO FAKEMON)
@@ -73,7 +75,7 @@ These are notable features which have been added
 * Move Relearner
 * Move Tutors
 * Move Deleter
-* Shiny Pokémon (same chances as Polished Crystal)
+* Shiny Pokémon (same chances as Polished Crystal v2)
 * Pokémon have genders
 * Chain-Fishing for Shinies
 * More

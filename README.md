@@ -49,6 +49,9 @@ A: There is only Kanto for now. Johto is planned for the future, though.
 A: Maybe!
 
 
+For help, questions, or to generally keep up with development, check out the [**Lunaverse Discord**][lunaverse].
+
+
 
 ## Setting up your own version
 
@@ -81,3 +84,4 @@ After setting up the repository, you'll want to download the current release of 
 [pokeemerald]: https://github.com/pret/pokeemerald
 [Discord]: https://discord.gg/cJxDDVP
 [irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
+[lunaverse]: https://discord.gg/SQwkd7r

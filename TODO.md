@@ -4,11 +4,12 @@ This list is not necessarily a guarantee, but it contains a list of features and
 Things may be added to this list as I think of them, and removed if they are added or I change my mind.
 
 ## Engine updates and New Features
-* Full color, by merging in pokered-gbc or porting from pokecrystal (whichever is cleaner)
-* Crystal's audio engine, by merging in the crysaudio branch
+* Cleanup pokered-gbc code (optimizations)
+* Add support for larger tileset images, like Polished Crystal
+* Add support for setting XY Flip/Palette Attributes as part of block data?
 * Real-Time Clock, with Day and Night
 * More modern Berry System, allowing you to plant and grow new ones instead of the Gen 2-like current system
-* Expand Pokédex beyond 255
+* Expand Pokédex beyond 255 (mimic ShantyTown's "expand-dex" branch)
 * Allow for more than one proper region, so Johto can happen
 * Individual menu sprites for all Pokémon
 * Pokégear/Pokénav equivalent
@@ -30,11 +31,9 @@ Things may be added to this list as I think of them, and removed if they are add
 * Player customization options
 * Rewritten Trainer AI
 * Secret Bases
-* Surfing Pikachu minigame
-* Ruins of Alph puzzles
+* Surfing Pikachu minigame (ported from Pokeyellow)
+* Ruins of Alph puzzles (waiting for PR from ShantyTown)
 * Bug Catching Contest
-* More songs added
-* More detailed tilesets. 256 tiles, XY Flip support (Using VRAM0 and VRAM1 for two halves of the set)
 * Possibly add Forms
 * Use IVs and EVs instead of DVs and Stat EXP, old DVs become a mini Personality ID
 * Gain EXP on catching a Pokémon
@@ -57,18 +56,16 @@ Things may be added to this list as I think of them, and removed if they are add
 * Make Pokéball break with zero shakes instead of "You missed the Pokémon!"
 * Stat-up too high making your stat roll over to ultra low values
 * Substitute not protecting against status
-* Make sure badges boost the stats they claim to
+* Remove badge boosts, to be more modern
 
 
 ## Unsorted Notes
-* Pokégear/Pokénav would replace Town Map, have a VS Seeker option, a radio, and possibly allow PC access
-* Possibly move Wonder Trade into the Pokégear/Pokénav menu
+* Pokégear/Pokénav would replace Town Map, have a VS Seeker option, a radio, etc.
 * Several things in WRAM could stand to be optimized, such as event flags and map script bytes
 * Hide/Show routine needs work. Probably better to redo it based on normal flags somehow, like Gen 2
 * IndexToPokedex and PokedexToIndex are pointless now, and can be removed
 * Remove the weird TM Name Generation routine, TM Case will work differently.
 * Add even more trainer classes and cameo trainers
-* Faraway Island needs the Abandoned Ship music
 * Johto needs songs from Crystal, of course
 * Johto should include areas that were in Polished Crystal/Christmas
 * Battle Tower will be in Johto
@@ -82,7 +79,6 @@ Things may be added to this list as I think of them, and removed if they are add
 * Pull Swimmer F data out of Beauty class list
 * Consolidate Leader classes and Elite Four classes
 * Maybe change Trainer DVs back to checking AI Number, instead of Trainer Class, once those are consolidated
-* Go ahead and declare constants for all 721 Pokémon + Fossils, use Gen 3 Missingno Sprite as placeholder
 * If Natures are disabled in intro, do not display on status screens, and use a neutral nature always
 * If Abilities are disabled in intro, do not display on status screens, and use a blank ability for everyone
 * EXP on catch is annoying, since a lot of variables are reused during the EXP Gain process. Will require a lot of testing.
