@@ -1,5 +1,5 @@
 AdvancePlayerSprite_::
-	; First, reset chain fishing streak
+	; First, reset chain fishing/headbutt streak
 	xor a
 	ld [wChainFishingStreak], a
 	ld a,[wSpriteStateData1 + 3] ; delta Y

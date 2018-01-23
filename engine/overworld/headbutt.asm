@@ -1,7 +1,5 @@
 ; Handles functionality for Headbutt outside of battle
 ; Headbutt Pokemon tables are stored in data/wildPokemon/tree_mons.asm
-; engine/battle/16.asm needs to include the check for wMoveMissed being 2 for _FellOutOfTreeText
-; without that check, it will claim the Pokemon was hooked by a rod
 UseHeadbuttOW::
 	xor a
 	ld [wActionResultOrTookBattleTurn], a
@@ -72,10 +70,14 @@ GetHeadbuttMons:
 ; If we are, find the appropriate list and load a random encounter
 ; Else, say nothing happened
 	call Random
-	cp $A0
+	cp $D0
 	jr c, .getHeadbuttMon
-	ld hl, NoHeadbuttMonText
-	jp PrintText
+
+	; If you have a chain going, you always encounter a Pokemon
+	; If you haven't started a chain, it can still fail
+	ld a, [wChainHeadbuttStreak]
+	and a
+	jp z, .noHeadbuttMon
 
 .getHeadbuttMon
 	ld a, [wCurMap]
@@ -111,6 +113,9 @@ GetHeadbuttMons:
 	pop hl ; get the mon list back
 	ld b, 0
 	add hl, bc
+
+	call CheckChainHeadbuttShiny
+
 	ld a, 2
 	ld [wMoveMissed], a ; fell out of tree text at start of battle
 	ld a, [hli]
@@ -119,6 +124,52 @@ GetHeadbuttMons:
 	ld [wCurOpponent], a
 	xor a
 	ld [wIsTrainerBattle], a ; make sure this doesn't try to be a glitch trainer
+	ret
+
+.noHeadbuttMon
+	ld hl, NoHeadbuttMonText
+	jp PrintText
+
+; Checks if the pokemon should be shiny, based on the current
+; chain the player has built up.
+; Sets the "force shiny" flag appropriately.
+; Probablities are based on this research: http://mrnbayoh.github.io/pkmn6gen/chain_fishing_shiny/
+; Once a chain of 20 is reached, it's approximately a 1/100 chance.
+CheckChainHeadbuttShiny:
+	push hl
+	ld a, [wChainHeadbuttStreak]
+	cp 21
+	jr c, .ok
+	ld a, 20  ; maximum of 20 * 2 attempts at being shiny
+.ok
+	sla a
+	push af
+	; increase chain
+	ld a, [wChainHeadbuttStreak]
+	cp $ff
+	jr z, .maxChain
+	inc a
+	ld [wChainHeadbuttStreak], a
+.maxChain
+	pop af
+	ld e, a  ; e = number of rolls to try and get shiny
+	inc e
+.loop
+	dec e
+	jr z, .end
+	; Generate a random number and see if its shiny (1/256 now, since 1/1024 for normal wild)
+	call Random
+	; Check if a = $AA
+	cp a, $AA
+	jr nz, .loop
+	; Force wild pokemon to be shiny
+	ld hl, wExtraFlags
+	set 0, [hl]
+	; Reset chain
+	xor a
+	ld [wChainHeadbuttStreak], a
+.end
+	pop hl
 	ret
 
 NoHeadbuttMonText:

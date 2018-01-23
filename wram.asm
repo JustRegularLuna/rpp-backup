@@ -2973,6 +2973,7 @@ wRoute18GateCurScript:: ; d669
 	ds 1
 wGameProgressFlagsEnd::
 
+wChainHeadbuttStreak::
 wChainFishingStreak::
 	ds 1
 

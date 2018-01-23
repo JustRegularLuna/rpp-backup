@@ -77,4 +77,4 @@ VersionScreenText2:
 
 VersionScreenText3:
 	db   "Have fun!"
-	next "  - Mateo, 2016@"
+	next "  - Mateo, 2018@"
