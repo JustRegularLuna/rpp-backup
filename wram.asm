@@ -989,6 +989,9 @@ wHiddenObjectFunctionArgument:: ; cd3d
 wWhichTrade:: ; cd3d
 ; which entry from TradeMons to select
 
+wWhichSlidingPuzzle::
+; which sliding tile puzzle to load
+
 wTrainerSpriteOffset:: ; cd3d
 
 wUnusedCD3D:: ; cd3d
@@ -2977,8 +2980,28 @@ wChainHeadbuttStreak::
 wChainFishingStreak::
 	ds 1
 
+wSlidingTilePuzzleCells::
+	ds 25
+wSlidingTilePuzzleCellsEnd::
+wSlidingTilePuzzleX::
+	ds 1
+wSlidingTilePuzzleY::
+	ds 1
+wSlidingTilePuzzleHeader::
+wSlidingTilePuzzleTileSize::
+	ds 1
+wSlidingTilePuzzleWidth::
+	ds 1
+wSlidingTilePuzzleHeight::
+	ds 1
+wSlidingTilePuzzleTileMapPointer::
+	ds 2
+wSlidingTilePuzzleInitialPositions::
+	ds 2
+wSlidingTilePuzzleHeaderEnd::
+
 ; unused bytes originally allocated with game progress flags
-	ds 99
+	ds 65
 
 
 
