@@ -6,6 +6,7 @@ Red++ serves as an updated version of Pokémon Red.
 
 It fixes a lot of bugs leftover from original Red and Blue, as well as adding new features.
 It builds two versions, a "Normal" version and a "Hard" version. The only difference is the level curve.
+By default, it builds the Hard rom. To build the Normal rom, go to [constants.asm](constants.asm) and comment out the line it tells you to at the top.
 
 For a list of features, check out [**FEATURES.md**](FEATURES.md).
 
@@ -43,7 +44,7 @@ A: The only "Event Shiny" for now is the Magikarp you buy in the Mt. Moon Pokéc
 A: Yes, Dark Steel and Fairy are all in, and type strengths/weaknesses match Gen 6.
 
 ### Q: Can I go to Johto?
-A: There is only Kanto for now. Johto is planned for the future, though.
+A: There is only Kanto for now. Johto is part of the ongoing copy of v3 in the main repo.
 
 ### Q: Will you add so-and-so feature?
 A: Maybe!
