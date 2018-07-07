@@ -15,6 +15,7 @@ For a list of features, check out [**FEATURES.md**](FEATURES.md).
 * To see what the TMs/HMs teach, and where to find them, look [**here**](data/tms.asm).
 * To see a list of Move Tutor moves, and where to find them, look [**here**](data/move_tutors.asm)
 * To see Pokémon base stats, which TMs and which Move Tutors they learn, look [**here**](data/baseStats/).
+* To see which Pokémon are found in the wild in each area, look [**here**](data/wildPokemon/).
 
 
 ## Frequently Asked Questions
