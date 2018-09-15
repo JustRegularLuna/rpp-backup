@@ -1,17 +1,17 @@
 _DayCareIntroText::
 	text "We run a Day Care."
-	line "Would you like me"
+	line "Would you like us"
 	cont "to raise one of"
 	cont "your #mon?"
 	done
 
 _DayCareWhichMonText::
 	text "Which #mon"
-	line "should I raise?"
+	line "should we raise?"
 	prompt
 
 _DayCareWillLookAfterMonText::
-	text "Fine, I'll look"
+	text "Fine, we'll look"
 	line "after @"
 	TX_RAM wcd6d
 	db $0
@@ -19,7 +19,7 @@ _DayCareWillLookAfterMonText::
 	prompt
 
 _DayCareComeSeeMeInAWhileText::
-	text "Come see me in"
+	text "Come see us in"
 	line "a while."
 	done
 
@@ -34,11 +34,11 @@ _DayCareMonHasGrownText::
 	TX_NUM wDayCareNumLevelsGrown,$1,$3
 	text "!"
 
-	para "Aren't I great?"
+	para "Aren't we great?"
 	prompt
 
 _DayCareOweMoneyText::
-	text "You owe me ¥@"
+	text "You owe us ¥@"
 	TX_BCD wDayCareTotalCost, $c2
 	db $0
 	line "for the return"

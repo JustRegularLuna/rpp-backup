@@ -34,7 +34,7 @@ _DayCareNotEnoughMoneyText::
 
 _DayCareMText2::
     text "Hello there! I'm"
-    line "the Breeder!"
+    line "the Day Care Man!"
     
     para "Come back and see"
     line "me another time."

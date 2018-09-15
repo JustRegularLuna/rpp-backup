@@ -66,14 +66,14 @@ IF DEF(_HARD) ; Hard Rom
 ELSE ; Normal Rom
 	next "The Normal Patch"
 ENDC
-	next "v3.x.x dev@"
+	next "v?.?.? dev@"
 
 VersionScreenText2:
 	db   "Readme and FAQ"
 	next "are found at:"
 	next "www.github.com/"
 	next "TheFakeMateo/"
-	next "RedPlusPlus@"
+	next "rpp-backup@"
 
 VersionScreenText3:
 	db   "Have fun!"
