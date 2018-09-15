@@ -362,11 +362,6 @@ _MoveMon:
 	cp PARTY_TO_DAYCARE
 	ld hl, wDayCareMon
 	jr z, .findMonDataSrc
-	cp PARTY_TO_DAYCARE_2
-	ld hl, wDayCareMon2
-	jr z, .findMonDataSrc
-	cp DAYCARE_TO_PARTY_2
-	jr z, .checkPartyMonSlots
 	; else it's PARTY_TO_BOX
 	ld hl, wNumInBox
 	ld a, [hl]
@@ -390,10 +385,6 @@ _MoveMon:
 	ld a, [wMoveMonType]
 	cp DAYCARE_TO_PARTY
 	ld a, [wDayCareMon]
-	jr z, .copySpecies
-	ld a, [wMoveMonType]
-	cp DAYCARE_TO_PARTY_2
-	ld a, [wDayCareMon2]
 	jr z, .copySpecies
 	ld a, [wcf91]
 .copySpecies
@@ -425,9 +416,6 @@ _MoveMon:
 	cp DAYCARE_TO_PARTY
 	ld hl, wDayCareMon
 	jr z, .copyMonData
-	cp DAYCARE_TO_PARTY_2
-	ld hl, wDayCareMon2
-	jr z, .copyMonData
 	ld hl, wPartyMons
 	ld bc, wPartyMon2 - wPartyMon1 ; $2c
 .addMonOffset2
@@ -445,8 +433,6 @@ _MoveMon:
 	jr z, .findOTdest
 	cp DAYCARE_TO_PARTY
 	jr z, .findOTdest
-	cp DAYCARE_TO_PARTY_2
-	jr z, .findOTdest
 	ld bc, wBoxMon2 - wBoxMon1
 	add hl, bc
 	ld a, [hl] ; hl = Level
@@ -459,10 +445,7 @@ _MoveMon:
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonOT
 	jr z, .findOTsrc
-	cp PARTY_TO_DAYCARE_2
-	ld de, wDayCareMon2OT
-	jr z, .findOTsrc
-	dec a
+	dec a 
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
 	jr nz, .addOToffset
@@ -481,9 +464,6 @@ _MoveMon:
 	ld hl, wDayCareMonOT
 	cp DAYCARE_TO_PARTY
 	jr z, .copyOT
-	ld hl, wDayCareMon2OT
-	cp DAYCARE_TO_PARTY_2
-	jr z, .copyOT
 	ld hl, wPartyMonOT
 .addOToffset2
 	ld a, [wWhichPokemon]
@@ -495,9 +475,6 @@ _MoveMon:
 .findNickDest
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonName
-	jr z, .findNickSrc
-	cp PARTY_TO_DAYCARE_2
-	ld de, wDayCareMon2Name
 	jr z, .findNickSrc
 	dec a
 	ld hl, wPartyMonNicks
@@ -518,9 +495,6 @@ _MoveMon:
 	ld hl, wDayCareMonName
 	cp DAYCARE_TO_PARTY
 	jr z, .copyNick
-	ld hl, wDayCareMon2Name
-	cp DAYCARE_TO_PARTY_2
-	jr z, .copyNick
 	ld hl, wPartyMonNicks
 .addNickOffset2
 	ld a, [wWhichPokemon]
@@ -533,8 +507,6 @@ _MoveMon:
 	cp PARTY_TO_BOX
 	jr z, .done
 	cp PARTY_TO_DAYCARE
-	jr z, .done
-	cp PARTY_TO_DAYCARE_2
 	jr z, .done
 	push hl
 	srl a

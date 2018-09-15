@@ -107,10 +107,9 @@ BerryReset::
 	ld [hli],a
 	ld [hl],a
 	; Added part to mark there being a baby at the Day Care
-	ld hl, wDayCareInUse
-	bit 0, [hl] ; does the Day Care Lady have someone?
+	ld a, [wDayCareInUse]
+	and a ; does the Day Care Lady have someone?
 	ret z
-	bit 1, [hl] ; does the Day Care Man have someone?
-	ret z
-	set 2, [hl] ; Mark there being a babymon at Day Care
+	ld hl, wExtraFlags
+	set 1, [hl] ; Mark there being a babymon at Day Care
 	ret

@@ -3081,7 +3081,7 @@ wPlayerGender::
 wExtraFlags::
 ; TODO: Move these in with Event Flags and an EngineFlags array
 ; bit 0 = Set means next Wildmon or Giftmon will be Shiny (Reset afterwards)
-; bit 1 = unused
+; bit 1 = Set means there is a baby at the Daycare
 ; bit 2 = Set means traded mons obey like normal mons
 ; bit 3 = Set means you've received Eon Ticket in Celadon Mansion
 ; bit 4 = Set means you've received Mystic Ticket in Cinnabar Lab

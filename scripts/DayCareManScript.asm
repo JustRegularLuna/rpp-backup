@@ -1,64 +1,67 @@
-DayCareBreederScript::
-; Handles breeding DayCareMon with DayCareMon2
+DayCareManScript::
+; Handles breeding the DayCareMon with the Day Care Man's Ditto
 	ld a, [wDayCareInUse]
-	bit 0, a ; is a mon with Day Care Lady?
+	and a
 	jp z, .NoDayCareMon
-	bit 1, a ; is a mon with Day Care Man?
-	jp z, .NoDayCareMon
-	ld hl, DayCareBreederText1 ; Your (daycare mon) has been hanging out with (daycare mon 2)
+	ld hl, DayCareManText1 ; Your (daycare mon) has been hanging out with my Ditto
 	call PrintText
 	call IsABabymon ; Baby Pokemon cannot breed
 	jp c, .isBaby
-	call CanBreed ; Check if it is in the No Breed List (legendaries)
+	call CanBreed ; Check if it is in the No Breed List (legendaries and Ditto)
 	jp c, .cannotBreed
-	ld a, [wDayCareInUse]
-	bit 2, a ; Check to see if there is a baby
+	ld hl, wExtraFlags ; Extra Flags
+	bit 1, [hl] ; Check to see if there is a baby
 	jp z, .noEggs
 	ld a, [wPartyCount]
 	cp $06
 	jp z, .partyFull
-	ld hl, DayCareBreederText2 ; It looks like they had an egg! Do you want the Pokemon that hatched from it?
+	ld hl, DayCareManText2 ; It looks like they had an egg! Do you want the Pokemon that hatched from it?
 	call PrintText
 	call YesNoChoice
 	ld a, [wCurrentMenuItem]
 	and a
 	jp nz, .nevermind
-	call GetBabyID ; Reads the entry from the table, and stores it in register b
-	ld c, $5
+	call GetBabyID ; Reads the entry from the table, and stores it in register b for the mon ID
+	ld c, $5	   ; Babies are at lv 5, like Gen 2
 	call GivePokemon
 	call SetupBabymonStats
-	ld hl, wDayCareInUse
-	res 2, [hl] ; Mark there not being a babymon at Day Care
+	ld hl, wExtraFlags ; Extra flags
+	res 1, [hl] ; Mark there not being a babymon at Day Care
 	ret
 	
 .NoDayCareMon ; Runs if you don't have a Pokemon in the Day Care
-	ld hl, DayCareBreederText3 ; Come back and see me later
-	jp PrintText
+	ld hl, DayCareManText3 ; Come back and see me later
+	call PrintText
+	ret
 
 .isBaby
-	ld hl, DayCareBreederText4 ; That Pokemon is just a baby
-	jp PrintText
+	ld hl, DayCareManText4 ; That Pokemon is just a baby
+	call PrintText
+	ret
 
 .cannotBreed
-	ld hl, DayCareBreederText5 ; I don't think that will breed
-	jp PrintText
+	ld hl, DayCareManText5 ; I don't think that will breed
+	call PrintText
+	ret
 
 .noEggs
-	ld hl, DayCareBreederText6 ; They seem to be getting along ok, come back later
-	jp PrintText
+	ld hl, DayCareManText6 ; They seem to be getting along ok, come back later
+	call PrintText
+	ret
 
 .partyFull
-	ld hl, DayCareBreederText7 ; You have no room for it, though
-	jp PrintText
+	ld hl, DayCareManText7 ; You have no room for it, though
+	call PrintText
+	ret
 
 .nevermind
-	ld hl, wDayCareInUse
-	res 2, [hl] ; Mark there not being a babymon at Day Care
-	ld hl, DayCareBreederText8 ; Ok, I'll give this to someone else, then
-	jp PrintText
+	ld hl, wExtraFlags ; Extra Flags
+	res 1, [hl] ; Mark there not being a babymon at Day Care
+	ld hl, DayCareManText8 ; Ok, I'll give this to someone else, then
+	call PrintText
+	ret
 
-IsABabymon:
-; is the mon with Day Care Lady a baby?
+IsABabymon: ; Checks if the Pokemon with the Day Care Lady is a baby
 	ld hl, BabyMonList
 	ld a, [wDayCareMonSpecies]
 	ld b, a
@@ -68,27 +71,13 @@ IsABabymon:
 	jr z, .baby
 	inc a
 	jr nz, .loop
-
-; if not, is the mon with the Day Care Man a baby?
-	ld hl, BabyMonList
-	ld a, [wDayCareMon2Species]
-	ld b, a
-.loop2
-	ld a, [hli]
-	cp b
-	jr z, .baby
-	inc a
-	jr nz, .loop2
-
-.notBaby
 	xor a
 	ret
-
 .baby
 	scf
 	ret
-	
-CanBreed: ; Needs to be completely redone to include checks for Gender and Egg Groups
+
+CanBreed: ; Checks if the Pokemon cannot breed (Legendaries and Ditto)
 	ld hl, NoBreedList
 	ld a, [wDayCareMonSpecies]
 	ld b, a
@@ -103,8 +92,8 @@ CanBreed: ; Needs to be completely redone to include checks for Gender and Egg G
 .cannot
 	scf
 	ret
-	
-GetBabyID: ; Needs to be redone to get the egg from the Female/Non-Ditto parent
+
+GetBabyID: ; Read the table to determine which baby the Pokemon had
 	ld a, [wDayCareMonSpecies]
 	dec a
 	ld c, a
@@ -133,13 +122,13 @@ SetupBabymonStats: ; Inherit stuff from the parents, currently just DVs for now
 	ld de, wDayCareMonDVs
 	ld a, [de]
 	ld [hli], a
-	ld de, wDayCareMon2DVs + 1
+	ld de, DayCareManDittoDVs + 1
 	ld a, [de]
 	ld [hld], a
 	jr .doneCopyingDVs
 	
 .parents2 ; same as above, but copies from opposite parents
-	ld de, wDayCareMon2DVs
+	ld de, DayCareManDittoDVs
 	ld a, [de]
 	ld [hli], a
 	ld de, wDayCareMonDVs + 1
@@ -192,34 +181,35 @@ SetupBabymonStats: ; Inherit stuff from the parents, currently just DVs for now
 	;@@@ Later, there will be code for passing down Egg Moves
 	ret
 
+DayCareManDittoDVs: ; placeholder until there is a second daycaremon
+	db ATKDEFDV_SHINY, SPDSPCDV_SHINY
+
 INCLUDE "data/breeding_list.asm"
 INCLUDE "data/no_breed_list.asm"
 INCLUDE "data/babymon_list.asm"
 
-DayCareBreederText1:
+DayCareManText1:
 	text "Your @"
 	TX_RAM wDayCareMonName
 	db $0
 	line "has been playing"
-	cont "with @"
-	TX_RAM wDayCareMon2Name
-	text "!"
+	cont "with my DITTO."
 	prompt
 	db "@"
 	
-DayCareBreederText2:
+DayCareManText2:
 	text "It looks like they"
-	line "had an Egg!"
+	line "had an EGG!"
 	
 	para "Do you want the"
-	line "#mon that"
+	line "#MON that"
 	cont "hatched from it?@@"
 	
-DayCareBreederText3:
+DayCareManText3:
 	TX_FAR _DayCareMText2
 	db "@"
 	
-DayCareBreederText4:
+DayCareManText4:
 	text "It's just a baby,"
 	line "though."
 	
@@ -228,12 +218,13 @@ DayCareBreederText4:
 	cont "if you want to"
 	cont "breed it.@@"
 	
-DayCareBreederText5:
+DayCareManText5:
 	text "I don't think that"
-	line "those two are able"
-	cont "to breed, though.@@"
+	line "#MON can breed"
+	cont "with my DITTO,"
+	cont "though.@@"
 	
-DayCareBreederText6:
+DayCareManText6:
 	text "They seem to be"
 	line "getting on pretty"
 	cont "well."
@@ -242,17 +233,15 @@ DayCareBreederText6:
 	line "back and see me"
 	cont "later.@@"
 	
-DayCareBreederText7:
+DayCareManText7:
 	text "It looks like they"
-	line "had an Egg!"
+	line "had an EGG!"
 	
 	para "You don't seem to"
 	line "have any room for"
 	cont "this, though.@@"
 	
-DayCareBreederText8:
+DayCareManText8:
 	text "Ok, I'll give this"
 	line "to someone else,"
 	cont "then.@@"
-	
-	

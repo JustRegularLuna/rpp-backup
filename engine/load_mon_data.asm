@@ -4,7 +4,6 @@ LoadMonData_:
 ;  1: enemymon
 ;  2: boxmon
 ;  3: daycaremon
-;  4: daycaremon2
 ; Return monster id at wcf91 and its data at wLoadedMon.
 ; Also load base stats at wMonHeader for convenience.
 
@@ -12,12 +11,6 @@ LoadMonData_:
 	ld [wcf91], a
 	ld a, [wMonDataLocation]
 	cp DAYCARE_DATA
-	jr z, .GetMonHeader
-	
-	ld a, [wDayCareMon2Species]
-	ld [wcf91], a
-	ld a, [wMonDataLocation]
-	cp 4
 	jr z, .GetMonHeader
 
 	ld a, [wWhichPokemon]
@@ -43,12 +36,7 @@ LoadMonData_:
 	ld bc, wBoxMon2 - wBoxMon1
 	jr z, .getMonEntry
 
-	cp 3
 	ld hl, wDayCareMon
-	jr z, .copyMonData
-
-	; 4
-	ld hl, wDayCareMon2
 	jr .copyMonData
 
 .getMonEntry
