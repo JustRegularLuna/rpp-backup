@@ -66,6 +66,8 @@ ColorOverworldSprite:
 	ld d,wSpriteStateData1>>8
 	ld a,[de]		; Load A with picture ID
 	dec a
+	and a
+	jr z, .playerSprite
 
 	ld de, SpritePaletteAssignments
 	add e
@@ -74,7 +76,16 @@ ColorOverworldSprite:
 	inc d
 .noCarry
 	ld a,[de]		; Get the picture ID's palette
+	jr .continue
 
+.playerSprite
+	ld a, [wPlayerGender]
+	and a
+	ld a, PAL_OW_RED
+	jr z, .continue
+	ld a, PAL_OW_GREEN
+
+.continue
 	; If it's PAL_OW_RANDOM, that means no particular palette is assigned
 	cp PAL_OW_RANDOM
 	jr nz,.norandomColor

@@ -29,14 +29,14 @@ const_value = 0
 	const CAVE_YELLOW       ; 1B
 	const CAVE_BROWN        ; 1C
 	const CAVE_LIGHT_BLUE   ; 1D
-	const BENCH_GUY_PAL     ; 1E
+	const POKECENTER_TABLE  ; 1E
 	const PC_POKEBALL_PAL   ; 1F: doubles as textbox palette for some areas
 	const FOREST_ROCKS      ; 20
 	const FOREST_TREES      ; 21
 	const ALT_TEXTBOX_PAL   ; 22: used in areas with skeleton pokemon
+	const POKECENTER_FLOOR  ; 23
 
 	; These are unused
-	const MAP_PALETTE_23    ; 23
 	const MAP_PALETTE_24    ; 24
 	const MAP_PALETTE_25    ; 25
 	const MAP_PALETTE_26    ; 26
