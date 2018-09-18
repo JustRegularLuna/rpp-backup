@@ -35,10 +35,10 @@ const_value = 0
 	const FOREST_TREES      ; 21
 	const ALT_TEXTBOX_PAL   ; 22: used in areas with skeleton pokemon
 	const POKECENTER_FLOOR  ; 23
-
+	const OAK_TABLE         ; 24
+	const ALT_TEXTBOX_2     ; 25: used to show Articuno properly via the Binoculars
+	
 	; These are unused
-	const MAP_PALETTE_24    ; 24
-	const MAP_PALETTE_25    ; 25
 	const MAP_PALETTE_26    ; 26
 	const MAP_PALETTE_27    ; 27
 	const MAP_PALETTE_28    ; 28
