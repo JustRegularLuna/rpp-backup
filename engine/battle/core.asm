@@ -8,7 +8,7 @@ ResidualEffects1:
 	db SWITCH_AND_TELEPORT_EFFECT
 	db MIST_EFFECT
 	db FOCUS_ENERGY_EFFECT
-;	db CONFUSION_EFFECT
+	db CONFUSION_EFFECT
 	db HEAL_EFFECT
 	db TRANSFORM_EFFECT
 	db LIGHT_SCREEN_EFFECT
@@ -7365,6 +7365,8 @@ MoveEffectPointerTable:
 	 dw PoisonEffect              ; POISON_FANG_EFFECT
 	 dw GrowthEffect              ; GROWTH_EFFECT
 	 dw HoneClawsEffect           ; HONE_CLAWS_EFFECT
+	 dw DynamicPunchEffect        ; DYNAMIC_PUNCH_EFFECT
+	 dw SilverWindEffect          ; SILVER_WIND_EFFECT
 
 SleepEffect:
 	ld de, wEnemyMonStatus
@@ -8520,6 +8522,7 @@ ConfusionEffect:
 	and a
 	jr nz, ConfusionEffectFailed
 
+DynamicPunchEffect:
 ConfusionSideEffectSuccess:
 	ld a, [H_WHOSETURN]
 	and a
@@ -8900,6 +8903,46 @@ FangAttacks:
 VoltTackleEffect:
 	call RecoilEffect
 	jp FreezeBurnParalyzeEffect
+
+SilverWindEffect:
+; 10% chance to boost all stats
+	call BattleRandom
+	cp $1a
+	ret nc
+	
+	ld a, [H_WHOSETURN]
+	and a
+	jr z, .notEnemyTurn
+; Enemy's turn
+	xor a
+	ld [wEnemyMoveNum], a
+	ld a, ATTACK_UP1_EFFECT
+	ld [wEnemyMoveEffect], a
+	call StatModifierUpEffect
+	ld a, DEFENSE_UP1_EFFECT
+	ld [wEnemyMoveEffect], a
+	call StatModifierUpEffect
+	ld a, SPEED_UP1_EFFECT
+	ld [wEnemyMoveEffect], a
+	call StatModifierUpEffect
+	ld a, SPECIAL_UP1_EFFECT
+	ld [wEnemyMoveEffect], a
+	jp StatModifierUpEffect
+.notEnemyTurn
+	xor a
+	ld [wPlayerMoveNum], a
+	ld a, ATTACK_UP1_EFFECT
+	ld [wPlayerMoveEffect], a
+	call StatModifierUpEffect
+	ld a, DEFENSE_UP1_EFFECT
+	ld [wPlayerMoveEffect], a
+	call StatModifierUpEffect
+	ld a, SPEED_UP1_EFFECT
+	ld [wPlayerMoveEffect], a
+	call StatModifierUpEffect
+	ld a, SPECIAL_UP1_EFFECT
+	ld [wPlayerMoveEffect], a
+	jp StatModifierUpEffect
 
 GrowthEffect:
 	ld a, [H_WHOSETURN]

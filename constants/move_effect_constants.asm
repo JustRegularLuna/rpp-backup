@@ -98,6 +98,8 @@ const_value = 0
 	const POISON_FANG_EFFECT         ; $5B
 	const GROWTH_EFFECT              ; $5C
 	const HONE_CLAWS_EFFECT          ; $5D
+	const DYNAMIC_PUNCH_EFFECT       ; $5E
+	const SILVER_WIND_EFFECT         ; $5F
 
 ; fixed damage constants
 SONICBOOM_DAMAGE   EQU 20

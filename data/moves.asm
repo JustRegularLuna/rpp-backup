@@ -234,7 +234,7 @@ MoveEnd:
 	move SLUDGE,       POISON_SIDE_EFFECT2,        120, POISON,    80,  5 ; Gunk Shot
 	move BITE,         POISON_FANG_EFFECT,          50, POISON,   100, 15 ; Poison Fang
 	move SURF,         POISON_SIDE_EFFECT1,         95, POISON,   100, 10 ; Sludge Wave
-	move MIST,         NO_ADDITIONAL_EFFECT,        60, BUG,      100,  5 ; Silver Wind
+	move MIST,         SILVER_WIND_EFFECT,          60, BUG,      100,  5 ; Silver Wind
 	move SUPERSONIC,   SPECIAL_DOWN_SIDE_EFFECT,    90, BUG,      100, 10 ; Bug Buzz
 	move HORN_ATTACK,  NO_ADDITIONAL_EFFECT,       120, BUG,       85, 10 ; Megahorn
 	move CUT,          NO_ADDITIONAL_EFFECT,        80, BUG,      100, 15 ; X-Scissor
@@ -252,7 +252,7 @@ MoveEnd:
 	move BARRAGE,      TWO_TO_FIVE_ATTACKS_EFFECT,  25, ROCK,      95, 10 ; Rock Blast
 	move HARDEN,       SPEED_UP2_EFFECT,             0, ROCK,     100, 20 ; Rock Polish
 	move ROCK_SLIDE,   SPEED_DOWN_SIDE_EFFECT,      60, ROCK,      95, 15 ; Rock Tomb
-	move MEGA_PUNCH,   CONFUSION_EFFECT,           100, FIGHTING,  50,  5 ; Dynamicpunch
+	move MEGA_PUNCH,   DYNAMIC_PUNCH_EFFECT,       100, FIGHTING,  50,  5 ; Dynamicpunch
 	move COUNTER,      NO_ADDITIONAL_EFFECT,        60, FIGHTING,  90, 10 ; Circle Throw
 	move KARATE_CHOP,  NO_ADDITIONAL_EFFECT,       100, FIGHTING,  85,  5 ; Cross Chop
 	move MEGA_KICK,    SPEED_DOWN_SIDE_EFFECT,      65, FIGHTING, 100, 20 ; Low Sweep
