@@ -35,13 +35,6 @@ _TM34ExplanationText::
 	cont "can be taught to"
 	cont "#mon!"
 
-	para "A TM is good only"
-	line "once! So when you"
-	cont "use one to teach"
-	cont "a new technique,"
-	cont "pick the #mon"
-	cont "carefully!"
-
 	para "TM36 contains"
 	line "Rock Tomb!"
 
