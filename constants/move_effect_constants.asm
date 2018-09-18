@@ -100,6 +100,7 @@ const_value = 0
 	const HONE_CLAWS_EFFECT          ; $5D
 	const DYNAMIC_PUNCH_EFFECT       ; $5E
 	const SILVER_WIND_EFFECT         ; $5F
+	const ATTACK_UP1_SIDE_EFFECT     ; $60
 
 ; fixed damage constants
 SONICBOOM_DAMAGE   EQU 20

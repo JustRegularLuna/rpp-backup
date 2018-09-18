@@ -7367,6 +7367,7 @@ MoveEffectPointerTable:
 	 dw HoneClawsEffect           ; HONE_CLAWS_EFFECT
 	 dw DynamicPunchEffect        ; DYNAMIC_PUNCH_EFFECT
 	 dw SilverWindEffect          ; SILVER_WIND_EFFECT
+	 dw AttackUpSideEffect        ; ATTACK_UP1_SIDE_EFFECT
 
 SleepEffect:
 	ld de, wEnemyMonStatus
@@ -8952,6 +8953,8 @@ GrowthEffect:
 	ld a, SPECIAL_UP1_EFFECT
 	ld [wEnemyMoveEffect], a
 	call StatModifierUpEffect
+	xor a
+	ld [wEnemyMoveNum], a
 	ld a, ATTACK_UP1_EFFECT
 	ld [wEnemyMoveEffect], a
 	jp StatModifierUpEffect
@@ -8959,6 +8962,8 @@ GrowthEffect:
 	ld a, SPECIAL_UP1_EFFECT
 	ld [wPlayerMoveEffect], a
 	call StatModifierUpEffect
+	xor a
+	ld [wPlayerMoveNum], a
 	ld a, ATTACK_UP1_EFFECT
 	ld [wPlayerMoveEffect], a
 	jp StatModifierUpEffect
@@ -8971,6 +8976,8 @@ HoneClawsEffect:
 	ld a, ATTACK_UP1_EFFECT
 	ld [wEnemyMoveEffect], a
 	call StatModifierUpEffect
+	xor a
+	ld [wEnemyMoveNum], a
 	ld a, ACCURACY_UP1_EFFECT
 	ld [wEnemyMoveEffect], a
 	jp StatModifierUpEffect
@@ -8978,7 +8985,31 @@ HoneClawsEffect:
 	ld a, ATTACK_UP1_EFFECT
 	ld [wPlayerMoveEffect], a
 	call StatModifierUpEffect
+	xor a
+	ld [wPlayerMoveNum], a
 	ld a, ACCURACY_UP1_EFFECT
+	ld [wPlayerMoveEffect], a
+	jp StatModifierUpEffect
+
+AttackUpSideEffect:
+; 10% chance to boost stat
+	call BattleRandom
+	cp $1a
+	ret nc
+
+	ld a, [H_WHOSETURN]
+	and a
+	jr z, .notEnemyTurn
+; Enemy's turn
+	xor a
+	ld [wEnemyMoveNum], a
+	ld a, ATTACK_UP1_EFFECT
+	ld [wEnemyMoveEffect], a
+	jp StatModifierUpEffect
+.notEnemyTurn
+	xor a
+	ld [wPlayerMoveNum], a
+	ld a, ATTACK_UP1_EFFECT
 	ld [wPlayerMoveEffect], a
 	jp StatModifierUpEffect
 
