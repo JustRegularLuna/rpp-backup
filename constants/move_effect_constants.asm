@@ -96,9 +96,8 @@ const_value = 0
 	const THUNDER_FANG_EFFECT        ; $59
 	const VOLT_TACKLE_EFFECT         ; $5A
 	const POISON_FANG_EFFECT         ; $5B
-	const SUCKER_PUNCH_EFFECT        ; $5C
-	const GROWTH_EFFECT              ; $5D
-	const HONE_CLAWS_EFFECT          ; $5E
+	const GROWTH_EFFECT              ; $5C
+	const HONE_CLAWS_EFFECT          ; $5D
 
 ; fixed damage constants
 SONICBOOM_DAMAGE   EQU 20

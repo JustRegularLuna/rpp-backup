@@ -80,7 +80,6 @@ SpecialEffects:
 	db DREAM_EATER_EFFECT
 	db PAY_DAY_EFFECT
 	db SWIFT_EFFECT
-	db SUCKER_PUNCH_EFFECT
 	db TWO_TO_FIVE_ATTACKS_EFFECT
 	db $1E
 	db CHARGE_EFFECT
@@ -5532,12 +5531,6 @@ MoveHitTest:
 .checkForDigOrFlyStatus
 	bit Invulnerable,[hl]
 	jp nz,.moveMissed
-.suckerPunchCheck
-	ld a,[de]
-	cp a,SUCKER_PUNCH_EFFECT
-	jr nz,.swiftCheck
-	call SuckerPunchHitTest
-	jp c,.moveMissed
 .swiftCheck
 	ld a,[de]
 	cp a,SWIFT_EFFECT
@@ -7370,7 +7363,6 @@ MoveEffectPointerTable:
 	 dw FangAttacks               ; THUNDER_FANG_EFFECT
 	 dw VoltTackleEffect          ; VOLT_TACKLE_EFFECT
 	 dw PoisonEffect              ; POISON_FANG_EFFECT
-	 dw $0000                     ; SUCKER_PUNCH_EFFECT
 	 dw GrowthEffect              ; GROWTH_EFFECT
 	 dw HoneClawsEffect           ; HONE_CLAWS_EFFECT
 
@@ -8946,38 +8938,6 @@ HoneClawsEffect:
 	ld a, ACCURACY_UP1_EFFECT
 	ld [wPlayerMoveEffect], a
 	jp StatModifierUpEffect
-
-SuckerPunchHitTest:
-; Sets carry flag if the move should miss. (Resets carry flag otherwise.)
-; Move fails if it didn't go first.
-	ld a, [H_WHOSETURN]
-	and a
-	ld a, [wEnemyWentFirst]
-	jr z, .playerTurn
-	and a
-	jr z, .moveMissed
-.playerTurn
-	and a
-	jr nz, .moveMissed
-.checkOpposingMove
-; Fails if the opponent is using a non-damaging move.
-	ld a, [H_WHOSETURN]
-	and a
-	jr z, .getEnemyMove
-	ld a, [wPlayerSelectedMove]
-	jr .checkIfDamagingMove
-.getEnemyMove
-	ld a, [wEnemySelectedMove]
-.checkIfDamagingMove
-	call PhysicalSpecialSplit
-	cp OTHER_M ; non-damaging or status move
-	jr z, .moveMissed
-.moveHit
-	and a  ; reset carry flag
-	ret
-.moveMissed
-	scf
-	ret
 
 CheckForHex:
 	ld a, [H_WHOSETURN]
