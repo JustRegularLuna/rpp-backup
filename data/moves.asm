@@ -263,4 +263,4 @@ MoveEnd:
 	move ROCK_THROW,   SILVER_WIND_EFFECT,          60, ROCK,     100,  5 ; Ancient Power
 	move SURF,         CHARGE_EFFECT,               80, WATER,    100, 10 ; Dive (Unused)
 	move FLASH,        SPECIAL_DOWN_SIDE_EFFECT,    70, PSYCHIC,  100,  5 ; Luster Purge
-	move KINESIS,      SILVER_WIND_EFFECT,         100, PSYCHIC,  100, 10 ; Mind Blast
+	move GLARE,        SILVER_WIND_EFFECT,         100, PSYCHIC,  100, 10 ; Mind Blast

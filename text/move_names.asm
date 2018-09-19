@@ -250,6 +250,6 @@ MoveNames::
 	db "Aeroblast@"
 	db "AncientPower@"
 	db "Dive@"
-    db "Luster Purge@"
-    db "Mind Blast@"
+	db "Luster Purge@"
+	db "Mind Blast@"
 
