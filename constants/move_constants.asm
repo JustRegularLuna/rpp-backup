@@ -242,7 +242,7 @@ const_value = 1
 	const ROCK_POLISH  ; f0
 	const ROCK_TOMB    ; f1
 	const DYNAMICPUNCH ; f2
-	const CIRCLE_THROW ; f3
+	const STORM_THROW  ; f3
 	const CROSS_CHOP   ; f4
 	const LOW_SWEEP    ; f5
 	const HURRICANE    ; f6
@@ -252,7 +252,7 @@ const_value = 1
 	const ANCIENTPOWER ; fa
 	const DIVE         ; fb (Unused) 
     const LUSTER_PURGE ; fc
-    const PSYSTRIKE    ; fd
+    const AURA_STRIKE  ; fd
 
 NUM_ATTACKS EQU const_value
 const_value = STRUGGLE + 1

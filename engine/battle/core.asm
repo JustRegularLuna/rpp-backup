@@ -4762,10 +4762,18 @@ CriticalHitTest:
 	jr z, .PlayersTurn
 .EnemyTurn
 	ld a, [wEnemySelectedMove]
+	cp STORM_THROW ; Always Crits
+	jr z, .CritSuccess
+	cp AURA_STRIKE
+	jr z, .CritSuccess
 	ld b, a
 	jr .loop
 .PlayersTurn
 	ld a, [wPlayerSelectedMove]
+	cp STORM_THROW ; Always Crits
+	jr z, .CritSuccess
+	cp AURA_STRIKE
+	jr z, .CritSuccess
 	ld b,a
 .loop
 	ld a, [hli]
@@ -4791,6 +4799,7 @@ CriticalHitTest:
 	call BattleRandom
 	cp [hl]
 	ret nc
+.CritSuccess
 	ld a,1
 	ld [wCriticalHitOrOHKO],a ; Critical Hit Flag
 	ret

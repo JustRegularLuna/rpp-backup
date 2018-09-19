@@ -241,7 +241,7 @@ MoveNames::
 	db "Rock Polish@"
 	db "Rock Tomb@"
 	db "DynamicPunch@"
-	db "Circle Throw@"
+	db "Storm Throw@"
 	db "Cross Chop@"
 	db "Low Sweep@"
 	db "Hurricane@"
@@ -251,5 +251,5 @@ MoveNames::
 	db "AncientPower@"
 	db "Dive@"
     db "Luster Purge@"
-    db "Psystrike@"
+    db "Aura Strike@"
 
