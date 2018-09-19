@@ -4762,20 +4762,19 @@ CriticalHitTest:
 	jr z, .PlayersTurn
 .EnemyTurn
 	ld a, [wEnemySelectedMove]
-	cp STORM_THROW ; Always Crits
-	jr z, .CritSuccess
-	cp AURA_STRIKE
-	jr z, .CritSuccess
 	ld b, a
-	jr .loop
+	jr .checkAlwaysCrit
 .PlayersTurn
 	ld a, [wPlayerSelectedMove]
-	cp STORM_THROW ; Always Crits
+	ld b,a
+.checkAlwaysCrit
+; first, check moves that always crit
+	cp STORM_THROW
 	jr z, .CritSuccess
 	cp AURA_STRIKE
 	jr z, .CritSuccess
-	ld b,a
 .loop
+; if it wasn't one of those, loop over the list of high-crit moves
 	ld a, [hli]
 	cp b
 	jr z, .HighCritical
