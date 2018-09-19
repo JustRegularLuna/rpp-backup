@@ -7369,6 +7369,7 @@ MoveEffectPointerTable:
 	 dw SilverWindEffect          ; SILVER_WIND_EFFECT
 	 dw AttackUpSideEffect        ; ATTACK_UP1_SIDE_EFFECT
 	 dw AttackUpSideEffect2       ; ATTACK_UP1_SIDE_EFFECT2
+	 dw DefenseUpSideEffect       ; DEFENSE_UP1_SIDE_EFFECT
 
 SleepEffect:
 	ld de, wEnemyMonStatus
@@ -9020,6 +9021,30 @@ AttackUpSideEffectSuccess:
 	xor a
 	ld [wPlayerMoveNum], a
 	ld a, ATTACK_UP1_EFFECT
+	ld [wPlayerMoveEffect], a
+	jp StatModifierUpEffect
+
+DefenseUpSideEffect:
+; 10% chance to boost stat
+	call BattleRandom
+	cp $1a
+	ret nc
+	; fallthrough
+
+DefenseUpSideEffectSuccess:
+	ld a, [H_WHOSETURN]
+	and a
+	jr z, .notEnemyTurn
+; Enemy's turn
+	xor a
+	ld [wEnemyMoveNum], a
+	ld a, DEFENSE_UP1_EFFECT
+	ld [wEnemyMoveEffect], a
+	jp StatModifierUpEffect
+.notEnemyTurn
+	xor a
+	ld [wPlayerMoveNum], a
+	ld a, DEFENSE_UP1_EFFECT
 	ld [wPlayerMoveEffect], a
 	jp StatModifierUpEffect
 

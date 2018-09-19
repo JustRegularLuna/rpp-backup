@@ -102,6 +102,7 @@ const_value = 0
 	const SILVER_WIND_EFFECT         ; $5F
 	const ATTACK_UP1_SIDE_EFFECT     ; $60: 10% chance to raise attack 1 stage
 	const ATTACK_UP1_SIDE_EFFECT2    ; $61: 20% chance to raise attack 1 stage
+	const DEFENSE_UP1_SIDE_EFFECT    ; $62: 10% chance to raise defense 1 stage
 
 ; fixed damage constants
 SONICBOOM_DAMAGE   EQU 20

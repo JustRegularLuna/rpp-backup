@@ -196,7 +196,7 @@ MoveEnd:
 	move SONICBOOM,    FLINCH_SIDE_EFFECT1,         40, DRAGON,   100, 20 ; Twister
 	move RAGE,         THRASH_PETAL_DANCE_EFFECT,  120, DRAGON,   100, 10 ; Outrage
 	move SLASH,        NO_ADDITIONAL_EFFECT,        70, GHOST,    100, 15 ; Shadow Claw
-	move WING_ATTACK,  NO_ADDITIONAL_EFFECT,        70, STEEL,     90, 25 ; Steel Wing
+	move WING_ATTACK,  DEFENSE_UP1_SIDE_EFFECT,     70, STEEL,     90, 25 ; Steel Wing
 	move BARRIER,      DEFENSE_UP2_EFFECT,           0, STEEL,    100, 15 ; Iron Defense
 	move CUT,          FLINCH_SIDE_EFFECT2,         75, FLYING,    95, 15 ; Air Slash
 	move BITE,         FIRE_FANG_EFFECT,            65, FIRE,      95, 15 ; Fire Fang
