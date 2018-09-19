@@ -180,7 +180,7 @@ MoveEnd:
 	move COMET_PUNCH,  NO_ADDITIONAL_EFFECT,        40, STEEL,    100, 30 ; Bullet Punch
 	move AURORA_BEAM,  SPECIAL_DOWN_SIDE_EFFECT,    80, STEEL,    100, 10 ; Flash Cannon
 	move CUT,          DEFENSE_DOWN_SIDE_EFFECT,   100, STEEL,     75, 15 ; Iron Tail
-	move STRENGTH,     NO_ADDITIONAL_EFFECT,        90, STEEL,     90, 10 ; Meteor Mash
+	move STRENGTH,     ATTACK_UP1_SIDE_EFFECT2,     90, STEEL,     90, 10 ; Meteor Mash
 	move BITE,         DEFENSE_DOWN_SIDE_EFFECT,    80, DARK,     100, 15 ; Crunch
 	move PSYCHIC_M,    FLINCH_SIDE_EFFECT1,         80, DARK,     100, 15 ; Dark Pulse
 	move QUICK_ATTACK, SWIFT_EFFECT,                60, DARK,     100, 20 ; Feint Attack

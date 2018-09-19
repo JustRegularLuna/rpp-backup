@@ -7368,6 +7368,7 @@ MoveEffectPointerTable:
 	 dw DynamicPunchEffect        ; DYNAMIC_PUNCH_EFFECT
 	 dw SilverWindEffect          ; SILVER_WIND_EFFECT
 	 dw AttackUpSideEffect        ; ATTACK_UP1_SIDE_EFFECT
+	 dw AttackUpSideEffect2       ; ATTACK_UP1_SIDE_EFFECT2
 
 SleepEffect:
 	ld de, wEnemyMonStatus
@@ -8991,12 +8992,21 @@ HoneClawsEffect:
 	ld [wPlayerMoveEffect], a
 	jp StatModifierUpEffect
 
+AttackUpSideEffect2:
+; 20% chance to boost stat
+	call BattleRandom
+	cp $34
+	ret nc
+	jr AttackUpSideEffectSuccess
+
 AttackUpSideEffect:
 ; 10% chance to boost stat
 	call BattleRandom
 	cp $1a
 	ret nc
+	; fallthrough
 
+AttackUpSideEffectSuccess:
 	ld a, [H_WHOSETURN]
 	and a
 	jr z, .notEnemyTurn

@@ -100,7 +100,8 @@ const_value = 0
 	const HONE_CLAWS_EFFECT          ; $5D
 	const DYNAMIC_PUNCH_EFFECT       ; $5E
 	const SILVER_WIND_EFFECT         ; $5F
-	const ATTACK_UP1_SIDE_EFFECT     ; $60
+	const ATTACK_UP1_SIDE_EFFECT     ; $60: 10% chance to raise attack 1 stage
+	const ATTACK_UP1_SIDE_EFFECT2    ; $61: 20% chance to raise attack 1 stage
 
 ; fixed damage constants
 SONICBOOM_DAMAGE   EQU 20
