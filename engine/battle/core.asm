@@ -4771,7 +4771,7 @@ CriticalHitTest:
 ; first, check moves that always crit
 	cp STORM_THROW
 	jr z, .CritSuccess
-	cp AURA_STRIKE
+	cp MIND_BLAST
 	jr z, .CritSuccess
 .loop
 ; if it wasn't one of those, loop over the list of high-crit moves

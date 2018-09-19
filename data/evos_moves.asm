@@ -3456,7 +3456,7 @@ Mon150_EvosMoves:
 	db 79,PSYCHO_CUT
 	db 86,HEX
 	db 93,DARK_PULSE
-	db 100,AURA_STRIKE
+	db 100,MIND_BLAST
 	db 0
 	
 Mon151_EvosMoves:
@@ -3474,7 +3474,7 @@ Mon151_EvosMoves:
 	db 70,PSYCHIC_M
 	db 80,SHADOW_BALL
 	db 90,DAZZLINGLEAM
-	db 100,AURA_STRIKE
+	db 100,MIND_BLAST
 	db 0
 	
 Mon152_EvosMoves: 

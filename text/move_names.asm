@@ -251,5 +251,5 @@ MoveNames::
 	db "AncientPower@"
 	db "Dive@"
     db "Luster Purge@"
-    db "Aura Strike@"
+    db "Mind Blast@"
 

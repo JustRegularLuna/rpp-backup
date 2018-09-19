@@ -252,7 +252,7 @@ const_value = 1
 	const ANCIENTPOWER ; fa
 	const DIVE         ; fb (Unused) 
     const LUSTER_PURGE ; fc
-    const AURA_STRIKE  ; fd
+    const MIND_BLAST   ; fd
 
 NUM_ATTACKS EQU const_value
 const_value = STRUGGLE + 1
