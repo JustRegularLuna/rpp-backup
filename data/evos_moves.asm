@@ -413,7 +413,7 @@ Mon011_EvosMoves:
 	db 0
 ;Learnset
 	db 1,HARDEN
-    db 7,HARDEN
+	db 7,HARDEN
 	db 20,IRON_DEFENSE
 	db 0
 	
@@ -456,7 +456,7 @@ Mon014_EvosMoves:
 	db 0
 ;Learnset
 	db 1,HARDEN
-    db 7,HARDEN
+	db 7,HARDEN
 	db 20,IRON_DEFENSE
 	db 0
 	
@@ -1372,7 +1372,7 @@ Mon056_EvosMoves:
 	db 1,SCRATCH
 	db 1,LEER
 	db 5,FOCUS_ENERGY
-    db 7,LOW_KICK
+	db 7,LOW_KICK
 	db 9,FURY_SWIPES
 	db 13,KARATE_CHOP
 	db 17,SEISMIC_TOSS
@@ -2582,7 +2582,7 @@ Mon109_EvosMoves:
 	db 40,TAKE_DOWN
 	db 42,GUNK_SHOT
 	db 45,DARK_PULSE
-    db 52,EXPLOSION
+	db 52,EXPLOSION
 	db 0
 	
 Mon110_EvosMoves:
@@ -2605,7 +2605,7 @@ Mon110_EvosMoves:
 	db 46,TAKE_DOWN
 	db 51,GUNK_SHOT
 	db 57,DARK_PULSE
-    db 62,EXPLOSION
+	db 62,EXPLOSION
 	db 0
 	
 Mon111_EvosMoves:
@@ -2614,8 +2614,12 @@ Mon111_EvosMoves:
 	db EV_LEVEL,42,RHYDON
 	db 0
 ;Learnset
+	db 1,ANCIENTPOWER
+	db 1,HORN_DRILL
 	db 1,HORN_ATTACK
 	db 1,TAIL_WHIP
+	db 1,FURY_ATTACK
+	db 1,LEER
 	db 5,FURY_ATTACK
 	db 9,LEER
 	db 13,MUD_SLAP
@@ -2637,8 +2641,12 @@ Mon112_EvosMoves:
 	db EV_MOVE,ANCIENTPOWER,RHYPERIOR
 	db 0
 ;Learnset
+	db 1,ANCIENTPOWER
+	db 1,HORN_DRILL
 	db 1,HORN_ATTACK
 	db 1,TAIL_WHIP
+	db 1,FURY_ATTACK
+	db 1,LEER
 	db 5,FURY_ATTACK
 	db 9,LEER
 	db 13,MUD_SLAP
@@ -2651,8 +2659,7 @@ Mon112_EvosMoves:
 	db 41,ROCK_TOMB
 	db 42,DYNAMICPUNCH
 	db 48,EARTHQUAKE
-    db 52,ANCIENTPOWER
-	db 58,MEGAHORN
+	db 55,MEGAHORN
 	db 62,HORN_DRILL
 	db 0
 	
@@ -3330,17 +3337,22 @@ Mon144_EvosMoves:
 ;Evolutions
 	db 0
 ;Learnset
+	db 1,GUST
 	db 1,ICY_WIND
-	db 1,WING_ATTACK
-	db 1,MIST
-	db 51,ICE_BEAM
-	db 51,REFLECT
-	db 57,AERIAL_ACE
-	db 64,AGILITY
+	db 8,MIST
+	db 15,ICE_SHARD
+	db 22,EXTRASENSORY
+	db 29,ANCIENTPOWER
+	db 36,AGILITY
+	db 43,ICE_BEAM
+	db 50,AIR_SLASH
+	db 57,HAZE
+	db 64,REFLECT
 	db 71,BLIZZARD
 	db 78,SHEER_COLD
-	db 85,ICE_SHARD
+	db 85,REST
 	db 92,HURRICANE
+	db 99,AEROBLAST
 	db 0
 	
 Mon145_EvosMoves:
@@ -3348,16 +3360,22 @@ Mon145_EvosMoves:
 ;Evolutions
 	db 0
 ;Learnset
+	db 1,PECK
 	db 1,THUNDERSHOCK
-	db 1,DRILL_PECK
-	db 51,THUNDERBOLT
-	db 51,LIGHT_SCREEN
-	db 57,AERIAL_ACE
-	db 64,AGILITY
-	db 71,DISCHARGE
-	db 78,DRILL_PECK
-	db 85,THUNDER
+	db 8,THUNDER_WAVE
+	db 15,FOCUS_ENERGY
+	db 22,EXTRASENSORY
+	db 29,ANCIENTPOWER
+	db 36,AGILITY
+	db 43,THUNDERBOLT
+	db 50,DRILL_PECK
+	db 57,DISCHARGE
+	db 64,LIGHT_SCREEN
+	db 71,THUNDER
+	db 78,SKY_ATTACK
+	db 85,REST
 	db 92,HURRICANE
+	db 99,ELECTRO_BALL
 	db 0
 	
 Mon146_EvosMoves:
@@ -3366,15 +3384,21 @@ Mon146_EvosMoves:
 	db 0
 ;Learnset
 	db 1,WING_ATTACK
-	db 1,FIRE_SPIN
-	db 51,FLAMETHROWER
-	db 51,REFLECT
-	db 57,AIR_SLASH
-	db 64,AGILITY
-	db 71,FIRE_BLAST
+	db 1,EMBER
+	db 8,FIRE_SPIN
+	db 15,SMOKESCREEN
+	db 22,EXTRASENSORY
+	db 29,ANCIENTPOWER
+	db 36,AGILITY
+	db 43,FLAMETHROWER
+	db 50,AIR_SLASH
+	db 57,AMNESIA
+	db 64,FIRE_BLAST
+	db 71,SOLARBEAM
 	db 78,SKY_ATTACK
-	db 85,FLARE_BLITZ
+	db 85,REST
 	db 92,HURRICANE
+	db 99,FLARE_BLITZ
 	db 0
 	
 Mon147_EvosMoves:
@@ -3448,14 +3472,21 @@ Mon150_EvosMoves:
 ;Evolutions
 	db 0
 ;Learnset
-	db 1,PSYCHIC_M
-	db 1,SWIFT
+	db 1,MIND_BLAST
+	db 1,PSYWAVE
+	db 1,FOCUS_ENERGY
+	db 1,CONFUSION
 	db 1,DISABLE
-	db 1,RECOVER
-	db 71,AMNESIA
-	db 79,PSYCHO_CUT
-	db 86,HEX
-	db 93,DARK_PULSE
+	db 10,PSYCHO_CUT
+	db 19,SWIFT
+	db 28,EXTRASENSORY
+	db 37,AMNESIA
+	db 46,RECOVER
+	db 55,PSYCHIC_M
+	db 64,BARRIER
+	db 73,SHADOW_BALL
+	db 82,MIST
+	db 91,DARK_PULSE
 	db 100,MIND_BLAST
 	db 0
 	
@@ -3464,16 +3495,18 @@ Mon151_EvosMoves:
 ;Evolutions
 	db 0
 ;Learnset
+	db 1,TELEPORT
 	db 1,POUND
-	db 10,TRANSFORM
+	db 1,TRANSFORM
+	db 10,MEGA_PUNCH
 	db 20,METRONOME
-	db 30,SWIFT
+	db 30,PSYCHIC_M
 	db 40,BARRIER
 	db 50,ANCIENTPOWER
 	db 60,AMNESIA
-	db 70,PSYCHIC_M
-	db 80,SHADOW_BALL
-	db 90,DAZZLINGLEAM
+	db 70,MIST
+	db 80,DAZZLINGLEAM
+	db 90,DARK_PULSE
 	db 100,MIND_BLAST
 	db 0
 	
@@ -3484,14 +3517,19 @@ Mon152_EvosMoves:
 ;Learnset
 	db 1,WATER_GUN
 	db 1,SKY_ATTACK
+	db 1,WHIRLWIND
+	db 9,GUST
+	db 15,DRAGONBREATH
+	db 23,EXTRASENSORY
+	db 29,TWISTER
 	db 37,HYDRO_PUMP
-	db 43,AEROBLAST
-	db 50,DARK_PULSE
+	db 43,DRAGON_PULSE
+	db 50,AEROBLAST
 	db 57,ANCIENTPOWER
 	db 65,MIST
 	db 71,RECOVER
 	db 79,PSYCHIC_M
-	db 85,HYPER_BEAM
+	db 85,REFLECT
 	db 93,AMNESIA
 	db 99,HURRICANE
 	db 0
@@ -4154,7 +4192,7 @@ Mon182_EvosMoves:
 	db 40,SHADOW_CLAW
 	db 44,NIGHT_SLASH
 	db 47,BLIZZARD
-    db 51,SUCKER_PUNCH
+	db 51,SUCKER_PUNCH
 	db 0
 	
 Mon183_EvosMoves:
@@ -4177,7 +4215,7 @@ Mon183_EvosMoves:
 	db 40,SHADOW_CLAW
 	db 44,NIGHT_SLASH
 	db 47,DARK_PULSE
-    db 51,SUCKER_PUNCH
+	db 51,SUCKER_PUNCH
 	db 0
 	
 Mon184_EvosMoves:
@@ -4315,106 +4353,122 @@ Mon189_EvosMoves:
 Mon190_EvosMoves:
 ;SLUGMA
 ;Evolutions
-    db EV_LEVEL,38,MAGCARGO
-    db 0
+	db EV_LEVEL,38,MAGCARGO
+	db 0
 ;Learnset
 	db 1,SMOG
-    db 6,EMBER
-    db 8,ROCK_THROW
-    db 13,HARDEN
-    db 15,FIRE_SPIN
-    db 20,HAZE
-    db 22,ANCIENTPOWER
-    db 27,FLAME_WHEEL
-    db 29,ROCK_SLIDE
-    db 34,FLAMETHROWER
-    db 36,AMNESIA
-    db 41,BODY_SLAM
-    db 43,RECOVER
-    db 48,FIRE_BLAST
-    db 50,EARTH_POWER
-    db 0
-    
+	db 6,EMBER
+	db 8,ROCK_THROW
+	db 13,HARDEN
+	db 15,FIRE_SPIN
+	db 20,HAZE
+	db 22,ANCIENTPOWER
+	db 27,FLAME_WHEEL
+	db 29,ROCK_SLIDE
+	db 34,FLAMETHROWER
+	db 36,AMNESIA
+	db 41,BODY_SLAM
+	db 43,RECOVER
+	db 48,FIRE_BLAST
+	db 50,EARTH_POWER
+	db 0
+	
 Mon191_EvosMoves:
 ;MAGCARGO
 ;Evolutions
-    db 0
+	db 0
 ;Learnset
 	db 1,SMOG
-    db 6,EMBER
-    db 8,ROCK_THROW
-    db 13,HARDEN
-    db 15,FIRE_SPIN
-    db 20,HAZE
-    db 22,ANCIENTPOWER
-    db 27,FLAME_WHEEL
-    db 29,ROCK_SLIDE
-    db 34,FLAMETHROWER
-    db 36,AMNESIA
-    db 38,EARTHQUAKE
-    db 43,BODY_SLAM
-    db 47,RECOVER
-    db 54,FIRE_BLAST
-    db 58,EARTH_POWER
-    db 0
-    
+	db 6,EMBER
+	db 8,ROCK_THROW
+	db 13,HARDEN
+	db 15,FIRE_SPIN
+	db 20,HAZE
+	db 22,ANCIENTPOWER
+	db 27,FLAME_WHEEL
+	db 29,ROCK_SLIDE
+	db 34,FLAMETHROWER
+	db 36,AMNESIA
+	db 38,EARTHQUAKE
+	db 43,BODY_SLAM
+	db 47,RECOVER
+	db 54,FIRE_BLAST
+	db 58,EARTH_POWER
+	db 0
+	
 Mon192_EvosMoves:
 ;TORKOAL
 ;Evolutions
-    db 0
+	db 0
 ;Learnset
 	db 1,EMBER
-    db 4,SMOG
-    db 7,WITHDRAW
-    db 10,QUICK_ATTACK
-    db 13,FIRE_SPIN
-    db 15,SMOKESCREEN
-    db 18,FLAME_WHEEL
-    db 22,HEX
-    db 25,EARTHQUAKE
-    db 27,BODY_SLAM
-    db 30,HAZE
-    db 34,FLAMETHROWER
-    db 38,IRON_DEFENSE
-    db 40,AMNESIA
-    db 42,FOCUS_ENERGY
-    db 45,FIRE_BLAST
-    db 47,STOMP
-    db 50,GIGA_IMPACT
-    db 0
-    
+	db 4,SMOG
+	db 7,WITHDRAW
+	db 10,QUICK_ATTACK
+	db 13,FIRE_SPIN
+	db 15,SMOKESCREEN
+	db 18,FLAME_WHEEL
+	db 22,HEX
+	db 25,EARTHQUAKE
+	db 27,BODY_SLAM
+	db 30,HAZE
+	db 34,FLAMETHROWER
+	db 38,IRON_DEFENSE
+	db 40,AMNESIA
+	db 42,FOCUS_ENERGY
+	db 45,FIRE_BLAST
+	db 47,STOMP
+	db 50,GIGA_IMPACT
+	db 0
+	
 Mon193_EvosMoves:
 ;LATIAS
 ;Evolutions
-    db 0
+	db 0
 ;Learnset
-	db 1,ZEN_HEADBUTT
-	db 1,DRAGONBREATH
-	db 1,LUSTER_PURGE
-    db 70,RECOVER
-    db 75,CONVERSION
-    db 80,PSYCHIC_M
-    db 85,DRAGON_PULSE
-    db 0
-    
+	db 1,PSYWAVE
+	db 5,REST
+	db 10,BABYDOLLEYES
+	db 15,MIST
+	db 20,DRAGONBREATH
+	db 25,MUDDY_WATER
+	db 30,REFLECT
+	db 35,LUSTER_PURGE
+	db 40,ZEN_HEADBUTT
+	db 45,RECOVER
+	db 50,HAZE
+	db 55,DRAGON_PULSE
+	db 60,LIGHT_SCREEN
+	db 65,PSYCHIC_M
+	db 70,DRACO_METEOR
+	db 0
+	
 Mon194_EvosMoves:
 ;LATIOS
 ;Evolutions
-    db 0
+	db 0
 ;Learnset
-	db 1,ZEN_HEADBUTT
-	db 1,DRAGONBREATH
-	db 1,LUSTER_PURGE
-    db 70,RECOVER
-    db 75,CONVERSION
-    db 80,PSYCHIC_M
-    db 85,DRAGON_PULSE
-    db 0
-    
+	db 1,PSYWAVE
+	db 5,REST
+	db 10,DISARM_VOICE
+	db 15,MIST
+	db 20,DRAGONBREATH
+	db 25,FOCUS_ENERGY
+	db 30,COUNTER
+	db 35,LUSTER_PURGE
+	db 40,ZEN_HEADBUTT
+	db 45,RECOVER
+	db 50,HAZE
+	db 55,DRAGON_PULSE
+	db 60,LIGHT_SCREEN
+	db 65,PSYCHIC_M
+	db 70,DRACO_METEOR
+	db 0
+	
 Mon195_EvosMoves:
 ;HITMONTOP
 ;Evolutions
-    db 0
+	db 0
 ;Learnset
 	db 1,DOUBLE_KICK
 	db 5,MEDITATE
@@ -4430,61 +4484,61 @@ Mon195_EvosMoves:
 	db 53,MEGA_KICK
 	db 61,GIGA_IMPACT
 	db 0
-    
+	
 Mon196_EvosMoves:
 ;TYROGUE
 ;Evolutions
-    db EV_TYROGUE,20,ATK_HIGHER,HITMONLEE
-    db EV_TYROGUE,20,BOTH_EQUAL,HITMONTOP
-    db EV_TYROGUE,20,DEF_HIGHER,HITMONCHAN
-    db 0
+	db EV_TYROGUE,20,ATK_HIGHER,HITMONLEE
+	db EV_TYROGUE,20,BOTH_EQUAL,HITMONTOP
+	db EV_TYROGUE,20,DEF_HIGHER,HITMONCHAN
+	db 0
 ;Learnset
 	db 1,TACKLE
-    db 7,MEDITATE
-    db 10,FOCUS_ENERGY
-    db 0
-    
+	db 7,MEDITATE
+	db 10,FOCUS_ENERGY
+	db 0
+	
 Mon197_EvosMoves:
 ;PICHU
 ;Evolutions
-    db EV_LEVEL,10,PIKACHU
-    db 0
+	db EV_LEVEL,10,PIKACHU
+	db 0
 ;Learnset
 	db 1,THUNDERSHOCK
 	db 1,BABYDOLLEYES
-    db 7,TAIL_WHIP
-    db 10,LOVELY_KISS
-    db 0
-    
+	db 7,TAIL_WHIP
+	db 10,LOVELY_KISS
+	db 0
+	
 Mon198_EvosMoves:
 ;CLEFFA
 ;Evolutions
-    db EV_LEVEL,10,CLEFAIRY
-    db 0
+	db EV_LEVEL,10,CLEFAIRY
+	db 0
 ;Learnset
 	db 1,POUND
 	db 1,BABYDOLLEYES
-    db 7,SING
-    db 10,LOVELY_KISS
-    db 0
-    
+	db 7,SING
+	db 10,LOVELY_KISS
+	db 0
+	
 Mon199_EvosMoves:
 ;IGGLYBUFF
 ;Evolutions
-    db EV_LEVEL,10,JIGGLYPUFF
-    db 0
+	db EV_LEVEL,10,JIGGLYPUFF
+	db 0
 ;Learnset
 	db 1,SING
 	db 1,BABYDOLLEYES
-    db 7,POUND
-    db 10,LOVELY_KISS
-    db 0
-    
+	db 7,POUND
+	db 10,LOVELY_KISS
+	db 0
+	
 Mon200_EvosMoves:
 ;SMOOCHUM
 ;Evolutions
-    db EV_LEVEL,30,JYNX
-    db 0
+	db EV_LEVEL,30,JYNX
+	db 0
 ;Learnset
 	db 1,POUND
 	db 5,LICK
@@ -4502,12 +4556,12 @@ Mon200_EvosMoves:
 	db 55,PSYCHIC_M
 	db 60,SHEER_COLD
 	db 0
-    
+	
 Mon201_EvosMoves:
 ;ELEKID
 ;Evolutions
-    db EV_LEVEL,30,ELECTABUZZ
-    db 0
+	db EV_LEVEL,30,ELECTABUZZ
+	db 0
 ;Learnset
 	db 1,QUICK_ATTACK
 	db 1,LEER
@@ -4524,12 +4578,12 @@ Mon201_EvosMoves:
 	db 49,THUNDERBOLT
 	db 55,THUNDER
 	db 0
-    
+	
 Mon202_EvosMoves:
 ;MAGBY
 ;Evolutions
-    db EV_LEVEL,30,MAGMAR
-    db 0
+	db EV_LEVEL,30,MAGMAR
+	db 0
 ;Learnset
 	db 1,SMOG
 	db 1,LEER
@@ -4546,12 +4600,12 @@ Mon202_EvosMoves:
 	db 49,FIRE_BLAST
 	db 55,FLARE_BLITZ
 	db 0
-    
+	
 Mon203_EvosMoves:
 ;MIME_JR
 ;Evolutions
-    db EV_MOVE,MIMIC,MR_MIME
-    db 0
+	db EV_MOVE,MIMIC,MR_MIME
+	db 0
 ;Learnset
 	db 1,CONFUSION
 	db 1,BARRIER
@@ -4571,24 +4625,24 @@ Mon203_EvosMoves:
 	db 43,MIMIC
 	db 46,DAZZLINGLEAM
 	db 0
-    
+	
 Mon204_EvosMoves:
 ;HAPPINY
 ;Evolutions
-    db EV_LEVEL,10,CHANSEY
-    db 0
+	db EV_LEVEL,10,CHANSEY
+	db 0
 ;Learnset
 	db 1,POUND
 	db 1,BABYDOLLEYES
-    db 7,MIRROR_MOVE
-    db 10,LOVELY_KISS
-    db 0
-    
+	db 7,MIRROR_MOVE
+	db 10,LOVELY_KISS
+	db 0
+	
 Mon205_EvosMoves:
 ;MUNCHLAX
 ;Evolutions
-    db EV_LEVEL,15,SNORLAX
-    db 0
+	db EV_LEVEL,15,SNORLAX
+	db 0
 ;Learnset
 	db 1,TACKLE
 	db 1,LICK
@@ -4608,5 +4662,5 @@ Mon205_EvosMoves:
 	db 50,SLAM
 	db 57,GIGA_IMPACT
 	db 0
-    
-    
+	
+	
