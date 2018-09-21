@@ -3,6 +3,22 @@ LoadMateoPresentsScreen::
 	ld [hWY], a
 	call ClearScreen
 	call DisableLCD
+
+; HAX: Add a warning screen about VBA issues
+	call LoadFontTilePatterns
+; turn the screen back on
+	call EnableLCD
+	call Delay3
+	call GBPalNormal
+; display the warning text
+	coord hl, 1, 1
+	ld de, VBAWarningText
+	call PlaceString
+; wait for the player to press A
+	call WaitForTextScrollButtonPress
+; clear screen again, and load the original Mateo Presents screen
+	call ClearScreen
+	call DisableLCD
 	
 ; load the graphics for the screen
 	ld hl, MateoPresentsGraphics1
@@ -59,3 +75,14 @@ MateoPresentsTilemap:
 	DB $A7,$A8,$A9,$00,$AA,$AB,$AC,$AD,$AE,$AF,$B0,$B1,$B2,$B3,$B4,$B5
 	DB $B6,$B7,$AA,$B8,$00,$B9,$BA,$BB
 MateoPresentsTilemapEnd:
+
+VBAWarningText:
+	db   "     WARNING!"
+	next "This hack has"
+	next "known issues with"
+	next "VBA. Please use"
+	next "Gambatte, BGB, etc"
+	next "Playing on a 3DS or"
+	next "Mobile should work"
+	next "too. Just not VBA."
+	next "PRESS A TO CONTINUE@"
