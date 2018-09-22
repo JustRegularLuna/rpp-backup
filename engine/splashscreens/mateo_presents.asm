@@ -83,6 +83,6 @@ VBAWarningText:
 	next "VBA. Mobile users"
 	next "are fine. On PC or"
 	next "Mac, use Gambatte,"
-	next "BGB, etc. instead."
+	next "BGB, VBA-M, etc."
 	next ""
 	next "PRESS A TO ADVANCE@"
