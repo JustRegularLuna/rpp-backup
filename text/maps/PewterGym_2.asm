@@ -102,7 +102,7 @@ _PewterGymText_5c515::
 	text "Hiya! I can tell"
 	line "you have what it"
 	cont "takes to become a"
-	cont "#moc champ!"
+	cont "#mon champ!"
 
 	para "I'm no trainer,"
 	line "but I can tell"
