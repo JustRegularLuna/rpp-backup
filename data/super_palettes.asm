@@ -2112,7 +2112,7 @@ TrainerPaletteTable:
 
 ; PAL_PROF_OAK
 	RGB 24, 19, 11
-	RGB 13, 16, 00
+	RGB 10, 08, 14
 
 ; PAL_PI_TRAINER
 	RGB 25, 16, 12
