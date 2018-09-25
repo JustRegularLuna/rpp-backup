@@ -48,6 +48,56 @@ SpritePalettes: ; Taken from pokemon GSC.
 	RGB 20,15,3
 	RGB 7,7,7
 
+SpritePalettesNite: ; Taken from pokemon GSC.
+
+; PAL_OW_RED
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 31,7,1
+	RGB 0,0,0
+
+; PAL_OW_BLUE
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 10,9,31
+	RGB 0,0,0
+
+; PAL_OW_GREEN
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 7,23,3
+	RGB 0,0,0
+
+; PAL_OW_BROWN
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 15,10,3
+	RGB 0,0,0
+
+; PAL_OW_PURPLE
+	RGB 27,31,27
+	RGB 31,19,10
+	RGB 18,4,18
+	RGB 0,0,0
+
+; PAL_OW_EMOJI
+	RGB 31,31,31
+	RGB 31,31,31
+	RGB 13,13,13
+	RGB 0,0,0
+
+; PAL_OW_TREE
+	RGB 15,14,24
+	RGB 08,13,19
+	RGB 00,11,13
+	RGB 00,00,00
+
+; PAL_OW_ROCK
+	RGB 15,14,24
+	RGB 12,09,15
+	RGB 08,04,05
+	RGB 00,00,00
+
 
 AttackSpritePalettes:
 	; GREY

@@ -23,7 +23,29 @@ PAL_OW_ROCK		EQU 7
 PAL_OW_RANDOM	EQU 8 ; pseudorandom
 
 LoadOverworldSpritePalettes:
+	ld a,[rSVBK]
+	ld b,a
+	xor a
+	ld [rSVBK],a
+	push bc
+
+	; Does the map we're on use dark/night palettes?
+	; Load the matching Object Pals if so
+	ld a, [wCurMapTileset]
+	ld hl,SpritePalettesNite
+	cp ICE_CAVERN
+	jr z, .gotPaletteList
+	cp CAVERN
+	jr z, .gotPaletteList
+	cp FOREST
+	jr z, .gotPaletteList
+	; If not, load the normal Object Pals
 	ld hl,SpritePalettes
+.gotPaletteList
+	pop bc
+	ld a, b
+	ld [rSVBK], a
+	
 	jr LoadSpritePaletteData
 
 LoadAttackSpritePalettes:
