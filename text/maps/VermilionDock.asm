@@ -1,3 +1,6 @@
 _VermilionDockText1::
-	text ""
+	text "Hey! Under this"
+	next "truck..."
+	
+	para "There's nothing!"
 	done

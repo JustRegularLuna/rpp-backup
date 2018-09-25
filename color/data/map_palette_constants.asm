@@ -31,7 +31,7 @@ const_value = 0
 	const CAVE_LIGHT_BLUE   ; 1D
 	const POKECENTER_TABLE  ; 1E
 	const PC_POKEBALL_PAL   ; 1F: doubles as textbox palette for some areas
-	const FOREST_ROCKS      ; 20
+	const SSANNE_PAL        ; 20
 	const FOREST_TREES      ; 21
 	const ALT_TEXTBOX_PAL   ; 22: used in areas with skeleton pokemon
 	const POKECENTER_FLOOR  ; 23

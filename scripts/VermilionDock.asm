@@ -208,6 +208,7 @@ endr
 
 VermilionDockTextPointers:
 	dw VermilionDockText1
+	dw VermilionDockText1
 
 VermilionDockText1:
 	TX_FAR _VermilionDockText1
