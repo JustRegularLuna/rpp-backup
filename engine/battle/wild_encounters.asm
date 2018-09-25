@@ -46,6 +46,8 @@ TryDoWildEncounter:
 	jr z, .CantEncounter2
 	cp SAFARI ; Safari Zone
 	jr z, .CantEncounter2
+	cp OVERWORLD
+	jr z, .CantEncounter2
 	ld a, [wGrassRate]
 .CanEncounter
 ; compare encounter chance with a random number to determine if there will be an encounter

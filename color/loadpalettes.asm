@@ -108,37 +108,10 @@ LoadTilesetPalette:
 	ld a,2
 	ld [rSVBK],a
 
-	; Check for celadon mart roof (make the "outside" blue)
-	ld a,b
-	cp CELADON_MART_ROOF
-	jr nz,.notCeladonRoof
-	ld a,PAL_BG_WATER
-	ld hl,W2_TilesetPaletteMap + $4b
-	ld [hli],a
-	ld [hli],a
-	ld [hli],a
-	ld [hli],a
-	ld [hli],a
-.notCeladonRoof
-	; Check for celadon 3rd floor (fix miscoloration on counter)
-	ld a,b
-	cp CELADON_MART_3
-	jr nz,.notCeladon3rd
-	ld hl,W2_TilesetPaletteMap + $37
-	ld [hl],PAL_BG_BROWN
-.notCeladon3rd
-	; Check for celadon 1st floor (change bench color from blue to yellow)
-	ld a,b
-	cp CELADON_MART_1
-	jr nz,.notCeladon1st
-	ld hl,W2_TilesetPaletteMap + $07
-	ld a,PAL_BG_YELLOW
-	ld [hli],a
-	ld [hli],a
-	ld l,$17
-	ld [hli],a
-	ld [hli],a
-.notCeladon1st
+	; b holds the current Map ID
+	; There used to be code here to hard-code different palette assignments in Celadon Mart
+	; They were removed, as they do not apply to the new tileset
+	; Any new map-specific overrides could be added here
 
 	; Retrieve former wram bank
 	pop af
@@ -173,6 +146,10 @@ LoadTownPalette:
 	; Get the current map.
 	ld a,[wCurMap]
 	ld c,a
+	cp MT_MOON_SQUARE ; Uses Pewter City roof
+	jr nz, .notMtMoonSquare
+	ld c, PEWTER_CITY
+.notMtMoonSquare
 	cp ROUTE_6 ; Route 6 has 2 rows in saffron city; check if player is there or not.
 	jr nz, .notRoute6
 	ld a,[wYCoord]

@@ -366,7 +366,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_OW_BROWN
 
 	; 0x19: SPRITE_MEDIUM
-	db PAL_OW_BROWN
+	db PAL_OW_BLUE
 
 	; 0x1a: SPRITE_WAITER
 	db PAL_OW_RANDOM
