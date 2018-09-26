@@ -1,5 +1,5 @@
-; Comment the following line out to build the Normal rom
-_HARD EQU 1
+; Un-Comment the following line out to build the Normal rom
+;_HARD EQU 1
 
 INCLUDE "macros.asm"
 INCLUDE "charmap.asm"

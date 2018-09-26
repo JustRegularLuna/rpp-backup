@@ -1,4 +1,8 @@
 MtMoon3Script:
+	; Going to Mt. Moon Square overwrites this, since it is an outdoor map
+	; Make sure nothing breaks
+	ld a, ROUTE_4
+	ld [wLastMap], a
 	call EnableAutoTextBoxDrawing
 	ld hl, MtMoon3TrainerHeader0
 	ld de, MtMoon3ScriptPointers
