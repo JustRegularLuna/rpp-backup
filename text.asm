@@ -2645,7 +2645,7 @@ _WarpToLastPokemonCenterText::
 _CannotUseTeleportNowText::
 	TX_RAM wcd6d
 	text " can't"
-	line "use Telepor now."
+	line "use Teleport now."
 	prompt
 
 _CannotFlyHereText::
