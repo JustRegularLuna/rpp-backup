@@ -33,6 +33,8 @@ TMToMove:
 	ld [wd11e], a
 	ret
 
+; Moved the label here, so that line number == TM number for quick reference
+TechnicalMachines:
 INCLUDE "data/tms.asm"
 
 
