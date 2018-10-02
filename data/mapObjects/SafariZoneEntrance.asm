@@ -2,8 +2,8 @@ SafariZoneEntranceObject:
 	db $a ; border block
 
 	db $4 ; warps
-	db $5, $3, $4, $ff
-	db $5, $4, $4, $ff
+	db $5, $3, $4, FUCHSIA_CITY
+	db $5, $4, $4, FUCHSIA_CITY
 	db $0, $3, $0, SAFARI_ZONE_CENTER
 	db $0, $4, $1, SAFARI_ZONE_CENTER
 
