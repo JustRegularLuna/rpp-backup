@@ -19,7 +19,7 @@ dw RapidashPicBack
 db 0 ; growth rate
 ; learnset
 	tmlearn 5,6,7,8
-	tmlearn 9,10
+	tmlearn 9,10,15,16
 	tmlearn 22
 	tmlearn 31,32
 	tmlearn 33,34,37,38,39,40

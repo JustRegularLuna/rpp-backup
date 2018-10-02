@@ -19,9 +19,9 @@ dw TogepiPicBack
 	m_tutor 0
 db 3 ; growth rate
 ; learnset
-	tmlearn 6,8
-	tmlearn 9,10
-	tmlearn 22
+	tmlearn 5,6,8
+	tmlearn 9,10,11
+	tmlearn 18,22
 	tmlearn 29,30,31,32
 	tmlearn 34,37,38,39,40
 	tmlearn 42,44,45,46

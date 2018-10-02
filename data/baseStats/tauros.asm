@@ -18,7 +18,7 @@ dw TaurosPicBack
 	m_tutor 0
 db 5 ; growth rate
 ; learnset
-	tmlearn 1,5,6,8
+	tmlearn 1,5,6,7,8
 	tmlearn 9,10,11,13,14,15,16
 	tmlearn 22,24
 	tmlearn 25,26,27,30,31,32

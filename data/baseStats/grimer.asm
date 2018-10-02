@@ -18,7 +18,7 @@ dw GrimerPicBack
 	m_tutor 0
 db 0 ; growth rate
 ; learnset
-	tmlearn 6,8
+	tmlearn 1,6,8
 	tmlearn 9,10,12
 	tmlearn 21,24
 	tmlearn 25,28,31,32

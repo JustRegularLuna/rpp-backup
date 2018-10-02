@@ -19,8 +19,8 @@ dw BellossomPicBack
 	m_tutor 0
 db 3 ; growth rate
 ; learnset
-	tmlearn 6
-	tmlearn 15
+	tmlearn 6,8
+	tmlearn 10,15
 	tmlearn 21,22
 	tmlearn 32
 	tmlearn 39

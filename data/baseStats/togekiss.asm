@@ -20,8 +20,8 @@ dw TogekissPicBack
 db 3 ; growth rate
 ; learnset
 	tmlearn 4,6,8
-	tmlearn 9,10,15
-	tmlearn 22,23
+	tmlearn 9,10,11,15
+	tmlearn 18,19,22,23
 	tmlearn 29,30,31,32
 	tmlearn 34,37,38,39,40
 	tmlearn 41,42,44,45,46

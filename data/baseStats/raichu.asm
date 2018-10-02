@@ -19,7 +19,7 @@ dw RaichuPicBack
 db 0 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8
-	tmlearn 9,10,16
+	tmlearn 9,10,15,16
 	tmlearn 17,18,19,24
 	tmlearn 25,31,32
 	tmlearn 33,34,39,40

@@ -20,7 +20,7 @@ dw PolitoedPicBack
 db 3 ; growth rate
 ; learnset
 	tmlearn 1,5,6,8
-	tmlearn 9,10,11,12,13,14
+	tmlearn 9,10,11,12,13,14,15
 	tmlearn 17,18,19
 	tmlearn 26,27,28,29,30,31,32
 	tmlearn 34,40

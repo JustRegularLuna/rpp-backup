@@ -20,7 +20,7 @@ dw Porygon2PicBack
 db 0 ; growth rate
 ; learnset
 	tmlearn 6
-	tmlearn 9,10,13,14,15
+	tmlearn 9,10,13,14,15,16
 	tmlearn 22,24
 	tmlearn 25,29,30,31,32
 	tmlearn 33,34,39,40

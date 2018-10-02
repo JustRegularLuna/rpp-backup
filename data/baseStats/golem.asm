@@ -18,7 +18,7 @@ dw GolemPicBack
 	m_tutor 0
 db 3 ; growth rate
 ; learnset
-	tmlearn 1,6,8
+	tmlearn 1,5,6,8
 	tmlearn 9,10,15
 	tmlearn 17,18,19
 	tmlearn 26,27,28,31,32

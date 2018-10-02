@@ -18,9 +18,9 @@ dw OmastarPicBack
 	m_tutor 0
 db 0 ; growth rate
 ; learnset
-	tmlearn 6,8
+	tmlearn 6,7,8
 	tmlearn 9,10,11,12,13,14,15
-	tmlearn 0
+	tmlearn 17,19
 	tmlearn 26,27,31,32
 	tmlearn 33,34,35,36
 	tmlearn 44,48

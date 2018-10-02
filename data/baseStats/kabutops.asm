@@ -18,9 +18,9 @@ dw KabutopsPicBack
 	m_tutor 0
 db 0 ; growth rate
 ; learnset
-	tmlearn 2,3,6,8
+	tmlearn 2,3,5,6,8
 	tmlearn 9,10,11,12,13,14,15
-	tmlearn 20,21
+	tmlearn 17,19,20,21
 	tmlearn 26,27,28,31,32
 	tmlearn 33,34,35,36
 	tmlearn 41,44,48

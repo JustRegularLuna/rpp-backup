@@ -18,7 +18,7 @@ dw VictreebelPicBack
 	m_tutor 0
 db 3 ; growth rate
 ; learnset
-	tmlearn 3,6
+	tmlearn 3,6,8
 	tmlearn 9,10,15
 	tmlearn 21,22
 	tmlearn 31,32

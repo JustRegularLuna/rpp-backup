@@ -19,7 +19,7 @@ dw DratiniPicBack
 db 5 ; growth rate
 ; learnset
 	tmlearn 6,7,8
-	tmlearn 9,10,11,12,13,14,16
+	tmlearn 9,10,11,12,13,14,15,16
 	tmlearn 23,24
 	tmlearn 25,31,32
 	tmlearn 33,34,37,38,39,40

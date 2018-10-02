@@ -18,7 +18,7 @@ dw DoduoPicBack
 	m_tutor 0
 db 0 ; growth rate
 ; learnset
-	tmlearn 4,5,6,8
+	tmlearn 3,4,5,6,8
 	tmlearn 9,10
 	tmlearn 0
 	tmlearn 31,32

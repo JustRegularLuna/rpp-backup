@@ -18,7 +18,7 @@ dw RaticatePicBack
 	m_tutor 0
 db 0 ; growth rate
 ; learnset
-	tmlearn 5,6,8
+	tmlearn 3,5,6,8
 	tmlearn 9,10,11,12,13,14,15,16
 	tmlearn 17,18,19,20,24
 	tmlearn 25,28,30,31,32
