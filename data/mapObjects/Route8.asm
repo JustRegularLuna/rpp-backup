@@ -21,7 +21,7 @@ Route8Object:
 	object SPRITE_LASS, $1a, $6, STAY, RIGHT, $7, OPP_LASS, $f
 	object SPRITE_GAMBLER, $2e, $d, STAY, DOWN, $8, OPP_GAMBLER, $7
 	object SPRITE_LASS, $33, $c, STAY, LEFT, $9, OPP_LASS, $10
-	object SPRITE_BERRY_TREE, $35, $6, STAY, NONE, $a
+	object SPRITE_BERRY_TREE, $a, $d, STAY, NONE, $a
 
 	; warp-to
 	EVENT_DISP ROUTE_8_WIDTH, $9, $1 ; ROUTE_8_GATE

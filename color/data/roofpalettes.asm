@@ -29,7 +29,7 @@ RoofPalettes:
 	dw CeladonRoof   ; ROUTE_16
 	dw CeladonRoof   ; ROUTE_17
 	dw CeladonRoof   ; ROUTE_18
-	dw CinnabarRoof  ; ROUTE_19
+	dw FuchsiaRoof   ; ROUTE_19
 	dw CinnabarRoof  ; ROUTE_20
 	dw CinnabarRoof  ; ROUTE_21
 	dw IndigoRoof    ; ROUTE_22
