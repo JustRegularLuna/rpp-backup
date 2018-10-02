@@ -11,7 +11,7 @@ VictoryRoad1Object:
 	db $7 ; objects
 	object SPRITE_BRUNETTE_GIRL, $7, $5, STAY, RIGHT, $1, OPP_PKMN_TRAINER, $2
 	object SPRITE_BLACK_HAIR_BOY_1, $3, $2, STAY, DOWN, $2, OPP_COOLTRAINER_M, $5
-	object SPRITE_BALL, $b, $0, STAY, NONE, $3, TM_15
+	object SPRITE_BALL, $b, $0, STAY, NONE, $3, NUGGET
 	object SPRITE_BALL, $9, $2, STAY, NONE, $4, RARE_CANDY
 	object SPRITE_BOULDER, $5, $f, NONE, BOULDER_MOVEMENT_BYTE_2, $5 ; person
 	object SPRITE_BOULDER, $e, $2, NONE, BOULDER_MOVEMENT_BYTE_2, $6 ; person

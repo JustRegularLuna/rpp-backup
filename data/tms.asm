@@ -1,4 +1,4 @@
-	db DYNAMICPUNCH ; Victory Road, Safari Zone
+	db DYNAMICPUNCH ; Safari Zone
 	db DRAGON_CLAW  ; Rocket Hideout, Celadon Dept
 	db SWORDS_DANCE ; Silph Co
 	db STEEL_WING   ; Route 4
@@ -12,7 +12,7 @@
 	db MUDDY_WATER  ; Mt Moon
 	db ICE_BEAM     ; Celadon Dept Roof
 	db BLIZZARD     ; Pokemon Mansion
-	db HYPER_BEAM   ; Victory Road, Beach House
+	db HYPER_BEAM   ; Beach House
 	db IRON_TAIL    ; Route 12
 	db SUBMISSION   ; Celadon Dept
 	db COUNTER      ; Celadon Dept
@@ -50,6 +50,6 @@
 	db FLASH        ; Route 2
 	db CUT          ; SS Anne
 	db FLY          ; Route 16
-	db SURF         ; Safari Zone Secret House ***(Still in the Beach House in v2.2)
+	db SURF         ; Safari Zone Secret House
 	db STRENGTH     ; Fuchsia City
-	db DIVE         ; Currently Unused in Beta 2
+	db DIVE         ; Not available until v3, Sorry
