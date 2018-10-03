@@ -1,6 +1,6 @@
 CableClubNPC:
 	ld hl, CableClubNPCWelcomeText
-	call PrintText
+	jp PrintText ; call PrintText
 	CheckEvent EVENT_GOT_POKEDEX
 	jp nz, .receivedPokedex
 ; if the player hasn't received the pokedex
