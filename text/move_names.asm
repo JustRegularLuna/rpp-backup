@@ -199,7 +199,7 @@ MoveNames::
 	db "Sucker Punch@"
 	db "Shadow Ball@"
 	db "Flame Wheel@"
-	db "Moonlight@"
+	db "HealingLight@"
 	db "Hex@"
 	db "Shadow Punch@"
 	db "Aerial Ace@"

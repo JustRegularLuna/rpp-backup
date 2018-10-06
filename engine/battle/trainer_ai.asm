@@ -389,7 +389,7 @@ HealingMoves:
 	db REST
 	db RECOVER
 	db SOFTBOILED
-	db MOONLIGHT
+	db HEALINGLIGHT
 	db $FF
 	
 StatusOnlyMoves:
