@@ -68,6 +68,7 @@ AlwaysHappenSideEffects:
 	db HYPER_BEAM_EFFECT
 	db ATTACK_TWICE_EFFECT
 	db RECOIL_EFFECT
+	db VOLT_TACKLE_EFFECT
 	db TWINEEDLE_EFFECT
 	db RAGE_EFFECT
 	db -1
@@ -89,6 +90,7 @@ SpecialEffects:
 	db ATTACK_TWICE_EFFECT
 	db JUMP_KICK_EFFECT
 	db RECOIL_EFFECT
+	db VOLT_TACKLE_EFFECT
 	; fallthrough to Next EffectsArray
 SpecialEffectsCont:
 ; damaging moves whose effect is executed prior to damage calculation
@@ -5226,6 +5228,8 @@ AttackSubstitute:
 	cp EXPLODE_EFFECT
 	jr z, .done
 	cp RECOIL_EFFECT
+	jr z, .done
+	cp VOLT_TACKLE_EFFECT
 	jr z, .done
 	; if it wasn't one of those, nullify the effect
 	xor a
