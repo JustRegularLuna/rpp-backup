@@ -2402,16 +2402,17 @@ Mon096_EvosMoves:
 	db 17,POISON_GAS
 	db 21,MEDITATE
 	db 25,PSYBEAM
-	db 29,DREAM_EATER
-	db 33,EXTRASENSORY
-	db 37,LIGHT_SCREEN
+	db 29,DREAM_EATER ; Wake-Up Slap → TM move
+	db 33,BARRIER ; Psych Up → egg move
+	db 37,SIGNAL_BEAM ; Synchronize → Tutor Move
 	db 41,ZEN_HEADBUTT
-	db 45,REFLECT
+	db 45,SHADOW_BALL ; Swagger → TM move
 	db 49,PSYCHIC_M
-	db 53,SHADOW_BALL
-	db 57,REST
+	db 53,AMNESIA ; Nasty Plot → similar move
+	db 57,TOXIC ; Psyshock → TM move
+	db 61,DAZZLINGLEAM ; Future Sight → TM move
 	db 0
-	
+
 Mon097_EvosMoves:
 ;HYPNO
 ;Evolutions
@@ -2425,16 +2426,17 @@ Mon097_EvosMoves:
 	db 17,POISON_GAS
 	db 21,MEDITATE
 	db 25,PSYBEAM
-	db 29,DREAM_EATER
-	db 33,EXTRASENSORY
-	db 37,LIGHT_SCREEN
+	db 29,DREAM_EATER ; Wake-Up Slap → TM move
+	db 33,BARRIER ; Psych Up → egg move
+	db 37,SIGNAL_BEAM ; Synchronize → Tutor Move
 	db 41,ZEN_HEADBUTT
-	db 45,REFLECT
+	db 45,SHADOW_BALL ; Swagger → TM move
 	db 49,PSYCHIC_M
-	db 53,SHADOW_BALL
-	db 57,REST
+	db 53,AMNESIA ; Nasty Plot → similar move
+	db 57,TOXIC ; Psyshock → TM move
+	db 61,DAZZLINGLEAM ; Future Sight → TM move
 	db 0
-	
+
 Mon098_EvosMoves:
 ;KRABBY
 ;Evolutions
@@ -2446,17 +2448,17 @@ Mon098_EvosMoves:
 	db 9,LEER
 	db 11,HARDEN
 	db 15,BUBBLEBEAM
-	db 19,MUD_SLAP
+	db 19,DIG ; Mud Shot → egg move
 	db 21,METAL_CLAW
 	db 25,STOMP
-	db 29,CLAMP
-	db 31,GUILLOTINE
+	db 29,MIST ; Protect → new move
+	db 31,X_SCISSOR ; Guillotine → TM move
 	db 35,SLAM
-	db 39,WATER_PULSE
-	db 41,CRABHAMMER
-	db 45,IRON_DEFENSE
+	db 39,CRABHAMMER ; Brine → Crabhammer
+	db 41,ANCIENTPOWER ; Crabhammer → egg move
+	db 45,BIDE ; Flail → RBY TM move
 	db 0
-	
+
 Mon099_EvosMoves:
 ;KINGLER
 ;Evolutions
@@ -2467,17 +2469,17 @@ Mon099_EvosMoves:
 	db 9,LEER
 	db 11,HARDEN
 	db 15,BUBBLEBEAM
-	db 19,MUD_SLAP
+	db 19,DIG ; Mud Shot → egg move
 	db 21,METAL_CLAW
 	db 25,STOMP
-	db 32,CLAMP
-	db 37,GUILLOTINE
+	db 32,MIST ; Protect → new move
+	db 37,X_SCISSOR ; Guillotine → TM move
 	db 44,SLAM
-	db 51,WATER_PULSE
-	db 56,CRABHAMMER
-	db 63,IRON_DEFENSE
+	db 51,CRABHAMMER ; Brine → Crabhammer
+	db 56,ANCIENTPOWER ; Crabhammer → egg move
+	db 63,BIDE ; Flail → RBY TM move
 	db 0
-	
+
 Mon100_EvosMoves:
 ;VOLTORB
 ;Evolutions
@@ -2486,21 +2488,22 @@ Mon100_EvosMoves:
 ;Learnset
 	db 1,TACKLE
 	db 4,SONICBOOM
-	db 6,THUNDER_WAVE
-	db 9,THUNDERSHOCK
-	db 11,QUICK_ATTACK
+	db 6,AGILITY ; Eerie Impulse → event move
+	db 9,THUNDERSHOCK ; Spark → similar move
+	db 11,MIMIC ; Rollout → tutor move
 	db 13,SCREECH
-	db 16,THUNDERBOLT
+	db 16,SIGNAL_BEAM ; Charge Beam → tutor move
 	db 20,SWIFT
 	db 22,ELECTRO_BALL
 	db 26,SELFDESTRUCT
 	db 29,LIGHT_SCREEN
-	db 34,AGILITY
+	db 34,REFLECT ; Magnet Rise → TM move
 	db 37,DISCHARGE
 	db 41,EXPLOSION
-	db 46,EXTREMESPEED
+	db 46,THUNDER ; Gyro Ball → TM move
+	db 48,SUBSTITUTE ; Mirror Coat → RBY TM move
 	db 0
-	
+
 Mon101_EvosMoves:
 ;ELECTRODE
 ;Evolutions
@@ -2508,21 +2511,22 @@ Mon101_EvosMoves:
 ;Learnset
 	db 1,TACKLE
 	db 4,SONICBOOM
-	db 6,THUNDER_WAVE
-	db 9,THUNDERSHOCK
-	db 11,QUICK_ATTACK
+	db 6,AGILITY ; Eerie Impulse → event move
+	db 9,THUNDERSHOCK ; Spark → similar move
+	db 11,MIMIC ; Rollout → tutor move
 	db 13,SCREECH
-	db 16,THUNDERBOLT
+	db 16,SIGNAL_BEAM ; Charge Beam → tutor move
 	db 20,SWIFT
 	db 22,ELECTRO_BALL
 	db 26,SELFDESTRUCT
 	db 29,LIGHT_SCREEN
-	db 36,AGILITY
+	db 36,REFLECT ; Magnet Rise → TM move
 	db 41,DISCHARGE
 	db 47,EXPLOSION
-	db 54,EXTREMESPEED
+	db 54,THUNDER ; Gyro Ball → TM move
+	db 58,SUBSTITUTE ; Mirror Coat → RBY TM move
 	db 0
-	
+
 Mon102_EvosMoves:
 ;EXEGGCUTE
 ;Evolutions
@@ -2533,18 +2537,18 @@ Mon102_EvosMoves:
 	db 1,HYPNOSIS
 	db 7,REFLECT
 	db 11,LEECH_SEED
-	db 17,GROWTH
+	db 17,SELFDESTRUCT ; Bullet Seed → RBY TM move
 	db 19,STUN_SPORE
 	db 21,POISONPOWDER
 	db 23,SLEEP_POWDER
 	db 27,CONFUSION
-	db 33,AMNESIA
-	db 37,EGG_BOMB
+	db 33,ANCIENTPOWER ; Worry Seed → HGSS tutor move
+	db 37,HEALINGLIGHT ; Natural Gift → new move
 	db 43,SOLARBEAM
 	db 47,EXTRASENSORY
-	db 50,SOFTBOILED
+	db 50,PSYCHIC_M ; Bestow → TM move
 	db 0
-	
+
 Mon103_EvosMoves:
 ;EXEGGUTOR
 ;Evolutions
@@ -2553,30 +2557,27 @@ Mon103_EvosMoves:
 	db 1,BARRAGE
 	db 1,HYPNOSIS
 	db 1,CONFUSION
-	db 1,STOMP
-	db 7,REFLECT
+	db 1,STOMP ; evolution move
 	db 11,LEECH_SEED
-	db 17,GROWTH
+	db 17,LOW_KICK ; Psyshock → HGSS tutor move
 	db 19,STUN_SPORE
 	db 21,POISONPOWDER
 	db 23,SLEEP_POWDER
-	db 27,CONFUSION
-	db 28,STOMP
-	db 33,AMNESIA
-	db 37,EGG_BOMB
-	db 41,WOOD_HAMMER
+	db 27,EGG_BOMB
+	db 33,ANCIENTPOWER ; Worry Seed → HGSS tutor move
+	db 37,WOOD_HAMMER
 	db 43,SOLARBEAM
-	db 47,EXTRASENSORY
-	db 50,SOFTBOILED
+	db 47,PETAL_DANCE ; Leaf Storm → new move
+	db 50,PSYCHIC_M ; Bestow → TM move
 	db 0
-	
+
 Mon104_EvosMoves:
 ;CUBONE
 ;Evolutions
 	db EV_LEVEL,28,MAROWAK
 	db 0
 ;Learnset
-	db 1,TACKLE
+	db 1,TACKLE ; new move
 	db 1,GROWL
 	db 3,TAIL_WHIP
 	db 7,BONE_CLUB
@@ -2585,20 +2586,21 @@ Mon104_EvosMoves:
 	db 17,FOCUS_ENERGY
 	db 21,BONEMERANG
 	db 23,RAGE
-	db 27,SWORDS_DANCE
-	db 31,THRASH
-	db 33,DOUBLE_TEAM
-	db 37,BONE_RUSH
+	db 27,LOW_KICK ; False Swipe → HGSS tutor move
+	db 31,ANCIENTPOWER ; Thrash → TM move
+	db 33,THRASH ; Fling → Thrash
+	db 37,BONE_RUSH ; Stomping Tantrum → Bone Rush
+	db 41,EARTH_POWER ; Endeavor → Tutor move
 	db 43,DOUBLE_EDGE
-	db 47,ROCK_TOMB
+	db 47,OUTRAGE ; Bone Rush → Outrage
 	db 0
-	
+
 Mon105_EvosMoves:
 ;MAROWAK
 ;Evolutions
 	db 0
 ;Learnset
-	db 1,TACKLE
+	db 1,TACKLE ; new move
 	db 1,GROWL
 	db 3,TAIL_WHIP
 	db 7,BONE_CLUB
@@ -2607,57 +2609,64 @@ Mon105_EvosMoves:
 	db 17,FOCUS_ENERGY
 	db 21,BONEMERANG
 	db 23,RAGE
-	db 27,SWORDS_DANCE
-	db 33,THRASH
-	db 37,DOUBLE_TEAM
-	db 43,BONE_RUSH
-	db 49,DOUBLE_EDGE
-	db 53,ROCK_TOMB
+	db 27,LOW_KICK ; False Swipe → HGSS tutor move
+	db 33,SHADOW_CLAW ; Thrash → TM move
+	db 37,THRASH ; Fling → Thrash
+	db 43,BONE_RUSH ; Stomping Tantrum → Bone Rush
+	db 49,EARTH_POWER ; Endeavor → Tutor move
+	db 53,DOUBLE_EDGE
+	db 59,OUTRAGE ; Bone Rush → Outrage
 	db 0
-	
+
 Mon106_EvosMoves:
 ;HITMONLEE
 ;Evolutions
 	db 0
 ;Learnset
 	db 1,DOUBLE_KICK
+	db 1,RAGE ; Revenge → Tyrogue Move
 	db 5,MEDITATE
 	db 9,ROLLING_KICK
 	db 13,JUMP_KICK
-	db 17,LOW_KICK
+	db 17,STOMP ; Brick Break → new move
 	db 21,FOCUS_ENERGY
-	db 25,QUICK_ATTACK
+	db 25,AERIAL_ACE ; Feint → new move
 	db 29,HI_JUMP_KICK
-	db 37,LOW_SWEEP
-	db 45,STOMP
-	db 49,DOUBLE_TEAM
+	db 33,DOUBLE_TEAM ; Mind Reader → TM move
+	db 37,SUBMISSION ; Foresight → TM move
+	db 41,REST ; Wide Guard → TM move
+	db 45,SWIFT ; Blaze Kick → TM move
+	db 49,BIDE ; Endure → RBY TM move
 	db 53,MEGA_KICK
-	db 61,GIGA_IMPACT
+	db 57,COUNTER ; Close Combat → TM move
+	db 61,GIGA_IMPACT ; Reversal → new move
 	db 0
-	
+
 Mon107_EvosMoves:
 ;HITMONCHAN
 ;Evolutions
 	db 0
 ;Learnset
 	db 1,COMET_PUNCH
+	db 1,RAGE ; Revenge → Tyrogue move
 	db 6,AGILITY
-	db 11,MEDITATE
-	db 16,BULLET_PUNCH
-	db 21,QUICK_ATTACK
-	db 26,FOCUS_ENERGY
-	db 31,COMET_PUNCH
+	db 11,MUD_SLAP ; Pursuit → tutor move
+	db 13,DIZZY_PUNCH ; Mach Punch → Dizzy Punch
+	db 17,BULLET_PUNCH
+	db 21,AERIAL_ACE ; Feint → new move
+	db 26,SEISMIC_TOSS ; Vacuum Wave → RBY TM move
+	db 31,REST ; Quick Guard → TM move
 	db 36,THUNDERPUNCH
 	db 36,ICE_PUNCH
 	db 36,FIRE_PUNCH
-	db 41,SHADOW_PUNCH
+	db 41,SHADOW_PUNCH ; Sky Uppercut → new move
 	db 46,MEGA_PUNCH
-	db 50,SUCKER_PUNCH
-	db 56,DYNAMICPUNCH
+	db 51,DOUBLE_TEAM ; Detect → TM move
+	db 56,DYNAMICPUNCH ; Focus Punch → TM move
 	db 61,COUNTER
-	db 66,GIGA_IMPACT
+	db 66,GIGA_IMPACT ; Close Combat → new move
 	db 0
-	
+
 Mon108_EvosMoves:
 ;LICKITUNG
 ;Evolutions
@@ -2667,15 +2676,20 @@ Mon108_EvosMoves:
 	db 1,LICK
 	db 5,SUPERSONIC
 	db 9,DEFENSE_CURL
+	db 13,MEGA_PUNCH ; Knock Off → RBY TM move
 	db 17,WRAP
 	db 21,STOMP
 	db 25,DISABLE
 	db 29,SLAM
-	db 33,ANCIENTPOWER
-	db 39,SCREECH
-	db 49,GIGA_IMPACT
+	db 33,ANCIENTPOWER ; Rollout → New evolution move
+	db 37,THRASH ; Chip Away → egg move
+	db 41,ZEN_HEADBUTT ; Me First → egg move
+	db 45,REST ; Refresh → TM move
+	db 49,SCREECH
+	db 53,DOUBLE_EDGE ; Power Whip → RBY TM move
+	db 57,GIGA_IMPACT ; Wring Out → TM move
 	db 0
-	
+
 Mon109_EvosMoves:
 ;KOFFING
 ;Evolutions
@@ -2699,7 +2713,7 @@ Mon109_EvosMoves:
 	db 45,DARK_PULSE
 	db 52,EXPLOSION
 	db 0
-	
+
 Mon110_EvosMoves:
 ;WEEZING
 ;Evolutions
@@ -2722,7 +2736,7 @@ Mon110_EvosMoves:
 	db 57,DARK_PULSE
 	db 62,EXPLOSION
 	db 0
-	
+
 Mon111_EvosMoves:
 ;RHYHORN
 ;Evolutions
@@ -2749,7 +2763,7 @@ Mon111_EvosMoves:
 	db 49,MEGAHORN
 	db 53,HORN_DRILL
 	db 0
-	
+
 Mon112_EvosMoves:
 ;RHYDON
 ;Evolutions
@@ -2777,7 +2791,7 @@ Mon112_EvosMoves:
 	db 55,MEGAHORN
 	db 62,HORN_DRILL
 	db 0
-	
+
 Mon113_EvosMoves:
 ;CHANSEY
 ;Evolutions
@@ -2803,7 +2817,7 @@ Mon113_EvosMoves:
 	db 50,RECOVER
 	db 54,DOUBLE_EDGE
 	db 0
-	
+
 Mon114_EvosMoves:
 ;TANGELA
 ;Evolutions
@@ -2827,7 +2841,7 @@ Mon114_EvosMoves:
 	db 48,HEALINGLIGHT
 	db 50,WOOD_HAMMER
 	db 0
-	
+
 Mon115_EvosMoves:
 ;KANGASKHAN
 ;Evolutions
@@ -2848,7 +2862,7 @@ Mon115_EvosMoves:
 	db 49,SUCKER_PUNCH
 	db 50,GIGA_IMPACT
 	db 0
-	
+
 Mon116_EvosMoves:
 ;HORSEA
 ;Evolutions
@@ -2868,7 +2882,7 @@ Mon116_EvosMoves:
 	db 46,WATER_PULSE
 	db 52,HYDRO_PUMP
 	db 0
-	
+
 Mon117_EvosMoves:
 ;SEADRA
 ;Evolutions
@@ -2888,7 +2902,7 @@ Mon117_EvosMoves:
 	db 52,WATER_PULSE
 	db 60,HYDRO_PUMP
 	db 0
-	
+
 Mon118_EvosMoves:
 ;GOLDEEN
 ;Evolutions
@@ -2909,7 +2923,7 @@ Mon118_EvosMoves:
 	db 40,AQUA_TAIL
 	db 45,MEGAHORN
 	db 0
-	
+
 Mon119_EvosMoves:
 ;SEAKING
 ;Evolutions
@@ -2929,7 +2943,7 @@ Mon119_EvosMoves:
 	db 46,AQUA_TAIL
 	db 54,MEGAHORN
 	db 0
-	
+
 Mon120_EvosMoves:
 ;STARYU
 ;Evolutions
@@ -2956,7 +2970,7 @@ Mon120_EvosMoves:
 	db 49,DAZZLINGLEAM
 	db 53,HYDRO_PUMP
 	db 0
-	
+
 Mon121_EvosMoves:
 ;STARMIE
 ;Evolutions
@@ -2982,7 +2996,7 @@ Mon121_EvosMoves:
 	db 49,DAZZLINGLEAM
 	db 53,HYDRO_PUMP
 	db 0
-	
+
 Mon122_EvosMoves:
 ;MR_MIME
 ;Evolutions
@@ -3006,7 +3020,7 @@ Mon122_EvosMoves:
 	db 43,MIMIC
 	db 46,DAZZLINGLEAM
 	db 0
-	
+
 Mon123_EvosMoves:
 ;SCYTHER
 ;Evolutions
@@ -3030,7 +3044,7 @@ Mon123_EvosMoves:
 	db 50,AIR_SLASH
 	db 57,SWORDS_DANCE
 	db 0
-	
+
 Mon124_EvosMoves:
 ;JYNX
 ;Evolutions
@@ -3052,7 +3066,7 @@ Mon124_EvosMoves:
 	db 55,PSYCHIC_M
 	db 60,SHEER_COLD
 	db 0
-	
+
 Mon125_EvosMoves:
 ;ELECTABUZZ
 ;Evolutions
@@ -3074,7 +3088,7 @@ Mon125_EvosMoves:
 	db 49,THUNDERBOLT
 	db 55,THUNDER
 	db 0
-	
+
 Mon126_EvosMoves:
 ;MAGMAR
 ;Evolutions
@@ -3099,7 +3113,7 @@ Mon126_EvosMoves:
 	db 49,FIRE_BLAST
 	db 55,FLARE_BLITZ
 	db 0
-	
+
 Mon127_EvosMoves:
 ;PINSIR
 ;Evolutions
@@ -3121,7 +3135,7 @@ Mon127_EvosMoves:
 	db 43,MEGAHORN
 	db 47,GUILLOTINE
 	db 0
-	
+
 Mon128_EvosMoves:
 ;TAUROS
 ;Evolutions
@@ -3142,7 +3156,7 @@ Mon128_EvosMoves:
 	db 50,THRASH
 	db 63,GIGA_IMPACT
 	db 0
-	
+
 Mon129_EvosMoves:
 ;MAGIKARP
 ;Evolutions
@@ -3152,7 +3166,7 @@ Mon129_EvosMoves:
 	db 1,SPLASH
 	db 15,TACKLE
 	db 0
-	
+
 Mon130_EvosMoves:
 ;GYARADOS
 ;Evolutions
@@ -3171,7 +3185,7 @@ Mon130_EvosMoves:
 	db 47,DRAGONBREATH
 	db 50,HYPER_BEAM
 	db 0
-	
+
 Mon131_EvosMoves:
 ;LAPRAS
 ;Evolutions
@@ -3193,7 +3207,7 @@ Mon131_EvosMoves:
 	db 47,HYDRO_PUMP
 	db 50,SHEER_COLD
 	db 0
-	
+
 Mon132_EvosMoves:
 ;DITTO
 ;Evolutions
@@ -3201,7 +3215,7 @@ Mon132_EvosMoves:
 ;Learnset
 	db 1,TRANSFORM
 	db 0
-	
+
 Mon133_EvosMoves:
 ;EEVEE
 ;Evolutions
@@ -3233,7 +3247,7 @@ Mon133_EvosEnd:
 	db 41,SCREECH
 	db 45,SUBSTITUTE
 	db 0
-	
+
 Mon134_EvosMoves:
 ;VAPOREON
 ;Evolutions
@@ -3254,7 +3268,7 @@ Mon134_EvosMoves:
 	db 41,DOUBLE_EDGE
 	db 45,HYDRO_PUMP
 	db 0
-	
+
 Mon135_EvosMoves:
 ;JOLTEON
 ;Evolutions
@@ -3275,7 +3289,7 @@ Mon135_EvosMoves:
 	db 41,DOUBLE_EDGE
 	db 45,THUNDER
 	db 0
-	
+
 Mon136_EvosMoves:
 ;FLAREON
 ;Evolutions
@@ -3296,7 +3310,7 @@ Mon136_EvosMoves:
 	db 41,DOUBLE_EDGE
 	db 45,FLARE_BLITZ
 	db 0
-	
+
 Mon137_EvosMoves:
 ;PORYGON
 ;Evolutions
@@ -3318,7 +3332,7 @@ Mon137_EvosMoves:
 	db 56,FLASH_CANNON
 	db 62,THUNDER
 	db 0
-	
+
 Mon138_EvosMoves:
 ;OMANYTE
 ;Evolutions
@@ -3340,7 +3354,7 @@ Mon138_EvosMoves:
 	db 50,SLAM
 	db 55,HYDRO_PUMP
 	db 0
-	
+
 Mon139_EvosMoves:
 ;OMASTAR
 ;Evolutions
@@ -3362,7 +3376,7 @@ Mon139_EvosMoves:
 	db 67,SLAM
 	db 75,HYDRO_PUMP
 	db 0
-	
+
 Mon140_EvosMoves:
 ;KABUTO
 ;Evolutions
@@ -3382,7 +3396,7 @@ Mon140_EvosMoves:
 	db 46,ANCIENTPOWER
 	db 50,GIGA_DRAIN
 	db 0
-	
+
 Mon141_EvosMoves:
 ;KABUTOPS
 ;Evolutions
@@ -3403,7 +3417,7 @@ Mon141_EvosMoves:
 	db 63,GIGA_DRAIN
 	db 72,NIGHT_SLASH
 	db 0
-	
+
 Mon142_EvosMoves:
 ;AERODACTYL
 ;Evolutions
@@ -3423,7 +3437,7 @@ Mon142_EvosMoves:
 	db 73,ROCK_SLIDE
 	db 81,GIGA_IMPACT
 	db 0
-	
+
 Mon143_EvosMoves:
 ;SNORLAX
 ;Evolutions
@@ -3446,7 +3460,7 @@ Mon143_EvosMoves:
 	db 50,SLAM
 	db 57,GIGA_IMPACT
 	db 0
-	
+
 Mon144_EvosMoves:
 ;ARTICUNO
 ;Evolutions
@@ -3469,7 +3483,7 @@ Mon144_EvosMoves:
 	db 92,HURRICANE
 	db 99,AEROBLAST
 	db 0
-	
+
 Mon145_EvosMoves:
 ;ZAPDOS
 ;Evolutions
@@ -3492,7 +3506,7 @@ Mon145_EvosMoves:
 	db 92,HURRICANE
 	db 99,ELECTRO_BALL
 	db 0
-	
+
 Mon146_EvosMoves:
 ;MOLTRES
 ;Evolutions
@@ -3515,7 +3529,7 @@ Mon146_EvosMoves:
 	db 92,HURRICANE
 	db 99,FLARE_BLITZ
 	db 0
-	
+
 Mon147_EvosMoves:
 ;DRATINI
 ;Evolutions
@@ -3537,7 +3551,7 @@ Mon147_EvosMoves:
 	db 55,DRACO_METEOR
 	db 61,HYPER_BEAM
 	db 0
-	
+
 Mon148_EvosMoves:
 ;DRAGONAIR
 ;Evolutions
@@ -3559,7 +3573,7 @@ Mon148_EvosMoves:
 	db 67,DRACO_METEOR
 	db 75,HYPER_BEAM
 	db 0
-	
+
 Mon149_EvosMoves:
 ;DRAGONITE
 ;Evolutions
@@ -3581,7 +3595,7 @@ Mon149_EvosMoves:
 	db 75,HYPER_BEAM
 	db 81,HURRICANE
 	db 0
-	
+
 Mon150_EvosMoves:
 ;MEWTWO
 ;Evolutions
@@ -3604,7 +3618,7 @@ Mon150_EvosMoves:
 	db 91,DARK_PULSE
 	db 100,MIND_BLAST
 	db 0
-	
+
 Mon151_EvosMoves:
 ;MEW
 ;Evolutions
@@ -3624,7 +3638,7 @@ Mon151_EvosMoves:
 	db 90,DARK_PULSE
 	db 100,MIND_BLAST
 	db 0
-	
+
 Mon152_EvosMoves: 
 ;LUGIA
 ;Evolutions
@@ -3648,7 +3662,7 @@ Mon152_EvosMoves:
 	db 93,AMNESIA
 	db 99,HURRICANE
 	db 0
-	
+
 Mon153_EvosMoves:
 ;HOUNDOUR
 ;Evolutions
@@ -3672,7 +3686,7 @@ Mon153_EvosMoves:
 	db 52,AMNESIA
 	db 56,FLARE_BLITZ
 	db 0
-	
+
 Mon154_EvosMoves:
 ;HOUNDOOM
 ;Evolutions
@@ -3695,7 +3709,7 @@ Mon154_EvosMoves:
 	db 60,AMNESIA
 	db 65,FLARE_BLITZ
 	db 0
-	
+
 Mon155_EvosMoves:
 ;MURKROW
 ;Evolutions
@@ -3718,7 +3732,7 @@ Mon155_EvosMoves:
 	db 61,SHADOW_BALL
 	db 65,DARK_PULSE
 	db 0
-	
+
 Mon156_EvosMoves:
 ;HONCHKROW
 ;Evolutions
@@ -3740,7 +3754,7 @@ Mon156_EvosMoves:
 	db 61,SHADOW_BALL
 	db 65,DARK_PULSE
 	db 0
-	
+
 Mon157_EvosMoves:
 ;HERACROSS
 ;Evolutions
@@ -3760,7 +3774,7 @@ Mon157_EvosMoves:
 	db 43,LOW_SWEEP
 	db 46,X_SCISSOR
 	db 0
-	
+
 Mon158_EvosMoves:
 ;ESPEON
 ;Evolutions
@@ -3781,7 +3795,7 @@ Mon158_EvosMoves:
 	db 41,ZEN_HEADBUTT
 	db 45,EXTRASENSORY
 	db 0
-	
+
 Mon159_EvosMoves:
 ;UMBREON
 ;Evolutions
@@ -3802,7 +3816,7 @@ Mon159_EvosMoves:
 	db 41,SHADOW_BALL
 	db 45,DARK_PULSE
 	db 0
-	
+
 Mon160_EvosMoves:
 ;GLACEON
 ;Evolutions
@@ -3823,7 +3837,7 @@ Mon160_EvosMoves:
 	db 41,MIST
 	db 45,BLIZZARD
 	db 0
-	
+
 Mon161_EvosMoves:
 ;LEAFEON
 ;Evolutions
@@ -3844,7 +3858,7 @@ Mon161_EvosMoves:
 	db 41,SOLARBEAM
 	db 45,LEAF_BLADE
 	db 0
-	
+
 Mon162_EvosMoves:
 ;SYLVEON
 ;Evolutions
@@ -3865,7 +3879,7 @@ Mon162_EvosMoves:
 	db 41,AMNESIA
 	db 45,DAZZLINGLEAM
 	db 0
-	
+
 Mon163_EvosMoves:
 ;SCIZOR
 ;Evolutions
@@ -3888,7 +3902,7 @@ Mon163_EvosMoves:
 	db 50,AIR_SLASH
 	db 57,SWORDS_DANCE
 	db 0
-	
+
 Mon164_EvosMoves:
 ;STEELIX
 ;Evolutions
@@ -3914,7 +3928,7 @@ Mon164_EvosMoves:
 	db 49,DOUBLE_EDGE
 	db 52,EARTH_POWER
 	db 0
-	
+
 Mon165_EvosMoves:
 ;CROBAT
 ;Evolutions
@@ -3935,7 +3949,7 @@ Mon165_EvosMoves:
 	db 45,AIR_SLASH
 	db 51,CRUNCH
 	db 0
-	
+
 Mon166_EvosMoves:
 ;POLITOED
 ;Evolutions
@@ -3955,7 +3969,7 @@ Mon166_EvosMoves:
 	db 48,HYDRO_PUMP
 	db 53,GIGA_IMPACT
 	db 0
-	
+
 Mon167_EvosMoves:
 ;SLOWKING
 ;Evolutons
@@ -3976,7 +3990,7 @@ Mon167_EvosMoves:
 	db 54,EXTRASENSORY
 	db 58,HEX
 	db 0
-	
+
 Mon168_EvosMoves:
 ;BELLOSSOM
 ;Evolutions
@@ -3998,7 +4012,7 @@ Mon168_EvosMoves:
 	db 54,LEAF_BLADE
 	db 59,PETAL_DANCE
 	db 0
-	
+
 Mon169_EvosMoves:
 ;KINGDRA
 ;Evolutions
@@ -4017,7 +4031,7 @@ Mon169_EvosMoves:
 	db 52,WATER_PULSE
 	db 60,HYDRO_PUMP
 	db 0
-	
+
 Mon170_EvosMoves:
 ;BLISSEY
 ;Evolutions
@@ -4042,7 +4056,7 @@ Mon170_EvosMoves:
 	db 50,RECOVER
 	db 54,DOUBLE_EDGE
 	db 0
-	
+
 Mon171_EvosMoves:
 ;PORYGON2
 ;Evolutions
@@ -4065,7 +4079,7 @@ Mon171_EvosMoves:
 	db 62,THUNDER
 	db 67,HYPER_BEAM
 	db 0
-	
+
 Mon172_EvosMoves:
 ;PORYGONZ
 ;Evolutions
@@ -4087,7 +4101,7 @@ Mon172_EvosMoves:
 	db 62,THUNDER
 	db 67,HYPER_BEAM
 	db 0
-	
+
 Mon173_EvosMoves:
 ;MAGMORTAR
 ;Evolutions
@@ -4109,7 +4123,7 @@ Mon173_EvosMoves:
 	db 55,FLARE_BLITZ
 	db 62,HYPER_BEAM
 	db 0
-	
+
 Mon174_EvosMoves:
 ;ELECTIVIRE
 ;Evolutions
@@ -4131,7 +4145,7 @@ Mon174_EvosMoves:
 	db 55,THUNDER
 	db 62,GIGA_IMPACT
 	db 0
-	
+
 Mon175_EvosMoves:
 ;MAGNEZONE
 ;Evolutions
@@ -4156,7 +4170,7 @@ Mon175_EvosMoves:
 	db 59,EXTREMESPEED
 	db 63,THUNDER
 	db 0
-	
+
 Mon176_EvosMoves:
 ;RHYPERIOR
 ;Evolutions
@@ -4180,7 +4194,7 @@ Mon176_EvosMoves:
 	db 62,HORN_DRILL
 	db 69,GIGA_IMPACT
 	db 0
-	
+
 Mon177_EvosMoves:
 ;TANGROWTH
 ;Evolutions
@@ -4204,7 +4218,7 @@ Mon177_EvosMoves:
 	db 53,WOOD_HAMMER
 	db 56,HYPER_BEAM
 	db 0
-	
+
 Mon178_EvosMoves:
 ;LICKILICKY
 ;Evolutions
@@ -4242,7 +4256,7 @@ Mon179_EvosMoves:
 	db 45,DOUBLE_EDGE
 	db 49,GIGA_IMPACT
 	db 0
-	
+
 Mon180_EvosMoves:
 ;TOGETIC
 ;Evolutions
@@ -4264,7 +4278,7 @@ Mon180_EvosMoves:
 	db 45,DOUBLE_EDGE
 	db 49,GIGA_IMPACT
 	db 0
-	
+
 Mon181_EvosMoves:
 ;TOGEKISS
 ;Evolutions
@@ -4285,7 +4299,7 @@ Mon181_EvosMoves:
 	db 45,SKY_ATTACK
 	db 49,GIGA_IMPACT
 	db 0
-	
+
 Mon182_EvosMoves:
 ;SNEASEL
 ;Evolutions
@@ -4309,7 +4323,7 @@ Mon182_EvosMoves:
 	db 47,BLIZZARD
 	db 51,SUCKER_PUNCH
 	db 0
-	
+
 Mon183_EvosMoves:
 ;WEAVILE
 ;Evolutions
@@ -4332,7 +4346,7 @@ Mon183_EvosMoves:
 	db 47,DARK_PULSE
 	db 51,SUCKER_PUNCH
 	db 0
-	
+
 Mon184_EvosMoves:
 ;SKARMORY
 ;Evolutions
@@ -4355,7 +4369,7 @@ Mon184_EvosMoves:
 	db 50,AERIAL_ACE
 	db 53,NIGHT_SLASH
 	db 0
-	
+
 Mon185_EvosMoves:
 ;MISDREAVUS
 ;Evolutions
@@ -4377,7 +4391,7 @@ Mon185_EvosMoves:
 	db 50,POWER_GEM
 	db 55,DARK_PULSE
 	db 0
-	
+
 Mon186_EvosMoves:
 ;MISMAGIUS
 ;Evolutions
@@ -4398,7 +4412,7 @@ Mon186_EvosMoves:
 	db 50,POWER_GEM
 	db 55,DARK_PULSE
 	db 0
-	
+
 Mon187_EvosMoves:
 ;MILTANK
 ;Evolutions
@@ -4417,7 +4431,7 @@ Mon187_EvosMoves:
 	db 48,DOUBLE_TEAM
 	db 50,GIGA_IMPACT
 	db 0
-	
+
 Mon188_EvosMoves:
 ;CHINCHOU
 ;Evolutions
@@ -4441,7 +4455,7 @@ Mon188_EvosMoves:
 	db 47,MIST
 	db 50,THUNDER
 	db 0
-	
+
 Mon189_EvosMoves:
 ;LANTURN
 ;Evolutions
@@ -4464,7 +4478,7 @@ Mon189_EvosMoves:
 	db 54,MIST
 	db 58,THUNDER
 	db 0
-	
+
 Mon190_EvosMoves:
 ;SLUGMA
 ;Evolutions
@@ -4487,7 +4501,7 @@ Mon190_EvosMoves:
 	db 48,FIRE_BLAST
 	db 50,EARTH_POWER
 	db 0
-	
+
 Mon191_EvosMoves:
 ;MAGCARGO
 ;Evolutions
@@ -4510,7 +4524,7 @@ Mon191_EvosMoves:
 	db 54,FIRE_BLAST
 	db 58,EARTH_POWER
 	db 0
-	
+
 Mon192_EvosMoves:
 ;TORKOAL
 ;Evolutions
@@ -4535,7 +4549,7 @@ Mon192_EvosMoves:
 	db 47,STOMP
 	db 50,GIGA_IMPACT
 	db 0
-	
+
 Mon193_EvosMoves:
 ;LATIAS
 ;Evolutions
@@ -4557,7 +4571,7 @@ Mon193_EvosMoves:
 	db 65,PSYCHIC_M
 	db 70,DRACO_METEOR
 	db 0
-	
+
 Mon194_EvosMoves:
 ;LATIOS
 ;Evolutions
@@ -4579,7 +4593,7 @@ Mon194_EvosMoves:
 	db 65,PSYCHIC_M
 	db 70,DRACO_METEOR
 	db 0
-	
+
 Mon195_EvosMoves:
 ;HITMONTOP
 ;Evolutions
@@ -4599,7 +4613,7 @@ Mon195_EvosMoves:
 	db 53,MEGA_KICK
 	db 61,GIGA_IMPACT
 	db 0
-	
+
 Mon196_EvosMoves:
 ;TYROGUE
 ;Evolutions
@@ -4612,7 +4626,7 @@ Mon196_EvosMoves:
 	db 7,MEDITATE
 	db 10,FOCUS_ENERGY
 	db 0
-	
+
 Mon197_EvosMoves:
 ;PICHU
 ;Evolutions
@@ -4624,7 +4638,7 @@ Mon197_EvosMoves:
 	db 7,TAIL_WHIP
 	db 10,LOVELY_KISS
 	db 0
-	
+
 Mon198_EvosMoves:
 ;CLEFFA
 ;Evolutions
@@ -4636,7 +4650,7 @@ Mon198_EvosMoves:
 	db 7,SING
 	db 10,LOVELY_KISS
 	db 0
-	
+
 Mon199_EvosMoves:
 ;IGGLYBUFF
 ;Evolutions
@@ -4648,7 +4662,7 @@ Mon199_EvosMoves:
 	db 7,POUND
 	db 10,LOVELY_KISS
 	db 0
-	
+
 Mon200_EvosMoves:
 ;SMOOCHUM
 ;Evolutions
@@ -4671,7 +4685,7 @@ Mon200_EvosMoves:
 	db 55,PSYCHIC_M
 	db 60,SHEER_COLD
 	db 0
-	
+
 Mon201_EvosMoves:
 ;ELEKID
 ;Evolutions
@@ -4693,7 +4707,7 @@ Mon201_EvosMoves:
 	db 49,THUNDERBOLT
 	db 55,THUNDER
 	db 0
-	
+
 Mon202_EvosMoves:
 ;MAGBY
 ;Evolutions
@@ -4715,7 +4729,7 @@ Mon202_EvosMoves:
 	db 49,FIRE_BLAST
 	db 55,FLARE_BLITZ
 	db 0
-	
+
 Mon203_EvosMoves:
 ;MIME_JR
 ;Evolutions
@@ -4740,7 +4754,7 @@ Mon203_EvosMoves:
 	db 43,MIMIC
 	db 46,DAZZLINGLEAM
 	db 0
-	
+
 Mon204_EvosMoves:
 ;HAPPINY
 ;Evolutions
@@ -4752,7 +4766,7 @@ Mon204_EvosMoves:
 	db 7,MIRROR_MOVE
 	db 10,LOVELY_KISS
 	db 0
-	
+
 Mon205_EvosMoves:
 ;MUNCHLAX
 ;Evolutions
@@ -4777,5 +4791,3 @@ Mon205_EvosMoves:
 	db 50,SLAM
 	db 57,GIGA_IMPACT
 	db 0
-	
-	
