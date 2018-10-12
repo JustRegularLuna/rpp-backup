@@ -2424,6 +2424,14 @@ WorldMapTileGraphicsEnd:
 Mart_GFX:          INCBIN "gfx/tilesets/mart.2bpp"
 Mart_Block:        INCBIN "gfx/blocksets/mart.bst"
 
+ZigzagoonPicFront:: INCBIN "pic/bmon/zigzagoon.pic"
+ZigzagoonPicBack::  INCBIN "pic/monback/zigzagoonb.pic"
+LinoonePicFront::   INCBIN "pic/bmon/linoone.pic"
+LinoonePicBack::    INCBIN "pic/monback/linooneb.pic"
+HoohPicFront::      INCBIN "pic/bmon/hooh.pic"
+HoohPicBack::       INCBIN "pic/monback/hoohb.pic"
+
+
 SECTION "bank34",ROMX,BANK[$34]
 
 ; Mt Moon Square

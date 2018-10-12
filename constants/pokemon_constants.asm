@@ -205,6 +205,9 @@ const_value = 1
 	const MIME_JR     ; 203
 	const HAPPINY     ; 204
 	const MUNCHLAX    ; 205
+	const ZIGZAGOON   ; 206
+	const LINOONE     ; 207
+	const HO_OH       ; 208
 
 MON_GHOST           EQU 252
 FOSSIL_KABUTOPS     EQU 253

@@ -273,6 +273,7 @@ BannedMons: ; List of Pokemon not allowed to show up in Wonder Trade
 	db LUGIA
 	db LATIOS
 	db LATIAS
+	db HO_OH
 	db $FF
 
 CheckValidLevel:
@@ -506,6 +507,9 @@ MinimumPokemonLevels: ; Offered Pokemon must be within the level range
 	db   1,  15 ; Mime Jr.
 	db   1,  15 ; Happiny
 	db   1,  15 ; Munchlax
+	db   1,  19 ; Zigzagoon
+	db  20, 100 ; Linoone
+	db 255, 255 ; Ho-oh
 
 
 WonderConnectCableText:

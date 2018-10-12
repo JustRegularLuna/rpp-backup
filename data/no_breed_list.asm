@@ -8,4 +8,5 @@ NoBreedList:
 	db MEW
 	db LATIAS
 	db LATIOS
+	db HO_OH
 	db $FF ; end of list

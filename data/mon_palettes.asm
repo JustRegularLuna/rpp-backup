@@ -205,7 +205,10 @@ MonsterPalettes:
 	db PAL_MIME_JR
 	db PAL_HAPPINY
 	db PAL_MUNCHLAX
-	
+	db PAL_ZIGZAGOON
+	db PAL_LINOONE
+	db PAL_HO_OH
+
 TrainerPalettes:
 	db PAL_GREYMON
 	db PAL_YOUNGSTER

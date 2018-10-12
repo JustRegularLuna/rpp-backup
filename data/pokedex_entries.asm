@@ -204,6 +204,9 @@ dw MagbyDexEntry
 dw MimeJrDexEntry
 dw HappinyDexEntry
 dw MunchlaxDexEntry
+dw ZigzagoonDexEntry
+dw LinooneDexEntry
+dw HoohDexEntry
 
 
 ; string: species name
@@ -1535,114 +1538,134 @@ LanturnDexEntry:
 	db "@"
 	
 SlugmaDexEntry:
-    db "Lava@"
-    db 2,4
-    dw 772
-    TX_FAR _SlugmaDexEntry
-    db "@"
-    
+	db "Lava@"
+	db 2,4
+	dw 772
+	TX_FAR _SlugmaDexEntry
+	db "@"
+	
 MagcargoDexEntry:
-    db "Lava@"
-    db 2,7
-    dw 1213
-    TX_FAR _MagcargoDexEntry
-    db "@"
-    
+	db "Lava@"
+	db 2,7
+	dw 1213
+	TX_FAR _MagcargoDexEntry
+	db "@"
+	
 TorkoalDexEntry:
-    db "Coal@"
-    db 1,8
-    dw 1772
-    TX_FAR _TorkoalDexEntry
-    db "@"
-    
+	db "Coal@"
+	db 1,8
+	dw 1772
+	TX_FAR _TorkoalDexEntry
+	db "@"
+	
 LatiasDexEntry:
-    db "Eon@"
-    db 4,7
-    dw 882
-    TX_FAR _LatiasDexEntry
-    db "@"
-    
+	db "Eon@"
+	db 4,7
+	dw 882
+	TX_FAR _LatiasDexEntry
+	db "@"
+	
 LatiosDexEntry:
-    db "Eon@"
-    db 6,7
-    dw 1323
-    TX_FAR _LatiosDexEntry
-    db "@"
-    
+	db "Eon@"
+	db 6,7
+	dw 1323
+	TX_FAR _LatiosDexEntry
+	db "@"
+	
 HitmontopDexEntry:
-    db "Handstand@"
-    db 4,7
-    dw 1058
-    TX_FAR _HitmontopDexEntry
-    db "@"
-    
+	db "Handstand@"
+	db 4,7
+	dw 1058
+	TX_FAR _HitmontopDexEntry
+	db "@"
+	
 TyrogueDexEntry:
-    db "Scuffle@"
-    db 2,4
-    dw 463
-    TX_FAR _TyrogueDexEntry
-    db "@"
-    
+	db "Scuffle@"
+	db 2,4
+	dw 463
+	TX_FAR _TyrogueDexEntry
+	db "@"
+	
 PichuDexEntry:
-    db "Tiny Mouse@"
-    db 1,0
-    dw 44
-    TX_FAR _PichuDexEntry
-    db "@"
-    
+	db "Tiny Mouse@"
+	db 1,0
+	dw 44
+	TX_FAR _PichuDexEntry
+	db "@"
+	
 CleffaDexEntry:
-    db "StarShape@"
-    db 1,0
-    dw 66
-    TX_FAR _CleffaDexEntry
-    db "@"
-    
+	db "StarShape@"
+	db 1,0
+	dw 66
+	TX_FAR _CleffaDexEntry
+	db "@"
+	
 IgglybuffDexEntry:
-    db "Balloon@"
-    db 1,0
-    dw 22
-    TX_FAR _IgglybuffDexEntry
-    db "@"
-    
+	db "Balloon@"
+	db 1,0
+	dw 22
+	TX_FAR _IgglybuffDexEntry
+	db "@"
+	
 SmoochumDexEntry:
-    db "Kiss@"
-    db 1,4
-    dw 132
-    TX_FAR _SmoochumDexEntry
-    db "@"
-    
+	db "Kiss@"
+	db 1,4
+	dw 132
+	TX_FAR _SmoochumDexEntry
+	db "@"
+	
 ElekidDexEntry:
-    db "Electric@"
-    db 2,0
-    dw 518
-    TX_FAR _ElekidDexEntry
-    db "@"
-    
+	db "Electric@"
+	db 2,0
+	dw 518
+	TX_FAR _ElekidDexEntry
+	db "@"
+	
 MagbyDexEntry:
-    db "Live Coal@"
-    db 2,4
-    dw 472
-    TX_FAR _MagbyDexEntry
-    db "@"
-    
+	db "Live Coal@"
+	db 2,4
+	dw 472
+	TX_FAR _MagbyDexEntry
+	db "@"
+	
 MimeJrDexEntry:
-    db "Mime@"
-    db 2,0
-    dw 287
-    TX_FAR _MimeJrDexEntry
-    db "@"
-    
+	db "Mime@"
+	db 2,0
+	dw 287
+	TX_FAR _MimeJrDexEntry
+	db "@"
+	
 HappinyDexEntry:
-    db "Playhouse@"
-    db 2,0
-    dw 538
-    TX_FAR _HappinyDexEntry
-    db "@"
-    
+	db "Playhouse@"
+	db 2,0
+	dw 538
+	TX_FAR _HappinyDexEntry
+	db "@"
+	
 MunchlaxDexEntry:
-    db "Big Eater@"
-    db 2,0
-    dw 2315
-    TX_FAR _MunchlaxDexEntry
-    db "@"
-    
+	db "Big Eater@"
+	db 2,0
+	dw 2315
+	TX_FAR _MunchlaxDexEntry
+	db "@"
+
+ZigzagoonDexEntry:
+	db "Raccoon@"
+	db 1,4
+	dw 386
+	TX_FAR _ZigzagoonDexEntry
+	db "@"
+
+LinooneDexEntry:
+	db "Rushing@"
+	db 1,8
+	dw 716
+	TX_FAR _LinooneDexEntry
+	db "@"
+
+HoohDexEntry:
+	db "Rainbow@"
+	db 12, 6
+	dw 4387
+	TX_FAR _HoohDexEntry
+	db "@"

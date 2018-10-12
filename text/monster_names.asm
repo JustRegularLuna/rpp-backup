@@ -204,4 +204,6 @@ db "Magby@@@@@"
 db "Mime Jr.@@"
 db "Happiny@@@"
 db "Munchlax@@"
-
+db "Zigzagoon@"
+db "Linoone@@@"
+db "Ho-oh@@@@@"

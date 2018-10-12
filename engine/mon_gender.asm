@@ -256,3 +256,6 @@ MonGenderRatios:
 	db SAME_BOTH_GENDERS ; Mime Jr
 	db FEMALE_ONLY       ; Happiny
 	db MALE_88_PERCENT   ; Munchlax
+	db SAME_BOTH_GENDERS ; Zigzagoon
+	db SAME_BOTH_GENDERS ; Linoone
+	db NO_GENDER         ; Ho-oh

@@ -205,3 +205,6 @@ db MAGBY      ; Magby
 db MIME_JR    ; Mime Jr
 db HAPPINY    ; Happiny
 db MUNCHLAX   ; Munchlax
+db ZIGZAGOON  ; Zigzagoon
+db ZIGZAGOON  ; Linoone
+db HO_OH      ; Ho-oh

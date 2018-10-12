@@ -26,7 +26,7 @@ _CrobatDexEntry::
 	page "so it may not be"
 	next "noticed even when"
 	next "it is nearby"
-    dex
+	dex
 	
 _PolitoedDexEntry::
 	text "If Poliwag and"
@@ -268,164 +268,191 @@ _LanturnDexEntry::
 	dex
 
 _SlugmaDexEntry::
-    text "These #mon"
-    next "gather together in"
-    next "areas that are"
-    
-    page "hotter than usual."
-    next "If it cools off,"
-    next "its skin hardens"
-    dex
-    
+	text "These #mon"
+	next "gather together in"
+	next "areas that are"
+	
+	page "hotter than usual."
+	next "If it cools off,"
+	next "its skin hardens"
+	dex
+	
 _MagcargoDexEntry::
-    text "Its body is as hot"
-    next "as lava, and is"
-    next "always billowing."
-    
-    page "Flames will"
-    next "occasionally burst"
-    next "from its shell"
-    dex
-    
+	text "Its body is as hot"
+	next "as lava, and is"
+	next "always billowing."
+	
+	page "Flames will"
+	next "occasionally burst"
+	next "from its shell"
+	dex
+	
 _TorkoalDexEntry::
-    text "You find abandoned"
-    next "coal mines full of"
-    next "them."
-    
-    page "They will dig"
-    next "tirelessly in"
-    next "search of coal"
-    dex
-    
+	text "You find abandoned"
+	next "coal mines full of"
+	next "them."
+	
+	page "They will dig"
+	next "tirelessly in"
+	next "search of coal"
+	dex
+	
 _LatiasDexEntry::
-    text "Its body is"
-    next "covered in a down"
-    next "that can refract"
-    
-    page "light in such a"
-    next "way that it"
-    next "becomes invisible"
-    dex
-    
+	text "Its body is"
+	next "covered in a down"
+	next "that can refract"
+	
+	page "light in such a"
+	next "way that it"
+	next "becomes invisible"
+	dex
+	
 _LatiosDexEntry::
-    text "A highly intelli-"
-    next "gent #mon. By"
-    next "folding back its"
-    
-    page "wings in flight,"
-    next "it can overtake"
-    next "jet planes"
-    dex
-    
+	text "A highly intelli-"
+	next "gent #mon. By"
+	next "folding back its"
+	
+	page "wings in flight,"
+	next "it can overtake"
+	next "jet planes"
+	dex
+	
 _HitmontopDexEntry::
-    text "It launches kicks"
-    next "while spinning. If"
-    next "it spins at high"
-    
-    page "speed, it may bore"
-    next "its way into the"
-    next "ground"
-    dex
-    
+	text "It launches kicks"
+	next "while spinning. If"
+	next "it spins at high"
+	
+	page "speed, it may bore"
+	next "its way into the"
+	next "ground"
+	dex
+	
 _TyrogueDexEntry::
-    text "To brush up on its"
-    next "fighting skills,"
-    next "it will challenge"
-    
-    page "anyone. It has a"
-    next "very strong com-"
-    next "petitive spirit"
-    dex
-    
+	text "To brush up on its"
+	next "fighting skills,"
+	next "it will challenge"
+	
+	page "anyone. It has a"
+	next "very strong com-"
+	next "petitive spirit"
+	dex
+	
 _PichuDexEntry::
-    text "Despite its small"
-    next "size, it can zap"
-    next "even adult humans."
-    
-    page "However, if it"
-    next "does so, it also"
-    next "surprises itself"
-    dex
-    
+	text "Despite its small"
+	next "size, it can zap"
+	next "even adult humans."
+	
+	page "However, if it"
+	next "does so, it also"
+	next "surprises itself"
+	dex
+	
 _CleffaDexEntry::
-    text "When numerous"
-    next "meteors illuminate"
-    next "the night sky,"
-    
-    page "sightings of"
-    next "Cleffa strangely"
-    next "increase"
-    dex
-    
+	text "When numerous"
+	next "meteors illuminate"
+	next "the night sky,"
+	
+	page "sightings of"
+	next "Cleffa strangely"
+	next "increase"
+	dex
+	
 _IgglybuffDexEntry::
-    text "Instead of walking"
-    next "with its short"
-    next "legs, it moves"
-    
-    page "around by bouncing"
-    next "on its soft,"
-    next "tender body"
-    dex
-    
+	text "Instead of walking"
+	next "with its short"
+	next "legs, it moves"
+	
+	page "around by bouncing"
+	next "on its soft,"
+	next "tender body"
+	dex
+	
 _SmoochumDexEntry::
-    text "The sensitivity of"
-    next "its lips develops"
-    next "most quickly."
-    
-    page "It uses them to"
-    next "try to identify"
-    next "unknown objects"
-    dex
-    
+	text "The sensitivity of"
+	next "its lips develops"
+	next "most quickly."
+	
+	page "It uses them to"
+	next "try to identify"
+	next "unknown objects"
+	dex
+	
 _ElekidDexEntry::
-    text "It loves violent"
-    next "thunder. The space"
-    next "between its horns"
-    
-    page "flickers bluish-"
-    next "white when it is"
-    next "charging energy"
-    dex
-    
+	text "It loves violent"
+	next "thunder. The space"
+	next "between its horns"
+	
+	page "flickers bluish-"
+	next "white when it is"
+	next "charging energy"
+	dex
+	
 _MagbyDexEntry::
-    text "It is found in"
-    next "volcanic craters."
-    next "Its body temp is"
-    
-    page "over 1100 degrees,"
-    next "so don't under-"
-    next "estimate it"
-    dex
-    
+	text "It is found in"
+	next "volcanic craters."
+	next "Its body temp is"
+	
+	page "over 1100 degrees,"
+	next "so don't under-"
+	next "estimate it"
+	dex
+	
 _MimeJrDexEntry::
-    text "It habitually"
-    next "mimics its foes."
-    next "Once mimicked, the"
-    
-    page "foe cannot take"
-    next "its eyes off this"
-    next "#mon"
-    dex
-    
+	text "It habitually"
+	next "mimics its foes."
+	next "Once mimicked, the"
+	
+	page "foe cannot take"
+	next "its eyes off this"
+	next "#mon"
+	dex
+	
 _HappinyDexEntry::
-    text "It loves white"
-    next "round things. It"
-    next "carries an egg-"
-    
-    page "shaped rock in"
-    next "imitation of"
-    next "Chansey"
-    dex
-    
+	text "It loves white"
+	next "round things. It"
+	next "carries an egg-"
+	
+	page "shaped rock in"
+	next "imitation of"
+	next "Chansey"
+	dex
+	
 _MunchlaxDexEntry::
-    text "It hides food"
-    next "under its long"
-    next "body hair."
-    
-    page "However, it for-"
-    next "gets it has"
-    next "hidden the food"
-    dex
-    
-    
-    
+	text "It hides food"
+	next "under its long"
+	next "body hair."
+	
+	page "However, it for-"
+	next "gets it has"
+	next "hidden the food"
+	dex
+
+_ZigzagoonDexEntry::
+	text "It walks in zigzag"
+	next "fashion. It is"
+	next "good at finding"
+
+	page "items in the grass"
+	next "and even in the"
+	next "ground"
+	dex
+
+_LinooneDexEntry::
+	text "It charges prey at"
+	next "speeds over 60"
+	next "mph. However, be-"
+
+	page "cause it can only"
+	next "run straight,"
+	next "it often fails"
+	dex
+
+_HoohDexEntry::
+	text "It will reveal"
+	next "itself before a"
+	next "pure-hearted"
+
+	page "trainer by shining"
+	next "its bright rain-"
+	next "bow-colored wings"
+	dex

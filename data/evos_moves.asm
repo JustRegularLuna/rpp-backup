@@ -204,6 +204,9 @@ EvosMovesPointerTable:
 	dw Mon203_EvosMoves
 	dw Mon204_EvosMoves
 	dw Mon205_EvosMoves
+	dw Mon206_EvosMoves
+	dw Mon207_EvosMoves
+	dw Mon208_EvosMoves
 
 
 Mon001_EvosMoves:
@@ -4866,4 +4869,73 @@ Mon205_EvosMoves:
 	db 49,CRUNCH
 	db 50,EARTHQUAKE ; Heavy Slam → TM move
 	db 57,GIGA_IMPACT ; High Horsepower → Giga Impact
+	db 0
+
+Mon206_EvosMoves:
+;ZIGZAGOON
+;Evolutions
+	db EV_LEVEL,20,LINOONE
+	db 0
+;Learnset
+	db 1,TACKLE
+	db 1,GROWL
+	db 5,TAIL_WHIP
+	db 7,SAND_ATTACK
+	db 11,HEADBUTT
+	db 12,BABYDOLLEYES
+	db 13,BITE ; Odor Sleuth → new move
+	db 17,HYPER_VOICE ; Mud Sport → tutor move
+	db 19,PAY_DAY ; Covet → RBY TM move
+	db 23,PIN_MISSILE
+	db 25,SUPER_FANG ; Bestow → tutor move
+	db 29,BIDE ; Flail → RBY TM move
+	db 31,TAKE_DOWN
+	db 35,REST
+	db 37,SUBSTITUTE ; Belly Drum → TM move
+	db 41,EXTREMESPEED ; Fling → event move
+	db 0
+
+Mon207_EvosMoves:
+;LINOONE
+;Evolutions
+	db 0
+;Learnset
+	db 1,TACKLE
+	db 1,GROWL
+	db 5,TAIL_WHIP
+	db 7,SAND_ATTACK
+	db 11,HEADBUTT
+	db 12,BABYDOLLEYES
+	db 13,BITE ; Odor Sleuth → new move
+	db 17,HYPER_VOICE ; Mud Sport → tutor move
+	db 19,PAY_DAY ; Covet → RBY TM move
+	db 24,FURY_SWIPES
+	db 27,SUPER_FANG ; Bestow → tutor move
+	db 32,SLASH
+	db 35,DOUBLE_EDGE
+	db 40,REST
+	db 43,SUBSTITUTE ; Belly Drum → TM move
+	db 48,EXTREMESPEED ; Fling → event move
+	db 0
+
+Mon208_EvosMoves:
+;HO_OH
+;Evolutions
+	db 0
+;Learnset
+	db 1,WHIRLWIND
+	db 9,GUST
+	db 15,DRAGONBREATH ; Brave Bird → GSC TM move
+	db 23,EXTRASENSORY
+	db 29,SHADOW_BALL ; Sunny Day → TM move
+	db 37,FIRE_BLAST
+	db 43,SOLARBEAM ; Sacred Fire → Solarbeam
+	db 50,FLARE_BLITZ ; Solarbeam → new move
+	db 57,ANCIENTPOWER
+	db 65,HAZE ; Safeguard → new move
+	db 71,RECOVER
+	db 79,SKY_ATTACK ; Future Sight → Sky Attack
+	db 85,LIGHT_SCREEN ; Natural Gift → TM move
+	db 93,AMNESIA ; Calm Mind → new move
+	db 99,HURRICANE ; Sky Attack → TM move
 	db 0

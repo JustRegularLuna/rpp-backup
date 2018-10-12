@@ -8,8 +8,8 @@ IF DEF(_HARD) ; Diffuclt Rom
 	db 6,CATERPIE
 	db 8,KAKUNA
 	db 8,METAPOD
-	db 8,KAKUNA
-	db 8,METAPOD
+	db 6,ZIGZAGOON
+	db 8,ZIGZAGOON
 	db 6,PIKACHU
 	db 8,PIKACHU
 
@@ -25,8 +25,8 @@ ELSE ; Normal Rom
 	db 3,CATERPIE
 	db 6,KAKUNA
 	db 6,METAPOD
-	db 5,KAKUNA
-	db 5,METAPOD
+	db 5,ZIGZAGOON
+	db 6,ZIGZAGOON
 	db 3,PIKACHU
 	db 5,PIKACHU
 

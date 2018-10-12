@@ -1228,9 +1228,28 @@ MuchlaxCryHeader:
 	db $00  ; echo
 	dw $081 ; length
 
+ZigzagoonCryHeader:
+	dw $2e  ; cry id
+	db $8a  ; pitch
+	db $00  ; echo
+	dw $0b8 ; length
+
+LinooneCryHeader:
+	dw $2e  ; cry id
+	db $6b  ; pitch
+	db $00  ; echo
+	dw $102 ; length
+
+HoohCryHeader:
+	dw $41  ; cry id
+	db $00  ; pitch
+	db $00  ; echo
+	dw $100 ; length
+
+
 MissingNoCryHeaders:
-;Munchlax was mon 205, so there are 50 unused slots to account for, to be safe
-rept 50
+;Ho-oh was mon 208, so there are 47 unused slots to account for, to be safe
+rept 47
 	dw 0  ; cry id
 	db 0  ; pitch
 	db 0  ; echo

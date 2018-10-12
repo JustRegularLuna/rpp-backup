@@ -269,6 +269,9 @@ const_value = 0
 	const PAL_MIME_JR
 	const PAL_HAPPINY
 	const PAL_MUNCHLAX
+	const PAL_ZIGZAGOON
+	const PAL_LINOONE
+	const PAL_HO_OH
 
 
 const_value = 0

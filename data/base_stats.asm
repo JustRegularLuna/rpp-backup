@@ -203,4 +203,6 @@ INCLUDE "data/baseStats/magby.asm"
 INCLUDE "data/baseStats/mime_jr.asm"
 INCLUDE "data/baseStats/happiny.asm"
 INCLUDE "data/baseStats/munchlax.asm"
-
+INCLUDE "data/baseStats/zigzagoon.asm"
+INCLUDE "data/baseStats/linoone.asm"
+INCLUDE "data/baseStats/hooh.asm"

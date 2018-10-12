@@ -101,4 +101,5 @@ MonPartyData:
 	dn SPRITE_FAIRY, SPRITE_FAIRY           ;Igglybuff/Smoochum
 	dn SPRITE_MON, SPRITE_MON               ;Elekid/Magby
 	dn SPRITE_MON, SPRITE_FAIRY             ;Mime Jr/Happiny
-	dn SPRITE_MON, 0                        ;Munchlax/Padding
+	dn SPRITE_MON, SPRITE_QUADRUPED         ;Munchlax/Zigzagoon
+	dn SPRITE_QUADRUPED, SPRITE_BIRD_M      ;Linoone/Ho-oh

@@ -2,7 +2,7 @@ MtMoonSquareMons:
 IF DEF(_HARD) ; Difficult Rom
 ; Grass Mons
 	db $0A
-	db 12,SANDSHREW
+	db 12,ZIGZAGOON
 	db 12,GEODUDE
 	db 13,SANDSHREW
 	db 13,GEODUDE
@@ -29,7 +29,7 @@ IF DEF(_HARD) ; Difficult Rom
 ELSE ; Normal Rom
 ; Grass Mons
 	db $0A
-	db 9,SANDSHREW
+	db 9,ZIGZAGOON
 	db 9,GEODUDE
 	db 10,SANDSHREW
 	db 10,GEODUDE
