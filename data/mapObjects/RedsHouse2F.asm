@@ -2,7 +2,7 @@ RedsHouse2FObject:
 	db $0A ; border block
 
 	db $1 ; warps
-	db $0, $7, $0, NAVEL_ROCK_CAVE_2
+	db $0, $7, $2, REDS_HOUSE_1F
 
 	db $0 ; signs
 
