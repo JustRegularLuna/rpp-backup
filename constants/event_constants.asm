@@ -2246,7 +2246,7 @@ const_value = 0
 	const EVENT_BEAT_SOUTHERN_INSIDE_TRAINER_0       ; 8C3, (D85F, bit 3)
 	const EVENT_BEAT_SOUTHERN_INSIDE_TRAINER_1       ; 8C4, (D85F, bit 4)
 	const EVENT_BEAT_LUGIA                           ; 8C5, (D85F, bit 5)
-	const EVENT_8C6                                  ; 8C6, (D85F, bit 6)
+	const EVENT_BEAT_HO_OH                           ; 8C6, (D85F, bit 6)
 	const EVENT_8C7                                  ; 8C7, (D85F, bit 7)
 	;const EVENT_8C8                                  ; 8C8, (D860, bit 0)
 	;const EVENT_8C9                                  ; 8C9, (D860, bit 1)

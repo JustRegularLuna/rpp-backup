@@ -243,7 +243,7 @@ ENDM
 	mapconst SILPH_CO_11F,                9,  9 ; $EB
 	mapconst SILPH_CO_ELEVATOR,           2,  2 ; $EC
 	mapconst NAVEL_ROCK_HO_OH_ROOM,      14, 14 ; $ED
-	mapconst NAVEL_ROCK_LUGIA_ROOM,      14, 14 ; $EE
+	mapconst NAVEL_ROCK_LUGIA_ROOM,      20, 14 ; $EE
 	mapconst TRADE_CENTER,                4,  5 ; $EF
 	mapconst COLOSSEUM,                   4,  5 ; $F0
 	mapconst UNUSED_MAP_F1,               0,  0 ; $F1

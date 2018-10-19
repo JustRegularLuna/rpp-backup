@@ -6,4 +6,7 @@ _SouthernIslandInsideLatiText:: ; added for Latios and Latias
 	text "Lati!@@"
 
 _NavelRockLugiaRoomLugiaText:: ; added for Lugia
-	text "Shaoo!@@"
+	text "Gyaaas!@@"
+
+_NavelRockLugiaRoomHoohText:: ; added for Ho-oh
+	text "Shaoooh!@@"
