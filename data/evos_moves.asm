@@ -227,7 +227,7 @@ Mon001_EvosMoves:
 	db 25,GROWTH
 	db 27,DOUBLE_EDGE
 	db 31,ANCIENTPOWER ; Worry Seed → Similar Move
-	db 33,RECOVER ; Synthesis → Similar Move
+	db 33,HEALINGLIGHT ; Synthesis → Similar Move
 	db 37,LEAF_BLADE ; Seed Bomb → New Move
 	db 43,SLUDGE_WAVE ; Sludge Bomb (TM Move) → Similar Move
 	db 0
@@ -250,7 +250,7 @@ Mon002_EvosMoves:
 	db 28,GROWTH
 	db 31,DOUBLE_EDGE
 	db 36,ANCIENTPOWER ; Worry Seed → Similar Move
-	db 39,RECOVER ; Synthesis → Similar Move
+	db 39,HEALINGLIGHT ; Synthesis → Similar Move
 	db 44,LEAF_BLADE ; Seed Bomb → New Move
 	db 50,SLUDGE_WAVE ; Sludge Bomb (TM Move) → Similar Move
 	db 0
