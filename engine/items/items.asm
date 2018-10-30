@@ -41,7 +41,7 @@ ItemUsePtrTable:
 	dw UnusableItem      ; OLD SEA MAP
 	dw UnusableItem      ; FERRY TICKET
 	dw UnusableItem      ; EON TICKET
-	dw UnusableItem      ; TERU-SAMA
+	dw TMCaseItem        ; TERU-SAMA
 	dw UnusableItem      ; TERU-SAMA
 	dw UnusableItem      ; TERU-SAMA
 	dw ItemUseEscapeRope ; ESCAPE_ROPE
@@ -3130,3 +3130,9 @@ CheckMapForMon:
 	jr nz, .loop
 	dec hl
 	ret
+
+TMCaseItem:
+	ld a,[wIsInBattle]
+	and a
+	jp nz,ItemUseNotTime
+	jpba ShowTMCaseMenu

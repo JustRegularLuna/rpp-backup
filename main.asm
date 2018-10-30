@@ -2658,3 +2658,6 @@ SECTION "Trainer Parties", ROMX,BANK[$3B]
 INCLUDE "engine/battle/read_trainer_party.asm"
 INCLUDE "engine/overworld/advance_player_sprite.asm"
 INCLUDE "engine/mon_gender.asm"
+
+SECTION "TM Case", ROMX
+INCLUDE "engine/items/tm_case.asm"
