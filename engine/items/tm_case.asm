@@ -108,7 +108,6 @@ HandleTMCaseListMenu:
 	call PrintNumber ; print the TM number
 	ld de,SCREEN_WIDTH
 	add hl,de
-	dec hl
 	push hl
 
 	ld hl,wObtainedTMs
@@ -120,17 +119,16 @@ HandleTMCaseListMenu:
 	ld a,c
 	and a
 
-	jr nz,.getPokemonName ; if the player has the TM
+	jr nz,.getMoveName ; if the player has the TM
 	ld de,.dashedLine ; print a dashed line in place of the name if the player hasn't got the TM
 	jr .skipGettingName
 .dashedLine ; for unowned TMs
 	db "----------@"
-.getPokemonName
+.getMoveName
 	predef TMToMove
 	call GetMoveName
 .skipGettingName
 	pop hl
-	inc hl
 	call PlaceString
 	pop hl
 	ld bc,2 * SCREEN_WIDTH
@@ -218,5 +216,5 @@ wObtainedTMs: ; placeholder
 	tmlearn 25,26,27,28,29,30,31,32
 	tmlearn 33,34,35,36,37,38,39,40
 	tmlearn 41,42,43,44,45,46,47,48
-	tmlearn 49,50,51,52,53,54,55,56
+	tmlearn 49,50,51,52,53,54,55
 wObtainedTMsEnd:
