@@ -1,4 +1,4 @@
-; Un-Comment the following line out to build the Normal rom
+; Un-Comment the following line out to build the Hard rom
 ;_HARD EQU 1
 
 INCLUDE "macros.asm"
