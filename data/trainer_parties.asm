@@ -713,7 +713,7 @@ Green3Data:
 	db $FF
 	
 YoungsterData:
-	db "Joey@",11,RATTATA,EKANS,$FF
+	db "Ben@",11,ZIGZAGOON,RATTATA,$FF
 	db "Arnold@",14,SPEAROW,$FF
 	db "Anthony@",10,RATTATA,RATTATA,ZUBAT,$FF
 	db "Samuel@",14,RATTATA,EKANS,ZUBAT,$FF
@@ -723,7 +723,7 @@ YoungsterData:
 	db "Chad@",21,NIDORAN_M,$FF
 	db "Dan@",21,EKANS,$FF
 	db "Dave@",19,SANDSHREW,ZUBAT,$FF
-	db "Josh@",17,RATTATA,RATTATA,RATICATE,$FF
+	db "Josh@",17,ZIGZAGOON,ZIGZAGOON,LINOONE,$FF
 	db "Timmy@",18,NIDORAN_M,NIDORINO,$FF
 	db "Nash@",17,SPEAROW,RATTATA,RATTATA,SPEAROW,$FF
 	
@@ -745,7 +745,7 @@ BugCatcherData:
 	
 LassData:
 	db "Nicole@",9,PIDGEY,PIDGEY,$FF
-	db "Jennifer@",10,RATTATA,NIDORAN_M,$FF
+	db "Jennifer@",10,ZIGZAGOON,NIDORAN_M,$FF
 	db "Hillary@",14,JIGGLYPUFF,$FF
 	db "Rachel@",31,PARAS,PARAS,PARASECT,$FF
 	db "Christy@",11,ODDISH,BELLSPROUT,$FF
@@ -783,7 +783,7 @@ CamperData:
 	db "Nick@",21,GROWLITHE,HOUNDOUR,$FF
 	db "Robert@",19,RATTATA,DIGLETT,EKANS,SANDSHREW,$FF
 	db "Ian@",29,NIDORAN_M,NIDORINO,$FF
-	db "Flint@",14,RATTATA,EKANS,$FF
+	db "Flint@",14,ZIGZAGOON,EKANS,$FF
 	
 PicnickerData:
 	db "Cindy@",19,GOLDEEN,$FF

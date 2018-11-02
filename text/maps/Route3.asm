@@ -27,11 +27,11 @@ _Route3AfterBattleText1::
 
 _Route3BattleText2::
 	text "Hey! Check out my"
-	line "Rattata!"
-	
+	line "Zigzagoon!"
+
 	para "He's in the top"
 	line "percentage of"
-	cont "Rattata!"
+	cont "Zigzagoon!"
 	done
 
 _Route3EndBattleText2::
@@ -40,13 +40,10 @@ _Route3EndBattleText2::
 	prompt
 
 _Route3AfterBattleText2::
-	text "Oh well, I'm only"
-	line "visiting here"
-	cont "anyway."
-	
-	para "I'll be heading"
-	line "back to Johto"
-	cont "pretty soon."
+	text "Until recently, I"
+	line "never ran into any"
+	cont "Zigzagoons around"
+	cont "Kanto…"
 	done
 
 _Route3BattleText3::

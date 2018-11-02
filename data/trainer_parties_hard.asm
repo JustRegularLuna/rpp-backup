@@ -773,7 +773,7 @@ Green3Data:
 	db $FF
 	
 YoungsterData: ; COMPLETED
-	db "Joey@",14,RATTATA,EKANS,$FF ; ROUTE3 #3
+	db "Ben@",14,ZIGZAGOON,RATTATA,$FF ; ROUTE3 #3
 	db "Arnold@",14,SPEAROW,SANDSHREW,$FF ; ROUTE3 #5
 	db "Anthony@",16,RATTATA,MACHOP,ZUBAT,$FF ; #MTMOON #6
 	db "Samuel@",20,RATICATE,ARBOK,GOLBAT,$FF ; NUGGET BRIDGE #4
@@ -783,7 +783,7 @@ YoungsterData: ; COMPLETED
 	db "Chad@",25,NIDORINO,$FF ;  SS_ANNE
 	db "Dan@",25,EKANS,KOFFING,$FF ; Route 12 1
 	db "Dave@",26,SANDSHREW,ZUBAT,$FF ; Route 12 2u
-	db "Josh@",26,RATTATA,RATICATE,$FF ; Route 12 6u
+	db "Josh@",26,ZIGZAGOON,LINOONE,$FF ; Route 12 6u
 	db "Timmy@",26,NIDORAN_M,NIDORINO,$FF ; Route 12 2d
 	db "Nash@",23,SPEAROW,RATTATA,RATTATA,SPEAROW,$FF ; 					UNKNOWN
 	
@@ -843,7 +843,7 @@ CamperData:
 	db "Nick@",32,GROWLITHE,HOUNDOUR,$FF ; Route 9 3u
 	db "Robert@",32,RATICATE,DUGTRIO,ARBOK,SANDSLASH,$FF ; Route 9 4rl
 	db "Ian@",53,NIDOKING,$FF ; Route 13 R4
-	db "Flint@",23,RATTATA,EKANS,$FF ; Route 24 1
+	db "Flint@",23,ZIGZAGOON,EKANS,$FF ; Route 24 1
 	
 PicnickerData: ; COMPLETED
 	db "Cindy@",25,GOLDEEN,$FF ; Cerulean City GYM
