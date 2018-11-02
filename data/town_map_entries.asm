@@ -26,7 +26,7 @@ ExternalMapEntries:
 	EMAP 140, 108, Route13Name
 	EMAP 132, 116, Route14Name
 	EMAP 116, 124, Route15Name
-	EMAP  76,  76, Route16Name
+	EMAP  85,  76, Route16Name
 	EMAP  84, 104, Route17Name
 	EMAP  88, 124, Route18Name
 	EMAP 100, 136, Route19Name
