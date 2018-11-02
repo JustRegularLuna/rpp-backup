@@ -92,7 +92,6 @@ _SafariZoneEntranceText_753f0::
 	line "regular here!"
 	done
 
-IF DEF(_OPTION_LOWCOST_SAFARI)
 _SafariZoneLowCostText1::
 	db 0
 	para "Oh, all right, pay"
@@ -137,4 +136,3 @@ _SafariZoneLowCostText8::
 	text "Read my lips, NO!"
 	line "Get it?"
 	done
-ENDC

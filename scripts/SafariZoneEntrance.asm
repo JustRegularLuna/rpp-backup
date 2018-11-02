@@ -117,10 +117,10 @@ SafariZoneEntranceScriptPointers:
 
 SafariZoneEntranceAutoWalk:
 	push af
-	ld b,0
-	ld a,c
-	ld [wSimulatedJoypadStatesIndex],a
-	ld hl,wSimulatedJoypadStatesEnd
+	ld b, 0
+	ld a, c
+	ld [wSimulatedJoypadStatesIndex], a
+	ld hl, wSimulatedJoypadStatesEnd
 	pop af
 	call FillMemory
 	jp StartSimulatingJoypadStates
@@ -146,64 +146,82 @@ SafariZoneEntranceTextPointers:
 	TX_FAR SafariZoneEntranceText_9e6e4
 	TX_ASM
 	ld a, MONEY_BOX
-	ld [wTextBoxID],a
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	call YesNoChoice
-	ld a,[wCurrentMenuItem]
+	ld a, [wCurrentMenuItem]
 	and a
-	jp nz,.PleaseComeAgain
+	jp nz, .PleaseComeAgain
+	ld hl, wPlayerMoney
+	ld a, [hli]
+	or [hl]
+	inc hl
+	or [hl]
+	jr nz, .HasPositiveBalance
+	call SafariZoneEntranceGetLowCostAdmissionText
+	jr c, .CantPayWalkDown
+	jr .PoorMansDiscount
+
+.HasPositiveBalance
 	xor a
-	ld [hMoney],a
-	ld a,$05
-	ld [hMoney + 1],a
-	ld a,$00
-	ld [hMoney + 2],a
+	ld [hMoney], a
+	ld a, $05
+	ld [hMoney + 1], a
+	ld a, $00
+	ld [hMoney + 2], a
 	call HasEnoughMoney
-	jr nc,.success
-	ld hl,.NotEnoughMoneyText
+	jr nc, .success
+	ld hl, .NotEnoughMoneyText
 	call PrintText
-	jr .CantPayWalkDown
+	call SafariZoneEntranceCalculateLowCostAdmission
+	jr c, .CantPayWalkDown
+	jr .PoorMansDiscount
 
 .success
 	xor a
-	ld [wPriceTemp],a
-	ld a,$05
-	ld [wPriceTemp + 1],a
-	ld a,$00
-	ld [wPriceTemp + 2],a
-	ld hl,wPriceTemp + 2
-	ld de,wPlayerMoney + 2
-	ld c,3
+	ld [wPriceTemp], a
+	ld a, $05
+	ld [wPriceTemp + 1], a
+	ld a, $00
+	ld [wPriceTemp + 2], a
+	ld hl, wPriceTemp + 2
+	ld de, wPlayerMoney + 2
+	ld c, 3
 	predef SubBCDPredef
-	ld a,MONEY_BOX
-	ld [wTextBoxID],a
+	ld a, SFX_PURCHASE
+	call PlaySoundWaitForCurrent
+	call WaitForSoundToFinish
+	ld a, MONEY_BOX
+	ld [wTextBoxID], a
 	call DisplayTextBoxID
-	ld hl,.MakePaymentText
+	ld hl, .MakePaymentText
 	call PrintText
-	ld a,30
-	ld [wNumSafariBalls],a
-	ld a,502 / $100
-	ld [wSafariSteps],a
-	ld a, 502 % $100
-	ld [wSafariSteps + 1],a
-	ld a,D_UP
-	ld c,3
+	ld a, 30
+	ld hl, 502
+.PoorMansDiscount
+	ld [wNumSafariBalls], a
+	ld a, h
+	ld [wSafariSteps], a
+	ld a, l
+	ld [wSafariSteps + 1], a
+	ld a, D_UP
+	ld c, 3
 	call SafariZoneEntranceAutoWalk
 	SetEvent EVENT_IN_SAFARI_ZONE
 	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
-	ld a,3
-	ld [wSafariZoneEntranceCurScript],a
+	ld a, 3
+	ld [wSafariZoneEntranceCurScript], a
 	jr .done
 
 .PleaseComeAgain
-	ld hl,.PleaseComeAgainText
+	ld hl, .PleaseComeAgainText
 	call PrintText
 .CantPayWalkDown
-	ld a,D_DOWN
-	ld c,1
+	ld a, D_DOWN
+	ld c, 1
 	call SafariZoneEntranceAutoWalk
-	ld a,4
-	ld [wSafariZoneEntranceCurScript],a
+	ld a, 4
+	ld [wSafariZoneEntranceCurScript], a
 .done
 	jp TextScriptEnd
 
@@ -225,7 +243,7 @@ SafariZoneEntranceTextPointers:
 	TX_FAR SafariZoneEntranceText_9e814
 	TX_ASM
 	call YesNoChoice
-	ld a,[wCurrentMenuItem]
+	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .asm_7539c
 	ld hl, .SafariZoneEntranceText_753bb
@@ -268,14 +286,14 @@ SafariZoneEntranceTextPointers:
 
 .SafariZoneEntranceText2
 	TX_ASM
-	ld hl,.FirstTimeQuestionText
+	ld hl, .FirstTimeQuestionText
 	call PrintText
 	call YesNoChoice
-	ld a,[wCurrentMenuItem]
+	ld a, [wCurrentMenuItem]
 	and a
-	ld hl,.RegularText
-	jr nz,.Explanation
-	ld hl,.ExplanationText
+	ld hl, .RegularText
+	jr nz, .Explanation
+	ld hl, .ExplanationText
 .Explanation
 	call PrintText
 	jp TextScriptEnd
@@ -291,3 +309,120 @@ SafariZoneEntranceTextPointers:
 .RegularText
 	TX_FAR _SafariZoneEntranceText_753f0
 	db "@"
+
+SafariZoneEntranceCalculateLowCostAdmission:
+	ld hl, wPlayerMoney
+	ld de, hMoney
+	ld bc, $3
+	call CopyData
+	xor a
+	ld [hDivideBCDDivisor], a
+	ld [hDivideBCDDivisor + 1], a
+	ld a, 23
+	ld [hDivideBCDDivisor + 2], a
+	predef DivideBCDPredef3
+	ld a, [hDivideBCDQuotient + 2]
+	call SafariZoneEntranceConvertBCDtoNumber
+	push af
+	ld hl, wPlayerMoney
+	xor a
+	ld bc, $3
+	call FillMemory
+	ld hl, SafariZoneEntranceText_f20c4
+	call PrintText_NoCreatingTextBox
+	ld a, MONEY_BOX
+	ld [wTextBoxID], a
+	call DisplayTextBoxID
+	ld hl, SafariZoneEntranceText_f20c9
+	call PrintText
+	pop af
+	inc a
+	jr z, .max_balls
+	cp 29
+	jr c, .load_balls
+.max_balls
+	ld a, 29
+.load_balls
+	ld hl, 502
+	and a
+	ret
+
+SafariZoneEntranceText_f20c4:
+	TX_FAR _SafariZoneLowCostText1
+	db "@"
+
+SafariZoneEntranceText_f20c9:
+	TX_FAR _SafariZoneLowCostText2
+	db "@"
+
+SafariZoneEntranceGetLowCostAdmissionText:
+	ld hl, wSafariSteps
+	ld a, [hl]
+	push af
+	inc [hl]
+	ld e, a
+	ld d, $0
+	ld hl, Pointers_f2100
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call PrintText
+	pop af
+	cp $3
+	jr z, .give_one_ball
+	scf
+	ret
+
+.give_one_ball
+	ld hl, SafariZoneEntranceText_f20f6
+	call PrintText_NoCreatingTextBox
+	ld a, $1
+	ld hl, 502
+	and a
+	ret
+
+SafariZoneEntranceText_f20f6:
+	TX_FAR _SafariZoneLowCostText3
+	TX_SFX_ITEM_1
+	TX_FAR _SafariZoneLowCostText4
+	db "@"
+
+Pointers_f2100:
+	dw SafariZoneEntranceText_f210a
+	dw SafariZoneEntranceText_f210f
+	dw SafariZoneEntranceText_f2114
+	dw SafariZoneEntranceText_f2119
+	dw SafariZoneEntranceText_f2119
+
+SafariZoneEntranceText_f210a:
+	TX_FAR _SafariZoneLowCostText5
+	db "@"
+
+SafariZoneEntranceText_f210f:
+	TX_FAR _SafariZoneLowCostText6
+	db "@"
+
+SafariZoneEntranceText_f2114:
+	TX_FAR _SafariZoneLowCostText7
+	db "@"
+
+SafariZoneEntranceText_f2119:
+	TX_FAR _SafariZoneLowCostText8
+	db "@"
+
+SafariZoneEntranceConvertBCDtoNumber:
+	push hl
+	ld c, a
+	and $f
+	ld l, a
+	ld h, $0
+	ld a, c
+	and $f0
+	swap a
+	ld bc, 10
+	call AddNTimes
+	ld a, l
+	pop hl
+	ret
