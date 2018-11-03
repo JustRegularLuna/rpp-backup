@@ -608,6 +608,9 @@ SpritePaletteAssignments: ; Characters on the overworld
 
 	; 0x61: SPRITE_TOWN_MAP
 	db PAL_OW_BLUE
+	
+	; 0x62: SPRITE_BENCH_GUY
+	db PAL_OW_PURPLE
 
 
 AnimationTileset1Palettes:

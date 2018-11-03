@@ -7,6 +7,7 @@ CeruleanPokecenterTextPointers:
 	dw CeruleanPokecenterText2
 	dw CeruleanPokecenterText3
 	dw CeruleanTradeNurseText
+	dw CeruleanCityPokecenterBenchGuyText
 
 CeruleanTradeNurseText:
 	TX_CABLE_CLUB_RECEPTIONIST
@@ -20,4 +21,8 @@ CeruleanPokecenterText2:
 
 CeruleanPokecenterText3:
 	TX_FAR _CeruleanPokecenterText3
+	db "@"
+
+CeruleanCityPokecenterBenchGuyText:
+	TX_FAR _CeruleanPokecenterGuyText
 	db "@"

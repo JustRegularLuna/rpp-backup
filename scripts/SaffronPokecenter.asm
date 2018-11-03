@@ -7,6 +7,7 @@ SaffronPokecenterTextPointers:
 	dw SaffronPokecenterText2
 	dw SaffronPokecenterText3
 	dw SaffronTradeNurseText
+	dw SaffronCityPokecenterBenchGuyText
 
 SaffronHealNurseText:
 	TX_POKECENTER_NURSE
@@ -21,3 +22,21 @@ SaffronPokecenterText3:
 
 SaffronTradeNurseText:
 	TX_CABLE_CLUB_RECEPTIONIST
+
+SaffronCityPokecenterBenchGuyText:
+	TX_ASM
+	CheckEvent EVENT_BEAT_SILPH_CO_GIOVANNI
+	ld hl, SaffronCityPokecenterBenchGuyText2
+	jr nz, .asm_624f2
+	ld hl, SaffronCityPokecenterBenchGuyText1
+.asm_624f2
+	call PrintText
+	jp TextScriptEnd
+
+SaffronCityPokecenterBenchGuyText1:
+	TX_FAR _SaffronCityPokecenterGuyText1
+	db "@"
+
+SaffronCityPokecenterBenchGuyText2:
+	TX_FAR _SaffronCityPokecenterGuyText2
+	db "@"

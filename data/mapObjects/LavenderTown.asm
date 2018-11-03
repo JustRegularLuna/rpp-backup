@@ -17,10 +17,11 @@ LavenderTownObject:
 	db  9,  9, $8 ; LavenderTownText8
 	db  7, 21, $9 ; LavenderTownText9
 
-	db $3 ; objects
+	db $4 ; objects
 	object SPRITE_LITTLE_GIRL, 19, 9, WALK, $0, $1 ; person
 	object SPRITE_BLACK_HAIR_BOY_1, 13, 10, STAY, NONE, $2 ; person
 	object SPRITE_BLACK_HAIR_BOY_2, 12, 7, WALK, $2, $3 ; person
+	object SPRITE_BENCH_GUY, $0, $4, STAY, NONE, $4
 
 	; warp-to
 	EVENT_DISP LAVENDER_TOWN_WIDTH,  5,  7 ; LAVENDER_POKECENTER

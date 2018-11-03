@@ -691,4 +691,7 @@ SpriteSheetPointerTable:
 	db $40 ; byte count
 	db BANK(TownMapSprite)
 
-
+	; SPRITE_BENCH_GUY
+	dw BenchGuySprite
+	db $40 ; byte count
+	db BANK(BenchGuySprite)

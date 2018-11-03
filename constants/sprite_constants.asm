@@ -114,6 +114,7 @@ const_value = 1
 	const SPRITE_CELEBI                    ; $5f
 	const SPRITE_FOSSIL                    ; $60
 	const SPRITE_TOWN_MAP                  ; $61
+	const SPRITE_BENCH_GUY                 ; $62
 	
 	
 ; Variable Sprite IDs Here

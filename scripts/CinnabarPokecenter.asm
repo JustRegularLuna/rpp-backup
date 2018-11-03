@@ -7,6 +7,7 @@ CinnabarPokecenterTextPointers:
 	dw CinnabarPokecenterText2
 	dw CinnabarPokecenterText3
 	dw CinnabarTradeNurseText
+	dw CinnabarIslandPokecenterBenchGuyText
 
 CinnabarHealNurseText:
 	TX_POKECENTER_NURSE
@@ -21,3 +22,7 @@ CinnabarPokecenterText3:
 
 CinnabarTradeNurseText:
 	TX_CABLE_CLUB_RECEPTIONIST
+
+CinnabarIslandPokecenterBenchGuyText:
+	TX_FAR _CinnabarPokecenterGuyText
+	db "@"

@@ -5,6 +5,7 @@ CeladonHotelTextPointers:
 	dw CeladonHotelText1
 	dw CeladonHotelText2
 	dw CeladonHotelText3
+	dw CeladonCityHotelText
 
 CeladonHotelText1:
 	TX_FAR _CeladonHotelText1
@@ -16,4 +17,8 @@ CeladonHotelText2:
 
 CeladonHotelText3:
 	TX_FAR _CeladonHotelText3
+	db "@"
+
+CeladonCityHotelText:
+	TX_FAR _CeladonCityHotelText
 	db "@"

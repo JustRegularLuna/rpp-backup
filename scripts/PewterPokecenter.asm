@@ -7,6 +7,7 @@ PewterPokecenterTextPointers:
 	dw PewterPokecenterText2
 	dw PewterJigglypuffText
 	dw PewterTradeNurseText
+	dw PewterCityPokecenterBenchGuyText
 
 PewterHealNurseText:
 	TX_POKECENTER_NURSE
@@ -81,3 +82,7 @@ JigglypuffFacingDirectionsEnd:
 
 PewterTradeNurseText:
 	TX_CABLE_CLUB_RECEPTIONIST
+
+PewterCityPokecenterBenchGuyText:
+	TX_FAR _PewterCityPokecenterGuyText
+	db "@"

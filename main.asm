@@ -2313,6 +2313,7 @@ KrisSprite:            INCBIN "gfx/sprites/kris.2bpp"
 SilverSprite:          INCBIN "gfx/sprites/silver.2bpp"
 BillSprite:            INCBIN "gfx/sprites/bill.2bpp"
 
+BenchGuySprite:        INCBIN "gfx/sprites/bench_guy.2bpp"
 
 
 SECTION "bank30",ROMX,BANK[$30]
