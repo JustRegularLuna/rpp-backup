@@ -41,9 +41,9 @@ _Route3EndBattleText2::
 
 _Route3AfterBattleText2::
 	text "Until recently, I"
-	line "never ran into any"
+	line "never ran into"
 	cont "Zigzagoons around"
-	cont "Kanto…"
+	cont "Kanto..."
 	done
 
 _Route3BattleText3::
