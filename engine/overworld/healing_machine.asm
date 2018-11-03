@@ -78,15 +78,15 @@ PokeCenterFlashingMonitorAndHealBall:
 	INCBIN "gfx/pokecenter_ball.2bpp"
 
 ; Pokeball sprites for the pokecenter
-; HAXed to use palette 4, but returned to 0
+; Uses Palette 4, which is PAL_OW_PURPLE everywhere else
 PokeCenterOAMData:
-	db $24,$34,$7C,$10 ; heal machine monitor
-	db $2B,$30,$7D,$10 ; pokeballs 1-6
-	db $2B,$38,$7D,$30
-	db $30,$30,$7D,$10
-	db $30,$38,$7D,$30
-	db $35,$30,$7D,$10
-	db $35,$38,$7D,$30
+	db $24,$34,$7C,$14 ; heal machine monitor
+	db $2B,$30,$7D,$14 ; pokeballs 1-6
+	db $2B,$38,$7D,$34
+	db $30,$30,$7D,$14
+	db $30,$38,$7D,$34
+	db $35,$30,$7D,$14
+	db $35,$38,$7D,$34
 
 ; d = value to xor with palette
 FlashSprite8Times:
