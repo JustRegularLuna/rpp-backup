@@ -7,7 +7,6 @@ MtMoonPokecenterTextPointers:
 	dw MtMoonPokecenterText2
 	dw MtMoonPokecenterText3
 	dw MagikarpSalesmanText
-	dw MtMoonPokecenterText5
 	dw MtMoonTradeNurseText
 	dw MtMoonPokecenterBenchGuyText
 

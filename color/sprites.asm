@@ -610,7 +610,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_OW_BLUE
 	
 	; 0x62: SPRITE_BENCH_GUY
-	db PAL_OW_PURPLE
+	db PAL_OW_BROWN
 
 
 AnimationTileset1Palettes:
