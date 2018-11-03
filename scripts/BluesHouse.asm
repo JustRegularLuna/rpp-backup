@@ -105,6 +105,21 @@ BluesHouseText6:
 	db "@"
 	
 BluesHouseText7:
+	TX_ASM
+	ld a, [wSpriteStateData1 + 9]
+	cp SPRITE_FACING_UP
+	ld hl, TVWrongSideText2
+	jr nz, .done ; if player is not facing up
+	ld hl, BluesTVText
+.done
+	call PrintText
+	jp TextScriptEnd
+	
+BluesTVText:
 	TX_FAR _BluesTVText
+	db "@"
+
+TVWrongSideText2:
+	TX_FAR _TVWrongSideText
 	db "@"
 	
