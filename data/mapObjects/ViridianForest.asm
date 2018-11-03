@@ -1,5 +1,5 @@
 ViridianForestObject:
-	db $3 ; border block
+	db $2 ; border block
 
 	db $6 ; warps
 	db $0, $1, $2, VIRIDIAN_FOREST_EXIT
