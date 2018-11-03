@@ -11,7 +11,7 @@ ViridianForestEntranceObject:
 
 	db $2 ; objects
 	object SPRITE_GIRL, $8, $4, STAY, LEFT, $1 ; person
-	object SPRITE_BRENDAN, $2, $4, WALK, $1, $2 ; person
+	object SPRITE_LITTLE_GIRL, $2, $4, WALK, $1, $2 ; person
 
 	; warp-to
 	EVENT_DISP VIRIDIAN_FOREST_ENTRANCE_WIDTH, $0, $4 ; VIRIDIAN_FOREST
