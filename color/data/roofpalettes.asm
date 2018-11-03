@@ -46,8 +46,8 @@ ViridianRoof:
 	RGB 0,24,7
 
 PewterRoof:
-	RGB 24,25,26
-	RGB 20,17,19
+	RGB 19,19,16
+	RGB 10,12,15
 
 CeruleanRoof:
 	RGB 14,24,31

@@ -293,7 +293,7 @@ PokemonPaletteTable:
 	RGB 30, 04, 01
 
 ; PAL_PIDGEY
-	RGB 31, 21, 31
+	RGB 30, 27, 13
 	RGB 19, 08, 02
 
 ; PAL_PIDGEOTTO
