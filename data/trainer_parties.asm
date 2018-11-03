@@ -1063,7 +1063,18 @@ ScientistData:
 	
 RocketFData:
 RocketData:
-	db "Executive@",CUSTOM_PIC,EXECUTIVE_F,15,RATTATA,MURKROW,$FF
+	db "Executive@"
+	db SPECIAL_TRAINER2
+	db EXECUTIVE_F
+	db AI_POTION
+	
+	db 15,RATTATA
+	moveset BITE, QUICK_ATTACK, FOCUS_ENERGY, IRON_TAIL
+	
+	db 16,MURKROW
+	moveset PECK, QUICK_ATTACK, WING_ATTACK, GROWL
+	db $FF
+
 	db "James@",CUSTOM_PIC,JAMES,13,KOFFING,$FF
 	db "Jessie@",CUSTOM_PIC,JESSIE,13,EKANS,$FF
 	db "Grunt@",14,RATICATE,$FF
