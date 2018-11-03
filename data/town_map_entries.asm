@@ -35,7 +35,7 @@ ExternalMapEntries:
 	EMAP  48,  92, Route22Name
 	EMAP  36,  80, Route23Name
 	EMAP 116,  52, Route24Name
-	EMAP 132,  44, Route25Name
+	EMAP 124,  44, Route25Name
 
 InternalMapEntries:
 	IMAP OAKS_LAB,                   60, 116, PalletTownName
@@ -54,10 +54,10 @@ InternalMapEntries:
 	IMAP POWER_PLANT,               156,  68, PowerPlantName
 	IMAP ROUTE_11_GATE_2F,          132,  92, Route11Name
 	IMAP ROUTE_12_GATE_1F,          148,  92, Route12Name
-	IMAP BILLS_HOUSE,               132,  42, SeaCottageName
+	IMAP BILLS_HOUSE,               132,  44, SeaCottageName
 	IMAP VERMILION_DOCK,            116,  92, VermilionCityName
 	IMAP SS_ANNE_10,                116,  94, SSAnneName
-	IMAP MT_MOON_SHOP,               84,  60, MountMoonSquareName
+	IMAP MT_MOON_SHOP,               84,  56, MountMoonSquareName
 	IMAP VERMILION_FERRY_DOCK,      116,  92, VermilionCityName
 	IMAP VICTORY_ROAD_1,             36,  68, VictoryRoadName
 	IMAP SOUTHERN_ISLAND_INSIDE,    116,  94, AreaUnknownText
