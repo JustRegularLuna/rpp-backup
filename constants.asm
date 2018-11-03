@@ -1,5 +1,6 @@
-; Un-Comment the following line out to build the Hard rom
-;_HARD EQU 1
+IF DEF(_BLUE)
+_HARD EQU 1
+ENDC
 
 INCLUDE "macros.asm"
 INCLUDE "charmap.asm"

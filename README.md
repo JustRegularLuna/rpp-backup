@@ -6,7 +6,7 @@ Red++ serves as an updated version of Pokémon Red.
 
 It fixes a lot of bugs leftover from original Red and Blue, as well as adding new features.
 It builds two versions, a "Normal" version and a "Hard" version. The only difference is the level curve.
-By default, it builds the Normal rom. To build the Hard rom, go to [constants.asm](constants.asm) and un-comment the line it tells you to at the top.
+"pokered.gbc" is the Normal version, "pokeblue.gbc" is the Hard version.
 
 For a list of features, check out [**FEATURES.md**](FEATURES.md).
 
