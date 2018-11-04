@@ -88,8 +88,14 @@ LoadTilesetPalette:
 	dec b
 	jr nz,.copyLoop
 
+	; HAX: set route gate roofs (outside the tileset) to GRAY
+	ld a,0 ; GRAY
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+
 	; Set the remaining values to CRYS_TEXTBOX for text
-	ld b,$a0
+	ld b,$9d ;a0 - 3
 	ld a,7;CRYS_TEXTBOX
 .fillLoop
 	ld [hli],a
