@@ -690,6 +690,9 @@ ItemUseBicycle:
 	xor a
 	ld [wWalkBikeSurfState],a ; change player state to walking
 	call PlayDefaultMusic ; play walking music
+	ld a,[wPseudoItemID]
+	and a ; if using select shortcut
+	ret nz
 	ld hl,GotOffBicycleText
 	jr .printText
 .tryToGetOnBike
@@ -700,8 +703,11 @@ ItemUseBicycle:
 	ld [hJoyHeld],a ; current joypad state
 	inc a
 	ld [wWalkBikeSurfState],a ; change player state to bicycling
-	ld hl,GotOnBicycleText
 	call PlayDefaultMusic ; play bike riding music
+	ld a,[wPseudoItemID]
+	and a ; if using select shortcut
+	ret nz
+	ld hl,GotOnBicycleText
 .printText
 	jp PrintText
 

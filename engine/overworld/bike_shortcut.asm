@@ -7,15 +7,19 @@ TryRideBike::
      ld [wd11e],a ; store item ID for GetItemName
      call GetItemName
      call CopyStringToCF4B ; copy name to wcf4b
-     call EnableBikeShortcutText
 .tryForBike
      ld b,BICYCLE
      call IsItemInBag
      jr nz,.hasBike
+     call EnableBikeShortcutText
      ld hl,TextNoBike ; if no bike
      call PrintText
      jr .cleanUp
 .hasBike
+     farcall IsBikeRidingAllowed
+     jr c,.useItem
+     call EnableBikeShortcutText
+.useItem
      call UseItem
 .cleanUp
      call CloseBikeShortcutText
