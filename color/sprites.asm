@@ -602,7 +602,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_OW_RED
 
 	; 0x5e: SPRITE_DITTO
-	db PAL_OW_PURPLE
+	db PAL_OW_BLUE
 
 	; 0x5f: SPRITE_CELEBI
 	db PAL_OW_GREEN

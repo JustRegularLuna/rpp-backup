@@ -5,6 +5,8 @@ LoadMateoPresentsScreen::
 	call DisableLCD
 
 ; HAX: Add a warning screen about VBA issues
+	call CheckForPlayerNameInSRAM2
+	jr c, .skipWarningScreen
 	call LoadFontTilePatterns
 ; turn the screen back on
 	call EnableLCD
@@ -19,7 +21,8 @@ LoadMateoPresentsScreen::
 ; clear screen again, and load the original Mateo Presents screen
 	call ClearScreen
 	call DisableLCD
-	
+
+.skipWarningScreen
 ; load the graphics for the screen
 	ld hl, MateoPresentsGraphics1
 	ld de, vChars2
@@ -86,3 +89,34 @@ VBAWarningText:
 	next "BGB, VBA-M, etc."
 	next ""
 	next "PRESS A TO ADVANCE@"
+
+CheckForPlayerNameInSRAM2:
+; Duplicate of the one used in the Main Menu
+; Check if the player name data in SRAM has a string terminator character
+; (indicating that a name may have been saved there) and return whether it does
+; in carry.
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
+	ld a, $1
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamBank], a
+	ld b, NAME_LENGTH
+	ld hl, sPlayerName
+.loop
+	ld a, [hli]
+	cp "@"
+	jr z, .found
+	dec b
+	jr nz, .loop
+; not found
+	xor a
+	ld [MBC1SRamEnable], a
+	ld [MBC1SRamBankingMode], a
+	and a
+	ret
+.found
+	xor a
+	ld [MBC1SRamEnable], a
+	ld [MBC1SRamBankingMode], a
+	scf
+	ret
