@@ -2963,6 +2963,15 @@ _GotOffBicycleText2::
 	text "."
 	prompt
 
+_NoBicycleText1::
+	text "[PLAYER] hasn't got@@"
+
+_NoBicycleText2::
+	text "a @"
+	TX_RAM wcf4b
+	text "."
+	prompt
+
 _ThrewAwayItemText::
 	text "Threw away"
 	line "@"
