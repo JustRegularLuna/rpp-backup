@@ -17,7 +17,17 @@ TryRideBike::
      jr .cleanUp
 .hasBike
      farcall IsBikeRidingAllowed
-     jr c,.useItem
+     jr c,.checkSurfing
+     call EnableBikeShortcutText
+.checkSurfing
+     ld a,[wWalkBikeSurfState]
+     cp a,2
+     jr nz,.checkCyclingRoad ; if not surfing
+     call EnableBikeShortcutText
+.checkCyclingRoad
+     ld a,[wd732] ; cycling road
+     bit 5,a
+     jr z,.useItem ;if not on cycling road skip text
      call EnableBikeShortcutText
 .useItem
      call UseItem
