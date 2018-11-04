@@ -6,7 +6,7 @@ AnimateHealingMachine:
 
 	ld de, PokeCenterFlashingMonitorAndHealBall
 	ld hl, vChars0 + $fc0
-	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), $02
+	lb bc, BANK(PokeCenterFlashingMonitorAndHealBall), $03
 	call CopyVideoData
 	ld hl, wUpdateSpritesEnabled
 	ld a, [hl]
@@ -19,8 +19,9 @@ AnimateHealingMachine:
 	;ld [rOBP1], a
 	nop
 	nop
-	ld hl, wOAMBuffer + $84
+	ld hl, wOAMBuffer + $80
 	ld de, PokeCenterOAMData
+	call CopyHealingMachineOAM
 	call CopyHealingMachineOAM
 
 ;	ld a, 4
@@ -80,13 +81,14 @@ PokeCenterFlashingMonitorAndHealBall:
 ; Pokeball sprites for the pokecenter
 ; Uses Palette 4, which is PAL_OW_PURPLE everywhere else
 PokeCenterOAMData:
-	db $24,$34,$FC,$14 ; heal machine monitor
-	db $2B,$30,$FD,$14 ; pokeballs 1-6
+	db $24,$30,$FC,$14 ; heal machine monitor
+	db $24,$38,$FC,$34
+	db $2B,$30,$FD,$14 ; pokeballs 1-4
 	db $2B,$38,$FD,$34
 	db $30,$30,$FD,$14
 	db $30,$38,$FD,$34
-	db $35,$30,$FD,$14
-	db $35,$38,$FD,$34
+	db $35,$30,$FE,$14 ; pokeballs 5-6
+	db $35,$38,$FE,$34
 
 ; d = value to xor with palette
 FlashSprite8Times:
