@@ -38,9 +38,9 @@ const_value = 0
 	const OAK_TABLE         ; 24
 	const ALT_TEXTBOX_2     ; 25: used to show Articuno properly via the Binoculars
 	const INDOOR_PURPLE     ; 26
+	const MART_FLOOR        ; 27
 	
 	; These are unused
-	const MAP_PALETTE_27    ; 27
 	const MAP_PALETTE_28    ; 28
 	const MAP_PALETTE_29    ; 29
 	const MAP_PALETTE_2A    ; 2A

@@ -302,7 +302,7 @@ SetPal_TownMap:
 
 	ld de, TownMapPalAssignments
 	ld hl, W2_TilesetPaletteMap
-	ld b, $60
+	ld b, $40
 .copyLoop
 	ld a, [de]
 	inc de
@@ -311,7 +311,7 @@ SetPal_TownMap:
 	jr nz, .copyLoop
 
 	; Set the remaining tiles (the font) to pal 0
-	ld b, $a0
+	ld b, $c0
 	xor a
 .fillLoop
 	ld [hli], a

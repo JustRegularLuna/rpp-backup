@@ -312,7 +312,7 @@ LoadTownMap:
 	ld de, vSprites + $40
 	ld bc, MonNestIconEnd - MonNestIcon
 	ld a, BANK(MonNestIcon)
-	call FarCopyDataDouble
+	call FarCopyData2
 	
 	ld hl, UncompressedMap
 	ld de, wTileMap
@@ -588,7 +588,7 @@ INCLUDE "data/town_map_entries.asm"
 INCLUDE "text/map_names.asm"
 
 MonNestIcon:
-	INCBIN "gfx/mon_nest_icon.1bpp"
+	INCBIN "gfx/mon_nest_icon.2bpp"
 MonNestIconEnd:
 
 TownMapSpriteBlinkingAnimation:
