@@ -42,41 +42,41 @@ PalletRoof:
 	RGB 25,10,08
 
 ViridianRoof:
-	RGB 0,29,7
-	RGB 0,24,7
+	RGB 00,29,07
+	RGB 00,24,07
 
 PewterRoof:
 	RGB 19,19,16
 	RGB 10,12,15
 
 CeruleanRoof:
-	RGB 14,24,31
-	RGB 14,20,26
+	RGB 17,27,31
+	RGB 05,15,31
 
 LavenderRoof:
-	RGB 23,12,31
-	RGB 19,9,24
+	RGB 23,15,31
+	RGB 16,05,31
 
 VermilionRoof:
-	RGB 29,8,0
-	RGB 22,8,0
+	RGB 27,23,01
+	RGB 23,11,00
 
 CeladonRoof:
 	RGB 15,26,19
-	RGB 3,20,11
+	RGB 03,20,11
 
 FuchsiaRoof:
-	RGB 31,3,18
-	RGB 25,3,12
+	RGB 31,03,18
+	RGB 25,03,12
 
 CinnabarRoof:
-	RGB 29,0,0
-	RGB 22,0,0
+	RGB 31,08,08
+	RGB 22,04,04
 
 IndigoRoof:
-	RGB 16,0,31
-	RGB 10,0,25
+	RGB 16,00,31
+	RGB 10,00,25
 
 SaffronRoof:
-	RGB 31,27,0
-	RGB 28,22,0
+	RGB 31,26,00
+	RGB 31,15,00
