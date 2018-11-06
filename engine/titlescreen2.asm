@@ -88,32 +88,32 @@ TitleBallYTable:
 	db 0, $71, $6f, $6e, $6d, $6c, $6d, $6e, $6f, $71, $74, 0
 
 TitleScreenAnimateBallIfStarterOut:
-; Animate the TitleBall if a starter just got scrolled out.
-; Also animate it if a legendary just got scrolled out.
-	ld a, [wTitleMonSpecies]
-	cp BULBASAUR
-	jr z, .ok
-	cp CHARMANDER
-	jr z, .ok
-	cp SQUIRTLE
-	jr z, .ok
-	cp PIKACHU
-	jr z, .ok
-	cp EEVEE
-	jr z, .ok
-	cp ARTICUNO
-	jr z, .ok
-	cp ZAPDOS
-	jr z, .ok
-	cp MOLTRES
-	jr z, .ok
-	cp LUGIA
-	jr z, .ok
-	cp MEWTWO
-	jr z, .ok
-	cp MEW
-	ret nz
-.ok
+; Animate the TitleBall when a mon scrolls out
+; Originally only animated it when a starter or legendary scrolled by, which is rare
+;	ld a, [wTitleMonSpecies]
+;	cp BULBASAUR
+;	jr z, .ok
+;	cp CHARMANDER
+;	jr z, .ok
+;	cp SQUIRTLE
+;	jr z, .ok
+;	cp PIKACHU
+;	jr z, .ok
+;	cp EEVEE
+;	jr z, .ok
+;	cp ARTICUNO
+;	jr z, .ok
+;	cp ZAPDOS
+;	jr z, .ok
+;	cp MOLTRES
+;	jr z, .ok
+;	cp LUGIA
+;	jr z, .ok
+;	cp MEWTWO
+;	jr z, .ok
+;	cp MEW
+;	ret nz
+;.ok
 	ld e, 1 ; animate titleball
 	ld bc, TitleScroll_WaitBall
 	ld d, 0
