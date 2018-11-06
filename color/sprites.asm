@@ -431,7 +431,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_OW_RANDOM
 
 	; 0x26: SPRITE_MART_GUY
-	db PAL_OW_BLUE
+	db PAL_OW_GREEN
 
 	; 0x27: SPRITE_FISHER
 	db PAL_OW_RANDOM

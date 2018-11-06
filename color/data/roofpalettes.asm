@@ -66,8 +66,8 @@ CeladonRoof:
 	RGB 03,20,11
 
 FuchsiaRoof:
-	RGB 31,03,18
-	RGB 25,03,12
+	RGB 31,18,29
+	RGB 17,13,20
 
 CinnabarRoof:
 	RGB 31,08,08
