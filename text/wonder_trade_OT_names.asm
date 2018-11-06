@@ -464,20 +464,20 @@ WonderTradeOTNames2:
 	db "Hana@@@@" ; $cc
 	db "Miyuki@@" ; $cd
 	db "Luke@@@@" ; $ce
-	db "Lun@@@@@" ; $cf
-	db "Rhue@@@@" ; $d0
-	db "Traziun@" ; $d1
-	db "Gaius@@@" ; $d2
-	db "Lyrra@@@" ; $d3
-	db "Kloe@@@@" ; $d4
-	db "Cetsa@@@" ; $d5
-	db "Lexus@@@" ; $d6
-	db "Sorya@@@" ; $d7
-	db "Strata@@" ; $d8
-	db "Slade@@@" ; $d9
-	db "Dirk@@@@" ; $da
-	db "Talan@@@" ; $db
-	db "Kersh@@@" ; $dc
+	db "Vulpes@@" ; $cf
+	db "Benny@@@" ; $d0
+	db "Sarah@@@" ; $d1
+	db "R.House@" ; $d2
+	db "Victor@@" ; $d3
+	db "Sunny@@@" ; $d4
+	db "Cass@@@@" ; $d5
+	db "Boone@@@" ; $d6
+	db "Felicia@" ; $d7
+	db "Arcade@@" ; $d8
+	db "Ringo@@@" ; $d9
+	db "Pete@@@@" ; $da
+	db "Torres@@" ; $db
+	db "Jackson@" ; $dc
 	db "Rangi@@@" ; $dd
 	db "Remy@@@@" ; $de
 	db "Sylvie@@" ; $df
