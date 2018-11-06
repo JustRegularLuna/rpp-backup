@@ -68,12 +68,16 @@ _PewterGymText_5c4c1::
 	para "That's an official"
 	line "#mon League"
 	cont "Badge!"
-
+IF DEF(_HARD)
+	para "It's your first"
+	line "step on the road"
+	cont "to the League!"
+ELSE
 	para "Its bearer's"
 	line "#mon become"
 	cont "more powerful!"
-
-	para "The technique"
+ENDC
+	para "Also, the move"
 	line "Flash can now be"
 	cont "used anytime!"
 	prompt

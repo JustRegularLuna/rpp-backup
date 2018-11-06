@@ -6852,6 +6852,11 @@ CalculateModifiedStat:
 	ret
 
 ApplyBadgeStatBoosts:
+IF DEF (_HARD)
+	; Hard Mode does not have Badges boost your stats
+	ret
+ELSE
+	; Normal Mode keeps this in place
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	ret z ; return if link battle
@@ -6903,6 +6908,7 @@ ApplyBadgeStatBoosts:
 	ld a, 999 % $100
 	ld [hld], a
 	ret
+ENDC
 
 LoadHudAndHpBarAndStatusTilePatterns:
 	call LoadHpBarAndStatusTilePatterns

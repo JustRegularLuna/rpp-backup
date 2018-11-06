@@ -11,6 +11,12 @@ _VermilionGymText_5cb72::
 	done
 
 _VermilionGymText_5cb77::
+IF DEF(_HARD)
+	text "The ThunderBadge"
+	line "lets your #mon"
+	cont "use Fly any time,"
+	cont "kid!"
+ELSE
 	text "The ThunderBadge"
 	line "cranks up your"
 	cont "#mon's Speed!"
@@ -18,6 +24,7 @@ _VermilionGymText_5cb77::
 	para "It also lets your"
 	line "#mon Fly any-"
 	cont "time, kid!"
+ENDC
 
 	para "You're special,"
 	line "kid! Take this!"

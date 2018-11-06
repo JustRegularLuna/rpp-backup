@@ -31,11 +31,17 @@ _BlaineFireBlastText::
 _BlaineBadgeText::
 	text "Hah!"
 
+IF DEF(_HARD)
+	text "The VolcanoBadge"
+	line "puts you another"
+	cont "step closer to"
+	cont "Victory Road!"
+ELSE
 	para "The VolcanoBadge"
 	line "heightens the"
 	cont "Special abilities"
 	cont "of your #mon!"
-
+ENDC
 	para "Here, you can"
 	line "have this too!"
 	done
