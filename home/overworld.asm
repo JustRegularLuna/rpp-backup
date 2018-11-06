@@ -68,10 +68,15 @@ OverworldLoopLessDelay::
 	bit 7,a ; are we simulating button presses?
 	jr z,.notSimulating
 	ld a,[hJoyHeld]
-	jr .checkIfStartIsPressed
+	jr .checkIfSelectIsPressed
 .notSimulating
 	ld a,[hJoyPressed]
-.checkIfStartIsPressed
+.checkIfSelectIsPressed
+	bit 2,a ; select button
+	jr z,.selectButtonNotPressed
+; if SELECT is pressed
+	farcall TryRideBike
+.selectButtonNotPressed
 	bit 3,a ; start button
 	jr z,.startButtonNotPressed
 ; if START is pressed
@@ -95,11 +100,11 @@ OverworldLoopLessDelay::
 	ld a,[hSpriteIndexOrTextID]
 	and a
 	jr nz, .displayDialogue
-	
+
 	; Check for field moves that interact with the bg.
 	predef TryFieldMove
 	jp OverworldLoop
-	
+
 .displayDialogue
 	predef GetTileAndCoordsInFrontOfPlayer
 	call UpdateSprites
@@ -1290,11 +1295,11 @@ CollisionCheckOnLand::
 	;ld a,[wChannelSoundIDs + Ch4]
 	;cp SFX_COLLISION ; check if collision sound is already playing
 	; curSFX is not cleared for some reason.
-	
+
     ; ch5 on?
     ld hl, Channel5 + Channel1Flags - Channel1
     bit 0, [hl]
-    
+
 	jr nz,.setCarry
 	ld a,SFX_COLLISION
 	call PlaySound ; play collision sound (if it's not already playing)
