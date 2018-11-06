@@ -3001,7 +3001,7 @@ wSlidingTilePuzzleInitialPositions::
 wSlidingTilePuzzleHeaderEnd::
 
 ; unused bytes originally allocated with game progress flags
-	ds 50
+	ds 10
 
 
 

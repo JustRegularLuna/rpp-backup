@@ -11,7 +11,7 @@ MONS_PER_BOX EQU 20
 NUM_BOXES    EQU 12
 
 BAG_ITEM_CAPACITY EQU 100
-PC_ITEM_CAPACITY  EQU 50
+PC_ITEM_CAPACITY  EQU 70
 
 SPECIAL_TRAINER  EQU $FE ; custom levels and moves for each
 SPECIAL_TRAINER2 EQU $FD ; custom levels, moves, trainer pic, and AI
