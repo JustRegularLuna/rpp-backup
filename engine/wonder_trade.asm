@@ -160,7 +160,12 @@ WonderTrade_PrepareTradeData: ; Get the data setup for the trade
 	ld de, wTradedPlayerMonOT
 	ld bc, $b
 	call WonderTrade_CopyData
-	ld hl, WonderTrade_TrainerString
+	ld bc, $2
+	ld hl, hRandomAdd
+	ld de, wTradedEnemyMonOTID
+	call WonderTrade_CopyData
+	call WonderTrade_GetOTName
+	ld bc, $8
 	ld de, wTradedEnemyMonOT
 	call WonderTrade_CopyData
 	ld de, wLinkEnemyTrainerName
@@ -171,11 +176,7 @@ WonderTrade_PrepareTradeData: ; Get the data setup for the trade
 	call AddNTimes
 	ld de, wTradedPlayerMonOTID
 	ld bc, $2
-	call WonderTrade_CopyData
-	call Random
-	ld hl, hRandomAdd
-	ld de, wTradedEnemyMonOTID
-	jp CopyData
+	jp WonderTrade_CopyData
 
 ; copies name of species a to hl
 WonderTrade_GetMonName:
@@ -206,8 +207,8 @@ WonderTrade_CopyDataToReceivedMon: ; Copy the Nickname and OT from RAM to the Po
 	ld hl, wPartyMonOT
 	ld bc, $b
 	call WonderTrade_GetReceivedMonPointer
-	ld hl, WonderTrade_TrainerString
-	ld bc, $b
+	ld hl, wLinkEnemyTrainerName
+	ld bc, $8
 	call CopyData
 	ld hl, wPartyMon1OTID
 	ld bc, wPartyMon2 - wPartyMon1
@@ -226,8 +227,18 @@ WonderTrade_GetReceivedMonPointer:
 	ld d, h
 	ret
 
-WonderTrade_TrainerString:
-	db "Mystery@@@@"
+WonderTrade_GetOTName:
+	ld hl, wTradedEnemyMonOTID
+	ld a, [hli]
+	and 1
+	ld a, [hl]
+	ld hl, WonderTradeOTNames1
+	jr z, .ok
+	ld hl, WonderTradeOTNames2
+.ok
+	ld bc, $8
+	call AddNTimes
+	ret
 
 ; Stores a random Pokemon ID into register a
 ; Makes sure it is a valid Pokemon ID
@@ -555,3 +566,5 @@ AreYouSureText:
 	
 	para "Are you sure you"
 	line "want to trade?@@"
+
+INCLUDE "text/wonder_trade_OT_names.asm"
