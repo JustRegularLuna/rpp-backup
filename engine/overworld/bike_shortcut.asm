@@ -1,45 +1,43 @@
 TryRideBike::
-     xor a
+	xor a
 .setUp
-     ld a,BICYCLE
-     ld [wcf91],a
-     ld [wPseudoItemID],a
-     ld [wd11e],a ; store item ID for GetItemName
-     call GetItemName
-     call CopyStringToCF4B ; copy name to wcf4b
+	ld a,BICYCLE
+	ld [wcf91],a
+	ld [wPseudoItemID],a
+	ld [wd11e],a ; store item ID for GetItemName
+	call GetItemName
+	call CopyStringToCF4B ; copy name to wcf4b
 .tryForBike
-     ld b,BICYCLE
-     call IsItemInBag
-     jr nz,.hasBike
-     call EnableBikeShortcutText
-     ld hl,TextNoBike ; if no bike
-     call PrintText
-     jr .cleanUp
+	ld b,BICYCLE
+	call IsItemInBag
+	jr nz,.hasBike
+	call EnableBikeShortcutText
+	ld hl,TextNoBike ; if no bike
+	call PrintText
+	jr .cleanUp
 .hasBike
-     farcall IsBikeRidingAllowed
-     jr c,.checkSurfing
-     call EnableBikeShortcutText
+	farcall IsBikeRidingAllowed
+	jr c,.checkSurfing
+	call EnableBikeShortcutText
 .checkSurfing
-     ld a,[wWalkBikeSurfState]
-     cp a,2
-     jr nz,.checkCyclingRoad ; if not surfing
-     call EnableBikeShortcutText
+	ld a,[wWalkBikeSurfState]
+	cp a,2
+	jr nz,.checkCyclingRoad ; if not surfing
+	call EnableBikeShortcutText
 .checkCyclingRoad
-     ld a,[wd732] ; cycling road
-     bit 5,a
-     jr z,.useItem ;if not on cycling road skip text
-     call EnableBikeShortcutText
+	ld a,[wd732] ; cycling road
+	bit 5,a
+	jr z,.useItem ;if not on cycling road skip text
+	call EnableBikeShortcutText
 .useItem
-     call UseItem
+	call UseItem
 .cleanUp
-     call CloseBikeShortcutText
-     ret
+	call CloseBikeShortcutText
+	ret
 
 TextNoBike:
-     TX_FAR _NoBicycleText1
-     TX_LINE
-     TX_FAR _NoBicycleText2
-     db "@"
+	TX_FAR _NoBicycleText1
+	db "@"
 
 EnableBikeShortcutText: ; Gets everything setup to let you display text properly
 	call EnableAutoTextBoxDrawing

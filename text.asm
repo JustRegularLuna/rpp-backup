@@ -2964,12 +2964,9 @@ _GotOffBicycleText2::
 	prompt
 
 _NoBicycleText1::
-	text "[PLAYER] hasn't got@@"
-
-_NoBicycleText2::
-	text "a @"
-	TX_RAM wcf4b
-	text "."
+	text "Pressing SELECT"
+	line "uses the Bicycle"
+	cont "if you have one."
 	prompt
 
 _ThrewAwayItemText::
