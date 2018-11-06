@@ -33,10 +33,13 @@ _TM34ExplanationText::
 	para "A TM contains a"
 	line "technique that"
 	cont "can be taught to"
-	cont "#mon!"
+	cont "#mon."
+	
+	para "It can be used"
+	line "again and again!"
 
 	para "TM36 contains"
-	line "Rock Tomb!"
+	line "Rock Tomb."
 
 	para "It reduces your"
 	line "opponent's speed,"
