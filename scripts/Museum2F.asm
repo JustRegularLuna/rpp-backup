@@ -9,6 +9,7 @@ Museum2FTextPointers:
 	dw Museum2FText5
 	dw Museum2FText6
 	dw Museum2FText7
+	dw Museum2FText8
 
 Museum2FText1:
 	TX_FAR _Museum2FText1
@@ -45,4 +46,8 @@ Museum2FText6:
 
 Museum2FText7:
 	TX_FAR _Museum2FText7
+	db "@"
+
+Museum2FText8:
+	TX_FAR _Museum2FText8
 	db "@"

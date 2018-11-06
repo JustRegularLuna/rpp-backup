@@ -30,3 +30,4 @@ INCLUDE "color/tilesets/plateau.asm" ; PLATEAU
 INCLUDE "color/tilesets/safari.asm" ; SAFARI
 INCLUDE "color/tilesets/ferry.asm" ; FERRY
 INCLUDE "color/tilesets/ice_cavern.asm" ; ICE_CAVERN
+INCLUDE "color/tilesets/museum2.asm" ; MUSEUM_2

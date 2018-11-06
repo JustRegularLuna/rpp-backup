@@ -27,3 +27,4 @@ const_value = 0
 	const SAFARI       ; 24
 	const FERRY        ; 25
 	const ICE_CAVERN   ; 26
+	const MUSEUM_2     ; 27

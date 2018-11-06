@@ -31,9 +31,9 @@ DoorTileIDPointers:
 	dbw SAFARI,       ForestDoorTileIDs
 	dbw POKECENTER,   PokecenterDoorTileIDs
 	dbw HOUSE,        HouseDoorTileIDs
-	dbw FOREST_GATE,  TilesetMuseumDoorTileIDs
+	dbw FOREST_GATE,  GateDoorTileIDs
 	dbw MUSEUM,       TilesetMuseumDoorTileIDs
-	dbw GATE,         TilesetMuseumDoorTileIDs
+	dbw GATE,         GateDoorTileIDs
 	dbw SHIP,         ShipDoorTileIDs
 	dbw LOBBY,        LobbyDoorTileIDs
 	dbw MANSION,      MansionDoorTileIDs
@@ -44,6 +44,7 @@ DoorTileIDPointers:
 	dbw REDS_HOUSE_2, RedsHouseDoorTileIDs
 	dbw MART,         MartDoorTileIDs
 	dbw FERRY,        FerryDoorTileIDs
+	dbw MUSEUM_2,     TilesetMuseumDoorTileIDs
 	db $FF
 
 OverworldDoorTileIDs:
@@ -58,7 +59,7 @@ PokecenterDoorTileIDs:
 HouseDoorTileIDs:
 	db 62,$00
 
-TilesetMuseumDoorTileIDs:
+GateDoorTileIDs:
 	db 22,59,$00
 
 ShipDoorTileIDs:
@@ -87,3 +88,6 @@ MartDoorTileIDs:
 
 FerryDoorTileIDs:
 	db 16,48,$00
+
+TilesetMuseumDoorTileIDs:
+	db $16,$00

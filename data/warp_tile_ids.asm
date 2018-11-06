@@ -26,10 +26,10 @@ WarpTileIDPointers:
 	dw ForestWarpTileIDs
 	dw FerryWarpTileIDs
 	dw CavernWarpTileIDs
+	dw MuseumWarpTileIDs
 OverworldWarpTileIDs:
 	db 27,88,$FF
 ForestGateWarpTileIDs:
-MuseumWarpTileIDs:
 GateWarpTileIDs:
 	db 22,26,28,59,$FF
 RedsHouse1WarpTileIDs:
@@ -72,3 +72,5 @@ ClubWarpTileIDs:
 	db $FF
 FerryWarpTileIDs:
 	db 16,48,$FF
+MuseumWarpTileIDs:
+	db $16,$1E,$FF

@@ -16,9 +16,8 @@ _Museum2FText2::
 	done
 
 _Museum2FText3::
-	text "The space exhibit"
-	line "is being shown"
-    cont "abroad for now."
+	text "We have a space"
+	line "exhibit now."
 	done
 
 _Museum2FText4::
@@ -35,11 +34,15 @@ _Museum2FText5::
 	done
 
 _Museum2FText6::
-	text "Fossils from the"
-	line "Hoenn region."
+	text "Space Shuttle"
 	done
 
 _Museum2FText7::
 	text "Meteorite that"
 	line "fell on Mt. Moon."
+	done
+
+_Museum2FText8::
+	text "A person wearing"
+	line "a space suit!"
 	done

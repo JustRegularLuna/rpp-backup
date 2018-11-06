@@ -10,7 +10,7 @@ Safari_Coll::
 Forest_Coll::       INCBIN  "gfx/tilesets/forest.tilecoll"
 House_Coll::        INCBIN  "gfx/tilesets/house.tilecoll"
 ForestGate_Coll::   INCBIN  "gfx/tilesets/forest_gate.tilecoll"
-Museum_Coll::       INCBIN  "gfx/tilesets/museum.tilecoll"
+Museum_Coll::       INCBIN  "gfx/tilesets/museum.tilecoll" ; applies to Museum and Museum 2
 Gate_Coll::         INCBIN  "gfx/tilesets/gate.tilecoll"
 Ship_Coll::         INCBIN  "gfx/tilesets/ship.tilecoll"
 ShipPort_Coll::     INCBIN  "gfx/tilesets/ship_port.tilecoll"

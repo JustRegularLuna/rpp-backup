@@ -269,3 +269,13 @@ MapPaletteSets:
 	db CAVE_BROWN
 	db CAVE_LIGHT_BLUE
 	db CRYS_TEXTBOX
+
+; MUSEUM_2
+	db INDOOR_GRAY
+	db INDOOR_RED
+	db INDOOR_GREEN
+	db INDOOR_BLUE
+	db INDOOR_YELLOW
+	db INDOOR_BROWN
+	db INDOOR_LIGHT_BLUE
+	db ALT_TEXTBOX_PAL ; Uses variant of textbox palette for skeleton pokemon

@@ -2583,11 +2583,11 @@ IndigoPlateauLobbyBlocks: INCBIN "maps/IndigoPlateauLobby.blk"
 
 SECTION "bank36",ROMX,BANK[$36]
 
-ForestGate_GFX:      INCBIN "gfx/tilesets/forest_gate.2bpp"
-ForestGate_Block:    INCBIN "gfx/blocksets/forest_gate.bst"
-
 Museum_GFX:          INCBIN "gfx/tilesets/museum.2bpp"
 Museum_Block:        INCBIN "gfx/blocksets/museum.bst"
+
+Museum2_GFX:         INCBIN "gfx/tilesets/museum2.2bpp"
+Museum2_Block:       INCBIN "gfx/blocksets/museum2.bst"
 
 Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
 Safari_Block:      INCBIN "gfx/blocksets/safari.bst"
@@ -2607,6 +2607,8 @@ Ferry_Block:  INCBIN "gfx/blocksets/ferry.bst"
 Ice_Cavern_GFX:    INCBIN "gfx/tilesets/ice_cavern.t14.2bpp"
 Cavern_GFX:        INCBIN "gfx/tilesets/cavern.t14.2bpp"
 Cavern_Block:      INCBIN "gfx/blocksets/cavern.bst"
+
+
 
 INCLUDE "data/mapHeaders/BeachHouse.asm"
 INCLUDE "scripts/BeachHouse.asm"
@@ -2640,6 +2642,11 @@ HexManiacPic::   INCBIN "pic/trainer/hex_maniac.pic"
 JessiePic::      INCBIN "pic/trainer/jessie.pic"
 JamesPic::       INCBIN "pic/trainer/james.pic"
 GiovanniGymPic:: INCBIN "pic/trainer/giovanni2.pic"
+
+
+ForestGate_GFX:      INCBIN "gfx/tilesets/forest_gate.2bpp"
+ForestGate_Block:    INCBIN "gfx/blocksets/forest_gate.bst"
+
 
 SECTION "random stuff", ROMX,BANK[$3A]
 WindowsGraphics1:
