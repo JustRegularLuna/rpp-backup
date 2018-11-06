@@ -58,9 +58,9 @@ _ExclamationText::
 	text "!"
 	done
 
-_GroundRoseText::
-	text "Ground rose up"
-	line "somewhere!"
+_MyReflectionText::
+	text "My reflection!"
+	line "Lookin' good!"
 	done
 
 _BoulderText::

@@ -58,12 +58,22 @@ BookshelfTileIDs:
 	db_tx_pre BookOrSculptureText
 	db GATE,         34
 	db_tx_pre BookOrSculptureText
+	db GATE,         56
+	db_tx_pre MyReflectionText
+	db GATE,         78
+	db_tx_pre MyReflectionText
+	db GATE,         93
+	db_tx_pre MyReflectionText
 	db SHIP,         54
 	db_tx_pre BookOrSculptureText
 	db REDS_HOUSE_1, 50
 	db_tx_pre BookOrSculptureText
+	db REDS_HOUSE_1, 61
+	db_tx_pre MyReflectionText
 	db PLATEAU,      48
 	db_tx_pre IndigoPlateauStatues
+	db HOUSE,        33
+	db_tx_pre MyReflectionText
 	db HOUSE,        60
 	db_tx_pre TownMapText
 	db HOUSE,        50
@@ -74,6 +84,8 @@ BookshelfTileIDs:
 	db_tx_pre WonderTradeMachineText
 	db LOBBY,        22
 	db_tx_pre ElevatorText
+	db FERRY,         4
+	db_tx_pre MyReflectionText
 	db $FF
 
 IndigoPlateauStatues:
@@ -158,3 +170,7 @@ WonderTradeMachineText:
 	TX_ASM
 	callba DoWonderTradeDialogue
 	jp TextScriptEnd
+
+MyReflectionText:
+	TX_FAR _MyReflectionText
+	db "@"
