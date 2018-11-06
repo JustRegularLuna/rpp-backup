@@ -1,12 +1,8 @@
 ; prints text for bookshelves in buildings without sign events
 PrintBookshelfText:
-	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction
-	cp SPRITE_FACING_UP
-	jr nz, .noMatch
-; facing up
 	ld a, [wCurMapTileset]
 	ld b, a
-	aCoord 8, 7
+	ld a, [wTileInFrontOfPlayer]
 	ld c, a
 	ld hl, BookshelfTileIDs
 .loop
@@ -40,7 +36,15 @@ PrintBookshelfText:
 BookshelfTileIDs:
 	db LAB,          40
 	db_tx_pre BookOrSculptureText
+	db MART,         26
+	db_tx_pre PokemonStuffText
+	db MART,         28
+	db_tx_pre PokemonStuffText
 	db MART,         54
+	db_tx_pre PokemonStuffText
+	db MART,         58
+	db_tx_pre PokemonStuffText
+	db MART,         60
 	db_tx_pre PokemonStuffText
 	db MART,         90
 	db_tx_pre PokemonStuffText
@@ -151,6 +155,6 @@ PokemonStuffText:
 	db "@"
 
 WonderTradeMachineText:
-	db $08
+	TX_ASM
 	callba DoWonderTradeDialogue
 	jp TextScriptEnd
