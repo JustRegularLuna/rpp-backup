@@ -20,11 +20,8 @@ For a list of features, check out [**FEATURES.md**](FEATURES.md).
 
 ## Frequently Asked Questions
 
-### Q: How do you play this in color?
-A: If you build the current copy yourself, it is already in Full Color. For the current stable release (v2.4.2), however: In VBA, go to Options -> Gameboy and set it to "Automatic", then close and re-open the emulator for the change to take effect. If you're playing on a mobile emulator, chances are good that if it doesn't automatically play in color, your emulator doesn't support Super Gameboy mode, which this hack currently uses for color.
-
 ### Q: Are all Pokémon available?
-A: Yes, all 205 Pokémon that are included in the game are available without needing to trade with another person or abusing Wonder Trade.
+A: Yes, all 208 Pokémon that are included in the game are available without needing to trade with another person or abusing Wonder Trade.
 
 ### Q: Which Pokémon are in Wonder Trade?
 A: Every Pokémon that isn't legendary can appear in Wonder Trade, but you will only find Pokémon that can legally exist at the same level as the one you offered for the trade.
@@ -45,7 +42,7 @@ A: The only "Event Shiny" for now is the Magikarp you buy in the Mt. Moon Pokéc
 A: Yes, Dark Steel and Fairy are all in, and type strengths/weaknesses match Gen 6.
 
 ### Q: Can I go to Johto?
-A: There is only Kanto for now. Johto is part of the ongoing copy of v3 in the main repo.
+A: There is only Kanto for now. Johto is part of the ongoing copy of v4 in the main repo.
 
 ### Q: Will you add so-and-so feature?
 A: Maybe!
