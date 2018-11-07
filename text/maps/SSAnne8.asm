@@ -95,11 +95,19 @@ _SSAnne8Text9::
 	done
 
 _SSAnne8Text11::
-	text "Hello there!"	
-	line "I'm The Looker!"
+	text "Hello there!"
+	line "How did you know"
+	cont "to find me?"
+
+	para "My code name,"
+	line "it is Looker."
+	cont "It is what they"
+	cont "call me."
 
 	para "I'm a Global"
 	line "Police agent."
 	cont "On the trail of"
 	cont "Team Rocket!"
+	
+	para "Allons-y!"
 	done
