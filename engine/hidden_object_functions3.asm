@@ -2,7 +2,25 @@
 PrintBookshelfText:
 	ld a, [wCurMapTileset]
 	ld b, a
-	ld a, [wTileInFrontOfPlayer]
+	ld a, [wSpriteStateData1 + 9] ; player's sprite facing direction	
+	cp SPRITE_FACING_UP
+	jr z, .up
+	cp SPRITE_FACING_LEFT
+	jr z, .left
+	cp SPRITE_FACING_RIGHT
+	jr z, .right
+	; SPRITE_FACING_DOWN
+	aCoord 8, 11
+	jr .got_coord
+.up
+	aCoord 8, 7
+	jr .got_coord
+.left
+	aCoord 6, 9
+	jr .got_coord
+.right
+	aCoord 10, 9
+.got_coord
 	ld c, a
 	ld hl, BookshelfTileIDs
 .loop
@@ -34,57 +52,57 @@ PrintBookshelfText:
 
 ; format: db tileset id, bookshelf tile id, text id
 BookshelfTileIDs:
-	db LAB,          40
+	db LAB,		  40
 	db_tx_pre BookOrSculptureText
-	db MART,         26
+	db MART,		 26
 	db_tx_pre PokemonStuffText
-	db MART,         28
+	db MART,		 28
 	db_tx_pre PokemonStuffText
-	db MART,         54
+	db MART,		 54
 	db_tx_pre PokemonStuffText
-	db MART,         58
+	db MART,		 58
 	db_tx_pre PokemonStuffText
-	db MART,         60
+	db MART,		 60
 	db_tx_pre PokemonStuffText
-	db MART,         90
+	db MART,		 90
 	db_tx_pre PokemonStuffText
-	db MART,         92
+	db MART,		 92
 	db_tx_pre PokemonStuffText
-	db OAK_TS,       92
+	db OAK_TS,	   92
 	db_tx_pre BookOrSculptureText
-	db OAK_TS,       94
+	db OAK_TS,	   94
 	db_tx_pre BookOrSculptureText
-	db MANSION,      50
+	db MANSION,	  50
 	db_tx_pre BookOrSculptureText
-	db GATE,         34
+	db GATE,		 34
 	db_tx_pre BookOrSculptureText
-	db GATE,         56
+	db GATE,		 56
 	db_tx_pre MyReflectionText
-	db GATE,         78
+	db GATE,		 78
 	db_tx_pre MyReflectionText
-	db GATE,         93
+	db GATE,		 93
 	db_tx_pre MyReflectionText
-	db SHIP,         54
+	db SHIP,		 54
 	db_tx_pre BookOrSculptureText
 	db REDS_HOUSE_1, 50
 	db_tx_pre BookOrSculptureText
 	db REDS_HOUSE_1, 61
 	db_tx_pre MyReflectionText
-	db PLATEAU,      48
+	db PLATEAU,	  48
 	db_tx_pre IndigoPlateauStatues
-	db HOUSE,        33
+	db HOUSE,		33
 	db_tx_pre MyReflectionText
-	db HOUSE,        60
+	db HOUSE,		60
 	db_tx_pre TownMapText
-	db HOUSE,        50
+	db HOUSE,		50
 	db_tx_pre BookOrSculptureText
-	db GYM,          29
+	db GYM,		  29
 	db_tx_pre BookOrSculptureText
 	db POKECENTER,   41
 	db_tx_pre WonderTradeMachineText
-	db LOBBY,        22
+	db LOBBY,		22
 	db_tx_pre ElevatorText
-	db FERRY,         4
+	db FERRY,		 4
 	db_tx_pre MyReflectionText
 	db $FF
 
