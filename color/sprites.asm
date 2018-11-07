@@ -1,27 +1,5 @@
 ; Handles sprite attributes
 
-ATK_PAL_GREY    EQU 0
-ATK_PAL_BLUE    EQU 1
-ATK_PAL_RED     EQU 2
-ATK_PAL_BROWN   EQU 3
-ATK_PAL_YELLOW  EQU 4
-ATK_PAL_GREEN   EQU 5
-ATK_PAL_ICE	EQU 6
-ATK_PAL_PURPLE	EQU 7
-; 8: color based on attack type
-; 9: don't change color palette (assume it's already set properly from elsewhere)
-
-
-PAL_OW_RED		EQU 0
-PAL_OW_BLUE		EQU 1
-PAL_OW_GREEN	EQU 2
-PAL_OW_BROWN	EQU 3
-PAL_OW_PURPLE	EQU 4
-PAL_OW_EMOJI	EQU 5
-PAL_OW_TREE		EQU 6
-PAL_OW_ROCK		EQU 7
-PAL_OW_RANDOM	EQU 8 ; pseudorandom
-
 LoadOverworldSpritePalettes:
 	ld a,[rSVBK]
 	ld b,a
@@ -344,7 +322,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_OW_RANDOM
 
 	; 0x09: SPRITE_BIRD
-	db PAL_OW_RED
+	db PAL_OW_BROWN
 
 	; 0x0a: SPRITE_FAT_BALD_GUY
 	db PAL_OW_RANDOM
@@ -563,7 +541,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_OW_RED
 
 	; 0x51: SPRITE_OMANYTE
-	db PAL_OW_ROCK
+	db PAL_OW_BROWN
 
 	; 0x52: SPRITE_BOULDER
 	db PAL_OW_ROCK
@@ -572,7 +550,7 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_OW_BROWN
 
 	; 0x54: SPRITE_BOOK_MAP_DEX
-	db PAL_OW_RED
+	db PAL_OW_BROWN
 
 	; 0x55: SPRITE_CLIPBOARD
 	db PAL_OW_BROWN
@@ -581,10 +559,10 @@ SpritePaletteAssignments: ; Characters on the overworld
 	db PAL_OW_BLUE
 
 	; 0x57: SPRITE_OLD_AMBER_COPY
-	db PAL_OW_BROWN
+	db PAL_OW_RED
 
 	; 0x58: SPRITE_OLD_AMBER
-	db PAL_OW_BROWN
+	db PAL_OW_RED
 
 	; 0x59: SPRITE_POKEDEX
 	db PAL_OW_RED

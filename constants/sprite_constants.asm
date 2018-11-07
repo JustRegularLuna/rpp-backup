@@ -138,3 +138,27 @@ SPRITE_FACING_DOWN  EQU $00
 SPRITE_FACING_UP    EQU $04
 SPRITE_FACING_LEFT  EQU $08
 SPRITE_FACING_RIGHT EQU $0C
+
+
+; Moved these here instead of making them local
+ATK_PAL_GREY    EQU 0
+ATK_PAL_BLUE    EQU 1
+ATK_PAL_RED     EQU 2
+ATK_PAL_BROWN   EQU 3
+ATK_PAL_YELLOW  EQU 4
+ATK_PAL_GREEN   EQU 5
+ATK_PAL_ICE     EQU 6
+ATK_PAL_PURPLE  EQU 7
+; 8: color based on attack type
+; 9: don't change color palette (assume it's already set properly from elsewhere)
+
+; Moved these here instead of making them local
+PAL_OW_RED		EQU 0
+PAL_OW_BLUE		EQU 1
+PAL_OW_GREEN	EQU 2
+PAL_OW_BROWN	EQU 3
+PAL_OW_PURPLE	EQU 4
+PAL_OW_EMOJI	EQU 5
+PAL_OW_TREE		EQU 6
+PAL_OW_ROCK		EQU 7
+PAL_OW_RANDOM	EQU 8 ; pseudorandom

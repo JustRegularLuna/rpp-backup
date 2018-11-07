@@ -8,7 +8,7 @@ VermilionHouse3Object:
 	db $0 ; signs
 
 	db $1 ; objects
-	object SPRITE_LITTLE_GIRL, $3, $5, STAY, UP, $1 ; person
+	object SPRITE_OFFICER_JENNY, $3, $5, STAY, UP, $1 ; person
 
 	; warp-to
 	EVENT_DISP VERMILION_HOUSE_3_WIDTH, $7, $2
