@@ -183,7 +183,7 @@ IsWarpTileInFrontOfPlayer:
 	dw .facingRightWarpTiles
 
 .facingDownWarpTiles
-	db $01,$12,$17,$26,$3D,$04,$18,$33,$1C,$FF
+	db $01,$12,$17,$26,$3D,$04,$18,$33,$1C,$61,$FF
 
 .facingUpWarpTiles
 	db $01,$5C,$FF
