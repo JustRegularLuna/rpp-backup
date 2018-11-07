@@ -38,7 +38,7 @@ _SaffronGymText_5d16e::
 _SaffronGymText_5d173::
 	text "The MarshBadge"
 	line "makes #mon up"
-	cont "to Lv70 obey you!"
+	cont "to Lv80 obey you!"
 
 	para "Stronger #mon"
 	line "will become wild,"

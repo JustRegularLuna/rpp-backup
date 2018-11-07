@@ -50,7 +50,7 @@ _CeladonGymText_48a68::
 _CeladonGymText9::
 	text "The RainbowBadge"
 	line "will make #mon"
-	cont "up to Lv50 obey."
+	cont "up to Lv60 obey."
 
 	para "It also allows"
 	line "#mon to use"
