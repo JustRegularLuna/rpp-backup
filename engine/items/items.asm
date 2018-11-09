@@ -2133,6 +2133,8 @@ ItemUseItemfinder:
 	and a
 	jp nz,ItemUseNotTime
 	call ItemUseReloadOverworldData
+	ld hl,ItemFinderUsedText
+	call PrintText
 	callba HiddenItemNear ; check for hidden items
 	ld hl,ItemfinderFoundNothingText
 	jr nc,.printText ; if no hidden items
@@ -2147,6 +2149,11 @@ ItemUseItemfinder:
 	ld hl,ItemfinderFoundItemText
 .printText
 	jp PrintText
+
+ItemFinderUsedText:
+	text "[PLAYER] used the"
+	line "ItemFinder!"
+	prompt
 
 ItemfinderFoundItemText:
 	TX_FAR _ItemfinderFoundItemText
