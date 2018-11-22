@@ -77,4 +77,5 @@ After setting up the repository, you'll want to download the current release of 
 [redplusplus]: https://github.com/TheFakeMateo/RedPlusPlus
 [redstarbluestar]: https://github.com/Rangi42/redstarbluestar
 [orange]: https://github.com/PiaCarrot/pokeorange
+[pokered]: https://github.com/pret/pokered
 [lunaverse]: https://discord.gg/SQwkd7r
