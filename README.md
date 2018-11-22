@@ -67,6 +67,7 @@ After setting up the repository, you'll want to download the current release of 
 ## See also
 
 * [**Pokémon Red++ v4**][redplusplus] by Me.
+* [**Pokémon Polished Crystal**][polished] by Rangi.
 * [**Pokémon RedStar/BlueStar**][redstarbluestar] by Rangi.
 * [**Pokémon Orange**][orange] by Pia Carrot.
 
