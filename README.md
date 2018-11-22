@@ -1,4 +1,4 @@
-# Pokémon Red++
+# Pokémon Red++ v3
 
 This is based on the [**Pokémon Red Disassembly**][pokered]
 
@@ -16,6 +16,9 @@ For a list of features, check out [**FEATURES.md**](FEATURES.md).
 * To see a list of Move Tutor moves, and where to find them, look [**here**](data/move_tutors.asm)
 * To see Pokémon base stats, which TMs and which Move Tutors they learn, look [**here**](data/baseStats/).
 * To see which Pokémon are found in the wild in each area, look [**here**](data/wildPokemon/).
+* To see a list of Pokémon you can find via Headbutting trees, look [**here**](data/wildPokemon/tree_mons.asm).
+* To see all the In-Game Trades and where they are found, look [**here**](data/trades.asm).
+
 
 
 ## Frequently Asked Questions
@@ -27,7 +30,7 @@ A: Yes, all 208 Pokémon that are included in the game are available without nee
 A: Every Pokémon that isn't legendary can appear in Wonder Trade, but you will only find Pokémon that can legally exist at the same level as the one you offered for the trade.
 
 ### Q: How do you get Dive?
-A: Dive is not available because the functionality hasn't been added yet.
+A: Dive is not available because the functionality hasn't been added yet. It will be in v4.
 
 ### Q: Where is the Move Deleter?
 A: The house between Fuchsia City's Gym and Pokémon Center.
@@ -63,24 +66,15 @@ After setting up the repository, you'll want to download the current release of 
 
 ## See also
 
-* Disassembly of [**Pokémon Yellow**][pokeyellow]
-* Disassembly of [**Pokémon Crystal**][pokecrystal]
-* Disassembly of [**Pokémon Pinball**][pokepinball]
-* Disassembly of [**Pokémon TCG**][poketcg]
-* Disassembly of [**Pokémon Ruby**][pokeruby]
-* Disassembly of [**Pokémon Emerald**][pokeemerald]
-* Discord: [**pret**][Discord]
-* irc: **irc.freenode.net** [**#pret**][irc]
+* [**Pokémon Red++ v4**][redplusplus] by Me.
+* [**Pokémon RedStar/BlueStar**][redstarbluestar] by Rangi.
+* [**Pokémon Orange**][orange] by Pia Carrot.
 
-[polished]: http://github.com/roukaour/polishedcrystal
-[polishedmap]: https://github.com/roukaour/polished-map
-[pokered]: http://github.com/pret/pokered
-[pokeyellow]: https://github.com/pret/pokeyellow
-[pokecrystal]: https://github.com/pret/pokecrystal
-[pokepinball]: https://github.com/pret/pokepinball
-[poketcg]: https://github.com/pret/poketcg
-[pokeruby]: https://github.com/pret/pokeruby
-[pokeemerald]: https://github.com/pret/pokeemerald
-[Discord]: https://discord.gg/cJxDDVP
-[irc]: https://kiwiirc.com/client/irc.freenode.net/?#pret
+
+
+[polished]: http://github.com/rangi42/polishedcrystal
+[polishedmap]: https://github.com/rangi42/polished-map
+[redplusplus]: https://github.com/TheFakeMateo/RedPlusPlus
+[redstarbluestar]: https://github.com/Rangi42/redstarbluestar
+[orange]: https://github.com/PiaCarrot/pokeorange
 [lunaverse]: https://discord.gg/SQwkd7r
