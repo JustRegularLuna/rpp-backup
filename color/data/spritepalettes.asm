@@ -36,11 +36,19 @@ SpritePalettes: ; Taken from pokemon GSC.
 	RGB 13,13,13
 	RGB 0,0,0
 
+IF DEF(_SNOW)
+; PAL_OW_TREE
+	RGB 27,31,27
+	RGB 1,27,27
+	RGB 5,17,31
+	RGB 7,7,7
+ELSE
 ; PAL_OW_TREE
 	RGB 22,31,10
 	RGB 12,25,1
 	RGB 5,14,0
 	RGB 7,7,7
+ENDC
 
 ; PAL_OW_ROCK
 	RGB 27,31,27
@@ -86,11 +94,19 @@ SpritePalettesNite: ; Taken from pokemon GSC.
 	RGB 13,13,13
 	RGB 0,0,0
 
+IF DEF(_SNOW)
+; PAL_OW_TREE
+	RGB 15,14,24
+	RGB 0,10,22
+	RGB 0,7,15
+	RGB 00,00,00
+ELSE
 ; PAL_OW_TREE
 	RGB 15,14,24
 	RGB 08,13,19
 	RGB 00,11,13
 	RGB 00,00,00
+ENDC
 
 ; PAL_OW_ROCK
 	RGB 15,14,24

@@ -3,10 +3,21 @@
 ; Refer to MapPaletteSets for clarification on specific colors
 ; Each row of entries corresponds to a row of tiles on the tileset image
 MapPaletteAssignments:
-INCLUDE "color/tilesets/overworld.asm" ; OVERWORLD
+IF DEF(_SNOW)
+	INCLUDE "color/tilesets/overworld_snow.asm" ; OVERWORLD
+ELSE
+	INCLUDE "color/tilesets/overworld.asm" ; OVERWORLD
+ENDC
+
 INCLUDE "color/tilesets/reds_house.asm" ; REDS_HOUSE_1
 INCLUDE "color/tilesets/mart.asm" ; MART
-INCLUDE "color/tilesets/forest.asm" ; FOREST
+
+IF DEF(_SNOW)
+	INCLUDE "color/tilesets/forest_snow.asm" ; FOREST
+ELSE
+	INCLUDE "color/tilesets/forest.asm" ; FOREST
+ENDC
+
 INCLUDE "color/tilesets/reds_house.asm" ; REDS_HOUSE_2
 INCLUDE "color/tilesets/oakts.asm" ; OAK_TS
 INCLUDE "color/tilesets/pokecenter.asm" ; POKECENTER
@@ -26,8 +37,15 @@ INCLUDE "color/tilesets/mansion.asm" ; MANSION
 INCLUDE "color/tilesets/lab.asm" ; LAB
 INCLUDE "color/tilesets/club.asm" ; CLUB
 INCLUDE "color/tilesets/facility.asm" ; FACILITY
-INCLUDE "color/tilesets/plateau.asm" ; PLATEAU
-INCLUDE "color/tilesets/safari.asm" ; SAFARI
+
+IF DEF(_SNOW)
+	INCLUDE "color/tilesets/plateau_snow.asm" ; PLATEAU
+	INCLUDE "color/tilesets/safari_snow.asm" ; SAFARI
+ELSE
+	INCLUDE "color/tilesets/plateau.asm" ; PLATEAU
+	INCLUDE "color/tilesets/safari.asm" ; SAFARI
+ENDC
+
 INCLUDE "color/tilesets/ferry.asm" ; FERRY
 INCLUDE "color/tilesets/ice_cavern.asm" ; ICE_CAVERN
 INCLUDE "color/tilesets/museum2.asm" ; MUSEUM_2

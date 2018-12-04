@@ -172,7 +172,12 @@ BattleHudTiles3End:
 NintendoCopyrightLogoGraphics:  INCBIN "gfx/copyright.2bpp"
 GamefreakLogoGraphics:          INCBIN "gfx/gamefreak.2bpp"
 GamefreakLogoGraphicsEnd:
-TextBoxGraphics:                INCBIN "gfx/text_box.2bpp"
+TextBoxGraphics:
+IF DEF(_SNOW)
+	INCBIN "gfx/text_box_snow.2bpp" ; Roof tiles are in here for outdoor tileset
+ELSE
+	INCBIN "gfx/text_box.2bpp"
+ENDC
 TextBoxGraphicsEnd:
 PokedexTileGraphics:            INCBIN "gfx/pokedex.2bpp"
 PokedexTileGraphicsEnd:
@@ -1921,8 +1926,19 @@ ShipPort_GFX:      INCBIN "gfx/tilesets/ship_port.t2.2bpp"
 ShipPort_Block:    INCBIN "gfx/blocksets/ship_port.bst"
 Interior_GFX:      INCBIN "gfx/tilesets/interior.t1.2bpp"
 Interior_Block:    INCBIN "gfx/blocksets/interior.bst"
-Plateau_GFX:       INCBIN "gfx/tilesets/plateau.t6.2bpp"
-Plateau_Block:     INCBIN "gfx/blocksets/plateau.bst"
+Plateau_GFX:
+IF DEF(_SNOW)
+	INCBIN "gfx/tilesets/plateau_snow.t6.2bpp"
+ELSE
+	INCBIN "gfx/tilesets/plateau.t6.2bpp"
+ENDC
+
+Plateau_Block:
+IF DEF(_SNOW)
+	INCBIN "gfx/blocksets/plateau_snow.bst"
+ELSE
+	INCBIN "gfx/blocksets/plateau.bst"
+ENDC
 
 INCLUDE "engine/battle/get_trainer_pic_pointers.asm"
 
@@ -2589,17 +2605,53 @@ Museum_Block:        INCBIN "gfx/blocksets/museum.bst"
 Museum2_GFX:         INCBIN "gfx/tilesets/museum2.2bpp"
 Museum2_Block:       INCBIN "gfx/blocksets/museum2.bst"
 
-Safari_GFX:        INCBIN "gfx/tilesets/safari.2bpp"
-Safari_Block:      INCBIN "gfx/blocksets/safari.bst"
+Safari_GFX:
+IF DEF(_SNOW)
+	INCBIN "gfx/tilesets/safari_snow.2bpp"
+ELSE
+	INCBIN "gfx/tilesets/safari.2bpp"
+ENDC
 
-Forest_GFX:        INCBIN "gfx/tilesets/forest.2bpp"
-Forest_Block:      INCBIN "gfx/blocksets/forest.bst"
+Safari_Block:
+IF DEF(_SNOW)
+	INCBIN "gfx/blocksets/safari_snow.bst"
+ELSE
+	INCBIN "gfx/blocksets/safari.bst"
+ENDC
+
+
+
+Forest_GFX:
+IF DEF(_SNOW)
+	INCBIN "gfx/tilesets/forest_snow.2bpp"
+ELSE
+	INCBIN "gfx/tilesets/forest.2bpp"
+ENDC
+
+Forest_Block:
+IF DEF(_SNOW)
+	INCBIN "gfx/blocksets/forest_snow.bst"
+ELSE
+	INCBIN "gfx/blocksets/forest.bst"
+ENDC
 
 
 SECTION "bank37",ROMX,BANK[$37]
 
-Overworld_GFX:     INCBIN "gfx/tilesets/overworld.2bpp"
-Overworld_Block:   INCBIN "gfx/blocksets/overworld.bst"
+Overworld_GFX:
+IF DEF(_SNOW)
+	INCBIN "gfx/tilesets/overworld_snow.2bpp"
+ELSE
+	INCBIN "gfx/tilesets/overworld.2bpp"
+ENDC
+
+Overworld_Block:
+IF DEF(_SNOW)
+	INCBIN "gfx/blocksets/overworld_snow.bst"
+ELSE
+	INCBIN "gfx/blocksets/overworld.bst"
+ENDC
+
 
 Ferry_GFX:    INCBIN "gfx/tilesets/ferry.2bpp"
 Ferry_Block:  INCBIN "gfx/blocksets/ferry.bst"
