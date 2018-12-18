@@ -66,7 +66,11 @@ IF DEF(_HARD) ; Hard Rom
 ELSE ; Normal Rom
 	next "The Normal Patch"
 ENDC
-	next "v3.0.1@"
+IF DEF(_SNOW)
+	next "v3.0.2 (Snowy)@"
+ELSE
+	next "v3.0.2@"
+ENDC
 
 VersionScreenText2:
 	db   "Readme and FAQ"
