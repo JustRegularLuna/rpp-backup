@@ -10,7 +10,7 @@ It builds two versions, a "Normal" version and a "Hard" version. The only differ
 
 For a list of features, check out [**FEATURES.md**](FEATURES.md).
 
-You can download IPS patch files [**here**]](patches). Apply them to a normal Red Version rom. Just apply whichever patch you want.
+You can download IPS patch files [**here**](patches/). Apply them to a normal Red Version rom. Just apply whichever patch you want.
 
 * To see a list of all Pokémon included, look [**here**](constants/pokemon_constants.asm).
 * To see Pokémon skill sets and evolutions, look [**here**](data/evos_moves.asm).
