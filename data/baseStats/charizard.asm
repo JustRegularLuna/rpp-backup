@@ -23,6 +23,6 @@ db 3 ; growth rate
 	tmlearn 17,18,19,20,22,23
 	tmlearn 26,27,28,31,32
 	tmlearn 33,34,37,38,39,40
-	tmlearn 41,44,
+	tmlearn 41,44
 	tmlearn 51,52,54
 db BANK(CharizardPicFront)
