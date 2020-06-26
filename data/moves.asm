@@ -81,8 +81,8 @@ MoveEnd:
 	move COUNTER,      NO_ADDITIONAL_EFFECT,         1, FIGHTING, 100, 20
 	move SEISMIC_TOSS, SPECIAL_DAMAGE_EFFECT,        1, FIGHTING, 100, 20
 	move STRENGTH,     NO_ADDITIONAL_EFFECT,        80, NORMAL,   100, 15
-	move ABSORB,       DRAIN_HP_EFFECT,             40, GRASS,    100, 15
-	move MEGA_DRAIN,   DRAIN_HP_EFFECT,             75, GRASS,    100, 10
+	move ABSORB,       DRAIN_HP_EFFECT,             20, GRASS,    100, 25
+	move MEGA_DRAIN,   DRAIN_HP_EFFECT,             40, GRASS,    100, 15
 	move LEECH_SEED,   LEECH_SEED_EFFECT,            0, GRASS,     90, 10
 	move GROWTH,       GROWTH_EFFECT,                0, NORMAL,   100, 20
 	move RAZOR_LEAF,   NO_ADDITIONAL_EFFECT,        55, GRASS,     95, 25
