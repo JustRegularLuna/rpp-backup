@@ -4,7 +4,7 @@
 ; d: length of bar (tiles)
 ; e: # pixels to fill
 ; hl: where to draw
-DrawHPBarWithColor
+DrawHPBarWithColor:
 	call DrawHPBar
 	push bc
 	push de

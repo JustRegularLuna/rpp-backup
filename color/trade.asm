@@ -24,7 +24,7 @@ Trade_LoadCablePalettes:
 ; Called just before loading the pokemon sprites for moving through the link cable.
 ; This function sort of "patches" the result of "LoadAnimationTileset", so it should be
 ; called after any such animations occur.
-Trade_InitGameboyTransferGfx_ColorHook
+Trade_InitGameboyTransferGfx_ColorHook:
 	call Trade_LoadCablePalettes
 
 	ld a,2

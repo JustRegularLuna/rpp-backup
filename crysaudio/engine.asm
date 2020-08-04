@@ -1702,7 +1702,7 @@ MusicFB: ; e8817
 	ret
 ; e883e
 
-MusicEE; e883e
+MusicEE:; e883e
 ; conditional jump
 ; checks a byte in ram corresponding to the current channel
 ; doesn't seem to be set by any commands
