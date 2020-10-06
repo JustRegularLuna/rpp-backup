@@ -147,6 +147,7 @@ charmap "ゅ", $E1
 charmap "ょ", $E2
 charmap "ー", $E3
 
+charmap "_", $1F ; special linebreak for area names
 charmap "[pkmn]", $4A ; PkMn
 charmap "@", $50
 charmap "[PLAYER]", $52

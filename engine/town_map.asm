@@ -36,7 +36,7 @@ DisplayTownMap:
 
 .townMapLoop
 	coord hl, 1, 0
-	lb bc, 1, 19
+	lb bc, 2, 11
 	call ClearScreenArea
 	ld hl, TownMapOrder
 	ld a, [wWhichTownMapLocation]
@@ -134,7 +134,10 @@ LoadTownMap_Nest:
 	call PlaceString
 	ld h, b
 	ld l, c
-	ld de, MonsNestText
+	ld de, MonsText
+	call PlaceString
+	coord hl, 1, 1
+	ld de, NestText
 	call PlaceString
 	call WaitForTextScrollButtonPress
 	call ExitTownMap
@@ -145,8 +148,11 @@ LoadTownMap_Nest:
 	ld [hTilesetType], a
 	ret
 
-MonsNestText:
-	db "'s nest@"
+MonsText:
+	db "'s@"
+
+NestText:
+	db "Nest@"
 
 LoadTownMap_Fly:
 	ld a, [hTilesetType]
@@ -172,8 +178,8 @@ LoadTownMap_Fly:
 	ld [hl], $ff
 	push hl
 	coord hl, 0, 0
-	ld de, ToText
-	call PlaceString
+	ld a, $3f ; up/down arrow tile
+	ld [hl], a
 	ld a, [wCurMap]
 	ld b, $0
 	call DrawPlayerOrBirdSprite
@@ -184,22 +190,18 @@ LoadTownMap_Fly:
 	ld [de], a
 	push hl
 	push hl
-	coord hl, 3, 0
-	lb bc, 1, 15
+	coord hl, 1, 0
+	lb bc, 2, 11
 	call ClearScreenArea
 	pop hl
 	ld a, [hl]
 	ld b, $4
 	call DrawPlayerOrBirdSprite ; draw bird sprite
-	coord hl, 3, 0
+	coord hl, 1, 0
 	ld de, wcd6d
 	call PlaceString
 	ld c, 15
 	call DelayFrames
-	coord hl, 18, 0
-	ld [hl], "▲"
-	coord hl, 19, 0
-	ld [hl], "▼"
 	pop hl
 .inputLoop
 	push hl
@@ -262,9 +264,6 @@ LoadTownMap_Fly:
 .wrapToEndOfList
 	ld hl, wFlyLocationsList + 11
 	jr .pressedDown
-
-ToText:
-	db "To@"
 
 BuildFlyLocationsList:
 	ld hl, wFlyLocationsList - 1
