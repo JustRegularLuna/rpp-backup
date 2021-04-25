@@ -2,8 +2,8 @@ IF DEF(_BLUE)
 _HARD EQU 1
 ENDC
 
-; Comment this out to build the normal rom
-_SNOW EQU 1
+; uncomment this to build snowy roms
+;_SNOW EQU 1
 
 INCLUDE "macros.asm"
 INCLUDE "charmap.asm"

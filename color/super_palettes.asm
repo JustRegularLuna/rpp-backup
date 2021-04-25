@@ -10,9 +10,9 @@ LoadSGBPalette:
 	ld a,e
 	ld l,d
 	ld h,0
-	add hl
-	add hl
-	add hl
+	add hl,hl
+	add hl,hl
+	add hl,hl
 	ld de, SuperPalettes
 	add hl,de
 
@@ -29,9 +29,9 @@ LoadSGBPalette_Sprite:
 	ld a,e
 	ld l,d
 	ld h,0
-	add hl
-	add hl
-	add hl
+	add hl,hl
+	add hl,hl
+	add hl,hl
 	ld de, SuperPalettes
 	add hl,de
 
@@ -80,8 +80,8 @@ LoadPalette:
 	ld a,e
 	ld l,d
 	ld h,0
-	add hl
-	add hl
+	add hl,hl
+	add hl,hl
 	pop de
 	add hl,de
 
@@ -112,8 +112,8 @@ LoadPalette_Sprite:
 	ld a,e
 	ld l,d
 	ld h,0
-	add hl
-	add hl
+	add hl,hl
+	add hl,hl
 	pop de
 	add hl,de
 
