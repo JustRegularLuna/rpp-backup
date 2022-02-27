@@ -11,6 +11,8 @@ pokeblue_obj := audio_blue.o main_blue.o text_blue.o wram_blue.o
 
 .SUFFIXES:
 .SECONDEXPANSION:
+# Suppress annoying intermediate file deletion messages.
+.PRECIOUS: %.2bpp
 .PHONY: all clean red blue compare tools
 
 roms := pokered.gbc pokeblue.gbc
@@ -26,7 +28,7 @@ compare: red blue
 clean:
 	rm -f $(roms) $(pokered_obj) $(pokeblue_obj) $(roms:.gbc=.sym)
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pic' \) -exec rm {} +
-	#$(MAKE) clean -C tools/
+	$(MAKE) clean -C tools/
 
 tools:
 	$(MAKE) -C tools/
