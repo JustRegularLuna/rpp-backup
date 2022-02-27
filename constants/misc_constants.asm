@@ -34,7 +34,7 @@ D_LEFT   EQU %00100000
 D_UP     EQU %01000000
 D_DOWN   EQU %10000000
 
-const_value set 0
+const_value = 0
 	const BIT_A_BUTTON
 	const BIT_B_BUTTON
 	const BIT_SELECT
