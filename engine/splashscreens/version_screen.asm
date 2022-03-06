@@ -76,9 +76,9 @@ VersionScreenText2:
 	db   "Readme and FAQ"
 	next "are found at:"
 	next "www.github.com/"
-	next "TheFakeMateo/"
+	next "JustRegularLuna/"
 	next "rpp-backup@"
 
 VersionScreenText3:
 	db   "Have fun!"
-	next "  - Mateo, 2018@"
+	next "  - Luna, 2018@"
