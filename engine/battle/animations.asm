@@ -1865,7 +1865,7 @@ AnimationMinimizeMon:
 	ld bc, 7 * 7 * $10
 	call FillMemory
 	pop hl
-	ld de, $194
+	ld de, 7 * 3 * $10 + 4 * $10
 	add hl, de
 	ld de, MinimizedMonSprite
 	ld c, MinimizedMonSpriteEnd - MinimizedMonSprite
