@@ -75,7 +75,7 @@ These are notable features which have been added
 * Move Relearner
 * Move Tutors
 * Move Deleter
-* Shiny Pokémon (same chances as Polished Crystal v2)
+* Shiny Pokémon (1/1024 wild Pokémon are shiny)
 * Pokémon have genders
 * Chain-Fishing for Shinies
 * More
